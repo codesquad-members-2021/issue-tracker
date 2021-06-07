@@ -6,7 +6,7 @@
 
 ## 팀원
 
-- iOS : [잭슨](), [Lollo]()
+- iOS : [잭슨](https://github.com/JacksonPk), [Lollo](https://github.com/eeeesong)
 - BE : [Starve](), ...dong....??(삭제예정 ㅋㅋ)
 - FE : [Seong](), [Luke]()
 
