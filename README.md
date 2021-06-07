@@ -18,7 +18,13 @@
 
 ## [커밋 메시지 정책](https://github.com/ghojeong/issue-tracker/wiki/%EC%BB%A4%EB%B0%8B-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%A0%95%EC%B1%85)
 
-{commit header}: {commit title}
+```txt
+git commit
+
+{feat | fix | docs | chore | refator | style | test}: {commit_title}
+
+ghojeong/issue-tracker/#{issue_number}
+```
 
 ## 정기 미팅 정책
 
