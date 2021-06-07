@@ -1,5 +1,12 @@
 # issue-tracker
 
+## 기획
+
+- [웹 기획서](https://www.figma.com/proto/iOTGa5otAchVNyxqX6kjNI/FE_%EC%9D%B4%EC%8A%88%ED%8A%B8%EB%9E%98%EC%BB%A4?page-id=89:0&node-id=89:32&viewport=110,361,0.5&scaling=contain)
+- [웹 프로토타입](https://www.figma.com/file/iOTGa5otAchVNyxqX6kjNI/FE_%EC%9D%B4%EC%8A%88%ED%8A%B8%EB%9E%98%EC%BB%A4?node-id=32:243)
+- [모바일 기획서](https://docs.google.com/presentation/d/1EpuJNsLjoq7Jr2rD3JoFjOsvbw5qBZ3Sc-cmNcBQE44/edit#slide=id.p)
+- [모바일 프로토타입](https://xd.adobe.com/view/49a21a62-ec7a-4d57-785e-0246b5495040-3f93/)
+
 ## 온라인 모임 링크
 
 - [Gather](https://gather.town/app/C1JEKQnsIvvB9zG0/codesquade)
