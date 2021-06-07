@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		71377D25266E458000DB1C4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71377D23266E458000DB1C4D /* Main.storyboard */; };
 		71377D27266E458100DB1C4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71377D26266E458100DB1C4D /* Assets.xcassets */; };
 		71377D2A266E458100DB1C4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71377D28266E458100DB1C4D /* LaunchScreen.storyboard */; };
+		71377D33266E47AC00DB1C4D /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 71377D32266E47AC00DB1C4D /* OctoKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71377D33266E47AC00DB1C4D /* OctoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = IssueTracker;
+			packageProductDependencies = (
+				71377D32266E47AC00DB1C4D /* OctoKit */,
+			);
 			productName = IssueTracker;
 			productReference = 71377D1A266E458000DB1C4D /* IssueTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +115,9 @@
 				Base,
 			);
 			mainGroup = 71377D11266E458000DB1C4D;
+			packageReferences = (
+				71377D31266E47AC00DB1C4D /* XCRemoteSwiftPackageReference "octokit.swift" */,
+			);
 			productRefGroup = 71377D1B266E458000DB1C4D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -339,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71377D31266E47AC00DB1C4D /* XCRemoteSwiftPackageReference "octokit.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerdishbynature/octokit.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71377D32266E47AC00DB1C4D /* OctoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71377D31266E47AC00DB1C4D /* XCRemoteSwiftPackageReference "octokit.swift" */;
+			productName = OctoKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 71377D12266E458000DB1C4D /* Project object */;
 }
