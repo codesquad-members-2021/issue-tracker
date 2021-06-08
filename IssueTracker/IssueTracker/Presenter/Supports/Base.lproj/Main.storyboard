@@ -105,14 +105,75 @@
                                     <constraint firstItem="f9H-mc-xPP" firstAttribute="leading" secondItem="7s4-Vv-bDk" secondAttribute="leading" id="uyx-IG-R1t"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1T4-np-ClK">
+                                <rect key="frame" x="0.0" y="339" width="390" height="75"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2b-Cg-4OD">
+                                        <rect key="frame" x="0.0" y="0.0" width="195" height="75"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="로그인"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-Ri-zVL">
+                                        <rect key="frame" x="195" y="0.0" width="195" height="75"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="회원가입"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPC-sz-ysq">
+                                <rect key="frame" x="24.666666666666657" y="627" width="341" height="68"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="  Github 계정으로 로그인" image="github"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUe-tn-HS5">
+                                <rect key="frame" x="24.666666666666657" y="705" width="341" height="68"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="  Apple 계정으로 로그인" image="apple"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPa-Lt-HL5">
+                                <rect key="frame" x="75" y="84" width="240" height="61"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="1T4-np-ClK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3lr-ew-CgM"/>
+                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0722749" id="4Gh-4M-OvL"/>
+                            <constraint firstItem="pUe-tn-HS5" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.874359" id="7N7-m5-yU3"/>
+                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.615385" id="9E9-1T-kDg"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EPF-ki-GrR"/>
+                            <constraint firstItem="1T4-np-ClK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="IGI-oe-1Hc"/>
+                            <constraint firstItem="pUe-tn-HS5" firstAttribute="top" secondItem="EPC-sz-ysq" secondAttribute="bottom" constant="10" id="IS9-J1-9VR"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.154028" id="R5Q-aN-ruZ"/>
+                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7u-B2-8wJ"/>
+                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="VT2-RC-n8M"/>
+                            <constraint firstItem="EPC-sz-ysq" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0805687" id="bBd-g1-hb6"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bsc-cZ-2JI"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="165" id="gSo-b2-xAm"/>
+                            <constraint firstItem="EPC-sz-ysq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gdo-3T-ut3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pUe-tn-HS5" secondAttribute="bottom" constant="37" id="h3n-uw-0KI"/>
+                            <constraint firstItem="1T4-np-ClK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0888626" id="i9B-MO-gMo"/>
+                            <constraint firstItem="EPC-sz-ysq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.874359" id="kch-l0-0GY"/>
+                            <constraint firstItem="pUe-tn-HS5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0805687" id="pDS-bC-y7q"/>
+                            <constraint firstItem="1T4-np-ClK" firstAttribute="top" secondItem="7s4-Vv-bDk" secondAttribute="bottom" id="rW0-1C-ZHv"/>
+                            <constraint firstItem="pUe-tn-HS5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rg8-vW-Sdi"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -122,6 +183,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="apple" width="14" height="17"/>
+        <image name="github" width="25" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
