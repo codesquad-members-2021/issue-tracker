@@ -5,35 +5,24 @@ import LoginLoadingPage from "./components/pages/LoginLoadingPage";
 import MainPage from "./components/pages/MainPage";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Milestones from "./components/Milestones/Milestones";
+import NoMatch from "./components/pages/NoMatch";
+import Labels from "./components/Labels/Labels";
+import NewIssue from "./components/pages/NewIssue";
+
 function App() {
 	return (
 		<>
-			{/* <div>레이블/마일스톤</div> */}
 			<Switch>
-				<PrivateRoute exact path="/" component={MainPage} />
-				<Route path="/test" component={LoginPage} />
+				<Route exact path="/" component={LoginPage} />
+				<PrivateRoute path="/main" component={MainPage} />
 				<Route path="/login" component={LoginLoadingPage} />
-				<Route path="/milestones" component={Milestones} />
-
-				<Route
-					render={({ location }) => (
-						<div>
-							<Link to="/">
-								<button>홈으로가기</button>
-							</Link>
-							<ErrorImage src="https://cdn.dribbble.com/users/252114/screenshots/3840347/mong03b.gif" />
-						</div>
-					)}
-				/>
+				<Route path="/main/milestones" component={Milestones} />
+				<Route path="/main/labels" component={Labels} />
+				<Route path="/main/new_issue" component={NewIssue} />
+				<Route path="*" component={NoMatch} />
 			</Switch>
 		</>
 	);
 }
-const ErrorImage = styled.img`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 export default App;
