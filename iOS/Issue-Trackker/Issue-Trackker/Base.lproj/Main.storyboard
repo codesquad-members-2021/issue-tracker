@@ -3,14 +3,15 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Issue_Trackker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="Issue_Trackker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,11 +48,17 @@
                                         <rect key="frame" x="140" y="0.0" width="274" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="7Nn-mK-PZW"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ibR-2k-JjT">
                                         <rect key="frame" x="140" y="45" width="274" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="QkN-No-FY9"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -128,6 +135,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="1OX-sW-dPu"/>
                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                         <constraints>
                             <constraint firstItem="0g1-iG-TbN" firstAttribute="top" secondItem="cn0-mn-Rr5" secondAttribute="bottom" constant="72" id="0WE-3Y-7xo"/>
@@ -151,6 +159,14 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <connections>
+                        <outlet property="appleSignInButton" destination="FSS-tc-hh5" id="zKk-LL-pte"/>
+                        <outlet property="githubSignInButton" destination="Hps-nA-1dc" id="6BG-jP-CyP"/>
+                        <outlet property="idTextField" destination="GW4-74-q2e" id="DkP-K7-6uV"/>
+                        <outlet property="passwordTextField" destination="ibR-2k-JjT" id="wro-vo-CFM"/>
+                        <outlet property="signInButton" destination="lzV-nn-WWV" id="23r-Q6-tAU"/>
+                        <outlet property="signUpButton" destination="on5-Bh-bfq" id="RGL-yb-yVS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
