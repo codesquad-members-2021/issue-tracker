@@ -99,13 +99,9 @@
 		FF89A95C266F0BD000983577 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				FF89A95D266F0BD000983577 /* AppDelegate.swift */,
-				FF89A95F266F0BD000983577 /* SceneDelegate.swift */,
-				FF89A961266F0BD000983577 /* ViewController.swift */,
 				FF89A963266F0BD000983577 /* Main.storyboard */,
-				FF89A966266F0BD400983577 /* Assets.xcassets */,
-				FF89A968266F0BD400983577 /* LaunchScreen.storyboard */,
-				FF89A96B266F0BD400983577 /* Info.plist */,
+				FF89A98D266F109800983577 /* SupportingFiles */,
+				FF89A961266F0BD000983577 /* ViewController.swift */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -126,6 +122,18 @@
 				FF89A981266F0BD400983577 /* Info.plist */,
 			);
 			path = IssueTrackerUITests;
+			sourceTree = "<group>";
+		};
+		FF89A98D266F109800983577 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FF89A95D266F0BD000983577 /* AppDelegate.swift */,
+				FF89A95F266F0BD000983577 /* SceneDelegate.swift */,
+				FF89A966266F0BD400983577 /* Assets.xcassets */,
+				FF89A968266F0BD400983577 /* LaunchScreen.storyboard */,
+				FF89A96B266F0BD400983577 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,7 +446,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,7 +465,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
