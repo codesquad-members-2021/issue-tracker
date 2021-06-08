@@ -12,6 +12,8 @@
 		8345AD7BD9CAFAD9A4F8374A /* Pods_issue_tracker_issue_trackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */; };
 		8D53899997C8120B27C2FB4A /* Pods_issue_trackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FD79E124256E10A8CD0326 /* Pods_issue_trackerTests.framework */; };
 		9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCF55CDC3CD94CD2F1208E5 /* Pods_issue_tracker.framework */; };
+		B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */; };
+		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
 		B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E2266E095E00901C55 /* SceneDelegate.swift */; };
 		B3B559E5266E095E00901C55 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
@@ -54,6 +56,8 @@
 		702E8D2AD8B572CC0A3F3F24 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A36EB985C6FE14BAF28D126D /* Pods-issue-trackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-trackerTests.debug.xcconfig"; path = "Target Support Files/Pods-issue-trackerTests/Pods-issue-trackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2AD0081C0EB261B3FEA9CF7 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginButton.swift; sourceTree = "<group>"; };
+		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B559E0266E095E00901C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3B559E2266E095E00901C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				49903DAA266F558300D2A6DD /* LoginView.swift */,
+				B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */,
+				B349997E266F90710091A44A /* AppleLoginButton.swift */,
 				49903DAD266F588B00D2A6DD /* IDPasswordTextField.swift */,
 			);
 			path = View;
@@ -427,6 +433,8 @@
 			files = (
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
+				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
+				B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */,
 				B3B559E5266E095E00901C55 /* LoginViewController.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
