@@ -8,6 +8,8 @@
       "@assets/*":["assets/*"],
       "@recoil/*":["recoil/*"],
       "@utils/*":["utils/*"],
+      "@store/*":["store/*"],
+      "@const/*":["const/*"],
     }
   }
 }
