@@ -84,12 +84,41 @@ class ViewController: UIViewController {
         return button
     }()
     
+    private lazy var githubLoginButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(named: "icon_github")?.resizedImage(Size: CGSize(width: 24, height: 24))
+        button.setImage(image, for: .normal)
+        button.setTitle("GitHub 계정으로 로그인", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = Colors.mainGrape
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        button.layer.cornerRadius = 20
+        
+        return button
+    }()
+    
+    private lazy var appleLoginButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(named: "icon_apple")?.resizedImage(Size: CGSize(width: 24, height: 24))
+        button.setImage(image, for: .normal)
+        button.setTitle("Apple 계정으로 로그인", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = Colors.mainGrape
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        button.layer.cornerRadius = 20
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.backGround
         addTitleLabel()
         addLoginStackView()
-        addButtons()
+        addLoginButtons()
+        addSocialLoginButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,7 +156,7 @@ class ViewController: UIViewController {
         loginStackView.layer.addSublayer(layer)
     }
     
-    func addButtons() {
+    func addLoginButtons() {
         view.addSubview(loginButton)
         view.addSubview(signUpButton)
         
@@ -138,6 +167,23 @@ class ViewController: UIViewController {
             loginButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 32),
             signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: (view.frame.width / 4) * -1),
             signUpButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 32)
+        ])
+    }
+    
+    func addSocialLoginButton() {
+        view.addSubview(appleLoginButton)
+        view.addSubview(githubLoginButton)
+        
+        NSLayoutConstraint.activate([
+            appleLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            appleLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            appleLoginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -1 * (view.frame.height * 0.07)),
+            appleLoginButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.068),
+            
+            githubLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            githubLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            githubLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -14),
+            githubLoginButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.068)
         ])
     }
     
