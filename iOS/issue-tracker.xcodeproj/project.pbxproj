@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10BCA8A5266F38E800DBBA61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCA8A4266F38E800DBBA61 /* LoginViewController.swift */; };
+		10BCA8AA266F3C8100DBBA61 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BCA8A9266F3C7A00DBBA61 /* Montserrat-Italic.ttf */; };
 		10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D99266EFB5700FBD593 /* AppDelegate.swift */; };
 		10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */; };
 		10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9D266EFB5700FBD593 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10BCA8A4266F38E800DBBA61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		10BCA8A9266F3C7A00DBBA61 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
 		10CE4D96266EFB5700FBD593 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10CE4D99266EFB5700FBD593 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +46,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10BCA8A3266F38D700DBBA61 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				10BCA8A4266F38E800DBBA61 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		10BCA8A7266F3C0000DBBA61 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				10BCA8A9266F3C7A00DBBA61 /* Montserrat-Italic.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		10CE4D8D266EFB5700FBD593 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +83,7 @@
 		10CE4D98266EFB5700FBD593 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				10BCA8A7266F3C0000DBBA61 /* Font */,
 				10CE4D99266EFB5700FBD593 /* AppDelegate.swift */,
 				10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */,
 				10CE4D9D266EFB5700FBD593 /* ViewController.swift */,
@@ -70,6 +91,7 @@
 				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
 				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
 				10CE4DA7266EFB5700FBD593 /* Info.plist */,
+				10BCA8A3266F38D700DBBA61 /* Login */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -153,6 +175,7 @@
 				10CE4DA6266EFB5700FBD593 /* LaunchScreen.storyboard in Resources */,
 				10CE4DA3266EFB5700FBD593 /* Assets.xcassets in Resources */,
 				10CE4DA1266EFB5700FBD593 /* Main.storyboard in Resources */,
+				10BCA8AA266F3C8100DBBA61 /* Montserrat-Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BCA8A5266F38E800DBBA61 /* LoginViewController.swift in Sources */,
 				10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */,
 				10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */,
 				10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */,
