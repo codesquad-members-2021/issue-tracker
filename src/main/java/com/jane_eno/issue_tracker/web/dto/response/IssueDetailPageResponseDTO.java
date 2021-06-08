@@ -10,14 +10,13 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class IssueResponseDTO {
-
+public class IssueDetailPageResponseDTO {
     private final Long id;
     private final String title;
-    private final String author;
+    private final boolean status;
     private final LocalDateTime createdDateTime;
-    private final Integer commentNumber;
-    private final List<String> assignees;
-    private final List<String> labels;
-    private final String milestone;
+    private final List<Comment> comments;
+    private final List<Assignee> assignees;
+    private final List<Label> labels;
+    private final List<Milestone> milestones;
 }

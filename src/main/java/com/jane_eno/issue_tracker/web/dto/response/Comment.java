@@ -1,22 +1,19 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
-
+import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
-@ToString
 @AllArgsConstructor
-public class Milestone {
+public class Comment {
 
     private final Long id;
-    private final String title;
-    private final String description;
+    private final String userName;
+    private final String comment;
     private final LocalDateTime createdDateTime;
-    private final int openedIssues;
-    private final int closedIssues;
+    private final boolean isOwner;
+    private final boolean isAuthor;
 }
