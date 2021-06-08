@@ -25,7 +25,7 @@ public class Issue {
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone1"))
-    private MileStone mileStone;
+    private Milestone milestone;
 
     @OneToMany(mappedBy = "issue")
     private List<IssueAssignee> issueAssignees = new ArrayList<>();
