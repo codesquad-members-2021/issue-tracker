@@ -183,6 +183,9 @@
                             <constraint firstItem="pUe-tn-HS5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rg8-vW-Sdi"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logInButton" destination="Q2b-Cg-4OD" id="7Xy-il-FrF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -330,7 +333,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Lq5-ee-v4w">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="JAr-Mn-mfp" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier="TabBarVC" storyboardIdentifier="TabBarVC" automaticallyAdjustsScrollViewInsets="NO" id="JAr-Mn-mfp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JMf-4E-4O5">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
