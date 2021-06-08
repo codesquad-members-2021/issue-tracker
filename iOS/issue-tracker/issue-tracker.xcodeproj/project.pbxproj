@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49903DAB266F558300D2A6DD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903DAA266F558300D2A6DD /* LoginView.swift */; };
+		49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49903DAD266F588B00D2A6DD /* IDPasswordTextField.swift */; };
 		8345AD7BD9CAFAD9A4F8374A /* Pods_issue_tracker_issue_trackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */; };
 		8D53899997C8120B27C2FB4A /* Pods_issue_trackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FD79E124256E10A8CD0326 /* Pods_issue_trackerTests.framework */; };
 		9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCF55CDC3CD94CD2F1208E5 /* Pods_issue_tracker.framework */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
 		B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E2266E095E00901C55 /* SceneDelegate.swift */; };
-		B3B559E5266E095E00901C55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* ViewController.swift */; };
+		B3B559E5266E095E00901C55 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
 		B3B559E8266E095E00901C55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559E6266E095E00901C55 /* Main.storyboard */; };
 		B3B559EA266E096000901C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3B559E9266E096000901C55 /* Assets.xcassets */; };
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		3D239EFE5DEB1D1C49840391 /* Pods-issue-trackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-trackerTests.release.xcconfig"; path = "Target Support Files/Pods-issue-trackerTests/Pods-issue-trackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		49903DAA266F558300D2A6DD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		49903DAD266F588B00D2A6DD /* IDPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDPasswordTextField.swift; sourceTree = "<group>"; };
 		57FD79E124256E10A8CD0326 /* Pods_issue_trackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_trackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DCF55CDC3CD94CD2F1208E5 /* Pods_issue_tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		702E8D2AD8B572CC0A3F3F24 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -53,7 +57,7 @@
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B559E0266E095E00901C55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3B559E2266E095E00901C55 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B3B559E4266E095E00901C55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B3B559E4266E095E00901C55 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B3B559E7266E095E00901C55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B3B559E9266E096000901C55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3B559EC266E096000901C55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49903DAC266F558700D2A6DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				49903DAA266F558300D2A6DD /* LoginView.swift */,
+				49903DAD266F588B00D2A6DD /* IDPasswordTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B3B559D4266E095E00901C55 = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				D0ADB68F266F0A2200E0762C /* Supporting Files */,
-				B3B559E4266E095E00901C55 /* ViewController.swift */,
+				B3B559E4266E095E00901C55 /* LoginViewController.swift */,
+				49903DAC266F558700D2A6DD /* View */,
 				B3B559E6266E095E00901C55 /* Main.storyboard */,
 				B3B559EE266E096000901C55 /* Info.plist */,
 				D0ADB69D266F0E7900E0762C /* Model */,
@@ -411,7 +425,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3B559E5266E095E00901C55 /* ViewController.swift in Sources */,
+				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
+				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
+				B3B559E5266E095E00901C55 /* LoginViewController.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
