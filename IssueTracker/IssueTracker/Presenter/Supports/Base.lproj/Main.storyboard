@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JAr-Mn-mfp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -222,14 +223,25 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DK3-aF-yEx">
+                                <rect key="frame" x="339" y="712" width="36" height="34"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="default"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e0z-SA-kYV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" constant="-10" id="Hrk-Ia-AT4"/>
+                            <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" secondItem="DK3-aF-yEx" secondAttribute="trailing" constant="15" id="OAO-TQ-CjM"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="QAv-HA-W83"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="top" secondItem="e0z-SA-kYV" secondAttribute="top" id="QQQ-Hb-8OU"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0592417" id="ehO-P1-IZs"/>
+                            <constraint firstItem="DK3-aF-yEx" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0402844" id="gwH-1N-904"/>
+                            <constraint firstItem="e0z-SA-kYV" firstAttribute="bottom" secondItem="DK3-aF-yEx" secondAttribute="bottom" constant="15" id="obq-CA-gxB"/>
+                            <constraint firstItem="DK3-aF-yEx" firstAttribute="width" secondItem="y7b-4X-MXd" secondAttribute="width" multiplier="0.0923077" id="wd1-39-DRt"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="info.circle" catalog="system" id="G0w-bk-aWG"/>
@@ -343,6 +355,7 @@
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="line.horizontal.3.decrease" catalog="system" width="128" height="73"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="signpost.right" catalog="system" width="128" height="118"/>
         <image name="tag" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
