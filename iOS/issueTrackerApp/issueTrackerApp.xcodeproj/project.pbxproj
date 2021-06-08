@@ -12,6 +12,7 @@
 		883F5161266F505E0055EC9E /* Label.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F5160266F505E0055EC9E /* Label.storyboard */; };
 		883F516A266F508B0055EC9E /* Milestones.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F5168266F508B0055EC9E /* Milestones.storyboard */; };
 		883F5172266F50A40055EC9E /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F5171266F50A40055EC9E /* Setting.storyboard */; };
+		883F5185266F5F090055EC9E /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5184266F5F090055EC9E /* IssueViewController.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		883F5160266F505E0055EC9E /* Label.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Label.storyboard; sourceTree = "<group>"; };
 		883F5169266F508B0055EC9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = issueTrackerApp/Base.lproj/Milestones.storyboard; sourceTree = "<group>"; };
 		883F5171266F50A40055EC9E /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		883F5184266F5F090055EC9E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueViewController.swift; path = ViewController/Issue/IssueViewController.swift; sourceTree = SOURCE_ROOT; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 				883F5147266F3EAF0055EC9E /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		883F5182266F5EE80055EC9E /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				883F5184266F5F090055EC9E /* IssueViewController.swift */,
+			);
+			path = Issue;
 			sourceTree = "<group>";
 		};
 		930FAE79266E112700422968 = {
@@ -253,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				883F514F266F3F060055EC9E /* Login */,
+				883F5182266F5EE80055EC9E /* Issue */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -445,6 +456,7 @@
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
 				9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */,
 				9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */,
+				883F5185266F5F090055EC9E /* IssueViewController.swift in Sources */,
 				930FAE88266E112700422968 /* SceneDelegate.swift in Sources */,
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 			);

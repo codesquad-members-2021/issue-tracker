@@ -11,14 +11,17 @@
         <!--이슈-->
         <scene sceneID="vS5-qn-ATL">
             <objects>
-                <viewController id="Tjq-IH-GWR" sceneMemberID="viewController">
+                <viewController id="Tjq-IH-GWR" customClass="IssueViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yB3-0h-hyg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="AqE-6q-lez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="이슈" id="84B-Z6-ZJW"/>
+                    <navigationItem key="navigationItem" title="이슈" id="84B-Z6-ZJW">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="JtK-ut-fGU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="beK-EC-qtW"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T52-Ei-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
