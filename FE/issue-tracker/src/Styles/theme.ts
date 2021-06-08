@@ -1,19 +1,42 @@
 const COLOR = {
-  WHITE: "#fff",
-  BLACK: "#010101",
-  GRAY1: "#333",
-  GRAY2: "#4f4f4f",
-  GRAY3: "#828282",
-  GRAY4: "#BDBDBD",
-  GRAY5: "#E0E0E0",
-  GRAY6: "#F5F5F7",
-  SEARCH_BUTTON: "#E84C60",
-  DISCOUNT: "#118917",
-  LINE: "#C4C4C4",
+  BLUE: "#007AFF",
+  LIGHT_BLUE: "#C7EBFF",
+  DARK_BLUE: "#004DE3",
+  PURPLE: "#0025E7",
+  LIGHT_PURPLE: "#CCD4FF",
+  DARK_PURPLE: "#020070",
+  RED: "#FF3B30",
+  LIGHT_RED: "#FFD1CF",
+  DARK_RED: "#C60B00",
+  GREEN: "#34C759",
+  LIGHT_GREEN: "#DDFFE6",
+  DARK_GREEN: "#00A028",
 };
-
+const GRAY_SCALE = {
+  OFF_WHITE: "#FEFEFE",
+  BACKGROUND: "#F7F7FC",
+  INPUT_BACKGROUND: "#EFF0F6",
+  LINE: "#D9DBE9",
+  PLACEHOLDER: "#A0A3BD",
+  LABEL: "#6E7191",
+  BODY: "#4E4B66",
+  TITLE_ACTIVE: "#14142B",
+};
+const FONT_SIZE = {
+  DISPLAY: "32px",
+  TEXT_LARGE: "24px",
+  TEXT_MEDIUM: "18px",
+  LINK_MEDIUM: "18px",
+  TEXT_SMALL: "16px",
+  LINK_SMALL: "16px",
+  TEXT_X_SMALL: "12px",
+  LINK_S_SMALL: "12px",
+  LOGOTYPE_LARGE: "56px",
+  LOGOTYPE_REGULAR: "32px",
+};
 const theme = {
   COLOR,
+  GRAY_SCALE,
+  FONT_SIZE,
 };
-
 export default theme;
