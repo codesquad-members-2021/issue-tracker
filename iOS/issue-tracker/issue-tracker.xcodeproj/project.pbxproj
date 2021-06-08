@@ -18,11 +18,12 @@
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
-		B3B55A12266E0C8600901C55 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A11266E0C8600901C55 /* Alamofire */; };
-		B3B55A15266E0D5600901C55 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A14266E0D5600901C55 /* RxTest */; };
-		B3B55A17266E0D5600901C55 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A16266E0D5600901C55 /* RxCocoa */; };
-		B3B55A19266E0D5600901C55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A18266E0D5600901C55 /* RxSwift */; };
-		B3F50EE9266E12340009C260 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3F50EE8266E12340009C260 /* SnapKit */; };
+		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
+		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
+		D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6CB266F4F1C00E0762C /* Alamofire */; };
+		D0ADB6D1266F4F3D00E0762C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D0266F4F3D00E0762C /* RxCocoa */; };
+		D0ADB6D5266F4F3D00E0762C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D4266F4F3D00E0762C /* RxSwift */; };
+		D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D6266F4F4700E0762C /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
+		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E7F242466FC866CAD16EFF69 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker_issue_trackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,12 +76,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3B55A17266E0D5600901C55 /* RxCocoa in Frameworks */,
-				B3B55A15266E0D5600901C55 /* RxTest in Frameworks */,
-				B3B55A19266E0D5600901C55 /* RxSwift in Frameworks */,
-				B3F50EE9266E12340009C260 /* SnapKit in Frameworks */,
-				B3B55A12266E0C8600901C55 /* Alamofire in Frameworks */,
+				D0ADB6D1266F4F3D00E0762C /* RxCocoa in Frameworks */,
 				9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */,
+				D0ADB6D5266F4F3D00E0762C /* RxSwift in Frameworks */,
+				D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */,
+				D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,13 +128,11 @@
 		B3B559DF266E095E00901C55 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				B3B559E0266E095E00901C55 /* AppDelegate.swift */,
-				B3B559E2266E095E00901C55 /* SceneDelegate.swift */,
+				D0ADB68F266F0A2200E0762C /* Supporting Files */,
 				B3B559E4266E095E00901C55 /* ViewController.swift */,
 				B3B559E6266E095E00901C55 /* Main.storyboard */,
-				B3B559E9266E096000901C55 /* Assets.xcassets */,
-				B3B559EB266E096000901C55 /* LaunchScreen.storyboard */,
 				B3B559EE266E096000901C55 /* Info.plist */,
+				D0ADB69D266F0E7900E0762C /* Model */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -153,6 +153,26 @@
 				B3B55A04266E096000901C55 /* Info.plist */,
 			);
 			path = "issue-trackerUITests";
+			sourceTree = "<group>";
+		};
+		D0ADB68F266F0A2200E0762C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B3B559E0266E095E00901C55 /* AppDelegate.swift */,
+				B3B559E2266E095E00901C55 /* SceneDelegate.swift */,
+				B3B559E9266E096000901C55 /* Assets.xcassets */,
+				B3B559EB266E096000901C55 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0ADB69D266F0E7900E0762C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0ADB693266F0A5000E0762C /* Endpoint.swift */,
+				D0ADB698266F0C1300E0762C /* NetworkManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DD720597B58AE4F3E0B9F4F7 /* Pods */ = {
@@ -196,11 +216,10 @@
 			);
 			name = "issue-tracker";
 			packageProductDependencies = (
-				B3B55A11266E0C8600901C55 /* Alamofire */,
-				B3B55A14266E0D5600901C55 /* RxTest */,
-				B3B55A16266E0D5600901C55 /* RxCocoa */,
-				B3B55A18266E0D5600901C55 /* RxSwift */,
-				B3F50EE8266E12340009C260 /* SnapKit */,
+				D0ADB6CB266F4F1C00E0762C /* Alamofire */,
+				D0ADB6D0266F4F3D00E0762C /* RxCocoa */,
+				D0ADB6D4266F4F3D00E0762C /* RxSwift */,
+				D0ADB6D6266F4F4700E0762C /* SnapKit */,
 			);
 			productName = "issue-tracker";
 			productReference = B3B559DD266E095E00901C55 /* issue-tracker.app */;
@@ -394,6 +413,8 @@
 			files = (
 				B3B559E5266E095E00901C55 /* ViewController.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
+				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
+				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -555,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -614,7 +635,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = "issue-trackerTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -637,7 +658,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = "issue-trackerTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -762,27 +783,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B3B55A11266E0C8600901C55 /* Alamofire */ = {
+		D0ADB6CB266F4F1C00E0762C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3B55A10266E0C8600901C55 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		B3B55A14266E0D5600901C55 /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B3B55A13266E0D5600901C55 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
-		B3B55A16266E0D5600901C55 /* RxCocoa */ = {
+		D0ADB6D0266F4F3D00E0762C /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3B55A13266E0D5600901C55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		B3B55A18266E0D5600901C55 /* RxSwift */ = {
+		D0ADB6D4266F4F3D00E0762C /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3B55A13266E0D5600901C55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		B3F50EE8266E12340009C260 /* SnapKit */ = {
+		D0ADB6D6266F4F4700E0762C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3F50EE7266E12340009C260 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
