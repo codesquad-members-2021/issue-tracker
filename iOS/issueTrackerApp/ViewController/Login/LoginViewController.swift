@@ -8,16 +8,20 @@
 import UIKit
 import AuthenticationServices
 
-class LoginViewController: UIViewController, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var appleLoginButton: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configAppleLoginButton()
-        
     }
     
+}
+
+//MARK:- APPLE ID LOGIN
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
     private func configAppleLoginButton() {
         let authorizationButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
         authorizationButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
@@ -45,10 +49,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
             let accessToken = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            
-            print("\(accessToken)")
-            print("\(fullName)")
-            print("\(email)")
         default:
             break
         }
@@ -57,5 +57,4 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         //to do
     }
-    
 }
