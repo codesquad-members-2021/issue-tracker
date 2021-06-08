@@ -1,61 +1,50 @@
 import React, { FC } from 'react';
 import useInputStyles from '../styles/InputStyles';
 import TextField from '@material-ui/core/TextField';
+import { ClassNameMap } from '@material-ui/styles/withStyles';
 
 interface Prop {
   type: string;
   name: string;
 }
+type IInputType = ClassNameMap<
+  'InputLarge' | 'InputMedium' | 'InputSmall' | 'InputText'
+>;
 
-const InputList: FC<Prop> = ({ type, name }) => {
+interface IInput {
+  classes: IInputType;
+  name: string;
+}
+
+const InputList: FC<Prop> = ({ type, name }: Prop) => {
   const classes = useInputStyles();
   return {
     large: <InputLarge {...{ classes, name }} />,
     medium: <InputMedium {...{ classes, name }} />,
     small: <InputSmall {...{ classes, name }} />,
     text: <InputText {...{ classes, name }} />,
-  }[type] as any;
+  }[type] as JSX.Element;
 };
 
 export default InputList;
 
-function InputLarge({ classes, name }: any): React.ReactElement {
+function InputLarge({ classes, name }: IInput): React.ReactElement {
   return (
-    <TextField
-      id="filled-basic"
-      label={name}
-      variant="filled"
-      className={classes.InputLarge}
-    />
+    <TextField label={name} variant="filled" className={classes.InputLarge} />
   );
 }
-function InputMedium({ classes, name }: any) {
+function InputMedium({ classes, name }: IInput) {
   return (
-    <TextField
-      id="filled-basic"
-      label={name}
-      variant="filled"
-      className={classes.InputMedium}
-    />
+    <TextField label={name} variant="filled" className={classes.InputMedium} />
   );
 }
-function InputSmall({ classes, name }: any) {
+function InputSmall({ classes, name }: IInput) {
   return (
-    <TextField
-      id="filled-basic"
-      label={name}
-      variant="filled"
-      className={classes.InputSmall}
-    />
+    <TextField label={name} variant="filled" className={classes.InputSmall} />
   );
 }
-function InputText({ classes, name }: any) {
+function InputText({ classes, name }: IInput) {
   return (
-    <TextField
-      id="filled-basic"
-      label={name}
-      variant="filled"
-      className={classes.InputText}
-    />
+    <TextField label={name} variant="filled" className={classes.InputText} />
   );
 }

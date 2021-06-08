@@ -2,40 +2,50 @@ import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import useButtonStyles from '../styles/ButtonStyles';
+import { ClassNameMap } from '@material-ui/styles/withStyles';
 
 interface Prop {
   type: string;
   name: string;
+  color?: string;
+}
+type IButtonType = ClassNameMap<
+  | 'buttonLarge'
+  | 'buttonMedium'
+  | 'buttonSmallFill'
+  | 'buttonSmallBorder'
+  | 'buttonMediumText'
+  | 'buttonSmallText'
+>;
+
+interface IButton {
+  classes: IButtonType;
+  name: string;
+  color?: string;
 }
 
-const ButtonList: FC<Prop> = ({ type, name }) => {
+const ButtonList: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
   const classes = useButtonStyles();
 
   return {
-    large: <ButtonLarge {...{ classes, name }} />,
-    medium: <ButtonMedium {...{ classes, name }} />,
-    smallFill: <ButtonSmallFill {...{ classes, name }} />,
-    smallBorder: <ButtonSmallBorder {...{ classes, name }} />,
-    mediumText: <ButtonMediumText {...{ classes, name }} />,
-    smallText: <ButtonSmallText {...{ classes, name }} />,
-  }[type] as any;
+    large: <ButtonLarge {...{ classes, name, color }} />,
+    medium: <ButtonMedium {...{ classes, name, color }} />,
+    smallFill: <ButtonSmallFill {...{ classes, name, color }} />,
+    smallBorder: <ButtonSmallBorder {...{ classes, name, color }} />,
+    mediumText: <ButtonMediumText {...{ classes, name, color }} />,
+    smallText: <ButtonSmallText {...{ classes, name, color }} />,
+  }[type] as JSX.Element;
 };
 
 export default ButtonList;
 
-interface IButtonLarge {
-  classes: any;
-  name: string;
-}
-
-function ButtonLarge({ classes, name }: IButtonLarge) {
+function ButtonLarge({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
-      color="secondary"
       className={classes.buttonLarge}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -43,14 +53,13 @@ function ButtonLarge({ classes, name }: IButtonLarge) {
   );
 }
 
-function ButtonMedium({ classes, name }: any) {
+function ButtonMedium({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
-      color="secondary"
       className={classes.buttonMedium}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -58,15 +67,14 @@ function ButtonMedium({ classes, name }: any) {
   );
 }
 
-function ButtonSmallFill({ classes, name }: any) {
+function ButtonSmallFill({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
       startIcon={<AddIcon />}
-      color="secondary"
       className={classes.buttonSmallFill}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -74,15 +82,14 @@ function ButtonSmallFill({ classes, name }: any) {
   );
 }
 
-function ButtonSmallBorder({ classes, name }: any) {
+function ButtonSmallBorder({ classes, name, color }: IButton) {
   return (
     <Button
       variant="outlined"
       startIcon={<AddIcon />}
-      color="secondary"
       className={classes.buttonSmallBorder}
       style={{
-        border: '1px solid #815854',
+        border: `1px solid ${color}`,
       }}
     >
       {name}
@@ -90,11 +97,10 @@ function ButtonSmallBorder({ classes, name }: any) {
   );
 }
 
-function ButtonMediumText({ classes, name }: any) {
+function ButtonMediumText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
-      color="secondary"
       startIcon={<AddIcon />}
       className={classes.buttonMediumText}
     >
@@ -103,11 +109,10 @@ function ButtonMediumText({ classes, name }: any) {
   );
 }
 
-function ButtonSmallText({ classes, name }: any) {
+function ButtonSmallText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
-      color="secondary"
       startIcon={<AddIcon />}
       className={classes.buttonSmallText}
     >
