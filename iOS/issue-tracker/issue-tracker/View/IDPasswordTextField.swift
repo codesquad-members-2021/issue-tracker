@@ -13,7 +13,6 @@ class IDPasswordTextField: UIView {
     let IDLabel: UILabel = {
         var label = UILabel()
         label.text = "아이디"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -24,14 +23,14 @@ class IDPasswordTextField: UIView {
     }()
     
     let line: UIView = {
-        var line = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 1))
-        line.layer.borderColor = UIColor.black.cgColor
+        var line = UIView()
+        line.layer.borderColor = UIColor.lightGray.cgColor
         line.layer.borderWidth = 1
         return line
     }()
     
     let IDTextField: UITextField = {
-       var textField = UITextField()
+        var textField = UITextField()
         textField.borderStyle = .none
         return textField
     }()
@@ -44,12 +43,14 @@ class IDPasswordTextField: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         addSubViews()
         autoLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        backgroundColor = .white
         addSubViews()
         autoLayout()
     }
@@ -66,6 +67,7 @@ class IDPasswordTextField: UIView {
         IDLabel.snp.makeConstraints { label in
             label.top.equalTo(self.safeAreaLayoutGuide).offset(12)
             label.leading.equalTo(self.safeAreaLayoutGuide).offset(20)
+            label.width.equalTo(47)
         }
         
         line.snp.makeConstraints { view in
@@ -77,6 +79,7 @@ class IDPasswordTextField: UIView {
         passwordLabel.snp.makeConstraints { label in
             label.top.equalTo(line.snp.bottom).offset(10.5)
             label.leading.equalTo(self.safeAreaLayoutGuide).offset(20)
+            label.width.equalTo(62)
         }
         
         IDTextField.snp.makeConstraints { textField in
@@ -87,7 +90,7 @@ class IDPasswordTextField: UIView {
         }
         
         passwordTextField.snp.makeConstraints { textField in
-            textField.top.equalTo(self.safeAreaLayoutGuide).offset(11)
+            textField.top.equalTo(line.snp.bottom).offset(11)
             textField.leading.equalTo(passwordLabel.snp.trailing).offset(61)
             textField.trailing.equalTo(self.safeAreaLayoutGuide)
             textField.height.equalTo(22)
