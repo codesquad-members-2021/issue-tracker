@@ -11,7 +11,6 @@ const App = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <GlobalStyles />
           <Router />
-          <Header />
         </Suspense>
       </RecoilRoot>
     </div>
