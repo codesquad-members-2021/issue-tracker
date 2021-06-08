@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
-		E42AD102266E52FB0071B436 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* ViewController.swift */; };
+		E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* LoginViewController.swift */; };
 		E42AD105266E52FB0071B436 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42AD103266E52FB0071B436 /* Main.storyboard */; };
 		E42AD107266E52FE0071B436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42AD106266E52FE0071B436 /* Assets.xcassets */; };
 		E42AD10A266E52FE0071B436 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */; };
+		FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AB266F5E9700C17BE9 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E42AD101266E52FB0071B436 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E42AD101266E52FB0071B436 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E42AD104266E52FB0071B436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E42AD106266E52FE0071B436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E42AD109266E52FE0071B436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E42AD10B266E52FE0071B436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +59,12 @@
 			isa = PBXGroup;
 			children = (
 				E42AD111266E530F0071B436 /* LifeCycle */,
-				E42AD101266E52FB0071B436 /* ViewController.swift */,
+				E42AD101266E52FB0071B436 /* LoginViewController.swift */,
 				E42AD103266E52FB0071B436 /* Main.storyboard */,
 				E42AD106266E52FE0071B436 /* Assets.xcassets */,
 				E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */,
 				E42AD10B266E52FE0071B436 /* Info.plist */,
+				FAEB30AB266F5E9700C17BE9 /* Colors.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -145,7 +148,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E42AD102266E52FB0071B436 /* ViewController.swift in Sources */,
+				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
+				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
 			);
@@ -224,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -279,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -304,7 +308,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "loljack.issue-tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -323,7 +327,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "loljack.issue-tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
