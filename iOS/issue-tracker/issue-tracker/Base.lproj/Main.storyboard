@@ -187,12 +187,24 @@
         <!--이슈-->
         <scene sceneID="z1m-pj-Jw5">
             <objects>
-                <viewController id="sqk-8h-LsM" sceneMemberID="viewController">
+                <viewController id="sqk-8h-LsM" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="76P-zK-Alf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="718-9Y-KjG">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PsK-ws-Yyq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="718-9Y-KjG" firstAttribute="top" secondItem="PsK-ws-Yyq" secondAttribute="top" id="VZe-b1-iBP"/>
+                            <constraint firstItem="PsK-ws-Yyq" firstAttribute="trailing" secondItem="718-9Y-KjG" secondAttribute="trailing" id="q4W-9i-H3j"/>
+                            <constraint firstItem="718-9Y-KjG" firstAttribute="leading" secondItem="PsK-ws-Yyq" secondAttribute="leading" id="rqB-H2-7tV"/>
+                            <constraint firstItem="PsK-ws-Yyq" firstAttribute="bottom" secondItem="718-9Y-KjG" secondAttribute="bottom" id="zSe-7t-e4g"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="exclamationmark.circle" catalog="system" id="nVy-AD-MMB"/>
                 </viewController>

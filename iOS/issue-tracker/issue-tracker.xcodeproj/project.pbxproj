@@ -18,6 +18,8 @@
 		BD1D370C266E428800B51184 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D370B266E428800B51184 /* issue_trackerTests.swift */; };
 		BD1D3717266E428800B51184 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3716266E428800B51184 /* issue_trackerUITests.swift */; };
 		BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3730266F539400B51184 /* IssueListViewController.swift */; };
+		BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */; };
+		BD1D3735266F5D9800B51184 /* IssueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */; };
 		D1A7BE791A93D93FFEAD56C9 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9D20682EEABD0253D986DA /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		BD1D3716266E428800B51184 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		BD1D3718266E428800B51184 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1D3730266F539400B51184 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueTableViewCell.xib; sourceTree = "<group>"; };
 		BE8239AFCA4C0E7723B72656 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +145,7 @@
 		BD1D36F3266E428700B51184 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				BD1D3736266F5DA200B51184 /* View */,
 				BD1D3727266F121B00B51184 /* AppCycle */,
 				BD1D3726266F121000B51184 /* ViewController */,
 				BD1D36FA266E428700B51184 /* Main.storyboard */,
@@ -185,6 +190,15 @@
 				BD1D36F6266E428700B51184 /* SceneDelegate.swift */,
 			);
 			path = AppCycle;
+			sourceTree = "<group>";
+		};
+		BD1D3736266F5DA200B51184 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */,
+				BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +311,7 @@
 				BD1D3701266E428700B51184 /* LaunchScreen.storyboard in Resources */,
 				BD1D36FE266E428700B51184 /* Assets.xcassets in Resources */,
 				BD1D36FC266E428700B51184 /* Main.storyboard in Resources */,
+				BD1D3735266F5D9800B51184 /* IssueTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */,
 				BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */,
