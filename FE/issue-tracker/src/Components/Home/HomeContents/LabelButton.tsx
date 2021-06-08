@@ -1,13 +1,13 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { Home as Styled } from "../HomeStyles";
 import { HomeAssets as S } from "../HomeStyles";
 
 const LabelButton = () => {
   return (
-    <Button>
+    <Styled.Button>
       <S.labelTag />
       레이블 (3)
-    </Button>
+    </Styled.Button>
   );
 };
 

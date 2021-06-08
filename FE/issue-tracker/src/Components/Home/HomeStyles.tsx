@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Button from "@material-ui/core/Button";
 import { BOX } from "@/Styles/CommonStyles";
 import theme from "@/Styles/theme";
 import { ReactComponent as LabelTag } from "@/assets/labelTag.svg";
@@ -23,13 +24,39 @@ const Home = {
     align-items: center;
   `,
   ButtonGroup: styled(ButtonGroup)`
-    border: 1px solid blue;
+    border-radius: 11px;
+    border: 1px solid ${theme.GRAY_SCALE.LINE};
+    margin-right: 16px;
+  `,
+
+  Button: styled(Button)`
+    border-right: 0.5px solid ${theme.GRAY_SCALE.LINE};
+    width: 160px;
+    height: 40px;
+    font-size: 13px;
+    font-weight: bold;
+    color: ${theme.GRAY_SCALE.LABEL};
+  `,
+
+  WriteIssueBtn: styled(Button)`
+    width: 120px;
+    height: 40px;
+    color: white;
+    background: ${theme.COLOR.BLUE};
+    border-radius: 11px;
+    &:hover {
+      background: ${theme.COLOR.DARK_BLUE};
+    }
   `,
 };
 
 const HomeAssets = {
-  labelTag: styled(LabelTag)``,
-  milestoneTag: styled(MilestoneTag)``,
+  labelTag: styled(LabelTag)`
+    margin-right: 8px;
+  `,
+  milestoneTag: styled(MilestoneTag)`
+    margin-right: 8px;
+  `,
 };
 
 export { Home, HomeAssets };

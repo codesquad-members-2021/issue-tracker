@@ -1,13 +1,13 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import { HomeAssets as S } from "../HomeStyles";
+import { Home as Styled } from "../HomeStyles";
 
 const MileStoneButton = () => {
   return (
-    <Button>
+    <Styled.Button>
       <S.milestoneTag />
       마일스톤 (2)
-    </Button>
+    </Styled.Button>
   );
 };
 

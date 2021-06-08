@@ -1,4 +1,3 @@
-import React from "react";
 import { Header as S } from "./HeaderStyles";
 import Avatar from "@material-ui/core/Avatar";
 
