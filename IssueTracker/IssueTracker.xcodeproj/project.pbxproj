@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7105555D266F36650072065E /* FilterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7105555C266F36650072065E /* FilterIssueViewController.swift */; };
+		71055560266F36FD0072065E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7105555F266F36FD0072065E /* Constant.swift */; };
+		7123D3FF266F2431009C959B /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7123D3FE266F2431009C959B /* IssueListViewController.swift */; };
 		71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71377D1D266E458000DB1C4D /* AppDelegate.swift */; };
 		71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71377D1F266E458000DB1C4D /* SceneDelegate.swift */; };
 		71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71377D21266E458000DB1C4D /* LoginViewController.swift */; };
@@ -19,6 +22,9 @@
 
 /* Begin PBXFileReference section */
 		0BD2EE732C85DCCFB3400CDE /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		7105555C266F36650072065E /* FilterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterIssueViewController.swift; sourceTree = "<group>"; };
+		7105555F266F36FD0072065E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		7123D3FE266F2431009C959B /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		71377D1A266E458000DB1C4D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71377D1D266E458000DB1C4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71377D1F266E458000DB1C4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +58,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7105555E266F36EB0072065E /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7105555F266F36FD0072065E /* Constant.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		7123D3F6266F0733009C959B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				71377D21266E458000DB1C4D /* LoginViewController.swift */,
+				7123D3FE266F2431009C959B /* IssueListViewController.swift */,
+				7105555C266F36650072065E /* FilterIssueViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -109,6 +125,7 @@
 		71377D1C266E458000DB1C4D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				7105555E266F36EB0072065E /* UseCase */,
 				7123D3F6266F0733009C959B /* Presenter */,
 				71377D26266E458100DB1C4D /* Assets.xcassets */,
 				71377D2B266E458100DB1C4D /* Info.plist */,
@@ -245,9 +262,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7123D3FF266F2431009C959B /* IssueListViewController.swift in Sources */,
 				71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */,
 				71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */,
 				71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */,
+				7105555D266F36650072065E /* FilterIssueViewController.swift in Sources */,
+				71055560266F36FD0072065E /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
