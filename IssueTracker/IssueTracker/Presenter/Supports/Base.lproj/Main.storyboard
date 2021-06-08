@@ -241,7 +241,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-z6-xay">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSr-z6-xay">
                                 <rect key="frame" x="0.0" y="142.66666666666666" width="390" height="79"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="bgs-fQ-eLl">
@@ -268,6 +268,13 @@
                                     <constraint firstAttribute="trailing" secondItem="bgs-fQ-eLl" secondAttribute="trailing" id="qwD-TL-zXS"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HjD-6e-ROj">
+                                <rect key="frame" x="0.0" y="142.66666666666666" width="390" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="9cN-6j-c6h"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e0z-SA-kYV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -278,14 +285,17 @@
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" secondItem="hSr-z6-xay" secondAttribute="trailing" id="PPq-8R-bV5"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="QAv-HA-W83"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="top" secondItem="e0z-SA-kYV" secondAttribute="top" id="QQQ-Hb-8OU"/>
+                            <constraint firstItem="HjD-6e-ROj" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="QjY-CZ-vmW"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="top" secondItem="0FN-Kc-ZGd" secondAttribute="bottom" constant="1" id="TBY-Iq-lHv"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0473934" id="XPS-uV-bhL"/>
+                            <constraint firstItem="HjD-6e-ROj" firstAttribute="top" secondItem="KWF-lz-KJf" secondAttribute="bottom" multiplier="1.05" constant="1" id="cik-el-yEE"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0592417" id="ehO-P1-IZs"/>
                             <constraint firstItem="hSr-z6-xay" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="fKB-Mq-yAx"/>
                             <constraint firstItem="DK3-aF-yEx" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0402844" id="gwH-1N-904"/>
                             <constraint firstItem="hSr-z6-xay" firstAttribute="top" secondItem="KWF-lz-KJf" secondAttribute="bottom" multiplier="1.05" constant="1" id="kZO-Wp-3mV"/>
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KWF-lz-KJf" secondAttribute="trailing" id="mkc-of-nGh"/>
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="bottom" secondItem="DK3-aF-yEx" secondAttribute="bottom" constant="15" id="obq-CA-gxB"/>
+                            <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" secondItem="HjD-6e-ROj" secondAttribute="trailing" id="qWT-gy-xDr"/>
                             <constraint firstItem="DK3-aF-yEx" firstAttribute="width" secondItem="y7b-4X-MXd" secondAttribute="width" multiplier="0.0923077" id="wd1-39-DRt"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="x0u-HK-591"/>
                         </constraints>
