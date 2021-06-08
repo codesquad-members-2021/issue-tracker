@@ -3,15 +3,18 @@ import styled from "styled-components";
 import LoginPage from "./components/pages/LoginPage";
 import LoginLoadingPage from "./components/pages/LoginLoadingPage";
 import MainPage from "./components/pages/MainPage";
-
+import PrivateRoute from "./components/common/PrivateRoute";
+import Milestones from "./components/Milestones/Milestones";
 function App() {
 	return (
 		<>
 			{/* <div>레이블/마일스톤</div> */}
 			<Switch>
-				<Route path="/" exact component={MainPage} />
-				<Route path="/login" component={LoginPage} />
-				<Route path="/callback" component={LoginLoadingPage} />
+				<PrivateRoute exact path="/" component={MainPage} />
+				<Route path="/test" component={LoginPage} />
+				<Route path="/login" component={LoginLoadingPage} />
+				<Route path="/milestones" component={Milestones} />
+
 				<Route
 					render={({ location }) => (
 						<div>

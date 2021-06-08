@@ -1,10 +1,12 @@
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, Redirect, BrowserRouter } from "react-router-dom";
+
 import Labels from "../Labels/Labels";
 import Milestones from "../Milestones/Milestones";
-//
+import { useState } from "react";
+
 const MainPage = () => {
-	return (
-		<>
+	return localStorage.getItem("token") ? (
+		<BrowserRouter>
 			<div>메인의 헤더</div>
 			<ul>
 				<li>
@@ -14,11 +16,12 @@ const MainPage = () => {
 					<Link to="/labels">labels</Link>
 				</li>
 			</ul>
-			{/* <Switch>
-				<Route path="/milestones/" component={Milestones} />
-				<Route path="/labels/" component={Labels} />
-			</Switch> */}
-		</>
+			<Switch>
+				<Route path="/milestones" component={Milestones} />
+			</Switch>
+		</BrowserRouter>
+	) : (
+		<Redirect to="/login"></Redirect>
 	);
 };
 
