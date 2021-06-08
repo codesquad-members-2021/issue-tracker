@@ -45,7 +45,8 @@ interface activeTab {
 const LabelTab = styled(Link)<activeTab>`
   width: 50%;
   ${({ theme }) => theme.flexCenter}
-  background-color: ${({ theme, page }) => (page === 'labels' ? theme.colors.gr_line : 'transparent')};
+  background-color: ${({ theme, page }) =>
+    page === 'labels' ? theme.colors.gr_line : 'transparent'};
   border-radius: 11px 0 0 11px;
   .tab_name {
     margin: 0 8px;
@@ -55,7 +56,8 @@ const LabelTab = styled(Link)<activeTab>`
 const MilestoneTab = styled(Link)<activeTab>`
   width: 50%;
   ${({ theme }) => theme.flexCenter}
-  background-color: ${({ theme, page }) => (page === 'milestones' ? theme.colors.gr_line : 'transparent')};
+  background-color: ${({ theme, page }) =>
+    page === 'milestones' ? theme.colors.gr_line : 'transparent'};
   border-radius: 0 11px 11px 0;
   .tab_name {
     margin: 0 8px;
