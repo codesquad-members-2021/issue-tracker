@@ -233,10 +233,53 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="info.circle" catalog="system" id="G0w-bk-aWG"/>
+                    <connections>
+                        <outlet property="issueFilterButton" destination="ZQs-Ta-h9h" id="YPj-6m-RR9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0r-RA-T9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1827.6923076923076" y="-419.43127962085305"/>
+        </scene>
+        <!--Filter Issue View Controller-->
+        <scene sceneID="gae-50-zfK">
+            <objects>
+                <viewController restorationIdentifier="FilterVC" storyboardIdentifier="FilterVC" id="9Oz-MY-zZq" customClass="FilterIssueViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h33-78-mOL">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="7su-Cr-Xdd">
+                                <rect key="frame" x="10" y="44" width="370" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kV-M6-aen">
+                                        <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="50"/>
+                                        <state key="normal" title=" 취소" image="arrow.backward.circle" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRV-XP-fP2">
+                                        <rect key="frame" x="340" y="0.0" width="30" height="50"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title=" 저장"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="amG-2m-e2P"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7su-Cr-Xdd" firstAttribute="height" secondItem="h33-78-mOL" secondAttribute="height" multiplier="0.0592417" id="0WX-Ej-1bF"/>
+                            <constraint firstItem="7su-Cr-Xdd" firstAttribute="leading" secondItem="amG-2m-e2P" secondAttribute="leading" constant="10" id="FVc-1u-I6E"/>
+                            <constraint firstItem="7su-Cr-Xdd" firstAttribute="top" secondItem="amG-2m-e2P" secondAttribute="top" id="S9c-Xb-z2c"/>
+                            <constraint firstItem="7su-Cr-Xdd" firstAttribute="trailing" secondItem="amG-2m-e2P" secondAttribute="trailing" constant="-10" id="bAK-yy-BTa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="3kV-M6-aen" id="bom-Vw-oal"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iRx-qs-5kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2529.2307692307691" y="-419.43127962085305"/>
         </scene>
         <!--내계정-->
         <scene sceneID="O9w-qS-exz">
@@ -276,6 +319,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="JAr-Mn-mfp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JMf-4E-4O5">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -293,6 +337,7 @@
     </scenes>
     <resources>
         <image name="apple" width="14" height="17"/>
+        <image name="arrow.backward.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="github" width="25" height="24"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
