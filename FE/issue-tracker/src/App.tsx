@@ -7,7 +7,7 @@ import Login from '@pages/Login';
 import Issues from '@pages/Issues';
 import NewIssue from '@pages/NewIssue';
 import Labels from '@pages/Labels';
-import Milestones from '@pages/Milestones';
+import Milestones from '@pages/MileStones';
 import IssueDetail from '@pages/IssueDetail';
 
 function App() {
