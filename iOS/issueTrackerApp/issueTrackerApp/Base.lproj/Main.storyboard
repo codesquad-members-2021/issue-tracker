@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,6 +119,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qme-py-Kbq">
+                                <rect key="frame" x="41.5" y="535" width="331" height="44.5"/>
+                                <color key="backgroundColor" red="0.69803921570000005" green="0.72156862749999995" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -127,6 +131,8 @@
                             <constraint firstItem="2tV-IA-7Jv" firstAttribute="centerX" secondItem="3Ng-9N-1ia" secondAttribute="centerX" id="BkF-dF-Gxu"/>
                             <constraint firstItem="2tV-IA-7Jv" firstAttribute="top" secondItem="3Ng-9N-1ia" secondAttribute="bottom" constant="55" id="DGH-kO-xP3"/>
                             <constraint firstItem="dqe-MB-KSb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="JPr-a9-2K5"/>
+                            <constraint firstItem="qme-py-Kbq" firstAttribute="centerX" secondItem="dqe-MB-KSb" secondAttribute="centerX" id="Jcb-F0-ipz"/>
+                            <constraint firstItem="qme-py-Kbq" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.23" id="NsS-tS-G0J"/>
                             <constraint firstItem="dqe-MB-KSb" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="RHG-Kh-beG"/>
                             <constraint firstItem="dqe-MB-KSb" firstAttribute="centerX" secondItem="wAu-1s-4H4" secondAttribute="centerX" id="RM2-rr-hMb"/>
                             <constraint firstItem="3Ng-9N-1ia" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.4" id="Xfb-Pl-Rt0"/>
@@ -134,9 +140,14 @@
                             <constraint firstItem="3Ng-9N-1ia" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YsQ-67-xkh"/>
                             <constraint firstItem="wAu-1s-4H4" firstAttribute="centerX" secondItem="3Ng-9N-1ia" secondAttribute="centerX" id="dpC-I1-kdj"/>
                             <constraint firstItem="wAu-1s-4H4" firstAttribute="top" secondItem="2tV-IA-7Jv" secondAttribute="bottom" constant="20" id="jgn-LB-aen"/>
+                            <constraint firstItem="qme-py-Kbq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="nbq-3x-OcV"/>
+                            <constraint firstItem="qme-py-Kbq" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="vzq-8m-gAy"/>
                             <constraint firstItem="vg5-BD-AOB" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.21" id="wnK-mp-3tJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appleLoginButton" destination="qme-py-Kbq" id="JfC-mb-uDd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
