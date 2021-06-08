@@ -18,7 +18,7 @@ function App() {
 				<Route path="/login" component={LoginLoadingPage} />
 				<Route path="/main/milestones" component={Milestones} />
 				<Route path="/main/labels" component={Labels} />
-				<Route path="/main/new_issue" component={NewIssue} />
+				{/* <Route path="/main/new" component={NewIssue} /> */}
 				<Route path="*" component={NoMatch} />
 			</Switch>
 		</>
