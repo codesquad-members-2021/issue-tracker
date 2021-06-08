@@ -1,6 +1,6 @@
-import { Avatar } from "@chakra-ui/react";
-import styled from "styled-components";
-import { ReactComponent as LogotypeMedium } from "@assets/LogotypeMedium.svg";
+import { Avatar } from '@chakra-ui/react';
+import styled from 'styled-components';
+import { ReactComponent as LogotypeMedium } from '@assets/LogotypeMedium.svg';
 
 function Header() {
   return (
@@ -16,7 +16,6 @@ export default Header;
 const HeaderContainer = styled.div`
   width: 100%;
   height: 94px;
-  padding: 0 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
