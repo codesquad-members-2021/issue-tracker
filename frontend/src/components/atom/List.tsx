@@ -14,7 +14,7 @@ function RadionBtn(){
 function List({type, modal}:ListProps){
 
   return (
-    <ListBlock ref={modal} className={'showing'} >
+    <ListBlock ref={modal}>
       <ListHead>{type} 선택</ListHead>
       <ListBody><div>내용</div><RadionBtn/></ListBody>
       <ListBody><div>내용</div><RadionBtn/></ListBody>
