@@ -1,24 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈 트래커" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joF-lb-xtI">
+                                <rect key="frame" x="129.5" y="114" width="155" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w63-YT-NKm">
+                                <rect key="frame" x="38" y="205" width="338" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGK-7P-jaP">
+                                        <rect key="frame" x="31" y="11.5" width="45" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqn-1a-MdE">
+                                        <rect key="frame" x="84" y="0.0" width="238" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nGK-7P-jaP" firstAttribute="centerY" secondItem="w63-YT-NKm" secondAttribute="centerY" id="0Ky-gO-dDf"/>
+                                    <constraint firstItem="dqn-1a-MdE" firstAttribute="leading" secondItem="nGK-7P-jaP" secondAttribute="trailing" constant="8" id="1ZG-gD-7eZ"/>
+                                    <constraint firstItem="dqn-1a-MdE" firstAttribute="top" secondItem="w63-YT-NKm" secondAttribute="top" id="9WU-io-0AK"/>
+                                    <constraint firstAttribute="height" constant="44" id="Hm6-O5-FoK"/>
+                                    <constraint firstAttribute="trailing" secondItem="dqn-1a-MdE" secondAttribute="trailing" constant="16" id="YHz-Ei-2uc"/>
+                                    <constraint firstAttribute="bottom" secondItem="dqn-1a-MdE" secondAttribute="bottom" id="tJS-Ly-gAM"/>
+                                    <constraint firstItem="nGK-7P-jaP" firstAttribute="leading" secondItem="w63-YT-NKm" secondAttribute="leading" constant="31" id="zaO-8K-nfF"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTA-kt-nM8">
+                                <rect key="frame" x="38" y="267" width="338" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7Z-cL-pSg">
+                                        <rect key="frame" x="16" y="11.5" width="59" height="21"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQk-5y-ehz">
+                                        <rect key="frame" x="83" y="0.0" width="239" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CQF-5K-3c7"/>
+                                    <constraint firstItem="b7Z-cL-pSg" firstAttribute="leading" secondItem="XTA-kt-nM8" secondAttribute="leading" constant="16" id="JUb-vH-A04"/>
+                                    <constraint firstAttribute="trailing" secondItem="RQk-5y-ehz" secondAttribute="trailing" constant="16" id="X4d-jJ-2Aw"/>
+                                    <constraint firstItem="b7Z-cL-pSg" firstAttribute="centerY" secondItem="XTA-kt-nM8" secondAttribute="centerY" id="dpP-8C-NHM"/>
+                                    <constraint firstItem="RQk-5y-ehz" firstAttribute="leading" secondItem="b7Z-cL-pSg" secondAttribute="trailing" constant="8" id="e5a-2C-lxM"/>
+                                    <constraint firstItem="RQk-5y-ehz" firstAttribute="top" secondItem="XTA-kt-nM8" secondAttribute="top" id="mpx-4t-UG8"/>
+                                    <constraint firstAttribute="bottom" secondItem="RQk-5y-ehz" secondAttribute="bottom" id="sSx-4N-XaO"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqa-hW-Efv">
+                                <rect key="frame" x="83" y="344" width="39" height="30"/>
+                                <state key="normal" title="로그인"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDW-DW-3fg">
+                                <rect key="frame" x="287" y="344" width="56" height="30"/>
+                                <state key="normal" title="회원 가입"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpA-Ma-aho">
+                                <rect key="frame" x="38" y="419" width="338" height="44"/>
+                                <color key="backgroundColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fSb-UT-XZl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <state key="normal" title="Sign in with Github">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WJ-Re-OVw">
+                                <rect key="frame" x="38" y="481" width="338" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Tc2-R7-YWL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title=" Sign in with Apple" image="applelogo" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w63-YT-NKm" secondAttribute="trailing" constant="38" id="034-pp-i5V"/>
+                            <constraint firstItem="JDW-DW-3fg" firstAttribute="top" secondItem="XTA-kt-nM8" secondAttribute="bottom" constant="33" id="3hW-ma-tVO"/>
+                            <constraint firstItem="pqa-hW-Efv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="83" id="57f-Ri-YT3"/>
+                            <constraint firstItem="0WJ-Re-OVw" firstAttribute="top" secondItem="xpA-Ma-aho" secondAttribute="bottom" constant="18" id="7JB-z6-a9x"/>
+                            <constraint firstItem="xpA-Ma-aho" firstAttribute="top" secondItem="XTA-kt-nM8" secondAttribute="bottom" constant="108" id="AMS-N4-gUg"/>
+                            <constraint firstItem="JDW-DW-3fg" firstAttribute="leading" relation="lessThanOrEqual" secondItem="pqa-hW-Efv" secondAttribute="trailing" constant="165" id="Af6-t4-hc8"/>
+                            <constraint firstItem="joF-lb-xtI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EHH-hc-X9V"/>
+                            <constraint firstItem="XTA-kt-nM8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="MAl-Yj-OqF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="0WJ-Re-OVw" secondAttribute="bottom" constant="337" id="NaD-bj-sxY"/>
+                            <constraint firstItem="w63-YT-NKm" firstAttribute="top" secondItem="joF-lb-xtI" secondAttribute="bottom" constant="50" id="O1z-Gz-1dv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0WJ-Re-OVw" secondAttribute="trailing" constant="38" id="Qyc-bX-kb2"/>
+                            <constraint firstItem="pqa-hW-Efv" firstAttribute="top" secondItem="XTA-kt-nM8" secondAttribute="bottom" constant="33" id="Sqw-yM-T5n"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JDW-DW-3fg" secondAttribute="trailing" constant="71" id="VKY-YK-YtP"/>
+                            <constraint firstItem="xpA-Ma-aho" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="XCr-hu-e8Y"/>
+                            <constraint firstItem="w63-YT-NKm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="YnR-p6-fJm"/>
+                            <constraint firstItem="0WJ-Re-OVw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="ah6-Aa-V1x"/>
+                            <constraint firstItem="XTA-kt-nM8" firstAttribute="top" secondItem="w63-YT-NKm" secondAttribute="bottom" constant="18" id="fml-AP-AMc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XTA-kt-nM8" secondAttribute="trailing" constant="38" id="iCH-2i-Fzp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xpA-Ma-aho" secondAttribute="trailing" constant="38" id="sMB-LV-Oto"/>
+                            <constraint firstItem="joF-lb-xtI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="yEg-XT-Csq"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="108.48214285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="applelogo" catalog="system" width="103" height="128"/>
+    </resources>
 </document>

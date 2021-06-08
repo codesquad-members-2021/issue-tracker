@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F4266E428700B51184 /* AppDelegate.swift */; };
 		BD1D36F7266E428700B51184 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F6266E428700B51184 /* SceneDelegate.swift */; };
-		BD1D36F9266E428700B51184 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F8266E428700B51184 /* ViewController.swift */; };
+		BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F8266E428700B51184 /* LoginViewController.swift */; };
 		BD1D36FC266E428700B51184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD1D36FA266E428700B51184 /* Main.storyboard */; };
 		BD1D36FE266E428700B51184 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1D36FD266E428700B51184 /* Assets.xcassets */; };
 		BD1D3701266E428700B51184 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD1D36FF266E428700B51184 /* LaunchScreen.storyboard */; };
@@ -38,7 +38,7 @@
 		BD1D36F1266E428700B51184 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1D36F4266E428700B51184 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD1D36F6266E428700B51184 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD1D36F8266E428700B51184 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD1D36F8266E428700B51184 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BD1D36FB266E428700B51184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD1D36FD266E428700B51184 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD1D3700266E428700B51184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,9 +99,8 @@
 		BD1D36F3266E428700B51184 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				BD1D36F4266E428700B51184 /* AppDelegate.swift */,
-				BD1D36F6266E428700B51184 /* SceneDelegate.swift */,
-				BD1D36F8266E428700B51184 /* ViewController.swift */,
+				BD1D3727266F121B00B51184 /* AppCycle */,
+				BD1D3726266F121000B51184 /* ViewController */,
 				BD1D36FA266E428700B51184 /* Main.storyboard */,
 				BD1D36FD266E428700B51184 /* Assets.xcassets */,
 				BD1D36FF266E428700B51184 /* LaunchScreen.storyboard */,
@@ -126,6 +125,23 @@
 				BD1D3718266E428800B51184 /* Info.plist */,
 			);
 			path = "issue-trackerUITests";
+			sourceTree = "<group>";
+		};
+		BD1D3726266F121000B51184 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BD1D36F8266E428700B51184 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		BD1D3727266F121B00B51184 /* AppCycle */ = {
+			isa = PBXGroup;
+			children = (
+				BD1D36F4266E428700B51184 /* AppDelegate.swift */,
+				BD1D36F6266E428700B51184 /* SceneDelegate.swift */,
+			);
+			path = AppCycle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD1D36F9266E428700B51184 /* ViewController.swift in Sources */,
+				BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */,
 				BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */,
 				BD1D36F7266E428700B51184 /* SceneDelegate.swift in Sources */,
 			);
