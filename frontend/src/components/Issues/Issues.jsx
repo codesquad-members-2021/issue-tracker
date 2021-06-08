@@ -1,5 +1,5 @@
 const Issues = () => {
-	return <div></div>;
+	return <div>이슈ㄴ</div>;
 };
 
 export default Issues;

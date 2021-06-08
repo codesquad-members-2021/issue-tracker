@@ -1,5 +1,5 @@
 const Labels = () => {
-	return <div></div>;
+	return <div>레이블</div>;
 };
 
 export default Labels;

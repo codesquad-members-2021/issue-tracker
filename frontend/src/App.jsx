@@ -1,18 +1,17 @@
 import { Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginPage from "./components/pages/LoginPage";
-import LoadingPage from "./components/pages/LoadingPage";
+import LoginLoadingPage from "./components/pages/LoginLoadingPage";
 import MainPage from "./components/pages/MainPage";
-import Milestones from "./components/Milestones/Milestones";
+
 function App() {
 	return (
 		<>
 			{/* <div>레이블/마일스톤</div> */}
 			<Switch>
-				<Route path="/" exact component={LoginPage} />
-				<Route path="/login" component={LoadingPage} />
-				<Route path="/main" component={MainPage} />
-
+				<Route path="/" exact component={MainPage} />
+				<Route path="/login" component={LoginPage} />
+				<Route path="/callback" component={LoginLoadingPage} />
 				<Route
 					render={({ location }) => (
 						<div>
