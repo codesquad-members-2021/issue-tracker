@@ -2,13 +2,27 @@ import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import useButtonStyles from '../styles/ButtonStyles';
+import { ClassNameMap } from '@material-ui/styles/withStyles';
 
 interface Prop {
   type: string;
   name: string;
 }
+type IButtonType = ClassNameMap<
+  | 'buttonLarge'
+  | 'buttonMedium'
+  | 'buttonSmallFill'
+  | 'buttonSmallBorder'
+  | 'buttonMediumText'
+  | 'buttonSmallText'
+>;
 
-const ButtonList: FC<Prop> = ({ type, name }) => {
+interface IButton {
+  classes: IButtonType;
+  name: string;
+}
+
+const ButtonList: FC<Prop> = ({ type, name }: Prop) => {
   const classes = useButtonStyles();
 
   return {
@@ -18,17 +32,12 @@ const ButtonList: FC<Prop> = ({ type, name }) => {
     smallBorder: <ButtonSmallBorder {...{ classes, name }} />,
     mediumText: <ButtonMediumText {...{ classes, name }} />,
     smallText: <ButtonSmallText {...{ classes, name }} />,
-  }[type] as any;
+  }[type] as JSX.Element;
 };
 
 export default ButtonList;
 
-interface IButtonLarge {
-  classes: any;
-  name: string;
-}
-
-function ButtonLarge({ classes, name }: IButtonLarge) {
+function ButtonLarge({ classes, name }: IButton) {
   return (
     <Button
       variant="contained"
@@ -43,7 +52,7 @@ function ButtonLarge({ classes, name }: IButtonLarge) {
   );
 }
 
-function ButtonMedium({ classes, name }: any) {
+function ButtonMedium({ classes, name }: IButton) {
   return (
     <Button
       variant="contained"
@@ -58,7 +67,7 @@ function ButtonMedium({ classes, name }: any) {
   );
 }
 
-function ButtonSmallFill({ classes, name }: any) {
+function ButtonSmallFill({ classes, name }: IButton) {
   return (
     <Button
       variant="contained"
@@ -74,7 +83,7 @@ function ButtonSmallFill({ classes, name }: any) {
   );
 }
 
-function ButtonSmallBorder({ classes, name }: any) {
+function ButtonSmallBorder({ classes, name }: IButton) {
   return (
     <Button
       variant="outlined"
@@ -90,7 +99,7 @@ function ButtonSmallBorder({ classes, name }: any) {
   );
 }
 
-function ButtonMediumText({ classes, name }: any) {
+function ButtonMediumText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
@@ -103,7 +112,7 @@ function ButtonMediumText({ classes, name }: any) {
   );
 }
 
-function ButtonSmallText({ classes, name }: any) {
+function ButtonSmallText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
