@@ -1,5 +1,5 @@
 //
-//  RepositoryController.swift
+//  NetworkController.swift
 //  issueTrackerApp
 //
 //  Created by zombietux on 2021/06/08.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RepositoryController {
+class NetworkController {
     private let keychainController: KeychainController
     
     init(keychainController: KeychainController) {

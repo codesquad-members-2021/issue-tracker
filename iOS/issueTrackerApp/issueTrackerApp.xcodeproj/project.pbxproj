@@ -16,7 +16,9 @@
 		930FAE9D266E112900422968 /* issueTrackerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE9C266E112900422968 /* issueTrackerAppTests.swift */; };
 		930FAEA8266E112A00422968 /* issueTrackerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */; };
 		930FAEC7266E13F500422968 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 930FAEC6266E13F500422968 /* Alamofire */; };
-		930FAECD266E144E00422968 /* SwiftLintFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 930FAECC266E144E00422968 /* SwiftLintFramework */; };
+		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
+		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
+		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		930FAEA3266E112A00422968 /* issueTrackerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = issueTrackerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issueTrackerAppUITests.swift; sourceTree = "<group>"; };
 		930FAEA9266E112A00422968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
+		9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubEndpoint.swift; sourceTree = "<group>"; };
+		9343E2D7266F03E90086F977 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				930FAECD266E144E00422968 /* SwiftLintFramework in Frameworks */,
 				930FAEC7266E13F500422968 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,8 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				930FAEB9266E116300422968 /* Network */,
-				930FAEBB266E126100422968 /* Repository */,
 				930FAEBA266E11BA00422968 /* Storage */,
+				930FAEBB266E126100422968 /* Repository */,
+				9343E2C9266EF9CD0086F977 /* KeychainController.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 		930FAEB9266E116300422968 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -162,6 +168,7 @@
 		930FAEBB266E126100422968 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				9343E2D7266F03E90086F977 /* NetworkController.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -254,7 +261,6 @@
 			name = issueTrackerApp;
 			packageProductDependencies = (
 				930FAEC6266E13F500422968 /* Alamofire */,
-				930FAECC266E144E00422968 /* SwiftLintFramework */,
 			);
 			productName = issueTrackerApp;
 			productReference = 930FAE82266E112700422968 /* issueTrackerApp.app */;
@@ -329,7 +335,6 @@
 			mainGroup = 930FAE79266E112700422968;
 			packageReferences = (
 				930FAEC5266E13F500422968 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				930FAECB266E144E00422968 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 930FAE83266E112700422968 /* Products */;
 			projectDirPath = "";
@@ -375,8 +380,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				930FAE8A266E112700422968 /* ViewController.swift in Sources */,
+				9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
+				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
 				930FAE88266E112700422968 /* SceneDelegate.swift in Sources */,
+				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,14 +727,6 @@
 				minimumVersion = 5.4.3;
 			};
 		};
-		930FAECB266E144E00422968 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.43.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -734,11 +734,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 930FAEC5266E13F500422968 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		930FAECC266E144E00422968 /* SwiftLintFramework */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 930FAECB266E144E00422968 /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = SwiftLintFramework;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
