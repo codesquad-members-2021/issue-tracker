@@ -8,6 +8,7 @@ target 'issue-tracker' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
+  pod 'OctoKit.swift'
   # Pods for issue-tracker
 
 end
