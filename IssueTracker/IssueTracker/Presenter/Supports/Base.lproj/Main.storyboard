@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7s4-Vv-bDk">
-                                <rect key="frame" x="0.0" y="209" width="390" height="130"/>
+                                <rect key="frame" x="0.0" y="226" width="390" height="130"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5n4-JK-aaU">
                                         <rect key="frame" x="20" y="64.666666666666686" width="350" height="1"/>
@@ -107,7 +107,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1T4-np-ClK">
-                                <rect key="frame" x="0.0" y="339" width="390" height="75"/>
+                                <rect key="frame" x="0.0" y="356" width="390" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2b-Cg-4OD">
                                         <rect key="frame" x="0.0" y="0.0" width="195" height="75"/>
@@ -125,6 +125,7 @@
                                 <rect key="frame" x="24.666666666666657" y="627" width="341" height="68"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="  Github 계정으로 로그인" image="github">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -139,6 +140,7 @@
                                 <rect key="frame" x="24.666666666666657" y="705" width="341" height="68"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="  Apple 계정으로 로그인" image="apple">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -150,7 +152,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPa-Lt-HL5">
-                                <rect key="frame" x="75" y="84" width="240" height="61"/>
+                                <rect key="frame" x="75" y="89" width="240" height="61"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -166,12 +168,12 @@
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EPF-ki-GrR"/>
                             <constraint firstItem="1T4-np-ClK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="IGI-oe-1Hc"/>
                             <constraint firstItem="pUe-tn-HS5" firstAttribute="top" secondItem="EPC-sz-ysq" secondAttribute="bottom" constant="10" id="IS9-J1-9VR"/>
+                            <constraint firstItem="7s4-Vv-bDk" firstAttribute="top" secondItem="MPa-Lt-HL5" secondAttribute="bottom" multiplier="1.5" constant="1" id="QiD-XW-jA2"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.154028" id="R5Q-aN-ruZ"/>
                             <constraint firstItem="MPa-Lt-HL5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="T7u-B2-8wJ"/>
-                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="VT2-RC-n8M"/>
+                            <constraint firstItem="MPa-Lt-HL5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" multiplier="2" constant="1" id="VT2-RC-n8M"/>
                             <constraint firstItem="EPC-sz-ysq" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0805687" id="bBd-g1-hb6"/>
                             <constraint firstItem="7s4-Vv-bDk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bsc-cZ-2JI"/>
-                            <constraint firstItem="7s4-Vv-bDk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="165" id="gSo-b2-xAm"/>
                             <constraint firstItem="EPC-sz-ysq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gdo-3T-ut3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pUe-tn-HS5" secondAttribute="bottom" constant="37" id="h3n-uw-0KI"/>
                             <constraint firstItem="1T4-np-ClK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0888626" id="i9B-MO-gMo"/>
