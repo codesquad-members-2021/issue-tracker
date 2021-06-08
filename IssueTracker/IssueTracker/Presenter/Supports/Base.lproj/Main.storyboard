@@ -120,11 +120,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPC-sz-ysq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPC-sz-ysq">
                                 <rect key="frame" x="24.666666666666657" y="627" width="341" height="68"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="  Github 계정으로 로그인" image="github"/>
+                                <state key="normal" title="  Github 계정으로 로그인" image="github">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -132,11 +134,13 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUe-tn-HS5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUe-tn-HS5">
                                 <rect key="frame" x="24.666666666666657" y="705" width="341" height="68"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="  Apple 계정으로 로그인" image="apple"/>
+                                <state key="normal" title="  Apple 계정으로 로그인" image="apple">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -204,14 +208,35 @@
                     <view key="view" contentMode="scaleToFill" id="y7b-4X-MXd">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-Kc-ZGd">
+                                <rect key="frame" x="0.0" y="44" width="390" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-Ta-h9h">
+                                        <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="50"/>
+                                        <state key="normal" title=" 필터" image="line.horizontal.3.decrease" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQv-G2-rHf">
+                                        <rect key="frame" x="335.33333333333331" y="0.0" width="54.666666666666686" height="50"/>
+                                        <state key="normal" title=" 선택 " image="checkmark.circle" catalog="system"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="e0z-SA-kYV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" id="Hrk-Ia-AT4"/>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="QAv-HA-W83"/>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="top" secondItem="e0z-SA-kYV" secondAttribute="top" id="QQQ-Hb-8OU"/>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0592417" id="ehO-P1-IZs"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="info.circle" catalog="system" id="G0w-bk-aWG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0r-RA-T9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1828" y="-419"/>
+            <point key="canvasLocation" x="1827.6923076923076" y="-419.43127962085305"/>
         </scene>
         <!--내계정-->
         <scene sceneID="O9w-qS-exz">
@@ -268,8 +293,10 @@
     </scenes>
     <resources>
         <image name="apple" width="14" height="17"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="github" width="25" height="24"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="line.horizontal.3.decrease" catalog="system" width="128" height="73"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="signpost.right" catalog="system" width="128" height="118"/>
         <image name="tag" catalog="system" width="128" height="119"/>
