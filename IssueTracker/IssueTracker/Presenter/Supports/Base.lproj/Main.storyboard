@@ -210,14 +210,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-Kc-ZGd">
-                                <rect key="frame" x="0.0" y="44" width="390" height="50"/>
+                                <rect key="frame" x="10" y="44" width="370" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQs-Ta-h9h">
                                         <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="50"/>
                                         <state key="normal" title=" 필터" image="line.horizontal.3.decrease" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQv-G2-rHf">
-                                        <rect key="frame" x="335.33333333333331" y="0.0" width="54.666666666666686" height="50"/>
+                                        <rect key="frame" x="315.33333333333331" y="0.0" width="54.666666666666686" height="50"/>
                                         <state key="normal" title=" 선택 " image="checkmark.circle" catalog="system"/>
                                     </button>
                                 </subviews>
@@ -226,8 +226,8 @@
                         <viewLayoutGuide key="safeArea" id="e0z-SA-kYV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" id="Hrk-Ia-AT4"/>
-                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="QAv-HA-W83"/>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" constant="-10" id="Hrk-Ia-AT4"/>
+                            <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="QAv-HA-W83"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="top" secondItem="e0z-SA-kYV" secondAttribute="top" id="QQQ-Hb-8OU"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0592417" id="ehO-P1-IZs"/>
                         </constraints>
