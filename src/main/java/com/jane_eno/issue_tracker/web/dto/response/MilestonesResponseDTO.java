@@ -1,15 +1,15 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class MilestoneResponseDTO {
+public class MilestonesResponseDTO {
 
+    private final int labelsCount;
+    private final int milestonesCount;
     private final List<Milestone> milestones;
 }

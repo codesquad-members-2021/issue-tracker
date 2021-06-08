@@ -2,19 +2,17 @@ package com.jane_eno.issue_tracker.web;
 
 import com.jane_eno.issue_tracker.service.UserService;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    public final UserService userService;
+    private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/login")
     public UserResponseDTO login(@RequestParam String code) {

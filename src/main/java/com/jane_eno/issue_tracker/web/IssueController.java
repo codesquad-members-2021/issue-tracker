@@ -3,20 +3,18 @@ package com.jane_eno.issue_tracker.web;
 import com.jane_eno.issue_tracker.service.IssueService;
 import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/issues")
+@RequiredArgsConstructor
 public class IssueController {
 
-    public final IssueService issueService;
+    private final IssueService issueService;
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
-
-    public IssueController(IssueService issueService) {
-        this.issueService = issueService;
-    }
 
     @GetMapping
     public IssuesResponseDTO view(@RequestParam String status) {
@@ -71,7 +69,7 @@ public class IssueController {
     }
 
     @GetMapping("/{issueId}/labels")
-    public LabelsResponseDTO viewLabels(@PathVariable Long issueId) {
+    public LabelsInIssueResponseDTO viewLabels(@PathVariable Long issueId) {
         logger.debug("이슈의 레이블 가져오기");
         return issueService.getLabels(issueId);
     }
@@ -84,7 +82,7 @@ public class IssueController {
     }
 
     @GetMapping("/{issueId}/milestones")
-    public MilestoneResponseDTO getMilestones(@PathVariable Long issueId) {
+    public MilestonesInIssueResponseDTO getMilestones(@PathVariable Long issueId) {
         logger.debug("이슈의 마일스톤 가져오기");
         return issueService.getMilestones(issueId);
     }

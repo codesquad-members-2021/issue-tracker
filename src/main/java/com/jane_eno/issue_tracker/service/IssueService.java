@@ -78,8 +78,8 @@ public class IssueService {
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
                 )))
                 .milestones(new ArrayList<>(Arrays.asList(
-                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), 3, 1),
-                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), 4, 5)
+                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
+                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
                 )))
                 .build();
     }
@@ -110,8 +110,8 @@ public class IssueService {
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
                 )))
                 .milestones(new ArrayList<>(Arrays.asList(
-                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), 3, 1),
-                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), 4, 5)
+                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
+                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
                 )))
                 .build();
     }
@@ -131,8 +131,8 @@ public class IssueService {
     public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
     }
 
-    public LabelsResponseDTO getLabels(Long issueID) {
-        return LabelsResponseDTO.builder()
+    public LabelsInIssueResponseDTO getLabels(Long issueID) {
+        return LabelsInIssueResponseDTO.builder()
                 .labels(new ArrayList<>(Arrays.asList(
                         new Label(1L, "bug", "#CCFFCC", "bug fix", true),
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
@@ -143,11 +143,11 @@ public class IssueService {
 
     }
 
-    public MilestoneResponseDTO getMilestones(Long issueId) {
-        return MilestoneResponseDTO.builder()
+    public MilestonesInIssueResponseDTO getMilestones(Long issueId) {
+        return MilestonesInIssueResponseDTO.builder()
                 .milestones(new ArrayList<>(Arrays.asList(
-                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), 3, 1),
-                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), 4, 5)
+                        new Milestone(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
+                        new Milestone(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
                 )))
                 .build();
     }
