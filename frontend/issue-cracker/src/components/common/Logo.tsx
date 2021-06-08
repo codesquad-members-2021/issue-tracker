@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 interface Prop {
@@ -7,14 +7,13 @@ interface Prop {
 }
 //function : 아예 안써도 됨
 //const logo => : FuncitonComponent  , FC
-const Logo: FunctionComponent<Prop> = ({ type, name }: Prop) => {
+const Logo: FC<Prop> = ({ type, name }: Prop) => {
   return <LogoDiv type={type}>{name}</LogoDiv>;
 };
 
 const LogoDiv = styled.div<Prop>`
-  /* color: ${({ theme }) => theme.colors.black}; */
   font-size: ${({ type }) => (type === 'large' ? '56px' : '32px')};
-
   font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
 `;
 export default Logo;

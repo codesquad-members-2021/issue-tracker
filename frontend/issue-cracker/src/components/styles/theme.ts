@@ -11,9 +11,8 @@ const theme = {
     magenta: '#ed6f63',
     brown: '#815854',
     beige: '#F9EBDE',
-    blue: '#7b9acc',
-    pink: '#FAD0C9',
-
+    blue: '#1E4174',
+    yellow: '#DDA94B',
     //gray1~gray6 => 5로 갈수록 진해짐
   },
   fontSizes: {

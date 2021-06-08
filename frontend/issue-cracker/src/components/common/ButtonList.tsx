@@ -7,6 +7,7 @@ import { ClassNameMap } from '@material-ui/styles/withStyles';
 interface Prop {
   type: string;
   name: string;
+  color?: string;
 }
 type IButtonType = ClassNameMap<
   | 'buttonLarge'
@@ -20,31 +21,31 @@ type IButtonType = ClassNameMap<
 interface IButton {
   classes: IButtonType;
   name: string;
+  color?: string;
 }
 
-const ButtonList: FC<Prop> = ({ type, name }: Prop) => {
+const ButtonList: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
   const classes = useButtonStyles();
 
   return {
-    large: <ButtonLarge {...{ classes, name }} />,
-    medium: <ButtonMedium {...{ classes, name }} />,
-    smallFill: <ButtonSmallFill {...{ classes, name }} />,
-    smallBorder: <ButtonSmallBorder {...{ classes, name }} />,
-    mediumText: <ButtonMediumText {...{ classes, name }} />,
-    smallText: <ButtonSmallText {...{ classes, name }} />,
+    large: <ButtonLarge {...{ classes, name, color }} />,
+    medium: <ButtonMedium {...{ classes, name, color }} />,
+    smallFill: <ButtonSmallFill {...{ classes, name, color }} />,
+    smallBorder: <ButtonSmallBorder {...{ classes, name, color }} />,
+    mediumText: <ButtonMediumText {...{ classes, name, color }} />,
+    smallText: <ButtonSmallText {...{ classes, name, color }} />,
   }[type] as JSX.Element;
 };
 
 export default ButtonList;
 
-function ButtonLarge({ classes, name }: IButton) {
+function ButtonLarge({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
-      color="secondary"
       className={classes.buttonLarge}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -52,14 +53,13 @@ function ButtonLarge({ classes, name }: IButton) {
   );
 }
 
-function ButtonMedium({ classes, name }: IButton) {
+function ButtonMedium({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
-      color="secondary"
       className={classes.buttonMedium}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -67,15 +67,14 @@ function ButtonMedium({ classes, name }: IButton) {
   );
 }
 
-function ButtonSmallFill({ classes, name }: IButton) {
+function ButtonSmallFill({ classes, name, color }: IButton) {
   return (
     <Button
       variant="contained"
       startIcon={<AddIcon />}
-      color="secondary"
       className={classes.buttonSmallFill}
       style={{
-        backgroundColor: '#815854',
+        backgroundColor: `${color}`,
       }}
     >
       {name}
@@ -83,15 +82,14 @@ function ButtonSmallFill({ classes, name }: IButton) {
   );
 }
 
-function ButtonSmallBorder({ classes, name }: IButton) {
+function ButtonSmallBorder({ classes, name, color }: IButton) {
   return (
     <Button
       variant="outlined"
       startIcon={<AddIcon />}
-      color="secondary"
       className={classes.buttonSmallBorder}
       style={{
-        border: '1px solid #815854',
+        border: `1px solid ${color}`,
       }}
     >
       {name}
@@ -103,7 +101,6 @@ function ButtonMediumText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
-      color="secondary"
       startIcon={<AddIcon />}
       className={classes.buttonMediumText}
     >
@@ -116,7 +113,6 @@ function ButtonSmallText({ classes, name }: IButton) {
   return (
     <Button
       variant="text"
-      color="secondary"
       startIcon={<AddIcon />}
       className={classes.buttonSmallText}
     >
