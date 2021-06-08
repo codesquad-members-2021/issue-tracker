@@ -200,7 +200,7 @@
         <!--이슈-->
         <scene sceneID="XTk-1U-WTB">
             <objects>
-                <viewController id="ODI-ZX-2fD" sceneMemberID="viewController">
+                <viewController restorationIdentifier="IssueVC" storyboardIdentifier="IssueVC" id="ODI-ZX-2fD" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y7b-4X-MXd">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
