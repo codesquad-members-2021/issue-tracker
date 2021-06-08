@@ -23,6 +23,8 @@
 		B3B55A17266E0D5600901C55 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A16266E0D5600901C55 /* RxCocoa */; };
 		B3B55A19266E0D5600901C55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B3B55A18266E0D5600901C55 /* RxSwift */; };
 		B3F50EE9266E12340009C260 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3F50EE8266E12340009C260 /* SnapKit */; };
+		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
+		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
+		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E7F242466FC866CAD16EFF69 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker_issue_trackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -126,13 +130,11 @@
 		B3B559DF266E095E00901C55 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				B3B559E0266E095E00901C55 /* AppDelegate.swift */,
-				B3B559E2266E095E00901C55 /* SceneDelegate.swift */,
+				D0ADB68F266F0A2200E0762C /* Supporting Files */,
 				B3B559E4266E095E00901C55 /* ViewController.swift */,
 				B3B559E6266E095E00901C55 /* Main.storyboard */,
-				B3B559E9266E096000901C55 /* Assets.xcassets */,
-				B3B559EB266E096000901C55 /* LaunchScreen.storyboard */,
 				B3B559EE266E096000901C55 /* Info.plist */,
+				D0ADB69D266F0E7900E0762C /* Model */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -153,6 +155,26 @@
 				B3B55A04266E096000901C55 /* Info.plist */,
 			);
 			path = "issue-trackerUITests";
+			sourceTree = "<group>";
+		};
+		D0ADB68F266F0A2200E0762C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B3B559E0266E095E00901C55 /* AppDelegate.swift */,
+				B3B559E2266E095E00901C55 /* SceneDelegate.swift */,
+				B3B559E9266E096000901C55 /* Assets.xcassets */,
+				B3B559EB266E096000901C55 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0ADB69D266F0E7900E0762C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0ADB693266F0A5000E0762C /* Endpoint.swift */,
+				D0ADB698266F0C1300E0762C /* NetworkManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DD720597B58AE4F3E0B9F4F7 /* Pods */ = {
@@ -394,6 +416,8 @@
 			files = (
 				B3B559E5266E095E00901C55 /* ViewController.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
+				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
+				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
