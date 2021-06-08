@@ -241,23 +241,42 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEX-gl-9Ji">
+                                <rect key="frame" x="0.0" y="204.33333333333334" width="390" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="UtE-rP-r6e"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="AEz-7C-FAR">
+                                <rect key="frame" x="0.0" y="150" width="390" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e0z-SA-kYV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="width" secondItem="y7b-4X-MXd" secondAttribute="width" multiplier="0.305128" id="3Ij-vb-G5W"/>
+                            <constraint firstItem="AEz-7C-FAR" firstAttribute="top" secondItem="KWF-lz-KJf" secondAttribute="bottom" multiplier="1.1" constant="1" id="6yb-W9-bno"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" constant="-10" id="Hrk-Ia-AT4"/>
+                            <constraint firstItem="AEz-7C-FAR" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="Jl0-ta-E7N"/>
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" secondItem="DK3-aF-yEx" secondAttribute="trailing" constant="15" id="OAO-TQ-CjM"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="QAv-HA-W83"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="top" secondItem="e0z-SA-kYV" secondAttribute="top" id="QQQ-Hb-8OU"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="top" secondItem="0FN-Kc-ZGd" secondAttribute="bottom" constant="1" id="TBY-Iq-lHv"/>
+                            <constraint firstItem="AEz-7C-FAR" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" id="ULM-bL-Nxn"/>
+                            <constraint firstItem="AEz-7C-FAR" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0521327" id="VdK-tf-G4f"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0473934" id="XPS-uV-bhL"/>
+                            <constraint firstItem="mEX-gl-9Ji" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" id="Yae-vG-6uG"/>
+                            <constraint firstItem="mEX-gl-9Ji" firstAttribute="top" secondItem="AEz-7C-FAR" secondAttribute="bottom" multiplier="1.05" constant="1" id="bew-tY-S8v"/>
                             <constraint firstItem="0FN-Kc-ZGd" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0592417" id="ehO-P1-IZs"/>
                             <constraint firstItem="DK3-aF-yEx" firstAttribute="height" secondItem="y7b-4X-MXd" secondAttribute="height" multiplier="0.0402844" id="gwH-1N-904"/>
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KWF-lz-KJf" secondAttribute="trailing" id="mkc-of-nGh"/>
                             <constraint firstItem="e0z-SA-kYV" firstAttribute="bottom" secondItem="DK3-aF-yEx" secondAttribute="bottom" constant="15" id="obq-CA-gxB"/>
+                            <constraint firstItem="AEz-7C-FAR" firstAttribute="width" secondItem="y7b-4X-MXd" secondAttribute="width" id="tML-tm-4Eb"/>
                             <constraint firstItem="DK3-aF-yEx" firstAttribute="width" secondItem="y7b-4X-MXd" secondAttribute="width" multiplier="0.0923077" id="wd1-39-DRt"/>
                             <constraint firstItem="KWF-lz-KJf" firstAttribute="leading" secondItem="e0z-SA-kYV" secondAttribute="leading" constant="10" id="x0u-HK-591"/>
+                            <constraint firstItem="mEX-gl-9Ji" firstAttribute="trailing" secondItem="e0z-SA-kYV" secondAttribute="trailing" id="zgy-Bi-SZq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="info.circle" catalog="system" id="G0w-bk-aWG"/>
