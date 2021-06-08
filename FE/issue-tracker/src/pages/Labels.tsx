@@ -1,5 +1,19 @@
+import styled from 'styled-components';
+import Header from '@components/common/Header';
+import Tabs from '@components/common/Tabs';
+
 function Labels() {
-  return <div>여기는 라벨 페이지</div>;
+  return (
+    <LabelsPageContainer>
+      <Header />
+      <Tabs page="labels" />
+    </LabelsPageContainer>
+  );
 }
 
 export default Labels;
+
+const LabelsPageContainer = styled.div`
+  ${({ theme }) => theme.page}
+  outline: 1px solid red;
+`;

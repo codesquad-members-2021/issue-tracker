@@ -1,4 +1,17 @@
 import theme from '@chakra-ui/theme';
+import { css } from 'styled-components';
+
+const page = css`
+  width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px;
+`;
+
+const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const customTheme = {
   ...theme,
@@ -26,6 +39,8 @@ const customTheme = {
     error_dark: '#C60B00',
     error_light: '#FFD1CF',
   },
+  page,
+  flexCenter,
 };
 
 export default customTheme;
