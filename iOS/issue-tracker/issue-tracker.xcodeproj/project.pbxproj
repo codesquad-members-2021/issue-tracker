@@ -26,6 +26,7 @@
 		B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */; };
 		B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */; };
 		B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527592670A4BD002B0812 /* AddButton.swift */; };
+		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
 		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
 		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
 		D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6CB266F4F1C00E0762C /* Alamofire */; };
@@ -83,6 +84,7 @@
 		B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
 		B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTabelHeaderView.swift; sourceTree = "<group>"; };
 		B3F527592670A4BD002B0812 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				B3F52752267096EC002B0812 /* LabelTableViewCell.swift */,
 				B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */,
 				B3F527592670A4BD002B0812 /* AddButton.swift */,
+				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
 				B3F5274F26709614002B0812 /* Login */,
 			);
 			path = View;
@@ -469,6 +472,7 @@
 				D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */,
 				B3F52753267096EC002B0812 /* LabelTableViewCell.swift in Sources */,
 				B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */,
+				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
