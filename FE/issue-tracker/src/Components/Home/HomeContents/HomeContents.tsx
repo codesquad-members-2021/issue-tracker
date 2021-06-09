@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Home as S } from "../HomeStyles";
 import CreateIssueButton from "./CreateIssueButton";
 import IssueSearchBar from "./IssueSearchBar";

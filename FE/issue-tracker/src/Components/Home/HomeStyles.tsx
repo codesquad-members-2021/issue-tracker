@@ -83,6 +83,52 @@ const FilterSearchBar = {
   `,
 };
 
+const IssueTable = {
+  IssueTable: styled.div`
+    border: 1px solid ${theme.GRAY_SCALE.LINE};
+    background: white;
+    width: 100%;
+    border-radius: 16px;
+  `,
+
+  TableHeader: styled(BOX.FLEX_CENTER_BOX)`
+    padding: 0 30px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 64px;
+    border-radius: 16px 16px 0 0;
+    background: ${theme.GRAY_SCALE.BACKGROUND};
+  `,
+
+  TableHeaderLeft: styled.div`
+    display: flex;
+    gap: 33px;
+  `,
+
+  TableHeaderToggleDiv: styled(BOX.FLEX_CENTER_BOX)`
+    gap: 30.67px;
+  `,
+
+  TableHeaderRight: styled.div`
+    display: flex;
+    gap: 36px;
+  `,
+
+  TableTh: styled(BOX.FLEX_CENTER_BOX)``,
+
+  TableBody: styled.div`
+    width: 100%;
+    background: white;
+  `,
+
+  TableRow: styled.div`
+    width: 100%;
+    background: white;
+    border: 1px solid pink;
+  `,
+};
+
 const HomeAssets = {
   labelTag: styled(LabelTag)`
     margin-right: 8px;
@@ -99,4 +145,4 @@ const HomeAssets = {
   `,
 };
 
-export { Home, HomeAssets, FilterSearchBar };
+export { Home, HomeAssets, FilterSearchBar, IssueTable };

@@ -1,20 +1,14 @@
-import React from "react";
+import { IssueTable as S } from "../../HomeStyles";
+import IssueTableBody from "./IssueTableBody/IssueTableBody";
+import IssueTableHeader from "./IssueTableHeader/IssueTableHeader";
 
 const IssueTable = () => {
   return (
     <div>
-      <table>
-        <th>열린이슈</th>
-        <th>열린이슈</th>
-        <th>열린이슈</th>
-        <th>열린이슈</th>
-        <th>열린이슈</th>
-        <th>열린이슈</th>
-        <tbody>
-          <div>이슈들</div>
-          <div>이슈들</div>
-        </tbody>
-      </table>
+      <S.IssueTable>
+        <IssueTableHeader />
+        <IssueTableBody />
+      </S.IssueTable>
     </div>
   );
 };
