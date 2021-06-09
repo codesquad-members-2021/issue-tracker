@@ -19,6 +19,11 @@
 		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
 		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
 		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
+		9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2F1266F5CC70086F977 /* Coordinator.swift */; };
+		9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2F6266F5E890086F977 /* MainTabBarController.swift */; };
+		9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2FF266F603C0086F977 /* AccessTokenRequest.swift */; };
+		9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E304266F60B50086F977 /* NetworkRequest.swift */; };
+		9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E30C266F90EF0086F977 /* LoginFlowCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubEndpoint.swift; sourceTree = "<group>"; };
 		9343E2D7266F03E90086F977 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		9343E2F1266F5CC70086F977 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		9343E2F6266F5E890086F977 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9343E2FF266F603C0086F977 /* AccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRequest.swift; sourceTree = "<group>"; };
+		9343E304266F60B50086F977 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		9343E30C266F90EF0086F977 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */,
+				9343E2FE266F60320086F977 /* Requests */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -187,6 +198,7 @@
 			children = (
 				930FAEBE266E128700422968 /* UseCase */,
 				930FAEBD266E127B00422968 /* Entity */,
+				9343E2F0266F5CBC0086F977 /* Coordinator */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -208,6 +220,7 @@
 		930FAEBF266E129000422968 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9343E2F6266F5E890086F977 /* MainTabBarController.swift */,
 				930FAEC4266E12E900422968 /* ViewModel */,
 				930FAEC0266E129C00422968 /* UI */,
 			);
@@ -251,6 +264,24 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9343E2F0266F5CBC0086F977 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9343E2F1266F5CC70086F977 /* Coordinator.swift */,
+				9343E30C266F90EF0086F977 /* LoginFlowCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9343E2FE266F60320086F977 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				9343E2FF266F603C0086F977 /* AccessTokenRequest.swift */,
+				9343E304266F60B50086F977 /* NetworkRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,8 +422,13 @@
 			files = (
 				883F5148266F3EAF0055EC9E /* LoginViewController.swift in Sources */,
 				9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */,
+				9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */,
+				9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
+				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
+				9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */,
+				9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */,
 				930FAE88266E112700422968 /* SceneDelegate.swift in Sources */,
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 			);
