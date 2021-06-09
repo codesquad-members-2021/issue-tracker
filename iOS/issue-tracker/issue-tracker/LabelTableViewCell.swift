@@ -9,11 +9,15 @@ import UIKit
 import SnapKit
 
 class LabelTableViewCell: UITableViewCell {
+    
+    static var identifier = "LabelTableViewCell"
 
-    var labelView: UILabel = {
-        var label = UILabel()
+    var labelView: PaddingLabel = {
+        var label = PaddingLabel(withInsets: 0, 0, 10, 10)
+        label.textAlignment = .center
+        label.textColor = .white
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 20
+        label.layer.cornerRadius = 15
         return label
     }()
     
@@ -41,7 +45,7 @@ class LabelTableViewCell: UITableViewCell {
         labelView.snp.makeConstraints { view in
             view.top.equalToSuperview().offset(24)
             view.left.equalToSuperview().offset(16)
-            view.width.equalTo(114)
+            view.width.greaterThanOrEqualTo(50)
             view.height.equalTo(30)
         }
         
@@ -54,10 +58,7 @@ class LabelTableViewCell: UITableViewCell {
     
     func setLabelCell(title: String, description: String, color: String) {
         self.labelView.text = title
-        var temp = color
-        temp.remove(at: temp.startIndex)
-        let hexcolor = Int(temp)!
-        self.labelView.backgroundColor = UIColor(rgb: hexcolor)
+        self.labelView.backgroundColor = UIColor.hexStringToUIColor(hex: color)
         self.labelDescription.text = description
     }
 }
