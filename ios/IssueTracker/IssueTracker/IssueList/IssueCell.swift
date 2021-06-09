@@ -29,6 +29,7 @@ class IssueCell: UITableViewCell {
     func fillUI(with issue: Issue) {
         titleLabel.text = issue.title
         descriptionLabel.text = issue.description
+        descriptionLabel.addLineSpacing()
         configureMilestone(with: issue.milestone)
         fillLabels(with: issue.labels ?? [])
     }
