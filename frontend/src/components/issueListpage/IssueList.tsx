@@ -4,7 +4,7 @@ import Lable from '../atom/Lable'
 import Checkbox from '../atom/CheckBox'
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import MilesStone from '../atom/MilesStone'
-import Theme from '../../style/Theme'
+
 
 function IssueLine(){
   return (
@@ -16,7 +16,7 @@ function IssueLine(){
           <Lable color={"red"} desc={"description"}/>
         </IssueTitle>
         <IssueDesc>
-          #11 opened 2 days ago by skawnkk <MilesStone sizeType={Theme.size.sm}/>milestone
+          #11 opened 2 days ago by skawnkk <MilesStone/>milestone
         </IssueDesc>
       </div>
     </ListBody>
@@ -28,8 +28,7 @@ function IssueList() {
   return (
     <ListBox>
       <IssueListHead/>
-   
-        <IssueLine/>
+      <IssueLine/>
    
     </ListBox>
   );

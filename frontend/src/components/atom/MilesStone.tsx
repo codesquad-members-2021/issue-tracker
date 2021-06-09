@@ -1,10 +1,12 @@
 
 interface MilesProps{
-  sizeType: number
+  sizeType?: number
 }
-function MilesStone({sizeType}:MilesProps){
+function MilesStone({sizeType=12}:MilesProps){
   const style = {
-    marginLeft: '10px'
+    display: 'flex',
+    width: 'fit-content',
+    margin: '0 7px'
   }
   return (
     <div style={style}>
