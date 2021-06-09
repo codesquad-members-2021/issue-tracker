@@ -1,1 +1,14 @@
-export {};
+import React from "react";
+import { HomeAssets as S } from "../HomeStyles";
+import { Home as Styled } from "../HomeStyles";
+
+const MileStoneButton = () => {
+  return (
+    <Styled.Button>
+      <S.milestoneTag />
+      마일스톤 (2)
+    </Styled.Button>
+  );
+};
+
+export default MileStoneButton;
