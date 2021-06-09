@@ -1,8 +1,10 @@
-import { theme } from 'style/theme';
-import GlobalStyle from 'style/GlobalStyle';
-import { ThemeProvider } from 'styled-components';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from 'style/GlobalStyle';
+import { theme } from 'style/theme';
 import IssuesPage from 'pages/IssuesPage';
+import LoginPage from 'pages/LoginPage';
+import OAuthPage from 'pages/OAuthPage';
 
 function App() {
   return (
@@ -10,8 +12,14 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <Route path={['/', '/issues']}>
+          <Route path={['/', '/issues']} exact>
             <IssuesPage />
+          </Route>
+          <Route path="/login" exact>
+            <LoginPage />
+          </Route>
+          <Route path="/login/oauth">
+            <OAuthPage />
           </Route>
         </Switch>
       </BrowserRouter>
