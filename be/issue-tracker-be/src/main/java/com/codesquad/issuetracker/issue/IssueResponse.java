@@ -1,5 +1,8 @@
 package com.codesquad.issuetracker.issue;
 
+import com.codesquad.issuetracker.label.LabelResponse;
+import com.codesquad.issuetracker.milestone.MileStoneResponse;
+import com.codesquad.issuetracker.user.UserResponse;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,38 +17,10 @@ public class IssueResponse {
     private String title;
     private String description;
     private boolean isClosed;
-    private boolean isAuthorSame;//TODO: 작성자 있으면 작성자로 필터링 가능한 것 아닌지?
+    private boolean isAuthorSame;
     private LocalDateTime createDateTime;
-    private User author;
-    private List<User> assignees;
-    private List<Label> labels;
-    private Milestone milestone;
-
-    @Data
-    @Builder
-    public static class User {
-        private long id;
-        private String email;
-        private String name;
-    }
-
-    @Data
-    @Builder
-    public static class Label {
-        private Long id;
-        private String name;
-        private String description;
-        private String color;
-    }
-
-    @Data
-    @Builder
-    public static class Milestone {
-        private Long id;
-        private String name;
-        private String description;
-        private boolean isClosed;
-        private int openedIssueCount;
-        private int closedIssueCount;
-    }
+    private UserResponse author;
+    private List<UserResponse> assignees;
+    private List<LabelResponse> labels;
+    private MileStoneResponse milestone;
 }

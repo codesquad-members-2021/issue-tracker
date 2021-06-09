@@ -1,5 +1,9 @@
 package com.codesquad.issuetracker.issue;
 
+import com.codesquad.issuetracker.label.LabelResponse;
+import com.codesquad.issuetracker.milestone.MileStoneResponse;
+import com.codesquad.issuetracker.user.UserResponse;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -30,24 +34,24 @@ public class IssueDummyData {
         );
     }
 
-    private static IssueResponse.User userFreddie() {
-        return IssueResponse.User.builder()
+    private static UserResponse userFreddie() {
+        return UserResponse.builder()
                        .id(1L)
                        .email("freddie@freddie.com")
                        .name("freddie")
                        .build();
     }
 
-    private static IssueResponse.User userHiro() {
-        return IssueResponse.User.builder()
+    private static UserResponse userHiro() {
+        return UserResponse.builder()
                        .id(2L)
                        .email("hiro@hiro.com")
                        .name("hiro")
                        .build();
     }
 
-    private static IssueResponse.Label labelBe() {
-        return IssueResponse.Label.builder()
+    private static LabelResponse labelBe() {
+        return LabelResponse.builder()
                        .id(1L)
                        .name("be")
                        .description("label for backend")
@@ -55,8 +59,8 @@ public class IssueDummyData {
                        .build();
     }
 
-    private static IssueResponse.Milestone milestoneMockup() {
-        return IssueResponse.Milestone.builder()
+    private static MileStoneResponse milestoneMockup() {
+        return MileStoneResponse.builder()
                        .id(1L)
                        .name("목업 api 만들기")
                        .description("목업 api를 만들어봅시다.")
