@@ -17,7 +17,7 @@ public class IssueResponse {
     private String title;
     private String description;
     private boolean isClosed;
-    private boolean isAuthorSame;
+    private boolean hasSameAuthorComments;
     private LocalDateTime createDateTime;
     private UserResponse author;
     private List<UserResponse> assignees;

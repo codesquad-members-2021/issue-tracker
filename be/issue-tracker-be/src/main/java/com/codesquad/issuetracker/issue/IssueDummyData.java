@@ -19,7 +19,7 @@ public class IssueDummyData {
                         .number(1L)
                         .title("title")
                         .description("description설명")
-                        .isAuthorSame(true)
+                        .hasSameAuthorComments(true)
                         .createDateTime(LocalDateTime.now())
                         .author(userFreddie())
                         .assignees(Arrays.asList(
