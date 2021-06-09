@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family:'Noto Sans KR', sans-serif, Roboto,'Helvetica Neue';
         font-size: 14px;
+        background-color: #F7F7FC;
     }
 `;
 

@@ -12,6 +12,7 @@ const Buttons: React.FC<Props> = ({ children, ...props }) => {
 const ButtonWrapper = styled.div<Props>`
   border-radius: 20px;
   font-weight: bold;
+  cursor: pointer;
   color: ${props => props.theme.greyscale.offWhite};
   ${props => props.theme.alignCenter}
   ${props =>

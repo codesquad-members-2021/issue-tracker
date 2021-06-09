@@ -16,9 +16,11 @@ const TypoWrapper = styled.span<Props>`
     else if (props.sm) return props.theme.fontSize.sm;
     else if (props.xs) return props.theme.fontSize.xs;
   }};
-
   font-weight: ${props => {
     if (props.link) return 'bold';
+  }};
+  cursor: ${props => {
+    if (props.link) return 'pointer';
   }};
   color: ${props => props.theme.greyscale.body};
 `;

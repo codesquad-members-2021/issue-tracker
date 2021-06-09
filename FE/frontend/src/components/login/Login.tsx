@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import Buttons from '../styles/atoms/Buttons';
-import Typos from '../styles/atoms/Typos';
-import { ReactComponent as Logo } from '../icons/logo.svg';
+import { Link } from 'react-router-dom';
+import Buttons from '../../styles/atoms/Buttons';
+import Typos from '../../styles/atoms/Typos';
+import { ReactComponent as Logo } from '../../icons/logoLarge.svg';
 
 const Login = () => {
   return (
     <LoginWrapper>
       <Logo />
-      <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
-      <TextInBetween link sm>
-        or
-      </TextInBetween>
+      <Link to="/oauth">
+        <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
+      </Link>
+      <TextInBetween sm>or</TextInBetween>
       <ManualLogin large>아이디</ManualLogin>
       <ManualLogin large>비밀번호</ManualLogin>
       <Buttons disabled large>
@@ -35,13 +36,16 @@ const LoginWrapper = styled.div`
     margin-bottom: 20px;
   }
 `;
+
 const GitHubLogin = styled(Buttons)`
   margin-top: 50px;
   background-color: ${props => props.theme.greyscale.titleActive};
 `;
+
 const TextInBetween = styled(Typos)`
   color: ${props => props.theme.greyscale.placeholer};
 `;
+
 const ManualLogin = styled(Buttons)`
   justify-content: flex-start;
   background-color: ${props => props.theme.greyscale.inputBackgound};
