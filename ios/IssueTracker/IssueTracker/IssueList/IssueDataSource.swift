@@ -28,7 +28,7 @@ extension IssueDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueCell.reuseIdentifier, for: indexPath) as? IssueCell else { return UITableViewCell() }
         
-//        cell.fillUI()
+        cell.fillUI(with: viewModel.issues[indexPath.row])
         
         return cell
     }

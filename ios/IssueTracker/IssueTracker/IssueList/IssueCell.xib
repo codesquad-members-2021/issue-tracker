@@ -18,29 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1u-BX-WeN">
-                        <rect key="frame" x="15" y="15" width="360" height="22.5"/>
+                        <rect key="frame" x="15" y="15" width="360" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="fwf-zl-PNX"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FD-MN-Rss">
-                        <rect key="frame" x="15" y="112" width="90" height="22"/>
-                        <color key="backgroundColor" red="0.0089584877709999993" green="0.0025909866669999999" blue="0.43943297860000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="0bu-8C-mFw"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="gAO-jW-5ae"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" systemColor="systemGray6Color"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="8"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WN5-Kw-WYQ">
-                        <rect key="frame" x="15" y="47.5" width="360" height="20"/>
+                        <rect key="frame" x="15" y="50" width="360" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="PSk-NO-1GR"/>
                         </constraints>
@@ -48,42 +35,60 @@
                         <color key="textColor" systemColor="secondaryLabelColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="WgA-aC-EoH">
-                        <rect key="frame" x="15" y="77.5" width="112.5" height="19.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8k-B7-nLH" userLabel="milestoneView">
+                        <rect key="frame" x="15" y="75" width="360" height="30"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signpost.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OLm-oa-SJA">
-                                <rect key="frame" x="0.0" y="0.0" width="21" height="19"/>
+                                <rect key="frame" x="0.0" y="5" width="21" height="19.5"/>
                                 <color key="tintColor" systemColor="secondaryLabelColor"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마일스톤 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bkd-p9-xjf">
-                                <rect key="frame" x="25" y="0.0" width="87.5" height="19.5"/>
+                                <rect key="frame" x="26" y="5" width="87.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OLm-oa-SJA" firstAttribute="leading" secondItem="r8k-B7-nLH" secondAttribute="leading" id="CHh-KQ-EEK"/>
+                            <constraint firstAttribute="bottom" secondItem="OLm-oa-SJA" secondAttribute="bottom" constant="5" id="H3l-2e-Dm9"/>
+                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" constant="5" id="WXP-Tl-rKs"/>
+                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="leading" secondItem="OLm-oa-SJA" secondAttribute="trailing" constant="5" id="eqc-T0-HLO"/>
+                            <constraint firstItem="OLm-oa-SJA" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" constant="5" id="hFl-Ki-tZE"/>
+                            <constraint firstAttribute="height" constant="30" id="jfx-cE-HP3"/>
+                            <constraint firstAttribute="bottom" secondItem="Bkd-p9-xjf" secondAttribute="bottom" constant="5" id="pcj-RV-7Jo"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="left" ambiguous="YES" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4sH-Hc-qno">
+                        <rect key="frame" x="15" y="110" width="60" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="t5M-j2-7HY"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0FD-MN-Rss" firstAttribute="top" secondItem="WgA-aC-EoH" secondAttribute="bottom" constant="15" id="Agt-OM-0gr"/>
                     <constraint firstItem="b1u-BX-WeN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="As6-ep-1n9"/>
-                    <constraint firstItem="WgA-aC-EoH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FtA-R1-JiH"/>
+                    <constraint firstAttribute="bottom" secondItem="4sH-Hc-qno" secondAttribute="bottom" constant="10" id="DTK-mh-gVk"/>
+                    <constraint firstItem="4sH-Hc-qno" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="bottom" constant="5" id="ILn-aN-W9F"/>
+                    <constraint firstAttribute="trailing" secondItem="r8k-B7-nLH" secondAttribute="trailing" constant="15" id="JMi-CJ-p5o"/>
                     <constraint firstItem="b1u-BX-WeN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QFD-oL-4tH"/>
+                    <constraint firstItem="r8k-B7-nLH" firstAttribute="top" secondItem="WN5-Kw-WYQ" secondAttribute="bottom" constant="5" id="aik-Se-udd"/>
                     <constraint firstItem="WN5-Kw-WYQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="e7F-6f-E2B"/>
                     <constraint firstAttribute="trailing" secondItem="WN5-Kw-WYQ" secondAttribute="trailing" constant="15" id="gTx-1b-hQd"/>
-                    <constraint firstItem="0FD-MN-Rss" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="h0J-wN-K58"/>
                     <constraint firstAttribute="trailing" secondItem="b1u-BX-WeN" secondAttribute="trailing" constant="15" id="njo-VJ-gyB"/>
+                    <constraint firstItem="r8k-B7-nLH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="phd-4e-WRw"/>
                     <constraint firstItem="WN5-Kw-WYQ" firstAttribute="top" secondItem="b1u-BX-WeN" secondAttribute="bottom" constant="10" id="qoh-rf-LIQ"/>
-                    <constraint firstItem="WgA-aC-EoH" firstAttribute="top" secondItem="WN5-Kw-WYQ" secondAttribute="bottom" constant="10" id="v28-yL-9TD"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="0FD-MN-Rss" secondAttribute="bottom" constant="5" id="vnq-nw-anq"/>
+                    <constraint firstItem="4sH-Hc-qno" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="tCA-Yk-Gdl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="descriptionLabel" destination="WN5-Kw-WYQ" id="Tcq-up-NFJ"/>
-                <outlet property="labelLabel" destination="0FD-MN-Rss" id="MAK-Kk-2rE"/>
+                <outlet property="labelStackView" destination="4sH-Hc-qno" id="emQ-UX-hz8"/>
                 <outlet property="milestoneLabel" destination="Bkd-p9-xjf" id="ZTu-Du-Xmv"/>
-                <outlet property="milestoneStackView" destination="WgA-aC-EoH" id="xjS-2N-u1E"/>
+                <outlet property="milestoneView" destination="r8k-B7-nLH" id="q50-Ez-Q71"/>
                 <outlet property="titleLabel" destination="b1u-BX-WeN" id="bFN-j0-QJb"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="129.91071428571428"/>
@@ -93,9 +98,6 @@
         <image name="signpost.right" catalog="system" width="128" height="118"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
