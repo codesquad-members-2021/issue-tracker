@@ -7,14 +7,27 @@
 
 import UIKit
 
+protocol test {
+    func close()
+}
+
 class HeaderView: UIView {
     private var backButton: UIButton!
+    var delegate: test!
+    
     override init(frame: CGRect) {
+
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+
+    func setUpBackButton2(vc: UIViewController) {
+        let vc2 = vc as? IssueListFilterViewController
+        self.backButton.addTarget(delegate, action: #selector(vc2!.testt), for: .touchDown)
     }
     
     func setUpTitle(text: String) {
@@ -44,6 +57,7 @@ class HeaderView: UIView {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        self.backButton = backButton
     }
     
     func setUpSaveButton(text: String) {
