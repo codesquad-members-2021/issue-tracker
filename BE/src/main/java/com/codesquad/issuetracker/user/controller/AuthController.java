@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.user.controller;
 
-import com.codesquad.issuetracker.user.dto.AccessTokenResponse;
 import com.codesquad.issuetracker.user.dto.JwtResponse;
 import com.codesquad.issuetracker.user.service.GithubLoginService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +17,12 @@ public class AuthController {
     }
 
     @GetMapping("/github/web")
-    public JwtResponse issueJwt(String code) {
-        return githubLoginService.issueToken(code);
+    public JwtResponse issueJwtForWeb(String code) {
+        return githubLoginService.issueJwtForWeb(code);
     }
 
+    @GetMapping("/github/ios")
+    public JwtResponse issueJwtForIos(String code) {
+        return githubLoginService.issueTokenForIos(code);
+    }
 }

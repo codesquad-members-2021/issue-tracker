@@ -1,5 +1,9 @@
 package com.codesquad.issuetracker.user.service;
 
+import com.codesquad.issuetracker.user.component.GitHubOauthIosValues;
+import com.codesquad.issuetracker.user.component.GitHubOauthValues;
+import com.codesquad.issuetracker.user.component.GitHubOauthWebValues;
+import com.codesquad.issuetracker.user.component.JwtUtils;
 import com.codesquad.issuetracker.user.dto.AccessTokenRequest;
 import com.codesquad.issuetracker.user.dto.AccessTokenResponse;
 import com.codesquad.issuetracker.user.dto.GithubUser;
@@ -17,9 +21,9 @@ import java.util.Optional;
 @Service
 public class GithubLoginService {
 
-    private final String WEB_CLIENT_ID;
-    private final String WEB_CLIENT_SECRET;
-    private final String WEB_REDIRECT_URI;
+    private final GitHubOauthValues gitHubOauthWebValues;
+    private final GitHubOauthValues gitHubOauthIosValues;
+
     private final String ACCESS_TOKEN_URI;
     private final String USER_URI;
 
@@ -27,23 +31,21 @@ public class GithubLoginService {
 
     private final Logger logger = LoggerFactory.getLogger(GithubLoginService.class);
 
-    public GithubLoginService(@Value("${auth.github.web.clientId}") String WEB_CLIENT_ID,
-                       @Value("${auth.github.web.clientSecret}") String WEB_CLIENT_SECRET,
-                       @Value("${auth.github.web.redirectUri}") String WEB_REDIRECT_URI,
-                       @Value("${auth.github.accessTokenUri}") String ACCESS_TOKEN_URI,
-                       @Value("${auth.github.userUri}") String USER_URI,
-                       JwtUtils jwtUtils) {
-        this.WEB_CLIENT_ID = WEB_CLIENT_ID;
-        this.WEB_CLIENT_SECRET = WEB_CLIENT_SECRET;
-        this.WEB_REDIRECT_URI = WEB_REDIRECT_URI;
+    public GithubLoginService(GitHubOauthWebValues gitHubOauthWebValues,
+                              GitHubOauthIosValues gitHubOauthIosValues,
+                              @Value("${auth.github.accessTokenUri}") String ACCESS_TOKEN_URI,
+                              @Value("${auth.github.userUri}") String USER_URI,
+                              JwtUtils jwtUtils) {
+        this.gitHubOauthWebValues = gitHubOauthWebValues;
+        this.gitHubOauthIosValues = gitHubOauthIosValues;
         this.ACCESS_TOKEN_URI = ACCESS_TOKEN_URI;
         this.USER_URI = USER_URI;
         this.jwtUtils = jwtUtils;
     }
 
-    public JwtResponse issueToken(String code) {
+    public JwtResponse issueToken(String code, GitHubOauthValues gitHubOauthValues) {
         RestTemplate request = new RestTemplate();
-        AccessTokenResponse accessToken = getAccessToken(code, request)
+        AccessTokenResponse accessToken = getAccessToken(code, gitHubOauthValues, request)
                 .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
 
         GithubUser githubUser = getUserFromOauth(accessToken, request)
@@ -52,11 +54,23 @@ public class GithubLoginService {
         return new JwtResponse(jwtUtils.getJwt(githubUser), "Bearer");
     }
 
-    private Optional<AccessTokenResponse> getAccessToken(String code, RestTemplate restTemplate) {
+    public JwtResponse issueJwtForWeb(String code) {
+        return issueToken(code, gitHubOauthWebValues);
+    }
+
+    public JwtResponse issueTokenForIos(String code) {
+        return issueToken(code, gitHubOauthIosValues);
+    }
+
+    private Optional<AccessTokenResponse> getAccessToken(String code, GitHubOauthValues gitHubOauthValues,
+                                                         RestTemplate restTemplate) {
         RequestEntity<AccessTokenRequest> request = RequestEntity
                 .post(ACCESS_TOKEN_URI)
                 .header("Accept", "application/json")
-                .body(new AccessTokenRequest(WEB_CLIENT_ID, WEB_CLIENT_SECRET, code, WEB_REDIRECT_URI));
+                .body(new AccessTokenRequest(gitHubOauthValues.getClientId(),
+                        gitHubOauthValues.getClientSecret(),
+                        code,
+                        gitHubOauthValues.getRedirectUri()));
 
         ResponseEntity<AccessTokenResponse> response = restTemplate
                 .exchange(request, AccessTokenResponse.class);

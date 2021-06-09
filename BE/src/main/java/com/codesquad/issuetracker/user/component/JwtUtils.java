@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.user.service;
+package com.codesquad.issuetracker.user.component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
