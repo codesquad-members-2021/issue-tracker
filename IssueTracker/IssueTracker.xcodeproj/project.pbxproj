@@ -21,6 +21,7 @@
 		71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19F2670AC540044038E /* IssueDTO.swift */; };
 		71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A52670B2880044038E /* MemoryStorage.swift */; };
 		71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A82670B2A30044038E /* IssueListViewModel.swift */; };
+		71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */; };
 		C3B8DAD5620CB1718E122CFA /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		71FCE19F2670AC540044038E /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
 		71FCE1A52670B2880044038E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 		71FCE1A82670B2A30044038E /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
+		71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorageType.swift; sourceTree = "<group>"; };
 		81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C617ED888C881C2FD8566BFB /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				71FCE1A52670B2880044038E /* MemoryStorage.swift */,
+				71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */,
 				71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */,
 				7105555D266F36650072065E /* FilterIssueViewController.swift in Sources */,
+				71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */,
 				71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */,
 				71055560266F36FD0072065E /* Constant.swift in Sources */,
 			);

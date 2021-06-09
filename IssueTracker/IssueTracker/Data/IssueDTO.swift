@@ -15,6 +15,7 @@ struct Count: Decodable {
 struct Issue: Decodable {
     let id:Int
     let title:String
+    let comment:String
     let author:String
     let createdDateTime:String
     let commentNumber:Int
