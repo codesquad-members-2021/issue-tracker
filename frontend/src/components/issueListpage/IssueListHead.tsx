@@ -1,18 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import CheckBox from '../atom/CheckBox'
-import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
-import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded'
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import List from '../atom/List'
 import useToggle from '../../hooks/useToggle'
+import { useRecoilValue } from 'recoil'
+import { CountInfoStorage } from '../../hooks/store'
+
 function ListLeft(){
+  const {openedIssue, closedIssue} = useRecoilValue(CountInfoStorage)
+  const handleOpen =()=>{
+    console.log('click')
+  }
   return (
     <ListLeftBlock>
       <CheckBox/>
       <FilterTabBlock>
-        <div><AdjustRoundedIcon/> 열린 이슈 (0)</div>
-        <div><CheckRoundedIcon/> 닫힌 이슈 (0)</div>
+        <div onClick={handleOpen}><AdjustRoundedIcon/> 열린 이슈 ({openedIssue})</div>
+        <div><CheckRoundedIcon/> 닫힌 이슈 ({closedIssue})</div>
       </FilterTabBlock>
     </ListLeftBlock>
   )
