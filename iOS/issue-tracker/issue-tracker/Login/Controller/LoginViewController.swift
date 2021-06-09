@@ -183,6 +183,9 @@ class LoginViewController: UIViewController {
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
         print("하이~, H I~")
+        let tabBarVC = IssueTrackerTabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        present(tabBarVC, animated: true, completion: nil)
     }
     
 }

@@ -13,6 +13,12 @@
 		E42AD105266E52FB0071B436 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42AD103266E52FB0071B436 /* Main.storyboard */; };
 		E42AD107266E52FE0071B436 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42AD106266E52FE0071B436 /* Assets.xcassets */; };
 		E42AD10A266E52FE0071B436 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */; };
+		E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD1172670886F0071B436 /* IssueTrackerTabBarController.swift */; };
+		E42AD11E267093320071B436 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD11D267093320071B436 /* IssueViewController.swift */; };
+		E42AD120267093430071B436 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD11F267093430071B436 /* LabelViewController.swift */; };
+		E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD121267093590071B436 /* MilestoneViewController.swift */; };
+		E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD123267093700071B436 /* MyAccountViewController.swift */; };
+		E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD12526709C010071B436 /* UIViewControllerExtension.swift */; };
 		FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AB266F5E9700C17BE9 /* Colors.swift */; };
 		FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +32,12 @@
 		E42AD106266E52FE0071B436 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E42AD109266E52FE0071B436 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E42AD10B266E52FE0071B436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E42AD1172670886F0071B436 /* IssueTrackerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarController.swift; sourceTree = "<group>"; };
+		E42AD11D267093320071B436 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		E42AD11F267093430071B436 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		E42AD121267093590071B436 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
+		E42AD123267093700071B436 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		E42AD12526709C010071B436 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +75,7 @@
 				E42AD111266E530F0071B436 /* LifeCycle */,
 				E42AD11226704F070071B436 /* Common */,
 				E42AD113267054900071B436 /* Login */,
+				E42AD115267087AE0071B436 /* Main */,
 				E42AD103266E52FB0071B436 /* Main.storyboard */,
 				E42AD106266E52FE0071B436 /* Assets.xcassets */,
 				E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */,
@@ -85,6 +98,7 @@
 			children = (
 				FAEB30AB266F5E9700C17BE9 /* Colors.swift */,
 				FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */,
+				E42AD12526709C010071B436 /* UIViewControllerExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -103,6 +117,58 @@
 				E42AD101266E52FB0071B436 /* LoginViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		E42AD115267087AE0071B436 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD116267087F40071B436 /* TabBar */,
+				E42AD11926708EBA0071B436 /* Issue */,
+				E42AD11A26708EC00071B436 /* Label */,
+				E42AD11B26708EC80071B436 /* Milestone */,
+				E42AD11C26708ED50071B436 /* MyAccount */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E42AD116267087F40071B436 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD1172670886F0071B436 /* IssueTrackerTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		E42AD11926708EBA0071B436 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD11D267093320071B436 /* IssueViewController.swift */,
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
+		E42AD11A26708EC00071B436 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD11F267093430071B436 /* LabelViewController.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		E42AD11B26708EC80071B436 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD121267093590071B436 /* MilestoneViewController.swift */,
+			);
+			path = Milestone;
+			sourceTree = "<group>";
+		};
+		E42AD11C26708ED50071B436 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD123267093700071B436 /* MyAccountViewController.swift */,
+			);
+			path = MyAccount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +241,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
+				E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */,
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
+				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
+				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
+				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
+				E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */,
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
