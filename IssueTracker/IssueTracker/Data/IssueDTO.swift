@@ -1,18 +1,18 @@
 import Foundation
 
-struct IssueDTO {
+struct IssueDTO: Decodable {
     let count: Count
     let issue: [Issue]
 }
 
-struct Count {
+struct Count: Decodable {
     let label:Int
     let milestone:Int
     let openedIssue:Int
     let closedIssue:Int
 }
 
-struct Issue {
+struct Issue: Decodable {
     let id:Int
     let title:String
     let author:String
