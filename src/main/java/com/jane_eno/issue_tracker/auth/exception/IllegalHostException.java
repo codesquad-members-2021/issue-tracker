@@ -1,0 +1,11 @@
+package com.jane_eno.issue_tracker.auth.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class IllegalHostException extends OAuthException {
+    public IllegalHostException() {
+        super("Illegal host detected.");
+    }
+}

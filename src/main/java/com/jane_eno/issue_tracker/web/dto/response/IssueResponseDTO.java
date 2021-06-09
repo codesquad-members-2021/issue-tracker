@@ -14,10 +14,11 @@ public class IssueResponseDTO {
 
     private final Long id;
     private final String title;
+    private final String comment;
     private final String author;
     private final LocalDateTime createdDateTime;
     private final Integer commentNumber;
     private final List<String> assignees;
-    private final List<String> labels;
+    private final List<Label> labels;
     private final String milestone;
 }
