@@ -7,7 +7,7 @@ import Login from '@pages/Login';
 import Issues from '@pages/Issues';
 import NewIssue from '@pages/NewIssue';
 import Labels from '@pages/Labels';
-import MileStones from '@pages/MileStones';
+import Milestones from '@pages/Milestones';
 import IssueDetail from '@pages/IssueDetail';
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
               <Labels />
             </Route>
             <Route path="/milestones">
-              <MileStones />
+              <Milestones />
             </Route>
           </Switch>
         </BrowserRouter>
