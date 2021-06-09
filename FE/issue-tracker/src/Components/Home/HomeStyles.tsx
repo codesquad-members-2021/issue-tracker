@@ -158,6 +158,8 @@ const IssueTable = {
   `,
 
   IssueInfoTitle: styled.div`
+    display: flex;
+    align-items: center;
     font-weight: bold;
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
     font-size: ${theme.FONT_SIZE.LINK_MEDIUM};
