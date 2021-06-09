@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
   },
   fontWeight: {
     normal: '400',
+    middle: '500',
     bold: '700',
   },
   fontSize: {
