@@ -1,10 +1,12 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 import LogIn from './components/layout/LogIn';
-import { BrowserRouter, Route } from 'react-router-dom';
 import Callback from './components/Callback';
+import Header from './components/layout/Header';
+import IssueList from './components/layout/IssueList';
 
 function App(): JSX.Element {
   return (
@@ -12,8 +14,12 @@ function App(): JSX.Element {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <AppStyle>
-          <Route exact path="/" component={LogIn} />
+          <Route exact path="/login" component={LogIn} />
           <Route exact path="/callback" component={Callback} />
+          <Route path="/main" component={Header} />
+          <Route exact path="/main/issue-list" component={IssueList} />
+          {/* <Route exact path="/iss ue-add" component={Header} /> */}
+          {/* <Route exact path="/main/add" component={AddList} /> */}
         </AppStyle>
       </ThemeProvider>
     </BrowserRouter>
@@ -39,10 +45,4 @@ function App(): JSX.Element {
 
 export default App;
 
-const AppStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 100vh;
-`;
+const AppStyle = styled.div``;

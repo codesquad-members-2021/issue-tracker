@@ -76,6 +76,7 @@ function ButtonSmallFill({ classes, name, color }: IButton) {
       className={classes.buttonSmallFill}
       style={{
         backgroundColor: `${color}`,
+        color: `${color === 'white' ? '#222' : '#fff'}`,
       }}
     >
       {name}

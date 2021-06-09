@@ -49,7 +49,12 @@ const LogIn: FC = () => {
 
 export default LogIn;
 
-const LogInDiv = styled.div``;
+const LogInDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 const LogInBox = styled.div`
   display: flex;
