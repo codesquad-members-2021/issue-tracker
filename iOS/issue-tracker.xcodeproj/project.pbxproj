@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		10BCA8A5266F38E800DBBA61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCA8A4266F38E800DBBA61 /* LoginViewController.swift */; };
 		10BCA8AA266F3C8100DBBA61 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BCA8A9266F3C7A00DBBA61 /* Montserrat-Italic.ttf */; };
+		10BDE6B52670C324007B38AF /* IssueEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDE6B42670C324007B38AF /* IssueEditViewController.swift */; };
+		10BDE6B92670C62A007B38AF /* IdentityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDE6B82670C62A007B38AF /* IdentityProtocol.swift */; };
 		10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D99266EFB5700FBD593 /* AppDelegate.swift */; };
 		10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */; };
 		10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9D266EFB5700FBD593 /* ViewController.swift */; };
@@ -17,12 +19,18 @@
 		10CE4DA6266EFB5700FBD593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */; };
 		10D4258226709CC200AE119C /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D4258126709CC200AE119C /* IssueListViewController.swift */; };
 		10D4258526709D4800AE119C /* UIViewController+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D4258426709D4800AE119C /* UIViewController+Instantiate.swift */; };
+		10D55EDE2670D46E007587C4 /* AdditionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D55EDC2670D46E007587C4 /* AdditionalTableViewCell.swift */; };
+		10D55EDF2670D46E007587C4 /* AdditionalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10D55EDD2670D46E007587C4 /* AdditionalTableViewCell.xib */; };
+		10D55EE12670D512007587C4 /* AdditionalTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D55EE02670D512007587C4 /* AdditionalTableViewDataSource.swift */; };
+		10D55EE32670D717007587C4 /* AdditionalTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D55EE22670D717007587C4 /* AdditionalTableDelegate.swift */; };
 		BCCEBE1E1668EC814AFFBE24 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906455FA7C42AB9BB530CE77 /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		10BCA8A4266F38E800DBBA61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		10BCA8A9266F3C7A00DBBA61 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		10BDE6B42670C324007B38AF /* IssueEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEditViewController.swift; sourceTree = "<group>"; };
+		10BDE6B82670C62A007B38AF /* IdentityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityProtocol.swift; sourceTree = "<group>"; };
 		10CE4D96266EFB5700FBD593 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10CE4D99266EFB5700FBD593 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +42,10 @@
 		10D4257F2670912800AE119C /* issue-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "issue-tracker.entitlements"; sourceTree = "<group>"; };
 		10D4258126709CC200AE119C /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		10D4258426709D4800AE119C /* UIViewController+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Instantiate.swift"; sourceTree = "<group>"; };
+		10D55EDC2670D46E007587C4 /* AdditionalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTableViewCell.swift; sourceTree = "<group>"; };
+		10D55EDD2670D46E007587C4 /* AdditionalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalTableViewCell.xib; sourceTree = "<group>"; };
+		10D55EE02670D512007587C4 /* AdditionalTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTableViewDataSource.swift; sourceTree = "<group>"; };
+		10D55EE22670D717007587C4 /* AdditionalTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTableDelegate.swift; sourceTree = "<group>"; };
 		26D189FC7EF28507BC1CCEF4 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		3CB31D25B54D61EBD8942312 /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		906455FA7C42AB9BB530CE77 /* Pods_issue_tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1085274B2670C149006121B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				10D55EDC2670D46E007587C4 /* AdditionalTableViewCell.swift */,
+				10D55EDD2670D46E007587C4 /* AdditionalTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		10BCA8A3266F38D700DBBA61 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +114,7 @@
 				10CE4D99266EFB5700FBD593 /* AppDelegate.swift */,
 				10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */,
 				10CE4D9D266EFB5700FBD593 /* ViewController.swift */,
+				10BDE6B82670C62A007B38AF /* IdentityProtocol.swift */,
 				10CE4D9F266EFB5700FBD593 /* Main.storyboard */,
 				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
 				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
@@ -108,6 +130,10 @@
 			isa = PBXGroup;
 			children = (
 				10D4258126709CC200AE119C /* IssueListViewController.swift */,
+				10BDE6B42670C324007B38AF /* IssueEditViewController.swift */,
+				1085274B2670C149006121B8 /* View */,
+				10D55EE02670D512007587C4 /* AdditionalTableViewDataSource.swift */,
+				10D55EE22670D717007587C4 /* AdditionalTableDelegate.swift */,
 			);
 			path = IssueList;
 			sourceTree = "<group>";
@@ -196,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10D55EDF2670D46E007587C4 /* AdditionalTableViewCell.xib in Resources */,
 				10CE4DA6266EFB5700FBD593 /* LaunchScreen.storyboard in Resources */,
 				10CE4DA3266EFB5700FBD593 /* Assets.xcassets in Resources */,
 				10CE4DA1266EFB5700FBD593 /* Main.storyboard in Resources */,
@@ -253,10 +280,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BCA8A5266F38E800DBBA61 /* LoginViewController.swift in Sources */,
+				10D55EE12670D512007587C4 /* AdditionalTableViewDataSource.swift in Sources */,
 				10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */,
 				10D4258226709CC200AE119C /* IssueListViewController.swift in Sources */,
+				10BDE6B92670C62A007B38AF /* IdentityProtocol.swift in Sources */,
 				10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */,
 				10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */,
+				10D55EE32670D717007587C4 /* AdditionalTableDelegate.swift in Sources */,
+				10D55EDE2670D46E007587C4 /* AdditionalTableViewCell.swift in Sources */,
+				10BDE6B52670C324007B38AF /* IssueEditViewController.swift in Sources */,
 				10D4258526709D4800AE119C /* UIViewController+Instantiate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
