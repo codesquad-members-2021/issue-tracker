@@ -7,23 +7,38 @@
 
 import UIKit
 
+struct Label {
+    let title: String
+    let description: String
+    let color: String
+}
+
 class LabelViewController: UIViewController {
 
+    @IBOutlet weak var labelTableView: UITableView!
+    
+    lazy var tableHeaderView = LabelTabelHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 140))
+    let fakeData = [Label(title: "hidsfadsfsafasfdfadsf", description: "hello", color: "#B1CAE5"), Label(title: "wow", description: "amazing", color: "#DFCD85")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
+        labelTableView.dataSource = self
+        labelTableView.tableHeaderView = tableHeaderView
+    }
+}
 
-        // Do any additional setup after loading the view.
+extension LabelViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fakeData.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell() }
+        cell.setLabelCell(title: fakeData[indexPath.row].title, description: fakeData[indexPath.row].description, color: fakeData[indexPath.row].color)
+        
+        return cell
     }
-    */
-
+    
+    
 }

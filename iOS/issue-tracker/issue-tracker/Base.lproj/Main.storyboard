@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ztH-lY-X3Y">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -60,10 +60,25 @@
                     <view key="view" contentMode="scaleToFill" id="aEd-FN-64U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="117" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HEu-i9-bYg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xiy-vv-PRm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HEu-i9-bYg" firstAttribute="leading" secondItem="xiy-vv-PRm" secondAttribute="leading" id="QQX-ch-CXb"/>
+                            <constraint firstItem="xiy-vv-PRm" firstAttribute="bottom" secondItem="HEu-i9-bYg" secondAttribute="bottom" id="i8q-oS-ElH"/>
+                            <constraint firstItem="xiy-vv-PRm" firstAttribute="trailing" secondItem="HEu-i9-bYg" secondAttribute="trailing" id="kI7-A6-lSN"/>
+                            <constraint firstItem="HEu-i9-bYg" firstAttribute="top" secondItem="aEd-FN-64U" secondAttribute="top" id="vxU-Vr-Fwg"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="레이블" image="tag" catalog="system" id="icm-rA-6fv"/>
+                    <connections>
+                        <outlet property="labelTableView" destination="HEu-i9-bYg" id="R20-IQ-0Wm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IGg-E4-hvo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
