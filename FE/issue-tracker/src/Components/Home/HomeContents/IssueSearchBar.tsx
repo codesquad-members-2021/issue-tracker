@@ -1,11 +1,12 @@
 import React from "react";
 import { Home as S } from "../HomeStyles";
+import Filter from "./Filter/Filter";
 
 const IssueSearchBar = () => {
   return (
     <S.ContentNavLeft>
-      <div>필터</div>
-      <input placeholder="is: issue" />
+      <Filter />
+      <input />
     </S.ContentNavLeft>
   );
 };

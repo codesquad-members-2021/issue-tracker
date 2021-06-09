@@ -19,6 +19,9 @@ const Home = {
 
   ContentNavLeft: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
+    background: none;
+    height: 40px;
+    border: 1px solid gray;
   `,
   ContentNavRight: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
@@ -50,6 +53,8 @@ const Home = {
   `,
 };
 
+const FilterSearchBar = {};
+
 const HomeAssets = {
   labelTag: styled(LabelTag)`
     margin-right: 8px;
@@ -59,4 +64,4 @@ const HomeAssets = {
   `,
 };
 
-export { Home, HomeAssets };
+export { Home, HomeAssets, FilterSearchBar };

@@ -22,7 +22,6 @@ const HomeContents = () => {
               <LabelButton />
               <MileStoneButton />
             </S.ButtonGroup>
-
             <CreateIssueButton />
           </S.ContentNavRight>
         </S.ContentNavDiv>
