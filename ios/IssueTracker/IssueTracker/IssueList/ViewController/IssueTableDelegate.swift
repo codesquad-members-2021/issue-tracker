@@ -27,7 +27,7 @@ extension IssueTableDelegate: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-            let share = UIContextualAction(style: .normal, title: "Share") { action, view, completion in
+            let share = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
                 completion(true)
             }
 
