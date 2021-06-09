@@ -13,10 +13,10 @@ struct Issue {
     var title: String
     var description: String
     var isOpened: Bool
-    var isHaveMyComment: Bool
+    var isMyCommentExist: Bool
     var timeStamp: String
     var writer: User
     var assignees: [User]?
-    var labels: [Label]
-    var milestone: Milestone
+    var labels: [Label]?
+    var milestone: Milestone?
 }

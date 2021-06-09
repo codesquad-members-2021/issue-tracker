@@ -10,7 +10,7 @@ import Foundation
 struct Milestone {
     var id: Int
     var name: String
-    var description: String
+    var description: String?
     var isOpend: Bool
     var openedIssueCount: Int
     var closedIssueCount: Int
