@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { ReactComponent as DropDown } from '@assets/dropDown.svg';
-import { ReactComponent as Search } from '@assets/search.svg';
+import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
+import { ReactComponent as SearchIcon } from '@assets/search.svg';
 import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/menu';
 import { Button } from '@chakra-ui/button';
 
@@ -13,7 +13,7 @@ function FilterBar() {
           background="gr_background"
           width="128px"
           as={Button}
-          rightIcon={<DropDown />}
+          rightIcon={<DropDownIcon />}
           borderRadius="11px 0px 0px 11px"
           border="1px solid gr_inputBackground"
         >
@@ -46,7 +46,7 @@ function FilterBar() {
         </MenuList>
       </Menu>
       <InputContainer>
-        <Search />
+        <SearchIcon />
         <Input placeholder=" " />
       </InputContainer>
     </FilterBarWrap>
