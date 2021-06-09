@@ -12,7 +12,7 @@ struct Count: Decodable {
     let closedIssue:Int
 }
 
-struct Issue: Decodable {
+struct Issue: Equatable, Decodable {
     let id:Int
     let title:String
     let comment:String
