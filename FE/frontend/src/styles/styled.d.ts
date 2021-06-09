@@ -8,6 +8,10 @@ declare module 'styled-components' {
     colors: {
       [key: string]: string;
     };
+    fontSize: {
+      [key: string]: string;
+    };
+
     alignCenter: string;
   }
 }

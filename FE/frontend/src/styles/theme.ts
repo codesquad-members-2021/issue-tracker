@@ -25,6 +25,12 @@ const theme: DefaultTheme = {
     lightGreen: '#DDFFE6',
     darkGreen: '#00A028',
   },
+  fontSize: {
+    lg: '24px',
+    md: '18px',
+    sm: '16px',
+    xs: '12px',
+  },
   alignCenter: `
     display: flex;
     align-items: center;

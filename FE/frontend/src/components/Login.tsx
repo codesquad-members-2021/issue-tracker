@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import Buttons from '../styles/atoms/Buttons';
 
 const Login = () => {
-  return <Div>hi</Div>;
+  return (
+    <Buttons disabled large>
+      Hi
+    </Buttons>
+  );
 };
-
-const Div = styled.div`
-  color: ${({ theme }) => theme.colors.primary};
-`;
 
 export default Login;
