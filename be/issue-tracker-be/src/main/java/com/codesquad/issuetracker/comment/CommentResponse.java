@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -14,5 +14,5 @@ public class CommentResponse {
     private UserResponse author;
     private String contents;
     private LocalDateTime createDateTime;
-    private List<Emoji> emojis;
+    private Set<Emoji> emojis;
 }
