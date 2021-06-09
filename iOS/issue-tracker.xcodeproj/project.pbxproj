@@ -15,6 +15,8 @@
 		10CE4DA1266EFB5700FBD593 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4D9F266EFB5700FBD593 /* Main.storyboard */; };
 		10CE4DA3266EFB5700FBD593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4DA2266EFB5700FBD593 /* Assets.xcassets */; };
 		10CE4DA6266EFB5700FBD593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */; };
+		10D4258226709CC200AE119C /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D4258126709CC200AE119C /* IssueListViewController.swift */; };
+		10D4258526709D4800AE119C /* UIViewController+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D4258426709D4800AE119C /* UIViewController+Instantiate.swift */; };
 		BCCEBE1E1668EC814AFFBE24 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906455FA7C42AB9BB530CE77 /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		10CE4DA5266EFB5700FBD593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		10CE4DA7266EFB5700FBD593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10D4257F2670912800AE119C /* issue-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "issue-tracker.entitlements"; sourceTree = "<group>"; };
+		10D4258126709CC200AE119C /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		10D4258426709D4800AE119C /* UIViewController+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Instantiate.swift"; sourceTree = "<group>"; };
 		26D189FC7EF28507BC1CCEF4 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		3CB31D25B54D61EBD8942312 /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		906455FA7C42AB9BB530CE77 /* Pods_issue_tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,9 +97,27 @@
 				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
 				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
 				10CE4DA7266EFB5700FBD593 /* Info.plist */,
+				10D4258326709D3300AE119C /* Extension */,
+				10D4258026709CB000AE119C /* IssueList */,
 				10BCA8A3266F38D700DBBA61 /* Login */,
 			);
 			path = "issue-tracker";
+			sourceTree = "<group>";
+		};
+		10D4258026709CB000AE119C /* IssueList */ = {
+			isa = PBXGroup;
+			children = (
+				10D4258126709CC200AE119C /* IssueListViewController.swift */,
+			);
+			path = IssueList;
+			sourceTree = "<group>";
+		};
+		10D4258326709D3300AE119C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				10D4258426709D4800AE119C /* UIViewController+Instantiate.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		7322197006E01F85C16AF0AA /* Pods */ = {
@@ -232,8 +254,10 @@
 			files = (
 				10BCA8A5266F38E800DBBA61 /* LoginViewController.swift in Sources */,
 				10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */,
+				10D4258226709CC200AE119C /* IssueListViewController.swift in Sources */,
 				10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */,
 				10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */,
+				10D4258526709D4800AE119C /* UIViewController+Instantiate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,6 +53,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             print(userIdentifier)
             print(String(describing: email))
+            
+            self.present(IssueListViewController.instantiate(name: "Main", bundle: nil),
+                         animated: true)
         default: break
         }
     }
