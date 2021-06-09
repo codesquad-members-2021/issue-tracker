@@ -2,10 +2,7 @@ package com.codesqaude.cocomarco.domain.label;
 
 import com.codesqaude.cocomarco.domain.issue.IssueLabel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +10,10 @@ import java.util.List;
 public class Label {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private String name;
