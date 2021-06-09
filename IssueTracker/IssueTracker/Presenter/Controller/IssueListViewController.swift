@@ -5,6 +5,7 @@ import NSObject_Rx
 
 class IssueListViewController: UIViewController {
 
+    @IBOutlet weak var issueCollectionView: UICollectionView!
     @IBOutlet weak var issueFilterButton: UIButton!
     
     private let viewModel = IssueListViewModel()
@@ -26,6 +27,9 @@ class IssueListViewController: UIViewController {
     private func bind() {
         viewModel.getIssueList()
         
-        let _ = viewModel.issueList
+        viewModel.issueList
+            .drive(issueCollectionView.rx.items(cellIdentifier: IssueCell.identifier, cellType: IssueCell.self)) { _, issue, cell in
+                cell.configure(issue.title, issue.comment, milestone: issue.milestone, label: issue.labels.first!)
+            }.disposed(by: rx.disposeBag)
     }
 }
