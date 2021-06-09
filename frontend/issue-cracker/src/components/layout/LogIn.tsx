@@ -15,17 +15,21 @@ import {
 import theme from '../styles/theme';
 
 const LogIn: FC = () => {
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/callback`;
+
   return (
     <LogInDiv>
-      <Box>
+      <LogInBox>
         <Logo type={LARGE} name={LOGO_TITLE} />
-        <ButtonBox>
-          <ButtonList
-            type={LARGE}
-            name={GITHUB_LOGIN}
-            color={theme.colors.blue}
-          />
-        </ButtonBox>
+        <a href={loginUri}>
+          <ButtonBox>
+            <ButtonList
+              type={LARGE}
+              name={GITHUB_LOGIN}
+              color={theme.colors.blue}
+            />
+          </ButtonBox>
+        </a>
         <TextBox>or</TextBox>
         <InputBox>
           <InputList type={LARGE} name={ID} />
@@ -39,7 +43,7 @@ const LogIn: FC = () => {
           />
         </ButtonBox>
         <RegisterButton />
-      </Box>
+      </LogInBox>
     </LogInDiv>
   );
 };
@@ -48,7 +52,7 @@ export default LogIn;
 
 const LogInDiv = styled.div``;
 
-const Box = styled.div`
+const LogInBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

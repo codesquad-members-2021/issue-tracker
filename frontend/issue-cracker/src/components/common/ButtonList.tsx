@@ -46,6 +46,7 @@ function ButtonLarge({ classes, name, color }: IButton) {
       className={classes.buttonLarge}
       style={{
         backgroundColor: `${color}`,
+        color: `${color === 'white' ? '#222' : '#fff'}`,
       }}
     >
       {name}
