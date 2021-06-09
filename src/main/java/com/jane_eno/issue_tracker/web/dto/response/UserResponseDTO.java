@@ -1,6 +1,5 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
-import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
 import com.jane_eno.issue_tracker.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

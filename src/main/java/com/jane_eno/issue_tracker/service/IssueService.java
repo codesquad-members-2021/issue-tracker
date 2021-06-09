@@ -30,7 +30,10 @@ public class IssueService {
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
                 .assignees(new ArrayList<>(Arrays.asList("janeljs", "enolj", "Ray")))
-                .labels(new ArrayList<>(Arrays.asList("bug", "documentation")))
+                .labels(new ArrayList<>(Arrays.asList(
+                        new Label(1L, "bug", "#CCFFCC", "bug fix", true),
+                        new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
+                )))
                 .milestone("마스터즈 코스")
                 .build();
         IssueResponseDTO issue2 = IssueResponseDTO.
@@ -42,7 +45,10 @@ public class IssueService {
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
                 .assignees(new ArrayList<>(Arrays.asList("Kyle", "enolj", "Ray")))
-                .labels(new ArrayList<>(Arrays.asList("bug", "documentation")))
+                .labels(new ArrayList<>(Arrays.asList(
+                        new Label(1L, "bug", "#CCFFCC", "bug fix", true),
+                        new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
+                )))
                 .milestone("마스터즈 코스")
                 .build();
         IssueResponseDTO issue3 = IssueResponseDTO.
@@ -54,7 +60,10 @@ public class IssueService {
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
                 .assignees(new ArrayList<>(Arrays.asList("janeljs", "enolj", "Ray")))
-                .labels(new ArrayList<>(Arrays.asList("bug", "enhancement")))
+                .labels(new ArrayList<>(Arrays.asList(
+                        new Label(1L, "bug", "#CCFFCC", "bug fix", true),
+                        new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
+                )))
                 .milestone("마스터즈 코스")
                 .build();
         List<IssueResponseDTO> issues = new ArrayList<>();
@@ -98,10 +107,10 @@ public class IssueService {
                 .createdDateTime(LocalDateTime.now())
                 .comments(new ArrayList<>(Arrays.asList(
                         new Comment(1L, "jane", "주나미 최고",
-                                LocalDateTime.of(LocalDate.of(2021,6,6), LocalTime.of(10,10,10)),
-                        true, false),
+                                LocalDateTime.of(LocalDate.of(2021, 6, 6), LocalTime.of(10, 10, 10)),
+                                true, false),
                         new Comment(1L, "kyle", "레이 최고",
-                                LocalDateTime.of(LocalDate.of(2021,6,6), LocalTime.of(10,10,10)),
+                                LocalDateTime.of(LocalDate.of(2021, 6, 6), LocalTime.of(10, 10, 10)),
                                 true, false)
                 )))
                 .assignees(new ArrayList<>(Arrays.asList(

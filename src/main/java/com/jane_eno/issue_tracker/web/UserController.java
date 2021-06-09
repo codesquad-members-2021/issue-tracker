@@ -1,6 +1,7 @@
 package com.jane_eno.issue_tracker.web;
 
-import com.jane_eno.issue_tracker.auth.exception.AccessTokenNotFoundException;
+import com.jane_eno.issue_tracker.auth.annotation.LoginRequired;
+import com.jane_eno.issue_tracker.auth.annotation.UserName;
 import com.jane_eno.issue_tracker.service.UserService;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -25,8 +25,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public void logout(@RequestHeader String authorization) {
+    @LoginRequired
+    public void logout(@UserName String userName) {
         logger.debug("로그아웃 요청");
-        userService.logout(authorization);
+        userService.logout(userName);
     }
 }

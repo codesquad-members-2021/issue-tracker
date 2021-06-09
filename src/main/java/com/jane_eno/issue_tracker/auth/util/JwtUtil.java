@@ -26,7 +26,7 @@ public class JwtUtil {
     public String createToken(User user) {
         return JWT.create()
                 .withExpiresAt(new Date())
-                .withClaim(GITHUB_NAME, user.getName())
+                .withClaim(GITHUB_NAME, user.getUserName())
                 .withIssuer(ISSUER)
                 .sign(Algorithm.HMAC256(SECRET_KEY));
     }

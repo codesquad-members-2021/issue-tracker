@@ -17,7 +17,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.netty.http.client.HttpClient;
 
-
 @Component
 @RequiredArgsConstructor
 public class GitHubOAuth implements OAuth {
