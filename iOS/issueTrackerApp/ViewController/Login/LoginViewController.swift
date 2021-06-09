@@ -8,15 +8,26 @@
 import UIKit
 import AuthenticationServices
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginCoordinated, Networked {
 
+    @IBOutlet weak var gitHubLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: UIStackView!
+    
+    private let state = UUID().description
+    
+    weak var loginCoordinator: LoginFlowCoordinator?
+    var networkController: NetworkController?
+    
+    var isAuthenticating: Bool = false {
+        didSet {
+            gitHubLoginButton.isEnabled = !isAuthenticating
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configAppleLoginButton()
     }
-    
 }
 
 //MARK:- APPLE ID LOGIN
@@ -56,5 +67,19 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         //to do
+    }
+}
+
+//MARK:- GitHub LOGIN
+extension LoginViewController {
+    func performAuthorization(with authorizationCode: String) {
+        isAuthenticating = true
+        networkController?.authenticateWith(authorizationCode: authorizationCode, state: state) { [weak self] in
+            self?.loginCoordinator?.loginViewControllerDidFinishAuthorization()
+        }
+    }
+    
+    @IBAction func gitHubLoginButtonTapped(_ sender: Any) {
+        loginCoordinator?.loginViewController(self, didStartAuthorizationWithState: state)
     }
 }
