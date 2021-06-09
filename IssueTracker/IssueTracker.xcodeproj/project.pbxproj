@@ -17,6 +17,8 @@
 		71377D27266E458100DB1C4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71377D26266E458100DB1C4D /* Assets.xcassets */; };
 		71377D2A266E458100DB1C4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71377D28266E458100DB1C4D /* LaunchScreen.storyboard */; };
 		71377D33266E47AC00DB1C4D /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 71377D32266E47AC00DB1C4D /* OctoKit */; };
+		71FCE19C2670ABD60044038E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19B2670ABD60044038E /* APIService.swift */; };
+		71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19F2670AC540044038E /* IssueDTO.swift */; };
 		C3B8DAD5620CB1718E122CFA /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		71377D26266E458100DB1C4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71377D29266E458100DB1C4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71377D2B266E458100DB1C4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FCE19B2670ABD60044038E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		71FCE19F2670AC540044038E /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
 		81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C617ED888C881C2FD8566BFB /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,14 +60,6 @@
 				81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7105555E266F36EB0072065E /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				7105555F266F36FD0072065E /* Constant.swift */,
-			);
-			path = UseCase;
 			sourceTree = "<group>";
 		};
 		7123D3F6266F0733009C959B /* Presenter */ = {
@@ -125,12 +121,30 @@
 		71377D1C266E458000DB1C4D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				7105555E266F36EB0072065E /* UseCase */,
+				71FCE1992670ABB90044038E /* Data */,
 				7123D3F6266F0733009C959B /* Presenter */,
 				71377D26266E458100DB1C4D /* Assets.xcassets */,
 				71377D2B266E458100DB1C4D /* Info.plist */,
 			);
 			path = IssueTracker;
+			sourceTree = "<group>";
+		};
+		71FCE1992670ABB90044038E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE19A2670ABC90044038E /* Network */,
+				7105555F266F36FD0072065E /* Constant.swift */,
+				71FCE19F2670AC540044038E /* IssueDTO.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		71FCE19A2670ABC90044038E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE19B2670ABD60044038E /* APIService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		760666D006709C46B8C9828D /* Pods */ = {
@@ -263,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7123D3FF266F2431009C959B /* IssueListViewController.swift in Sources */,
+				71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */,
+				71FCE19C2670ABD60044038E /* APIService.swift in Sources */,
 				71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */,
 				71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */,
 				71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */,
