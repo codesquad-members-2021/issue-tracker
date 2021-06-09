@@ -2,10 +2,10 @@ import { FilterSearchBar as S, HomeAssets as SVG } from "../../HomeStyles";
 
 const Filter = () => {
   return (
-    <S.filterDiv>
+    <S.FilterDiv>
       필터
-      <SVG.down />
-    </S.filterDiv>
+      <SVG.Down />
+    </S.FilterDiv>
   );
 };
 

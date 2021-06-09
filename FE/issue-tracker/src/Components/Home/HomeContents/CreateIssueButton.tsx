@@ -1,9 +1,7 @@
-import React from "react";
-import { HomeAssets as S } from "../HomeStyles";
-import { Home as Styled } from "../HomeStyles";
+import { Home as S } from "../HomeStyles";
 
 const CreateIssueButton = () => {
-  return <Styled.WriteIssueBtn>+ 이슈작성</Styled.WriteIssueBtn>;
+  return <S.WriteIssueBtn>+ 이슈작성</S.WriteIssueBtn>;
 };
 
 export default CreateIssueButton;

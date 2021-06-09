@@ -5,7 +5,7 @@ import { Home as Styled } from "../HomeStyles";
 const MileStoneButton = () => {
   return (
     <Styled.Button>
-      <S.milestoneTag />
+      <S.MilestoneTag />
       마일스톤 (2)
     </Styled.Button>
   );
