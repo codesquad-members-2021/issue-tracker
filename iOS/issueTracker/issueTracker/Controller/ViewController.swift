@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func qwer(_ sender: Any) {
+        self.performSegue(withIdentifier: "IssueList", sender: nil)
+    }
 }
 
