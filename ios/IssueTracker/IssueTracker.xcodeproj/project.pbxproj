@@ -202,10 +202,10 @@
 		FF89A98E266F116000983577 /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
-				FF89A995267075A000983577 /* Model */,
 				AE7505342670EFA800BA14F7 /* ViewController */,
 				AE7505352670EFBD00BA14F7 /* ViewModel */,
 				AE7505362670EFD300BA14F7 /* View */,
+				FF89A995267075A000983577 /* Model */,
 				AE7505372670EFDC00BA14F7 /* Utility */,
 			);
 			path = IssueList;
