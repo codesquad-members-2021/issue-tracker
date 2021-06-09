@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Badge } from "@chakra-ui/react"
 interface LableProps{
   color: string;
   desc?: string;

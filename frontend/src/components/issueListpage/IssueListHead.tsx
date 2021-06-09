@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import styled from 'styled-components'
 import CheckBox from '../atom/CheckBox'
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded'
@@ -26,7 +26,7 @@ function ListLeft(){
 }
 function ListRight(){
   const [type, setType] = useState<string>('')
-
+  
   const assigneeToggle = useRef<HTMLDivElement>(null)
   const labelToggle = useRef<HTMLDivElement>(null)
   const milestoneToggle = useRef<HTMLDivElement>(null)
@@ -44,13 +44,14 @@ function ListRight(){
   const handleClick = (clickTarget:string):void =>{
     setType(clickTarget)
   }
-
-  const view = filterStandards.map((standard,idx)=><div ref={standard.ref} key={idx} onClick={()=>handleClick(standard.name)}>{standard.name}<ExpandMoreIcon/></div>)
   
   return (
     <>
       <FilterInListBlock> 
-        {view}
+        {filterStandards.map((standard,idx)=>
+          <div ref={standard.ref} key={idx} onClick={()=>handleClick(standard.name)}>
+            {standard.name}<ExpandMoreIcon/>
+          </div>)}
         </FilterInListBlock>
       {open && <List type={type} modal={listModal}/>}
     </>
@@ -72,7 +73,6 @@ display: flex;
 justify-content: space-between;
 background-color: ${({theme})=>theme.color.bgGrey};
 border: ${({theme})=>theme.color.bgGrey};
-border-bottom: 1px solid ${({theme})=>theme.color.lineGrey};
 border-radius: 16px 16px 0 0;`
 const ListLeftBlock =styled.div`
 display: flex;

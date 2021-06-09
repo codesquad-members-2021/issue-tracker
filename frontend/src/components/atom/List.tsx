@@ -1,23 +1,18 @@
 import { RefObject } from 'react'
 import styled from 'styled-components'
+import RadioBtn from './RadioBtn'
 interface ListProps{
   type : string|null
   modal: RefObject<HTMLDivElement>
 }
-function RadionBtn(){
-  return (
-    <div>
-      <input type="radio"/>
-    </div>
-    )
-}
+
 function List({type, modal}:ListProps){
 
   return (
     <ListBlock ref={modal}>
       <ListHead>{type} 선택</ListHead>
-      <ListBody><div>내용</div><RadionBtn/></ListBody>
-      <ListBody><div>내용</div><RadionBtn/></ListBody>
+      <ListBody><div>내용</div><RadioBtn/></ListBody>
+      <ListBody><div>내용</div><RadioBtn/></ListBody>
     </ListBlock>
   )
 }
