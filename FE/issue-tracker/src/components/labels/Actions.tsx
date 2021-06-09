@@ -26,7 +26,8 @@ export default Actions;
 
 const ActionsWrap = styled.section`
   /* theme에 추가하기 */
-  display: flex;
   width: 100%;
+  margin-bottom: 24px;
+  display: flex;
   justify-content: space-between;
 `;
