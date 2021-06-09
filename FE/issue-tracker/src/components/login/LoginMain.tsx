@@ -5,13 +5,13 @@ import { Button } from '@chakra-ui/button';
 import { Stack } from '@chakra-ui/layout';
 import { Input } from '@chakra-ui/input';
 
-import { ReactComponent as LogoMedium } from '@assets/LogotypeLarge.svg';
+import { ReactComponent as LogoLarge } from '@assets/LogotypeLarge.svg';
 import { gitLoginStyle, idLoginStyle, inputStyle } from './style';
 
-function Main() {
+function LoginMain() {
   return (
     <MainWrap>
-      <LogoMedium />
+      <LogoLarge />
       <Button {...gitLoginStyle}>GitHub 계정으로 로그인</Button>
       <Span>or</Span>
       <Stack spacing={2}>
@@ -44,4 +44,4 @@ const Register = styled.button`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
-export default Main;
+export default LoginMain;
