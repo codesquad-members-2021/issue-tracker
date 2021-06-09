@@ -8,8 +8,6 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-
-    static let reuseIdentifier = "IssueListViewController"
     
     @IBOutlet weak var issueNumLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -20,17 +18,9 @@ class IssueListViewController: UIViewController {
     
     private var dataSource: IssueDataSource!
     
-    init(dataSource: IssueDataSource = IssueDataSource()) {
-        self.dataSource = dataSource
-        super.init(nibName: IssueListViewController.reuseIdentifier, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDataSource(with: IssueDataSource(issues: IssueListMock.data))
         setting()
     }
     
@@ -48,4 +38,5 @@ extension IssueListViewController: UITableViewDelegate {
         issueTableView.delegate = self
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
     }
+    
 }
