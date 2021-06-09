@@ -20,6 +20,7 @@
 		BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3730266F539400B51184 /* IssueListViewController.swift */; };
 		BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */; };
 		BD1D3735266F5D9800B51184 /* IssueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */; };
+		BD6AF8C7266F64D200ADBCDE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */; };
 		D1A7BE791A93D93FFEAD56C9 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9D20682EEABD0253D986DA /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		BD1D3730266F539400B51184 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueTableViewCell.xib; sourceTree = "<group>"; };
+		BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BE8239AFCA4C0E7723B72656 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 		BD1D36E8266E428700B51184 = {
 			isa = PBXGroup;
 			children = (
+				BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */,
 				BD1D36F3266E428700B51184 /* issue-tracker */,
 				BD1D370A266E428800B51184 /* issue-trackerTests */,
 				BD1D3715266E428800B51184 /* issue-trackerUITests */,
@@ -308,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD6AF8C7266F64D200ADBCDE /* .swiftlint.yml in Resources */,
 				BD1D3701266E428700B51184 /* LaunchScreen.storyboard in Resources */,
 				BD1D36FE266E428700B51184 /* Assets.xcassets in Resources */,
 				BD1D36FC266E428700B51184 /* Main.storyboard in Resources */,

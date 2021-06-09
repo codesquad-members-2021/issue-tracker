@@ -68,12 +68,15 @@
                     <constraint firstItem="GIi-ua-HME" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="Aby-jv-gim"/>
                     <constraint firstAttribute="trailing" secondItem="Qpf-ep-Gd6" secondAttribute="trailing" constant="16" id="CmQ-9Z-w0l"/>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Dq1-Fy-ZXC"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="GIi-ua-HME" secondAttribute="trailing" constant="173" id="I8Y-K6-FNE"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="leading" secondItem="j3A-Sy-Bl7" secondAttribute="trailing" constant="4" id="RnV-1F-NaF"/>
                     <constraint firstAttribute="trailing" secondItem="5gT-3I-aPM" secondAttribute="trailing" constant="16" id="Zna-aJ-ajn"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="GeO-05-zJU" secondAttribute="trailing" constant="174" id="gw2-U5-mUN"/>
                     <constraint firstItem="GeO-05-zJU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="huu-GV-D9u"/>
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="k6e-V3-uEr"/>
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="nRS-wo-Dx5"/>
                     <constraint firstItem="GeO-05-zJU" firstAttribute="top" secondItem="GIi-ua-HME" secondAttribute="bottom" constant="16" id="nU8-3s-ENI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="GeO-05-zJU" secondAttribute="bottom" constant="19" id="qgb-9I-Eq3"/>
                     <constraint firstItem="5gT-3I-aPM" firstAttribute="top" secondItem="Qpf-ep-Gd6" secondAttribute="bottom" constant="16" id="x52-N2-NGe"/>
                 </constraints>
             </tableViewCellContentView>

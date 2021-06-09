@@ -166,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="108.48214285714285"/>
+            <point key="canvasLocation" x="-504" y="108"/>
         </scene>
         <!--레이블-->
         <scene sceneID="exm-7W-pat">
@@ -182,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFe-YH-lJu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2941" y="527"/>
+            <point key="canvasLocation" x="2943" y="108"/>
         </scene>
         <!--이슈-->
         <scene sceneID="z1m-pj-Jw5">
@@ -194,7 +194,11 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="718-9Y-KjG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="sqk-8h-LsM" id="dXB-OF-bAX"/>
+                                    <outlet property="delegate" destination="sqk-8h-LsM" id="RZH-lL-6eA"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PsK-ws-Yyq"/>
@@ -207,10 +211,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="exclamationmark.circle" catalog="system" id="nVy-AD-MMB"/>
+                    <connections>
+                        <outlet property="issueTableView" destination="718-9Y-KjG" id="WeY-UQ-MQe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mY-IO-iRn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2942" y="-135"/>
+            <point key="canvasLocation" x="2188" y="108"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J67-YZ-aC2">
@@ -247,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CtM-LR-TbC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="1057"/>
+            <point key="canvasLocation" x="3688" y="108"/>
         </scene>
         <!--내 계정-->
         <scene sceneID="7vG-yV-IiM">
@@ -263,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgM-wO-nSN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="1057"/>
+            <point key="canvasLocation" x="4448" y="108"/>
         </scene>
     </scenes>
     <resources>
