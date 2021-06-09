@@ -3,7 +3,8 @@ import IssueList from './IssueList'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { getOpenIssues, openIssuesStorage, CountInfoStorage } from '../../hooks/store'
 import RouterTab from '../atom/RouterTab'
-
+import IssueFilterSection from './IssueFilter'
+import IssuePlus from '../atom/IssuePlus'
 function IssueListPage(){
   const setCountInfo = useSetRecoilState(CountInfoStorage)
   const setOpenIssues = useSetRecoilState(openIssuesStorage)
@@ -16,14 +17,28 @@ function IssueListPage(){
 
   return (
       <Body>
-        <RouterTab/>
+        <Option>
+          <IssueFilterSection/>
+          <FlexBox>
+            <RouterTab/>
+            <IssuePlus/>
+          </FlexBox>
+        </Option>
         <IssueList/>
       </Body>
   )
 }
-
+const FlexBox = styled.div`
+display: flex;
+align-items: center;`
+const Option = styled.div`
+display: flex;
+justify-content: space-between;
+margin-bottom: 50px;
+`
 const Body = styled.div`
-padding: 80px;`
+padding: 80px;
+`
 
 export default IssueListPage
 
