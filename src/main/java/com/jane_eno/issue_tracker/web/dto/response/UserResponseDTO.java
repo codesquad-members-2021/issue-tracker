@@ -1,32 +1,29 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
+import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
+import com.jane_eno.issue_tracker.domain.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+@AllArgsConstructor
 public class UserResponseDTO {
 
     private final String name;
     private final String email;
     private final String userName;
+    private final String avatarUrl;
     private final String token;
 
-    public UserResponseDTO(String name, String email, String userName, String token) {
-        this.name = name;
-        this.email = email;
-        this.userName = userName;
-        this.token = token;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getToken() {
-        return token;
+    public static UserResponseDTO createUserResponseDTO(User user, String token) {
+        return UserResponseDTO.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .userName(user.getUserName())
+                .avatarUrl(user.getAvatarUrl())
+                .token(token)
+                .build();
     }
 }

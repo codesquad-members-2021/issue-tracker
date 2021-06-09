@@ -2,7 +2,7 @@ package com.jane_eno.issue_tracker.auth;
 
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenRequestDTO;
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
-import com.jane_eno.issue_tracker.auth.dto.GitHubUser;
+import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
 import com.jane_eno.issue_tracker.auth.exception.AccessTokenNotFoundException;
 import com.jane_eno.issue_tracker.auth.exception.GitHubUserNotFoundException;
 import com.jane_eno.issue_tracker.auth.util.GitHubUtil;
@@ -53,13 +53,13 @@ public class GitHubOAuth implements OAuth {
     }
 
     @Override
-    public GitHubUser getUserInfo(String accessToken) {
+    public GitHubUserResponseDTO getUserInfo(String accessToken) {
         return webClient.get()
                 .uri(userUri)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, TOKEN + " " + accessToken)
                 .retrieve()
-                .bodyToMono(GitHubUser.class)
+                .bodyToMono(GitHubUserResponseDTO.class)
                 .blockOptional()
                 .orElseThrow(GitHubUserNotFoundException::new);
     }

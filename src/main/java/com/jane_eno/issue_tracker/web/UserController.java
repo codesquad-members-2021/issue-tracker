@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.web;
 
+import com.jane_eno.issue_tracker.auth.exception.AccessTokenNotFoundException;
 import com.jane_eno.issue_tracker.service.UserService;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
