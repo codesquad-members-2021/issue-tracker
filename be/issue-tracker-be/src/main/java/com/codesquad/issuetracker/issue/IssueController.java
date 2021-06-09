@@ -1,8 +1,7 @@
 package com.codesquad.issuetracker.issue;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +16,11 @@ public class IssueController {
     @GetMapping("/issues/{issueId}")
     public IssueDetailResponse readOne(@PathVariable long issueId) {
         return IssueDummyData.issueDetailResponse();
+    }
+
+    @PatchMapping("/issues")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateIssueStates(@RequestBody List<IssueStateRequest> issueStateRequest) {
+
     }
 }
