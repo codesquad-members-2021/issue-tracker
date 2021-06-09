@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Chip from "@material-ui/core/Chip";
 
 const BOX = {
   FLEX_ROW_BOX: styled.div`
@@ -28,4 +29,8 @@ const BOX = {
   `,
 };
 
-export { BOX };
+const Label = {
+  label: styled(Chip)``,
+};
+
+export { BOX, Label };
