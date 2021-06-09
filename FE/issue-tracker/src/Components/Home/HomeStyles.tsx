@@ -193,8 +193,9 @@ const HomeAssets = {
     margin-right: 11.33px;
   `,
 
-  IssueMark: styled(IssueMark)`
+  IssueMark: styled(IssueMark)<{ fillColor?: string }>`
     margin-right: 5px;
+    fill: ${({ fillColor }) => (fillColor ? fillColor : "none")};
   `,
 
   CloseIssueMark: styled(closeIssueMark)`
