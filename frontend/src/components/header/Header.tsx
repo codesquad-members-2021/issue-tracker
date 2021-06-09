@@ -5,6 +5,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const useStyle = makeStyles(()=>({
   typographyStyles: {
     flex: 1,
+    fontFamily: "'Raleway', sans-serif",
+    fontSize: '30px',
   }}))
 
 function Header(){

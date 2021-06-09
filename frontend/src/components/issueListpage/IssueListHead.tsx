@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import CheckBox from '../atom/CheckBox'
-import DraftsOutlinedIcon from '@material-ui/icons/DraftsOutlined';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '../atom/List'
 import useToggle from '../../hooks/useToggle'
@@ -11,8 +11,8 @@ function ListLeft(){
     <ListLeftBlock>
       <CheckBox/>
       <FilterTabBlock>
-        <div><DraftsOutlinedIcon/> 열린 이슈 (0)</div>
-        <div><EmailOutlinedIcon/> 닫힌 이슈 (0)</div>
+        <div><AdjustRoundedIcon/> 열린 이슈 (0)</div>
+        <div><CheckRoundedIcon/> 닫힌 이슈 (0)</div>
       </FilterTabBlock>
     </ListLeftBlock>
   )
@@ -30,7 +30,7 @@ function ListRight(){
     {name:'담당자', ref: assigneeToggle},
     {name:'레이블', ref:labelToggle},
     {name:'마일스톤',ref: milestoneToggle},
-    {name: '작성자', ref: authorToggle},
+    {name:'작성자', ref: authorToggle},
   ]
   const open = useToggle({toggle: [assigneeToggle, labelToggle, milestoneToggle, authorToggle ], modal: listModal, init:false})
 
@@ -68,7 +68,8 @@ border: ${({theme})=>theme.color.bgGrey};
 border-bottom: 1px solid ${({theme})=>theme.color.lineGrey};
 border-radius: 16px 16px 0 0;`
 const ListLeftBlock =styled.div`
-display: flex;`
+display: flex;
+padding: 0 10px;`
 const FilterTabBlock = styled.div`
 display: flex;
 div { 
