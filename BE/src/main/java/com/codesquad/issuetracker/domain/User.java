@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,6 +11,8 @@ public class User {
     @Id
     private Long id;
     private String name;
+    
+    @JsonProperty("user_id")
     private String userId;
 
     private User(Long id, String name, String userId) {

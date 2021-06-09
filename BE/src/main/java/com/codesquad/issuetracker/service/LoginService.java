@@ -33,7 +33,7 @@ public class LoginService {
                 .body(AccessTokenRequest.create(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code));
         RestTemplate restTemplate = new RestTemplate(); // RestTemplate : 요청을 보내기 또는 응답을 받기
         AccessTokenResponse accessTokenResponse = restTemplate.exchange(accessTokenRequestEntity, AccessTokenResponse.class).getBody(); // 액세스토큰 받아오기
-
+        System.out.println(accessTokenResponse.getAccessToken());
         RequestEntity<Void> githubUserInfoRequestEntity = RequestEntity.get(GITHUB_USER_URL)// body에 아무것도 보내지 않으므로 Void로 설정 
                 .header("Accept", "application/json")
                 .header("Authorization", "token " + accessTokenResponse.getAccessToken())
