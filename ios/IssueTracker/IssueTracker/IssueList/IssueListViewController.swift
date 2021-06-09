@@ -17,6 +17,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var plusButton: UIButton!
     
     private var dataSource: IssueDataSource!
+    private lazy var tableViewDelegate = IssueTableDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ extension IssueListViewController: UITableViewDelegate {
     
     private func setting() {
         issueTableView.dataSource = dataSource
-        issueTableView.delegate = self
+        issueTableView.delegate = tableViewDelegate
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
     }
     
