@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AE7505312670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */; };
+		AE7505332670EE0600BA14F7 /* UIColor+hexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */; };
 		AECEA442266F38D000855F20 /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA441266F38D000855F20 /* IssueDataSource.swift */; };
 		AECEA445266F3AD900855F20 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA443266F3AD900855F20 /* IssueCell.swift */; };
 		AECEA446266F3AD900855F20 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECEA444266F3AD900855F20 /* IssueCell.xib */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+AddLineSpacing.swift"; sourceTree = "<group>"; };
+		AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexToUIColor.swift"; sourceTree = "<group>"; };
 		AECEA441266F38D000855F20 /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		AECEA443266F3AD900855F20 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		AECEA444266F3AD900855F20 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */,
 				AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */,
 				AEE2A4D42670A8C000FA6274 /* LabelView.swift */,
+				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
 				AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */,
 				AECEA443266F3AD900855F20 /* IssueCell.swift */,
 				AECEA444266F3AD900855F20 /* IssueCell.xib */,
@@ -330,6 +333,7 @@
 				FF89A960266F0BD000983577 /* SceneDelegate.swift in Sources */,
 				FF89A999267077E800983577 /* User.swift in Sources */,
 				AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */,
+				AE7505332670EE0600BA14F7 /* UIColor+hexToUIColor.swift in Sources */,
 				FF89A997267075CD00983577 /* Issue.swift in Sources */,
 				FF89A99D2670784200983577 /* Milestone.swift in Sources */,
 				AEE2A4D126709D8400FA6274 /* IssueTableDelegate.swift in Sources */,
