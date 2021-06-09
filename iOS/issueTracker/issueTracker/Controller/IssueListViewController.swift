@@ -32,6 +32,7 @@ class IssueListViewController: UIViewController {
         self.set(navigationBarTitle: "이슈")
         self.setupLeftNavigationItem(buttonTitle: "필터")
         self.setupRightNavigationItem(buttonTitle: "선택")
+
     }
     
     func set(navigationBarTitle: String) {
@@ -43,8 +44,15 @@ class IssueListViewController: UIViewController {
         let uibutton = UIButton()
         uibutton.setTitleColor(UIColor(red: 0, green: 0.32, blue: 0.4, alpha: 1), for: .normal)
         uibutton.setTitle(buttonTitle, for: .normal)
+        uibutton.addTarget(self, action: #selector(pressedLeftbutton), for: .touchDown)
         let leftbarbutton = UIBarButtonItem(customView: uibutton)
         self.navigationItem.leftBarButtonItem = leftbarbutton
+    }
+    
+    @objc func pressedLeftbutton() {
+        let nextVC = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController
+
+        self.present(nextVC!, animated: true, completion: nil)
     }
     
     func setupRightNavigationItem(buttonTitle: String) {
@@ -55,4 +63,5 @@ class IssueListViewController: UIViewController {
         let rightbarbutton = UIBarButtonItem(customView: uibutton)
         self.navigationItem.rightBarButtonItem = rightbarbutton
     }
+    
 }

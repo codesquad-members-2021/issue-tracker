@@ -24,6 +24,21 @@
             </objects>
             <point key="canvasLocation" x="1000.0000000000001" y="88.392857142857139"/>
         </scene>
+        <!--Issue List Filter View Controller-->
+        <scene sceneID="bw8-Ue-Fz3">
+            <objects>
+                <viewController storyboardIdentifier="IssueListFilterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D8o-oD-iSX" customClass="IssueListFilterViewController" customModule="issueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t05-M1-atD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aQn-c3-gMa"/>
+                        <color key="backgroundColor" red="0.94919604059999996" green="0.94853931670000002" blue="0.96863085029999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EYv-e7-vdH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1916" y="88"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="e2h-91-QKp">
             <objects>
