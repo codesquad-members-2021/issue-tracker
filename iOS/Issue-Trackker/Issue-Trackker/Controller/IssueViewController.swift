@@ -7,16 +7,18 @@
 
 import UIKit
 
-class IssueViewController: UIViewController {
+class IssueViewController: UIViewController, UISearchBarDelegate {
 
     private var searchController: UISearchController?
+    @IBOutlet weak var issueCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController = UISearchController()
+        self.searchController?.searchBar.delegate = self
+        self.searchController?.hidesNavigationBarDuringPresentation = true
         self.navigationItem.title = "이슈"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
         setButton()
@@ -43,3 +45,28 @@ class IssueViewController: UIViewController {
         
     }
 }
+
+extension IssueViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath) as? IssueCell else {
+            return IssueCell()
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueCellFooter", for: indexPath)
+        return footerView
+    }
+}
+
+//extension IssueViewController: UICollectionViewDelegate {
+//    collectioView
+//}
+

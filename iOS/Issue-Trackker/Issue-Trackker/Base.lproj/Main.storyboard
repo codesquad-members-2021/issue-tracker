@@ -207,7 +207,6 @@
         <!--Item-->
         <scene sceneID="3uD-oD-ipD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rLX-p5-83v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UHp-O8-aey" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="nqI-I8-YdY"/>
                     <toolbarItems/>
@@ -220,6 +219,7 @@
                         <segue destination="CnZ-LH-VSU" kind="relationship" relationship="rootViewController" id="d3b-gr-DNS"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rLX-p5-83v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1787" y="88"/>
         </scene>

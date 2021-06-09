@@ -20,7 +20,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func signInButtonToucehd(_ sender: UIButton) {

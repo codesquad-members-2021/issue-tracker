@@ -15,6 +15,8 @@
 		D49B785B266F0D0400CF3FE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49B7859266F0D0400CF3FE4 /* LaunchScreen.storyboard */; };
 		D49B7863266F6C4B00CF3FE4 /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49B7862266F6C4B00CF3FE4 /* Issue.storyboard */; };
 		D49B7865266F6C5900CF3FE4 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B7864266F6C5900CF3FE4 /* IssueViewController.swift */; };
+		D49B78672670A67400CF3FE4 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78662670A67400CF3FE4 /* IssueCell.swift */; };
+		D49B78692670AD9900CF3FE4 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78682670AD9900CF3FE4 /* PaddingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		D49B785C266F0D0400CF3FE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D49B7862266F6C4B00CF3FE4 /* Issue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		D49B7864266F6C5900CF3FE4 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		D49B78662670A67400CF3FE4 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
+		D49B78682670AD9900CF3FE4 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,17 +64,59 @@
 		D49B784D266F0D0200CF3FE4 /* Issue-Trackker */ = {
 			isa = PBXGroup;
 			children = (
-				D49B784E266F0D0200CF3FE4 /* AppDelegate.swift */,
-				D49B7850266F0D0200CF3FE4 /* SceneDelegate.swift */,
-				D49B7852266F0D0200CF3FE4 /* SignInViewController.swift */,
+				D49B786F2670AED100CF3FE4 /* LifeCycle */,
+				D49B786D2670AEC000CF3FE4 /* Controller */,
+				D49B786C2670AEBA00CF3FE4 /* View */,
+				D49B786B2670AEB500CF3FE4 /* Model */,
+				D49B786A2670AEA700CF3FE4 /* Extension */,
 				D49B7854266F0D0200CF3FE4 /* Main.storyboard */,
 				D49B7862266F6C4B00CF3FE4 /* Issue.storyboard */,
-				D49B7864266F6C5900CF3FE4 /* IssueViewController.swift */,
 				D49B7857266F0D0400CF3FE4 /* Assets.xcassets */,
 				D49B7859266F0D0400CF3FE4 /* LaunchScreen.storyboard */,
 				D49B785C266F0D0400CF3FE4 /* Info.plist */,
 			);
 			path = "Issue-Trackker";
+			sourceTree = "<group>";
+		};
+		D49B786A2670AEA700CF3FE4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D49B78682670AD9900CF3FE4 /* PaddingLabel.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D49B786B2670AEB500CF3FE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D49B786C2670AEBA00CF3FE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D49B78662670A67400CF3FE4 /* IssueCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D49B786D2670AEC000CF3FE4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D49B7864266F6C5900CF3FE4 /* IssueViewController.swift */,
+				D49B7852266F0D0200CF3FE4 /* SignInViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D49B786F2670AED100CF3FE4 /* LifeCycle */ = {
+			isa = PBXGroup;
+			children = (
+				D49B784E266F0D0200CF3FE4 /* AppDelegate.swift */,
+				D49B7850266F0D0200CF3FE4 /* SceneDelegate.swift */,
+			);
+			path = LifeCycle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49B78692670AD9900CF3FE4 /* PaddingLabel.swift in Sources */,
+				D49B78672670A67400CF3FE4 /* IssueCell.swift in Sources */,
 				D49B7865266F6C5900CF3FE4 /* IssueViewController.swift in Sources */,
 				D49B7853266F0D0200CF3FE4 /* SignInViewController.swift in Sources */,
 				D49B784F266F0D0200CF3FE4 /* AppDelegate.swift in Sources */,
