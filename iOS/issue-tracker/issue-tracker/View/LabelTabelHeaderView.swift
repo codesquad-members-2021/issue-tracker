@@ -17,6 +17,12 @@ class LabelTabelHeaderView: UIView {
         return label
     }()
     
+    var line: UIView = {
+        var view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     var button = AddButton()
     
     override init(frame: CGRect) {
@@ -34,6 +40,7 @@ class LabelTabelHeaderView: UIView {
     func addSubViews() {
         self.addSubview(title)
         self.addSubview(button)
+        self.addSubview(line)
     }
     
     func setAutolayout() {
@@ -48,6 +55,11 @@ class LabelTabelHeaderView: UIView {
             button.width.equalTo(85)
             button.height.equalTo(44)
             button.top.trailing.equalToSuperview()
+        }
+        
+        line.snp.makeConstraints { line in
+            line.leading.trailing.bottom.equalToSuperview()
+            line.height.equalTo(1)
         }
     }
 }
