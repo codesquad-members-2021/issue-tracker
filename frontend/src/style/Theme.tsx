@@ -8,6 +8,9 @@ const Theme = {
     lineGrey: '#e2e5e9',
     skyblue: '#007AFF',
     blue: '#007AFF'
+  },
+  size:{
+    sm: 12
   }
 }
 
