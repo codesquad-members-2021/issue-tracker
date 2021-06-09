@@ -87,26 +87,6 @@
                                     <constraint firstItem="Hbj-Hz-d5A" firstAttribute="leading" secondItem="STh-RM-usK" secondAttribute="leading" constant="16" id="zpL-eG-zYT"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m73-NA-dnJ">
-                                <rect key="frame" x="16" y="676" width="382" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="et4-dO-i2Y"/>
-                                </constraints>
-                                <state key="normal" title="GitHub 계정으로 로그인">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec2-Fl-yd7">
-                                <rect key="frame" x="16" y="746" width="382" height="56"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="zkX-em-ELc"/>
-                                </constraints>
-                                <state key="normal" title=" Apple 계정으로 로그인">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="8xb-ZV-hjX">
                                 <rect key="frame" x="118.5" y="519.5" width="177" height="33"/>
                                 <subviews>
@@ -134,18 +114,12 @@
                         <constraints>
                             <constraint firstItem="Kl9-Ti-Egs" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" id="2hq-aK-ssf"/>
                             <constraint firstItem="8xb-ZV-hjX" firstAttribute="top" secondItem="STh-RM-usK" secondAttribute="bottom" constant="32" id="3ks-fj-vxZ"/>
-                            <constraint firstItem="Dcd-cT-GFi" firstAttribute="bottom" secondItem="Ec2-Fl-yd7" secondAttribute="bottom" constant="60" id="DFL-0F-5ez"/>
-                            <constraint firstItem="m73-NA-dnJ" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" constant="16" id="HbT-FS-mzW"/>
                             <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="Kl9-Ti-Egs" secondAttribute="trailing" id="Idp-ss-p8k"/>
                             <constraint firstItem="STh-RM-usK" firstAttribute="centerY" secondItem="XRs-Ba-eL1" secondAttribute="centerY" id="QEI-lI-cJr"/>
-                            <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="m73-NA-dnJ" secondAttribute="trailing" constant="16" id="Y8m-ez-wzc"/>
                             <constraint firstItem="STh-RM-usK" firstAttribute="top" secondItem="Kl9-Ti-Egs" secondAttribute="bottom" constant="72" id="ZLH-Au-mKH"/>
                             <constraint firstItem="8xb-ZV-hjX" firstAttribute="centerX" secondItem="XRs-Ba-eL1" secondAttribute="centerX" id="dWn-8A-75W"/>
                             <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="STh-RM-usK" secondAttribute="trailing" id="hQi-2D-vV2"/>
                             <constraint firstItem="STh-RM-usK" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" id="ju3-ox-IO9"/>
-                            <constraint firstItem="Ec2-Fl-yd7" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" constant="16" id="kvH-ms-EPb"/>
-                            <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="Ec2-Fl-yd7" secondAttribute="trailing" constant="16" id="lVy-6O-zqh"/>
-                            <constraint firstItem="Ec2-Fl-yd7" firstAttribute="top" secondItem="m73-NA-dnJ" secondAttribute="bottom" constant="14" id="uNP-yQ-1t7"/>
                         </constraints>
                     </view>
                 </viewController>
