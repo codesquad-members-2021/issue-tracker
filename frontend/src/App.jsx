@@ -5,9 +5,9 @@ import LoginLoadingPage from "./components/pages/LoginLoadingPage";
 import MainPage from "./components/pages/MainPage";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Milestones from "./components/Milestones/Milestones";
-import NoMatch from "./components/pages/NoMatch";
+import NoMatch from "./components/pages/NoMatchPage";
 import Labels from "./components/Labels/Labels";
-import NewIssue from "./components/pages/NewIssue";
+import NewIssue from "./components/pages/NewIssuePage";
 
 function App() {
 	return (
