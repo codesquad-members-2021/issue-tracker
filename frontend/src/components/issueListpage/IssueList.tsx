@@ -5,6 +5,7 @@ import Checkbox from '../atom/CheckBox'
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import MilesStone from '../atom/MilesStone'
 import Theme from '../../style/Theme'
+
 function IssueLine(){
   return (
     <ListBody>
@@ -23,11 +24,13 @@ function IssueLine(){
 }
 
 function IssueList() {
-  
+
   return (
     <ListBox>
       <IssueListHead/>
-      <IssueLine/>
+   
+        <IssueLine/>
+   
     </ListBox>
   );
 }
@@ -40,6 +43,7 @@ display: flex;
 align-items: center;
 font-weight: 800;`
 const ListBox = styled.div`
+min-width: 680px;
 border: 1px solid ${({theme})=>theme.color.lineGrey};
 border-radius: 16px;
 div:not(:last-child) {
