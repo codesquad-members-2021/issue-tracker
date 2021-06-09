@@ -16,6 +16,7 @@ const labelColorLeft = {
   color: 'gray.600',
   fontSize: 'xs',
   border: 'none',
+  marginBottom: '16px',
 };
 
 const labelCheckbox = {
@@ -23,6 +24,30 @@ const labelCheckbox = {
   paddingRight: '16px',
   spacing: '0.8rem',
   colorScheme: 'cyan',
+  marginBottom: '16px',
 };
 
-export { labelNameInput, labelDescInput, labelColorLeft, labelCheckbox };
+const submitButton = {
+  width: '120px',
+  fontSize: 'xs',
+  background: 'bl_initial',
+  colorScheme: 'blue',
+  color: 'white',
+};
+
+const whiteButton = {
+  width: '120px',
+  fontSize: 'xs',
+  background: 'white',
+  color: 'bl_initial',
+  border: '2px solid #007AFF',
+};
+
+export {
+  labelNameInput,
+  labelDescInput,
+  labelColorLeft,
+  labelCheckbox,
+  submitButton,
+  whiteButton,
+};
