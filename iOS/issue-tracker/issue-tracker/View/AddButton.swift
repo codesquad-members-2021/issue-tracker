@@ -8,11 +8,12 @@
 import UIKit
 import SnapKit
 
-class AddButton: UIStackView {
+class AddButton: UIView {
     
     var addText: UILabel = {
         var label = UILabel()
         label.text = "추가"
+        label.textColor = .systemBlue
         return label
     }()
     
@@ -24,37 +25,30 @@ class AddButton: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setStackView()
-        setAutolayout()
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-        setStackView()
-        setAutolayout()
-    }
-    
-    func setStackView() {
-        self.axis = .horizontal
-        self.alignment = .fill
-        self.distribution = .fill
-        self.spacing = 4
-        
         addViews()
+        setAutolayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setAutolayout()
     }
 
     func addViews() {
-        self.addArrangedSubview(addText)
-        self.addArrangedSubview(addImage)
+        self.addSubview(addText)
+        self.addSubview(addImage)
     }
     
     func setAutolayout() {
         addText.snp.makeConstraints { text in
+            text.top.leading.equalTo(10)
             text.width.equalTo(32)
             text.height.equalTo(22)
         }
         
         addImage.snp.makeConstraints { image in
+            image.top.equalTo(10)
+            image.leading.equalTo(addText.snp.trailing).offset(10)
             image.width.equalTo(17)
             image.height.equalTo(21)
         }
