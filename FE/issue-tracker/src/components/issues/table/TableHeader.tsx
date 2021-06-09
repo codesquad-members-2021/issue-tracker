@@ -58,6 +58,7 @@ const FilterLists = styled.ul`
   li {
     display: flex;
     align-items: center;
+    margin-left: 24px;
     width: 65px;
     height: 32px;
   }
@@ -67,9 +68,7 @@ const IssueTab = styled.ul`
   display: flex;
 
   li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    ${({ theme }) => theme.flexCenter}
     margin-left: 24px;
     width: 100px;
     height: 28px;
