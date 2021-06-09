@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, FunctionComponent } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 const Callback = ({ history, location }: RouteComponentProps) => {
   const authUri = `http://localhost:8080/api/web/auth`;
@@ -27,6 +27,12 @@ const Callback = ({ history, location }: RouteComponentProps) => {
         console.log('data', data);
         localStorage.setItem('token', data.token);
         // localStorage.setItem('ProfileURL', data.avatar_url);
+
+        const token = localStorage.getItem('token');
+        if (!token) return null;
+        console.log('token?"', token);
+        const decoded = jwtDecode(token);
+        console.log(decoded);
 
         history.push('/');
       } catch (error) {}
