@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ResponsiveLayout from '../components/common/ResponsiveLayout';
+import LoginButton from '../components/LoginButton';
 
 const MainPage = () => {
   return (
@@ -8,9 +9,10 @@ const MainPage = () => {
         <MainPageTitleLayer>
             타이틀
         </MainPageTitleLayer>
-        <MainPageTitleLayer>
+        <LoginButton/>
+        {/* <MainPageTitleLayer>
             버튼
-        </MainPageTitleLayer>
+        </MainPageTitleLayer> */}
         <MainPageTitleLayer>
             or
         </MainPageTitleLayer>
