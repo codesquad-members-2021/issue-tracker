@@ -1,5 +1,7 @@
+import Main from '@components/login/Main';
+
 function Login() {
-  return <div>여기는 로그인</div>;
+  return <Main />;
 }
 
 export default Login;
