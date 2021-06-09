@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol MemoryStorageType {
     
@@ -7,7 +8,7 @@ protocol MemoryStorageType {
     func create(_ title:String, _ comment:String, _ assignees:[Int], _ labels:[Int], _ milestone:Int) -> Observable<Issue>
     
     @discardableResult
-    func issueList() -> Observable<[Issue]>
+    func issueList() -> Driver<[Issue]>
     
     @discardableResult
     func update(_ issue:Issue, _ title:String, _ comment:String, _ assignees:[Int], _ labels:[Int], _ milestone:Int) -> Observable<Issue>

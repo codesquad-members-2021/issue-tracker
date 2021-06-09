@@ -5,5 +5,5 @@ struct Issue: Equatable, Decodable {
     let comment:String
     let assignees:[Int]
     let labels:[Int]
-    let milestone:[Int]
+    let milestone:Int
 }
