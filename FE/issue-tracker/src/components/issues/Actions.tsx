@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Tabs from '@components/common/Tabs';
 import { Button } from '@chakra-ui/button';
 
+import Tabs from '@components/common/Tabs';
 import FilterBar from './FilterBar';
 
 function Actions() {
@@ -10,11 +11,13 @@ function Actions() {
     <ActionsWrap>
       <SearchWrap>
         <FilterBar />
-        <Tabs page="labels" />
+        <Tabs page="" />
       </SearchWrap>
-      <Button marginLeft="16px" background="bl_initial" colorScheme="blue">
-        + 이슈 작성
-      </Button>
+      <Link to="/new-issue">
+        <Button marginLeft="16px" background="bl_initial" colorScheme="blue">
+          + 이슈 작성
+        </Button>
+      </Link>
     </ActionsWrap>
   );
 }
