@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.issue;
 
+import com.codesquad.issuetracker.comment.CommentResponse;
+import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserResponse;
@@ -32,6 +34,40 @@ public class IssueDummyData {
                         .milestone(milestoneMockup())
                         .build()
         );
+    }
+
+    public static IssueDetailResponse issueDetailResponse() {
+        return IssueDetailResponse.builder()
+                       .id(1L)
+                       .number(1L)
+                       .title("title")
+                       .createDateTime(LocalDateTime.now())
+                       .author(userFreddie())
+                       .assignees(Arrays.asList(
+                               userFreddie(),
+                               userHiro()
+                       ))
+                       .labels(Arrays.asList(
+                               labelBe()
+                       ))
+                       .milestone(milestoneMockup())
+                       .mainComment(CommentResponse.builder()
+                                            .id(1L)
+                                            .author(userFreddie())
+                                            .contents("comment1")
+                                            .createDateTime(LocalDateTime.now())
+                                            .emojis(Arrays.asList(
+                                                    Emoji.builder()
+                                                            .value("😀")
+                                                            .count(2)
+                                                            .build(),
+                                                    Emoji.builder()
+                                                            .value("😂")
+                                                            .count(2)
+                                                            .build()
+                                            ))
+                                            .build())
+                       .build();
     }
 
     private static UserResponse userFreddie() {
