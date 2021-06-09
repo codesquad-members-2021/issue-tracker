@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -61,16 +62,26 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKA-M4-CeL">
+                        <rect key="frame" x="0.0" y="199" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="uZP-pD-gYt"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="6vh-ka-RsX"/>
+                    <constraint firstItem="oKA-M4-CeL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="75n-XY-klI"/>
                     <constraint firstItem="5gT-3I-aPM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8fa-PR-Pff"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="Aby-jv-gim"/>
+                    <constraint firstAttribute="bottom" secondItem="oKA-M4-CeL" secondAttribute="bottom" id="CfU-pt-5YU"/>
                     <constraint firstAttribute="trailing" secondItem="Qpf-ep-Gd6" secondAttribute="trailing" constant="16" id="CmQ-9Z-w0l"/>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Dq1-Fy-ZXC"/>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="GIi-ua-HME" secondAttribute="trailing" constant="173" id="I8Y-K6-FNE"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="leading" secondItem="j3A-Sy-Bl7" secondAttribute="trailing" constant="4" id="RnV-1F-NaF"/>
                     <constraint firstAttribute="trailing" secondItem="5gT-3I-aPM" secondAttribute="trailing" constant="16" id="Zna-aJ-ajn"/>
+                    <constraint firstAttribute="trailing" secondItem="oKA-M4-CeL" secondAttribute="trailing" id="cls-YQ-Wl6"/>
                     <constraint firstItem="GeO-05-zJU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="huu-GV-D9u"/>
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="k6e-V3-uEr"/>
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="nRS-wo-Dx5"/>
@@ -85,5 +96,8 @@
     </objects>
     <resources>
         <image name="mileStoneImage" width="17" height="18"/>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

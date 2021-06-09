@@ -200,13 +200,22 @@
                                     <outlet property="delegate" destination="sqk-8h-LsM" id="RZH-lL-6eA"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0Y-d4-UUE">
+                                <rect key="frame" x="327.5" y="728.5" width="70.5" height="68.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" image="plus.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" scale="large" weight="thin"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PsK-ws-Yyq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="718-9Y-KjG" firstAttribute="top" secondItem="PsK-ws-Yyq" secondAttribute="top" id="VZe-b1-iBP"/>
+                            <constraint firstItem="PsK-ws-Yyq" firstAttribute="trailing" secondItem="q0Y-d4-UUE" secondAttribute="trailing" constant="16" id="hTX-bF-BEv"/>
                             <constraint firstItem="PsK-ws-Yyq" firstAttribute="trailing" secondItem="718-9Y-KjG" secondAttribute="trailing" id="q4W-9i-H3j"/>
                             <constraint firstItem="718-9Y-KjG" firstAttribute="leading" secondItem="PsK-ws-Yyq" secondAttribute="leading" id="rqB-H2-7tV"/>
+                            <constraint firstItem="PsK-ws-Yyq" firstAttribute="bottom" secondItem="q0Y-d4-UUE" secondAttribute="bottom" constant="16" id="vBW-V7-sAG"/>
                             <constraint firstItem="PsK-ws-Yyq" firstAttribute="bottom" secondItem="718-9Y-KjG" secondAttribute="bottom" id="zSe-7t-e4g"/>
                         </constraints>
                     </view>
@@ -298,6 +307,7 @@
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="mileStoneImage" width="17" height="18"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="tagImage" width="18" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -36,12 +36,21 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
+        issueTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         configureNavigationItem()
     }
     
     //MARK: - 아래로 당기면 SearchBar show
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        navigationItem.searchController = searchController
+//    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        navigationItem.searchController = searchController
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         navigationItem.searchController = searchController
     }
 
