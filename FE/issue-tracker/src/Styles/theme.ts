@@ -11,6 +11,7 @@ const COLOR = {
   GREEN: "#34C759",
   LIGHT_GREEN: "#DDFFE6",
   DARK_GREEN: "#00A028",
+  WHITE: "#fff",
 };
 const GRAY_SCALE = {
   OFF_WHITE: "#FEFEFE",

@@ -20,11 +20,15 @@ const GlobalStyles = createGlobalStyle`
 		justify-content: center;
 		align-items: center;
 		background: ${theme.GRAY_SCALE.BACKGROUND};
+		cursor:default;
 	}
 	.App{
-		width:1280px;
-		border:1px solid blue;
-		height:500px;
+		width:1440px;
+		height:960px;
+		border:1px solid black;
+		display:flex;
+		flex-direction: column;
+		align-items: center;
 	}
 `;
 

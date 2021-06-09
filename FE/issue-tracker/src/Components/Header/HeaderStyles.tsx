@@ -10,7 +10,7 @@ const Header = {
     padding: 27px 80px;
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
     font-size: ${theme.FONT_SIZE.LOGOTYPE_REGULAR};
-    font-style: italic;
+    font-family: "Montserrat", sans-serif;
   `,
 };
 
