@@ -16,12 +16,13 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var EditButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     
+    private var viewModel: IssueViewModel!
     private var dataSource: IssueDataSource!
-    private lazy var tableViewDelegate = IssueTableDelegate()
+    private var tableViewDelegate: IssueTableDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDataSource(with: IssueDataSource(issues: IssueListMock.data))
+        setViewModel(with: IssueListMock.data)
         setting()
     }
     
@@ -30,8 +31,10 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDelegate {
     
-    func setDataSource(with dataSource: IssueDataSource) {
-        self.dataSource = dataSource
+    func setViewModel(with issues: [Issue]) {
+        viewModel = IssueViewModel(issues: issues)
+        dataSource = IssueDataSource(viewModel: viewModel)
+        tableViewDelegate = IssueTableDelegate(viewModel: viewModel)
     }
     
     private func setting() {

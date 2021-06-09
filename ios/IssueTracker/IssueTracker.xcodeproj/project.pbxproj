@@ -11,6 +11,7 @@
 		AECEA445266F3AD900855F20 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA443266F3AD900855F20 /* IssueCell.swift */; };
 		AECEA446266F3AD900855F20 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECEA444266F3AD900855F20 /* IssueCell.xib */; };
 		AEE2A4D126709D8400FA6274 /* IssueTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */; };
+		AEE2A4D32670A00300FA6274 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */; };
 		FF89A95E266F0BD000983577 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A95D266F0BD000983577 /* AppDelegate.swift */; };
 		FF89A960266F0BD000983577 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A95F266F0BD000983577 /* SceneDelegate.swift */; };
 		FF89A962266F0BD000983577 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A961266F0BD000983577 /* IssueListViewController.swift */; };
@@ -48,6 +49,7 @@
 		AECEA443266F3AD900855F20 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		AECEA444266F3AD900855F20 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableDelegate.swift; sourceTree = "<group>"; };
+		AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		FF89A95A266F0BD000983577 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF89A95D266F0BD000983577 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF89A95F266F0BD000983577 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				FF89A961266F0BD000983577 /* IssueListViewController.swift */,
 				AECEA441266F38D000855F20 /* IssueDataSource.swift */,
 				AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */,
+				AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */,
 				AECEA443266F3AD900855F20 /* IssueCell.swift */,
 				AECEA444266F3AD900855F20 /* IssueCell.xib */,
 			);
@@ -314,6 +317,7 @@
 				AECEA442266F38D000855F20 /* IssueDataSource.swift in Sources */,
 				FF89A962266F0BD000983577 /* IssueListViewController.swift in Sources */,
 				FF89A95E266F0BD000983577 /* AppDelegate.swift in Sources */,
+				AEE2A4D32670A00300FA6274 /* IssueViewModel.swift in Sources */,
 				FF89A99B2670780F00983577 /* Label.swift in Sources */,
 				FF89A99F2670793B00983577 /* IssueListMockData.swift in Sources */,
 				FF89A960266F0BD000983577 /* SceneDelegate.swift in Sources */,

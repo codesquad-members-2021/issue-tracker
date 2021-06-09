@@ -7,7 +7,19 @@
 
 import UIKit
 
-class IssueTableDelegate: NSObject, UITableViewDelegate {
+class IssueTableDelegate: NSObject {
+    
+    private var viewModel: IssueViewModel
+    
+    init(viewModel: IssueViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+}
+
+
+extension IssueTableDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -20,8 +32,8 @@ class IssueTableDelegate: NSObject, UITableViewDelegate {
             }
 
             let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completion in
-//                tableView.dataSource?.issues.remove(at: indexPath.row)
-//                tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                self?.viewModel.deleteIssue(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 completion(true)
             }
 

@@ -8,10 +8,11 @@
 import UIKit
 
 class IssueDataSource: NSObject {
-    var issues: [Issue]
     
-    init(issues: [Issue]) {
-        self.issues = issues
+    private var viewModel: IssueViewModel
+    
+    init(viewModel: IssueViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -21,7 +22,7 @@ class IssueDataSource: NSObject {
 extension IssueDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return issues.count
+        return viewModel.issues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
