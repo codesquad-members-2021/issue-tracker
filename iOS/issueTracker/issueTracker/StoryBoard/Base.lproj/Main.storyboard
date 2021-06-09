@@ -98,7 +98,7 @@
                                 <rect key="frame" x="266" y="541" width="52" height="30"/>
                                 <state key="normal" title="회원가입"/>
                                 <connections>
-                                    <action selector="qwer:" destination="Lyf-Ut-OWF" eventType="touchUpInside" id="afc-Xq-0MB"/>
+                                    <action selector="segueNextViewController:" destination="Lyf-Ut-OWF" eventType="touchUpInside" id="afc-Xq-0MB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cya-67-fmc">
