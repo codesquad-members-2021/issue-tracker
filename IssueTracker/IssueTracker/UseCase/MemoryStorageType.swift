@@ -5,14 +5,8 @@ import RxCocoa
 protocol MemoryStorageType {
     
     @discardableResult
-    func create(_ title:String, _ comment:String, _ assignees:[Int], _ labels:[Int], _ milestone:Int) -> Observable<Issue>
+    func append(_ issues:[IssueInfo]) -> Observable<[IssueInfo]>
     
     @discardableResult
-    func issueList() -> Driver<[Issue]>
-    
-    @discardableResult
-    func update(_ issue:Issue, _ title:String, _ comment:String, _ assignees:[Int], _ labels:[Int], _ milestone:Int) -> Observable<Issue>
-    
-    @discardableResult
-    func delete(_ issue:Issue) -> Observable<Issue>
+    func issueList() -> Driver<[IssueInfo]>
 }
