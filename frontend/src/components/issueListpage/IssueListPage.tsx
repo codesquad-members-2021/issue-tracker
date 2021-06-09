@@ -5,7 +5,6 @@ function IssueListPage(){
 
   return (
     <>
-      <Header/>
       <Body>
         <IssueList/>
       </Body>
