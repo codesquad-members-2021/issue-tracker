@@ -6,9 +6,11 @@ class IssueListViewController: UIViewController {
     
     //MARK: - NavigationController Property
     private lazy var searchController: UISearchController = {
-        let searchController = UISearchController()
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search"
-//        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        
         return searchController
     }()
     
@@ -37,8 +39,13 @@ class IssueListViewController: UIViewController {
         configureNavigationItem()
     }
     
+    //MARK: - 아래로 당기면 SearchBar show
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        navigationItem.searchController = searchController
+    }
+
     func configureNavigationItem() {
-        self.navigationItem.searchController = searchController
         self.navigationItem.leftBarButtonItem = filterButton
         self.navigationItem.rightBarButtonItem = selectButton
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -51,23 +58,12 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else { return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else { return UITableViewCell()}
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let uiview = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 36))
-//        let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
-//        label.text = "aabcdetgdssdfs"
-//        label.sizeToFit()
-//        uiview.addSubview(label)
-//        return uiview
-//    }
-
 }
