@@ -57,7 +57,7 @@ public class IssueDummyData {
                                             .author(userFreddie())
                                             .contents("comment1")
                                             .createDateTime(LocalDateTime.now())
-                                            .emojis(Arrays.asList(
+                                            .emojis(new HashSet<>(Arrays.asList(
                                                     Emoji.builder()
                                                             .value("😀")
                                                             .count(2)
@@ -66,7 +66,7 @@ public class IssueDummyData {
                                                             .value("😂")
                                                             .count(2)
                                                             .build()
-                                            ))
+                                            )))
                                             .build())
                        .build();
     }
