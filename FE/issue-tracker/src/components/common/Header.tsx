@@ -1,5 +1,6 @@
-import { Avatar } from '@chakra-ui/react';
 import styled from 'styled-components';
+
+import { Avatar } from '@chakra-ui/react';
 import { ReactComponent as LogotypeMedium } from '@assets/LogotypeMedium.svg';
 
 function Header() {
