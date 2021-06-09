@@ -3,13 +3,14 @@ import RxSwift
 import Alamofire
 
 protocol NetworkPort {
-    func get(_ url:URL) -> Observable<IssueDTO>
+    static func get(_ url:URL?) -> Observable<IssueDTO>
 }
 
 class APIService:NetworkPort {
     
-    func get(_ url: URL) -> Observable<IssueDTO> {
+    static func get(_ url: URL?) -> Observable<IssueDTO> {
         return Observable.create { observer in
+            guard let url = url else { return Disposables.create()}
             AF.request(url, method: .get)
                 .responseDecodable(of: IssueDTO.self) { response in
                     switch response.result {

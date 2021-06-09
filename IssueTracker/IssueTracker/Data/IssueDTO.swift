@@ -2,7 +2,7 @@ import Foundation
 
 struct IssueDTO: Decodable {
     let count: Count
-    let issue: [Issue]
+    let issues: [Issue]
 }
 
 struct Count: Decodable {
