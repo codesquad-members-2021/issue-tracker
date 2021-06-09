@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-ug-Cwp">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-ug-Cwp">
                                 <rect key="frame" x="24" y="68" width="35" height="30"/>
                                 <state key="normal" title="Filter"/>
                             </button>
@@ -24,20 +24,43 @@
                                 <rect key="frame" x="336" y="68" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-lO-Mc5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="이슈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-lO-Mc5">
                                 <rect key="frame" x="23.999999999999996" y="114" width="60.666666666666657" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="lz8-qn-0a9">
-                                <rect key="frame" x="15" y="164" width="360" height="51"/>
+                                <rect key="frame" x="15" y="164" width="360" height="50"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-d5-JJ0" userLabel="LineView">
+                                <rect key="frame" x="0.0" y="222" width="390" height="1"/>
+                                <color key="backgroundColor" red="0.93717283009999997" green="0.93730747699999994" blue="0.9410645366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="n5z-jD-Sr1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" id="2hM-sJ-yUB">
+                                <rect key="frame" x="0.0" y="223" width="390" height="621"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93321973089999999" green="0.93331867459999995" blue="0.93730396029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0KX-iF-s2p">
-                                <rect key="frame" x="0.0" y="224" width="390" height="586"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="223" width="390" height="587"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93717283009999997" green="0.93730747699999994" blue="0.9410645366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="S1q-Uk-oFA">
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S1q-Uk-oFA" id="4Is-ba-lga">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWi-eK-cor">
                                 <rect key="frame" x="316" y="712" width="50" height="50"/>
@@ -56,21 +79,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-d5-JJ0">
-                                <rect key="frame" x="0.0" y="223" width="390" height="1"/>
-                                <color key="backgroundColor" red="0.93717283009999997" green="0.93730747699999994" blue="0.9410645366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="n5z-jD-Sr1"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YWm-lO-Mc5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="1xL-9h-nTM"/>
+                            <constraint firstItem="YWm-lO-Mc5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1xL-9h-nTM"/>
                             <constraint firstItem="lz8-qn-0a9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="37B-dR-s5k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0KX-iF-s2p" secondAttribute="bottom" id="546-ug-d4l"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YWm-lO-Mc5" secondAttribute="trailing" constant="305.33333333333337" id="Af1-O3-wLj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nsR-uf-1Tl" secondAttribute="trailing" constant="24" id="DkN-GV-3eG"/>
+                            <constraint firstItem="nsR-uf-1Tl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cak-ug-Cwp" secondAttribute="trailing" constant="8" symbolic="YES" id="LmH-r4-C70"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWi-eK-cor" secondAttribute="trailing" constant="24" id="M2S-A6-zyS"/>
                             <constraint firstItem="Cak-ug-Cwp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="MZA-HT-jRv"/>
                             <constraint firstItem="Edi-d5-JJ0" firstAttribute="top" secondItem="lz8-qn-0a9" secondAttribute="bottom" constant="8" id="NYV-4f-ueI"/>
@@ -81,6 +99,7 @@
                             <constraint firstItem="lz8-qn-0a9" firstAttribute="top" secondItem="YWm-lO-Mc5" secondAttribute="bottom" constant="8" id="d0b-HB-R7S"/>
                             <constraint firstItem="nsR-uf-1Tl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="hZh-r5-cPe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SWi-eK-cor" secondAttribute="bottom" constant="48" id="he2-Lp-nhf"/>
+                            <constraint firstItem="2hM-sJ-yUB" firstAttribute="top" secondItem="Edi-d5-JJ0" secondAttribute="bottom" id="iE0-wS-A0z"/>
                             <constraint firstItem="Cak-ug-Cwp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="qsi-Ec-KDB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Edi-d5-JJ0" secondAttribute="trailing" id="x17-bP-qmi"/>
                             <constraint firstItem="YWm-lO-Mc5" firstAttribute="top" secondItem="Cak-ug-Cwp" secondAttribute="bottom" constant="16" id="y6V-57-brS"/>
