@@ -25,10 +25,10 @@ const GlobalStyles = createGlobalStyle`
 	.App{
 		width:1440px;
 		height:960px;
+		border:1px solid black;
 		display:flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
 	}
 `;
 
