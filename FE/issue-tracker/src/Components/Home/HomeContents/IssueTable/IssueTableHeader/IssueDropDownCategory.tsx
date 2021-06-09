@@ -6,19 +6,19 @@ const IssueDropDownCategory = () => {
     <S.TableHeaderRight>
       <S.TableTh>
         담당자
-        <Icon.down />
+        <Icon.Down />
       </S.TableTh>
       <S.TableTh>
         레이블
-        <Icon.down />
+        <Icon.Down />
       </S.TableTh>
       <S.TableTh>
         마일스톤
-        <Icon.down />
+        <Icon.Down />
       </S.TableTh>
       <S.TableTh>
         작성자
-        <Icon.down />
+        <Icon.Down />
       </S.TableTh>
     </S.TableHeaderRight>
   );

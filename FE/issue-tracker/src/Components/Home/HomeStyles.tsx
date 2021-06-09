@@ -58,7 +58,7 @@ const Home = {
 };
 
 const FilterSearchBar = {
-  filterDiv: styled(BOX.FLEX_CENTER_BOX)`
+  FilterDiv: styled(BOX.FLEX_CENTER_BOX)`
     width: 128px;
     height: 40px;
     border-right: 1px solid ${theme.GRAY_SCALE.LINE};
@@ -66,12 +66,12 @@ const FilterSearchBar = {
     font-size: ${theme.FONT_SIZE.LINK_SMALL};
     font-weight: bold;
   `,
-  searchDiv: styled(BOX.FLEX_CENTER_BOX)`
+  SearchDiv: styled(BOX.FLEX_CENTER_BOX)`
     width: 472px;
     height: 40px;
   `,
 
-  searchInput: styled.input`
+  SearchInput: styled.input`
     width: 400px;
     height: 28px;
     background: none;
@@ -130,17 +130,17 @@ const IssueTable = {
 };
 
 const HomeAssets = {
-  labelTag: styled(LabelTag)`
+  LabelTag: styled(LabelTag)`
     margin-right: 8px;
   `,
-  milestoneTag: styled(MilestoneTag)`
+  MilestoneTag: styled(MilestoneTag)`
     margin-right: 8px;
   `,
-  down: styled(Down)`
+  Down: styled(Down)`
     margin-left: 8px;
   `,
 
-  searchIcon: styled(Search)`
+  SearchIcon: styled(Search)`
     margin-right: 11.33px;
   `,
 };
