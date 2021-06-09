@@ -35,7 +35,6 @@ class IssueCell: UITableViewCell {
     }
     
     private func fillLabels(with labels: [Label]) {
-
         labels.forEach { label in
             let label_ = LabelView()
             label_.fillUI(with: label)
