@@ -37,7 +37,8 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func pressedLeftbutton() {
-        print("abcde")
+        let nextVC = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController
+        self.present(nextVC!, animated: true, completion: nil)
     }
     
     func setupRightNavigationItem(buttonTitle: String) {
