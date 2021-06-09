@@ -1,12 +1,12 @@
-import { useState } from "react";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Home as S } from "../../HomeStyles";
+import { FilterSearchBar as S, HomeAssets as SVG } from "../../HomeStyles";
 
 const Filter = () => {
-  return <div>필터</div>;
+  return (
+    <S.filterDiv>
+      필터
+      <SVG.down />
+    </S.filterDiv>
+  );
 };
 
 export default Filter;

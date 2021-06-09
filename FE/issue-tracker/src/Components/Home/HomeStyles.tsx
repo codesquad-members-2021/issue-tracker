@@ -5,6 +5,8 @@ import { BOX } from "@/Styles/CommonStyles";
 import theme from "@/Styles/theme";
 import { ReactComponent as LabelTag } from "@/assets/labelTag.svg";
 import { ReactComponent as MilestoneTag } from "@/assets/milestoneTag.svg";
+import { ReactComponent as Down } from "@/assets/Down.svg";
+import { ReactComponent as Search } from "@/assets/Search.svg";
 
 const Home = {
   HomeContent: styled(BOX.FLEX_COLUMN_BOX)`
@@ -15,13 +17,15 @@ const Home = {
   `,
   ContentNavDiv: styled(BOX.FLEX_ROW_BOX)`
     justify-content: space-between;
+    margin: 30px 0;
   `,
 
   ContentNavLeft: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
     background: none;
     height: 40px;
-    border: 1px solid gray;
+    border: 1px solid #d9dbe9;
+    border-radius: 11px;
   `,
   ContentNavRight: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
@@ -53,7 +57,31 @@ const Home = {
   `,
 };
 
-const FilterSearchBar = {};
+const FilterSearchBar = {
+  filterDiv: styled(BOX.FLEX_CENTER_BOX)`
+    width: 128px;
+    height: 40px;
+    border-right: 1px solid ${theme.GRAY_SCALE.LINE};
+    color: ${theme.GRAY_SCALE.LABEL};
+    font-size: ${theme.FONT_SIZE.LINK_SMALL};
+    font-weight: bold;
+  `,
+  searchDiv: styled(BOX.FLEX_CENTER_BOX)`
+    width: 472px;
+    height: 40px;
+  `,
+
+  searchInput: styled.input`
+    width: 400px;
+    height: 28px;
+    background: none;
+    border: none;
+    &::placeholder {
+      color: ${theme.GRAY_SCALE.PLACEHOLDER};
+      font-size: ${theme.FONT_SIZE.TEXT_SMALL};
+    }
+  `,
+};
 
 const HomeAssets = {
   labelTag: styled(LabelTag)`
@@ -61,6 +89,13 @@ const HomeAssets = {
   `,
   milestoneTag: styled(MilestoneTag)`
     margin-right: 8px;
+  `,
+  down: styled(Down)`
+    margin-left: 8px;
+  `,
+
+  searchIcon: styled(Search)`
+    margin-right: 11.33px;
   `,
 };
 
