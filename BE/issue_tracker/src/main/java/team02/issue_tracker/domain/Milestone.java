@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class MileStone {
+public class Milestone {
     @Id @GeneratedValue
     private Long id;
 
@@ -19,6 +19,6 @@ public class MileStone {
     private LocalDate dueDate;
     private boolean isOpen;
 
-    @OneToMany(mappedBy = "mileStone")
+    @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 }
