@@ -46,7 +46,6 @@ public class OAuthService {
 
     private GithubUserProfile githubUserProfileFrom(
             GithubAccessTokenResponseDto githubAccessTokenResponseDto) {
-
         RequestEntity githubUserProfileRequest = RequestEntity
                 .get(GITHUB_USER_INFO_URI)
                 .header("Authorization"
