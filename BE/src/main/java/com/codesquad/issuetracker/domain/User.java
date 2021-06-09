@@ -1,18 +1,24 @@
 package com.codesquad.issuetracker.domain;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class User {
 
     @Id
-    private final Long id;
-    private final String name;
-    private final String userId;
+    private Long id;
+    private String name;
+    private String userId;
 
     private User(Long id, String name, String userId) {
         this.id = id;
         this.name = name;
         this.userId = userId;
+    }
+
+    public User() {
+
     }
 
     public User create(Long id, String name, String userId) {
