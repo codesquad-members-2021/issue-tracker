@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Switch, Route } from 'react-router-dom';
 import { RecoilRoot } from '@/utils/myRecoil/RecoilRoot';
+import { createGlobalStyle } from 'styled-components';
 
 const IssueListLazy = React.lazy(() => import('@/Pages/IssueList'));
 const LoginLazy = React.lazy(() => import('@/Pages/LoginPage'));
@@ -11,6 +12,7 @@ function App() {
   return (
     <RecoilRoot>
       <CssBaseline />
+      <GlobalStyle />
       <Suspense fallback="loading...">
         <Switch>
           <Route exact path="/issueList" component={IssueListLazy} />
@@ -21,5 +23,12 @@ function App() {
     </RecoilRoot>
   );
 }
+
+
+const GlobalStyle = createGlobalStyle`
+  body{
+    background: #E5E5E5;
+  }
+`
 
 export default App;
