@@ -30,12 +30,32 @@ export const CountInfoStorage = selector<any>({
   }
 })
 
+type LabelsProp = { 
+  id: number; 
+  name: string; 
+  colorCode: string; 
+  description: string; 
+  checked: boolean; 
+}
+
+interface IssuesType {
+  assignees: string[]
+  author: string 
+  comment: string
+  commentNumber: number 
+  createdDateTime: string
+  id: number  
+  labels: LabelsProp[]
+  milestone: string
+  title: string
+}
+
 const openIssues = atom<any>({
   key: 'issues/open',
   default: []
 })
 
-export const openIssuesStorage = selector({
+export const openIssuesStorage = selector<IssuesType[]>({
   key: 'storage/issues/open',
   get: ({get})=>{
     const open = get(openIssues)

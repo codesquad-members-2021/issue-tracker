@@ -7,7 +7,8 @@ const Theme = {
     bgGrey: '#F7F7FC',
     lineGrey: '#e2e5e9',
     skyblue: '#007AFF',
-    blue: '#007AFF'
+    blue: '#007AFF',
+    transparent: '#00ffff00'
   },
   size:{
     sm: 12
