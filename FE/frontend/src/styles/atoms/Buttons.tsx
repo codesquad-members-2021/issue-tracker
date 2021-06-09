@@ -12,6 +12,7 @@ const Buttons: React.FC<Props> = ({ children, ...props }) => {
 const ButtonWrapper = styled.div<Props>`
   border-radius: 20px;
   font-weight: bold;
+  color: ${props => props.theme.greyscale.offWhite};
   ${props => props.theme.alignCenter}
   ${props =>
     props.large &&
@@ -32,18 +33,6 @@ const ButtonWrapper = styled.div<Props>`
   height: 40px;
   padding: 0px 16px;
 `}
-  /* ${props =>
-    props.mediumText &&
-    `
-  width: 87px;
-  height: 32px;
-`}
-  ${props =>
-    props.smallText &&
-    `
-  width: 70px;
-  height: 32px;
-`} */
 
   background-color: ${props => {
     if (props.initial || props.focus || props.disabled)
