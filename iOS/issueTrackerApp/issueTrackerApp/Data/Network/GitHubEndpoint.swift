@@ -24,6 +24,8 @@ struct GitHubEndpoint {
     static let accessTokenURL = URL(string: "https://github.com/login/oauth/access_token")!
     static let serverURL = URL(string: "https://github.com")!
     static let authorizationURL = URL(string: "https://github.com/login/oauth/authorize")!
+    static let signOutURL = URL(string: "https://github.com/logout")!
+        static let apiRootURL = URL(string: "https://api.github.com")!
     
     static func authorizationUrl(with state: String) -> URL {
         var urlComponents = URLComponents(url: GitHubEndpoint.authorizationURL, resolvingAgainstBaseURL: false)!
@@ -33,5 +35,23 @@ struct GitHubEndpoint {
             URLQueryItem(name: FieldNames.scope, value: GitHubEndpoint.scope)
         ]
         return urlComponents.url!
+    }
+}
+
+extension URL {
+    var authorizationCode: String? {
+        guard absoluteString.contains(GitHubEndpoint.authorizationCallbackURLScheme) else {
+            return nil
+        }
+        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false),
+            let queryItems = components.queryItems else {
+                return nil
+        }
+        for queryItem in queryItems {
+            if queryItem.name == GitHubEndpoint.FieldNames.authorizationCode {
+                return queryItem.value
+            }
+        }
+        return nil
     }
 }
