@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { ADD, SMALL_FILL } from '../../utils/const';
+import { SMALL_FILL, WRITING_ISSUE } from '../../utils/const';
 import ButtonList from '../common/ButtonList';
 import TabList from '../common/TabList';
 
@@ -12,7 +12,7 @@ const IssueList: FC = () => {
           <TabList />
         </TabBox>
         <ButtonBox>
-          <ButtonList type={SMALL_FILL} name={ADD} />
+          <ButtonList type={SMALL_FILL} name={WRITING_ISSUE} />
         </ButtonBox>
       </AddContainer>
     </IssueListDiv>
@@ -26,7 +26,7 @@ const IssueListDiv = styled.div``;
 const AddContainer = styled.div`
   width: 100vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 10px;
 `;
@@ -37,4 +37,5 @@ const TabBox = styled.div`
 
 const ButtonBox = styled.div`
   margin: 10px;
+  padding-left: 10px;
 `;

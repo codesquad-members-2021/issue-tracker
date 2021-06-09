@@ -9,6 +9,7 @@ export const DEFAULT_LOGIN = '아이디로 로그인';
 
 // ButtonName
 export const ADD = '추가';
+export const WRITING_ISSUE = '이슈작성';
 
 // ButtonSize
 export const LARGE = 'large';
