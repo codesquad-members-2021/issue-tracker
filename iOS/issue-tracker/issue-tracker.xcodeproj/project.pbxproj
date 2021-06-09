@@ -61,13 +61,12 @@
 			isa = PBXGroup;
 			children = (
 				E42AD111266E530F0071B436 /* LifeCycle */,
-				E42AD101266E52FB0071B436 /* LoginViewController.swift */,
+				E42AD11226704F070071B436 /* Common */,
+				E42AD113267054900071B436 /* Login */,
 				E42AD103266E52FB0071B436 /* Main.storyboard */,
 				E42AD106266E52FE0071B436 /* Assets.xcassets */,
 				E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */,
 				E42AD10B266E52FE0071B436 /* Info.plist */,
-				FAEB30AB266F5E9700C17BE9 /* Colors.swift */,
-				FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -79,6 +78,31 @@
 				E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */,
 			);
 			path = LifeCycle;
+			sourceTree = "<group>";
+		};
+		E42AD11226704F070071B436 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FAEB30AB266F5E9700C17BE9 /* Colors.swift */,
+				FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E42AD113267054900071B436 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD1142670549C0071B436 /* Controller */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E42AD1142670549C0071B436 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD101266E52FB0071B436 /* LoginViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
