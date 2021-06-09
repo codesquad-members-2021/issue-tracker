@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.user.UserResponse;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class IssueDummyData {
@@ -24,13 +25,13 @@ public class IssueDummyData {
                         .hasSameAuthorComments(true)
                         .createDateTime(LocalDateTime.now())
                         .author(userFreddie())
-                        .assignees(Arrays.asList(
+                        .assignees(new HashSet<>(Arrays.asList(
                                 userFreddie(),
                                 userHiro()
-                        ))
-                        .labels(Arrays.asList(
+                        )))
+                        .labels(new HashSet<>(Arrays.asList(
                                 labelBe()
-                        ))
+                        )))
                         .milestone(milestoneMockup())
                         .build()
         );
