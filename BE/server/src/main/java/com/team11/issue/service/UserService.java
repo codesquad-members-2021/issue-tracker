@@ -2,6 +2,7 @@ package com.team11.issue.service;
 
 import com.team11.issue.dto.oauth.UserInfoDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
+import com.team11.issue.exception.AccessTokenNotFoundException;
 import com.team11.issue.oauth.GitHubOauth;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,8 @@ public class UserService {
         this.gitHubOauth = gitHubOauth;
     }
 
-
-    /*TODO: Exception Handler 추가*/
     private String getAccessToken(LoginRequestDTO loginRequestDTO) {
-        return gitHubOauth.getAccessToken(loginRequestDTO).orElseThrow(() -> new RuntimeException());
+        return gitHubOauth.getAccessToken(loginRequestDTO).orElseThrow(() -> new AccessTokenNotFoundException());
     }
 
     private UserInfoDTO getUserInfoFromGitHub(String accessToken) {

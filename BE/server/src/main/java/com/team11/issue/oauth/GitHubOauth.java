@@ -3,6 +3,7 @@ package com.team11.issue.oauth;
 import com.team11.issue.dto.oauth.AccessTokenDTO;
 import com.team11.issue.dto.oauth.UserInfoDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
+import com.team11.issue.exception.OauthException;
 import com.team11.issue.oauth.errorHandler.RestTemplateResponseErrorHandler;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -35,12 +36,11 @@ public class GitHubOauth implements Oauth {
                 .build();
     }
 
-    /*TODO: Exception Handler 추가*/
     private GitHubOauthConfig getGitHubOauthConfig(LoginRequestDTO loginRequestDTO) {
         String type = loginRequestDTO.getType();
 
         if (!(type.equals("fe") || type.equals("ios"))) {
-            throw new IllegalArgumentException("type을 확인해 주세요");
+            throw new OauthException("적절한 type 값이 아닙니다.");
         }
 
         gitHubOauthConfig.setGitHubOauthInfo(type);
