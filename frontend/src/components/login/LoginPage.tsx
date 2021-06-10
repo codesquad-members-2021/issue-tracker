@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,9 +17,9 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color='inherit' href='https://material-ui.com/'>
         Issue Tracker
       </Link>{' '}
       {new Date().getFullYear()}
@@ -45,33 +45,36 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    color: 'white'
+    color: 'white',
   },
   typographyStyles: {
     flex: 1,
     fontWeight: 800,
     fontFamily: "'Raleway', sans-serif",
     fontSize: '30px',
-  }
+  },
 }));
 
-export default function SignIn({history}:RouteComponentProps) {
+export default function SignIn() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography className={classes.typographyStyles} component="h1" variant="h5">
+        <Typography className={classes.typographyStyles} component='h1' variant='h5'>
           Issue Tracker
         </Typography>
 
         <CustomBtn>
           <a href='https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=http://localhost:3000'>
-            <div><GitHubIcon/>&nbsp;GitHub 으로 로그인</div>
+            <div>
+              <GitHubIcon />
+              &nbsp;GitHub 으로 로그인
+            </div>
           </a>
         </CustomBtn>
       </div>
@@ -82,23 +85,25 @@ export default function SignIn({history}:RouteComponentProps) {
   );
 }
 const CustomBtn = styled(Button)`
-margin-top:30px;
-background-color: ${({theme})=>theme.color.blue};
-color: ${({theme})=>theme.color.white};
-width: 350px;
-a {
-  text-decoration: none;
-  color: ${({theme})=>theme.color.white};
-  &:hover{
-    color:  ${({theme})=>theme.color.fontGrey};
+  margin-top: 30px;
+  background-color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.white};
+  width: 350px;
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.color.white};
+    &:hover {
+      color: ${({ theme }) => theme.color.fontGrey};
+    }
+    div {
+      display: flex;
+      align-items: center;
+    }
   }
-div{
-  display: flex; 
-  align-items: center;
-}
-}`
+`;
 
-       {/* <form className={classes.form} noValidate>
+{
+  /* <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -147,4 +152,5 @@ div{
             </Grid>
           </Grid>
         </form>
-      </div> */}
+      </div> */
+}
