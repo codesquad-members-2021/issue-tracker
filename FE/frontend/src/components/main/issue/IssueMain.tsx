@@ -29,7 +29,12 @@ const IssueMain = () => {
 };
 
 const MainWrapper = styled.div`
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  div {
+    max-width: 1280px;
+  }
 `;
 
 const IconWrapper = styled.div`
