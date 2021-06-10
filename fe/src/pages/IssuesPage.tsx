@@ -1,5 +1,11 @@
+import Header from 'components/header/Header';
+
 const IssuesPage = () => {
-  return <div></div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default IssuesPage;
