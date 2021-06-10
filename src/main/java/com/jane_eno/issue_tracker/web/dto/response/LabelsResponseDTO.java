@@ -11,5 +11,5 @@ import java.util.List;
 public class LabelsResponseDTO {
     private final int labelsCount;
     private final int milestonesCount;
-    private final List<Label> labels;
+    private final List<LabelDTO> labels;
 }

@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class LabelsInIssueResponseDTO {
 
-    private final List<Label> labels;
+    private final List<LabelDTO> labels;
 }

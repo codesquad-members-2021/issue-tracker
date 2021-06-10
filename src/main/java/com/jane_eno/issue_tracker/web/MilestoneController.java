@@ -1,7 +1,7 @@
 package com.jane_eno.issue_tracker.web;
 
 import com.jane_eno.issue_tracker.service.MilestoneService;
-import com.jane_eno.issue_tracker.web.dto.response.Milestone;
+import com.jane_eno.issue_tracker.web.dto.response.MilestoneDTO;
 import com.jane_eno.issue_tracker.web.dto.response.MilestonesResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,14 +23,14 @@ public class MilestoneController {
     }
 
     @PostMapping
-    public void create(@RequestBody Milestone milestone) {
+    public void create(@RequestBody MilestoneDTO milestone) {
         logger.debug("마일스톤 생성");
         logger.debug("마일스톤 생성 요청 확인: {}", milestone.toString());
         milestoneService.create(milestone);
     }
 
     @PatchMapping("/{milestoneId}")
-    public void update(@PathVariable Long milestoneId, @RequestBody Milestone milestone) {
+    public void update(@PathVariable Long milestoneId, @RequestBody MilestoneDTO milestone) {
         logger.debug("마일스톤 수정");
         logger.debug("마일스톤 생성 요청 확인: {}", milestone.toString());
         milestoneService.update(milestoneId, milestone);

@@ -19,6 +19,6 @@ public class IssueResponseDTO {
     private final LocalDateTime createdDateTime;
     private final Integer commentNumber;
     private final List<Assignee> assignees;
-    private final List<Label> labels;
+    private final List<LabelDTO> labels;
     private final String milestone;
 }

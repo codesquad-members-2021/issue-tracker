@@ -9,7 +9,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @AllArgsConstructor
-public class Label {
+public class LabelDTO {
 
     private final Long id;
     private final String name;

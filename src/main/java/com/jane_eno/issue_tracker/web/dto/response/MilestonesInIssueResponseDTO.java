@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class MilestonesInIssueResponseDTO {
 
-    private final List<Milestone> milestones;
+    private final List<MilestoneDTO> milestones;
 }

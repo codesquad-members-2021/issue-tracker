@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @AllArgsConstructor
-public class Milestone {
+public class MilestoneDTO {
 
     private final Long id;
     private final String title;

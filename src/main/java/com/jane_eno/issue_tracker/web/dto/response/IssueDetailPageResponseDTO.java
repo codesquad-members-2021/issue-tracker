@@ -15,8 +15,8 @@ public class IssueDetailPageResponseDTO {
     private final String title;
     private final boolean status;
     private final LocalDateTime createdDateTime;
-    private final List<Comment> comments;
+    private final List<CommentDTO> comments;
     private final List<Assignee> assignees;
-    private final List<Label> labels;
-    private final List<Milestone> milestones;
+    private final List<LabelDTO> labels;
+    private final List<MilestoneDTO> milestones;
 }

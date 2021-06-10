@@ -12,6 +12,6 @@ import java.util.List;
 public class IssueFormResponseDTO {
 
     private final List<Assignee> assignees;
-    private final List<Label> labels;
-    private final List<Milestone> milestones;
+    private final List<LabelDTO> labels;
+    private final List<MilestoneDTO> milestones;
 }

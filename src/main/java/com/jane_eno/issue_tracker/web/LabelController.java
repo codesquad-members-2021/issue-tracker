@@ -1,7 +1,7 @@
 package com.jane_eno.issue_tracker.web;
 
 import com.jane_eno.issue_tracker.service.LabelService;
-import com.jane_eno.issue_tracker.web.dto.response.Label;
+import com.jane_eno.issue_tracker.web.dto.response.LabelDTO;
 import com.jane_eno.issue_tracker.web.dto.response.LabelsResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,14 +23,14 @@ public class LabelController {
     }
 
     @PostMapping
-    public void create(@RequestBody Label label) {
+    public void create(@RequestBody LabelDTO label) {
         logger.debug("라벨 생성");
         logger.debug("라벨 생성 요청 확인: {}", label.toString());
         labelService.create(label);
     }
 
     @PatchMapping("/{labelId}")
-    public void update(@PathVariable Long labelId, @RequestBody Label label) {
+    public void update(@PathVariable Long labelId, @RequestBody LabelDTO label) {
         logger.debug("라벨 편집");
         logger.debug("라벨 편집 요청 확인: {}", label);
         labelService.update(labelId, label);

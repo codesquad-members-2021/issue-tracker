@@ -11,5 +11,5 @@ public class MilestonesResponseDTO {
 
     private final int labelsCount;
     private final int milestonesCount;
-    private final List<Milestone> milestones;
+    private final List<MilestoneDTO> milestones;
 }

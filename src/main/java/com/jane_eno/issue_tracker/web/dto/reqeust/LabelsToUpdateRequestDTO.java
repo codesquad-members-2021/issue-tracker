@@ -1,6 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.reqeust;
 
-import com.jane_eno.issue_tracker.web.dto.response.Label;
+import com.jane_eno.issue_tracker.web.dto.response.LabelDTO;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 public class LabelsToUpdateRequestDTO {
 
-    private List<Label> labels;
+    private List<LabelDTO> labels;
 }
