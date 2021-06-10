@@ -5,7 +5,7 @@ import { IssueItemProps } from 'components/issueTable/issueType';
 import { Checkbox } from '@material-ui/core';
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import MilestoneIcon from 'components/atom/MilestoneIcon';
-import { timeChecker } from 'util/util';
+import { timeChecker } from '../../util/util';
 
 export default function IssueItem({
   issue: {
@@ -20,9 +20,11 @@ export default function IssueItem({
     title,
   },
 }: IssueItemProps): ReactElement {
-  const labelList = labels.map((label, idx) => (
-    <LabelBadge key={label.id} color={label.colorCode} desc={label.name} />
+  const labelList = labels.map((label) => (
+    <LabelBadge key={label.id} color={label.color} desc={label.name} />
   ));
+
+  const passedTime = timeChecker(createdDateTime);
 
   return (
     <IssueItemBlock>
@@ -34,7 +36,7 @@ export default function IssueItem({
           {labelList}
         </div>
         <div className='issue-item__description'>
-          #{id} opened {timeChecker(createdDateTime)} by {author} <MilestoneIcon />
+          #{id} opened {passedTime} by {author} <MilestoneIcon />
           {milestone}
         </div>
       </div>
