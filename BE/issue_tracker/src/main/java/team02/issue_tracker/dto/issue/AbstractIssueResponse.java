@@ -1,4 +1,4 @@
-package team02.issue_tracker.dto;
+package team02.issue_tracker.dto.issue;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,8 @@ import lombok.Getter;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
 import team02.issue_tracker.domain.IssueLabel;
+import team02.issue_tracker.dto.LabelResponse;
+import team02.issue_tracker.dto.UserResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
