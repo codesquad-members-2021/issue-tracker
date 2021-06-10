@@ -60,7 +60,7 @@ extension IssueViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.issueTableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as! IssueCell
-        cell.configure()
+        cell.configureAll()
         return cell
     }
     

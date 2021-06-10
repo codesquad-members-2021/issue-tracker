@@ -24,13 +24,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQV-EP-IPs">
-                        <rect key="frame" x="0.0" y="40" width="335" height="55.5"/>
+                        <rect key="frame" x="0.0" y="40" width="335" height="47.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Milestones Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-Jq-0Lh">
-                        <rect key="frame" x="0.0" y="95.5" width="335" height="31.5"/>
+                        <rect key="frame" x="0.0" y="87.5" width="335" height="32"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="systemGray2Color"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                     <constraint firstItem="cfH-Jq-0Lh" firstAttribute="top" secondItem="PQV-EP-IPs" secondAttribute="bottom" id="Vf6-i0-WQm"/>
                     <constraint firstItem="aKN-Dc-NU9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VgN-7Q-1os"/>
                     <constraint firstAttribute="trailing" secondItem="aKN-Dc-NU9" secondAttribute="trailing" id="Xgc-k6-yTE"/>
-                    <constraint firstItem="PQV-EP-IPs" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.35" id="dw0-r3-dJj"/>
+                    <constraint firstItem="PQV-EP-IPs" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.3" id="dw0-r3-dJj"/>
                     <constraint firstItem="j9h-AK-Uf8" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.2" id="fcc-EG-TXP"/>
                     <constraint firstItem="PQV-EP-IPs" firstAttribute="top" secondItem="aKN-Dc-NU9" secondAttribute="bottom" id="gnD-Ok-2NE"/>
                     <constraint firstAttribute="trailing" secondItem="cfH-Jq-0Lh" secondAttribute="trailing" id="ysX-AT-V2T"/>
