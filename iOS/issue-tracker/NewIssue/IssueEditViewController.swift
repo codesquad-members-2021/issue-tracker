@@ -41,8 +41,8 @@ class IssueEditViewController: UIViewController {
     func insertPhoto(){
         let photoSelectViewController = PhotoViewController
             .instantiate(name: "Main", bundle: Bundle.main)
-        
-        self.present(photoSelectViewController, animated: true)
+        let navigationViewController = UINavigationController(rootViewController: photoSelectViewController)
+        self.present(navigationViewController, animated: true)
     }
 }
 extension IssueEditViewController: UITextViewDelegate {
