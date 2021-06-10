@@ -1,4 +1,4 @@
-package team02.issue_tracker.dto;
+package team02.issue_tracker.dto.issue;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,8 @@ import lombok.Getter;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
 import team02.issue_tracker.domain.IssueLabel;
+import team02.issue_tracker.dto.LabelResponse;
+import team02.issue_tracker.dto.UserResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Getter
-public class IssueResponse {
+public abstract class AbstractIssueResponse {
 
     private Long id;
     private int issueNumber;
@@ -25,10 +27,9 @@ public class IssueResponse {
     private Boolean isOpen;
     private UserResponse writer;
     private List<UserResponse> assignees;
-    private MilestoneResponse milestone;
     private List<LabelResponse> labels;
 
-    public IssueResponse(Issue issue) {
+    public AbstractIssueResponse(Issue issue) {
         this.id = issue.getId();
         this.issueNumber = issue.getIssueNumber();
         this.title = issue.getTitle();
@@ -36,7 +37,6 @@ public class IssueResponse {
         this.isOpen = issue.isOpen();
         this.writer = new UserResponse(issue.getWriter());
         this.assignees = toAssigneeResponses(issue.getIssueAssignees());
-        this.milestone = new MilestoneResponse(issue.getMilestone());
         this.labels = toLabelResponses(issue.getIssueLabels());
     }
 

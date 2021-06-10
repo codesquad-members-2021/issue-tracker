@@ -13,7 +13,8 @@ import java.util.List;
 @Entity
 @Getter
 public class Milestone {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String title;
@@ -24,4 +25,14 @@ public class Milestone {
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
+
+    public int getTotalIssueCount() {
+        return issues.size();
+    }
+
+    public int getOpenIssueCount() {
+        return (int) issues.stream()
+                .filter(Issue::isOpen)
+                .count();
+    }
 }

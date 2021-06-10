@@ -1,11 +1,13 @@
 package team02.issue_tracker.domain;
 
+import lombok.Getter;
 import team02.issue_tracker.domain.composite_key.CommentEmojiId;
 
 import javax.persistence.*;
 
 @IdClass(CommentEmojiId.class)
 @Entity
+@Getter
 public class CommentEmoji {
     @Id
     @ManyToOne
