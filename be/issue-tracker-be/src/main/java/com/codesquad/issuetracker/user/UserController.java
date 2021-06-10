@@ -9,7 +9,7 @@ import java.util.Set;
 public class UserController {
 
     @GetMapping("/users")
-    public Set<UserResponse> userResponses() {
+    public Set<UserResponse> readAll() {
         return UserDummyData.usersResponse();
     }
 }
