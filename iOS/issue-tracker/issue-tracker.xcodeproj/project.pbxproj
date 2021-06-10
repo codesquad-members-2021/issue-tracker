@@ -28,12 +28,10 @@
 		FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */; };
 		FAC6D88D2671D8A100A9E5F9 /* GithubLoginManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */; };
 		FAC6D88F2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */; };
-		FAC6D8912671D91400A9E5F9 /* GithubLoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D8902671D91400A9E5F9 /* GithubLoginInfo.swift */; };
 		FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AB266F5E9700C17BE9 /* Colors.swift */; };
 		FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */; };
 		FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FAEB30B02670B74000C17BE9 /* Alamofire */; };
 		FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30B32670B76200C17BE9 /* NetworkManager.swift */; };
-		FAEB30B72670BD3100C17BE9 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = FAEB30B62670BD3100C17BE9 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +58,6 @@
 		FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAuthorizationManager.swift; sourceTree = "<group>"; };
 		FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagable.swift; sourceTree = "<group>"; };
 		FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagerDelegate.swift; sourceTree = "<group>"; };
-		FAC6D8902671D91400A9E5F9 /* GithubLoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginInfo.swift; sourceTree = "<group>"; };
 		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FAEB30B32670B76200C17BE9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAEB30B72670BD3100C17BE9 /* KeychainAccess in Frameworks */,
 				FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,10 +130,9 @@
 		E42AD113267054900071B436 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				FA8840422671F9B000ECCF7A /* Apple */,
 				FAC6D8922671E1A800A9E5F9 /* Github */,
 				E42AD1142670549C0071B436 /* Controller */,
-				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
-				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
 				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
 				E426DAC32671D95D0069E77D /* LoginService.swift */,
 				E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */,
@@ -205,6 +200,15 @@
 			path = MyAccount;
 			sourceTree = "<group>";
 		};
+		FA8840422671F9B000ECCF7A /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
+				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
 		FAC6D8852671ACDA00A9E5F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,7 +223,6 @@
 				FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */,
 				FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */,
 				FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */,
-				FAC6D8902671D91400A9E5F9 /* GithubLoginInfo.swift */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -250,7 +253,6 @@
 			name = "issue-tracker";
 			packageProductDependencies = (
 				FAEB30B02670B74000C17BE9 /* Alamofire */,
-				FAEB30B62670BD3100C17BE9 /* KeychainAccess */,
 			);
 			productName = "issue-tracker";
 			productReference = E42AD0FA266E52FB0071B436 /* issue-tracker.app */;
@@ -281,7 +283,6 @@
 			mainGroup = E42AD0F1266E52FB0071B436;
 			packageReferences = (
 				FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				FAEB30B52670BD3100C17BE9 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = E42AD0FB266E52FB0071B436 /* Products */;
 			projectDirPath = "";
@@ -322,7 +323,6 @@
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
-				FAC6D8912671D91400A9E5F9 /* GithubLoginInfo.swift in Sources */,
 				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
 				FAC6D88F2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift in Sources */,
@@ -545,14 +545,6 @@
 				minimumVersion = 5.4.3;
 			};
 		};
-		FAEB30B52670BD3100C17BE9 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -560,11 +552,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		FAEB30B62670BD3100C17BE9 /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAEB30B52670BD3100C17BE9 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

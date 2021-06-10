@@ -32,7 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = issueTrackerTabBarController
         
-        print(loginInfo.name, " 님  환영합니다!")
-    }
-    
+        print(loginInfo.name, " 님  환영합니다! 님 정보는? \(loginInfo)" )
+    }    
 }

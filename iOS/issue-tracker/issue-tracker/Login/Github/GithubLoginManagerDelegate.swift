@@ -8,6 +8,6 @@
 import Foundation
 
 protocol GithubLoginManagerDelegate: AnyObject {
-    func didGithubLoginSuccess()
+    func didGithubLoginSuccess(with loginInfo: LoginInfo)
     func didGithubLoginFail(with error: Error)
 }

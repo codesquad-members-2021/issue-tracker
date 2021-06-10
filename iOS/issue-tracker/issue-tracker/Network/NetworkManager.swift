@@ -7,23 +7,22 @@
 
 import Foundation
 import Alamofire
-import KeychainAccess
 
 protocol NetworkManagerOperations {
     func setInfoGithub<T: Decodable>(with code: String, completion: @escaping (Result<T,Error>) -> Void)
 }
 
 class NetworkManager: NetworkManagerOperations {
-    let keychain = Keychain()
+    
+    let accessTokenURL = "http://3.34.122.67/api/login/ios"
     
     func setInfoGithub<T: Decodable>(with code: String, completion: @escaping (Result<T, Error>) -> Void) {
-        
-        guard let url = keychain["github_JWT_URL"] else { return }        
+            
         let param: Parameters = [
             "code" : code
         ]
         
-        AF.request(url, method: .get, parameters: param)
+        AF.request(accessTokenURL, method: .get, parameters: param)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let data):

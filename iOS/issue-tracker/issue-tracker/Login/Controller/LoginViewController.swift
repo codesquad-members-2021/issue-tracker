@@ -6,13 +6,8 @@
 //
 
 import UIKit
-//import AuthenticationServices
-import KeychainAccess
 
 class LoginViewController: UIViewController {
-    
-    
-//    var webAuthSession: ASWebAuthenticationSession?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -210,16 +205,14 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
-//        print("하이~, H I~")
         let tabBarVC = IssueTrackerTabBarController()
         tabBarVC.modalPresentationStyle = .fullScreen
         present(tabBarVC, animated: true, completion: nil)
+        
     }
     
     @objc private func loginByGithubTouchedDown(sender: UIButton!) {
         githubLoginManager?.login()
-    }
-        print("하이~, H I~")
     }
     
     @objc private func appleLoginTouched(_ sender: UIButton) {
@@ -229,18 +222,22 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: GithubLoginManagerDelegate {
-    func didGithubLoginSuccess() {
-        presentIssueViewController()
+    
+    func didGithubLoginSuccess(with loginInfo: LoginInfo) {
+        let loginKeyChainManager = LoginKeyChainManager(loginService: .github)
+        
+        if loginKeyChainManager.save(loginInfo) {
+            presentIssueViewController(with: loginInfo)
+        } else {
+            //저장 오류
+        }
     }
     
     func didGithubLoginFail(with error: Error) {
         //에러
     }
-    
-    private func presentIssueViewController() {
-        let tabBarVC = IssueTrackerTabBarController()
-        tabBarVC.modalPresentationStyle = .fullScreen
-        present(tabBarVC, animated: true, completion: nil)
+}
+
 extension LoginViewController: AppleLoginManagerDelegate {
     func didAppleLoginSuccess(with loginInfo: LoginInfo) {
         let loginKeyChainManager = LoginKeyChainManager(loginService: .apple)

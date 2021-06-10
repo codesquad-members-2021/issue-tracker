@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KeychainAccess
 
 class IssueTrackerTabBarController: UITabBarController {
     
@@ -25,9 +24,7 @@ class IssueTrackerTabBarController: UITabBarController {
         
         let viewControllers = items.map{ createTabBarViewController(info: $0) }
         setViewControllers(viewControllers, animated: true)
-        
-        let keychain = Keychain()
-        print("잘 지정됐는지 테스트하기!", keychain["github_jwt"], keychain["github_avatarUrl"], keychain["github_loginId"] )
+                        
     }
     
     private struct TabBarViewControllerInfo {
