@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
 
-    private IssueRepository issueRepository;
+    private final IssueRepository issueRepository;
 
     public IssueService(IssueRepository issueRepository) {
         this.issueRepository = issueRepository;

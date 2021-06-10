@@ -12,7 +12,7 @@ import team02.issue_tracker.service.IssueService;
 @RequestMapping("/api/issues")
 public class IssueController {
 
-    private IssueService issueService;
+    private final IssueService issueService;
 
     public IssueController(IssueService issueService) {
         this.issueService = issueService;
