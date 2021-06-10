@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { CountInfoStorage } from '../../hooks/store';
+import { CountInfoStorage } from '../../store/store';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MilestoneIcon from '../atom/MilestoneIcon';
 

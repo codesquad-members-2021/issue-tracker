@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React, { ReactElement } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { CountInfoStorage, issuesStorage, getOpenIssues } from '../hooks/store';
 import IssueFilterSection from '../components/issueList/IssueFilter';
 import LabelMileStoneTab from '../components/common/LabelMilestoneTab';
 import IssuePlus from '../components/atom/IssuePlus';
@@ -10,16 +8,6 @@ import IssueTable from '../components/issueList/IssueTable';
 interface Props {}
 
 export default function MainPage({}: Props): ReactElement {
-  const setCountInfo = useSetRecoilState(CountInfoStorage);
-  const setIssues = useSetRecoilState(issuesStorage);
-
-  const asyncOpenIssues = useRecoilValue(getOpenIssues); //요청해서받은 오픈이슈
-  const openIssueList = asyncOpenIssues?.issues;
-  setIssues(openIssueList);
-
-  const countInfo = asyncOpenIssues?.count;
-  setCountInfo(countInfo);
-
   return (
     <MainPageBlock>
       <div className='issue-tracker__options'>
