@@ -4,13 +4,56 @@ import { css } from 'styled-components';
 const page = css`
   width: 1440px;
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 0 80px 80px 80px;
 `;
 
 const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+// LabelCell, MilestoneCell
+const cellWrap = css`
+  width: 100%;
+  height: 100px;
+  padding: 20px 32px;
+  background-color: ${({ theme }) => theme.colors.gr_offWhite};
+  border: 1px solid ${({ theme }) => theme.colors.gr_line};
+  border-top: none;
+  border-radius: ${({ last }) => (last ? '0 0 16px 16px' : 'none')};
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const tableHeader = css`
+  margin-top: 24px;
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+  background: ${({ theme }) => theme.colors.gr_background};
+  border: 1px solid ${({ theme }) => theme.colors.gr_line};
+  border-radius: 16px 16px 0px 0px;
+
+  color: ${({ theme }) => theme.colors.gr_label};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
+
+const newLabelMilestoneWrap = css`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.gr_line};
+  padding: 32px;
+  border-radius: ${({ theme }) => theme.radii['2xl']};
+  background-color: ${({ theme }) => theme.colors.gr_offWhite};
+  h2 {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    margin-bottom: 16px;
+  }
 `;
 
 const customTheme = {
@@ -29,6 +72,7 @@ const customTheme = {
     bl_hover: '#004DE3',
     bl_focus: '#007AFF',
     bl_disabled: '#007AFF',
+    bl_light: '#C7EBFF',
     pu_primary: '#0025E7',
     pu_dark: '#020070',
     pu_light: '#CCD4FF',
@@ -41,6 +85,9 @@ const customTheme = {
   },
   page,
   flexCenter,
+  cellWrap,
+  tableHeader,
+  newLabelMilestoneWrap,
 };
 
 export default customTheme;
