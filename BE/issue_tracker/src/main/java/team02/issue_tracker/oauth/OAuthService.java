@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenResponseDto;
 import team02.issue_tracker.oauth.dto.GithubUserProfile;
+import team02.issue_tracker.repository.UserRepository;
 
 @Slf4j
 @Service

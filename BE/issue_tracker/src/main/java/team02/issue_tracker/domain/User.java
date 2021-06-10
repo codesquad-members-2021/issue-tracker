@@ -1,12 +1,16 @@
 package team02.issue_tracker.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import lombok.*;
+import team02.issue_tracker.oauth.SocialLogin;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @Entity
 public class User {
     @Id
@@ -16,7 +20,10 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String oauthResource;
+
+    @Enumerated(EnumType.STRING)
+    private SocialLogin oauthResource;
+
     private String profileImage;
 
     @OneToMany(mappedBy = "assignee")

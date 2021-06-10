@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.AuthJwt;
 import team02.issue_tracker.oauth.dto.GithubUserProfile;
 
@@ -15,13 +16,13 @@ import java.time.LocalDate;
 @Component
 public class JwtUtils {
 
-    public AuthJwt getJwt(GithubUserProfile user) {
+    public AuthJwt getJwt(User user) {
         String token = JWT.create()
                 .withClaim("id", user.getId())
-                .withClaim("name", user.getName())
+                .withClaim("name", user.getUsername())
                 .withClaim("email", user.getEmail())
                 .withIssuer("shion")
-                .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(2)))
+                .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(1)))
                 .sign(Algorithm.HMAC256("secret"));
 
         return new AuthJwt(token);
