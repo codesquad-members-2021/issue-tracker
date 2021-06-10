@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueTrackerTabBarController: UITabBarController {
+    
+    private var loginManager: LoginKeyChainManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,7 @@ class IssueTrackerTabBarController: UITabBarController {
         setViewControllers(viewControllers, animated: true)
     }
     
-    struct TabBarViewControllerInfo {
+    private struct TabBarViewControllerInfo {
         let title: String
         let image: UIImage?
         let type: UIViewController.Type
@@ -40,6 +42,10 @@ class IssueTrackerTabBarController: UITabBarController {
         let viewController = info.type.create()
         viewController.tabBarItem = tabBarItem
         return viewController
+    }
+    
+    func configure(loginManager: LoginKeyChainManager) {
+        self.loginManager = loginManager
     }
 
 }

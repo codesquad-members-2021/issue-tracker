@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct LoginInfo {
+struct LoginInfo: Codable {
     let token: Data
     let name: String
-    let email: String
 }

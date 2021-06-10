@@ -10,7 +10,8 @@
 		E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */; };
 		E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABB2670EC5E0069E77D /* LoginInfo.swift */; };
 		E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */; };
-		E426DAC02670EE820069E77D /* AppleLoginManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABF2670EE820069E77D /* AppleLoginManagable.swift */; };
+		E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */; };
+		E426DAC42671D95D0069E77D /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC32671D95D0069E77D /* LoginService.swift */; };
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
 		E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* LoginViewController.swift */; };
@@ -31,7 +32,8 @@
 		E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationManager.swift; sourceTree = "<group>"; };
 		E426DABB2670EC5E0069E77D /* LoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
 		E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManagerDelegate.swift; sourceTree = "<group>"; };
-		E426DABF2670EE820069E77D /* AppleLoginManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManagable.swift; sourceTree = "<group>"; };
+		E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKeyChainManager.swift; sourceTree = "<group>"; };
+		E426DAC32671D95D0069E77D /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,10 +119,11 @@
 			isa = PBXGroup;
 			children = (
 				E42AD1142670549C0071B436 /* Controller */,
-				E426DABF2670EE820069E77D /* AppleLoginManagable.swift */,
 				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
 				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
 				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
+				E426DAC32671D95D0069E77D /* LoginService.swift */,
+				E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -261,7 +264,8 @@
 				E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */,
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
-				E426DAC02670EE820069E77D /* AppleLoginManagable.swift in Sources */,
+				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
+				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,

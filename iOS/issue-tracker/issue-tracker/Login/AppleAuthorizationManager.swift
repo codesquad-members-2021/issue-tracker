@@ -18,9 +18,6 @@ final class AppleAuthorizationManager: NSObject {
         self.delegate = delegate
     }
     
-}
-
-extension AppleAuthorizationManager: AppleLoginManagable {
     func login() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.email, .fullName]
@@ -30,19 +27,19 @@ extension AppleAuthorizationManager: AppleLoginManagable {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
+    
 }
 
 extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let token = appleIDCredential.identityToken,
-              let name = appleIDCredential.fullName?.givenName ?? appleIDCredential.fullName?.familyName,
-              let email = appleIDCredential.email else {
+              let name = appleIDCredential.fullName?.givenName ?? appleIDCredential.fullName?.familyName else {
             //에러 리턴
             return
         }
         
-        let loginInfo = LoginInfo(token: token, name: name, email: email)
+        let loginInfo = LoginInfo(token: token, name: name)
         delegate?.didAppleLoginSuccess(with: loginInfo)
     }
     
@@ -55,5 +52,4 @@ extension AppleAuthorizationManager: ASAuthorizationControllerPresentationContex
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return viewController?.view.window ?? UIWindow()
     }
-    
 }

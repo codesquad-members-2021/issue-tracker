@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AuthenticationServices
 
 class LoginViewController: UIViewController {
     
@@ -94,7 +93,7 @@ class LoginViewController: UIViewController {
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
     
-    private var appleLoginManager: AppleLoginManagable?
+    private var appleLoginManager: AppleAuthorizationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,6 +188,14 @@ class LoginViewController: UIViewController {
         ])
     }
     
+    private func presentIssueViewController(with loginInfo: LoginInfo) {
+        DispatchQueue.main.async {
+            let tabBarVC = IssueTrackerTabBarController()
+            tabBarVC.modalPresentationStyle = .fullScreen
+            self.present(tabBarVC, animated: true, completion: nil)
+        }
+    }
+    
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
         print("하이~, H I~")
     }
@@ -201,16 +208,16 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: AppleLoginManagerDelegate {
     func didAppleLoginSuccess(with loginInfo: LoginInfo) {
-        presentIssueViewController(with: loginInfo)
+        let loginKeyChainManager = LoginKeyChainManager(loginService: .apple)
+        
+        if loginKeyChainManager.save(loginInfo) {
+            presentIssueViewController(with: loginInfo)
+        } else {
+            //저장 오류
+        }
     }
     
     func didAppleLoginFail(with error: Error) {
         //에러 표시
-    }
-    
-    private func presentIssueViewController(with loginInfo: LoginInfo) {
-        let tabBarVC = IssueTrackerTabBarController()
-        tabBarVC.modalPresentationStyle = .fullScreen
-        present(tabBarVC, animated: true, completion: nil)
     }
 }
