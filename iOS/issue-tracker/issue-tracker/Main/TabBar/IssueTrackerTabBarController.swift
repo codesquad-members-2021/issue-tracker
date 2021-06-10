@@ -19,8 +19,7 @@ class IssueTrackerTabBarController: UITabBarController {
         let items = [TabBarViewControllerInfo(title: "이슈", imageName: "exclamationmark.circle", type: IssueViewController.self),
                      TabBarViewControllerInfo(title: "레이블", imageName: "tag", type: LabelViewController.self),
                      TabBarViewControllerInfo(title: "마일스톤", imageName: "signpost.right", type: MilestoneViewController.self),
-                     TabBarViewControllerInfo(title: "내 계정", imageName: "person.circle", type: MyAccountViewController.self)
-        ]
+                     TabBarViewControllerInfo(title: "내 계정", imageName: "person.circle", type: MyAccountViewController.self)]
         
         let viewControllers = items.map{ createTabBarViewController(info: $0) }
         setViewControllers(viewControllers, animated: true)
@@ -48,6 +47,15 @@ class IssueTrackerTabBarController: UITabBarController {
     func configure(loginManager: LoginKeyChainManager, loginInfo: LoginInfo) {
         self.loginManager = loginManager
         self.loginInfo = loginInfo
+        handOutLoginInfo()
     }
 
+    private func handOutLoginInfo() {
+        guard let loginInfo = self.loginInfo else { return }
+        let loginInfoContainers = viewControllers?.compactMap{ $0 as? LoginInfoContainer }
+        loginInfoContainers?.forEach({ loginInfoContainer in
+            loginInfoContainer.setup(loginInfo: loginInfo)
+        })
+    }
+    
 }

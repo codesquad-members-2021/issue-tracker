@@ -14,6 +14,7 @@
 		E426DAC42671D95D0069E77D /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC32671D95D0069E77D /* LoginService.swift */; };
 		E426DAC72671F6A00069E77D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC62671F6A00069E77D /* LoginError.swift */; };
 		E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC82671F7760069E77D /* AlertFactory.swift */; };
+		E426DACB267206D10069E77D /* LoginInfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DACA267206D10069E77D /* LoginInfoContainer.swift */; };
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
 		E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* LoginViewController.swift */; };
@@ -38,6 +39,7 @@
 		E426DAC32671D95D0069E77D /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		E426DAC62671F6A00069E77D /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		E426DAC82671F7760069E77D /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
+		E426DACA267206D10069E77D /* LoginInfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoContainer.swift; sourceTree = "<group>"; };
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		E42AD115267087AE0071B436 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E426DACA267206D10069E77D /* LoginInfoContainer.swift */,
 				E42AD116267087F40071B436 /* TabBar */,
 				E42AD11926708EBA0071B436 /* Issue */,
 				E42AD11A26708EC00071B436 /* Label */,
@@ -273,6 +276,7 @@
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
+				E426DACB267206D10069E77D /* LoginInfoContainer.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,

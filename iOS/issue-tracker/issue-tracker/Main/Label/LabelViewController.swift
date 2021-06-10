@@ -9,9 +9,17 @@ import UIKit
 
 class LabelViewController: UIViewController {
     
+    private var loginInfo: LoginInfo?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.orange
     }
     
+}
+
+extension LabelViewController: LoginInfoContainer {
+    func setup(loginInfo: LoginInfo) {
+        self.loginInfo = loginInfo
+    }
 }
