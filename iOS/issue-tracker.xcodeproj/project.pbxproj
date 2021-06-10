@@ -111,6 +111,7 @@
 			children = (
 				10D4257F2670912800AE119C /* issue-tracker.entitlements */,
 				10BCA8A7266F3C0000DBBA61 /* Font */,
+				10D4258326709D3300AE119C /* Extension */,
 				10CE4D99266EFB5700FBD593 /* AppDelegate.swift */,
 				10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */,
 				10CE4D9D266EFB5700FBD593 /* ViewController.swift */,
@@ -119,7 +120,6 @@
 				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
 				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
 				10CE4DA7266EFB5700FBD593 /* Info.plist */,
-				10D4258326709D3300AE119C /* Extension */,
 				10D4258026709CB000AE119C /* IssueList */,
 				10BCA8A3266F38D700DBBA61 /* Login */,
 			);

@@ -16,7 +16,8 @@ class AdditionalTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdditionalTableViewCell.reuseIdentifier, for: indexPath) as? AdditionalTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AdditionalTableViewCell.reuseIdentifier,
+                                                       for: indexPath) as? AdditionalTableViewCell
         else {
             return UITableViewCell()
         }

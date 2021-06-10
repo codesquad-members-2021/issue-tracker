@@ -162,7 +162,7 @@
                                     <constraint firstAttribute="height" constant="44" id="NHX-2w-MUj"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pa6-0w-fC8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pa6-0w-fC8">
                                 <rect key="frame" x="0.0" y="686" width="414" height="176"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -187,6 +187,7 @@
                     </view>
                     <connections>
                         <outlet property="additionalInfoTable" destination="pa6-0w-fC8" id="ZUg-Nt-XKH"/>
+                        <outlet property="textContent" destination="kSq-iB-zDu" id="005-ad-Ppi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hbs-zq-eec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

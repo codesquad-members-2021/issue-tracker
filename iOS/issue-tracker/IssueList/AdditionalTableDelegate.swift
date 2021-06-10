@@ -20,4 +20,8 @@ class AdditionalTableDelegate: NSObject, UITableViewDelegate {
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
