@@ -16,4 +16,9 @@ public class UserService {
     public User enroll(User user) {
         return userRepository.save(user);
     }
+
+    public User findByUser(User user) {
+        return userRepository.findUserByOauthResourceAndPassword(
+                user.getOauthResource(), user.getPassword());
+    }
 }

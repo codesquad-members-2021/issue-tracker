@@ -31,14 +31,18 @@ public class OAuthController {
     public String githubCallBack(@RequestParam("code") String code) {
         log.info("code : {}", code);
         GithubUserProfile githubUserProfile = oauthService.githubUserProfileFrom(code);
-        User user = userService.enroll(githubUserProfile.becomeUser());
+        User userFromGithub = githubUserProfile.becomeUser();
+        User user = userService.findByUser(userFromGithub);
+        if (user == null) {
+            user = userService.enroll(userFromGithub);
+        }
+        log.info("user : {}", user.toString());
 
         AuthJwt authJwt = jwtUtils.getJwt(user);
         log.info("auth jwt : {}", authJwt.getJwt());
         DecodedJWT decodedJWT = jwtUtils.decode(authJwt.getJwt());
         String result = jwtUtils.decodeJwt(decodedJWT);
         log.info("info from jwt token : {}", result);
-
 
         return githubUserProfile.toString();
     }
