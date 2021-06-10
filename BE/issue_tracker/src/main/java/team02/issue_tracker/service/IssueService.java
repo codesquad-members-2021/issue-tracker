@@ -2,10 +2,10 @@ package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Issue;
-import team02.issue_tracker.dto.wrapping_dto.DataResponse;
-import team02.issue_tracker.dto.wrapping_dto.ListDataResponse;
-import team02.issue_tracker.dto.DetailIssueResponse;
-import team02.issue_tracker.dto.IssueResponse;
+import team02.issue_tracker.dto.wrapping.DataResponse;
+import team02.issue_tracker.dto.wrapping.ListDataResponse;
+import team02.issue_tracker.dto.issue.DetailIssueResponse;
+import team02.issue_tracker.dto.issue.IssueResponse;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
