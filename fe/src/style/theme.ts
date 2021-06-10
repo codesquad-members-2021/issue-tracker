@@ -31,13 +31,14 @@ const theme: DefaultTheme = {
   },
   color: {
     grayscale: {
-      default: '#F7F7FC',
-      label: '#6E7191',
       titleActive: '#14142B',
-      offWhite: '#FEFEFE',
-      inputBG: '#EFF0F6',
       body: '#4E4B66',
+      label: '#6E7191',
       line: '#D9DBE9',
+      inputBG: '#EFF0F6',
+      default: '#F7F7FC',
+      background: '#F7F7FC',
+      offWhite: '#FEFEFE',
     },
     blue: '#007AFF',
     lightBlue: '#C7EBFF',

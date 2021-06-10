@@ -24,7 +24,10 @@ const GlobalStyle = createGlobalStyle`
   a{
     color: inherit;
   }
-
+  body {
+    padding: 0 80px;
+    background-color: #F7F7FC;
+  }
 `;
 
 export default GlobalStyle;
