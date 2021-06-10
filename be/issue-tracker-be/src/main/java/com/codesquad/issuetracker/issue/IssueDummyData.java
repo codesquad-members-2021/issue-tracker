@@ -7,6 +7,7 @@ import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneDummyData;
 import com.codesquad.issuetracker.user.UserResponse;
+import com.codesquad.issuetracker.user.UserDummyData;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -26,11 +27,8 @@ public class IssueDummyData {
                         .description("description설명")
                         .hasSameAuthorComments(true)
                         .createDateTime(LocalDateTime.now())
-                        .author(userFreddie())
-                        .assignees(new HashSet<>(Arrays.asList(
-                                userFreddie(),
-                                userHiro()
-                        )))
+                        .author(UserDummyData.userFreddie())
+                        .assignees(UserDummyData.usersResponse())
                         .labels(new HashSet<>(Arrays.asList(
                                 LabelDummyData.labelBe(),
                                 LabelDummyData.labelFe()
@@ -46,19 +44,16 @@ public class IssueDummyData {
                        .number(1L)
                        .title("title")
                        .createDateTime(LocalDateTime.now())
-                       .author(userFreddie())
-                       .assignees(Arrays.asList(
-                               userFreddie(),
-                               userHiro()
-                       ))
-                       .labels(Arrays.asList(
+                       .author(UserDummyData.userHiro())
+                       .assignees(UserDummyData.usersResponse())
+                       .labels(new HashSet<>(Arrays.asList(
                                LabelDummyData.labelBe(),
                                LabelDummyData.labelFe()
                        ))
                        .milestone(MileStoneDummyData.openMileStoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
-                                            .author(userFreddie())
+                                            .author(UserDummyData.userFreddie())
                                             .contents("comment1")
                                             .createDateTime(LocalDateTime.now())
                                             .emojis(new HashSet<>(Arrays.asList(
@@ -75,38 +70,4 @@ public class IssueDummyData {
                        .build();
     }
 
-    private static UserResponse userFreddie() {
-        return UserResponse.builder()
-                       .id(1L)
-                       .email("freddie@freddie.com")
-                       .name("freddie")
-                       .build();
-    }
-
-    private static UserResponse userHiro() {
-        return UserResponse.builder()
-                       .id(2L)
-                       .email("hiro@hiro.com")
-                       .name("hiro")
-                       .build();
-    }
-
-    private static LabelResponse labelBe() {
-        return LabelResponse.builder()
-                       .id(1L)
-                       .name("be")
-                       .description("label for backend")
-                       .color("#1679CF")
-                       .build();
-    }
-
-    private static MileStoneResponse milestoneMockup() {
-        return MileStoneResponse.builder()
-                       .id(1L)
-                       .name("목업 api 만들기")
-                       .description("목업 api를 만들어봅시다.")
-                       .openedIssueCount(2)
-                       .closedIssueCount(2)
-                       .build();
-    }
 }
