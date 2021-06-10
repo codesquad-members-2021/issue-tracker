@@ -48,13 +48,13 @@ extension GithubAuthorizationManager: GithubLoginManagable {
             }
             
             guard let code = NSURLComponents(string: (successURL.absoluteString))?.queryItems?.filter({$0.name == "code"}).first?.value else { return }
-            print("code = ",code)
+//            print("code = ",code)
             
             let networkmanager = NetworkManager()
             networkmanager.setInfoGithub(with: code) { (result: Result<OAuthResponse,Error>) in
                 switch result {
                 case .success(let jwtResponse):
-                    print("response=",jwtResponse)
+//                    print("response=",jwtResponse)
                     self.keychain["github_jwt"] = jwtResponse.avatarUrl
                     self.keychain["github_avatarUrl"] = jwtResponse.jwt
                     self.keychain["github_loginId"] = jwtResponse.loginId

@@ -109,6 +109,7 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
+        definesPresentationContext = true
         
         let githubAuthorizationManager = GithubAuthorizationManager(viewController: self, delegate: self)
         githubLoginManager = githubAuthorizationManager
