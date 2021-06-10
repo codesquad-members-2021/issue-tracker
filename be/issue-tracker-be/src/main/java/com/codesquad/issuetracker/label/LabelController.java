@@ -12,4 +12,9 @@ public class LabelController {
     public Set<LabelResponse> getLabels() {
         return LabelDummyData.labelResponses();
     }
+
+    @GetMapping("/labels-count")
+    public int getLabelsCount() {
+        return LabelDummyData.labelsCountResponses();
+    }
 }
