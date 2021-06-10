@@ -25,12 +25,15 @@ protocol Networked: class {
 }
 
 class MainFlowCoordinator: NSObject {
+    let mainTabBarController: MainTabBarController
     let keyChainController = KeychainController()
     let loginFlowCoordinator = LoginFlowCoordinator()
     
-    override init() {
+    init(mainViewController: MainTabBarController) {
+        self.mainTabBarController = mainViewController
         super.init()
         loginFlowCoordinator.parent = self
+        configure(viewController: mainViewController)
     }
 }
 

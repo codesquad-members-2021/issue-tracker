@@ -20,14 +20,12 @@ class LoginFlowCoordinator {
         }
         self.loginViewController = loginViewController
         configure(viewController: loginViewController)
-        loginViewController.modalTransitionStyle = isAppLaunch ? .crossDissolve : .coverVertical
         viewController.present(loginViewController, animated: !isAppLaunch, completion: nil)
     }
     
     func loginViewController(_ viewController: LoginViewController, didStartAuthorizationWithState state: String) {
         let url = GitHubEndpoint.authorizationUrl(with: state)
-        print("URL", url)
-        authenticationSession = ASWebAuthenticationSession(url: url, callbackURLScheme: nil, completionHandler: { [weak self] (callbackURL, error) in
+        authenticationSession = ASWebAuthenticationSession(url: url, callbackURLScheme: GitHubEndpoint.authorizationCallbackURLScheme, completionHandler: { [weak self] (callbackURL, error) in
             self?.authenticationSession = nil
             if let authorizationCode = callbackURL?.authorizationCode {
                 viewController.performAuthorization(with: authorizationCode)
