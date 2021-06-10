@@ -77,6 +77,29 @@ class IssueListViewController: UIViewController {
         
         self.present(filterViewController, animated: true, completion: nil)
     }
+    
+    //MARK: - TableView Cell Swipe Action Method
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "삭제", handler: { (action, view, success) in
+            
+            self.issueTableView.deleteRows(at: [indexPath], with: .automatic)
+            success(true)
+        })
+        action.image = UIImage(systemName: "trash")
+        action.backgroundColor = UIColor(red: 1, green: 59/255, blue: 48/255, alpha: 1)
+        return action
+    }
+    
+    func closeAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (action, view, success) in
+            
+        })
+        action.image = UIImage(systemName: "archivebox")
+        
+        action.backgroundColor = UIColor(red: 204/255, green: 212/255, blue: 1, alpha: 1)
+        return action
+    }
+
 }
 
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -88,5 +111,11 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else { return UITableViewCell() }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = deleteAction(at: indexPath)
+        let closeAction = closeAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
     }
 }
