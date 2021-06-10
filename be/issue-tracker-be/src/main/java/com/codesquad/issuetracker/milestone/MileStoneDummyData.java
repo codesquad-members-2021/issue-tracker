@@ -9,7 +9,7 @@ public class MileStoneDummyData {
     private MileStoneDummyData() {
     }
 
-    public static Set<MileStoneResponse> MileStoneResponse() {
+    public static Set<MileStoneResponse> MileStonesResponse() {
         return new HashSet<>(Arrays.asList(
                 MileStoneResponse.builder()
                     .id(1L)
@@ -32,4 +32,16 @@ public class MileStoneDummyData {
                     .build()
         ));
     }
+
+    public static MileStoneResponse MileStoneResponse() {
+        return  MileStoneResponse.builder()
+                    .id(1L)
+                    .name("milestone명")
+                    .description("milestone설명")
+                    .dueDate(LocalDate.of(2020, 12, 25))
+                    .isClosed(false)
+                    .openedIssueCount(1)
+                    .closedIssueCount(1)
+                    .build();
+    };
 }

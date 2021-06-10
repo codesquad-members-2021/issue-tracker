@@ -10,6 +10,6 @@ public class MileStoneController {
 
     @GetMapping("/milestones")
     public Set<MileStoneResponse> getMileStoneResponses() {
-        return MileStoneDummyData.MileStoneResponse();
+        return MileStoneDummyData.MileStonesResponse();
     }
 }

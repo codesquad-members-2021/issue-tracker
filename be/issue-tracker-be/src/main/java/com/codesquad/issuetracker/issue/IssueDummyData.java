@@ -3,6 +3,7 @@ package com.codesquad.issuetracker.issue;
 import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelResponse;
+import com.codesquad.issuetracker.milestone.MileStoneDummyData;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserResponse;
 
@@ -32,7 +33,7 @@ public class IssueDummyData {
                         .labels(new HashSet<>(Arrays.asList(
                                 labelBe()
                         )))
-                        .milestone(milestoneMockup())
+                        .milestone(MileStoneDummyData.MileStoneResponse())
                         .build()
         );
     }
@@ -51,7 +52,7 @@ public class IssueDummyData {
                        .labels(Arrays.asList(
                                labelBe()
                        ))
-                       .milestone(milestoneMockup())
+                       .milestone(MileStoneDummyData.MileStoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
                                             .author(userFreddie())
@@ -96,13 +97,4 @@ public class IssueDummyData {
                        .build();
     }
 
-    private static MileStoneResponse milestoneMockup() {
-        return MileStoneResponse.builder()
-                       .id(1L)
-                       .name("목업 api 만들기")
-                       .description("목업 api를 만들어봅시다.")
-                       .openedIssueCount(2)
-                       .closedIssueCount(2)
-                       .build();
-    }
 }
