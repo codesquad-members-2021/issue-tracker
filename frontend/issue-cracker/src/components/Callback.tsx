@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import Loader from '../components/common/Loader';
+import Loader from './layout/Loader';
 
 const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
   const authUri = `http://localhost:8080/api/web/auth`;

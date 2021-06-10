@@ -37,9 +37,9 @@ const AccountName = styled.div`
   color: ${({ theme }) => theme.colors.gray2};
   font-family: 'Montserrat', sans-serif;
 `;
-const ProfileImg = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 70%;
-  /* object-fit: contain; */
-`;
+// const ProfileImg = styled.img`
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 70%;
+//   /* object-fit: contain; */
+// `;

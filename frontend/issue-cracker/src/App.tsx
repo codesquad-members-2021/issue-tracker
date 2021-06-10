@@ -7,7 +7,6 @@ import LogIn from './components/layout/LogIn';
 import Callback from './components/Callback';
 import Header from './components/layout/Header';
 import IssueList from './components/layout/IssueList';
-import Loader from './components/common/Loader';
 
 function App(): JSX.Element {
   return (
@@ -19,7 +18,6 @@ function App(): JSX.Element {
           <Route exact path="/callback" component={Callback} />
           <Route path="/main" component={Header} />
           <Route exact path="/main/issue-list" component={IssueList} />
-          <Route exact path="/loader" component={Loader} />
           {/* <Route exact path="/iss ue-add" component={Header} /> */}
           {/* <Route exact path="/main/add" component={AddList} /> */}
         </AppStyle>
