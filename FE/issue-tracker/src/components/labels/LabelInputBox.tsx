@@ -7,7 +7,7 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 import { ReactComponent as Refresh } from '@assets/refresh.svg';
-import Label from '@components/labels/Label';
+import Label from '@components/common/Label';
 import {
   labelNameInput,
   labelDescInput,
