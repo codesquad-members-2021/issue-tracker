@@ -4,7 +4,7 @@ import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelDummyData;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
-import com.codesquad.issuetracker.user.UserResponse;
+import com.codesquad.issuetracker.user.UserDummyData;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -24,11 +24,8 @@ public class IssueDummyData {
                         .description("description설명")
                         .hasSameAuthorComments(true)
                         .createDateTime(LocalDateTime.now())
-                        .author(userFreddie())
-                        .assignees(new HashSet<>(Arrays.asList(
-                                userFreddie(),
-                                userHiro()
-                        )))
+                        .author(UserDummyData.userFreddie())
+                        .assignees(UserDummyData.usersResponse())
                         .labels(new HashSet<>(Arrays.asList(
                                 LabelDummyData.labelBe(),
                                 LabelDummyData.labelFe()
@@ -44,19 +41,16 @@ public class IssueDummyData {
                        .number(1L)
                        .title("title")
                        .createDateTime(LocalDateTime.now())
-                       .author(userFreddie())
-                       .assignees(Arrays.asList(
-                               userFreddie(),
-                               userHiro()
-                       ))
-                       .labels(Arrays.asList(
+                       .author(UserDummyData.userHiro())
+                       .assignees(UserDummyData.usersResponse())
+                       .labels(new HashSet<>(Arrays.asList(
                                LabelDummyData.labelBe(),
                                LabelDummyData.labelFe()
-                       ))
+                       )))
                        .milestone(milestoneMockup())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
-                                            .author(userFreddie())
+                                            .author(UserDummyData.userFreddie())
                                             .contents("comment1")
                                             .createDateTime(LocalDateTime.now())
                                             .emojis(new HashSet<>(Arrays.asList(
@@ -70,22 +64,6 @@ public class IssueDummyData {
                                                             .build()
                                             )))
                                             .build())
-                       .build();
-    }
-
-    private static UserResponse userFreddie() {
-        return UserResponse.builder()
-                       .id(1L)
-                       .email("freddie@freddie.com")
-                       .name("freddie")
-                       .build();
-    }
-
-    private static UserResponse userHiro() {
-        return UserResponse.builder()
-                       .id(2L)
-                       .email("hiro@hiro.com")
-                       .name("hiro")
                        .build();
     }
 
