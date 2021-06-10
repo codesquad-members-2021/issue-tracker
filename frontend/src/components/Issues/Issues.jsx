@@ -4,14 +4,14 @@ import Menu from "./Menu/Menu";
 const Issues = () => {
 	return (
 		<StyledIssues>
-			<Menu></Menu>
+			<Menu />
 			<IssueList />
 		</StyledIssues>
 	);
 };
 
 const StyledIssues = styled.div`
-	display: flex;
+	/* display: flex; */
 	width: 100%;
 `;
 
