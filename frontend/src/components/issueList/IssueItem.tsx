@@ -1,0 +1,62 @@
+import React, { ReactElement } from 'react';
+import styled from 'styled-components';
+import LabelBadge from '../atom/LabelBadge';
+import { IssueItemProps } from './issueType';
+import { Checkbox } from '@material-ui/core';
+import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
+import MilestoneIcon from '../atom/MilestoneIcon';
+import { timeChecker } from '../../util/util';
+
+export default function IssueItem({
+  issue: {
+    id,
+    assignees,
+    author,
+    comment,
+    commentNumber,
+    createdDateTime,
+    labels,
+    milestone,
+    title,
+  },
+}: IssueItemProps): ReactElement {
+  const labelList = labels.map((label, idx) => (
+    <LabelBadge key={label.id} color={label.colorCode} desc={label.name} />
+  ));
+
+  return (
+    <IssueItemBlock>
+      <Checkbox />
+      <div>
+        <div className='issue-item__title'>
+          <AdjustRoundedIcon className='issue-itme__icon' style={{ color: 'green' }} />
+          <div>{title}</div>
+          {labelList}
+        </div>
+        <div className='issue-item__description'>
+          #{id} opened {timeChecker(createdDateTime)} by {author} <MilestoneIcon />
+          {milestone}
+        </div>
+      </div>
+    </IssueItemBlock>
+  );
+}
+
+const IssueItemBlock = styled.div`
+  display: flex;
+  border-top: 1px solid ${({ theme }) => theme.color.lineGrey};
+  padding: 10px;
+  .issue-item__title {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    .issue-itme__icon {
+      margin-right: 10px;
+    }
+  }
+  .issue-item__description {
+    display: flex;
+    font-size: ${({ theme }) => theme.size.sm}px;
+    padding-top: 5px;
+  }
+`;

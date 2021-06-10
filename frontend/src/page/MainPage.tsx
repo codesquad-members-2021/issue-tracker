@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import React, { ReactElement } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CountInfoStorage, issuesStorage, getOpenIssues } from '../hooks/store';
-import IssueFilterSection from '../components/issueListpage/IssueFilter';
+import IssueFilterSection from '../components/issueList/IssueFilter';
 import LabelMileStoneTab from '../components/common/LabelMilestoneTab';
 import IssuePlus from '../components/atom/IssuePlus';
+import IssueTable from '../components/issueList/IssueTable';
 
 interface Props {}
 
@@ -28,7 +29,7 @@ export default function MainPage({}: Props): ReactElement {
           <IssuePlus />
         </div>
       </div>
-      {/* <IssueList /> */}
+      <IssueTable />
     </MainPageBlock>
   );
 }
