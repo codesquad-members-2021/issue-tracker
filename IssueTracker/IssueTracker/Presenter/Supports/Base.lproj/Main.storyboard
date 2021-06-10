@@ -10,6 +10,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Redirection View Controller-->
+        <scene sceneID="msj-0G-TFf">
+            <objects>
+                <viewController restorationIdentifier="RedirectionVC" storyboardIdentifier="RedirectionVC" id="zwb-MS-PBz" customClass="RedirectionViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N3u-m2-aQl">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잠시만 기다려주세요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzk-Ie-IaF">
+                                <rect key="frame" x="41.666666666666657" y="324.66666666666669" width="307" height="195.00000000000006"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="djD-Iw-uIL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rzk-Ie-IaF" firstAttribute="centerY" secondItem="N3u-m2-aQl" secondAttribute="centerY" id="JvV-Ku-iJH"/>
+                            <constraint firstItem="rzk-Ie-IaF" firstAttribute="width" secondItem="N3u-m2-aQl" secondAttribute="width" multiplier="0.787179" id="OpH-jR-jhA"/>
+                            <constraint firstItem="rzk-Ie-IaF" firstAttribute="centerX" secondItem="N3u-m2-aQl" secondAttribute="centerX" id="f9K-qL-B5d"/>
+                            <constraint firstItem="rzk-Ie-IaF" firstAttribute="height" secondItem="N3u-m2-aQl" secondAttribute="height" multiplier="0.231043" id="sVN-5l-7Wf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgL-LQ-0zv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-878.46153846153845" y="88.862559241706151"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>

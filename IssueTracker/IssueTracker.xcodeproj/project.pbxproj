@@ -20,6 +20,7 @@
 		71928E7F2671C06200847111 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E7E2671C06200847111 /* LoginManager.swift */; };
 		71928E852671C4D300847111 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E842671C4D300847111 /* LoginDTO.swift */; };
 		71928E872671CA6E00847111 /* LoginObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E862671CA6E00847111 /* LoginObserver.swift */; };
+		71928E8B2671CFD900847111 /* RedirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E8A2671CFD900847111 /* RedirectionViewController.swift */; };
 		71FCE19C2670ABD60044038E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19B2670ABD60044038E /* APIService.swift */; };
 		71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19F2670AC540044038E /* IssueDTO.swift */; };
 		71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A52670B2880044038E /* MemoryStorage.swift */; };
@@ -46,6 +47,7 @@
 		71928E7E2671C06200847111 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		71928E842671C4D300847111 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		71928E862671CA6E00847111 /* LoginObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginObserver.swift; sourceTree = "<group>"; };
+		71928E8A2671CFD900847111 /* RedirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedirectionViewController.swift; sourceTree = "<group>"; };
 		71FCE19B2670ABD60044038E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		71FCE19F2670AC540044038E /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
 		71FCE1A52670B2880044038E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				71377D21266E458000DB1C4D /* LoginViewController.swift */,
 				7123D3FE266F2431009C959B /* IssueListViewController.swift */,
 				7105555C266F36650072065E /* FilterIssueViewController.swift */,
+				71928E8A2671CFD900847111 /* RedirectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				7123D3FF266F2431009C959B /* IssueListViewController.swift in Sources */,
 				71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */,
 				71928E872671CA6E00847111 /* LoginObserver.swift in Sources */,
+				71928E8B2671CFD900847111 /* RedirectionViewController.swift in Sources */,
 				71FCE19C2670ABD60044038E /* APIService.swift in Sources */,
 				71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */,
 				71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */,

@@ -3,6 +3,7 @@ import Foundation
 enum ViewControllerID {
     static let issueFilter = "FilterVC"
     static let tabBar = "TabBarVC"
+    static let redirection = "RedirectionVC"
 }
 
 enum API {
