@@ -25,6 +25,25 @@ class LabelTest {
     }
 
     @Test
+    @DisplayName("If Label name is too long, throw IllegalArgumentException")
+    void createTooLongNamedLabel() {
+        assertThatThrownBy(
+                () -> Label.create("1234567890123456789012345678901234567890123456789012", "Too Long name", Colors.of("#000000", "#FFFFFF")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Label name is too long (max 50)");
+    }
+
+    @Test
+    @DisplayName("If Label name is too long, throw IllegalArgumentException")
+    void createTooLongDescriptionLabel() {
+        assertThatThrownBy(() -> Label.create("Too Long Description Label",
+                "12345678901234567890123456789012345678901234567890121234567890123456789012345678901234567890123456789012",
+                Colors.of("#000000", "#FFFFFF")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Label description is too long (max 100)");
+    }
+
+    @Test
     @DisplayName("If Colors is null, throw IllegalArgumentException")
     void createIfLabelColorsIsNull() {
         assertThatThrownBy(() -> Label.create("Color null label", "null color label", null))
