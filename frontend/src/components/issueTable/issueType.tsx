@@ -14,10 +14,15 @@ export interface IssuesType {
   title: string;
 }
 
+export interface LabelColorType {
+  backgroundColorCode: string;
+  textColorCode: string;
+}
+
 export interface LabelProp {
   id: number;
   name: string;
-  colorCode: string;
+  color: LabelColorType;
   description: string;
   checked: boolean;
 }
