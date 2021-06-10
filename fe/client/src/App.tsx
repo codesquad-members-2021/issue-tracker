@@ -31,7 +31,7 @@ function App() {
 
 const GlobalStyle = createGlobalStyle`
   body{
-    background: #E5E5E5;
+    background: #F7F7FC;
     padding: 27px 80px 0;
   }
 `

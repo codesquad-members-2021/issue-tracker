@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import LargeLogo from '@/Icons/LargeLogo.svg';
+import Button from '@material-ui/core/Button';
 
 const LoginPage = () => {
   return (
@@ -8,13 +9,12 @@ const LoginPage = () => {
       <LogoWrapper>
         <img src={LargeLogo} alt="" />
       </LogoWrapper>
-      <LoginButton>
+      <LargeButton>
         GitHub 계정으로 로그인
-      </LoginButton>
+      </LargeButton>
     </LoginFormWrapper>
   )
 }
-
 
 const LoginFormWrapper = styled.div`
   position: absolute;
@@ -27,20 +27,21 @@ const LogoWrapper = styled.div`
   margin-bottom:60px;
 `;
 
-const LoginButton = styled.button`
-  width: 340px;
-  height: 64px;
-  padding: 0px 24px;
-  margin-bottom: 2rem;
-  color: #fff;
-  border-radius: 20px;
-  background: #14142B;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 32px;
-
-  &:hover { 
-    cursor:pointer;
-  }
+const LargeButton = styled(Button)`
+    width: 340px;
+    height: 64px;
+    padding: 0px 24px;
+    margin-bottom: 2rem;
+    color:#fff;
+    border-radius: 20px;
+    background: #14142B;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 32px;
+    &:hover{
+      background: #14142B;
+      box-shadow: 0 3px 5px 2px #c8c8c8;
+    }
 `;
+
 export default LoginPage;

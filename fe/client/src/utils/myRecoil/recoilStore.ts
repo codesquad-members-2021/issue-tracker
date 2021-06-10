@@ -30,8 +30,12 @@ const recoilStore = {
   },
 
   setData: function (key: string) {
-    return (fn: Function) => {
-      this.data[key] = fn(this.data[key]);
+    return (fn: Function | object) => {
+      if(typeof fn === 'object'){
+        this.data[key] = fn;
+      }else{
+        this.data[key] = fn(this.data[key]);
+      } 
       this.observers[key].forEach((callback) => callback());
     };
   }

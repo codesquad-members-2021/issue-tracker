@@ -9,7 +9,6 @@ const Header = () => {
   const location = useLocation();
 
   if(exclusionArray.indexOf(location.pathname) < 0) return null;
-
   return (
     <HeaderWrapper>
       <img src={LogoIcon} alt="" />
@@ -21,6 +20,7 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   display:flex;
+  margin-bottom: 59px;
   justify-content: space-between;
 `;
 
