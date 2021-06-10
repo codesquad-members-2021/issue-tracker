@@ -1,4 +1,5 @@
 import Foundation
+import Alamofire
 
 class LoginManager {
     
@@ -11,6 +12,11 @@ class LoginManager {
         guard let url = URL(string: API.accessToken+code) else { return }
         let headers: HTTPHeaders = ["User-Agent":"IssueTrackerIOS/1.0"]
         AF.request(url, method: .post, headers: headers)
+            .responseDecodable(of: LoginDTO.self) { response in
+                switch response.result {
+                case .success(let loginData): print(loginData)
+                case .failure(let error): print(error)
+                }
+            }
     }
-    
 }
