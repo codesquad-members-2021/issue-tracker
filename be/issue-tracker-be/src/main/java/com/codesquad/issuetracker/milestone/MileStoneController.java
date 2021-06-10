@@ -10,12 +10,12 @@ import java.util.Set;
 public class MileStoneController {
 
     @GetMapping("/milestones")
-    public Set<MileStoneResponse> getMileStoneResponses() {
+    public Set<MileStoneResponse> readAll() {
         return MileStoneDummyData.mileStonesResponse();
     }
 
     @GetMapping("/milestones-count")
-    public int getMilestonesCount() {
+    public int readAllCount() {
         return MileStoneDummyData.milestonesCountResponses();
     }
 }
