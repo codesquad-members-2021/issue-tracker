@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class LoginViewController: UIViewController {
     
@@ -85,11 +86,15 @@ class LoginViewController: UIViewController {
     private lazy var appleLoginButton: UIButton = {
         let image = UIImage(named: "icon_apple")
         let title = "Apple 계정으로 로그인"
-        return socialLoginButton(with: image, title)
+        let appleLoginButton = socialLoginButton(with: image, title)
+        appleLoginButton.addTarget(self, action: #selector(appleLoginTouched), for: .touchUpInside)
+        return appleLoginButton
     }()
     
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
+    
+    private var appleLoginManager: AppleLoginManagable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +103,9 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
+        
+        let appleAuthorizationManager = AppleAuthorizationManager(viewController: self, delegate: self)
+        appleLoginManager = appleAuthorizationManager
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,9 +191,26 @@ class LoginViewController: UIViewController {
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
         print("하이~, H I~")
+    }
+    
+    @objc private func appleLoginTouched(_ sender: UIButton) {
+        appleLoginManager?.login()
+    }
+    
+}
+
+extension LoginViewController: AppleLoginManagerDelegate {
+    func didAppleLoginSuccess(with loginInfo: LoginInfo) {
+        presentIssueViewController(with: loginInfo)
+    }
+    
+    func didAppleLoginFail(with error: Error) {
+        //에러 표시
+    }
+    
+    private func presentIssueViewController(with loginInfo: LoginInfo) {
         let tabBarVC = IssueTrackerTabBarController()
         tabBarVC.modalPresentationStyle = .fullScreen
         present(tabBarVC, animated: true, completion: nil)
     }
-    
 }
