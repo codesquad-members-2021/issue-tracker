@@ -1,4 +1,4 @@
-import 'styled-components';
+import { css } from 'styled-components';
 
 interface DefaultTheme {
   fontFamily: string;
@@ -20,7 +20,33 @@ interface DefaultTheme {
       [key: string]: string;
     };
   };
+  style: { [key: string]: string };
 }
+
+const flexSpaceBetween = css`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const flexColum = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const upperWrapper = css`
+  border: 1px solid #d9dbe9;
+  background-color: #f7f7fc;
+  border-radius: 16px 16px 0px 0px;
+`;
+
+const lowerWrapper = css`
+  border: 1px solid #d9dbe9;
+  border-top: none;
+  background: #fefefe;
+  border-radius: 0px 0px 16px 16px;
+`;
 
 const theme: DefaultTheme = {
   fontFamily: 'Noto Sans KR',
@@ -61,6 +87,12 @@ const theme: DefaultTheme = {
       M: '1rem', // 16px
       S: '0.7rem', // 11px
     },
+  },
+  style: {
+    flexColum: `${flexColum}`,
+    upperWrapper: `${upperWrapper}`,
+    lowerWrapper: `${lowerWrapper}`,
+    flexSpaceBetween: `${flexSpaceBetween}`,
   },
 };
 

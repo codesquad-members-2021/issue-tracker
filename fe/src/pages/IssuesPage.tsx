@@ -1,4 +1,4 @@
-import Wrapper from 'components/common/Wrapper';
+import Wrapper from 'components/Issues/Issues';
 import Header from 'components/header/Header';
 import Navbar from 'components/navbar/Navbar';
 
