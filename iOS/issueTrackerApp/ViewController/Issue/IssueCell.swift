@@ -58,7 +58,7 @@ class IssueCell: UITableViewCell {
     
     private func configureTagLabelStack(with issue: String? = nil) {
         let tempTagLabel = TagLabel()
-            tempTagLabel.custom(title: " issue.tagTitle ", colorCode: "#f69e7b")
+            tempTagLabel.custom(title: "   issue.tagTitle   ", colorCode: "#f69e7b")
         self.tagStackView.addTag(tagLabel: tempTagLabel)
     }
 }

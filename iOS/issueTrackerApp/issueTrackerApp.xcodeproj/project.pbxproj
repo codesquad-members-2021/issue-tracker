@@ -18,6 +18,7 @@
 		883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51A32670AAAB0055EC9E /* TagStackView.swift */; };
 		883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51A82670ABDC0055EC9E /* TagLabel.swift */; };
 		883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51AD2670B2F70055EC9E /* UIColorExtension.swift */; };
+		883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		883F51A32670AAAB0055EC9E /* TagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagStackView.swift; path = ViewController/Issue/TagStackView.swift; sourceTree = SOURCE_ROOT; };
 		883F51A82670ABDC0055EC9E /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagLabel.swift; path = ViewController/Issue/TagLabel.swift; sourceTree = SOURCE_ROOT; };
 		883F51AD2670B2F70055EC9E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomBarButtonItem.swift; path = ViewController/Issue/CustomBarButtonItem.swift; sourceTree = SOURCE_ROOT; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				883F519D2670940E0055EC9E /* IssueCell.xib */,
 				883F51A32670AAAB0055EC9E /* TagStackView.swift */,
 				883F51A82670ABDC0055EC9E /* TagLabel.swift */,
+				883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */,
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
+				883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

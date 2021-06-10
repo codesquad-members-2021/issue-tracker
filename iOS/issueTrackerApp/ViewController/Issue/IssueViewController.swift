@@ -23,19 +23,39 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        definesPresentationContext = true
-//        navigationItem.searchController = searchController
-        searchController.searchResultsUpdater = self
-        
-        print("aa")
-        configureTableView()
+        self.configureLeftBarButtonItem()
+        self.configureRightBarButtonItem()
+        self.configureTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.configureSearchController()
+    }
+    
+    private func configureLeftBarButtonItem() {
+        let customLeftBarButton = CustomBarButtonItem(title: "필터", image: UIImage(systemName: "line.horizontal.3.decrease") ?? UIImage(), located: .left)
+        customLeftBarButton.addAction(UIAction.init(handler: { (touch) in
+            // todo
+        }), for: .touchUpInside)
+        let leftBarButtonItem = UIBarButtonItem(customView: customLeftBarButton)
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+    }
+    
+    private func configureRightBarButtonItem() {
+        let customRightBarButton = CustomBarButtonItem(title: "선택", image: UIImage(systemName: "checkmark.circle") ?? UIImage(), located: .right)
+        customRightBarButton.addAction(UIAction(handler: { (touch) in
+            // todo
+        }), for: .touchUpInside)
+        let rightBarButtonItem = UIBarButtonItem(customView: customRightBarButton)
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    private func configureSearchController() {
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search"
+        definesPresentationContext = true
+        self.searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
     }
     

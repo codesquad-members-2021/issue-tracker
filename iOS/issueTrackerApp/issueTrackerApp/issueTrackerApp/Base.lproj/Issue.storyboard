@@ -31,8 +31,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="이슈" id="84B-Z6-ZJW">
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="JtK-ut-fGU"/>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="beK-EC-qtW"/>
+                        <barButtonItem key="leftBarButtonItem" id="JtK-ut-fGU"/>
+                        <barButtonItem key="rightBarButtonItem" id="beK-EC-qtW"/>
                     </navigationItem>
                     <connections>
                         <outlet property="issueTableView" destination="jeM-5r-JuA" id="o9K-J0-bRC"/>
