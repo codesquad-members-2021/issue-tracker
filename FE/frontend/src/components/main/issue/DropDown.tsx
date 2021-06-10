@@ -7,19 +7,13 @@ import { ReactComponent as CheckOnCircle } from '../../../icons/checkOnCircle.sv
 interface Props {
   options: { name: string; isSelected: boolean }[];
   setOptions: Dispatch<SetStateAction<any>>;
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<any>>;
+  isShown: boolean;
+  setIsShown(): any;
   type: string;
+  title: string;
 }
 
 const DropDown: React.FC<Props> = props => {
-  const controlDropDown = (
-    isOpen: boolean,
-    setIsOpen: Dispatch<SetStateAction<any>>
-  ) => {
-    setIsOpen(!isOpen);
-  };
-
   const setCheckBox = (
     option: { name: string; isSelected: boolean },
     options: { name: string; isSelected: boolean }[],
@@ -36,15 +30,15 @@ const DropDown: React.FC<Props> = props => {
 
   return (
     <FilterWrapper>
-      <FilterTitle>필터 이름</FilterTitle>
+      <FilterTitle>{props.title}</FilterTitle>
       {props.options.map((option, i) => {
         return (
           <Fragment key={i}>
             <FilterOption
               sm
               onClick={(event: React.MouseEvent<HTMLInputElement>) => {
-                controlDropDown(props.isOpen, props.setIsOpen);
                 setCheckBox(option, props.options, props.setOptions);
+                props.setIsShown();
               }}>
               {option.name}
               {props.type === 'text' && (

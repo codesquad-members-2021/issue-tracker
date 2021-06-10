@@ -4,9 +4,10 @@ import Typo from '../../../styles/atoms/Typos';
 import { ReactComponent as DownwardIcon } from '../../../icons/downward.svg';
 import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import DropDown from './DropDown';
+import useModal from '../../hooks/useModal';
 
 const Filter = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isShown, toggle } = useModal();
   const [options, setOptions] = useState([
     { name: '열린 이슈', isSelected: false },
     { name: '내가 작성한 이슈', isSelected: false },
@@ -15,14 +16,10 @@ const Filter = () => {
     { name: '닫힌 이슈', isSelected: false },
   ]);
 
-  const onClick = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <>
       <FilterWrapper>
-        <Button onClick={onClick}>
+        <Button onClick={toggle}>
           <Text link small>
             필터
           </Text>
@@ -34,13 +31,14 @@ const Filter = () => {
           <SearchIcon />
         </IconWrapper>
       </FilterWrapper>
-      {isOpen && (
+      {isShown && (
         <DropDown
           options={options}
           setOptions={setOptions}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          isShown={isShown}
+          setIsShown={toggle}
           type="text"
+          title="이슈 필터"
         />
       )}
     </>
