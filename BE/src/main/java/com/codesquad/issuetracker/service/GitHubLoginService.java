@@ -11,16 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class LoginService {
+public class GitHubLoginService {
 
-    private Logger logger = LoggerFactory.getLogger(LoginService.class);
+    private final UserRepository userRepository;
+
+    private Logger logger = LoggerFactory.getLogger(GitHubLoginService.class);
 
     private static final String GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_USER_URL = "https://api.github.com/user";
     private final String GITHUB_CLIENT_ID;
     private final String GITHUB_CLIENT_SECRETS;
 
-    public LoginService(Environment environment) {
+    public GitHubLoginService(UserRepository userRepository, Environment environment) {
+        this.userRepository = userRepository;
         GITHUB_CLIENT_ID = environment.getProperty("github.client.id");
         GITHUB_CLIENT_SECRETS = environment.getProperty("github.client.secrets");
     }
