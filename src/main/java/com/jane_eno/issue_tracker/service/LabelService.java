@@ -1,4 +1,6 @@
 package com.jane_eno.issue_tracker.service;
+
+import com.jane_eno.issue_tracker.domain.label.Color;
 import com.jane_eno.issue_tracker.web.dto.response.LabelsResponseDTO;
 import org.springframework.stereotype.Service;
 import com.jane_eno.issue_tracker.web.dto.response.LabelDTO;
@@ -13,8 +15,8 @@ public class LabelService {
                 .labelsCount(3)
                 .milestonesCount(2)
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .build();
     }

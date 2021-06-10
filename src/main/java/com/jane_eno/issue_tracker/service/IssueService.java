@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.service;
 
+import com.jane_eno.issue_tracker.domain.label.Color;
 import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class IssueService {
                         new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
                 )))
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .milestone("마스터즈 코스")
                 .build();
@@ -52,8 +53,8 @@ public class IssueService {
                         new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
                 )))
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .milestone("마스터즈 코스")
                 .build();
@@ -70,8 +71,8 @@ public class IssueService {
                         new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
                 )))
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .milestone("마스터즈 코스")
                 .build();
@@ -95,8 +96,8 @@ public class IssueService {
                         new Assignee(2L, "imageString2", "eNoLJ", false)
                 )))
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .milestones(new ArrayList<>(Arrays.asList(
                         new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
@@ -127,8 +128,8 @@ public class IssueService {
                         new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
                 )))
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 )))
                 .milestones(new ArrayList<>(Arrays.asList(
                         new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
@@ -155,8 +156,8 @@ public class IssueService {
     public LabelsInIssueResponseDTO getLabels(Long issueID) {
         return LabelsInIssueResponseDTO.builder()
                 .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", "#CCFFCC", "bug fix", true),
-                        new LabelDTO(2L, "enhancement", "#99FFFF", "enhancement", false)
+                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
+                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
                 ))).build();
     }
 

@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
+import com.jane_eno.issue_tracker.domain.label.Color;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ public class LabelDTO {
 
     private final Long id;
     private final String name;
-    private final String colorCode;
+    private final Color color;
     private final String description;
     private final boolean isChecked;
 }

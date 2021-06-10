@@ -22,20 +22,19 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    private User author;
-//
-//    @ManyToMany
-//    private List<User> assignees;
-//
-//    @ManyToMany
-//    private List<Label> labels;
+    @JoinColumn
+    @ManyToOne
+    private User author;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone"))
+    @ManyToMany
+    private List<User> assignees;
+
+    @ManyToMany
+    private List<Label> labels;
+
+    @JoinColumn
     @ManyToOne
     private Milestone milestone;
-//    (foreignKey = @ForeignKey(name = "fk_issue_milestone"))
 
     private boolean isOpen;
 

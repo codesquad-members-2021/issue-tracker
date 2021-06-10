@@ -25,8 +25,8 @@ public class User {
     private String avatarUrl;
     private String token;
 
-//    @ManyToMany
-//    private List<Issue> issue;
+    @OneToMany(mappedBy = "author")
+    private List<Issue> issues;
 
     public static User createUser(GitHubUserResponseDTO user, AccessTokenResponseDTO token) {
         return User.builder()

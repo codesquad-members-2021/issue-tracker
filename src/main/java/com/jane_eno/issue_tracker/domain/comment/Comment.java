@@ -20,9 +20,7 @@ public class Comment {
     private String comment;
     private LocalDateTime createdDateTime;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone"))
+    @JoinColumn
     private Issue issue;
-//    (foreignKey = @ForeignKey(name = "fk_issue_milestone"))
 }

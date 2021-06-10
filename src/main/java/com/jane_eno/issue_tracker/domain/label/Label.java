@@ -20,7 +20,10 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String colorCode;
+
+    @Embedded
+    private Color color;
+
     private String description;
 
 //    @ManyToMany
