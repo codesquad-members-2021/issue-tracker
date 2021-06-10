@@ -8,7 +8,7 @@
 import Foundation
 import AuthenticationServices
 
-class AuthManager {
+class OAuthManager {
     private let cliendId = ""
     private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)&scope=user:email")!
     private let callbackUrlScheme = "issueTracker"
