@@ -22,6 +22,9 @@ public class Oauth {
     public static final String CLIENT_SECRET = "github.secret";
     public static final String SCOPE = "github.scope";
 
+    public static final String ALGORITHM_SECRET = "jwt.algorithm.secret";
+    public static final String ISSUER = "jwt.issuer";
+
     private String access_token;
 
     public String getClientId() {
@@ -38,6 +41,14 @@ public class Oauth {
 
     public String getUserinfoUri() {
         return environment.getProperty(USERINFO_URI);
+    }
+
+    public String getAlgorithmSecret() {
+        return environment.getProperty(ALGORITHM_SECRET);
+    }
+
+    public String getIssuer() {
+        return environment.getProperty(ISSUER);
     }
 
     public String getUriForAccesToken(String code) {
