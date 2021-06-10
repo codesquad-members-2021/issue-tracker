@@ -6,9 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 class LoginViewModel {
 
     private let loginService = LoginService()
+    private var cancellable = Set<AnyCancellable>()
+
+    func fetchToken(to code: Encodable) {
+        loginService.fetchToken(to: code).sink { _ in
+        } receiveValue: { value in
+            print(value)
+        }.store(in: &cancellable)
+    }
 
 }

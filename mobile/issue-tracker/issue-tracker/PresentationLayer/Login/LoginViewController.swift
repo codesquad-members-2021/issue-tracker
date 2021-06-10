@@ -31,13 +31,17 @@ final class LoginViewController: UIViewController {
             }
             let queryItems = URLComponents(string: successURL.absoluteString)?.queryItems
             let code = queryItems?.filter({ $0.name == "code" }).first?.value
-            print(code)
+            
+            self.requestToken(to: code ?? "")
         })
     }
 
     private func configureAuthSession() {
         webAuthSession?.presentationContextProvider = self
-//        webAuthSession?.prefersEphemeralWebBrowserSession = true
+    }
+
+    private func requestToken(to code: String) {
+        loginViewModel.fetchToken(to: Auth(code: code))
     }
 }
 

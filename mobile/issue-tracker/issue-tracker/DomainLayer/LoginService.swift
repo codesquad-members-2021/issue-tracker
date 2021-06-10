@@ -6,11 +6,13 @@
 //
 
 import Foundation
-import AuthenticationServices
+import Combine
 
 class LoginService {
 
-    func fetchToken() {
+    private let repository = Repository()
 
+    func fetchToken(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
+       return repository.requestUserAuth(to: code)
     }
 }
