@@ -1,14 +1,16 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { CountInfoStorage } from '../../store/store';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MilestoneIcon from '../atom/MilestoneIcon';
+import { getIssuesInfoState } from '../../store/issueInfoStore';
 
 interface Props {}
 
 export default function LabelMilestoneTab({}: Props): ReactElement {
-  const { label, milestone } = useRecoilValue(CountInfoStorage);
+  const {
+    count: { label, milestone },
+  } = useRecoilValue(getIssuesInfoState);
 
   return (
     <LabelMilestoneTabBlock>

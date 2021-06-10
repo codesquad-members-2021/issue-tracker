@@ -12,10 +12,10 @@ export default function IssueListHeaderLeft({}: Props): ReactElement {
       <CheckBox />
       <div className='issue-header__filter-tab'>
         <div>
-          <AdjustRoundedIcon /> 열린 이슈 ()
+          <AdjustRoundedIcon /> <span>열린 이슈 ()</span>
         </div>
         <div>
-          <CheckRoundedIcon /> 닫힌 이슈 ()
+          <CheckRoundedIcon /> <span>닫힌 이슈 ()</span>
         </div>
       </div>
     </IssueListHeaderLeftBlock>

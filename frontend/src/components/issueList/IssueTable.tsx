@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { getIssues } from '../../store/issueStore';
+import { getIssuesInfoState } from '../../store/issueInfoStore';
 import IssueItem from './IssueItem';
 
 export default function IssueTable(): ReactElement {
-  const issues = useRecoilValue(getIssues);
+  const { issues } = useRecoilValue(getIssuesInfoState);
 
   const issueList = issues?.map((issue) => <IssueItem key={issue.id} issue={issue} />);
 
