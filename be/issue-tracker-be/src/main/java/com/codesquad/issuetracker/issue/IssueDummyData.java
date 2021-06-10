@@ -2,7 +2,7 @@ package com.codesquad.issuetracker.issue;
 
 import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
-import com.codesquad.issuetracker.label.LabelResponse;
+import com.codesquad.issuetracker.label.LabelDummyData;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserResponse;
 
@@ -30,7 +30,8 @@ public class IssueDummyData {
                                 userHiro()
                         )))
                         .labels(new HashSet<>(Arrays.asList(
-                                labelBe()
+                                LabelDummyData.labelBe(),
+                                LabelDummyData.labelFe()
                         )))
                         .milestone(milestoneMockup())
                         .build()
@@ -49,7 +50,8 @@ public class IssueDummyData {
                                userHiro()
                        ))
                        .labels(Arrays.asList(
-                               labelBe()
+                               LabelDummyData.labelBe(),
+                               LabelDummyData.labelFe()
                        ))
                        .milestone(milestoneMockup())
                        .mainComment(CommentResponse.builder()
@@ -84,15 +86,6 @@ public class IssueDummyData {
                        .id(2L)
                        .email("hiro@hiro.com")
                        .name("hiro")
-                       .build();
-    }
-
-    private static LabelResponse labelBe() {
-        return LabelResponse.builder()
-                       .id(1L)
-                       .name("be")
-                       .description("label for backend")
-                       .color("#1679CF")
                        .build();
     }
 
