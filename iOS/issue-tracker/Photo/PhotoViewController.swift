@@ -15,6 +15,7 @@ class PhotoViewController: UIViewController, ReuseIdentity {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationItem()
         
         PhotoManager.shared.requestPhotos()
         PhotoManager.shared.authorization()
@@ -24,4 +25,16 @@ class PhotoViewController: UIViewController, ReuseIdentity {
         self.album.reloadData()
     }
 
+    private func configureNavigationItem(){
+        let rightButton = UIBarButtonItem(title: "추가",
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(addPhotoToTextView))
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    @objc
+    func addPhotoToTextView(){
+        
+    }
 }
