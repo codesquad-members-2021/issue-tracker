@@ -15,7 +15,8 @@ class LabelView: UILabel {
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        super.init(coder: coder)
+        configure()
     }
     
 }
