@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAx-ab-YaI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eSe-aU-cEI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -341,6 +341,36 @@
             </objects>
             <point key="canvasLocation" x="3095.6521739130435" y="797.54464285714278"/>
         </scene>
+        <!--Issue Selection View Controller-->
+        <scene sceneID="Sv6-XW-Yhl">
+            <objects>
+                <viewController storyboardIdentifier="IssueSelectionViewController" id="eSe-aU-cEI" customClass="IssueSelectionViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nEa-QM-1Ai">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbW-ne-zMn">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <items/>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zjk-if-fF4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XbW-ne-zMn" firstAttribute="leading" secondItem="Zjk-if-fF4" secondAttribute="leading" id="3wN-l1-pit"/>
+                            <constraint firstItem="XbW-ne-zMn" firstAttribute="bottom" secondItem="Zjk-if-fF4" secondAttribute="bottom" id="8qr-pc-zxy"/>
+                            <constraint firstItem="XbW-ne-zMn" firstAttribute="trailing" secondItem="Zjk-if-fF4" secondAttribute="trailing" id="YS3-mU-YOf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="issueSelectionToolBar" destination="XbW-ne-zMn" id="yeV-D6-hIb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKP-OA-TSw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3961" y="798"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J67-YZ-aC2">
             <objects>
@@ -432,6 +462,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

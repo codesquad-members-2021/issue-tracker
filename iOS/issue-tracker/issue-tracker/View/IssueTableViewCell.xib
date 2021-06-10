@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpf-ep-Gd6">
-                        <rect key="frame" x="16" y="24" width="288" height="26.5"/>
+                        <rect key="frame" x="16" y="24" width="243" height="26.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -69,16 +69,25 @@
                             <constraint firstAttribute="height" constant="1" id="uZP-pD-gYt"/>
                         </constraints>
                     </view>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="E9A-TQ-zbz">
+                        <rect key="frame" x="275" y="24.5" width="29" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="29" id="Dep-ds-kHi"/>
+                            <constraint firstAttribute="height" constant="29" id="b6T-b7-H14"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="6vh-ka-RsX"/>
                     <constraint firstItem="oKA-M4-CeL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="75n-XY-klI"/>
                     <constraint firstItem="5gT-3I-aPM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8fa-PR-Pff"/>
+                    <constraint firstAttribute="trailing" secondItem="E9A-TQ-zbz" secondAttribute="trailing" constant="16" id="AOl-w2-VC4"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="Aby-jv-gim"/>
                     <constraint firstAttribute="bottom" secondItem="oKA-M4-CeL" secondAttribute="bottom" id="CfU-pt-5YU"/>
-                    <constraint firstAttribute="trailing" secondItem="Qpf-ep-Gd6" secondAttribute="trailing" constant="16" id="CmQ-9Z-w0l"/>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Dq1-Fy-ZXC"/>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="GIi-ua-HME" secondAttribute="trailing" constant="173" id="I8Y-K6-FNE"/>
+                    <constraint firstItem="oKA-M4-CeL" firstAttribute="top" secondItem="E9A-TQ-zbz" secondAttribute="bottom" constant="146" id="J1K-WP-IgH"/>
+                    <constraint firstItem="E9A-TQ-zbz" firstAttribute="leading" secondItem="Qpf-ep-Gd6" secondAttribute="trailing" constant="16" id="R01-7V-osg"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="leading" secondItem="j3A-Sy-Bl7" secondAttribute="trailing" constant="4" id="RnV-1F-NaF"/>
                     <constraint firstAttribute="trailing" secondItem="5gT-3I-aPM" secondAttribute="trailing" constant="16" id="Zna-aJ-ajn"/>
                     <constraint firstAttribute="trailing" secondItem="oKA-M4-CeL" secondAttribute="trailing" id="cls-YQ-Wl6"/>
@@ -88,6 +97,7 @@
                     <constraint firstItem="GeO-05-zJU" firstAttribute="top" secondItem="GIi-ua-HME" secondAttribute="bottom" constant="16" id="nU8-3s-ENI"/>
                     <constraint firstAttribute="bottomMargin" secondItem="GeO-05-zJU" secondAttribute="bottom" constant="19" id="qgb-9I-Eq3"/>
                     <constraint firstItem="5gT-3I-aPM" firstAttribute="top" secondItem="Qpf-ep-Gd6" secondAttribute="bottom" constant="16" id="x52-N2-NGe"/>
+                    <constraint firstItem="E9A-TQ-zbz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="xPf-IM-s0r"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -95,6 +105,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mileStoneImage" width="17" height="18"/>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

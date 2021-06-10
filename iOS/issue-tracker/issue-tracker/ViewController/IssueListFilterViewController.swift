@@ -1,10 +1,3 @@
-//
-//  IssueListFilterViewController.swift
-//  issue-tracker
-//
-//  Created by user on 2021/06/10.
-//
-
 import UIKit
 
 class IssueListFilterViewController: UIViewController {
