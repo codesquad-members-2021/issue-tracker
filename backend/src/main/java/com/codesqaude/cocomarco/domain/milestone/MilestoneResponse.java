@@ -23,7 +23,7 @@ public class MilestoneResponse {
         int closeIssueCount = milestone.countIssuesByStatus(IssueStatus.CLOSE);
         double progress = closeIssueCount / ((double) openIssueCount + closeIssueCount);
         return new MilestoneResponse(milestone.getId(), milestone.getTitle(), milestone.getDetail(),
-                milestone.getDeadline(), (int) (progress * PERCENT),
+                milestone.getDeadLine(), (int) (progress * PERCENT),
                 openIssueCount, closeIssueCount);
     }
 }

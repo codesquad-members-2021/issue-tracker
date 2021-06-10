@@ -1,10 +1,7 @@
 package com.codesqaude.cocomarco.service;
 
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
-import com.codesqaude.cocomarco.domain.milestone.Milestone;
-import com.codesqaude.cocomarco.domain.milestone.MilestoneRepository;
-import com.codesqaude.cocomarco.domain.milestone.MilestoneResponse;
-import com.codesqaude.cocomarco.domain.milestone.MilestonesWrapper;
+import com.codesqaude.cocomarco.domain.milestone.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,5 +25,9 @@ public class MilestoneService {
         Page<Milestone> milestonePage = milestoneRepository.findAll(pageable);
         List<MilestoneResponse> milestoneResponses = milestonePage.stream().map(MilestoneResponse::of).collect(Collectors.toList());
         return new MilestonesWrapper(milestoneResponses, labelRepository.count());
+    }
+
+    public void create(MilestoneRequest milestoneRequest){
+        milestoneRepository.save(milestoneRequest.toEntity());
     }
 }
