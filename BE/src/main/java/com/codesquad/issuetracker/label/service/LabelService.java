@@ -5,6 +5,7 @@ import com.codesquad.issuetracker.label.dto.LabelRequest;
 import com.codesquad.issuetracker.label.dto.LabelDto;
 import com.codesquad.issuetracker.label.repository.LabelRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +30,7 @@ public class LabelService {
         return LabelDto.fromEntity(labelRepository.save(newLabel.toEntity()));
     }
 
+    @Transactional
     public LabelDto update(UUID id, LabelRequest updatingLabelInfo) {
         Label updatingLabel = labelRepository.findById(id)
                 //TODO: Exception
