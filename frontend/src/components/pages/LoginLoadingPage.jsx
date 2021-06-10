@@ -1,17 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import API from "./../util/API";
+
 const LoginLoadingPage = () => {
+	const [isLogin, setIsLogin] = useState(false);
 	const getToken = async () => {
 		const params = new URLSearchParams(window.location.search);
-		console.log(params);
 		const code = params.get("code");
 		console.log(code);
-		// const token = await API.post.code(code);
-		// localStorage.setItem("token", token);
+		const res = await fetch(API.login(code));
+		const json = await res.json();
+		const { accessToken, tokenType } = json;
+		localStorage.setItem("accessToken", accessToken);
+		localStorage.setItem("tokeType", tokenType);
+		setIsLogin(true);
 	};
 	useEffect(() => {
 		getToken();
 	}, []);
-	return <div>로딩</div>;
+	return <>${isLogin ? <Redirect to="/main"></Redirect> : <div>로딩</div>}</>;
 };
 
 export default LoginLoadingPage;
