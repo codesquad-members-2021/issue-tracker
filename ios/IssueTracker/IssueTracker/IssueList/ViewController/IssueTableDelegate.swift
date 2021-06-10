@@ -15,16 +15,18 @@ class IssueTableDelegate: NSObject, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let share = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+        let close = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
             completion(true)
         }
+        close.image = UIImage(systemName: "archivebox")
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
             NotificationCenter.default.post(name: .deleteIssue, object: nil, userInfo: ["index": indexPath])
             completion(true)
         }
+        delete.image = UIImage(systemName: "trash")
         
-        let configuration = UISwipeActionsConfiguration(actions: [delete, share])
+        let configuration = UISwipeActionsConfiguration(actions: [delete, close])
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
