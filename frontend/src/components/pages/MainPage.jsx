@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
+import styled from "styled-components";
 import NewIssue from "./NewIssuePage";
 import NoMatch from "./NoMatchPage";
 import IssueDetailPage from "./IssueDetailPage";
@@ -8,7 +9,6 @@ import Milestones from "components/Milestones/Milestones";
 import Header from "components/common/Header";
 import Navigator from "components/common/Navigator";
 import Issues from "components/Issues/Issues";
-import styled from "styled-components";
 
 const MainPage = () => {
 	const { pathname } = window.location;
@@ -17,6 +17,7 @@ const MainPage = () => {
 	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
+
 			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
 				<Navigator />
 			)}
@@ -35,9 +36,10 @@ const MainPage = () => {
 };
 
 const MainPageLayout = styled.div`
-	display: flex;
+	/* display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 0 80px; */
 `;
 
 export default MainPage;
