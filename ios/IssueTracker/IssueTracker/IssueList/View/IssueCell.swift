@@ -9,11 +9,11 @@ import UIKit
 
 class IssueCell: UITableViewCell, ReuseIdentifierable, UINibCreatable {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var milestoneView: UIView!
-    @IBOutlet weak var milestoneLabel: UILabel!
-    @IBOutlet weak var labelStackView: UIStackView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var milestoneView: UIView!
+    @IBOutlet private weak var milestoneLabel: UILabel!
+    @IBOutlet private weak var labelStackView: UIStackView!
     
 }
 

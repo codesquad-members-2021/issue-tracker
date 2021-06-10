@@ -9,12 +9,12 @@ import UIKit
 
 class IssueListViewController: UIViewController {
     
-    @IBOutlet weak var issueNumLabel: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var issueTableView: UITableView!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var EditButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet private weak var issueNumLabel: UILabel!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var issueTableView: UITableView!
+    @IBOutlet private weak var filterButton: UIButton!
+    @IBOutlet private weak var EditButton: UIButton!
+    @IBOutlet private weak var plusButton: UIButton!
     
     private var viewModel: IssueViewModel!
     private var dataSource: IssueDataSource!
