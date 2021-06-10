@@ -71,7 +71,12 @@ class IssueListViewController: UIViewController {
         searchController.searchBar.setImage(micImage, for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
     }
-    
+ 
+    @objc func showIssueListFilterView(sender: UIBarButtonItem) {
+        guard let filterViewController = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController else { return }
+        
+        self.present(filterViewController, animated: true, completion: nil)
+    }
 }
 
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {

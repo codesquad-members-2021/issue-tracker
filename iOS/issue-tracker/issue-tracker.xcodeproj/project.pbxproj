@@ -23,6 +23,7 @@
 		BD6AF8C7266F64D200ADBCDE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
+		CE7183602671F61F008B287F /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835F2671F61F008B287F /* FilterHeaderView.swift */; };
 		D1A7BE791A93D93FFEAD56C9 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9D20682EEABD0253D986DA /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		CE71835F2671F61F008B287F /* FilterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */,
 				BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */,
 				CE71835D2671EB78008B287F /* FilterTableViewCell.swift */,
+				CE71835F2671F61F008B287F /* FilterHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
+				CE7183602671F61F008B287F /* FilterHeaderView.swift in Sources */,
 				BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */,
 				BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */,
 				CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */,

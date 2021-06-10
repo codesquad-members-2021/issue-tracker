@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q2y-Ti-QDY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAx-ab-YaI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -274,12 +274,12 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fXx-No-t8h">
                                 <rect key="frame" x="0.0" y="154" width="414" height="708"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterTableViewCell" id="cRv-xz-dmN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterTableViewCell" id="cRv-xz-dmN" customClass="FilterTableViewCell" customModule="issue_tracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cRv-xz-dmN" id="XGn-Tp-k5L" customClass="FilterTableViewCell" customModule="issue_tracker" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cRv-xz-dmN" id="XGn-Tp-k5L">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -305,11 +305,11 @@
                                                 <constraint firstItem="BoK-mv-hkG" firstAttribute="leading" secondItem="XGn-Tp-k5L" secondAttribute="leading" constant="20" id="f1V-Is-hxz"/>
                                                 <constraint firstItem="BoK-mv-hkG" firstAttribute="centerY" secondItem="XGn-Tp-k5L" secondAttribute="centerY" id="h7P-K1-U3P"/>
                                             </constraints>
-                                            <connections>
-                                                <outlet property="checkImage" destination="AB4-go-L1g" id="Qay-Zb-SAT"/>
-                                                <outlet property="title" destination="BoK-mv-hkG" id="3df-pD-v7b"/>
-                                            </connections>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkImage" destination="AB4-go-L1g" id="clZ-XD-exj"/>
+                                            <outlet property="title" destination="BoK-mv-hkG" id="YW1-Kd-LXh"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -319,7 +319,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RIZ-qq-QqX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fXx-No-t8h" firstAttribute="top" secondItem="cly-7M-egq" secondAttribute="bottom" id="2yT-IJ-xgO"/>
                             <constraint firstItem="cly-7M-egq" firstAttribute="top" secondItem="8yc-tD-kEU" secondAttribute="topMargin" id="5gc-1d-v0u"/>

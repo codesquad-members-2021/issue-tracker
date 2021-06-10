@@ -14,5 +14,4 @@ class FilterTableViewCell: UITableViewCell {
     
     static let identifier = "FilterTableViewCell"
     
-    
 }
