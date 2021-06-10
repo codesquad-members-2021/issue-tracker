@@ -9,35 +9,30 @@ public class MileStoneDummyData {
     private MileStoneDummyData() {
     }
 
-    public static Set<MileStoneResponse> MileStonesResponse() {
+    public static Set<MileStoneResponse> mileStonesResponse() {
         return new HashSet<>(Arrays.asList(
-                MileStoneResponse.builder()
+                openMileStoneResponse(),
+                closeMileStoneResponse()
+        ));
+    }
+
+    public static MileStoneResponse closeMileStoneResponse() {
+        return  MileStoneResponse.builder()
                     .id(1L)
-                    .name("milestone명")
-                    .description("milestone설명")
+                    .name("[FE] 이슈리스트 페이지")
+                    .description("이슈리스트 페이지 작성단위의 이슈를 모아서 관리")
                     .dueDate(LocalDate.of(2020, 12, 25))
                     .isClosed(true)
                     .openedIssueCount(1)
                     .closedIssueCount(1)
-                    .build(),
+                    .build();
+    };
 
-                MileStoneResponse.builder()
-                    .id(2L)
-                    .name("milestone명")
-                    .description("milestone설명")
-                    .dueDate(LocalDate.of(2020, 12, 23))
-                    .isClosed(false)
-                    .openedIssueCount(2)
-                    .closedIssueCount(2)
-                    .build()
-        ));
-    }
-
-    public static MileStoneResponse MileStoneResponse() {
+    public static MileStoneResponse openMileStoneResponse() {
         return  MileStoneResponse.builder()
                     .id(1L)
-                    .name("milestone명")
-                    .description("milestone설명")
+                    .name("[BE] 목업데이터 작성하기")
+                    .description("목업 데이터를 작성하는 이슈를 관리")
                     .dueDate(LocalDate.of(2020, 12, 25))
                     .isClosed(false)
                     .openedIssueCount(1)

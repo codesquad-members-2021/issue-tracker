@@ -4,7 +4,6 @@ import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneDummyData;
-import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserResponse;
 
 import java.time.LocalDateTime;
@@ -33,7 +32,7 @@ public class IssueDummyData {
                         .labels(new HashSet<>(Arrays.asList(
                                 labelBe()
                         )))
-                        .milestone(MileStoneDummyData.MileStoneResponse())
+                        .milestone(MileStoneDummyData.openMileStoneResponse())
                         .build()
         );
     }
@@ -52,7 +51,7 @@ public class IssueDummyData {
                        .labels(Arrays.asList(
                                labelBe()
                        ))
-                       .milestone(MileStoneDummyData.MileStoneResponse())
+                       .milestone(MileStoneDummyData.openMileStoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
                                             .author(userFreddie())
