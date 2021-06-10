@@ -29,6 +29,9 @@ extension IssueCell {
     }
     
     private func fillLabels(with labels: [Label]) {
+        labelStackView.arrangedSubviews.forEach { label in
+            label.removeFromSuperview()
+        }
         labels.forEach { label in
             let label_ = LabelView()
             label_.fillUI(with: label)
