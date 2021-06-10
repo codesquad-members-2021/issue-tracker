@@ -10,12 +10,26 @@ public class LabelDummyData {
 
     public static Set<LabelResponse> labelResponses() {
         return new HashSet<>(Arrays.asList(
-                LabelResponse.builder()
-                    .id(1L)
-                    .name("backend")
-                    .description("라벨 설명")
-                    .color("라벨 컬러")
-                    .build()
+                labelBe(),
+                labelFe()
         ));
+    }
+
+    public static LabelResponse labelBe() {
+        return LabelResponse.builder()
+                       .id(1L)
+                       .name("be")
+                       .description("label for backend")
+                       .color("#1679CF")
+                       .build();
+    }
+
+    public static LabelResponse labelFe() {
+        return LabelResponse.builder()
+                       .id(2L)
+                       .name("fe")
+                       .description("label for frontend")
+                       .color("#3EFC68")
+                       .build();
     }
 }
