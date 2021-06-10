@@ -19,7 +19,7 @@ struct IssueInfo: Decodable {
     let author:String
     let createdDateTime:String
     let commentNumber:Int
-    let assignees:[String]
-    let labels:[String]
+    let assignees:[Assignee]
+    let labels:[Label]
     let milestone:String
 }

@@ -29,7 +29,7 @@ class IssueListViewController: UIViewController {
         
         viewModel.issueList
             .drive(issueCollectionView.rx.items(cellIdentifier: IssueCell.identifier, cellType: IssueCell.self)) { _, issue, cell in
-                cell.configure(issue.title, issue.comment, milestone: issue.milestone, label: issue.labels.first!)
+                cell.configure(issue.title, issue.comment, milestone: issue.milestone, label: issue.labels.first!.name)
             }.disposed(by: rx.disposeBag)
     }
 }
