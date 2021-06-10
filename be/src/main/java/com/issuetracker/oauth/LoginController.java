@@ -40,6 +40,9 @@ public class LoginController {
                 .header("Authorization", "token " + responseDto.getBody().getAccessToken())
                 .build();
 
+        ResponseEntity<User> user = githubRequest.exchange(request, User.class);;
+
+
     }
 }
 
