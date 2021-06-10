@@ -1,102 +1,114 @@
-import { useState, useRef } from 'react'
-import styled from 'styled-components'
-import CheckBox from '../atom/CheckBox'
-import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded'
-import CheckRoundedIcon from '@material-ui/icons/CheckRounded'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import List from '../atom/List'
-import useToggle from '../../hooks/useToggle'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { getOpenIssues, getCloseIssues, issuesStorage, CountInfoStorage } from '../../hooks/store'
+import { useState, useRef } from 'react';
+import styled from 'styled-components';
+import CheckBox from '../atom/CheckBox';
+import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import List from '../atom/List';
+import useToggle from '../../hooks/useToggle';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { getOpenIssues, getCloseIssues, issuesStorage, CountInfoStorage } from '../../hooks/store';
 
-
-function ListLeft(){
-  const {openedIssue, closedIssue} = useRecoilValue(CountInfoStorage)
-  const setIssues = useSetRecoilState(issuesStorage)
-  const asyncOpenIssues = useRecoilValue(getOpenIssues)//요청해서받은 오픈이슈
-  const asyncCloseIssues = useRecoilValue(getCloseIssues)//요청해서받은 오픈이슈
-  const openIssueList = asyncOpenIssues?.issues
-  const closeIssueList = asyncCloseIssues?.issues
-  const handleOpen =()=>setIssues(openIssueList)
-  const handleClose =()=>setIssues(closeIssueList)
+function ListLeft() {
+  const { openedIssue, closedIssue } = useRecoilValue(CountInfoStorage);
+  const setIssues = useSetRecoilState(issuesStorage);
+  const asyncOpenIssues = useRecoilValue(getOpenIssues); //요청해서받은 오픈이슈
+  const asyncCloseIssues = useRecoilValue(getCloseIssues); //요청해서받은 오픈이슈
+  const openIssueList = asyncOpenIssues?.issues;
+  const closeIssueList = asyncCloseIssues?.issues;
+  const handleOpen = () => setIssues(openIssueList);
+  const handleClose = () => setIssues(closeIssueList);
   return (
     <ListLeftBlock>
-      <CheckBox/>
+      <CheckBox />
       <FilterTabBlock>
-        <div onClick={handleOpen}><AdjustRoundedIcon/> 열린 이슈 ({openedIssue})</div>
-        <div onClick={handleClose}><CheckRoundedIcon/> 닫힌 이슈 ({closedIssue})</div>
+        <div onClick={handleOpen}>
+          <AdjustRoundedIcon /> 열린 이슈 ({openedIssue})
+        </div>
+        <div onClick={handleClose}>
+          <CheckRoundedIcon /> 닫힌 이슈 ({closedIssue})
+        </div>
       </FilterTabBlock>
     </ListLeftBlock>
-  )
+  );
 }
-function ListRight(){
-  const [type, setType] = useState<string>('')
-  
-  const assigneeToggle = useRef<HTMLDivElement>(null)
-  const labelToggle = useRef<HTMLDivElement>(null)
-  const milestoneToggle = useRef<HTMLDivElement>(null)
-  const authorToggle = useRef<HTMLDivElement>(null)
-  const listModal = useRef<HTMLDivElement>(null)
+function ListRight() {
+  const [type, setType] = useState<string>('');
+
+  const assigneeToggle = useRef<HTMLDivElement>(null);
+  const labelToggle = useRef<HTMLDivElement>(null);
+  const milestoneToggle = useRef<HTMLDivElement>(null);
+  const authorToggle = useRef<HTMLDivElement>(null);
+  const listModal = useRef<HTMLDivElement>(null);
 
   const filterStandards = [
-    {name:'담당자', ref: assigneeToggle},
-    {name:'레이블', ref:labelToggle},
-    {name:'마일스톤',ref: milestoneToggle},
-    {name:'작성자', ref: authorToggle},
-  ]
-  const open = useToggle({toggle: [assigneeToggle, labelToggle, milestoneToggle, authorToggle ], modal: listModal, init:false})
+    { name: '담당자', ref: assigneeToggle },
+    { name: '레이블', ref: labelToggle },
+    { name: '마일스톤', ref: milestoneToggle },
+    { name: '작성자', ref: authorToggle },
+  ];
+  const open = useToggle({
+    toggle: [assigneeToggle, labelToggle, milestoneToggle, authorToggle],
+    modal: listModal,
+    init: false,
+  });
 
-  const handleClick = (clickTarget:string):void =>{
-    setType(clickTarget)
-  }
-  
+  const handleClick = (clickTarget: string): void => {
+    setType(clickTarget);
+  };
+
   return (
     <>
-      <FilterInListBlock> 
-        {filterStandards.map((standard,idx)=>
-          <div ref={standard.ref} key={idx} onClick={()=>handleClick(standard.name)}>
-            {standard.name}<ExpandMoreIcon/>
-          </div>)}
-        </FilterInListBlock>
-      {open && <List type={type} modal={listModal}/>}
+      <FilterInListBlock>
+        {filterStandards.map((standard, idx) => (
+          <div ref={standard.ref} key={idx} onClick={() => handleClick(standard.name)}>
+            {standard.name}
+            <ExpandMoreIcon />
+          </div>
+        ))}
+      </FilterInListBlock>
+      {open && <List type={type} modal={listModal} />}
     </>
-  )
+  );
 }
-function ListHead(){
-  
+function ListHead() {
   return (
     <>
       <ListHeadBlock>
-        <ListLeft/>
-        <ListRight/>
+        <ListLeft />
+        <ListRight />
       </ListHeadBlock>
     </>
-  )
+  );
 }
 const ListHeadBlock = styled.div`
-display: flex;
-justify-content: space-between;
-background-color: ${({theme})=>theme.color.bgGrey};
-border: ${({theme})=>theme.color.bgGrey};
-border-radius: 16px 16px 0 0;`
-const ListLeftBlock =styled.div`
-display: flex;
-padding: 0 10px;`
+  display: flex;
+  justify-content: space-between;
+  background-color: ${({ theme }) => theme.color.bgGrey};
+  border: ${({ theme }) => theme.color.bgGrey};
+  border-radius: 16px 16px 0 0;
+`;
+const ListLeftBlock = styled.div`
+  display: flex;
+  padding: 0 10px;
+`;
 const FilterTabBlock = styled.div`
-display: flex;
-div { 
   display: flex;
-  align-items: center;
-  margin-right: 10px;
-}`
+  div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+`;
 
-const FilterInListBlock=styled.div`
-display: flex;
-position: relative;
-div { 
+const FilterInListBlock = styled.div`
   display: flex;
-  align-items: center;
-  margin-right: 10px;
-}`
+  position: relative;
+  div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+`;
 
-export default ListHead
+export default ListHead;

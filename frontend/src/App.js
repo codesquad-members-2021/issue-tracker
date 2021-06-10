@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import IssueListPage from './components/issueListpage/IssueListPage';
 import LoginPage from './components/login/LoginPage';
 import Header from './components/header/Header';
 import { RecoilRoot } from 'recoil';
+import MainPage from './page/MainPage';
 function App() {
   const isLogin = true;
   return (
@@ -16,7 +16,7 @@ function App() {
             <Switch>
               <Route path='/' component={LoginPage} exact />
               //로그인이 되면, 되어있다면 화면 전환.
-              <Route path='/main' component={IssueListPage} />
+              <Route path='/main' component={MainPage} />
             </Switch>
           </Router>
         </Suspense>
