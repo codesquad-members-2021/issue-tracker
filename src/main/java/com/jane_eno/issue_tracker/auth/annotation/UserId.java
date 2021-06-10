@@ -8,5 +8,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Target(PARAMETER)
-public @interface UserName {
+public @interface UserId {
 }

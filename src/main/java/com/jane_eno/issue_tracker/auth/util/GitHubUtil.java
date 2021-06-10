@@ -1,6 +1,6 @@
 package com.jane_eno.issue_tracker.auth.util;
 
-import com.jane_eno.issue_tracker.auth.exception.IllegalHostException;
+import com.jane_eno.issue_tracker.auth.exception.UnknownUserAgentException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +20,23 @@ public class GitHubUtil {
     @Value("${github.ios.client.secret}")
     private String iOSClientSecret;
 
-    public String verifyClientId(String host) {
-        if (Host.isFront(host)) {
+    public String verifyClientId(String userAgent) {
+        if (UserAgent.isFront(userAgent)) {
             return frontClientId;
         }
-        if (Host.isIOS(host)) {
+        if (UserAgent.isIOS(userAgent)) {
             return iOSClientId;
         }
-        throw new IllegalHostException();
+        throw new UnknownUserAgentException();
     }
 
-    public String verifyClientSecret(String host) {
-        if (Host.isFront(host)) {
+    public String verifyClientSecret(String userAgent) {
+        if (UserAgent.isFront(userAgent)) {
             return frontClientSecret;
         }
-        if (Host.isIOS(host)) {
+        if (UserAgent.isIOS(userAgent)) {
             return iOSClientSecret;
         }
-        throw new IllegalHostException();
+        throw new UnknownUserAgentException();
     }
 }

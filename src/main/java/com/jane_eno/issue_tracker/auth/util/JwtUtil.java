@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 @NoArgsConstructor
 public class JwtUtil {
-    public static final String GITHUB_NAME = "githubName";
+    public static final String USER_ID = "userId";
 
     @Value("${jwt.issuer}")
     private String ISSUER;
@@ -26,7 +26,7 @@ public class JwtUtil {
     public String createToken(User user) {
         return JWT.create()
                 .withExpiresAt(new Date())
-                .withClaim(GITHUB_NAME, user.getUserName())
+                .withClaim(USER_ID, user.getId())
                 .withIssuer(ISSUER)
                 .sign(Algorithm.HMAC256(SECRET_KEY));
     }

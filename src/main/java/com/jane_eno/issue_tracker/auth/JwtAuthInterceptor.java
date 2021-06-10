@@ -12,7 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.jane_eno.issue_tracker.auth.util.JwtUtil.GITHUB_NAME;
+import static com.jane_eno.issue_tracker.auth.util.JwtUtil.USER_ID;
 
 @Component
 @RequiredArgsConstructor
@@ -40,8 +40,8 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         String jwt = header.substring("Bearer".length()).trim();
         DecodedJWT decodedJWT = jwtUtil.verifyToken(jwt);
 
-        String userName = decodedJWT.getClaim(GITHUB_NAME).asString();
-        request.setAttribute("userName", userName);
+        Long userId = decodedJWT.getClaim(USER_ID).asLong();
+        request.setAttribute("userId", userId);
     }
 
     private void verifyHeader(String header) {

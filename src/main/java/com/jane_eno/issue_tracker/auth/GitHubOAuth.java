@@ -34,10 +34,10 @@ public class GitHubOAuth implements OAuth {
     private final WebClient webClient = WebClient.builder().clientConnector(new ReactorClientHttpConnector(httpClient)).build();
 
     @Override
-    public AccessTokenResponseDTO getToken(String code, String host) {
+    public AccessTokenResponseDTO getToken(String code, String userAgent) {
         AccessTokenRequestDTO accessTokenRequest = AccessTokenRequestDTO.builder()
-                .clientId(gitHubUtil.verifyClientId(host))
-                .clientSecret(gitHubUtil.verifyClientSecret(host))
+                .clientId(gitHubUtil.verifyClientId(userAgent))
+                .clientSecret(gitHubUtil.verifyClientSecret(userAgent))
                 .code(code)
                 .build();
 

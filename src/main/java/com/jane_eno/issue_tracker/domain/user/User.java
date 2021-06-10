@@ -41,6 +41,7 @@ public class User {
         email = userInfo.getEmail();
         userName = userInfo.getLogin();
         avatarUrl = userInfo.getAvatarUrl();
+        this.token = token;
     }
 
     public void removeToken() {

@@ -6,7 +6,7 @@ import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
 import com.jane_eno.issue_tracker.auth.util.JwtUtil;
 import com.jane_eno.issue_tracker.domain.user.User;
 import com.jane_eno.issue_tracker.domain.user.UserRepository;
-import com.jane_eno.issue_tracker.exception.EntityNotFoundException;
+import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,22 +19,20 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
-    public UserResponseDTO login(String code, String host) {
-        AccessTokenResponseDTO token = oauth.getToken(code, host);
+    public UserResponseDTO login(String code, String userAgent) {
+        AccessTokenResponseDTO token = oauth.getToken(code, userAgent);
         GitHubUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
             User user = findByUserName(userInfo.getLogin());
             user.update(userInfo, token.getAccessToken());
-            userRepository.save(user);
-            return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(user));
+            return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
         }
         User user = User.createUser(userInfo, token);
-        userRepository.save(user);
-        return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(user));
+        return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
     }
 
-    public void logout(String userName) {
-        User user = findByUserName(userName);
+    public void logout(Long userId) {
+        User user = findByUserId(userId);
         user.removeToken();
         userRepository.save(user);
     }
@@ -44,6 +42,14 @@ public class UserService {
     }
 
     private User findByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(EntityNotFoundException::new);
+        return userRepository.findByUserName(userName).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find user by given user name.")
+        );
+    }
+
+    private User findByUserId(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find user by given user id.")
+        );
     }
 }

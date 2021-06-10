@@ -29,7 +29,10 @@ public class IssueService {
                 .author("Jane")
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
-                .assignees(new ArrayList<>(Arrays.asList("janeljs", "enolj", "Ray")))
+                .assignees(new ArrayList<>(Arrays.asList(
+                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
+                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
+                )))
                 .labels(new ArrayList<>(Arrays.asList(
                         new Label(1L, "bug", "#CCFFCC", "bug fix", true),
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
@@ -44,7 +47,10 @@ public class IssueService {
                 .author("주나미")
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
-                .assignees(new ArrayList<>(Arrays.asList("Kyle", "enolj", "Ray")))
+                .assignees(new ArrayList<>(Arrays.asList(
+                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
+                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
+                )))
                 .labels(new ArrayList<>(Arrays.asList(
                         new Label(1L, "bug", "#CCFFCC", "bug fix", true),
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)
@@ -59,7 +65,10 @@ public class IssueService {
                 .author("Ray")
                 .createdDateTime(LocalDateTime.now())
                 .commentNumber(5)
-                .assignees(new ArrayList<>(Arrays.asList("janeljs", "enolj", "Ray")))
+                .assignees(new ArrayList<>(Arrays.asList(
+                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
+                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
+                )))
                 .labels(new ArrayList<>(Arrays.asList(
                         new Label(1L, "bug", "#CCFFCC", "bug fix", true),
                         new Label(2L, "enhancement", "#99FFFF", "enhancement", false)

@@ -1,7 +1,7 @@
 package com.jane_eno.issue_tracker.web;
 
 import com.jane_eno.issue_tracker.auth.annotation.LoginRequired;
-import com.jane_eno.issue_tracker.auth.annotation.UserName;
+import com.jane_eno.issue_tracker.auth.annotation.UserId;
 import com.jane_eno.issue_tracker.service.UserService;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +18,16 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestHeader("host") String host, @RequestParam String code) {
+    public UserResponseDTO login(@RequestHeader("User-Agent") String userAgent, @RequestParam String code) {
         logger.debug("로그인 요청");
-        logger.debug("헤더 확인: {}", host);
-        return userService.login(code, host);
+        logger.debug("헤더 확인: {}", userAgent);
+        return userService.login(code, userAgent);
     }
 
     @GetMapping("/logout")
     @LoginRequired
-    public void logout(@UserName String userName) {
+    public void logout(@UserId Long userId) {
         logger.debug("로그아웃 요청");
-        userService.logout(userName);
+        userService.logout(userId);
     }
 }
