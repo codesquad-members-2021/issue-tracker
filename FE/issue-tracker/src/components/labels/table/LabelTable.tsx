@@ -17,7 +17,7 @@ function LabelTable() {
 export default LabelTable;
 
 const LabelTableWrap = styled.section`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
