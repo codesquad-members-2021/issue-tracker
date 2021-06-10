@@ -1,30 +1,34 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import CheckBox from '../../atom/CheckBox';
+import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 
 interface Props {}
 
 export default function IssueListHeaderLeft({}: Props): ReactElement {
-  const { openedIssue, closedIssue } = useRecoilValue(CountInfoStorage);
-  const setIssues = useSetRecoilState(issuesStorage);
-  const asyncOpenIssues = useRecoilValue(getOpenIssues); //요청해서받은 오픈이슈
-  const asyncCloseIssues = useRecoilValue(getCloseIssues); //요청해서받은 오픈이슈
-  const openIssueList = asyncOpenIssues?.issues;
-  const closeIssueList = asyncCloseIssues?.issues;
-  const handleOpen = () => setIssues(openIssueList);
-  const handleClose = () => setIssues(closeIssueList);
   return (
     <IssueListHeaderLeftBlock>
       <CheckBox />
-      <FilterTabBlock>
-        <div onClick={handleOpen}>
-          <AdjustRoundedIcon /> 열린 이슈 ({openedIssue})
+      <div className='issue-header__filter-tab'>
+        <div>
+          <AdjustRoundedIcon /> 열린 이슈 ()
         </div>
-        <div onClick={handleClose}>
-          <CheckRoundedIcon /> 닫힌 이슈 ({closedIssue})
+        <div>
+          <CheckRoundedIcon /> 닫힌 이슈 ()
         </div>
-      </FilterTabBlock>
+      </div>
     </IssueListHeaderLeftBlock>
   );
 }
 
-const IssueListHeaderLeftBlock = styled.div``;
+const IssueListHeaderLeftBlock = styled.div`
+  .issue-header__filter-tab {
+    display: flex;
+    div {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+  }
+`;
