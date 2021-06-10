@@ -1,12 +1,11 @@
 package com.issuetracker.oauth;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.issuetracker.util.Oauth;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -20,7 +19,7 @@ public class LoginController {
     }
 
     @GetMapping("/auth")
-    public void login(@RequestParam String client, @RequestParam String code) {
+    public JwtDto login(@RequestParam String client, @RequestParam String code) {
         RestTemplate githubRequest = new RestTemplate();
         String accessTokenUri = oauthUtil.getUriForAccesToken(code);
 
@@ -31,6 +30,31 @@ public class LoginController {
                         oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
                 ));
 
-       ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
+        ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
+
+        RequestEntity<Void> request = RequestEntity
+                .get(oauthUtil.getUserinfoUri())
+                .header("Accept", "application/json")
+                .header("Authorization", "token " + responseDto.getBody().getAccessToken())
+                .build();
+
+        ResponseEntity<User> user = githubRequest.exchange(request, User.class);
+
+        Algorithm algorithm = Algorithm.HMAC256(oauthUtil.getAlgorithmSecret());
+
+        String jwt = JWT.create()
+                .withClaim("id", user.getBody().getId())
+                .withClaim("name", user.getBody().getLogin())
+                .withClaim("avatar_url", user.getBody().getAvatar_url())
+                .withIssuer(oauthUtil.getIssuer())
+                .sign(algorithm);
+
+        return new JwtDto(jwt);
+    }
+
+    @GetMapping("/hello")
+    public void hell(@RequestAttribute User user) {
+        System.out.println(user);
     }
 }
+
