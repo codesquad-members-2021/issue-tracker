@@ -38,20 +38,26 @@ class IssueListViewController: UIViewController {
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         configureNavigationItem()
+        configureTableViewFooterView()
     }
     
-    //MARK: - 아래로 당기면 SearchBar show
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        navigationItem.searchController = searchController
-//    }
+    func configureTableViewFooterView() {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 100))
+        footerView.backgroundColor = UIColor.clear
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 20))
+        footerView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        label.textAlignment = .center
+        label.text = "아래로 당기면 검색바가 보여요!👁"
+        label.textColor = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        
+        self.issueTableView.tableFooterView = footerView
+    }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        navigationItem.searchController = searchController
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        navigationItem.searchController = searchController
+        self.issueTableView.tableFooterView = nil
     }
 
     func configureNavigationItem() {
@@ -60,7 +66,10 @@ class IssueListViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "이슈"
-        
+        self.navigationItem.searchController = searchController
+        let micImage = UIImage(systemName: "mic.fill")
+        searchController.searchBar.setImage(micImage, for: .bookmark, state: .normal)
+        searchController.searchBar.showsBookmarkButton = true
     }
     
 }
