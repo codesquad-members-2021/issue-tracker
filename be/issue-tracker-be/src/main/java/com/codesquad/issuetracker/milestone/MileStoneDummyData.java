@@ -30,7 +30,7 @@ public class MileStoneDummyData {
 
     public static MileStoneResponse openMileStoneResponse() {
         return  MileStoneResponse.builder()
-                    .id(1L)
+                    .id(2L)
                     .name("[BE] 목업데이터 작성하기")
                     .description("목업 데이터를 작성하는 이슈를 관리")
                     .dueDate(LocalDate.of(2020, 12, 25))

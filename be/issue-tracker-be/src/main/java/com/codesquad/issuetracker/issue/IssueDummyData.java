@@ -49,7 +49,7 @@ public class IssueDummyData {
                        .labels(new HashSet<>(Arrays.asList(
                                LabelDummyData.labelBe(),
                                LabelDummyData.labelFe()
-                       ))
+                       )))
                        .milestone(MileStoneDummyData.openMileStoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
