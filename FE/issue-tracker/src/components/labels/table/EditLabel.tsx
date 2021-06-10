@@ -1,25 +1,13 @@
 import styled from 'styled-components';
-import { Button } from '@chakra-ui/react';
-import { ReactComponent as Edit } from '@assets/edit.svg';
-import { ReactComponent as Cancel } from '@assets/cancel.svg';
 import LabelInputBox from '@components/labels/LabelInputBox';
-import { submitButton, whiteButton } from '@components/labels/newLabelStyle';
+import EditCompleteBtn from '@components/common/EditCompleteBtn';
 
 function EditLabel() {
   return (
     <EditLabelWrap>
       <h2>레이블 편집</h2>
       <LabelInputBox>
-        <ButtonBox>
-          <Button {...submitButton}>
-            <Edit className="icon_edit" />
-            완료
-          </Button>
-          <Button {...whiteButton} marginRight="8px">
-            <Cancel className="icon_cancel" />
-            취소
-          </Button>
-        </ButtonBox>
+        <EditCompleteBtn />
       </LabelInputBox>
     </EditLabelWrap>
   );
@@ -49,9 +37,4 @@ const EditLabelWrap = styled.section`
       stroke: ${({ theme }) => theme.colors.bl_initial};
     }
   }
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
 `;
