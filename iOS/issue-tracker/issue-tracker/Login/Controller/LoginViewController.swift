@@ -6,8 +6,36 @@
 //
 
 import UIKit
+import AuthenticationServices
+import KeychainAccess
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+    
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return self.view.window ?? ASPresentationAnchor()
+    }
+    
+    private let github_OAuthURLString = "https://github.com/login/oauth/authorize"
+    private let keychain = Keychain()
+    
+    private lazy var github_client_id: String = {
+        var github_client_id = String()
+        github_client_id = keychain["github_client_id"] ?? ""
+        return github_client_id
+    }()
+    private lazy var github_redirect_uri: String = {
+        var github_redirect_uri = String()
+        github_redirect_uri = keychain["github_redirect_uri"] ?? ""
+        return github_redirect_uri
+    }()
+    private lazy var github_callbackUrlScheme: String = {
+        var github_callbackUrlScheme = String()
+        github_callbackUrlScheme = keychain["github_callbackUrlScheme"] ?? ""
+        return github_callbackUrlScheme
+    }()
+    
+    
+    var webAuthSession: ASWebAuthenticationSession?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -17,7 +45,7 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
+    
     private lazy var loginIDTextField = UITextField()
     private lazy var loginPwdTextField = UITextField()
     
@@ -79,7 +107,11 @@ class LoginViewController: UIViewController {
     private lazy var githubLoginButton: UIButton = {
         let image = UIImage(named: "icon_github")
         let title = "GitHub 계정으로 로그인"
-        return socialLoginButton(with: image, title)
+        let button = socialLoginButton(with: image, title)
+        
+        button.addTarget(self, action: #selector(loginByGithubTouchedDown), for: .touchUpInside)
+        return button
+        
     }()
     
     private lazy var appleLoginButton: UIButton = {
@@ -117,7 +149,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-        
+    
     private func addTitleLabel() {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -131,7 +163,7 @@ class LoginViewController: UIViewController {
         loginStackView.backgroundColor = UIColor.white
         loginStackView.layer.borderColor = Colors.border.cgColor
         loginStackView.layer.borderWidth = borderWidth
-                
+        
         NSLayoutConstraint.activate([
             loginStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loginStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height * 0.088),
@@ -182,10 +214,53 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
-        print("하이~, H I~")
+//        print("하이~, H I~")
         let tabBarVC = IssueTrackerTabBarController()
         tabBarVC.modalPresentationStyle = .fullScreen
         present(tabBarVC, animated: true, completion: nil)
     }
     
+    @objc private func loginByGithubTouchedDown(sender: UIButton!) {
+        var components = URLComponents(string: github_OAuthURLString)!
+        components.queryItems = [
+            URLQueryItem(name: "client_id", value: github_client_id),
+            URLQueryItem(name: "redirect_uri", value: github_redirect_uri)
+        ]
+        webAuthSession = ASWebAuthenticationSession.init(url: components.url!, callbackURLScheme: github_callbackUrlScheme, completionHandler: { (callbackURL:URL?, error:Error?) in
+            
+            guard error == nil, let successURL = callbackURL else {
+                return
+            }
+            
+            guard let code = NSURLComponents(string: (successURL.absoluteString))?.queryItems?.filter({$0.name == "code"}).first?.value else { return }
+            print("code = ",code)
+                        
+            let networkmanager = NetworkManager()
+            networkmanager.setInfoGithub(with: code) { (result: Result<OAuthResponse,Error>) in
+                switch result {
+                case .success(let jwtResponse):
+                    print("response=",jwtResponse)
+                    self.keychain["github_jwt"] = jwtResponse.avatarUrl
+                    self.keychain["github_avatarUrl"] = jwtResponse.jwt
+                    self.keychain["github_loginId"] = jwtResponse.loginId
+                    
+                    DispatchQueue.main.async {
+//                        webAuthSession?.cancel()
+                        let tabBarVC = IssueTrackerTabBarController()
+                        tabBarVC.modalPresentationStyle = .fullScreen
+                        self.present(tabBarVC, animated: true, completion: nil)
+                    }
+                    
+                case .failure(let error):
+                    print("error",error)
+                }
+            }
+        })
+        webAuthSession?.presentationContextProvider = self
+        webAuthSession?.start()
+        
+    }
 }
+
+//6da592247cbf329d18c0
+//21384f723aeedf9be9c8

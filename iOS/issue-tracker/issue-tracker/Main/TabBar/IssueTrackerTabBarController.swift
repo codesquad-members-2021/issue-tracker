@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import KeychainAccess
 
 class IssueTrackerTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = Colors.mainGrape
@@ -21,6 +22,9 @@ class IssueTrackerTabBarController: UITabBarController {
         
         let viewControllers = items.map{ createTabBarViewController(info: $0) }
         setViewControllers(viewControllers, animated: true)
+        
+        let keychain = Keychain()
+        print("잘 지정됐는지 테스트하기!", keychain["github_jwt"], keychain["github_avatarUrl"], keychain["github_loginId"] )
     }
     
     struct TabBarViewControllerInfo {
@@ -41,5 +45,5 @@ class IssueTrackerTabBarController: UITabBarController {
         viewController.tabBarItem = tabBarItem
         return viewController
     }
-
+    
 }
