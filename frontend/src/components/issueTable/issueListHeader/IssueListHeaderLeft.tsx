@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import CheckBox from 'components/atom/CheckBox';
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import { useSetRecoilState } from 'recoil';
-import { issueTypeState } from 'store/issueInfoStore';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { getIssuesInfoState, issueTypeState } from 'store/issueInfoStore';
 
 interface Props {}
 
 export default function IssueListHeaderLeft({}: Props): ReactElement {
   const setIssueType = useSetRecoilState(issueTypeState);
+  const {
+    count: { openedIssue, closedIssue },
+  } = useRecoilValue(getIssuesInfoState);
 
   const handleOpenClick = () => setIssueType('open');
   const handleCloseClick = () => setIssueType('close');
@@ -18,10 +21,10 @@ export default function IssueListHeaderLeft({}: Props): ReactElement {
       <CheckBox />
       <div className='issue-header__filter-tab'>
         <div onClick={handleOpenClick}>
-          <AdjustRoundedIcon /> <span>열린 이슈 ()</span>
+          <AdjustRoundedIcon /> <span>열린 이슈 ({openedIssue})</span>
         </div>
         <div onClick={handleCloseClick}>
-          <CheckRoundedIcon /> <span>닫힌 이슈 ()</span>
+          <CheckRoundedIcon /> <span>닫힌 이슈 ({closedIssue})</span>
         </div>
       </div>
     </IssueListHeaderLeftBlock>
@@ -29,6 +32,7 @@ export default function IssueListHeaderLeft({}: Props): ReactElement {
 }
 
 const IssueListHeaderLeftBlock = styled.div`
+  display: flex;
   .issue-header__filter-tab {
     display: flex;
     div {
