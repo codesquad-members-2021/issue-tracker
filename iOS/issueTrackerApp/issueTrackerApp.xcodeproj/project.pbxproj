@@ -19,6 +19,10 @@
 		883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51A82670ABDC0055EC9E /* TagLabel.swift */; };
 		883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51AD2670B2F70055EC9E /* UIColorExtension.swift */; };
 		883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */; };
+		883F51C7267200EA0055EC9E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51C6267200EA0055EC9E /* Issue.swift */; };
+		883F51CC2672041A0055EC9E /* Milestones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51CB2672041A0055EC9E /* Milestones.swift */; };
+		883F51D4267204520055EC9E /* LabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51D3267204520055EC9E /* LabelModel.swift */; };
+		883F51DC267204DC0055EC9E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51DB267204DC0055EC9E /* Comment.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -68,6 +72,10 @@
 		883F51A82670ABDC0055EC9E /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagLabel.swift; path = ViewController/Issue/TagLabel.swift; sourceTree = SOURCE_ROOT; };
 		883F51AD2670B2F70055EC9E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomBarButtonItem.swift; path = ViewController/Issue/CustomBarButtonItem.swift; sourceTree = SOURCE_ROOT; };
+		883F51C6267200EA0055EC9E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Issue.swift; path = ViewController/Issue/Issue.swift; sourceTree = SOURCE_ROOT; };
+		883F51CB2672041A0055EC9E /* Milestones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Milestones.swift; path = ViewController/Issue/Milestones.swift; sourceTree = SOURCE_ROOT; };
+		883F51D3267204520055EC9E /* LabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelModel.swift; path = ViewController/Issue/LabelModel.swift; sourceTree = SOURCE_ROOT; };
+		883F51DB267204DC0055EC9E /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = ViewController/Issue/Comment.swift; sourceTree = SOURCE_ROOT; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +254,10 @@
 		930FAEBD266E127B00422968 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				883F51C6267200EA0055EC9E /* Issue.swift */,
+				883F51CB2672041A0055EC9E /* Milestones.swift */,
+				883F51D3267204520055EC9E /* LabelModel.swift */,
+				883F51DB267204DC0055EC9E /* Comment.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -475,6 +487,8 @@
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
 				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
+				883F51CC2672041A0055EC9E /* Milestones.swift in Sources */,
+				883F51DC267204DC0055EC9E /* Comment.swift in Sources */,
 				9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */,
 				9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */,
 				883F5185266F5F090055EC9E /* IssueViewController.swift in Sources */,
@@ -483,6 +497,8 @@
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
 				883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */,
+				883F51D4267204520055EC9E /* LabelModel.swift in Sources */,
+				883F51C7267200EA0055EC9E /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
