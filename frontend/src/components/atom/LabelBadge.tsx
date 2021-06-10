@@ -1,23 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LabelColorType } from 'components/issueTable/issueType';
+
 interface LabelBadgeProps {
-  color: string;
+  color: LabelColorType;
   desc?: string;
 }
 function LabelBadge({ color, desc }: LabelBadgeProps) {
-  return <LabelBadgeBlock color={color}>{desc}</LabelBadgeBlock>;
+  return <LabelBadgeBlock labelColor={color}>{desc}</LabelBadgeBlock>;
 }
 
-const LabelBadgeBlock = styled.div<LabelBadgeProps>`
+interface StyledProps {
+  labelColor: LabelColorType;
+}
+
+const LabelBadgeBlock = styled.div<StyledProps>`
+  display: flex;
+  align-items: center;
   margin-left: 10px;
   padding: 0 5px;
-  height: 25px;
+  height: 20px;
   width: auto;
   max-width: 100px;
   text-align: center;
   border-radius: 30px;
-  background-color: ${(props) => props.color};
-  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.size.sm}px;
+  color: ${({ labelColor }) => labelColor.backgroundColorCode};
+  background-color: ${({ labelColor }) => labelColor.textColorCode};
 `;
 
 export default LabelBadge;
