@@ -34,12 +34,13 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let token = appleIDCredential.identityToken,
+              let tokenInString = String(data: token, encoding: .utf8),
               let name = appleIDCredential.fullName?.givenName ?? appleIDCredential.fullName?.familyName else {
             //에러 리턴
             return
         }
         
-        let loginInfo = LoginInfo(token: token, name: name)
+        let loginInfo = LoginInfo(jwt: tokenInString, avatarURL: nil, name: name)
         delegate?.didAppleLoginSuccess(with: loginInfo)
     }
     

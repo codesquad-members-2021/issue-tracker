@@ -28,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let loginManager = loginManager, let loginInfo = loginInfo else { return }
         
         let issueTrackerTabBarController = IssueTrackerTabBarController()
-        issueTrackerTabBarController.configure(loginManager: loginManager)
+        issueTrackerTabBarController.configure(loginManager: loginManager, loginInfo: loginInfo)
+        
         window?.rootViewController = issueTrackerTabBarController
         
         print(loginInfo.name, " 님  환영합니다!")
