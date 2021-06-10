@@ -1,13 +1,12 @@
-package team02.issue_tracker.dto;
+package team02.issue_tracker.dto.issue;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team02.issue_tracker.domain.*;
 
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class IssueRequest {
 
@@ -18,4 +17,8 @@ public class IssueRequest {
     private List<Long> labelIds;
     private Long milestoneId;
     private List<Long> assigneeIds;
+
+    public Issue toIssue(User writer, List<Label> labels, Milestone milestone, List<User> assignees) {
+        return new Issue(title, comment, file, writer, true, labels, milestone, assignees);
+    }
 }
