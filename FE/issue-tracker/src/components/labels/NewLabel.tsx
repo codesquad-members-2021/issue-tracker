@@ -16,13 +16,5 @@ function NewLabel() {
 export default NewLabel;
 
 const NewLabelWrap = styled.section`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.gr_line};
-  padding: 32px;
-  border-radius: ${({ theme }) => theme.radii['2xl']};
-  background-color: ${({ theme }) => theme.colors.gr_offWhite};
-  h2 {
-    font-size: ${({ theme }) => theme.fontSizes['2xl']};
-    margin-bottom: 16px;
-  }
+  ${({ theme }) => theme.newLabelMilestoneWrap};
 `;
