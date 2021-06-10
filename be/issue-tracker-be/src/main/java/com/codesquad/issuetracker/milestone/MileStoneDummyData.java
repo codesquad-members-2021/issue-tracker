@@ -19,6 +19,16 @@ public class MileStoneDummyData {
                     .isClosed(true)
                     .openedIssueCount(1)
                     .closedIssueCount(1)
+                    .build(),
+
+                MileStoneResponse.builder()
+                    .id(2L)
+                    .name("milestone명")
+                    .description("milestone설명")
+                    .dueDate(LocalDate.of(2020, 12, 23))
+                    .isClosed(false)
+                    .openedIssueCount(2)
+                    .closedIssueCount(2)
                     .build()
         ));
     }
