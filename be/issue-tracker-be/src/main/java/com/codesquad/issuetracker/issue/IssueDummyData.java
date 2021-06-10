@@ -5,8 +5,6 @@ import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserDummyData;
-import com.codesquad.issuetracker.user.UserResponse;
-import org.apache.tomcat.jni.User;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -44,9 +42,9 @@ public class IssueDummyData {
                        .createDateTime(LocalDateTime.now())
                        .author(UserDummyData.userHiro())
                        .assignees(UserDummyData.usersResponse())
-                       .labels(Arrays.asList(
+                       .labels(new HashSet<>(Arrays.asList(
                                labelBe()
-                       ))
+                       )))
                        .milestone(milestoneMockup())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)

@@ -6,21 +6,12 @@ import java.util.Set;
 
 public class UserDummyData {
     private UserDummyData() {
-
     }
 
     public static Set<UserResponse> usersResponse() {
         return new HashSet<>(Arrays.asList(
-                UserResponse.builder()
-                    .id(1L)
-                    .name("hiro")
-                    .email("hiro@naver.com")
-                    .build(),
-                UserResponse.builder()
-                    .id(1L)
-                    .name("freddie")
-                    .email("freddie@naver.com")
-                    .build()
+                userFreddie(),
+                userHiro()
         ));
     }
 

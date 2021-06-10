@@ -21,7 +21,7 @@ public class IssueDetailResponse {
     private LocalDateTime createDateTime;
     private UserResponse author;
     private Set<UserResponse> assignees;
-    private List<LabelResponse> labels;
+    private Set<LabelResponse> labels;
     private MileStoneResponse milestone;
     private CommentResponse mainComment;
     private List<CommentResponse> comments;
