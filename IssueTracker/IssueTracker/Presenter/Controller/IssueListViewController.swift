@@ -52,4 +52,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
         let height = issueCollectionView.frame.height * 0.3
         return CGSize(width: width, height: height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
 }

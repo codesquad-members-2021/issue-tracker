@@ -311,7 +311,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-8K-DHf">
-                                                    <rect key="frame" x="1" y="74" width="308" height="31"/>
+                                                    <rect key="frame" x="1" y="74" width="308" height="20"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -320,6 +320,7 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="don-jh-7fC" secondAttribute="trailing" id="63W-ac-QV4"/>
                                                 <constraint firstItem="Bci-8K-DHf" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="9Ii-rH-hZ5"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.373457" id="AzV-ZD-2Vp"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.15625" id="HwA-Bi-Lp7"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="top" secondItem="don-jh-7fC" secondAttribute="bottom" multiplier="1.03" constant="1" id="IEj-I7-XEc"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.910494" id="J3z-09-jTj"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OBl-FT-h3J" secondAttribute="trailing" id="Jio-87-NDI"/>
@@ -327,7 +328,6 @@
                                                 <constraint firstItem="Bci-8K-DHf" firstAttribute="top" secondItem="OBl-FT-h3J" secondAttribute="bottom" multiplier="1.03" constant="1" id="PGO-iC-clt"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.195312" id="Q48-tg-sIB"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="top" secondItem="KdJ-Tq-2EI" secondAttribute="top" multiplier="1.03" constant="1" id="Q9f-E9-SQg"/>
-                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.242188" id="Qyc-Oz-dwL"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="top" secondItem="TCp-fC-jZO" secondAttribute="bottom" multiplier="1.03" constant="1" id="Rzm-6t-W7F"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.158854" id="THP-GB-OSI"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="Ywg-Ld-RXf"/>
