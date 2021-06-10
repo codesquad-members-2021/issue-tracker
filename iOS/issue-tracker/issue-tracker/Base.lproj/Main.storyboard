@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eSe-aU-cEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAx-ab-YaI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -349,27 +349,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbW-ne-zMn">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
-                                <items/>
-                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSF-HF-RgO">
+                                <rect key="frame" x="0.0" y="813" width="414" height="83"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZP-81-836">
+                                        <rect key="frame" x="16" y="15" width="20" height="22"/>
+                                        <state key="normal" image="checkmark.circle" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkY-Pn-s75">
+                                        <rect key="frame" x="377" y="16" width="21" height="22"/>
+                                        <state key="normal" image="archivebox" catalog="system"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O1-lk-NZd">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="xJA-kH-WoR"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1개의 이슈가 선택됨" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2a-SD-hkI">
+                                        <rect key="frame" x="140" y="16" width="134" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1O1-lk-NZd" secondAttribute="trailing" id="8p3-dl-uLi"/>
+                                    <constraint firstItem="1O1-lk-NZd" firstAttribute="top" secondItem="kSF-HF-RgO" secondAttribute="top" id="9nd-Mn-ti9"/>
+                                    <constraint firstItem="p2a-SD-hkI" firstAttribute="top" secondItem="1O1-lk-NZd" secondAttribute="bottom" constant="15" id="Fz6-80-bmR"/>
+                                    <constraint firstItem="OZP-81-836" firstAttribute="leading" secondItem="kSF-HF-RgO" secondAttribute="leading" constant="16" id="JtR-xI-daI"/>
+                                    <constraint firstItem="kkY-Pn-s75" firstAttribute="top" secondItem="kSF-HF-RgO" secondAttribute="top" constant="16" id="NPN-s5-718"/>
+                                    <constraint firstAttribute="bottom" secondItem="kkY-Pn-s75" secondAttribute="bottom" constant="45" id="Sdx-6n-6HE"/>
+                                    <constraint firstAttribute="height" constant="83" id="dRs-XX-ld6"/>
+                                    <constraint firstAttribute="trailing" secondItem="kkY-Pn-s75" secondAttribute="trailing" constant="16" id="g7O-Id-AaH"/>
+                                    <constraint firstAttribute="bottom" secondItem="OZP-81-836" secondAttribute="bottom" constant="46" id="gUG-D7-4Ac"/>
+                                    <constraint firstAttribute="bottom" secondItem="p2a-SD-hkI" secondAttribute="bottom" constant="46" id="lya-pl-Llh"/>
+                                    <constraint firstItem="1O1-lk-NZd" firstAttribute="leading" secondItem="kSF-HF-RgO" secondAttribute="leading" id="pXn-VM-q9s"/>
+                                    <constraint firstItem="p2a-SD-hkI" firstAttribute="centerX" secondItem="kSF-HF-RgO" secondAttribute="centerX" id="qSt-cx-hfP"/>
+                                    <constraint firstItem="OZP-81-836" firstAttribute="top" secondItem="kSF-HF-RgO" secondAttribute="top" constant="15" id="zSG-w8-NqF"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PWh-Oi-pe4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="eSe-aU-cEI" id="tRQ-zD-tMD"/>
+                                    <outlet property="delegate" destination="eSe-aU-cEI" id="acB-wF-hQU"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zjk-if-fF4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="XbW-ne-zMn" firstAttribute="leading" secondItem="Zjk-if-fF4" secondAttribute="leading" id="3wN-l1-pit"/>
-                            <constraint firstItem="XbW-ne-zMn" firstAttribute="bottom" secondItem="Zjk-if-fF4" secondAttribute="bottom" id="8qr-pc-zxy"/>
-                            <constraint firstItem="XbW-ne-zMn" firstAttribute="trailing" secondItem="Zjk-if-fF4" secondAttribute="trailing" id="YS3-mU-YOf"/>
+                            <constraint firstItem="Zjk-if-fF4" firstAttribute="trailing" secondItem="kSF-HF-RgO" secondAttribute="trailing" id="H8h-i6-PaW"/>
+                            <constraint firstItem="PWh-Oi-pe4" firstAttribute="top" secondItem="Zjk-if-fF4" secondAttribute="top" id="LB0-AQ-H5f"/>
+                            <constraint firstItem="kSF-HF-RgO" firstAttribute="leading" secondItem="Zjk-if-fF4" secondAttribute="leading" id="R38-he-jl5"/>
+                            <constraint firstAttribute="bottom" secondItem="kSF-HF-RgO" secondAttribute="bottom" id="bhG-6N-1xP"/>
+                            <constraint firstItem="Zjk-if-fF4" firstAttribute="trailing" secondItem="PWh-Oi-pe4" secondAttribute="trailing" id="rkl-Jw-CH5"/>
+                            <constraint firstItem="PWh-Oi-pe4" firstAttribute="leading" secondItem="Zjk-if-fF4" secondAttribute="leading" id="uhy-if-pmL"/>
+                            <constraint firstItem="kSF-HF-RgO" firstAttribute="top" secondItem="PWh-Oi-pe4" secondAttribute="bottom" id="zIi-2U-Lc5"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="issueSelectionToolBar" destination="XbW-ne-zMn" id="yeV-D6-hIb"/>
+                        <outlet property="allSelectionButton" destination="OZP-81-836" id="rnr-3R-1pa"/>
+                        <outlet property="issueCloseButton" destination="kkY-Pn-s75" id="6iM-YA-BYC"/>
+                        <outlet property="issueTableView" destination="PWh-Oi-pe4" id="sUT-Gh-qkY"/>
+                        <outlet property="selectedIssueCountLabel" destination="p2a-SD-hkI" id="ddo-15-cGl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKP-OA-TSw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961" y="798"/>
+            <point key="canvasLocation" x="3960.8695652173915" y="797.54464285714278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J67-YZ-aC2">
@@ -447,7 +499,9 @@
     <resources>
         <image name="GitHubImage" width="24" height="24"/>
         <image name="applelogo" catalog="system" width="103" height="128"/>
+        <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="mileStoneImage" width="17" height="18"/>
@@ -460,11 +514,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

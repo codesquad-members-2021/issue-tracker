@@ -2,31 +2,48 @@ import UIKit
 
 class IssueSelectionViewController: UIViewController {
 
-    @IBOutlet weak var issueSelectionToolBar: UIToolbar!
+    @IBOutlet weak var issueTableView: UITableView!
+    @IBOutlet weak var allSelectionButton: UIButton!
+    @IBOutlet weak var issueCloseButton: UIButton!
+    @IBOutlet weak var selectedIssueCountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureToolBarLabel()
+        configureNavigationTitle()
+        configureCancelButton()
+        issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
     }
     
-    func configureToolBarLabel() {
-        let label = UILabel(frame: .zero)
-        label.text = "1개의 이슈가 선택됨"
-        label.sizeToFit()
-        let toolBarLabel = UIBarButtonItem(customView: label)
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        issueSelectionToolBar.setItems([configureLeftToolBarItem(), flexible, toolBarLabel, flexible, configureRightToolBarItem()], animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.hidesBackButton = true
     }
     
-    func configureLeftToolBarItem() -> UIBarButtonItem {
-        let image = UIImage(systemName: "checkmark.circle.fill")
-        let item = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
-        return item
+    func configureNavigationTitle() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
+        self.navigationItem.title = "이슈 선택"
     }
     
-    func configureRightToolBarItem() -> UIBarButtonItem {
-        let image = UIImage(systemName: "archivebox")
-        let item = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
-        return item
+    func configureCancelButton() {
+        let button = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(pressedCancelButton))
+        button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight(600))], for: .normal)
+        self.navigationItem.rightBarButtonItem = button
+    }
+    
+    @objc func pressedCancelButton() {
+        self.navigationController?.popViewController(animated: false)
+    }
+}
+extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
     }
 }

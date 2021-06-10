@@ -23,7 +23,6 @@ class IssueListFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         filterTableView.tableFooterView = UIView()
     }
     
@@ -37,7 +36,6 @@ class IssueListFilterViewController: UIViewController {
         label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
         label.text = Section.allCases[section].sectionDescription()
-        
         return headerView
     }
 
@@ -64,7 +62,9 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FilterTableViewCell.identifier, for: indexPath) as? FilterTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FilterTableViewCell.identifier, for: indexPath) as? FilterTableViewCell else {
+            return UITableViewCell()
+        }
         cell.title.text = "asdfasdfasdf"
         cell.checkImage.isHidden = false
         return cell

@@ -15,10 +15,12 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
-        issueTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         configureNavigationItem()
         configureTableViewFooterView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         configureFilterButton()
+        configureSelectButton()
     }
     
     func configureTableViewFooterView() {
@@ -41,8 +43,6 @@ class IssueListViewController: UIViewController {
     }
 
     func configureNavigationItem() {
-        configureFilterButton()
-        configureSelectButton()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "이슈"
@@ -68,14 +68,23 @@ class IssueListViewController: UIViewController {
         button.setImage(buttonImage, for: .normal)
         button.setTitle("선택 ", for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
+        button.addTarget(self, action: #selector(showIssueSelectionView(sender:)), for: .touchUpInside)
         let selectButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = selectButton
     }
  
     @objc func showIssueListFilterView(sender: UIBarButtonItem) {
-        guard let filterViewController = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController else { return }
-        
+        guard let filterViewController = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController else {
+            return
+        }
         self.present(filterViewController, animated: true, completion: nil)
+    }
+    
+    @objc func showIssueSelectionView(sender: UIBarButtonItem) {
+        guard let issueSelectionViewController = self.storyboard?.instantiateViewController(identifier: "IssueSelectionViewController") as? IssueSelectionViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(issueSelectionViewController, animated: false)
     }
     
     //MARK: - TableView Cell Swipe Action Method
@@ -108,7 +117,9 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else {
+            return UITableViewCell()            
+        }
         
         return cell
     }
