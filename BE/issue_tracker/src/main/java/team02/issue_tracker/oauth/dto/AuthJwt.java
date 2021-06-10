@@ -1,12 +1,16 @@
 package team02.issue_tracker.oauth.dto;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 public class AuthJwt {
 
-    public static String tokenType = "Bearer";
-    public String jwt;
+    @JsonSetter("token_type")
+    private String tokenType = "Bearer";
+    private String jwt;
 
     public AuthJwt(String jwt) {
         this.jwt = jwt;

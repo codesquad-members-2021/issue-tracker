@@ -1,6 +1,8 @@
 package team02.issue_tracker.oauth;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -8,17 +10,26 @@ import org.springframework.web.client.RestTemplate;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenResponseDto;
 import team02.issue_tracker.oauth.dto.GithubUserProfile;
-import team02.issue_tracker.repository.UserRepository;
 
 @Slf4j
+@PropertySource("classpath:oauth.properties")
 @Service
 public class OAuthService {
 
-    private final String GITHUB_CLIENT_ID = "8f053229e25de08ed09d";
-    private final String GITHUB_CLIENT_SECRET = "7be948f2baabb4510d611bf720ea22b7965d1098";
-    private final String GITHUB_ACCESS_TOKEN_URI = "https://github.com/login/oauth/access_token";
-    private final String GITHUB_REDIRECT_URI = "http://localhost:8080/api/oauth/github/callback";
-    private final String GITHUB_USER_INFO_URI = "https://api.github.com/user";
+    @Value("${oauth.github.client_id}")
+    private String GITHUB_CLIENT_ID;
+
+    @Value("${oauth.github.client_secret}")
+    private String GITHUB_CLIENT_SECRET;
+
+    @Value("${oauth.github.access_token_uri}")
+    private String GITHUB_ACCESS_TOKEN_URI;
+
+    @Value("${oauth.github.redirect_uri.web}")
+    private String GITHUB_REDIRECT_URI;
+
+    @Value("${oauth.github.user_info_uri}")
+    private String GITHUB_USER_INFO_URI;
 
     public GithubUserProfile githubUserProfileFrom(String code) {
         return githubUserProfileFrom(accessTokenFrom(code));

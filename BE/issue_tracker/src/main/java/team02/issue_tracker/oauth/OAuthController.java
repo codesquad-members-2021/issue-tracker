@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.domain.User;
+import team02.issue_tracker.dto.ApiResult;
 import team02.issue_tracker.oauth.dto.AuthJwt;
 import team02.issue_tracker.oauth.dto.GithubUserProfile;
 import team02.issue_tracker.service.UserService;
 
 @Slf4j
-@RequestMapping("/api/oauth")
+@RequestMapping("/api")
 @RestController
 public class OAuthController {
 
@@ -27,8 +28,8 @@ public class OAuthController {
         this.jwtUtils = jwtUtils;
     }
 
-    @GetMapping("/github/callback")
-    public String githubCallBack(@RequestParam("code") String code) {
+    @GetMapping("/login/github/web")
+    public ApiResult<AuthJwt> issueJwtForWeb(@RequestParam("code") String code) {
         log.info("code : {}", code);
         GithubUserProfile githubUserProfile = oauthService.githubUserProfileFrom(code);
         User userFromGithub = githubUserProfile.becomeUser();
@@ -44,6 +45,6 @@ public class OAuthController {
         String result = jwtUtils.decodeJwt(decodedJWT);
         log.info("info from jwt token : {}", result);
 
-        return githubUserProfile.toString();
+        return ApiResult.success(authJwt);
     }
 }
