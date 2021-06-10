@@ -24,7 +24,9 @@ class LabelRepositoryTest {
     void create() {
         Label label = Label.create("document", "문서에 대한 레이블", Colors.of("#000000", "#FFFFFF"));
         label = labelRepository.save(label);
+
         entityManager.flush();
+        entityManager.detach(label);
 
         Label selectedLabel = labelRepository.findById(label.getId()).orElseThrow(RuntimeException::new);
 
