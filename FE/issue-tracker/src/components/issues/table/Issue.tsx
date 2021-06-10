@@ -1,9 +1,9 @@
-import { Avatar } from '@chakra-ui/avatar';
 import styled from 'styled-components';
 
-function Issue() {
-  // Label Styled Component는 colorCode를 Prop으로 받는다.
+import { Avatar } from '@chakra-ui/avatar';
+import Label from '@components/common/Label';
 
+function Issue() {
   return (
     <IssueWrap>
       <IssueContainer>
@@ -11,9 +11,7 @@ function Issue() {
           <CheckBox type="checkbox" name="issueCheckBox" />
           <IssueTitle>
             <h2>이것은 제목입니다.</h2>
-            <Label>
-              <span>레이블 타이틀</span>
-            </Label>
+            <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
           </IssueTitle>
         </StyledDiv>
         <Description>
@@ -26,16 +24,13 @@ function Issue() {
         <NoticeTag>
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
+          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
         </NoticeTag>
         <NoticeTag>
-          <Label>
-            <span>레이블 타이틀</span>
-          </Label>
+          <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
         </NoticeTag>
         <NoticeTag>
-          <Label>
-            <span>레이블 타이틀</span>
-          </Label>
+          <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
         </NoticeTag>
         <NoticeTag>
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
@@ -109,11 +104,11 @@ const Description = styled.div`
   }
 `;
 
-const Label = styled.div`
-  ${({ theme }) => theme.flexCenter};
-  padding: 4px 16px;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  background: ${({ theme }) => theme.colors.bl_initial};
-  border-radius: 30px;
-  cursor: pointer;
-`;
+// const Label = styled.div`
+//   ${({ theme }) => theme.flexCenter};
+//   padding: 4px 16px;
+//   font-size: ${({ theme }) => theme.fontSizes.xs};
+//   background: ${({ theme }) => theme.colors.bl_initial};
+//   border-radius: 30px;
+//   cursor: pointer;
+// `;
