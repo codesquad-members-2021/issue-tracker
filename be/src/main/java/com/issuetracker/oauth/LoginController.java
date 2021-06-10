@@ -1,6 +1,7 @@
 package com.issuetracker.oauth;
 
 import com.issuetracker.util.Oauth;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,14 @@ public class LoginController {
                         oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
                 ));
 
-       ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
+        ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
+
+        RequestEntity<Void> request = RequestEntity
+                .get(oauthUtil.getUserinfoUri())
+                .header("Accept", "application/json")
+                .header("Authorization", "token " + responseDto.getBody().getAccessToken())
+                .build();
+
     }
 }
+

@@ -36,6 +36,10 @@ public class Oauth {
         return environment.getProperty(REDIRECT_URI);
     }
 
+    public String getUserinfoUri() {
+        return environment.getProperty(USERINFO_URI);
+    }
+
     public String getUriForAccesToken(String code) {
         return environment.getProperty(TOKEN_URI) + "?client_id="
                 + getClientId() + "&client_secret=" + getClientSecret()
