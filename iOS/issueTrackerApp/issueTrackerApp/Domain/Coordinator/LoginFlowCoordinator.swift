@@ -8,7 +8,11 @@
 import UIKit
 import AuthenticationServices
 
-class LoginFlowCoordinator {
+class LoginFlowCoordinator: NSObject, ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return ASPresentationAnchor()
+    }
+    
     weak var parent: Coordinator?
     weak var loginViewController: UIViewController?
     private var authenticationSession: ASWebAuthenticationSession?
@@ -25,13 +29,17 @@ class LoginFlowCoordinator {
     
     func loginViewController(_ viewController: LoginViewController, didStartAuthorizationWithState state: String) {
         let url = GitHubEndpoint.authorizationUrl(with: state)
-        authenticationSession = ASWebAuthenticationSession(url: url, callbackURLScheme: GitHubEndpoint.authorizationCallbackURLScheme, completionHandler: { [weak self] (callbackURL, error) in
-            self?.authenticationSession = nil
-            if let authorizationCode = callbackURL?.authorizationCode {
+
+        let session = ASWebAuthenticationSession(url: url, callbackURLScheme: GitHubEndpoint.authorizationCallbackURLScheme)
+        { callbackURL, error in
+            guard error == nil, let callbackURL = callbackURL else { return }
+
+            if let authorizationCode = callbackURL.authorizationCode {
                 viewController.performAuthorization(with: authorizationCode)
             }
-        })
-        authenticationSession?.start()
+        }
+        session.presentationContextProvider = self
+        session.start()
     }
     
     func loginViewControllerDidFinishAuthorization() {
