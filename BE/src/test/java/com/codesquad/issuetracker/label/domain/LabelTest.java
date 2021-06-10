@@ -60,4 +60,16 @@ class LabelTest {
         assertThat(documentation.getDescription()).isEqualTo("문서화를 위한 레이블");
     }
 
+    @Test
+    @DisplayName("Update Label")
+    void updateLabel() {
+        Label label = Label.create("feat", "기능", Colors.of("#123456", "#567890"));
+        Label updateInfo = Label.create("feature", "기능 구현", Colors.of("#111111", "#EEEEEE"));
+
+        label.update(updateInfo);
+
+        assertThat(label.getName()).isEqualTo("feature");
+        assertThat(label.getDescription()).isEqualTo("기능 구현");
+    }
+
 }

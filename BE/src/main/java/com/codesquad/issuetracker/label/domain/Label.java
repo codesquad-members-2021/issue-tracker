@@ -35,6 +35,12 @@ public class Label {
         this.colors = colors;
     }
 
+    public void update(Label newInfoLabel) {
+        this.name = newInfoLabel.name;
+        this.description = newInfoLabel.description;
+        this.colors = newInfoLabel.colors;
+    }
+
     public static Label create(String name, String description, Colors colors) {
         checkName(name);
         checkDescription(description);
