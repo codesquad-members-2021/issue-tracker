@@ -196,6 +196,13 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func presentAlert(with errorMessage: String) {
+        DispatchQueue.main.async {
+            let alert = AlertFactory.create(body: errorMessage)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
         print("하이~, H I~")
     }
@@ -213,11 +220,13 @@ extension LoginViewController: AppleLoginManagerDelegate {
         if loginKeyChainManager.save(loginInfo) {
             presentIssueViewController(with: loginInfo)
         } else {
-            //저장 오류
+            let saveErrorText = LoginError.keyChainSave.description
+            presentAlert(with: saveErrorText)
         }
     }
     
     func didAppleLoginFail(with error: Error) {
-        //에러 표시
+        let appleLoginErrorText = LoginError.appleIDAccess.description
+        presentAlert(with: appleLoginErrorText)
     }
 }

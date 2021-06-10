@@ -12,6 +12,8 @@
 		E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */; };
 		E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */; };
 		E426DAC42671D95D0069E77D /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC32671D95D0069E77D /* LoginService.swift */; };
+		E426DAC72671F6A00069E77D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC62671F6A00069E77D /* LoginError.swift */; };
+		E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC82671F7760069E77D /* AlertFactory.swift */; };
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
 		E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* LoginViewController.swift */; };
@@ -34,6 +36,8 @@
 		E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManagerDelegate.swift; sourceTree = "<group>"; };
 		E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKeyChainManager.swift; sourceTree = "<group>"; };
 		E426DAC32671D95D0069E77D /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		E426DAC62671F6A00069E77D /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		E426DAC82671F7760069E77D /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				FAEB30AB266F5E9700C17BE9 /* Colors.swift */,
 				FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */,
 				E42AD12526709C010071B436 /* UIViewControllerExtension.swift */,
+				E426DAC82671F7760069E77D /* AlertFactory.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
 				E426DAC32671D95D0069E77D /* LoginService.swift */,
 				E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */,
+				E426DAC62671F6A00069E77D /* LoginError.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
+				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
@@ -274,6 +281,7 @@
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
 				E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */,
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
+				E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

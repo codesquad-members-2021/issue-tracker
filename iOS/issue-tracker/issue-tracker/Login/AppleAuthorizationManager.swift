@@ -5,7 +5,6 @@
 //  Created by Song on 2021/06/09.
 //
 
-import UIKit
 import AuthenticationServices
 
 final class AppleAuthorizationManager: NSObject {
@@ -36,7 +35,7 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
               let token = appleIDCredential.identityToken,
               let tokenInString = String(data: token, encoding: .utf8),
               let name = appleIDCredential.fullName?.givenName ?? appleIDCredential.fullName?.familyName else {
-            //에러 리턴
+            delegate?.didAppleLoginFail(with: LoginError.appleIDAccess)
             return
         }
         
