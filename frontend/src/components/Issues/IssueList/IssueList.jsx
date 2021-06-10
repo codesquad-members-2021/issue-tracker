@@ -2,16 +2,17 @@ import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import IssueHeader from "./IssuesHeader";
 import IssueCard from "./IssueCard";
+import { issues } from "data";
 
 const IssueList = () => {
+	const issueList = issues.map(issue => (
+		<IssueCard key={issue.id} issue={issue} />
+	));
+
 	return (
 		<StyledIssueList>
 			<IssueHeader />
-			<IssueCard />
-			<IssueCard />
-			<IssueCard />
-			<IssueCard />
-			<IssueCard />
+			{issueList}
 		</StyledIssueList>
 	);
 };

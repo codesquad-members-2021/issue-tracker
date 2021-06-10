@@ -1,5 +1,5 @@
 const IssueDetailPage = () => {
-	return <div>1번이슈</div>;
+	return <div>이슈디테일</div>;
 };
 
 export default IssueDetailPage;
