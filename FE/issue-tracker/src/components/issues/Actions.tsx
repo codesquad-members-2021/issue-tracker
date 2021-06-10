@@ -14,7 +14,13 @@ function Actions() {
         <Tabs page="" />
       </SearchWrap>
       <Link to="/new-issue">
-        <Button marginLeft="16px" background="bl_initial" colorScheme="blue">
+        <Button
+          width="120px"
+          fontSize="xs"
+          marginLeft="16px"
+          background="bl_initial"
+          colorScheme="blue"
+        >
           + 이슈 작성
         </Button>
       </Link>
