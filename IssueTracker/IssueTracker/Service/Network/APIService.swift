@@ -23,6 +23,5 @@ class APIService:NetworkPort {
                 }
             return Disposables.create()
         }
-       
     }
 }

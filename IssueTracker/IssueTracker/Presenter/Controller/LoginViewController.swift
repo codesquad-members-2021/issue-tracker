@@ -5,19 +5,38 @@ import NSObject_Rx
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var githubLogInButton: UIButton!
     @IBOutlet weak var logInButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLoginButton()
-    }
-
-    private func setupLoginButton() {
-        logInButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let issueVC = self?.storyboard?.instantiateViewController(withIdentifier: ViewControllerID.tabBar) else { return }
-                issueVC.modalPresentationStyle = .fullScreen
-                self?.present(issueVC, animated: true, completion: nil)
-            }).disposed(by: rx.disposeBag)
+        setupButton()
     }
 }
 
+private extension LoginViewController {
+    
+    private func setupButton() {
+        setupLoginButton()
+        setupGithubLoginButton()
+    }
+    
+    private func setupLoginButton() {
+        logInButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.moveToNextVC()
+            }).disposed(by: rx.disposeBag)
+    }
+    
+    private func setupGithubLoginButton() {
+        githubLogInButton.rx.tap
+            .subscribe(onNext: { _ in
+                LoginManager.loginPost(API.githubLogin)
+            }).disposed(by: rx.disposeBag)
+    }
+    
+    private func moveToNextVC() {
+        guard let issueVC = storyboard?.instantiateViewController(withIdentifier: ViewControllerID.tabBar) else { return }
+        issueVC.modalPresentationStyle = .fullScreen
+        present(issueVC, animated: true, completion: nil)
+    }
+}

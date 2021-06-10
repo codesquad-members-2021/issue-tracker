@@ -185,6 +185,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="githubLogInButton" destination="EPC-sz-ysq" id="Z8u-OR-3cF"/>
                         <outlet property="logInButton" destination="Q2b-Cg-4OD" id="7Xy-il-FrF"/>
                     </connections>
                 </viewController>
