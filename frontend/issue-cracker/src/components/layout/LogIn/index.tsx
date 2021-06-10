@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import ButtonList from '../common/ButtonList';
-import InputList from '../common/InputList';
-import RegisterButton from '../common/RegisterButton';
-import Logo from '../common/Logo';
+import ButtonList from '../../common/ButtonList';
+import InputList from '../../common/InputList';
+import RegisterButton from '../../common/RegisterButton';
+import Logo from '../../common/Logo';
 import {
   ID,
   PASSWORD,
@@ -11,8 +11,8 @@ import {
   LOGO_TITLE,
   GITHUB_LOGIN,
   DEFAULT_LOGIN,
-} from '../../utils/const';
-import theme from '../styles/theme';
+} from '../../../utils/const';
+import theme from '../../styles/theme';
 
 const LogIn: FC = () => {
   const loginUri = `https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/callback`;

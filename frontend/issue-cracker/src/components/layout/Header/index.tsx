@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Logo from '../common/Logo';
-import { MEDIUM, LOGO_TITLE } from '../../utils/const';
-import AccountIcon from '../styles/AccountIcon';
+import Logo from '../../common/Logo';
+import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
+import AccountIcon from '../../styles/AccountIcon';
 const Header: FC = () => {
   // const [profileURL, setProfileURL] = useState('');
   // useEffect(() => {
@@ -26,7 +26,7 @@ export default Header;
 const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 27px 80px 57px 80px;
+  margin: 27px 0 57px 0;
 `;
 const UserDiv = styled.div`
   display: flex;

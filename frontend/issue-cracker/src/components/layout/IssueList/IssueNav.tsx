@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { SMALL_FILL, WRITING_ISSUE } from '../../utils/const';
-import ButtonList from '../common/ButtonList';
-import TabList from '../common/TabList';
-import CustomizedSelects from '../common/FilterBar';
+import { SMALL_FILL, WRITING_ISSUE } from '../../../utils/const';
+import ButtonList from '../../common/ButtonList';
+import TabList from '../../common/TabList';
+import CustomizedSelects from '../../common/FilterBar';
 
-const IssueList: FC = () => {
+const IssueNav: FC = () => {
   return (
-    <IssueListDiv>
-      <AddContainer>
+    <IssueNavDiv>
+      <IssueNavContainer>
         <SelectBox>
           <CustomizedSelects />
         </SelectBox>
@@ -20,22 +20,20 @@ const IssueList: FC = () => {
             <ButtonList type={SMALL_FILL} name={WRITING_ISSUE} />
           </ButtonBox>
         </AnotherBox>
-      </AddContainer>
-    </IssueListDiv>
+      </IssueNavContainer>
+      <IssueTableContainer>IssueTable</IssueTableContainer>
+    </IssueNavDiv>
   );
 };
 
-export default IssueList;
+export default IssueNav;
 
-const IssueListDiv = styled.div``;
+const IssueNavDiv = styled.div``;
 
-const AddContainer = styled.div`
-  width: 100vw;
+const IssueNavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
-  border: 1px solid red;
 `;
 
 const SelectBox = styled.div`
@@ -55,6 +53,7 @@ const TabBox = styled.div`
 `;
 
 const ButtonBox = styled.div`
-  margin: 10px;
   padding-left: 10px;
 `;
+
+const IssueTableContainer = styled.div``;

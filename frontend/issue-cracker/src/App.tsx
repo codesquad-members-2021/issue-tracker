@@ -45,4 +45,6 @@ function App(): JSX.Element {
 
 export default App;
 
-const AppStyle = styled.div``;
+const AppStyle = styled.div`
+  margin: 0 80px;
+`;

@@ -57,12 +57,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CustomizedSelects() {
+function CustomizedSelects(): JSX.Element {
   const classes = useStyles();
-  const [age, setAge] = React.useState('필터');
+  const [index, setIndex] = React.useState('필터');
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
+    setIndex(event.target.value as string);
   };
+
   return (
     <div>
       <FormControl className={classes.margin}>
@@ -70,16 +71,16 @@ function CustomizedSelects() {
         <Select
           labelId="demo-customized-select-label"
           id="demo-customized-select"
-          value={age}
+          value={index}
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value={age}>필터</MenuItem>
-          <MenuItem value={10}>열린 이슈</MenuItem>
-          <MenuItem value={20}>내가 작성한 이슈</MenuItem>
-          <MenuItem value={30}>나에게 할당된 이슈</MenuItem>
-          <MenuItem value={40}>내가 댓글을 남긴 이슈</MenuItem>
-          <MenuItem value={50}>닫힌 이슈</MenuItem>
+          <MenuItem value={'필터'}>필터</MenuItem>
+          <MenuItem value={1}>열린 이슈</MenuItem>
+          <MenuItem value={2}>내가 작성한 이슈</MenuItem>
+          <MenuItem value={3}>나에게 할당된 이슈</MenuItem>
+          <MenuItem value={4}>내가 댓글을 남긴 이슈</MenuItem>
+          <MenuItem value={5}>닫힌 이슈</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.margin}>
