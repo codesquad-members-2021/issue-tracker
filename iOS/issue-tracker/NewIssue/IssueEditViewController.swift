@@ -15,6 +15,8 @@ class IssueEditViewController: UIViewController {
     private var tableDelegate = AdditionalTableDelegate()
     private var tableDataSource = AdditionalTableViewDataSource()
     
+    private lazy var photoPicker = ImagePicker(presentationController: self, delegate: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,17 +41,21 @@ class IssueEditViewController: UIViewController {
 
     @objc
     func insertPhoto(){
-        let photoSelectViewController = PhotoViewController
-            .instantiate(name: "Main", bundle: Bundle.main)
-        let navigationVC = UINavigationController(rootViewController: photoSelectViewController)
-        navigationVC.title = "사진"
-        self.present(navigationVC, animated: true)
+        self.photoPicker.present()
     }
+    
 }
 extension IssueEditViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         let menuItem = UIMenuItem(title: "Insert Photo", action: #selector(insertPhoto))
         UIMenuController.shared.menuItems = [menuItem]
+    }
+}
+
+extension IssueEditViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        
     }
 }

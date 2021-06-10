@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -194,66 +193,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hbs-zq-eec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1900.0000000000002" y="130.58035714285714"/>
-        </scene>
-        <!--Photo View Controller-->
-        <scene sceneID="Qhn-EN-AA6">
-            <objects>
-                <viewController storyboardIdentifier="PhotoViewController" id="3i5-Tr-59N" customClass="PhotoViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0uT-yf-zTm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jN3-VD-35R">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OHb-jT-NpV">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="MVx-rW-jh6" customClass="PhotoCell" customModule="issue_tracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CGq-6B-cGF">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyh-m7-fez">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Lyh-m7-fez" secondAttribute="trailing" id="Js3-GB-4Ze"/>
-                                                <constraint firstAttribute="bottom" secondItem="Lyh-m7-fez" secondAttribute="bottom" id="bhZ-a7-DYP"/>
-                                                <constraint firstItem="Lyh-m7-fez" firstAttribute="top" secondItem="CGq-6B-cGF" secondAttribute="top" id="g0M-kj-wFK"/>
-                                                <constraint firstItem="Lyh-m7-fez" firstAttribute="leading" secondItem="CGq-6B-cGF" secondAttribute="leading" id="rFc-8Q-OTB"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <connections>
-                                            <outlet property="photo" destination="Lyh-m7-fez" id="3dg-Me-A3I"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Ncf-vT-f03"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="jN3-VD-35R" firstAttribute="leading" secondItem="Ncf-vT-f03" secondAttribute="leading" id="8Oo-Wj-q91"/>
-                            <constraint firstItem="Ncf-vT-f03" firstAttribute="trailing" secondItem="jN3-VD-35R" secondAttribute="trailing" id="HAH-bg-FYy"/>
-                            <constraint firstItem="Ncf-vT-f03" firstAttribute="bottom" secondItem="jN3-VD-35R" secondAttribute="bottom" id="k0r-7B-UU9"/>
-                            <constraint firstItem="jN3-VD-35R" firstAttribute="top" secondItem="Ncf-vT-f03" secondAttribute="top" id="xHd-rb-LO0"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="album" destination="jN3-VD-35R" id="nM8-Rh-O8y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G5K-mW-iKV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2746" y="131"/>
         </scene>
     </scenes>
     <resources>
