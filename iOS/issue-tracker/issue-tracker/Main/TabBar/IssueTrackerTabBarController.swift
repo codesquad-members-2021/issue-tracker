@@ -10,6 +10,9 @@ import KeychainAccess
 
 class IssueTrackerTabBarController: UITabBarController {
     
+    private var loginManager: LoginKeyChainManager?
+    private var loginInfo: LoginInfo?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = Colors.mainGrape
@@ -27,7 +30,7 @@ class IssueTrackerTabBarController: UITabBarController {
         print("잘 지정됐는지 테스트하기!", keychain["github_jwt"], keychain["github_avatarUrl"], keychain["github_loginId"] )
     }
     
-    struct TabBarViewControllerInfo {
+    private struct TabBarViewControllerInfo {
         let title: String
         let image: UIImage?
         let type: UIViewController.Type
@@ -46,4 +49,9 @@ class IssueTrackerTabBarController: UITabBarController {
         return viewController
     }
     
+    func configure(loginManager: LoginKeyChainManager, loginInfo: LoginInfo) {
+        self.loginManager = loginManager
+        self.loginInfo = loginInfo
+    }
+
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */; };
+		E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABB2670EC5E0069E77D /* LoginInfo.swift */; };
+		E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */; };
+		E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */; };
+		E426DAC42671D95D0069E77D /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC32671D95D0069E77D /* LoginService.swift */; };
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
 		E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD101266E52FB0071B436 /* LoginViewController.swift */; };
@@ -32,6 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationManager.swift; sourceTree = "<group>"; };
+		E426DABB2670EC5E0069E77D /* LoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
+		E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManagerDelegate.swift; sourceTree = "<group>"; };
+		E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKeyChainManager.swift; sourceTree = "<group>"; };
+		E426DAC32671D95D0069E77D /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +136,11 @@
 			children = (
 				FAC6D8922671E1A800A9E5F9 /* Github */,
 				E42AD1142670549C0071B436 /* Controller */,
+				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
+				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
+				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
+				E426DAC32671D95D0069E77D /* LoginService.swift */,
+				E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -296,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */,
+				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
 				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
 				FAC6D88D2671D8A100A9E5F9 /* GithubLoginManagable.swift in Sources */,
@@ -303,12 +319,16 @@
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				FAC6D8832671AC7700A9E5F9 /* OAuthResponse.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
+				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
+				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				FAC6D8912671D91400A9E5F9 /* GithubLoginInfo.swift in Sources */,
+				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
 				FAC6D88F2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift in Sources */,
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
+				E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */,
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
 				E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */,
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
@@ -458,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "issue-tracker/issue-tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = "issue-tracker/Info.plist";
@@ -477,6 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "issue-tracker/issue-tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = "issue-tracker/Info.plist";
