@@ -35,6 +35,10 @@
 		D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D6266F4F4700E0762C /* SnapKit */; };
 		D0ADB6F8266F5BBE00E0762C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB6F7266F5BBE00E0762C /* AuthManager.swift */; };
 		D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
+		D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */; };
+		D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */; };
+		D0FD50D4267192AF008C6031 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50D3267192AF008C6031 /* AddViewController.swift */; };
+		D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50DB2671AA04008C6031 /* InputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +93,10 @@
 		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D0ADB6F7266F5BBE00E0762C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
+		D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
+		D0FD50D3267192AF008C6031 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		D0FD50DB2671AA04008C6031 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		E7F242466FC866CAD16EFF69 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker_issue_trackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -171,6 +179,7 @@
 				B3B559EE266E096000901C55 /* Info.plist */,
 				D0ADB69D266F0E7900E0762C /* Model */,
 				D0ADB6F7266F5BBE00E0762C /* AuthManager.swift */,
+				D0FD50B126709E19008C6031 /* Milestone */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -230,6 +239,17 @@
 				D0ADB698266F0C1300E0762C /* NetworkManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D0FD50B126709E19008C6031 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */,
+				D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */,
+				D0FD50DB2671AA04008C6031 /* InputView.swift */,
+				D0FD50D3267192AF008C6031 /* AddViewController.swift */,
+			);
+			path = Milestone;
 			sourceTree = "<group>";
 		};
 		DD720597B58AE4F3E0B9F4F7 /* Pods */ = {
@@ -473,7 +493,9 @@
 				B3F52753267096EC002B0812 /* LabelTableViewCell.swift in Sources */,
 				B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
+				D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */,
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
+				D0FD50D4267192AF008C6031 /* AddViewController.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
 				B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */,
@@ -484,6 +506,8 @@
 				B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
+				D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */,
+				D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
