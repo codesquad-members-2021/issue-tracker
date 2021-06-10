@@ -15,13 +15,28 @@
                     <view key="view" contentMode="scaleToFill" id="yB3-0h-hyg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jeM-5r-JuA">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="AqE-6q-lez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jeM-5r-JuA" firstAttribute="leading" secondItem="AqE-6q-lez" secondAttribute="leading" id="8Jw-kn-oJo"/>
+                            <constraint firstItem="AqE-6q-lez" firstAttribute="bottom" secondItem="jeM-5r-JuA" secondAttribute="bottom" id="JqC-U8-tBi"/>
+                            <constraint firstItem="jeM-5r-JuA" firstAttribute="top" secondItem="AqE-6q-lez" secondAttribute="top" id="OuA-e8-oBB"/>
+                            <constraint firstItem="AqE-6q-lez" firstAttribute="trailing" secondItem="jeM-5r-JuA" secondAttribute="trailing" id="wvU-Oy-Lzr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="이슈" id="84B-Z6-ZJW">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="JtK-ut-fGU"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="beK-EC-qtW"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="issueTableView" destination="jeM-5r-JuA" id="o9K-J0-bRC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T52-Ei-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

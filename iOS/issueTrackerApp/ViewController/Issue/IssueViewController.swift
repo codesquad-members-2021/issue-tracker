@@ -9,6 +9,8 @@ import UIKit
 
 class IssueViewController: UIViewController {
 
+    @IBOutlet weak var issueTableView: UITableView!
+    
     let searchController = UISearchController(searchResultsController: nil)
     var filteredIssue: [String] = []
     var isSearchBarEmpty: Bool {
@@ -20,15 +22,26 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("a")
+        
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController
         definesPresentationContext = true
-        
+//        navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         
+        print("aa")
+        configureTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationItem.searchController = searchController
+    }
+    
+    private func configureTableView() {
+        self.issueTableView.register(IssueCell.nib, forCellReuseIdentifier: IssueCell.identifier)
+        self.issueTableView.dataSource = self
     }
     
 }
@@ -36,6 +49,19 @@ class IssueViewController: UIViewController {
 extension IssueViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
+    }
+    
+}
+
+extension IssueViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.issueTableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as! IssueCell
+        cell.configure()
+        return cell
     }
     
 }

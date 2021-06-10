@@ -13,6 +13,11 @@
 		883F516A266F508B0055EC9E /* Milestones.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F5168266F508B0055EC9E /* Milestones.storyboard */; };
 		883F5172266F50A40055EC9E /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F5171266F50A40055EC9E /* Setting.storyboard */; };
 		883F5185266F5F090055EC9E /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5184266F5F090055EC9E /* IssueViewController.swift */; };
+		883F519E2670940E0055EC9E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F519C2670940E0055EC9E /* IssueCell.swift */; };
+		883F519F2670940E0055EC9E /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 883F519D2670940E0055EC9E /* IssueCell.xib */; };
+		883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51A32670AAAB0055EC9E /* TagStackView.swift */; };
+		883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51A82670ABDC0055EC9E /* TagLabel.swift */; };
+		883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51AD2670B2F70055EC9E /* UIColorExtension.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -56,6 +61,11 @@
 		883F5169266F508B0055EC9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = issueTrackerApp/Base.lproj/Milestones.storyboard; sourceTree = "<group>"; };
 		883F5171266F50A40055EC9E /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		883F5184266F5F090055EC9E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueViewController.swift; path = ViewController/Issue/IssueViewController.swift; sourceTree = SOURCE_ROOT; };
+		883F519C2670940E0055EC9E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueCell.swift; path = ViewController/Issue/IssueCell.swift; sourceTree = SOURCE_ROOT; };
+		883F519D2670940E0055EC9E /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = IssueCell.xib; path = ViewController/Issue/IssueCell.xib; sourceTree = SOURCE_ROOT; };
+		883F51A32670AAAB0055EC9E /* TagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagStackView.swift; path = ViewController/Issue/TagStackView.swift; sourceTree = SOURCE_ROOT; };
+		883F51A82670ABDC0055EC9E /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagLabel.swift; path = ViewController/Issue/TagLabel.swift; sourceTree = SOURCE_ROOT; };
+		883F51AD2670B2F70055EC9E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				883F5184266F5F090055EC9E /* IssueViewController.swift */,
+				883F519C2670940E0055EC9E /* IssueCell.swift */,
+				883F519D2670940E0055EC9E /* IssueCell.xib */,
+				883F51A32670AAAB0055EC9E /* TagStackView.swift */,
+				883F51A82670ABDC0055EC9E /* TagLabel.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -158,6 +172,7 @@
 				930FAE8E266E112900422968 /* Assets.xcassets */,
 				930FAE90266E112900422968 /* LaunchScreen.storyboard */,
 				930FAE93266E112900422968 /* Info.plist */,
+				883F51AD2670B2F70055EC9E /* UIColorExtension.swift */,
 			);
 			path = issueTrackerApp;
 			sourceTree = "<group>";
@@ -423,6 +438,7 @@
 				930FAE92266E112900422968 /* LaunchScreen.storyboard in Resources */,
 				930FAE8F266E112900422968 /* Assets.xcassets in Resources */,
 				930FAE8D266E112700422968 /* Main.storyboard in Resources */,
+				883F519F2670940E0055EC9E /* IssueCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,12 +469,16 @@
 				9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
+				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
+				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
 				9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */,
 				9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */,
 				883F5185266F5F090055EC9E /* IssueViewController.swift in Sources */,
 				930FAE88266E112700422968 /* SceneDelegate.swift in Sources */,
+				883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */,
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
+				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
