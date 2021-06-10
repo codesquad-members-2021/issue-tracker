@@ -19,6 +19,11 @@
 		71377D33266E47AC00DB1C4D /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 71377D32266E47AC00DB1C4D /* OctoKit */; };
 		71FCE19C2670ABD60044038E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19B2670ABD60044038E /* APIService.swift */; };
 		71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19F2670AC540044038E /* IssueDTO.swift */; };
+		71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A52670B2880044038E /* MemoryStorage.swift */; };
+		71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A82670B2A30044038E /* IssueListViewModel.swift */; };
+		71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */; };
+		71FCE1AF2670BE440044038E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1AE2670BE440044038E /* Issue.swift */; };
+		71FCE1B42670D3B30044038E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1B32670D3B30044038E /* IssueCell.swift */; };
 		C3B8DAD5620CB1718E122CFA /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +42,11 @@
 		71377D2B266E458100DB1C4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71FCE19B2670ABD60044038E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		71FCE19F2670AC540044038E /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
+		71FCE1A52670B2880044038E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
+		71FCE1A82670B2A30044038E /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
+		71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorageType.swift; sourceTree = "<group>"; };
+		71FCE1AE2670BE440044038E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		71FCE1B32670D3B30044038E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C617ED888C881C2FD8566BFB /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +75,7 @@
 		7123D3F6266F0733009C959B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				71FCE1B22670D3A80044038E /* View */,
 				7123D3F9266F0758009C959B /* Supports */,
 				7123D3F8266F074F009C959B /* Delegate */,
 				7123D3F7266F0744009C959B /* Controller */,
@@ -121,7 +132,10 @@
 		71377D1C266E458000DB1C4D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				71FCE1992670ABB90044038E /* Data */,
+				71FCE1AD2670BE3A0044038E /* Model */,
+				71FCE1A72670B2960044038E /* ViewModel */,
+				71FCE1A12670B1900044038E /* UseCase */,
+				71FCE1992670ABB90044038E /* Service */,
 				7123D3F6266F0733009C959B /* Presenter */,
 				71377D26266E458100DB1C4D /* Assets.xcassets */,
 				71377D2B266E458100DB1C4D /* Info.plist */,
@@ -129,14 +143,14 @@
 			path = IssueTracker;
 			sourceTree = "<group>";
 		};
-		71FCE1992670ABB90044038E /* Data */ = {
+		71FCE1992670ABB90044038E /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				71FCE19A2670ABC90044038E /* Network */,
 				7105555F266F36FD0072065E /* Constant.swift */,
 				71FCE19F2670AC540044038E /* IssueDTO.swift */,
 			);
-			path = Data;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		71FCE19A2670ABC90044038E /* Network */ = {
@@ -145,6 +159,39 @@
 				71FCE19B2670ABD60044038E /* APIService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		71FCE1A12670B1900044038E /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE1A52670B2880044038E /* MemoryStorage.swift */,
+				71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		71FCE1A72670B2960044038E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE1A82670B2A30044038E /* IssueListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		71FCE1AD2670BE3A0044038E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE1AE2670BE440044038E /* Issue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		71FCE1B22670D3A80044038E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				71FCE1B32670D3B30044038E /* IssueCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		760666D006709C46B8C9828D /* Pods */ = {
@@ -282,8 +329,13 @@
 				71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */,
 				71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */,
 				71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */,
+				71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */,
 				7105555D266F36650072065E /* FilterIssueViewController.swift in Sources */,
+				71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */,
+				71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */,
+				71FCE1B42670D3B30044038E /* IssueCell.swift in Sources */,
 				71055560266F36FD0072065E /* Constant.swift in Sources */,
+				71FCE1AF2670BE440044038E /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
