@@ -1,34 +1,54 @@
+import { useState, useRef, RefObject } from 'react'
 import styled from 'styled-components'
 import RadioBtn from '../atom/RadioBtn'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SearchIcon from '@material-ui/icons/Search';
+import useToggle from '../../hooks/useToggle'
 function IssueFilterSection(){
+  const filterButton = useRef<HTMLDivElement>(null)
+  const filterModal = useRef<HTMLDivElement>(null)
+  const open = useToggle({toggle: [filterButton], modal: filterModal, init:false})
+
 
   return (
-    <FilterSectionBlock>
-      <FilterBtn>
-        <div>필터</div>
-        <div><ExpandMoreIcon/></div>
-      </FilterBtn>
-      <SearchInput>
-        <SearchIcon/><Input value='is:issue is:open'></Input>
-      </SearchInput>
-    </FilterSectionBlock>
+    <>
+      <FilterSectionBlock>
+        <FilterBtn ref={filterButton}>
+          <div>필터</div>
+          <div><ExpandMoreIcon/></div>
+        </FilterBtn>
+        <SearchInput>
+          <SearchIcon/><Input value='is:issue is:open'></Input>
+        </SearchInput>
+      </FilterSectionBlock>
+      {open && <IssueFilterModal modal={filterModal}/>}
+    </>
   )
 }
+interface ModalProps{
+  modal: RefObject<HTMLDivElement>
+}
 
-function IssueFilterModal() {
+function IssueFilterModal({modal}:ModalProps) {
+  const filterLists = ['열린 이슈', '내가 작성한 이슈','나에게 할당된 이슈','내가 댓글을 남긴 이슈','닫힌 이슈']
+  const asyncFilter = {
+    0:'해당셀렉터로 연결되게..'
+  }
+  const handleFilterClick = (idx:number) =>{
+    console.log(idx)
+  }
   return ( 
-    <ListBlock>
+    <ListBlock ref={modal}>
       <ListHead>이슈 필터</ListHead>
-      <ListBody><div>열린 이슈</div><RadioBtn/></ListBody>
-      <ListBody><div>내가 작성한 이슈</div><RadioBtn/></ListBody>
-      <ListBody><div>나에게 할당된 이슈</div><RadioBtn/></ListBody>
-      <ListBody><div>내가 댓글을 남긴 이슈</div><RadioBtn/></ListBody>
-      <ListBody><div>닫힌 이슈</div><RadioBtn/></ListBody>
+      {filterLists.map((list,idx) =>
+        <ListBody key={'filter'+idx} onClick={()=>handleFilterClick(idx)}>
+          <div>{list}</div><RadioBtn/>
+        </ListBody>
+      )}
     </ListBlock>
   )
 }
+
 const SearchInput = styled.div`
 padding: 0px 10px;
 display: flex;
@@ -71,7 +91,8 @@ const FilterSectionBlock = styled.div`
 const ListBlock = styled.div`
   position: absolute;
   top: 190px;
-  right: 171px;
+  z-index: 9999;
+  background-color: ${({theme})=>theme.color.white};
   width: 240px;
   border: 1px solid ${({theme})=>theme.color.lineGrey};
   border-radius: 16px;
