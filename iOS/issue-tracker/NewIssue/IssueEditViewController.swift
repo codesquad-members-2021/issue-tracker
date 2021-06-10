@@ -27,7 +27,7 @@ class IssueEditViewController: UIViewController {
     }
     
     private func registerNib(){
-        additionalInfoTable.register(UINib(nibName: AdditionalTableViewCell.nibName, bundle: nil),
+        additionalInfoTable.register(UINib(nibName: AdditionalTableViewCell.nibName, bundle: Bundle.main),
                                      forCellReuseIdentifier: AdditionalTableViewCell.reuseIdentifier)
         
     }
@@ -39,7 +39,10 @@ class IssueEditViewController: UIViewController {
 
     @objc
     func insertPhoto(){
+        let photoSelectViewController = PhotoViewController
+            .instantiate(name: "Main", bundle: Bundle.main)
         
+        self.present(photoSelectViewController, animated: true)
     }
 }
 extension IssueEditViewController: UITextViewDelegate {
