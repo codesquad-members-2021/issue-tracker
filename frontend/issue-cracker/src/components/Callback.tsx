@@ -1,9 +1,10 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
+import Loader from '../components/common/Loader';
 
-const Callback = ({ history, location }: RouteComponentProps) => {
+const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
   const authUri = `http://localhost:8080/api/web/auth`;
 
   useEffect(() => {
@@ -34,13 +35,13 @@ const Callback = ({ history, location }: RouteComponentProps) => {
         const decoded = jwtDecode(token);
         console.log(decoded);
 
-        history.push('/');
+        history.push('/main/issue-list');
       } catch (error) {}
     };
 
     getToken();
   }, [location, history, authUri]);
-  return <div></div>;
+  return <Loader />;
 };
 
 export default Callback;
