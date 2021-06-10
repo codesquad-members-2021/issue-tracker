@@ -95,4 +95,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Querydsl
+generated
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows
