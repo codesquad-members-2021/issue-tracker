@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.service;
 
-import com.codesquad.issuetracker.AccessTokenResponse;
+import com.codesquad.issuetracker.response.AccessTokenResponse;
 import com.codesquad.issuetracker.component.JwtProvider;
 import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.domain.oauth.GitHubUser;
@@ -41,7 +41,7 @@ public class GitHubLoginService {
         AccessTokenResponse accessTokenResponse = accessToken(code).orElseThrow(IllegalArgumentException::new);
         logger.debug("Access token : {}", accessTokenResponse.getAccessToken());
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
-        return signIn(user);
+        return signIn(user, accessTokenResponse.getTokenType());
     }
 
     private Optional<AccessTokenResponse> accessToken(String code) {
@@ -77,10 +77,10 @@ public class GitHubLoginService {
         return userRepository.findByUserId(gitHubUser.getLogin());
     }
 
-    private GitHubLoginResponse signIn(GitHubUser gitHubUser) {
+    private GitHubLoginResponse signIn(GitHubUser gitHubUser, String type) {
         User user = signUp(gitHubUser).orElseThrow(IllegalArgumentException::new);
         String jwt = jwtProvider.createJwt(user.getId());
-        return GitHubLoginResponse.create(jwt, user);
+        return GitHubLoginResponse.create(jwt, user, type);
     }
 
 }

@@ -6,10 +6,12 @@ public class GitHubLoginResponse {
 
     private String jwt;
     private User user;
+    private String type;
 
-    public GitHubLoginResponse(String jwt, User user) {
+    public GitHubLoginResponse(String jwt, User user, String type) {
         this.jwt = jwt;
         this.user = user;
+        this.type = type;
     }
 
     public String getJwt() {
@@ -20,7 +22,11 @@ public class GitHubLoginResponse {
         return user;
     }
 
-    public static GitHubLoginResponse create(String jwt, User user) {
-        return new GitHubLoginResponse(jwt, user);
+    public String getType() {
+        return type;
+    }
+
+    public static GitHubLoginResponse create(String jwt, User user, String type) {
+        return new GitHubLoginResponse(jwt, user, type);
     }
 }
