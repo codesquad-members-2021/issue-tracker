@@ -48,6 +48,9 @@ class IssueListFilterViewController: UIViewController {
         return headerView
     }
 
+    @IBAction func pressedCancelButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension IssueListFilterViewController: UITableViewDataSource, UITableViewDelegate {

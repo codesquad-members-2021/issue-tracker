@@ -4,41 +4,21 @@ class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
     
-    //MARK: - NavigationController Property
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search"
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
-        
         return searchController
     }()
     
-    private lazy var selectButton: UIBarButtonItem = {
-        let buttonImage = UIImage(systemName: "checkmark.circle")
-        let button = UIButton(type: .system)
-        button.setImage(buttonImage, for: .normal)
-        button.setTitle("선택 ", for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft
-        let selectButton = UIBarButtonItem(customView: button)
-        return selectButton
-    }()
-
-    private lazy var filterButton: UIBarButtonItem = {
-        let buttonImage = UIImage(systemName: "line.horizontal.3.decrease")
-        let button = UIButton(type: .system)
-        button.setImage(buttonImage, for: .normal)
-        button.setTitle(" 필터", for: .normal)
-        let filterButton = UIBarButtonItem(customView: button)
-        return filterButton
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         configureNavigationItem()
         configureTableViewFooterView()
+        configureFilterButton()
     }
     
     func configureTableViewFooterView() {
@@ -61,8 +41,8 @@ class IssueListViewController: UIViewController {
     }
 
     func configureNavigationItem() {
-        self.navigationItem.leftBarButtonItem = filterButton
-        self.navigationItem.rightBarButtonItem = selectButton
+        configureFilterButton()
+        configureSelectButton()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "이슈"
@@ -70,6 +50,26 @@ class IssueListViewController: UIViewController {
         let micImage = UIImage(systemName: "mic.fill")
         searchController.searchBar.setImage(micImage, for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
+    }
+    
+    func configureFilterButton() {
+        let buttonImage = UIImage(systemName: "line.horizontal.3.decrease")
+        let button = UIButton(type: .system)
+        button.setImage(buttonImage, for: .normal)
+        button.setTitle(" 필터", for: .normal)
+        button.addTarget(self, action: #selector(showIssueListFilterView(sender:)), for: .touchUpInside)
+        let filterButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = filterButton
+    }
+    
+    func configureSelectButton() {
+        let buttonImage = UIImage(systemName: "checkmark.circle")
+        let button = UIButton(type: .system)
+        button.setImage(buttonImage, for: .normal)
+        button.setTitle("선택 ", for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        let selectButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = selectButton
     }
  
     @objc func showIssueListFilterView(sender: UIBarButtonItem) {

@@ -246,6 +246,9 @@
                                         <state key="normal" title="취소" image="chevron.left" catalog="system">
                                             <color key="titleColor" systemColor="linkColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pressedCancelButton:" destination="q2y-Ti-QDY" eventType="touchUpInside" id="5OQ-nV-ZqT"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6l-7V-O8E">
                                         <rect key="frame" x="368" y="38.5" width="30" height="33"/>
