@@ -1,6 +1,7 @@
 package com.codesqaude.cocomarco.domain.comment;
 
 import com.codesqaude.cocomarco.common.BasicEntity;
+import com.codesqaude.cocomarco.common.exception.NoPermissionUserException;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
 import lombok.AccessLevel;
@@ -12,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -36,6 +38,16 @@ public class Comment extends BasicEntity {
         this.writer = writer;
     }
 
+    public void modify(String text) {
+        this.text = text;
+    }
+
+    public void isSameWriter(UUID writerId) {
+        if (!writer.sameUser(writerId)) {
+            throw new NoPermissionUserException();
+        }
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -44,4 +56,5 @@ public class Comment extends BasicEntity {
                 ", writingTime=" + writingTime +
                 '}';
     }
+
 }

@@ -2,11 +2,10 @@ package com.codesqaude.cocomarco.controller;
 
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
 import com.codesqaude.cocomarco.service.CommentService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/issues/{issueId}/comments")
 public class CommentController {
 
     private final CommentService commentService;
@@ -15,9 +14,18 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/issues/{issueId}/comments")
-    public void makeComment(@PathVariable Long issueId, CommentRequest commentRequest){
+    @PostMapping
+    public void makeComment(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
         //todo user id
-        commentService.write(issueId,"uuid",commentRequest);
+        commentService.write(issueId, "uuid", commentRequest);
     }
+
+    @PutMapping("/{commentId}")
+    public void modifyComment(@PathVariable Long issueId,
+                              @PathVariable Long commentId,
+                              @RequestBody CommentRequest commentRequest) {
+        //todo user id
+        commentService.modify("uuid", commentRequest, commentId);
+    }
+
 }

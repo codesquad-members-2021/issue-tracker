@@ -34,6 +34,12 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    public void modify(String writerId, CommentRequest commentRequest, Long commentId) {
+        Comment comment = findById(commentId);
+        comment.isSameWriter(UUID.fromString(writerId));
+        comment.modify(commentRequest.getText());
+    }
+
     public Comment findById(Long id) {
         return commentRepository.findById(id).orElseThrow(NotFoundCommentException::new);
     }
