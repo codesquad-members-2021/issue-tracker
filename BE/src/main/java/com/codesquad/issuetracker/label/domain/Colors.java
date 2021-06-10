@@ -12,10 +12,10 @@ public class Colors {
 
     private static final Pattern COLOR = Pattern.compile("#[0-9A-Fa-f]{6}");
 
-    @Column(name = "LABEL_BACKGROUND_COLOR")
+    @Column(name = "LABEL_BACKGROUND_COLOR", nullable = false)
     private String backgroundColor;
 
-    @Column(name = "LABEL_TEXT_COLOR")
+    @Column(name = "LABEL_TEXT_COLOR", nullable = false)
     private String textColor;
 
     protected Colors() {

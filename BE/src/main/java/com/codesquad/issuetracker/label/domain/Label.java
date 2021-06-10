@@ -17,10 +17,10 @@ public class Label {
     @Column(columnDefinition = "BINARY(16)", name = "LABEL_ID")
     private UUID id;
 
-    @Column(name = "LABEL_NAME")
+    @Column(name = "LABEL_NAME", unique = true, length = 50, nullable = false)
     private String name;
 
-    @Column(name = "LABEL_DESCRIPTION")
+    @Column(name = "LABEL_DESCRIPTION", length = 100, nullable = true)
     private String description;
 
     @Embedded
