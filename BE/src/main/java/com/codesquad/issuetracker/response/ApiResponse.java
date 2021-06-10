@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker;
+package com.codesquad.issuetracker.response;
 
 public class ApiResponse<T> {
 

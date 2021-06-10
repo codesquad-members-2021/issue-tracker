@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.controller;
 
-import com.codesquad.issuetracker.ApiResponse;
+import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.request.LabelRequest;
 import org.springframework.web.bind.annotation.*;
 
