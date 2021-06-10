@@ -24,6 +24,10 @@
 		BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
 		BFB399D22671BE6B002C6D80 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
+		BFB399D42671BFDF002C6D80 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
+		BFB399D62671C015002C6D80 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D52671C015002C6D80 /* Error.swift */; };
+		BFB399D92671D7C7002C6D80 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D82671D7C7002C6D80 /* Code.swift */; };
+		BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryBoard+Extension.swift"; sourceTree = "<group>"; };
 		BFB399CF2671BDCB002C6D80 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		BFB399D12671BE6B002C6D80 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		BFB399D32671BFDF002C6D80 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		BFB399D52671C015002C6D80 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		BFB399D82671D7C7002C6D80 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 		BF0A6BD4266F4EE5000F3BC5 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				BFB399DA2671D986002C6D80 /* Utility */,
 				BF0A6C0C266F5BAE000F3BC5 /* AppCycle */,
 				BFB399CC2671BB44002C6D80 /* Extension */,
 				BF0A6C0F266F5F07000F3BC5 /* DataLayer */,
@@ -178,6 +187,7 @@
 		BF0A6C0F266F5F07000F3BC5 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				BFB399D72671D7BA002C6D80 /* Model */,
 				BF0A6C17266F67DB000F3BC5 /* Network */,
 				BFB399D12671BE6B002C6D80 /* Repository.swift */,
 			);
@@ -199,6 +209,8 @@
 			children = (
 				BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */,
 				BFB399CA2671B387002C6D80 /* Endpoint.swift */,
+				BFB399D32671BFDF002C6D80 /* Method.swift */,
+				BFB399D52671C015002C6D80 /* Error.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -206,9 +218,25 @@
 		BFB399CC2671BB44002C6D80 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */,
 				BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		BFB399D72671D7BA002C6D80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BFB399D82671D7C7002C6D80 /* Code.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BFB399DA2671D986002C6D80 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,7 +387,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -370,11 +398,15 @@
 			files = (
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
+				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
+				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
 				BF0A6BDA266F4EE5000F3BC5 /* MainViewController.swift in Sources */,
+				BFB399D62671C015002C6D80 /* Error.swift in Sources */,
 				BF0A6BD6266F4EE5000F3BC5 /* AppDelegate.swift in Sources */,
 				BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */,
 				BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */,
 				BF0A6C19266F67EE000F3BC5 /* GithubConfiguration.swift in Sources */,
+				BFB399D92671D7C7002C6D80 /* Code.swift in Sources */,
 				BFB399D22671BE6B002C6D80 /* Repository.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,

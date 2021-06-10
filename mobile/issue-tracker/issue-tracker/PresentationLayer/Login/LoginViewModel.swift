@@ -8,5 +8,7 @@
 import Foundation
 
 class LoginViewModel {
-    
+
+    private let loginService = LoginService()
+
 }

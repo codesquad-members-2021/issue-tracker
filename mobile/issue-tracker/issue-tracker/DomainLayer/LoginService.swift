@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import AuthenticationServices
 
 class LoginService {
+
+    func fetchToken() {
+
+    }
 }
