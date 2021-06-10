@@ -1,34 +1,43 @@
 import styled from "styled-components";
-
+import { ReactComponent as SearchIcon } from "images/search.svg";
+import DropDownButton from "components/common/DropDownButton";
+import theme from "styles/theme";
 const MenuFilterBar = () => {
 	return (
 		<MenuFilterLayout>
-			<FilterButton>필터</FilterButton>
-			<FilterInput />
+			<DropDownButton text={"필터"} />
+			<FilterInputContainer>
+				<FilterInput>
+					<SearchIcon />
+					<FilterInputText>is:issue is:open</FilterInputText>
+				</FilterInput>
+			</FilterInputContainer>
 		</MenuFilterLayout>
 	);
 };
 
 const MenuFilterLayout = styled.div`
 	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	padding: 0px;
 	width: 601px;
 	height: 40px;
-	border: 1px solid #d9dbe9;
-	border-radius: 11px;
 `;
-const FilterInput = styled.input`
-	border: none;
+const FilterInputContainer = styled.div`
+	width: 100%;
+	height: 100%;
+	border: 1px solid ${theme.grayScale.line};
+	border-radius: ${theme.border_radius_mix.right};
 `;
-const FilterButton = styled.div`
-	/* Button */
-	background: #f7f7fc;
-	border-radius: 11px 0px 0px 11px;
-	/* outline: red 1px solid; */
-	padding: 10px;
+const FilterInput = styled.div`
+	display: flex;
+	width: 100%;
+	height: 100%;
+	padding: 2.3%;
+	background-color: ${theme.grayScale.input_background};
+	border-radius: ${theme.border_radius_mix.right};
+`;
+const FilterInputText = styled.div`
+	padding: 0.4% 2%;
+	color: ${theme.grayScale.placeholder};
 `;
 
-const MenuFilterDropDown = styled.div``;
 export default MenuFilterBar;
