@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -19,7 +20,7 @@ public class IssueDetailResponse {
     private boolean isClosed;
     private LocalDateTime createDateTime;
     private UserResponse author;
-    private List<UserResponse> assignees;
+    private Set<UserResponse> assignees;
     private List<LabelResponse> labels;
     private MileStoneResponse milestone;
     private CommentResponse mainComment;

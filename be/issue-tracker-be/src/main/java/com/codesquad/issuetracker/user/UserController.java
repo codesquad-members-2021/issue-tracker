@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping("/users")
     public Set<UserResponse> userResponses() {
-        return UserDummyData.userResponse();
+        return UserDummyData.usersResponse();
     }
 }
