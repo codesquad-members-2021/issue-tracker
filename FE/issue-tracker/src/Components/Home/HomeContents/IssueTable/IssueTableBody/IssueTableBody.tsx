@@ -3,11 +3,13 @@ import { IssueTable as S } from "../../../HomeStyles";
 import IssueTableRow from "./IssueTableRow/IssueTableRow";
 
 const IssueTableBody = () => {
+  const issues = Array.from({ length: 3 }, (_, i) => i);
+
   return (
     <S.TableBody>
-      <IssueTableRow />
-      <IssueTableRow />
-      <IssueTableRow />
+      {issues.map((id) => (
+        <IssueTableRow id={id} />
+      ))}
     </S.TableBody>
   );
 };

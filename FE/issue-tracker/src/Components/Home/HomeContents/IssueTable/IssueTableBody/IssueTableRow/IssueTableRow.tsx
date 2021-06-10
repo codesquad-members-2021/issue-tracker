@@ -5,11 +5,15 @@ import IssueDropDownSymbol from "./IssueDropDownSymbol";
 import IssueTitle from "./IssueTitle";
 import IssueLabel from "./IssueLabel";
 
-const IssueTableRow = () => {
+type IssueTableRowProps = {
+  id: number;
+};
+
+const IssueTableRow = ({ id }: IssueTableRowProps) => {
   return (
     <S.TableRow>
       <S.TableRowLeft>
-        <CheckButton />
+        <CheckButton id={id} />
         <S.IssueInfoDiv>
           <S.IssueInfoTop>
             <IssueTitle />

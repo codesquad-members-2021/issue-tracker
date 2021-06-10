@@ -1,4 +1,5 @@
 import { FilterSearchBar as S, HomeAssets as SVG } from "../../HomeStyles";
+import FilterModal from "./FilterModal";
 
 const Filter = () => {
   return (
@@ -6,6 +7,7 @@ const Filter = () => {
       필터
       <SVG.Down />
     </S.FilterDiv>
+    // <FilterModal />
   );
 };
 

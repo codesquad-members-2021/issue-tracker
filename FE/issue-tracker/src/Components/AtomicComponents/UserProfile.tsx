@@ -1,6 +1,6 @@
-import Avatar from "@material-ui/core/Avatar";
-import styled, { ThemeProvider } from "styled-components";
-import { StylesProvider, useTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "styled-components";
+import { useTheme } from "@material-ui/core/styles";
+import { AvatarDiv } from "./AtomicComponentsStyles";
 
 type UserProfileProps = {
   imgUrl?: string;
@@ -11,18 +11,9 @@ const UserProfile = ({ imgUrl, size }: UserProfileProps) => {
   const theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
-      <StylesProvider injectFirst>
-        <AvatarDiv src={imgUrl} size={size}></AvatarDiv>
-      </StylesProvider>
+      <AvatarDiv src={imgUrl} size={size}></AvatarDiv>
     </ThemeProvider>
   );
 };
-
-const AvatarDiv = styled(Avatar)<{ size?: number }>`
-  ${({ size, theme }) => `
-    width: ${theme.spacing(size)}px; 
-    height: ${theme.spacing(size)}px; 
-  `};
-`;
 
 export default UserProfile;
