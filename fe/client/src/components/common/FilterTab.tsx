@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom } from './atoms/filterAtom';
+import { filterAtom, filterDefaultCheckerAtom, filterDefaultCheckerType } from './atoms/filterAtom';
 
 type FilterTabType = {
   header: string;
@@ -18,7 +17,8 @@ const filterHeaderNames: { [key: string]: string } = {
 }
 
 const FilterTab = ({ header, filterList }: FilterTabType) => {
-  const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
+  const [, setFilterModalState] = useRecoilState(filterAtom);
+  const [defaultCheckerState, setDefaultCheckerState] = useRecoilState(filterDefaultCheckerAtom);
 
   const handleClickHideFilterModal = (event: MouseEvent) => {
     const targetList = (event.target as HTMLElement);
@@ -32,21 +32,26 @@ const FilterTab = ({ header, filterList }: FilterTabType) => {
         writer: false,
       })
     }
-  }
+  };
+
+  const handleChangeDefaultChecker = useCallback((listItem: string) => () => {
+    setDefaultCheckerState((state: filterDefaultCheckerType) => ({ ...state, [header]: listItem }));
+  }, []);
 
   useEffect(() => {
     document.addEventListener('click', handleClickHideFilterModal);
     return () => document.removeEventListener('click', handleClickHideFilterModal);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterModalState])
+  }, [header]);
 
   return (
-    <FilterTabWrapper className="filterTab">
+    <FilterTabWrapper className="filterTab" >
       <FilterTabHeader>{filterHeaderNames[header]} 필터</FilterTabHeader>
       {filterList.map((listItem, idx) => {
         return (<div key={`${header}-${idx}`}>
           <FilterLabel>
-            <input type="radio" name="filter" />
+            <input type="radio" name="filter"
+              onChange={handleChangeDefaultChecker(listItem)}
+              checked={defaultCheckerState[header] === listItem} />
             <span>{listItem}</span>
           </FilterLabel>
         </div>)
@@ -55,7 +60,7 @@ const FilterTab = ({ header, filterList }: FilterTabType) => {
   )
 }
 
-const FilterTabWrapper = styled.div`
+const FilterTabWrapper = styled.div<any>`
   position: absolute;
   width: 200px;
   top:35px;

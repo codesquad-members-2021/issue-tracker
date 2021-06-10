@@ -9,9 +9,8 @@ type AtomType<T> = {
 function useRecoilState<T>({ key, initialState }: AtomType<T>) {
   const store = useContext(globalStateRoot).current;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setState] = useState({});
+  const [, setState] = useState({});
   store.addInitState({ key, initialState });
-
   const forceUpdate = useCallback(() => {
     setState({});
   }, []);
@@ -20,7 +19,6 @@ function useRecoilState<T>({ key, initialState }: AtomType<T>) {
     store.subscribe({ key, fn: forceUpdate });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return [store.getData(key), store.setData(key)];
 };
 

@@ -20,4 +20,23 @@ export const filterAtom = atom<filterAtomType>({
   }
 })
 
+export type filterDefaultCheckerType = {
+  issue: string;
+  manager: string;
+  label: string;
+  milestone: string;
+  writer: string;
+}
+
+export const filterDefaultCheckerAtom = atom<filterDefaultCheckerType>({
+  key: 'filterDefaultCheckerAtom',
+  initialState: {
+    issue: '',
+    manager: '',
+    label: '',
+    milestone: '',
+    writer:'' 
+  }
+})
+
 

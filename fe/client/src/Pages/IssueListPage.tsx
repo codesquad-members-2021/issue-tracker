@@ -6,6 +6,9 @@ import { InputAdornment, InputBase } from '@material-ui/core';
 import SearchIcon from '@/Icons/Search.svg';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@/components/common/FilterTab';
+import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
+import { filterAtom, filterAtomType } from '@/components/common/atoms/filterAtom';
+import { useCallback } from 'react';
 
 const issueFilterList = [
   '열린 이슈',
@@ -16,16 +19,22 @@ const issueFilterList = [
 ];
 
 const IssueList = () => {
+  const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
+  const { issue, manager, label, milestone, writer } = filterModalState;
+  const handleClickShowFilterModal = useCallback((title: string) => () => {
+    setFilterModalState((filterModalState: filterAtomType) => ({ ...filterModalState, [title]: true }));
+  }, []);
+
   return (
     <HeadWrapper>
       <FilterWrapper>
-        <FilterButton>
+        <FilterButton onClick={handleClickShowFilterModal('issue')}>
           <span>필터</span>
           <img src={ArrowBottomIcon} alt=""
             style={{ transform: 'translateY(3px)' }} />
-          <FilterTab 
-          header="issue" 
-          filterList={issueFilterList} />
+          {issue && <FilterTab
+            header="issue"
+            filterList={issueFilterList} />}
         </FilterButton>
         <InputStyles
           startAdornment={
