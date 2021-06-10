@@ -21,6 +21,5 @@ public class IssueController {
     @PatchMapping("/issues")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateIssueStates(@RequestBody List<IssueStateRequest> issueStateRequest) {
-
     }
 }

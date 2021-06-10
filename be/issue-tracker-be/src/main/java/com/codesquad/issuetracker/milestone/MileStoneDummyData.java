@@ -26,7 +26,7 @@ public class MileStoneDummyData {
                     .openedIssueCount(1)
                     .closedIssueCount(1)
                     .build();
-    };
+    }
 
     public static MileStoneResponse openMileStoneResponse() {
         return  MileStoneResponse.builder()
@@ -38,7 +38,7 @@ public class MileStoneDummyData {
                     .openedIssueCount(1)
                     .closedIssueCount(1)
                     .build();
-    };
+    }
 
     public static int milestonesCountResponses() {
         int milestonesCount = 5;

@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.milestone;
 
-import com.codesquad.issuetracker.label.LabelDummyData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

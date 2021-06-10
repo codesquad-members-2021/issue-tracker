@@ -3,10 +3,7 @@ package com.codesquad.issuetracker.issue;
 import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
 import com.codesquad.issuetracker.label.LabelDummyData;
-import com.codesquad.issuetracker.milestone.MileStoneResponse;
-import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneDummyData;
-import com.codesquad.issuetracker.user.UserResponse;
 import com.codesquad.issuetracker.user.UserDummyData;
 
 import java.time.LocalDateTime;
