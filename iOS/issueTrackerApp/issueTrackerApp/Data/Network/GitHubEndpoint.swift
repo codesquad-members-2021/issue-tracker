@@ -21,7 +21,7 @@ struct GitHubEndpoint {
     static let clientID = "536d7504b702d01b8910"
     static let clientSecret = "8473cd9ac4bb16ef2156ed80b89646d09d4db01f"
     static let scope = "user"
-    static let authorizationCallbackURLScheme = "issuetarcker://issuetarcker"
+    static let authorizationCallbackURLScheme = "issuetracker"
     static let accessTokenURL = URL(string: "https://github.com/login/oauth/access_token")!
     static let serverURL = URL(string: "https://github.com")!
     static let authorizationURL = URL(string: "https://github.com/login/oauth/authorize")!
