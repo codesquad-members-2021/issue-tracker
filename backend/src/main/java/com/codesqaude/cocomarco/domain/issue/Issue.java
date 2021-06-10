@@ -1,11 +1,14 @@
 package com.codesqaude.cocomarco.domain.issue;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Issue {
 
     @Id
@@ -20,6 +23,7 @@ public class Issue {
     private IssueStatus status;
 
     @OneToMany
+    @JoinColumn(name = "issue_id")
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue")

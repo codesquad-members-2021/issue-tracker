@@ -1,6 +1,7 @@
 package com.codesqaude.cocomarco.domain.milestone;
 
 import com.codesqaude.cocomarco.domain.issue.Issue;
+import com.codesqaude.cocomarco.domain.issue.IssueStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,13 @@ public class Milestone {
 
     private String title;
     private String detail;
-    private LocalDate deadLine;
+    private LocalDate deadline;
 
     @OneToMany
+    @JoinColumn(name = "milestone_id")
     private List<Issue> issues = new ArrayList<>();
+
+    public int countIssuesByStatus(IssueStatus issueStatus) {
+        return (int) issues.stream().filter(issue -> issueStatus.equals(issue.getStatus())).count();
+    }
 }
