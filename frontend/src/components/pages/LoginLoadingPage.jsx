@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import API from "./../util/API";
+import API from "util/API";
 
 const LoginLoadingPage = () => {
 	const [isLogin, setIsLogin] = useState(false);
