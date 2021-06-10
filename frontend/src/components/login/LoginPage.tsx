@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import Divider from '@material-ui/core/Divider';
 
 function Copyright() {
   return (
@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: 'white'
   },
   typographyStyles: {
     flex: 1,
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn({history}:RouteComponentProps) {
   const classes = useStyles();
 
   return (
@@ -67,15 +68,12 @@ export default function SignIn() {
         <Typography className={classes.typographyStyles} component="h1" variant="h5">
           Issue Tracker
         </Typography>
-        <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-          <GitHubIcon/>&nbsp;GitHub 으로 로그인
-        </Button>
+
+        <CustomBtn>
+          <a href='https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=http://localhost:3000'>
+            <div><GitHubIcon/>&nbsp;GitHub 으로 로그인</div>
+          </a>
+        </CustomBtn>
       </div>
       <Box mt={8}>
         <Copyright />
@@ -83,7 +81,22 @@ export default function SignIn() {
     </Container>
   );
 }
-
+const CustomBtn = styled(Button)`
+margin-top:30px;
+background-color: ${({theme})=>theme.color.blue};
+color: ${({theme})=>theme.color.white};
+width: 350px;
+a {
+  text-decoration: none;
+  color: ${({theme})=>theme.color.white};
+  &:hover{
+    color:  ${({theme})=>theme.color.fontGrey};
+  }
+div{
+  display: flex; 
+  align-items: center;
+}
+}`
 
        {/* <form className={classes.form} noValidate>
           <TextField
