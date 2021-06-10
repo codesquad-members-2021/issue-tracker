@@ -13,8 +13,12 @@ class IssueListViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var issueTableView: UITableView!
     @IBOutlet private weak var filterButton: UIButton!
-    @IBOutlet private weak var EditButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var plusButton: UIButton!
+    
+    @IBOutlet weak var editableView: UIView!
+    @IBOutlet weak var checkAllButton: UIButton!
+    private var isCheckAll: Bool!
     
     private var viewModel: IssueViewModel!
     private var dataSource: IssueDataSource!
@@ -42,6 +46,8 @@ extension IssueListViewController: UITableViewDelegate {
         issueTableView.dataSource = dataSource
         issueTableView.delegate = tableViewDelegate
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
+        issueTableView.allowsMultipleSelectionDuringEditing = true
+        editableView.isHidden = true
     }
     
 }
@@ -66,3 +72,34 @@ extension IssueListViewController {
     }
     
 }
+
+
+extension IssueListViewController {
+    
+    @IBAction private func editButtonTouched(_ sender: UIButton) {
+        issueTableView.isEditing = !issueTableView.isEditing
+        issueTableView.setEditing(issueTableView.isEditing, animated: true)
+        editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
+        filterButton.setIsHidden(issueTableView.isEditing, animated: true)
+        editableView.setIsHidden(!issueTableView.isEditing, animated: true)
+    }
+    
+    @IBAction private func checkAllButtonTouched(_ sender: UIButton) {
+        let allIndexPath = (0..<viewModel.issues.count).map { IndexPath(row: $0, section: 0) }
+        isCheckAll = issueTableView.indexPathsForSelectedRows == allIndexPath
+        
+        if isCheckAll {
+            checkAllButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            allIndexPath.forEach {
+                issueTableView.deselectRow(at: $0, animated: true)
+            }
+        } else {
+            checkAllButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            allIndexPath.forEach {
+                issueTableView.selectRow(at: $0, animated: true, scrollPosition: .none)
+            }
+        }
+    }
+    
+}
+
