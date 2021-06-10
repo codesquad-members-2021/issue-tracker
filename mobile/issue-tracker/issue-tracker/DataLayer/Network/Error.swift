@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkError: Error, CustomStringConvertible {
     case invalidURL
     case invalidRequest
     case invalidResponse
@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case emptyData
     case failParsing
 
-    var message: String {
+    var description: String {
         switch self {
         case .invalidURL:
             return "올바르지 않은 URL입니다"
