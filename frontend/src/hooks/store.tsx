@@ -65,11 +65,18 @@ export const issuesStorage = selector<IssuesType[]>({
     set(issues, newAsync)
   }
 })
+const headerInfo = {
+  // headers: {
+  //   Authorization: Bearer {token}
+  // }
+}
 export const getOpenIssues = selector({
   key: 'GET/issues/open',
   get: async ()=>{
     try {
-      const response = await fetch(`http://3.37.76.224/api/issues?status=open`)
+      const response = await fetch(`http://3.37.76.224/api/issues?status=open`,{
+        // headerInfo
+      })
       return response.json()
     } catch (err) {
       console.error(err)
@@ -80,7 +87,9 @@ export const getCloseIssues = selector({
   key: 'GET/issues/close',
   get: async ()=>{
     try {
-      const response = await fetch(`http://3.37.76.224/api/issues?status=close`)
+      const response = await fetch(`http://3.37.76.224/api/issues?status=close`,{
+        // headerInfo
+      })
       return response.json()
     } catch (err) {
       console.error(err)
