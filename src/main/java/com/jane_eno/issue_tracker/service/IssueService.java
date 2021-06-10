@@ -11,6 +11,7 @@ import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -150,10 +151,9 @@ public class IssueService {
         List<Label> labels = labelService.findLabels(issueRequestDTO.getLabels());
         List<User> assignees = userService.findAssignees(issueRequestDTO.getAssignees());
         Milestone milestone = milestoneService.findMilestoneById(issueRequestDTO.getMilestone());
-        Issue issue = issueRequestDTO.toEntity();
-        Issue is = issueRepository.save(issue.create(author, labels, assignees, milestone));
-        is.getComments().add(Comment.builder().comment("안녕").createdDateTime(LocalDateTime.now()).build());
-        issueRepository.save(is);
+        Issue issue = issueRequestDTO.toEntity().create(author, labels, assignees, milestone);
+        System.out.println(issue.toString());
+        issueRepository.save(issue);
     }
 
     public IssueDetailPageResponseDTO getDetailPage(Long issueId) {

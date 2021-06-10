@@ -1,6 +1,6 @@
 package com.jane_eno.issue_tracker.domain.comment;
 
-import com.jane_eno.issue_tracker.domain.issue.Issue;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,8 +24,4 @@ public class Comment {
 
     @NonNull
     private LocalDateTime createdDateTime;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn
-    private Issue issue;
 }

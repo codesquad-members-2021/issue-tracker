@@ -4,8 +4,6 @@ import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.user.User;
-import com.jane_eno.issue_tracker.web.dto.reqeust.IssueRequestDTO;
-import com.jane_eno.issue_tracker.web.dto.response.Assignee;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,8 +13,10 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@ToString
 @AllArgsConstructor
 public class Issue {
 
@@ -42,19 +42,20 @@ public class Issue {
 
     private String title;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "issue_id", nullable = false)
+    private List<Comment> comments = new ArrayList<>();
 
     private LocalDateTime createdDateTime;
 
     public Issue create(User author, List<Label> labels, List<User> assignees, Milestone milestone) {
-       this.author = author;
-       this.labels = labels;
-       this.assignees = assignees;
-       this.milestone = milestone;
-       this.isOpen = true;
-       this.createdDateTime = LocalDateTime.now();
-       return this;
+        this.author = author;
+        this.labels = labels;
+        this.assignees = assignees;
+        this.milestone = milestone;
+        this.isOpen = true;
+        this.createdDateTime = LocalDateTime.now();
+        return this;
     }
 
     public String getFirstComment() {
