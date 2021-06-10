@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import IssueList from './issue/IssueList';
+import IssueMain from './issue/IssueMain';
 
 const Main = () => {
   return (
     <MainWrapper>
       <Header />
-      <IssueList />
+      <IssueMain />
     </MainWrapper>
   );
 };

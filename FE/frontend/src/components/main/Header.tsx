@@ -4,14 +4,14 @@ import { ReactComponent as Logo } from '../../icons/logoMedium.svg';
 
 const Header = () => {
   return (
-    <HeaerWrapper>
+    <HeaderWrapper>
       <Logo />
       <User />
-    </HeaerWrapper>
+    </HeaderWrapper>
   );
 };
 
-const HeaerWrapper = styled.div`
+const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 24px 48px;

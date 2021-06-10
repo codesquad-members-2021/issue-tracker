@@ -4,7 +4,6 @@ import Typo from '../../../styles/atoms/Typos';
 import { ReactComponent as DownwardIcon } from '../../../icons/downward.svg';
 import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import DropDown from './DropDown';
-// import UseModel from '../../hooks/UseModal';
 
 const Filter = () => {
   const [isShown, setIsShown] = useState<boolean>(false);
@@ -16,7 +15,9 @@ const Filter = () => {
     { name: '닫힌 이슈', isSelected: false },
   ]);
 
-  const toggle = () => setIsShown(!isShown);
+  const toggle = () => {
+    setIsShown(!isShown);
+  };
 
   return (
     <>
@@ -35,15 +36,15 @@ const Filter = () => {
       </FilterWrapper>
       {isShown && (
         <DropDownWrapper>
-              <DropDown
-                isShown={isShown} 
-                toggle={toggle} 
-                exceptedDiv="filterTitle"
-                options={options}
-                setOptions={setOptions}
-                type="text"
-                title="이슈 필터"
-              />
+          <DropDown
+            isShown={isShown}
+            toggle={toggle}
+            exceptedDiv="filterTitle"
+            options={options}
+            setOptions={setOptions}
+            type="text"
+            title="이슈 필터"
+          />
         </DropDownWrapper>
       )}
     </>

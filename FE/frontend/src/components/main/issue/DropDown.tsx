@@ -1,4 +1,4 @@
-import React, { Fragment, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { useEffect, Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import Typo from '../../../styles/atoms/Typos';
 import { ReactComponent as CheckOffCircle } from '../../../icons/checkOffCircle.svg';
@@ -8,7 +8,7 @@ interface Props {
   isShown: boolean;
   toggle(): any;
   exceptedDiv: string;
-  options: { name: string; isSelected: boolean }[];
+  options: { image?: string; name: string; isSelected: boolean }[];
   setOptions: Dispatch<SetStateAction<any>>;
   type: string;
   title: string;
@@ -29,15 +29,23 @@ const DropDown: React.FC<Props> = props => {
     );
   };
 
-  const onClickOutside = (event: React.MouseEvent<HTMLInputElement>) => {
+  const onClickOutside = (
+    event: React.MouseEvent<HTMLInputElement> | Event
+  ) => {
     const target = event.target as HTMLElement;
-    if (
-      target.classList.contains(props.exceptedDiv)
-    ) {
+    if (target.classList.contains(props.exceptedDiv)) {
       return;
     }
     props.toggle();
   };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', onClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+  });
 
   return (
     <FilterWrapper>
@@ -47,9 +55,9 @@ const DropDown: React.FC<Props> = props => {
           <Fragment key={i}>
             <FilterOption
               sm
-              onClick={(event: React.MouseEvent<HTMLInputElement>) => {
+              onMouseDown={(event: React.MouseEvent<HTMLInputElement>) => {
                 setChecked(option, props.options, props.setOptions);
-                onClickOutside(event)
+                onClickOutside(event);
               }}>
               {option.name}
               {props.type === 'text' && (
