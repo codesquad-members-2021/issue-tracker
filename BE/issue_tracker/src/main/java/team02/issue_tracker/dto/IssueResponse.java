@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static team02.issue_tracker.dto.MilestoneResponse.toMilestoneResponse;
-import static team02.issue_tracker.dto.UserResponse.toUserResponse;
-
 @AllArgsConstructor
 @Getter
 public class IssueResponse {
@@ -31,23 +28,29 @@ public class IssueResponse {
     private MilestoneResponse milestone;
     private List<LabelResponse> labels;
 
-    public static IssueResponse toIssueResponse(Issue issue) {
-        return new IssueResponse(issue.getId(), issue.getIssueNumber(), issue.getTitle(), issue.getCreatedTime(),
-                issue.isOpen(), toUserResponse(issue.getWriter()), toAssigneeResponses(issue.getIssueAssignees()),
-                toMilestoneResponse(issue.getMilestone()), toLabelResponses(issue.getIssueLabels()));
+    public IssueResponse(Issue issue) {
+        this.id = issue.getId();
+        this.issueNumber = issue.getIssueNumber();
+        this.title = issue.getTitle();
+        this.createdTime = issue.getCreatedTime();
+        this.isOpen = issue.isOpen();
+        this.writer = new UserResponse(issue.getWriter());
+        this.assignees = toAssigneeResponses(issue.getIssueAssignees());
+        this.milestone = new MilestoneResponse(issue.getMilestone());
+        this.labels = toLabelResponses(issue.getIssueLabels());
     }
 
-    private static List<UserResponse> toAssigneeResponses(List<IssueAssignee> issueAssignees) {
+    private List<UserResponse> toAssigneeResponses(List<IssueAssignee> issueAssignees) {
         return issueAssignees.stream()
                 .map(IssueAssignee::getAssignee)
-                .map(UserResponse::toUserResponse)
+                .map(UserResponse::new)
                 .collect(Collectors.toList());
     }
 
-    private static List<LabelResponse> toLabelResponses(List<IssueLabel> issueLabels) {
+    private List<LabelResponse> toLabelResponses(List<IssueLabel> issueLabels) {
         return issueLabels.stream()
                 .map(IssueLabel::getLabel)
-                .map(LabelResponse::toLabelResponse)
+                .map(LabelResponse::new)
                 .collect(Collectors.toList());
     }
 }
