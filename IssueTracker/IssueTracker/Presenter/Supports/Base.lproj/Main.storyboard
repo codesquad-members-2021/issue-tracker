@@ -310,47 +310,36 @@
                                                     <color key="textColor" systemColor="systemGray2Color"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9X7-hd-wFl">
-                                                    <rect key="frame" x="1" y="74" width="147" height="26"/>
-                                                    <color key="backgroundColor" white="0.054234465990000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-8K-DHf">
+                                                    <rect key="frame" x="1" y="74" width="308" height="31"/>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="1tS-Ha-pTy"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.950617" id="2xm-om-DJZ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="don-jh-7fC" secondAttribute="trailing" id="63W-ac-QV4"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="9Ii-rH-hZ5"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.373457" id="AzV-ZD-2Vp"/>
-                                                <constraint firstItem="9X7-hd-wFl" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.203125" id="ChH-Gk-ZhI"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="top" secondItem="don-jh-7fC" secondAttribute="bottom" multiplier="1.03" constant="1" id="IEj-I7-XEc"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.910494" id="J3z-09-jTj"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OBl-FT-h3J" secondAttribute="trailing" id="Jio-87-NDI"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.158854" id="LcK-2b-dc6"/>
-                                                <constraint firstItem="9X7-hd-wFl" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.453704" id="MHD-Cw-fki"/>
-                                                <constraint firstItem="9X7-hd-wFl" firstAttribute="top" secondItem="OBl-FT-h3J" secondAttribute="bottom" multiplier="1.03" constant="1" id="Ntq-oe-myX"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="top" secondItem="OBl-FT-h3J" secondAttribute="bottom" multiplier="1.03" constant="1" id="PGO-iC-clt"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.195312" id="Q48-tg-sIB"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="top" secondItem="KdJ-Tq-2EI" secondAttribute="top" multiplier="1.03" constant="1" id="Q9f-E9-SQg"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.242188" id="Qyc-Oz-dwL"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="top" secondItem="TCp-fC-jZO" secondAttribute="bottom" multiplier="1.03" constant="1" id="Rzm-6t-W7F"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.158854" id="THP-GB-OSI"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="Ywg-Ld-RXf"/>
-                                                <constraint firstItem="9X7-hd-wFl" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.01" constant="1" id="f6X-sj-Oel"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TCp-fC-jZO" secondAttribute="trailing" id="mdk-N8-Zpe"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.910494" id="nnt-TQ-Sf3"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9X7-hd-wFl" secondAttribute="trailing" id="rAI-5h-NI3"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="s08-Qq-qbE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="324" height="128"/>
                                         <connections>
                                             <outlet property="commnetLabel" destination="don-jh-7fC" id="sv0-gq-WGP"/>
-                                            <outlet property="labelLabel" destination="9X7-hd-wFl" id="gxh-iX-Mdb"/>
+                                            <outlet property="labelStackView" destination="Bci-8K-DHf" id="JhH-4P-jAe"/>
                                             <outlet property="milestoneLabel" destination="OBl-FT-h3J" id="KJG-8C-psR"/>
                                             <outlet property="titleLabel" destination="TCp-fC-jZO" id="aNM-5t-JuM"/>
                                         </connections>
