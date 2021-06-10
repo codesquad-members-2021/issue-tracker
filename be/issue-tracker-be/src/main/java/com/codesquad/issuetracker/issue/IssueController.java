@@ -18,6 +18,16 @@ public class IssueController {
         return IssueDummyData.issueDetailResponse();
     }
 
+    @PostMapping("/issues")
+    public IssueDetailResponse create(IssueRequest issueRequest) {
+        return IssueDummyData.issueDetailResponse();
+    }
+
+    @PutMapping("/issues/{issueId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable long issueId, IssueRequest issueRequest) {
+    }
+
     @PatchMapping("/issues")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateIssueStates(@RequestBody List<IssueStateRequest> issueStateRequest) {
