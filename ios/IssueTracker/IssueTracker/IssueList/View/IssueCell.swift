@@ -7,10 +7,7 @@
 
 import UIKit
 
-class IssueCell: UITableViewCell {
-
-    static let reuseIdentifier = "IssueCell"
-    static let nib = UINib(nibName: IssueCell.reuseIdentifier, bundle: nil)
+class IssueCell: UITableViewCell, ReuseIdentifierable, UINibCreatable {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -18,13 +15,10 @@ class IssueCell: UITableViewCell {
     @IBOutlet weak var milestoneLabel: UILabel!
     @IBOutlet weak var labelStackView: UIStackView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+
+extension IssueCell {
     
     func fillUI(with issue: Issue) {
         titleLabel.text = issue.title
