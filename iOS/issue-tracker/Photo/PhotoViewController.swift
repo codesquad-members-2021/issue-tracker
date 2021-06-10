@@ -30,11 +30,21 @@ class PhotoViewController: UIViewController, ReuseIdentity {
                                           style: .done,
                                           target: self,
                                           action: #selector(addPhotoToTextView))
+        let leftButton = UIBarButtonItem(title: "취소",
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(dismissPhotoAlbum))
+        
         self.navigationItem.rightBarButtonItem = rightButton
+        self.navigationItem.leftBarButtonItem = leftButton
     }
     
     @objc
     func addPhotoToTextView(){
         
+    }
+    @objc
+    func dismissPhotoAlbum(){
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
