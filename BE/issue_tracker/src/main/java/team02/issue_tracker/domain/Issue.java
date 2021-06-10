@@ -1,11 +1,14 @@
 package team02.issue_tracker.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Issue {
     @Id @GeneratedValue
     private Long id;
