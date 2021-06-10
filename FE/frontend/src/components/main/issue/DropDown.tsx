@@ -1,20 +1,21 @@
-import React, { Fragment, Dispatch, SetStateAction } from 'react';
+import React, { Fragment, Dispatch, SetStateAction, useEffect } from 'react';
 import styled from 'styled-components';
 import Typo from '../../../styles/atoms/Typos';
 import { ReactComponent as CheckOffCircle } from '../../../icons/checkOffCircle.svg';
 import { ReactComponent as CheckOnCircle } from '../../../icons/checkOnCircle.svg';
 
 interface Props {
+  isShown: boolean;
+  toggle(): any;
+  exceptedDiv: string;
   options: { name: string; isSelected: boolean }[];
   setOptions: Dispatch<SetStateAction<any>>;
-  isShown: boolean;
-  setIsShown(): any;
   type: string;
   title: string;
 }
 
 const DropDown: React.FC<Props> = props => {
-  const setCheckBox = (
+  const setChecked = (
     option: { name: string; isSelected: boolean },
     options: { name: string; isSelected: boolean }[],
     setOptions: Dispatch<SetStateAction<any>>
@@ -28,17 +29,27 @@ const DropDown: React.FC<Props> = props => {
     );
   };
 
+  const onClickOutside = (event: React.MouseEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLElement;
+    if (
+      target.classList.contains(props.exceptedDiv)
+    ) {
+      return;
+    }
+    props.toggle();
+  };
+
   return (
     <FilterWrapper>
-      <FilterTitle>{props.title}</FilterTitle>
+      <FilterTitle className="filterTitle">{props.title}</FilterTitle>
       {props.options.map((option, i) => {
         return (
           <Fragment key={i}>
             <FilterOption
               sm
               onClick={(event: React.MouseEvent<HTMLInputElement>) => {
-                setCheckBox(option, props.options, props.setOptions);
-                props.setIsShown();
+                setChecked(option, props.options, props.setOptions);
+                onClickOutside(event)
               }}>
               {option.name}
               {props.type === 'text' && (

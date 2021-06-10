@@ -4,10 +4,10 @@ import Typo from '../../../styles/atoms/Typos';
 import { ReactComponent as DownwardIcon } from '../../../icons/downward.svg';
 import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import DropDown from './DropDown';
-import useModal from '../../hooks/useModal';
+// import UseModel from '../../hooks/UseModal';
 
 const Filter = () => {
-  const { isShown, toggle } = useModal();
+  const [isShown, setIsShown] = useState<boolean>(false);
   const [options, setOptions] = useState([
     { name: '열린 이슈', isSelected: false },
     { name: '내가 작성한 이슈', isSelected: false },
@@ -15,6 +15,8 @@ const Filter = () => {
     { name: '내가 댓글을 남긴 이슈', isSelected: false },
     { name: '닫힌 이슈', isSelected: false },
   ]);
+
+  const toggle = () => setIsShown(!isShown);
 
   return (
     <>
@@ -32,14 +34,17 @@ const Filter = () => {
         </IconWrapper>
       </FilterWrapper>
       {isShown && (
-        <DropDown
-          options={options}
-          setOptions={setOptions}
-          isShown={isShown}
-          setIsShown={toggle}
-          type="text"
-          title="이슈 필터"
-        />
+        <DropDownWrapper>
+              <DropDown
+                isShown={isShown} 
+                toggle={toggle} 
+                exceptedDiv="filterTitle"
+                options={options}
+                setOptions={setOptions}
+                type="text"
+                title="이슈 필터"
+              />
+        </DropDownWrapper>
       )}
     </>
   );
@@ -65,8 +70,9 @@ const Button = styled.div`
   background: ${props => props.theme.greyscale.background};
   border-radius: 11px 0px 0px 11px;
   cursor: pointer;
+  //not working
   &:hover span {
-    color: ${props => props.theme.greyscale.body};
+    color: ${props => props.theme.greyscale.offWhite};
   }
 `;
 
@@ -90,4 +96,10 @@ const IconWrapper = styled.div`
     stroke: ${props => props.theme.greyscale.placeholer};
   }
 `;
+
+const DropDownWrapper = styled.div`
+  position: absolute;
+  top: 160px;
+`;
+
 export default Filter;
