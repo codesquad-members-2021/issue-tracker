@@ -1,6 +1,7 @@
 package team02.issue_tracker.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Comment {
     @Id @GeneratedValue
     private Long id;
@@ -27,4 +29,10 @@ public class Comment {
 
     @OneToMany(mappedBy = "comment")
     private List<CommentEmoji> commentEmojis = new ArrayList<>();
+
+    public Comment(String content, String file) {
+        this.content = content;
+        this.file = file;
+        createdTime = LocalDateTime.now();
+    }
 }
