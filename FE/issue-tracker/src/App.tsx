@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from './globalStyle';
+import GlobalStyle from '@styles/globalStyle';
 import customTheme from '@styles/theme';
 import Login from '@pages/Login';
 import Issues from '@pages/Issues';
