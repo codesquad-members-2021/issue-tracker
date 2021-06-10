@@ -28,13 +28,15 @@ const IssueList = () => {
   return (
     <HeadWrapper>
       <FilterWrapper>
-        <FilterButton onClick={handleClickShowFilterModal('issue')}>
-          <span>필터</span>
-          <img src={ArrowBottomIcon} alt=""
-            style={{ transform: 'translateY(3px)' }} />
-          {issue && <FilterTab
-            header="issue"
-            filterList={issueFilterList} />}
+        <FilterButton >
+          <div onClick={handleClickShowFilterModal('issue')}>
+            <span>필터</span>
+            <img src={ArrowBottomIcon} alt=""
+              style={{ transform: 'translateY(3px)' }} />
+          </div>
+          {<FilterTab
+              header="issue"
+              filterList={issueFilterList} />}
         </FilterButton>
         <InputStyles
           startAdornment={
@@ -80,7 +82,7 @@ const FilterButton = styled.div`
   &:hover{
     cursor:pointer;
   }
-  & > span{
+  & div> span{
     margin-right: 30px;
   }
 `;

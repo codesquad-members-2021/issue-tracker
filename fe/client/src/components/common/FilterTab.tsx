@@ -17,41 +17,41 @@ const filterHeaderNames: { [key: string]: string } = {
 }
 
 const FilterTab = ({ header, filterList }: FilterTabType) => {
-  const [, setFilterModalState] = useRecoilState(filterAtom);
+  const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
   const [defaultCheckerState, setDefaultCheckerState] = useRecoilState(filterDefaultCheckerAtom);
 
-  const handleClickHideFilterModal = (event: MouseEvent) => {
+  const handleClickHideFilterModal = useCallback((event: MouseEvent) => {
     const targetList = (event.target as HTMLElement);
     const checkTarget = targetList.closest('.filterTab');
-    if (!checkTarget) {
-      setFilterModalState({
-        issue: false,
-        manager: false,
-        label: false,
-        milestone: false,
-        writer: false,
-      })
-    }
-  };
+    if (checkTarget) return;
+    setFilterModalState({
+      issue: false,
+      manager: false,
+      label: false,
+      milestone: false,
+      writer: false,
+    })
+  }, []);
 
   const handleChangeDefaultChecker = useCallback((listItem: string) => () => {
     setDefaultCheckerState((state: filterDefaultCheckerType) => ({ ...state, [header]: listItem }));
   }, []);
 
   useEffect(() => {
+    if (Object.values(filterModalState).every(v => !v)) return;
     document.addEventListener('click', handleClickHideFilterModal);
     return () => document.removeEventListener('click', handleClickHideFilterModal);
-  }, [header]);
+  }, [filterModalState]);
 
   return (
-    <FilterTabWrapper className="filterTab" >
+    <FilterTabWrapper className="filterTab" isShow={filterModalState[header]}>
       <FilterTabHeader>{filterHeaderNames[header]} 필터</FilterTabHeader>
       {filterList.map((listItem, idx) => {
         return (<div key={`${header}-${idx}`}>
           <FilterLabel>
             <input type="radio" name="filter"
               onChange={handleChangeDefaultChecker(listItem)}
-              checked={defaultCheckerState[header] === listItem} />
+              defaultChecked={defaultCheckerState[header] === listItem} />
             <span>{listItem}</span>
           </FilterLabel>
         </div>)
@@ -69,6 +69,7 @@ const FilterTabWrapper = styled.div<any>`
   border:1px solid #d9dbe9;
   background: #FEFEFE;
   border-radius: 11px;
+  display:${({ isShow }) => isShow ? 'block' : 'none'};
   > div{
     padding: .5rem;
   }
