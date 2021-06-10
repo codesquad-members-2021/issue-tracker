@@ -2,7 +2,7 @@ package com.jane_eno.issue_tracker.domain.milestone;
 
 import com.jane_eno.issue_tracker.domain.issue.Issue;
 import lombok.*;
-
+import com.jane_eno.issue_tracker.web.dto.response.MilestoneDTO;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,5 +26,14 @@ public class Milestone {
     private LocalDateTime createdDateTime;
 
     @OneToMany(mappedBy = "milestone")
-    private List<Issue> issues = new ArrayList<>();
+    private List<Issue> issues;
+
+    public static Milestone createMilestone(MilestoneDTO milestoneDTO) {
+        return Milestone.builder()
+                .title(milestoneDTO.getTitle())
+                .description(milestoneDTO.getDescription())
+                .dueDate(milestoneDTO.getDueDate())
+                .createdDateTime(milestoneDTO.getCreatedDateTime())
+                .build();
+    }
 }

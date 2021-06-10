@@ -11,6 +11,9 @@ import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -18,6 +21,10 @@ public class UserService {
     private final OAuth oauth;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+
+    public List<User> findAssignees(List<Long> assigneeIdList) {
+        return assigneeIdList.stream().map(this::findByUserId).collect(Collectors.toList());
+    }
 
     public UserResponseDTO login(String code, String userAgent) {
         AccessTokenResponseDTO token = oauth.getToken(code, userAgent);
@@ -47,9 +54,13 @@ public class UserService {
         );
     }
 
-    private User findByUserId(Long userId) {
+    public User findByUserId(Long userId) {
         return userRepository.findById(userId).orElseThrow(
                 () -> new ElementNotFoundException("Cannot find user by given user id.")
         );
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
