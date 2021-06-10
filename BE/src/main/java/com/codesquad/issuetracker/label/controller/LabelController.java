@@ -21,17 +21,17 @@ public class LabelController {
 
     @GetMapping
     public LabelsWrapper labels() {
-        return LabelsWrapper.wrap(labelService.labels());
+        return labelService.labels();
     }
 
     @PostMapping
     public LabelWrapper create(@RequestBody LabelRequest labelRequest) {
-        return LabelWrapper.wrap(labelService.create(labelRequest));
+        return labelService.create(labelRequest);
     }
 
     @PutMapping("/{id}")
     public LabelWrapper update(@PathVariable UUID id, @RequestBody LabelRequest labelRequest) {
-        return LabelWrapper.wrap(labelService.update(id, labelRequest));
+        return labelService.update(id, labelRequest);
     }
 
     @DeleteMapping("/{id}")

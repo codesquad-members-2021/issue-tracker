@@ -1,13 +1,14 @@
 package com.codesquad.issuetracker.label.service;
 
 import com.codesquad.issuetracker.label.domain.Label;
-import com.codesquad.issuetracker.label.dto.LabelRequest;
 import com.codesquad.issuetracker.label.dto.LabelDto;
+import com.codesquad.issuetracker.label.dto.LabelRequest;
+import com.codesquad.issuetracker.label.dto.LabelWrapper;
+import com.codesquad.issuetracker.label.dto.LabelsWrapper;
 import com.codesquad.issuetracker.label.repository.LabelRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,24 +21,24 @@ public class LabelService {
         this.labelRepository = labelRepository;
     }
 
-    public List<LabelDto> labels() {
-        return labelRepository.findAll().stream()
+    public LabelsWrapper labels() {
+        return LabelsWrapper.wrap(labelRepository.findAll().stream()
                 .map(LabelDto::fromEntity)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    public LabelDto create(LabelRequest newLabel) {
-        return LabelDto.fromEntity(labelRepository.save(newLabel.toEntity()));
+    public LabelWrapper create(LabelRequest newLabel) {
+        return LabelWrapper.wrap(LabelDto.fromEntity(labelRepository.save(newLabel.toEntity())));
     }
 
     @Transactional
-    public LabelDto update(UUID id, LabelRequest updatingLabelInfo) {
+    public LabelWrapper update(UUID id, LabelRequest updatingLabelInfo) {
         Label updatingLabel = labelRepository.findById(id)
                 //TODO: Exception
                 .orElseThrow(() -> new RuntimeException("Not Found"));
         updatingLabel.update(updatingLabelInfo.toEntity());
 
-        return LabelDto.fromEntity(updatingLabel);
+        return LabelWrapper.wrap(LabelDto.fromEntity(updatingLabel));
     }
 
     public void delete(UUID id) {
