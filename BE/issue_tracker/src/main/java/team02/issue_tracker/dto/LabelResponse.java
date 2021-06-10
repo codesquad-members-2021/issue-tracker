@@ -12,7 +12,7 @@ public class LabelResponse {
     private String title;
     private String color;
 
-    public static LabelResponse toLabelResponse(Label label) {
-        return new LabelResponse(label.getId(), label.getTitle(), label.getColor());
+    public LabelResponse(Label label) {
+        this(label.getId(), label.getTitle(), label.getColor());
     }
 }

@@ -11,7 +11,7 @@ public class MilestoneResponse {
     private Long id;
     private String title;
 
-    public static MilestoneResponse toMilestoneResponse(Milestone milestone) {
-        return new MilestoneResponse(milestone.getId(), milestone.getTitle());
+    public MilestoneResponse(Milestone milestone) {
+        this(milestone.getId(), milestone.getTitle());
     }
 }

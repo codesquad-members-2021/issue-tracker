@@ -12,7 +12,7 @@ public class UserResponse {
     private String username;
     private String profileImage;
 
-    public static UserResponse toUserResponse(User user) {
-        return new UserResponse(user.getId(), user.getUsername(), user.getProfileImage());
+    public UserResponse(User user) {
+        this(user.getId(), user.getUsername(), user.getProfileImage());
     }
 }
