@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { deviceSizes } from "styles/theme";
 import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
@@ -6,12 +7,14 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
   body {
     padding: 0;
     margin: 0;
     background-color: #ffffff;
     font-family: 'Noto Sans KR', sans-serif;
   }
+
   a {
     text-decoration: none;
     color:inherit;
@@ -27,6 +30,8 @@ const GlobalStyle = createGlobalStyle`
   input {
     outline: none;
   }
+
+  
 `;
 
 export default GlobalStyle;

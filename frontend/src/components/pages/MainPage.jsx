@@ -1,25 +1,26 @@
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import Labels from "../Labels/Labels";
-import Milestones from "../Milestones/Milestones";
 import { useState } from "react";
+import { Route, Switch, Link, Redirect } from "react-router-dom";
 import NewIssue from "./NewIssuePage";
 import NoMatch from "./NoMatchPage";
-import Header from "../common/Header";
-import Navigator from "../common/Navigator";
-import Issue from "./../Issues/Issues";
 import IssueDetailPage from "./IssueDetailPage";
+import Labels from "components/Labels/Labels";
+import Milestones from "components/Milestones/Milestones";
+import Header from "components/common/Header";
+import Navigator from "components/common/Navigator";
+import Issues from "components/Issues/Issues";
+import styled from "styled-components";
 
 const MainPage = () => {
 	const { pathname } = window.location;
 	console.log(pathname);
 
 	return localStorage.getItem("token") ? (
-		<>
+		<MainPageLayout>
 			<Header pathName={pathname} />
 			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
 				<Navigator />
 			)}
-			{pathname === "/main" && <Issue />}
+			{pathname === "/main" && <Issues />}
 			<Switch>
 				<Route exact path="/main/1" component={IssueDetailPage} />
 				<Route exact path="/main/milestones" component={Milestones} />
@@ -27,10 +28,16 @@ const MainPage = () => {
 				<Route exact path="/main/new" component={NewIssue} />
 				<Route path="/main/*" component={NoMatch} />
 			</Switch>
-		</>
+		</MainPageLayout>
 	) : (
 		<Redirect to="/login"></Redirect>
 	);
 };
+
+const MainPageLayout = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
 
 export default MainPage;

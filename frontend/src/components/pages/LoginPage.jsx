@@ -1,17 +1,32 @@
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { BigBlueButton } from "./../../styles/StyledButtons";
+import { LoginButton } from "styles/StyledButtons";
+import API from "util/API";
+import { ReactComponent as Logo } from "images/LogotypeLarge.svg";
+
 const LoginPage = () => {
 	return (
-		<>
-			<div>로그인페이지</div>
-
-			<BigBlueButton>
-				<a href="https://github.com/login/oauth/authorize?client_id=c39689919134be7915cf&redirect_uri=http://localhost:3000/login">
-					GitHub 계정으로 로그인
+		<LoginPageLayout>
+			<Contents>
+				<Logo />
+				<a href={API.gitHubOAuth()}>
+					<LoginButton>GitHub 계정으로 로그인</LoginButton>
 				</a>
-			</BigBlueButton>
-		</>
+			</Contents>
+		</LoginPageLayout>
 	);
 };
+
+const LoginPageLayout = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+`;
+
+const Contents = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
 
 export default LoginPage;

@@ -47,6 +47,14 @@ const deviceSizes = {
 	tabletL: "1024px",
 };
 
+const border_radius = {
+	small: "10px",
+	base: "11px",
+	lg: "16px",
+	xl: "20px",
+	xxl: "30px",
+};
+
 const grayScale = {
 	title_active: "#14142B",
 	body: "#4E4B66",
@@ -86,6 +94,7 @@ const theme = {
 	grayScale,
 	colors,
 	deviceSizes,
+	border_radius,
 	device,
 	paddings,
 	margins,
