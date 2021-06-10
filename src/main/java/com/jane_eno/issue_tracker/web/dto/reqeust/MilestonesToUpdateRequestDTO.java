@@ -1,6 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.reqeust;
 
-import com.jane_eno.issue_tracker.web.dto.response.Milestone;
+import com.jane_eno.issue_tracker.web.dto.response.MilestoneDTO;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class MilestonesToUpdateRequestDTO {
 
-    private Milestone milestones;
+    private MilestoneDTO milestones;
 }
 
 

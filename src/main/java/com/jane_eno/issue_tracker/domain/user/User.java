@@ -2,12 +2,11 @@ package com.jane_eno.issue_tracker.domain.user;
 
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
 import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
+import com.jane_eno.issue_tracker.domain.issue.Issue;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +24,9 @@ public class User {
     private String userName;
     private String avatarUrl;
     private String token;
+
+    @OneToMany(mappedBy = "author")
+    private List<Issue> issues;
 
     public static User createUser(GitHubUserResponseDTO user, AccessTokenResponseDTO token) {
         return User.builder()
