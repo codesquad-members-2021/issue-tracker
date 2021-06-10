@@ -23,7 +23,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="5c7-K6-PoG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                 <state key="normal" title="GitHub 계정으로 로그인" image="github_icon">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,7 +41,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pl0-rM-6N6">
                                 <rect key="frame" x="16" y="423" width="382" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.8382398593" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="22"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
                                 <state key="normal" title="Apple 계정으로 로그인">
@@ -53,15 +53,31 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVu-DP-Ohc">
+                                <rect key="frame" x="16" y="221" width="382" height="82"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Issue Tracker">
+                                        <attributes>
+                                            <font key="NSFont" size="35" name="Menlo-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="WVu-DP-Ohc" firstAttribute="trailing" secondItem="Xbm-5D-IMC" secondAttribute="trailing" id="887-3V-Qr2"/>
                             <constraint firstItem="pl0-rM-6N6" firstAttribute="top" secondItem="Xbm-5D-IMC" secondAttribute="bottom" constant="14" id="90r-sB-oUK"/>
+                            <constraint firstItem="WVu-DP-Ohc" firstAttribute="leading" secondItem="Xbm-5D-IMC" secondAttribute="leading" id="I60-T1-Jaz"/>
                             <constraint firstItem="pl0-rM-6N6" firstAttribute="height" secondItem="Xbm-5D-IMC" secondAttribute="height" id="IXn-UT-wc9"/>
                             <constraint firstItem="Xbm-5D-IMC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="M9U-1C-apv"/>
+                            <constraint firstItem="WVu-DP-Ohc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" multiplier="5" constant="1" id="Mkb-R6-Fn9"/>
                             <constraint firstItem="pl0-rM-6N6" firstAttribute="leading" secondItem="Xbm-5D-IMC" secondAttribute="leading" id="Xnc-WJ-vXU"/>
                             <constraint firstItem="pl0-rM-6N6" firstAttribute="trailing" secondItem="Xbm-5D-IMC" secondAttribute="trailing" id="jGG-uv-9Xy"/>
+                            <constraint firstItem="Xbm-5D-IMC" firstAttribute="top" secondItem="WVu-DP-Ohc" secondAttribute="bottom" constant="50" id="mcr-Uk-14i"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Xbm-5D-IMC" secondAttribute="trailing" constant="16" id="tEq-vG-KPd"/>
                             <constraint firstItem="Xbm-5D-IMC" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="wtz-kg-zKu"/>
                             <constraint firstItem="Xbm-5D-IMC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" multiplier="8" constant="1" id="zxy-xR-XUS"/>

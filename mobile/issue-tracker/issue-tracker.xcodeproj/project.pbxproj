@@ -18,7 +18,8 @@
 		BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */; };
 		BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
 		BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
-		BF0A6C19266F67EE000F3BC5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C18266F67EE000F3BC5 /* Endpoint.swift */; };
+		BF0A6C19266F67EE000F3BC5 /* GithubConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */; };
+		BFB399C92671A75C002C6D80 /* ClientId.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFB399C82671A75C002C6D80 /* ClientId.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,8 @@
 		BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		BF0A6C18266F67EE000F3BC5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubConfiguration.swift; sourceTree = "<group>"; };
+		BFB399C82671A75C002C6D80 /* ClientId.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientId.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				BF0A6BDB266F4EE5000F3BC5 /* Main.storyboard */,
 				BF0A6BDE266F4EE7000F3BC5 /* Assets.xcassets */,
 				BF0A6BE0266F4EE7000F3BC5 /* LaunchScreen.storyboard */,
+				BFB399C82671A75C002C6D80 /* ClientId.plist */,
 				BF0A6BE3266F4EE7000F3BC5 /* Info.plist */,
 			);
 			path = "issue-tracker";
@@ -183,7 +186,7 @@
 		BF0A6C17266F67DB000F3BC5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BF0A6C18266F67EE000F3BC5 /* Endpoint.swift */,
+				BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */,
 				BF0A6BE2266F4EE7000F3BC5 /* LaunchScreen.storyboard in Resources */,
 				BF0A6BDF266F4EE7000F3BC5 /* Assets.xcassets in Resources */,
+				BFB399C92671A75C002C6D80 /* ClientId.plist in Resources */,
 				BF0A6BDD266F4EE5000F3BC5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +352,7 @@
 				BF0A6BDA266F4EE5000F3BC5 /* MainViewController.swift in Sources */,
 				BF0A6BD6266F4EE5000F3BC5 /* AppDelegate.swift in Sources */,
 				BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */,
-				BF0A6C19266F67EE000F3BC5 /* Endpoint.swift in Sources */,
+				BF0A6C19266F67EE000F3BC5 /* GithubConfiguration.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

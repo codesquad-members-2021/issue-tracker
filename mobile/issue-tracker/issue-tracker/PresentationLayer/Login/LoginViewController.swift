@@ -8,6 +8,9 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+
+    private let loginViewModel = LoginViewModel()
+
     @IBAction func loginButtonTouched(_ sender: Any) {
     }
 }
