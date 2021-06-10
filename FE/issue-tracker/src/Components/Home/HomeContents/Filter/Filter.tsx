@@ -3,11 +3,11 @@ import FilterModal from "./FilterModal";
 
 const Filter = () => {
   return (
-    // <S.FilterDiv>
-    //   필터
-    //   <SVG.Down />
-    // </S.FilterDiv>
-    <FilterModal />
+    <S.FilterDiv>
+      필터
+      <SVG.Down />
+    </S.FilterDiv>
+    // <FilterModal />
   );
 };
 
