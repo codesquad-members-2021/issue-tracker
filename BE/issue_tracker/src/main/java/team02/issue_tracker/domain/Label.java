@@ -1,7 +1,6 @@
 package team02.issue_tracker.domain;
 
 import lombok.Getter;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
