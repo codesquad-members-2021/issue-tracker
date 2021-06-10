@@ -25,6 +25,7 @@ private extension RedirectionViewController {
         LoginObserver.InvalidLoginTry.addObserver().bind { [weak self] _ in
             guard let errorAlert = self?.errorAlert else { return }
             self?.present(errorAlert, animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: nil)
         }.disposed(by: rx.disposeBag)
     }
     
