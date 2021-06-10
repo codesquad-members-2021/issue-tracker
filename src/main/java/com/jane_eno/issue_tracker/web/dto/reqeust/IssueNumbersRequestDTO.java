@@ -5,9 +5,10 @@ import lombok.*;
 import java.util.List;
 
 @Setter
+@Getter
 @ToString
 @NoArgsConstructor
 public class IssueNumbersRequestDTO {
 
-    private List<Integer> issueNumbers;
+    private List<Long> issueNumbers;
 }

@@ -33,7 +33,7 @@ public class JwtUtil {
 
     public DecodedJWT verifyToken(String jwt) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET_KEY))
-                .acceptExpiresAt(60 * 10)
+                .acceptExpiresAt(60 * 100)
                 .withIssuer(ISSUER)
                 .build();
         return verifier.verify(jwt);

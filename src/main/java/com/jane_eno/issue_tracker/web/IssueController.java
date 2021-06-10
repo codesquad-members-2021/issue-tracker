@@ -1,5 +1,7 @@
 package com.jane_eno.issue_tracker.web;
 
+import com.jane_eno.issue_tracker.auth.annotation.LoginRequired;
+import com.jane_eno.issue_tracker.auth.annotation.UserId;
 import com.jane_eno.issue_tracker.service.IssueService;
 import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
@@ -35,11 +37,12 @@ public class IssueController {
         return issueService.getIssueForm();
     }
 
+    @LoginRequired
     @PostMapping("/form")
-    public void create(@RequestBody IssueRequestDTO issueRequestDTO) {
+    public void create(@RequestBody IssueRequestDTO issueRequestDTO, @UserId Long userId) {
         logger.debug("이슈 생성");
         logger.debug("issue 요청 확인: {}", issueRequestDTO.toString());
-        issueService.createIssue(issueRequestDTO);
+        issueService.createIssue(issueRequestDTO, userId);
     }
 
     @GetMapping("/{issueId}")

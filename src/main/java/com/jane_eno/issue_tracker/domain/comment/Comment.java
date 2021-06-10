@@ -11,16 +11,21 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NonNull
     private String comment;
+
+    @NonNull
     private LocalDateTime createdDateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private Issue issue;
 }

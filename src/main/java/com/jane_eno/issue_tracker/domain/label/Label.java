@@ -1,13 +1,14 @@
 package com.jane_eno.issue_tracker.domain.label;
 
-import com.jane_eno.issue_tracker.domain.issue.Issue;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+
+import com.jane_eno.issue_tracker.web.dto.response.LabelDTO;
 
 @Getter
 @Entity
@@ -26,6 +27,17 @@ public class Label {
 
     private String description;
 
-//    @ManyToMany
-//    private List<Issue> issues;
+    //    @ManyToMany
+//    private List<Issue> issues
+    public static Label createLabel(LabelDTO labelDTO) {
+        return Label.builder()
+                .name(labelDTO.getName())
+                .color(labelDTO.getColor())
+                .description(labelDTO.getDescription())
+                .build();
+    }
+
+    public boolean matchLabel(Label targetLabel) {
+        return id.equals(targetLabel.id);
+    }
 }

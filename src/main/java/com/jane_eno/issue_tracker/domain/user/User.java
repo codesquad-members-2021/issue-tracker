@@ -49,4 +49,8 @@ public class User {
     public void removeToken() {
         this.token = null;
     }
+
+    public boolean matchUser(User user) {
+        return id.equals(user.id);
+    }
 }
