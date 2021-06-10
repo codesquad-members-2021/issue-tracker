@@ -7,6 +7,6 @@
 
 import UIKit
 
-class IssueCell: UICollectionViewCell {
+class IssueCell: UITableViewCell {
     
 }
