@@ -15,17 +15,23 @@ public class CommentController {
     }
 
     @PostMapping
-    public void makeComment(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
+    public void make(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
         //todo user id
         commentService.write(issueId, "uuid", commentRequest);
     }
 
     @PutMapping("/{commentId}")
-    public void modifyComment(@PathVariable Long issueId,
-                              @PathVariable Long commentId,
-                              @RequestBody CommentRequest commentRequest) {
+    public void modify(@PathVariable Long issueId,
+                       @PathVariable Long commentId,
+                       @RequestBody CommentRequest commentRequest) {
         //todo user id
         commentService.modify("uuid", commentRequest, commentId);
     }
 
+    @DeleteMapping("/{commentId}")
+    public void delete(@PathVariable Long issueId,
+                       @PathVariable Long commentId) {
+        //todo user id
+        commentService.delete("uuid", commentId);
+    }
 }

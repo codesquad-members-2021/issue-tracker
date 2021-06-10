@@ -10,22 +10,18 @@ import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
 import com.codesqaude.cocomarco.domain.user.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final IssueRepository issueRepository;
     private final UserRepository userRepository;
-
-    public CommentService(CommentRepository commentRepository, IssueRepository issueRepository, UserRepository userRepository) {
-        this.commentRepository = commentRepository;
-        this.issueRepository = issueRepository;
-        this.userRepository = userRepository;
-    }
 
     public void write(Long issueId, String writerId, CommentRequest commentRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
@@ -38,6 +34,12 @@ public class CommentService {
         Comment comment = findById(commentId);
         comment.isSameWriter(UUID.fromString(writerId));
         comment.modify(commentRequest.getText());
+    }
+
+    public void delete(String writerId, Long commentId) {
+        Comment comment = findById(commentId);
+        comment.isSameWriter(UUID.fromString(writerId));
+        commentRepository.delete(comment);
     }
 
     public Comment findById(Long id) {
