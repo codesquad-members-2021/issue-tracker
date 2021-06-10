@@ -5,7 +5,7 @@ interface MilestoneIconProps {
 }
 function MilestoneIcon({ sizeType = 12 }: MilestoneIconProps) {
   return (
-    <MilestoneIconBlock>
+    <MilestoneIconBlock style={{ width: 'fit-content' }}>
       <img src={process.env.PUBLIC_URL + '/miles.png'} alt='milestoneIcon' width={sizeType} />
     </MilestoneIconBlock>
   );
@@ -14,7 +14,6 @@ function MilestoneIcon({ sizeType = 12 }: MilestoneIconProps) {
 export default MilestoneIcon;
 
 const MilestoneIconBlock = styled.div`
-  display: 'flex';
-  width: 'fit-content';
-  margin: '0 7px';
+  display: flex;
+  margin: 0 7px;
 `;
