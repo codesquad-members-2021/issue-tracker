@@ -5,6 +5,12 @@ public class User {
     private Long id;
     private String avatar_url;
 
+    public User(String login, Long id, String avatar_url) {
+        this.login = login;
+        this.id = id;
+        this.avatar_url = avatar_url;
+    }
+
     public String getLogin() {
         return login;
     }
