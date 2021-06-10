@@ -1,12 +1,18 @@
 package com.codesqaude.cocomarco.domain.label;
 
 import com.codesqaude.cocomarco.domain.issue.IssueLabel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Label {
 
     @Id
@@ -18,5 +24,4 @@ public class Label {
 
     private String name;
     private String hexCode;
-
 }
