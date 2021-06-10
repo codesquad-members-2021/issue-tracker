@@ -6,20 +6,25 @@ import CheckRoundedIcon from '@material-ui/icons/CheckRounded'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import List from '../atom/List'
 import useToggle from '../../hooks/useToggle'
-import { useRecoilValue } from 'recoil'
-import { CountInfoStorage } from '../../hooks/store'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { getOpenIssues, getCloseIssues, issuesStorage, CountInfoStorage } from '../../hooks/store'
+
 
 function ListLeft(){
   const {openedIssue, closedIssue} = useRecoilValue(CountInfoStorage)
-  const handleOpen =()=>{
-    console.log('click')
-  }
+  const setIssues = useSetRecoilState(issuesStorage)
+  const asyncOpenIssues = useRecoilValue(getOpenIssues)//요청해서받은 오픈이슈
+  const asyncCloseIssues = useRecoilValue(getCloseIssues)//요청해서받은 오픈이슈
+  const openIssueList = asyncOpenIssues?.issues
+  const closeIssueList = asyncCloseIssues?.issues
+  const handleOpen =()=>setIssues(openIssueList)
+  const handleClose =()=>setIssues(closeIssueList)
   return (
     <ListLeftBlock>
       <CheckBox/>
       <FilterTabBlock>
         <div onClick={handleOpen}><AdjustRoundedIcon/> 열린 이슈 ({openedIssue})</div>
-        <div><CheckRoundedIcon/> 닫힌 이슈 ({closedIssue})</div>
+        <div onClick={handleClose}><CheckRoundedIcon/> 닫힌 이슈 ({closedIssue})</div>
       </FilterTabBlock>
     </ListLeftBlock>
   )

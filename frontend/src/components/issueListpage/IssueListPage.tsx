@@ -1,16 +1,18 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import IssueList from './IssueList'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { getOpenIssues, openIssuesStorage, CountInfoStorage } from '../../hooks/store'
+import { getOpenIssues, issuesStorage, CountInfoStorage } from '../../hooks/store'
 import RouterTab from '../atom/RouterTab'
 import IssueFilterSection from './IssueFilter'
 import IssuePlus from '../atom/IssuePlus'
 function IssueListPage(){
   const setCountInfo = useSetRecoilState(CountInfoStorage)
-  const setOpenIssues = useSetRecoilState(openIssuesStorage)
+  const setIssues = useSetRecoilState(issuesStorage)
+
   const asyncOpenIssues = useRecoilValue(getOpenIssues)//요청해서받은 오픈이슈
   const openIssueList = asyncOpenIssues?.issues
-  setOpenIssues(openIssueList)
+  setIssues(openIssueList)
 
   const countInfo = asyncOpenIssues?.count
   setCountInfo(countInfo)

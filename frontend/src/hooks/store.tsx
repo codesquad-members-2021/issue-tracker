@@ -50,27 +50,37 @@ interface IssuesType {
   title: string
 }
 
-const openIssues = atom<any>({
-  key: 'issues/open',
+const issues = atom<any>({
+  key: 'issues',
   default: []
 })
 
-export const openIssuesStorage = selector<IssuesType[]>({
-  key: 'storage/issues/open',
+export const issuesStorage = selector<IssuesType[]>({
+  key: 'storage/issues',
   get: ({get})=>{
-    const open = get(openIssues)
-    return open
+    const result = get(issues)
+    return result
   },
   set:({set}, newAsync)=>{
-    set(openIssues, newAsync)
+    set(issues, newAsync)
   }
 })
-
 export const getOpenIssues = selector({
   key: 'GET/issues/open',
   get: async ()=>{
     try {
       const response = await fetch(`http://3.37.76.224/api/issues?status=open`)
+      return response.json()
+    } catch (err) {
+      console.error(err)
+    }
+  }
+})
+export const getCloseIssues = selector({
+  key: 'GET/issues/close',
+  get: async ()=>{
+    try {
+      const response = await fetch(`http://3.37.76.224/api/issues?status=close`)
       return response.json()
     } catch (err) {
       console.error(err)

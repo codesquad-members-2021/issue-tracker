@@ -6,7 +6,7 @@ import Checkbox from '../atom/CheckBox'
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import MilesStone from '../atom/MilesStone'
 import { useRecoilValue } from 'recoil';
-import { openIssuesStorage } from '../../hooks/store'
+import { issuesStorage } from '../../hooks/store'
 import timeChecker from '../../hooks/timeChecker'
 
 interface IssueLineProps{
@@ -54,7 +54,7 @@ function IssueLine({issue}:IssueLineProps){
 
 
 function IssueList() {
-  const openIssues:IssuesType[] = useRecoilValue(openIssuesStorage)
+  const openIssues:IssuesType[] = useRecoilValue(issuesStorage)
 
   return (
     <ListBox>
