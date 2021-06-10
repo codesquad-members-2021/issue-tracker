@@ -33,19 +33,26 @@ const ButtonWrapper = styled.div<Props>`
   width: 120px;
   height: 40px;
   padding: 0px 16px;
+  border-radius: 11px;
 `}
 
   background-color: ${props => {
     if (props.initial || props.focus || props.disabled)
       return props.theme.colors.primary;
-    else if (props.hover) return props.theme.colors.darkBlue;
-  }};
-  border: ${props => {
-    if (props.focus) return `4px solid ${props.theme.colors.lightBlue}`;
   }};
   opacity: ${props => {
     if (props.disabled) return 0.5;
   }};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.darkBlue};
+    color: ${props => props.theme.greyscale.offWhite};
+  }
+
+  &:focus {
+    background-color: ${props => props.theme.colors.primary};
+    border: ${props => `4px solid ${props.theme.colors.lightBlue}`};
+  }
 `;
 
 export default Buttons;

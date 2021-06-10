@@ -7,7 +7,7 @@ const theme: DefaultTheme = {
     label: '#6E7191',
     placeholer: '#A0A3BD',
     line: '#D9DBE9',
-    inputBackgound: '#EFF0F6',
+    inputBackground: '#EFF0F6',
     background: '#F7F7FC',
     offWhite: '#FEFEFE',
   },
