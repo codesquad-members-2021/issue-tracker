@@ -36,15 +36,33 @@ public class Label {
     }
 
     public static Label create(String name, String description, Colors colors) {
+        checkName(name);
+        checkDescription(description);
+        checkColors(colors);
+
+        return new Label(name, description, colors);
+    }
+
+    private static void checkName(String name) {
         if (name == null || name.length() == 0) {
             throw new IllegalArgumentException("Label name is empty or null");
         }
 
+        if (name.length() > 50) {
+            throw new IllegalArgumentException("Label name is too long (max 50)");
+        }
+    }
+
+    private static void checkDescription(String description) {
+        if (description != null && description.length() > 100) {
+            throw new IllegalArgumentException("Label description is too long (max 100)");
+        }
+    }
+
+    private static void checkColors(Colors colors) {
         if (colors == null) {
             throw new IllegalArgumentException("Colors is null");
         }
-
-        return new Label(name, description, colors);
     }
 
     @Override
