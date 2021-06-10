@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import LabelBadge from '../atom/LabelBadge';
-import { IssueItemProps } from './issueType';
+import LabelBadge from 'components/atom/LabelBadge';
+import { IssueItemProps } from 'components/issueTable/issueType';
 import { Checkbox } from '@material-ui/core';
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
-import MilestoneIcon from '../atom/MilestoneIcon';
-import { timeChecker } from '../../util/util';
+import MilestoneIcon from 'components/atom/MilestoneIcon';
+import { timeChecker } from 'util/util';
 
 export default function IssueItem({
   issue: {

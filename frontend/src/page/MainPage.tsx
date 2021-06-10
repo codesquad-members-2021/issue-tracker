@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React, { ReactElement } from 'react';
-import IssueFilterSection from '../components/issueList/IssueFilter';
-import LabelMileStoneTab from '../components/common/LabelMilestoneTab';
-import IssuePlus from '../components/atom/IssuePlus';
-import IssueTable from '../components/issueList/IssueTable';
+import LabelMileStoneTab from 'components/common/LabelMilestoneTab';
+import IssuePlus from 'components/atom/IssuePlus';
+import IssueFilterSection from 'components/issueTable/IssueFilter';
+import IssueTable from 'components/issueTable/IssueTable';
 
 interface Props {}
 

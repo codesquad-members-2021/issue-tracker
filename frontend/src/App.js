@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from './components/login/LoginPage';
+import LoginPage from 'components/login/LoginPage';
 import Header from './components/header/Header';
 import { RecoilRoot } from 'recoil';
 import MainPage from './page/MainPage';

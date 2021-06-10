@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import CheckBox from '../../atom/CheckBox';
+import CheckBox from 'components/atom/CheckBox';
 import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import { useSetRecoilState } from 'recoil';
-import { issueTypeState } from '../../../store/issueInfoStore';
+import { issueTypeState } from 'store/issueInfoStore';
 
 interface Props {}
 

@@ -1,9 +1,9 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
-import MilestoneIcon from '../atom/MilestoneIcon';
-import { getIssuesInfoState } from '../../store/issueInfoStore';
+import MilestoneIcon from 'components/atom/MilestoneIcon';
+import { getIssuesInfoState } from 'store/issueInfoStore';
 
 interface Props {}
 

@@ -1,9 +1,9 @@
-import { useState, useRef, RefObject } from 'react';
+import React, { useState, useRef, RefObject } from 'react';
 import styled from 'styled-components';
-import RadioBtn from '../atom/RadioBtn';
+import RadioBtn from 'components/atom/RadioBtn';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SearchIcon from '@material-ui/icons/Search';
-import useToggle from '../../hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 function IssueFilterSection() {
   const filterButton = useRef<HTMLDivElement>(null);
   const filterModal = useRef<HTMLDivElement>(null);
