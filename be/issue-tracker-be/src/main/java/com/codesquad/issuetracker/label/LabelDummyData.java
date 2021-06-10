@@ -32,4 +32,9 @@ public class LabelDummyData {
                        .color("#3EFC68")
                        .build();
     }
+
+    public static int labelsCountResponses() {
+        int labelsCount = 3;
+        return labelsCount;
+    }
 }

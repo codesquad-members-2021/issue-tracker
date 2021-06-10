@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.milestone;
 
+import com.codesquad.issuetracker.label.LabelDummyData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +10,12 @@ import java.util.Set;
 public class MileStoneController {
 
     @GetMapping("/milestones")
-    public Set<MileStoneResponse> getMileStoneResponses() {
+    public Set<MileStoneResponse> readAll() {
         return MileStoneDummyData.mileStonesResponse();
+    }
+
+    @GetMapping("/milestones-count")
+    public int readAllCount() {
+        return MileStoneDummyData.milestonesCountResponses();
     }
 }

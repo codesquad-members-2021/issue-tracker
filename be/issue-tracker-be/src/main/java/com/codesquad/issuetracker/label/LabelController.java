@@ -9,7 +9,12 @@ import java.util.Set;
 public class LabelController {
 
     @GetMapping("/labels")
-    public Set<LabelResponse> getLabels() {
+    public Set<LabelResponse> readAll() {
         return LabelDummyData.labelResponses();
+    }
+
+    @GetMapping("/labels-count")
+    public int readAllCount() {
+        return LabelDummyData.labelsCountResponses();
     }
 }
