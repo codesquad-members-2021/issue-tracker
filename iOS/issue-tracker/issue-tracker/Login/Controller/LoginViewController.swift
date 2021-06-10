@@ -6,36 +6,13 @@
 //
 
 import UIKit
-import AuthenticationServices
+//import AuthenticationServices
 import KeychainAccess
 
-class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
-    
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return self.view.window ?? ASPresentationAnchor()
-    }
-    
-    private let github_OAuthURLString = "https://github.com/login/oauth/authorize"
-    private let keychain = Keychain()
-    
-    private lazy var github_client_id: String = {
-        var github_client_id = String()
-        github_client_id = keychain["github_client_id"] ?? ""
-        return github_client_id
-    }()
-    private lazy var github_redirect_uri: String = {
-        var github_redirect_uri = String()
-        github_redirect_uri = keychain["github_redirect_uri"] ?? ""
-        return github_redirect_uri
-    }()
-    private lazy var github_callbackUrlScheme: String = {
-        var github_callbackUrlScheme = String()
-        github_callbackUrlScheme = keychain["github_callbackUrlScheme"] ?? ""
-        return github_callbackUrlScheme
-    }()
+class LoginViewController: UIViewController {
     
     
-    var webAuthSession: ASWebAuthenticationSession?
+//    var webAuthSession: ASWebAuthenticationSession?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -123,6 +100,8 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
     
+    private var githubLoginManager: GithubLoginManagable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.background
@@ -130,6 +109,9 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
+        
+        let githubAuthorizationManager = GithubAuthorizationManager(viewController: self, delegate: self)
+        githubLoginManager = githubAuthorizationManager
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -221,46 +203,22 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
     
     @objc private func loginByGithubTouchedDown(sender: UIButton!) {
-        var components = URLComponents(string: github_OAuthURLString)!
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: github_client_id),
-            URLQueryItem(name: "redirect_uri", value: github_redirect_uri)
-        ]
-        webAuthSession = ASWebAuthenticationSession.init(url: components.url!, callbackURLScheme: github_callbackUrlScheme, completionHandler: { (callbackURL:URL?, error:Error?) in
-            
-            guard error == nil, let successURL = callbackURL else {
-                return
-            }
-            
-            guard let code = NSURLComponents(string: (successURL.absoluteString))?.queryItems?.filter({$0.name == "code"}).first?.value else { return }
-            print("code = ",code)
-                        
-            let networkmanager = NetworkManager()
-            networkmanager.setInfoGithub(with: code) { (result: Result<OAuthResponse,Error>) in
-                switch result {
-                case .success(let jwtResponse):
-                    print("response=",jwtResponse)
-                    self.keychain["github_jwt"] = jwtResponse.avatarUrl
-                    self.keychain["github_avatarUrl"] = jwtResponse.jwt
-                    self.keychain["github_loginId"] = jwtResponse.loginId
-                    
-                    DispatchQueue.main.async {
-//                        webAuthSession?.cancel()
-                        let tabBarVC = IssueTrackerTabBarController()
-                        tabBarVC.modalPresentationStyle = .fullScreen
-                        self.present(tabBarVC, animated: true, completion: nil)
-                    }
-                    
-                case .failure(let error):
-                    print("error",error)
-                }
-            }
-        })
-        webAuthSession?.presentationContextProvider = self
-        webAuthSession?.start()
-        
+        githubLoginManager?.login()
     }
 }
 
-//6da592247cbf329d18c0
-//21384f723aeedf9be9c8
+extension LoginViewController: GithubLoginManagerDelegate {
+    func didGithubLoginSuccess() {
+        presentIssueViewController()
+    }
+    
+    func didGithubLoginFail(with error: Error) {
+        //에러
+    }
+    
+    private func presentIssueViewController() {
+        let tabBarVC = IssueTrackerTabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        present(tabBarVC, animated: true, completion: nil)
+    }
+}

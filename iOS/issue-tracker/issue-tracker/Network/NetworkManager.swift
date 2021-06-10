@@ -22,6 +22,7 @@ class NetworkManager: NetworkManagerOperations {
         let param: Parameters = [
             "code" : code
         ]
+        
         AF.request(url, method: .get, parameters: param)
             .responseDecodable(of: T.self) { response in
                 switch response.result {

@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let keychain = Keychain()
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
+        keychain["github_OAuthURLString"] = "https://github.com/login/oauth/authorize"
         keychain["github_client_id"] = "1f8b844e0951dd8b43cb"
         keychain["github_redirect_uri"] = "issuetracker://login"
         keychain["github_callbackUrlScheme"] = "issuetracker"
