@@ -14,7 +14,7 @@ const MainPage = () => {
 	const { pathname } = window.location;
 	console.log(pathname);
 
-	return localStorage.getItem("token") ? (
+	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
 			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
