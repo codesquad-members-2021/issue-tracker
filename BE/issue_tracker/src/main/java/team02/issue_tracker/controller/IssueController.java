@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team02.issue_tracker.dto.wrapping_dto.DataResponse;
-import team02.issue_tracker.dto.wrapping_dto.ListDataResponse;
+import team02.issue_tracker.dto.wrapping.DataResponse;
+import team02.issue_tracker.dto.wrapping.ListDataResponse;
 import team02.issue_tracker.service.IssueService;
 
 @RestController
