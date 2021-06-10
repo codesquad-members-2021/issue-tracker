@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { ReactComponent as Tag } from '@assets/tag.svg';
 import { ReactComponent as Milestone } from '@assets/milestone.svg';
 

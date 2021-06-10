@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as Edit } from '@assets/edit.svg';
 import { ReactComponent as Delete } from '@assets/trash.svg';
-import Label from '@components/labels/Label';
+import Label from '@components/common/Label';
 
 interface Props {
   last: boolean;
