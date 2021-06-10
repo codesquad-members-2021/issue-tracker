@@ -6,13 +6,18 @@ interface countType {
   closedIssue: number;
 }
 
-type LabelsProp = {
+interface LabelColorType {
+  backgroundColorCode: string;
+  textColorCode: string;
+}
+
+interface LabelProp {
   id: number;
   name: string;
-  colorCode: string;
+  color: LabelColorType;
   description: string;
   checked: boolean;
-};
+}
 
 interface IssuesType {
   assignees: string[];
@@ -21,7 +26,7 @@ interface IssuesType {
   commentNumber: number;
   createdDateTime: string;
   id: number;
-  labels: LabelsProp[];
+  labels: LabelProp[];
   milestone: string;
   title: string;
 }
