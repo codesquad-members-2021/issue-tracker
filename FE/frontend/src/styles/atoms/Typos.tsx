@@ -9,7 +9,8 @@ const Typos: React.FC<Props> = ({ children, ...props }) => {
   return <TypoWrapper {...props}>{children}</TypoWrapper>;
 };
 
-const TypoWrapper = styled.span<Props>`
+const TypoWrapper = styled.div<Props>`
+  display: block;
   font-size: ${props => {
     if (props.lg) return props.theme.fontSize.lg;
     else if (props.md) return props.theme.fontSize.md;

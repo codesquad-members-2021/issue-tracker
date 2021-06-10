@@ -1,12 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import Header from './Header';
+import IssueList from './issue/IssueList';
 
-const IssueList = () => {
+const Main = () => {
   return (
-    <div>
+    <MainWrapper>
       <Header />
-    </div>
+      <IssueList />
+    </MainWrapper>
   );
 };
 
-export default IssueList;
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default Main;
