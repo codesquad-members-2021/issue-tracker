@@ -1,9 +1,18 @@
 import styled from 'styled-components';
-
-import { Container } from "@material-ui/core";
+import NavFilter from './NavFilter';
 
 const IssueList = () => {
-  return <Container maxWidth="xl">123</Container>;
+  return (
+    <IssueListLayout>
+      <NavFilter />
+    </IssueListLayout>
+  );
 };
 
 export default IssueList;
+
+// --- Styled Components ---
+const IssueListLayout = styled.div`
+  display: flex;
+  /* justify-content: space-between; */
+`;
