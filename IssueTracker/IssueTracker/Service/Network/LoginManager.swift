@@ -14,8 +14,10 @@ class LoginManager {
         AF.request(url, method: .post, headers: headers)
             .responseDecodable(of: LoginDTO.self) { response in
                 switch response.result {
-                case .success(let loginData): print(loginData)
-                case .failure(let error): print(error)
+                case .success(let loginData):
+                    LoginObserver.validLoginTry.post(object: loginData)
+                case .failure(let error):
+                    LoginObserver.InvalidLoginTry.post(object: error)
                 }
             }
     }
