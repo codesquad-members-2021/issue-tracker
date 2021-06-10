@@ -57,5 +57,10 @@ public class LoginController {
 
         return new JwtDto(jwt);
     }
+
+    @GetMapping("/hello")
+    public void hell() {
+        System.out.println("something");
+    }
 }
 
