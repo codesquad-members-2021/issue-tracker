@@ -14,30 +14,38 @@ public class Label {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", name = "label_id")
+    @Column(columnDefinition = "BINARY(16)", name = "LABEL_ID")
     private UUID id;
 
-    @Embedded
-    private BackgroundColor backgroundColor;
+    @Column(name = "LABEL_NAME")
+    private String name;
+
+    @Column(name = "LABEL_DESCRIPTION")
+    private String description;
 
     @Embedded
-    private LabelName name;
-    private String description;
+    private Colors colors;
 
     protected Label() {
     }
 
-    private Label(UUID id, BackgroundColor backgroundColor, LabelName name, String description) {
-        this.id = id;
-        this.backgroundColor = backgroundColor;
+    private Label(String name, String description, Colors colors) {
         this.name = name;
         this.description = description;
+        this.colors = colors;
     }
 
-    public static Label newLabel(BackgroundColor backgroundColor, LabelName name, String description) {
-        return new Label(null, backgroundColor, name, description);
-    }
+    public static Label create(String name, String description, Colors colors) {
+        if (name == null || name.length() == 0) {
+            throw new IllegalArgumentException("Label name is empty or null");
+        }
 
+        if (colors == null) {
+            throw new IllegalArgumentException("Colors is null");
+        }
+
+        return new Label(name, description, colors);
+    }
 
     @Override
     public boolean equals(Object o) {
