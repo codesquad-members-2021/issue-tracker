@@ -66,12 +66,12 @@
 		883F5169266F508B0055EC9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = issueTrackerApp/Base.lproj/Milestones.storyboard; sourceTree = "<group>"; };
 		883F5171266F50A40055EC9E /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		883F5184266F5F090055EC9E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueViewController.swift; path = ViewController/Issue/IssueViewController.swift; sourceTree = SOURCE_ROOT; };
-		883F519C2670940E0055EC9E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueCell.swift; path = ViewController/Issue/IssueCell.swift; sourceTree = SOURCE_ROOT; };
-		883F519D2670940E0055EC9E /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = IssueCell.xib; path = ViewController/Issue/IssueCell.xib; sourceTree = SOURCE_ROOT; };
-		883F51A32670AAAB0055EC9E /* TagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagStackView.swift; path = ViewController/Issue/TagStackView.swift; sourceTree = SOURCE_ROOT; };
-		883F51A82670ABDC0055EC9E /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagLabel.swift; path = ViewController/Issue/TagLabel.swift; sourceTree = SOURCE_ROOT; };
+		883F519C2670940E0055EC9E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueCell.swift; path = "issueTrackerApp/Presentation/UI/UIView/New Group/IssueCell.swift"; sourceTree = SOURCE_ROOT; };
+		883F519D2670940E0055EC9E /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = IssueCell.xib; path = "issueTrackerApp/Presentation/UI/UIView/New Group/IssueCell.xib"; sourceTree = SOURCE_ROOT; };
+		883F51A32670AAAB0055EC9E /* TagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagStackView.swift; path = "issueTrackerApp/Presentation/UI/UIView/New Group/TagStackView.swift"; sourceTree = SOURCE_ROOT; };
+		883F51A82670ABDC0055EC9E /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagLabel.swift; path = "issueTrackerApp/Presentation/UI/UIView/New Group/TagLabel.swift"; sourceTree = SOURCE_ROOT; };
 		883F51AD2670B2F70055EC9E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomBarButtonItem.swift; path = ViewController/Issue/CustomBarButtonItem.swift; sourceTree = SOURCE_ROOT; };
+		883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomBarButtonItem.swift; path = issueTrackerApp/Presentation/UI/UIControl/CustomBarButtonItem.swift; sourceTree = SOURCE_ROOT; };
 		883F51C6267200EA0055EC9E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Issue.swift; path = ViewController/Issue/Issue.swift; sourceTree = SOURCE_ROOT; };
 		883F51CB2672041A0055EC9E /* Milestones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Milestones.swift; path = ViewController/Issue/Milestones.swift; sourceTree = SOURCE_ROOT; };
 		883F51D3267204520055EC9E /* LabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelModel.swift; path = ViewController/Issue/LabelModel.swift; sourceTree = SOURCE_ROOT; };
@@ -137,11 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				883F5184266F5F090055EC9E /* IssueViewController.swift */,
-				883F519C2670940E0055EC9E /* IssueCell.swift */,
-				883F519D2670940E0055EC9E /* IssueCell.xib */,
-				883F51A32670AAAB0055EC9E /* TagStackView.swift */,
-				883F51A82670ABDC0055EC9E /* TagLabel.swift */,
-				883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -212,7 +207,6 @@
 				930FAEB9266E116300422968 /* Network */,
 				930FAEBA266E11BA00422968 /* Storage */,
 				930FAEBB266E126100422968 /* Repository */,
-				9343E2C9266EF9CD0086F977 /* KeychainController.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -220,8 +214,8 @@
 		930FAEB9266E116300422968 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */,
-				9343E2FE266F60320086F977 /* Requests */,
+				931BADFE26720B7D00CD9244 /* Issue */,
+				931BADFA26720B7200CD9244 /* OAuth */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -236,7 +230,8 @@
 		930FAEBB266E126100422968 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				9343E2D7266F03E90086F977 /* NetworkController.swift */,
+				931BAE0326720C0900CD9244 /* Issue */,
+				931BADFF26720C0200CD9244 /* OAuth */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -301,6 +296,7 @@
 		930FAEC2266E12C800422968 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				931BAE0426720C1500CD9244 /* Issue */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -308,6 +304,7 @@
 		930FAEC3266E12CF00422968 /* UIControl */ = {
 			isa = PBXGroup;
 			children = (
+				883F51B52671E1710055EC9E /* CustomBarButtonItem.swift */,
 			);
 			path = UIControl;
 			sourceTree = "<group>";
@@ -317,6 +314,57 @@
 			children = (
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		931BADF626720B6600CD9244 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		931BADFA26720B7200CD9244 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				931BADF626720B6600CD9244 /* Endpoint */,
+				9343E2FE266F60320086F977 /* Requests */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		931BADFE26720B7D00CD9244 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
+		931BADFF26720C0200CD9244 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				9343E2C9266EF9CD0086F977 /* KeychainController.swift */,
+				9343E2D7266F03E90086F977 /* NetworkController.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		931BAE0326720C0900CD9244 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
+		931BAE0426720C1500CD9244 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				883F519C2670940E0055EC9E /* IssueCell.swift */,
+				883F519D2670940E0055EC9E /* IssueCell.xib */,
+				883F51A32670AAAB0055EC9E /* TagStackView.swift */,
+				883F51A82670ABDC0055EC9E /* TagLabel.swift */,
+			);
+			path = Issue;
 			sourceTree = "<group>";
 		};
 		9343E2F0266F5CBC0086F977 /* Coordinator */ = {
