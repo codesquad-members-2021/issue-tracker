@@ -1,4 +1,3 @@
-
 package com.codesquad.issuetracker.label.dto;
 
 import lombok.Getter;

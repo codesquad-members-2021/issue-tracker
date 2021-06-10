@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.label.dto;
 
-import com.codesquad.issuetracker.label.domain.Colors;
 import com.codesquad.issuetracker.label.domain.Label;
 import lombok.Getter;
 
