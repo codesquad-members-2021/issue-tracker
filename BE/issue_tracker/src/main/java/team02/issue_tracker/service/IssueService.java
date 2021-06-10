@@ -19,7 +19,7 @@ public class IssueService {
 
     public DataResponse getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
-                .map(IssueResponse::toIssueResponse)
+                .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
         return new DataResponse(issueResponses);
