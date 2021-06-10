@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { CountInfoStorage, issuesStorage, getOpenIssues } from '../hooks/store';
 import IssueFilterSection from '../components/issueListpage/IssueFilter';
 import LabelMileStoneTab from '../components/common/LabelMilestoneTab';
+import IssuePlus from '../components/atom/IssuePlus';
 
 interface Props {}
 
@@ -20,13 +21,13 @@ export default function MainPage({}: Props): ReactElement {
 
   return (
     <MainPageBlock>
-      <Option>
+      <div className='issue-tracker__options'>
         <IssueFilterSection />
-        <FlexBox>
+        <div className='options__tabs'>
           <LabelMileStoneTab />
-          {/* <IssuePlus /> */}
-        </FlexBox>
-      </Option>
+          <IssuePlus />
+        </div>
+      </div>
       {/* <IssueList /> */}
     </MainPageBlock>
   );
@@ -34,14 +35,13 @@ export default function MainPage({}: Props): ReactElement {
 
 const MainPageBlock = styled.div`
   padding: 80px;
-`;
-
-const FlexBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const Option = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+  .issue-tracker__options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .options__tabs {
+    display: flex;
+    align-items: center;
+  }
 `;
