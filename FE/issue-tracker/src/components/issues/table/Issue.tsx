@@ -103,12 +103,3 @@ const Description = styled.div`
     color: ${({ theme }) => theme.colors.gr_label};
   }
 `;
-
-// const Label = styled.div`
-//   ${({ theme }) => theme.flexCenter};
-//   padding: 4px 16px;
-//   font-size: ${({ theme }) => theme.fontSizes.xs};
-//   background: ${({ theme }) => theme.colors.bl_initial};
-//   border-radius: 30px;
-//   cursor: pointer;
-// `;
