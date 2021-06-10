@@ -10,8 +10,8 @@ values (1, "백엔드 1주차 마일스톤 내용", "2021-06-01", "2021-06-15", 
 
 -- issue
 insert into issue(id, created_time, is_open, issue_number, title, milestone_id, writer_id)
-values (1, Current_Timestamp, true, 1, "이슈 제목1", 1, 1),
-       (2, Current_Timestamp, false, 2, "이슈 제목2", 1, 2);
+values (1, CURRENT_TIMESTAMP, true, 1, "이슈 제목1", 1, 1),
+       (2, CURRENT_TIMESTAMP, false, 2, "이슈 제목2", 1, 2);
 
 -- label
 insert into label(id, title, content, color)
@@ -29,3 +29,22 @@ values (1, 1),
 insert into issue_assignee(issue_id, user_id)
 values (1, 1),
        (1, 2);
+
+-- comment
+insert into comment(id, content, file, created_time, issue_id, writer_id)
+values (1, "good", "file url", CURRENT_TIMESTAMP, 1, 1),
+       (2, "nice", "file url", CURRENT_TIMESTAMP, 1, 2);
+
+
+-- emoji
+insert
+into emoji(id, `name`)
+values (1, ":happy face"),
+       (2, ":surprise face");
+
+-- comment_emoji
+insert into comment_emoji(comment_id, emoji_id)
+values (1, 1),
+       (1, 2),
+       (2, 1),
+       (2, 2);
