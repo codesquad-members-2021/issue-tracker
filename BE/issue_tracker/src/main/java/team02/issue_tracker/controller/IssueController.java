@@ -18,7 +18,7 @@ public class IssueController {
 
     @GetMapping
     public DataResponse showAllIssues() {
-        return issueService.getAllIssues();
+        return issueService.getAllIssueResponses();
     }
 
 }
