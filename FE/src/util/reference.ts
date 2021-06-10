@@ -29,6 +29,17 @@ interface ITextIssueList {
   };
 }
 
+interface ITextLogin {
+  github: string;
+  id: string;
+  placeHolder: {
+    id: string;
+    password: string;
+  }
+  or: string;
+  register: string;
+}
+
 const TextIssueList: ITextIssueList = {
   filter: {
     caption: '필터',
@@ -63,5 +74,18 @@ const TextIssueList: ITextIssueList = {
   },
 };
 
-export type { ITextHeader, ITextIssueList };
-export { TextHeader, TextIssueList };
+// 3. Login
+
+const TextLogin: ITextLogin = {
+  github: 'GitHub 계정으로 로그인',
+  id: '아이디로 로그인',
+  placeHolder: {
+    id: '아이디',
+    password: '비밀번호',
+  },
+  or: 'or',
+  register: '회원가입'
+}
+
+export type { ITextHeader, ITextIssueList, ITextLogin };
+export { TextHeader, TextIssueList, TextLogin };
