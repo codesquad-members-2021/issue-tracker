@@ -1,5 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "@/Routes/LoginPage";
+import NewIssue from "@/Routes/NewIssuePage";
 import MainPage from "@/Routes/MainPage";
 
 const Router = () => {
@@ -10,7 +11,7 @@ const Router = () => {
         <Route path="/login" component={Login} />
         {/* <Route path="/issueDetail" component={issueDetail} /> */}
         {/* <Route path="/tab" component={tab} /> */}
-        {/* <Route path="/newIssue" component={newIssue} /> */}
+        <Route path="/newIssue" component={NewIssue} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
