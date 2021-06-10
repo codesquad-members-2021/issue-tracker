@@ -2,6 +2,8 @@ package com.codesquad.issuetracker.issue;
 
 import com.codesquad.issuetracker.comment.CommentResponse;
 import com.codesquad.issuetracker.comment.Emoji;
+import com.codesquad.issuetracker.label.LabelDummyData;
+import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.label.LabelResponse;
 import com.codesquad.issuetracker.milestone.MileStoneDummyData;
 import com.codesquad.issuetracker.user.UserResponse;
@@ -30,7 +32,8 @@ public class IssueDummyData {
                                 userHiro()
                         )))
                         .labels(new HashSet<>(Arrays.asList(
-                                labelBe()
+                                LabelDummyData.labelBe(),
+                                LabelDummyData.labelFe()
                         )))
                         .milestone(MileStoneDummyData.openMileStoneResponse())
                         .build()
@@ -49,7 +52,8 @@ public class IssueDummyData {
                                userHiro()
                        ))
                        .labels(Arrays.asList(
-                               labelBe()
+                               LabelDummyData.labelBe(),
+                               LabelDummyData.labelFe()
                        ))
                        .milestone(MileStoneDummyData.openMileStoneResponse())
                        .mainComment(CommentResponse.builder()
@@ -96,4 +100,13 @@ public class IssueDummyData {
                        .build();
     }
 
+    private static MileStoneResponse milestoneMockup() {
+        return MileStoneResponse.builder()
+                       .id(1L)
+                       .name("목업 api 만들기")
+                       .description("목업 api를 만들어봅시다.")
+                       .openedIssueCount(2)
+                       .closedIssueCount(2)
+                       .build();
+    }
 }
