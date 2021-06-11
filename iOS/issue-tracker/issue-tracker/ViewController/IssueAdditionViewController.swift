@@ -11,6 +11,6 @@ class IssueAdditionViewController: UIViewController {
     }
     
     @IBAction func pressedCancelButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
 }

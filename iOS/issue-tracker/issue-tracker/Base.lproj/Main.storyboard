@@ -168,21 +168,40 @@
             </objects>
             <point key="canvasLocation" x="80" y="108"/>
         </scene>
-        <!--레이블-->
+        <!--Label View Controller-->
         <scene sceneID="exm-7W-pat">
             <objects>
-                <viewController id="T0A-ww-OXq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LabelViewController" id="T0A-ww-OXq" customClass="LabelViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3U8-HH-buH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sWk-xg-Eic">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="T0A-ww-OXq" id="k71-Ra-Pfj"/>
+                                    <outlet property="delegate" destination="T0A-ww-OXq" id="wnc-So-mHf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="QOe-nK-hOJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QOe-nK-hOJ" firstAttribute="trailing" secondItem="sWk-xg-Eic" secondAttribute="trailing" id="9vF-x1-VGN"/>
+                            <constraint firstItem="sWk-xg-Eic" firstAttribute="top" secondItem="QOe-nK-hOJ" secondAttribute="top" id="Rof-j3-0lb"/>
+                            <constraint firstItem="QOe-nK-hOJ" firstAttribute="bottom" secondItem="sWk-xg-Eic" secondAttribute="bottom" id="eHc-gd-AEs"/>
+                            <constraint firstItem="sWk-xg-Eic" firstAttribute="leading" secondItem="QOe-nK-hOJ" secondAttribute="leading" id="ngT-he-LOS"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="레이블" image="tagImage" id="cyx-RY-UHe"/>
+                    <navigationItem key="navigationItem" id="sBO-dD-3Iz"/>
+                    <connections>
+                        <outlet property="labelTableView" destination="sWk-xg-Eic" id="JcW-Wv-Z6h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFe-YH-lJu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3852.1739130434785" y="107.8125"/>
+            <point key="canvasLocation" x="5221.739130434783" y="-334.15178571428572"/>
         </scene>
         <!--Issue List View Controller-->
         <scene sceneID="z1m-pj-Jw5">
@@ -343,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZa-bc-y9P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3095.6521739130435" y="797.54464285714278"/>
+            <point key="canvasLocation" x="1483" y="798"/>
         </scene>
         <!--Issue Selection View Controller-->
         <scene sceneID="Sv6-XW-Yhl">
@@ -425,7 +444,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKP-OA-TSw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3960.8695652173915" y="797.54464285714278"/>
+            <point key="canvasLocation" x="2187" y="798"/>
         </scene>
         <!--Issue Addition View Controller-->
         <scene sceneID="ZNb-67-fgE">
@@ -662,7 +681,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MhG-06-lC8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4766.666666666667" y="797.54464285714278"/>
+            <point key="canvasLocation" x="3097" y="875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J67-YZ-aC2">
@@ -676,7 +695,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="OuB-5S-ofe" kind="relationship" relationship="viewControllers" id="afr-Bt-LtZ"/>
-                        <segue destination="T0A-ww-OXq" kind="relationship" relationship="viewControllers" id="yHI-O9-5zn"/>
+                        <segue destination="Q87-aR-dZ8" kind="relationship" relationship="viewControllers" id="yHI-O9-5zn"/>
                         <segue destination="JXM-La-Lel" kind="relationship" relationship="viewControllers" id="50R-Sp-Wjo"/>
                         <segue destination="QbC-4f-pAd" kind="relationship" relationship="viewControllers" id="onB-gZ-zBP"/>
                     </connections>
@@ -699,7 +718,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CtM-LR-TbC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4597.1014492753629" y="107.8125"/>
+            <point key="canvasLocation" x="6134.7826086956529" y="107.8125"/>
         </scene>
         <!--내 계정-->
         <scene sceneID="7vG-yV-IiM">
@@ -715,7 +734,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgM-wO-nSN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5357.971014492754" y="107.8125"/>
+            <point key="canvasLocation" x="7008.6956521739139" y="107.8125"/>
         </scene>
         <!--이슈-->
         <scene sceneID="qNZ-vJ-Ib2">
@@ -735,6 +754,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egz-65-LQP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2186.9565217391305" y="107.8125"/>
+        </scene>
+        <!--레이블-->
+        <scene sceneID="iCM-fs-Ixv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q87-aR-dZ8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="레이블" image="tagImage" id="cyx-RY-UHe"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sa6-y4-baz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T0A-ww-OXq" kind="relationship" relationship="rootViewController" id="4At-Wy-i87"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z1G-dd-8A3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4311.594202898551" y="-334.15178571428572"/>
         </scene>
     </scenes>
     <resources>
