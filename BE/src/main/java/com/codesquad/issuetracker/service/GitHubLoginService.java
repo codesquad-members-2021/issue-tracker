@@ -6,7 +6,7 @@ import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.domain.oauth.GitHubUser;
 import com.codesquad.issuetracker.repository.UserRepository;
 import com.codesquad.issuetracker.request.AccessTokenRequest;
-import com.codesquad.issuetracker.response.GitHubLoginResponse;
+import com.codesquad.issuetracker.response.GitHubUserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -37,7 +37,7 @@ public class GitHubLoginService {
         this.GITHUB_CLIENT_SECRETS = environment.getProperty("github.client.secrets");
     }
 
-    public GitHubLoginResponse login(String code) {
+    public GitHubUserResponse login(String code) {
         AccessTokenResponse accessTokenResponse = accessToken(code).orElseThrow(IllegalArgumentException::new);
         logger.debug("Access token : {}", accessTokenResponse.getAccessToken());
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
@@ -77,10 +77,10 @@ public class GitHubLoginService {
         return userRepository.findByUserId(gitHubUser.getLogin());
     }
 
-    private GitHubLoginResponse signIn(GitHubUser gitHubUser, String type) {
+    private GitHubUserResponse signIn(GitHubUser gitHubUser, String type) {
         User user = signUp(gitHubUser).orElseThrow(IllegalArgumentException::new);
         String jwt = jwtProvider.createJwt(user.getId());
-        return GitHubLoginResponse.create(jwt, user, type);
+        return GitHubUserResponse.create(jwt, user, type);
     }
 
 }

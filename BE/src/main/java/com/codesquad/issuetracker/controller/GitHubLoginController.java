@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.controller;
 
 import com.codesquad.issuetracker.response.ApiResponse;
-import com.codesquad.issuetracker.response.GitHubLoginResponse;
+import com.codesquad.issuetracker.response.GitHubUserResponse;
 import com.codesquad.issuetracker.service.GitHubLoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +24,9 @@ public class GitHubLoginController {
 
 
     @GetMapping("/github")
-    public ApiResponse<GitHubLoginResponse> githubLogin(@RequestParam String code) {
+    public ApiResponse<GitHubUserResponse> githubLogin(@RequestParam String code) {
         logger.debug("code : {} ", code);
-        GitHubLoginResponse response = loginService.login(code);
+        GitHubUserResponse response = loginService.login(code);
         return ApiResponse.ok(response);
     }
 
