@@ -31,6 +31,7 @@ const completeButton = {
 const whiteButton = {
   width: '120px',
   fontSize: 'xs',
+  fontWeight: 'medium',
   background: 'white',
   color: 'bl_initial',
   border: '2px solid #007AFF',
