@@ -2,7 +2,11 @@ package com.codesquad.issuetracker.controller;
 
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.request.LabelRequest;
+import com.codesquad.issuetracker.response.LabelResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/label")
@@ -15,7 +19,17 @@ public class LabelController {
 
     @GetMapping
     public ApiResponse getLabels(){
-        return ApiResponse.ok("Get Labels");
+
+        LabelResponse labelOne = new LabelResponse("BE", null, "0052CC");
+        LabelResponse labelTwo = new LabelResponse("FE", null, "0052CC");
+        LabelResponse labelThree = new LabelResponse("feature", "for the new feature", "FFFFFF");
+
+        Set<LabelResponse> labels = new LinkedHashSet<>();
+        labels.add(labelOne);
+        labels.add(labelTwo);
+        labels.add(labelThree);
+
+        return ApiResponse.ok(labels);
     }
 
 }
