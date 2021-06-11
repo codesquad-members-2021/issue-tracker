@@ -28,11 +28,11 @@ class IssueListViewController: UIViewController {
         super.viewDidLoad()
         setViewModel(with: IssueListMock.data)
         setting()
-        setObserver()
     }
     
 }
 
+//MARK:- Set Inital Condition
 
 extension IssueListViewController {
     
@@ -47,10 +47,12 @@ extension IssueListViewController {
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
         issueTableView.allowsMultipleSelectionDuringEditing = true
         editableView.isHidden = true
+        setObserver()
     }
     
 }
 
+//MARK:- Delete Issue
 
 extension IssueListViewController {
     
@@ -72,6 +74,7 @@ extension IssueListViewController {
     
 }
 
+//MARK:- Editing Mode
 
 extension IssueListViewController {
     
