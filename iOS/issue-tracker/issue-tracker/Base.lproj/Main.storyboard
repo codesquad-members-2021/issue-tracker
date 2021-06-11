@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAx-ab-YaI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vwo-83-pmj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -166,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504" y="108"/>
+            <point key="canvasLocation" x="80" y="108"/>
         </scene>
         <!--레이블-->
         <scene sceneID="exm-7W-pat">
@@ -307,6 +307,7 @@
                                                 <constraint firstItem="AB4-go-L1g" firstAttribute="centerY" secondItem="XGn-Tp-k5L" secondAttribute="centerY" id="Ztl-nh-c2i"/>
                                                 <constraint firstItem="BoK-mv-hkG" firstAttribute="leading" secondItem="XGn-Tp-k5L" secondAttribute="leading" constant="20" id="f1V-Is-hxz"/>
                                                 <constraint firstItem="BoK-mv-hkG" firstAttribute="centerY" secondItem="XGn-Tp-k5L" secondAttribute="centerY" id="h7P-K1-U3P"/>
+                                                <constraint firstItem="AB4-go-L1g" firstAttribute="leading" relation="lessThanOrEqual" secondItem="BoK-mv-hkG" secondAttribute="trailing" constant="306" id="hPw-83-rjE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -423,6 +424,81 @@
             </objects>
             <point key="canvasLocation" x="3960.8695652173915" y="797.54464285714278"/>
         </scene>
+        <!--Issue Addition View Controller-->
+        <scene sceneID="ZNb-67-fgE">
+            <objects>
+                <viewController storyboardIdentifier="IssueAdditionViewController" id="vwo-83-pmj" customClass="IssueAdditionViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AHT-s0-DPR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOy-zg-h4Q">
+                                <rect key="frame" x="0.0" y="44" width="414" height="88"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJF-8N-N5l">
+                                        <rect key="frame" x="16" y="56" width="50" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="S3S-YM-Apt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" systemColor="linkColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <state key="normal" title="취소" image="chevron.left" catalog="system">
+                                            <color key="titleColor" systemColor="linkColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedCancelButton:" destination="q2y-Ti-QDY" eventType="touchUpInside" id="nLp-Rc-jvS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEg-BA-18e">
+                                        <rect key="frame" x="338" y="55" width="60" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="wX8-7X-uID"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <state key="normal" title="저장" image="plus" catalog="system">
+                                            <color key="titleColor" systemColor="linkColor"/>
+                                        </state>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wqH-Ee-MuY">
+                                        <rect key="frame" x="109" y="50" width="196" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="196" id="MoM-uS-pu6"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="마크다운"/>
+                                            <segment title="미리보기"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="IEg-BA-18e" secondAttribute="bottom" constant="11" id="0jl-ls-tnS"/>
+                                    <constraint firstAttribute="bottom" secondItem="wqH-Ee-MuY" secondAttribute="bottom" constant="7" id="8g3-uw-c3D"/>
+                                    <constraint firstItem="XJF-8N-N5l" firstAttribute="leading" secondItem="UOy-zg-h4Q" secondAttribute="leading" constant="16" id="Sqo-v1-2O7"/>
+                                    <constraint firstAttribute="trailing" secondItem="IEg-BA-18e" secondAttribute="trailing" constant="16" id="XIZ-9g-tRb"/>
+                                    <constraint firstItem="wqH-Ee-MuY" firstAttribute="centerX" secondItem="UOy-zg-h4Q" secondAttribute="centerX" id="dDg-ka-LNl"/>
+                                    <constraint firstAttribute="height" constant="88" id="g66-Kj-xBI"/>
+                                    <constraint firstAttribute="bottom" secondItem="XJF-8N-N5l" secondAttribute="bottom" constant="11" id="iC2-V0-KJI"/>
+                                    <constraint firstItem="IEg-BA-18e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wqH-Ee-MuY" secondAttribute="trailing" id="owc-i9-Lst"/>
+                                    <constraint firstItem="wqH-Ee-MuY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XJF-8N-N5l" secondAttribute="trailing" id="yVm-38-Kw6"/>
+                                    <constraint firstAttribute="bottom" secondItem="wqH-Ee-MuY" secondAttribute="bottom" constant="7" id="z8e-KW-k2w"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gn0-gS-w6e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UOy-zg-h4Q" firstAttribute="leading" secondItem="Gn0-gS-w6e" secondAttribute="leading" id="FHw-bV-aHW"/>
+                            <constraint firstItem="UOy-zg-h4Q" firstAttribute="trailing" secondItem="Gn0-gS-w6e" secondAttribute="trailing" id="XWB-LO-Jaj"/>
+                            <constraint firstItem="UOy-zg-h4Q" firstAttribute="top" secondItem="AHT-s0-DPR" secondAttribute="top" constant="44" id="hea-3U-Zw0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MhG-06-lC8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4766.666666666667" y="797.54464285714278"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J67-YZ-aC2">
             <objects>
@@ -442,7 +518,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJf-HQ-r1C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="108"/>
+            <point key="canvasLocation" x="1317" y="108"/>
         </scene>
         <!--마일스톤-->
         <scene sceneID="Oc9-Qa-nea">
@@ -506,6 +582,7 @@
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="mileStoneImage" width="17" height="18"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="tagImage" width="18" height="18"/>
         <systemColor name="linkColor">

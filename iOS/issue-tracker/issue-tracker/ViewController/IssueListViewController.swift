@@ -21,6 +21,7 @@ class IssueListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         configureFilterButton()
         configureSelectButton()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func configureTableViewFooterView() {

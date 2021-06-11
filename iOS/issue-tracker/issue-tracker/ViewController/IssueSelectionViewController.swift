@@ -16,6 +16,7 @@ class IssueSelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     func configureNavigationTitle() {
