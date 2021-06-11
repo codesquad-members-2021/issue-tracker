@@ -8,7 +8,7 @@ import team02.issue_tracker.oauth.SocialLogin;
 
 @ToString
 @Getter
-public class GithubUserProfile {
+public class GithubUserProfile implements SocialProfile {
     private Long id;
     private String login;
     private String name;

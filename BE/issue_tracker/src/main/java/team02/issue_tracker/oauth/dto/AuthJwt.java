@@ -3,7 +3,9 @@ package team02.issue_tracker.oauth.dto;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 public class AuthJwt {

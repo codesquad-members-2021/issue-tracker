@@ -1,15 +1,12 @@
 package team02.issue_tracker.oauth;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import team02.issue_tracker.domain.User;
 import team02.issue_tracker.dto.ApiResult;
 import team02.issue_tracker.oauth.dto.AuthJwt;
-import team02.issue_tracker.oauth.dto.GithubUserProfile;
 import team02.issue_tracker.service.UserService;
 
 @Slf4j
@@ -31,20 +28,12 @@ public class OAuthController {
     @GetMapping("/login/github/web")
     public ApiResult<AuthJwt> issueJwtForWeb(@RequestParam("code") String code) {
         log.info("code : {}", code);
-        GithubUserProfile githubUserProfile = oauthService.githubUserProfileFrom(code);
-        User userFromGithub = githubUserProfile.becomeUser();
-        User user = userService.findByUser(userFromGithub);
-        if (user == null) {
-            user = userService.enroll(userFromGithub);
-        }
-        log.info("user : {}", user.toString());
+        return ApiResult.success(oauthService.issueJwtForWeb(code));
+    }
 
-        AuthJwt authJwt = jwtUtils.getJwt(user);
-        log.info("auth jwt : {}", authJwt.getJwt());
-        DecodedJWT decodedJWT = jwtUtils.decode(authJwt.getJwt());
-        String result = jwtUtils.decodeJwt(decodedJWT);
-        log.info("info from jwt token : {}", result);
-
-        return ApiResult.success(authJwt);
+    @GetMapping("/login/github/ios")
+    public ApiResult<AuthJwt> issueJwtForIos(@RequestParam("code") String code) {
+        log.info("code : {}", code);
+        return ApiResult.success(oauthService.issueJwtForIos(code));
     }
 }

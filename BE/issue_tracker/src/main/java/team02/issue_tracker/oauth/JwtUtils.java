@@ -21,6 +21,9 @@ public class JwtUtils {
                 .withClaim("id", user.getId())
                 .withClaim("name", user.getUsername())
                 .withClaim("email", user.getEmail())
+                .withClaim("pw", user.getPassword())
+                .withClaim("rss", user.getOauthResource().name())
+                .withClaim("profile", user.getProfileImage())
                 .withIssuer("shion")
                 .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(1)))
                 .sign(Algorithm.HMAC256("secret"));
@@ -28,13 +31,24 @@ public class JwtUtils {
         return new AuthJwt(token);
     }
 
-    public String decodeJwt(DecodedJWT jwt) {
+    public User decodeJwt(DecodedJWT jwt) {
         Long id = jwt.getClaim("id").asLong();
         String name = jwt.getClaim("name").asString();
         String email = jwt.getClaim("email").asString();
+        String password = jwt.getClaim("pw").asString();
+        String oauthResource = jwt.getClaim("rss").asString();
+        String profile = jwt.getClaim("profile").asString();
 
-        log.info("id : {}, name : {}, email : {}", id, name, email);
-        return "id : " + id + ", name : " + name + ", email : " + email;
+        User user = User.builder()
+                .username(name)
+                .email(email)
+                .password(password)
+                .oauthResource(SocialLogin.valueOf(oauthResource))
+                .profileImage(profile)
+                .build();
+
+        log.info("user : {}", user.toString());
+        return user;
     }
 
     public DecodedJWT decode(String token) {
