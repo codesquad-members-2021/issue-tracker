@@ -29,7 +29,7 @@ create table issue
 (
     id           bigint primary key auto_increment,
     title        varchar(45),
-    text         varchar(300),
+    text         varchar(500),
     status       varchar(10),
     writing_time DATETIME,
     milestone_id bigint,
@@ -52,7 +52,7 @@ create table comment
     id           bigint primary key auto_increment,
     issue_id     bigint,
     writing_time DATETIME,
-    text         varchar(45),
+    text         varchar(500),
     writer       BINARY(16),
     foreign key (issue_id) references issue (id),
     foreign key (writer) references users (id)
