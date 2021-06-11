@@ -12,9 +12,10 @@ class LabelView: UILabel {
         setupMainView()
     }
     
-    func configure(_ text:String, _ color:String) {
+    func configure(_ text:String, _ backgroundHex:String, _ textHex:String) {
         self.text = text
-        backgroundColor = colorWithHexString(color)
+        self.textColor = colorWithHexString(textHex)
+        backgroundColor = colorWithHexString(backgroundHex)
     }
 }
 
