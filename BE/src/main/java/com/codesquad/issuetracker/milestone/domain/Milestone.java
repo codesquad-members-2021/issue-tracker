@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
 public class Milestone {
@@ -22,17 +21,22 @@ public class Milestone {
     private UUID id;
 
     @NonNull
-    @Column(name = "MILESTONE_TITLE", unique = true, length = 255)
+    @Column(name = "MILESTONE_TITLE", unique = true, nullable = false)
     private String title;
 
     @NonNull
     @Lob
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @NonNull
     @Column(name = "DUE_DATE")
     private LocalDate dueDate;
+
+    private Milestone(@NonNull String title, @NonNull String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
 
     public static Milestone create(String title, String description, LocalDate dueDate) {
         return new Milestone(title, description, dueDate);
