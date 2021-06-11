@@ -22,7 +22,6 @@ interface DeleteButtonType {
 }
 
 const DeleteButton = styled.div<DeleteButtonType>`
-  width: 43px;
   margin: ${({ margin }) => margin || 0};
   display: flex;
   justify-content: space-between;
@@ -31,7 +30,10 @@ const DeleteButton = styled.div<DeleteButtonType>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.error_primary};
   cursor: pointer;
-  .btn_delete > path {
-    stroke: ${({ theme }) => theme.colors.error_primary};
+  .btn_delete {
+    margin-right: 5px;
+    path {
+      stroke: ${({ theme }) => theme.colors.error_primary};
+    }
   }
 `;
