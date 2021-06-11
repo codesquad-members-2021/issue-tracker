@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -27,12 +28,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let loginManager = loginManager, let loginInfo = loginInfo else { return }
         
-        let issueTrackerTabBarController = IssueTrackerTabBarController()
-        issueTrackerTabBarController.configure(loginManager: loginManager, loginInfo: loginInfo)
-        
-        window?.rootViewController = issueTrackerTabBarController
-        
-        print(loginInfo.name, " 님  환영합니다!")
+        if let deviceID = loginInfo.deviceID {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            appleIDProvider.getCredentialState(forUserID: deviceID) { [weak self] (credentialState, error) in
+                switch credentialState {
+                case .authorized:
+                    self?.straightToIssueTrackerScene(with: loginManager, loginInfo)
+                default:
+                    let _ = loginManager.delete()
+                }
+            }
+        } else {
+            straightToIssueTrackerScene(with: loginManager, loginInfo)
+        }
+    
+    }
+    
+    private func straightToIssueTrackerScene(with loginManager: LoginKeyChainManager,_ loginInfo: LoginInfo) {
+        DispatchQueue.main.async {
+            let issueTrackerTabBarController = IssueTrackerTabBarController()
+            issueTrackerTabBarController.configure(loginManager: loginManager, loginInfo: loginInfo)
+            
+            self.window?.rootViewController = issueTrackerTabBarController
+        }
     }
     
 }

@@ -39,7 +39,8 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
             return
         }
         
-        let loginInfo = LoginInfo(jwt: tokenInString, avatarURL: nil, name: name)
+        let deviceID = appleIDCredential.user
+        let loginInfo = LoginInfo(deviceID: deviceID, jwt: tokenInString, avatarURL: nil, name: name)
         delegate?.didAppleLoginSuccess(with: loginInfo)
     }
     

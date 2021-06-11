@@ -8,6 +8,7 @@
 import Foundation
 
 struct LoginInfo: Codable {
+    let deviceID: String?
     let jwt: String 
     let avatarURL: String?
     let name: String
