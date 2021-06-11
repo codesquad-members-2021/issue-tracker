@@ -183,9 +183,9 @@
 			children = (
 				AE7D391A2671A91400BF9487 /* UINibCreatable.swift */,
 				AE7D39422672033800BF9487 /* UIView+HiddenWithAnimation.swift */,
-				AE7D39402671E8CC00BF9487 /* Notification+Name.swift */,
-				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
 				AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */,
+				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
+				AE7D39402671E8CC00BF9487 /* Notification+Name.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
