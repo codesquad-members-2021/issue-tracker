@@ -1,13 +1,15 @@
 //
-//  IssueTableViewController.swift
+//  IssueViewController.swift
 //  Issue-Trackker
 //
-//  Created by 심영민 on 2021/06/10.
+//  Created by 심영민 on 2021/06/11.
 //
 
 import UIKit
 
-class IssueTableViewController: UITableViewController, UISearchBarDelegate {
+class IssueViewController: UIViewController, UISearchBarDelegate {
+    
+    @IBOutlet weak var issueTableView: UITableView!
     
     private var searchController: UISearchController?
 
@@ -26,12 +28,13 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
-        self.tableView.tableFooterView = setFooterView()
+        self.issueTableView.tableFooterView = setFooterView()
         
         let filterButton = UIButton.setButton(image: "filter.png", title: " 필터")
         filterButton.addTarget(self, action: #selector(filterButtonTouched(_:)), for: .touchUpInside)
       
         let selectButton = UIButton.setButton(image: "select.png", title: "선택")
+        selectButton.addTarget(self, action: #selector(selectButtonTouched(_:)), for: .touchUpInside)
         selectButton.semanticContentAttribute = .forceRightToLeft
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
@@ -40,8 +43,8 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func setFooterView() -> UIView {
-        let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.tableView.bounds.width, height: 100)))
-        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: self.tableView.bounds.width, height: 20)))
+        let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 100)))
+        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 20)))
         label.text = "아래로 당기면 검색바가 보여요! 👀"
         label.textColor = .systemGray2
         label.textAlignment = .center
@@ -57,27 +60,35 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
         let naviController = UINavigationController(rootViewController: filterViewController)
         self.present(naviController, animated: true, completion: nil)
     }
+    
+    @objc func selectButtonTouched(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    
+//    @IBAction func addButtonTouched(_ sender: UIButton) {
+//        guard let addingIssueViewController = storyboard?.instantiateViewController(identifier: "AddIssue") as? AddingIssueViewController else {
+//            return
+//        }
+//        addingIssueViewController.modalPresentationStyle = .custom
+//        self.present(addingIssueViewController, animated: true, completion: nil)
+//    }
 }
 
-extension IssueTableViewController {
+extension IssueViewController: UITableViewDataSource {
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "IssueCell") as? IssueCell else {
             return IssueCell()
         }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive,
                                               title:  "삭제",
@@ -95,5 +106,12 @@ extension IssueTableViewController {
         
         return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
     }
-
 }
+
+extension IssueViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+}
+

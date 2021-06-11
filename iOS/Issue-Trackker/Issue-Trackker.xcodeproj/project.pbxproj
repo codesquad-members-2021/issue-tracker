@@ -16,9 +16,11 @@
 		D49B7863266F6C4B00CF3FE4 /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49B7862266F6C4B00CF3FE4 /* Issue.storyboard */; };
 		D49B78672670A67400CF3FE4 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78662670A67400CF3FE4 /* IssueCell.swift */; };
 		D49B78692670AD9900CF3FE4 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78682670AD9900CF3FE4 /* PaddingLabel.swift */; };
-		D49B78712671D9A900CF3FE4 /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78702671D9A900CF3FE4 /* IssueTableViewController.swift */; };
 		D49B78732671E97300CF3FE4 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78722671E97300CF3FE4 /* FilterTableViewController.swift */; };
 		D49B78752671F4FB00CF3FE4 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78742671F4FB00CF3FE4 /* UIButton + Extension.swift */; };
+		D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78762673299400CF3FE4 /* IssueViewController.swift */; };
+		D49B78792673313B00CF3FE4 /* AddingIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */; };
+		D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +35,11 @@
 		D49B7862266F6C4B00CF3FE4 /* Issue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		D49B78662670A67400CF3FE4 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		D49B78682670AD9900CF3FE4 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
-		D49B78702671D9A900CF3FE4 /* IssueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewController.swift; sourceTree = "<group>"; };
 		D49B78722671E97300CF3FE4 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		D49B78742671F4FB00CF3FE4 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		D49B78762673299400CF3FE4 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingIssueViewController.swift; sourceTree = "<group>"; };
+		D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInformationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				D49B78662670A67400CF3FE4 /* IssueCell.swift */,
+				D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,8 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				D49B7852266F0D0200CF3FE4 /* SignInViewController.swift */,
-				D49B78702671D9A900CF3FE4 /* IssueTableViewController.swift */,
+				D49B78762673299400CF3FE4 /* IssueViewController.swift */,
 				D49B78722671E97300CF3FE4 /* FilterTableViewController.swift */,
+				D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -198,11 +204,13 @@
 			files = (
 				D49B78692670AD9900CF3FE4 /* PaddingLabel.swift in Sources */,
 				D49B78672670A67400CF3FE4 /* IssueCell.swift in Sources */,
-				D49B78712671D9A900CF3FE4 /* IssueTableViewController.swift in Sources */,
 				D49B7853266F0D0200CF3FE4 /* SignInViewController.swift in Sources */,
 				D49B78732671E97300CF3FE4 /* FilterTableViewController.swift in Sources */,
+				D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */,
+				D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */,
 				D49B784F266F0D0200CF3FE4 /* AppDelegate.swift in Sources */,
 				D49B7851266F0D0200CF3FE4 /* SceneDelegate.swift in Sources */,
+				D49B78792673313B00CF3FE4 /* AddingIssueViewController.swift in Sources */,
 				D49B78752671F4FB00CF3FE4 /* UIButton + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
