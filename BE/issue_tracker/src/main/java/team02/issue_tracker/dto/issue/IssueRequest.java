@@ -18,7 +18,11 @@ public class IssueRequest {
     private Long milestoneId;
     private List<Long> assigneeIds;
 
-    public Issue toIssue(User writer, List<Label> labels, Milestone milestone, List<User> assignees) {
-        return new Issue(title, comment, file, writer, true, labels, milestone, assignees);
+    public Issue toIssue(User writer) {
+        return new Issue(title, writer, true);
+    }
+
+    public Comment toComment(User writer) {
+        return new Comment(comment, file, writer);
     }
 }
