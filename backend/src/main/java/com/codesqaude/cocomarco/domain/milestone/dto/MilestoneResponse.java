@@ -1,17 +1,19 @@
 package com.codesqaude.cocomarco.domain.milestone.dto;
 
-import com.codesqaude.cocomarco.domain.issue.IssueStatus;
+import com.codesqaude.cocomarco.domain.issue.model.IssueStatus;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MilestoneResponse {
 
     private static final int PERCENT = 100;
+
     private Long id;
     private String title;
     private String detail;

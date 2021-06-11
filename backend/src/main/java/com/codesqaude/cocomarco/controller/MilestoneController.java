@@ -3,13 +3,13 @@ package com.codesqaude.cocomarco.controller;
 import com.codesqaude.cocomarco.domain.milestone.dto.MilestoneRequest;
 import com.codesqaude.cocomarco.domain.milestone.dto.MilestoneResponseWrapper;
 import com.codesqaude.cocomarco.service.MilestoneService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/milestones")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MilestoneController {
 
     private final MilestoneService milestoneService;

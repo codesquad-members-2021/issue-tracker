@@ -1,4 +1,4 @@
-package com.codesqaude.cocomarco.domain.issue;
+package com.codesqaude.cocomarco.domain.issue.model;
 
 import com.codesqaude.cocomarco.domain.label.Label;
 

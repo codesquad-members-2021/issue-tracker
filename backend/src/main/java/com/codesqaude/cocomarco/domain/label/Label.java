@@ -1,6 +1,6 @@
 package com.codesqaude.cocomarco.domain.label;
 
-import com.codesqaude.cocomarco.domain.issue.IssueLabel;
+import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +23,8 @@ public class Label {
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private String title;
-    private String hexCode;
     private String detail;
+    private String hexCode;
 
     public Label(String title, String hexCode, String detail) {
         this.title = title;

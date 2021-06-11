@@ -1,7 +1,7 @@
 package com.codesqaude.cocomarco.domain.milestone;
 
-import com.codesqaude.cocomarco.domain.issue.Issue;
-import com.codesqaude.cocomarco.domain.issue.IssueStatus;
+import com.codesqaude.cocomarco.domain.issue.model.Issue;
+import com.codesqaude.cocomarco.domain.issue.model.IssueStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
