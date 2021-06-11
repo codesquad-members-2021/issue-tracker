@@ -38,9 +38,13 @@ public class User {
     @Column(name = "USER_APPLE_ID")
     private String appleId;
 
-    public User(@NonNull String nickName, @NonNull String imageUrl, String githubId) {
+    private User(@NonNull String nickName, @NonNull String imageUrl, String githubId) {
         this.nickName = nickName;
         this.imageUrl = imageUrl;
         this.githubId = githubId;
+    }
+
+    public static User fromGitHubUser(GitHubUser gitHubUser) {
+        return new User(gitHubUser.getName(), gitHubUser.getAvatarUrl(), gitHubUser.getLogin());
     }
 }
