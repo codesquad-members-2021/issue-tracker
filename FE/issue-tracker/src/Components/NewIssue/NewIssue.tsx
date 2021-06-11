@@ -1,4 +1,3 @@
-import { StylesProvider } from "@material-ui/core";
 import Title from "./Title";
 import MyIcon from "./MyIcon";
 import TextArea from "./TextArea";
