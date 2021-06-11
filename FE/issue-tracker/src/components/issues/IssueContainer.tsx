@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Actions from './Actions';
-import IssueTable from './table/IssueTable';
+import IssueTable from './tableMain/IssueTable';
 
 function IssueContainer() {
   return (
