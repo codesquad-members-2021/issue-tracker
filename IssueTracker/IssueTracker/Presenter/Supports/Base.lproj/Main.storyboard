@@ -403,10 +403,10 @@
                                 <rect key="frame" x="0.0" y="95" width="390" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FilterCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="R3i-3z-Q7c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FilterCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="R3i-3z-Q7c" customClass="FilterCell" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R3i-3z-Q7c" id="3QC-pE-vzm">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R3i-3z-Q7c" id="3QC-pE-vzm" customClass="FilterCell" customModule="IssueTracker" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
@@ -429,7 +429,7 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="3kV-M6-aen" id="bom-Vw-oal"/>
-                        <outlet property="filterTableView" destination="09n-ZV-zqf" id="p8Y-ca-Wt3"/>
+                        <outlet property="filterTableView" destination="09n-ZV-zqf" id="iAb-PV-b67"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRx-qs-5kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
