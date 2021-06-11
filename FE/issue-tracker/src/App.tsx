@@ -2,7 +2,6 @@ import { RecoilRoot } from "recoil";
 import { Suspense } from "react";
 import Router from "@/Routes/Router";
 import GlobalStyles from "@/Styles/GlobalStyles";
-import Header from "./Components/Header/Header";
 import { StylesProvider } from "@material-ui/core/styles";
 
 const App = () => {

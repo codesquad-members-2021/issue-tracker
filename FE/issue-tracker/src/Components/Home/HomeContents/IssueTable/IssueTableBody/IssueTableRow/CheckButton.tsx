@@ -24,16 +24,14 @@ const CheckButton = ({ id }: CheckButtonProps) => {
   console.log(id);
 
   const handleCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
+    console.log(e.target.closest);
     setChecked(!checked);
     handleCheckedItem(id, e.target.checked);
   };
 
   console.log(checkedItemList);
 
-  return (
-    <input type="checkbox" onClick={(e) => {}} onChange={handleCheckboxClick} />
-  );
+  return <input type="checkbox" onChange={handleCheckboxClick} />;
 };
 
 export default CheckButton;

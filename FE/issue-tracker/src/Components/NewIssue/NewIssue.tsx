@@ -1,4 +1,3 @@
-import { StylesProvider } from "@material-ui/core";
 import Title from "./Title";
 import MyIcon from "./MyIcon";
 import TextArea from "./TextArea";
@@ -9,24 +8,22 @@ import { NewIssue as S } from "@/Components/NewIssue/NewIssueStyles";
 
 const NewIssue = () => {
   return (
-    <StylesProvider injectFirst>
-      <S.NewIssue>
-        <Title />
-        <S.NewIssueBody>
-          <MyIcon />
-          <S.TextAreaWrapper>
-            <TextArea placeholder={"제목"} rows={1} />
-            <TextArea placeholder={"코멘트를 입력하세요"} rows={20} />
-            <FileAttachButton />
-          </S.TextAreaWrapper>
-          <S.Test>사이드세팅바</S.Test>
-        </S.NewIssueBody>
-        <S.ButtonsWrapper>
-          <UnCreateButton />
-          <CreateButton />
-        </S.ButtonsWrapper>
-      </S.NewIssue>
-    </StylesProvider>
+    <S.NewIssue>
+      <Title />
+      <S.NewIssueBody>
+        <MyIcon />
+        <S.TextAreaWrapper>
+          <TextArea placeholder={"제목"} rows={1} />
+          <TextArea placeholder={"코멘트를 입력하세요"} rows={20} />
+          <FileAttachButton />
+        </S.TextAreaWrapper>
+        <S.Test>사이드세팅바</S.Test>
+      </S.NewIssueBody>
+      <S.ButtonsWrapper>
+        <UnCreateButton />
+        <CreateButton />
+      </S.ButtonsWrapper>
+    </S.NewIssue>
   );
 };
 
