@@ -10,20 +10,17 @@ import team02.issue_tracker.oauth.SocialLogin;
 @Getter
 public class GithubUserProfile implements SocialProfile {
     private Long id;
-    private String login;
     private String name;
+    private String email;
 
     @JsonSetter("avatar_url")
     private String avatarUrl;
 
-    private String email;
-
     public User becomeUser() {
         return User.builder()
+                .oauthResource(SocialLogin.GITHUB)
                 .username(this.name)
                 .email(this.email)
-                .password(this.id.toString())
-                .oauthResource(SocialLogin.GITHUB)
                 .profileImage(this.avatarUrl)
                 .build();
     }

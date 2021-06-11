@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.*;
+import team02.issue_tracker.oauth.utils.GithubApiProperties;
+import team02.issue_tracker.oauth.utils.JwtUtils;
 import team02.issue_tracker.service.UserService;
 
 @Slf4j

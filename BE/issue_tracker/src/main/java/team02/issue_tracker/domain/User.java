@@ -19,13 +19,11 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    private String username;
-    private String email;
-    private String password;
-
     @Enumerated(EnumType.STRING)
     private SocialLogin oauthResource;
 
+    private String username;
+    private String email;
     private String profileImage;
 
     @OneToMany(mappedBy = "assignee")

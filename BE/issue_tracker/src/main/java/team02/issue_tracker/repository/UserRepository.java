@@ -8,7 +8,7 @@ import team02.issue_tracker.oauth.SocialLogin;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    User findUserByOauthResourceAndPassword(
+    User findUserByOauthResourceAndEmail(
             SocialLogin oauthResource, String password);
 
 }

@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public User findByUser(User user) {
-        return userRepository.findUserByOauthResourceAndPassword(
-                user.getOauthResource(), user.getPassword());
+        return userRepository.findUserByOauthResourceAndEmail(
+                user.getOauthResource(), user.getEmail());
     }
 }

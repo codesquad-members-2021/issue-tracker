@@ -1,4 +1,4 @@
-package team02.issue_tracker.oauth;
+package team02.issue_tracker.oauth.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
