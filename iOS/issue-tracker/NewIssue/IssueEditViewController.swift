@@ -7,10 +7,11 @@
 
 import UIKit
 
-class IssueEditViewController: UIViewController {
+class IssueEditViewController: UIViewController, ReuseIdentity {
 
     @IBOutlet weak var additionalInfoTable: UITableView!
     @IBOutlet weak var textContent: UITextView!
+    weak var coordinator: Coordinator?
     
     private var tableDelegate = AdditionalTableDelegate()
     private var tableDataSource = AdditionalTableViewDataSource()
