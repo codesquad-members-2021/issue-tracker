@@ -27,23 +27,16 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
         self.tableView.tableFooterView = setFooterView()
-        let filtetrButton = UIButton()
-        filtetrButton.setImage(UIImage(named: "filter.png"), for: .normal)
-        //leftBarButton.addTarget(self, action: nil, for: .touchUpInside)
-        filtetrButton.setTitle(" 필터", for: .normal)
-        filtetrButton.setTitleColor(UIColor(red: 0, green: 0.478, blue: 1, alpha: 1), for: .normal)
-        let leftBarButton = UIBarButtonItem(customView: filtetrButton)
         
-        let selectButton = UIButton()
+        let filterButton = UIButton.setButton(image: "filter.png", title: " 필터")
+        filterButton.addTarget(self, action: #selector(filterButtonTouched(_:)), for: .touchUpInside)
+      
+        let selectButton = UIButton.setButton(image: "select.png", title: "선택")
         selectButton.semanticContentAttribute = .forceRightToLeft
-        selectButton.setImage(UIImage(named: "select.png"), for: .normal)
-        selectButton.setTitle("선택 ", for: .normal)
-        selectButton.setTitleColor(UIColor(red: 0, green: 0.478, blue: 1, alpha: 1), for: .normal)
 
-        let rightBarButton = UIBarButtonItem(customView: selectButton)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: selectButton)
         
-        self.navigationItem.leftBarButtonItem = leftBarButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     func setFooterView() -> UIView {
@@ -57,6 +50,16 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
         return footerView
     }
     
+    @objc func filterButtonTouched(_ sender: UIButton) {
+        guard let filterViewController = storyboard?.instantiateViewController(identifier: "Filter") as? FilterTableViewController else {
+            return
+        }
+        let naviController = UINavigationController(rootViewController: filterViewController)
+        self.present(naviController, animated: true, completion: nil)
+    }
+}
+
+extension IssueTableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,6 +75,25 @@ class IssueTableViewController: UITableViewController, UISearchBarDelegate {
             return IssueCell()
         }
         return cell
-        
     }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title:  "삭제",
+                                              handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                                                    success(true)
+                                              })
+
+        deleteAction.image = UIImage(named: "delete.png")
+        
+        let closeAction = UIContextualAction(style: .normal,
+                                              title:  "닫기",
+                                              handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                                                    success(true)
+                                              })
+        
+        return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
+    }
+
 }
