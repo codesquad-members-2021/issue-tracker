@@ -22,6 +22,7 @@ class IssueListViewController: UIViewController {
         configureFilterButton()
         configureSelectButton()
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func configureTableViewFooterView() {
