@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 import Header from '@components/common/Header';
-import Tabs from '@components/common/Tabs';
+import Actions from '@components/labels/Actions';
+import NewMilestone from '@components/milestones/NewMilestone';
+import MilestoneTable from '@components/milestones/table/MilestoneTable';
 
 function Milestones() {
   return (
-    <LabelsPageContainer>
+    <MilestonesPageContainer>
       <Header />
-      <Tabs page="milestones" />
-    </LabelsPageContainer>
+      <Actions page="milestones" />
+      <NewMilestone />
+      <MilestoneTable />
+    </MilestonesPageContainer>
   );
 }
 
 export default Milestones;
 
-const LabelsPageContainer = styled.div`
+const MilestonesPageContainer = styled.div`
   ${({ theme }) => theme.page}
-  outline: 1px solid red;
 `;

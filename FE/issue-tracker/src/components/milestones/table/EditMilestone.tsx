@@ -1,21 +1,23 @@
 import styled from 'styled-components';
-import LabelInputBox from '@components/labels/LabelInputBox';
+import MilestoneInputBox from '@components/milestones/MilestoneInputBox';
 import EditCompleteBtn from '@components/common/EditCompleteBtn';
 
-function EditLabel() {
+function EditMilestone() {
   return (
-    <EditLabelWrap>
-      <h2>레이블 편집</h2>
-      <LabelInputBox>
-        <EditCompleteBtn />
-      </LabelInputBox>
-    </EditLabelWrap>
+    <div>
+      <EditMilestoneWrap>
+        <h2>마일스톤 편집</h2>
+        <MilestoneInputBox>
+          <EditCompleteBtn />
+        </MilestoneInputBox>
+      </EditMilestoneWrap>
+    </div>
   );
 }
 
-export default EditLabel;
+export default EditMilestone;
 
-const EditLabelWrap = styled.section`
+const EditMilestoneWrap = styled.section`
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.gr_line};
   border-top: none;

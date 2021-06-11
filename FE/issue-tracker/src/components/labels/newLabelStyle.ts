@@ -27,27 +27,4 @@ const labelCheckbox = {
   marginBottom: '16px',
 };
 
-const submitButton = {
-  width: '120px',
-  fontSize: 'xs',
-  background: 'bl_initial',
-  colorScheme: 'blue',
-  color: 'white',
-};
-
-const whiteButton = {
-  width: '120px',
-  fontSize: 'xs',
-  background: 'white',
-  color: 'bl_initial',
-  border: '2px solid #007AFF',
-};
-
-export {
-  labelNameInput,
-  labelDescInput,
-  labelColorLeft,
-  labelCheckbox,
-  submitButton,
-  whiteButton,
-};
+export { labelNameInput, labelDescInput, labelColorLeft, labelCheckbox };
