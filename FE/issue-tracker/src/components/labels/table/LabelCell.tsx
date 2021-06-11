@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ReactComponent as Edit } from '@assets/edit.svg';
-import { ReactComponent as Delete } from '@assets/trash.svg';
 import Label from '@components/common/Label';
+import EditMiniButton from '@components/common/EditMiniButton';
+import DeleteMiniButton from '@components/common/DeleteMiniButton';
 
 interface Props {
   last: boolean;
@@ -18,14 +18,8 @@ function LabelCell({ last }: Props) {
       </StyledDiv>
 
       <LabelButtons>
-        <EditButton>
-          <Edit className="btn_edit" />
-          <span>편집</span>
-        </EditButton>
-        <DeleteButton>
-          <Delete className="btn_delete" />
-          <span>삭제</span>
-        </DeleteButton>
+        <EditMiniButton>편집</EditMiniButton>
+        <DeleteMiniButton>삭제</DeleteMiniButton>
       </LabelButtons>
     </LabelWrap>
   );
@@ -38,17 +32,7 @@ interface LabelWrapType {
 }
 
 const LabelWrap = styled.div<LabelWrapType>`
-  width: 100%;
-  height: 100px;
-  padding: 0 32px;
-  background-color: ${({ theme }) => theme.colors.gr_offWhite};
-  border: 1px solid ${({ theme }) => theme.colors.gr_line};
-  border-top: none;
-  border-radius: ${({ last }) => (last ? '0 0 16px 16px' : 'none')};
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${({ theme }) => theme.cellWrap};
 `;
 
 const StyledDiv = styled.div`
@@ -68,29 +52,4 @@ const LabelButtons = styled.div`
   width: 110px;
   display: flex;
   justify-content: space-between;
-`;
-
-const EditButton = styled.div`
-  width: 43px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.gr_label};
-  cursor: pointer;
-  .btn_edit > path {
-    stroke: ${({ theme }) => theme.colors.gr_label};
-  }
-`;
-const DeleteButton = styled.div`
-  width: 43px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.error_primary};
-  cursor: pointer;
-  .btn_delete > path {
-    stroke: ${({ theme }) => theme.colors.error_primary};
-  }
 `;
