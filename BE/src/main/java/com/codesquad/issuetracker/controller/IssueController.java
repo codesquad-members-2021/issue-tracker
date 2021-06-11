@@ -1,23 +1,41 @@
 package com.codesquad.issuetracker.controller;
 
-import com.codesquad.issuetracker.response.ApiResponse;
+import com.codesquad.issuetracker.response.*;
 import com.codesquad.issuetracker.request.IssueRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/issue")
 public class IssueController {
 
-    @GetMapping
-    public ApiResponse getIssues() {
+    @GetMapping("/open")
+    public ApiResponse getOpenedIssues() {
+        return ApiResponse.ok("Get Issue List");
+    }
+
+    @GetMapping("/close")
+    public ApiResponse getClosedIssues() {
         return ApiResponse.ok("Get Issue List");
     }
 
     @GetMapping("/{issueId}")
     public ApiResponse getIssue(@PathVariable Long issueId) {
-        return ApiResponse.ok("Get Single Issue Number " + issueId);
+        LocalDateTime createdAt = LocalDateTime.now();
+        LabelResponse labelResponse1 = new LabelResponse("label title 1", "label content 1", "FFFFFF");
+        LabelResponse labelResponse2 = new LabelResponse("label title 2", "label content 2", "FFFFFF");
+        Set<LabelResponse> labelResponseSet = new LinkedHashSet<>();
+        labelResponseSet.add(labelResponse1);
+        labelResponseSet.add(labelResponse2);
+        UserResponse userResponse = new UserResponse("bibi", "bibi6666667");
+        MilestoneForIssueResponse milestoneForIssueResponse = new MilestoneForIssueResponse(1L, "milestone title 1");
+        IssueResponse issueResponse = new IssueResponse(1L, "issue title 1", "issue content 1", true,
+                createdAt, labelResponseSet, userResponse, milestoneForIssueResponse);
+        return ApiResponse.ok(issueResponse);
     }
 
     @PostMapping
