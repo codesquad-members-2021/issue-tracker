@@ -1,29 +1,26 @@
 package com.codesqaude.cocomarco.service;
 
+import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.*;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
 @Service
+@AllArgsConstructor
 public class MilestoneService {
 
     private MilestoneRepository milestoneRepository;
     private LabelRepository labelRepository;
 
-    public MilestoneService(MilestoneRepository milestoneRepository, LabelRepository labelRepository) {
-        this.milestoneRepository = milestoneRepository;
-        this.labelRepository = labelRepository;
-    }
-
     public Milestone findById(Long milestoneId){
-        return milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
+        return milestoneRepository.findById(milestoneId).orElseThrow(NotFoundMilestoneException::new);
     }
 
     public MilestonesWrapper findAll(Pageable pageable) {
@@ -36,9 +33,9 @@ public class MilestoneService {
         milestoneRepository.save(milestoneRequest.toEntity());
     }
 
-    public void update(Long milestoneId,MilestoneRequest milestoneRequest){
+    public void modify(Long milestoneId, MilestoneRequest milestoneRequest){
         Milestone milestone = findById(milestoneId);
-        milestone.update(milestoneRequest.toEntity());
+        milestone.modify(milestoneRequest.toEntity());
         milestoneRepository.save(milestone);
     }
 

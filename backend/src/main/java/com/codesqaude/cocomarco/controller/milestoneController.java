@@ -28,7 +28,7 @@ public class milestoneController {
 
     @PutMapping("/{milestoneId}")
     public void update(@RequestBody MilestoneRequest milestoneRequest, @PathVariable Long milestoneId){
-        milestoneService.update(milestoneId,milestoneRequest);
+        milestoneService.modify(milestoneId,milestoneRequest);
     }
 
     @DeleteMapping("/{milestoneId}")
