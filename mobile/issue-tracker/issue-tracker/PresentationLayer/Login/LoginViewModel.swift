@@ -7,10 +7,12 @@
 
 import Foundation
 import Combine
+import KeychainSwift
 
-class LoginViewModel {
+final class LoginViewModel {
 
     private let loginService = LoginService()
+    private var successSubject = PassthroughSubject<Void, Never>()
     private var cancellable = Set<AnyCancellable>()
 
     @Published private var message = ""
@@ -20,8 +22,8 @@ class LoginViewModel {
             if case .failure(let error) = fail {
                 self.message = error.description
             }
-        } receiveValue: { _ in
-
+        } receiveValue: { [weak self] _ in
+            self?.successSubject.send()
         }.store(in: &cancellable)
     }
 
@@ -29,5 +31,9 @@ class LoginViewModel {
         return $message
             .dropFirst()
             .eraseToAnyPublisher()
+    }
+
+    func fetchCompltion() -> AnyPublisher<Void, Never> {
+        return successSubject.eraseToAnyPublisher()
     }
 }

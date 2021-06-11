@@ -16,11 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let screen = (scene as? UIWindowScene) else { return }
 
-        let loginViewController = UIStoryboard().create(name: "Login", type: LoginViewController.self)
-
-        window = UIWindow(frame: screen.coordinateSpace.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = screen
-        window?.rootViewController = loginViewController
+        ViewSwitcher.updateViewController()
         window?.makeKeyAndVisible()
+    }
+
+    func changeRootViewController (_ vc: UIViewController) {
+        guard let window = self.window else { return }
+        window.rootViewController = vc
+        UIView.transition(with: window,
+                          duration: 0.4,
+                          options: [.transitionCrossDissolve],
+                          animations: nil, completion: nil)
     }
 }
