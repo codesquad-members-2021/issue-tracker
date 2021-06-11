@@ -18,13 +18,13 @@ public class AopConfig {
 
     // 깃헙으로부터 받아온 인증코드를 출력한다.
     @Before("execution(* team02.issue_tracker.oauth.OAuthController.*(..))")
-    public void codeLog(JoinPoint joinPoint) {
+    public void authorizationCodeLog(JoinPoint joinPoint) {
         log.info("Authorization code from GitHub : {}", joinPoint.getArgs());
     }
 
     // target 메소드의 동작 시간을 출력한다.
     @Around("execution(* team02.issue_tracker.oauth.OAuthController.*(..))")
-    public Object timeLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+    public Object jwtIssueTimeLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
         long startTime = System.currentTimeMillis();
 
         Object result = proceedingJoinPoint.proceed();
