@@ -25,7 +25,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
     public List<User> findAssignees(List<Long> assigneeIdList) {
-        return assigneeIdList.stream().map(this::findByUserId).collect(Collectors.toList());
+        return userRepository.findAllById(assigneeIdList);
     }
 
     public UserResponseDTO login(String code, String userAgent) {
@@ -73,4 +73,5 @@ public class UserService {
                 .map(Assignee::of)
                 .collect(Collectors.toList());
     }
+
 }

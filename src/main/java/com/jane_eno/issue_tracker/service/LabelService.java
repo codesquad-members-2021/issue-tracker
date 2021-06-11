@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class LabelService {
 
     private final LabelRepository labelRepository;
+    private final MilestoneService milestoneService;
 
     public List<Label> findLabels(List<Long> assigneeIdList) {
         return labelRepository.findAllById(assigneeIdList);
@@ -37,12 +38,9 @@ public class LabelService {
 
     public LabelsResponseDTO read() {
         return LabelsResponseDTO.builder()
-                .labelsCount(3)
-                .milestonesCount(2)
-                .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-                )))
+                .labelsCount((int) count())
+                .milestonesCount((int) milestoneService.count())
+                .labels(findAllLabelDTOs())
                 .build();
     }
 
@@ -50,7 +48,7 @@ public class LabelService {
         labelRepository.save(Label.createLabel(label));
     }
 
-    public void update(Long labelId, LabelDTO label) {
+    public void update(Long labelId, LabelDTO labelDTO) {
     }
 
     public void delete(Long labelId) {

@@ -71,16 +71,7 @@ public class IssueService {
     public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
         Issue issue = findIssueById(issueId);
         User loginUser = userService.findByUserId(userId);
-        return IssueDetailPageResponseDTO.builder()
-                .id(issue.getId())
-                .title(issue.getTitle())
-                .status(issue.isOpen())
-                .createdDateTime(issue.getCreatedDateTime())
-                .comments(commentsToCommentDTOs(loginUser, issue))
-                .assignees(userService.usersToAssignees(issue))
-                .labels(labelService.labelsToLabelDTOs(issue))
-                .milestones(milestoneService.findAllMilestoneDTOs())
-                .build();
+        return IssueDetailPageResponseDTO.of(issue, commentsToCommentDTOs(loginUser, issue), userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue), milestoneService.findAllMilestoneDTOs());
     }
 
     public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
@@ -93,19 +84,29 @@ public class IssueService {
         return new AssigneesResponseDTO(userService.usersToAssignees(issue));
     }
 
-    public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
+    public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO assigneesToUpdateRequestDTO) {
+        Issue issue = findIssueById(issueId);
+        List<Long> assigneeIds = assigneesToUpdateRequestDTO.getAssignees().stream()
+                .filter(Assignee::isAssigned)
+                .map(Assignee::getId)
+                .collect(Collectors.toList());
+        issue.updateAssignees(userService.findAssignees(assigneeIds));
+        issueRepository.save(issue);
     }
 
-    public LabelsInIssueResponseDTO getLabels(Long issueID) {
-        return LabelsInIssueResponseDTO.builder()
-                .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-                ))).build();
+    public LabelsInIssueResponseDTO getLabels(Long issueId) {
+        Issue issue = findIssueById(issueId);
+        return new LabelsInIssueResponseDTO(labelService.labelsToLabelDTOs(issue));
     }
 
     public void updateLabels(Long issueId, LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
-
+        Issue issue = findIssueById(issueId);
+        List<Long> labelIds = labelsToUpdateRequestDTO.getLabels().stream()
+                .filter(LabelDTO::isChecked)
+                .map(LabelDTO::getId)
+                .collect(Collectors.toList());
+        issue.updateLabels(labelService.findLabels(labelIds));
+        issueRepository.save(issue);
     }
 
     public MilestonesInIssueResponseDTO getMilestones(Long issueId) {

@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
+import com.jane_eno.issue_tracker.domain.issue.Issue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,16 @@ public class IssueDetailPageResponseDTO {
     private final List<LabelDTO> labels;
     private final List<MilestoneDTO> milestones;
 
-//    public Static IssueDetailPageResponseDTO of() {
-//
-//    }
+    public static IssueDetailPageResponseDTO of(Issue issue, List<CommentDTO> comments, List<Assignee> assignees, List<LabelDTO> labels, List<MilestoneDTO> milestones) {
+        return IssueDetailPageResponseDTO.builder()
+                .id(issue.getId())
+                .title(issue.getTitle())
+                .status(issue.isOpen())
+                .createdDateTime(issue.getCreatedDateTime())
+                .comments(comments)
+                .assignees(assignees)
+                .labels(labels)
+                .milestones(milestones)
+                .build();
+    }
 }

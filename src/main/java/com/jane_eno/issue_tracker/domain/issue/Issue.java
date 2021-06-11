@@ -4,6 +4,7 @@ import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.user.User;
+import com.jane_eno.issue_tracker.web.dto.reqeust.AssigneesToUpdateRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Issue {
     private User author;
 
     @ManyToMany
-    private List<User> assignees;
+    private List<User> assignees = new ArrayList<>();
 
     @ManyToMany
     private List<Label> labels;
@@ -60,6 +61,16 @@ public class Issue {
 
     public Issue update(String title) {
         this.title = title;
+        return this;
+    }
+
+    public Issue updateAssignees(List<User> assignees) {
+        this.assignees = assignees;
+        return this;
+    }
+
+    public Issue updateLabels(List<Label> labels) {
+        this.labels = labels;
         return this;
     }
 

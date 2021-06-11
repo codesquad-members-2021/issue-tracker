@@ -3,6 +3,7 @@ package com.jane_eno.issue_tracker.domain.user;
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
 import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
 import com.jane_eno.issue_tracker.domain.issue.Issue;
+import com.jane_eno.issue_tracker.web.dto.response.Assignee;
 import lombok.*;
 
 import javax.persistence.*;
@@ -53,4 +54,6 @@ public class User {
     public boolean matchUser(User user) {
         return id.equals(user.id);
     }
+
+
 }
