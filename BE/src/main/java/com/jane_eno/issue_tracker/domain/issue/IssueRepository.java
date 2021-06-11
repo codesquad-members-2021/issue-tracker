@@ -14,8 +14,8 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     List<Issue> findAllByIsOpenFalse();
 
-    @Modifying(flushAutomatically = true)
-    @Query("update Issue i set i.isOpen = :isOpen where i.id = :id")
     @Transactional
+    @Modifying
+    @Query("update Issue i set i.isOpen = :isOpen where i.id = :id")
     void updateStatusBy(@Param("id") Long id, @Param("isOpen") boolean isOpen);
 }

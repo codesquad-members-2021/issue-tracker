@@ -1,4 +1,4 @@
-package com.jane_eno.issue_tracker.web.dto.response;
+package com.jane_eno.issue_tracker.web.dto.response.vo;
 
 import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.user.User;

@@ -10,6 +10,8 @@ import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
 import com.jane_eno.issue_tracker.exception.InvalidSearchRequestException;
 import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
+import com.jane_eno.issue_tracker.web.dto.response.vo.Assignee;
+import com.jane_eno.issue_tracker.web.dto.response.vo.Count;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,14 +30,12 @@ public class IssueService {
     public IssuesResponseDTO getIssues(String status) {
         List<Issue> openedIssues = issueRepository.findAllByIsOpenTrue();
         List<Issue> closedIssues = issueRepository.findAllByIsOpenFalse();
-
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.count())
                 .openedIssue(openedIssues.size())
                 .closedIssue(closedIssues.size())
                 .build();
-
         List<IssueResponseDTO> issues = filterByStatus(status).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
@@ -151,19 +151,15 @@ public class IssueService {
         issueRepository.save(issue);
     }
 
-    public void deleteIssueById(Long id) {
-        issueRepository.deleteById(id);
+    private Issue findIssueById(Long id) {
+        return issueRepository.findById(id).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find issue by given id."));
     }
 
     private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {
         return issue.getComments().stream()
                 .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
                 .collect(Collectors.toList());
-    }
-
-    private Issue findIssueById(Long id) {
-        return issueRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find issue by given id."));
     }
 
     private List<Issue> filterByStatus(String status) {

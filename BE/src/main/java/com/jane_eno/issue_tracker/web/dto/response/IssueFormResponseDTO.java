@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.response;
 
+import com.jane_eno.issue_tracker.web.dto.response.vo.Assignee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

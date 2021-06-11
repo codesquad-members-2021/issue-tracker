@@ -8,7 +8,7 @@ import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.user.User;
 import com.jane_eno.issue_tracker.domain.user.UserRepository;
 import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
-import com.jane_eno.issue_tracker.web.dto.response.Assignee;
+import com.jane_eno.issue_tracker.web.dto.response.vo.Assignee;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,16 +46,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    private boolean verifyUser(String userName) {
-        return userRepository.findByUserName(userName).isPresent();
-    }
-
-    private User findByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find user by given user name.")
-        );
-    }
-
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(
                 () -> new ElementNotFoundException("Cannot find user by given user id.")
@@ -74,4 +64,13 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    private User findByUserName(String userName) {
+        return userRepository.findByUserName(userName).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find user by given user name.")
+        );
+    }
+
+    private boolean verifyUser(String userName) {
+        return userRepository.findByUserName(userName).isPresent();
+    }
 }

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidSearchRequestException extends RuntimeException {
 
     public InvalidSearchRequestException() {
-        super("Invalid status");
+        super("Invalid status.");
     }
 }

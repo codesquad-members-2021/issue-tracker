@@ -1,4 +1,4 @@
-package com.jane_eno.issue_tracker.web.dto.response;
+package com.jane_eno.issue_tracker.web.dto.response.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

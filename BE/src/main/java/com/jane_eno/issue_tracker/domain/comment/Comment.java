@@ -39,19 +39,19 @@ public class Comment {
                 .build();
     }
 
-    public boolean matchAuthor(User user) {
-        return author.matchUser(user);
-    }
-
-    public boolean matchComment(Long commentId) {
-        return id.equals(commentId);
+    public void update(String comment) {
+        this.comment = comment;
     }
 
     public String getAuthorName() {
         return author.getUserName();
     }
 
-    public void update(String comment) {
-        this.comment = comment;
+    public boolean matchAuthor(User user) {
+        return author.matchUser(user);
+    }
+
+    public boolean matchComment(Long commentId) {
+        return id.equals(commentId);
     }
 }
