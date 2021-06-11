@@ -1,9 +1,6 @@
 package team02.issue_tracker.oauth;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,51 +10,29 @@ import team02.issue_tracker.oauth.dto.*;
 import team02.issue_tracker.service.UserService;
 
 @Slf4j
-@PropertySource("classpath:oauth.properties")
 @Service
 public class OAuthService {
 
-    @Value("${oauth.github.web.client_id}")
-    private String GITHUB_WEB_CLIENT_ID;
-
-    @Value("${oauth.github.web.client_secret}")
-    private String GITHUB_WEB_CLIENT_SECRET;
-
-    @Value("${oauth.github.web.redirect_uri}")
-    private String GITHUB_WEB_REDIRECT_URI;
-
-    @Value("${oauth.github.ios.client_id}")
-    private String GITHUB_IOS_CLIENT_ID;
-
-    @Value("${oauth.github.ios.client_secret}")
-    private String GITHUB_IOS_CLIENT_SECRET;
-
-    @Value("${oauth.github.ios.redirect_uri}")
-    private String GITHUB_IOS_REDIRECT_URI;
-
-    @Value("${oauth.github.access_token_uri}")
-    private String GITHUB_ACCESS_TOKEN_URI;
-
-    @Value("${oauth.github.user_info_uri}")
-    private String GITHUB_USER_INFO_URI;
-
     private final UserService userService;
     private final JwtUtils jwtUtils;
+    private final GithubApiProperties githubApiProperties;
 
-    public OAuthService(UserService userService, JwtUtils jwtUtils) {
+    public OAuthService(UserService userService, JwtUtils jwtUtils
+            , GithubApiProperties githubApiProperties) {
         this.userService = userService;
         this.jwtUtils = jwtUtils;
+        this.githubApiProperties = githubApiProperties;
     }
 
     public AuthJwt issueJwtForWeb(String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
-                GITHUB_WEB_CLIENT_ID, GITHUB_WEB_CLIENT_SECRET, GITHUB_WEB_REDIRECT_URI, code);
+                githubApiProperties.accessTokenRequestForWeb(code));
         return jwtUtils.getJwt(userFrom(githubUserProfile));
     }
 
     public AuthJwt issueJwtForIos(String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
-                GITHUB_IOS_CLIENT_ID, GITHUB_IOS_CLIENT_SECRET, GITHUB_IOS_REDIRECT_URI, code);
+                githubApiProperties.accessTokenRequestForIos(code));
         return jwtUtils.getJwt(userFrom(githubUserProfile));
     }
 
@@ -71,24 +46,16 @@ public class OAuthService {
     }
 
     private GithubUserProfile githubUserProfileFrom(
-            String clientId, String clientSecret, String redirectUri, String code) {
-        return githubUserProfileFrom(accessTokenFrom(clientId, clientSecret, redirectUri, code));
+            GithubAccessTokenRequestDto accessTokenRequest) {
+        return githubUserProfileFrom(accessTokenFrom(accessTokenRequest));
     }
 
     private GithubAccessTokenResponseDto accessTokenFrom(
-            String clientId, String clientSecret, String redirectUri, String code) {
-        GithubAccessTokenRequestDto githubAccessTokenRequestDto =
-                GithubAccessTokenRequestDto.builder()
-                        .clientId(clientId)
-                        .clientSecret(clientSecret)
-                        .redirectUri(redirectUri)
-                        .code(code)
-                        .build();
-
+            GithubAccessTokenRequestDto accessTokenRequest) {
         RequestEntity<GithubAccessTokenRequestDto> request = RequestEntity
-                .post(GITHUB_ACCESS_TOKEN_URI)
+                .post(githubApiProperties.accessTokenUri())
                 .header("Accept", "application/json")
-                .body(githubAccessTokenRequestDto);
+                .body(accessTokenRequest);
 
         ResponseEntity<GithubAccessTokenResponseDto> response =
                 new RestTemplate().exchange(request, GithubAccessTokenResponseDto.class);
@@ -98,7 +65,7 @@ public class OAuthService {
     private GithubUserProfile githubUserProfileFrom(
             GithubAccessTokenResponseDto githubAccessTokenResponseDto) {
         RequestEntity githubUserProfileRequest = RequestEntity
-                .get(GITHUB_USER_INFO_URI)
+                .get(githubApiProperties.userInfoUri())
                 .header("Authorization"
                         , "token " + githubAccessTokenResponseDto.getAccessToken())
                 .build();

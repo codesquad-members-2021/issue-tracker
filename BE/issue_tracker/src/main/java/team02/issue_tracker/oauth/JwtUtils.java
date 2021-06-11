@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.AuthJwt;
-import team02.issue_tracker.oauth.dto.GithubUserProfile;
 
 import java.sql.Date;
 import java.time.LocalDate;
