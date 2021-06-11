@@ -3,7 +3,7 @@ package com.codesquad.issuetracker.auth.component;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.codesquad.issuetracker.auth.dto.GithubUser;
+import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class JwtUtils {
                 .build();
     }
 
-    public String getJwt(GithubUser user) {
+    public String getJwt(GitHubUser user) {
         return JWT.create()
                 .withClaim(GITHUB, user.getLogin())
                 .withIssuer(ISSUER)

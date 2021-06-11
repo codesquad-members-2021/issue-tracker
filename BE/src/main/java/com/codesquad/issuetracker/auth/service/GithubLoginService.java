@@ -6,7 +6,7 @@ import com.codesquad.issuetracker.auth.component.GitHubOauthWebValues;
 import com.codesquad.issuetracker.auth.component.JwtUtils;
 import com.codesquad.issuetracker.auth.dto.AccessTokenRequest;
 import com.codesquad.issuetracker.auth.dto.AccessTokenResponse;
-import com.codesquad.issuetracker.auth.dto.GithubUser;
+import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import com.codesquad.issuetracker.auth.dto.JwtResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class GithubLoginService {
         AccessTokenResponse accessToken = getAccessToken(code, gitHubOauthValues, request)
                 .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
 
-        GithubUser githubUser = getUserFromOauth(accessToken, request)
+        GitHubUser githubUser = getUserFromOauth(accessToken, request)
                 .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
 
         return new JwtResponse(jwtUtils.getJwt(githubUser), "Bearer");
@@ -78,15 +78,15 @@ public class GithubLoginService {
         return Optional.ofNullable(response.getBody());
     }
 
-    private Optional<GithubUser> getUserFromOauth(AccessTokenResponse accessToken, RestTemplate gitHubRequest) {
+    private Optional<GitHubUser> getUserFromOauth(AccessTokenResponse accessToken, RestTemplate gitHubRequest) {
         RequestEntity<Void> request = RequestEntity
                 .get(USER_URI)
                 .header("Accept", "application/json")
                 .header("Authorization", "token " + accessToken.getAccessToken())
                 .build();
 
-        ResponseEntity<GithubUser> response = gitHubRequest
-                .exchange(request, GithubUser.class);
+        ResponseEntity<GitHubUser> response = gitHubRequest
+                .exchange(request, GitHubUser.class);
 
         return Optional.ofNullable(response.getBody());
     }

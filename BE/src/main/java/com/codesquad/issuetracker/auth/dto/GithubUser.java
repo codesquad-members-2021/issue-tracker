@@ -1,17 +1,19 @@
 package com.codesquad.issuetracker.auth.dto;
 
-public class GithubUser {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class GitHubUser {
 
     private String login;
 
-    public GithubUser() {
-    }
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    private String name;
 }
