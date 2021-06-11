@@ -85,11 +85,15 @@ class LoginViewController: UIViewController {
     private lazy var appleLoginButton: UIButton = {
         let image = UIImage(named: "icon_apple")
         let title = "Apple 계정으로 로그인"
-        return socialLoginButton(with: image, title)
+        let appleLoginButton = socialLoginButton(with: image, title)
+        appleLoginButton.addTarget(self, action: #selector(appleLoginTouched), for: .touchUpInside)
+        return appleLoginButton
     }()
     
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
+    
+    private var appleLoginManager: AppleAuthorizationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +102,9 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
+        
+        let appleAuthorizationManager = AppleAuthorizationManager(viewController: self, delegate: self)
+        appleLoginManager = appleAuthorizationManager
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -181,11 +188,45 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    @objc private func loginBtnTouchedDown(sender: UIButton!) {
-        print("하이~, H I~")
-        let tabBarVC = IssueTrackerTabBarController()
-        tabBarVC.modalPresentationStyle = .fullScreen
-        present(tabBarVC, animated: true, completion: nil)
+    private func presentIssueViewController(with loginInfo: LoginInfo) {
+        DispatchQueue.main.async {
+            let tabBarVC = IssueTrackerTabBarController()
+            tabBarVC.modalPresentationStyle = .fullScreen
+            self.present(tabBarVC, animated: true, completion: nil)
+        }
     }
     
+    private func presentAlert(with errorMessage: String) {
+        DispatchQueue.main.async {
+            let alert = AlertFactory.create(body: errorMessage)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func loginBtnTouchedDown(sender: UIButton!) {
+        print("하이~, H I~")
+    }
+    
+    @objc private func appleLoginTouched(_ sender: UIButton) {
+        appleLoginManager?.login()
+    }
+    
+}
+
+extension LoginViewController: AppleLoginManagerDelegate {
+    func didAppleLoginSuccess(with loginInfo: LoginInfo) {
+        let loginKeyChainManager = LoginKeyChainManager(loginService: .apple)
+        
+        if loginKeyChainManager.save(loginInfo) {
+            presentIssueViewController(with: loginInfo)
+        } else {
+            let saveErrorText = LoginError.keyChainSave.description
+            presentAlert(with: saveErrorText)
+        }
+    }
+    
+    func didAppleLoginFail(with error: Error) {
+        let appleLoginErrorText = LoginError.appleIDAccess.description
+        presentAlert(with: appleLoginErrorText)
+    }
 }
