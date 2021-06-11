@@ -24,17 +24,6 @@ class IssueTrackerTabBarController: UITabBarController {
     
     func configure(loginInfo: LoginInfo) {
         self.loginInfo = loginInfo
-        handOutLoginInfo()
-    }
-
-    private func handOutLoginInfo() {
-        guard let loginInfo = self.loginInfo else { return }
-        
-        let loginInfoContainers = viewControllers?.compactMap{ $0 as? LoginInfoContainer }
-        
-        loginInfoContainers?.forEach({ loginInfoContainer in
-            loginInfoContainer.setup(loginInfo: loginInfo)
-        })
     }
     
     private func updateUserImage() {
