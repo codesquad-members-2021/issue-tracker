@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.user.component;
+package com.codesquad.issuetracker.auth.component;
 
 public interface GitHubOauthValues {
     String getClientId();

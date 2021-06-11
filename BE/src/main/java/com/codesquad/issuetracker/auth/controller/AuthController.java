@@ -1,7 +1,7 @@
-package com.codesquad.issuetracker.user.controller;
+package com.codesquad.issuetracker.auth.controller;
 
-import com.codesquad.issuetracker.user.dto.JwtResponse;
-import com.codesquad.issuetracker.user.service.GithubLoginService;
+import com.codesquad.issuetracker.auth.dto.JwtResponse;
+import com.codesquad.issuetracker.auth.service.GithubLoginService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

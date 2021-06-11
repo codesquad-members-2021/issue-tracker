@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.user.component;
+package com.codesquad.issuetracker.auth.component;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

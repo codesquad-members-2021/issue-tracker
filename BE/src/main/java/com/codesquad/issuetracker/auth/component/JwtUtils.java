@@ -1,11 +1,10 @@
-package com.codesquad.issuetracker.user.component;
+package com.codesquad.issuetracker.auth.component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.codesquad.issuetracker.user.dto.GithubUser;
-import com.codesquad.issuetracker.user.dto.JwtResponse;
+import com.codesquad.issuetracker.auth.dto.GitHubUser;
+import com.codesquad.issuetracker.user.domain.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,9 @@ import java.time.LocalDate;
 public class JwtUtils {
 
     private static final String ISSUER = "issue-tracker";
-    private static final String GITHUB = "github";
+    private static final String ID = "id";
+    private static final String NICKNAME = "nickName";
+    private static final String IMAGE_URL = "imageUrl";
 
     private final Algorithm ALGORITHM;
     private final JWTVerifier jwtVerifier;
@@ -29,9 +30,11 @@ public class JwtUtils {
                 .build();
     }
 
-    public String getJwt(GithubUser user) {
+    public String getJwt(User user) {
         return JWT.create()
-                .withClaim(GITHUB, user.getLogin())
+                .withClaim(ID, user.getId().toString())
+                .withClaim(NICKNAME, user.getNickName())
+                .withClaim(IMAGE_URL, user.getImageUrl())
                 .withIssuer(ISSUER)
                 .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(2)))
                 .sign(ALGORITHM);
