@@ -1,8 +1,8 @@
 import { useHistory, useLocation } from 'react-router';
-import { CircularProgress } from '@material-ui/core';
 import styled from 'styled-components';
-import axios from 'axios';
 import qs from 'qs';
+import useAxios from 'hook/useAxios';
+import { useEffect } from 'react';
 
 const OAuthPage = () => {
   const location = useLocation();
@@ -10,18 +10,19 @@ const OAuthPage = () => {
   const res = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+  const url = `${process.env.REACT_APP_API_URL}/api/login/auth?client=web&code=${res.code}`;
+  const { isSuccess, data } = useAxios(true, url, 'get');
 
-  (async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/login/auth?client=web&code=${res.code}`
-    );
-    localStorage.setItem('jwt', data.jwt);
-    history.push('/issues');
-  })();
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem('jwt', JSON.stringify(data));
+      history.push('/issues');
+    }
+  });
 
   return (
     <Div>
-      <CircularProgress />
+      {/* <CircularProgress /> */}
       <span>로그인 중... 🤗</span>
     </Div>
   );
