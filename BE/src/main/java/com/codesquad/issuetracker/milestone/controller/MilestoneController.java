@@ -36,9 +36,9 @@ public class MilestoneController {
     }
 
     @PutMapping("/{id}")
-    public MilestoneWrapper updateMilestone(@PathVariable UUID id, @RequestBody MilestoneRequestDto milestoneRequest) {
+    public MilestoneWrapper updateMilestone(@PathVariable UUID id, @RequestBody MilestoneRequestDto milestoneRequestDto) {
         logger.debug("{}", id);
-        return milestoneService.updateMilestone(id, milestoneRequest);
+        return milestoneService.updateMilestone(id, milestoneRequestDto);
     }
 
     @DeleteMapping("/{id}")
