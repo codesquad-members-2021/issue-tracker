@@ -12,7 +12,11 @@ import { Avatar } from '@chakra-ui/avatar';
 
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import MenuTitle from '@components/common/MenuTitle';
-import { checkBoxStyle, menuItemStyle, menuBtnStyle } from './chakraStyle';
+import {
+  checkBoxStyle,
+  menuItemStyle,
+  menuBtnStyle,
+} from '@components/common/chakraStyle';
 
 function SelectAssignee() {
   return (
@@ -64,6 +68,7 @@ function SelectAssignee() {
 export default SelectAssignee;
 
 const Wrap = styled.div`
+  padding: 34px 32px 32px 32px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gr_line};
 `;
 
@@ -78,5 +83,5 @@ const Text = styled.span`
 `;
 
 const AddList = styled.ul`
-  padding: 8px 32px;
+  padding: 8px 0;
 `;
