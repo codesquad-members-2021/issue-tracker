@@ -34,9 +34,9 @@ const IssueList = () => {
             <img src={ArrowBottomIcon} alt=""
               style={{ transform: 'translateY(3px)' }} />
           </div>
-          {<FilterTab
-              header="issue"
-              filterList={issueFilterList} />}
+          <FilterTab
+            header="issue"
+            filterList={issueFilterList} />
         </FilterButton>
         <InputStyles
           startAdornment={

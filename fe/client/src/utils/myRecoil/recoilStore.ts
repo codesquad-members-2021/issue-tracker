@@ -16,7 +16,7 @@ const recoilStore = {
   observers: {} as ObserverFuncType,
   data: {} as DataType,
   subscribe({ key, fn }: { key: string, fn: Function }) {
-    if (Object.keys(this.observers).find(k => k === key)) return;
+    if (key in this.observers) return;
     this.observers[key] = this.observers[key] || [];
     this.observers[key].push(fn);
   },
@@ -31,12 +31,8 @@ const recoilStore = {
   },
 
   setData: function (key: string) {
-    return (fn: Function | object) => {
-      if (typeof fn === 'object') {
-        this.data[key] = fn;
-      } else {
-        this.data[key] = fn(this.data[key]);
-      }
+    return (fn: Function | InitialStateType) => {
+      this.data[key] = typeof fn === 'function' ? fn(this.data[key]) : fn;
       this.observers[key].forEach((callback) => callback());
     };
   }
