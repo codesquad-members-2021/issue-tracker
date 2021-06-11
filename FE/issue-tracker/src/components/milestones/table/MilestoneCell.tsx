@@ -7,13 +7,13 @@ import DeleteMiniButton from '@components/common/DeleteMiniButton';
 import CloseMiniButton from '@components/common/CloseMiniButton';
 
 interface Props {
-  last: boolean;
+  isLastItemStyle: boolean;
 }
 
-function MilestoneCell({ last }: Props) {
+function MilestoneCell({ isLastItemStyle }: Props) {
   let progressValue = 80;
   return (
-    <MilestoneWrap last={last}>
+    <MilestoneWrap isLastItemStyle={isLastItemStyle}>
       {/* 마일스톤 왼쪽 */}
       <MilestoneLeft>
         <TitleBox>
@@ -45,10 +45,10 @@ function MilestoneCell({ last }: Props) {
           borderRadius="10px"
         />
         <ProgressInfo>
-          <PercentInfo>{`${progressValue}%`}</PercentInfo>
+          <PercentInfo>{progressValue}%</PercentInfo>
           <IssueInfo>
-            <NumOfOpenIssue>{`열린 이슈 ${1}`}</NumOfOpenIssue>
-            <NumOfCloseIssue>{`닫힌 이슈 ${2}`}</NumOfCloseIssue>
+            <NumOfOpenIssue>열린 이슈 {1}</NumOfOpenIssue>
+            <NumOfCloseIssue>닫힌 이슈 {2}</NumOfCloseIssue>
           </IssueInfo>
         </ProgressInfo>
       </MilestoneRight>
@@ -59,7 +59,7 @@ function MilestoneCell({ last }: Props) {
 export default MilestoneCell;
 
 interface MilestoneWrapType {
-  last: boolean;
+  isLastItemStyle: boolean;
 }
 
 const MilestoneWrap = styled.section<MilestoneWrapType>`
