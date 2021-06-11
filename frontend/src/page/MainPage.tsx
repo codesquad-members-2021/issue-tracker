@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import React, { ReactElement } from 'react';
 import LabelMileStoneTab from 'components/common/LabelMilestoneTab';
 import IssuePlus from 'components/atom/IssuePlus';
-import IssueFilterSection from 'components/issueTable/IssueFilter';
 import IssueTable from 'components/issueTable/IssueTable';
+import IssueFilter from 'components/optionTable/issueFilter/IssueFilter';
 
 interface Props {}
 
@@ -11,7 +11,7 @@ export default function MainPage({}: Props): ReactElement {
   return (
     <MainPageBlock>
       <div className='issue-tracker__options'>
-        <IssueFilterSection />
+        <IssueFilter />
         <div className='options__tabs'>
           <LabelMileStoneTab />
           <IssuePlus />
