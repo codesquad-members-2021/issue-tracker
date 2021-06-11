@@ -33,15 +33,15 @@ public class User {
     private String imageUrl;
 
     @Column(name = "USER_GITHUB_ID")
-    private String githubId;
+    private String gitHubId;
 
     @Column(name = "USER_APPLE_ID")
     private String appleId;
 
-    private User(@NonNull String nickName, @NonNull String imageUrl, String githubId) {
+    private User(@NonNull String nickName, @NonNull String imageUrl, String gitHubId) {
         this.nickName = nickName;
         this.imageUrl = imageUrl;
-        this.githubId = githubId;
+        this.gitHubId = gitHubId;
     }
 
     public static User fromGitHubUser(GitHubUser gitHubUser) {

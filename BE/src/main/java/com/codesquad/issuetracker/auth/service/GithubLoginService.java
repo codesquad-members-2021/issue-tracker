@@ -8,6 +8,8 @@ import com.codesquad.issuetracker.auth.dto.AccessTokenRequest;
 import com.codesquad.issuetracker.auth.dto.AccessTokenResponse;
 import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import com.codesquad.issuetracker.auth.dto.JwtResponse;
+import com.codesquad.issuetracker.user.domain.User;
+import com.codesquad.issuetracker.user.infra.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,19 +30,20 @@ public class GithubLoginService {
     private final String USER_URI;
 
     private final JwtUtils jwtUtils;
-
-    private final Logger logger = LoggerFactory.getLogger(GithubLoginService.class);
+    private final UserRepository userRepository;
 
     public GithubLoginService(GitHubOauthWebValues gitHubOauthWebValues,
                               GitHubOauthIosValues gitHubOauthIosValues,
                               @Value("${auth.github.accessTokenUri}") String ACCESS_TOKEN_URI,
                               @Value("${auth.github.userUri}") String USER_URI,
-                              JwtUtils jwtUtils) {
+                              JwtUtils jwtUtils,
+                              UserRepository userRepository) {
         this.gitHubOauthWebValues = gitHubOauthWebValues;
         this.gitHubOauthIosValues = gitHubOauthIosValues;
         this.ACCESS_TOKEN_URI = ACCESS_TOKEN_URI;
         this.USER_URI = USER_URI;
         this.jwtUtils = jwtUtils;
+        this.userRepository = userRepository;
     }
 
     public JwtResponse issueToken(String code, GitHubOauthValues gitHubOauthValues) {
@@ -51,7 +54,10 @@ public class GithubLoginService {
         GitHubUser githubUser = getUserFromOauth(accessToken, request)
                 .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
 
-        return new JwtResponse(jwtUtils.getJwt(githubUser), "Bearer");
+        User user = userRepository.findByGitHubId(githubUser.getLogin())
+                .orElseGet(() -> userRepository.save(User.fromGitHubUser(githubUser)));
+
+        return new JwtResponse(jwtUtils.getJwt(user), "Bearer");
     }
 
     public JwtResponse issueJwtForWeb(String code) {
