@@ -7,12 +7,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
-@EqualsAndHashCode(exclude = {"id", "profileImage", "issueAssignees", "issues", "comments"})
-@Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor
 @Entity
 public class User {
     @Id
