@@ -47,29 +47,44 @@ extension IssueListViewController {
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
         issueTableView.allowsMultipleSelectionDuringEditing = true
         editableView.isHidden = true
-        setObserver()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
 }
 
 //MARK:- Delete Issue
 
-extension IssueListViewController {
+extension IssueListViewController: UITableViewDelegate {
     
-    private func setObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(alertForDelete), name: .deleteIssue, object: nil)
-    }
-    
-    @objc func alertForDelete(_ notification: Notification) {
-        guard let index = notification.userInfo?["index"] as? IndexPath else { return }
-        
+    private func alertForDelete(with index: IndexPath) {
         let alert = UIAlertController(title: "정말로 이 이슈를 삭제하시겠습니까?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "취소", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { action in
+        let cancel = UIAlertAction(title: "취소", style: .default, handler: nil)
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
             self.viewModel.deleteIssue(at: index.row)
             self.issueTableView.deleteRows(at: [index], with: UITableView.RowAnimation.automatic)
-        })
+        }
+        alert.addAction(cancel)
+        alert.addAction(delete)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let close = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+            completion(true)
+        }
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            self.alertForDelete(with: indexPath)
+            completion(true)
+        }
+        close.image = UIImage(systemName: "archivebox")
+        delete.image = UIImage(systemName: "trash")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [delete, close])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
     
 }
