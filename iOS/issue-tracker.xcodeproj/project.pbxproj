@@ -14,7 +14,6 @@
 		10BDE6B92670C62A007B38AF /* IdentityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDE6B82670C62A007B38AF /* IdentityProtocol.swift */; };
 		10CE4D9A266EFB5700FBD593 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D99266EFB5700FBD593 /* AppDelegate.swift */; };
 		10CE4D9C266EFB5700FBD593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */; };
-		10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE4D9D266EFB5700FBD593 /* ViewController.swift */; };
 		10CE4DA1266EFB5700FBD593 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4D9F266EFB5700FBD593 /* Main.storyboard */; };
 		10CE4DA3266EFB5700FBD593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4DA2266EFB5700FBD593 /* Assets.xcassets */; };
 		10CE4DA6266EFB5700FBD593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */; };
@@ -43,7 +42,6 @@
 		10CE4D96266EFB5700FBD593 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10CE4D99266EFB5700FBD593 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		10CE4D9D266EFB5700FBD593 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10CE4DA0266EFB5700FBD593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10CE4DA2266EFB5700FBD593 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10CE4DA5266EFB5700FBD593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +77,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1029609726733DD000669988 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				10D4257F2670912800AE119C /* issue-tracker.entitlements */,
+				10CE4D99266EFB5700FBD593 /* AppDelegate.swift */,
+				10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */,
+				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
+				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
 		1085274B2670C149006121B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,18 +135,13 @@
 		10CE4D98266EFB5700FBD593 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				10CE4DA7266EFB5700FBD593 /* Info.plist */,
+				1029609726733DD000669988 /* Supporting */,
 				B04468DF26732DCC00DAD616 /* Coordinator */,
-				10D4257F2670912800AE119C /* issue-tracker.entitlements */,
 				10BCA8A7266F3C0000DBBA61 /* Font */,
 				10D4258326709D3300AE119C /* Extension */,
-				10CE4D99266EFB5700FBD593 /* AppDelegate.swift */,
-				10CE4D9B266EFB5700FBD593 /* SceneDelegate.swift */,
-				10CE4D9D266EFB5700FBD593 /* ViewController.swift */,
 				10BDE6B82670C62A007B38AF /* IdentityProtocol.swift */,
 				10CE4D9F266EFB5700FBD593 /* Main.storyboard */,
-				10CE4DA2266EFB5700FBD593 /* Assets.xcassets */,
-				10CE4DA4266EFB5700FBD593 /* LaunchScreen.storyboard */,
-				10CE4DA7266EFB5700FBD593 /* Info.plist */,
 				10BCA8A3266F38D700DBBA61 /* Login */,
 				10ED3B7E2671C1F600FCBF2E /* Photo */,
 				10ED3B7D2671AFA000FCBF2E /* NewIssue */,
@@ -334,7 +339,6 @@
 				10D55EE12670D512007587C4 /* AdditionalTableViewDataSource.swift in Sources */,
 				10ED3B862671C34200FCBF2E /* PhotoManager.swift in Sources */,
 				10ED3B8C2671C41B00FCBF2E /* PhotoCell.swift in Sources */,
-				10CE4D9E266EFB5700FBD593 /* ViewController.swift in Sources */,
 				10D4258226709CC200AE119C /* IssueListViewController.swift in Sources */,
 				10BDE6B92670C62A007B38AF /* IdentityProtocol.swift in Sources */,
 				10992D55267200F000A77322 /* ImagePicker.swift in Sources */,
