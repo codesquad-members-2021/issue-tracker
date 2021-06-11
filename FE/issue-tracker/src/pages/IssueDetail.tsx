@@ -3,7 +3,7 @@ import Header from '@components/common/Header';
 import IssueHeader from '@components/issueDetail/IssueHeader';
 import IssueSidebar from '@components/issueDetail/IssueSidebar';
 import Comment from '@components/issueDetail/Comment';
-import TextBox from '@components/issueDetail/TextBox';
+import NewComment from '@components/issueDetail/NewComment';
 
 function IssueDetail() {
   return (
@@ -11,12 +11,12 @@ function IssueDetail() {
       <Header />
       <IssueHeader />
       <IssueDetailContent>
-        <IssueSidebar />
         <CommentBox>
           <Comment />
           <Comment />
-          <TextBox />
+          <NewComment />
         </CommentBox>
+        <IssueSidebar />
       </IssueDetailContent>
     </IssueDetailPage>
   );
