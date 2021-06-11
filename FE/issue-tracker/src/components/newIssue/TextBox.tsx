@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Input } from '@chakra-ui/input';
 import { Textarea } from '@chakra-ui/textarea';
 
-import { contentsInput, titleInput } from './chakraStyle';
 import { ReactComponent as FileIcon } from '@assets/file.svg';
+import { contentsInput, titleInput } from './style';
 
 function TextBox() {
   return (
