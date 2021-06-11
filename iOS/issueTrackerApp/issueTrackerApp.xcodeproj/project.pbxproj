@@ -31,7 +31,7 @@
 		930FAE9D266E112900422968 /* issueTrackerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE9C266E112900422968 /* issueTrackerAppTests.swift */; };
 		930FAEA8266E112A00422968 /* issueTrackerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */; };
 		930FAEC7266E13F500422968 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 930FAEC6266E13F500422968 /* Alamofire */; };
-		931BAE1926725E3C00CD9244 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE1826725E3C00CD9244 /* SettingViewController.swift */; };
+		931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE1D26730C8600CD9244 /* SettingViewController.swift */; };
 		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
 		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
 		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
@@ -90,7 +90,7 @@
 		930FAEA3266E112A00422968 /* issueTrackerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = issueTrackerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issueTrackerAppUITests.swift; sourceTree = "<group>"; };
 		930FAEA9266E112A00422968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		931BAE1826725E3C00CD9244 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = ../../../../../../../../../Documents/SettingViewController.swift; sourceTree = "<group>"; };
+		931BAE1D26730C8600CD9244 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubEndpoint.swift; sourceTree = "<group>"; };
 		9343E2D7266F03E90086F977 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -373,10 +373,11 @@
 		931BAE1726725DC600CD9244 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				931BAE1826725E3C00CD9244 /* SettingViewController.swift */,
+				931BAE1D26730C8600CD9244 /* SettingViewController.swift */,
 			);
-			path = Setting;
-			sourceTree = "<group>";
+			name = Setting;
+			path = issueTrackerApp/Presentation/UI/ViewController/Setting;
+			sourceTree = SOURCE_ROOT;
 		};
 		9343E2F0266F5CBC0086F977 /* Coordinator */ = {
 			isa = PBXGroup;
@@ -538,12 +539,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				883F5148266F3EAF0055EC9E /* LoginViewController.swift in Sources */,
-				931BAE1926725E3C00CD9244 /* SettingViewController.swift in Sources */,
 				9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */,
 				9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */,
 				9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
+				931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */,
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
 				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
