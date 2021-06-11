@@ -28,7 +28,7 @@
         <scene sceneID="u5O-O7-06V">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="caH-Yp-3TI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="레이블" image="text.bubble" catalog="system" id="Pkv-Gv-J52"/>
+                    <tabBarItem key="tabBarItem" title="레이블" image="label" id="Pkv-Gv-J52"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ep6-9k-9nw">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -45,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="text.bubble" catalog="system" width="128" height="110"/>
+        <image name="label" width="18" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

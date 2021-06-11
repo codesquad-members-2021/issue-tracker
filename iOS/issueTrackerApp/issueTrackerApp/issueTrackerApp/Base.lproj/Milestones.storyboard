@@ -28,7 +28,7 @@
         <scene sceneID="VYP-kk-hmi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jgm-SO-RnD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마일스톤" image="paperclip" catalog="system" id="dDa-gt-U5N"/>
+                    <tabBarItem key="tabBarItem" title="마일스톤" image="milestone" id="dDa-gt-U5N"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="uJu-wb-ftF">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -45,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="milestone" width="18" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

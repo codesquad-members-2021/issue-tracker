@@ -50,11 +50,11 @@
             </objects>
             <point key="canvasLocation" x="1784.057971014493" y="1728.3482142857142"/>
         </scene>
-        <!--설정-->
+        <!--내 계정-->
         <scene sceneID="4o8-40-CR1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FLe-bm-IQg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="설정" image="gearshape.fill" catalog="system" id="Flj-IL-FFS"/>
+                    <tabBarItem key="tabBarItem" title="내 계정" image="icon" id="Flj-IL-FFS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="XaJ-hr-3OX">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -71,7 +71,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="icon" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

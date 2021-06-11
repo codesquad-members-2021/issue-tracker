@@ -46,7 +46,7 @@
         <scene sceneID="cV0-f2-Z42">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OnM-5d-5ES" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="이슈" image="pencil" catalog="system" id="rGb-ZM-SCH"/>
+                    <tabBarItem key="tabBarItem" title="이슈" image="issue" id="rGb-ZM-SCH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="s5S-fC-m3B">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -63,7 +63,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="issue" width="18" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
