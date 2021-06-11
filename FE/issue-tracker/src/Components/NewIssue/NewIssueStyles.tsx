@@ -39,6 +39,11 @@ const NewIssue = {
     outline: none;
     margin-bottom: 16px;
     resize: none;
+    :focus {
+      transition: all 0.3s;
+      border: 1px solid ${theme.GRAY_SCALE.LINE};
+      background: ${theme.COLOR.WHITE};
+    }
   `,
   FileAttachButton: styled(Button)`
     width: 11.5%;
@@ -57,12 +62,6 @@ const NewIssue = {
   `,
   UnCreateButton: styled(Button)`
     width: 8%;
-  `,
-  Test: styled.div`
-    width: 30%;
-    height: 300px;
-    background: #fff;
-    border: 1px solid black;
   `,
 };
 
