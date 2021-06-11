@@ -27,12 +27,19 @@ public class Label {
 
     private String description;
     
-    public static Label createLabel(LabelDTO labelDTO) {
+    public static Label create(LabelDTO labelDTO) {
         return Label.builder()
                 .name(labelDTO.getName())
                 .color(labelDTO.getColor())
                 .description(labelDTO.getDescription())
                 .build();
+    }
+
+    public Label update(LabelDTO labelDTO) {
+        this.name = labelDTO.getName();
+        this.description = labelDTO.getDescription();
+        this.color = labelDTO.getColor();
+        return this;
     }
 
     public boolean matchLabel(Label targetLabel) {
