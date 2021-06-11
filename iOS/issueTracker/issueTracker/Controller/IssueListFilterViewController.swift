@@ -81,19 +81,15 @@ extension IssueListFilterViewController: UITableViewDataSource {
             return 0
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "filterOptionCell") as? filterOptionCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterOptionCell") as? FilterOptionCell else {
             return UITableViewCell()
         }
         return cell
     }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionModels = ["상태", "작성자", "레이블", "마일스톤"]
         let view = UIView(frame: .zero)
@@ -109,13 +105,10 @@ extension IssueListFilterViewController: UITableViewDataSource {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         return view
     }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    
 }
 
 extension IssueListFilterViewController: UITableViewDelegate {
-   
 }

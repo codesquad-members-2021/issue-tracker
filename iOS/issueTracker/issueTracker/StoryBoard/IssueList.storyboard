@@ -21,14 +21,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="issueCell" id="Ar2-Q1-fBS" customClass="IssueListTableViewCell" customModule="issueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="207.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="208"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ar2-Q1-fBS" id="5HE-ed-Bgc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="207.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UaT-BY-Jrm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="207.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckw-BQ-7fv">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -48,7 +48,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JR7-G6-67J">
-                                                            <rect key="frame" x="0.0" y="50" width="414" height="57.5"/>
+                                                            <rect key="frame" x="0.0" y="50" width="414" height="58"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅇㅁㄴ어항너마ㅣ;ㄴ어라ㅣ;ㄴㅇ머리ㅏㄴ어리;ㅏㄴ어라ㅣ머이ㅏㄹ멍나ㅣ런아ㅣ럼ㄴ아ㅣㄹ먼아ㅣㄹ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ev-fi-aKh">
                                                                     <rect key="frame" x="16" y="8.5" width="382" height="41"/>
@@ -69,7 +69,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qm-rY-BVm">
-                                                            <rect key="frame" x="0.0" y="107.5" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="108" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마일스톤 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glx-JK-IWV">
                                                                     <rect key="frame" x="37" y="15" width="93" height="20.5"/>
@@ -91,7 +91,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-cn-4AV">
-                                                            <rect key="frame" x="0.0" y="157.5" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="158" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS3-vA-DQF">
                                                                     <rect key="frame" x="16" y="10" width="114" height="30"/>
@@ -206,7 +206,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filterOptionCell" id="xE8-zm-adh" customClass="filterOptionCell" customModule="issueTracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterOptionCell" id="xE8-zm-adh" customClass="FilterOptionCell" customModule="issueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xE8-zm-adh" id="9jB-eT-tqV">
@@ -282,6 +282,7 @@
                 <tabBarController storyboardIdentifier="IssueList" automaticallyAdjustsScrollViewInsets="NO" id="Xtb-om-INU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xeW-0U-Y5Y">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

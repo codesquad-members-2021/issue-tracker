@@ -7,6 +7,6 @@
 
 import UIKit
 
-class filterOptionCell: UITableViewCell {
+class FilterOptionCell: UITableViewCell {
     
 }

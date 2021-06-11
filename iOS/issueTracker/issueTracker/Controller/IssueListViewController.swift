@@ -30,7 +30,7 @@ class IssueListViewController: UIViewController {
     
     func setupLeftNavigationItem(buttonTitle: String) {
         let uibutton = UIButton()
-        uibutton.setTitleColor(ButtonColors.ButtonColor.value, for: .normal)
+        uibutton.setTitleColor(ButtonColors.buttonColor.value, for: .normal)
         uibutton.setImage(UIImage(named: ButtonImagesTitle.filter.description), for: .normal)
         uibutton.setTitle(buttonTitle, for: .normal)
         uibutton.addTarget(self, action: #selector(pressedLeftbutton), for: .touchDown)
@@ -39,13 +39,13 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func pressedLeftbutton() {
-        let nextVC = self.storyboard?.instantiateViewController(identifier: ViewControllerIdentity.IssueListFilterViewController.description) as? IssueListFilterViewController
+        let nextVC = self.storyboard?.instantiateViewController(identifier: ViewControllerIdentity.issueListFilterViewController.description) as? IssueListFilterViewController
         self.present(nextVC!, animated: true, completion: nil)
     }
     
     func setupRightNavigationItem(buttonTitle: String) {
         let uibutton = UIButton()
-        uibutton.setTitleColor(ButtonColors.ButtonColor.value, for: .normal)
+        uibutton.setTitleColor(ButtonColors.buttonColor.value, for: .normal)
         uibutton.setImage(UIImage(named: ButtonImagesTitle.selector.description), for: .normal)
         uibutton.setTitle(buttonTitle, for: .normal)
         uibutton.semanticContentAttribute = .forceRightToLeft
@@ -85,7 +85,9 @@ extension IssueListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: IssueListTableViewCell.cellIdentity) as! IssueListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueListTableViewCell.cellIdentity) as? IssueListTableViewCell else {
+            return UITableViewCell()
+        }
         return cell
     }
 }
@@ -140,11 +142,11 @@ enum ButtonImagesTitle: CustomStringConvertible {
 }
 
 enum ButtonColors {
-    case ButtonColor
+    case buttonColor
     
     var value: UIColor {
         switch self {
-        case .ButtonColor:
+        case .buttonColor:
             return UIColor(red: 0, green: 0.478, blue: 1, alpha: 1)
         }
     }

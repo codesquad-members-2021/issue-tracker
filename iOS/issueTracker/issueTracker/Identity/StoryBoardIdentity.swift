@@ -8,12 +8,12 @@
 import Foundation
 
 enum StoryBoardIdentity {
-    case Main
-    case IssueList
+    case main
+    case issueList
 }
 
 enum ViewControllerIdentity: CustomStringConvertible {
-    case IssueListFilterViewController
+    case issueListFilterViewController
     
     var description: String {
         return "IssueListFilterViewController"
