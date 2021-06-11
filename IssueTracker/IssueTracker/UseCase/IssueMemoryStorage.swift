@@ -2,7 +2,16 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class MemoryStorage: MemoryStorageType {
+protocol MemoryStorageType {
+    
+    @discardableResult
+    func append(_ issues:[IssueInfo]) -> Observable<[IssueInfo]>
+    
+    @discardableResult
+    func issueList() -> Driver<[IssueInfo]>
+}
+
+class IssueMemoryStorage: MemoryStorageType {
     
     private var list:[IssueInfo] = []
     private lazy var store = BehaviorRelay<[IssueInfo]>(value: list)

@@ -25,11 +25,11 @@
 		71928E8F2671DF2800847111 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E8E2671DF2800847111 /* Label.swift */; };
 		71928E912671E15400847111 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71928E902671E15400847111 /* LabelView.swift */; };
 		71B040F526732B82008819E8 /* FilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B040F426732B82008819E8 /* FilterList.swift */; };
+		71B040F726732DEA008819E8 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B040F626732DEA008819E8 /* FilterViewModel.swift */; };
 		71FCE19C2670ABD60044038E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19B2670ABD60044038E /* APIService.swift */; };
 		71FCE1A02670AC540044038E /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE19F2670AC540044038E /* IssueDTO.swift */; };
-		71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A52670B2880044038E /* MemoryStorage.swift */; };
+		71FCE1A62670B2880044038E /* IssueMemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A52670B2880044038E /* IssueMemoryStorage.swift */; };
 		71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1A82670B2A30044038E /* IssueListViewModel.swift */; };
-		71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */; };
 		71FCE1AF2670BE440044038E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1AE2670BE440044038E /* Issue.swift */; };
 		71FCE1B42670D3B30044038E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FCE1B32670D3B30044038E /* IssueCell.swift */; };
 		C3B8DAD5620CB1718E122CFA /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */; };
@@ -56,11 +56,11 @@
 		71928E8E2671DF2800847111 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		71928E902671E15400847111 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		71B040F426732B82008819E8 /* FilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterList.swift; sourceTree = "<group>"; };
+		71B040F626732DEA008819E8 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		71FCE19B2670ABD60044038E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		71FCE19F2670AC540044038E /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
-		71FCE1A52670B2880044038E /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
+		71FCE1A52670B2880044038E /* IssueMemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMemoryStorage.swift; sourceTree = "<group>"; };
 		71FCE1A82670B2A30044038E /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
-		71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorageType.swift; sourceTree = "<group>"; };
 		71FCE1AE2670BE440044038E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		71FCE1B32670D3B30044038E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		81F546D74CA5B1CFA28C96AD /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,8 +183,7 @@
 		71FCE1A12670B1900044038E /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				71FCE1A52670B2880044038E /* MemoryStorage.swift */,
-				71FCE1AA2670B91B0044038E /* MemoryStorageType.swift */,
+				71FCE1A52670B2880044038E /* IssueMemoryStorage.swift */,
 				71928E862671CA6E00847111 /* LoginObserver.swift */,
 			);
 			path = UseCase;
@@ -194,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				71FCE1A82670B2A30044038E /* IssueListViewModel.swift */,
+				71B040F626732DEA008819E8 /* FilterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -355,10 +355,10 @@
 				71377D22266E458000DB1C4D /* LoginViewController.swift in Sources */,
 				71377D1E266E458000DB1C4D /* AppDelegate.swift in Sources */,
 				71377D20266E458000DB1C4D /* SceneDelegate.swift in Sources */,
-				71FCE1A62670B2880044038E /* MemoryStorage.swift in Sources */,
+				71B040F726732DEA008819E8 /* FilterViewModel.swift in Sources */,
+				71FCE1A62670B2880044038E /* IssueMemoryStorage.swift in Sources */,
 				71928E912671E15400847111 /* LabelView.swift in Sources */,
 				7105555D266F36650072065E /* FilterIssueViewController.swift in Sources */,
-				71FCE1AB2670B91B0044038E /* MemoryStorageType.swift in Sources */,
 				71928E7F2671C06200847111 /* LoginManager.swift in Sources */,
 				71FCE1A92670B2A30044038E /* IssueListViewModel.swift in Sources */,
 				71FCE1B42670D3B30044038E /* IssueCell.swift in Sources */,

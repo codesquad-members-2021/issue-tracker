@@ -4,7 +4,7 @@ import RxCocoa
 
 class IssueListViewModel: NSObject {
     
-    private let storage = MemoryStorage()
+    private let storage = IssueMemoryStorage()
     private let filteredIssues = BehaviorRelay<[IssueInfo]>(value: [])
     let searchText = BehaviorRelay<String>(value: "")
     
