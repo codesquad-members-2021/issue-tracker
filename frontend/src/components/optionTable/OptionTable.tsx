@@ -1,8 +1,8 @@
-import IssuePlus from 'components/atom/IssuePlus';
-import LabelMilestoneTab from 'components/common/LabelMilestoneTab';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import LabelMilestoneTab from 'components/common/LabelMilestoneTab';
 import IssueFilter from './issueFilter/IssueFilter';
+import PrimaryButton from 'components/atom/PrimaryButton';
 
 interface Props {}
 
@@ -12,7 +12,7 @@ export default function OptionTable({}: Props): ReactElement {
       <IssueFilter />
       <div className='options__tabs'>
         <LabelMilestoneTab />
-        <IssuePlus />
+        <PrimaryButton value='이슈작성 📝' />
       </div>
     </OptionTableBlock>
   );
