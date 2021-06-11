@@ -1,13 +1,13 @@
-package com.codesquad.issuetracker.user.service;
+package com.codesquad.issuetracker.auth.service;
 
-import com.codesquad.issuetracker.user.component.GitHubOauthIosValues;
-import com.codesquad.issuetracker.user.component.GitHubOauthValues;
-import com.codesquad.issuetracker.user.component.GitHubOauthWebValues;
-import com.codesquad.issuetracker.user.component.JwtUtils;
-import com.codesquad.issuetracker.user.dto.AccessTokenRequest;
-import com.codesquad.issuetracker.user.dto.AccessTokenResponse;
-import com.codesquad.issuetracker.user.dto.GithubUser;
-import com.codesquad.issuetracker.user.dto.JwtResponse;
+import com.codesquad.issuetracker.auth.component.GitHubOauthIosValues;
+import com.codesquad.issuetracker.auth.component.GitHubOauthValues;
+import com.codesquad.issuetracker.auth.component.GitHubOauthWebValues;
+import com.codesquad.issuetracker.auth.component.JwtUtils;
+import com.codesquad.issuetracker.auth.dto.AccessTokenRequest;
+import com.codesquad.issuetracker.auth.dto.AccessTokenResponse;
+import com.codesquad.issuetracker.auth.dto.GithubUser;
+import com.codesquad.issuetracker.auth.dto.JwtResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

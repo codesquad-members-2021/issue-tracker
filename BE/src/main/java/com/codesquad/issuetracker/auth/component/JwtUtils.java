@@ -1,11 +1,9 @@
-package com.codesquad.issuetracker.user.component;
+package com.codesquad.issuetracker.auth.component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.codesquad.issuetracker.user.dto.GithubUser;
-import com.codesquad.issuetracker.user.dto.JwtResponse;
+import com.codesquad.issuetracker.auth.dto.GithubUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

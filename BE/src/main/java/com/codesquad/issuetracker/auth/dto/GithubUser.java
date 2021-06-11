@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.user.dto;
+package com.codesquad.issuetracker.auth.dto;
 
 public class GithubUser {
 
