@@ -58,6 +58,11 @@ public class Issue {
         return this;
     }
 
+    public Issue update(String title) {
+        this.title = title;
+        return this;
+    }
+
     public String getFirstComment() {
         return comments.get(0).getComment();
     }
@@ -82,5 +87,9 @@ public class Issue {
                 .filter(label -> label.matchLabel(targetLabel))
                 .count();
         return count > 0;
+    }
+
+    public String getAuthorName() {
+        return author.getUserName();
     }
 }

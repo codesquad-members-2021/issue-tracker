@@ -29,4 +29,14 @@ public class LabelDTO {
                 .isChecked(issue.checkLabels(label))
                 .build();
     }
+
+    public static LabelDTO createLabelDTO(Label label) {
+        return LabelDTO.builder()
+                .id(label.getId())
+                .name(label.getName())
+                .color(label.getColor())
+                .description(label.getDescription())
+                .isChecked(false)
+                .build();
+    }
 }

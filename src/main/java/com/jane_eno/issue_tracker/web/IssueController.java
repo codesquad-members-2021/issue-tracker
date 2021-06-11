@@ -25,10 +25,10 @@ public class IssueController {
     }
 
     @PatchMapping
-    public void changeStatus(@RequestBody IssueNumbersRequestDTO issueNumbersRequestDTO) {
+    public void changeStatus(@RequestBody IssueNumbersRequestDTO issueNumbersRequestDTO, @RequestParam String status) {
         logger.debug("이슈 닫기 or 열기");
         logger.debug("issue 상태 변경 확인: {}", issueNumbersRequestDTO.toString());
-        issueService.changeIssueStatus(issueNumbersRequestDTO);
+        issueService.changeIssueStatus(issueNumbersRequestDTO, status);
     }
 
     @GetMapping("/form")
@@ -46,9 +46,9 @@ public class IssueController {
     }
 
     @GetMapping("/{issueId}")
-    public IssueDetailPageResponseDTO viewDetailPage(@PathVariable Long issueId) {
+    public IssueDetailPageResponseDTO viewDetailPage(@PathVariable Long issueId, @UserId Long userId) {
         logger.debug("이슈 상세 페이지");
-        return issueService.getDetailPage(issueId);
+        return issueService.getDetailPage(issueId, userId);
     }
 
     @PatchMapping("/{issueId}/title")

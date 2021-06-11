@@ -23,16 +23,15 @@ public class LabelService {
 
     public List<Label> findLabels(List<Long> assigneeIdList) {
         return labelRepository.findAllById(assigneeIdList);
-//        return assigneeIdList.stream().map(this::findByLabelId).collect(Collectors.toList());
     }
 
     public List<Label> findAllLabels() {
         return labelRepository.findAll();
     }
 
-//    public List<LabelDTO> findAllLabelDTOs() {
-//        return labelRepository.findAll().stream().map(l->);
-//    }
+    public List<LabelDTO> findAllLabelDTOs() {
+        return labelRepository.findAll().stream().map(LabelDTO::createLabelDTO).collect(Collectors.toList());
+    }
 
     private Label findByLabelId(Long labelId) {
         return labelRepository.findById(labelId).orElseThrow(
