@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getIssuesInfoState } from 'store/issueInfoStore';
-import IssueListHeader from 'components/issueTable/issueTableHeader/IssueTableHeader';
-import IssueItem from 'components/issueTable/IssueItem';
+import IssueListHeader from 'page/mainPage/issueTable/issueTableHeader/IssueTableHeader';
+import IssueItem from 'page/mainPage/issueTable/IssueItem';
 
 export default function IssueTable(): ReactElement {
   const IssuesInfoData = useRecoilValue(getIssuesInfoState);

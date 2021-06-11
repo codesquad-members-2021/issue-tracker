@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from 'components/login/LoginPage';
 import Header from './components/header/Header';
 
-import MainPage from './page/MainPage';
+import MainPage from './page/mainPage/MainPage';
 function App() {
   const isLogin = true;
   return (

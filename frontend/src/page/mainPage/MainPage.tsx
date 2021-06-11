@@ -1,7 +1,7 @@
 import React, { ReactElement, Suspense } from 'react';
 import styled from 'styled-components';
-import IssueTable from 'components/issueTable/IssueTable';
-import OptionTable from 'components/optionTable/OptionTable';
+import IssueTable from 'page/mainPage/issueTable/IssueTable';
+import OptionTable from 'page/mainPage/optionTable/OptionTable';
 import PrimaryButton from 'components/atom/PrimaryButton';
 
 interface Props {}
