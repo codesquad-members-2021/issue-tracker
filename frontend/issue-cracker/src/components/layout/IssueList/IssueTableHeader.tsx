@@ -5,9 +5,9 @@ import CheckBoxes from '../../common/CheckBoxes';
 
 const IssueTableHeader = (): JSX.Element => {
   return (
-    <S.IssueTableHeaderStyle>
+    <S.IssueTableHeader>
       <CheckBoxes />
-    </S.IssueTableHeaderStyle>
+    </S.IssueTableHeader>
   );
 };
 

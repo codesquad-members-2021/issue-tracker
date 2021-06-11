@@ -3,16 +3,18 @@ import styled from 'styled-components';
 
 interface ProfileImgProps {
   src: string;
-  size: string;
+  style: any;
 }
-const ProfileImg = ({ src, size }: ProfileImgProps): JSX.Element => {
-  return <ProfileImgStyle {...{ src, size }}></ProfileImgStyle>;
+
+const ProfileImg = ({ src, style }: ProfileImgProps): JSX.Element => {
+  return <ProfileImgStyle {...{ src, style }}></ProfileImgStyle>;
 };
 
 export default ProfileImg;
 
 const ProfileImgStyle = styled.img`
-  height: 30px;
+  width: ${({ style }) => `${style?.width}px`};
+  height: ${({ style }) => `${style?.height}px`};
   border-radius: 70%;
   /* object-fit: contain; */
 `;

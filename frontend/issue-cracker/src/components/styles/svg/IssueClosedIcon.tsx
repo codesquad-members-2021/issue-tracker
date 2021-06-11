@@ -3,14 +3,19 @@ import styled from 'styled-components';
 
 interface IssueClosedIconProps {
   color: string;
-  fontSize: number;
+  style: StyleProps;
 }
 
-const IssueOpenIcon = ({
+interface StyleProps {
+  width: number;
+  height: number;
+}
+
+const IssueClosedIcon = ({
   color,
-  fontSize,
+  style,
 }: IssueClosedIconProps): JSX.Element => (
-  <IssueClosedIconStyle {...{ color, fontSize }}>
+  <IssueClosedIconStyle {...{ color, style }}>
     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0)">
         <path
@@ -41,7 +46,7 @@ const IssueOpenIcon = ({
   </IssueClosedIconStyle>
 );
 
-export default IssueOpenIcon;
+export default IssueClosedIcon;
 
 const IssueClosedIconStyle = styled.div`
   display: flex;
@@ -50,7 +55,7 @@ const IssueClosedIconStyle = styled.div`
 
   svg {
     stroke: ${({ color }) => `${color}`};
-    width: 20px;
-    height: 20px;
+    width: ${({ style }) => `${style?.width}px`};
+    height: ${({ style }) => `${style?.height}px`};
   }
 `;

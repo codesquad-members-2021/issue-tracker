@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { ProfileImg as S } from '../../styles/CommonStyles';
 import Logo from '../../common/Logo';
 import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
 import ProfileImg from '../../common/ProfileImg';
@@ -12,7 +13,7 @@ const Header: FC = () => {
       <Logo type={MEDIUM} name={LOGO_TITLE} />
       <UserDiv>
         <AccountName>{profileName}</AccountName>
-        {profileURL && <ProfileImg src={profileURL} size="30" />}
+        {profileURL && <S.ProfileImgLarge src={profileURL} />}
       </UserDiv>
     </HeaderDiv>
   );
@@ -34,9 +35,3 @@ const AccountName = styled.div`
   color: ${({ theme }) => theme.colors.gray2};
   font-family: 'Montserrat', sans-serif;
 `;
-// const ProfileImg = styled.img`
-//   width: 30px;
-//   height: 30px;
-//   border-radius: 70%;
-//   /* object-fit: contain; */
-// `;

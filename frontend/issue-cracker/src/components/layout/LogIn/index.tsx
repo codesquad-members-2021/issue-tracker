@@ -15,7 +15,7 @@ import {
 import theme from '../../styles/theme';
 
 const LogIn: FC = () => {
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/callback`;
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user&redirect_uri=http://localhost:3000/callback`;
   return (
     <LogInDiv>
       <LogInBox>

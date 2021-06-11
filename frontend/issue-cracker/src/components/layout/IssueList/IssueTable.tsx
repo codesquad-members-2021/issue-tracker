@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProgressBar from '../../common/ProgrerssBar';
-import IssueLabelGroup from '../../common/IssueLabelGroup';
+import LabelLargeGroup from '../../common/LabelLargeGroup';
 import InputGroup from '../../common/InputGroup';
 import TextArea from '../../common/TextArea';
 import IssueTableHeader from './IssueTableHeader';
@@ -12,10 +12,10 @@ const IssueTable = (): JSX.Element => {
     <IssueTableContainer>
       <ProgressBar />
       <br />
-      <IssueLabelGroup type={'open'} />
+      <LabelLargeGroup type={'open'} />
       <br />
       <br />
-      <IssueLabelGroup type={'closed'} />
+      <LabelLargeGroup type={'closed'} />
       <br />
       <br />
       <InputGroup type="text" name="name" />
