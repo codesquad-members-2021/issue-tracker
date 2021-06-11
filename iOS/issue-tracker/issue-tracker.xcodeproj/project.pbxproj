@@ -121,12 +121,11 @@
 		E42AD0FC266E52FB0071B436 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				FAC6D8852671ACDA00A9E5F9 /* Model */,
-				FAEB30B22670B75200C17BE9 /* Network */,
 				E42AD111266E530F0071B436 /* LifeCycle */,
 				E42AD11226704F070071B436 /* Common */,
 				E42AD113267054900071B436 /* Login */,
 				E42AD115267087AE0071B436 /* Main */,
+				FAEB30B22670B75200C17BE9 /* Network */,
 				E42AD103266E52FB0071B436 /* Main.storyboard */,
 				E42AD106266E52FE0071B436 /* Assets.xcassets */,
 				E42AD108266E52FE0071B436 /* LaunchScreen.storyboard */,
@@ -231,13 +230,6 @@
 				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
 			);
 			path = Apple;
-			sourceTree = "<group>";
-		};
-		FAC6D8852671ACDA00A9E5F9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		FAC6D8922671E1A800A9E5F9 /* Github */ = {

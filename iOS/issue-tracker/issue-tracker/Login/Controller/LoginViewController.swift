@@ -192,6 +192,7 @@ class LoginViewController: UIViewController {
     private func presentIssueViewController(with loginInfo: LoginInfo) {
         DispatchQueue.main.async {
             let tabBarVC = IssueTrackerTabBarController()
+            tabBarVC.configure(loginInfo: loginInfo)
             tabBarVC.modalPresentationStyle = .fullScreen
             self.present(tabBarVC, animated: true, completion: nil)
         }
@@ -205,10 +206,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
-        let tabBarVC = IssueTrackerTabBarController()
-        tabBarVC.modalPresentationStyle = .fullScreen
-        present(tabBarVC, animated: true, completion: nil)
-        
+
     }
     
     @objc private func loginByGithubTouchedDown(_ sender: UIButton) {

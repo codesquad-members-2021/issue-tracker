@@ -8,8 +8,7 @@
 import UIKit
 
 class IssueTrackerTabBarController: UITabBarController {
-    
-    private var loginManager: LoginKeyChainManager?
+
     private var loginInfo: LoginInfo?
 
     override func viewDidLoad() {
@@ -45,8 +44,7 @@ class IssueTrackerTabBarController: UITabBarController {
         return viewController
     }
     
-    func configure(loginManager: LoginKeyChainManager, loginInfo: LoginInfo) {
-        self.loginManager = loginManager
+    func configure(loginInfo: LoginInfo) {
         self.loginInfo = loginInfo
         handOutLoginInfo()
     }
