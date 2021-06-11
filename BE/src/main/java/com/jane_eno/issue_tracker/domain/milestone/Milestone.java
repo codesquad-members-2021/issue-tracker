@@ -3,10 +3,10 @@ package com.jane_eno.issue_tracker.domain.milestone;
 import com.jane_eno.issue_tracker.domain.issue.Issue;
 import lombok.*;
 import com.jane_eno.issue_tracker.web.dto.response.MilestoneDTO;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +20,7 @@ public class Milestone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String description;
     private LocalDate dueDate;
@@ -50,6 +51,6 @@ public class Milestone {
     }
 
     public Long countClosedIssues() {
-        return issues.stream().filter(i->!i.isOpen()).count();
+        return issues.stream().filter(i -> !i.isOpen()).count();
     }
 }

@@ -1,6 +1,6 @@
 package com.jane_eno.issue_tracker.web.dto.reqeust;
 
-import com.jane_eno.issue_tracker.web.dto.response.Assignee;
+import com.jane_eno.issue_tracker.web.dto.response.vo.Assignee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

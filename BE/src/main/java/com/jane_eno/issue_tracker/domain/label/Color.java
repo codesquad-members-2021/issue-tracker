@@ -13,6 +13,7 @@ import javax.persistence.Embeddable;
 @Builder
 @Getter
 public class Color {
+
     private String backgroundColorCode;
     private String textColorCode;
 }

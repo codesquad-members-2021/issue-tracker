@@ -9,6 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class LabelsResponseDTO {
+
     private final int labelsCount;
     private final int milestonesCount;
     private final List<LabelDTO> labels;

@@ -4,21 +4,19 @@ import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.user.User;
-import com.jane_eno.issue_tracker.web.dto.reqeust.AssigneesToUpdateRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Issue {
 
     @Id
@@ -64,26 +62,31 @@ public class Issue {
         return this;
     }
 
-    public Issue deleteComment(Comment comment) {
+    public void updateAssignees(List<User> assignees) {
+        this.assignees = assignees;
+    }
+
+    public void updateLabels(List<Label> labels) {
+        this.labels = labels;
+    }
+
+    public void updateMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
+
+    public String getMilestoneTitle() {
+        return milestone.getTitle();
+    }
+
+    public Issue addComment(Comment comment) {
+        comments.add(comment);
+        return this;
+    }
+
+    public void deleteComment(Comment comment) {
         if (!comment.equals(this.comments.get(0))) {
             this.comments.remove(comment);
         }
-        return this;
-    }
-
-    public Issue updateMilestone(Milestone milestone) {
-        this.milestone = milestone;
-        return this;
-    }
-
-    public Issue updateAssignees(List<User> assignees) {
-        this.assignees = assignees;
-        return this;
-    }
-
-    public Issue updateLabels(List<Label> labels) {
-        this.labels = labels;
-        return this;
     }
 
     public String getFirstComment() {
@@ -92,15 +95,6 @@ public class Issue {
 
     public int getCommentNumber() {
         return comments.size();
-    }
-
-    public Issue addComment(Comment comment) {
-        comments.add(comment);
-        return this;
-    }
-
-    public String getMilestoneTitle() {
-        return milestone.getTitle();
     }
 
     public boolean checkAssignees(User user) {
