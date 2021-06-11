@@ -4,7 +4,7 @@ import TabContents from "./TabContents/TabContents";
 import { TabComponents as S } from "./TabStyles";
 import { toggleAddNewLabelState } from "./TabStore";
 import { useRecoilValue } from "recoil";
-import LabelAddModal from "./TabAddModal/LabelAddModal";
+import LabelAddModal from "./TabModal/LabelAddModal";
 
 const Tab = () => {
   const toggleAddModalState = useRecoilValue(toggleAddNewLabelState);
