@@ -18,10 +18,11 @@
 		AE7D392E2671B6EF00BF9487 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A99C2670784200983577 /* Milestone.swift */; };
 		AE7D39362671BC7200BF9487 /* UtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D39352671BC7200BF9487 /* UtilityTests.swift */; };
 		AE7D393D2671BC9400BF9487 /* UIColor+hexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */; };
+		AE7D39412671E8CC00BF9487 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D39402671E8CC00BF9487 /* Notification+Name.swift */; };
+		AE7D39432672033800BF9487 /* UIView+HiddenWithAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7D39422672033800BF9487 /* UIView+HiddenWithAnimation.swift */; };
 		AECEA442266F38D000855F20 /* IssueDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA441266F38D000855F20 /* IssueDataSource.swift */; };
 		AECEA445266F3AD900855F20 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA443266F3AD900855F20 /* IssueCell.swift */; };
 		AECEA446266F3AD900855F20 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECEA444266F3AD900855F20 /* IssueCell.xib */; };
-		AEE2A4D126709D8400FA6274 /* IssueTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */; };
 		AEE2A4D32670A00300FA6274 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */; };
 		AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D42670A8C000FA6274 /* LabelView.swift */; };
 		FF89A95E266F0BD000983577 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A95D266F0BD000983577 /* AppDelegate.swift */; };
@@ -80,10 +81,11 @@
 		AE7D39332671BC7200BF9487 /* UtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UtilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE7D39352671BC7200BF9487 /* UtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityTests.swift; sourceTree = "<group>"; };
 		AE7D39372671BC7200BF9487 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE7D39402671E8CC00BF9487 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
+		AE7D39422672033800BF9487 /* UIView+HiddenWithAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+HiddenWithAnimation.swift"; sourceTree = "<group>"; };
 		AECEA441266F38D000855F20 /* IssueDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataSource.swift; sourceTree = "<group>"; };
 		AECEA443266F3AD900855F20 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		AECEA444266F3AD900855F20 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
-		AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableDelegate.swift; sourceTree = "<group>"; };
 		AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		AEE2A4D42670A8C000FA6274 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		FF89A95A266F0BD000983577 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,7 +153,6 @@
 			children = (
 				FF89A961266F0BD000983577 /* IssueListViewController.swift */,
 				AECEA441266F38D000855F20 /* IssueDataSource.swift */,
-				AEE2A4D026709D8400FA6274 /* IssueTableDelegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -178,8 +179,10 @@
 			isa = PBXGroup;
 			children = (
 				AE7D391A2671A91400BF9487 /* UINibCreatable.swift */,
-				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
+				AE7D39422672033800BF9487 /* UIView+HiddenWithAnimation.swift */,
 				AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */,
+				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
+				AE7D39402671E8CC00BF9487 /* Notification+Name.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -503,7 +506,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7D39412671E8CC00BF9487 /* Notification+Name.swift in Sources */,
 				AECEA445266F3AD900855F20 /* IssueCell.swift in Sources */,
+				AE7D39432672033800BF9487 /* UIView+HiddenWithAnimation.swift in Sources */,
 				AECEA442266F38D000855F20 /* IssueDataSource.swift in Sources */,
 				FF89A962266F0BD000983577 /* IssueListViewController.swift in Sources */,
 				FF89A95E266F0BD000983577 /* AppDelegate.swift in Sources */,
@@ -518,7 +523,6 @@
 				AE7505332670EE0600BA14F7 /* UIColor+hexToUIColor.swift in Sources */,
 				FF89A997267075CD00983577 /* Issue.swift in Sources */,
 				FF89A99D2670784200983577 /* Milestone.swift in Sources */,
-				AEE2A4D126709D8400FA6274 /* IssueTableDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
