@@ -40,7 +40,7 @@ public class MilestoneService {
     }
 
     public void create(MilestoneDTO milestone) {
-        milestoneRepository.save(Milestone.createMilestone(milestone));
+        milestoneRepository.save(Milestone.create(milestone));
     }
 
     public void update(Long milestoneId, MilestoneDTO milestone) {

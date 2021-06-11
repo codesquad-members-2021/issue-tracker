@@ -30,7 +30,7 @@ public class Issue {
     private User author;
 
     @ManyToMany
-    private List<User> assignees = new ArrayList<>();
+    private List<User> assignees;
 
     @ManyToMany
     private List<Label> labels;
@@ -45,7 +45,7 @@ public class Issue {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "issue_id", nullable = false)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     private LocalDateTime createdDateTime;
 
@@ -61,6 +61,18 @@ public class Issue {
 
     public Issue update(String title) {
         this.title = title;
+        return this;
+    }
+
+    public Issue deleteComment(Comment comment) {
+        if (!comment.equals(this.comments.get(0))) {
+            this.comments.remove(comment);
+        }
+        return this;
+    }
+
+    public Issue updateMilestone(Milestone milestone) {
+        this.milestone = milestone;
         return this;
     }
 
@@ -82,6 +94,11 @@ public class Issue {
         return comments.size();
     }
 
+    public Issue addComment(Comment comment) {
+        comments.add(comment);
+        return this;
+    }
+
     public String getMilestoneTitle() {
         return milestone.getTitle();
     }
@@ -98,9 +115,5 @@ public class Issue {
                 .filter(label -> label.matchLabel(targetLabel))
                 .count();
         return count > 0;
-    }
-
-    public String getAuthorName() {
-        return author.getUserName();
     }
 }

@@ -22,8 +22,8 @@ public class LabelService {
     private final LabelRepository labelRepository;
     private final MilestoneService milestoneService;
 
-    public List<Label> findLabels(List<Long> assigneeIdList) {
-        return labelRepository.findAllById(assigneeIdList);
+    public List<Label> findLabels(List<Long> labelIds) {
+        return labelRepository.findAllById(labelIds);
     }
 
     public List<LabelDTO> findAllLabelDTOs() {

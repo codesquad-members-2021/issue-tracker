@@ -1,8 +1,8 @@
 package com.jane_eno.issue_tracker.service;
 
+import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.issue.IssueRepository;
-import com.jane_eno.issue_tracker.domain.label.Color;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.user.User;
@@ -13,9 +13,6 @@ import com.jane_eno.issue_tracker.web.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,12 +28,14 @@ public class IssueService {
     public IssuesResponseDTO getIssues(String status) {
         List<Issue> openedIssues = issueRepository.findAllByIsOpenTrue();
         List<Issue> closedIssues = issueRepository.findAllByIsOpenFalse();
+
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.count())
                 .openedIssue(openedIssues.size())
                 .closedIssue(closedIssues.size())
                 .build();
+
         List<IssueResponseDTO> issues = filterByStatus(status).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
@@ -59,7 +58,7 @@ public class IssueService {
     }
 
     public void createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
-        User author = userService.findByUserId(userId);
+        User author = userService.findUserById(userId);
         List<Label> labels = labelService.findLabels(issueRequestDTO.getLabels());
         List<User> assignees = userService.findAssignees(issueRequestDTO.getAssignees());
         Milestone milestone = milestoneService.findMilestoneById(issueRequestDTO.getMilestone());
@@ -70,7 +69,7 @@ public class IssueService {
 
     public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
         Issue issue = findIssueById(issueId);
-        User loginUser = userService.findByUserId(userId);
+        User loginUser = userService.findUserById(userId);
         return IssueDetailPageResponseDTO.of(issue, commentsToCommentDTOs(loginUser, issue), userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue), milestoneService.findAllMilestoneDTOs());
     }
 
@@ -110,28 +109,50 @@ public class IssueService {
     }
 
     public MilestonesInIssueResponseDTO getMilestones(Long issueId) {
-        return MilestonesInIssueResponseDTO.builder()
-                .milestones(new ArrayList<>(Arrays.asList(
-                        new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3L, 1L),
-                        new MilestoneDTO(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4L, 5L)
-                )))
-                .build();
+        Issue issue = findIssueById(issueId);
+        return new MilestonesInIssueResponseDTO(MilestoneDTO.of(issue.getMilestone()));
     }
 
-    public void updateMilestones(Long issueId, MilestonesToUpdateRequestDTO milestonesToUpdateRequestDTO) {
-
+    public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestone) {
+        Issue issue = findIssueById(issueId);
+        issue.updateMilestone(Milestone.create(milestone.getMilestone()));
+        issueRepository.save(issue);
     }
 
-    public void createComment(Long issueId, String comment) {
-
+    public void createComment(Long userId, Long issueId, CommentDTO commentDTO) {
+        User user = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        issueRepository.save(issue.addComment(Comment.create(user, commentDTO.getComment())));
     }
 
-    public void updateComment(Long issueId, String comment) {
-
+    public void updateComment(Long userId, Long issueId, CommentDTO commentDTO) {
+        User user = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        Comment targetComment = issue.getComments().stream()
+                .filter(comment -> comment.matchComment(commentDTO.getId()) && comment.matchAuthor(user))
+                .findFirst()
+                .orElseThrow(
+                        () -> new ElementNotFoundException("Cannot find comment by given id.")
+                );
+        targetComment.update(commentDTO.getComment());
+        issueRepository.save(issue);
     }
 
-    public void deleteComment(Long issueId, Long commentId) {
+    public void deleteComment(Long userId, Long issueId, Long commentId) {
+        User loginUser = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        Comment targetComment = issue.getComments().stream()
+                .filter(comment -> comment.matchComment(commentId) && comment.matchAuthor(loginUser))
+                .findFirst()
+                .orElseThrow(
+                        () -> new ElementNotFoundException("Cannot find comment by given id.")
+                );
+        issue.deleteComment(targetComment);
+        issueRepository.save(issue);
+    }
 
+    public void deleteIssueById(Long id) {
+        issueRepository.deleteById(id);
     }
 
     private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {

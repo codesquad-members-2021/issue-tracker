@@ -31,11 +31,27 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User author;
 
+    public static Comment create(User user, String comment) {
+        return Comment.builder()
+                .comment(comment)
+                .createdDateTime(LocalDateTime.now())
+                .author(user)
+                .build();
+    }
+
     public boolean matchAuthor(User user) {
         return author.matchUser(user);
     }
 
+    public boolean matchComment(Long commentId) {
+        return id.equals(commentId);
+    }
+
     public String getAuthorName() {
         return author.getUserName();
+    }
+
+    public void update(String comment) {
+        this.comment = comment;
     }
 }

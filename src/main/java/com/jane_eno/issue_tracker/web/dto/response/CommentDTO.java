@@ -6,9 +6,12 @@ import com.jane_eno.issue_tracker.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Builder;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 public class CommentDTO {

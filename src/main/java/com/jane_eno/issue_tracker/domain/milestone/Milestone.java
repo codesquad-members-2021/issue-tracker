@@ -28,8 +28,9 @@ public class Milestone {
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues;
 
-    public static Milestone createMilestone(MilestoneDTO milestoneDTO) {
+    public static Milestone create(MilestoneDTO milestoneDTO) {
         return Milestone.builder()
+                .id(milestoneDTO.getId())
                 .title(milestoneDTO.getTitle())
                 .description(milestoneDTO.getDescription())
                 .dueDate(milestoneDTO.getDueDate())

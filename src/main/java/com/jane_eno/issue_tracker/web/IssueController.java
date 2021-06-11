@@ -92,27 +92,30 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/milestones")
-    public void updateMilestones(@PathVariable Long issueId, @RequestBody MilestonesToUpdateRequestDTO milestonesToUpdateRequestDTO) {
+    public void updateMilestones(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
         logger.debug("이슈의 마일스톤 편집");
         logger.debug("이슈의 마일스톤 편집 요청 확인: {}", milestonesToUpdateRequestDTO.toString());
-        issueService.updateMilestones(issueId, milestonesToUpdateRequestDTO);
+        issueService.updateMilestone(issueId, milestonesToUpdateRequestDTO);
     }
 
+    @LoginRequired
     @PostMapping("/{issueId}/comments")
-    public void createComment(@PathVariable Long issueId, @RequestBody String comment) {
+    public void createComment(@UserId Long userId, @PathVariable Long issueId, @RequestBody CommentDTO comment) {
         logger.debug("이슈의 코멘트 생성");
-        issueService.createComment(issueId, comment);
+        issueService.createComment(userId, issueId, comment);
     }
 
+    @LoginRequired
     @PatchMapping("/{issueId}/comments")
-    public void updateComment(@PathVariable Long issueId, @RequestBody String comment) {
+    public void updateComment(@UserId Long userId, @PathVariable Long issueId, @RequestBody CommentDTO comment) {
         logger.debug("이슈의 코멘트 편집");
-        issueService.updateComment(issueId, comment);
+        issueService.updateComment(userId, issueId, comment);
     }
 
+    @LoginRequired
     @DeleteMapping("/{issueId}/comments/{commentId}")
-    public void deleteComment(@PathVariable Long issueId, @PathVariable Long commentId) {
+    public void deleteComment(@UserId Long userId, @PathVariable Long issueId, @PathVariable Long commentId) {
         logger.debug("이슈의 코멘트 삭제");
-        issueService.deleteComment(issueId, commentId);
+        issueService.deleteComment(userId, issueId, commentId);
     }
 }

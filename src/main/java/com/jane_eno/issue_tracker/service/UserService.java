@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public void logout(Long userId) {
-        User user = findByUserId(userId);
+        User user = findUserById(userId);
         user.removeToken();
         userRepository.save(user);
     }
@@ -56,8 +56,8 @@ public class UserService {
         );
     }
 
-    public User findByUserId(Long userId) {
-        return userRepository.findById(userId).orElseThrow(
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(
                 () -> new ElementNotFoundException("Cannot find user by given user id.")
         );
     }
