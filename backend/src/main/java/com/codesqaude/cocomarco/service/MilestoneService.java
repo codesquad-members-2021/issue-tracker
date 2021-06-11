@@ -43,7 +43,6 @@ public class MilestoneService {
     public void modify(Long milestoneId, MilestoneRequest milestoneRequest) {
         Milestone milestone = findById(milestoneId);
         milestone.modify(milestoneRequest.toEntity());
-        milestoneRepository.save(milestone);
     }
 
     @Transactional

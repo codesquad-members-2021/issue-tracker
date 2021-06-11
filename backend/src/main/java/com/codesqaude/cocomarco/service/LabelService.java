@@ -42,7 +42,6 @@ public class LabelService {
     public void modify(Long labelId, LabelRequest labelRequest){
         Label label = findById(labelId);
         label.modify(labelRequest.toEntity());
-        labelRepository.save(label);
     }
 
     @Transactional
