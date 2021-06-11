@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/issues")
 public class IssueController {
 
-    private IssueService issueService;
+    private final IssueService issueService;
 
     public IssueController(IssueService issueService) {
         this.issueService = issueService;
