@@ -26,10 +26,10 @@ public class Milestone {
 
     @NonNull
     @Lob
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "MILESTONE_DESCRIPTION", nullable = false)
     private String description;
 
-    @Column(name = "DUE_DATE")
+    @Column(name = "MILESTONE_DUE_DATE")
     private LocalDate dueDate;
 
     private Milestone(@NonNull String title, @NonNull String description, LocalDate dueDate) {
