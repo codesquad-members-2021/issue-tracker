@@ -4,12 +4,12 @@ import EditMiniButton from '@components/common/EditMiniButton';
 import DeleteMiniButton from '@components/common/DeleteMiniButton';
 
 interface Props {
-  last: boolean;
+  isLastItemStyle: boolean;
 }
 
-function LabelCell({ last }: Props) {
+function LabelCell({ isLastItemStyle }: Props) {
   return (
-    <LabelWrap last={last}>
+    <LabelWrap isLastItemStyle={isLastItemStyle}>
       <StyledDiv>
         <LabelBox>
           <Label name="documentation" colorCode="#004DE3" fontLight={true} />
@@ -28,7 +28,7 @@ function LabelCell({ last }: Props) {
 export default LabelCell;
 
 interface LabelWrapType {
-  last: boolean;
+  isLastItemStyle: boolean;
 }
 
 const LabelWrap = styled.div<LabelWrapType>`
