@@ -1,9 +1,10 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
+import Loader from './layout/Loader';
 
-const Callback = ({ history, location }: RouteComponentProps) => {
+const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
   const authUri = `http://localhost:8080/api/web/auth`;
 
   useEffect(() => {
@@ -26,21 +27,24 @@ const Callback = ({ history, location }: RouteComponentProps) => {
 
         console.log('data', data);
         localStorage.setItem('token', data.token);
-        // localStorage.setItem('ProfileURL', data.avatar_url);
 
         const token = localStorage.getItem('token');
-        if (!token) return null;
+        if (!token) return;
         console.log('token?"', token);
-        const decoded = jwtDecode(token);
+        const decoded =
+          jwtDecode<{ name: string; profileImageUrl: string }>(token);
         console.log(decoded);
 
-        history.push('/');
+        localStorage.setItem('name', decoded.name);
+        localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
+
+        history.push('/main/issue-list');
       } catch (error) {}
     };
 
     getToken();
   }, [location, history, authUri]);
-  return <div></div>;
+  return <Loader />;
 };
 
 export default Callback;

@@ -24,7 +24,7 @@ interface IButton {
   color?: string;
 }
 
-const ButtonList: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
+const ButtonGroup: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
   const classes = useButtonStyles();
 
   return {
@@ -37,7 +37,7 @@ const ButtonList: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
   }[type] as JSX.Element;
 };
 
-export default ButtonList;
+export default ButtonGroup;
 
 function ButtonLarge({ classes, name, color }: IButton) {
   return (
@@ -76,6 +76,7 @@ function ButtonSmallFill({ classes, name, color }: IButton) {
       className={classes.buttonSmallFill}
       style={{
         backgroundColor: `${color}`,
+        color: `${color === 'white' ? '#222' : '#fff'}`,
       }}
     >
       {name}
