@@ -26,8 +26,8 @@ class IssueListViewModel: NSObject {
             }).disposed(by: rx.disposeBag)
     }
     
-    func issuList() -> BehaviorRelay<[IssueInfo]> {
-        return filteredIssues
+    func issuList() -> Driver<[IssueInfo]> {
+        return filteredIssues.asDriver(onErrorJustReturn: [])
     }
 }
 
@@ -38,7 +38,6 @@ private extension IssueListViewModel {
             .subscribe(onNext: { [weak self] text in
                 self?.issueList.asObservable()
                     .map{$0.filter{$0.title.hasPrefix(text)}}
-                    .debug()
                     .bind(to: self?.filteredIssues ?? BehaviorRelay<[IssueInfo]>(value: []))
                     .disposed(by: self?.rx.disposeBag ?? DisposeBag())
             }).disposed(by: rx.disposeBag)

@@ -5,7 +5,7 @@ import RxCocoa
 class MemoryStorage: MemoryStorageType {
     
     private var list:[IssueInfo] = []
-    private lazy var store = PublishRelay<[IssueInfo]>()
+    private lazy var store = BehaviorRelay<[IssueInfo]>(value: list)
     
     @discardableResult
     func append(_ issues: [IssueInfo]) -> Observable<[IssueInfo]> {
