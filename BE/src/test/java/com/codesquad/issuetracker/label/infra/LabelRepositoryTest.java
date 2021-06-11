@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.label.repository;
+package com.codesquad.issuetracker.label.infra;
 
 import com.codesquad.issuetracker.label.domain.Colors;
 import com.codesquad.issuetracker.label.domain.Label;

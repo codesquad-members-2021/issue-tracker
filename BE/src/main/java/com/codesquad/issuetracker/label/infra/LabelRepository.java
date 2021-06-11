@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.label.repository;
+package com.codesquad.issuetracker.label.infra;
 
 import com.codesquad.issuetracker.label.domain.Label;
 import org.springframework.data.repository.CrudRepository;

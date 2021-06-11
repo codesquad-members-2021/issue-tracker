@@ -5,7 +5,7 @@ import com.codesquad.issuetracker.label.dto.LabelDto;
 import com.codesquad.issuetracker.label.dto.LabelRequestDto;
 import com.codesquad.issuetracker.label.dto.LabelWrapper;
 import com.codesquad.issuetracker.label.dto.LabelsWrapper;
-import com.codesquad.issuetracker.label.repository.LabelRepository;
+import com.codesquad.issuetracker.label.infra.LabelRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
