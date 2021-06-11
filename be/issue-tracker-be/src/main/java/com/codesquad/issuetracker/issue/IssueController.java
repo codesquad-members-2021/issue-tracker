@@ -9,18 +9,18 @@ import java.util.List;
 public class IssueController {
 
     @GetMapping("/issues")
-    public List<IssueResponse> readAll() {
+    public IssueResponses readAll() {
         return IssueDummyData.issueResponses();
     }
 
     @GetMapping("/issues/{issueId}")
-    public IssueDetailResponse readOne(@PathVariable long issueId) {
-        return IssueDummyData.issueDetailResponse();
+    public IssueDetailResponseWrapper readOne(@PathVariable long issueId) {
+        return IssueDetailResponseWrapper.from(IssueDummyData.issueDetailResponse());
     }
 
     @PostMapping("/issues")
-    public IssueDetailResponse create(IssueRequest issueRequest) {
-        return IssueDummyData.issueDetailResponse();
+    public IssueDetailResponseWrapper create(IssueRequest issueRequest) {
+        return IssueDetailResponseWrapper.from(IssueDummyData.issueDetailResponse());
     }
 
     @PutMapping("/issues/{issueId}")

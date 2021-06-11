@@ -1,13 +1,13 @@
 package com.codesquad.issuetracker.issue;
 
-import com.codesquad.issuetracker.label.LabelResponse;
+import com.codesquad.issuetracker.label.LabelResponses;
 import com.codesquad.issuetracker.milestone.MileStoneResponse;
 import com.codesquad.issuetracker.user.UserResponse;
+import com.codesquad.issuetracker.user.UserResponses;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @Builder
@@ -20,7 +20,7 @@ public class IssueResponse {
     private boolean hasSameAuthorComments;
     private LocalDateTime createDateTime;
     private UserResponse author;
-    private Set<UserResponse> assignees;
-    private Set<LabelResponse> labels;
+    private UserResponses assignees;
+    private LabelResponses labels;
     private MileStoneResponse milestone;
 }
