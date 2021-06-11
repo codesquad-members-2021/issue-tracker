@@ -1,15 +1,15 @@
 package com.codesqaude.cocomarco.domain.comment.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
-public class CommentRequest {
+@AllArgsConstructor
+public class CommentResponse {
 
-    private String text;
-
-    public CommentRequest(String text) {
-        this.text = text;
-    }
+    List<CommentDTO> comments;
 }

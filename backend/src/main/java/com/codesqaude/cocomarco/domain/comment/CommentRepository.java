@@ -1,6 +1,11 @@
 package com.codesqaude.cocomarco.domain.comment;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentRepository extends JpaRepository<Comment,Long> {
+import java.util.List;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+
+    List<Comment> findAllByIssueId(Long issueId, Pageable pageable);
 }

@@ -5,24 +5,32 @@ import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.comment.CommentRepository;
+import com.codesqaude.cocomarco.domain.comment.dto.CommentDTO;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
+import com.codesqaude.cocomarco.domain.comment.dto.CommentResponse;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
 import com.codesqaude.cocomarco.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final IssueRepository issueRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public void write(Long issueId, String writerId, CommentRequest commentRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
         User writer = userRepository.findById(UUID.fromString(writerId)).orElseThrow(NotFoundUserException::new);
@@ -30,19 +38,31 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    @Transactional
     public void modify(String writerId, CommentRequest commentRequest, Long commentId) {
-        Comment comment = findById(commentId);
+        Comment comment = show(commentId);
         comment.isSameWriter(UUID.fromString(writerId));
         comment.modify(commentRequest.getText());
     }
 
+    @Transactional
     public void delete(String writerId, Long commentId) {
-        Comment comment = findById(commentId);
+        Comment comment = show(commentId);
         comment.isSameWriter(UUID.fromString(writerId));
         commentRepository.delete(comment);
     }
 
-    public Comment findById(Long id) {
+    public CommentResponse showAll(Long issueId, Pageable pageable) {
+        List<Comment> comments = commentRepository.findAllByIssueId(issueId, pageable);
+        List<CommentDTO> commentDTOs = comments.stream()
+                .map(CommentDTO::of)
+                .collect(Collectors.toList());
+        return new CommentResponse(commentDTOs);
+    }
+
+    public Comment show(Long id) {
         return commentRepository.findById(id).orElseThrow(NotFoundCommentException::new);
     }
+
+
 }
