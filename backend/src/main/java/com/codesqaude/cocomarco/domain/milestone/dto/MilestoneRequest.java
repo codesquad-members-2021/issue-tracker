@@ -1,5 +1,6 @@
-package com.codesqaude.cocomarco.domain.milestone;
+package com.codesqaude.cocomarco.domain.milestone.dto;
 
+import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -25,8 +25,7 @@ public class Milestone {
     private String detail;
     private LocalDate deadLine;
 
-    @OneToMany
-    @JoinColumn(name = "milestone_id")
+    @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 
     public Milestone(String title, String detail, LocalDate deadLine) {
@@ -40,8 +39,8 @@ public class Milestone {
     }
 
     public void modify(Milestone updateMilestone){
-        this.title = updateMilestone.getTitle();
-        this.detail = updateMilestone.getDetail();
-        this.deadLine = updateMilestone.getDeadLine();
+        this.title = updateMilestone.title;
+        this.detail = updateMilestone.detail;
+        this.deadLine = updateMilestone.deadLine;
     }
 }

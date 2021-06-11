@@ -1,5 +1,6 @@
 package com.codesqaude.cocomarco.domain.issue;
 
+import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -22,8 +23,7 @@ public class Issue {
     @Enumerated(EnumType.STRING)
     private IssueStatus status;
 
-    @OneToMany
-    @JoinColumn(name = "issue_id")
+    @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue")
@@ -31,4 +31,9 @@ public class Issue {
 
     @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "milestone_id")
+    private Milestone milestone;
+
 }
