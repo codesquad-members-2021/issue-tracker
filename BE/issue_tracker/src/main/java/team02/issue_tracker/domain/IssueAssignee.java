@@ -1,6 +1,8 @@
 package team02.issue_tracker.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.composite_key.IssueAssigneeId;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @IdClass(IssueAssigneeId.class)
 @Entity
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class IssueAssignee {
     @Id
     @ManyToOne
@@ -18,4 +22,5 @@ public class IssueAssignee {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User assignee;
+
 }
