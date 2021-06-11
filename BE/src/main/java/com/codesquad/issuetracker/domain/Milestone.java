@@ -11,15 +11,15 @@ public class Milestone {
     private String title;
     private String content;
     private LocalDateTime dueDate;
-    private int openedIsssue;
+    private int openedIssue;
     private int closedIssue;
 
-    private Milestone(Long id, String title, String content, LocalDateTime dueDate, int openedIsssue, int closedIssue) {
+    private Milestone(Long id, String title, String content, LocalDateTime dueDate, int openedIssue, int closedIssue) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.dueDate = dueDate;
-        this.openedIsssue = openedIsssue;
+        this.openedIssue = openedIssue;
         this.closedIssue = closedIssue;
     }
 
