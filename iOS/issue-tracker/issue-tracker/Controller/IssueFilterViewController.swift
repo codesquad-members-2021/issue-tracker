@@ -9,9 +9,10 @@ import UIKit
 
 class IssueFilterViewController: UIViewController {
 
+    private let cellReuseIdentifier = "IssueFilterTableViewCell"
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "IssueFilterTableViewCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         return tableView
     }()
 
@@ -55,6 +56,16 @@ extension IssueFilterViewController: UITableViewDelegate {
             return nil
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selected = tableView.cellForRow(at: indexPath)
+        selected?.accessoryType = .checkmark
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let selected = tableView.cellForRow(at: indexPath)
+        selected?.accessoryType = .none
+    }
 }
 
 extension IssueFilterViewController: UITableViewDataSource {
@@ -76,7 +87,8 @@ extension IssueFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "IssueFilterTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        cell.selectionStyle = .none
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = issueFilter[indexPath.row]
