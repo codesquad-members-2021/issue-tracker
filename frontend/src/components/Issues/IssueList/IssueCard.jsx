@@ -19,20 +19,17 @@ const IssueCard = ({ issue }) => {
 					<span>
 						<Alert /> <Link to={`/main/${id}`}>{title}</Link>
 					</span>
-					<span>{labelId}</span>{" "}
-					{/* labelId 로 라벨 정보 fetch 해와서 title, 박스 렌더링 */}
+					<span>{labelId}</span> {/* labelId 로 라벨 정보 fetch 해와서 title, 박스 렌더링 */}
 				</TextTagDivider>
 				<TextTagDivider>
-					<span>#{id}</span>
+					<span>#{id} </span>
 					<span>
-						이 이슈가 {getTimeStamp(createdAt)} 전, {author}님에 의해
-						작성되었습니다
+						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해 작성되었습니다
 					</span>
 					<span>
 						<Milestone />
 					</span>
-					<span>{milestoneId}</span>{" "}
-					{/* milestoneId 로 마일스톤 정보 fetch 해와서 title만 뿌리기 */}
+					<span>{milestoneId}</span> {/* milestoneId 로 마일스톤 정보 fetch 해와서 title만 뿌리기 */}
 				</TextTagDivider>
 			</Contents>
 			<UserIcon>
@@ -46,7 +43,7 @@ export default IssueCard;
 
 const StyleCard = styled.div`
 	display: grid;
-	grid-template-columns: 0.5fr 9fr 0.4fr;
+	grid-template-columns: 0.5fr 9fr 1fr;
 	background-color: ${theme.grayScale.off_white};
 	border: 1px solid ${theme.grayScale.line};
 	height: 100px;
@@ -61,6 +58,7 @@ const CheckBox = styled.div`
 
 const UserIcon = styled.div`
 	display: flex;
+	justify-content: center;
 	align-items: center;
 `;
 

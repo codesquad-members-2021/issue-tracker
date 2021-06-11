@@ -1,4 +1,4 @@
-const getTimeStamp = dateInfo => {
+const getTimeStamp = (dateInfo) => {
 	const now = new Date();
 	const logTime = new Date(dateInfo);
 	const diff = Math.floor((now.getTime() - logTime.getTime()) / 1000 / 60);
@@ -13,6 +13,6 @@ const getTimeStamp = dateInfo => {
 
 	return `${Math.floor(diffDay / 365)}년 전`;
 };
-// console.log(getTimeStamp("2021-06-11"));
+// console.log(getTimeStamp("2021-06-11 11:12:13"));
 
 export default getTimeStamp;

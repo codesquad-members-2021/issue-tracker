@@ -4,13 +4,24 @@ import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
+import { useEffect } from "react";
 
-const IssuesHeader = () => {
+const IssuesHeader = ({}) => {
+	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
 	const [isIssueSelected, setIsIssueSelected] = useState(false); // 상태 위치 협의 후 수정
+	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
+	const checkAllIssue = () => {
+		setIsAllIssueSelected(!isAllIssueSelected);
+	};
+
+	useEffect(() => {
+		isAllIssueSelected && console.log("issue checkbox all selected");
+	}, [isAllIssueSelected]);
+
 	return (
 		<StyledIssuesHeader>
 			<CheckBox>
-				<input type="checkbox" />
+				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
 			<FilterOpenClose>
 				<TextIconDivider>
@@ -61,7 +72,7 @@ const StyledIssuesHeader = styled.div`
 	height: 64px;
 	border: 1px solid ${theme.grayScale.line};
 	border-radius: ${theme.border_radius.lg} ${theme.border_radius.lg} 0px 0px;
-	grid-template-columns: 0.5fr 1.2fr 8.3fr;
+	grid-template-columns: 0.5fr 1.5fr 8.3fr;
 `;
 
 const FilterOpenClose = styled.div`

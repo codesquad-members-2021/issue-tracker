@@ -6,6 +6,7 @@ export const issues = [
 		milestoneId: 4,
 		author: "goody",
 		createdAt: "2021-06-10",
+		isOpen: true,
 	},
 	{
 		title: "mainPage에 menu 만들기",
@@ -14,5 +15,6 @@ export const issues = [
 		milestoneId: 4,
 		author: "daisy",
 		createdAt: "2021-06-11",
+		isOpen: false,
 	},
 ];
