@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +12,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-ug-Cwp">
-                                <rect key="frame" x="24" y="68" width="51" height="22"/>
+                                <rect key="frame" x="24" y="24" width="51" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="Li9-v6-0vt"/>
                                 </constraints>
@@ -27,14 +26,14 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsR-uf-1Tl">
-                                <rect key="frame" x="336" y="68" width="30" height="30"/>
+                                <rect key="frame" x="546" y="24" width="30" height="30"/>
                                 <state key="normal" title="편집"/>
                                 <connections>
                                     <action selector="editButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Alt-dU-c31"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="이슈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-lO-Mc5">
-                                <rect key="frame" x="20" y="106" width="65" height="42"/>
+                                <rect key="frame" x="20" y="62" width="65" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Ezs-61-m9x"/>
                                 </constraints>
@@ -43,11 +42,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="lz8-qn-0a9">
-                                <rect key="frame" x="15" y="156" width="360" height="58"/>
+                                <rect key="frame" x="15" y="112" width="570" height="102"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-d5-JJ0" userLabel="LineView">
-                                <rect key="frame" x="0.0" y="222" width="390" height="1"/>
+                                <rect key="frame" x="0.0" y="222" width="600" height="1"/>
                                 <color key="backgroundColor" red="0.93717283009999997" green="0.93730747699999994" blue="0.9410645366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="n5z-jD-Sr1"/>
@@ -59,15 +58,15 @@
                                 <color key="backgroundColor" red="0.93321973089999999" green="0.93331867459999995" blue="0.93730396029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0KX-iF-s2p">
-                                <rect key="frame" x="0.0" y="223" width="390" height="587"/>
+                                <rect key="frame" x="0.0" y="223" width="600" height="377"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93717283009999997" green="0.93730747699999994" blue="0.9410645366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="S1q-Uk-oFA">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S1q-Uk-oFA" id="4Is-ba-lga">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -75,10 +74,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxi-wH-60j" userLabel="EditView">
-                                <rect key="frame" x="0.0" y="764" width="390" height="80"/>
+                                <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈를 선택하세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEU-Sh-IEt">
-                                        <rect key="frame" x="141" y="15" width="108" height="18"/>
+                                        <rect key="frame" x="246" y="15" width="108" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
@@ -95,7 +94,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJP-Bu-6WT">
-                                        <rect key="frame" x="340" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="550" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="5EF-wf-HOr"/>
                                             <constraint firstAttribute="width" constant="40" id="zgF-J1-sGh"/>
@@ -115,7 +114,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SWi-eK-cor">
-                                <rect key="frame" x="316" y="700" width="50" height="50"/>
+                                <rect key="frame" x="526" y="490" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.28222963210000002" green="0.52160656449999998" blue="0.76460951570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="9AB-Fc-gZq"/>
@@ -163,7 +162,7 @@
                     <connections>
                         <outlet property="checkAllButton" destination="GF4-Og-PDE" id="9nB-cW-n4q"/>
                         <outlet property="editButton" destination="nsR-uf-1Tl" id="cp1-ae-vMc"/>
-                        <outlet property="editableView" destination="Fxi-wH-60j" id="cb4-yy-PpK"/>
+                        <outlet property="editStateView" destination="Fxi-wH-60j" id="cb4-yy-PpK"/>
                         <outlet property="filterButton" destination="Cak-ug-Cwp" id="g2p-M3-Wsl"/>
                         <outlet property="issueLabel" destination="YWm-lO-Mc5" id="jSE-xO-WE8"/>
                         <outlet property="issueNumLabel" destination="mEU-Sh-IEt" id="Ywd-ag-IRz"/>

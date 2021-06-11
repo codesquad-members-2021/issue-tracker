@@ -16,7 +16,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var plusButton: UIButton!
     
-    @IBOutlet private weak var editableView: UIView!
+    @IBOutlet private weak var editStateView: UIView!
     @IBOutlet private weak var issueNumLabel: UILabel!
     @IBOutlet private weak var checkAllButton: UIButton!
     private var isCheckAll: Bool!
@@ -46,7 +46,7 @@ extension IssueListViewController {
         issueTableView.delegate = self
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
         issueTableView.allowsMultipleSelectionDuringEditing = true
-        editableView.isHidden = true
+        editStateView.isHidden = true
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,7 +102,7 @@ extension IssueListViewController {
         editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
         issueLabel.textWithAnimation(text: issueTableView.isEditing ? "이슈 선택" : "이슈", 0.2)
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
-        editableView.setIsHidden(!issueTableView.isEditing, animated: true)
+        editStateView.setIsHidden(!issueTableView.isEditing, animated: true)
     }
     
     @IBAction private func checkAllButtonTouched(_ sender: UIButton) {
