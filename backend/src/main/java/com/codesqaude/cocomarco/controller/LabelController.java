@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class LabelController {
 
-    private LabelService labelService;
+    private final LabelService labelService;
 
     @GetMapping
     public LabelWrapper findAll(Pageable pageable) {

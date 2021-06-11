@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class MilestoneController {
 
-    private MilestoneService milestoneService;
+    private final MilestoneService milestoneService;
 
     @GetMapping
     public MilestoneResponseWrapper findAll(Pageable pageable) {

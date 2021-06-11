@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class MilestoneService {
 
-    private MilestoneRepository milestoneRepository;
-    private LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
+    private final LabelRepository labelRepository;
 
     public Milestone findById(Long milestoneId) {
         return milestoneRepository.findById(milestoneId).orElseThrow(NotFoundMilestoneException::new);

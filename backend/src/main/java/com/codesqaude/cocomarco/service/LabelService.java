@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class LabelService {
 
-    private LabelRepository labelRepository;
-    private MilestoneRepository milestoneRepository;
+    private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     public Label findById(Long labelId){
         return labelRepository.findById(labelId).orElseThrow(NotFoundLabelException::new);
