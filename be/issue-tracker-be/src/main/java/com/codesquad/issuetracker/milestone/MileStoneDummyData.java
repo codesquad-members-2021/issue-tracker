@@ -38,8 +38,7 @@ public class MileStoneDummyData {
                     .build();
     }
 
-    public static int milestonesCountResponses() {
-        int milestonesCount = 5;
-        return milestonesCount;
+    public static MileStonesCountResponse milestonesCountResponses() {
+        return MileStonesCountResponse.from(5);
     }
 }

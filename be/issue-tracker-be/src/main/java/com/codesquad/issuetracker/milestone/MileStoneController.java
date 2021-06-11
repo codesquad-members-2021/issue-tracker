@@ -12,7 +12,7 @@ public class MileStoneController {
     }
 
     @GetMapping("/milestones-count")
-    public int readAllCount() {
-        return MileStoneDummyData.milestonesCountResponses();
+    public MileStonesCountResponseWrapper readAllCount() {
+        return MileStonesCountResponseWrapper.from(MileStoneDummyData.milestonesCountResponses());
     }
 }
