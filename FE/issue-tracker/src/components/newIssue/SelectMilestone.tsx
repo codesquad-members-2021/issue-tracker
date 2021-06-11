@@ -6,13 +6,19 @@ import {
   MenuItem,
   Button,
   Checkbox,
+  Progress,
 } from '@chakra-ui/react';
 
 import { Avatar } from '@chakra-ui/avatar';
 
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import MenuTitle from '@components/common/MenuTitle';
-import { checkBoxStyle, menuItemStyle, menuBtnStyle } from './chakraStyle';
+import {
+  checkBoxStyle,
+  menuItemStyle,
+  menuBtnStyle,
+} from '@components/common/chakraStyle';
+import { progressBar } from './style';
 
 function SelectMilestone() {
   return (
@@ -25,10 +31,10 @@ function SelectMilestone() {
           textAlign="left"
           _focus={{ border: 0 }}
         >
-          담당자
+          마일스톤
         </MenuButton>
         <MenuList>
-          <MenuTitle>담당자 추가</MenuTitle>
+          <MenuTitle>마일스톤 추가</MenuTitle>
           <MenuItem {...menuItemStyle}>
             <ItemWrap>
               <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
@@ -47,14 +53,8 @@ function SelectMilestone() {
       </Menu>
       <AddList>
         <li>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-          <Text>Oni</Text>
-        </li>
-      </AddList>
-      <AddList>
-        <li>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-          <Text>Oni</Text>
+          <Progress {...progressBar} value={32} />
+          <span>마스터즈 코스</span>
         </li>
       </AddList>
     </Wrap>
@@ -63,7 +63,10 @@ function SelectMilestone() {
 
 export default SelectMilestone;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  padding: 34px 32px 32px 32px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gr_line};
+`;
 
 const ItemWrap = styled.div`
   display: flex;
@@ -76,5 +79,9 @@ const Text = styled.span`
 `;
 
 const AddList = styled.ul`
-  padding: 8px 32px;
+  padding: 8px 0;
+
+  span {
+    color: ${({ theme }) => theme.colors.gr_label};
+  }
 `;
