@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data(staticConstructor = StaticConstructorNames.SINGLE_PARAMETER)
+@Data(staticConstructor = "from")
 public class CommentResponses {
     private final List<CommentResponse> commentResponses;
 }

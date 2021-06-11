@@ -31,8 +31,7 @@ public class LabelDummyData {
                        .build();
     }
 
-    public static int labelsCountResponses() {
-        int labelsCount = 3;
-        return labelsCount;
+    public static LabelsCountResponse labelsCountResponses() {
+        return LabelsCountResponse.from(3);
     }
 }

@@ -12,7 +12,7 @@ public class LabelController {
     }
 
     @GetMapping("/labels-count")
-    public int readAllCount() {
-        return LabelDummyData.labelsCountResponses();
+    public LabelsCountResponseWrapper readAllCount() {
+        return LabelsCountResponseWrapper.from(LabelDummyData.labelsCountResponses());
     }
 }
