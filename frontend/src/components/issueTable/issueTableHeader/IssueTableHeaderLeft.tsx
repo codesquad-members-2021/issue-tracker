@@ -10,9 +10,10 @@ interface Props {}
 
 export default function IssueListHeaderLeft({}: Props): ReactElement {
   const setIssueType = useSetRecoilState(issueTypeState);
-  const {
-    count: { openedIssue, closedIssue },
-  } = useRecoilValue(getIssuesInfoState);
+  // const {
+  //   count: { openedIssue, closedIssue },
+  // } = useRecoilValue(getIssuesInfoState);
+  const IssuesInfoData = useRecoilValue(getIssuesInfoState);
 
   const handleOpenClick = () => setIssueType('open');
   const handleCloseClick = () => setIssueType('close');
@@ -21,10 +22,10 @@ export default function IssueListHeaderLeft({}: Props): ReactElement {
       <CheckBox />
       <div className='issue-header__filter-tab'>
         <div onClick={handleOpenClick}>
-          <AdjustRoundedIcon /> <span>열린 이슈 ({openedIssue})</span>
+          <AdjustRoundedIcon /> <span>열린 이슈 ({IssuesInfoData?.count?.openedIssue})</span>
         </div>
         <div onClick={handleCloseClick}>
-          <CheckRoundedIcon /> <span>닫힌 이슈 ({closedIssue})</span>
+          <CheckRoundedIcon /> <span>닫힌 이슈 ({IssuesInfoData?.count?.closedIssue})</span>
         </div>
       </div>
     </IssueListHeaderLeftBlock>

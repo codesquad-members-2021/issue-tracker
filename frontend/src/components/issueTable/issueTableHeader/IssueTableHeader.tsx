@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueListHeaderLeft from './IssueListHeaderLeft';
-import IssueListHeaderRight from './IssueListHeaderRight';
+import IssueListHeaderLeft from './IssueTableHeaderLeft';
+import IssueListHeaderRight from './IssueTableHeaderRight';
 
 function IssueListHeader() {
   return (
