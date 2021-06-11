@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         guard let loginManager = loginManager, let loginInfo = loginInfo else { return }
-        
+
         if let deviceID = loginInfo.deviceID {
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: deviceID) { [weak self] (credentialState, error) in
@@ -52,5 +52,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = issueTrackerTabBarController
         }
     }
-    
+
 }

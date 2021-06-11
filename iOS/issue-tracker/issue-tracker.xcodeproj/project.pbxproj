@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,8 +27,14 @@
 		E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD121267093590071B436 /* MilestoneViewController.swift */; };
 		E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD123267093700071B436 /* MyAccountViewController.swift */; };
 		E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD12526709C010071B436 /* UIViewControllerExtension.swift */; };
+		FAC6D8832671AC7700A9E5F9 /* OAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D8822671AC7700A9E5F9 /* OAuthResponse.swift */; };
+		FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */; };
+		FAC6D88D2671D8A100A9E5F9 /* GithubLoginManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */; };
+		FAC6D88F2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */; };
 		FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AB266F5E9700C17BE9 /* Colors.swift */; };
 		FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */; };
+		FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FAEB30B02670B74000C17BE9 /* Alamofire */; };
+		FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30B32670B76200C17BE9 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,9 +60,13 @@
 		E42AD121267093590071B436 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		E42AD123267093700071B436 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		E42AD12526709C010071B436 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		E42AD1272670A9760071B436 /* issue-tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "issue-tracker.entitlements"; sourceTree = "<group>"; };
+		FAC6D8822671AC7700A9E5F9 /* OAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResponse.swift; sourceTree = "<group>"; };
+		FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAuthorizationManager.swift; sourceTree = "<group>"; };
+		FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagable.swift; sourceTree = "<group>"; };
+		FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagerDelegate.swift; sourceTree = "<group>"; };
 		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		FAEB30B32670B76200C17BE9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +100,8 @@
 		E42AD0FC266E52FB0071B436 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				E42AD1272670A9760071B436 /* issue-tracker.entitlements */,
+				FAC6D8852671ACDA00A9E5F9 /* Model */,
+				FAEB30B22670B75200C17BE9 /* Network */,
 				E42AD111266E530F0071B436 /* LifeCycle */,
 				E42AD11226704F070071B436 /* Common */,
 				E42AD113267054900071B436 /* Login */,
@@ -125,9 +137,9 @@
 		E42AD113267054900071B436 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				FA8840422671F9B000ECCF7A /* Apple */,
+				FAC6D8922671E1A800A9E5F9 /* Github */,
 				E42AD1142670549C0071B436 /* Controller */,
-				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
-				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
 				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
 				E426DAC32671D95D0069E77D /* LoginService.swift */,
 				E426DAC12671B1C60069E77D /* LoginKeyChainManager.swift */,
@@ -197,6 +209,41 @@
 			path = MyAccount;
 			sourceTree = "<group>";
 		};
+		FA8840422671F9B000ECCF7A /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				E426DABD2670EC830069E77D /* AppleLoginManagerDelegate.swift */,
+				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		FAC6D8852671ACDA00A9E5F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAC6D8922671E1A800A9E5F9 /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				FAC6D8822671AC7700A9E5F9 /* OAuthResponse.swift */,
+				FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */,
+				FAC6D88C2671D8A100A9E5F9 /* GithubLoginManagable.swift */,
+				FAC6D88E2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift */,
+			);
+			path = Github;
+			sourceTree = "<group>";
+		};
+		FAEB30B22670B75200C17BE9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FAEB30B32670B76200C17BE9 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,6 +260,9 @@
 			dependencies = (
 			);
 			name = "issue-tracker";
+			packageProductDependencies = (
+				FAEB30B02670B74000C17BE9 /* Alamofire */,
+			);
 			productName = "issue-tracker";
 			productReference = E42AD0FA266E52FB0071B436 /* issue-tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +290,9 @@
 				Base,
 			);
 			mainGroup = E42AD0F1266E52FB0071B436;
+			packageReferences = (
+				FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = E42AD0FB266E52FB0071B436 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,11 +320,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */,
 				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
 				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
+				FAC6D88D2671D8A100A9E5F9 /* GithubLoginManagable.swift in Sources */,
 				E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */,
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
+				FAC6D8832671AC7700A9E5F9 /* OAuthResponse.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
@@ -280,6 +336,8 @@
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E426DABE2670EC830069E77D /* AppleLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
+				FAC6D88F2671D8CE00A9E5F9 /* GithubLoginManagerDelegate.swift in Sources */,
+				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */,
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
@@ -489,6 +547,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAEB30B02670B74000C17BE9 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E42AD0F2266E52FB0071B436 /* Project object */;
 }

@@ -23,6 +23,7 @@ class IssueTrackerTabBarController: UITabBarController {
         
         let viewControllers = items.map{ createTabBarViewController(info: $0) }
         setViewControllers(viewControllers, animated: true)
+                        
     }
     
     private struct TabBarViewControllerInfo {

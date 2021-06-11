@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
+    
     private lazy var loginIDTextField = UITextField()
     private lazy var loginPwdTextField = UITextField()
     
@@ -79,7 +79,11 @@ class LoginViewController: UIViewController {
     private lazy var githubLoginButton: UIButton = {
         let image = UIImage(named: "icon_github")
         let title = "GitHub 계정으로 로그인"
-        return socialLoginButton(with: image, title)
+        let button = socialLoginButton(with: image, title)
+        
+        button.addTarget(self, action: #selector(loginByGithubTouchedDown), for: .touchUpInside)
+        return button
+        
     }()
     
     private lazy var appleLoginButton: UIButton = {
@@ -93,6 +97,7 @@ class LoginViewController: UIViewController {
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
     
+    private var githubLoginManager: GithubLoginManagable?
     private var appleLoginManager: AppleAuthorizationManager?
     
     override func viewDidLoad() {
@@ -102,7 +107,10 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
+        definesPresentationContext = true
         
+        let githubAuthorizationManager = GithubAuthorizationManager(viewController: self, delegate: self)
+        githubLoginManager = githubAuthorizationManager
         let appleAuthorizationManager = AppleAuthorizationManager(viewController: self, delegate: self)
         appleLoginManager = appleAuthorizationManager
     }
@@ -124,7 +132,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-        
+    
     private func addTitleLabel() {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -138,7 +146,7 @@ class LoginViewController: UIViewController {
         loginStackView.backgroundColor = UIColor.white
         loginStackView.layer.borderColor = Colors.border.cgColor
         loginStackView.layer.borderWidth = borderWidth
-                
+        
         NSLayoutConstraint.activate([
             loginStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loginStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height * 0.088),
@@ -204,13 +212,37 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginBtnTouchedDown(sender: UIButton!) {
-        print("하이~, H I~")
+        let tabBarVC = IssueTrackerTabBarController()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        present(tabBarVC, animated: true, completion: nil)
+        
+    }
+    
+    @objc private func loginByGithubTouchedDown(sender: UIButton!) {
+        githubLoginManager?.login()
     }
     
     @objc private func appleLoginTouched(_ sender: UIButton) {
         appleLoginManager?.login()
     }
     
+}
+
+extension LoginViewController: GithubLoginManagerDelegate {
+    
+    func didGithubLoginSuccess(with loginInfo: LoginInfo) {
+        let loginKeyChainManager = LoginKeyChainManager(loginService: .github)
+        
+        if loginKeyChainManager.save(loginInfo) {
+            presentIssueViewController(with: loginInfo)
+        } else {
+            //저장 오류
+        }
+    }
+    
+    func didGithubLoginFail(with error: Error) {
+        //에러
+    }
 }
 
 extension LoginViewController: AppleLoginManagerDelegate {
