@@ -59,12 +59,24 @@ private extension IssueListViewController {
 private extension IssueListViewController {
     
     private func bind() {
+        bindIssueList()
+        bindeSearchController()
+    }
+    
+    private func bindIssueList() {
         viewModel.getIssueList()
         
-        viewModel.issueList
+        viewModel.issuList().asDriver()
             .drive(issueCollectionView.rx.items(cellIdentifier: IssueCell.identifier, cellType: IssueCell.self)) { _, issue, cell in
                 cell.configure(issue.title, issue.comment, milestone: issue.milestone, labels: issue.labels)
             }.disposed(by: rx.disposeBag)
+    }
+    
+    private func bindeSearchController() {
+        searchController.searchBar.rx.text
+            .orEmpty
+            .bind(to: viewModel.searchText)
+            .disposed(by: rx.disposeBag)
     }
 }
 
