@@ -10,7 +10,7 @@ import Foundation
 class KeychainController {
     private static let accountName = "AppUser"
     
-    func readAccessToken() -> String? {
+    func readJWT() -> String? {
         var query = tokenQuery
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnAttributes as String] = true
@@ -28,10 +28,10 @@ class KeychainController {
         return token
     }
     
-    func store(accessToken: String) {
-        let encodedToken = accessToken.data(using: .utf8)!
+    func store(jWT: String) {
+        let encodedToken = jWT.data(using: .utf8)!
         var query: [String: Any] = tokenQuery
-        if let _ = readAccessToken() {
+        if let _ = readJWT() {
             SecItemUpdate(query as CFDictionary, [kSecValueData as String: encodedToken] as CFDictionary)
         } else {
             query[kSecValueData as String] = encodedToken
@@ -39,7 +39,7 @@ class KeychainController {
         }
     }
     
-    func deleteAccessToken() {
+    func deleteJWT() {
         SecItemDelete(tokenQuery as CFDictionary)
     }
 }

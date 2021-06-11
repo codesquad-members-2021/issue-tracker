@@ -6,43 +6,40 @@
 //
 
 import Foundation
+import Alamofire
 
-class AccessTokenRequest {
-    let state: String
+class JWTRequest {
+    let client: String
     let authorizationCode: String
     let session = URLSession(configuration: .ephemeral, delegate: nil, delegateQueue: .main)
     var task: URLSessionDataTask?
     
-    init(authorizationCode: String, state: String) {
+    init(authorizationCode: String, client: String) {
         self.authorizationCode = authorizationCode
-        self.state = state
+        self.client = client
     }
 }
 
 // MARK: NetworkRequest
-extension AccessTokenRequest: JSONDataRequest {
+extension JWTRequest: JSONDataRequest {
     typealias ModelType = Authorization
     
     var urlRequest: URLRequest {
-        var request = URLRequest(url: GitHubEndpoint.accessTokenURL)
-        request.httpMethod = "POST"
-        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let parameters = "grant_type=authorization_code"
-            + "&\(GitHubEndpoint.FieldNames.clientID)=\(GitHubEndpoint.clientID)"
-            + "&\(GitHubEndpoint.FieldNames.clientSecret)=\(GitHubEndpoint.clientSecret)"
-            + "&\(GitHubEndpoint.FieldNames.authorizationCode)=\(authorizationCode)"
-            + "&\(GitHubEndpoint.FieldNames.state)=\(state)"
-        request.httpBody = parameters.data(using: .utf8)
+        let url = URL(string: GitHubEndpoint.loginURL)!
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: GitHubEndpoint.FieldNames.authorizationCode, value: authorizationCode),
+            URLQueryItem(name: GitHubEndpoint.FieldNames.client, value: client)
+        ]
+        let headers: HTTPHeaders = [GitHubEndpoint.FieldNames.authorizationCode : authorizationCode]
+        
+        let request = try! URLRequest(url: urlComponents, method: .get, headers: headers)
+
         return request
     }
 }
 
 // MARK: - AuthorizationResponse
-struct Authorization: Decodable{
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-    }
-    
-    let accessToken: String
+struct Authorization: Decodable {
+    let jwt: String
 }

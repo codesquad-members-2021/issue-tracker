@@ -16,23 +16,28 @@ class NetworkController {
     }
     
     var accessToken: String? {
-        return keychainController.readAccessToken()
+        return keychainController.readJWT()
     }
     
     var isClientAuthenticated: Bool {
         return accessToken != nil
     }
     
-    func authenticateWith(authorizationCode: String, state: String, completion: @escaping () -> Void) {
-        let accessTokenRequest = AccessTokenRequest(authorizationCode: authorizationCode, state: state)
-        let requestURL = accessTokenRequest.urlRequest.url!
-        requests[requestURL] = accessTokenRequest
-        accessTokenRequest.execute { (authorization) in
-            if let accessToken = authorization?.accessToken {
-                self.keychainController.store(accessToken: accessToken)
+    func authenticateWith(authorizationCode: String, client: String, completion: @escaping () -> Void) {
+        let jWTRequest = JWTRequest(authorizationCode: authorizationCode, client: client)
+        let requestURL = jWTRequest.urlRequest.url!
+        requests[requestURL] = jWTRequest
+        
+        jWTRequest.execute { (authorization) in
+            if let jWT = authorization?.jwt {
+                self.keychainController.store(jWT: jWT)
             }
             self.requests[requestURL] = nil
             completion()
         }
+    }
+    
+    func logOut() {
+        keychainController.deleteJWT()
     }
 }
