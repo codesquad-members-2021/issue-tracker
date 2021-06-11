@@ -1,23 +1,6 @@
-import styled, { ThemeContext } from "styled-components";
-// import ButtonGroup from "@material-ui/core/ButtonGroup";
+import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import theme from "styles/theme";
-export const LoginButton = ({ children }) => {
-	// const { grayScale, border_radius, fontSizes } = useContext(ThemeContext);
-
-	return (
-		<></>
-		// <StyledLoginButton
-		// 	variant="contained"
-		// 	_fontSize={fontSizes.lg}
-		// 	_bgColor={grayScale.title_active}
-		// 	_color={grayScale.off_white}
-		// 	_border_radius={border_radius.xl}
-		// >
-		// 	{children}
-		// </StyledLoginButton>
-	);
-};
 
 export const TabButton = styled(Button)`
 	width: 160px;
@@ -49,11 +32,14 @@ export const AddBtn = styled(Button)`
 	}
 `;
 
-const StyledLoginButton = styled.button`
+export const StyledLoginButton = styled(Button)`
 	width: 340px;
 	height: 64px;
-	font-size: ${props => props._fontSize};
-	background-color: ${props => props._bgColor};
-	color: ${props => props._color};
-	border-radius: ${props => props._border_radius};
+	font-size: ${theme.fontSizes.base};
+	background-color: ${theme.grayScale.title_active};
+	color: ${theme.grayScale.off_white};
+	border-radius: ${theme.border_radius.base};
+	&:hover {
+		background-color: ${theme.grayScale.body};
+	}
 `;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { LoginButton } from "styles/StyledButtons";
+import { StyledLoginButton } from "styles/StyledButtons";
 import API from "util/API";
 import { ReactComponent as Logo } from "images/LogotypeLarge.svg";
 
@@ -10,7 +10,7 @@ const LoginPage = () => {
 			<Contents>
 				<Logo />
 				<a href={API.gitHubOAuth()}>
-					<LoginButton>GitHub 계정으로 로그인</LoginButton>
+					<StyledLoginButton>GitHub 계정으로 로그인</StyledLoginButton>
 				</a>
 			</Contents>
 		</LoginPageLayout>

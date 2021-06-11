@@ -23,7 +23,7 @@ const MainPage = () => {
 			)}
 			{pathname === "/main" && <Issues />}
 			<Switch>
-				<Route exact path="/main/1" component={IssueDetailPage} />
+				<Route exact path="/main/:id" component={IssueDetailPage} />
 				<Route exact path="/main/milestones" component={Milestones} />
 				<Route exact path="/main/labels" component={Labels} />
 				<Route exact path="/main/new" component={NewIssue} />
