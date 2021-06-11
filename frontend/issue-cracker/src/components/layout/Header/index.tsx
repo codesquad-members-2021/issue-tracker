@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Logo from '../../common/Logo';
 import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
-import AccountIcon from '../../styles/AccountIcon';
+import AccountIcon from '../../styles/svg/AccountIcon';
 const Header: FC = () => {
   // const [profileURL, setProfileURL] = useState('');
   // useEffect(() => {

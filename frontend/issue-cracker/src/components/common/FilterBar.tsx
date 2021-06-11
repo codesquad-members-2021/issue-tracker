@@ -9,7 +9,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
 const BootstrapInput = withStyles((theme: Theme) =>
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function CustomizedSelects(): JSX.Element {
+function FilterBar(): JSX.Element {
   const classes = useStyles();
   const [index, setIndex] = React.useState('필터');
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -91,4 +90,4 @@ function CustomizedSelects(): JSX.Element {
   );
 }
 
-export default CustomizedSelects;
+export default FilterBar;

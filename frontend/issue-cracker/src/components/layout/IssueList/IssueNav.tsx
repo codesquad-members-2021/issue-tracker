@@ -3,25 +3,26 @@ import styled from 'styled-components';
 import { SMALL_FILL, WRITING_ISSUE } from '../../../utils/const';
 import ButtonList from '../../common/ButtonList';
 import TabList from '../../common/TabList';
-import CustomizedSelects from '../../common/FilterBar';
+import FilterBar from '../../common/FilterBar';
+import ButtonGroup from '../../common/ButtonGroup';
 
 const IssueNav: FC = () => {
   return (
     <IssueNavDiv>
       <IssueNavContainer>
         <SelectBox>
-          <CustomizedSelects />
+          <FilterBar />
         </SelectBox>
         <AnotherBox>
           <TabBox>
             <TabList />
+            <ButtonGroup />
           </TabBox>
           <ButtonBox>
             <ButtonList type={SMALL_FILL} name={WRITING_ISSUE} />
           </ButtonBox>
         </AnotherBox>
       </IssueNavContainer>
-      <IssueTableContainer>IssueTable</IssueTableContainer>
     </IssueNavDiv>
   );
 };
@@ -54,6 +55,6 @@ const TabBox = styled.div`
 
 const ButtonBox = styled.div`
   padding-left: 10px;
+  display: flex;
+  align-items: flex-end;
 `;
-
-const IssueTableContainer = styled.div``;
