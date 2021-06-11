@@ -17,7 +17,7 @@ import {
   checkBoxStyle,
   menuItemStyle,
   menuBtnStyle,
-} from '@components/common/chakraStyle';
+} from '@styles/chakraStyle';
 import { progressBar } from './style';
 
 function SelectMilestone() {

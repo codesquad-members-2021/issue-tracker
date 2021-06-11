@@ -15,7 +15,7 @@ import {
   checkBoxStyle,
   menuItemStyle,
   menuBtnStyle,
-} from '@components/common/chakraStyle';
+} from '@styles/chakraStyle';
 
 function SelectLabel() {
   return (

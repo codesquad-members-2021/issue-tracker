@@ -9,7 +9,7 @@ import {
 
 import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
 import MenuTitle from '@components/common/MenuTitle';
-import { checkBoxStyle, menuItemStyle } from '@components/common/chakraStyle';
+import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
 import { menuBtnStyle } from './style';
 
 function MilestoneFilter() {
