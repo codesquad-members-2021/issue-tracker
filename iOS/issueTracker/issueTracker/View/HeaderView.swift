@@ -26,8 +26,10 @@ class HeaderView: UIView {
     
 
     func setUpBackButton2(vc: UIViewController) {
-        let vc2 = vc as? IssueListFilterViewController
-        self.backButton.addTarget(delegate, action: #selector(vc2!.testt), for: .touchDown)
+        guard let vc2 = vc as? IssueListFilterViewController else {
+            return
+        }
+        self.backButton.addTarget(delegate, action: #selector(vc2.testt), for: .touchDown)
     }
     
     func setUpTitle(text: String) {

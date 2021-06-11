@@ -5,10 +5,10 @@
 //  Created by 오킹 on 2021/06/09.
 //
 
-import Foundation
 import UIKit
 
 class IssueListFilterViewController: UIViewController, test {
+    
     func close() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -53,8 +53,6 @@ class IssueListFilterViewController: UIViewController, test {
         headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         headerView.heightAnchor.constraint(equalToConstant: self.view.frame.height/12).isActive = true
-        
-        
     }
     
     private func configFilterOptionTableView() {
@@ -80,22 +78,19 @@ extension IssueListFilterViewController: UITableViewDataSource {
         case 3:
             return 4
         default:
-            0
+            return 0
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "filterOptionCell") as? filterOptionCell else {
-            
             return UITableViewCell()
         }
-
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        return 4
     }
 
     
@@ -116,11 +111,11 @@ extension IssueListFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        50
+        return 50
     }
     
 }
 
 extension IssueListFilterViewController: UITableViewDelegate {
-
+   
 }

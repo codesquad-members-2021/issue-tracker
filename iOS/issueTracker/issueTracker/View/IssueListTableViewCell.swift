@@ -15,6 +15,4 @@ class IssueListTableViewCell: UITableViewCell {
     @IBOutlet weak var issueDescription: UILabel!
     @IBOutlet weak var milestoneTitle: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
-    
-    
 }

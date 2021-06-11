@@ -10,6 +10,7 @@ import UIKit
 class IssueListViewController: UIViewController {
     
     @IBOutlet weak var issueListTableView: UITableView!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class IssueListViewController: UIViewController {
         setupSearchbarcontroller()
         setuptableViewDelegateDataSource()
         setuptableViewCustomView()
+        bottomToolbar.isHidden = true
     }
     
     func set(navigationBarTitle: String) {
@@ -37,7 +39,7 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func pressedLeftbutton() {
-        let nextVC = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController
+        let nextVC = self.storyboard?.instantiateViewController(identifier: ViewControllerIdentity.IssueListFilterViewController.description) as? IssueListFilterViewController
         self.present(nextVC!, animated: true, completion: nil)
     }
     
@@ -54,18 +56,18 @@ class IssueListViewController: UIViewController {
     func setupSearchbarcontroller() {
         let searchbarController = UISearchController(searchResultsController: nil)
         searchbarController.hidesNavigationBarDuringPresentation = true
-        searchbarController.hidesBottomBarWhenPushed = true
         self.navigationItem.searchController = searchbarController
     }
     
     func setuptableViewDelegateDataSource(){
         self.issueListTableView.dataSource = self
+        self.issueListTableView.delegate = self
     }
     
     func setuptableViewCustomView() {
         let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.issueListTableView.frame.width, height: 100)))
         let label = UILabel(frame: CGRect(origin: .zero, size: footerView.frame.size))
-        label.text = "아래로 스크롤 하면 검색할 수 있습니다."
+        label.text = TableViewInformationMessage.showSearchBar.description
         footerView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
@@ -78,9 +80,8 @@ class IssueListViewController: UIViewController {
 }
 
 extension IssueListViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,10 +90,40 @@ extension IssueListViewController: UITableViewDataSource {
     }
 }
 
+extension IssueListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let shareAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            print("수정 가즈아~~~!!!")
+        })
+        
+        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            print("삭제 가즈아~~~!!!")
+        })
+        
+        shareAction.backgroundColor = .systemBlue
+        deleteAction.image = UIImage(systemName: ButtonImagesTitle.delete.description)
+        
+        return UISwipeActionsConfiguration(actions:[deleteAction, shareAction])
+    }
+}
+
+enum TableViewInformationMessage: CustomStringConvertible {
+    case showSearchBar
+    
+    var description: String {
+        switch self {
+        case .showSearchBar:
+            return "아래로 스크롤 하면 검색할 수 있습니다."
+        }
+    }
+}
 
 enum ButtonImagesTitle: CustomStringConvertible {
     case filter
     case selector
+    case delete
+    case next
     
     var description: String {
         switch self {
@@ -100,6 +131,10 @@ enum ButtonImagesTitle: CustomStringConvertible {
             return "filterIcon"
         case .selector:
             return "selectIcon"
+        case .delete:
+            return "trash"
+        case .next:
+            return "chevron.right"
         }
     }
 }

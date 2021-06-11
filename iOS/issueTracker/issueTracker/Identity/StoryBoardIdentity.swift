@@ -11,3 +11,11 @@ enum StoryBoardIdentity {
     case Main
     case IssueList
 }
+
+enum ViewControllerIdentity: CustomStringConvertible {
+    case IssueListFilterViewController
+    
+    var description: String {
+        return "IssueListFilterViewController"
+    }
+}
