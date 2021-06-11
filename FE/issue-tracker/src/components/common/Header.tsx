@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 import { Avatar } from '@chakra-ui/react';
 import { ReactComponent as LogotypeMedium } from '@assets/LogotypeMedium.svg';
 
 function Header() {
   return (
     <HeaderContainer>
-      <LogotypeMedium className="logo" />
+      <Link to="/issues">
+        <LogotypeMedium className="logo" />
+      </Link>
       <Avatar size="md" src="./janmang.jpeg" />
     </HeaderContainer>
   );
