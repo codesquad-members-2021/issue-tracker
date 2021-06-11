@@ -62,7 +62,7 @@ create table label
 (
     id       bigint primary key auto_increment,
     title    varchar(45),
-    detail   vachar(100),
+    detail   varchar(100),
     hex_code varchar(45)
 );
 
