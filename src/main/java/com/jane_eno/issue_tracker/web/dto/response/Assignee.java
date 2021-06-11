@@ -18,7 +18,7 @@ public class Assignee {
     private final String userName;
     private final boolean isAssigned;
 
-    public static Assignee createAssignee(User user, Issue issue) {
+    public static Assignee of(User user, Issue issue) {
         return Assignee.builder()
                 .id(user.getId())
                 .image(user.getAvatarUrl())
@@ -27,7 +27,7 @@ public class Assignee {
                 .build();
     }
 
-    public static Assignee createAssignee(User user) {
+    public static Assignee of(User user) {
         return Assignee.builder()
                 .id(user.getId())
                 .image(user.getAvatarUrl())

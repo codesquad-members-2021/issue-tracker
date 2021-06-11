@@ -14,7 +14,7 @@ public class IssuesResponseDTO {
     private final Count count;
     private final List<IssueResponseDTO> issues;
 
-    public static IssuesResponseDTO createIssuesResponseDTO(Count count, List<IssueResponseDTO> issues) {
+    public static IssuesResponseDTO of(Count count, List<IssueResponseDTO> issues) {
         return IssuesResponseDTO.builder()
                 .count(count)
                 .issues(issues)

@@ -20,7 +20,7 @@ public class LabelDTO {
     private final String description;
     private final boolean isChecked;
 
-    public static LabelDTO createLabelDTO(Label label, Issue issue) {
+    public static LabelDTO of(Label label, Issue issue) {
         return LabelDTO.builder()
                 .id(label.getId())
                 .name(label.getName())
@@ -30,7 +30,7 @@ public class LabelDTO {
                 .build();
     }
 
-    public static LabelDTO createLabelDTO(Label label) {
+    public static LabelDTO of(Label label) {
         return LabelDTO.builder()
                 .id(label.getId())
                 .name(label.getName())

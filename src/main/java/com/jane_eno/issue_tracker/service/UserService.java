@@ -4,9 +4,11 @@ import com.jane_eno.issue_tracker.auth.OAuth;
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
 import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
 import com.jane_eno.issue_tracker.auth.util.JwtUtil;
+import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.user.User;
 import com.jane_eno.issue_tracker.domain.user.UserRepository;
 import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
+import com.jane_eno.issue_tracker.web.dto.response.Assignee;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,7 +62,15 @@ public class UserService {
         );
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<Assignee> usersToAssignees(Issue issue) {
+        return userRepository.findAll().stream()
+                .map(user -> Assignee.of(user, issue))
+                .collect(Collectors.toList());
+    }
+
+    public List<Assignee> usersToAssignees() {
+        return userRepository.findAll().stream()
+                .map(Assignee::of)
+                .collect(Collectors.toList());
     }
 }

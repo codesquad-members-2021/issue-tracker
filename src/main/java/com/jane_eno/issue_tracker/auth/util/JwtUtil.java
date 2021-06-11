@@ -25,7 +25,7 @@ public class JwtUtil {
 
     public String createToken(User user) {
         return JWT.create()
-                .withExpiresAt(new Date())
+//                .withExpiresAt(new Date())
                 .withClaim(USER_ID, user.getId())
                 .withIssuer(ISSUER)
                 .sign(Algorithm.HMAC256(SECRET_KEY));
@@ -33,7 +33,7 @@ public class JwtUtil {
 
     public DecodedJWT verifyToken(String jwt) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET_KEY))
-                .acceptExpiresAt(60 * 100)
+//                .acceptExpiresAt(60 * 100)
                 .withIssuer(ISSUER)
                 .build();
         return verifier.verify(jwt);

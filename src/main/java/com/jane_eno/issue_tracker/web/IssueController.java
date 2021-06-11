@@ -45,6 +45,7 @@ public class IssueController {
         issueService.createIssue(issueRequestDTO, userId);
     }
 
+    @LoginRequired
     @GetMapping("/{issueId}")
     public IssueDetailPageResponseDTO viewDetailPage(@PathVariable Long issueId, @UserId Long userId) {
         logger.debug("이슈 상세 페이지");

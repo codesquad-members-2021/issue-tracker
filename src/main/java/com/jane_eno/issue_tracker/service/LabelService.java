@@ -1,9 +1,9 @@
 package com.jane_eno.issue_tracker.service;
 
+import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.label.Color;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.label.LabelRepository;
-import com.jane_eno.issue_tracker.domain.user.User;
 import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
 import com.jane_eno.issue_tracker.web.dto.response.LabelsResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +25,8 @@ public class LabelService {
         return labelRepository.findAllById(assigneeIdList);
     }
 
-    public List<Label> findAllLabels() {
-        return labelRepository.findAll();
-    }
-
     public List<LabelDTO> findAllLabelDTOs() {
-        return labelRepository.findAll().stream().map(LabelDTO::createLabelDTO).collect(Collectors.toList());
+        return labelRepository.findAll().stream().map(LabelDTO::of).collect(Collectors.toList());
     }
 
     private Label findByLabelId(Long labelId) {
@@ -63,5 +59,11 @@ public class LabelService {
 
     public long count() {
         return labelRepository.count();
+    }
+
+    public List<LabelDTO> labelsToLabelDTOs(Issue issue) {
+        return labelRepository.findAll().stream()
+                .map(label -> LabelDTO.of(label, issue))
+                .collect(Collectors.toList());
     }
 }

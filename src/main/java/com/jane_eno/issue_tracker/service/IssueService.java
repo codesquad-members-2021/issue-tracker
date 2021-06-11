@@ -19,11 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.jane_eno.issue_tracker.web.dto.response.Assignee.createAssignee;
-import static com.jane_eno.issue_tracker.web.dto.response.IssueResponseDTO.createIssueResponseDTO;
-import static com.jane_eno.issue_tracker.web.dto.response.IssuesResponseDTO.createIssuesResponseDTO;
-import static com.jane_eno.issue_tracker.web.dto.response.LabelDTO.createLabelDTO;
-
 @Service
 @RequiredArgsConstructor
 public class IssueService {
@@ -43,54 +38,21 @@ public class IssueService {
                 .closedIssue(closedIssues.size())
                 .build();
         List<IssueResponseDTO> issues = filterByStatus(status).stream()
-                .map(issue -> createIssueResponseDTO(issue, usersToAssignees(issue), labelsToLabelDTOs(issue)))
+                .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
-        return createIssuesResponseDTO(count, issues);
-    }
-
-    private List<Issue> filterByStatus(String status) {
-        if (status.equals("open")) {
-            return issueRepository.findAllByIsOpenTrue();
-        }
-        if (status.equals("close")) {
-            return issueRepository.findAllByIsOpenFalse();
-        }
-        throw new InvalidSearchRequestException();
-    }
-
-    private List<Assignee> usersToAssignees(Issue issue) {
-        return userService.findAll().stream()
-                .map(user -> createAssignee(user, issue))
-                .collect(Collectors.toList());
-    }
-
-    private List<Assignee> usersToAssignees() {
-        return userService.findAll().stream()
-                .map(Assignee::createAssignee)
-                .collect(Collectors.toList());
-    }
-
-    private List<LabelDTO> labelsToLabelDTOs(Issue issue) {
-        return labelService.findAllLabels().stream()
-                .map(label -> createLabelDTO(label, issue))
-                .collect(Collectors.toList());
+        return IssuesResponseDTO.of(count, issues);
     }
 
     public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
-        boolean newStatus = !Boolean.parseBoolean(status);
+        boolean newStatus = !statusToBoolean(status);
         for (Long id : requestDTO.getIssueNumbers()) {
             issueRepository.updateStatusBy(id, newStatus);
         }
     }
 
-    private Issue findIssueById(Long id) {
-        return issueRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find issue by given id."));
-    }
-
     public IssueFormResponseDTO getIssueForm() {
         return IssueFormResponseDTO.builder()
-                .assignees(usersToAssignees())
+                .assignees(userService.usersToAssignees())
                 .labels(labelService.findAllLabelDTOs())
                 .milestones(milestoneService.findAllMilestoneDTOs())
                 .build();
@@ -115,16 +77,10 @@ public class IssueService {
                 .status(issue.isOpen())
                 .createdDateTime(issue.getCreatedDateTime())
                 .comments(commentsToCommentDTOs(loginUser, issue))
-                .assignees(usersToAssignees(issue))
-                .labels(labelsToLabelDTOs(issue))
+                .assignees(userService.usersToAssignees(issue))
+                .labels(labelService.labelsToLabelDTOs(issue))
                 .milestones(milestoneService.findAllMilestoneDTOs())
                 .build();
-    }
-
-    private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {
-        return issue.getComments().stream()
-                .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
-                .collect(Collectors.toList());
     }
 
     public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
@@ -134,7 +90,7 @@ public class IssueService {
 
     public AssigneesResponseDTO getAssignees(Long issueId) {
         Issue issue = findIssueById(issueId);
-        return new AssigneesResponseDTO(usersToAssignees(issue));
+        return new AssigneesResponseDTO(userService.usersToAssignees(issue));
     }
 
     public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
@@ -175,5 +131,31 @@ public class IssueService {
 
     public void deleteComment(Long issueId, Long commentId) {
 
+    }
+
+    private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {
+        return issue.getComments().stream()
+                .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
+                .collect(Collectors.toList());
+    }
+
+    private Issue findIssueById(Long id) {
+        return issueRepository.findById(id).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find issue by given id."));
+    }
+
+    private List<Issue> filterByStatus(String status) {
+        boolean newStatus = statusToBoolean(status);
+        return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
+    }
+
+    private boolean statusToBoolean(String status) {
+        if (status.equals("open")) {
+            return true;
+        }
+        if (status.equals("close")) {
+            return false;
+        }
+        throw new InvalidSearchRequestException();
     }
 }
