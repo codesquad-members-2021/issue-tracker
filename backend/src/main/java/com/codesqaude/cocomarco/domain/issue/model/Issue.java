@@ -1,6 +1,5 @@
 package com.codesqaude.cocomarco.domain.issue.model;
 
-import com.codesqaude.cocomarco.common.BasicEntity;
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import com.codesqaude.cocomarco.domain.user.User;
@@ -19,8 +18,12 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Issue extends BasicEntity {
+public class Issue {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     private String title;
     private String text;
     private LocalDateTime writingTime;
@@ -46,7 +49,7 @@ public class Issue extends BasicEntity {
     private User writer;
 
     public static Issue createIssue(User writer, String title, String text, @Nullable List<Assignment> assignments, @Nullable List<IssueLabel> issueLabels, @Nullable Milestone milestone) {
-        return new Issue(title, text, LocalDateTime.now(), IssueStatus.OPEN, null, assignments, issueLabels, milestone, writer);
+        return new Issue(null, title, text, LocalDateTime.now(), IssueStatus.OPEN, null, assignments, issueLabels, milestone, writer);
     }
 
     @Override

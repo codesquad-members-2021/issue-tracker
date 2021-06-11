@@ -1,6 +1,5 @@
 package com.codesqaude.cocomarco.domain.comment;
 
-import com.codesqaude.cocomarco.common.BasicEntity;
 import com.codesqaude.cocomarco.common.exception.NoPermissionUserException;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
@@ -8,17 +7,18 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BasicEntity {
+public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String text;
     private LocalDateTime writingTime;
