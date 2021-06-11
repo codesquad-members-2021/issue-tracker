@@ -47,6 +47,4 @@ extension MilestoneViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: MilestoneTableViewCell.reuseId, for: indexPath)
         return cell
     }
-    
-    
 }

@@ -12,7 +12,7 @@ class MilestoneTableViewCell: UITableViewCell {
 
     static let reuseId = "MilestoneTableViewCell"
     
-    private let verticalStackViw: UIStackView = {
+    private let verticalStackView: UIStackView = {
         let stackViw = UIStackView()
         stackViw.axis = .vertical
         stackViw.alignment = .leading
@@ -20,7 +20,7 @@ class MilestoneTableViewCell: UITableViewCell {
         return stackViw
     }()
     
-    private let horizenStackViw: UIStackView = {
+    private let horizenStackView: UIStackView = {
         let stackViw = UIStackView()
         stackViw.axis = .horizontal
         stackViw.alignment = .fill
@@ -28,7 +28,7 @@ class MilestoneTableViewCell: UITableViewCell {
         return stackViw
     }()
     
-    private let IssueLabelStackViw: UIStackView = {
+    private let IssueLabelStackView: UIStackView = {
         let stackViw = UIStackView()
         stackViw.axis = .horizontal
         stackViw.alignment = .fill
@@ -89,17 +89,17 @@ class MilestoneTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        horizenStackViw.addArrangedSubview(titleLabel)
-        horizenStackViw.addArrangedSubview(achievementLabel)
+        horizenStackView.addArrangedSubview(titleLabel)
+        horizenStackView.addArrangedSubview(achievementLabel)
         
-        IssueLabelStackViw.addArrangedSubview(openedIssueLabel)
-        IssueLabelStackViw.addArrangedSubview(closedIssueLabel)
+        IssueLabelStackView.addArrangedSubview(openedIssueLabel)
+        IssueLabelStackView.addArrangedSubview(closedIssueLabel)
         
-        verticalStackViw.addArrangedSubview(horizenStackViw)
-        verticalStackViw.addArrangedSubview(descriptionLabel)
-        verticalStackViw.addArrangedSubview(dueDateLabel)
-        verticalStackViw.addArrangedSubview(IssueLabelStackViw)
-        addSubview(verticalStackViw)
+        verticalStackView.addArrangedSubview(horizenStackView)
+        verticalStackView.addArrangedSubview(descriptionLabel)
+        verticalStackView.addArrangedSubview(dueDateLabel)
+        verticalStackView.addArrangedSubview(IssueLabelStackView)
+        addSubview(verticalStackView)
     }
     
     required init?(coder: NSCoder) {
@@ -108,9 +108,8 @@ class MilestoneTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        verticalStackViw.snp.makeConstraints { (maker) in
+        verticalStackView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(20)
         }
     }
-
 }
