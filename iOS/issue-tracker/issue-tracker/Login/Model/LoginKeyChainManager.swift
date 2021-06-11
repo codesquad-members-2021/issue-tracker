@@ -11,7 +11,6 @@ import Security
 final class LoginKeyChainManager {
     
     private let loginService: String
-    private var userName: String?
 
     init(loginService: LoginService) {
         self.loginService = loginService.description
@@ -40,8 +39,7 @@ final class LoginKeyChainManager {
               let existingItem = item as? [String: Any],
               let data = existingItem[kSecAttrGeneric as String] as? Data,
               let loginInfo = try? JSONDecoder().decode(LoginInfo.self, from: data) else { return nil }
-        
-        self.userName = loginInfo.name
+
         return loginInfo
     }
     

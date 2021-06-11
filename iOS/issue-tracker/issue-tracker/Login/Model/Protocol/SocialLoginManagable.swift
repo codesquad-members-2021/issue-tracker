@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol GithubLoginManagable {
+protocol SocialLoginManagable {
     func login()
 }

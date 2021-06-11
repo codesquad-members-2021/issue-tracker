@@ -7,14 +7,16 @@
 
 import AuthenticationServices
 
-final class AppleAuthorizationManager: NSObject {
+final class AppleAuthorizationManager: NSObject, SocialLoginManagable {
     
     private weak var viewController: UIViewController?
-    private weak var delegate: AppleLoginManagerDelegate?
+    private weak var delegate: SocialLoginManagerDelegate?
+    private var keyChainSaver: LoginKeyChainManager
     
-    init(viewController: UIViewController, delegate: AppleLoginManagerDelegate) {
+    init(viewController: UIViewController, delegate: SocialLoginManagerDelegate, keyChainSaver: LoginKeyChainManager) {
         self.viewController = viewController
         self.delegate = delegate
+        self.keyChainSaver = keyChainSaver
     }
     
     func login() {
@@ -35,17 +37,24 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
               let token = appleIDCredential.identityToken,
               let tokenInString = String(data: token, encoding: .utf8),
               let name = appleIDCredential.fullName?.givenName ?? appleIDCredential.fullName?.familyName else {
-            delegate?.didAppleLoginFail(with: LoginError.appleIDAccess)
+            delegate?.didSocialLoginFail(with: LoginError.appleIDAccess)
             return
         }
         
         let deviceID = appleIDCredential.user
         let loginInfo = LoginInfo(deviceID: deviceID, jwt: tokenInString, avatarURL: nil, name: name)
-        delegate?.didAppleLoginSuccess(with: loginInfo)
+        
+        if !keyChainSaver.save(loginInfo) {
+            let saveError = LoginError.keyChainSave
+            delegate?.didSocialLoginFail(with: saveError)
+        } else {
+            delegate?.didSocialLoginSuccess(with: loginInfo)
+        }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        delegate?.didAppleLoginFail(with: error)
+        let appleLoginError = LoginError.appleIDAccess
+        delegate?.didSocialLoginFail(with: appleLoginError)
     }
 }
 

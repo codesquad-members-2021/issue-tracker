@@ -80,7 +80,6 @@ class LoginViewController: UIViewController {
         let image = UIImage(named: "icon_github")
         let title = "GitHub 계정으로 로그인"
         let button = socialLoginButton(with: image, title)
-        
         button.addTarget(self, action: #selector(loginByGithubTouchedDown), for: .touchUpInside)
         return button
         
@@ -96,9 +95,8 @@ class LoginViewController: UIViewController {
     
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
-    
-    private var githubLoginManager: GithubLoginManagable?
-    private var appleLoginManager: AppleAuthorizationManager?
+
+    private var socialLoginManager: SocialLoginManagable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,11 +106,6 @@ class LoginViewController: UIViewController {
         addLoginButtons()
         addSocialLoginButtons()
         definesPresentationContext = true
-        
-        let githubAuthorizationManager = GithubAuthorizationManager(viewController: self, delegate: self)
-        githubLoginManager = githubAuthorizationManager
-        let appleAuthorizationManager = AppleAuthorizationManager(viewController: self, delegate: self)
-        appleLoginManager = appleAuthorizationManager
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -218,47 +211,43 @@ class LoginViewController: UIViewController {
         
     }
     
-    @objc private func loginByGithubTouchedDown(sender: UIButton!) {
-        githubLoginManager?.login()
+    @objc private func loginByGithubTouchedDown(_ sender: UIButton) {
+        configureGithubLoginManager()
+        socialLoginManager?.login()
     }
     
     @objc private func appleLoginTouched(_ sender: UIButton) {
-        appleLoginManager?.login()
+        configureAppleLoginManager()
+        socialLoginManager?.login()
+    }
+    
+    private func configureGithubLoginManager() {
+        guard socialLoginManager as? GithubAuthorizationManager == nil else { return }
+        let githubKeyChainManager = LoginKeyChainManager(loginService: .github)
+        let githubLoginManager = GithubAuthorizationManager(viewController: self,
+                                                            delegate: self,
+                                                            keyChainSaver: githubKeyChainManager)
+        self.socialLoginManager = githubLoginManager
+    }
+    
+    private func configureAppleLoginManager() {
+        guard socialLoginManager as? AppleAuthorizationManager == nil else { return }
+        let appleKeyChainManager = LoginKeyChainManager(loginService: .apple)
+        let appleLoginManager = AppleAuthorizationManager(viewController: self,
+                                                            delegate: self,
+                                                            keyChainSaver: appleKeyChainManager)
+        self.socialLoginManager = appleLoginManager
     }
     
 }
 
-extension LoginViewController: GithubLoginManagerDelegate {
-    
-    func didGithubLoginSuccess(with loginInfo: LoginInfo) {
-        let loginKeyChainManager = LoginKeyChainManager(loginService: .github)
-        
-        if loginKeyChainManager.save(loginInfo) {
-            presentIssueViewController(with: loginInfo)
-        } else {
-            //저장 오류
-        }
+extension LoginViewController: SocialLoginManagerDelegate {
+    func didSocialLoginSuccess(with loginInfo: LoginInfo) {
+        presentIssueViewController(with: loginInfo)
     }
     
-    func didGithubLoginFail(with error: Error) {
-        //에러
-    }
-}
-
-extension LoginViewController: AppleLoginManagerDelegate {
-    func didAppleLoginSuccess(with loginInfo: LoginInfo) {
-        let loginKeyChainManager = LoginKeyChainManager(loginService: .apple)
-        
-        if loginKeyChainManager.save(loginInfo) {
-            presentIssueViewController(with: loginInfo)
-        } else {
-            let saveErrorText = LoginError.keyChainSave.description
-            presentAlert(with: saveErrorText)
-        }
-    }
-    
-    func didAppleLoginFail(with error: Error) {
-        let appleLoginErrorText = LoginError.appleIDAccess.description
-        presentAlert(with: appleLoginErrorText)
+    func didSocialLoginFail(with error: LoginError) {
+        let errorText = error.description
+        presentAlert(with: errorText)
     }
 }
