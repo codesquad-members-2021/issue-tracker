@@ -399,18 +399,37 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="09n-ZV-zqf">
+                                <rect key="frame" x="0.0" y="95" width="390" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FilterCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="R3i-3z-Q7c">
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R3i-3z-Q7c" id="3QC-pE-vzm">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="amG-2m-e2P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7su-Cr-Xdd" firstAttribute="height" secondItem="h33-78-mOL" secondAttribute="height" multiplier="0.0592417" id="0WX-Ej-1bF"/>
+                            <constraint firstItem="amG-2m-e2P" firstAttribute="bottom" secondItem="09n-ZV-zqf" secondAttribute="bottom" id="79f-2T-HNJ"/>
                             <constraint firstItem="7su-Cr-Xdd" firstAttribute="leading" secondItem="amG-2m-e2P" secondAttribute="leading" constant="10" id="FVc-1u-I6E"/>
+                            <constraint firstItem="09n-ZV-zqf" firstAttribute="top" secondItem="7su-Cr-Xdd" secondAttribute="bottom" constant="1" id="IsY-Lu-GyL"/>
+                            <constraint firstItem="09n-ZV-zqf" firstAttribute="leading" secondItem="amG-2m-e2P" secondAttribute="leading" id="OSl-RT-RAD"/>
+                            <constraint firstItem="amG-2m-e2P" firstAttribute="trailing" secondItem="09n-ZV-zqf" secondAttribute="trailing" id="Pha-u6-tjN"/>
                             <constraint firstItem="7su-Cr-Xdd" firstAttribute="top" secondItem="amG-2m-e2P" secondAttribute="top" id="S9c-Xb-z2c"/>
                             <constraint firstItem="7su-Cr-Xdd" firstAttribute="trailing" secondItem="amG-2m-e2P" secondAttribute="trailing" constant="-10" id="bAK-yy-BTa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="3kV-M6-aen" id="bom-Vw-oal"/>
+                        <outlet property="filterTableView" destination="09n-ZV-zqf" id="p8Y-ca-Wt3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRx-qs-5kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
