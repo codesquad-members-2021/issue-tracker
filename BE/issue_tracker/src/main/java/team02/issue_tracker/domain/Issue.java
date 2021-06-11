@@ -1,6 +1,7 @@
 package team02.issue_tracker.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,11 +10,12 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Issue {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int issueNumber;
     private String title;
 
     @OneToMany(mappedBy = "issue")
@@ -35,4 +37,15 @@ public class Issue {
 
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
+
+    public Issue(String title, User writer, boolean isOpen) {
+        this.title = title;
+        this.writer = writer;
+        this.isOpen = isOpen;
+        createdTime = LocalDateTime.now();
+    }
+
+    public void addMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }
