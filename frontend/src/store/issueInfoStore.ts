@@ -46,7 +46,7 @@ export const issueTypeState = atom<string>({
 //   select: string;
 // }
 
-const isFilterFullSetting = atom<boolean>({
+export const isFilterFullSetting = atom<boolean>({
   key: 'isFilterFullSetting',
   default: true,
 });
