@@ -11,7 +11,7 @@ import { gitLoginStyle, idLoginStyle, inputStyle } from './style';
 function LoginMain() {
   return (
     <MainWrap>
-      <LogoLarge />
+      <LogoLarge className="logo" />
       <Button {...gitLoginStyle}>GitHub 계정으로 로그인</Button>
       <Span>or</Span>
       <Stack spacing={2}>
@@ -29,8 +29,14 @@ function LoginMain() {
 const MainWrap = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
+
+  .logo {
+    margin-bottom: 24px;
+  }
 `;
 
 const Span = styled.span`
