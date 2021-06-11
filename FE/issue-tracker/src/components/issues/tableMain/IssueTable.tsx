@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import TableHeader from './TableHeader';
+import TableHeader from '../tableHeader/TableHeader';
 import Issue from './Issue';
 
 function IssueTable() {

@@ -2,8 +2,16 @@ import styled from 'styled-components';
 
 import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
 import { ReactComponent as SearchIcon } from '@assets/search.svg';
-import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/menu';
-import { Button } from '@chakra-ui/button';
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
+  Checkbox,
+} from '@chakra-ui/react';
+import MenuTitle from '@components/common/MenuTitle';
+import { checkBoxStyle, menuItemStyle } from '@components/common/chakraStyle';
 
 function FilterBar() {
   return (
@@ -20,28 +28,26 @@ function FilterBar() {
           필터
         </MenuButton>
         <MenuList padding="0">
-          <MenuTitle>
-            <span>이슈 필터</span>
-          </MenuTitle>
-          <MenuItem>
+          <MenuTitle>이슈 필터</MenuTitle>
+          <MenuItem {...menuItemStyle}>
             <span>열린 이슈</span>
-            <input type="checkbox" name="openIssue" />
+            <Checkbox {...checkBoxStyle} />
           </MenuItem>
-          <MenuItem>
+          <MenuItem {...menuItemStyle}>
             <span>내가 작성한 이슈</span>
-            <input type="checkbox" name="writtenByMe" />
+            <Checkbox {...checkBoxStyle} />
           </MenuItem>
-          <MenuItem>
+          <MenuItem {...menuItemStyle}>
             <span>나에게 할당된 이슈</span>
-            <input type="checkbox" name="assigned" />
+            <Checkbox {...checkBoxStyle} />
           </MenuItem>
-          <MenuItem>
+          <MenuItem {...menuItemStyle}>
             <span>내가 댓글을 남긴 이슈</span>
-            <input type="checkbox" name="commentByMe" />
+            <Checkbox {...checkBoxStyle} />
           </MenuItem>
-          <MenuItem>
+          <MenuItem {...menuItemStyle}>
             <span>닫힌 이슈</span>
-            <input type="checkbox" name="closeIssue" />
+            <Checkbox {...checkBoxStyle} />
           </MenuItem>
         </MenuList>
       </Menu>
@@ -63,15 +69,15 @@ const FilterBarWrap = styled.div`
   border-radius: 11px;
 `;
 
-const MenuTitle = styled.h2`
-  display: flex;
-  align-items: center;
-  width: 240px;
-  height: 48px;
-  padding: 8px 16px;
-  background: ${({ theme }) => theme.colors.gr_background};
-  color: ${({ theme }) => theme.colors.gr_titleActive};
-`;
+// const MenuTitle = styled.h2`
+//   display: flex;
+//   align-items: center;
+//   width: 240px;
+//   height: 48px;
+//   padding: 8px 16px;
+//   background: ${({ theme }) => theme.colors.gr_background};
+//   color: ${({ theme }) => theme.colors.gr_titleActive};
+// `;
 
 const InputContainer = styled.div`
   display: flex;
