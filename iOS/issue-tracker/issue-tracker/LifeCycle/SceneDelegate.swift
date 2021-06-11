@@ -45,11 +45,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func straightToIssueTrackerScene(with loginManager: LoginKeyChainManager,_ loginInfo: LoginInfo) {
-        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
-        let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
-        issueTrackerTabBarController.configure(loginInfo: loginInfo)
-        
         DispatchQueue.main.async {
+            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
+            let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
+            issueTrackerTabBarController.configure(loginInfo: loginInfo)
             self.window?.rootViewController = issueTrackerTabBarController
         }
     }

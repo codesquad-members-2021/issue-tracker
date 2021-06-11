@@ -189,12 +189,11 @@ class LoginViewController: UIViewController {
     }
     
     private func presentIssueViewController(with loginInfo: LoginInfo) {
-        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
-        let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
-        issueTrackerTabBarController.configure(loginInfo: loginInfo)
-        issueTrackerTabBarController.modalPresentationStyle = .fullScreen
-
         DispatchQueue.main.async {
+            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
+            let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
+            issueTrackerTabBarController.configure(loginInfo: loginInfo)
+            issueTrackerTabBarController.modalPresentationStyle = .fullScreen
             self.present(issueTrackerTabBarController, animated: true, completion: nil)
         }
     }

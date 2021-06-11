@@ -10,6 +10,7 @@ import UIKit
 final class IssueTrackerTabBarCreator {
     
     private let childInfos: [TabBarChildInfo]
+    private var loginInfo: LoginInfo
     
     enum Title {
         static let issue = "이슈"
@@ -25,23 +26,33 @@ final class IssueTrackerTabBarCreator {
         static let myAccount = "person.circle"
     }
     
-    init(childInfos: [TabBarChildInfo]) {
+    init(childInfos: [TabBarChildInfo], loginInfo: LoginInfo) {
         self.childInfos = childInfos
+        self.loginInfo = loginInfo
     }
     
-    convenience init() {
+    convenience init(loginInfo: LoginInfo) {
         let issue = TabBarChildInfo(title: Title.issue, imageName: SystemImageName.issue, type: IssueViewController.self)
         let label = TabBarChildInfo(title: Title.label, imageName: SystemImageName.label, type: LabelViewController.self)
         let milestone = TabBarChildInfo(title: Title.milestone, imageName: SystemImageName.milestone, type: MilestoneViewController.self)
         let myAccount = TabBarChildInfo(title: Title.myAccount, imageName: SystemImageName.myAccount, type: MyAccountViewController.self)
-        self.init(childInfos: [issue, label, milestone, myAccount])
+        self.init(childInfos: [issue, label, milestone, myAccount], loginInfo: loginInfo)
     }
     
     private func generateChild(with info: TabBarChildInfo) -> UIViewController {
         let tabBarItem = UITabBarItem(title: info.title, image: info.image, selectedImage: nil)
         let childViewController = info.type.create()
         childViewController.tabBarItem = tabBarItem
-        return childViewController
+        
+        if let loginInfoContainer = childViewController as? LoginInfoContainer {
+            loginInfoContainer.setup(loginInfo: self.loginInfo)
+        }
+        
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.prefersLargeTitles = true 
+        navigationController.pushViewController(childViewController, animated: false)
+        
+        return navigationController
     }
 }
 

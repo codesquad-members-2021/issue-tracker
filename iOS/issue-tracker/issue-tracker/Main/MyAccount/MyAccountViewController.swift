@@ -35,6 +35,7 @@ class MyAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "내 계정"
         addWelcomeLabel()
         addLogoutButton()
     }
