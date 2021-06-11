@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.jwt;
 
-import jdk.internal.joptsimple.internal.Strings;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
