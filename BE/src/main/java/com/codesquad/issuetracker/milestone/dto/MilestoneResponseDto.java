@@ -1,6 +1,8 @@
 package com.codesquad.issuetracker.milestone.dto;
 
 import com.codesquad.issuetracker.milestone.domain.Milestone;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -8,24 +10,18 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-@ToString
 @Getter
+@ToString
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MilestoneResponseDto {
 
-    private UUID id;
+    private final UUID id;
 
-    private String title;
+    private final String title;
 
-    private String description;
+    private final String description;
 
-    private LocalDate dueDate;
-
-    public MilestoneResponseDto(UUID id, String title, String description, LocalDate dueDate) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-    }
+    private final LocalDate dueDate;
 
     public static MilestoneResponseDto fromEntity (Milestone entity) {
         return new MilestoneResponseDto(entity.getId(),
