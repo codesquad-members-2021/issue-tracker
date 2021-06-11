@@ -4,6 +4,7 @@ import { Avatar } from '@chakra-ui/avatar';
 
 import TextBox from './TextBox';
 import SelectBox from './SelectBox';
+import ButtonBox from './ButtonBox';
 
 function NewIssueContainer() {
   return (
@@ -13,7 +14,7 @@ function NewIssueContainer() {
         <TextBox />
         <SelectBox />
       </ContentsBox>
-      <ButtonBox></ButtonBox>
+      <ButtonBox />
     </Wrap>
   );
 }
@@ -33,11 +34,4 @@ const ContentsBox = styled.div`
   width: 100%;
   border-top: 1px solid ${({ theme }) => theme.colors.gr_line};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gr_line};
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  width: 100%;
-  height: 80px;
-  justify-content: flex-end;
 `;
