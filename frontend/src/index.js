@@ -4,10 +4,14 @@ import './index.css';
 import Theme from './style/Theme';
 import App from './App';
 import { ThemeProvider } from 'styled-components';
+import { RecoilRoot } from 'recoil';
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={Theme}>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
