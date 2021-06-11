@@ -3,8 +3,7 @@ package team02.issue_tracker.service;
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.issue.IssueRequest;
-import team02.issue_tracker.dto.wrapping.DataResponse;
-import team02.issue_tracker.dto.wrapping.ListDataResponse;
+import team02.issue_tracker.dto.wrapping.ApiResult;
 import team02.issue_tracker.dto.issue.DetailIssueResponse;
 import team02.issue_tracker.dto.issue.IssueResponse;
 import team02.issue_tracker.exception.IssueNotFoundException;
@@ -39,32 +38,29 @@ public class IssueService {
         this.commentRepository = commentRepository;
     }
 
-    public ListDataResponse getAllIssueResponses() {
+    public ApiResult<List<IssueResponse>> getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
-        return new ListDataResponse(issueResponses);
+        return ApiResult.success(issueResponses);
     }
 
-    public DataResponse getDetailIssueResponse(Long issueId) {
+    public ApiResult getDetailIssueResponse(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        DetailIssueResponse issueResponse = new DetailIssueResponse(issue);
-        return new DataResponse(issueResponse);
+        return ApiResult.success(new DetailIssueResponse(issue));
     }
 
-    public void addIssue(IssueRequest issueRequest) {
+    public ApiResult<String> addIssue(IssueRequest issueRequest) {
         User writer = userRepository.findById(issueRequest.getUserId()).orElseThrow(UserNotFoundException::new);
         Milestone milestone = milestoneRepository.findById(issueRequest.getMilestoneId()).orElseThrow(MilestoneNotFoundException::new);
 
         Issue issue = saveIssue(issueRequest, writer, milestone);
         saveComment(issueRequest, writer, issue);
+        issueLabelRepository.saveAll(getIssueLabels(issue, issueRequest.getLabelIds()));
+        issueAssigneeRepository.saveAll(getIssueAssignees(issue, issueRequest.getAssigneeIds()));
 
-        List<IssueLabel> issueLabels = getIssueLabels(issue, issueRequest.getLabelIds());
-        issueLabelRepository.saveAll(issueLabels);
-
-        List<IssueAssignee> issueAssignees = getIssueAssignees(issue, issueRequest.getAssigneeIds());
-        issueAssigneeRepository.saveAll(issueAssignees);
+        return ApiResult.ok();
     }
 
     private Issue saveIssue(IssueRequest issueRequest, User writer, Milestone milestone) {
