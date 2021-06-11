@@ -19,4 +19,8 @@ public class IssueDetailPageResponseDTO {
     private final List<Assignee> assignees;
     private final List<LabelDTO> labels;
     private final List<MilestoneDTO> milestones;
+
+//    public Static IssueDetailPageResponseDTO of() {
+//
+//    }
 }

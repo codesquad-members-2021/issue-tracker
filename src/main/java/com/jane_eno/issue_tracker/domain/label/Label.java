@@ -26,9 +26,7 @@ public class Label {
     private Color color;
 
     private String description;
-
-    //    @ManyToMany
-//    private List<Issue> issues
+    
     public static Label createLabel(LabelDTO labelDTO) {
         return Label.builder()
                 .name(labelDTO.getName())

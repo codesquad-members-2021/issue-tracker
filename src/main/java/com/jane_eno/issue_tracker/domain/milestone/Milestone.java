@@ -33,7 +33,15 @@ public class Milestone {
                 .title(milestoneDTO.getTitle())
                 .description(milestoneDTO.getDescription())
                 .dueDate(milestoneDTO.getDueDate())
-                .createdDateTime(milestoneDTO.getCreatedDateTime())
+                .createdDateTime(LocalDateTime.now())
                 .build();
+    }
+
+    public Long countOpenedIssues() {
+        return issues.stream().filter(Issue::isOpen).count();
+    }
+
+    public Long countClosedIssues() {
+        return issues.stream().filter(i->!i.isOpen()).count();
     }
 }

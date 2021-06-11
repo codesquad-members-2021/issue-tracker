@@ -2,6 +2,7 @@ package com.jane_eno.issue_tracker.web.dto.reqeust;
 
 import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.issue.Issue;
+import com.jane_eno.issue_tracker.domain.user.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -22,10 +23,10 @@ public class IssueRequestDTO {
     private List<Long> labels;
     private Long milestone;
 
-    public Issue toEntity() {
+    public Issue toEntity(User author) {
         return Issue.builder()
                 .title(title)
-                .comments(new ArrayList<>(Collections.singletonList(new Comment(comment, LocalDateTime.now()))))
+                .comments(new ArrayList<>(Collections.singletonList(new Comment(comment, LocalDateTime.now(), author))))
                 .build();
     }
 }
