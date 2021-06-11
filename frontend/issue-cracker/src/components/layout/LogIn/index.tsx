@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import ButtonList from '../../common/ButtonList';
-import InputList from '../../common/InputList';
+import ButtonList from '../../common/ButtonGroup';
+import InputGroup from '../../common/InputGroup';
 import RegisterButton from '../../common/RegisterButton';
 import Logo from '../../common/Logo';
 import {
@@ -31,8 +31,8 @@ const LogIn: FC = () => {
         </a>
         <TextBox>or</TextBox>
         <InputBox>
-          <InputList type={LARGE} name={ID} />
-          <InputList type={LARGE} name={PASSWORD} />
+          <InputGroup type={LARGE} name={ID} />
+          <InputGroup type={LARGE} name={PASSWORD} />
         </InputBox>
         <ButtonBox>
           <ButtonList

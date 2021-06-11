@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { SMALL_FILL, WRITING_ISSUE } from '../../../utils/const';
-import ButtonList from '../../common/ButtonList';
-import TabList from '../../common/TabList';
-import FilterBar from '../../common/FilterBar';
 import ButtonGroup from '../../common/ButtonGroup';
+import FilterBar from '../../common/FilterBar';
+import TapGroup from '../../common/TabGroup';
 
 const IssueNav: FC = () => {
   return (
@@ -15,11 +14,10 @@ const IssueNav: FC = () => {
         </SelectBox>
         <AnotherBox>
           <TabBox>
-            <TabList />
-            <ButtonGroup />
+            <TapGroup />
           </TabBox>
           <ButtonBox>
-            <ButtonList type={SMALL_FILL} name={WRITING_ISSUE} />
+            <ButtonGroup type={SMALL_FILL} name={WRITING_ISSUE} />
           </ButtonBox>
         </AnotherBox>
       </IssueNavContainer>

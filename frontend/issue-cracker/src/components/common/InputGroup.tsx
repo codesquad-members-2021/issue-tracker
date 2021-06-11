@@ -16,7 +16,7 @@ interface IInput {
   name: string;
 }
 
-const InputList: FC<Prop> = ({ type, name }: Prop) => {
+const InputGroup: FC<Prop> = ({ type, name }: Prop) => {
   const classes = useInputStyles();
   return {
     large: <InputLarge {...{ classes, name }} />,
@@ -26,7 +26,7 @@ const InputList: FC<Prop> = ({ type, name }: Prop) => {
   }[type] as JSX.Element;
 };
 
-export default InputList;
+export default InputGroup;
 
 function InputLarge({ classes, name }: IInput): React.ReactElement {
   return (

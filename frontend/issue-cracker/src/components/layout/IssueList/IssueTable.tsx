@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import ProgressBar from '../../common/ProgrerssBar';
 import IssueLabelGroup from '../../common/IssueLabelGroup';
-import InputList from '../../common/InputList';
+import InputGroup from '../../common/InputGroup';
 import TextArea from '../../common/TextArea';
-import ContainerHeader from '../../common/ContainerHeader';
+import IssueTableHeader from './IssueTableHeader';
+import IssueCell from './IssueCell';
 
 const IssueTable = (): JSX.Element => {
   return (
@@ -17,13 +18,14 @@ const IssueTable = (): JSX.Element => {
       <IssueLabelGroup type={'closed'} />
       <br />
       <br />
-      <InputList type="text" name="name" />
+      <InputGroup type="text" name="name" />
       <br />
       <br />
       <TextArea />
       <br />
       <br />
-      <ContainerHeader />
+      <IssueTableHeader />
+      <IssueCell />
     </IssueTableContainer>
   );
 };

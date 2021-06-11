@@ -5,8 +5,7 @@ interface Prop {
   type: string;
   name?: string;
 }
-//function : 아예 안써도 됨
-//const logo => : FuncitonComponent  , FC
+
 const Logo: FC<Prop> = ({ type, name }: Prop) => {
   return <LogoDiv type={type}>{name}</LogoDiv>;
 };

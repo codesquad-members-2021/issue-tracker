@@ -2,20 +2,17 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Logo from '../../common/Logo';
 import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
-import AccountIcon from '../../styles/svg/AccountIcon';
+import ProfileImg from '../../common/ProfileImg';
 const Header: FC = () => {
-  // const [profileURL, setProfileURL] = useState('');
-  // useEffect(() => {
-  //     const profileImg = localStorage.getItem('ProfileURL');
-  //     setProfileURL(profileImg);
-  // })
+  const profileURL = localStorage.getItem('profileImageUrl');
+  const profileName = localStorage.getItem('name');
+
   return (
     <HeaderDiv>
       <Logo type={MEDIUM} name={LOGO_TITLE} />
       <UserDiv>
-        <AccountName>ink-0</AccountName>
-        <AccountIcon />
-        {/* <ProfileImg /> */}
+        <AccountName>{profileName}</AccountName>
+        {profileURL && <ProfileImg src={profileURL} size="30" />}
       </UserDiv>
     </HeaderDiv>
   );

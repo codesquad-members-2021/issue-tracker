@@ -1,45 +1,124 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import FlagIcon from '@material-ui/icons/Flag';
-import styled from 'styled-components';
+import AddIcon from '@material-ui/icons/Add';
+import useButtonStyles from '../styles/ButtonStyles';
+import { ClassNameMap } from '@material-ui/styles/withStyles';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-  })
-);
+interface Prop {
+  type: string;
+  name: string;
+  color?: string;
+}
+type IButtonType = ClassNameMap<
+  | 'buttonLarge'
+  | 'buttonMedium'
+  | 'buttonSmallFill'
+  | 'buttonSmallBorder'
+  | 'buttonMediumText'
+  | 'buttonSmallText'
+>;
 
-const GroupSizesColors = (): JSX.Element => {
-  const classes = useStyles();
+interface IButton {
+  classes: IButtonType;
+  name: string;
+  color?: string;
+}
 
-  return (
-    <div className={classes.root}>
-      <ButtonGroup
-        size="large"
-        color="primary"
-        aria-label="large outlined primary button group"
-      >
-        <TabButton startIcon={<LocalOfferIcon />}>라벨</TabButton>
-        <TabButton startIcon={<FlagIcon />}>마일스톤</TabButton>
-      </ButtonGroup>
-    </div>
-  );
+const ButtonGroup: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
+  const classes = useButtonStyles();
+
+  return {
+    large: <ButtonLarge {...{ classes, name, color }} />,
+    medium: <ButtonMedium {...{ classes, name, color }} />,
+    smallFill: <ButtonSmallFill {...{ classes, name, color }} />,
+    smallBorder: <ButtonSmallBorder {...{ classes, name, color }} />,
+    mediumText: <ButtonMediumText {...{ classes, name, color }} />,
+    smallText: <ButtonSmallText {...{ classes, name, color }} />,
+  }[type] as JSX.Element;
 };
 
-export default GroupSizesColors;
+export default ButtonGroup;
 
-const TabButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+function ButtonLarge({ classes, name, color }: IButton) {
+  return (
+    <Button
+      variant="contained"
+      className={classes.buttonLarge}
+      style={{
+        backgroundColor: `${color}`,
+        color: `${color === 'white' ? '#222' : '#fff'}`,
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
+
+function ButtonMedium({ classes, name, color }: IButton) {
+  return (
+    <Button
+      variant="contained"
+      className={classes.buttonMedium}
+      style={{
+        backgroundColor: `${color}`,
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
+
+function ButtonSmallFill({ classes, name, color }: IButton) {
+  return (
+    <Button
+      variant="contained"
+      startIcon={<AddIcon />}
+      className={classes.buttonSmallFill}
+      style={{
+        backgroundColor: `${color}`,
+        color: `${color === 'white' ? '#222' : '#fff'}`,
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
+
+function ButtonSmallBorder({ classes, name, color }: IButton) {
+  return (
+    <Button
+      variant="outlined"
+      startIcon={<AddIcon />}
+      className={classes.buttonSmallBorder}
+      style={{
+        border: `1px solid ${color}`,
+      }}
+    >
+      {name}
+    </Button>
+  );
+}
+
+function ButtonMediumText({ classes, name }: IButton) {
+  return (
+    <Button
+      variant="text"
+      startIcon={<AddIcon />}
+      className={classes.buttonMediumText}
+    >
+      {name}
+    </Button>
+  );
+}
+
+function ButtonSmallText({ classes, name }: IButton) {
+  return (
+    <Button
+      variant="text"
+      startIcon={<AddIcon />}
+      className={classes.buttonSmallText}
+    >
+      {name}
+    </Button>
+  );
+}

@@ -27,13 +27,16 @@ const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
 
         console.log('data', data);
         localStorage.setItem('token', data.token);
-        // localStorage.setItem('ProfileURL', data.avatar_url);
 
         const token = localStorage.getItem('token');
-        if (!token) return null;
+        if (!token) return;
         console.log('token?"', token);
-        const decoded = jwtDecode(token);
+        const decoded =
+          jwtDecode<{ name: string; profileImageUrl: string }>(token);
         console.log(decoded);
+
+        localStorage.setItem('name', decoded.name);
+        localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
 
         history.push('/main/issue-list');
       } catch (error) {}
