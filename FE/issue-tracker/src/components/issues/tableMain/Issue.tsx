@@ -4,6 +4,8 @@ import { Avatar } from '@chakra-ui/avatar';
 import Label from '@components/common/Label';
 
 function Issue() {
+  const defaultAvatarPosition = '32px';
+
   return (
     <IssueWrap>
       <IssueContainer>
@@ -23,16 +25,17 @@ function Issue() {
       <AvatarContainer>
         <NoticeTag>
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
+        </NoticeTag>
+        <NoticeTag pos="20px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
+        </NoticeTag>
+        <NoticeTag pos="8px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
         </NoticeTag>
-        <NoticeTag>
-          <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
+        <NoticeTag pos="-4px">
+          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
         </NoticeTag>
-        <NoticeTag>
-          <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
-        </NoticeTag>
-        <NoticeTag>
+        <NoticeTag pos="-16px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
         </NoticeTag>
       </AvatarContainer>
@@ -41,6 +44,10 @@ function Issue() {
 }
 
 export default Issue;
+
+interface AvatarPos {
+  pos?: string | undefined;
+}
 
 const IssueWrap = styled.div`
   display: flex;
@@ -61,13 +68,17 @@ const IssueContainer = styled.div`
 
 const AvatarContainer = styled.div`
   display: flex;
+  justify-content: flex-end;
   margin-right: 30px;
-  width: 448px;
-  justify-content: space-evenly;
+  width: 76px;
+  height: 32px;
+  position: relative;
 `;
 
-const NoticeTag = styled.div`
+const NoticeTag = styled.div<AvatarPos>`
   width: auto;
+  position: absolute;
+  right: ${({ pos }) => pos || '32px'};
 `;
 
 const IssueTitle = styled.div`
