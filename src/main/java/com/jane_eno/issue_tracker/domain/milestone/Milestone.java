@@ -28,12 +28,28 @@ public class Milestone {
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues;
 
-    public static Milestone createMilestone(MilestoneDTO milestoneDTO) {
+    public static Milestone create(MilestoneDTO milestoneDTO) {
         return Milestone.builder()
+                .id(milestoneDTO.getId())
                 .title(milestoneDTO.getTitle())
                 .description(milestoneDTO.getDescription())
                 .dueDate(milestoneDTO.getDueDate())
-                .createdDateTime(milestoneDTO.getCreatedDateTime())
+                .createdDateTime(LocalDateTime.now())
                 .build();
+    }
+
+    public Milestone update(MilestoneDTO milestoneDTO) {
+        this.title = milestoneDTO.getTitle();
+        this.dueDate = milestoneDTO.getDueDate();
+        this.description = milestoneDTO.getDescription();
+        return this;
+    }
+
+    public Long countOpenedIssues() {
+        return issues.stream().filter(Issue::isOpen).count();
+    }
+
+    public Long countClosedIssues() {
+        return issues.stream().filter(i->!i.isOpen()).count();
     }
 }

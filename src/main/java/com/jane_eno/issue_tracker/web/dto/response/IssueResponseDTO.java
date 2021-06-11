@@ -23,7 +23,7 @@ public class IssueResponseDTO {
     private final List<LabelDTO> labels;
     private final String milestone;
 
-    public static IssueResponseDTO createIssueResponseDTO(Issue issue, List<Assignee> assignees, List<LabelDTO> labels) {
+    public static IssueResponseDTO of(Issue issue, List<Assignee> assignees, List<LabelDTO> labels) {
         return IssueResponseDTO.builder()
                 .id(issue.getId())
                 .title(issue.getTitle())

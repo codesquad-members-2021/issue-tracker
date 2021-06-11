@@ -4,9 +4,11 @@ import com.jane_eno.issue_tracker.auth.OAuth;
 import com.jane_eno.issue_tracker.auth.dto.AccessTokenResponseDTO;
 import com.jane_eno.issue_tracker.auth.dto.GitHubUserResponseDTO;
 import com.jane_eno.issue_tracker.auth.util.JwtUtil;
+import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.user.User;
 import com.jane_eno.issue_tracker.domain.user.UserRepository;
 import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
+import com.jane_eno.issue_tracker.web.dto.response.Assignee;
 import com.jane_eno.issue_tracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
     public List<User> findAssignees(List<Long> assigneeIdList) {
-        return assigneeIdList.stream().map(this::findByUserId).collect(Collectors.toList());
+        return userRepository.findAllById(assigneeIdList);
     }
 
     public UserResponseDTO login(String code, String userAgent) {
@@ -39,7 +41,7 @@ public class UserService {
     }
 
     public void logout(Long userId) {
-        User user = findByUserId(userId);
+        User user = findUserById(userId);
         user.removeToken();
         userRepository.save(user);
     }
@@ -54,13 +56,22 @@ public class UserService {
         );
     }
 
-    public User findByUserId(Long userId) {
-        return userRepository.findById(userId).orElseThrow(
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(
                 () -> new ElementNotFoundException("Cannot find user by given user id.")
         );
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<Assignee> usersToAssignees(Issue issue) {
+        return userRepository.findAll().stream()
+                .map(user -> Assignee.of(user, issue))
+                .collect(Collectors.toList());
     }
+
+    public List<Assignee> usersToAssignees() {
+        return userRepository.findAll().stream()
+                .map(Assignee::of)
+                .collect(Collectors.toList());
+    }
+
 }

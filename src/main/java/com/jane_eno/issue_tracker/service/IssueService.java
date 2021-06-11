@@ -3,27 +3,18 @@ package com.jane_eno.issue_tracker.service;
 import com.jane_eno.issue_tracker.domain.comment.Comment;
 import com.jane_eno.issue_tracker.domain.issue.Issue;
 import com.jane_eno.issue_tracker.domain.issue.IssueRepository;
-import com.jane_eno.issue_tracker.domain.label.Color;
 import com.jane_eno.issue_tracker.domain.label.Label;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.user.User;
+import com.jane_eno.issue_tracker.exception.ElementNotFoundException;
+import com.jane_eno.issue_tracker.exception.InvalidSearchRequestException;
 import com.jane_eno.issue_tracker.web.dto.reqeust.*;
 import com.jane_eno.issue_tracker.web.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.jane_eno.issue_tracker.web.dto.response.Assignee.createAssignee;
-import static com.jane_eno.issue_tracker.web.dto.response.IssueResponseDTO.createIssueResponseDTO;
-import static com.jane_eno.issue_tracker.web.dto.response.LabelDTO.createLabelDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -45,195 +36,148 @@ public class IssueService {
                 .closedIssue(closedIssues.size())
                 .build();
 
-        List<IssueResponseDTO> issues = openedIssues.stream()
-                .map(issue -> createIssueResponseDTO(issue, userToAssignee(issue), labelToLabelDTO(issue)))
+        List<IssueResponseDTO> issues = filterByStatus(status).stream()
+                .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
-
-        return IssuesResponseDTO.builder()
-                .count(count)
-                .issues(issues)
-                .build();
-
-
-//        IssueResponseDTO issue1 = IssueResponseDTO.
-//                builder()
-//                .id(1L)
-//                .title("[BE] 로그인 구현")
-//                .comment("로그인 구현해야 한다. 마감기한 촉박하다.")
-//                .author("Jane")
-//                .createdDateTime(LocalDateTime.now())
-//                .commentNumber(5)
-//                .assignees(new ArrayList<>(Arrays.asList(
-//                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
-//                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
-//                )))
-//                .labels(new ArrayList<>(Arrays.asList(
-//                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-//                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-//                )))
-//                .milestone("마스터즈 코스")
-//                .build();
-//        IssueResponseDTO issue2 = IssueResponseDTO.
-//                builder()
-//                .id(2L)
-//                .title("[FE] 로그인 구현")
-//                .comment("로그인 구현해야 한다. 마감기한 촉박하다.")
-//                .author("주나미")
-//                .createdDateTime(LocalDateTime.now())
-//                .commentNumber(5)
-//                .assignees(new ArrayList<>(Arrays.asList(
-//                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
-//                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
-//                )))
-//                .labels(new ArrayList<>(Arrays.asList(
-//                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-//                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-//                )))
-//                .milestone("마스터즈 코스")
-//                .build();
-//        IssueResponseDTO issue3 = IssueResponseDTO.
-//                builder()
-//                .id(3L)
-//                .title("[iOS] 로그인 구현")
-//                .comment("로그인 구현해야 한다. 마감기한 촉박하다.")
-//                .author("Ray")
-//                .createdDateTime(LocalDateTime.now())
-//                .commentNumber(5)
-//                .assignees(new ArrayList<>(Arrays.asList(
-//                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
-//                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
-//                )))
-//                .labels(new ArrayList<>(Arrays.asList(
-//                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-//                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-//                )))
-//                .milestone("마스터즈 코스")
-//                .build();
-//        List<IssueResponseDTO> issues = new ArrayList<>();
-//        issues.add(issue1);
-//        issues.add(issue2);
-//        issues.add(issue3);
-//        return IssuesResponseDTO.builder()
-//                .count(count)
-//                .issues(issues)
-//                .build();
+        return IssuesResponseDTO.of(count, issues);
     }
 
-    private List<Assignee> userToAssignee(Issue issue) {
-        return userService.findAll().stream()
-                .map(user -> createAssignee(user, issue))
-                .collect(Collectors.toList());
-    }
-
-    private List<LabelDTO> labelToLabelDTO(Issue issue) {
-        return labelService.findAllLabels().stream()
-                .map(label -> createLabelDTO(label, issue))
-                .collect(Collectors.toList());
-    }
-
-    public void changeIssueStatus(IssueNumbersRequestDTO requestDTO) {
-
+    public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
+        boolean newStatus = !statusToBoolean(status);
+        for (Long id : requestDTO.getIssueNumbers()) {
+            issueRepository.updateStatusBy(id, newStatus);
+        }
     }
 
     public IssueFormResponseDTO getIssueForm() {
         return IssueFormResponseDTO.builder()
-                .assignees(new ArrayList<>(Arrays.asList(
-                        new Assignee(1L, "imageString1", "eNoLJ", true),
-                        new Assignee(2L, "imageString2", "eNoLJ", false)
-                )))
-//                .labels(labelService.findAllLabels())
-                .milestones(milestoneService.findAllMilestones())
+                .assignees(userService.usersToAssignees())
+                .labels(labelService.findAllLabelDTOs())
+                .milestones(milestoneService.findAllMilestoneDTOs())
                 .build();
     }
 
     public void createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
-        User author = userService.findByUserId(userId);
+        User author = userService.findUserById(userId);
         List<Label> labels = labelService.findLabels(issueRequestDTO.getLabels());
         List<User> assignees = userService.findAssignees(issueRequestDTO.getAssignees());
         Milestone milestone = milestoneService.findMilestoneById(issueRequestDTO.getMilestone());
-        Issue issue = issueRequestDTO.toEntity().create(author, labels, assignees, milestone);
+        Issue issue = issueRequestDTO.toEntity(author).create(author, labels, assignees, milestone);
         System.out.println(issue.toString());
         issueRepository.save(issue);
     }
 
-    public IssueDetailPageResponseDTO getDetailPage(Long issueId) {
-        return IssueDetailPageResponseDTO.builder()
-                .id(1L)
-                .title("FE 이슈트래커 디자인 구현")
-                .status(true)
-                .createdDateTime(LocalDateTime.now())
-                .comments(new ArrayList<>(Arrays.asList(
-                        new CommentDTO(1L, "jane", "주나미 최고",
-                                LocalDateTime.of(LocalDate.of(2021, 6, 6), LocalTime.of(10, 10, 10)),
-                                true, false),
-                        new CommentDTO(1L, "kyle", "레이 최고",
-                                LocalDateTime.of(LocalDate.of(2021, 6, 6), LocalTime.of(10, 10, 10)),
-                                true, false)
-                )))
-                .assignees(new ArrayList<>(Arrays.asList(
-                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
-                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
-                )))
-                .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-                )))
-                .milestones(new ArrayList<>(Arrays.asList(
-                        new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
-                        new MilestoneDTO(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
-                )))
-                .build();
+    public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
+        Issue issue = findIssueById(issueId);
+        User loginUser = userService.findUserById(userId);
+        return IssueDetailPageResponseDTO.of(issue, commentsToCommentDTOs(loginUser, issue), userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue), milestoneService.findAllMilestoneDTOs());
     }
 
     public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
+        Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO.getTitle());
+        issueRepository.save(updatedIssue);
     }
 
     public AssigneesResponseDTO getAssignees(Long issueId) {
-        return AssigneesResponseDTO.builder()
-                .assignees(new ArrayList<>(Arrays.asList(
-                        new Assignee(1L, "https://avatars.githubusercontent.com/u/65053955?v=4", "junamee", true),
-                        new Assignee(2L, "https://avatars.githubusercontent.com/u/74946802?v=4", "torch-ray", false)
-                )))
-                .build();
+        Issue issue = findIssueById(issueId);
+        return new AssigneesResponseDTO(userService.usersToAssignees(issue));
     }
 
-    public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
+    public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO assigneesToUpdateRequestDTO) {
+        Issue issue = findIssueById(issueId);
+        List<Long> assigneeIds = assigneesToUpdateRequestDTO.getAssignees().stream()
+                .filter(Assignee::isAssigned)
+                .map(Assignee::getId)
+                .collect(Collectors.toList());
+        issue.updateAssignees(userService.findAssignees(assigneeIds));
+        issueRepository.save(issue);
     }
 
-    public LabelsInIssueResponseDTO getLabels(Long issueID) {
-        return LabelsInIssueResponseDTO.builder()
-                .labels(new ArrayList<>(Arrays.asList(
-                        new LabelDTO(1L, "bug", new Color("#FFFFFF", "#CCFFCC"), "bug fix", true),
-                        new LabelDTO(2L, "enhancement", new Color("#FFFFFF", "#99FFFF"), "enhancement", false)
-                ))).build();
+    public LabelsInIssueResponseDTO getLabels(Long issueId) {
+        Issue issue = findIssueById(issueId);
+        return new LabelsInIssueResponseDTO(labelService.labelsToLabelDTOs(issue));
     }
 
     public void updateLabels(Long issueId, LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
-
+        Issue issue = findIssueById(issueId);
+        List<Long> labelIds = labelsToUpdateRequestDTO.getLabels().stream()
+                .filter(LabelDTO::isChecked)
+                .map(LabelDTO::getId)
+                .collect(Collectors.toList());
+        issue.updateLabels(labelService.findLabels(labelIds));
+        issueRepository.save(issue);
     }
 
     public MilestonesInIssueResponseDTO getMilestones(Long issueId) {
-        return MilestonesInIssueResponseDTO.builder()
-                .milestones(new ArrayList<>(Arrays.asList(
-                        new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
-                        new MilestoneDTO(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
-                )))
-                .build();
+        Issue issue = findIssueById(issueId);
+        return new MilestonesInIssueResponseDTO(MilestoneDTO.of(issue.getMilestone()));
     }
 
-    public void updateMilestones(Long issueId, MilestonesToUpdateRequestDTO milestonesToUpdateRequestDTO) {
-
+    public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestone) {
+        Issue issue = findIssueById(issueId);
+        issue.updateMilestone(Milestone.create(milestone.getMilestone()));
+        issueRepository.save(issue);
     }
 
-    public void createComment(Long issueId, String comment) {
-
+    public void createComment(Long userId, Long issueId, CommentDTO commentDTO) {
+        User user = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        issueRepository.save(issue.addComment(Comment.create(user, commentDTO.getComment())));
     }
 
-    public void updateComment(Long issueId, String comment) {
-
+    public void updateComment(Long userId, Long issueId, CommentDTO commentDTO) {
+        User user = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        Comment targetComment = issue.getComments().stream()
+                .filter(comment -> comment.matchComment(commentDTO.getId()) && comment.matchAuthor(user))
+                .findFirst()
+                .orElseThrow(
+                        () -> new ElementNotFoundException("Cannot find comment by given id.")
+                );
+        targetComment.update(commentDTO.getComment());
+        issueRepository.save(issue);
     }
 
-    public void deleteComment(Long issueId, Long commentId) {
+    public void deleteComment(Long userId, Long issueId, Long commentId) {
+        User loginUser = userService.findUserById(userId);
+        Issue issue = findIssueById(issueId);
+        Comment targetComment = issue.getComments().stream()
+                .filter(comment -> comment.matchComment(commentId) && comment.matchAuthor(loginUser))
+                .findFirst()
+                .orElseThrow(
+                        () -> new ElementNotFoundException("Cannot find comment by given id.")
+                );
+        issue.deleteComment(targetComment);
+        issueRepository.save(issue);
+    }
 
+    public void deleteIssueById(Long id) {
+        issueRepository.deleteById(id);
+    }
+
+    private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {
+        return issue.getComments().stream()
+                .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
+                .collect(Collectors.toList());
+    }
+
+    private Issue findIssueById(Long id) {
+        return issueRepository.findById(id).orElseThrow(
+                () -> new ElementNotFoundException("Cannot find issue by given id."));
+    }
+
+    private List<Issue> filterByStatus(String status) {
+        boolean newStatus = statusToBoolean(status);
+        return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
+    }
+
+    private boolean statusToBoolean(String status) {
+        if (status.equals("open")) {
+            return true;
+        }
+        if (status.equals("close")) {
+            return false;
+        }
+        throw new InvalidSearchRequestException();
     }
 }

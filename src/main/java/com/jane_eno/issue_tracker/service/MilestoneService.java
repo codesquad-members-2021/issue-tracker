@@ -1,5 +1,6 @@
 package com.jane_eno.issue_tracker.service;
 
+import com.jane_eno.issue_tracker.domain.label.LabelRepository;
 import com.jane_eno.issue_tracker.domain.milestone.Milestone;
 import com.jane_eno.issue_tracker.domain.milestone.MilestoneRepository;
 import com.jane_eno.issue_tracker.web.dto.response.MilestoneDTO;
@@ -19,36 +20,35 @@ import java.util.stream.Collectors;
 public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
+    private final LabelRepository labelRepository;
+
+    public MilestonesResponseDTO read() {
+        List<MilestoneDTO> milestoneDTOs = milestoneRepository.findAll().stream()
+                .map(MilestoneDTO::of)
+                .collect(Collectors.toList());
+        return MilestonesResponseDTO.of(labelRepository.count(), count(), milestoneDTOs);
+    }
+
+    public void create(MilestoneDTO milestone) {
+        milestoneRepository.save(Milestone.create(milestone));
+    }
+
+    public void update(Long milestoneId, MilestoneDTO newMilestoneInfo) {
+        Milestone milestone = findMilestoneById(milestoneId);
+        milestone.update(newMilestoneInfo);
+        milestoneRepository.save(milestone);
+    }
+
+    public void delete(Long milestoneId) {
+        milestoneRepository.deleteById(milestoneId);
+    }
 
     public Milestone findMilestoneById(Long milestoneId) {
         return milestoneRepository.findById(milestoneId).orElseThrow(EntityExistsException::new);
     }
 
-    public List<MilestoneDTO> findAllMilestones() {
+    public List<MilestoneDTO> findAllMilestoneDTOs() {
         return milestoneRepository.findAll().stream().map(MilestoneDTO::of).collect(Collectors.toList());
-    }
-
-    public MilestonesResponseDTO read() {
-        return MilestonesResponseDTO.builder()
-                .labelsCount(3)
-                .milestonesCount(4)
-                .milestones(new ArrayList<>(Arrays.asList(
-                        new MilestoneDTO(1L, "마일스톤 제목", "레이블에 대한 설명", LocalDateTime.now(), null, 3, 1),
-                        new MilestoneDTO(2L, "로그인 하기", "내일까지 끝내야 한다.", LocalDateTime.now(), null, 4, 5)
-                )))
-                .build();
-    }
-
-    public void create(MilestoneDTO milestone) {
-        milestoneRepository.save(Milestone.createMilestone(milestone));
-    }
-
-    public void update(Long milestoneId, MilestoneDTO milestone) {
-
-    }
-
-    public void delete(Long milestoneId) {
-
     }
 
     public long count() {

@@ -20,13 +20,23 @@ public class LabelDTO {
     private final String description;
     private final boolean isChecked;
 
-    public static LabelDTO createLabelDTO(Label label, Issue issue) {
+    public static LabelDTO of(Label label, Issue issue) {
         return LabelDTO.builder()
                 .id(label.getId())
                 .name(label.getName())
                 .color(label.getColor())
                 .description(label.getDescription())
                 .isChecked(issue.checkLabels(label))
+                .build();
+    }
+
+    public static LabelDTO of(Label label) {
+        return LabelDTO.builder()
+                .id(label.getId())
+                .name(label.getName())
+                .color(label.getColor())
+                .description(label.getDescription())
+                .isChecked(false)
                 .build();
     }
 }
