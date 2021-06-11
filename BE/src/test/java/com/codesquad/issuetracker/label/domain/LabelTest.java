@@ -8,10 +8,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LabelTest {
 
+    private final Colors blackWhite = new Colors.Builder()
+            .backgroundColor("#000000")
+            .textColor("#ffffff")
+            .build();
+
     @Test
     @DisplayName("If Label name is null, throw IllegalArgumentException")
     void createIfLabelNameIsNull() {
-        assertThatThrownBy(() -> Label.create(null, "null Label", Colors.of("#000000", "#FFFFFF")))
+        assertThatThrownBy(() -> Label.create(null, "null Label", blackWhite))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Label name is empty or null");
     }
@@ -19,7 +24,7 @@ class LabelTest {
     @Test
     @DisplayName("If Label name is empty, throw IllegalArgumentException")
     void createIfLabelNameIsEmpty() {
-        assertThatThrownBy(() -> Label.create("", "empty Label", Colors.of("#000000", "#FFFFFF")))
+        assertThatThrownBy(() -> Label.create("", "empty Label", blackWhite))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Label name is empty or null");
     }
@@ -28,7 +33,7 @@ class LabelTest {
     @DisplayName("If Label name is too long, throw IllegalArgumentException")
     void createTooLongNamedLabel() {
         assertThatThrownBy(
-                () -> Label.create("1234567890123456789012345678901234567890123456789012", "Too Long name", Colors.of("#000000", "#FFFFFF")))
+                () -> Label.create("1234567890123456789012345678901234567890123456789012", "Too Long name", blackWhite))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Label name is too long (max 50)");
     }
@@ -37,8 +42,7 @@ class LabelTest {
     @DisplayName("If Label name is too long, throw IllegalArgumentException")
     void createTooLongDescriptionLabel() {
         assertThatThrownBy(() -> Label.create("Too Long Description Label",
-                "12345678901234567890123456789012345678901234567890121234567890123456789012345678901234567890123456789012",
-                Colors.of("#000000", "#FFFFFF")))
+                "12345678901234567890123456789012345678901234567890121234567890123456789012345678901234567890123456789012", blackWhite))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Label description is too long (max 100)");
     }
@@ -54,7 +58,7 @@ class LabelTest {
     @Test
     @DisplayName("Can create Label instance")
     void createValidInstance() {
-        Label documentation = Label.create("documentation", "문서화를 위한 레이블", Colors.of("#000000", "#ffffff"));
+        Label documentation = Label.create("documentation", "문서화를 위한 레이블", blackWhite);
         assertThat(documentation).isNotNull();
         assertThat(documentation.getName()).isEqualTo("documentation");
         assertThat(documentation.getDescription()).isEqualTo("문서화를 위한 레이블");
@@ -63,8 +67,14 @@ class LabelTest {
     @Test
     @DisplayName("Update Label")
     void updateLabel() {
-        Label label = Label.create("feat", "기능", Colors.of("#123456", "#567890"));
-        Label updateInfo = Label.create("feature", "기능 구현", Colors.of("#111111", "#EEEEEE"));
+        Label label = Label.create("feat", "기능", new Colors.Builder()
+                .backgroundColor("#123456")
+                .textColor("#567890")
+                .build());
+        Label updateInfo = Label.create("feature", "기능 구현", new Colors.Builder()
+                        .backgroundColor("#111111")
+                        .textColor("#EEEEEE")
+                        .build());
 
         label.update(updateInfo);
 

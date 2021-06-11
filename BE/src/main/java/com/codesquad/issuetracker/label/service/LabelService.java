@@ -2,7 +2,7 @@ package com.codesquad.issuetracker.label.service;
 
 import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.label.dto.LabelDto;
-import com.codesquad.issuetracker.label.dto.LabelRequest;
+import com.codesquad.issuetracker.label.dto.LabelRequestDto;
 import com.codesquad.issuetracker.label.dto.LabelWrapper;
 import com.codesquad.issuetracker.label.dto.LabelsWrapper;
 import com.codesquad.issuetracker.label.repository.LabelRepository;
@@ -21,18 +21,18 @@ public class LabelService {
         this.labelRepository = labelRepository;
     }
 
-    public LabelsWrapper labels() {
+    public LabelsWrapper readAllLabels() {
         return LabelsWrapper.wrap(labelRepository.findAll().stream()
                 .map(LabelDto::fromEntity)
                 .collect(Collectors.toList()));
     }
 
-    public LabelWrapper create(LabelRequest newLabel) {
+    public LabelWrapper createLabels(LabelRequestDto newLabel) {
         return LabelWrapper.wrap(LabelDto.fromEntity(labelRepository.save(newLabel.toEntity())));
     }
 
     @Transactional
-    public LabelWrapper update(UUID id, LabelRequest updatingLabelInfo) {
+    public LabelWrapper updateLabel(UUID id, LabelRequestDto updatingLabelInfo) {
         Label updatingLabel = labelRepository.findById(id)
                 //TODO: Exception
                 .orElseThrow(() -> new RuntimeException("Not Found"));
@@ -41,7 +41,7 @@ public class LabelService {
         return LabelWrapper.wrap(LabelDto.fromEntity(updatingLabel));
     }
 
-    public void delete(UUID id) {
+    public void deleteLabel(UUID id) {
         Label deletingLabel = labelRepository.findById(id)
                 //TODO: Exception
                 .orElseThrow(() -> new RuntimeException("Not Found"));

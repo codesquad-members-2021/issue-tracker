@@ -10,9 +10,26 @@ class ColorsTest {
     @Test
     @DisplayName("If Color Format is invalid, throw exception.")
     void invalid() {
-        assertThatThrownBy(() -> Colors.of("#flkjzv", "#444444")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Colors.of("#000000", "444444")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Colors.of("233jka500000", "444444")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            new Colors.Builder()
+                    .backgroundColor("#flkjzv")
+                    .textColor("#444444")
+                    .build();
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> {
+            new Colors.Builder()
+                    .backgroundColor("233jka500000")
+                    .textColor("444444")
+                    .build();
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> {
+            new Colors.Builder()
+                    .backgroundColor("#000000")
+                    .textColor("444444")
+                    .build();
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -21,7 +38,10 @@ class ColorsTest {
         String backgroundColor = "#ffffff";
         String textColor = "#000000";
 
-        Colors myColor = Colors.of("#ffffff", "#000000");
+        Colors myColor = new Colors.Builder()
+                .backgroundColor("#ffffff")
+                .textColor("#000000")
+                .build();
 
         assertThat(myColor.getBackgroundColor()).isEqualTo(backgroundColor);
         assertThat(myColor.getTextColor()).isEqualTo(textColor);

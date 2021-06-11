@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.label.domain;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -8,35 +8,49 @@ import java.util.regex.Pattern;
 
 @Embeddable
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
 public class Colors {
 
-    private static final Pattern COLOR = Pattern.compile("#[0-9A-Fa-f]{6}");
-
+    @NonNull
     @Column(name = "LABEL_BACKGROUND_COLOR", nullable = false)
     private String backgroundColor;
 
+    @NonNull
     @Column(name = "LABEL_TEXT_COLOR", nullable = false)
     private String textColor;
 
-    protected Colors() {
-
+    private Colors(Builder builder) {
+        this.backgroundColor = builder.backgroundColor;
+        this.textColor = builder.textColor;
     }
 
-    private Colors(String backgroundColor, String textColor) {
-        this.backgroundColor = backgroundColor;
-        this.textColor = textColor;
-    }
+    public static class Builder {
+        private static final Pattern COLOR = Pattern.compile("#[0-9A-Fa-f]{6}");
 
-    public static Colors of(String backgroundColor, String textColor) {
-        checkColorFormat(backgroundColor);
-        checkColorFormat(textColor);
+        private String backgroundColor;
+        private String textColor;
 
-        return new Colors(backgroundColor, textColor);
-    }
+        public Builder backgroundColor(String backgroundColor) {
+            checkColorFormat(backgroundColor);
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
 
-    private static void checkColorFormat(String textColor) {
-        if (!COLOR.matcher(textColor).matches()) {
-            throw new IllegalArgumentException("Color Format is invalid");
+        public Builder textColor(String textColor) {
+            checkColorFormat(textColor);
+            this.textColor = textColor;
+            return this;
+        }
+
+        private static void checkColorFormat(String textColor) {
+            if (!COLOR.matcher(textColor).matches()) {
+                throw new IllegalArgumentException("Color Format is invalid");
+            }
+        }
+
+        public Colors build() {
+            return new Colors(this);
         }
     }
 }

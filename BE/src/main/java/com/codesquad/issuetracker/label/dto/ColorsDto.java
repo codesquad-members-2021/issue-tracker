@@ -2,24 +2,25 @@ package com.codesquad.issuetracker.label.dto;
 
 
 import com.codesquad.issuetracker.label.domain.Colors;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ColorsDto {
 
-    private final String backgroundColor;
-    private final String textColor;
-
-    private ColorsDto(String backgroundColor, String textColor) {
-        this.backgroundColor = backgroundColor;
-        this.textColor = textColor;
-    }
+    private String backgroundColor;
+    private String textColor;
 
     public static ColorsDto of(Colors colors) {
         return new ColorsDto(colors.getBackgroundColor(), colors.getTextColor());
     }
 
     public Colors toColors() {
-        return Colors.of(backgroundColor, textColor);
+        return new Colors.Builder()
+                .backgroundColor(backgroundColor)
+                .textColor(textColor)
+                .build();
     }
 }

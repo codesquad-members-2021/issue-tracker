@@ -14,6 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 class LabelRepositoryTest {
 
+    private final Colors blackWhite = new Colors.Builder()
+            .backgroundColor("#000000")
+            .textColor("#ffffff")
+            .build();
+
     @Autowired
     private LabelRepository labelRepository;
 
@@ -22,7 +27,7 @@ class LabelRepositoryTest {
 
     @Test
     void create() {
-        Label label = Label.create("document", "문서에 대한 레이블", Colors.of("#000000", "#FFFFFF"));
+        Label label = Label.create("document", "문서에 대한 레이블", blackWhite);
         label = labelRepository.save(label);
 
         entityManager.flush();

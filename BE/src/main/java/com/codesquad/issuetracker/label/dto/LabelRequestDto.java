@@ -2,9 +2,13 @@ package com.codesquad.issuetracker.label.dto;
 
 import com.codesquad.issuetracker.label.domain.Label;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-public class LabelRequest {
+@NoArgsConstructor
+@Setter
+public class LabelRequestDto {
 
     private String name;
     private String description;

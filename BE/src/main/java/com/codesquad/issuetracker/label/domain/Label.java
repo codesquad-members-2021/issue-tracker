@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.label.domain;
 
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Label {
 
     @Id
@@ -17,23 +19,17 @@ public class Label {
     @Column(columnDefinition = "BINARY(16)", name = "LABEL_ID")
     private UUID id;
 
+    @NonNull
     @Column(name = "LABEL_NAME", unique = true, length = 50, nullable = false)
     private String name;
 
-    @Column(name = "LABEL_DESCRIPTION", length = 100, nullable = true)
+    @NonNull
+    @Column(name = "LABEL_DESCRIPTION", length = 100, nullable = false)
     private String description;
 
+    @NonNull
     @Embedded
     private Colors colors;
-
-    protected Label() {
-    }
-
-    private Label(String name, String description, Colors colors) {
-        this.name = name;
-        this.description = description;
-        this.colors = colors;
-    }
 
     public static Label create(String name, String description, Colors colors) {
         checkName(name);

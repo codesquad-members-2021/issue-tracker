@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.label.controller;
 
-import com.codesquad.issuetracker.label.dto.LabelRequest;
+import com.codesquad.issuetracker.label.dto.LabelRequestDto;
 import com.codesquad.issuetracker.label.dto.LabelWrapper;
 import com.codesquad.issuetracker.label.dto.LabelsWrapper;
 import com.codesquad.issuetracker.label.service.LabelService;
@@ -20,24 +20,24 @@ public class LabelController {
     }
 
     @GetMapping
-    public LabelsWrapper labels() {
-        return labelService.labels();
+    public LabelsWrapper readAllLabels() {
+        return labelService.readAllLabels();
     }
 
     @PostMapping
-    public LabelWrapper create(@RequestBody LabelRequest labelRequest) {
-        return labelService.create(labelRequest);
+    public LabelWrapper createLabels(@RequestBody LabelRequestDto labelRequestDto) {
+        return labelService.createLabels(labelRequestDto);
     }
 
     @PutMapping("/{id}")
-    public LabelWrapper update(@PathVariable UUID id, @RequestBody LabelRequest labelRequest) {
-        return labelService.update(id, labelRequest);
+    public LabelWrapper updateLabel(@PathVariable UUID id, @RequestBody LabelRequestDto labelRequestDto) {
+        return labelService.updateLabel(id, labelRequestDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
-        labelService.delete(id);
+    public void deleteLabel(@PathVariable UUID id) {
+        labelService.deleteLabel(id);
     }
 
 }
