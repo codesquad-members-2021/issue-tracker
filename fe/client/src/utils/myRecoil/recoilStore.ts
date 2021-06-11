@@ -5,6 +5,7 @@ type InitialStateType =
   number |
   object |
   boolean |
+  Set<number> |
   Array<string> |
   Array<number> |
   Array<Array<number>> |
@@ -16,7 +17,7 @@ const recoilStore = {
   observers: {} as ObserverFuncType,
   data: {} as DataType,
   subscribe({ key, fn }: { key: string, fn: Function }) {
-    if (key in this.observers) return;
+    // if (key in this.observers) return;
     this.observers[key] = this.observers[key] || [];
     this.observers[key].push(fn);
   },
