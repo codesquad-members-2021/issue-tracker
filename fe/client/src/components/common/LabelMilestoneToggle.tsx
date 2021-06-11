@@ -10,7 +10,7 @@ const LabelMilestoneToggle = () => {
         <LabelBelongSpan> <img src={LabelIcon} alt="" /> &nbsp; 레이블 </LabelBelongSpan>
       </ToggleItem>
       <ToggleItem>
-        <RadioButton type="radio" name="labelMilestone" id="" />
+        <RadioButton type="radio" name="labelMilestone" />
         <LabelBelongSpan>  <img src={MilestoneIcon} alt="" /> &nbsp; 마일스톤</LabelBelongSpan>
       </ToggleItem>
     </ToggleWrapper>
@@ -23,7 +23,6 @@ const ToggleWrapper = styled.div`
   height: 40px;
   font-weight: 700;
   color: #6e7191;
-  
 `;
 
 const ToggleItem = styled.label`

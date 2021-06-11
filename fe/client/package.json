@@ -51,5 +51,6 @@
     "@types/styled-components": "^5.1.10",
     "craco-alias": "^3.0.1",
     "eslint-plugin-import": "^2.23.4"
-  }
+  },
+  "proxy": "https://issue-tracker-swagger.herokuapp.com"
 }

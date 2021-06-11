@@ -4,12 +4,15 @@ import { useCallback } from 'react';
 import { IssueListItemType } from '@components/common/types/APIType';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import { issueCheckedItemAtom, CheckBoxItemType, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
+type ListItemType = {
+  issueItem: IssueListItemType
+}
 
-const ListItem = ({ id }: { id: number }) => {
+const ListItem = ({ issueItem }: ListItemType) => {
   const [checkedState, setCheckedState] = useState(false);
   const [, setCheckedIssueItems] = useRecoilState(issueCheckedItemAtom);
   const [isAllIssueChecked] = useRecoilState(issueCheckedAllItemAtom);
-
+  
   const handleCheckChange = useCallback(({ id }) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedState(checkedState => !checkedState);
     const isChecked = event.target.checked;
@@ -25,7 +28,7 @@ const ListItem = ({ id }: { id: number }) => {
 
   return (
     <ListItemWrapper>
-      <CheckBox type="checkbox" checked={checkedState} onChange={handleCheckChange({ id })} />
+      <CheckBox type="checkbox" checked={checkedState} onChange={handleCheckChange({ id: issueItem.id })} />
     </ListItemWrapper>
   )
 }

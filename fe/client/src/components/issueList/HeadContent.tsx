@@ -6,8 +6,6 @@ import { InputAdornment, InputBase } from '@material-ui/core';
 import SearchIcon from '@/Icons/Search.svg';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@/components/common/FilterTab';
-import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom, FilterBooleanType } from '@/components/common/atoms/filterAtom';
 
 const issueFilterList = [
   '열린 이슈',
@@ -17,14 +15,11 @@ const issueFilterList = [
   '닫힌 이슈'
 ];
 
-const HeadContent = () => {
-  const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
-  const { issue, manager, label, milestone, writer } = filterModalState;
+type HeadContentType = {
+  handleClickShowFilterModal: (title: string) => () => void;
+}
 
-  const handleClickShowFilterModal = useCallback((title: string) => () => {
-    setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
-  }, []);
-
+const HeadContent = ({ handleClickShowFilterModal }: HeadContentType) => {
   return (
     <HeadWrapper>
       <FilterWrapper>
