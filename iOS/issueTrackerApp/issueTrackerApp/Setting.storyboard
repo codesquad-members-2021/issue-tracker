@@ -11,12 +11,38 @@
         <!--설정-->
         <scene sceneID="HeK-jT-NDK">
             <objects>
-                <viewController id="eqa-5I-1rK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingViewController" id="eqa-5I-1rK" customClass="SettingViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iok-xu-Nmk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVm-hG-ATx">
+                                <rect key="frame" x="24" y="798" width="366" height="44"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.61960784313725492" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xqu-vj-GU9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="로그아웃">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="eqa-5I-1rK" eventType="touchUpInside" id="LzR-IP-5Hn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fpC-6j-hEW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xVm-hG-ATx" firstAttribute="leading" secondItem="fpC-6j-hEW" secondAttribute="leading" constant="24" id="1pT-OL-Gg4"/>
+                            <constraint firstItem="fpC-6j-hEW" firstAttribute="bottom" secondItem="xVm-hG-ATx" secondAttribute="bottom" constant="20" id="jxu-VV-bvw"/>
+                            <constraint firstItem="fpC-6j-hEW" firstAttribute="trailing" secondItem="xVm-hG-ATx" secondAttribute="trailing" constant="24" id="m0B-8L-x1S"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="설정" id="51A-KD-1Wy"/>
                 </viewController>
