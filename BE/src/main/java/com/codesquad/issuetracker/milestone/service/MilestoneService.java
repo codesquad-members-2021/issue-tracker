@@ -37,7 +37,7 @@ public class MilestoneService {
     public MilestonesWrapper readAllMilestones() {
         List<Milestone> milestoneList = milestoneRepository.findAll();
         List<MilestoneResponseDto> milestoneResponseDtoList = milestoneList.stream()
-                .map(milestone -> MilestoneResponseDto.fromEntity(milestone))
+                .map(MilestoneResponseDto::fromEntity)
                 .collect(Collectors.toList());
 
         return MilestonesWrapper.create(milestoneResponseDtoList);
