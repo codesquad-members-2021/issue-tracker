@@ -35,6 +35,10 @@ class MainFlowCoordinator: NSObject {
         loginFlowCoordinator.parent = self
         configure(viewController: mainViewController)
     }
+    
+    func logOut() {
+        loginFlowCoordinator.mainViewControllerRequiresAuthentication(mainTabBarController, isAppLaunch: false)
+    }
 }
 
 extension MainFlowCoordinator: Coordinator {

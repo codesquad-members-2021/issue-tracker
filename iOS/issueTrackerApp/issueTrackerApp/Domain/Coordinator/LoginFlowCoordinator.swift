@@ -9,13 +9,8 @@ import UIKit
 import AuthenticationServices
 
 class LoginFlowCoordinator: NSObject, ASWebAuthenticationPresentationContextProviding {
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return ASPresentationAnchor()
-    }
-    
     weak var parent: Coordinator?
     weak var loginViewController: UIViewController?
-    private var authenticationSession: ASWebAuthenticationSession?
     
     func mainViewControllerRequiresAuthentication(_ viewController: MainTabBarController, isAppLaunch: Bool) {
         let newViewController = viewController.storyboard?.instantiateViewController(withIdentifier: ViewControllerIDs.loginViewController)
@@ -28,7 +23,7 @@ class LoginFlowCoordinator: NSObject, ASWebAuthenticationPresentationContextProv
     }
     
     func loginViewController(_ viewController: LoginViewController, didStartAuthorizationWithState state: String) {
-        let url = GitHubEndpoint.authorizationUrl(with: state)
+        let url = GitHubEndpoint.authorizationUrl()
 
         let session = ASWebAuthenticationSession(url: url, callbackURLScheme: GitHubEndpoint.authorizationCallbackURLScheme)
         { callbackURL, error in
@@ -44,6 +39,14 @@ class LoginFlowCoordinator: NSObject, ASWebAuthenticationPresentationContextProv
     
     func loginViewControllerDidFinishAuthorization() {
         loginViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func loginViewControllerDidSignOut() {
+        UIApplication.shared.open(GitHubEndpoint.signOutURL, options: [:], completionHandler: nil)
+    }
+    
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return ASPresentationAnchor()
     }
 }
 
