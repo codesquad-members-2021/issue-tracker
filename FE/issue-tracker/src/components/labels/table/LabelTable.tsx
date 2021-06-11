@@ -7,9 +7,9 @@ function LabelTable() {
   return (
     <LabelTableWrap>
       <TableHeader />
-      <LabelCell last={false} />
+      <LabelCell isLastItemStyle={false} />
       <EditLabel />
-      <LabelCell last={true} />
+      <LabelCell isLastItemStyle={true} />
     </LabelTableWrap>
   );
 }
