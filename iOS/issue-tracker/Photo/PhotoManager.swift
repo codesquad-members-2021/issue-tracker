@@ -13,7 +13,7 @@ class PhotoManager {
     var allPhotos: PHFetchResult<PHAsset>
     static var shared = PhotoManager()
     
-    private init(){
+    private init() {
         allPhotos = PHFetchResult<PHAsset>()
     }
     

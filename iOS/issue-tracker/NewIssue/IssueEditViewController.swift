@@ -11,8 +11,8 @@ class IssueEditViewController: UIViewController, ReuseIdentity {
 
     @IBOutlet weak var additionalInfoTable: UITableView!
     @IBOutlet weak var textContent: UITextView!
-    weak var coordinator: Coordinator?
     
+    weak var coordinator: Coordinator?
     private var tableDelegate = AdditionalTableDelegate()
     private var tableDataSource = AdditionalTableViewDataSource()
     
@@ -29,19 +29,19 @@ class IssueEditViewController: UIViewController, ReuseIdentity {
         configureTable()
     }
     
-    private func registerNib(){
+    private func registerNib() {
         additionalInfoTable.register(UINib(nibName: AdditionalTableViewCell.nibName, bundle: Bundle.main),
                                      forCellReuseIdentifier: AdditionalTableViewCell.reuseIdentifier)
         
     }
     
-    private func configureTable(){
+    private func configureTable() {
         self.additionalInfoTable.translatesAutoresizingMaskIntoConstraints = false
         self.additionalInfoTable.tableFooterView = UIView()
     }
 
     @objc
-    func insertPhoto(){
+    func insertPhoto() {
         self.photoPicker.present()
     }
     

@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     }()
     
     var githubLogInButton : UIButton = {
-        let button = UIButton()//frame: CGRect.init(origin: CGPoint.init(x: 626, y: 16), size: CGSize.init(width: 343, height: 56)))
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .black
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
@@ -38,7 +38,8 @@ class LoginViewController: UIViewController {
         configureButton()
     }
     
-    @objc func handleLogInWithAppleID(){
+    @objc
+    func handleLogInWithAppleID() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
         
@@ -47,11 +48,12 @@ class LoginViewController: UIViewController {
         controller.performRequests()
     }
     
-    @objc func handleLogInWithGithubID(){
+    @objc
+    func handleLogInWithGithubID() {
         
     }
 
-    private func configureButton(){
+    private func configureButton() {
         self.view.addSubview(appleLogInButton)
         self.view.addSubview(githubLogInButton)
         
@@ -72,6 +74,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
