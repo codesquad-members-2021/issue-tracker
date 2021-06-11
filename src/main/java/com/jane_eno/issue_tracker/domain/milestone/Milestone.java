@@ -38,6 +38,13 @@ public class Milestone {
                 .build();
     }
 
+    public Milestone update(MilestoneDTO milestoneDTO) {
+        this.title = milestoneDTO.getTitle();
+        this.dueDate = milestoneDTO.getDueDate();
+        this.description = milestoneDTO.getDescription();
+        return this;
+    }
+
     public Long countOpenedIssues() {
         return issues.stream().filter(Issue::isOpen).count();
     }
