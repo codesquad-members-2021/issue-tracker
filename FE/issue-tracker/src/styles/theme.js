@@ -56,6 +56,19 @@ const newLabelMilestoneWrap = css`
   }
 `;
 
+const issueTag = css`
+  ${({ theme }) => theme.flexCenter};
+  width: 100px;
+  height: 40px;
+  margin-right: 8px;
+  border-radius: 30px;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  .icon {
+    margin-right: 5px;
+  }
+`;
+
 const customTheme = {
   ...theme,
   colors: {
@@ -88,6 +101,7 @@ const customTheme = {
   cellWrap,
   tableHeader,
   newLabelMilestoneWrap,
+  issueTag,
 };
 
 export default customTheme;
