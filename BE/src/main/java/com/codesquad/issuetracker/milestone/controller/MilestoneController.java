@@ -25,7 +25,7 @@ public class MilestoneController {
     }
 
     @GetMapping
-    public MilestonesWrapper readMilestones() {
+    public MilestonesWrapper readAllMilestones() {
         return milestoneService.readAllMilestones();
     }
 
