@@ -3,22 +3,32 @@ import styled from "styled-components";
 import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
+import theme from "styles/theme";
+import { useEffect } from "react";
 
-const IssuesHeader = () => {
+const IssuesHeader = ({}) => {
+	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
 	const [isIssueSelected, setIsIssueSelected] = useState(false); // 상태 위치 협의 후 수정
+	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
+	const checkAllIssue = () => {
+		setIsAllIssueSelected(!isAllIssueSelected);
+	};
+
+	useEffect(() => {
+		isAllIssueSelected && console.log("issue checkbox all selected");
+	}, [isAllIssueSelected]);
+
 	return (
 		<StyledIssuesHeader>
 			<CheckBox>
-				<input type="checkbox" />
+				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
 			<FilterOpenClose>
 				<TextIconDivider>
-					<Alert />
-					열린 이슈(n){" "}
+					<Alert /> 열린 이슈(n)
 				</TextIconDivider>
 				<TextIconDivider>
-					<Archive />
-					닫힌 이슈(n){" "}
+					<Archive /> 닫힌 이슈(n)
 				</TextIconDivider>
 			</FilterOpenClose>
 			<FilterMain>
@@ -60,12 +70,14 @@ const StyledIssuesHeader = styled.div`
 	display: grid;
 	align-items: center;
 	height: 64px;
-	grid-template-columns: 0.5fr 1.5fr 8fr;
+	border: 1px solid ${theme.grayScale.line};
+	border-radius: ${theme.border_radius.lg} ${theme.border_radius.lg} 0px 0px;
+	grid-template-columns: 0.5fr 1.5fr 8.3fr;
 `;
 
 const FilterOpenClose = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 `;
 
 const FilterMain = styled.div`
@@ -85,7 +97,7 @@ const FiltersWrapper = styled.div`
 	justify-content: space-around;
 `;
 
-const CheckBox = styled.div`
+export const CheckBox = styled.div`
 	display: flex;
 	justify-content: center;
 `;
