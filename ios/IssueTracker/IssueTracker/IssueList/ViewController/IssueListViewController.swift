@@ -9,7 +9,7 @@ import UIKit
 
 class IssueListViewController: UIViewController {
     
-    @IBOutlet private weak var issueNumLabel: UILabel!
+    @IBOutlet private weak var issueLabel: UILabel!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var issueTableView: UITableView!
     @IBOutlet private weak var filterButton: UIButton!
@@ -17,6 +17,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet private weak var plusButton: UIButton!
     
     @IBOutlet weak var editableView: UIView!
+    @IBOutlet weak var issueNumLabel: UILabel!
     @IBOutlet weak var checkAllButton: UIButton!
     private var isCheckAll: Bool!
     
@@ -75,9 +76,13 @@ extension IssueListViewController {
 extension IssueListViewController {
     
     @IBAction private func editButtonTouched(_ sender: UIButton) {
+        fillCheckButton(issueTableView)
+        changeIssueNumLabel(issueTableView)
+        
         issueTableView.isEditing = !issueTableView.isEditing
         issueTableView.setEditing(issueTableView.isEditing, animated: true)
         editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
+        issueLabel.textWithAnimation(text: issueTableView.isEditing ? "이슈 선택" : "이슈", 0.2)
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
         editableView.setIsHidden(!issueTableView.isEditing, animated: true)
     }
@@ -97,14 +102,17 @@ extension IssueListViewController {
                 issueTableView.selectRow(at: $0, animated: true, scrollPosition: .none)
             }
         }
+        changeIssueNumLabel(issueTableView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         fillCheckButton(tableView)
+        changeIssueNumLabel(tableView)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         fillCheckButton(tableView)
+        changeIssueNumLabel(tableView)
     }
     
     private func fillCheckButton(_ tableView: UITableView) {
@@ -114,6 +122,17 @@ extension IssueListViewController {
             checkAllButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
         } else {
             checkAllButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+    }
+    
+    private func changeIssueNumLabel(_ tableView: UITableView) {
+        let issueNum = tableView.indexPathsForSelectedRows?.count
+        if issueNum == nil {
+            issueNumLabel.textWithAnimation(text: "이슈를 선택하세요", 0.15)
+            issueNumLabel.textColor = .secondaryLabel
+        } else {
+            issueNumLabel.textWithAnimation(text: "\(issueNum!)개의 이슈가 선택됨", 0.15)
+            issueNumLabel.textColor = .label
         }
     }
     

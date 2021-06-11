@@ -34,7 +34,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="이슈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWm-lO-Mc5">
-                                <rect key="frame" x="23.999999999999996" y="106" width="60.666666666666657" height="42"/>
+                                <rect key="frame" x="20" y="106" width="65" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Ezs-61-m9x"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -132,11 +135,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YWm-lO-Mc5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1xL-9h-nTM"/>
+                            <constraint firstItem="YWm-lO-Mc5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1xL-9h-nTM"/>
                             <constraint firstItem="lz8-qn-0a9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="37B-dR-s5k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0KX-iF-s2p" secondAttribute="bottom" id="546-ug-d4l"/>
                             <constraint firstItem="Fxi-wH-60j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8j3-EY-tut"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YWm-lO-Mc5" secondAttribute="trailing" constant="305.33333333333337" id="Af1-O3-wLj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nsR-uf-1Tl" secondAttribute="trailing" constant="24" id="DkN-GV-3eG"/>
                             <constraint firstItem="nsR-uf-1Tl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cak-ug-Cwp" secondAttribute="trailing" constant="8" symbolic="YES" id="LmH-r4-C70"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SWi-eK-cor" secondAttribute="trailing" constant="24" id="M2S-A6-zyS"/>
@@ -163,7 +165,8 @@
                         <outlet property="editButton" destination="nsR-uf-1Tl" id="cp1-ae-vMc"/>
                         <outlet property="editableView" destination="Fxi-wH-60j" id="cb4-yy-PpK"/>
                         <outlet property="filterButton" destination="Cak-ug-Cwp" id="g2p-M3-Wsl"/>
-                        <outlet property="issueNumLabel" destination="YWm-lO-Mc5" id="x0o-hS-TUH"/>
+                        <outlet property="issueLabel" destination="YWm-lO-Mc5" id="jSE-xO-WE8"/>
+                        <outlet property="issueNumLabel" destination="mEU-Sh-IEt" id="Ywd-ag-IRz"/>
                         <outlet property="issueTableView" destination="0KX-iF-s2p" id="RYH-QS-GQl"/>
                         <outlet property="plusButton" destination="SWi-eK-cor" id="D43-er-4f4"/>
                         <outlet property="searchBar" destination="lz8-qn-0a9" id="eXb-q5-GHi"/>
