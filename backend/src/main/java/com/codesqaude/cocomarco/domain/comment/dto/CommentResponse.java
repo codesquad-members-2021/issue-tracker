@@ -1,15 +1,26 @@
 package com.codesqaude.cocomarco.domain.comment.dto;
 
+import com.codesqaude.cocomarco.domain.comment.Comment;
+import com.codesqaude.cocomarco.domain.user.User;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CommentResponse {
 
-    List<CommentDTO> comments;
+    private String id;
+    private String avatarImage;
+    private String name;
+    private LocalDateTime writeTime;
+    private String text;
+
+    public static CommentResponse of(Comment comment) {
+        User writer = comment.getWriter();
+        return new CommentResponse(writer.getId().toString(), writer.getAvatarImage(), writer.getName(),
+                comment.getWritingTime(), comment.getText());
+    }
 }

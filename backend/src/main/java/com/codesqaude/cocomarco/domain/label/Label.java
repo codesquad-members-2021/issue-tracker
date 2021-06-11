@@ -14,7 +14,8 @@ public class Label extends BasicEntity {
     @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    private String name;
+    private String title;
+    private String detail;
     private String hexCode;
 
 }

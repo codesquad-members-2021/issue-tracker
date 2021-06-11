@@ -5,9 +5,9 @@ import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.comment.CommentRepository;
-import com.codesqaude.cocomarco.domain.comment.dto.CommentDTO;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentResponse;
+import com.codesqaude.cocomarco.domain.comment.dto.CommentResponseWrapper;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
@@ -52,12 +52,12 @@ public class CommentService {
         commentRepository.delete(comment);
     }
 
-    public CommentResponse showAll(Long issueId, Pageable pageable) {
+    public CommentResponseWrapper showAll(Long issueId, Pageable pageable) {
         List<Comment> comments = commentRepository.findAllByIssueId(issueId, pageable);
-        List<CommentDTO> commentDTOs = comments.stream()
-                .map(CommentDTO::of)
+        List<CommentResponse> commentResponses = comments.stream()
+                .map(CommentResponse::of)
                 .collect(Collectors.toList());
-        return new CommentResponse(commentDTOs);
+        return new CommentResponseWrapper(commentResponses);
     }
 
     public Comment show(Long id) {

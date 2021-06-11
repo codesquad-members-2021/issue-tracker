@@ -1,9 +1,10 @@
 package com.codesqaude.cocomarco.controller;
 
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
-import com.codesqaude.cocomarco.domain.comment.dto.CommentResponse;
+import com.codesqaude.cocomarco.domain.comment.dto.CommentResponseWrapper;
 import com.codesqaude.cocomarco.service.CommentService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +19,12 @@ public class CommentController {
     }
 
     @GetMapping
-    public CommentResponse show(@PathVariable Long issueId, Pageable pageable) {
+    public CommentResponseWrapper show(@PathVariable Long issueId, Pageable pageable) {
         return commentService.showAll(issueId, pageable);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void make(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
         //todo user id
         commentService.write(issueId, SAMPLE_UUID, commentRequest);
