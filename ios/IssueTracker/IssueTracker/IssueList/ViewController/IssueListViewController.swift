@@ -16,9 +16,9 @@ class IssueListViewController: UIViewController {
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var plusButton: UIButton!
     
-    @IBOutlet weak var editableView: UIView!
-    @IBOutlet weak var issueNumLabel: UILabel!
-    @IBOutlet weak var checkAllButton: UIButton!
+    @IBOutlet private weak var editableView: UIView!
+    @IBOutlet private weak var issueNumLabel: UILabel!
+    @IBOutlet private weak var checkAllButton: UIButton!
     private var isCheckAll: Bool!
     
     private var viewModel: IssueViewModel!
