@@ -22,7 +22,6 @@ class IssueListViewController: UIViewController {
     
     private var viewModel: IssueViewModel!
     private var dataSource: IssueDataSource!
-    private var tableViewDelegate: IssueTableDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,17 +33,16 @@ class IssueListViewController: UIViewController {
 }
 
 
-extension IssueListViewController: UITableViewDelegate {
+extension IssueListViewController {
     
     func setViewModel(with issues: [Issue]) {
         viewModel = IssueViewModel(issues: issues)
         dataSource = IssueDataSource(viewModel: viewModel)
-        tableViewDelegate = IssueTableDelegate()
     }
     
     private func setting() {
         issueTableView.dataSource = dataSource
-        issueTableView.delegate = tableViewDelegate
+        issueTableView.delegate = self
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
         issueTableView.allowsMultipleSelectionDuringEditing = true
         editableView.isHidden = true
@@ -98,6 +96,24 @@ extension IssueListViewController {
             allIndexPath.forEach {
                 issueTableView.selectRow(at: $0, animated: true, scrollPosition: .none)
             }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        fillCheckButton(tableView)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        fillCheckButton(tableView)
+    }
+    
+    private func fillCheckButton(_ tableView: UITableView) {
+        let allIndexPath = (0..<viewModel.issues.count).map { IndexPath(row: $0, section: 0) }
+        isCheckAll = tableView.indexPathsForSelectedRows == allIndexPath
+        if isCheckAll {
+            checkAllButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        } else {
+            checkAllButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
     }
     

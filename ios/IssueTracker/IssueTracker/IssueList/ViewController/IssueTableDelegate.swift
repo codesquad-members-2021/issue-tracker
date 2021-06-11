@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueTableDelegate: NSObject, UITableViewDelegate {
+extension IssueListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
