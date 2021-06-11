@@ -12,6 +12,13 @@
 		8345AD7BD9CAFAD9A4F8374A /* Pods_issue_tracker_issue_trackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */; };
 		8D53899997C8120B27C2FB4A /* Pods_issue_trackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FD79E124256E10A8CD0326 /* Pods_issue_trackerTests.framework */; };
 		9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCF55CDC3CD94CD2F1208E5 /* Pods_issue_tracker.framework */; };
+		B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEAC02671D9F600BF37A1 /* IssueListViewController.swift */; };
+		B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEAC22671DCB100BF37A1 /* IssueTableViewCell.swift */; };
+		B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEAC52671DDA600BF37A1 /* MilestoneView.swift */; };
+		B32FEAC82671F65F00BF37A1 /* FilterBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEAC72671F65F00BF37A1 /* FilterBarButton.swift */; };
+		B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEAC92671FD1600BF37A1 /* SelectBarButton.swift */; };
+		B32FEACC26724CF400BF37A1 /* IssueTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEACB26724CF400BF37A1 /* IssueTableFooterView.swift */; };
+		B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEACD267260E400BF37A1 /* AddIssueButton.swift */; };
 		B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */; };
 		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
@@ -26,6 +33,8 @@
 		B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */; };
 		B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527592670A4BD002B0812 /* AddButton.swift */; };
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
+		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
+		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
 		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
 		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
 		D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6CB266F4F1C00E0762C /* Alamofire */; };
@@ -67,6 +76,13 @@
 		702E8D2AD8B572CC0A3F3F24 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A36EB985C6FE14BAF28D126D /* Pods-issue-trackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-trackerTests.debug.xcconfig"; path = "Target Support Files/Pods-issue-trackerTests/Pods-issue-trackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2AD0081C0EB261B3FEA9CF7 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B32FEAC02671D9F600BF37A1 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueListViewController.swift; path = "issue-tracker/View/IssueListViewController.swift"; sourceTree = SOURCE_ROOT; };
+		B32FEAC22671DCB100BF37A1 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		B32FEAC52671DDA600BF37A1 /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
+		B32FEAC72671F65F00BF37A1 /* FilterBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBarButton.swift; sourceTree = "<group>"; };
+		B32FEAC92671FD1600BF37A1 /* SelectBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBarButton.swift; sourceTree = "<group>"; };
+		B32FEACB26724CF400BF37A1 /* IssueTableFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueTableFooterView.swift; path = "issue-tracker/Controller/IssueTableFooterView.swift"; sourceTree = SOURCE_ROOT; };
+		B32FEACD267260E400BF37A1 /* AddIssueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIssueButton.swift; sourceTree = "<group>"; };
 		B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginButton.swift; sourceTree = "<group>"; };
 		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +104,8 @@
 		B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTabelHeaderView.swift; sourceTree = "<group>"; };
 		B3F527592670A4BD002B0812 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueToolbar.swift; path = "issue-tracker/Controller/IssueToolbar.swift"; sourceTree = SOURCE_ROOT; };
+		B3FBA7B8267335C30006E5E6 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -136,11 +154,27 @@
 		49903DAC266F558700D2A6DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B32FEAC42671DCD200BF37A1 /* IssueList */,
 				D0FD50F12671B108008C6031 /* Label */,
 				D0FD50ED2671B0E8008C6031 /* Milestone */,
 				B3F5274F26709614002B0812 /* Login */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B32FEAC42671DCD200BF37A1 /* IssueList */ = {
+			isa = PBXGroup;
+			children = (
+				B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */,
+				B32FEACD267260E400BF37A1 /* AddIssueButton.swift */,
+				B32FEACB26724CF400BF37A1 /* IssueTableFooterView.swift */,
+				B32FEAC22671DCB100BF37A1 /* IssueTableViewCell.swift */,
+				B32FEAC52671DDA600BF37A1 /* MilestoneView.swift */,
+				B32FEAC72671F65F00BF37A1 /* FilterBarButton.swift */,
+				B3FBA7B8267335C30006E5E6 /* CancelButton.swift */,
+				B32FEAC92671FD1600BF37A1 /* SelectBarButton.swift */,
+			);
+			path = IssueList;
 			sourceTree = "<group>";
 		};
 		B3B559D4266E095E00901C55 = {
@@ -240,6 +274,7 @@
 		D0FD50E92671B0AD008C6031 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B32FEAC02671D9F600BF37A1 /* IssueListViewController.swift */,
 				B3B559E4266E095E00901C55 /* LoginViewController.swift */,
 				B3F527502670968F002B0812 /* LabelViewController.swift */,
 				D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */,
@@ -505,23 +540,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3F527512670968F002B0812 /* LabelViewController.swift in Sources */,
+				B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */,
 				D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */,
+				B32FEACC26724CF400BF37A1 /* IssueTableFooterView.swift in Sources */,
 				B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */,
+				B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */,
+				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
 				D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */,
+				B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */,
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */,
 				D0FD50D4267192AF008C6031 /* AddViewController.swift in Sources */,
+				B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
 				B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */,
 				B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */,
+				B32FEAC82671F65F00BF37A1 /* FilterBarButton.swift in Sources */,
 				D0ADB6F8266F5BBE00E0762C /* OAuthManager.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */,
+				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
+				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
 				D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */,
 				D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */,
 			);
