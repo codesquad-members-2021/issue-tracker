@@ -64,7 +64,6 @@ class LoginViewController: UIViewController {
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(Colors.mainGrape, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(loginBtnTouchedDown), for: .touchUpInside)
         return button
     }()
     
@@ -80,7 +79,7 @@ class LoginViewController: UIViewController {
         let image = UIImage(named: "icon_github")
         let title = "GitHub 계정으로 로그인"
         let button = socialLoginButton(with: image, title)
-        button.addTarget(self, action: #selector(loginByGithubTouchedDown), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginWithGithubTouched), for: .touchUpInside)
         return button
         
     }()
@@ -89,7 +88,7 @@ class LoginViewController: UIViewController {
         let image = UIImage(named: "icon_apple")
         let title = "Apple 계정으로 로그인"
         let appleLoginButton = socialLoginButton(with: image, title)
-        appleLoginButton.addTarget(self, action: #selector(appleLoginTouched), for: .touchUpInside)
+        appleLoginButton.addTarget(self, action: #selector(loginWithAppleTouched), for: .touchUpInside)
         return appleLoginButton
     }()
     
@@ -190,11 +189,13 @@ class LoginViewController: UIViewController {
     }
     
     private func presentIssueViewController(with loginInfo: LoginInfo) {
+        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
+        let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
+        issueTrackerTabBarController.configure(loginInfo: loginInfo)
+        issueTrackerTabBarController.modalPresentationStyle = .fullScreen
+
         DispatchQueue.main.async {
-            let tabBarVC = IssueTrackerTabBarController()
-            tabBarVC.configure(loginInfo: loginInfo)
-            tabBarVC.modalPresentationStyle = .fullScreen
-            self.present(tabBarVC, animated: true, completion: nil)
+            self.present(issueTrackerTabBarController, animated: true, completion: nil)
         }
     }
     
@@ -205,16 +206,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func loginBtnTouchedDown(sender: UIButton!) {
-
-    }
-    
-    @objc private func loginByGithubTouchedDown(_ sender: UIButton) {
+    @objc private func loginWithGithubTouched(_ sender: UIButton) {
         configureGithubLoginManager()
         socialLoginManager?.login()
     }
     
-    @objc private func appleLoginTouched(_ sender: UIButton) {
+    @objc private func loginWithAppleTouched(_ sender: UIButton) {
         configureAppleLoginManager()
         socialLoginManager?.login()
     }
@@ -232,8 +229,8 @@ class LoginViewController: UIViewController {
         guard socialLoginManager as? AppleAuthorizationManager == nil else { return }
         let appleKeyChainManager = LoginKeyChainManager(loginService: .apple)
         let appleLoginManager = AppleAuthorizationManager(viewController: self,
-                                                            delegate: self,
-                                                            keyChainSaver: appleKeyChainManager)
+                                                          delegate: self,
+                                                          keyChainSaver: appleKeyChainManager)
         self.socialLoginManager = appleLoginManager
     }
     
