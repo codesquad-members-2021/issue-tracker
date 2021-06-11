@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 import ResponsiveLayout from '../components/common/ResponsiveLayout';
+
 import LoginButton from '../components/LoginButton';
+import { SignIn } from '../components/SignIn';
 
 const MainPage = () => {
   return (
     <MainPageLayout>
       <MainPageBlock>
         <MainPageTitleLayer>
-            타이틀
+          <MainPageTitleText>
+            Issue Tracker
+          </MainPageTitleText>
         </MainPageTitleLayer>
-        <LoginButton/>
-        {/* <MainPageTitleLayer>
-            버튼
-        </MainPageTitleLayer> */}
+        <LoginButton />
+        <MainPageTitleLayer>
+          <SignIn />
+        </MainPageTitleLayer>
         <MainPageTitleLayer>
             or
         </MainPageTitleLayer>
@@ -38,11 +42,14 @@ const MainPageBlock = styled(ResponsiveLayout)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-`
+`;
 
 const MainPageTitleLayer = styled.div`
-`
+`;
 
+const MainPageTitleText = styled.span`
+  font-weight: 400;
+  font-size: 5.6rem;
+`
 
 export default MainPage;
