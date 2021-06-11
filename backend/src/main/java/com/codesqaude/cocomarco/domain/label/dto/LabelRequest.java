@@ -12,7 +12,7 @@ public class LabelRequest {
     private String detail;
     private String hexCode;
 
-    public Label toEntity(){
-        return new Label(title,detail,hexCode);
+    public Label toEntity() {
+        return new Label(title, detail, hexCode);
     }
 }

@@ -13,7 +13,7 @@ public class LabelResponse {
     private String detail;
     private String hexCode;
 
-    public static LabelResponse of(Label label){
+    public static LabelResponse of(Label label) {
         return new LabelResponse(label.getId(), label.getTitle(), label.getDetail(), label.getHexCode());
     }
 }

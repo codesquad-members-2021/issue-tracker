@@ -38,7 +38,7 @@ public class Milestone {
         return (int) issues.stream().filter(issue -> issueStatus.equals(issue.getStatus())).count();
     }
 
-    public void modify(Milestone updateMilestone){
+    public void modify(Milestone updateMilestone) {
         this.title = updateMilestone.title;
         this.detail = updateMilestone.detail;
         this.deadLine = updateMilestone.deadLine;

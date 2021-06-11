@@ -16,5 +16,4 @@ public class Comment {
 
     private String text;
     private LocalDateTime writingTime;
-
 }

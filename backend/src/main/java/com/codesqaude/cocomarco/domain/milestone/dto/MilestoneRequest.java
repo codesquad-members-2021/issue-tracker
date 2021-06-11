@@ -14,7 +14,7 @@ public class MilestoneRequest {
     private String detail;
     private LocalDate deadLine;
 
-    public Milestone toEntity(){
-        return new Milestone(title,detail,deadLine);
+    public Milestone toEntity() {
+        return new Milestone(title, detail, deadLine);
     }
 }

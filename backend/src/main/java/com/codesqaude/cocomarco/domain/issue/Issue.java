@@ -35,5 +35,4 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
-
 }

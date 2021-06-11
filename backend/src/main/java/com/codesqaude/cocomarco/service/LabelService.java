@@ -49,5 +49,4 @@ public class LabelService {
     public void delete(Long labelId){
         labelRepository.delete(findById(labelId));
     }
-
 }
