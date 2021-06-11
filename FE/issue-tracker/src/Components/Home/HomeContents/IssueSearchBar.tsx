@@ -10,10 +10,10 @@ const IssueSearchBar = () => {
   return (
     <S.ContentNavLeft>
       <Filter />
-      <SB.searchDiv>
-        <Icon.searchIcon />
-        <SB.searchInput placeholder="is:issue" />
-      </SB.searchDiv>
+      <SB.SearchDiv>
+        <Icon.SearchIcon />
+        <SB.SearchInput placeholder="is:issue" />
+      </SB.SearchDiv>
     </S.ContentNavLeft>
   );
 };

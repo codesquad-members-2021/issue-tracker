@@ -5,6 +5,7 @@ import TextArea from "./TextArea";
 import FileAttachButton from "./FileAttachButton";
 import CreateButton from "./CreateButton";
 import UnCreateButton from "./UnCreateButton";
+import SettingSideBar from "@/Components/SettingSideBar/SettingSideBar";
 import { NewIssue as S } from "@/Components/NewIssue/NewIssueStyles";
 
 const NewIssue = () => {
@@ -19,7 +20,7 @@ const NewIssue = () => {
             <TextArea placeholder={"코멘트를 입력하세요"} rows={20} />
             <FileAttachButton />
           </S.TextAreaWrapper>
-          <S.Test>사이드세팅바</S.Test>
+          <SettingSideBar />
         </S.NewIssueBody>
         <S.ButtonsWrapper>
           <UnCreateButton />

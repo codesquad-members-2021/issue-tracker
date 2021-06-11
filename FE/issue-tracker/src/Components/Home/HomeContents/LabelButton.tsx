@@ -5,7 +5,7 @@ import { HomeAssets as S } from "../HomeStyles";
 const LabelButton = () => {
   return (
     <Styled.Button>
-      <S.labelTag />
+      <S.LabelTag />
       레이블 (3)
     </Styled.Button>
   );
