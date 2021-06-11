@@ -19,6 +19,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly 'mysql:mysql-connector-java'
+
+    implementation 'com.auth0:java-jwt:3.16.0'
+
 }
 
 test {
