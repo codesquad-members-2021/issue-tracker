@@ -62,10 +62,10 @@ public class OAuthService {
     }
 
     private User userFrom(SocialProfile socialProfile) {
-        User userFromGithub = socialProfile.becomeUser();
-        User user = userService.findByUser(userFromGithub);
+        User userSocialProfile = socialProfile.becomeUser();
+        User user = userService.findByUser(userSocialProfile);
         if (user == null) {
-            user = userService.enroll(userFromGithub);
+            user = userService.enroll(userSocialProfile);
         }
         return user;
     }
@@ -92,8 +92,6 @@ public class OAuthService {
 
         ResponseEntity<GithubAccessTokenResponseDto> response =
                 new RestTemplate().exchange(request, GithubAccessTokenResponseDto.class);
-
-        log.info("access token : {}", response.getBody().toString());
         return response.getBody();
     }
 
