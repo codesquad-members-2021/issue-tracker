@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
@@ -21,6 +22,10 @@ public class MilestoneService {
         this.labelRepository = labelRepository;
     }
 
+    public Milestone findById(Long milestoneId){
+        return milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
+    }
+
     public MilestonesWrapper findAll(Pageable pageable) {
         Page<Milestone> milestonePage = milestoneRepository.findAll(pageable);
         List<MilestoneResponse> milestoneResponses = milestonePage.stream().map(MilestoneResponse::of).collect(Collectors.toList());
@@ -29,5 +34,15 @@ public class MilestoneService {
 
     public void create(MilestoneRequest milestoneRequest){
         milestoneRepository.save(milestoneRequest.toEntity());
+    }
+
+    public void update(Long milestoneId,MilestoneRequest milestoneRequest){
+        Milestone milestone = findById(milestoneId);
+        milestone.update(milestoneRequest.toEntity());
+        milestoneRepository.save(milestone);
+    }
+
+    public void delete(Long milestoneId){
+        milestoneRepository.delete(findById(milestoneId));
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("milestones")
+@RequestMapping("/milestones")
 public class milestoneController {
 
     private MilestoneService milestoneService;
@@ -24,5 +24,15 @@ public class milestoneController {
     @PostMapping
     public void create(@RequestBody MilestoneRequest milestoneRequest) {
         milestoneService.create(milestoneRequest);
+    }
+
+    @PutMapping("/{milestoneId}")
+    public void update(@RequestBody MilestoneRequest milestoneRequest, @PathVariable Long milestoneId){
+        milestoneService.update(milestoneId,milestoneRequest);
+    }
+
+    @DeleteMapping("/{milestoneId}")
+    public void delete(@PathVariable Long milestoneId){
+        milestoneService.delete(milestoneId);
     }
 }

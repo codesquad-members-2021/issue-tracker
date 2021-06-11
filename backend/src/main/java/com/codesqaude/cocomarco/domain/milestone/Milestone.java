@@ -38,4 +38,10 @@ public class Milestone {
     public int countIssuesByStatus(IssueStatus issueStatus) {
         return (int) issues.stream().filter(issue -> issueStatus.equals(issue.getStatus())).count();
     }
+
+    public void update(Milestone updateMilestone){
+        this.title = updateMilestone.getTitle();
+        this.detail = updateMilestone.getDetail();
+        this.deadLine = updateMilestone.getDeadLine();
+    }
 }
