@@ -8,11 +8,14 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 
-import { Avatar } from '@chakra-ui/avatar';
-
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import MenuTitle from '@components/common/MenuTitle';
-import { checkBoxStyle, menuItemStyle, menuBtnStyle } from './chakraStyle';
+import Label from '@components/common/Label';
+import {
+  checkBoxStyle,
+  menuItemStyle,
+  menuBtnStyle,
+} from '@components/common/chakraStyle';
 
 function SelectLabel() {
   return (
@@ -28,18 +31,14 @@ function SelectLabel() {
           레이블
         </MenuButton>
         <MenuList>
-          <MenuTitle>담당자 추가</MenuTitle>
+          <MenuTitle>레이블 추가</MenuTitle>
           <MenuItem {...menuItemStyle}>
             <ItemWrap>
-              <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-              <Text>Oni</Text>
-            </ItemWrap>
-            <Checkbox {...checkBoxStyle} />
-          </MenuItem>
-          <MenuItem {...menuItemStyle}>
-            <ItemWrap>
-              <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-              <Text>Oni</Text>
+              <Label
+                name="documentation"
+                colorCode="#0025E7"
+                fontLight={true}
+              />
             </ItemWrap>
             <Checkbox {...checkBoxStyle} />
           </MenuItem>
@@ -47,14 +46,12 @@ function SelectLabel() {
       </Menu>
       <AddList>
         <li>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-          <Text>Oni</Text>
+          <Label name="documentation" colorCode="#0025E7" fontLight={true} />
         </li>
       </AddList>
       <AddList>
         <li>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-          <Text>Oni</Text>
+          <Label name="eveBabo" colorCode="#531253" fontLight={true}></Label>
         </li>
       </AddList>
     </Wrap>
@@ -64,6 +61,7 @@ function SelectLabel() {
 export default SelectLabel;
 
 const Wrap = styled.div`
+  padding: 34px 32px 32px 32px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gr_line};
 `;
 
@@ -72,11 +70,6 @@ const ItemWrap = styled.div`
   align-items: center;
 `;
 
-const Text = styled.span`
-  margin-left: 4px;
-  color: ${({ theme }) => theme.colors.gr_label};
-`;
-
 const AddList = styled.ul`
-  padding: 8px 32px;
+  padding: 8px 0;
 `;
