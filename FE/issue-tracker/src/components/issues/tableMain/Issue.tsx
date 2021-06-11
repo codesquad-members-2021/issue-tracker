@@ -23,21 +23,21 @@ function Issue() {
         </Description>
       </IssueContainer>
       <AvatarContainer>
-        <NoticeTag>
+        <AvatarBox>
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </NoticeTag>
-        <NoticeTag pos="20px">
+        </AvatarBox>
+        <AvatarBox pos="20px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </NoticeTag>
-        <NoticeTag pos="8px">
+        </AvatarBox>
+        <AvatarBox pos="8px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </NoticeTag>
-        <NoticeTag pos="-4px">
+        </AvatarBox>
+        <AvatarBox pos="-4px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </NoticeTag>
-        <NoticeTag pos="-16px">
+        </AvatarBox>
+        <AvatarBox pos="-16px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </NoticeTag>
+        </AvatarBox>
       </AvatarContainer>
     </IssueWrap>
   );
@@ -75,7 +75,7 @@ const AvatarContainer = styled.div`
   position: relative;
 `;
 
-const NoticeTag = styled.div<AvatarPos>`
+const AvatarBox = styled.div<AvatarPos>`
   width: auto;
   position: absolute;
   right: ${({ pos }) => pos || '32px'};
