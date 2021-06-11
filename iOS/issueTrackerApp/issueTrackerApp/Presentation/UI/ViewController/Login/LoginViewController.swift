@@ -74,7 +74,7 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 extension LoginViewController {
     func performAuthorization(with authorizationCode: String) {
         isAuthenticating = true
-        networkController?.authenticateWith(authorizationCode: authorizationCode, state: state) { [weak self] in
+        networkController?.authenticateWith(authorizationCode: authorizationCode, client: GitHubEndpoint.FieldNames.client) { [weak self] in
             self?.loginCoordinator?.loginViewControllerDidFinishAuthorization()
         }
     }
