@@ -11,7 +11,7 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 import MenuTitle from '@components/common/MenuTitle';
-import { checkBoxStyle, menuItemStyle } from '@components/common/chakraStyle';
+import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
 
 function FilterBar() {
   return (
@@ -68,16 +68,6 @@ const FilterBarWrap = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.gr_line};
   border-radius: 11px;
 `;
-
-// const MenuTitle = styled.h2`
-//   display: flex;
-//   align-items: center;
-//   width: 240px;
-//   height: 48px;
-//   padding: 8px 16px;
-//   background: ${({ theme }) => theme.colors.gr_background};
-//   color: ${({ theme }) => theme.colors.gr_titleActive};
-// `;
 
 const InputContainer = styled.div`
   display: flex;
