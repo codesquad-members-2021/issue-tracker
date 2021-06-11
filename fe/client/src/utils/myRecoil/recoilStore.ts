@@ -21,9 +21,9 @@ const recoilStore = {
     this.observers[key].push(fn);
   },
 
-  addInitState({ key, initialState }: { key: string, initialState: InitialStateType }) {
-    if (this.data[key]) return;
-    this.data[key] = initialState;
+  addInitState(atom: { key: string, default: InitialStateType }) {
+    if (this.data[atom.key]) return;
+    this.data[atom.key] = atom.default;
   },
 
   getData(key: string) {

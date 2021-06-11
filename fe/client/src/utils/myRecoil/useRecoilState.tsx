@@ -3,13 +3,14 @@ import { globalStateRoot } from "./RecoilRoot";
 
 type AtomType<T> = {
   key: string;
-  initialState: T;
+  default: T;
 }
 
-function useRecoilState<T>({ key, initialState }: AtomType<T>) {
+function useRecoilState<T>(atom: AtomType<T>) {
+  const { key } = atom;
   const store = useContext(globalStateRoot).current;
   const [, setState] = useState({});
-  store.addInitState({ key, initialState });
+  store.addInitState(atom);
   const forceUpdate = useCallback(() => {
     setState({});
   }, []);

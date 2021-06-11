@@ -7,7 +7,7 @@ import SearchIcon from '@/Icons/Search.svg';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@/components/common/FilterTab';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom, filterAtomType } from '@/components/common/atoms/filterAtom';
+import { filterAtom, FilterBooleanType } from '@/components/common/atoms/filterAtom';
 import { useCallback } from 'react';
 
 const issueFilterList = [
@@ -22,7 +22,7 @@ const IssueList = () => {
   const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
   const { issue, manager, label, milestone, writer } = filterModalState;
   const handleClickShowFilterModal = useCallback((title: string) => () => {
-    setFilterModalState((filterModalState: filterAtomType) => ({ ...filterModalState, [title]: true }));
+    setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
   }, []);
 
   return (

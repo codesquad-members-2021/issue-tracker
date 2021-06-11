@@ -1,10 +1,10 @@
 type AtomType<T> = {
   key: string;
-  initialState: T;
+  default: T;
 }
 
-const atom = <T>({ key, initialState }: AtomType<T>) => {
-  return { key, initialState };
+const atom = <T>(atomInitialState: AtomType<T>) => {
+  return atomInitialState;
 }
 
 export default atom;

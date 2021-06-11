@@ -1,7 +1,7 @@
 
 import atom from '@/utils/myRecoil/atom';
 
-export type filterAtomType = {
+export type FilterBooleanType = {
   issue: boolean;
   manager: boolean;
   label: boolean;
@@ -9,9 +9,9 @@ export type filterAtomType = {
   writer: boolean;
 }
 
-export const filterAtom = atom<filterAtomType>({
+export const filterAtom = atom<FilterBooleanType>({
   key: 'filterAtom',
-  initialState: {
+  default: {
     issue: false,
     manager: false,
     label: false,
@@ -20,7 +20,7 @@ export const filterAtom = atom<filterAtomType>({
   }
 })
 
-export type filterDefaultCheckerType = {
+export type FilterStringType = {
   issue: string;
   manager: string;
   label: string;
@@ -28,9 +28,9 @@ export type filterDefaultCheckerType = {
   writer: string;
 }
 
-export const filterDefaultCheckerAtom = atom<filterDefaultCheckerType>({
+export const filterDefaultCheckerAtom = atom<FilterStringType>({
   key: 'filterDefaultCheckerAtom',
-  initialState: {
+  default: {
     issue: '',
     manager: '',
     label: '',

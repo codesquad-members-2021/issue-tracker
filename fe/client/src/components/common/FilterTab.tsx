@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom, filterDefaultCheckerAtom, filterDefaultCheckerType } from './atoms/filterAtom';
+import { filterAtom, filterDefaultCheckerAtom, FilterStringType } from './atoms/filterAtom';
 
 type FilterTabType = {
   header: string;
@@ -34,7 +34,7 @@ const FilterTab = ({ header, filterList }: FilterTabType) => {
   }, []);
 
   const handleChangeDefaultChecker = useCallback((listItem: string) => () => {
-    setDefaultCheckerState((state: filterDefaultCheckerType) => ({ ...state, [header]: listItem }));
+    setDefaultCheckerState((state: FilterStringType) => ({ ...state, [header]: listItem }));
   }, []);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const FilterTab = ({ header, filterList }: FilterTabType) => {
   )
 }
 
-const FilterTabWrapper = styled.div<any>`
+const FilterTabWrapper = styled.div<{ isShow: boolean }>`
   position: absolute;
   width: 200px;
   top:35px;
@@ -69,6 +69,7 @@ const FilterTabWrapper = styled.div<any>`
   border:1px solid #d9dbe9;
   background: #FEFEFE;
   border-radius: 11px;
+  box-shadow:0px 1px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
   display:${({ isShow }) => isShow ? 'block' : 'none'};
   > div{
     padding: .5rem;
