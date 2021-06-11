@@ -180,8 +180,8 @@
 		E42AD115267087AE0071B436 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E426DACA267206D10069E77D /* LoginInfoContainer.swift */,
 				E42AD116267087F40071B436 /* TabBar */,
+				E426DACA267206D10069E77D /* LoginInfoContainer.swift */,
 				E42AD11926708EBA0071B436 /* Issue */,
 				E42AD11A26708EC00071B436 /* Label */,
 				E42AD11B26708EC80071B436 /* Milestone */,
