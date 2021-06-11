@@ -32,6 +32,7 @@
 		930FAEA8266E112A00422968 /* issueTrackerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */; };
 		930FAEC7266E13F500422968 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 930FAEC6266E13F500422968 /* Alamofire */; };
 		931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE1D26730C8600CD9244 /* SettingViewController.swift */; };
+		931BAE2F267310EB00CD9244 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 931BAE2E267310EB00CD9244 /* JWTDecode */; };
 		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
 		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
 		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
@@ -106,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				931BAE2F267310EB00CD9244 /* JWTDecode in Frameworks */,
 				930FAEC7266E13F500422968 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +417,7 @@
 			name = issueTrackerApp;
 			packageProductDependencies = (
 				930FAEC6266E13F500422968 /* Alamofire */,
+				931BAE2E267310EB00CD9244 /* JWTDecode */,
 			);
 			productName = issueTrackerApp;
 			productReference = 930FAE82266E112700422968 /* issueTrackerApp.app */;
@@ -489,6 +492,7 @@
 			mainGroup = 930FAE79266E112700422968;
 			packageReferences = (
 				930FAEC5266E13F500422968 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				931BAE2D267310EB00CD9244 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 			);
 			productRefGroup = 930FAE83266E112700422968 /* Products */;
 			projectDirPath = "";
@@ -920,6 +924,14 @@
 				minimumVersion = 5.4.3;
 			};
 		};
+		931BAE2D267310EB00CD9244 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -927,6 +939,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 930FAEC5266E13F500422968 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		931BAE2E267310EB00CD9244 /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 931BAE2D267310EB00CD9244 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
+			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

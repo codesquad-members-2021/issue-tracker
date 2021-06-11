@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JWTDecode
 
 class KeychainController {
     private static let accountName = "AppUser"
@@ -41,6 +42,12 @@ class KeychainController {
     
     func deleteJWT() {
         SecItemDelete(tokenQuery as CFDictionary)
+    }
+    
+    func storeAvatarImage(jWT: String) {
+        if let decodedToken = try? decode(jwt: jWT) {
+            print(decodedToken)
+        }
     }
 }
 

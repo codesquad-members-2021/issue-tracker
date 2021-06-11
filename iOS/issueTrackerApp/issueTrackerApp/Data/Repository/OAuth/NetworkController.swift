@@ -15,12 +15,12 @@ class NetworkController {
         self.keychainController = keychainController
     }
     
-    var accessToken: String? {
+    var jWT: String? {
         return keychainController.readJWT()
     }
     
     var isClientAuthenticated: Bool {
-        return accessToken != nil
+        return jWT != nil
     }
     
     func authenticateWith(authorizationCode: String, client: String, completion: @escaping () -> Void) {
@@ -33,11 +33,16 @@ class NetworkController {
                 self.keychainController.store(jWT: jWT)
             }
             self.requests[requestURL] = nil
+            self.fetchUserAvatarImage()//test
             completion()
         }
     }
     
     func logOut() {
         keychainController.deleteJWT()
+    }
+    
+    func fetchUserAvatarImage() {
+        keychainController.storeAvatarImage(jWT: self.jWT ?? "")
     }
 }
