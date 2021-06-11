@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
+import GlobalStyle from '@styles/globalStyle';
 import customTheme from '@styles/theme';
 import Login from '@pages/Login';
 import Issues from '@pages/Issues';
@@ -12,32 +12,35 @@ import IssueDetail from '@pages/IssueDetail';
 
 function App() {
   return (
-    <ThemeProvider theme={customTheme}>
-      <Background>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" exact>
-              <Login />
-            </Route>
-            <Route path="/issues">
-              <Issues />
-            </Route>
-            <Route path="/new-issue">
-              <NewIssue />
-            </Route>
-            <Route path="/issue-detail">
-              <IssueDetail />
-            </Route>
-            <Route path="/labels">
-              <Labels />
-            </Route>
-            <Route path="/milestones">
-              <Milestones />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </Background>
-    </ThemeProvider>
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={customTheme}>
+        <Background>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact>
+                <Login />
+              </Route>
+              <Route path="/issues">
+                <Issues />
+              </Route>
+              <Route path="/new-issue">
+                <NewIssue />
+              </Route>
+              <Route path="/issue-detail">
+                <IssueDetail />
+              </Route>
+              <Route path="/labels">
+                <Labels />
+              </Route>
+              <Route path="/milestones">
+                <Milestones />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </Background>
+      </ThemeProvider>
+    </>
   );
 }
 
@@ -45,6 +48,6 @@ export default App;
 
 const Background = styled.div`
   background: ${({ theme }) => theme.colors.gr_background};
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
