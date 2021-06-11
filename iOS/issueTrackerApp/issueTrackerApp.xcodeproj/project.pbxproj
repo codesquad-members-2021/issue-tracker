@@ -33,6 +33,8 @@
 		930FAEC7266E13F500422968 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 930FAEC6266E13F500422968 /* Alamofire */; };
 		931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE1D26730C8600CD9244 /* SettingViewController.swift */; };
 		931BAE2F267310EB00CD9244 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 931BAE2E267310EB00CD9244 /* JWTDecode */; };
+		931BAE41267343B900CD9244 /* AddIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE40267343B900CD9244 /* AddIssueViewController.swift */; };
+		931BAE4626734FA500CD9244 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE4526734FA500CD9244 /* MoreInformationViewController.swift */; };
 		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
 		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
 		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
@@ -92,6 +94,8 @@
 		930FAEA7266E112A00422968 /* issueTrackerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issueTrackerAppUITests.swift; sourceTree = "<group>"; };
 		930FAEA9266E112A00422968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		931BAE1D26730C8600CD9244 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		931BAE40267343B900CD9244 /* AddIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIssueViewController.swift; sourceTree = "<group>"; };
+		931BAE4526734FA500CD9244 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
 		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubEndpoint.swift; sourceTree = "<group>"; };
 		9343E2D7266F03E90086F977 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				883F5184266F5F090055EC9E /* IssueViewController.swift */,
+				931BAE40267343B900CD9244 /* AddIssueViewController.swift */,
+				931BAE4526734FA500CD9244 /* MoreInformationViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -544,9 +550,11 @@
 			files = (
 				883F5148266F3EAF0055EC9E /* LoginViewController.swift in Sources */,
 				9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */,
+				931BAE41267343B900CD9244 /* AddIssueViewController.swift in Sources */,
 				9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */,
 				9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
+				931BAE4626734FA500CD9244 /* MoreInformationViewController.swift in Sources */,
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
 				931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */,
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
