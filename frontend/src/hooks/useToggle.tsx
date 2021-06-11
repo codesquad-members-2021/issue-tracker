@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
-type CtrlModal = {
-  toggle: any[];
-  modal: any;
-  init: boolean;
-};
-function useToggle({ toggle, modal, init }: CtrlModal): boolean {
+import { Dispatch, RefObject, SetStateAction, useEffect, useState } from 'react';
+
+interface CtrlModal {
+  toggle: RefObject<HTMLDivElement>[];
+  modal: RefObject<HTMLDivElement>;
+}
+
+interface toggleReturnType {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+function useToggle({ toggle, modal }: CtrlModal): toggleReturnType {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -16,7 +22,7 @@ function useToggle({ toggle, modal, init }: CtrlModal): boolean {
   }, []);
 
   const handleClick = (e: MouseEvent): void => {
-    const { target } = e;
+    const target = e.target as HTMLDivElement;
     const toggleTarget = toggle.map((el: any) => el.current);
     const ModalTarget = modal.current;
     if (toggleTarget[0]) {
@@ -30,6 +36,6 @@ function useToggle({ toggle, modal, init }: CtrlModal): boolean {
       else setOpen(false);
     }
   };
-  return open;
+  return { open, setOpen };
 }
 export default useToggle;

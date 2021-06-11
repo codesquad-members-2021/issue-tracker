@@ -22,10 +22,9 @@ export default function IssueListHeaderRight({}: Props): ReactElement {
     { key: 'milestone', name: '마일스톤', ref: milestoneToggle },
     { key: 'author', name: '작성자', ref: authorToggle },
   ];
-  const open = useToggle({
+  const { open } = useToggle({
     toggle: [assigneeToggle, labelToggle, milestoneToggle, authorToggle],
     modal: modalRef,
-    init: false,
   });
 
   const handleClick = (filterType: string): void => {
