@@ -41,15 +41,32 @@ export const issueTypeState = atom<string>({
   default: 'open',
 });
 
+// interface IssueFilterType {
+//   type: string;
+//   select: string;
+// }
+
+const isFilterFullSetting = atom<boolean>({
+  key: 'isFilterFullSetting',
+  default: true,
+});
+
 export const issueFilterTypeState = atom<string>({
   key: 'issueFilterTypeState',
   default: '',
 });
 
-export const getIssuesInfoState = selector<IssuesInfoStateType>({
+export const issueFilterSelectState = atom<string>({
+  key: 'issueFilterSelectState',
+  default: '',
+});
+
+export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
   key: 'GET/issues',
   get: async ({ get }) => {
     const issueType = get(issueTypeState);
+    const isFilterSetting = get(isFilterFullSetting);
+    if (!isFilterSetting) return null;
     try {
       const response = await fetch(`http://3.37.76.224/api/issues?status=${issueType}`);
       const issuesData = await response.json();

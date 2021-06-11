@@ -8,19 +8,20 @@ import { getIssuesInfoState } from 'store/issueInfoStore';
 interface Props {}
 
 export default function LabelMilestoneTab({}: Props): ReactElement {
-  const {
-    count: { label, milestone },
-  } = useRecoilValue(getIssuesInfoState);
+  // const {
+  //   count: { label, milestone },
+  // } = useRecoilValue(getIssuesInfoState);
+  const IssuesInfoData = useRecoilValue(getIssuesInfoState);
 
   return (
     <LabelMilestoneTabBlock>
       <div>
         <LoyaltyIcon fontSize='small' />
-        &nbsp;레이블 ({label})
+        &nbsp;레이블 ({IssuesInfoData?.count?.label})
       </div>
       <div>
         <MilestoneIcon sizeType={14} />
-        마일스톤 ({milestone})
+        마일스톤 ({IssuesInfoData?.count?.milestone})
       </div>
     </LabelMilestoneTabBlock>
   );

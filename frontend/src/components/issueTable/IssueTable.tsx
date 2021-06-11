@@ -2,13 +2,15 @@ import React, { ReactElement } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { getIssuesInfoState } from 'store/issueInfoStore';
-import IssueListHeader from 'components/issueTable/issueListHeader/IssueListHeader';
+import IssueListHeader from 'components/issueTable/issueTableHeader/IssueTableHeader';
 import IssueItem from 'components/issueTable/IssueItem';
 
 export default function IssueTable(): ReactElement {
-  const { issues } = useRecoilValue(getIssuesInfoState);
+  const IssuesInfoData = useRecoilValue(getIssuesInfoState);
 
-  const issueList = issues?.map((issue) => <IssueItem key={issue.id} issue={issue} />);
+  const issueList = IssuesInfoData?.issues?.map((issue) => (
+    <IssueItem key={issue.id} issue={issue} />
+  ));
 
   return (
     <IssueTableBlock>
