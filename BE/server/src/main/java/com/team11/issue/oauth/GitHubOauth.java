@@ -5,6 +5,8 @@ import com.team11.issue.dto.oauth.UserInfoDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
 import com.team11.issue.exception.OauthException;
 import com.team11.issue.oauth.errorHandler.RestTemplateResponseErrorHandler;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Component
 public class GitHubOauth implements Oauth {
 
@@ -26,25 +29,22 @@ public class GitHubOauth implements Oauth {
     private static final String CODE = "code";
     private static final String TOKEN = "token";
 
-    private final RestTemplate restTemplate;
-    private final GitHubOauthConfig gitHubOauthConfig;
+    private final RestTemplate restTemplate = new RestTemplateBuilder()
+            .errorHandler(new RestTemplateResponseErrorHandler())
+            .build();
 
-    public GitHubOauth(GitHubOauthConfig gitHubOauthConfig, RestTemplateBuilder restTemplateBuilder) {
-        this.gitHubOauthConfig = gitHubOauthConfig;
-        this.restTemplate = restTemplateBuilder
-                .errorHandler(new RestTemplateResponseErrorHandler())
-                .build();
-    }
+    private final GitHubOauthUtil gitHubOauthUtil;
 
-    private GitHubOauthConfig getGitHubOauthConfig(LoginRequestDTO loginRequestDTO) {
+
+    private GitHubOauthUtil getGitHubOauthConfig(LoginRequestDTO loginRequestDTO) {
         String type = loginRequestDTO.getType();
 
         if (!(type.equals("fe") || type.equals("ios"))) {
             throw new OauthException("적절한 type 값이 아닙니다.");
         }
 
-        gitHubOauthConfig.setGitHubOauthInfo(type);
-        return gitHubOauthConfig;
+        gitHubOauthUtil.setGitHubOauthInfo(type);
+        return gitHubOauthUtil;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class GitHubOauth implements Oauth {
         getGitHubOauthConfig(loginRequestDTO);
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-        parameters.add(CLIENT_ID, gitHubOauthConfig.getClientId());
-        parameters.add(CLIENT_SECRET, gitHubOauthConfig.getClientSecret());
+        parameters.add(CLIENT_ID, gitHubOauthUtil.getClientId());
+        parameters.add(CLIENT_SECRET, gitHubOauthUtil.getClientSecret());
         parameters.add(CODE, loginRequestDTO.getCode());
 
-        return Optional.ofNullable(restTemplate.postForObject(GitHubOauthConfig.GitHubUrl.ACCESS_TOKEN_URL.getUrl(), parameters, AccessTokenDTO.class).getAccessToken());
+        return Optional.ofNullable(restTemplate.postForObject(gitHubOauthUtil.getAccessTokenUrl(), parameters, AccessTokenDTO.class).getAccessToken());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class GitHubOauth implements Oauth {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, TOKEN + " " + accessToken);
         HttpEntity httpEntity = new HttpEntity<>(httpHeaders);
 
-        ResponseEntity<UserInfoDTO> userInfoDTO = restTemplate.exchange(GitHubOauthConfig.GitHubUrl.USER_INFO_URL.getUrl(), HttpMethod.GET, httpEntity, UserInfoDTO.class);
+        ResponseEntity<UserInfoDTO> userInfoDTO = restTemplate.exchange(gitHubOauthUtil.getUserInfoUrl(), HttpMethod.GET, httpEntity, UserInfoDTO.class);
         return userInfoDTO.getBody();
     }
 }
