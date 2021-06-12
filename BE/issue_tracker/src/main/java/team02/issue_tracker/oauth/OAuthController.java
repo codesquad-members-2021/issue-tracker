@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.dto.ApiResult;
+import team02.issue_tracker.oauth.annotation.LoginRequired;
+import team02.issue_tracker.oauth.annotation.UserId;
 import team02.issue_tracker.oauth.dto.AuthJwt;
 
 @Slf4j
@@ -27,5 +29,13 @@ public class OAuthController {
     @GetMapping("/login/github/ios")
     public ApiResult<AuthJwt> issueJwtForIos(@RequestParam("code") String code) {
         return ApiResult.success(oauthService.issueJwtForIos(code));
+    }
+
+    // jwt interceptor 테스트 목적 (임시)
+    @LoginRequired
+    @GetMapping("/jwt")
+    public String jwtChecking(@UserId Long userId) {
+        log.info("user id from jwt : {}", userId);
+        return userId.toString();
     }
 }
