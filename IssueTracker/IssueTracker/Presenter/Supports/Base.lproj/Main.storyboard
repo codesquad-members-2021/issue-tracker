@@ -423,6 +423,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="3kV-M6-aen" id="bom-Vw-oal"/>
                         <outlet property="filterTableView" destination="09n-ZV-zqf" id="iAb-PV-b67"/>
+                        <outlet property="saveButton" destination="yRV-XP-fP2" id="qxa-qe-eUQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRx-qs-5kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

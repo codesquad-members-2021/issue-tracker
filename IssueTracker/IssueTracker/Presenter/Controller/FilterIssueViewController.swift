@@ -7,8 +7,9 @@ import RxDataSources
 class FilterIssueViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var filterTableView: UITableView!
-    
+
     private let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFilterList>(configureCell: { dataSource, tableView, indexPath, item in
         let cell = tableView.dequeueReusableCell(withIdentifier: FilterCell.identifier, for: indexPath) as! FilterCell
         cell.configure(item.mainInfo)
@@ -28,12 +29,20 @@ private extension FilterIssueViewController {
     
     private func setupMainView() {
         setupIssueCancelButton()
+        setupIssueSaveButton()
         setupDataSource()
         setupFilterTableView()
     }
     
     private func setupIssueCancelButton() {
         cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }).disposed(by: rx.disposeBag)
+    }
+    
+    private func setupIssueSaveButton() {
+        saveButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: rx.disposeBag)
