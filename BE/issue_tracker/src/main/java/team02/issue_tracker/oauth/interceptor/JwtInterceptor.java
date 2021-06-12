@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
-import team02.issue_tracker.oauth.exception.IncorrectTokenTypeException;
+import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 import team02.issue_tracker.oauth.utils.JwtUtils;
 
@@ -56,7 +56,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             throw new JwtNotFoundException();
         }
         if (!authorizationInHeader.startsWith("Bearer")) {
-            throw new IncorrectTokenTypeException();
+            throw new InvalidTokenTypeException();
         }
     }
 

@@ -4,6 +4,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.*;
+import team02.issue_tracker.oauth.exception.InvalidGithubUserRequestException;
 import team02.issue_tracker.oauth.utils.GithubApiProperties;
 import team02.issue_tracker.oauth.utils.JwtUtils;
 import team02.issue_tracker.service.UserService;
@@ -59,7 +61,7 @@ public class OAuthService {
 
     private GithubUserProfile githubUserProfileFrom(
             GithubAccessTokenRequestDto accessTokenRequest) {
-        return githubUserProfileFrom(accessTokenByWebFlux(accessTokenRequest));
+        return githubUserProfileByWebFlux(accessTokenByWebFlux(accessTokenRequest));
     }
 
     private GithubAccessTokenResponseDto accessTokenFrom(
@@ -94,9 +96,34 @@ public class OAuthService {
                 .retrieve()
                 .bodyToMono(GithubAccessTokenResponseDto.class);
 
-        GithubAccessTokenResponseDto result = mono.blockOptional().orElseThrow(IllegalArgumentException::new);
+        GithubAccessTokenResponseDto result = mono.blockOptional()
+                .orElseThrow(IllegalArgumentException::new);
         log.info("access token from GitHub : {}", result);
         return result;
+    }
+
+    private GithubUserProfile githubUserProfileByWebFlux(GithubAccessTokenResponseDto accessTokenResponse) {
+        HttpClient httpClient = HttpClient.create()
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                .responseTimeout(Duration.ofSeconds(1))
+                .doOnConnected(conn -> conn
+                        .addHandlerLast(new ReadTimeoutHandler(5))
+                        .addHandlerLast(new WriteTimeoutHandler(5))
+                );
+
+        WebClient webClient = WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .build();
+
+        GithubUserProfile githubUserProfile = webClient.get()
+                .uri(githubApiProperties.userInfoUri())
+                .header(HttpHeaders.AUTHORIZATION, "token " + accessTokenResponse.accessToken())
+                .retrieve()
+                .bodyToMono(GithubUserProfile.class)
+                .blockOptional()
+                .orElseThrow(InvalidGithubUserRequestException::new);
+        log.info("github user profile : {}", githubUserProfile.toString());
+        return githubUserProfile;
     }
 
     private GithubUserProfile githubUserProfileFrom(

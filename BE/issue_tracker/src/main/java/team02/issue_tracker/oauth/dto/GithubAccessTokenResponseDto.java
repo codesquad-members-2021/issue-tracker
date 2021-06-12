@@ -15,4 +15,8 @@ public class GithubAccessTokenResponseDto {
 
     @JsonSetter("token_type")
     private String tokenType;
+
+    public String accessToken() {
+        return this.accessToken;
+    }
 }
