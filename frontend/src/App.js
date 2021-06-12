@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from 'components/login/LoginPage';
+import LoginPage from 'page/loginPage/LoginPage';
 import Header from './components/header/Header';
-
 import MainPage from './page/mainPage/MainPage';
+
 function App() {
   const isLogin = true;
   return (
