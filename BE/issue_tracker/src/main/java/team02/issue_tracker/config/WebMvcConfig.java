@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import team02.issue_tracker.oauth.JwtInterceptor;
-import team02.issue_tracker.oauth.UserArgumentResolver;
+import team02.issue_tracker.oauth.interceptor.JwtInterceptor;
+import team02.issue_tracker.oauth.argument_resolver.UserArgumentResolver;
 
 import java.util.List;
 
@@ -32,4 +32,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(userArgumentResolver);
     }
+
+
 }

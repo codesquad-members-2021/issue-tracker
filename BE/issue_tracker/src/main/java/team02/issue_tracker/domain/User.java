@@ -1,7 +1,7 @@
 package team02.issue_tracker.domain;
 
 import lombok.*;
-import team02.issue_tracker.oauth.SocialLogin;
+import team02.issue_tracker.oauth.dto.SocialLogin;
 
 import javax.persistence.*;
 import java.util.ArrayList;

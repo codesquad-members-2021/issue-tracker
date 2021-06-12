@@ -1,4 +1,4 @@
-package team02.issue_tracker.oauth;
+package team02.issue_tracker.oauth.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.dto.ApiResult;
+import team02.issue_tracker.oauth.service.OAuthService;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.annotation.UserId;
 import team02.issue_tracker.oauth.dto.AuthJwt;

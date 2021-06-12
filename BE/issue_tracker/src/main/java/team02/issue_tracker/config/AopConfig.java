@@ -17,13 +17,13 @@ import team02.issue_tracker.oauth.dto.AuthJwt;
 public class AopConfig {
 
     // 깃헙으로부터 받아온 인증코드를 출력한다.
-    @Before("execution(* team02.issue_tracker.oauth.OAuthController.*issue*(..))")
+    @Before("execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))")
     public void authorizationCodeLog(JoinPoint joinPoint) {
         log.info("Authorization code from GitHub : {}", joinPoint.getArgs());
     }
 
     // target 메소드의 동작 시간을 출력한다.
-    @Around("execution(* team02.issue_tracker.oauth.OAuthController.*issue*(..))")
+    @Around("execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))")
     public Object jwtIssueTimeLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
         long startTime = System.currentTimeMillis();
 
@@ -37,7 +37,7 @@ public class AopConfig {
     }
 
     // 발행한 jwt를 출력한다.
-    @AfterReturning(value = "execution(* team02.issue_tracker.oauth.OAuthController.*issue*(..))", returning = "authJwt")
+    @AfterReturning(value = "execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))", returning = "authJwt")
     public void jwtLog(JoinPoint joinPoint, ApiResult<AuthJwt> authJwt) {
         log.info("jwt : {}", authJwt.getData().getJwt());
     }

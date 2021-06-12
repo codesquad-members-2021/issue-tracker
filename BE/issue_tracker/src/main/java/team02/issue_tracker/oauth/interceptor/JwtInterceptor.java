@@ -1,4 +1,4 @@
-package team02.issue_tracker.oauth;
+package team02.issue_tracker.oauth.interceptor;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;

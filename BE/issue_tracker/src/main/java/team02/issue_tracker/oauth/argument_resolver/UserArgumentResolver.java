@@ -1,4 +1,4 @@
-package team02.issue_tracker.oauth;
+package team02.issue_tracker.oauth.argument_resolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

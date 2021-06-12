@@ -1,4 +1,4 @@
-package team02.issue_tracker.oauth;
+package team02.issue_tracker.oauth.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.RequestEntity;

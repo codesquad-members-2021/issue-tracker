@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
 import lombok.ToString;
 import team02.issue_tracker.domain.User;
-import team02.issue_tracker.oauth.SocialLogin;
 
 @ToString
 @Getter
