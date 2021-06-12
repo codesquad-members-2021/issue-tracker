@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler({OauthException.class, AccessTokenNotFoundException.class})
-    protected ResponseEntity handleException(Exception e){
+    protected ResponseEntity handleException(Exception e) {
         logger.error(e.getMessage());
         return new ResponseEntity(new ExceptionResponseDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
     }

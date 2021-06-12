@@ -1,21 +1,31 @@
 package com.team11.issue.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.team11.issue.domain.User;
 
-/*TODO: 생성자 구현되면 final 로 변경*/
+@JsonPropertyOrder({"userId","userName","email","profileImage","jwtToken"})
 public class LoginResponseDTO {
 
     @JsonProperty("userId")
-    private Long id;
+    private final Long id;
 
     @JsonProperty("userName")
-    private String name;
+    private final String name;
 
-    private String email;
+    private final String email;
 
-    private String profileImage;
+    private final String profileImage;
 
-    private String jwtToken;
+    private final String jwtToken;
+
+    public LoginResponseDTO(User user, String jwtToken) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.profileImage = user.getProfileImage();
+        this.jwtToken = jwtToken;
+    }
 
     public Long getId() {
         return id;
