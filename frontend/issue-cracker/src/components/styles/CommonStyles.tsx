@@ -33,10 +33,6 @@ const Issue = {
   IssueTableHeaderRight: styled.div`
     display: flex;
     align-items: center;
-
-    div {
-      padding: 0px 10px;
-    }
   `,
 };
 

@@ -15,6 +15,7 @@ import TextGroup from '../../common/TextGroup';
 import CountGroup from '../../common/CountGroup';
 
 import IssueHeaderButton from '../../common/IssueHeaderButton';
+import FilterMenu from '../../common/FilterMenu';
 
 const IssueTableHeader = (): JSX.Element => {
   return (
@@ -36,10 +37,14 @@ const IssueTableHeader = (): JSX.Element => {
         />
       </S.IssueTableHeaderLeft>
       <S.IssueTableHeaderRight>
-        <TextGroup type="small" content={ASSIGNEE} color="#6E7191" />
+        {/* <TextGroup type="small" content={ASSIGNEE} color="#6E7191" />
         <TextGroup type="small" content={LABEL} color="#6E7191" />
         <TextGroup type="small" content={MILESTONE} color="#6E7191" />
-        <TextGroup type="small" content={WRITER} color="#6E7191" />
+        <TextGroup type="small" content={WRITER} color="#6E7191" /> */}
+        <FilterMenu />
+        <FilterMenu />
+        <FilterMenu />
+        <FilterMenu />
       </S.IssueTableHeaderRight>
     </S.IssueTableHeader>
   );

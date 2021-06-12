@@ -10,7 +10,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
-import TextGroup from '../common/TextGroup';
+import TextGroup from '../../common/TextGroup';
+import {
+  ASSIGNED_ISSUE,
+  CLOSED_ISSUE,
+  COMMENTED_ISSUE,
+  FILTER,
+  OPEN_ISSUE,
+  WRITTEN_ISSUE,
+} from '../../../utils/const';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -63,31 +71,23 @@ function FilterBar(): JSX.Element {
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value={'필터'}>
-            <TextGroup content="필터" color="#222" type="xSmall" />
+          <MenuItem value={FILTER}>
+            <TextGroup content={FILTER} color="#222" type="xSmall" />
           </MenuItem>
           <MenuItem value={1}>
-            <TextGroup content="열린 이슈" color="#222" type="xSmall" />
+            <TextGroup content={OPEN_ISSUE} color="#222" type="xSmall" />
           </MenuItem>
           <MenuItem value={2}>
-            <TextGroup content="내가 작성한 이슈" color="#222" type="xSmall" />
+            <TextGroup content={WRITTEN_ISSUE} color="#222" type="xSmall" />
           </MenuItem>
           <MenuItem value={3}>
-            <TextGroup
-              content="나에게 할당된 이슈"
-              color="#222"
-              type="xSmall"
-            />
+            <TextGroup content={ASSIGNED_ISSUE} color="#222" type="xSmall" />
           </MenuItem>
           <MenuItem value={4}>
-            <TextGroup
-              content="내가 댓글을 남긴 이슈"
-              color="#222"
-              type="xSmall"
-            />
+            <TextGroup content={COMMENTED_ISSUE} color="#222" type="xSmall" />
           </MenuItem>
           <MenuItem value={5}>
-            <TextGroup content="닫힌 이슈" color="#222" type="xSmall" />
+            <TextGroup content={CLOSED_ISSUE} color="#222" type="xSmall" />
           </MenuItem>
         </Select>
       </FormControl>

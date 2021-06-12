@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { SMALL_FILL, WRITING_ISSUE } from '../../../utils/const';
 import ButtonGroup from '../../common/ButtonGroup';
-import FilterBar from '../../common/FilterBar';
+import FilterBar from './FilterBar';
 import TapGroup from '../../common/TabGroup';
 
 const IssueNav: FC = () => {

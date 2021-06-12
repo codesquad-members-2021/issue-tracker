@@ -26,3 +26,9 @@ export const ASSIGNEE = '담당자';
 export const LABEL = '레이블';
 export const MILESTONE = '마일스톤';
 export const WRITER = '작성자';
+
+// Filter
+export const FILTER = '필터';
+export const WRITTEN_ISSUE = '내가 작성한 이슈';
+export const ASSIGNED_ISSUE = '나에게 할당된 이슈';
+export const COMMENTED_ISSUE = '내가 댓글을 남긴 이슈';
