@@ -14,7 +14,6 @@ class LabelView: UILabel {
     
     func configure(_ text:String, _ backgroundHex:String, _ textHex:String) {
         self.text = text
-        self.textColor = colorWithHexString(textHex)
         backgroundColor = colorWithHexString(backgroundHex)
     }
 }
@@ -24,9 +23,8 @@ private extension LabelView {
     private func setupMainView() {
         layer.masksToBounds = true
         layer.cornerRadius = 10
-        backgroundColor = UIColor.systemGray2
-        textColor = UIColor.white
         textAlignment = .center
+        textColor = .white
     }
 }
 
@@ -61,4 +59,3 @@ private extension LabelView {
             return floatValue
     }
 }
-

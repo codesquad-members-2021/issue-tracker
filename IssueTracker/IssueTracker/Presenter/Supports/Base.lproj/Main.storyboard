@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -291,23 +292,14 @@
                                                     <color key="textColor" systemColor="systemGray2Color"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-8K-DHf">
-                                                    <rect key="frame" x="1" y="75.333333333333329" width="10" height="30"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-RR-olj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="10" height="30"/>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="10" id="YUW-Qf-q1O"/>
-                                                                <constraint firstAttribute="height" constant="30" id="qlT-ur-dsr"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bci-8K-DHf">
+                                                    <rect key="frame" x="1" y="75.333333333333329" width="323" height="30"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="1tS-Ha-pTy"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="don-jh-7fC" secondAttribute="trailing" id="63W-ac-QV4"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bci-8K-DHf" secondAttribute="trailing" id="9MM-Pc-CAO"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.373457" id="AzV-ZD-2Vp"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="top" secondItem="don-jh-7fC" secondAttribute="bottom" multiplier="1.03" constant="1" id="IEj-I7-XEc"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="width" secondItem="KdJ-Tq-2EI" secondAttribute="width" multiplier="0.910494" id="J3z-09-jTj"/>
@@ -316,6 +308,7 @@
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.195312" id="Q48-tg-sIB"/>
                                                 <constraint firstItem="TCp-fC-jZO" firstAttribute="top" secondItem="KdJ-Tq-2EI" secondAttribute="top" multiplier="1.03" constant="1" id="Q9f-E9-SQg"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="top" secondItem="TCp-fC-jZO" secondAttribute="bottom" multiplier="1.03" constant="1" id="Rzm-6t-W7F"/>
+                                                <constraint firstItem="Bci-8K-DHf" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.234375" id="SJh-rv-wx9"/>
                                                 <constraint firstItem="OBl-FT-h3J" firstAttribute="height" secondItem="KdJ-Tq-2EI" secondAttribute="height" multiplier="0.158854" id="THP-GB-OSI"/>
                                                 <constraint firstItem="don-jh-7fC" firstAttribute="leading" secondItem="KdJ-Tq-2EI" secondAttribute="leading" multiplier="1.05" constant="1" id="Ywg-Ld-RXf"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TCp-fC-jZO" secondAttribute="trailing" id="mdk-N8-Zpe"/>
@@ -328,7 +321,7 @@
                                         <size key="customSize" width="324" height="128"/>
                                         <connections>
                                             <outlet property="commnetLabel" destination="don-jh-7fC" id="sv0-gq-WGP"/>
-                                            <outlet property="labelStackView" destination="Bci-8K-DHf" id="JhH-4P-jAe"/>
+                                            <outlet property="labelStackView" destination="Bci-8K-DHf" id="RYy-Sr-vhk"/>
                                             <outlet property="milestoneLabel" destination="OBl-FT-h3J" id="KJG-8C-psR"/>
                                             <outlet property="titleLabel" destination="TCp-fC-jZO" id="aNM-5t-JuM"/>
                                         </connections>

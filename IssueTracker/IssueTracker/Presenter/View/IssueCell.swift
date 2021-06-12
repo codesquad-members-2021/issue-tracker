@@ -16,10 +16,12 @@ class IssueCell: UICollectionViewCell {
             let label = LabelView()
             let pedding = UIView()
             pedding.translatesAutoresizingMaskIntoConstraints = false
-            pedding.widthAnchor.constraint(equalToConstant: 15).isActive = true
+            pedding.widthAnchor.constraint(equalToConstant: 2).isActive = true
             label.configure(labels[index].name, labels[index].color.backgroundColorCode, labels[index].color.textColorCode)
+            if labels.count * 2 == labelStackView.subviews.count { continue }
             labelStackView.addArrangedSubview(label)
             labelStackView.addArrangedSubview(pedding)
+            
         }
     }
 }

@@ -22,7 +22,7 @@ class IssueListViewModel: NSObject {
             .subscribe(onNext: { [weak self] issue in
                 self?.storage.append(issue.issues)
             }, onError: { error in
-                print(error.localizedDescription)
+                print(error)
             }).disposed(by: rx.disposeBag)
     }
     
