@@ -1,15 +1,13 @@
 package com.codesquad.issuetracker.label;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class LabelDummyData {
     private LabelDummyData() {
     }
 
-    public static Set<LabelResponse> labelResponses() {
-        return new HashSet<>(Arrays.asList(
+    public static LabelResponses labelResponses() {
+        return LabelResponses.from(Arrays.asList(
                 labelBe(),
                 labelFe()
         ));
@@ -33,8 +31,7 @@ public class LabelDummyData {
                        .build();
     }
 
-    public static int labelsCountResponses() {
-        int labelsCount = 3;
-        return labelsCount;
+    public static LabelsCountResponse labelsCountResponses() {
+        return LabelsCountResponse.from(3);
     }
 }

@@ -9,14 +9,13 @@ import com.codesquad.issuetracker.user.UserDummyData;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 public class IssueDummyData {
     private IssueDummyData() {
     }
 
-    public static List<IssueResponse> issueResponses() {
-        return Arrays.asList(
+    public static IssueResponses issueResponses() {
+        return IssueResponses.from(Arrays.asList(
                 IssueResponse.builder()
                         .id(1L)
                         .number(1L)
@@ -26,13 +25,10 @@ public class IssueDummyData {
                         .createDateTime(LocalDateTime.now())
                         .author(UserDummyData.userFreddie())
                         .assignees(UserDummyData.usersResponse())
-                        .labels(new HashSet<>(Arrays.asList(
-                                LabelDummyData.labelBe(),
-                                LabelDummyData.labelFe()
-                        )))
+                        .labels(LabelDummyData.labelResponses())
                         .milestone(MileStoneDummyData.openMileStoneResponse())
                         .build()
-        );
+        ));
     }
 
     public static IssueDetailResponse issueDetailResponse() {
@@ -43,10 +39,7 @@ public class IssueDummyData {
                        .createDateTime(LocalDateTime.now())
                        .author(UserDummyData.userHiro())
                        .assignees(UserDummyData.usersResponse())
-                       .labels(new HashSet<>(Arrays.asList(
-                               LabelDummyData.labelBe(),
-                               LabelDummyData.labelFe()
-                       )))
+                       .labels(LabelDummyData.labelResponses())
                        .milestone(MileStoneDummyData.openMileStoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)

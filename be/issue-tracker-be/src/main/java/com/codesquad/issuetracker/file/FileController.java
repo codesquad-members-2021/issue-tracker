@@ -11,11 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 
     @PostMapping(value = "/files", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public FileResponse createOne(MultipartFile file) {
+    public FileResponseWrapper createOne(MultipartFile file) {
         if (file == null) {
             throw new MultipartFileNotFoundException();
         }
 
-        return FileDummyData.imageFileResponse();
+        return FileResponseWrapper.from(FileDummyData.imageFileResponse());
     }
 }

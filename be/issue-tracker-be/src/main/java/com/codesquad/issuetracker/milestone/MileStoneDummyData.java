@@ -2,15 +2,13 @@ package com.codesquad.issuetracker.milestone;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MileStoneDummyData {
     private MileStoneDummyData() {
     }
 
-    public static Set<MileStoneResponse> mileStonesResponse() {
-        return new HashSet<>(Arrays.asList(
+    public static MileStoneResponses mileStonesResponse() {
+        return MileStoneResponses.from(Arrays.asList(
                 openMileStoneResponse(),
                 closeMileStoneResponse()
         ));
@@ -40,8 +38,7 @@ public class MileStoneDummyData {
                     .build();
     }
 
-    public static int milestonesCountResponses() {
-        int milestonesCount = 5;
-        return milestonesCount;
+    public static MileStonesCountResponse milestonesCountResponses() {
+        return MileStonesCountResponse.from(5);
     }
 }
