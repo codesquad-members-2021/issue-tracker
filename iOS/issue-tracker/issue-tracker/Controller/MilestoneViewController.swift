@@ -7,7 +7,6 @@
 
 import UIKit
 
-@IBDesignable
 class MilestoneViewController: UIViewController {
 
     private let tableView: UITableView = {
