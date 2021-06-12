@@ -1,6 +1,5 @@
 import {useRef} from 'react'; 
 
-
 const MyUseCallback = (func, dependentArray) => {
   const originalDependentArray = useRef<any>();
   const originalFunc = useRef<any>();
