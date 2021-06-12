@@ -5,6 +5,9 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import FlagIcon from '@material-ui/icons/Flag';
 import styled from 'styled-components';
+import { LABEL, MILESTONE } from '../../utils/const';
+import TextGroup from '../common/TextGroup';
+import CountGroup from '../common/CountGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,8 +32,14 @@ const TabGroup = (): JSX.Element => {
         color="primary"
         aria-label="large outlined primary button group"
       >
-        <TabButton startIcon={<LocalOfferIcon />}>라벨</TabButton>
-        <TabButton startIcon={<FlagIcon />}>마일스톤</TabButton>
+        <TabButton startIcon={<LocalOfferIcon />}>
+          <TextGroup type="small" content={LABEL} color="#6E7191" />
+          <CountGroup count={0} color="#6E7191" />
+        </TabButton>
+        <TabButton startIcon={<FlagIcon />}>
+          <TextGroup type="small" content={MILESTONE} color="#6E7191" />
+          <CountGroup count={0} color="#6E7191" />
+        </TabButton>
       </CustomTabGroup>
     </div>
   );
@@ -42,6 +51,7 @@ const TabButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 40px;
 `;
 
 const CustomTabGroup = styled(ButtonGroup)`
@@ -54,4 +64,7 @@ const CustomTabGroup = styled(ButtonGroup)`
       border-color: ${({ theme }) => `${theme.colors.gray3}`};
     }
   }
+
+  margin: 0;
+  margin-right: 20px;
 `;

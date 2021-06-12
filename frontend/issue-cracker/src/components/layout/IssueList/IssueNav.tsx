@@ -48,7 +48,7 @@ const AnotherBox = styled.div`
 
 const TabBox = styled.div`
   display: flex;
-  height: 50px;
+  align-items: baseline;
 `;
 
 const ButtonBox = styled.div`
