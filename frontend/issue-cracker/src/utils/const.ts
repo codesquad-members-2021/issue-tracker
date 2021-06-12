@@ -22,3 +22,7 @@ export const SMALL_TEXT = 'smallText';
 // Text
 export const OPEN_ISSUE = '열린 이슈';
 export const CLOSED_ISSUE = '닫힌 이슈';
+export const ASSIGNEE = '담당자';
+export const LABEL = '레이블';
+export const MILESTONE = '마일스톤';
+export const WRITER = '작성자';

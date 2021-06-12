@@ -19,9 +19,11 @@ const Issue = {
     border: 1px solid #d9dbe9;
     background: #f7f7fc;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 24px 0px;
     margin-top: 10px;
+    padding-right: 24px;
   `,
 
   IssueTableHeaderLeft: styled.div`
@@ -31,6 +33,10 @@ const Issue = {
   IssueTableHeaderRight: styled.div`
     display: flex;
     align-items: center;
+
+    div {
+      padding: 0px 10px;
+    }
   `,
 };
 
@@ -47,31 +53,32 @@ const ProfileImg = {
   `,
 };
 
+const TextDefault = styled.div`
+  font-weight: 600;
+`;
+
 const Text = {
-  TextLarge: styled.div`
+  TextLarge: styled(TextDefault)`
     font-size: 24px;
     line-height: 40px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
+    color: ${({ color }) => `${color}`};
   `,
 
-  TextMedium: styled.div`
+  TextMedium: styled(TextDefault)`
     font-size: 18px;
     line-height: 32px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
+    color: ${({ color }) => `${color}`};
   `,
-  TextSmall: styled.div`
+  TextSmall: styled(TextDefault)`
     font-size: 16px;
     line-height: 28px;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
+    color: ${({ color }) => `${color}`};
   `,
-  TextXSmall: styled.div`
+  TextXSmall: styled(TextDefault)`
     font-size: 12px;
     line-height: 20px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
+    color: ${({ color }) => `${color}`};
   `,
 };
 

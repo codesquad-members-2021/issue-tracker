@@ -4,28 +4,38 @@ import { Text as S } from '../styles/CommonStyles';
 interface TextGroupProps {
   type: string;
   content: string;
+  color: string;
 }
 
-const TextGroup: FC<TextGroupProps> = ({ type, content }: TextGroupProps) => {
+const TextGroup: FC<TextGroupProps> = ({
+  type,
+  content,
+  color,
+}: TextGroupProps) => {
   return {
-    large: <TextLarge {...{ content }} />,
-    medium: <TextMedium {...{ content }} />,
-    small: <TextSmall {...{ content }} />,
-    xSmall: <TextXSmall {...{ content }} />,
+    large: <TextLarge {...{ content, color }} />,
+    medium: <TextMedium {...{ content, color }} />,
+    small: <TextSmall {...{ content, color }} />,
+    xSmall: <TextXSmall {...{ content, color }} />,
   }[type] as JSX.Element;
 };
 
 export default TextGroup;
 
-const TextLarge = ({ content }: { content: string }): JSX.Element => {
-  return <S.TextLarge>{content}</S.TextLarge>;
+interface TextType {
+  content: string;
+  color: string;
+}
+
+const TextLarge = ({ content, color }: TextType) => {
+  return <S.TextLarge {...{ color }}>{content}</S.TextLarge>;
 };
-const TextMedium = ({ content }: { content: string }): JSX.Element => {
-  return <S.TextMedium>{content}</S.TextMedium>;
+const TextMedium = ({ content, color }: TextType) => {
+  return <S.TextMedium {...{ color }}>{content}</S.TextMedium>;
 };
-const TextSmall = ({ content }: { content: string }): JSX.Element => {
-  return <S.TextSmall>{content}</S.TextSmall>;
+const TextSmall = ({ content, color }: TextType) => {
+  return <S.TextSmall {...{ color }}>{content}</S.TextSmall>;
 };
-const TextXSmall = ({ content }: { content: string }): JSX.Element => {
-  return <S.TextXSmall>{content}</S.TextXSmall>;
+const TextXSmall = ({ content, color }: TextType) => {
+  return <S.TextXSmall {...{ color }}>{content}</S.TextXSmall>;
 };

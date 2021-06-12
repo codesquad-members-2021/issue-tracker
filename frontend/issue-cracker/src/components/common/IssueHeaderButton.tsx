@@ -4,20 +4,20 @@ import styled from 'styled-components';
 interface IssueHeaderButtonProps {
   icon: JSX.Element;
   text: JSX.Element;
-  count?: number;
+  count: JSX.Element;
 }
 
 const IssueHeaderButton = ({
   icon,
   text,
-  count = 0,
+  count,
 }: IssueHeaderButtonProps): JSX.Element => {
   return (
     <IssueHeaderButtonStyle>
       <IconBox>{icon}</IconBox>
       <div>
         <TextBox>{text}</TextBox>
-        <CountBox>{`(${count})`}</CountBox>
+        <CountBox>{count}</CountBox>
       </div>
     </IssueHeaderButtonStyle>
   );
