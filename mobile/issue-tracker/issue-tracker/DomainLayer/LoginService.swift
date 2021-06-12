@@ -8,12 +8,30 @@
 import Foundation
 import Combine
 import KeychainSwift
+import AuthenticationServices
 
-class LoginService {
+final class LoginService {
 
-    private let keychain = KeychainSwift()
-    private let repository = Repository()
+    private let keychain: KeychainSwift
+    private let repository: Repository
+
     private let token = "token"
+
+    init(keychain: KeychainSwift = KeychainSwift(), repository: Repository = .init()) {
+        self.keychain = keychain
+        self.repository = repository
+    }
+
+    func fetchGithubCode(from content: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, Error?) -> Void) {
+        repository.fetchGithubLoginCode(from: content) { result in
+            switch result {
+            case .failure(let error):
+                completionHandler(nil, error)
+            case .success(let code):
+                completionHandler(code, nil)
+            }
+        }
+    }
 
     func fetchToken(to code: Encodable) -> AnyPublisher<Void, NetworkError> {
         return repository.requestUserAuth(to: code)
@@ -23,8 +41,8 @@ class LoginService {
             .map { [weak self] value in
                 guard let self = self else { return }
                 self.keychain.set(value[self.token] ?? "",
-                             forKey: self.token)
-            return
-        }.eraseToAnyPublisher()
+                                  forKey: self.token)
+                return
+            }.eraseToAnyPublisher()
     }
 }

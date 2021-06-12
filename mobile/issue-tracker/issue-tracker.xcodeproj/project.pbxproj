@@ -137,8 +137,7 @@
 				BF0A6C0F266F5F07000F3BC5 /* DataLayer */,
 				BF0A6C0E266F5F05000F3BC5 /* DomainLayer */,
 				BF0A6C0D266F5F03000F3BC5 /* PresentationLayer */,
-				BF0A6BD9266F4EE5000F3BC5 /* MainViewController.swift */,
-				BF0A6BDB266F4EE5000F3BC5 /* Main.storyboard */,
+				BF370D6326734B9300E6C090 /* New Group */,
 				BF0A6BDE266F4EE7000F3BC5 /* Assets.xcassets */,
 				BF0A6BE0266F4EE7000F3BC5 /* LaunchScreen.storyboard */,
 				BFB399C82671A75C002C6D80 /* ClientId.plist */,
@@ -219,6 +218,15 @@
 				BFB399D52671C015002C6D80 /* Error.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BF370D6326734B9300E6C090 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A6BD9266F4EE5000F3BC5 /* MainViewController.swift */,
+				BF0A6BDB266F4EE5000F3BC5 /* Main.storyboard */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		BFB399CC2671BB44002C6D80 /* Extension */ = {

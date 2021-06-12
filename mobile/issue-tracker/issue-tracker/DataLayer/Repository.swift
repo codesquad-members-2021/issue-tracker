@@ -7,15 +7,30 @@
 
 import Foundation
 import Combine
+import AuthenticationServices
 
-class Repository {
+protocol RepositoryProtocol {
+    func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError>
+}
+
+final class Repository: RepositoryProtocol {
+
+    private let session: URLSession
+    private var webAuthSession: ASWebAuthenticationSession?
+
+    private let callbackURLScheme = "issue-tracker"
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
 
     func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
+
         guard let url = Endpoint.authURLRequest(to: code) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return self.session.dataTaskPublisher(for: url)
             .mapError { _ in
                 NetworkError.invalidRequest
             }
@@ -36,4 +51,27 @@ class Repository {
             }.eraseToAnyPublisher()
     }
 
+    func fetchGithubLoginCode(from content: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<String, NetworkError>) -> Void) {
+        guard let url = GithubConfiguration.url() else {
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+
+        webAuthSession = .init(url: url, callbackURLScheme: callbackURLScheme) { (callback: URL?, error: Error?) in
+            guard error == nil, let successURL = callback else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+
+            let queryItems = URLComponents(string: successURL.absoluteString)?.queryItems
+            let code = queryItems?.filter { $0.name == "code" }.first?.value ?? ""
+            completion(.success(code))
+        }
+        configureWebAuthSession(from: content)
+    }
+
+    private func configureWebAuthSession(from content: ASWebAuthenticationPresentationContextProviding) {
+        webAuthSession?.presentationContextProvider = content
+        webAuthSession?.start()
+    }
 }

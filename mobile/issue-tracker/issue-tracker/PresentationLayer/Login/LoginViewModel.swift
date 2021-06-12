@@ -7,17 +7,31 @@
 
 import Foundation
 import Combine
-import KeychainSwift
+import AuthenticationServices
 
 final class LoginViewModel {
 
-    private let loginService = LoginService()
+    private let loginService: LoginService
     private var successSubject = PassthroughSubject<Void, Never>()
     private var cancellable = Set<AnyCancellable>()
 
     @Published private var message = ""
 
-    func fetchToken(to code: Encodable) {
+    init(loginService: LoginService = .init()) {
+        self.loginService = loginService
+    }
+
+    func fetctGithubLogin(from content: ASWebAuthenticationPresentationContextProviding) {
+        loginService.fetchGithubCode(from: content) { code, error in
+            guard error == nil, let code = code else {
+                self.message = error.debugDescription
+                return
+            }
+            self.authorizeUser(to: Auth(code: code))
+        }
+    }
+
+    func authorizeUser(to code: Encodable) {
         loginService.fetchToken(to: code).sink { fail in
             if case .failure(let error) = fail {
                 self.message = error.description
@@ -33,7 +47,7 @@ final class LoginViewModel {
             .eraseToAnyPublisher()
     }
 
-    func fetchCompltion() -> AnyPublisher<Void, Never> {
+    func AuthorizeCompltion() -> AnyPublisher<Void, Never> {
         return successSubject.eraseToAnyPublisher()
     }
 }

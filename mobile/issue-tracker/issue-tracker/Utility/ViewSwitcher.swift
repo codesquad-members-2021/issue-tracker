@@ -10,10 +10,15 @@ import KeychainSwift
 
 class ViewSwitcher {
 
-    static func updateViewController() {
-        let keyChain = KeychainSwift()
+    private let keyChain: KeychainSwift
+
+    init(keyChain: KeychainSwift = KeychainSwift()) {
+        self.keyChain = keyChain
+    }
+
+    func updateViewController() {
         var rootViewController: UIViewController?
-        
+
         if keyChain.get("token") != nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let mainTapController = storyBoard.instantiateViewController(withIdentifier: "Main")

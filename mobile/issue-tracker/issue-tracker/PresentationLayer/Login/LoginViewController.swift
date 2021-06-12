@@ -12,9 +12,6 @@ import AuthenticationServices
 final class LoginViewController: UIViewController {
 
     private let loginViewModel = LoginViewModel()
-    private var webAuthSession: ASWebAuthenticationSession?
-    private let callbackUrlScheme = "issue-Tracker"
-
     private var cancellable = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -22,26 +19,7 @@ final class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTouched(_ sender: Any) {
-        setupAuthSession()
-        webAuthSession?.presentationContextProvider = self
-        webAuthSession?.start()
-    }
-
-    private func setupAuthSession() {
-        guard let url = GithubConfiguration.url() else {
-            return
-        }
-
-        webAuthSession = ASWebAuthenticationSession.init(url: url,
-                                                         callbackURLScheme: callbackUrlScheme,
-                                                         completionHandler: { [weak self] (callBack: URL?, error: Error?) in
-            guard error == nil, let successURL = callBack else {
-                return
-            }
-            let queryItems = URLComponents(string: successURL.absoluteString)?.queryItems
-            let code = queryItems?.filter { $0.name == "code" }.first?.value ?? ""
-            self?.loginViewModel.fetchToken(to: Auth(code: code))
-        })
+        loginViewModel.fetctGithubLogin(from: self)
     }
 
     private func bind() {
@@ -49,12 +27,12 @@ final class LoginViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] message in
                 self?.present(Alert.create(title: message), animated: true)
-        }.store(in: &cancellable)
+            }.store(in: &cancellable)
 
-        loginViewModel.fetchCompltion()
+        loginViewModel.AuthorizeCompltion()
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                ViewSwitcher.updateViewController()
+                ViewSwitcher().updateViewController()
             }.store(in: &cancellable)
     }
 }
