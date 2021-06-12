@@ -18,3 +18,7 @@ export const SMALL_FILL = 'smallFill';
 export const SMALL_BORDER = 'smallBorder';
 export const MEDIUM_TEXT = 'mediumText';
 export const SMALL_TEXT = 'smallText';
+
+// Text
+export const OPEN_ISSUE = '열린 이슈';
+export const CLOSED_ISSUE = '닫힌 이슈';

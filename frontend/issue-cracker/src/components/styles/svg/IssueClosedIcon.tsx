@@ -9,6 +9,7 @@ interface IssueClosedIconProps {
 interface StyleProps {
   width: number;
   height: number;
+  fill?: string;
 }
 
 const IssueClosedIcon = ({
@@ -56,5 +57,6 @@ const IssueClosedIconStyle = styled.div`
     stroke: ${({ color }) => `${color}`};
     width: ${({ style }) => `${style?.width}px`};
     height: ${({ style }) => `${style?.height}px`};
+    fill: ${({ style }) => `${style?.fill}`};
   }
 `;

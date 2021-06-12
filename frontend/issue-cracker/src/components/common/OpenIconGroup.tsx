@@ -6,10 +6,10 @@ interface Prop {
   type: string;
 }
 
-const OpenIconLarge = (): JSX.Element => (
+const OpenIconLabel = (): JSX.Element => (
   <IssueOpenIcon color="#007AFF" style={{ width: 16, height: 16 }} />
 );
-const OpenIconSmall = (): JSX.Element => (
+const OpenIconDefault = (): JSX.Element => (
   <IssueOpenIcon color="#222" style={{ width: 16, height: 16 }} />
 );
 const OpenIconDisabled = (): JSX.Element => (
@@ -24,8 +24,8 @@ const OpenIconActive = (): JSX.Element => (
 
 const IssueOpenIconGroup: FC<Prop> = ({ type }: Prop) => {
   return {
-    large: <OpenIconLarge />,
-    small: <OpenIconSmall />,
+    label: <OpenIconLabel />,
+    default: <OpenIconDefault />,
     disabled: <OpenIconDisabled />,
     active: <OpenIconActive />,
   }[type] as JSX.Element;

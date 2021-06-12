@@ -18,6 +18,8 @@ export default function Checkboxes(): JSX.Element {
 }
 
 const CustomCheckBox = styled(Checkbox)`
+  margin: 0px 15px;
+
   svg {
     fill: #d9dbe9;
   }

@@ -10,22 +10,6 @@ import IssueCell from './IssueCell';
 const IssueTable = (): JSX.Element => {
   return (
     <IssueTableContainer>
-      <ProgressBar />
-      <br />
-
-      <LabelLargeGroup type={'open'} />
-
-      <br />
-      <br />
-      <LabelLargeGroup type={'closed'} />
-      <br />
-      <br />
-      <InputGroup type="text" name="name" />
-      <br />
-      <br />
-      <TextArea />
-      <br />
-      <br />
       <IssueTableHeader />
       <IssueCell />
     </IssueTableContainer>
