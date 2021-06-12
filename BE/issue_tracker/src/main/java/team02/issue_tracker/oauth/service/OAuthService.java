@@ -1,24 +1,16 @@
 package team02.issue_tracker.oauth.service;
 
-import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.*;
 import team02.issue_tracker.oauth.exception.InvalidGithubUserRequestException;
 import team02.issue_tracker.oauth.utils.GithubApiProperties;
 import team02.issue_tracker.oauth.utils.JwtUtils;
 import team02.issue_tracker.service.UserService;
-
-import java.time.Duration;
 
 @Slf4j
 @Service
@@ -37,19 +29,19 @@ public class OAuthService {
         this.webClient = webClient;
     }
 
-    public AuthJwt issueJwtForWeb(String code) {
+    public AuthJwt issueJwtForWeb(final String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForWeb(code));
         return jwtUtils.getJwt(userFrom(githubUserProfile));
     }
 
-    public AuthJwt issueJwtForIos(String code) {
+    public AuthJwt issueJwtForIos(final String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForIos(code));
         return jwtUtils.getJwt(userFrom(githubUserProfile));
     }
 
-    private User userFrom(SocialProfile socialProfile) {
+    private User userFrom(final SocialProfile socialProfile) {
         User socialProfileUser = socialProfile.becomeUser();
         User user = userService.findByUser(socialProfileUser);
         if (user == null) {
@@ -59,12 +51,12 @@ public class OAuthService {
     }
 
     private GithubUserProfile githubUserProfileFrom(
-            GithubAccessTokenRequestDto accessTokenRequest) {
+            final GithubAccessTokenRequestDto accessTokenRequest) {
         return githubUserProfileFrom(accessTokenFrom(accessTokenRequest));
     }
 
     private GithubAccessTokenResponseDto accessTokenFrom(
-            GithubAccessTokenRequestDto accessTokenRequest) {
+            final GithubAccessTokenRequestDto accessTokenRequest) {
         GithubAccessTokenResponseDto accessTokenResponse = webClient.post()
                 .uri(githubApiProperties.accessTokenUri())
                 .accept(MediaType.APPLICATION_JSON)
@@ -78,7 +70,7 @@ public class OAuthService {
     }
 
     private GithubUserProfile githubUserProfileFrom(
-            GithubAccessTokenResponseDto accessTokenResponse) {
+            final GithubAccessTokenResponseDto accessTokenResponse) {
         GithubUserProfile githubUserProfile = webClient.get()
                 .uri(githubApiProperties.userInfoUri())
                 .header(HttpHeaders.AUTHORIZATION
