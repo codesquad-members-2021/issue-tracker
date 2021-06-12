@@ -1,5 +1,4 @@
 import { Route, Switch, Link } from "react-router-dom";
-// import styled from "styled-components";
 import LoginPage from "./components/pages/LoginPage";
 import LoginLoadingPage from "./components/pages/LoginLoadingPage";
 import MainPage from "./components/pages/MainPage";
@@ -8,13 +7,12 @@ import Milestones from "./components/Milestones/Milestones";
 import NoMatch from "./components/pages/NoMatchPage";
 import Labels from "./components/Labels/Labels";
 import NewIssue from "./components/pages/NewIssuePage";
-// import { ThemeProvider } from "styled-components";
-// import theme from "./../src/styles/theme";
-import { StylesProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "styled-components";
+import theme from "styles/theme";
 
 function App() {
 	return (
-		<StylesProvider injectFirst>
+		<ThemeProvider theme={theme}>
 			<Switch>
 				<Route exact path="/" component={LoginPage} />
 				<PrivateRoute path="/main" component={MainPage} />
@@ -24,7 +22,7 @@ function App() {
 				{/* <Route path="/main/new" component={NewIssue} /> */}
 				<Route path="*" component={NoMatch} />
 			</Switch>
-		</StylesProvider>
+		</ThemeProvider>
 	);
 }
 

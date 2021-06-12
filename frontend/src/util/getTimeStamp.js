@@ -13,6 +13,5 @@ const getTimeStamp = (dateInfo) => {
 
 	return `${Math.floor(diffDay / 365)}년 전`;
 };
-// console.log(getTimeStamp("2021-06-11 11:12:13"));
 
 export default getTimeStamp;

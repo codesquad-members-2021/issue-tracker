@@ -18,9 +18,7 @@ const MainPage = () => {
 		<MainPageLayout>
 			<Header pathName={pathname} />
 
-			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
-				<Navigator />
-			)}
+			{(pathname === "/main/labels" || pathname === "/main/milestones") && <Navigator />}
 			{pathname === "/main" && <Issues />}
 			<Switch>
 				<Route exact path="/main/:id" component={IssueDetailPage} />
