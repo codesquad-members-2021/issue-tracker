@@ -1,3 +1,8 @@
-import SignInButton from './SignInButton';
+import GithubLogin from './GithubLogin';
+import IDLogin from './IDLogin';
+// import SignInButton from './SignInButton';
 
-export {SignInButton as SignIn};
+export {
+  IDLogin as IDLogin,
+  GithubLogin as GithubLogin
+};
