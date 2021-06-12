@@ -17,4 +17,8 @@ export default function Checkboxes(): JSX.Element {
   );
 }
 
-const CustomCheckBox = styled(Checkbox)``;
+const CustomCheckBox = styled(Checkbox)`
+  svg {
+    fill: #d9dbe9;
+  }
+`;

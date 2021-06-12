@@ -51,7 +51,6 @@ export default IssueClosedIcon;
 const IssueClosedIconStyle = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 8px;
 
   svg {
     stroke: ${({ color }) => `${color}`};

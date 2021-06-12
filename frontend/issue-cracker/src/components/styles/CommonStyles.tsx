@@ -17,6 +17,9 @@ const Issue = {
     border-radius: 16px 16px 0px 0px;
     border: 1px solid #d9dbe9;
     background: #f7f7fc;
+    display: flex;
+    align-items: center;
+    padding: 24px 32px;
   `,
 };
 
@@ -33,12 +36,4 @@ const ProfileImg = {
   `,
 };
 
-const Icon = {
-  OpenIconActive: styled.div``,
-  OpenIconDisabled: styled.div``,
-  OpenIconLarge: styled.div``,
-  OpenIconSmall: styled.div``,
-  ClosedIconLarge: styled.div``,
-  ClosedIconSmall: styled.div``,
-};
 export { Issue, ProfileImg };

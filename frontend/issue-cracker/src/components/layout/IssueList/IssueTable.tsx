@@ -12,7 +12,9 @@ const IssueTable = (): JSX.Element => {
     <IssueTableContainer>
       <ProgressBar />
       <br />
+
       <LabelLargeGroup type={'open'} />
+
       <br />
       <br />
       <LabelLargeGroup type={'closed'} />
