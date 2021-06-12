@@ -27,12 +27,14 @@ public class OAuthService {
     private final UserService userService;
     private final JwtUtils jwtUtils;
     private final GithubApiProperties githubApiProperties;
+    private final WebClient webClient;
 
     public OAuthService(UserService userService, JwtUtils jwtUtils
-            , GithubApiProperties githubApiProperties) {
+            , GithubApiProperties githubApiProperties, WebClient webClient) {
         this.userService = userService;
         this.jwtUtils = jwtUtils;
         this.githubApiProperties = githubApiProperties;
+        this.webClient = webClient;
     }
 
     public AuthJwt issueJwtForWeb(String code) {
@@ -63,45 +65,20 @@ public class OAuthService {
 
     private GithubAccessTokenResponseDto accessTokenFrom(
             GithubAccessTokenRequestDto accessTokenRequest) {
-        HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .responseTimeout(Duration.ofSeconds(1))
-                .doOnConnected(conn -> conn
-                        .addHandlerLast(new ReadTimeoutHandler(5))
-                        .addHandlerLast(new WriteTimeoutHandler(5))
-                );
-
-        WebClient webClient = WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .build();
-
-        Mono<GithubAccessTokenResponseDto> mono = webClient.post()
+        GithubAccessTokenResponseDto accessTokenResponse = webClient.post()
                 .uri(githubApiProperties.accessTokenUri())
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(accessTokenRequest)
                 .retrieve()
-                .bodyToMono(GithubAccessTokenResponseDto.class);
-
-        GithubAccessTokenResponseDto result = mono.blockOptional()
+                .bodyToMono(GithubAccessTokenResponseDto.class)
+                .blockOptional()
                 .orElseThrow(IllegalArgumentException::new);
-        log.info("access token from GitHub : {}", result);
-        return result;
+        log.info("access token from GitHub : {}", accessTokenResponse.toString());
+        return accessTokenResponse;
     }
 
     private GithubUserProfile githubUserProfileFrom(
             GithubAccessTokenResponseDto accessTokenResponse) {
-        HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .responseTimeout(Duration.ofSeconds(1))
-                .doOnConnected(conn -> conn
-                        .addHandlerLast(new ReadTimeoutHandler(5))
-                        .addHandlerLast(new WriteTimeoutHandler(5))
-                );
-
-        WebClient webClient = WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .build();
-
         GithubUserProfile githubUserProfile = webClient.get()
                 .uri(githubApiProperties.userInfoUri())
                 .header(HttpHeaders.AUTHORIZATION
