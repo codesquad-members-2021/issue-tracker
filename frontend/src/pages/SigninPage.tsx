@@ -45,6 +45,9 @@ const SigninPageBlock = styled(ResponsiveLayout)`
 
 const Layer = styled.div`
   width: 100%;
+  
+  display: flex;
+  justify-content: center;
 `;
 const TitleLayer = styled(Layer)`
   margin-bottom: 60px;

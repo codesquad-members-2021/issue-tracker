@@ -17,10 +17,10 @@ const IDLogin = () => {
 
     switch(type) {
       case "ID":
-        setLoginInfo({ [type]: payload });
+        setLoginInfo({ ...loginInfo, [type]: payload });
         return;
       case "password":
-        setLoginInfo({ [type]: payload });
+        setLoginInfo({ ...loginInfo, [type]: payload });
         return;
       default:
         alert("오류가 있습니다");
@@ -43,14 +43,29 @@ const IDLogin = () => {
           onChange={({target}) => { handleChangeInput({type: target.id, payload: target.value}) }} 
         />
       </InputLayer>
+      <InputLayer>
+        <SubmitButton validator={loginInfo}> 아이디로 로그인 </SubmitButton>
+      </InputLayer>
       
-      
-      <button>아이디로 로그인</button>
     </IDLoginLayout>
   )
 }
 const IDLoginLayout = styled.div`
   width: 100%;
+`;
+
+const SubmitButton = styled.button<{validator: any}>`
+  width: 100%;
+  height: 64px;
+  color: white;
+  box-sizing: border-box;
+  background-color: ${({validator}) => {
+    console.log(validator.ID, validator.password)
+    return validator.ID && validator.password ? "#007AFF": "#6AA7FD";
+  }};
+  padding: 0px 24px;  
+  border: none;
+  border-radius: 16px;
 `;
 
 const InputLabel = styled.label`
