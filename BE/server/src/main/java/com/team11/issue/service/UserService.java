@@ -39,10 +39,9 @@ public class UserService {
     }
 
     private String getJwtToken(String authorization) {
-        String jwtToken = null;
         if (authorization.startsWith("Bearer "))
-            return jwtToken = authorization.substring(7);
-        return jwtToken;
+            return authorization.substring(7);
+        return null;
     }
 
     private boolean verifyUser(String userName) {
@@ -53,21 +52,20 @@ public class UserService {
         String accessToken = getAccessToken(loginRequestDTO);
         UserInfoDTO loginUserInfo = getUserInfoFromGitHub(accessToken);
 
+        User user;
+
         if (verifyUser(loginUserInfo.getName())) {
-            User user = findByName(loginUserInfo.getName());
+            user = findByName(loginUserInfo.getName());
             user.updateUser(accessToken);
             userRepository.save(user);
-            String jwtToken = createJwtToken(user.getName());
-            return new LoginResponseDTO(user, jwtToken);
+            return new LoginResponseDTO(user, createJwtToken(user.getName()));
         }
 
-        User saveUser = new User(loginUserInfo, accessToken);
-        userRepository.save(saveUser);
+        user = User.createUser(loginUserInfo, accessToken);
+        userRepository.save(user);
 
-        User user = findByName(loginUserInfo.getName());
-        String jwtToken = createJwtToken(user.getName());
-
-        return new LoginResponseDTO(user, jwtToken);
+        user = findByName(loginUserInfo.getName());
+        return new LoginResponseDTO(user, createJwtToken(user.getName()));
 
     }
 
