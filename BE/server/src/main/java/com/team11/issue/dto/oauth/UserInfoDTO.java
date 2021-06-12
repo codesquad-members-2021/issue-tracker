@@ -1,7 +1,9 @@
 package com.team11.issue.dto.oauth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class UserInfoDTO {
 
     @JsonProperty("login")
@@ -24,12 +26,4 @@ public class UserInfoDTO {
         return email;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfoDTO{" +
-                "name='" + name + '\'' +
-                ", profileImage='" + profileImage + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

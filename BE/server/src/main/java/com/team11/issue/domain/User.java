@@ -1,21 +1,28 @@
 package com.team11.issue.domain;
 
 import com.team11.issue.dto.oauth.UserInfoDTO;
-import org.springframework.data.annotation.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 
+@Getter
+@NoArgsConstructor
+@Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String name;
+
     private String email;
+
     private String profileImage;
+
     private String accessToken;
-
-    public User() {
-
-    }
 
     public User(UserInfoDTO userInfoDTO, String accessToken) {
         this.id = id;
@@ -33,23 +40,4 @@ public class User {
         this.accessToken = null;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
 }

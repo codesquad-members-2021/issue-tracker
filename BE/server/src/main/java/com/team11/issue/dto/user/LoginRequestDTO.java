@@ -1,5 +1,8 @@
 package com.team11.issue.dto.user;
 
+import lombok.Getter;
+
+@Getter
 public class LoginRequestDTO {
 
     private String type;
@@ -8,13 +11,5 @@ public class LoginRequestDTO {
     public LoginRequestDTO(String type, String code) {
         this.type = type;
         this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getCode() {
-        return code;
     }
 }
