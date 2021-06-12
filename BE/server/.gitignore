@@ -4,8 +4,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-server/src/main/resources/oauth.properties
-
 ### STS ###
 .apt_generated
 .classpath
@@ -198,3 +196,6 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,macos,intellij
+/src/main/resources/application-oauth.properties
+/src/main/resources/application-prod.properties
+/src/main/resources/application-local.properties
