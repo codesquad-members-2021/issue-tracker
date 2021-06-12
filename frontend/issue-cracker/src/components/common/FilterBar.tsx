@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
+import TextGroup from '../common/TextGroup';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -19,28 +20,16 @@ const BootstrapInput = withStyles((theme: Theme) =>
       },
     },
     input: {
-      borderRadius: 4,
+      borderRadius: 16,
       position: 'relative',
       backgroundColor: theme.palette.background.paper,
       border: '1px solid #ced4da',
-      fontSize: 16,
       padding: '10px 26px 10px 12px',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
       // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
+      fontFamily: ['Noto Sans KR'].join(','),
       '&:focus': {
-        borderRadius: 4,
+        borderRadius: 16,
         borderColor: '#80bdff',
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
       },
@@ -74,12 +63,32 @@ function FilterBar(): JSX.Element {
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value={'필터'}>필터</MenuItem>
-          <MenuItem value={1}>열린 이슈</MenuItem>
-          <MenuItem value={2}>내가 작성한 이슈</MenuItem>
-          <MenuItem value={3}>나에게 할당된 이슈</MenuItem>
-          <MenuItem value={4}>내가 댓글을 남긴 이슈</MenuItem>
-          <MenuItem value={5}>닫힌 이슈</MenuItem>
+          <MenuItem value={'필터'}>
+            <TextGroup content="필터" color="#222" type="xSmall" />
+          </MenuItem>
+          <MenuItem value={1}>
+            <TextGroup content="열린 이슈" color="#222" type="xSmall" />
+          </MenuItem>
+          <MenuItem value={2}>
+            <TextGroup content="내가 작성한 이슈" color="#222" type="xSmall" />
+          </MenuItem>
+          <MenuItem value={3}>
+            <TextGroup
+              content="나에게 할당된 이슈"
+              color="#222"
+              type="xSmall"
+            />
+          </MenuItem>
+          <MenuItem value={4}>
+            <TextGroup
+              content="내가 댓글을 남긴 이슈"
+              color="#222"
+              type="xSmall"
+            />
+          </MenuItem>
+          <MenuItem value={5}>
+            <TextGroup content="닫힌 이슈" color="#222" type="xSmall" />
+          </MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.margin}>

@@ -54,7 +54,7 @@ const ProfileImg = {
 };
 
 const TextDefault = styled.div`
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Text = {
@@ -77,7 +77,6 @@ const Text = {
   TextXSmall: styled(TextDefault)`
     font-size: 12px;
     line-height: 20px;
-    font-weight: 500;
     color: ${({ color }) => `${color}`};
   `,
 };

@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import useButtonStyles from '../styles/ButtonStyles';
 import { ClassNameMap } from '@material-ui/styles/withStyles';
+import styled from 'styled-components';
 
 interface Prop {
   type: string;
@@ -70,7 +71,7 @@ function ButtonMedium({ classes, name, color }: IButton) {
 
 function ButtonSmallFill({ classes, name, color }: IButton) {
   return (
-    <Button
+    <CustomButton
       variant="contained"
       startIcon={<AddIcon />}
       className={classes.buttonSmallFill}
@@ -80,7 +81,7 @@ function ButtonSmallFill({ classes, name, color }: IButton) {
       }}
     >
       {name}
-    </Button>
+    </CustomButton>
   );
 }
 
@@ -122,3 +123,7 @@ function ButtonSmallText({ classes, name }: IButton) {
     </Button>
   );
 }
+
+const CustomButton = styled(Button)`
+  border-radius: 16px;
+`;
