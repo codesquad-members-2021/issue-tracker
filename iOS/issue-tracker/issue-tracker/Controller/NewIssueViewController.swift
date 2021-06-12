@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
+import MarkdownKit
 
 @IBDesignable
 class NewIssueViewController: UIViewController {
     
     private let additionalInfo = ["레이블", "마일스톤", "작성자"]
     private let cellReuseIdentifier = "NewIssueViewCell"
+    private let markdownParser = MarkdownParser()
     
     private let subject: UILabel = {
         let label = UILabel()
@@ -34,6 +36,8 @@ class NewIssueViewController: UIViewController {
     }()
 
     private let segmentedControl = UISegmentedControl(items: ["마크다운", "미리보기"])
+    private var textView: UITextView?
+    private var textString: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,7 @@ class NewIssueViewController: UIViewController {
         navigationItem.rightBarButtonItem = save
         navigationItem.titleView = segmentedControl
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(reload), for: .valueChanged)
         
         view.addSubview(subject)
         view.addSubview(textField)
@@ -68,6 +73,19 @@ class NewIssueViewController: UIViewController {
             maker.top.equalTo(textField.snp.bottom)
             maker.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    @objc
+    func reload(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            textView?.text = textString
+        case 1:
+            textString = textView?.text
+            textView?.attributedText = markdownParser.parse(textView!.text)
+        default:
+            break
         }
     }
 }
@@ -93,7 +111,8 @@ extension NewIssueViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         switch indexPath.section {
         case 0:
-            cell.addSubview(UITextView(frame: cell.contentView.bounds))
+            textView = UITextView(frame: cell.contentView.bounds)
+            cell.addSubview(textView!)
         case 1:
             cell.textLabel?.text = additionalInfo[indexPath.row]
             cell.accessoryType = .disclosureIndicator

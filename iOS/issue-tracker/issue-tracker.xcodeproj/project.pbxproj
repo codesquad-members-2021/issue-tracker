@@ -28,6 +28,7 @@
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
+		D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0A88E062674D9F0005877F6 /* MarkdownKit */; };
 		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
 		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
 		D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6CB266F4F1C00E0762C /* Alamofire */; };
@@ -114,6 +115,7 @@
 				9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */,
 				D0ADB6D5266F4F3D00E0762C /* RxSwift in Frameworks */,
 				D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */,
+				D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */,
 				D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +321,7 @@
 				D0ADB6D0266F4F3D00E0762C /* RxCocoa */,
 				D0ADB6D4266F4F3D00E0762C /* RxSwift */,
 				D0ADB6D6266F4F4700E0762C /* SnapKit */,
+				D0A88E062674D9F0005877F6 /* MarkdownKit */,
 			);
 			productName = "issue-tracker";
 			productReference = B3B559DD266E095E00901C55 /* issue-tracker.app */;
@@ -397,6 +400,7 @@
 				B3B55A10266E0C8600901C55 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B3B55A13266E0D5600901C55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				B3F50EE7266E12340009C260 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D0A88E052674D9F0005877F6 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
 			);
 			productRefGroup = B3B559DE266E095E00901C55 /* Products */;
 			projectDirPath = "";
@@ -896,9 +900,22 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		D0A88E052674D9F0005877F6 /* XCRemoteSwiftPackageReference "MarkdownKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bmoliveira/MarkdownKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D0A88E062674D9F0005877F6 /* MarkdownKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0A88E052674D9F0005877F6 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
+			productName = MarkdownKit;
+		};
 		D0ADB6CB266F4F1C00E0762C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3B55A10266E0C8600901C55 /* XCRemoteSwiftPackageReference "Alamofire" */;
