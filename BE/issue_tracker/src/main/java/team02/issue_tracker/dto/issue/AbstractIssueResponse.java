@@ -31,7 +31,6 @@ public abstract class AbstractIssueResponse {
 
     public AbstractIssueResponse(Issue issue) {
         this.id = issue.getId();
-        this.issueNumber = issue.getIssueNumber();
         this.title = issue.getTitle();
         this.createdTime = issue.getCreatedTime();
         this.isOpen = issue.isOpen();

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Comment;
 import team02.issue_tracker.domain.CommentEmoji;
-import team02.issue_tracker.domain.Emoji;
 
 import java.time.LocalDateTime;
 import java.util.List;
