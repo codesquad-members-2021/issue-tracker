@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import java.util.Date;
 
 public class JwtUtil {
+
     private static final String SECRET = "secret";
     private static final String CLAIM_KEY = "userName";
     private static final Algorithm algorithmHS = Algorithm.HMAC256(SECRET);

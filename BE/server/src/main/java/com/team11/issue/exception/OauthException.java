@@ -6,5 +6,4 @@ public class OauthException extends RuntimeException {
         super(message);
     }
 
-
 }

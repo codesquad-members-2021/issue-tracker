@@ -3,7 +3,9 @@ package com.team11.issue.dto.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.team11.issue.domain.User;
+import lombok.Getter;
 
+@Getter
 @JsonPropertyOrder({"userId","userName","email","profileImage","jwtToken"})
 public class LoginResponseDTO {
 
@@ -25,25 +27,5 @@ public class LoginResponseDTO {
         this.email = user.getEmail();
         this.profileImage = user.getProfileImage();
         this.jwtToken = jwtToken;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public String getJwtToken() {
-        return jwtToken;
     }
 }
