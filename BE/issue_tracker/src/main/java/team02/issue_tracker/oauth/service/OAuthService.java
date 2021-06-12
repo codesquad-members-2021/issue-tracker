@@ -6,11 +6,8 @@ import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
@@ -51,32 +48,21 @@ public class OAuthService {
     }
 
     private User userFrom(SocialProfile socialProfile) {
-        User userSocialProfile = socialProfile.becomeUser();
-        User user = userService.findByUser(userSocialProfile);
+        User socialProfileUser = socialProfile.becomeUser();
+        User user = userService.findByUser(socialProfileUser);
         if (user == null) {
-            user = userService.enroll(userSocialProfile);
+            user = userService.enroll(socialProfileUser);
         }
         return user;
     }
 
     private GithubUserProfile githubUserProfileFrom(
             GithubAccessTokenRequestDto accessTokenRequest) {
-        return githubUserProfileByWebFlux(accessTokenByWebFlux(accessTokenRequest));
+        return githubUserProfileFrom(accessTokenFrom(accessTokenRequest));
     }
 
     private GithubAccessTokenResponseDto accessTokenFrom(
             GithubAccessTokenRequestDto accessTokenRequest) {
-        RequestEntity<GithubAccessTokenRequestDto> request = RequestEntity
-                .post(githubApiProperties.accessTokenUri())
-                .header("Accept", "application/json")
-                .body(accessTokenRequest);
-
-        ResponseEntity<GithubAccessTokenResponseDto> response =
-                new RestTemplate().exchange(request, GithubAccessTokenResponseDto.class);
-        return response.getBody();
-    }
-
-    private GithubAccessTokenResponseDto accessTokenByWebFlux(GithubAccessTokenRequestDto accessTokenRequest) {
         HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .responseTimeout(Duration.ofSeconds(1))
@@ -102,7 +88,8 @@ public class OAuthService {
         return result;
     }
 
-    private GithubUserProfile githubUserProfileByWebFlux(GithubAccessTokenResponseDto accessTokenResponse) {
+    private GithubUserProfile githubUserProfileFrom(
+            GithubAccessTokenResponseDto accessTokenResponse) {
         HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .responseTimeout(Duration.ofSeconds(1))
@@ -117,26 +104,12 @@ public class OAuthService {
 
         GithubUserProfile githubUserProfile = webClient.get()
                 .uri(githubApiProperties.userInfoUri())
-                .header(HttpHeaders.AUTHORIZATION, "token " + accessTokenResponse.accessToken())
+                .header(HttpHeaders.AUTHORIZATION
+                        , "token " + accessTokenResponse.accessToken())
                 .retrieve()
                 .bodyToMono(GithubUserProfile.class)
                 .blockOptional()
                 .orElseThrow(InvalidGithubUserRequestException::new);
-        log.info("github user profile : {}", githubUserProfile.toString());
-        return githubUserProfile;
-    }
-
-    private GithubUserProfile githubUserProfileFrom(
-            GithubAccessTokenResponseDto githubAccessTokenResponseDto) {
-        RequestEntity githubUserProfileRequest = RequestEntity
-                .get(githubApiProperties.userInfoUri())
-                .header("Authorization"
-                        , "token " + githubAccessTokenResponseDto.getAccessToken())
-                .build();
-
-        ResponseEntity<GithubUserProfile> githubUserProfileResponse =
-                new RestTemplate().exchange(githubUserProfileRequest, GithubUserProfile.class);
-        GithubUserProfile githubUserProfile = githubUserProfileResponse.getBody();
         log.info("github user profile : {}", githubUserProfile.toString());
         return githubUserProfile;
     }
