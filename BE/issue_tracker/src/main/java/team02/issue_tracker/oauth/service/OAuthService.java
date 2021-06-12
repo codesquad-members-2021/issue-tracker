@@ -29,16 +29,16 @@ public class OAuthService {
         this.webClient = webClient;
     }
 
-    public AuthJwt issueJwtForWeb(final String code) {
+    public JwtResponse issueJwtForWeb(final String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForWeb(code));
-        return jwtUtils.getJwt(userFrom(githubUserProfile));
+        return jwtUtils.codeUserToJwt(userFrom(githubUserProfile));
     }
 
-    public AuthJwt issueJwtForIos(final String code) {
+    public JwtResponse issueJwtForIos(final String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForIos(code));
-        return jwtUtils.getJwt(userFrom(githubUserProfile));
+        return jwtUtils.codeUserToJwt(userFrom(githubUserProfile));
     }
 
     private User userFrom(final SocialProfile socialProfile) {

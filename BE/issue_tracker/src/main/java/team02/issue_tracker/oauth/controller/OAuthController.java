@@ -9,7 +9,7 @@ import team02.issue_tracker.dto.ApiResult;
 import team02.issue_tracker.oauth.service.OAuthService;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.annotation.UserId;
-import team02.issue_tracker.oauth.dto.AuthJwt;
+import team02.issue_tracker.oauth.dto.JwtResponse;
 
 @Slf4j
 @RequestMapping("/api")
@@ -23,12 +23,12 @@ public class OAuthController {
     }
 
     @GetMapping("/login/github/web")
-    public ApiResult<AuthJwt> issueJwtForWeb(@RequestParam("code") String code) {
+    public ApiResult<JwtResponse> issueJwtForWeb(@RequestParam("code") String code) {
         return ApiResult.success(oauthService.issueJwtForWeb(code));
     }
 
     @GetMapping("/login/github/ios")
-    public ApiResult<AuthJwt> issueJwtForIos(@RequestParam("code") String code) {
+    public ApiResult<JwtResponse> issueJwtForIos(@RequestParam("code") String code) {
         return ApiResult.success(oauthService.issueJwtForIos(code));
     }
 

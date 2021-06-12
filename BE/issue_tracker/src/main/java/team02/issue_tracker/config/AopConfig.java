@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 import team02.issue_tracker.dto.ApiResult;
-import team02.issue_tracker.oauth.dto.AuthJwt;
+import team02.issue_tracker.oauth.dto.JwtResponse;
 
 
 @Slf4j
@@ -38,7 +38,7 @@ public class AopConfig {
 
     // 발행한 jwt를 출력한다.
     @AfterReturning(value = "execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))", returning = "authJwt")
-    public void jwtLog(JoinPoint joinPoint, ApiResult<AuthJwt> authJwt) {
+    public void jwtLog(JoinPoint joinPoint, ApiResult<JwtResponse> authJwt) {
         log.info("jwt : {}", authJwt.getData().getJwt());
     }
 }
