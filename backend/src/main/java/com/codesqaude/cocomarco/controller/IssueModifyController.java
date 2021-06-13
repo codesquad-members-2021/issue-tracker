@@ -19,8 +19,13 @@ public class IssueModifyController {
     }
 
     @PutMapping("/{issueId}/milestone")
+    public void changeMilestone(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
+        issueModifyService.changeMilestone(issueId, issueRequest);
+    }
+
+    @PutMapping("/{issueId}/assignments")
     public void modifyMilestone(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
-        issueModifyService.modifyMilestone(issueId, issueRequest);
+        issueModifyService.changeAssignments(issueId, issueRequest);
     }
 
     @PutMapping("/status")

@@ -32,10 +32,10 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Assignment> assignments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "label", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "label", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -57,16 +57,19 @@ public class Issue {
         writer.addIssue(this);
     }
 
-    public void addAssignment(List<Assignment> assignments) {
+    public void changeAssignment(List<Assignment> assignments) {
+        //fixme set으로 구현?
+        this.assignments.clear();
+        this.assignments.addAll(assignments);
         for (Assignment assignment : assignments) {
-            this.assignments.add(assignment);
             assignment.setIssue(this);
         }
     }
 
     public void addIssueLabel(List<IssueLabel> issueLabels) {
+        this.issueLabels.clear();
+        this.issueLabels.addAll(issueLabels);
         for (IssueLabel issueLabel : issueLabels) {
-            this.issueLabels.add(issueLabel);
             issueLabel.setIssue(this);
         }
     }
@@ -92,7 +95,7 @@ public class Issue {
         Issue issue = new Issue(title, text);
         issue.setWriter(writer);
         issue.setMilestone(milestone);
-        issue.addAssignment(assignments);
+        issue.changeAssignment(assignments);
         issue.addIssueLabel(issueLabels);
         issue.status = IssueStatus.OPEN;
         issue.writingTime = LocalDateTime.now();
