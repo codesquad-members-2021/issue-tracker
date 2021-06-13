@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team02.issue_tracker.dto.ApiResult;
+import team02.issue_tracker.exception.IllegalIssueStatusException;
+import team02.issue_tracker.exception.NotFoundException;
 import team02.issue_tracker.oauth.exception.IncorrectTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 
@@ -20,6 +22,18 @@ public class GlobalExceptionHanlder {
     @ExceptionHandler(JwtNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiResult jwtNotFoundException(JwtNotFoundException e) {
+        return ApiResult.fail(e);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResult notFoundException(NotFoundException e) {
+        return ApiResult.fail(e);
+    }
+
+    @ExceptionHandler(IllegalIssueStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResult illegalIssueStatusException(IllegalIssueStatusException e) {
         return ApiResult.fail(e);
     }
 }
