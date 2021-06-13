@@ -1,19 +1,28 @@
 import { TabComponents as S } from "../TabStyles";
-import { useRecoilState } from "recoil";
-import { toggleAddNewLabelState } from "../TabStore";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  toggleAddNewMilestoneState,
+  toggleAddNewLabelState,
+  currentTabState,
+} from "../TabStore";
 
 const AddTabButton = () => {
-  const [toggleAddState, setToggleAddState] = useRecoilState(
+  const [toggleAddMilestoneState, setToggleAddMilestoneState] = useRecoilState(
+    toggleAddNewMilestoneState
+  );
+  const [toggleAddLabelState, setToggleAddLabelState] = useRecoilState(
     toggleAddNewLabelState
   );
+  const tabState = useRecoilValue(currentTabState);
 
   const handleAddBtnClick = () => {
-    setToggleAddState(!toggleAddState);
+    if (tabState === "label") setToggleAddLabelState(!toggleAddLabelState);
+    else setToggleAddMilestoneState(!toggleAddMilestoneState);
   };
 
   return (
     <>
-      {toggleAddState ? (
+      {toggleAddMilestoneState ? (
         <S.WriteIssueBtn
           onClick={handleAddBtnClick}
           backgroundcolor="white"

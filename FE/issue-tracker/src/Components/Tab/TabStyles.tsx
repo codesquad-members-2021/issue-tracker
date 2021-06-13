@@ -184,9 +184,9 @@ const LabelMilestoneTable = {
 };
 
 const AddNewModal = {
-  AddModalDiv: styled.div`
+  AddModalDiv: styled.div<{ isLabel: boolean }>`
     width: 100%;
-    height: 345px;
+    height: ${({ isLabel }) => (isLabel ? "345px" : "288px")};
     background: ${theme.GRAY_SCALE.OFF_WHITE};
     padding: 32px;
     margin-top: 24px;
@@ -198,6 +198,12 @@ const AddNewModal = {
   `,
 
   ModalContent: styled(BOX.FLEX_ROW_BOX)`
+    margin-top: 24px;
+    justify-content: space-between;
+    width: 100%;
+  `,
+
+  ModalMileContent: styled(BOX.FLEX_COLUMN_BOX)`
     margin-top: 24px;
     justify-content: space-between;
     width: 100%;
@@ -236,6 +242,10 @@ const AddNewModal = {
       font-size: ${theme.FONT_SIZE.TEXT_SMALL};
       color: ${theme.GRAY_SCALE.PLACEHOLDER};
     }
+  `,
+
+  MilestoneSmallInputDiv: styled.div`
+    width: 600px;
   `,
 
   ChangeColorContainer: styled(BOX.FLEX_ROW_BOX)`

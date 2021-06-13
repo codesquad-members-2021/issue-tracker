@@ -3,12 +3,17 @@ import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import Label from "@/Components/AtomicComponents/Label";
 import ContentDescription from "./ContentDescription";
-import { toggleEditLabelState, currentTabState } from "../../TabStore";
+import {
+  toggleEditLabelState,
+  currentTabState,
+  toggleEditMilestoneState,
+} from "../../TabStore";
 import { useRecoilValue } from "recoil";
 import LabelEditModal from "../../TabModal/Label/LabelEditModal";
 import ContentTitle from "./ContentTitle";
 import RangeBar from "./RangeBar";
 import RangeDescription from "./RangeDescription";
+import MilestoneEditModal from "../../TabModal/Milestone/MilestoneEditModal";
 
 type tabContentProp = {
   id: number;
@@ -16,6 +21,8 @@ type tabContentProp = {
 
 const TabContentRow = ({ id }: tabContentProp) => {
   const EditLabelState = useRecoilValue(toggleEditLabelState);
+  const EditMilestoneState = useRecoilValue(toggleEditMilestoneState);
+
   const tabState = useRecoilValue(currentTabState);
 
   return (
@@ -23,7 +30,7 @@ const TabContentRow = ({ id }: tabContentProp) => {
       {tabState === "label" ? (
         <>
           {EditLabelState.isOpen && id === EditLabelState.rowId ? (
-            <LabelEditModal />
+            <LabelEditModal id={id} />
           ) : (
             <S.TableRow>
               <S.TableRowContentLeft>
@@ -45,22 +52,26 @@ const TabContentRow = ({ id }: tabContentProp) => {
         </>
       ) : (
         <>
-          <S.TableRow>
-            <S.TableRowContentLeft>
-              <S.TableRowContentLeftCol>
-                <ContentTitle />
-                <ContentDescription />
-              </S.TableRowContentLeftCol>
-            </S.TableRowContentLeft>
-            <S.TableRowContentRight>
-              <S.TableRowButtonDiv>
-                <EditButton id={id} />
-                <DeleteButton />
-              </S.TableRowButtonDiv>
-              <RangeBar />
-              <RangeDescription />
-            </S.TableRowContentRight>
-          </S.TableRow>
+          {EditMilestoneState.isOpen && id === EditMilestoneState.rowId ? (
+            <MilestoneEditModal id={id} />
+          ) : (
+            <S.TableRow>
+              <S.TableRowContentLeft>
+                <S.TableRowContentLeftCol>
+                  <ContentTitle />
+                  <ContentDescription />
+                </S.TableRowContentLeftCol>
+              </S.TableRowContentLeft>
+              <S.TableRowContentRight>
+                <S.TableRowButtonDiv>
+                  <EditButton id={id} />
+                  <DeleteButton />
+                </S.TableRowButtonDiv>
+                <RangeBar />
+                <RangeDescription />
+              </S.TableRowContentRight>
+            </S.TableRow>
+          )}
         </>
       )}
     </>

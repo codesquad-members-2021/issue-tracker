@@ -13,6 +13,19 @@ export const toggleEditLabelState = atom({
   },
 });
 
+export const toggleAddNewMilestoneState = atom({
+  key: "toggleAddNewMilestoneState",
+  default: false,
+});
+
+export const toggleEditMilestoneState = atom({
+  key: "toggleEditMilestoneState",
+  default: {
+    isOpen: false,
+    rowId: 0,
+  },
+});
+
 export const currentTabState = atom({
   key: "currentTabState",
   default: "label",

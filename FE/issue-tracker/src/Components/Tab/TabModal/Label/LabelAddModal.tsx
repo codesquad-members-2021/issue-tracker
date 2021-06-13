@@ -2,7 +2,7 @@ import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
 
 const LabelAddModal = () => {
   return (
-    <S.AddModalDiv>
+    <S.AddModalDiv isLabel={true}>
       <S.AddModalTitle>새로운 레이블 추가</S.AddModalTitle>
       <S.ModalContent>
         <S.ModalLeft>레이블</S.ModalLeft>

@@ -1,19 +1,31 @@
 import { TabAssets as Icon, LabelMilestoneTable as S } from "../../TabStyles";
-import { toggleEditLabelState } from "../../TabStore";
-import { useSetRecoilState } from "recoil";
+import {
+  toggleEditLabelState,
+  toggleEditMilestoneState,
+  currentTabState,
+} from "../../TabStore";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 
 type editButtonProp = {
   id: number;
 };
 
 const EditButton = ({ id }: editButtonProp) => {
-  const setEditState = useSetRecoilState(toggleEditLabelState);
+  const setLabelEditState = useSetRecoilState(toggleEditLabelState);
+  const setMilestoneEditState = useSetRecoilState(toggleEditMilestoneState);
+  const tabState = useRecoilValue(currentTabState);
 
   const handleEditClick = () => {
-    setEditState({
-      isOpen: true,
-      rowId: id,
-    });
+    if (tabState === "label")
+      setLabelEditState({
+        isOpen: true,
+        rowId: id,
+      });
+    else
+      setMilestoneEditState({
+        isOpen: true,
+        rowId: id,
+      });
   };
 
   return (

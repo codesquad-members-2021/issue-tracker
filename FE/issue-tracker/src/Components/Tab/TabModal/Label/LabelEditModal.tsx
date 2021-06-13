@@ -2,18 +2,22 @@ import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
 import { toggleEditLabelState } from "../../TabStore";
 import { useSetRecoilState } from "recoil";
 
-const LabelAddModal = () => {
-  const setEditState = useSetRecoilState(toggleEditLabelState);
+type LabelEditProps = {
+  id: number;
+};
+
+const LabelAddModal = ({ id }: LabelEditProps) => {
+  const setLabelEditState = useSetRecoilState(toggleEditLabelState);
 
   const handleEditCloseBtnClick = () => {
-    setEditState({
+    setLabelEditState({
       isOpen: false,
-      rowId: 0,
+      rowId: id,
     });
   };
 
   return (
-    <S.AddModalDiv>
+    <S.AddModalDiv isLabel={true}>
       <S.AddModalTitle>레이블 편집</S.AddModalTitle>
       <S.ModalContent>
         <S.ModalLeft>레이블</S.ModalLeft>
