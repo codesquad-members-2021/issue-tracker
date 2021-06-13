@@ -64,15 +64,15 @@ public class Issue {
         isOpen = true;
     }
 
-    public void fixTitle(String title) {
+    public void replaceTitle(String title) {
         this.title = title;
     }
 
-    public void fixIssueAssignees(List<IssueAssignee> issueAssignees) {
+    public void replaceIssueAssignees(List<IssueAssignee> issueAssignees) {
         this.issueAssignees = issueAssignees;
     }
 
-    public void fixIssueLabels(List<IssueLabel> issueLabels) {
+    public void replaceIssueLabels(List<IssueLabel> issueLabels) {
         this.issueLabels = issueLabels;
     }
 }
