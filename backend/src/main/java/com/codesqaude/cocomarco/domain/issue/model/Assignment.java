@@ -2,11 +2,13 @@ package com.codesqaude.cocomarco.domain.issue.model;
 
 import com.codesqaude.cocomarco.domain.user.User;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Assignment {
 

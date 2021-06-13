@@ -1,12 +1,10 @@
 package com.codesqaude.cocomarco.controller;
 
+import com.codesqaude.cocomarco.domain.issue.model.dto.IssueDetailResponse;
 import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
 import com.codesqaude.cocomarco.service.IssueService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.codesqaude.cocomarco.domain.user.User.SAMPLE_UUID;
 
@@ -22,4 +20,8 @@ public class IssueController {
         issueService.create(issueRequest, SAMPLE_UUID);
     }
 
+    @GetMapping("/{issueId}")
+    public IssueDetailResponse showDetail(@PathVariable Long issueId) {
+        return issueService.showDetail(issueId);
+    }
 }

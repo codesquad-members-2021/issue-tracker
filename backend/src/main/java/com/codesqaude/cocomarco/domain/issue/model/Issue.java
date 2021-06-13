@@ -11,7 +11,9 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,10 +35,10 @@ public class Issue {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Assignment> assignments = new ArrayList<>();
+    private Set<Assignment> assignments = new HashSet<>();
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IssueLabel> issueLabels = new ArrayList<>();
+    private Set<IssueLabel> issueLabels = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
