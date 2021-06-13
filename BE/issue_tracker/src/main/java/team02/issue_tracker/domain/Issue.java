@@ -71,4 +71,8 @@ public class Issue {
     public void fixIssueAssignees(List<IssueAssignee> issueAssignees) {
         this.issueAssignees = issueAssignees;
     }
+
+    public void fixIssueLabels(List<IssueLabel> issueLabels) {
+        this.issueLabels = issueLabels;
+    }
 }
