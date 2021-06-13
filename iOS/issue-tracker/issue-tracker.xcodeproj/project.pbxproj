@@ -28,10 +28,10 @@
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
+		B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */; };
 		B3F527512670968F002B0812 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527502670968F002B0812 /* LabelViewController.swift */; };
 		B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */; };
 		B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */; };
-		B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527592670A4BD002B0812 /* AddButton.swift */; };
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
 		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
 		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
@@ -99,10 +99,10 @@
 		B3B559FE266E096000901C55 /* issue-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "issue-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
 		B3F527502670968F002B0812 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
 		B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTabelHeaderView.swift; sourceTree = "<group>"; };
-		B3F527592670A4BD002B0812 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueToolbar.swift; path = "issue-tracker/Controller/IssueToolbar.swift"; sourceTree = SOURCE_ROOT; };
 		B3FBA7B8267335C30006E5E6 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 			children = (
 				D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */,
 				B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */,
-				B3F527592670A4BD002B0812 /* AddButton.swift */,
+				B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */,
 				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
 			);
 			path = Label;
@@ -543,7 +543,7 @@
 				B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */,
 				D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */,
 				B32FEACC26724CF400BF37A1 /* IssueTableFooterView.swift in Sources */,
-				B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */,
+				B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */,
 				B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */,
 				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
