@@ -5,14 +5,20 @@ import Label from "@/Components/AtomicComponents/Label";
 import ContentDescription from "./ContentDescription";
 import { toggleEditLabelState } from "../../TabStore";
 import { useRecoilValue } from "recoil";
-import LabelEditModal from "../../TabModal/LabelEditModal";
+import LabelEditModal from "../../TabModal/Label/LabelEditModal";
 
-const TabContentRow = () => {
+type tabContentProp = {
+  id: number;
+};
+
+const TabContentRow = ({ id }: tabContentProp) => {
   const EditLabelState = useRecoilValue(toggleEditLabelState);
 
   return (
     <>
-      {!EditLabelState ? (
+      {EditLabelState.isOpen && id === EditLabelState.rowId ? (
+        <LabelEditModal />
+      ) : (
         <S.TableRow>
           <S.TableRowContentLeft>
             <S.LabelWrapper>
@@ -25,12 +31,10 @@ const TabContentRow = () => {
             <ContentDescription />
           </S.TableRowContentLeft>
           <S.TableRowButtonDiv>
-            <EditButton />
+            <EditButton id={id} />
             <DeleteButton />
           </S.TableRowButtonDiv>
         </S.TableRow>
-      ) : (
-        <LabelEditModal />
       )}
     </>
   );

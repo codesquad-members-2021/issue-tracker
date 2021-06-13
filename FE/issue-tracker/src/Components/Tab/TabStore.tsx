@@ -7,5 +7,8 @@ export const toggleAddNewLabelState = atom({
 
 export const toggleEditLabelState = atom({
   key: "toggleEditLabelState",
-  default: false,
+  default: {
+    isOpen: false,
+    rowId: 0,
+  },
 });
