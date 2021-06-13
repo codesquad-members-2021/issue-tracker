@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.domain.User;
-import team02.issue_tracker.dto.issue.DetailIssueResponse;
-import team02.issue_tracker.dto.issue.IssueIdsRequest;
-import team02.issue_tracker.dto.issue.IssueRequest;
-import team02.issue_tracker.dto.issue.IssueResponse;
+import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -81,5 +78,11 @@ public class IssueService {
                 }).collect(Collectors.toList());
 
         issueRepository.saveAll(issues);
+    }
+
+    public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        issue.fixTitle(issueRequest.getTitle());
+        issueRepository.save(issue);
     }
 }
