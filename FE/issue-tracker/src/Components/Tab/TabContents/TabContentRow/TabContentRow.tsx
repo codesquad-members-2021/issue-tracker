@@ -7,6 +7,8 @@ import { toggleEditLabelState, currentTabState } from "../../TabStore";
 import { useRecoilValue } from "recoil";
 import LabelEditModal from "../../TabModal/Label/LabelEditModal";
 import ContentTitle from "./ContentTitle";
+import RangeBar from "./RangeBar";
+import RangeDescription from "./RangeDescription";
 
 type tabContentProp = {
   id: number;
@@ -50,10 +52,14 @@ const TabContentRow = ({ id }: tabContentProp) => {
                 <ContentDescription />
               </S.TableRowContentLeftCol>
             </S.TableRowContentLeft>
-            <S.TableRowButtonDiv>
-              <EditButton id={id} />
-              <DeleteButton />
-            </S.TableRowButtonDiv>
+            <S.TableRowContentRight>
+              <S.TableRowButtonDiv>
+                <EditButton id={id} />
+                <DeleteButton />
+              </S.TableRowButtonDiv>
+              <RangeBar />
+              <RangeDescription />
+            </S.TableRowContentRight>
           </S.TableRow>
         </>
       )}

@@ -156,6 +156,31 @@ const LabelMilestoneTable = {
     gap: 0.5rem;
     cursor: pointer;
   `,
+
+  TableRowContentRight: styled(BOX.FLEX_COLUMN_BOX)`
+    align-items: flex-end;
+    gap: 5px;
+  `,
+
+  RangeBar: styled.div`
+    width: 244px;
+    height: 8px;
+    background: linear-gradient(
+      90deg,
+      #007aff 0%,
+      #007aff 68.86%,
+      #eff0f6 68.87%,
+      #eff0f6 100%
+    );
+    border-radius: 10px;
+  `,
+
+  RangeDescription: styled(BOX.FLEX_ROW_CENTER_BOX)`
+    justify-content: space-between;
+    width: 244px;
+    font-size: ${theme.FONT_SIZE.TEXT_X_SMALL};
+    color: ${theme.GRAY_SCALE.LABEL};
+  `,
 };
 
 const AddNewModal = {
@@ -273,9 +298,9 @@ const TabAssets = {
   LabelTag: styled(LabelTag)`
     margin-right: 8px;
   `,
-  MilestoneTag: styled(MilestoneTag)`
+  MilestoneTag: styled(MilestoneTag)<{ strokecolor?: string }>`
     margin-right: 8px;
-    stroke: black;
+    stroke: ${({ strokecolor }) => (strokecolor ? strokecolor : "black")};
   `,
   TrashIcon: styled(Trash)``,
 

@@ -4,7 +4,7 @@ const ContentTitle = () => {
   return (
     <S.TitleWrapper>
       <span>
-        <Icon.MilestoneTag />
+        <Icon.MilestoneTag strokecolor="#007AFF" />
         마일스톤 제목
       </span>
       <S.DateSpan>
