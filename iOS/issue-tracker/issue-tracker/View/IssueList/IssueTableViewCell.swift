@@ -48,6 +48,7 @@ class IssueTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setAutolayout()
+        checkBoxImageView.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -59,6 +60,7 @@ class IssueTableViewCell: UITableViewCell {
         addSubview(labelDescription)
         addSubview(milestoneView)
         addSubview(largeTitle)
+        addSubview(checkBoxImageView)
     }
     
     func setAutolayout() {
@@ -86,6 +88,14 @@ class IssueTableViewCell: UITableViewCell {
             view.width.greaterThanOrEqualTo(30)
             view.height.equalTo(30)
         }
+        
+        checkBoxImageView.snp.makeConstraints { image in
+            image.top.equalToSuperview().inset(24)
+            image.trailing.equalToSuperview().inset(16)
+            image.width.height.equalTo(30)
+        }
+        
+        
     }
     
     func setIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
@@ -97,16 +107,10 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     func check() {
-        addSubview(checkBoxImageView)
-        
-        checkBoxImageView.snp.makeConstraints { image in
-            image.top.equalToSuperview().inset(24)
-            image.trailing.equalToSuperview().inset(16)
-            image.width.height.equalTo(30)
-        }
+        checkBoxImageView.isHidden = false
     }
     
     func uncheck() {
-        checkBoxImageView.removeFromSuperview()
+        checkBoxImageView.isHidden = true
     }
 }
