@@ -8,6 +8,8 @@ import { ReactComponent as MilestoneTag } from "@/assets/svg/milestoneTag.svg";
 import { ReactComponent as Edit } from "@/assets/svg/Edit.svg";
 import { ReactComponent as Trash } from "@/assets/svg/Trash.svg";
 import { ReactComponent as Refresh } from "@/assets/svg/Refresh.svg";
+import { ReactComponent as closeIssueMark } from "@/assets/svg/closeIssueMark.svg";
+import { ReactComponent as IconCalendar } from "@/assets/svg/IconCalendar.svg";
 
 const TabComponents = {
   TabContainer: styled(BOX.FLEX_COLUMN_BOX)`
@@ -116,8 +118,27 @@ const LabelMilestoneTable = {
     align-items: center;
   `,
 
+  TableRowContentLeftCol: styled(BOX.FLEX_COLUMN_BOX)``,
+
   LabelWrapper: styled.div`
     width: 128px;
+  `,
+
+  TitleWrapper: styled(BOX.FLEX_ROW_CENTER_BOX)`
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: ${theme.FONT_SIZE.LINK_MEDIUM};
+    color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
+    font-weight: bold;
+    span {
+      display: flex;
+      align-items: center;
+    }
+  `,
+
+  DateSpan: styled.span`
+    font-size: ${theme.FONT_SIZE.TEXT_SMALL};
+    color: ${theme.GRAY_SCALE.LABEL};
   `,
 
   DescriptionWrapper: styled.div`
@@ -174,6 +195,7 @@ const AddNewModal = {
     gap: 16px;
     margin-right: 32px;
   `,
+
   Input: styled.input`
     width: 100%;
     font-size: ${theme.FONT_SIZE.TEXT_SMALL};
@@ -229,6 +251,7 @@ const AddNewModal = {
       background: ${theme.COLOR.DARK_BLUE};
     }
   `,
+
   ColorTitle: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
     width: 80px;
@@ -236,6 +259,7 @@ const AddNewModal = {
     color: ${theme.GRAY_SCALE.LABEL};
     font-size: ${theme.FONT_SIZE.TEXT_X_SMALL};
   `,
+
   ColorContent: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
@@ -251,10 +275,21 @@ const TabAssets = {
   `,
   MilestoneTag: styled(MilestoneTag)`
     margin-right: 8px;
+    stroke: black;
   `,
   TrashIcon: styled(Trash)``,
+
   EditIcon: styled(Edit)``,
+
   RefreshIcon: styled(Refresh)``,
+
+  CloseMileStoneTag: styled(closeIssueMark)`
+    margin-right: 5px;
+  `,
+
+  CalendarIcon: styled(IconCalendar)`
+    margin-right: 5px;
+  `,
 };
 
 export { TabComponents, AddNewModal, TabAssets, LabelMilestoneTable };

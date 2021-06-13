@@ -12,3 +12,8 @@ export const toggleEditLabelState = atom({
     rowId: 0,
   },
 });
+
+export const currentTabState = atom({
+  key: "currentTabState",
+  default: "label",
+});
