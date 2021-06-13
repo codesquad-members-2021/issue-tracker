@@ -15,7 +15,7 @@ public class MilestoneService {
         this.milestoneRepository = milestoneRepository;
     }
 
-    public Milestone findOne(IssueRequest issueRequest) {
-        return milestoneRepository.findById(issueRequest.getMilestoneId()).orElseThrow(MilestoneNotFoundException::new);
+    public Milestone findOne(Long id) {
+        return milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
     }
 }
