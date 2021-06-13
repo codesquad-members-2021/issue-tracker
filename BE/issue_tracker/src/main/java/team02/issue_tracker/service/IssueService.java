@@ -42,7 +42,7 @@ public class IssueService {
 
     public void addIssue(IssueRequest issueRequest, Long userId) {
         User writer = userService.findOne(userId);
-        Milestone milestone = milestoneService.findOne(issueRequest);
+        Milestone milestone = milestoneService.findOne(issueRequest.getMilestoneId());
 
         Issue issue = save(issueRequest, writer, milestone);
         commentService.save(issueRequest, writer, issue);
@@ -95,6 +95,14 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
         issue.replaceIssueLabels(issueLabels);
+        issueRepository.save(issue);
+    }
+
+    public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
+        // Todo: milestone 없애는걸로 변경하려면 0으로 request 받도록 해야하나..?
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        Milestone milestone = milestoneService.findOne(issueMilestoneRequest.getMilestoneId());
+        issue.replaceMilestone(milestone);
         issueRepository.save(issue);
     }
 }
