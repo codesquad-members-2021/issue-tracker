@@ -29,6 +29,7 @@
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
 		D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0A88E062674D9F0005877F6 /* MarkdownKit */; };
+		D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */; };
 		D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB693266F0A5000E0762C /* Endpoint.swift */; };
 		D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB698266F0C1300E0762C /* NetworkManager.swift */; };
 		D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6CB266F4F1C00E0762C /* Alamofire */; };
@@ -94,6 +95,7 @@
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		D0A88E0126732D21005877F6 /* NewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewController.swift; sourceTree = "<group>"; };
 		D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
+		D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				D0FD50F12671B108008C6031 /* Label */,
 				D0FD50ED2671B0E8008C6031 /* Milestone */,
 				B3F5274F26709614002B0812 /* Login */,
+				D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */,
 				D0ADB6F8266F5BBE00E0762C /* OAuthManager.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
+				D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
