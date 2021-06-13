@@ -1,13 +1,14 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const IDLogin = () => {
   const [loginInfo, setLoginInfo] = useState<any>({ID:"", password: ""});
+
   const $Labels = useRef({
-    ID: React.createRef<any>(),
-    password: React.createRef<any>()
+    ID: useRef<any>(),
+    password: useRef<any>()
   });
-  
+
   const handleChangeInput = ({ type, payload }) => {
     if(payload === "") {
       $Labels.current[type].current.style.display = "none";
@@ -30,14 +31,14 @@ const IDLogin = () => {
   return (
     <IDLoginLayout>
       <InputLayer>
-        <InputLabel data-target="ID" ref={$Labels.current["ID"]}> 아이디 </InputLabel>
-        <IDInput 
+        <InputLabel ref={$Labels.current["ID"]}> 아이디 </InputLabel>
+        <IDInput
           id={"ID"} value={loginInfo?.ID}
           onChange={({target}) => { handleChangeInput({type: target.id, payload: target.value}) }} 
         />  
       </InputLayer>
       <InputLayer>
-        <InputLabel data-target="password" ref={$Labels.current["password"]}> 비밀번호 </InputLabel>
+        <InputLabel ref={$Labels.current["password"]}> 비밀번호 </InputLabel>
         <PasswordInput 
           id={"password"} value={loginInfo?.password}
           onChange={({target}) => { handleChangeInput({type: target.id, payload: target.value}) }} 
@@ -54,7 +55,7 @@ const IDLoginLayout = styled.div`
   width: 100%;
 `;
 
-const SubmitButton = styled.button<{validator: any}>`
+const SubmitButton = styled.button<{ validator: any }>`
   width: 100%;
   height: 64px;
   color: white;
@@ -66,6 +67,7 @@ const SubmitButton = styled.button<{validator: any}>`
   padding: 0px 24px;  
   border: none;
   border-radius: 16px;
+  cursor: pointer;
 `;
 
 const InputLabel = styled.label`

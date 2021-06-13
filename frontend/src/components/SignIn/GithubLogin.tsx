@@ -20,7 +20,10 @@ function GithubLogin() {
     } else {
       const fetchResult = async () => {
         const result = await fetch('http://ec2-13-124-158-166.ap-northeast-2.compute.amazonaws.com/api/users/github');
-        setInfo(await result.json());
+        const resultResponse = await result.json();
+        console.log('resultResponse', resultResponse);
+        setInfo(resultResponse);
+        
       }
       fetchResult();
     }
