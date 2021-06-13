@@ -37,23 +37,23 @@ const TabComponents = {
   `,
 
   WriteIssueBtn: styled(Button)<{
-    backgroundColor?: string;
-    fontColor?: string;
+    backgroundcolor?: string;
+    fontcolor?: string;
   }>`
     width: 120px;
     height: 40px;
-    ${({ backgroundColor, fontColor }) => `
-    background: ${backgroundColor ? backgroundColor : theme.COLOR.BLUE}; 
-    color: ${fontColor ? fontColor : theme.GRAY_SCALE.OFF_WHITE}; 
+    ${({ backgroundcolor, fontcolor }) => `
+    background: ${backgroundcolor ? backgroundcolor : theme.COLOR.BLUE}; 
+    color: ${fontcolor ? fontcolor : theme.GRAY_SCALE.OFF_WHITE}; 
   `};
     font-weight: bold;
     border-radius: 11px;
     &:hover {
-      ${({ backgroundColor, fontColor }) => `
+      ${({ backgroundcolor, fontcolor }) => `
     background: ${
-      backgroundColor ? theme.COLOR.DARK_BLUE : theme.GRAY_SCALE.OFF_WHITE
+      backgroundcolor ? theme.COLOR.DARK_BLUE : theme.GRAY_SCALE.OFF_WHITE
     }; 
-    color: ${fontColor ? theme.GRAY_SCALE.OFF_WHITE : theme.COLOR.BLUE}; 
+    color: ${fontcolor ? theme.GRAY_SCALE.OFF_WHITE : theme.COLOR.BLUE}; 
   `};
     }
   `,
