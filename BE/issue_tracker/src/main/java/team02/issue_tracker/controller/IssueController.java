@@ -37,20 +37,26 @@ public class IssueController {
     }
 
     @PostMapping("/close")
-    public ApiResult<String> closeIssues(@RequestBody IssueIdsRequest issueRequest) {
-        issueService.closeIssues(issueRequest);
+    public ApiResult<String> closeIssues(@RequestBody IssueIdsRequest issueIdsRequest) {
+        issueService.closeIssues(issueIdsRequest);
         return ApiResult.ok();
     }
 
     @PostMapping("/open")
-    public ApiResult<String> openIssues(@RequestBody IssueIdsRequest issueRequest) {
-        issueService.openIssues(issueRequest);
+    public ApiResult<String> openIssues(@RequestBody IssueIdsRequest issueIdsRequest) {
+        issueService.openIssues(issueIdsRequest);
         return ApiResult.ok();
     }
 
     @PatchMapping("/{issueId}/title")
-    public ApiResult<String> modifyTitle(@PathVariable Long issueId, @RequestBody IssueTitleRequest issueRequest) {
-        issueService.modifyTitle(issueId, issueRequest);
+    public ApiResult<String> modifyTitle(@PathVariable Long issueId, @RequestBody IssueTitleRequest issueTitleRequest) {
+        issueService.modifyTitle(issueId, issueTitleRequest);
+        return ApiResult.ok();
+    }
+
+    @PatchMapping("/{issueId}/assignees")
+    public ApiResult<String> modifyAssignees(@PathVariable Long issueId, @RequestBody IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
+        issueService.modifyAssignees(issueId, issueAssigneeIdsRequest);
         return ApiResult.ok();
     }
 }
