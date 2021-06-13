@@ -17,6 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
+    public static final UUID SAMPLE_UUID = UUID.fromString("3eb62438-9604-45f9-a183-b838d2123793");
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -34,6 +36,13 @@ public class User {
         this.avatarImage = avatarImage;
     }
 
+
+    public User(UUID id, String name, String avatarImage) {
+        this.id = id;
+        this.name = name;
+        this.avatarImage = avatarImage;
+    }
+
     public boolean sameUser(UUID userId) {
         return id.equals(userId);
     }
@@ -45,5 +54,9 @@ public class User {
                 ", name='" + name + '\'' +
                 ", avatarImage='" + avatarImage + '\'' +
                 '}';
+    }
+
+    public void addIssue(Issue issue) {
+        issues.add(issue);
     }
 }

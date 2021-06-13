@@ -2,6 +2,7 @@ package com.codesqaude.cocomarco.domain.milestone;
 
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.issue.model.IssueStatus;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Milestone {
 
     @Id
@@ -42,5 +43,9 @@ public class Milestone {
         this.title = updateMilestone.title;
         this.detail = updateMilestone.detail;
         this.deadLine = updateMilestone.deadLine;
+    }
+
+    public void addIssue(Issue issue) {
+        issues.add(issue);
     }
 }

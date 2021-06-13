@@ -31,24 +31,24 @@ public class CommentService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void write(Long issueId, String writerId, CommentRequest commentRequest) {
+    public void create(Long issueId, UUID writerId, CommentRequest commentRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
-        User writer = userRepository.findById(UUID.fromString(writerId)).orElseThrow(NotFoundUserException::new);
+        User writer = userRepository.findById(writerId).orElseThrow(NotFoundUserException::new);
         Comment comment = new Comment(issue, writer, commentRequest.getText());
         commentRepository.save(comment);
     }
 
     @Transactional
-    public void modify(String writerId, CommentRequest commentRequest, Long commentId) {
+    public void modify(UUID writerId, CommentRequest commentRequest, Long commentId) {
         Comment comment = show(commentId);
-        comment.isSameWriter(UUID.fromString(writerId));
+        comment.isSameWriter(writerId);
         comment.modify(commentRequest.getText());
     }
 
     @Transactional
-    public void delete(String writerId, Long commentId) {
+    public void delete(UUID writerId, Long commentId) {
         Comment comment = show(commentId);
-        comment.isSameWriter(UUID.fromString(writerId));
+        comment.isSameWriter(writerId);
         commentRepository.delete(comment);
     }
 
