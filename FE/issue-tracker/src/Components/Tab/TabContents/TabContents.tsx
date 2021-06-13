@@ -7,8 +7,8 @@ const TabContents = () => {
     <S.IssueTable>
       <TabContentsHeader />
       <S.TableBody>
-        {[...Array(3)].map((v) => (
-          <TabContentRow />
+        {[...Array(3)].map((v, i) => (
+          <TabContentRow id={i} />
         ))}
       </S.TableBody>
     </S.IssueTable>

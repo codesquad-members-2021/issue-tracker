@@ -1,4 +1,4 @@
-import { AddNewModal as S, TabAssets as Icon } from "../TabStyles";
+import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
 
 const LabelAddModal = () => {
   return (

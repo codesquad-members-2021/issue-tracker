@@ -2,17 +2,17 @@ import { LabelDiv } from "./AtomicComponentsStyles";
 
 type LabelProps = {
   label: string;
-  backgroundColor?: string;
-  fontColor?: string;
+  backgroundcolor?: string;
+  fontcolor?: string;
 };
 
-const Label = ({ label, backgroundColor, fontColor }: LabelProps) => {
+const Label = ({ label, backgroundcolor, fontcolor }: LabelProps) => {
   return (
     <LabelDiv
       label={label}
       size="small"
-      fontColor={fontColor}
-      backgroundColor={backgroundColor}
+      fontcolor={fontcolor}
+      backgroundcolor={backgroundcolor}
     />
   );
 };

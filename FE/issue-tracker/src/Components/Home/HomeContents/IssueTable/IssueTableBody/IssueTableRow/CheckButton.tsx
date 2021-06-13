@@ -21,15 +21,15 @@ const CheckButton = ({ id }: CheckButtonProps) => {
     }
   };
 
-  console.log(id);
+  // console.log(id);
 
   const handleCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.closest);
+    // console.log(e.target.closest);
     setChecked(!checked);
     handleCheckedItem(id, e.target.checked);
   };
 
-  console.log(checkedItemList);
+  // console.log(checkedItemList);
 
   return <input type="checkbox" onChange={handleCheckboxClick} />;
 };

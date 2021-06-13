@@ -1,12 +1,15 @@
-import { AddNewModal as S, TabAssets as Icon } from "../TabStyles";
-import { toggleEditLabelState } from "../TabStore";
+import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
+import { toggleEditLabelState } from "../../TabStore";
 import { useSetRecoilState } from "recoil";
 
 const LabelAddModal = () => {
   const setEditState = useSetRecoilState(toggleEditLabelState);
 
   const handleEditCloseBtnClick = () => {
-    setEditState(false);
+    setEditState({
+      isOpen: false,
+      rowId: 0,
+    });
   };
 
   return (
