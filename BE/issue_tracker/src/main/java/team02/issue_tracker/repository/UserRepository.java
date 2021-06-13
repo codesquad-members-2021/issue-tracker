@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.SocialLogin;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
   
