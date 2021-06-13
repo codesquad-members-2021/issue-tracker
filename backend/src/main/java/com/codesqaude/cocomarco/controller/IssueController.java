@@ -1,6 +1,6 @@
 package com.codesqaude.cocomarco.controller;
 
-import com.codesqaude.cocomarco.domain.issue.dto.IssueRequest;
+import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
 import com.codesqaude.cocomarco.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,4 +21,5 @@ public class IssueController {
     public void create(@RequestBody IssueRequest issueRequest) {
         issueService.create(issueRequest, SAMPLE_UUID);
     }
+
 }

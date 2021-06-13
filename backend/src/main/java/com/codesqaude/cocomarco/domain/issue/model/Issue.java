@@ -76,6 +76,10 @@ public class Issue {
         milestone.addIssue(this);
     }
 
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
     public static Issue createIssue(User writer, String title, String text, @Nullable List<Assignment> assignments, @Nullable List<IssueLabel> issueLabels, @Nullable Milestone milestone) {
         Issue issue = new Issue(title, text);
         issue.setWriter(writer);
@@ -98,4 +102,5 @@ public class Issue {
                 ", status=" + status +
                 '}';
     }
+
 }

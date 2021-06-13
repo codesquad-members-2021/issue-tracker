@@ -1,4 +1,4 @@
-package com.codesqaude.cocomarco.domain.issue.dto;
+package com.codesqaude.cocomarco.domain.issue.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

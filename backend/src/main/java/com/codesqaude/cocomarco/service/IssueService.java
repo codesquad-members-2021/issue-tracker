@@ -4,10 +4,10 @@ import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
-import com.codesqaude.cocomarco.domain.issue.dto.IssueRequest;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
+import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
 import com.codesqaude.cocomarco.domain.label.Label;
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
@@ -53,5 +53,4 @@ public class IssueService {
     public Issue findById(Long issueId) {
         return issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
     }
-
 }
