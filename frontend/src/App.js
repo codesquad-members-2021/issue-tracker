@@ -1,5 +1,6 @@
 import './App.css';
 import MainPage from './pages/MainPage';
+import SigninPage from './pages/SigninPage';
 // import CountMyRecoil from './components/Count/CountMyRecoil';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
           <CountMyRecoil />
         </RecoilRoot>
       */}
-      <MainPage />
+      {/* <MainPage /> */}
+      <SigninPage />
     </>
   );
 }
