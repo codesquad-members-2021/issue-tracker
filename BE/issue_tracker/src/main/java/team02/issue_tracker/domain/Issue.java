@@ -63,4 +63,8 @@ public class Issue {
         }
         isOpen = true;
     }
+
+    public void fixTitle(String title) {
+        this.title = title;
+    }
 }
