@@ -1,6 +1,6 @@
 -- user
 insert into `user`(id, email, oauth_resource, profile_image, username)
-values (1, "yeon@google.com", "Google", "프로필 이미지 url", "yeon");
+values (1, "yeon@github.com", "GITHUB", "프로필 이미지 url", "yeon");
 insert into `user`(id, email, oauth_resource, profile_image, username)
 values (2, "ehdrhelr@gmail.com", "GITHUB", "프로필 이미지 url", "shion");
 
@@ -11,7 +11,7 @@ values (1, "백엔드 1주차 마일스톤 내용", "2021-06-01", "2021-06-15", 
 -- issue
 insert into issue(id, created_time, is_open, title, writer_id, milestone_id)
 values (1, CURRENT_TIMESTAMP, true, "이슈 제목1", 1, 1),
-       (2, CURRENT_TIMESTAMP, false, "이슈 제목2", 2, null);
+       (2, CURRENT_TIMESTAMP, true, "이슈 제목2", 2, null);
 
 -- label
 insert into label(id, title, content, color)
