@@ -1,10 +1,7 @@
 package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
-import team02.issue_tracker.domain.Issue;
-import team02.issue_tracker.domain.IssueAssignee;
-import team02.issue_tracker.domain.Milestone;
-import team02.issue_tracker.domain.User;
+import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
@@ -49,7 +46,7 @@ public class IssueService {
 
         Issue issue = save(issueRequest, writer, milestone);
         commentService.save(issueRequest, writer, issue);
-        labelService.makeIssueLabels(issue, issueRequest);
+        labelService.makeIssueLabels(issue, issueRequest.getLabelIds());
         userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds());
     }
 
@@ -83,14 +80,21 @@ public class IssueService {
 
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        issue.fixTitle(issueRequest.getTitle());
+        issue.replaceTitle(issueRequest.getTitle());
         issueRepository.save(issue);
     }
 
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
-        issue.fixIssueAssignees(issueAssignees);
+        issue.replaceIssueAssignees(issueAssignees);
+        issueRepository.save(issue);
+    }
+
+    public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
+        issue.replaceIssueLabels(issueLabels);
         issueRepository.save(issue);
     }
 }
