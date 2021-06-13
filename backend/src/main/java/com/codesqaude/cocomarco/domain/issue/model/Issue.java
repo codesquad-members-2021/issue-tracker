@@ -80,6 +80,10 @@ public class Issue {
         this.title = title;
     }
 
+    public void changeStatus(IssueStatus status) {
+        this.status = status;
+    }
+
     public static Issue createIssue(User writer, String title, String text, @Nullable List<Assignment> assignments, @Nullable List<IssueLabel> issueLabels, @Nullable Milestone milestone) {
         Issue issue = new Issue(title, text);
         issue.setWriter(writer);
