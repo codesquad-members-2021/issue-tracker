@@ -22,6 +22,15 @@ public class UserService {
         this.userRepository = userRepository;
         this.issueAssigneeRepository = issueAssigneeRepository;
     }
+    
+    public User enroll(User user) {
+        return userRepository.save(user);
+    }
+
+    public User findByUser(User user) {
+        return userRepository.findUserByOauthResourceAndEmail(
+                user.getOauthResource(), user.getEmail());
+    }
 
     public User findOne(IssueRequest issueRequest) {
         return userRepository.findById(issueRequest.getUserId()).orElseThrow(UserNotFoundException::new);

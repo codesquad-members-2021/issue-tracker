@@ -1,14 +1,16 @@
 package team02.issue_tracker.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import team02.issue_tracker.domain.User;
-
-import java.util.Optional;
+import team02.issue_tracker.oauth.dto.SocialLogin;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
+public interface UserRepository extends CrudRepository<User, Long> {
+  
     @Override
     Optional<User> findById(Long id);
+
+    User findUserByOauthResourceAndEmail(
+            SocialLogin oauthResource, String password);
 }

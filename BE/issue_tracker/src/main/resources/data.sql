@@ -1,8 +1,8 @@
 -- user
-insert into `user`(id, email, oauth_resource, password, profile_image, username)
-values (1, "yeon@google.com", "Google", "1234", "프로필 이미지 url", "yeon");
-insert into `user`(id, email, oauth_resource, password, profile_image, username)
-values (2, "shion@github.com", "GitHub", "1234", "프로필 이미지 url", "shion");
+insert into `user`(id, email, oauth_resource, profile_image, username)
+values (1, "yeon@google.com", "Google", "프로필 이미지 url", "yeon");
+insert into `user`(id, email, oauth_resource, profile_image, username)
+values (2, "ehdrhelr@gmail.com", "GITHUB", "프로필 이미지 url", "shion");
 
 -- milestone
 insert into milestone(id, content, created_date, due_date, is_open, title)
