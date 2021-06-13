@@ -5,9 +5,11 @@ import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.dto.issue.DetailIssueResponse;
+import team02.issue_tracker.dto.issue.IssueIdsRequest;
 import team02.issue_tracker.dto.issue.IssueRequest;
 import team02.issue_tracker.dto.issue.IssueResponse;
 import team02.issue_tracker.dto.wrapping.ApiResult;
+import team02.issue_tracker.exception.IllegalIssueStatusException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -32,20 +34,20 @@ public class IssueService {
         this.labelService = labelService;
     }
 
-    public ApiResult<List<IssueResponse>> getAllIssueResponses() {
+    public List<IssueResponse> getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
-        return ApiResult.success(issueResponses);
+        return issueResponses;
     }
 
-    public ApiResult getDetailIssueResponse(Long issueId) {
+    public DetailIssueResponse getDetailIssueResponse(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        return ApiResult.success(new DetailIssueResponse(issue));
+        return new DetailIssueResponse(issue);
     }
 
-    public ApiResult<String> addIssue(IssueRequest issueRequest, Long userId) {
+    public void addIssue(IssueRequest issueRequest, Long userId) {
         User writer = userService.findOne(userId);
         Milestone milestone = milestoneService.findOne(issueRequest);
 
@@ -53,13 +55,26 @@ public class IssueService {
         commentService.save(issueRequest, writer, issue);
         labelService.makeIssueLabels(issue, issueRequest);
         userService.makeIssueAssignees(issue, issueRequest);
-
-        return ApiResult.ok();
     }
 
     private Issue save(IssueRequest issueRequest, User writer, Milestone milestone) {
         Issue issue = issueRequest.toIssue(writer);
         issue.addMilestone(milestone);
         return issueRepository.save(issue);
+    }
+
+    public void closeIssues(IssueIdsRequest issueIdsRequest) {
+        List<Issue> issues = issueIdsRequest.getIssueIds().stream()
+                .map(issueId -> {
+                    Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+
+                    if(issue.isOpen() != true) {
+                        throw new IllegalIssueStatusException("열린 이슈가 아닙니다.");
+                    }
+                    issue.close();
+                    return issue;
+                }).collect(Collectors.toList());
+
+        issueRepository.saveAll(issues);
     }
 }
