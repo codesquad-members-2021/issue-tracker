@@ -59,4 +59,10 @@ public class IssueController {
         issueService.modifyAssignees(issueId, issueAssigneeIdsRequest);
         return ApiResult.ok();
     }
+
+    @PatchMapping("/{issueId}/labels")
+    public ApiResult<String> modifyLabels(@PathVariable Long issueId, @RequestBody IssueLabelIdsRequest issueLabelIdsRequest) {
+        issueService.modifyLabels(issueId, issueLabelIdsRequest);
+        return ApiResult.ok();
+    }
 }
