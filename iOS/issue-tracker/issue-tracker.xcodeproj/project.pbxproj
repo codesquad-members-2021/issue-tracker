@@ -31,7 +31,6 @@
 		B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */; };
 		B3F527512670968F002B0812 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527502670968F002B0812 /* LabelViewController.swift */; };
 		B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */; };
-		B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */; };
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
 		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
 		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
@@ -102,7 +101,6 @@
 		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
 		B3F527502670968F002B0812 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
-		B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTabelHeaderView.swift; sourceTree = "<group>"; };
 		B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueToolbar.swift; path = "issue-tracker/Controller/IssueToolbar.swift"; sourceTree = SOURCE_ROOT; };
 		B3FBA7B8267335C30006E5E6 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
@@ -296,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */,
-				B3F527572670A3F3002B0812 /* LabelTabelHeaderView.swift */,
 				B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */,
 				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
 			);
@@ -561,7 +558,6 @@
 				D0ADB6F8266F5BBE00E0762C /* OAuthManager.swift in Sources */,
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
-				B3F527582670A3F3002B0812 /* LabelTabelHeaderView.swift in Sources */,
 				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,

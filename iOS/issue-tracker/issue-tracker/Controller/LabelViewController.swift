@@ -19,7 +19,6 @@ class LabelViewController: UIViewController {
     
     var addLabelButton = AddLabelButton()
     
-    lazy var tableHeaderView = LabelTabelHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 140))
     let fakeData = [Label(title: "hidsfadsfsafasfdfadsf", description: "hello", color: "#B1CAE5"), Label(title: "wow", description: "amazing", color: "#DFCD85")]
     
     override func viewDidLoad() {
