@@ -28,10 +28,9 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "code를 가지고 로그인을 합니다.")
-    public ResponseEntity<LoginResponseDTO> login(@ApiParam("web|| mobile") @RequestHeader("User-Agent") String userAgent,
+    public ResponseEntity<LoginResponseDTO> login(@ApiParam("IssueTrackerFE || IssueTrackerIOS") @RequestHeader("User-Agent") String userAgent,
                                                   @ApiParam("github code")  @RequestBody LoginRequestDTO loginRequestDTO) {
         logger.info("로그인 요청");
-        System.out.println(userAgent);
         return ResponseEntity.ok().body(userService.login(userAgent,loginRequestDTO));
     }
 
