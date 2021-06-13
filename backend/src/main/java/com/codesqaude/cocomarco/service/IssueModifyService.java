@@ -5,8 +5,11 @@ import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
+import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
 import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
 import com.codesqaude.cocomarco.domain.issue.model.dto.IssueStatusRequest;
+import com.codesqaude.cocomarco.domain.label.Label;
+import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import com.codesqaude.cocomarco.domain.milestone.MilestoneRepository;
 import com.codesqaude.cocomarco.domain.user.User;
@@ -29,6 +32,7 @@ public class IssueModifyService {
     private final IssueRepository issueRepository;
     private final MilestoneRepository milestoneRepository;
     private final UserRepository userRepository;
+    private final LabelRepository labelRepository;
 
     public void modifyTitle(Long issueId, IssueRequest issueRequest) {
         Issue issue = findById(issueId);
@@ -40,11 +44,6 @@ public class IssueModifyService {
         for (Issue issue : issues) {
             issue.changeStatus(issueStatusRequest.getStatus());
         }
-    }
-
-    @Transactional
-    public Issue findById(Long issueId) {
-        return issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
     }
 
     public void changeMilestone(Long issueId, IssueRequest issueRequest) {
@@ -59,5 +58,18 @@ public class IssueModifyService {
         List<Assignment> assignments = assignees.stream().map(Assignment::createAssignment).collect(Collectors.toList());
 
         issue.changeAssignment(assignments);
+    }
+
+    public void changeLabels(Long issueId, IssueRequest issueRequest) {
+        Issue issue = findById(issueId);
+        List<Label> labels = labelRepository.findAllById(issueRequest.getLabels());
+        List<IssueLabel> issueLabels = labels.stream().map(IssueLabel::createIssueLabel).collect(Collectors.toList());
+
+        issue.changeIssueLabels(issueLabels);
+    }
+
+    @Transactional
+    public Issue findById(Long issueId) {
+        return issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
     }
 }

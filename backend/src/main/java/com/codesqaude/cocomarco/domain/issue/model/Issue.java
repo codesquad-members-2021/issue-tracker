@@ -35,7 +35,7 @@ public class Issue {
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Assignment> assignments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "label", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +58,6 @@ public class Issue {
     }
 
     public void changeAssignment(List<Assignment> assignments) {
-        //fixme set으로 구현?
         this.assignments.clear();
         this.assignments.addAll(assignments);
         for (Assignment assignment : assignments) {
@@ -66,7 +65,7 @@ public class Issue {
         }
     }
 
-    public void addIssueLabel(List<IssueLabel> issueLabels) {
+    public void changeIssueLabels(List<IssueLabel> issueLabels) {
         this.issueLabels.clear();
         this.issueLabels.addAll(issueLabels);
         for (IssueLabel issueLabel : issueLabels) {
@@ -96,7 +95,7 @@ public class Issue {
         issue.setWriter(writer);
         issue.setMilestone(milestone);
         issue.changeAssignment(assignments);
-        issue.addIssueLabel(issueLabels);
+        issue.changeIssueLabels(issueLabels);
         issue.status = IssueStatus.OPEN;
         issue.writingTime = LocalDateTime.now();
 
