@@ -9,15 +9,21 @@ import Milestones from "components/Milestones/Milestones";
 import Header from "components/common/Header";
 import Navigator from "components/common/Navigator";
 import Issues from "components/Issues/Issues";
+import { useStateValue } from "MyRecoil/useStateValue";
 
+const FooChild = () => {
+	const [store] = useStateValue();
+	const filters = store.getData().map((item, i) => <div key={i}>{item}</div>);
+	console.log(store);
+	return <div>{filters}</div>;
+};
 const MainPage = () => {
 	const { pathname } = window.location;
-	console.log(pathname);
 
 	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
-
+			<FooChild />
 			{(pathname === "/main/labels" || pathname === "/main/milestones") && <Navigator />}
 			{pathname === "/main" && <Issues />}
 			<Switch>
