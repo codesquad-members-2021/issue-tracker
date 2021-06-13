@@ -2,6 +2,7 @@ package team02.issue_tracker.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team02.issue_tracker.exception.IllegalIssueStatusException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -50,6 +51,16 @@ public class Issue {
     }
 
     public void close() {
+        if (isOpen != true) {
+            throw new IllegalIssueStatusException("열린 이슈가 아닙니다.");
+        }
         isOpen = false;
+    }
+
+    public void open() {
+        if (isOpen != false) {
+            throw new IllegalIssueStatusException("닫힌 이슈가 아닙니다.");
+        }
+        isOpen = true;
     }
 }
