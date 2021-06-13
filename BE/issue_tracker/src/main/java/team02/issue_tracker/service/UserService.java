@@ -3,8 +3,10 @@ package team02.issue_tracker.service;
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
+import team02.issue_tracker.domain.IssueLabel;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.dto.issue.IssueAssigneeIdsRequest;
+import team02.issue_tracker.dto.issue.IssueLabelIdsRequest;
 import team02.issue_tracker.exception.UserNotFoundException;
 import team02.issue_tracker.repository.IssueAssigneeRepository;
 import team02.issue_tracker.repository.UserRepository;
@@ -38,6 +40,7 @@ public class UserService {
 
     public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
         List<IssueAssignee> issueAssignees = new ArrayList<>();
+
         assigneeIds.stream()
                 .forEach(assigneeId -> {
                     User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
