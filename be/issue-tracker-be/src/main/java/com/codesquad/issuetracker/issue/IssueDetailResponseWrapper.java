@@ -1,8 +1,11 @@
 package com.codesquad.issuetracker.issue;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data(staticConstructor = "from")
 public class IssueDetailResponseWrapper {
-    private final IssueDetailResponse issue;
+
+    @JsonProperty("issue")
+    private final IssueDetailResponse issueDetailResponse;
 }

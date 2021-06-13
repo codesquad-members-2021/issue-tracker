@@ -1,8 +1,11 @@
 package com.codesquad.issuetracker.file;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data(staticConstructor = "from")
 public class FileResponseWrapper {
-    private final FileResponse file;
+
+    @JsonProperty("file")
+    private final FileResponse fileResponse;
 }
