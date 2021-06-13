@@ -31,6 +31,7 @@ class IssueDetailViewController: UIViewController {
         textField.placeholder = "코멘트를 입력하세요"
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(postComment), for: .touchUpInside)
         textField.rightView = button
         textField.rightViewMode = .always
         textField.layer.cornerRadius = 10
@@ -56,11 +57,10 @@ class IssueDetailViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
         
         view.addSubview(tableView)
         view.addSubview(toolbar)
-        
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +92,12 @@ class IssueDetailViewController: UIViewController {
               indexPath.row + 1 < data.count else { return }
         tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
                             animated: true, scrollPosition: .bottom)
+    }
+    
+    @objc
+    private func postComment() {
+        print(textField.text as Any)
+        textField.text = ""
     }
 }
 
