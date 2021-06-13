@@ -18,8 +18,8 @@ const TabContentRow = () => {
             <S.LabelWrapper>
               <Label
                 label="JennyJJang"
-                fontColor="white"
-                backgroundColor="green"
+                fontcolor="white"
+                backgroundcolor="green"
               />
             </S.LabelWrapper>
             <ContentDescription />

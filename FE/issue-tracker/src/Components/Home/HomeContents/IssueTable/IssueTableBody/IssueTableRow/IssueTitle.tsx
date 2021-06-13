@@ -6,7 +6,7 @@ import {
 const IssueTitle = () => {
   return (
     <S.IssueInfoTitle>
-      <Icon.IssueMark fillColor="#C7EBFF" />
+      <Icon.IssueMark fillcolor="#C7EBFF" />
       이슈제목
     </S.IssueInfoTitle>
   );

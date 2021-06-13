@@ -7,8 +7,8 @@ const IssueTableBody = () => {
 
   return (
     <S.TableBody>
-      {issues.map((id) => (
-        <IssueTableRow id={id} />
+      {issues.map((id, index) => (
+        <IssueTableRow id={id} key={index} />
       ))}
     </S.TableBody>
   );

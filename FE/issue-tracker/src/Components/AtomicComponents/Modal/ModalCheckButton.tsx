@@ -4,7 +4,7 @@ const ModalCheckButton = ({ index }: any) => {
       type="radio"
       checked={false}
       onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        console.log(index);
+        // console.log(index);
       }}
     />
   );

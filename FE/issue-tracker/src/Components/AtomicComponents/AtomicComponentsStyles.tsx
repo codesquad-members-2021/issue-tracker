@@ -10,10 +10,10 @@ const AvatarDiv = styled(Avatar)<{ size?: number }>`
   `};
 `;
 
-const LabelDiv = styled(Chip)<{ fontColor?: string; backgroundColor?: string }>`
-  color: ${({ fontColor }) => (fontColor ? fontColor : "black")};
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : "gray"};
+const LabelDiv = styled(Chip)<{ fontcolor?: string; backgroundcolor?: string }>`
+  color: ${({ fontcolor }) => (fontcolor ? fontcolor : "black")};
+  background-color: ${({ backgroundcolor }) =>
+    backgroundcolor ? backgroundcolor : "gray"};
 `;
 
 const Modal = {

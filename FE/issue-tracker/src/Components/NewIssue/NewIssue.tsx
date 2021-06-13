@@ -9,24 +9,22 @@ import { NewIssue as S } from "@/Components/NewIssue/NewIssueStyles";
 
 const NewIssue = () => {
   return (
-    <StylesProvider injectFirst>
-      <S.NewIssue>
-        <Title />
-        <S.NewIssueBody>
-          <MyIcon />
-          <S.TextAreaWrapper>
-            <TextArea placeholder={"제목"} rows={1} />
-            <TextArea placeholder={"코멘트를 입력하세요"} rows={20} />
-            <FileAttachButton />
-          </S.TextAreaWrapper>
-          <SettingSideBar />
-        </S.NewIssueBody>
-        <S.ButtonsWrapper>
-          <UnCreateButton />
-          <CreateButton />
-        </S.ButtonsWrapper>
-      </S.NewIssue>
-    </StylesProvider>
+    <S.NewIssue>
+      <Title />
+      <S.NewIssueBody>
+        <MyIcon />
+        <S.TextAreaWrapper>
+          <TextArea placeholder={"제목"} rows={1} />
+          <TextArea placeholder={"코멘트를 입력하세요"} rows={20} />
+          <FileAttachButton />
+        </S.TextAreaWrapper>
+        <SettingSideBar />
+      </S.NewIssueBody>
+      <S.ButtonsWrapper>
+        <UnCreateButton />
+        <CreateButton />
+      </S.ButtonsWrapper>
+    </S.NewIssue>
   );
 };
 
