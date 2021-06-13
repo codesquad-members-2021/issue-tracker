@@ -65,4 +65,11 @@ public class IssueController {
         issueService.modifyLabels(issueId, issueLabelIdsRequest);
         return ApiResult.ok();
     }
+
+    @PatchMapping("/{issueId}/milestone")
+    public ApiResult<String> modifyMilestone(@PathVariable Long issueId, @RequestBody IssueMilestoneRequest  issueMilestoneRequest) {
+        issueService.modifyMilestone(issueId, issueMilestoneRequest);
+        return ApiResult.ok();
+    }
+
 }
