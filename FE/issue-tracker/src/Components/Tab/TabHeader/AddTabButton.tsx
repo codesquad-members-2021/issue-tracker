@@ -16,8 +16,8 @@ const AddTabButton = () => {
       {toggleAddState ? (
         <S.WriteIssueBtn
           onClick={handleAddBtnClick}
-          backgroundColor="white"
-          fontColor="#007AFF"
+          backgroundcolor="white"
+          fontcolor="#007AFF"
         >
           x 닫기
         </S.WriteIssueBtn>
