@@ -9,9 +9,9 @@ insert into milestone(id, content, created_date, due_date, is_open, title)
 values (1, "백엔드 1주차 마일스톤 내용", "2021-06-01", "2021-06-15", true, "BE 1주차");
 
 -- issue
-insert into issue(id, created_time, is_open, issue_number, title, writer_id, milestone_id)
-values (1, CURRENT_TIMESTAMP, true, 1, "이슈 제목1", 1, 1),
-       (2, CURRENT_TIMESTAMP, false, 2, "이슈 제목2", 2, null);
+insert into issue(id, created_time, is_open, title, writer_id, milestone_id)
+values (1, CURRENT_TIMESTAMP, true, "이슈 제목1", 1, 1),
+       (2, CURRENT_TIMESTAMP, false, "이슈 제목2", 2, null);
 
 -- label
 insert into label(id, title, content, color)
