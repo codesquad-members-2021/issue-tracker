@@ -75,4 +75,8 @@ public class Issue {
     public void replaceIssueLabels(List<IssueLabel> issueLabels) {
         this.issueLabels = issueLabels;
     }
+
+    public void replaceMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }
