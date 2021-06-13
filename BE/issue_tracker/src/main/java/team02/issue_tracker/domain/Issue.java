@@ -67,4 +67,8 @@ public class Issue {
     public void fixTitle(String title) {
         this.title = title;
     }
+
+    public void fixIssueAssignees(List<IssueAssignee> issueAssignees) {
+        this.issueAssignees = issueAssignees;
+    }
 }
