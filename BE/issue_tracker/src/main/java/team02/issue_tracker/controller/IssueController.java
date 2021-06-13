@@ -44,4 +44,10 @@ public class IssueController {
         issueService.closeIssues(issueRequest);
         return ApiResult.ok();
     }
+
+    @PostMapping("/open")
+    public ApiResult<String> openIssues(@RequestBody IssueIdsRequest issueRequest) {
+        issueService.openIssues(issueRequest);
+        return ApiResult.ok();
+    }
 }
