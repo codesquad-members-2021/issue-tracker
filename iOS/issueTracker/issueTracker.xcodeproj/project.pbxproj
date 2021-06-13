@@ -22,6 +22,16 @@
 		82A6986C266F688A00F16D39 /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6986B266F688A00F16D39 /* IssueList.storyboard */; };
 		82A6987026707A9700F16D39 /* StoryBoardIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6986F26707A9700F16D39 /* StoryBoardIdentity.swift */; };
 		82A698732670A03000F16D39 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A698722670A03000F16D39 /* IssueListViewController.swift */; };
+		82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED72675F1A700B85F98 /* Issue.swift */; };
+		82CB7EE22675F1A700B85F98 /* IssueCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED82675F1A700B85F98 /* IssueCount.swift */; };
+		82CB7EE32675F1A700B85F98 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED92675F1A700B85F98 /* Milestone.swift */; };
+		82CB7EE42675F1A700B85F98 /* SendIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDA2675F1A700B85F98 /* SendIssue.swift */; };
+		82CB7EE52675F1A700B85F98 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDB2675F1A700B85F98 /* User.swift */; };
+		82CB7EE62675F1A700B85F98 /* Rooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDC2675F1A700B85F98 /* Rooms.swift */; };
+		82CB7EE72675F1A700B85F98 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDD2675F1A700B85F98 /* Comment.swift */; };
+		82CB7EE82675F1A700B85F98 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDE2675F1A700B85F98 /* History.swift */; };
+		82CB7EE92675F1A700B85F98 /* Issues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDF2675F1A700B85F98 /* Issues.swift */; };
+		82CB7EEA2675F1A700B85F98 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EE02675F1A700B85F98 /* Label.swift */; };
 		F6E434BBF6BA1A046ECCDAE7 /* Pods_issueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F578667332988195174B5525 /* Pods_issueTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +54,16 @@
 		82A6986B266F688A00F16D39 /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		82A6986F26707A9700F16D39 /* StoryBoardIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoardIdentity.swift; sourceTree = "<group>"; };
 		82A698722670A03000F16D39 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		82CB7ED72675F1A700B85F98 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		82CB7ED82675F1A700B85F98 /* IssueCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCount.swift; sourceTree = "<group>"; };
+		82CB7ED92675F1A700B85F98 /* Milestone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		82CB7EDA2675F1A700B85F98 /* SendIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendIssue.swift; sourceTree = "<group>"; };
+		82CB7EDB2675F1A700B85F98 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		82CB7EDC2675F1A700B85F98 /* Rooms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rooms.swift; sourceTree = "<group>"; };
+		82CB7EDD2675F1A700B85F98 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		82CB7EDE2675F1A700B85F98 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		82CB7EDF2675F1A700B85F98 /* Issues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issues.swift; sourceTree = "<group>"; };
+		82CB7EE02675F1A700B85F98 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		B3BFE9646CB6617B7B7C59E9 /* Pods-issueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issueTracker.release.xcconfig"; path = "Target Support Files/Pods-issueTracker/Pods-issueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		F578667332988195174B5525 /* Pods_issueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -81,6 +101,16 @@
 		827A16B426734AB700F3622F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				82CB7EDD2675F1A700B85F98 /* Comment.swift */,
+				82CB7EDE2675F1A700B85F98 /* History.swift */,
+				82CB7ED72675F1A700B85F98 /* Issue.swift */,
+				82CB7ED82675F1A700B85F98 /* IssueCount.swift */,
+				82CB7EDF2675F1A700B85F98 /* Issues.swift */,
+				82CB7EE02675F1A700B85F98 /* Label.swift */,
+				82CB7ED92675F1A700B85F98 /* Milestone.swift */,
+				82CB7EDC2675F1A700B85F98 /* Rooms.swift */,
+				82CB7EDA2675F1A700B85F98 /* SendIssue.swift */,
+				82CB7EDB2675F1A700B85F98 /* User.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -274,16 +304,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82CB7EE82675F1A700B85F98 /* History.swift in Sources */,
 				820550892671F3C700BF8857 /* NewIssueViewController.swift in Sources */,
+				82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */,
 				1E15AA292670F45F00A573DB /* filterOptionCell.swift in Sources */,
 				82A6985C266F585100F16D39 /* ViewController.swift in Sources */,
+				82CB7EE32675F1A700B85F98 /* Milestone.swift in Sources */,
+				82CB7EE72675F1A700B85F98 /* Comment.swift in Sources */,
 				82A69858266F585100F16D39 /* AppDelegate.swift in Sources */,
+				82CB7EE62675F1A700B85F98 /* Rooms.swift in Sources */,
+				82CB7EE22675F1A700B85F98 /* IssueCount.swift in Sources */,
 				82A6987026707A9700F16D39 /* StoryBoardIdentity.swift in Sources */,
+				82CB7EE52675F1A700B85F98 /* User.swift in Sources */,
 				82847A1E267102FD009CFAE6 /* IssueTableViewCell.swift in Sources */,
+				82CB7EE42675F1A700B85F98 /* SendIssue.swift in Sources */,
 				82A698732670A03000F16D39 /* IssueListViewController.swift in Sources */,
 				1E15AA222670ADB400A573DB /* IssueFilterViewController.swift in Sources */,
 				82A6985A266F585100F16D39 /* SceneDelegate.swift in Sources */,
 				1E15AA252670B54B00A573DB /* HeaderView.swift in Sources */,
+				82CB7EEA2675F1A700B85F98 /* Label.swift in Sources */,
+				82CB7EE92675F1A700B85F98 /* Issues.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
