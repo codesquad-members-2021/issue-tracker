@@ -62,16 +62,13 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc func selectButtonTouched(_ sender: UIButton) {
+        guard let selectViewController = storyboard?.instantiateViewController(identifier: "Select") as? IssueSelectViewController else {
+            return
+        }
+        
+        self.present(selectViewController, animated: true, completion: nil)
         sender.isSelected = !sender.isSelected
     }
-    
-//    @IBAction func addButtonTouched(_ sender: UIButton) {
-//        guard let addingIssueViewController = storyboard?.instantiateViewController(identifier: "AddIssue") as? AddingIssueViewController else {
-//            return
-//        }
-//        addingIssueViewController.modalPresentationStyle = .custom
-//        self.present(addingIssueViewController, animated: true, completion: nil)
-//    }
 }
 
 extension IssueViewController: UITableViewDataSource {

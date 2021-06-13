@@ -21,6 +21,7 @@
 		D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78762673299400CF3FE4 /* IssueViewController.swift */; };
 		D49B78792673313B00CF3FE4 /* AddingIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */; };
 		D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */; };
+		D49B787D2673586F00CF3FE4 /* IssueSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B787C2673586E00CF3FE4 /* IssueSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D49B78762673299400CF3FE4 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingIssueViewController.swift; sourceTree = "<group>"; };
 		D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInformationCell.swift; sourceTree = "<group>"; };
+		D49B787C2673586E00CF3FE4 /* IssueSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				D49B78762673299400CF3FE4 /* IssueViewController.swift */,
 				D49B78722671E97300CF3FE4 /* FilterTableViewController.swift */,
 				D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */,
+				D49B787C2673586E00CF3FE4 /* IssueSelectViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */,
 				D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */,
 				D49B784F266F0D0200CF3FE4 /* AppDelegate.swift in Sources */,
+				D49B787D2673586F00CF3FE4 /* IssueSelectViewController.swift in Sources */,
 				D49B7851266F0D0200CF3FE4 /* SceneDelegate.swift in Sources */,
 				D49B78792673313B00CF3FE4 /* AddingIssueViewController.swift in Sources */,
 				D49B78752671F4FB00CF3FE4 /* UIButton + Extension.swift in Sources */,
