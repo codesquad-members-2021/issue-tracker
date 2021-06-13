@@ -8,8 +8,6 @@ import team02.issue_tracker.dto.issue.DetailIssueResponse;
 import team02.issue_tracker.dto.issue.IssueIdsRequest;
 import team02.issue_tracker.dto.issue.IssueRequest;
 import team02.issue_tracker.dto.issue.IssueResponse;
-import team02.issue_tracker.dto.wrapping.ApiResult;
-import team02.issue_tracker.exception.IllegalIssueStatusException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -67,11 +65,18 @@ public class IssueService {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
                     Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-
-                    if(issue.isOpen() != true) {
-                        throw new IllegalIssueStatusException("열린 이슈가 아닙니다.");
-                    }
                     issue.close();
+                    return issue;
+                }).collect(Collectors.toList());
+
+        issueRepository.saveAll(issues);
+    }
+
+    public void openIssues(IssueIdsRequest issueIdsRequest) {
+        List<Issue> issues = issueIdsRequest.getIssueIds().stream()
+                .map(issueId -> {
+                    Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+                    issue.open();
                     return issue;
                 }).collect(Collectors.toList());
 
