@@ -7,31 +7,28 @@
 
 import UIKit
 
-protocol test {
+protocol customNavigationHeader: AnyObject {
     func close()
 }
 
 class HeaderView: UIView {
     private var backButton: UIButton!
-    var delegate: test!
-    
+    private weak var delegate: customNavigationHeader?
     override init(frame: CGRect) {
-
         super.init(frame: frame)
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-
-    func setUpBackButton2(vc: UIViewController) {
-        guard let vc2 = vc as? IssueListFilterViewController else {
+    func setUpBackButton2(viewController: UIViewController) {
+        guard let vc2 = viewController as? IssueFilterViewController else {
             return
         }
         self.backButton.addTarget(delegate, action: #selector(vc2.testt), for: .touchDown)
     }
-    
+    func set(delegate: customNavigationHeader) {
+        self.delegate = delegate
+    }
     func setUpTitle(text: String) {
         let uiLabel = UILabel(frame: .zero)
         uiLabel.text = text
@@ -43,32 +40,27 @@ class HeaderView: UIView {
         uiLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         uiLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
-    
     func setUpBackButton(text: String) {
         let backButton = UIButton(type: .custom)
         backButton.setTitle(text, for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
         backButton.titleLabel?.font = .systemFont(ofSize: 20)
 
-        if let image = UIImage(systemName: "chevron.backward"){
+        if let image = UIImage(systemName: "chevron.backward") {
             backButton.setImage(image, for: .normal)
         }
-  
         self.addSubview(backButton)
-        
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         self.backButton = backButton
     }
-    
     func setUpSaveButton(text: String) {
         let backButton = UIButton()
         backButton.setTitle(text, for: .normal)
         backButton.titleLabel?.font = .boldSystemFont(ofSize: 20)
         backButton.setTitleColor(.systemBlue, for: .normal)
         self.addSubview(backButton)
-        
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         backButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true

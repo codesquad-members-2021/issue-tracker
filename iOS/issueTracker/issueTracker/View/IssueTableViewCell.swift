@@ -7,10 +7,8 @@
 
 import UIKit
 
-class IssueListTableViewCell: UITableViewCell {
-    
+class IssueTableViewCell: UITableViewCell {
     static var cellIdentity: String = "issueCell"
-    
     @IBOutlet weak var issueTitle: UILabel!
     @IBOutlet weak var issueDescription: UILabel!
     @IBOutlet weak var milestoneTitle: UILabel!

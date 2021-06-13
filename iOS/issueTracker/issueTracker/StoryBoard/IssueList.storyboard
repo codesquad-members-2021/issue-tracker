@@ -20,15 +20,15 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="681"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="issueCell" id="Ar2-Q1-fBS" customClass="IssueListTableViewCell" customModule="issueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="208"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="issueCell" id="Ar2-Q1-fBS" customClass="IssueTableViewCell" customModule="issueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="208.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ar2-Q1-fBS" id="5HE-ed-Bgc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="208.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UaT-BY-Jrm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="208.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckw-BQ-7fv">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -48,10 +48,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JR7-G6-67J">
-                                                            <rect key="frame" x="0.0" y="50" width="414" height="58"/>
+                                                            <rect key="frame" x="0.0" y="50" width="414" height="58.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅇㅁㄴ어항너마ㅣ;ㄴ어라ㅣ;ㄴㅇ머리ㅏㄴ어리;ㅏㄴ어라ㅣ머이ㅏㄹ멍나ㅣ런아ㅣ럼ㄴ아ㅣㄹ먼아ㅣㄹ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ev-fi-aKh">
-                                                                    <rect key="frame" x="16" y="8.5" width="382" height="41"/>
+                                                                    <rect key="frame" x="16" y="9" width="382" height="41"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="YJx-O0-IPd"/>
                                                                     </constraints>
@@ -69,7 +69,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qm-rY-BVm">
-                                                            <rect key="frame" x="0.0" y="108" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="108.5" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마일스톤 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glx-JK-IWV">
                                                                     <rect key="frame" x="37" y="15" width="93" height="20.5"/>
@@ -91,7 +91,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-cn-4AV">
-                                                            <rect key="frame" x="0.0" y="158" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="158.5" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS3-vA-DQF">
                                                                     <rect key="frame" x="16" y="10" width="114" height="30"/>
@@ -193,10 +193,10 @@
             </objects>
             <point key="canvasLocation" x="1910.144927536232" y="88.392857142857139"/>
         </scene>
-        <!--Issue List Filter View Controller-->
+        <!--Issue Filter View Controller-->
         <scene sceneID="bw8-Ue-Fz3">
             <objects>
-                <viewController storyboardIdentifier="IssueListFilterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D8o-oD-iSX" customClass="IssueListFilterViewController" customModule="issueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueListFilterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D8o-oD-iSX" customClass="IssueFilterViewController" customModule="issueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t05-M1-atD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
                         <color key="backgroundColor" red="0.94919604059999996" green="0.94853931670000002" blue="0.96863085029999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <connections>
-                        <outlet property="filterOptionTableView" destination="NBi-m5-ofO" id="pMe-4a-JrG"/>
+                        <outlet property="filterTableView" destination="NBi-m5-ofO" id="pMe-4a-JrG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EYv-e7-vdH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -254,7 +254,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="vye-Ew-6jF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t9S-zc-FK7">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -304,7 +303,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="qUd-oy-wyq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u1R-Da-T4a">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -339,7 +337,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="sLj-SS-hMJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M2y-sg-JtQ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -374,7 +371,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="6gm-NW-ueV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZYk-en-inH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

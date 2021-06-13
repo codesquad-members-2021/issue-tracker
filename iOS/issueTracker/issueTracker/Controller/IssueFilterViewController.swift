@@ -7,66 +7,54 @@
 
 import UIKit
 
-class IssueListFilterViewController: UIViewController, test {
-    
-    func close() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBOutlet weak var filterOptionTableView: UITableView!
+class IssueFilterViewController: UIViewController, customNavigationHeader {
+    @IBOutlet weak var filterTableView: UITableView!
     private var headerView: HeaderView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        filterOptionTableView.dataSource = self
-        filterOptionTableView.delegate = self
-        
+        filterTableView.dataSource = self
+        filterTableView.delegate = self
         configHeaderView()
         configFilterOptionTableView()
         configfilterOptionTableView()
-        
-        headerView.delegate = self
-        headerView.setUpBackButton2(vc: self)
+        headerView.set(delegate: self)
+        headerView.setUpBackButton2(viewController: self)
     }
-    
+    func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
     @objc
     func testt() {
         self.dismiss(animated: true, completion: nil)
     }
-    
     private func configfilterOptionTableView() {
-        filterOptionTableView.tableHeaderView?.backgroundColor = .black
+        filterTableView.tableHeaderView?.backgroundColor = .black
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = .clear
-        filterOptionTableView.tableFooterView = footerView;
+        filterTableView.tableFooterView = footerView
     }
-    
     private func configHeaderView() {
         headerView = HeaderView(frame: .zero)
-        headerView.setUpTitle(text: "필터")
-        headerView.setUpBackButton(text: "취소")
-        headerView.setUpSaveButton(text: "저장")
+        headerView.setUpTitle(text: CustomHeaderViewTitle.headerViewFilter.description)
+        headerView.setUpBackButton(text: CustomHeaderViewTitle.headerViewCancel.description)
+        headerView.setUpSaveButton(text: CustomHeaderViewTitle.headerViewSave.description)
         self.view.addSubview(headerView)
-        
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         headerView.heightAnchor.constraint(equalToConstant: self.view.frame.height/12).isActive = true
     }
-    
     private func configFilterOptionTableView() {
-        filterOptionTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        filterOptionTableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor).isActive = true
-        filterOptionTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        filterOptionTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        filterOptionTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+        filterTableView.translatesAutoresizingMaskIntoConstraints = false
+        filterTableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor).isActive = true
+        filterTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        filterTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        filterTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 
-extension IssueListFilterViewController: UITableViewDataSource {
+extension IssueFilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -110,5 +98,21 @@ extension IssueListFilterViewController: UITableViewDataSource {
     }
 }
 
-extension IssueListFilterViewController: UITableViewDelegate {
+extension IssueFilterViewController: UITableViewDelegate {
+}
+
+enum CustomHeaderViewTitle: CustomStringConvertible {
+    case headerViewFilter
+    case headerViewCancel
+    case headerViewSave
+    var description: String {
+        switch self {
+        case .headerViewFilter:
+            return "필터"
+        case .headerViewSave:
+            return "저장"
+        case .headerViewCancel:
+            return "취소"
+        }
+    }
 }

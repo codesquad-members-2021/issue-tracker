@@ -14,7 +14,6 @@ enum StoryBoardIdentity {
 
 enum ViewControllerIdentity: CustomStringConvertible {
     case issueListFilterViewController
-    
     var description: String {
         return "IssueListFilterViewController"
     }

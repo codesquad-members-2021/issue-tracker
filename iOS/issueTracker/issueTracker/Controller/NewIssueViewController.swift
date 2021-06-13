@@ -8,9 +8,7 @@
 import UIKit
 
 class NewIssueViewController: UIViewController {
-    
     @IBOutlet weak var conditionTableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
@@ -18,24 +16,19 @@ class NewIssueViewController: UIViewController {
         self.conditionTableView.dataSource = self
         self.conditionTableView.delegate = self
     }
-    
     func setupSegmentControl(items: [String]) {
         let uisegmentControl = UISegmentedControl(items: items)
         uisegmentControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = uisegmentControl
     }
-    
     func setupNavigationRightButton() {
-        
     }
 }
 
 extension NewIssueViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let cellTitles = ["레이블", "마일스톤", "담당자"]
@@ -47,7 +40,6 @@ extension NewIssueViewController: UITableViewDataSource, UITableViewDelegate {
         cellSelectImage.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -16).isActive = true
         return cell
     }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white
@@ -62,7 +54,6 @@ extension NewIssueViewController: UITableViewDataSource, UITableViewDelegate {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         return view
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (tableView.frame.height) / 3
     }
@@ -71,7 +62,6 @@ extension NewIssueViewController: UITableViewDataSource, UITableViewDelegate {
 enum SegmentItemTitle: CustomStringConvertible {
     case markdown
     case preview
-    
     var description: String {
         switch self {
         case .markdown:
