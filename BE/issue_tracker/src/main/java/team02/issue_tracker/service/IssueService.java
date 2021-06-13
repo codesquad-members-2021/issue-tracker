@@ -2,6 +2,7 @@ package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Issue;
+import team02.issue_tracker.domain.IssueAssignee;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.dto.issue.*;
@@ -49,7 +50,7 @@ public class IssueService {
         Issue issue = save(issueRequest, writer, milestone);
         commentService.save(issueRequest, writer, issue);
         labelService.makeIssueLabels(issue, issueRequest);
-        userService.makeIssueAssignees(issue, issueRequest);
+        userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds());
     }
 
     private Issue save(IssueRequest issueRequest, User writer, Milestone milestone) {
@@ -83,6 +84,13 @@ public class IssueService {
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         issue.fixTitle(issueRequest.getTitle());
+        issueRepository.save(issue);
+    }
+
+    public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
+        issue.fixIssueAssignees(issueAssignees);
         issueRepository.save(issue);
     }
 }
