@@ -45,8 +45,8 @@ public class IssueService {
         return ApiResult.success(new DetailIssueResponse(issue));
     }
 
-    public ApiResult<String> addIssue(IssueRequest issueRequest) {
-        User writer = userService.findOne(issueRequest);
+    public ApiResult<String> addIssue(IssueRequest issueRequest, Long userId) {
+        User writer = userService.findOne(userId);
         Milestone milestone = milestoneService.findOne(issueRequest);
 
         Issue issue = save(issueRequest, writer, milestone);
