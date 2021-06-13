@@ -48,4 +48,8 @@ public class Issue {
     public void addMilestone(Milestone milestone) {
         this.milestone = milestone;
     }
+
+    public void close() {
+        isOpen = false;
+    }
 }
