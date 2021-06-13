@@ -1,3 +1,4 @@
+import { RecoilRoot } from "recoil";
 import { useRef, createContext } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import LoginPage from "./components/pages/LoginPage";
@@ -10,26 +11,9 @@ import Labels from "./components/Labels/Labels";
 import NewIssue from "./components/pages/NewIssuePage";
 import { ThemeProvider } from "styled-components";
 import theme from "styles/theme";
+import store from "./MyRecoil/store";
 
 export const globalStateRoot = createContext();
-
-const store = {
-	observers: [],
-
-	subscribe(fn) {
-		this.observers.push(fn);
-	},
-
-	getData() {
-		return this.filters;
-	},
-
-	addFilter(newFilter) {
-		this.filters.push(newFilter);
-		this.observers.forEach((fn) => fn(this.getData()));
-	},
-	filters: ["milestone", "label", "asignee"],
-};
 
 function App() {
 	const globalState = useRef(store);

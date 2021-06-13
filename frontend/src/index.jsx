@@ -11,9 +11,7 @@ ReactDOM.render(
 	<BrowserRouter>
 		<GlobalStyle />
 		<StylesProvider injectFirst>
-			<RecoilRoot>
-				<App />
-			</RecoilRoot>
+			<App />
 		</StylesProvider>
 	</BrowserRouter>,
 	document.getElementById("root")

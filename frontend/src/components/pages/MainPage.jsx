@@ -9,28 +9,27 @@ import Milestones from "components/Milestones/Milestones";
 import Header from "components/common/Header";
 import Navigator from "components/common/Navigator";
 import Issues from "components/Issues/Issues";
-import { useStateValue } from "MyRecoil/useStateValue";
+import { Test } from "components/pages/Test";
+import { AnotherTest } from "./AnotherTest";
 
-const FooChild = () => {
-	const [store] = useStateValue();
-	const filters = store.getData().map((item, i) => <div key={i}>{item}</div>);
-	console.log(store);
-	return <div>{filters}</div>;
-};
 const MainPage = () => {
 	const { pathname } = window.location;
 
 	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
-			<FooChild />
-			{(pathname === "/main/labels" || pathname === "/main/milestones") && <Navigator />}
+			<AnotherTest />
+			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
+				<Navigator />
+			)}
 			{pathname === "/main" && <Issues />}
 			<Switch>
-				<Route exact path="/main/:id" component={IssueDetailPage} />
+				<Route exact path="/main/test" component={Test} />
 				<Route exact path="/main/milestones" component={Milestones} />
 				<Route exact path="/main/labels" component={Labels} />
 				<Route exact path="/main/new" component={NewIssue} />
+				<Route exact path="/main/AnotherTest" component={AnotherTest} />
+				<Route exact path="/main/:id" component={IssueDetailPage} />
 				<Route path="/main/*" component={NoMatch} />
 			</Switch>
 		</MainPageLayout>

@@ -1,26 +1,26 @@
 import { atom } from "recoil";
 
-export const issueFilterState = atom({
+export const issueAtomState = atom({
 	key: "issueFilter",
 	default: "열린 이슈",
 });
 
-export const assigneeFilterState = atom({
+export const assigneeAtomState = atom({
 	key: "assigneeFilter",
-	default: null,
+	default: [],
 });
 
-export const labelFilterState = atom({
+export const labelAtomState = atom({
 	key: "labelFilter",
-	default: null,
+	default: [],
 });
 
-export const milestoneFilterState = atom({
+export const milestoneAtomState = atom({
 	key: "milestoneFilter",
-	default: null,
+	default: [],
 });
 
-export const authorFilterState = atom({
+export const authorAtomState = atom({
 	key: "authorFilter",
-	default: null,
+	default: [],
 });
