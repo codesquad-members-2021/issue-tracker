@@ -1,10 +1,7 @@
 package team02.issue_tracker.controller;
 
 import org.springframework.web.bind.annotation.*;
-import team02.issue_tracker.dto.issue.DetailIssueResponse;
-import team02.issue_tracker.dto.issue.IssueIdsRequest;
-import team02.issue_tracker.dto.issue.IssueRequest;
-import team02.issue_tracker.dto.issue.IssueResponse;
+import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.dto.wrapping.ApiResult;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.annotation.UserId;
@@ -48,6 +45,12 @@ public class IssueController {
     @PostMapping("/open")
     public ApiResult<String> openIssues(@RequestBody IssueIdsRequest issueRequest) {
         issueService.openIssues(issueRequest);
+        return ApiResult.ok();
+    }
+
+    @PatchMapping("/{issueId}/title")
+    public ApiResult<String> modifyTitle(@PathVariable Long issueId, @RequestBody IssueTitleRequest issueRequest) {
+        issueService.modifyTitle(issueId, issueRequest);
         return ApiResult.ok();
     }
 }
