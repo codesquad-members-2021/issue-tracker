@@ -11,6 +11,8 @@ import SnapKit
 class IssueDetailViewController: UIViewController {
 
     private let cellReuseIdentifier = "IssueDetailCell"
+    private let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 130
@@ -19,10 +21,10 @@ class IssueDetailViewController: UIViewController {
     }()
     
     private let up = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"),
-                                     style: .plain, target: self, action: #selector(backToTop))
+                                     style: .plain, target: self, action: #selector(scrollToBefore))
     
     private let down = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
-                               style: .plain, target: self, action: nil)
+                                       style: .plain, target: self, action: #selector(scrollToNext))
     
     private let textField: UITextField = {
         let textField = UITextField(frame: .zero)
@@ -57,6 +59,8 @@ class IssueDetailViewController: UIViewController {
         
         view.addSubview(tableView)
         view.addSubview(toolbar)
+        
+        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,14 +79,25 @@ class IssueDetailViewController: UIViewController {
     }
     
     @objc
-    func backToTop() {
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .top)
+    private func scrollToBefore() {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+              indexPath.row != 0 else { return }
+        tableView.selectRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section),
+                            animated: true, scrollPosition: .top)
+    }
+    
+    @objc
+    private func scrollToNext() {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+              indexPath.row + 1 < data.count else { return }
+        tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
+                            animated: true, scrollPosition: .bottom)
     }
 }
 
 extension IssueDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
