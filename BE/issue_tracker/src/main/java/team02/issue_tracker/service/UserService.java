@@ -32,8 +32,8 @@ public class UserService {
                 user.getOauthResource(), user.getEmail());
     }
 
-    public User findOne(IssueRequest issueRequest) {
-        return userRepository.findById(issueRequest.getUserId()).orElseThrow(UserNotFoundException::new);
+    public User findOne(Long id) {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     public List<IssueAssignee> makeIssueAssignees(Issue issue, IssueRequest issueRequest) {
