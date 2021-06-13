@@ -11,7 +11,5 @@ import UIKit
 class Test: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-  
-        
     }
 }
