@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface Oauth {
 
-    Optional<String> getAccessToken(LoginRequestDTO loginRequestDTO);
+    Optional<String> getAccessToken(String userAgent,LoginRequestDTO loginRequestDTO);
 
     UserInfoDTO getUserInfoFromGitHub(String accessToken);
 

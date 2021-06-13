@@ -3,10 +3,8 @@ package com.team11.issue.oauth;
 import com.team11.issue.dto.oauth.AccessTokenDTO;
 import com.team11.issue.dto.oauth.UserInfoDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
-import com.team11.issue.exception.OauthException;
 import com.team11.issue.oauth.errorHandler.RestTemplateResponseErrorHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -36,21 +34,24 @@ public class GitHubOauth implements Oauth {
     private final GitHubOauthUtil gitHubOauthUtil;
 
 
-    private GitHubOauthUtil getGitHubOauthConfig(LoginRequestDTO loginRequestDTO) {
-        String type = loginRequestDTO.getType();
+    private GitHubOauthUtil getGitHubOauthInfo(String userAgent) {
+        String type = null;
 
-        if (!(type.equals("fe") || type.equals("ios"))) {
-            throw new OauthException("적절한 type 값이 아닙니다.");
-        }
+        if (UserAgent.isIOS(userAgent))
+            type = "ios";
 
+        if (UserAgent.isFront(userAgent))
+            type = "fe";
+
+        System.out.println(type);
         gitHubOauthUtil.setGitHubOauthInfo(type);
         return gitHubOauthUtil;
     }
 
     @Override
-    public Optional<String> getAccessToken(LoginRequestDTO loginRequestDTO) {
+    public Optional<String> getAccessToken(String userAgent, LoginRequestDTO loginRequestDTO) {
 
-        getGitHubOauthConfig(loginRequestDTO);
+        getGitHubOauthInfo(userAgent);
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
         parameters.add(CLIENT_ID, gitHubOauthUtil.getClientId());

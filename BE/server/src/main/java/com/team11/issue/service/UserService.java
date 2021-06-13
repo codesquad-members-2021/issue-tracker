@@ -21,8 +21,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    private String getAccessToken(LoginRequestDTO loginRequestDTO) {
-        return gitHubOauth.getAccessToken(loginRequestDTO).orElseThrow(() -> new AccessTokenNotFoundException());
+    private String getAccessToken(String userAgent, LoginRequestDTO loginRequestDTO) {
+        return gitHubOauth.getAccessToken(userAgent,loginRequestDTO).orElseThrow(() -> new AccessTokenNotFoundException());
     }
 
     private UserInfoDTO getUserInfoFromGitHub(String accessToken) {
@@ -48,8 +48,8 @@ public class UserService {
         return userRepository.findByName(userName).isPresent();
     }
 
-    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
-        String accessToken = getAccessToken(loginRequestDTO);
+    public LoginResponseDTO login(String userAgent, LoginRequestDTO loginRequestDTO) {
+        String accessToken = getAccessToken(userAgent, loginRequestDTO);
         UserInfoDTO loginUserInfo = getUserInfoFromGitHub(accessToken);
 
         User user;
