@@ -5,7 +5,6 @@ import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueLabel;
 import team02.issue_tracker.domain.Label;
 import team02.issue_tracker.dto.issue.IssueLabelIdsRequest;
-import team02.issue_tracker.dto.issue.IssueRequest;
 import team02.issue_tracker.exception.LabelNotFoundException;
 import team02.issue_tracker.repository.IssueLabelRepository;
 import team02.issue_tracker.repository.LabelRepository;
