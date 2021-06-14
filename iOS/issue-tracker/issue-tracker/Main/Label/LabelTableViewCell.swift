@@ -9,22 +9,7 @@ import UIKit
 
 class LabelTableViewCell: UITableViewCell {
 
-    private lazy var labelTitleView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = labelHeight * 0.5
-        view.backgroundColor = Colors.mainGrape
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var labelTitle: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.white
-        label.textAlignment = .center
-        label.text = "레이블"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var labelView: LabelView = LabelView()
     
     private lazy var labelDescription: UILabel = {
         let label = UILabel()
@@ -37,10 +22,6 @@ class LabelTableViewCell: UITableViewCell {
     
     private lazy var spacing: CGFloat = {
         return frame.width * 0.05
-    }()
-    
-    private lazy var labelHeight: CGFloat = {
-        return spacing * 2
     }()
     
     static var reuseID: String {
@@ -64,23 +45,11 @@ class LabelTableViewCell: UITableViewCell {
     }
     
     private func addLabelTitle() {
-        configureLabelTitleView()
-        addSubview(labelTitleView)
+        addSubview(labelView)
         
         NSLayoutConstraint.activate([
-            labelTitleView.widthAnchor.constraint(equalTo: labelTitle.widthAnchor, constant: spacing * 1.8),
-            labelTitleView.heightAnchor.constraint(equalToConstant: labelHeight),
-            labelTitleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
-            labelTitleView.topAnchor.constraint(equalTo: topAnchor, constant: spacing * 1.5)
-        ])
-    }
-    
-    private func configureLabelTitleView() {
-        labelTitleView.addSubview(labelTitle)
-        
-        NSLayoutConstraint.activate([
-            labelTitle.centerXAnchor.constraint(equalTo: labelTitleView.centerXAnchor),
-            labelTitle.centerYAnchor.constraint(equalTo: labelTitleView.centerYAnchor)
+            labelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            labelView.topAnchor.constraint(equalTo: topAnchor, constant: spacing * 1.5)
         ])
     }
     
@@ -95,9 +64,10 @@ class LabelTableViewCell: UITableViewCell {
     }
     
     func configure(with colorCode: String,_ title: String,_ description: String?) {
-        self.labelTitleView.backgroundColor = hexCodeToColor(colorCode)
-        self.labelTitle.text = title
-        self.labelTitle.textColor = textColor(from: colorCode)
+        let backgroundColor = hexCodeToColor(colorCode)
+        let textColor = textColor(from: colorCode)
+        labelView.configure(with: backgroundColor, textColor, title)
+        
         self.labelDescription.text = description
     }
     
@@ -108,5 +78,4 @@ class LabelTableViewCell: UITableViewCell {
     private func textColor(from backgroundcolorCode: String) -> UIColor {
         return UIColor.white
     }
-    
 }
