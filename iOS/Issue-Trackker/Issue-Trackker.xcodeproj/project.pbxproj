@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				D49B789126771E9400CF3FE4 /* DTO */,
-				D49B789026771E8C00CF3FE4 /* Entity */,
+				D49B789026771E8C00CF3FE4 /* DataModel */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		D49B789026771E8C00CF3FE4 /* Entity */ = {
+		D49B789026771E8C00CF3FE4 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
 				D49B789626771EC100CF3FE4 /* Comment.swift */,
@@ -183,7 +183,7 @@
 				D49B7884267622CF00CF3FE4 /* Label.swift */,
 				D49B7886267622D800CF3FE4 /* Milestone.swift */,
 			);
-			path = Entity;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		D49B789126771E9400CF3FE4 /* DTO */ = {
