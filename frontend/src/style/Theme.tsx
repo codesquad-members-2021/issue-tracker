@@ -16,6 +16,10 @@ const Theme = {
   },
   size: {
     sm: 12,
+    lg: 32,
+  },
+  weight: {
+    bold: 700,
   },
   filterModalPosition: {
     assignee: 260.5,

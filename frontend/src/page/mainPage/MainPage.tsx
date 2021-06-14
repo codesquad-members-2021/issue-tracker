@@ -20,5 +20,5 @@ export default function MainPage({}: Props): ReactElement {
 }
 
 const MainPageBlock = styled.div`
-  padding: 80px;
+  padding: 50px 80px;
 `;
