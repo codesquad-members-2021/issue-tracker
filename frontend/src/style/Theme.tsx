@@ -16,6 +16,7 @@ const Theme = {
   },
   size: {
     sm: 12,
+    md: 16,
     lg: 32,
   },
   weight: {
