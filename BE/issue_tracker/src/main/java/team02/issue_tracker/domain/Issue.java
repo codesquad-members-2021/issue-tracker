@@ -79,4 +79,8 @@ public class Issue {
     public void replaceMilestone(Milestone milestone) {
         this.milestone = milestone;
     }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }
