@@ -28,6 +28,9 @@
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
+		B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C3267735CC000F02F4 /* IssueList.swift */; };
+		B3D7D0C726773828000F02F4 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C626773828000F02F4 /* IssueDetail.swift */; };
+		B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C826773AEA000F02F4 /* NewIssue.swift */; };
 		B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */; };
 		B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */; };
 		B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */; };
@@ -109,6 +112,9 @@
 		B3B559FE266E096000901C55 /* issue-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "issue-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3D7D0C3267735CC000F02F4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
+		B3D7D0C626773828000F02F4 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
+		B3D7D0C826773AEA000F02F4 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
 		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
 		B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionView.swift; sourceTree = "<group>"; };
 		B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -257,6 +263,16 @@
 			path = "issue-trackerUITests";
 			sourceTree = "<group>";
 		};
+		B3D7D0C5267735CF000F02F4 /* UserDTO */ = {
+			isa = PBXGroup;
+			children = (
+				B3D7D0C3267735CC000F02F4 /* IssueList.swift */,
+				B3D7D0C626773828000F02F4 /* IssueDetail.swift */,
+				B3D7D0C826773AEA000F02F4 /* NewIssue.swift */,
+			);
+			path = UserDTO;
+			sourceTree = "<group>";
+		};
 		B3F5274F26709614002B0812 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +310,7 @@
 				D0ADB693266F0A5000E0762C /* Endpoint.swift */,
 				D0ADB698266F0C1300E0762C /* NetworkManager.swift */,
 				D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */,
+				B3D7D0C5267735CF000F02F4 /* UserDTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +591,7 @@
 			files = (
 				B3F527512670968F002B0812 /* LabelViewController.swift in Sources */,
 				D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */,
+				B3D7D0C726773828000F02F4 /* IssueDetail.swift in Sources */,
 				B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */,
 				D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */,
 				B32FEACC26724CF400BF37A1 /* IssueTableFooterView.swift in Sources */,
@@ -598,10 +616,12 @@
 				B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */,
 				D0A88E0D26762D51005877F6 /* ModalViewController.swift in Sources */,
 				D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */,
+				B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D03AF8F42677253C001C2CBF /* IssueFilterViewController.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
+				B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
 				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
 				B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */,

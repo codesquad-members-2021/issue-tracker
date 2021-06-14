@@ -12,7 +12,7 @@ class IssueTableViewCell: UITableViewCell {
     
     static var identifier = "IssueTableViewCell"
     
-    var fakeData = [IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabel(title: "gdsfa", color: "#DFCD85"), IssueLabel(title: "gdsfa", color: "#DFCD85"), IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
+    var fakeData = [IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
     
     var largeTitle: UILabel = {
         var label = UILabel()
@@ -125,7 +125,7 @@ extension IssueTableViewCell: UICollectionViewDataSource {
     
 }
 
-struct IssueLabel {
+struct IssueLabels {
     var title: String
     var color: String
 }
