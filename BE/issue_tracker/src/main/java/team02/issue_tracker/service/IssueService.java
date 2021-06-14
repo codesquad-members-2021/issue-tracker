@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
+import team02.issue_tracker.exception.IllegalIssueStatusException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
+
+    private static final Long EMPTY = 0L;
 
     private final IssueRepository issueRepository;
     private final UserService userService;
@@ -28,8 +31,12 @@ public class IssueService {
         this.labelService = labelService;
     }
 
+    /**
+     * isDeleted = false 인 issue들만 반환
+     */
     public List<IssueResponse> getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
+                .filter(issue -> !issue.isDeleted())
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
@@ -43,24 +50,32 @@ public class IssueService {
 
     public void addIssue(IssueRequest issueRequest, Long userId) {
         User writer = userService.findOne(userId);
-        Milestone milestone = milestoneService.findOne(issueRequest.getMilestoneId());
 
-        Issue issue = makeIssue(issueRequest, writer, milestone);
+        Issue issue = makeIssue(issueRequest, writer);
         commentService.makeComment(issueRequest, writer, issue);
         labelService.makeIssueLabels(issue, issueRequest.getLabelIds());
         userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds());
     }
 
-    private Issue makeIssue(IssueRequest issueRequest, User writer, Milestone milestone) {
+    private Issue makeIssue(IssueRequest issueRequest, User writer) {
         Issue issue = issueRequest.toIssue(writer);
-        issue.addMilestone(milestone);
+
+        if (!isMilestoneEmpty(issueRequest.getMilestoneId())) {
+            Milestone milestone = milestoneService.findOne(issueRequest.getMilestoneId());
+            issue.addMilestone(milestone);
+        }
         return issueRepository.save(issue);
+    }
+
+    private boolean isMilestoneEmpty(Long milestoneId) {
+        return milestoneId == EMPTY;
     }
 
     public void closeIssues(IssueIdsRequest issueIdsRequest) {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
                     Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+                    validateDeleted(issue);
                     issue.close();
                     return issue;
                 }).collect(Collectors.toList());
@@ -68,10 +83,17 @@ public class IssueService {
         issueRepository.saveAll(issues);
     }
 
+    private void validateDeleted(Issue issue) {
+        if (issue.isDeleted()) {
+            throw new IllegalIssueStatusException("삭제된 이슈입니다.");
+        }
+    }
+
     public void openIssues(IssueIdsRequest issueIdsRequest) {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
                     Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+                    validateDeleted(issue);
                     issue.open();
                     return issue;
                 }).collect(Collectors.toList());
@@ -81,12 +103,14 @@ public class IssueService {
 
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        validateDeleted(issue);
         issue.replaceTitle(issueRequest.getTitle());
         issueRepository.save(issue);
     }
 
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        validateDeleted(issue);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
         issue.replaceIssueAssignees(issueAssignees);
         issueRepository.save(issue);
@@ -94,21 +118,30 @@ public class IssueService {
 
     public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        validateDeleted(issue);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
         issue.replaceIssueLabels(issueLabels);
         issueRepository.save(issue);
     }
 
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
-        // Todo: milestone 없애는걸로 변경하려면 0으로 request 받도록 해야하나..?
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        Milestone milestone = milestoneService.findOne(issueMilestoneRequest.getMilestoneId());
+        validateDeleted(issue);
+        Milestone milestone = getMilestone(issueMilestoneRequest.getMilestoneId());
         issue.replaceMilestone(milestone);
         issueRepository.save(issue);
     }
 
+    private Milestone getMilestone(Long milestoneId) {
+        if(isMilestoneEmpty(milestoneId)) {
+            return null;
+        }
+        return milestoneService.findOne(milestoneId);
+    }
+
     public void addComment(Long issueId, Long userId, CommentRequest commentRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        validateDeleted(issue);
         User writer = userService.findOne(userId);
 
         Comment comment = commentRequest.toComment(writer);
