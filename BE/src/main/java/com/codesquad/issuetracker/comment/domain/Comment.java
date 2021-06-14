@@ -28,12 +28,10 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    @Column(name = "COMMENT_AUTHOR", nullable = false)
     @NonNull
     private User author;
 
     @Column(name = "COMMENT_CREATED_AT", nullable = false)
-    @CreatedDate
     private LocalDateTime createdAt;
 
     @Lob
@@ -45,6 +43,7 @@ public class Comment {
         this.issueId = issueId;
         this.author = author;
         this.content = content;
+        this.createdAt = LocalDateTime.now();
     }
 
     public static Comment create(Long issueId, User author, String content) {
