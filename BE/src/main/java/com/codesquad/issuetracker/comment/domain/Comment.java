@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.comment.domain;
 
+import com.codesquad.issuetracker.comment.dto.CommentRequest;
 import com.codesquad.issuetracker.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -48,5 +49,9 @@ public class Comment {
 
     public static Comment create(Long issueId, User author, String content) {
         return new Comment(issueId, author, content);
+    }
+
+    public void updateContent(CommentRequest commentRequest) {
+        this.content = commentRequest.getContent();
     }
 }
