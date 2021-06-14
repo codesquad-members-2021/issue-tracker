@@ -25,7 +25,7 @@ public class IssueRequestDTO {
     public Issue toEntity(User author) {
         return Issue.builder()
                 .title(title)
-                .comments(new ArrayList<>(Collections.singletonList(new Comment(comment, LocalDateTime.now(), author))))
+                .comments(new ArrayList<>(Collections.singletonList(new Comment(comment, author))))
                 .build();
     }
 }

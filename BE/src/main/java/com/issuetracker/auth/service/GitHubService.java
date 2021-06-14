@@ -1,11 +1,11 @@
-package com.issuetracker.auth.util;
+package com.issuetracker.auth.service;
 
 import com.issuetracker.auth.exception.UnknownUserAgentException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GitHubUtil {
+public class GitHubService {
 
     @Value("${github.web.client.id}")
     private String frontClientId;
@@ -19,7 +19,7 @@ public class GitHubUtil {
     @Value("${github.ios.client.secret}")
     private String iOSClientSecret;
 
-    public String verifyClientId(String userAgent) {
+    public String getClientId(String userAgent) {
         if (UserAgent.isFront(userAgent)) {
             return frontClientId;
         }
@@ -29,7 +29,7 @@ public class GitHubUtil {
         throw new UnknownUserAgentException();
     }
 
-    public String verifyClientSecret(String userAgent) {
+    public String getClientSecret(String userAgent) {
         if (UserAgent.isFront(userAgent)) {
             return frontClientSecret;
         }

@@ -1,6 +1,6 @@
 package com.issuetracker.domain.comment;
 
-
+import com.issuetracker.domain.BaseTimeEntity;
 import com.issuetracker.domain.user.User;
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,6 @@ public class Comment {
     private String comment;
 
     @NonNull
-    private LocalDateTime createdDateTime;
-
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
@@ -34,7 +31,6 @@ public class Comment {
     public static Comment create(User user, String comment) {
         return Comment.builder()
                 .comment(comment)
-                .createdDateTime(LocalDateTime.now())
                 .author(user)
                 .build();
     }
@@ -48,10 +44,10 @@ public class Comment {
     }
 
     public boolean matchAuthor(User user) {
-        return author.matchUser(user);
+        return author.equals(user);
     }
 
-    public boolean matchComment(Long commentId) {
+    public boolean matchCommentId(Long commentId) {
         return id.equals(commentId);
     }
 }

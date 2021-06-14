@@ -3,6 +3,7 @@ package com.issuetracker.service;
 import com.issuetracker.auth.OAuth;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
 import com.issuetracker.auth.dto.GitHubUserResponseDTO;
+import com.issuetracker.auth.dto.UserAgent;
 import com.issuetracker.auth.util.JwtUtil;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
@@ -28,8 +29,8 @@ public class UserService {
         return userRepository.findAllById(assigneeIdList);
     }
 
-    public UserResponseDTO login(String code, String userAgent) {
-        AccessTokenResponseDTO token = oauth.getToken(code, userAgent);
+    public UserResponseDTO login(String code, UserAgent userAgent) {
+        AccessTokenResponseDTO token = oauth.getToken(code, userAgent.getUserAgent());
         GitHubUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
             User user = findByUserName(userInfo.getLogin());

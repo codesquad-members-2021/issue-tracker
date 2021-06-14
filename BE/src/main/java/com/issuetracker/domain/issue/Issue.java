@@ -1,5 +1,6 @@
 package com.issuetracker.domain.issue;
 
+import com.issuetracker.domain.BaseTimeEntity;
 import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.user.User;
@@ -17,7 +18,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Issue {
+public class Issue extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,15 +46,12 @@ public class Issue {
     @JoinColumn(name = "issue_id", nullable = false)
     private List<Comment> comments;
 
-    private LocalDateTime createdDateTime;
-
     public Issue create(User author, List<Label> labels, List<User> assignees, Milestone milestone) {
         this.author = author;
         this.labels = labels;
         this.assignees = assignees;
         this.milestone = milestone;
         this.isOpen = true;
-        this.createdDateTime = LocalDateTime.now();
         return this;
     }
 
@@ -99,14 +97,14 @@ public class Issue {
 
     public boolean checkAssignees(User user) {
         long count = assignees.stream()
-                .filter(assignee -> assignee.matchUser(user))
+                .filter(assignee -> assignee.equals(user))
                 .count();
         return count > 0;
     }
 
     public boolean checkLabels(Label targetLabel) {
         long count = labels.stream()
-                .filter(label -> label.matchLabel(targetLabel))
+                .filter(label -> label.equals(targetLabel))
                 .count();
         return count > 0;
     }

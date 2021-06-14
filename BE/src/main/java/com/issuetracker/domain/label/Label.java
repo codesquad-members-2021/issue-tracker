@@ -2,15 +2,13 @@ package com.issuetracker.domain.label;
 
 
 import com.issuetracker.web.dto.response.LabelDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
 @Entity
+@Getter
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -26,7 +24,7 @@ public class Label {
     private Color color;
 
     private String description;
-    
+
     public static Label create(LabelDTO labelDTO) {
         return Label.builder()
                 .name(labelDTO.getName())
@@ -40,9 +38,5 @@ public class Label {
         this.description = labelDTO.getDescription();
         this.color = labelDTO.getColor();
         return this;
-    }
-
-    public boolean matchLabel(Label targetLabel) {
-        return id.equals(targetLabel.id);
     }
 }

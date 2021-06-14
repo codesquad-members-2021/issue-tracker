@@ -1,5 +1,6 @@
 package com.issuetracker.domain.milestone;
 
+import com.issuetracker.domain.BaseTimeEntity;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.web.dto.response.MilestoneDTO;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Milestone {
+public class Milestone extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +25,6 @@ public class Milestone {
     private String title;
     private String description;
     private LocalDate dueDate;
-    private LocalDateTime createdDateTime;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues;
@@ -35,7 +35,6 @@ public class Milestone {
                 .title(milestoneDTO.getTitle())
                 .description(milestoneDTO.getDescription())
                 .dueDate(milestoneDTO.getDueDate())
-                .createdDateTime(LocalDateTime.now())
                 .build();
     }
 

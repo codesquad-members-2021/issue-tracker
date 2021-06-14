@@ -10,8 +10,6 @@ import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.ElementNotFoundException;
 import com.issuetracker.exception.InvalidSearchRequestException;
-import com.jane_eno.issue_tracker.web.dto.reqeust.*;
-import com.jane_eno.issue_tracker.web.dto.response.*;
 import com.issuetracker.web.dto.response.vo.Assignee;
 import com.issuetracker.web.dto.response.vo.Count;
 import lombok.RequiredArgsConstructor;
@@ -131,7 +129,7 @@ public class IssueService {
         User user = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchComment(commentDTO.getId()) && comment.matchAuthor(user))
+                .filter(comment -> comment.matchCommentId(commentDTO.getId()) && comment.matchAuthor(user))
                 .findFirst()
                 .orElseThrow(
                         () -> new ElementNotFoundException("Cannot find comment by given id.")
@@ -144,7 +142,7 @@ public class IssueService {
         User loginUser = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchComment(commentId) && comment.matchAuthor(loginUser))
+                .filter(comment -> comment.matchCommentId(commentId) && comment.matchAuthor(loginUser))
                 .findFirst()
                 .orElseThrow(
                         () -> new ElementNotFoundException("Cannot find comment by given id.")

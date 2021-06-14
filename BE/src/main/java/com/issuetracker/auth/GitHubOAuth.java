@@ -5,7 +5,7 @@ import com.issuetracker.auth.exception.GitHubUserNotFoundException;
 import com.issuetracker.auth.dto.AccessTokenRequestDTO;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
 import com.issuetracker.auth.dto.GitHubUserResponseDTO;
-import com.issuetracker.auth.util.GitHubUtil;
+import com.issuetracker.auth.service.GitHubService;
 import io.netty.resolver.DefaultAddressResolverGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,8 @@ import reactor.netty.http.client.HttpClient;
 public class GitHubOAuth implements OAuth {
 
     private static final String TOKEN = "token";
-    private final GitHubUtil gitHubUtil;
+    private final GitHubService gitHubService;
+    private final WebClient webClient;
 
     @Value("${github.access.token.uri}")
     private String accessTokenUri;
@@ -30,14 +31,11 @@ public class GitHubOAuth implements OAuth {
     @Value("${github.user.uri}")
     private String userUri;
 
-    private final HttpClient httpClient = HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);
-    private final WebClient webClient = WebClient.builder().clientConnector(new ReactorClientHttpConnector(httpClient)).build();
-
     @Override
     public AccessTokenResponseDTO getToken(String code, String userAgent) {
         AccessTokenRequestDTO accessTokenRequest = AccessTokenRequestDTO.builder()
-                .clientId(gitHubUtil.verifyClientId(userAgent))
-                .clientSecret(gitHubUtil.verifyClientSecret(userAgent))
+                .clientId(gitHubService.getClientId(userAgent))
+                .clientSecret(gitHubService.getClientSecret(userAgent))
                 .code(code)
                 .build();
 

@@ -2,7 +2,7 @@ package com.issuetracker.auth;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.issuetracker.auth.annotation.LoginRequired;
-import com.issuetracker.auth.exception.HttpProtocolViolationException;
+import com.issuetracker.auth.exception.HttpHeaderFormatException;
 import com.issuetracker.auth.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,8 @@ import static com.issuetracker.auth.util.JwtUtil.USER_ID;
 @RequiredArgsConstructor
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer";
     private final JwtUtil jwtUtil;
 
     @Override
@@ -34,19 +36,18 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     }
 
     private void verifyJwt(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader(AUTHORIZATION);
         verifyHeader(header);
 
-        String jwt = header.substring("Bearer".length()).trim();
+        String jwt = header.substring(BEARER.length()).trim();
         DecodedJWT decodedJWT = jwtUtil.verifyToken(jwt);
 
-        Long userId = decodedJWT.getClaim(USER_ID).asLong();
-        request.setAttribute("userId", userId);
+        request.setAttribute(USER_ID, jwtUtil.getUserId(decodedJWT));
     }
 
     private void verifyHeader(String header) {
-        if (header == null || !header.startsWith("Bearer")) {
-            throw new HttpProtocolViolationException();
+        if (header == null || !header.startsWith(BEARER)) {
+            throw new HttpHeaderFormatException();
         }
     }
 }
