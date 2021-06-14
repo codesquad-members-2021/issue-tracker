@@ -41,7 +41,11 @@ const IssueList = () => {
 				initCheck={initCheck}
 				setInitCheck={setInitCheck}
 			/>
-			{issueList}
+			{issueList.length ? (
+				issueList
+			) : (
+				<ErrorCard>검색과 일치하는 결과가 없습니다</ErrorCard>
+			)}
 		</StyledIssueList>
 	);
 };
@@ -52,4 +56,13 @@ const StyledIssueList = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+`;
+
+const ErrorCard = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: ${({ theme }) => theme.grayScale.off_white};
+	border: 1px solid ${({ theme }) => theme.grayScale.line};
+	height: 100px;
 `;
