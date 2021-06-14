@@ -1,11 +1,10 @@
-import { TabButton, AddButton } from "styles/StyledButtons";
-
+import ButtonGroup from "components/common/ButtonGroup";
+import AddButton from "components/common/AddButton";
 const MenuTab = () => {
 	return (
 		<div>
-			<TabButton>마일스톤</TabButton>
-			<TabButton>레이블</TabButton>
-			<AddButton>+ 이슈작성</AddButton>
+			<ButtonGroup milestoneCount={0} labelCount={0} />
+			<AddButton text={"이슈 작성"} />
 		</div>
 	);
 };
