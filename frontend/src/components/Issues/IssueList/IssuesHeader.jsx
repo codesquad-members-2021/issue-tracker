@@ -6,10 +6,14 @@ import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
 import { useEffect } from "react";
 
-const IssuesHeader = ({}) => {
+const IssuesHeader = ({
+	isAnyIssueSelected,
+	setIsAnyIssueSelected,
+	isAllIssueSelected,
+	setIsAllIssueSelected,
+}) => {
 	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
-	const [isIssueSelected, setIsIssueSelected] = useState(false); // 상태 위치 협의 후 수정
-	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
+
 	const checkAllIssue = () => {
 		setIsAllIssueSelected(!isAllIssueSelected);
 	};
@@ -32,7 +36,7 @@ const IssuesHeader = ({}) => {
 				</TextIconDivider>
 			</FilterOpenClose>
 			<FilterMain>
-				{isIssueSelected ? (
+				{isAnyIssueSelected ? (
 					<OpenCloseEdit>
 						<TextIconDivider>
 							상태 수정
