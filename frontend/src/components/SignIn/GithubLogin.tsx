@@ -3,30 +3,15 @@ import styled from 'styled-components';
 
 function GithubLogin() {
   const [info, setInfo] = useState<any>();
-  const [userInfo, setUserInfo] = useState<any>();
 
   useEffect(() => {
-    if (window.location.search.split("?code=")[1]) {
-      const fetchCode = async () => {
-        const result = await fetch('http://ec2-13-124-158-166.ap-northeast-2.compute.amazonaws.com/api/users/github/callback?code='+window.location.search.split("?code=")[1]);
-        
-        // userinfo는 테스트용입니다.
-        const checkedUserInfo = await result.json();
-        setUserInfo(checkedUserInfo);
-        console.log(checkedUserInfo)
-        alert(`안녕하세요 ${checkedUserInfo.name}`)
-      }
-      fetchCode();
-    } else {
-      const fetchResult = async () => {
-        const result = await fetch('http://ec2-13-124-158-166.ap-northeast-2.compute.amazonaws.com/api/users/github');
-        const resultResponse = await result.json();
-        console.log('resultResponse', resultResponse);
-        setInfo(resultResponse);
-        
-      }
-      fetchResult();
+    const fetchResult = async () => {
+      const result = await fetch('http://ec2-13-124-158-166.ap-northeast-2.compute.amazonaws.com/api/users/github');
+      const resultResponse = await result.json();
+      console.log('resultResponse', resultResponse);
+      setInfo(resultResponse);
     }
+    fetchResult();
   }, []);
   
   if (!info) return <></>;
