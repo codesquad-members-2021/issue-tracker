@@ -1,6 +1,5 @@
 package com.issuetracker.domain.label;
 
-
 import com.issuetracker.web.dto.response.LabelDTO;
 import lombok.*;
 

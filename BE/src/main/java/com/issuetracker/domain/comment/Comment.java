@@ -5,7 +5,8 @@ import com.issuetracker.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -24,7 +25,7 @@ public class Comment extends BaseTimeEntity {
     private String comment;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User author;
 

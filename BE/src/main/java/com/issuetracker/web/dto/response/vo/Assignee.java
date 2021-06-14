@@ -18,12 +18,12 @@ public class Assignee {
     private final String userName;
     private final boolean isAssigned;
 
-    public static Assignee of(User user, Issue issue) {
+    public static Assignee of(User user, Issue issue, boolean isAssigned) {
         return Assignee.builder()
                 .id(user.getId())
                 .image(user.getAvatarUrl())
                 .userName(user.getUserName())
-                .isAssigned(issue.checkAssignees(user))
+                .isAssigned(isAssigned)
                 .build();
     }
 

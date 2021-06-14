@@ -47,7 +47,9 @@ public class LabelService {
     }
 
     public List<LabelDTO> findAllLabelDTOs() {
-        return labelRepository.findAll().stream().map(LabelDTO::of).collect(Collectors.toList());
+        return labelRepository.findAll().stream()
+                .map(LabelDTO::of)
+                .collect(Collectors.toList());
     }
 
     private Label findLabelById(Long id) {
@@ -58,8 +60,15 @@ public class LabelService {
 
     public List<LabelDTO> labelsToLabelDTOs(Issue issue) {
         return labelRepository.findAll().stream()
-                .map(label -> LabelDTO.of(label, issue))
+                .map(label -> LabelDTO.of(label, checkLabels(label, issue)))
                 .collect(Collectors.toList());
+    }
+
+    private boolean checkLabels(Label targetLabel, Issue issue) {
+        long count = issue.getLabels().stream()
+                .filter(label -> label.equals(targetLabel))
+                .count();
+        return count > 0;
     }
 
     public long count() {

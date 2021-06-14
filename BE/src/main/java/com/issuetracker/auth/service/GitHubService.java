@@ -7,17 +7,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class GitHubService {
 
-    @Value("${github.web.client.id}")
-    private String frontClientId;
+    private final String frontClientId;
+    private final String frontClientSecret;
+    private final String iOSClientId;
+    private final String iOSClientSecret;
 
-    @Value("${github.web.client.secret}")
-    private String frontClientSecret;
-
-    @Value("${github.ios.client.id}")
-    private String iOSClientId;
-
-    @Value("${github.ios.client.secret}")
-    private String iOSClientSecret;
+    public GitHubService(@Value("${github.web.client.id}") String frontClientId,
+                         @Value("${github.web.client.secret}") String frontClientSecret,
+                         @Value("${github.ios.client.id}") String iOSClientId,
+                         @Value("${github.ios.client.secret}") String iOSClientSecret) {
+        this.frontClientId = frontClientId;
+        this.frontClientSecret = frontClientSecret;
+        this.iOSClientId = iOSClientId;
+        this.iOSClientSecret = iOSClientSecret;
+    }
 
     public String getClientId(String userAgent) {
         if (UserAgent.isFront(userAgent)) {

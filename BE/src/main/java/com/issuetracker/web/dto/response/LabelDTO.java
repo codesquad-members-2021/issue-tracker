@@ -1,6 +1,5 @@
 package com.issuetracker.web.dto.response;
 
-import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.label.Color;
 import com.issuetracker.domain.label.Label;
 import lombok.AllArgsConstructor;
@@ -20,13 +19,13 @@ public class LabelDTO {
     private final String description;
     private final boolean isChecked;
 
-    public static LabelDTO of(Label label, Issue issue) {
+    public static LabelDTO of(Label label, boolean isChecked) {
         return LabelDTO.builder()
                 .id(label.getId())
                 .name(label.getName())
                 .color(label.getColor())
                 .description(label.getDescription())
-                .isChecked(issue.checkLabels(label))
+                .isChecked(isChecked)
                 .build();
     }
 

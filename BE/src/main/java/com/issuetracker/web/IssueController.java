@@ -5,8 +5,6 @@ import com.issuetracker.service.IssueService;
 import com.issuetracker.web.dto.reqeust.*;
 import com.issuetracker.web.dto.response.*;
 import com.issuetracker.auth.annotation.UserId;
-import com.issuetracker.web.dto.reqeust.*;
-import com.issuetracker.web.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +68,7 @@ public class IssueController {
     @PatchMapping("/{issueId}/assignees")
     public void updateAssignees(@PathVariable Long issueId, @RequestBody AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
         logger.debug("이슈의 담당자 편집");
-        logger.debug("이슈의 단당자 편집 요청 확인: {}", updateAssigneesRequestDTO.toString());
+        logger.debug("이슈의 담당자 편집 요청 확인: {}", updateAssigneesRequestDTO.toString());
         issueService.updateAssignees(issueId, updateAssigneesRequestDTO);
     }
 

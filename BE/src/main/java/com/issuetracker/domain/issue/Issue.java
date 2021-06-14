@@ -5,11 +5,16 @@ import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.milestone.Milestone;
+import com.issuetracker.web.dto.reqeust.IssueTitleDTO;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -25,7 +30,7 @@ public class Issue extends BaseTimeEntity {
     private Long id;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private User author;
 
     @ManyToMany
@@ -35,28 +40,31 @@ public class Issue extends BaseTimeEntity {
     private List<Label> labels;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Milestone milestone;
 
     private boolean isOpen;
 
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = {PERSIST, MERGE}, orphanRemoval = true)
     @JoinColumn(name = "issue_id", nullable = false)
     private List<Comment> comments;
 
-    public Issue create(User author, List<Label> labels, List<User> assignees, Milestone milestone) {
-        this.author = author;
-        this.labels = labels;
-        this.assignees = assignees;
-        this.milestone = milestone;
-        this.isOpen = true;
-        return this;
+    public static Issue create(String title, String comment, User author, List<Label> labels, List<User> assignees, Milestone milestone) {
+        return Issue.builder()
+                .author(author)
+                .labels(labels)
+                .assignees(assignees)
+                .milestone(milestone)
+                .isOpen(true)
+                .title(title)
+                .comments(Collections.singletonList(new Comment(comment, author)))
+                .build();
     }
 
-    public Issue update(String title) {
-        this.title = title;
+    public Issue update(IssueTitleDTO issueTitleDTO) {
+        this.title = issueTitleDTO.getTitle();
         return this;
     }
 
@@ -95,17 +103,7 @@ public class Issue extends BaseTimeEntity {
         return comments.size();
     }
 
-    public boolean checkAssignees(User user) {
-        long count = assignees.stream()
-                .filter(assignee -> assignee.equals(user))
-                .count();
-        return count > 0;
-    }
-
-    public boolean checkLabels(Label targetLabel) {
-        long count = labels.stream()
-                .filter(label -> label.equals(targetLabel))
-                .count();
-        return count > 0;
+    public boolean isClosed() {
+        return !isOpen;
     }
 }

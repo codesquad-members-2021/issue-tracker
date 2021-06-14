@@ -4,12 +4,12 @@ import com.issuetracker.auth.OAuth;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
 import com.issuetracker.auth.dto.GitHubUserResponseDTO;
 import com.issuetracker.auth.dto.UserAgent;
-import com.issuetracker.auth.util.JwtUtil;
+import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
+import com.issuetracker.exception.UserNotFoundException;
 import com.issuetracker.web.dto.response.vo.Assignee;
 import com.issuetracker.domain.issue.Issue;
-import com.issuetracker.exception.ElementNotFoundException;
 import com.issuetracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class UserService {
 
     private final OAuth oauth;
     private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtUtil;
 
     public List<User> findAssignees(List<Long> assigneeIdList) {
         return userRepository.findAllById(assigneeIdList);
@@ -48,15 +48,20 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find user by given user id.")
-        );
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     public List<Assignee> usersToAssignees(Issue issue) {
         return userRepository.findAll().stream()
-                .map(user -> Assignee.of(user, issue))
+                .map(user -> Assignee.of(user, issue, checkAssignees(user, issue)))
                 .collect(Collectors.toList());
+    }
+
+    private boolean checkAssignees(User user, Issue issue) {
+        long count = issue.getAssignees().stream()
+                .filter(assignee -> assignee.equals(user))
+                .count();
+        return count > 0;
     }
 
     public List<Assignee> usersToAssignees() {
@@ -67,7 +72,7 @@ public class UserService {
 
     private User findByUserName(String userName) {
         return userRepository.findByUserName(userName).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find user by given user name.")
+                () -> new UserNotFoundException("Cannot find user by given username.")
         );
     }
 

@@ -5,7 +5,6 @@ import com.issuetracker.web.dto.response.*;
 import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.issue.IssueRepository;
-import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.ElementNotFoundException;
@@ -14,6 +13,7 @@ import com.issuetracker.web.dto.response.vo.Assignee;
 import com.issuetracker.web.dto.response.vo.Count;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,13 +28,11 @@ public class IssueService {
     private final UserService userService;
 
     public IssuesResponseDTO getIssues(String status) {
-        List<Issue> openedIssues = issueRepository.findAllByIsOpenTrue();
-        List<Issue> closedIssues = issueRepository.findAllByIsOpenFalse();
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.count())
-                .openedIssue(openedIssues.size())
-                .closedIssue(closedIssues.size())
+                .openedIssue((int) issueRepository.countAllByIsOpenTrue())
+                .closedIssue((int) issueRepository.countAllByIsOpenFalse())
                 .build();
         List<IssueResponseDTO> issues = filterByStatus(status).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
@@ -42,11 +40,15 @@ public class IssueService {
         return IssuesResponseDTO.of(count, issues);
     }
 
+    private List<Issue> filterByStatus(String status) {
+        boolean newStatus = statusToBoolean(status);
+        return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
+    }
+
+    @Transactional
     public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
         boolean newStatus = !statusToBoolean(status);
-        for (Long id : requestDTO.getIssueNumbers()) {
-            issueRepository.updateStatusBy(id, newStatus);
-        }
+        issueRepository.updateStatusBy(newStatus, requestDTO.getIssueNumbers());
     }
 
     public IssueFormResponseDTO getIssueForm() {
@@ -58,23 +60,31 @@ public class IssueService {
     }
 
     public void createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
-        User author = userService.findUserById(userId);
-        List<Label> labels = labelService.findLabels(issueRequestDTO.getLabels());
-        List<User> assignees = userService.findAssignees(issueRequestDTO.getAssignees());
-        Milestone milestone = milestoneService.findMilestoneById(issueRequestDTO.getMilestone());
-        Issue issue = issueRequestDTO.toEntity(author).create(author, labels, assignees, milestone);
-        System.out.println(issue.toString());
+        Issue issue = Issue.create(
+                issueRequestDTO.getTitle(),
+                issueRequestDTO.getComment(),
+                userService.findUserById(userId),
+                labelService.findLabels(issueRequestDTO.getLabels()),
+                userService.findAssignees(issueRequestDTO.getAssignees()),
+                milestoneService.findMilestoneById(issueRequestDTO.getMilestone())
+        );
         issueRepository.save(issue);
     }
 
     public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
         Issue issue = findIssueById(issueId);
         User loginUser = userService.findUserById(userId);
-        return IssueDetailPageResponseDTO.of(issue, commentsToCommentDTOs(loginUser, issue), userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue), milestoneService.findAllMilestoneDTOs());
+        return IssueDetailPageResponseDTO.of(
+                issue,
+                commentsToCommentDTOs(loginUser, issue),
+                userService.usersToAssignees(issue),
+                labelService.labelsToLabelDTOs(issue),
+                milestoneService.findAllMilestoneDTOs()
+        );
     }
 
     public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
-        Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO.getTitle());
+        Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO);
         issueRepository.save(updatedIssue);
     }
 
@@ -160,11 +170,6 @@ public class IssueService {
         return issue.getComments().stream()
                 .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
                 .collect(Collectors.toList());
-    }
-
-    private List<Issue> filterByStatus(String status) {
-        boolean newStatus = statusToBoolean(status);
-        return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
     }
 
     private boolean statusToBoolean(String status) {

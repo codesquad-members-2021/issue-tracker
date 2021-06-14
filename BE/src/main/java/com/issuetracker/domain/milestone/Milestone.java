@@ -7,7 +7,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -46,10 +45,14 @@ public class Milestone extends BaseTimeEntity {
     }
 
     public Long countOpenedIssues() {
-        return issues.stream().filter(Issue::isOpen).count();
+        return issues.stream()
+                .filter(Issue::isOpen)
+                .count();
     }
 
     public Long countClosedIssues() {
-        return issues.stream().filter(i -> !i.isOpen()).count();
+        return issues.stream()
+                .filter(Issue::isClosed)
+                .count();
     }
 }
