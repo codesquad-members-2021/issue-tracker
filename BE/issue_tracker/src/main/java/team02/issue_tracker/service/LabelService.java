@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueLabel;
 import team02.issue_tracker.domain.Label;
+import team02.issue_tracker.dto.IssueLabelResponse;
+import team02.issue_tracker.dto.LabelResponse;
 import team02.issue_tracker.dto.issue.IssueLabelIdsRequest;
 import team02.issue_tracker.exception.LabelNotFoundException;
 import team02.issue_tracker.repository.IssueLabelRepository;
@@ -11,6 +13,7 @@ import team02.issue_tracker.repository.LabelRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LabelService {
@@ -43,5 +46,11 @@ public class LabelService {
     public void deleteIssueLabels(Issue issue) {
         List<IssueLabel> issueLabels = issueLabelRepository.findByIssueId(issue.getId());
         issueLabelRepository.deleteAll(issueLabels);
+    }
+
+    public List<LabelResponse> getAllLabelResponses() {
+        return labelRepository.findAll().stream()
+                .map(LabelResponse::new)
+                .collect(Collectors.toList());
     }
 }
