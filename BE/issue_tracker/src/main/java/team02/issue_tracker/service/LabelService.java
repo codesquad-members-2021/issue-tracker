@@ -40,7 +40,7 @@ public class LabelService {
         return makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
     }
 
-    private void deleteIssueLabels(Issue issue) {
+    public void deleteIssueLabels(Issue issue) {
         List<IssueLabel> issueLabels = issueLabelRepository.findByIssueId(issue.getId());
         issueLabelRepository.deleteAll(issueLabels);
     }
