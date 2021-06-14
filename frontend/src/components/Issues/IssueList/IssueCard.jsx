@@ -58,19 +58,24 @@ const IssueCard = ({
 					<span>
 						<Alert /> <Link to={`/main/${id}`}>{title}</Link>
 					</span>
-
-					{/* labelId 로 라벨 정보 fetch 해와서 title, 박스 렌더링 */}
+					<Padder>
+						라벨 위치
+						{/* labelId 로 라벨 정보 fetch 해와서 title, 라벨 렌더링 */}
+					</Padder>
 				</TextTagDivider>
 				<TextTagDivider>
 					<span>#{id} </span>
-					<span>
+					<Padder>
 						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해
 						작성되었습니다
-					</span>
-					<span>
+					</Padder>
+					<Padder>
 						<Milestone fill={theme.grayScale.label} />
-					</span>
-					{/* milestoneId 로 마일스톤 정보 fetch 해와서 title만 뿌리기 */}
+					</Padder>
+					<Padder>
+						마일스톤 이름
+						{/* milestoneId 로 마일스톤 정보 fetch 해와서 title만 뿌리기 */}
+					</Padder>
 				</TextTagDivider>
 			</Contents>
 			<UserIcon>
@@ -84,7 +89,7 @@ export default IssueCard;
 
 const StyleCard = styled.div`
 	display: grid;
-	grid-template-columns: 0.5fr 9fr 1fr;
+	grid-template-columns: 0.5fr 9fr 0.6fr;
 	background-color: ${theme.grayScale.off_white};
 	border: 1px solid ${theme.grayScale.line};
 	height: 100px;
@@ -109,8 +114,8 @@ const Contents = styled.div`
 	flex-direction: column;
 `;
 
-const TextTagDivider = styled.div`
-	display: flex;
-	/* justify-content: space-between; */
-	/* width: 30%; */
+const TextTagDivider = styled.div``;
+
+const Padder = styled.span`
+	padding: 0 5px;
 `;
