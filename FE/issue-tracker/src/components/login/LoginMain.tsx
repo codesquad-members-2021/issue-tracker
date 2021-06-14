@@ -33,6 +33,7 @@ const MainWrap = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin-top: -64px;
 
   .logo {
     margin-bottom: 24px;
