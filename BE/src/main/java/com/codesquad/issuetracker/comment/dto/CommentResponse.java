@@ -12,15 +12,15 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CommentResponse {
 
-    private UUID id;
+    private final UUID id;
 
-    private Long issueId;
+    private final Long issueId;
 
-    private UserDto author;
+    private final UserDto author;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
-    private String content;
+    private final String content;
 
     public static CommentResponse fromEntity (Comment comment) {
         return new CommentResponse(comment.getId(),
