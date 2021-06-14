@@ -1,22 +1,28 @@
 package com.issuetracker.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issuetracker.domain.Issue;
-import com.issuetracker.domain.Label;
 import com.issuetracker.oauth.User;
+
+import java.time.LocalDateTime;
 
 public class IssueDto {
     private Long id;
     private String title;
     private String description;
-    private String authorAvatarUrl;
-//    private List<Label> labelList;
-    private Long issueNumber;
-    private LocalDateTime createdTime;
-//    private String milestoneTitle;
 
+    @JsonProperty("author_avatar_url")
+    private String authorAvatarUrl;
+    //    private List<Label> labelList;
+
+    @JsonProperty("issue_number")
+    private Long issueNumber;
+
+    @JsonProperty("created_time")
+    private LocalDateTime createdTime;
+
+    @JsonProperty("milestone_title")
+    private String milestoneTitle;
 
     public IssueDto(Long id, String title, String description, String authorAvatarUrl, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
