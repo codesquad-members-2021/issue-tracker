@@ -25,28 +25,15 @@ const NewIssue = {
   MyIcon: styled(Avatar)`
     margin-right: 16px;
   `,
+  BodyContentsWrapper: styled.div`
+    width: 100%;
+  `,
   TextAreaWrapper: styled(BOX.FLEX_COLUMN_BOX)`
     width: 100%;
-    margin-right: 32px;
+    margin-bottom: 24px;
   `,
-  TextArea: styled.textarea`
-    width: 100%;
-    font-size: ${theme.FONT_SIZE.TEXT_SMALL};
-    border-radius: 14px;
-    padding: 18px 24px;
-    background: ${theme.GRAY_SCALE.INPUT_BACKGROUND};
-    border: none;
-    outline: none;
-    margin-bottom: 16px;
-    resize: none;
-    :focus {
-      transition: all 0.3s;
-      border: 1px solid ${theme.GRAY_SCALE.LINE};
-      background: ${theme.COLOR.WHITE};
-    }
-  `,
-  FileAttachButton: styled(Button)`
-    width: 11.5%;
+  NavWrapper: styled.div`
+    width: 30%;
   `,
   ButtonsWrapper: styled(BOX.FLEX_ROW_BOX)`
     justify-content: flex-end;

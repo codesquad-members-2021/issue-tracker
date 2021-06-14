@@ -1,4 +1,3 @@
-import { StylesProvider } from "@material-ui/core";
 import { Login as S } from "@/Components/Login/LoginStyles";
 
 interface Props {
@@ -6,11 +5,7 @@ interface Props {
 }
 
 const Input = ({ label }: Props) => {
-  return (
-    <StylesProvider injectFirst>
-      <S.Input id="outlined-basic" label={label} variant="outlined" />
-    </StylesProvider>
-  );
+  return <S.Input id="outlined-basic" label={label} variant="outlined" />;
 };
 
 export default Input;
