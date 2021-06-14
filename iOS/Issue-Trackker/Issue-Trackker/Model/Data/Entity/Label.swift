@@ -11,5 +11,5 @@ struct Label: Decodable {
     var id: Int
     var name: String
     var hexCode: String
-    var detail: String
+    var detail: String?
 }
