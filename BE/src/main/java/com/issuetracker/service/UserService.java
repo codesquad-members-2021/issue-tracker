@@ -2,15 +2,14 @@ package com.issuetracker.service;
 
 import com.issuetracker.auth.OAuth;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
-import com.issuetracker.auth.dto.GitHubUserResponseDTO;
-import com.issuetracker.auth.dto.UserAgent;
+import com.issuetracker.auth.dto.UserResponseDTO;
+import com.issuetracker.auth.dto.UserAgentDTO;
 import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
 import com.issuetracker.exception.UserNotFoundException;
 import com.issuetracker.web.dto.response.vo.Assignee;
 import com.issuetracker.domain.issue.Issue;
-import com.issuetracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,16 +28,16 @@ public class UserService {
         return userRepository.findAllById(assigneeIdList);
     }
 
-    public UserResponseDTO login(String code, UserAgent userAgent) {
+    public com.issuetracker.web.dto.response.UserResponseDTO login(String code, UserAgentDTO userAgent) {
         AccessTokenResponseDTO token = oauth.getToken(code, userAgent.getUserAgent());
-        GitHubUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
+        UserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
             User user = findByUserName(userInfo.getLogin());
             user.update(userInfo, token.getAccessToken());
-            return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
+            return com.issuetracker.web.dto.response.UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
         }
         User user = User.createUser(userInfo, token);
-        return UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
+        return com.issuetracker.web.dto.response.UserResponseDTO.createUserResponseDTO(user, jwtUtil.createToken(userRepository.save(user)));
     }
 
     public void logout(Long userId) {

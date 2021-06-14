@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class GitHubUserResponseDTO {
+public class UserResponseDTO {
 
     private String name;
     private String email;
