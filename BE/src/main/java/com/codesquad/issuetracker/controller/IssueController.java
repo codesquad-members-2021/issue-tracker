@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.controller;
 
 import com.codesquad.issuetracker.response.*;
 import com.codesquad.issuetracker.request.IssueRequest;
+import com.codesquad.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -13,14 +14,20 @@ import java.util.Set;
 @RequestMapping("/issue")
 public class IssueController {
 
+    private final IssueService issueService;
+
+    public IssueController(IssueService issueService) {
+        this.issueService = issueService;
+    }
+
     @GetMapping("/open")
     public ApiResponse getOpenedIssues() {
-        return ApiResponse.ok("Get Issue List");
+        return ApiResponse.ok(issueService.getOpenedIssues());
     }
 
     @GetMapping("/close")
     public ApiResponse getClosedIssues() {
-        return ApiResponse.ok("Get Issue List");
+        return ApiResponse.ok(issueService.getClosedIssues());
     }
 
     @GetMapping("/{issueId}")
