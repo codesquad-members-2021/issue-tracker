@@ -9,6 +9,7 @@ interface IssueOpenIconProps {
 interface StyleProps {
   width: number;
   height: number;
+  fill?: string;
 }
 
 const IssueOpenIcon = ({ color, style }: IssueOpenIconProps): JSX.Element => (
@@ -48,11 +49,11 @@ export default IssueOpenIcon;
 const IssueOpenIconStyle = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 4px;
 
   svg {
     stroke: ${({ color }) => `${color}`};
     width: ${({ style }) => `${style?.width}px`};
     height: ${({ style }) => `${style?.height}px`};
+    fill: ${({ style }) => `${style?.fill}`};
   }
 `;

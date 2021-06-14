@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import ButtonList from '../../common/ButtonGroup';
-import InputGroup from '../../common/InputGroup';
+import ButtonList from '../../common/group/ButtonGroup';
+import InputGroup from '../../common/group/InputGroup';
 import RegisterButton from '../../common/RegisterButton';
 import Logo from '../../common/Logo';
 import {

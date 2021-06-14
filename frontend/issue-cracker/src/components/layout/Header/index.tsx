@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ProfileImg as S } from '../../styles/CommonStyles';
 import Logo from '../../common/Logo';
 import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
-import ProfileImg from '../../common/ProfileImg';
 const Header: FC = () => {
   const profileURL = localStorage.getItem('profileImageUrl');
   const profileName = localStorage.getItem('name');

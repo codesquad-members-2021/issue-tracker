@@ -9,6 +9,7 @@ interface IssueClosedIconProps {
 interface StyleProps {
   width: number;
   height: number;
+  fill?: string;
 }
 
 const IssueClosedIcon = ({
@@ -51,11 +52,11 @@ export default IssueClosedIcon;
 const IssueClosedIconStyle = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 8px;
 
   svg {
     stroke: ${({ color }) => `${color}`};
     width: ${({ style }) => `${style?.width}px`};
     height: ${({ style }) => `${style?.height}px`};
+    fill: ${({ style }) => `${style?.fill}`};
   }
 `;

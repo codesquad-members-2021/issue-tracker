@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { SMALL_FILL, WRITING_ISSUE } from '../../../utils/const';
-import ButtonGroup from '../../common/ButtonGroup';
-import FilterBar from '../../common/FilterBar';
-import TapGroup from '../../common/TabGroup';
+import { SMALL_FILL, WRITING_ISSUE } from '../../../../utils/const';
+import ButtonGroup from '../../../common/group/ButtonGroup';
+import IssueFilter from './IssueFilter';
+import TapGroup from '../../../common/group/TabGroup';
 
 const IssueNav: FC = () => {
   return (
     <IssueNavDiv>
       <IssueNavContainer>
         <SelectBox>
-          <FilterBar />
+          <IssueFilter />
         </SelectBox>
         <AnotherBox>
           <TabBox>
@@ -48,7 +48,7 @@ const AnotherBox = styled.div`
 
 const TabBox = styled.div`
   display: flex;
-  height: 50px;
+  align-items: baseline;
 `;
 
 const ButtonBox = styled.div`
