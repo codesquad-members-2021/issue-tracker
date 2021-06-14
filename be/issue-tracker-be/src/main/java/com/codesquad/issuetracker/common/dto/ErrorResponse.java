@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.common.exception;
+package com.codesquad.issuetracker.common.dto;
 
 import lombok.Builder;
 import lombok.Data;
