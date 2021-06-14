@@ -5,6 +5,7 @@ import MainPage from 'pages/MainPage';
 import SigninPage from 'pages/SigninPage';
 import OAuthCallbackPage from 'pages/OAuthCallbackPage';
 import IssueListPage from 'pages/IssueListPage';
+import AddIssuePage from 'pages/AddIssuePage';
 
 // import CountMyRecoil from './components/Count/CountMyRecoil';
 
@@ -18,11 +19,13 @@ function App() {
         </RecoilRoot>
       */}
       <BrowserRouter>
-        <Route exact path="/" component={MainPage} />
+        <Route exact path="/" component={AddIssuePage} />
+        <Route path="/main" component={MainPage} />
         <Route path="/signin" component={SigninPage} />
         <Route path="/auth/github/callback" component={OAuthCallbackPage} />
         <Route path="/issues" component={IssueListPage} />
       </BrowserRouter>
+      
     </>
   );
 }

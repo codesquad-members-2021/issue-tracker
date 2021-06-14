@@ -28,7 +28,7 @@ const SigninPage = () => {
 
 const SigninPageLayout = styled.div`
   background-color: #F7F7FC;
-  
+
   display: flex;
   justify-content: center;
 `
