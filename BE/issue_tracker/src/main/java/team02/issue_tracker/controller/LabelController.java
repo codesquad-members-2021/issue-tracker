@@ -40,4 +40,10 @@ public class LabelController {
         labelService.addLabel(labelRequest);
         return ApiResult.ok();
     }
+
+    @DeleteMapping("/{labelId}")
+    public ApiResult<String> deleteLabel(@PathVariable Long labelId) {
+        labelService.deleteLabel(labelId);
+        return ApiResult.ok();
+    }
 }

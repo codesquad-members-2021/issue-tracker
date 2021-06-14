@@ -11,4 +11,6 @@ import java.util.List;
 public interface IssueLabelRepository extends JpaRepository<IssueLabel, IssueLabelId> {
 
     List<IssueLabel> findByIssueId(Long id);
+
+    List<IssueLabel> findByLabelId(Long id);
 }

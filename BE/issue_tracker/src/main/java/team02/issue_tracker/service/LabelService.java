@@ -69,4 +69,16 @@ public class LabelService {
         Label label = labelRequest.toLabel();
         labelRepository.save(label);
     }
+
+    public void deleteLabel(Long labelId) {
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+        label.delete();
+        labelRepository.save(label);
+        deleteIssueLabels(labelId);
+    }
+
+    private void deleteIssueLabels(Long labelId) {
+        List<IssueLabel> issueLabels = issueLabelRepository.findByLabelId(labelId);
+        issueLabelRepository.deleteAll(issueLabels);
+    }
 }

@@ -42,4 +42,8 @@ public class Label {
         this.content = labelRequest.getContent();
         this.color = labelRequest.getColor();
     }
+
+    public void delete() {
+        isDeleted = true;
+    }
 }
