@@ -6,7 +6,7 @@ import lombok.Getter;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
 import team02.issue_tracker.domain.IssueLabel;
-import team02.issue_tracker.dto.LabelResponse;
+import team02.issue_tracker.dto.IssueLabelResponse;
 import team02.issue_tracker.dto.UserResponse;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public abstract class AbstractIssueResponse {
     private Boolean isOpen;
     private UserResponse writer;
     private List<UserResponse> assignees;
-    private List<LabelResponse> labels;
+    private List<IssueLabelResponse> labels;
 
     public AbstractIssueResponse(Issue issue) {
         this.id = issue.getId();
@@ -46,10 +46,10 @@ public abstract class AbstractIssueResponse {
                 .collect(Collectors.toList());
     }
 
-    private List<LabelResponse> toLabelResponses(List<IssueLabel> issueLabels) {
+    private List<IssueLabelResponse> toLabelResponses(List<IssueLabel> issueLabels) {
         return issueLabels.stream()
                 .map(IssueLabel::getLabel)
-                .map(LabelResponse::new)
+                .map(IssueLabelResponse::new)
                 .collect(Collectors.toList());
     }
 }
