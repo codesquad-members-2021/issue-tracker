@@ -1,6 +1,5 @@
 package com.issuetracker.service;
 
-import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
 import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
@@ -20,7 +19,7 @@ public class IssueService {
 
     public List<IssueDto> getAllIssues(User user) {
         return issueRepository.findAllIssues().stream()
-                .map(issue -> IssueDto.of(issue, user))
+                .map(issue -> IssueDto.of(issue, user, issueRepository.findMilestoneTitleByIssueId(issue.getId())))
                 .collect(Collectors.toList());
     }
 }

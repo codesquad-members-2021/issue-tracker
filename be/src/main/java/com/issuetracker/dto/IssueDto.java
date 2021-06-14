@@ -18,16 +18,17 @@ public class IssueDto {
 //    private String milestoneTitle;
 
 
-    public IssueDto(Long id, String title, String description, String authorAvatarUrl, Long issueNumber, LocalDateTime createdTime) {
+    public IssueDto(Long id, String title, String description, String authorAvatarUrl, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.authorAvatarUrl = authorAvatarUrl;
         this.issueNumber = issueNumber;
         this.createdTime = createdTime;
+        this.milestoneTitle = milestoneTitle;
     }
 
-    public static IssueDto of(Issue issue, User user) {
+    public static IssueDto of(Issue issue, User user, String milestoneTitle) {
         return new IssueDto(
                 issue.getId(),
                 issue.getTitle(),
@@ -35,8 +36,8 @@ public class IssueDto {
                 user.getAvatar_url(),
 //                getLabelListByIssueId(issue.getId()),
                 issue.getNumber(),
-                issue.getCreatedTime()
-//                getMilestoneTitleByMilestoneId(issue.getMilestoneId())
+                issue.getCreatedTime(),
+                milestoneTitle
         );
     }
 
@@ -62,6 +63,10 @@ public class IssueDto {
 
     public LocalDateTime getCreatedTime() {
         return createdTime;
+    }
+
+    public String getMilestoneTitle() {
+        return milestoneTitle;
     }
 
     @Override
