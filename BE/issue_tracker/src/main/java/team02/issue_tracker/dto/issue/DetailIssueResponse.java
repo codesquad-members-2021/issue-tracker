@@ -20,6 +20,7 @@ public class DetailIssueResponse extends AbstractIssueResponse {
         super(issue);
         this.milestone = toMilestoneDetailResponse(issue.getMilestone());
         this.comments = issue.getComments().stream()
+                .filter(comment -> !comment.isDeleted())
                 .map(CommentResponse::new)
                 .collect(Collectors.toList());
     }
