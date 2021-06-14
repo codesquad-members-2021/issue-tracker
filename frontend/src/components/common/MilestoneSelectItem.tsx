@@ -1,9 +1,19 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-interface Props {}
+import { hoverGrey } from 'style/Theme';
 
-export default function MilestoneSelectItem({}: Props): ReactElement {
-  return <MilestoneSelectItemBlock></MilestoneSelectItemBlock>;
+interface Props {
+  title: string;
 }
 
-const MilestoneSelectItemBlock = styled.div``;
+export default function MilestoneSelectItem({ title }: Props): ReactElement {
+  return <MilestoneSelectItemBlock>{title}</MilestoneSelectItemBlock>;
+}
+
+const MilestoneSelectItemBlock = styled(hoverGrey)`
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 12px 16px;
+  cursor: pointer;
+`;
