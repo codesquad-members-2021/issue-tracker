@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Archive } from '@assets/archive.svg';
+import { ReactComponent as ArchiveIcon } from '@assets/archive.svg';
 
 interface Props {
   children: string;
@@ -9,7 +9,7 @@ interface Props {
 function CloseMiniButton({ children, margin }: Props) {
   return (
     <CloseButton margin={margin}>
-      <Archive className="btn_close" />
+      <ArchiveIcon className="close_icon" />
       <span>{children}</span>
     </CloseButton>
   );
@@ -31,7 +31,7 @@ const CloseButton = styled.div<CloseButtonType>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.gr_label};
   cursor: pointer;
-  .btn_close path {
+  .close_icon path {
     stroke: ${({ theme }) => theme.colors.gr_label};
   }
 `;

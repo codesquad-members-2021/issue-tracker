@@ -21,7 +21,8 @@ const cellWrap = css`
   background-color: ${({ theme }) => theme.colors.gr_offWhite};
   border: 1px solid ${({ theme }) => theme.colors.gr_line};
   border-top: none;
-  border-radius: ${({ last }) => (last ? '0 0 16px 16px' : 'none')};
+  border-radius: ${({ isLastItemStyle }) =>
+    isLastItemStyle ? '0 0 16px 16px' : 'none'};
 
   display: flex;
   justify-content: space-between;
@@ -53,6 +54,30 @@ const newLabelMilestoneWrap = css`
   h2 {
     font-size: ${({ theme }) => theme.fontSizes['2xl']};
     margin-bottom: 16px;
+  }
+`;
+
+const editLabelMilestoneWrap = css`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.gr_line};
+  border-top: none;
+  padding: 32px;
+  background-color: ${({ theme }) => theme.colors.gr_offWhite};
+  h2 {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    margin-bottom: 16px;
+  }
+  .edit_icon {
+    margin-right: 5px;
+    path {
+      stroke: ${({ theme }) => theme.colors.gr_offWhite};
+    }
+  }
+  .cancel_icon {
+    margin-right: 5px;
+    path {
+      stroke: ${({ theme }) => theme.colors.bl_initial};
+    }
   }
 `;
 
@@ -101,6 +126,7 @@ const customTheme = {
   cellWrap,
   tableHeader,
   newLabelMilestoneWrap,
+  editLabelMilestoneWrap,
   issueTag,
 };
 

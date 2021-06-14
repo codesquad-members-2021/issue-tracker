@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as Delete } from '@assets/trash.svg';
+import { ReactComponent as DeleteIcon } from '@assets/trash.svg';
 
 interface Props {
   children: string;
@@ -9,7 +9,7 @@ interface Props {
 function DeleteMiniButton({ children, margin }: Props) {
   return (
     <DeleteButton margin={margin}>
-      <Delete className="btn_delete" />
+      <DeleteIcon className="delete_icon" />
       <span>{children}</span>
     </DeleteButton>
   );
@@ -22,7 +22,6 @@ interface DeleteButtonType {
 }
 
 const DeleteButton = styled.div<DeleteButtonType>`
-  width: 43px;
   margin: ${({ margin }) => margin || 0};
   display: flex;
   justify-content: space-between;
@@ -31,7 +30,10 @@ const DeleteButton = styled.div<DeleteButtonType>`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.error_primary};
   cursor: pointer;
-  .btn_delete > path {
-    stroke: ${({ theme }) => theme.colors.error_primary};
+  .delete_icon {
+    margin-right: 5px;
+    path {
+      stroke: ${({ theme }) => theme.colors.error_primary};
+    }
   }
 `;

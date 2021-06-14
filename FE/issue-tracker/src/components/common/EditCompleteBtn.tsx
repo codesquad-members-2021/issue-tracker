@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { Button } from '@chakra-ui/react';
-import { ReactComponent as Edit } from '@assets/edit.svg';
-import { ReactComponent as Cancel } from '@assets/cancel.svg';
+import { ReactComponent as EditIcon } from '@assets/edit.svg';
+import { ReactComponent as CancelIcon } from '@assets/cancel.svg';
 
 function CompleteBtn() {
   return (
     <ButtonBox>
       <Button {...completeButton}>
-        <Edit className="icon_edit" />
+        <EditIcon className="edit_icon" />
         완료
       </Button>
       <Button {...whiteButton} marginRight="8px">
-        <Cancel className="icon_cancel" />
+        <CancelIcon className="cancel_icon" />
         취소
       </Button>
     </ButtonBox>

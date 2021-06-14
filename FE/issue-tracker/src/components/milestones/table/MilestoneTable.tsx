@@ -7,9 +7,9 @@ function MilestoneTable() {
   return (
     <MilestoneTableWrap>
       <TableHeader />
-      <MilestoneCell last={false} />
+      <MilestoneCell isLastItemStyle={false} />
       <EditMilestone />
-      <MilestoneCell last={true} />
+      <MilestoneCell isLastItemStyle={true} />
     </MilestoneTableWrap>
   );
 }
