@@ -5,6 +5,7 @@ import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueLabel;
 import team02.issue_tracker.domain.Label;
 import team02.issue_tracker.dto.LabelCountResponse;
+import team02.issue_tracker.dto.LabelRequest;
 import team02.issue_tracker.dto.LabelResponse;
 import team02.issue_tracker.dto.issue.IssueLabelIdsRequest;
 import team02.issue_tracker.exception.LabelNotFoundException;
@@ -56,5 +57,11 @@ public class LabelService {
     public LabelCountResponse getLabelCount() {
         int labelCount = labelRepository.findAll().size();
         return new LabelCountResponse(labelCount);
+    }
+
+    public void modifyLabel(Long labelId, LabelRequest labelRequest) {
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+        label.modifyLabel(labelRequest);
+        labelRepository.save(label);
     }
 }
