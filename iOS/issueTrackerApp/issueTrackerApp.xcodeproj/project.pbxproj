@@ -23,6 +23,11 @@
 		883F51CC2672041A0055EC9E /* Milestones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51CB2672041A0055EC9E /* Milestones.swift */; };
 		883F51D4267204520055EC9E /* LabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51D3267204520055EC9E /* LabelModel.swift */; };
 		883F51DC267204DC0055EC9E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F51DB267204DC0055EC9E /* Comment.swift */; };
+		883F522A267312CE0055EC9E /* IssueEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5229267312CE0055EC9E /* IssueEndPoint.swift */; };
+		883F5234267318240055EC9E /* IssueRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5233267318240055EC9E /* IssueRequest.swift */; };
+		883F5239267654CB0055EC9E /* IssueNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5238267654CB0055EC9E /* IssueNetworkController.swift */; };
+		88C3A9F426773B660090FAD8 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9F326773B660090FAD8 /* IssueViewModel.swift */; };
+		88C3A9F9267742140090FAD8 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -77,6 +82,11 @@
 		883F51CB2672041A0055EC9E /* Milestones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Milestones.swift; path = issueTrackerApp/Domain/Entity/Milestones.swift; sourceTree = SOURCE_ROOT; };
 		883F51D3267204520055EC9E /* LabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabelModel.swift; path = issueTrackerApp/Domain/Entity/LabelModel.swift; sourceTree = SOURCE_ROOT; };
 		883F51DB267204DC0055EC9E /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = issueTrackerApp/Domain/Entity/Comment.swift; sourceTree = SOURCE_ROOT; };
+		883F5229267312CE0055EC9E /* IssueEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEndPoint.swift; sourceTree = "<group>"; };
+		883F5233267318240055EC9E /* IssueRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRequest.swift; sourceTree = "<group>"; };
+		883F5238267654CB0055EC9E /* IssueNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueNetworkController.swift; path = issueTrackerApp/Data/Network/Issue/Request/IssueNetworkController.swift; sourceTree = SOURCE_ROOT; };
+		88C3A9F326773B660090FAD8 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
+		88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +153,22 @@
 			path = Issue;
 			sourceTree = "<group>";
 		};
+		883F522E267312D60055EC9E /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				883F5229267312CE0055EC9E /* IssueEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		883F5232267317BB0055EC9E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				883F5233267318240055EC9E /* IssueRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		930FAE79266E112700422968 = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +206,7 @@
 				930FAE8E266E112900422968 /* Assets.xcassets */,
 				930FAE90266E112900422968 /* LaunchScreen.storyboard */,
 				930FAE93266E112900422968 /* Info.plist */,
+				88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */,
 				883F51AD2670B2F70055EC9E /* UIColorExtension.swift */,
 			);
 			path = issueTrackerApp;
@@ -315,6 +342,7 @@
 		930FAEC4266E12E900422968 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				88C3A9F326773B660090FAD8 /* IssueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -339,6 +367,8 @@
 		931BADFE26720B7D00CD9244 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				883F522E267312D60055EC9E /* EndPoint */,
+				883F5232267317BB0055EC9E /* Request */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -355,6 +385,7 @@
 		931BAE0326720C0900CD9244 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				883F5238267654CB0055EC9E /* IssueNetworkController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -538,10 +569,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C3A9F9267742140090FAD8 /* NotificationNameExtension.swift in Sources */,
+				883F5234267318240055EC9E /* IssueRequest.swift in Sources */,
 				883F5148266F3EAF0055EC9E /* LoginViewController.swift in Sources */,
 				9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */,
 				9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */,
+				88C3A9F426773B660090FAD8 /* IssueViewModel.swift in Sources */,
 				9343E30D266F90EF0086F977 /* LoginFlowCoordinator.swift in Sources */,
+				883F5239267654CB0055EC9E /* IssueNetworkController.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
 				931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */,
@@ -558,6 +593,7 @@
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
 				883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */,
+				883F522A267312CE0055EC9E /* IssueEndPoint.swift in Sources */,
 				883F51D4267204520055EC9E /* LabelModel.swift in Sources */,
 				883F51C7267200EA0055EC9E /* Issue.swift in Sources */,
 			);

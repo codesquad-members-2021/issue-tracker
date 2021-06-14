@@ -24,6 +24,10 @@ protocol Networked: class {
     var networkController: NetworkController? { get set }
 }
 
+protocol IssueNetworked: class {
+    var issueNetworkController: IssueNetworkController? { get set }
+}
+
 class MainFlowCoordinator: NSObject {
     let mainTabBarController: MainTabBarController
     let keyChainController = KeychainController()
@@ -46,6 +50,8 @@ extension MainFlowCoordinator: Coordinator {
         (viewController as? MainCoordinated)?.mainCoordinator = self
         (viewController as? Networked)?.networkController = NetworkController(keychainController: keyChainController)
         (viewController as? LoginCoordinated)?.loginCoordinator = loginFlowCoordinator
+        (viewController as? IssueNetworked)?.issueNetworkController = IssueNetworkController()
+        
         if let tabBarController = viewController as? UITabBarController {
             tabBarController.viewControllers?.forEach(configure(viewController:))
         }

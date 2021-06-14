@@ -30,35 +30,37 @@ class IssueCell: UITableViewCell {
     }
     
     // will fetch issue data type from server later on
-    public func configureAll(_ issue: String? = nil) {
+    public func configureAll(with issue: Issue) {
         self.configureTitleLabel(with: issue)
         self.configureDescriptionLabel(with: issue)
         self.configureMileStonesLabel(with: issue)
         self.configureTagLabelStack(with: issue)
     }
     
-    private func configureTitleLabel(with issue: String? = nil) {
-        self.titleLabel.text = "issue.title"
+    private func configureTitleLabel(with issue: Issue) {
+        self.titleLabel.text = issue.title
     }
     
-    private func configureDescriptionLabel(with issue: String? = nil) {
-        self.descriptionLabel.text = "issue.description"
+    private func configureDescriptionLabel(with issue: Issue) {
+        self.descriptionLabel.text = issue.description
     }
     
-    private func configureMileStonesLabel(with issue: String? = nil) {
+    private func configureMileStonesLabel(with issue: Issue) {
         let fullString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "exclamationmark.circle")
         let imageString = NSAttributedString(attachment: imageAttachment)
         fullString.append(imageString)
-        fullString.append(NSAttributedString(string: "issue.mileStoneName"))
+        fullString.append(NSAttributedString(string: issue.milestoneTitle))
         
         self.milestonesLabel.attributedText = fullString
     }
     
-    private func configureTagLabelStack(with issue: String? = nil) {
-        let tempTagLabel = TagLabel()
-            tempTagLabel.custom(title: "   issue.tagTitle   ", colorCode: "#f69e7b")
-        self.tagStackView.addTag(tagLabel: tempTagLabel)
+    private func configureTagLabelStack(with issue: Issue) {
+        issue.labelList.forEach { (label) in
+            let tempTagLabel = TagLabel()
+            tempTagLabel.custom(title: "   \(label.title)   ", colorCode: "\(label.colorCode)")
+            self.tagStackView.addTag(tagLabel: tempTagLabel)
+        }
     }
 }

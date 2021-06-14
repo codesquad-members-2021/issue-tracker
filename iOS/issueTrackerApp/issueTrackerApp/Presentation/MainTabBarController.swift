@@ -14,10 +14,10 @@ class MainTabBarController: UITabBarController, Networked, MainCoordinated, Logi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard (networkController?.isClientAuthenticated ?? true) else {
-            loginCoordinator?.mainViewControllerRequiresAuthentication(self, isAppLaunch: true)
-            return
-        }
+//        guard (networkController?.isClientAuthenticated ?? true) else {
+//            loginCoordinator?.mainViewControllerRequiresAuthentication(self, isAppLaunch: true)
+//            return
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
