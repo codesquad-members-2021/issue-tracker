@@ -36,10 +36,10 @@ public class IssueRepositoryTest {
     private CommentEmojiRepository commentEmojiRepository;
 
     @Test
-    @DisplayName("issueRepository에서 전체 issue가 잘 반환되는지 확인한다.")
+    @DisplayName("issueRepository에서 findAll메소드가 잘 동작하는지 확인한다.")
     void findAll() {
         List<Issue> issues = issueRepository.findAll();
-        Assertions.assertThat(issues.size()).isEqualTo(2);
+        Assertions.assertThat(issues.size()).isEqualTo(1);
     }
 
     @Test
