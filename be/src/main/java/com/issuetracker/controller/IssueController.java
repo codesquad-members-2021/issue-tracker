@@ -1,5 +1,6 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.dto.IssueDto;
 import com.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

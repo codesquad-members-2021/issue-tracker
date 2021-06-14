@@ -1,6 +1,5 @@
 package com.issuetracker.repository;
 
-import com.issuetracker.controller.IssueDto;
 import com.issuetracker.domain.Issue;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,12 +10,10 @@ import java.util.List;
 @Repository
 public class IssueRepository {
 
-    private final DataSource dataSource;
     private final JdbcTemplate jdbcTemplate;
 
-    public IssueRepository(DataSource dataSource, JdbcTemplate jdbcTemplate) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = jdbcTemplate;
+    public IssueRepository(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     public List<Issue> findAllIssues() {
