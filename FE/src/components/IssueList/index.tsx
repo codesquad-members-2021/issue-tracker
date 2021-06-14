@@ -1,13 +1,13 @@
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import IssueTable from './IssueTable';
+import ListTable from './ListTable';
 import NavFilter from './NavFilter';
 
 const IssueList = () => {
   return (
     <IssueListLayout>
       <NavFilter />
-      <IssueTable />
+      <ListTable />
     </IssueListLayout>
   );
 };
