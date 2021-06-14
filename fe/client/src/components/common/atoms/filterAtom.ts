@@ -39,4 +39,3 @@ export const filterDefaultCheckerAtom = atom<FilterStringType>({
   }
 })
 
-

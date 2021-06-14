@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react'
 import LabelMilestoneToggle from '@components/common/LabelMilestoneToggle';
 import styled from 'styled-components';
 import IconButton from '@components/common/IconButton';
 import { InputAdornment, InputBase } from '@material-ui/core';
 import SearchIcon from '@/Icons/Search.svg';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
-import FilterTab from '@/components/common/FilterTab';
+import FilterTab from '@components/common/FilterTab';
 
 const issueFilterList = [
   '열린 이슈',

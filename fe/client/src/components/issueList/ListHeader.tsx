@@ -20,7 +20,7 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
       : setCheckedIssueItems(new Set());
     setAllIssueChecked(!isAllIssueChecked);
   };
-
+  
   return (
     <ListHeaderWrapper>
       <div>
@@ -40,15 +40,17 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
       </div>
 
       <FilterListWrapper>
-        <FilterItem title='manager' {...{handleClickShowFilterModal}}/>
-        <FilterItem title='label' {...{handleClickShowFilterModal}}/>
-        <FilterItem title='milestone' {...{handleClickShowFilterModal}}/>
-        <FilterItem title='writer' {...{handleClickShowFilterModal}}/>
+        {filterItems.map(title => {
+          return <FilterItem key={title} {...{ title, handleClickShowFilterModal }} />
+        })}
+
       </FilterListWrapper>
 
     </ListHeaderWrapper>
   )
 }
+
+const filterItems = ['manager', 'label', 'milestone', 'writer'];
 
 const ListHeaderWrapper = styled.div`
   display: flex;
@@ -58,7 +60,7 @@ const ListHeaderWrapper = styled.div`
 `;
 
 const AllCheckerInput = styled.input`
-  margin-right: 33px;
+  margin-right: 17px;
 `;
 
 const RadioButton = styled.input`

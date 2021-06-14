@@ -6,6 +6,7 @@ type ListWrapperType = {
 
 export const ListWrapper = styled.div<ListWrapperType>`
   width:${({ wrapWidth }) => wrapWidth ? wrapWidth : ''};
+  min-width: 595px;
   border:1px solid #d9dbe9;
   border-radius: 11px;
   background: #FEFEFE;

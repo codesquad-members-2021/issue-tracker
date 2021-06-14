@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@components/common/FilterTab';
+import useAsync, { AsyncState } from '@/utils/hook/useAsync';
+import API from '@/utils/API';
 
-const filterNames: { [key: string]: { api: string; name: string } } = {
-  manager: { api: 'users', name: '담당자' },
-  label: { api: 'labels', name: '레이블' },
-  milestone: { api: 'milestones', name: '마일스톤' },
-  writer: { api: 'users', name: '작성자' }
+const filterNames: { [key: string]: { apiName: string; name: string } } = {
+  manager: { apiName: 'users', name: '담당자' },
+  label: { apiName: 'labels', name: '레이블' },
+  milestone: { apiName: 'milestones', name: '마일스톤' },
+  writer: { apiName: 'users', name: '작성자' }
 }
 
 type FilterItemType = {
@@ -15,24 +17,22 @@ type FilterItemType = {
   handleClickShowFilterModal: (title: string) => () => void;
 }
 
-const issueFilterList = [
-  '열린 이슈',
-  '내가 작성한 이슈',
-  '나에게 할당된 이슈',
-  '내가 댓글을 남긴 이슈',
-  '닫힌 이슈'
-];
 const FilterItem = ({ title, handleClickShowFilterModal }: FilterItemType) => {
-  console.log(123)
+  const { apiName } = filterNames[title];
+  const [users] = useAsync(API.get[apiName]);
+  const { data, loading, error }: AsyncState<any, any> = users;
+
   return (
     <FilterWrapper>
       <div onClick={handleClickShowFilterModal(title)}>
         <FilterTitleSpan>{filterNames[title].name}</FilterTitleSpan>
         <ArrowImageTag src={ArrowBottomIcon} alt="" />
       </div>
-      <FilterTab
-        header={title}
-        filterList={issueFilterList} />
+      {data &&
+        <FilterTab
+          header={title}
+          filterList={data[apiName].map(({ name }: { name: string }) => name)} />
+      }
     </FilterWrapper>
   )
 }
