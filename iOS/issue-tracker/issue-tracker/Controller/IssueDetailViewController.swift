@@ -53,6 +53,7 @@ class IssueDetailViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showIssueDetailInfo))
         navigationItem.title = "테스트 이슈 #2"
         
         tableView.dataSource = self
@@ -98,6 +99,14 @@ class IssueDetailViewController: UIViewController {
     private func postComment() {
         print(textField.text as Any)
         textField.text = ""
+    }
+    
+    @objc
+    private func showIssueDetailInfo() {
+        let storyboard = UIStoryboard(name: "Modal", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "Modal")
+        controller.modalPresentationStyle = .custom
+        present(controller, animated: true, completion: nil)
     }
 }
 
