@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface LabelRepository extends JpaRepository<Label, Long> {
 
+    @Query("select l from Label l where l.isDeleted = false and l.id = ?1")
     Optional<Label> findById(Long id);
 
     @Query("select l from Label l where l.isDeleted = false")
