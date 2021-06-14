@@ -13,4 +13,14 @@ struct Milestone: Codable {
     var deadLineDate: String
     var description: String
     var issueCount: IssueCount?
+    
+    static let empty = Self()
+    
+    init() {
+        self.milestoneId = 0
+        self.title = ""
+        self.deadLineDate = ""
+        self.description = ""
+        self.issueCount = IssueCount.empty
+    }
 }

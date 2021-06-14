@@ -19,4 +19,20 @@ struct IssueDTO: Codable {
     var issueCount: IssueCount
     var labels: [Label]
     var comments: [Comment]?
+    
+    static let empty = Self()
+    
+    init() {
+        self.issueId = 0
+        self.history = Histroy.empty
+        self.isOpen = false
+        self.title = ""
+        self.contents = ""
+        self.assignees = []
+        self.author = User.empty
+        self.milestone = Milestone.empty
+        self.issueCount = IssueCount.empty
+        self.labels = []
+        self.comments = []
+    }
 }
