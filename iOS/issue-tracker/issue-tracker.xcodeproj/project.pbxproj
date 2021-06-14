@@ -34,12 +34,13 @@
 		B3F527512670968F002B0812 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527502670968F002B0812 /* LabelViewController.swift */; };
 		B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */; };
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
+		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
+		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
+		D03AF8F226771FA3001C2CBF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03AF8F126771FA3001C2CBF /* Login.storyboard */; };
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
 		D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0A88E062674D9F0005877F6 /* MarkdownKit */; };
 		D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */; };
-		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
-		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
 		D0A88E0D26762D51005877F6 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0C26762D51005877F6 /* ModalViewController.swift */; };
 		D0A88E0F26765325005877F6 /* UIKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0E26765325005877F6 /* UIKit+Extension.swift */; };
 		D0A88E112676563E005877F6 /* Modal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A88E102676563E005877F6 /* Modal.storyboard */; };
@@ -116,6 +117,7 @@
 		B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueToolbar.swift; path = "issue-tracker/Controller/IssueToolbar.swift"; sourceTree = SOURCE_ROOT; };
 		B3FBA7B8267335C30006E5E6 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
+		D03AF8F126771FA3001C2CBF /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D0A88E0126732D21005877F6 /* NewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewController.swift; sourceTree = "<group>"; };
 		D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				D0ADB69D266F0E7900E0762C /* Model */,
 				D0A88E0C26762D51005877F6 /* ModalViewController.swift */,
 				D0A88E102676563E005877F6 /* Modal.storyboard */,
+				D03AF8F126771FA3001C2CBF /* Login.storyboard */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				D0A88E112676563E005877F6 /* Modal.storyboard in Resources */,
 				B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */,
 				B3B559EA266E096000901C55 /* Assets.xcassets in Resources */,
+				D03AF8F226771FA3001C2CBF /* Login.storyboard in Resources */,
 				B3B559E8266E095E00901C55 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,7 +577,6 @@
 				B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */,
 				B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */,
 				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
-				B3F5275A2670A4BD002B0812 /* AddButton.swift in Sources */,
 				D0A88E0F26765325005877F6 /* UIKit+Extension.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
 				D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */,

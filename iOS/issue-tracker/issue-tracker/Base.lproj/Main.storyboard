@@ -9,34 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSX-T9-Rsz" customClass="LoginView" customModule="issue_tracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="DSX-T9-Rsz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Lx1-jN-Lcy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DSX-T9-Rsz" secondAttribute="trailing" id="jNp-h8-2g4"/>
-                            <constraint firstAttribute="bottom" secondItem="DSX-T9-Rsz" secondAttribute="bottom" id="nUt-lE-TIZ"/>
-                            <constraint firstItem="DSX-T9-Rsz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ugO-N8-lfh"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="t4g-fW-miQ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-632" y="238"/>
-        </scene>
         <!--Issue List View Controller-->
         <scene sceneID="f3p-9R-hjs">
             <objects>

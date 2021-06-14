@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+@IBDesignable
 class LoginView: UIView {
     
     let titleLabel: UILabel = {

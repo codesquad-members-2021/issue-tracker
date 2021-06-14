@@ -23,7 +23,7 @@ class MilestoneViewController: UIViewController {
         view.addSubview(tableView)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Milestone"
+        navigationItem.title = "마일스톤"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMilestone))
     }
     
