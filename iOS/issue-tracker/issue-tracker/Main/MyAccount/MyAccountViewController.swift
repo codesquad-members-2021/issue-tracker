@@ -33,8 +33,6 @@ class MyAccountViewController: UIViewController {
     private let spacing: CGFloat = 16
     private var loginInfo: LoginInfo?
     
-
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -86,13 +84,8 @@ class MyAccountViewController: UIViewController {
             }
         }
         guard let loginManager = loginManager else { return }
-        
-        print("삭제 전 정보  = ", loginManager.read())
-        
         let _ = loginManager.delete()
-        
-        print("삭제 된거 맞나? = ", loginManager.read())
-        
+
         let loginViewController = LoginViewController()
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
