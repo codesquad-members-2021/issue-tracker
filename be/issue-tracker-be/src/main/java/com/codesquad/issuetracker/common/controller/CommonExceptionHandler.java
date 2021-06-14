@@ -13,12 +13,12 @@ import javax.validation.ConstraintViolationException;
 public class CommonExceptionHandler {
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse BindExceptionHandler(BindException bindException) {
+    public ErrorResponse bindExceptionHandler(BindException bindException) {
         return ErrorResponse.of(HttpStatus.BAD_REQUEST, bindException.getFieldErrors());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ErrorResponse handle(ConstraintViolationException constraintViolationException) {
+    public ErrorResponse constraintViolationExceptionHandler(ConstraintViolationException constraintViolationException) {
         return ErrorResponse.of(HttpStatus.BAD_REQUEST, constraintViolationException.getConstraintViolations());
     }
 }
