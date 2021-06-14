@@ -1,14 +1,12 @@
 package com.codesquad.issuetracker.controller;
 
+import com.codesquad.issuetracker.domain.Issue;
 import com.codesquad.issuetracker.response.*;
 import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/issue")
@@ -32,22 +30,13 @@ public class IssueController {
 
     @GetMapping("/{issueId}")
     public ApiResponse getIssue(@PathVariable Long issueId) {
-        LocalDateTime createdAt = LocalDateTime.now();
-        LabelResponse labelResponse1 = new LabelResponse("label title 1", "label content 1", "FFFFFF");
-        LabelResponse labelResponse2 = new LabelResponse("label title 2", "label content 2", "FFFFFF");
-        Set<LabelResponse> labelResponseSet = new LinkedHashSet<>();
-        labelResponseSet.add(labelResponse1);
-        labelResponseSet.add(labelResponse2);
-        UserResponse userResponse = new UserResponse("bibi", "bibi6666667");
-        MilestoneForIssueResponse milestoneForIssueResponse = new MilestoneForIssueResponse(1L, "milestone title 1");
-        IssueResponse issueResponse = new IssueResponse(1L, "issue title 1", "issue content 1", true,
-                createdAt, labelResponseSet, userResponse, milestoneForIssueResponse);
-        return ApiResponse.ok(issueResponse);
+        return ApiResponse.ok(issueService.getIssue(issueId));
     }
 
     @PostMapping
-    public ApiResponse createIssue(@RequestBody IssueRequest issuerequest) {
-        return ApiResponse.ok("Create Issue");
+    public ApiResponse createIssue(@RequestBody IssueRequest issueRequest) {
+        System.out.println(issueRequest.toString());
+        return ApiResponse.ok(issueService.addIssue(Issue.issueRequestToIssue(issueRequest)));
     }
 
     @PutMapping("/{issueId}/title")
@@ -83,7 +72,8 @@ public class IssueController {
 
     @DeleteMapping("/{issueId}")
     public ApiResponse deleteIssue(@PathVariable Long issueId) {
-        return ApiResponse.ok("Delete Issue Number " + issueId);
+        issueService.deleteIssue(issueId);
+        return ApiResponse.ok();
     }
 
 }
