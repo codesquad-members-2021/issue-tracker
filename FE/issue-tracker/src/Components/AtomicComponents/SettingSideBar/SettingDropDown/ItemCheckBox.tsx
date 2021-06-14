@@ -1,4 +1,4 @@
-import { SettingSideBar as S } from "@/Components/SettingSideBar/SettingSideBarStyles";
+import { SettingSideBar as S } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStyles";
 
 const ItemCheckBox = () => {
   return <S.ItemCheckBox color="primary" />;

@@ -1,6 +1,6 @@
 import PlusButton from "./PlusButton";
 import SettingDropDown from "./SettingDropDown/SettingDropDown";
-import { SettingSideBar as S } from "@/Components/SettingSideBar/SettingSideBarStyles";
+import { SettingSideBar as S } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStyles";
 
 interface Props {
   id: string;

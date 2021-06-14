@@ -1,8 +1,8 @@
 import { useRecoilValue } from "recoil";
-import { showDropDownState } from "@/Components/SettingSideBar/SettingSideBarStore";
+import { showDropDownState } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStore";
 import Title from "./Title";
 import Item from "./Item";
-import { SettingSideBar as S } from "@/Components/SettingSideBar/SettingSideBarStyles";
+import { SettingSideBar as S } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStyles";
 
 interface Props {
   id: string;

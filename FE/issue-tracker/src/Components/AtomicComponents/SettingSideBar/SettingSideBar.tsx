@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
-import { ItemsState } from "@/Components/SettingSideBar/SettingSideBarStore";
+import { ItemsState } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStore";
 import SettingSideBarItem from "./SettingSideBarItem";
-import { SettingSideBar as S } from "@/Components/SettingSideBar/SettingSideBarStyles";
+import { SettingSideBar as S } from "@/Components/AtomicComponents/SettingSideBar/SettingSideBarStyles";
 
 const SettingSideBar = () => {
   const items = useRecoilValue(ItemsState);

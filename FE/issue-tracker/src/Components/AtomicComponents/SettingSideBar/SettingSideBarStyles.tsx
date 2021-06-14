@@ -6,11 +6,12 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const SettingSideBar = {
   SettingSideBar: styled.div`
-    width: 30%;
+    width: 100%;
     height: 267px;
     background: ${theme.GRAY_SCALE.OFF_WHITE};
     border: 1px solid ${theme.GRAY_SCALE.LINE};
     border-radius: 16px;
+    margin: 0px 0px 20px 32px;
   `,
   SettingSideBarItem: styled(BOX.FLEX_ROW_CENTER_BOX)`
     position: relative;
