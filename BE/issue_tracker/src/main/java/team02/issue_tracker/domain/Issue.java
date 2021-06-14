@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -84,5 +85,11 @@ public class Issue {
 
     public void delete() {
         isDeleted = true;
+    }
+
+    public List<Comment> getComments() {
+        return comments.stream()
+                .filter(comment -> !comment.isDeleted())
+                .collect(Collectors.toList());
     }
 }
