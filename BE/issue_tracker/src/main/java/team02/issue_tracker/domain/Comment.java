@@ -43,4 +43,8 @@ public class Comment {
     public void addIssue(Issue issue) {
         this.issue = issue;
     }
+
+    public void delete() {
+        isDeleted = true;
+    }
 }

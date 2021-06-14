@@ -2,7 +2,7 @@ package team02.issue_tracker.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import team02.issue_tracker.exception.IllegalIssueStatusException;
+import team02.issue_tracker.exception.IllegalStatusException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -54,14 +54,14 @@ public class Issue {
 
     public void close() {
         if (!isOpen) {
-            throw new IllegalIssueStatusException("열린 이슈가 아닙니다.");
+            throw new IllegalStatusException("열린 이슈가 아닙니다.");
         }
         isOpen = false;
     }
 
     public void open() {
         if (isOpen) {
-            throw new IllegalIssueStatusException("닫힌 이슈가 아닙니다.");
+            throw new IllegalStatusException("닫힌 이슈가 아닙니다.");
         }
         isOpen = true;
     }
@@ -80,5 +80,9 @@ public class Issue {
 
     public void replaceMilestone(Milestone milestone) {
         this.milestone = milestone;
+    }
+
+    public void delete() {
+        isDeleted = true;
     }
 }
