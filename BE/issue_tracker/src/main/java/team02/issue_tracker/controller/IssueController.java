@@ -76,6 +76,12 @@ public class IssueController {
         return ApiResult.ok();
     }
 
+    @DeleteMapping("/{issueId}")
+    public ApiResult<String> deleteIssue(@PathVariable Long issueId) {
+        issueService.deleteIssue(issueId);
+        return ApiResult.ok();
+    }
+
     @LoginRequired
     @PostMapping("/{issueId}/comments")
     public ApiResult<String> createComment(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest, @UserId Long userId) {
@@ -83,5 +89,4 @@ public class IssueController {
         issueService.addComment(issueId, userId, commentRequest);
         return ApiResult.ok();
     }
-
 }
