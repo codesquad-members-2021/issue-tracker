@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 
 public class Issue {
     @Id
-    private final Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
     private String content;
     private boolean status;
