@@ -17,7 +17,7 @@ export default IssueList;
 // --- Styled Components ---
 const IssueListLayout = styled(Box)`
   display: flex;
-  row-gap: 12px;
+  row-gap: 1.2rem;
   align-items: center;
   flex-wrap: wrap;
 `;

@@ -8,8 +8,8 @@ const Tabs = () => {
 
   // render 관련
   const renderTabButtons = () =>
-    tabs.map(({ name, value }, i) => (
-      <TabButton name={name}>
+    tabs.map(({ name, value }, idx) => (
+      <TabButton name={name} key={idx}>
         <span>{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
         <span>{value}</span>
         <span>(3)</span>

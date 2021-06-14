@@ -19,8 +19,9 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
 
   const renderLeftTabItems = useCallback(
     () =>
-      left.map(({ name, value: label }) => (
+      left.map(({ name, value: label }, idx) => (
         <LeftTab
+          key={idx}
           label={
             <IconBlock>
               {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
@@ -35,8 +36,8 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
 
   const renderRightButtons = useCallback(
     () =>
-      right.map(({ name, value }) => (
-        <RightButton name={name}>
+      right.map(({ name, value }, idx) => (
+        <RightButton key={idx} name={name}>
           <span>{value}</span>
           <MdKeyboardArrowDown />
         </RightButton>
