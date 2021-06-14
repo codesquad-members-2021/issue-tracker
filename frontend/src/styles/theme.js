@@ -1,4 +1,11 @@
-const calcRem = size => `${size / 16}rem`;
+import { css } from "styled-components";
+
+const calcRem = (size) => `${size / 16}rem`;
+
+const StyledSpaceBetween = css`
+	display: flex;
+	justify-content: space-between;
+`;
 
 const fontSizes = {
 	xs: calcRem(13),
@@ -105,6 +112,7 @@ const theme = {
 	margins,
 	interval,
 	verticalInterval,
+	StyledSpaceBetween,
 };
 
 export default theme;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { StyledLoginButton } from "styles/StyledButtons";
 import API from "util/API";
 import { ReactComponent as Logo } from "images/LogotypeLarge.svg";
