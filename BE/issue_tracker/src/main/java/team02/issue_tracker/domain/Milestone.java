@@ -39,4 +39,11 @@ public class Milestone {
                 .filter(Issue::isOpen)
                 .count();
     }
+
+    public int getClosedIssueCount() {
+        return (int) issues.stream()
+                .filter(issue -> !issue.isDeleted())
+                .filter(issue -> !issue.isOpen())
+                .count();
+    }
 }
