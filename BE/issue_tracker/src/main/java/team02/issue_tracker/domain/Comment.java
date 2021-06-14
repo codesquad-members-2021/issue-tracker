@@ -19,6 +19,7 @@ public class Comment {
     private String content;
     private String file;
     private LocalDateTime createdTime;
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_comment_issue"))
@@ -36,6 +37,7 @@ public class Comment {
         this.file = file;
         this.writer = writer;
         this.createdTime = LocalDateTime.now();
+        this.isDeleted = false;
     }
 
     public void addIssue(Issue issue) {

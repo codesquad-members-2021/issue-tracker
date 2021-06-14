@@ -22,6 +22,7 @@ public class Milestone {
     private LocalDate createdDate;
     private LocalDate dueDate;
     private boolean isOpen;
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();

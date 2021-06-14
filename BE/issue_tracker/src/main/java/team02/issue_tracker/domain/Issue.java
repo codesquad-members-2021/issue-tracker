@@ -24,6 +24,7 @@ public class Issue {
 
     private LocalDateTime createdTime;
     private boolean isOpen;
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
@@ -43,7 +44,8 @@ public class Issue {
         this.title = title;
         this.writer = writer;
         this.isOpen = isOpen;
-        createdTime = LocalDateTime.now();
+        this.createdTime = LocalDateTime.now();
+        this.isDeleted = false;
     }
 
     public void addMilestone(Milestone milestone) {
@@ -51,14 +53,14 @@ public class Issue {
     }
 
     public void close() {
-        if (isOpen != true) {
+        if (!isOpen) {
             throw new IllegalIssueStatusException("열린 이슈가 아닙니다.");
         }
         isOpen = false;
     }
 
     public void open() {
-        if (isOpen != false) {
+        if (isOpen) {
             throw new IllegalIssueStatusException("닫힌 이슈가 아닙니다.");
         }
         isOpen = true;
@@ -78,9 +80,5 @@ public class Issue {
 
     public void replaceMilestone(Milestone milestone) {
         this.milestone = milestone;
-    }
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
     }
 }
