@@ -34,7 +34,6 @@ public class IssueService {
      */
     public List<IssueResponse> getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
-                .filter(issue -> !issue.isDeleted())
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
