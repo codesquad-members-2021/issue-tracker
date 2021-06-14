@@ -53,7 +53,7 @@ public class UserService {
         return makeIssueAssignees(issue, issueAssigneeIdsRequest.getAssigneeIds());
     }
 
-    private void deleteIssueAssignees(Issue issue) {
+    public void deleteIssueAssignees(Issue issue) {
         List<IssueAssignee> issueAssignees = issueAssigneeRepository.findByIssueId(issue.getId());
         issueAssigneeRepository.deleteAll(issueAssignees);
     }
