@@ -3,24 +3,21 @@ import { globalStateRoot } from "./RecoilRoot";
 
 type AtomType<T> = {
   key: string;
-  initialState: T;
+  default: T;
 }
 
-function useRecoilState<T>({ key, initialState }: AtomType<T>) {
+function useRecoilState<T>(atom: AtomType<T>) {
+  const { key } = atom;
   const store = useContext(globalStateRoot).current;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setState] = useState({});
-  store.addInitState({ key, initialState });
-
+  const [, setState] = useState({});
+  store.addInitState(atom);
   const forceUpdate = useCallback(() => {
     setState({});
   }, []);
 
   useEffect(() => {
     store.subscribe({ key, fn: forceUpdate });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return [store.getData(key), store.setData(key)];
 };
 

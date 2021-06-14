@@ -4,9 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 import { RecoilRoot } from '@/utils/myRecoil/RecoilRoot';
 import { createGlobalStyle } from 'styled-components';
 
-const IssueListLazy = React.lazy(() => import('@/Pages/IssueList'));
+const HeaderLazy = React.lazy(() => import('@components/common/Header'));
+const IssueListLazy = React.lazy(() => import('@/Pages/IssueListPage'));
 const LoginLazy = React.lazy(() => import('@/Pages/LoginPage'));
 const Page404Lazy = React.lazy(() => import('@/Pages/Page404'));
+const CreateIssueLazy = React.lazy(() => import('@/Pages/CreateIssuePage'));
 
 function App() {
   return (
@@ -14,9 +16,11 @@ function App() {
       <CssBaseline />
       <GlobalStyle />
       <Suspense fallback="loading...">
+        <HeaderLazy />
         <Switch>
-          <Route exact path="/issueList" component={IssueListLazy} />
           <Route exact path="/" component={LoginLazy} />
+          <Route exact path="/issueList" component={IssueListLazy} />
+          <Route exact path="/createIssue" component={CreateIssueLazy} />
           <Route component={Page404Lazy} />
         </Switch >
       </Suspense>
@@ -27,7 +31,8 @@ function App() {
 
 const GlobalStyle = createGlobalStyle`
   body{
-    background: #E5E5E5;
+    background: #F7F7FC;
+    padding: 27px 80px 0;
   }
 `
 
