@@ -8,7 +8,7 @@ const TextHeader: ITextHeader = {
 };
 
 // 2. IssueList
-type TNameValue = {
+export type TNameValue = {
   name: string;
   value: string;
 };

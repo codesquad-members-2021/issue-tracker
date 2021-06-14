@@ -11,12 +11,12 @@ const theme: DefaultTheme = {
     bold: '700',
   },
   fontSize: {
-    XS: "1.2rem",
-    S: "1.6rem",
-    M: "1.8rem",
-    L: "2.4rem",
-    XL: "3.2rem",
-    LOGO: "5.6rem",
+    XS: "12px",
+    S: "16px",
+    M: "18px",
+    L: "24px",
+    XL: "32px",
+    LOGO: "56px",
   },
   colors: {
     grayScale: {

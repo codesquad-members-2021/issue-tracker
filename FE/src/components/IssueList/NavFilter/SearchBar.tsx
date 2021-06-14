@@ -30,12 +30,12 @@ const SearchBarLayout = styled(Box)`
 `;
 
 const FilterButton = styled(Button)`
-  min-width: 25%;
+  min-width: 20%;
   height: 100%;
   padding: 0 4px;
 
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 
   cursor: pointer;
