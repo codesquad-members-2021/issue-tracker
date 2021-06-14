@@ -47,4 +47,12 @@ public class Comment {
     public void delete() {
         isDeleted = true;
     }
+
+    public void replaceContent(String content) {
+        this.content = content;
+    }
+
+    public void replaceFile(String file) {
+        this.file = file;
+    }
 }
