@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from 'page/loginPage/LoginPage';
 import Header from './components/header/Header';
-import MainPage from './page/mainPage/MainPage';
+// import LoginPage from 'page/loginPage/LoginPage';
+// import MainPage from './page/mainPage/MainPage';
+// import CreateIssuePage from 'page/createIssuePage/CreateIssuePage';
 
 function App() {
+  
+  const LoginPage = lazy(()=>import('./page/loginPage/LoginPage'))
+  const MainPage = lazy(()=>import('./page/mainPage/MainPage'))
+  const CreateIssuePage = lazy(()=>import('./page/createIssuePage/CreateIssuePage'))
   const isLogin = true;
   return (
     <div className='App'>
+
       <Router>
-        <Switch>{isLogin && <Header />}</Switch>
-        <Switch>
-          <Route path='/' component={LoginPage} exact />
-          //로그인이 되면, 되어있다면 화면 전환.
-          <Route path='/main' component={MainPage} />
-        </Switch>
+        <Suspense fallback={<h1>Loading...🎢</h1>}>
+          {isLogin && <Header />}
+          <Switch>
+            <Route path='/' component={LoginPage} exact />
+            <Route path='/main' component={MainPage} />
+            <Route path='/create' component={CreateIssuePage} />
+          </Switch>
+        </Suspense>
       </Router>
+
     </div>
   );
 }

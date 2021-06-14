@@ -12,6 +12,7 @@ function IssueListHeader() {
   );
 }
 const IssueListHeaderBlock = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 10px;

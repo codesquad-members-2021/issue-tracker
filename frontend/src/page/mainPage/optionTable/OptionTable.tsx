@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import LabelMilestoneTab from 'components/common/LabelMilestoneTab';
 import IssueFilter from './issueFilter/IssueFilter';
 import PrimaryButton from 'components/atom/PrimaryButton';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -12,7 +13,9 @@ export default function OptionTable({}: Props): ReactElement {
       <IssueFilter />
       <div className='options__tabs'>
         <LabelMilestoneTab />
-        <PrimaryButton value='이슈작성 📝' />
+        <Link to='/create'>
+          <PrimaryButton value='이슈작성 📝' />
+        </Link>
       </div>
     </OptionTableBlock>
   );

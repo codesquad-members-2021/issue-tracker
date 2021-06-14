@@ -47,7 +47,6 @@ export default function IssueListHeaderRight({}: Props): ReactElement {
 
 const IssueListHeaderRightBlock = styled.div`
   display: flex;
-  position: relative;
   div {
     display: flex;
     align-items: center;
