@@ -19,7 +19,7 @@ public class MilestoneController {
 
     @PostMapping("/milestones")
     public MilestoneResponseWrapper create(@RequestBody @Valid MilestoneRequest milestoneRequest) {
-        return MilestoneResponseWrapper.from(MilestoneDummyData.openMilestoneResponse());
+        return MilestoneResponseWrapper.from(MilestoneDummyData.openedMilestoneResponse());
     }
 
     @PutMapping("/milestones/{milestoneId}")

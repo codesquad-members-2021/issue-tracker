@@ -29,7 +29,7 @@ public class IssueDummyData {
                         .author(UserDummyData.userFreddie())
                         .assignees(UserDummyData.usersResponse())
                         .labels(LabelDummyData.labelResponses())
-                        .milestone(MilestoneDummyData.openMilestoneResponse())
+                        .milestone(MilestoneDummyData.openedMilestoneResponse())
                         .build()
         ));
     }
@@ -43,7 +43,7 @@ public class IssueDummyData {
                        .author(UserDummyData.userHiro())
                        .assignees(UserDummyData.usersResponse())
                        .labels(LabelDummyData.labelResponses())
-                       .milestone(MilestoneDummyData.openMilestoneResponse())
+                       .milestone(MilestoneDummyData.openedMilestoneResponse())
                        .mainComment(CommentResponse.builder()
                                             .id(1L)
                                             .author(UserDummyData.userFreddie())

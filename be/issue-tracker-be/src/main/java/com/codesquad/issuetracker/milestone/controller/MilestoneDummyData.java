@@ -13,12 +13,12 @@ public class MilestoneDummyData {
 
     public static MilestoneResponses milestonesResponse() {
         return MilestoneResponses.from(Arrays.asList(
-                openMilestoneResponse(),
-                closeMilestoneResponse()
+                openedMilestoneResponse(),
+                closedMilestoneResponse()
         ));
     }
 
-    public static MilestoneResponse closeMilestoneResponse() {
+    public static MilestoneResponse closedMilestoneResponse() {
         return  MilestoneResponse.builder()
                     .id(1L)
                     .name("[FE] 이슈리스트 페이지")
@@ -30,7 +30,7 @@ public class MilestoneDummyData {
                     .build();
     }
 
-    public static MilestoneResponse openMilestoneResponse() {
+    public static MilestoneResponse openedMilestoneResponse() {
         return  MilestoneResponse.builder()
                     .id(2L)
                     .name("[BE] 목업데이터 작성하기")
