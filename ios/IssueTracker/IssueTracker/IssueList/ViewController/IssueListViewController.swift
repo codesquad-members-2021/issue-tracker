@@ -9,16 +9,27 @@ import UIKit
 
 class IssueListViewController: UIViewController {
     
-    @IBOutlet private weak var issueLabel: UILabel!
-    @IBOutlet private weak var searchBar: UISearchBar!
+  
     @IBOutlet private weak var issueTableView: UITableView!
-    @IBOutlet private weak var filterButton: UIButton!
-    @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var plusButton: UIButton!
-    
     @IBOutlet private weak var editStateView: UIView!
     @IBOutlet private weak var issueNumLabel: UILabel!
     @IBOutlet private weak var checkAllButton: UIButton!
+    
+    private lazy var filterButton: UIBarButtonItem = {
+        let button = UIButton(type: .system)
+        button.setTitle("Filter", for: .normal)
+        button.setImage(UIImage(systemName: "line.horizontal.3.decrease"), for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTouched(_:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    private lazy var editButton: UIBarButtonItem = {
+        let button = UIButton(type: .system)
+        button.setTitle("Filter", for: .normal)
+        button.addTarget(self, action: #selector(editButtonTouched(_:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
     private var isCheckAll: Bool!
     
     private var viewModel: IssueViewModel!
@@ -28,6 +39,7 @@ class IssueListViewController: UIViewController {
         super.viewDidLoad()
         setViewModel(with: IssueListMock.data)
         setting()
+        setNavigation()
     }
     
 }
@@ -47,6 +59,24 @@ extension IssueListViewController {
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
         issueTableView.allowsMultipleSelectionDuringEditing = true
         editStateView.isHidden = true
+    }
+    
+    private func setNavigation() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.topItem?.title = "Issues"
+        
+        let searchController = UISearchController()
+        
+        searchController.searchBar.setImage(UIImage(systemName: "magnifyingglass"), for: .search, state: .normal)
+        searchController.searchBar.placeholder = "Search"
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        navigationItem.leftBarButtonItem = filterButton
+        navigationItem.rightBarButtonItem = editButton
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,14 +123,15 @@ extension IssueListViewController: UITableViewDelegate {
 
 extension IssueListViewController {
     
-    @IBAction private func editButtonTouched(_ sender: UIButton) {
+    @objc private func editButtonTouched(_ sender: UIButton) {
         fillCheckButton(issueTableView)
         changeIssueNumLabel(issueTableView)
-        
         issueTableView.isEditing = !issueTableView.isEditing
         issueTableView.setEditing(issueTableView.isEditing, animated: true)
         editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
-        issueLabel.textWithAnimation(text: issueTableView.isEditing ? "이슈 선택" : "이슈", 0.2)
+        UIView.animate(withDuration: 0.2) {
+            self.navigationController?.navigationBar.topItem?.title = self.issueTableView.isEditing ? "Select Issues" : "Issues"
+        }
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
         editStateView.setIsHidden(!issueTableView.isEditing, animated: true)
     }
@@ -153,6 +184,12 @@ extension IssueListViewController {
             issueNumLabel.textColor = .label
         }
     }
-    
 }
 
+//MARK: - Filtering Mode
+
+extension IssueListViewController {
+    @objc func filterButtonTouched(_ sender: UIBarButtonItem) {
+        
+    }
+}
