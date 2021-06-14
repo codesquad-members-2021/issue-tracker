@@ -11,4 +11,12 @@ struct Histroy: Codable {
     var userName: String
     var historyDatetime: String
     var flag: String
+    
+    static let empty = Self()
+    
+    init() {
+        self.userName = ""
+        self.historyDatetime = ""
+        self.flag = ""
+    }
 }

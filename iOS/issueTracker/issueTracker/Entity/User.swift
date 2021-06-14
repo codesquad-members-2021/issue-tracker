@@ -10,4 +10,11 @@ import Foundation
 struct User: Codable {
     var profileImage: String
     var userName: String
+    
+    static let empty = Self()
+    
+    init() {
+        self.profileImage = ""
+        self.userName = ""
+    }
 }
