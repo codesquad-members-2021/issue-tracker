@@ -2,6 +2,7 @@ package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
+import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
@@ -44,13 +45,13 @@ public class IssueService {
         User writer = userService.findOne(userId);
         Milestone milestone = milestoneService.findOne(issueRequest.getMilestoneId());
 
-        Issue issue = save(issueRequest, writer, milestone);
-        commentService.save(issueRequest, writer, issue);
+        Issue issue = makeIssue(issueRequest, writer, milestone);
+        commentService.makeComment(issueRequest, writer, issue);
         labelService.makeIssueLabels(issue, issueRequest.getLabelIds());
         userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds());
     }
 
-    private Issue save(IssueRequest issueRequest, User writer, Milestone milestone) {
+    private Issue makeIssue(IssueRequest issueRequest, User writer, Milestone milestone) {
         Issue issue = issueRequest.toIssue(writer);
         issue.addMilestone(milestone);
         return issueRepository.save(issue);
@@ -104,5 +105,14 @@ public class IssueService {
         Milestone milestone = milestoneService.findOne(issueMilestoneRequest.getMilestoneId());
         issue.replaceMilestone(milestone);
         issueRepository.save(issue);
+    }
+
+    public void addComment(Long issueId, Long userId, CommentRequest commentRequest) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        User writer = userService.findOne(userId);
+
+        Comment comment = commentRequest.toComment(writer);
+        comment.addIssue(issue);
+        commentService.save(comment);
     }
 }
