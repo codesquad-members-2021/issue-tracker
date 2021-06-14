@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 const Theme = {
   color: {
     white: '#ffffff',
@@ -15,5 +17,11 @@ const Theme = {
     sm: 12,
   },
 };
+
+export const hoverGrey = styled.div`
+  &:hover {
+    background-color: ${Theme.color.bgGrey};
+  }
+`;
 
 export default Theme;
