@@ -29,12 +29,6 @@ public class IssueRepositoryTest {
     @Autowired
     private IssueAssigneeRepository issueAssigneeRepository;
 
-    @Autowired
-    private CommentRepository commentRepository;
-
-    @Autowired
-    private CommentEmojiRepository commentEmojiRepository;
-
     @Test
     @DisplayName("issueRepository에서 전체 issue가 잘 반환되는지 확인한다.")
     void findAll() {
@@ -60,14 +54,5 @@ public class IssueRepositoryTest {
         List<IssueAssignee> issueAssignees = issueAssigneeRepository.findByIssueId(issue.getId());
 
         Assertions.assertThat(issueAssignees.size()).isEqualTo(2);
-    }
-
-    @Test
-    @DisplayName("코멘트의 id로 CommentEmoji 리스트를 잘 반환하는지 확인한다.")
-    void findCommentEmojiByCommentId() {
-        Comment comment = commentRepository.findById(1L).orElseThrow(CommentNotFoundException::new);
-        List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(comment.getId());
-
-        Assertions.assertThat(commentEmojis.size()).isEqualTo(2);
     }
 }
