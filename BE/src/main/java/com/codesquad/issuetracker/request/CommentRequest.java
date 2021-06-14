@@ -1,32 +1,34 @@
 package com.codesquad.issuetracker.request;
 
-import com.codesquad.issuetracker.domain.Comment;
-import com.codesquad.issuetracker.domain.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-
-@Getter
 public class CommentRequest {
 
-    @JsonProperty("issue_id")
+    private Long userId;
     private Long issueId;
-
     private String content;
+    private LocalDate createdAt;
 
-    @JsonProperty("created_at")
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss")
-    private LocalDateTime createdAt;
-
-    public CommentRequest(Long issueId, String content) {
+    public CommentRequest(Long userId, Long issueId, String content, LocalDate createdAt) {
+        this.userId = userId;
         this.issueId = issueId;
         this.content = content;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 
-    public Comment create(User user) {
-        return Comment.create(null, content, createdAt, issueId, user);
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 }

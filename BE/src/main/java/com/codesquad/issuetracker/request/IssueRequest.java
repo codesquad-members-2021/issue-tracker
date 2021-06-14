@@ -10,7 +10,9 @@ public class IssueRequest {
     private LocalDate createdAt;
     private ArrayList<String> label;
     private Long milestoneId;
-    private String userId;
+
+    @JsonProperty("user_id")
+    private Long userId;
 
     public IssueRequest(String title, String content, LocalDate createdAt, ArrayList<String> label, Long milestoneId, String userId) {
         this.title = title;
