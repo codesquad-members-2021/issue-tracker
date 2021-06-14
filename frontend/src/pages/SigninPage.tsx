@@ -36,6 +36,7 @@ const SigninPageLayout = styled.div`
 const SigninPageBlock = styled(ResponsiveLayout)`
   width: 340px;
   height: calc(100vh - 16px);
+  padding: 0;
 
   display: flex;
   flex-direction: column;
