@@ -67,6 +67,7 @@ const theme: DefaultTheme = {
       offWhite: '#FEFEFE',
     },
     blue: '#007AFF',
+    darkBlue: '#004DE3',
     lightBlue: '#C7EBFF',
     red: '#FF3B30',
     purple: '#0025E7',
