@@ -1,6 +1,8 @@
 package team02.issue_tracker.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.composite_key.CommentEmojiId;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @IdClass(CommentEmojiId.class)
 @Entity
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommentEmoji {
     @Id
     @ManyToOne
