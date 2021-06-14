@@ -1,25 +1,33 @@
-import React from "react";
+import { useRecoilState } from "recoil";
 import { IssueTable as S, HomeAssets as Icon } from "../../../HomeStyles";
+import DropDown from "./DropDown/DropDown";
+import { categoryModalOpenState } from "../../../HomeStore";
 
 const IssueDropDownCategory = () => {
+  const modalTitleMock: string[] = ["담당자", "레이블", "마일스톤", "작성자"];
+  const [categModalOpenState, setCategModalOpenState] = useRecoilState(
+    categoryModalOpenState
+  );
+
+  const handleCategClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    setCategModalOpenState({
+      openedModalTitle: (e.target as HTMLElement).dataset.title,
+      isOpen: !categModalOpenState.isOpen,
+    });
+  };
+
   return (
     <S.TableHeaderRight>
-      <S.TableTh>
-        담당자
-        <Icon.Down />
-      </S.TableTh>
-      <S.TableTh>
-        레이블
-        <Icon.Down />
-      </S.TableTh>
-      <S.TableTh>
-        마일스톤
-        <Icon.Down />
-      </S.TableTh>
-      <S.TableTh>
-        작성자
-        <Icon.Down />
-      </S.TableTh>
+      {modalTitleMock.map((modalTitle) => (
+        <S.TableTh data-title={modalTitle} onClick={handleCategClick}>
+          {modalTitle}
+          <Icon.Down />
+          {categModalOpenState.isOpen &&
+            modalTitle === categModalOpenState.openedModalTitle && (
+              <DropDown modalTitle={modalTitle} />
+            )}
+        </S.TableTh>
+      ))}
     </S.TableHeaderRight>
   );
 };

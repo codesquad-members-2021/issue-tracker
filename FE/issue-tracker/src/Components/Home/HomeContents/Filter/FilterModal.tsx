@@ -1,4 +1,5 @@
 import Modal from "@/Components/AtomicComponents/Modal/Modal";
+import { FilterSearchBar as S } from "../../HomeStyles";
 
 const FilterModal = () => {
   const mock = [
@@ -9,7 +10,11 @@ const FilterModal = () => {
     "닫힌 이슈",
   ];
 
-  return <Modal modalTitle="이슈" modalDataArray={mock} />;
+  return (
+    <S.FilterModalDiv>
+      <Modal modalTitle="이슈" modalDataArray={mock} />
+    </S.FilterModalDiv>
+  );
 };
 
 export default FilterModal;

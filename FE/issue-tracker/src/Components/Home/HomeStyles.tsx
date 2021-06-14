@@ -22,6 +22,7 @@ const Home = {
   `,
 
   ContentNavLeft: styled(BOX.FLEX_ROW_BOX)`
+    position: relative;
     align-items: center;
     background: none;
     height: 40px;
@@ -67,6 +68,7 @@ const FilterSearchBar = {
     color: ${theme.GRAY_SCALE.LABEL};
     font-size: ${theme.FONT_SIZE.LINK_SMALL};
     font-weight: bold;
+    cursor: pointer;
   `,
   SearchDiv: styled(BOX.FLEX_CENTER_BOX)`
     width: 472px;
@@ -82,6 +84,11 @@ const FilterSearchBar = {
       color: ${theme.GRAY_SCALE.PLACEHOLDER};
       font-size: ${theme.FONT_SIZE.TEXT_SMALL};
     }
+  `,
+
+  FilterModalDiv: styled.div`
+    position: absolute;
+    top: 48px;
   `,
 };
 
@@ -118,9 +125,17 @@ const IssueTable = {
   `,
 
   TableTh: styled(BOX.FLEX_CENTER_BOX)`
+    position: relative;
     cursor: pointer;
     font-size: ${theme.FONT_SIZE.LINK_SMALL};
     font-weight: bold;
+  `,
+
+  TableCategoryModal: styled.div`
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 3;
   `,
 
   TableBody: styled.div`
