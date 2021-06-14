@@ -64,4 +64,9 @@ public class LabelService {
         label.modifyLabel(labelRequest);
         labelRepository.save(label);
     }
+
+    public void addLabel(LabelRequest labelRequest) {
+        Label label = labelRequest.toLabel();
+        labelRepository.save(label);
+    }
 }

@@ -34,4 +34,10 @@ public class LabelController {
         labelService.modifyLabel(labelId, labelRequest);
         return ApiResult.ok();
     }
+
+    @PostMapping
+    public ApiResult<String> createLabel(@RequestBody LabelRequest labelRequest) {
+        labelService.addLabel(labelRequest);
+        return ApiResult.ok();
+    }
 }

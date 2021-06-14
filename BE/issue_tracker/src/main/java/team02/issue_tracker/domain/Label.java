@@ -30,6 +30,13 @@ public class Label {
     @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
+    public Label(String title, String content, String color) {
+        this.title = title;
+        this.content = content;
+        this.color = color;
+        this.isDeleted = false;
+    }
+
     public void modifyLabel(LabelRequest labelRequest) {
         this.title = labelRequest.getTitle();
         this.content = labelRequest.getContent();
