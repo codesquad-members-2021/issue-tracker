@@ -4,17 +4,18 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from 'page/loginPage/LoginPage';
 import Header from './components/header/Header';
 import MainPage from './page/mainPage/MainPage';
+import CreateIssuePage from 'page/createIssuePage/CreateIssuePage';
 
 function App() {
   const isLogin = true;
   return (
     <div className='App'>
       <Router>
-        <Switch>{isLogin && <Header />}</Switch>
+        {isLogin && <Header />}
         <Switch>
           <Route path='/' component={LoginPage} exact />
-          //로그인이 되면, 되어있다면 화면 전환.
           <Route path='/main' component={MainPage} />
+          <Route path='/create' component={CreateIssuePage} />
         </Switch>
       </Router>
     </div>
