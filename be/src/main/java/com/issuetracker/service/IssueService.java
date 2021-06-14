@@ -1,6 +1,8 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
+import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,9 @@ public class IssueService {
         this.issueRepository = issueRepository;
     }
 
-    public List<IssueDto> getAllIssues() {
+    public List<IssueDto> getAllIssues(User user) {
         return issueRepository.findAllIssues().stream()
-                .map(issue -> IssueDto.of(issue))
+                .map(issue -> IssueDto.of(issue, user))
                 .collect(Collectors.toList());
     }
 }
