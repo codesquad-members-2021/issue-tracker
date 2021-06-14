@@ -74,7 +74,7 @@ const InputLabel = styled.label`
   color: grey;
   font-size: 1.2rem;
   display: none;
-  position: absolute;
+  position: absolute; 
   padding: 6px 24px;
 `;
 
