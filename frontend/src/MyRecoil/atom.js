@@ -26,3 +26,8 @@ export const authorAtomState = atom({
 	key: "authorAtomState",
 	initialState: [],
 });
+
+export const selectedIssueCntAtomState = atom({
+	key: "selectedIssueCntAtomState",
+	initialState: 0,
+});

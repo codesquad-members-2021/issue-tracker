@@ -1,40 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
-import { useEffect } from "react";
+import { selectedIssueCntAtomState } from "MyRecoil/atom";
+import { useRecoilState } from "MyRecoil/useRecoilState";
 
 const IssuesHeader = ({
 	isAnyIssueSelected,
 	setIsAnyIssueSelected,
 	isAllIssueSelected,
 	setIsAllIssueSelected,
+	issuesCnt,
+	initCheck,
+	setInitCheck,
 }) => {
-	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
+	const [selectedIssues, setSelectedIssues] = useRecoilState(
+		selectedIssueCntAtomState
+	);
 
 	const checkAllIssue = () => {
 		setIsAllIssueSelected(!isAllIssueSelected);
 	};
 
 	useEffect(() => {
-		isAllIssueSelected && console.log("issue checkbox all selected");
+		if (isAllIssueSelected) {
+			setIsAnyIssueSelected(true);
+			setInitCheck(false);
+			setSelectedIssues(() => issuesCnt);
+		}
+		if (!initCheck && !isAllIssueSelected) {
+			setIsAnyIssueSelected(false);
+			setSelectedIssues(() => 0);
+		}
 	}, [isAllIssueSelected]);
+
+	useEffect(() => {
+		if (selectedIssues === 0) setIsAnyIssueSelected(false);
+		if (isAllIssueSelected && selectedIssues === 1)
+			setIsAnyIssueSelected(false);
+	}, [selectedIssues]);
 
 	return (
 		<StyledIssuesHeader>
 			<CheckBox>
 				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
-			<FilterOpenClose>
-				<TextIconDivider>
-					<Alert /> 열린 이슈(n)
-				</TextIconDivider>
-				<TextIconDivider>
-					<Archive /> 닫힌 이슈(n)
-				</TextIconDivider>
-			</FilterOpenClose>
+			{isAnyIssueSelected ? (
+				isAllIssueSelected ? (
+					<div>{selectedIssues - 1}개 이슈 선택</div>
+				) : (
+					<div>{selectedIssues}개 이슈 선택</div>
+				)
+			) : (
+				<FilterOpenClose>
+					<TextIconDivider>
+						<Alert /> 열린 이슈(n)
+					</TextIconDivider>
+					<TextIconDivider>
+						<Archive /> 닫힌 이슈(n)
+					</TextIconDivider>
+				</FilterOpenClose>
+			)}
 			<FilterMain>
 				{isAnyIssueSelected ? (
 					<OpenCloseEdit>

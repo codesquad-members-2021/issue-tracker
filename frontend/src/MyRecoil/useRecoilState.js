@@ -8,7 +8,6 @@ export const useRecoilState = atom => {
 	store.setInitState(atom);
 
 	const forceUpdate = useCallback(() => {
-		console.log("forced Update");
 		setReRender({});
 	}, []);
 
