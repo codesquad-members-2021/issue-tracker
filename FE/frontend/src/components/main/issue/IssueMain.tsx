@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Filter from './Filter';
+import SearchFilter from './SearchFilter';
 import Tabs from './Tabs';
 import IssueTable from './IssueTable';
 import Buttons from '../../../styles/atoms/Buttons';
@@ -10,7 +10,7 @@ const IssueMain = () => {
   return (
     <MainWrapper>
       <UpperIssueWrapper>
-        <Filter />
+        <SearchFilter />
         <RightListWrapper>
           <Tabs />
           <Buttons initial small>
@@ -32,9 +32,6 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  div {
-    max-width: 1280px;
-  }
 `;
 
 const IconWrapper = styled.div`
@@ -45,6 +42,7 @@ const IconWrapper = styled.div`
 `;
 
 const UpperIssueWrapper = styled.div`
+  width: 1280px;
   display: flex;
   justify-content: space-between;
   padding: 24px 48px;

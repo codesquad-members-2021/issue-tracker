@@ -1,12 +1,12 @@
 import React, { useEffect, Fragment, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import Typo from '../../../styles/atoms/Typos';
-import { ReactComponent as CheckOffCircle } from '../../../icons/checkOffCircle.svg';
-import { ReactComponent as CheckOnCircle } from '../../../icons/checkOnCircle.svg';
+import Typo from '../atoms/Typos';
+import { ReactComponent as CheckOffCircle } from '../../icons/checkOffCircle.svg';
+import { ReactComponent as CheckOnCircle } from '../../icons/checkOnCircle.svg';
 
 interface Props {
   isShown: boolean;
-  toggle(): any;
+  toggle(): void;
   exceptedDiv: string;
   options: { image?: string; name: string; isSelected: boolean }[];
   setOptions: Dispatch<SetStateAction<any>>;
@@ -14,12 +14,12 @@ interface Props {
   title: string;
 }
 
-const DropDown: React.FC<Props> = props => {
+const DropDown = (props: Props): JSX.Element => {
   const setChecked = (
     option: { name: string; isSelected: boolean },
     options: { name: string; isSelected: boolean }[],
     setOptions: Dispatch<SetStateAction<any>>
-  ): void => {
+  ) => {
     setOptions(
       options.map(item =>
         item.name === option.name

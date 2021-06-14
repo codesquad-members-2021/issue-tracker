@@ -5,7 +5,7 @@ interface Props {
   [key: string]: boolean | React.ReactNode;
 }
 
-const Typos: React.FC<Props> = ({ children, ...props }) => {
+const Typos = ({ children, ...props }: Props) => {
   return <TypoWrapper {...props}>{children}</TypoWrapper>;
 };
 

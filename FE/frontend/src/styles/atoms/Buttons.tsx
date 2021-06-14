@@ -5,7 +5,7 @@ interface Props {
   [key: string]: boolean | React.ReactNode;
 }
 
-const Buttons: React.FC<Props> = ({ children, ...props }) => {
+const Buttons = ({ children, ...props }: Props) => {
   return <ButtonWrapper {...props}>{children}</ButtonWrapper>;
 };
 
