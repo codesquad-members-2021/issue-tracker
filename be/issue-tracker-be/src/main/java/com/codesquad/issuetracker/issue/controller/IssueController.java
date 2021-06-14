@@ -3,13 +3,16 @@ package com.codesquad.issuetracker.issue.controller;
 import com.codesquad.issuetracker.issue.dto.IssueDetailResponseWrapper;
 import com.codesquad.issuetracker.issue.dto.IssueRequest;
 import com.codesquad.issuetracker.issue.dto.IssueResponses;
-import com.codesquad.issuetracker.issue.dto.IssueStateRequests;
+import com.codesquad.issuetracker.issue.dto.IssueStateRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
+@Validated
 public class IssueController {
 
     @GetMapping("/issues")
@@ -34,6 +37,6 @@ public class IssueController {
 
     @PatchMapping("/issues")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateIssueStates(@RequestBody @Valid IssueStateRequests issueStateRequests) {
+    public void updateIssueStates(@RequestBody List<@Valid IssueStateRequest> issueStates) {
     }
 }

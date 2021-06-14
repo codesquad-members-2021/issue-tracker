@@ -5,7 +5,9 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 
+import javax.validation.ConstraintViolation;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data(staticConstructor = "of")
@@ -23,6 +25,17 @@ public class ErrorResponse {
                 status.getReasonPhrase(),
                 errors.stream()
                         .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public static ErrorResponse of(HttpStatus status, Set<ConstraintViolation<?>> errors) {
+        return new ErrorResponse(
+                status.value(),
+                status.name(),
+                status.getReasonPhrase(),
+                errors.stream()
+                        .map(fieldError -> fieldError.getPropertyPath() + ": " + fieldError.getMessage())
                         .collect(Collectors.toList())
         );
     }
