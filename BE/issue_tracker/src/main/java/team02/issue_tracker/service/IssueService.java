@@ -145,7 +145,7 @@ public class IssueService {
         List<Comment> comments = issue.getComments().stream()
                 .map(comment -> {
                     comment.delete();
-                    commentService.deleteCommentEmoji(comment.getId());
+                    commentService.deleteCommentEmojis(comment.getId());
                     return comment;
                 }).collect(Collectors.toList());
         commentService.saveAll(comments);
