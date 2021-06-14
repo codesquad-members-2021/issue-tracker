@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelTableViewCell: UITableViewCell {
+final class LabelTableViewCell: UITableViewCell {
 
     private lazy var labelView: LabelView = LabelView()
     

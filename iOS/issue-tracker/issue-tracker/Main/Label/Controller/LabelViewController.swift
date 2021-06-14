@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelViewController: UIViewController {
+final class LabelViewController: UIViewController {
     
     private lazy var addLabelButton: UIButton = {
         let button = UIButton()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelView: UIView {
+final class LabelView: UIView {
     
     private lazy var labelTitle: UILabel = {
         let label = UILabel()
