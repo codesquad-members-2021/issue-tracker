@@ -17,7 +17,8 @@ values (1, CURRENT_TIMESTAMP, true, "이슈 제목1", 1, 1, false),
 -- label
 insert into label(id, title, content, color, is_deleted)
 values (1, "BE", "백엔드 라벨", "#3DDCFF", false),
-       (2, "FE", "프론트엔드 라벨", "#3DDCFF", false);
+       (2, "FE", "프론트엔드 라벨", "#3DDCFF", true),
+       (3, "iOS", "iOS 라벨", "#3DDCFF", false);
 
 -- issue_label
 insert into issue_label(issue_id, label_id)
