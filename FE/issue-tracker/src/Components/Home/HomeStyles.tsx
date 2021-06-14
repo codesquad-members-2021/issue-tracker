@@ -125,7 +125,6 @@ const IssueTable = {
   `,
 
   TableTh: styled(BOX.FLEX_CENTER_BOX)`
-    position: relative;
     cursor: pointer;
     font-size: ${theme.FONT_SIZE.LINK_SMALL};
     font-weight: bold;
@@ -136,6 +135,10 @@ const IssueTable = {
     top: 30px;
     right: 0;
     z-index: 3;
+  `,
+
+  ThModalWrapDiv: styled.div`
+    position: relative;
   `,
 
   TableBody: styled.div`

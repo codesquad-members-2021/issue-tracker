@@ -19,14 +19,16 @@ const IssueDropDownCategory = () => {
   return (
     <S.TableHeaderRight>
       {modalTitleMock.map((modalTitle) => (
-        <S.TableTh data-title={modalTitle} onClick={handleCategClick}>
-          {modalTitle}
-          <Icon.Down />
+        <S.ThModalWrapDiv>
+          <S.TableTh data-title={modalTitle} onClick={handleCategClick}>
+            {modalTitle}
+            <Icon.Down />
+          </S.TableTh>
           {categModalOpenState.isOpen &&
             modalTitle === categModalOpenState.openedModalTitle && (
               <DropDown modalTitle={modalTitle} />
             )}
-        </S.TableTh>
+        </S.ThModalWrapDiv>
       ))}
     </S.TableHeaderRight>
   );
