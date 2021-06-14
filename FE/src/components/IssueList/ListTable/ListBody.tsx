@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Checkbox } from '@material-ui/core';
 import { IconAlertCircle, IconMileStone } from '../../Common/Icons';
 import { FaHashtag } from 'react-icons/fa';
+import Label from '../../Common/Label';
 
 const ListBody = ({ ...props }) => {
   return (
@@ -16,7 +17,7 @@ const ListBody = ({ ...props }) => {
                 <IconAlertCircle />
               </span>
               <span className="subject">이슈 제목</span>
-              <span className="label">레이블 이름</span>
+              <Label>레이블 이름</Label>
             </TitleBlock>
             <InfoBlock>
               <span><FaHashtag/>이슈번호 </span>
@@ -74,6 +75,7 @@ const TitleInfoBlock = styled.div`
 const TitleBlock = styled.div`
   display: flex;
   column-gap: 0.6rem;
+  align-items: center;
 
   span {
     &.icon {
@@ -83,18 +85,14 @@ const TitleBlock = styled.div`
       font-size: ${({ theme }) => theme.fontSize.M};
       font-weight: ${({ theme }) => theme.fontWeight.bold};
     }
-    &.label {
-      font-size: ${({ theme }) => theme.fontSize.XS};
-      background-color: ${({ theme }) => theme.colors.normal.blue};
-      border-radius: 3rem;
-      padding: 0.4rem 1.6rem;
-    }
   }
 `;
 
 const InfoBlock = styled.div`
   display: flex;
   column-gap: 1.2rem;
+  align-items: center;
+
   span {
     font-size: ${({ theme }) => theme.fontSize.XS};
     color: ${({ theme }) => theme.colors.grayScale.label};
