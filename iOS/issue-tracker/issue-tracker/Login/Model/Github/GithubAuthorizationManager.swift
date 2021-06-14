@@ -60,11 +60,11 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                                               jwt: response.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)
-                    if !self.keyChainSaver.save(loginInfo) {
+                    if self.keyChainSaver.save(loginInfo) {
+                        self.delegate?.didSocialLoginSuccess(with: loginInfo)
+                    } else {
                         let saveError = LoginError.keyChainSave
                         self.delegate?.didSocialLoginFail(with: saveError)
-                    } else {
-                        self.delegate?.didSocialLoginSuccess(with: loginInfo)
                     }
                 case .failure:
                     let githubLoginError = LoginError.githubIDAccess
