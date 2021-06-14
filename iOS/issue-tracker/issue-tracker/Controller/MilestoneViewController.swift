@@ -19,6 +19,7 @@ class MilestoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
         view.addSubview(tableView)
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -45,5 +46,19 @@ extension MilestoneViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MilestoneTableViewCell.reuseId, for: indexPath)
         return cell
+    }
+}
+
+extension MilestoneViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "삭제", handler: { action, view, completion in
+            completion(true)
+        })
+        delete.image = UIImage(systemName: "trash")
+        let edit = UIContextualAction(style: .normal, title:  "수정", handler: { action, view, completion in
+            completion(true)
+        })
+        edit.image = UIImage(systemName: "pencil")
+        return UISwipeActionsConfiguration(actions:[delete, edit])
     }
 }
