@@ -16,16 +16,16 @@ public class User {
     private Long id;
     private String name;
 
-    @JsonProperty("user_id")
-    private String userId;
+    @JsonProperty("login_id")
+    private String loginId;
 
-    private User(String name, String userId) {
+    private User(String name, String loginId) {
         this.name = name;
-        this.userId = userId;
+        this.loginId = loginId;
     }
 
-    private User(Long id, String name, String userId) {
-        this(name, userId);
+    private User(Long id, String name, String loginId) {
+        this(name, loginId);
         this.id = id;
     }
 
@@ -41,8 +41,8 @@ public class User {
         return name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getLoginId() {
+        return loginId;
     }
 
     public User create(Long id, String name, String userId) {
@@ -58,7 +58,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", userId='" + userId + '\'' +
+                ", userId='" + loginId + '\'' +
                 '}';
     }
 }
