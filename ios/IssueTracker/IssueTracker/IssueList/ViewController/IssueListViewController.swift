@@ -129,9 +129,7 @@ extension IssueListViewController {
         issueTableView.isEditing = !issueTableView.isEditing
         issueTableView.setEditing(issueTableView.isEditing, animated: true)
         editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
-        UIView.animate(withDuration: 0.2) {
-            self.navigationController?.navigationBar.topItem?.title = self.issueTableView.isEditing ? "Select Issues" : "Issues"
-        }
+        navigationController?.navigationBar.topItem?.title = issueTableView.isEditing ? "Select Issues" : "Issues"
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
         editStateView.setIsHidden(!issueTableView.isEditing, animated: true)
     }
