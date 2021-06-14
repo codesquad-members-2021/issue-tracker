@@ -1,15 +1,12 @@
 package com.codesquad.issuetracker.issue.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class IssueStateRequest {
-    private long id;
+    @NotNull
+    private Long id;
     private boolean isClosed;
 }
