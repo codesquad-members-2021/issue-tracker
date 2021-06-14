@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typo from '../../../styles/atoms/Typos';
+import CheckBox from '../../../styles/atoms/CheckBox';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import ListFilters from './ListFilters';
@@ -10,7 +11,7 @@ const IssueTable = () => {
     <TableWrapper>
       <IssueHeader>
         <LeftHeaderWrapper>
-          <CheckBox type="checkbox" name="checkAll"></CheckBox>
+          <CheckBox />
           <Text link sm>
             <AlertCircle />
             열린 이슈
@@ -22,18 +23,13 @@ const IssueTable = () => {
         </LeftHeaderWrapper>
         <ListFilters />
       </IssueHeader>
+      <IssueCell>
+        <CheckBox />
+        <AlertCircle />
+      </IssueCell>
     </TableWrapper>
   );
 };
-
-const CheckBox = styled.input`
-  width: 18px;
-  height: 18px;
-  background: ${props => props.theme.greyscale.offWhite};
-  border: 1px solid #d9dbe9;
-  box-sizing: border-box;
-  border-radius: 2px;
-`;
 
 const TableWrapper = styled.div``;
 
@@ -45,15 +41,23 @@ const IssueHeader = styled.div`
   margin: 1px 0px;
   display: flex;
   justify-content: space-between;
+  & > div {
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const LeftHeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
   padding: 0 24px;
   div {
     padding: 0 18px;
   }
+`;
+
+const IssueCell = styled.div`
+  height: 100px;
+  background: ${props => props.theme.greyscale.offWhite};
+  margin: 1px 0px;
 `;
 
 const Text = styled(Typo)`
