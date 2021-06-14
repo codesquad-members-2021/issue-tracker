@@ -9,6 +9,7 @@ import UIKit
 
 class MyAccountViewController: UIViewController {
     
+    
     private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .medium)
@@ -32,7 +33,10 @@ class MyAccountViewController: UIViewController {
     private let spacing: CGFloat = 16
     private var loginInfo: LoginInfo?
     
+
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "내 계정"
@@ -69,8 +73,30 @@ class MyAccountViewController: UIViewController {
     }
     
     @objc private func didLogoutTouched(_ sender: UIButton) {
-        let logoutErrorText = LoginError.logout.description
-        presentAlert(with: logoutErrorText)
+//        let logoutErrorText = LoginError.logout.description
+//        presentAlert(with: logoutErrorText)
+        
+        var loginManager: LoginKeyChainManager?
+        
+        for loginService in LoginService.allCases {
+            loginManager = LoginKeyChainManager(loginService: loginService)
+            loginInfo = loginManager?.read()
+            if loginInfo != nil {
+                break
+            }
+        }
+        guard let loginManager = loginManager else { return }
+        
+        print("삭제 전 정보  = ", loginManager.read())
+        
+        let _ = loginManager.delete()
+        
+        print("삭제 된거 맞나? = ", loginManager.read())
+        
+        let loginViewController = LoginViewController()
+        loginViewController.modalPresentationStyle = .fullScreen
+        self.present(loginViewController, animated: true, completion: nil)
+        
     }
     
 }
