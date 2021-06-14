@@ -2,8 +2,16 @@ import styled from 'styled-components';
 import { Button, Checkbox } from '@material-ui/core';
 import { ReactComponent as Open } from 'icons/openIssue.svg';
 import { ReactComponent as Close } from 'icons/closeIssue.svg';
+import Filter from 'components/common/Filter';
 
 const IssuesHeader = () => {
+  const testArray = [
+    { description: '테스트필터1' },
+    { description: '테스트필터2' },
+    { description: '테스트필터3' },
+    { description: '테스트필터4' },
+  ];
+
   return (
     <StyledIssuesHeader>
       <IssuesHeaderLeft>
@@ -16,7 +24,12 @@ const IssuesHeader = () => {
           닫힌 이슈(0)
         </IssuesButton>
       </IssuesHeaderLeft>
-      <IssuesHeaderRight></IssuesHeaderRight>
+      <IssuesHeaderRight>
+        <Filter filterTitle="담당자" filterList={testArray} />
+        <Filter filterTitle="레이블" filterList={testArray} />
+        <Filter filterTitle="마일스톤" filterList={testArray} />
+        <Filter filterTitle="작성자" filterList={testArray} />
+      </IssuesHeaderRight>
     </StyledIssuesHeader>
   );
 };
@@ -31,6 +44,7 @@ const IssuesButton = styled(Button)`
 
 const StyledIssuesHeader = styled.div`
   ${({ theme }) => theme.style.flexSpaceBetween}
+  box-sizing: border-box;
 
   padding: 1rem;
 `;

@@ -1,5 +1,3 @@
-import { PopupState } from 'material-ui-popup-state/core';
-
 export type FilterItemType = {
   description: string;
   imgurl?: string | null;
@@ -8,10 +6,15 @@ export type FilterItemType = {
 
 export type FilterListType = {
   filterList: FilterItemType[];
-  popupState: PopupState;
+  filterTitle: string;
 };
 
 export type FilterItemPropsType = {
-  popupState: PopupState;
   filterItem: FilterItemType;
+  isEnd: boolean;
 };
+
+export type FilterPropsType = {
+  filterTitle: string;
+  filterList: FilterItemType[];
+}

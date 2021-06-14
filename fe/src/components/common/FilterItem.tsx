@@ -1,27 +1,28 @@
-import { Divider, FormControlLabel, MenuItem, Radio } from '@material-ui/core';
+import { Divider, MenuItem, Checkbox } from '@material-ui/core';
+import { forwardRef, Ref } from 'react';
 import styled from 'styled-components';
 import { FilterItemPropsType } from '../../types/filterType';
-
-const FilterItem = ({ popupState, filterItem }: FilterItemPropsType) => {
+import { ReactComponent as CheckOff } from 'icons/check-off-circle.svg';
+import { ReactComponent as CheckOn } from 'icons/check-on-circle.svg';
+const FilterItem = (
+  { filterItem, isEnd }: FilterItemPropsType,
+  ref: Ref<HTMLElement>
+) => {
   return (
     <>
-      <MenuItem onClick={popupState.close}>
-        <CustomFormControlLabel
-          control={<Radio />}
-          value={filterItem.description}
-          label={filterItem.description}
-          labelPlacement="start"
-        />
-      </MenuItem>
-
-      <Divider />
+      <StyledFilterItem>
+        <span>{filterItem.description}</span>
+        <Checkbox icon={<CheckOff />} checkedIcon={<CheckOn />} />
+      </StyledFilterItem>
+      {isEnd ? null : <Divider />}
     </>
   );
 };
 
-const CustomFormControlLabel = styled(FormControlLabel)`
-  width: 100%;
-  justify-content: space-between;
+const StyledFilterItem = styled(MenuItem)`
+  ${({ theme }) => theme.style.flexSpaceBetween}
+  width: 12rem;
+  background-color: white;
 `;
 
-export default FilterItem;
+export default forwardRef(FilterItem);

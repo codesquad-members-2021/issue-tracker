@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import AuthorAvatar from 'components/common/AuthorAvatar';
 import Logo from 'components/common/Logo';
 import styled from 'styled-components';
 
@@ -6,20 +6,12 @@ const Header = () => {
   return (
     <StyledHeader>
       <Logo />
-      <CustomAvatar alt="Eamon3481" src={undefined} >E</CustomAvatar>
+      <AuthorAvatar name="eamon" size="L" />
     </StyledHeader>
   );
 };
 
 export default Header;
-
-
-const CustomAvatar = styled(Avatar)`
-  color: ${({ theme }) => theme.color.grayscale.line};
-  font-weight: 700;
-  background-color: ${({ theme }) => theme.color.grayscale.label};
-  border: 3px solid ${({ theme }) => theme.color.grayscale.line};
-`;
 
 const StyledHeader = styled.div`
   display: flex;

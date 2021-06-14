@@ -1,18 +1,21 @@
 import FilterItem from './FilterItem';
 import { FilterItemType, FilterListType } from '../../types/filterType';
+import styled from 'styled-components';
+import { forwardRef, Ref } from 'react';
 
-const FilterList = ({ filterList, popupState }: FilterListType) => {
+const FilterList = ({ filterTitle, filterList }: FilterListType,ref:Ref<HTMLElement>) => {
   return (
-    <ul>
-      {filterList.map((filterItem: FilterItemType) => {
-        return (
-          <>
-            <FilterItem popupState={popupState} filterItem={filterItem} />
-          </>
-        );
+    <>
+      <MenuTitle>{filterTitle} 필터</MenuTitle>
+      {filterList.map((filterItem: FilterItemType, idx) => {
+        return <FilterItem key={idx} filterItem={filterItem} isEnd={filterList.length -1 ===idx} ref={ref} />;
       })}
-    </ul>
+    </>
   );
 };
 
-export default FilterList;
+const MenuTitle = styled.div`
+  ${({ theme }) => theme.style.upperWrapper}
+  padding: 0.7rem 1rem;
+`;
+export default forwardRef(FilterList);

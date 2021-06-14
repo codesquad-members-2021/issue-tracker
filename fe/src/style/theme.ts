@@ -27,6 +27,12 @@ const flexSpaceBetween = css`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const flexAlignItemsCenter = css`
+  display: flex;
+  align-items: center;
 `;
 
 const flexColum = css`
@@ -94,6 +100,7 @@ const theme: DefaultTheme = {
     upperWrapper: `${upperWrapper}`,
     lowerWrapper: `${lowerWrapper}`,
     flexSpaceBetween: `${flexSpaceBetween}`,
+    flexAlignItemsCenter: `${flexAlignItemsCenter}`,
   },
 };
 
