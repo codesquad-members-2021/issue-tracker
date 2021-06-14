@@ -109,7 +109,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addLoginStackViewDivisionLine()
+        addLoginStackViewDivisionLine()        
     }
     
     private func socialLoginButton(with image: UIImage?, _ title: String) -> UIButton {
