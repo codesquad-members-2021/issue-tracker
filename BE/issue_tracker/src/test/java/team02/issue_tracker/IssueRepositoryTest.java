@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import team02.issue_tracker.domain.Comment;
+import team02.issue_tracker.domain.CommentEmoji;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
 import team02.issue_tracker.exception.IssueNotFoundException;
+import team02.issue_tracker.repository.CommentEmojiRepository;
+import team02.issue_tracker.repository.CommentRepository;
 import team02.issue_tracker.repository.IssueAssigneeRepository;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -23,6 +27,12 @@ public class IssueRepositoryTest {
 
     @Autowired
     private IssueAssigneeRepository issueAssigneeRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private CommentEmojiRepository commentEmojiRepository;
 
     @Test
     @DisplayName("issueRepository에서 전체 issue가 잘 반환되는지 확인한다.")
@@ -49,5 +59,14 @@ public class IssueRepositoryTest {
         List<IssueAssignee> issueAssignees = issueAssigneeRepository.findByIssueId(issue.getId());
 
         Assertions.assertThat(issueAssignees.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("코멘트의 id로 CommentEmoji 리스트를 잘 반환하는지 확인한다.")
+    void findCommentEmojiByCommentId() {
+        Comment comment = commentRepository.findById(1L).get();
+        List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(comment.getId());
+
+        Assertions.assertThat(commentEmojis.size()).isEqualTo(2);
     }
 }
