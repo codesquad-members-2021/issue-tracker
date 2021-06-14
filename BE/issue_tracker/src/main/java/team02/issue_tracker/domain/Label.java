@@ -3,6 +3,7 @@ package team02.issue_tracker.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team02.issue_tracker.dto.LabelRequest;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Label {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String title;
@@ -26,5 +29,10 @@ public class Label {
 
     @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
-    
+
+    public void modifyLabel(LabelRequest labelRequest) {
+        this.title = labelRequest.getTitle();
+        this.content = labelRequest.getContent();
+        this.color = labelRequest.getColor();
+    }
 }
