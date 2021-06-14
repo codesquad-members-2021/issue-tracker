@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
-import TextGroup from '../../common/TextGroup';
+import TextGroup from '../../../common/group/TextGroup';
 import {
   ASSIGNED_ISSUE,
   CLOSED_ISSUE,
@@ -18,7 +18,7 @@ import {
   FILTER,
   OPEN_ISSUE,
   WRITTEN_ISSUE,
-} from '../../../utils/const';
+} from '../../../../utils/const';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function FilterBar(): JSX.Element {
+function IssueFilter(): JSX.Element {
   const classes = useStyles();
   const [index, setIndex] = React.useState('필터');
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -99,4 +99,4 @@ function FilterBar(): JSX.Element {
   );
 }
 
-export default FilterBar;
+export default IssueFilter;

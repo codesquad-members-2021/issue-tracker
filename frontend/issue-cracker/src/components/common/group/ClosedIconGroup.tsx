@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import IssueClosedIcon from '../styles/svg/IssueClosedIcon';
+import IssueClosedIcon from '../../styles/svg/IssueClosedIcon';
 
 interface Prop {
   type: string;

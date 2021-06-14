@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueClosedIcon from '../styles/svg/IssueClosedIcon';
+import IssueClosedIcon from '../../styles/svg/IssueClosedIcon';
 import Chip from '@material-ui/core/Chip';
-import OpenIconGroup from '../common/OpenIconGroup';
-import { CLOSED_ISSUE, OPEN_ISSUE } from '../../utils/const';
+import OpenIconGroup from '../group/OpenIconGroup';
+import { CLOSED_ISSUE, OPEN_ISSUE } from '../../../utils/const';
 
 interface Prop {
   type: string;

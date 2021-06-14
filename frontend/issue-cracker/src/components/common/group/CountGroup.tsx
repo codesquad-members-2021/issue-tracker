@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text as S } from '../styles/CommonStyles';
+import { Text as S } from '../../styles/CommonStyles';
 
 interface CountGroupProps {
   count: number;

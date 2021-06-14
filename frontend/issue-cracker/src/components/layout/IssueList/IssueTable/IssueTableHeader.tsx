@@ -1,8 +1,8 @@
 import React from 'react';
-import { Issue as S } from '../../styles/CommonStyles';
-import CheckBoxes from '../../common/CheckBoxes';
-import OpenIconGroup from '../../common/OpenIconGroup';
-import ClosedIconGroup from '../../common/ClosedIconGroup';
+import { Issue as S } from '../../../styles/CommonStyles';
+import CheckBoxes from '../../../common/CheckBoxes';
+import OpenIconGroup from '../../../common/group/OpenIconGroup';
+import ClosedIconGroup from '../../../common/group/ClosedIconGroup';
 import {
   ASSIGNEE,
   CLOSED_ISSUE,
@@ -10,12 +10,12 @@ import {
   MILESTONE,
   OPEN_ISSUE,
   WRITER,
-} from '../../../utils/const';
-import TextGroup from '../../common/TextGroup';
-import CountGroup from '../../common/CountGroup';
+} from '../../../../utils/const';
+import TextGroup from '../../../common/group/TextGroup';
+import CountGroup from '../../../common/group/CountGroup';
 
-import IssueHeaderButton from '../../common/IssueHeaderButton';
-import FilterMenu from '../../common/FilterMenu';
+import IssueHeaderButton from '../../../common/IssueHeaderButton';
+import FilterMenu from '../../../common/FilterMenu';
 
 const IssueTableHeader = (): JSX.Element => {
   return (

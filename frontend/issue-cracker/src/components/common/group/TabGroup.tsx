@@ -5,9 +5,9 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import FlagIcon from '@material-ui/icons/Flag';
 import styled from 'styled-components';
-import { LABEL, MILESTONE } from '../../utils/const';
-import TextGroup from '../common/TextGroup';
-import CountGroup from '../common/CountGroup';
+import { LABEL, MILESTONE } from '../../../utils/const';
+import TextGroup from '../group/TextGroup';
+import CountGroup from '../group/CountGroup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

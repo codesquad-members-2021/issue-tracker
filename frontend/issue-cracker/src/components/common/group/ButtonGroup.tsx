@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import useButtonStyles from '../styles/ButtonStyles';
+import useButtonStyles from '../../styles/ButtonStyles';
 import { ClassNameMap } from '@material-ui/styles/withStyles';
 import styled from 'styled-components';
 
