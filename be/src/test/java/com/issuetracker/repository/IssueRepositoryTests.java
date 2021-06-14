@@ -1,6 +1,5 @@
 package com.issuetracker.repository;
 
-import com.issuetracker.controller.IssueDto;
 import com.issuetracker.domain.Issue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
