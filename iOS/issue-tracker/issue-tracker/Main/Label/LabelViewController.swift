@@ -22,6 +22,16 @@ class LabelViewController: UIViewController {
         return button
     }()
     
+    private lazy var labelTableView: UITableView = {
+        let tableView = UITableView()
+        let cellID = LabelTableViewCell.reuseID
+        tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.backgroundColor = Colors.background
+        tableView.allowsSelection = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     private var loginInfo: LoginInfo?
     
     override func viewDidLoad() {
@@ -29,10 +39,25 @@ class LabelViewController: UIViewController {
         view.backgroundColor = UIColor.white
         title = "레이블"
         addNavigationButton()
+        addTableView()
+        
+        labelTableView.dataSource = self
+        labelTableView.delegate = self
     }
     
     private func addNavigationButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
+    }
+    
+    private func addTableView() {
+        view.addSubview(labelTableView)
+        
+        NSLayoutConstraint.activate([
+            labelTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            labelTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            labelTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            labelTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
@@ -44,5 +69,23 @@ class LabelViewController: UIViewController {
 extension LabelViewController: LoginInfoContainer {
     func setup(loginInfo: LoginInfo) {
         self.loginInfo = loginInfo
+    }
+}
+
+extension LabelViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height * 0.135
+    }
+}
+
+extension LabelViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellID = LabelTableViewCell.reuseID
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? LabelTableViewCell ?? LabelTableViewCell()
+        return cell
     }
 }
