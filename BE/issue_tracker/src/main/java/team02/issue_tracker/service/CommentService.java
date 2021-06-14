@@ -3,6 +3,7 @@ package team02.issue_tracker.service;
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentEmojiRequest;
+import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.IssueRequest;
 import team02.issue_tracker.exception.CommentNotFoundException;
 import team02.issue_tracker.exception.EmojiNotFoundException;
@@ -48,5 +49,12 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
         Emoji emoji = emojiRepository.findById(commentEmojiRequest.getEmojiId()).orElseThrow(EmojiNotFoundException::new);
         commentEmojiRepository.save(new CommentEmoji(comment, emoji));
+    }
+
+    public void modifyComment(Long commentId, CommentRequest commentRequest) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+        comment.replaceContent(commentRequest.getContent());
+        comment.replaceFile(commentRequest.getFile());
+        commentRepository.save(comment);
     }
 }
