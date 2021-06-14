@@ -4,15 +4,51 @@ import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import DropDownButton from "components/common/DropDownButton";
+import FilterModal from "components/common/FilterModal";
+import { filter } from "data";
+import { clickedFilterAtomState } from "MyRecoil/atom";
+import { useRecoilState } from "MyRecoil";
+const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 
 const IssuesHeader = ({}) => {
 	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
 	const [isIssueSelected, setIsIssueSelected] = useState(false); // 상태 위치 협의 후 수정
 	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
+	const [clickedFilter, setClickedFilter] = useState("");
 	const checkAllIssue = () => {
 		setIsAllIssueSelected(!isAllIssueSelected);
 	};
+
+	//----------중복 코드from MeuFilter --------
+	const [isFilterClicked, setIsFilterClicked] = useState(false);
+	const handleClick = useCallback(e => {
+		isFilterClicked === false
+			? setIsFilterClicked(true)
+			: setIsFilterClicked(false);
+		console.dir(e.target.textContent);
+		console.dir(e.target);
+		setClickedFilter(e.target.textContent);
+	});
+
+	useEffect(() => {
+		window.addEventListener("click", closeFilterModal);
+		return function cleanup() {
+			window.removeEventListener("click", closeFilterModal);
+		};
+	}, [isFilterClicked]);
+
+	const closeFilterModal = e => {
+		const target = e.target;
+		if (
+			isFilterClicked &&
+			!target.closest(".filter-modal") &&
+			!target.closest(".issue-header-button")
+		)
+			setIsFilterClicked(false);
+	};
+	//----------여기 까지 중복 코드from MeuFilter --------/
 
 	useEffect(() => {
 		isAllIssueSelected && console.log("issue checkbox all selected");
@@ -42,20 +78,21 @@ const IssuesHeader = ({}) => {
 				) : (
 					<FiltersWrapper>
 						<TextIconDivider>
-							담당자
-							<DownArrow />
-						</TextIconDivider>
-						<TextIconDivider>
-							레이블
-							<DownArrow />
-						</TextIconDivider>
-						<TextIconDivider>
-							마일스톤
-							<DownArrow />
-						</TextIconDivider>
-						<TextIconDivider>
-							작성자
-							<DownArrow />
+							{buttonNames.map((filter, idx) => (
+								<DropDownButton
+									text={filter}
+									clickEvent={handleClick}
+									key={`filter-${idx}`}
+									className={"issue-header-button"}
+									width={({ theme }) => theme.buttonWidths.small}
+									border={"none"}
+									id={filter}
+								></DropDownButton>
+							))}
+							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+							{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
+							{/* 🔥recoil로 수정 필요 */}
+							{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
 						</TextIconDivider>
 					</FiltersWrapper>
 				)}
@@ -93,8 +130,9 @@ const OpenCloseEdit = styled.div`
 
 const FiltersWrapper = styled.div`
 	display: flex;
-	width: 500px;
 	justify-content: space-around;
+	position: relative;
+	/* outline: red 1px solid; */
 `;
 
 export const CheckBox = styled.div`
