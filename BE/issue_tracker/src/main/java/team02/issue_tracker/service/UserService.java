@@ -39,8 +39,7 @@ public class UserService {
     public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
         List<IssueAssignee> issueAssignees = new ArrayList<>();
 
-        assigneeIds.stream()
-                .forEach(assigneeId -> {
+        assigneeIds.forEach(assigneeId -> {
                     User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
                     issueAssignees.add(new IssueAssignee(issue, assignee));
                 });
