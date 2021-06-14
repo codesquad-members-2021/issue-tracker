@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import { filterAtom, filterDefaultCheckerAtom, FilterStringType } from './atoms/filterAtom';
-import { delay } from '@/utils/serviceUtils';
 
 type FilterTabType = {
   header: string;
@@ -20,6 +19,7 @@ const filterHeaderNames: { [key: string]: string } = {
 const FilterTab = ({ header, filterList }: FilterTabType) => {
   const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
   const [defaultCheckerState, setDefaultCheckerState] = useRecoilState(filterDefaultCheckerAtom);
+
   const handleClickHideFilterModal = useCallback((event: MouseEvent) => {
     const targetList = (event.target as HTMLElement);
     const checkTarget = targetList.closest('.filterTab');
@@ -40,19 +40,19 @@ const FilterTab = ({ header, filterList }: FilterTabType) => {
   useEffect(() => {
     if (Object.values(filterModalState).every(v => !v)) return;
     document.addEventListener('click', handleClickHideFilterModal);
-    return () => document.removeEventListener('click', handleClickHideFilterModal);
+    return () => {
+      document.removeEventListener('click', handleClickHideFilterModal)
+    };
   }, [filterModalState]);
 
   useEffect(() => {
-    delay(5)
-    .then(() =>
-     setFilterModalState({
+    setFilterModalState({
       issue: false,
       manager: false,
       label: false,
       milestone: false,
       writer: false,
-    }));
+    });
   }, [defaultCheckerState])
 
   return (
