@@ -4,6 +4,10 @@ public class ApiResponse<T> {
 
     private T data;
 
+    private ApiResponse() {
+
+    }
+
     private ApiResponse(T data) {
         this.data = data;
     }
@@ -14,5 +18,8 @@ public class ApiResponse<T> {
 
     public static <T> ApiResponse<T> ok(T data){
         return new ApiResponse(data);
+    }
+    public static <T> ApiResponse<T> ok(){
+        return new ApiResponse();
     }
 }
