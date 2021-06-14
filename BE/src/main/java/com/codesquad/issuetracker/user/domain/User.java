@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -46,5 +47,18 @@ public class User {
 
     public static User fromGitHubUser(GitHubUser gitHubUser) {
         return new User(gitHubUser.getName(), gitHubUser.getAvatarUrl(), gitHubUser.getLogin());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
