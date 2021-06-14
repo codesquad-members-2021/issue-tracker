@@ -12,7 +12,7 @@ class MyAccountViewController: UIViewController {
     private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .medium)
-        label.text = "unknown 님, 환영합니다!"
+        label.text = "\(userName) 님, 환영합니다!"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -28,12 +28,14 @@ class MyAccountViewController: UIViewController {
         return button
     }()
     
+    private var userName = "unknown"
     private let spacing: CGFloat = 16
     private var loginInfo: LoginInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "내 계정"
         addWelcomeLabel()
         addLogoutButton()
     }
@@ -82,7 +84,7 @@ extension MyAccountViewController: LoginInfoContainer {
     
     private func updateWelcomeLabel() {
         guard let userName = loginInfo?.name else { return }
-        welcomeLabel.text = "\(userName) 님 환영합니다!"
+        self.userName = userName
     }
     
 }

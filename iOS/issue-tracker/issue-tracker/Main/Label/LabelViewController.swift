@@ -13,7 +13,8 @@ class LabelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.orange
+        view.backgroundColor = UIColor.white
+        title = "레이블"
     }
     
 }

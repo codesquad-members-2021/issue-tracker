@@ -14,6 +14,7 @@ class MilestoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.yellow
+        title = "마일스톤"
     }
     
 }

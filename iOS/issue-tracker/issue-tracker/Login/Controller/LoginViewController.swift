@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
+    
     private lazy var loginIDTextField = UITextField()
     private lazy var loginPwdTextField = UITextField()
     
@@ -64,7 +64,6 @@ class LoginViewController: UIViewController {
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(Colors.mainGrape, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(loginBtnTouchedDown), for: .touchUpInside)
         return button
     }()
     
@@ -79,21 +78,24 @@ class LoginViewController: UIViewController {
     private lazy var githubLoginButton: UIButton = {
         let image = UIImage(named: "icon_github")
         let title = "GitHub 계정으로 로그인"
-        return socialLoginButton(with: image, title)
+        let button = socialLoginButton(with: image, title)
+        button.addTarget(self, action: #selector(loginWithGithubTouched), for: .touchUpInside)
+        return button
+        
     }()
     
     private lazy var appleLoginButton: UIButton = {
         let image = UIImage(named: "icon_apple")
         let title = "Apple 계정으로 로그인"
         let appleLoginButton = socialLoginButton(with: image, title)
-        appleLoginButton.addTarget(self, action: #selector(appleLoginTouched), for: .touchUpInside)
+        appleLoginButton.addTarget(self, action: #selector(loginWithAppleTouched), for: .touchUpInside)
         return appleLoginButton
     }()
     
     private let spacing: CGFloat = 16
     private let borderWidth: CGFloat = 1
-    
-    private var appleLoginManager: AppleAuthorizationManager?
+
+    private var socialLoginManager: SocialLoginManagable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,9 +104,7 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
-        
-        let appleAuthorizationManager = AppleAuthorizationManager(viewController: self, delegate: self)
-        appleLoginManager = appleAuthorizationManager
+        definesPresentationContext = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,7 +124,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-        
+    
     private func addTitleLabel() {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
         loginStackView.backgroundColor = UIColor.white
         loginStackView.layer.borderColor = Colors.border.cgColor
         loginStackView.layer.borderWidth = borderWidth
-                
+        
         NSLayoutConstraint.activate([
             loginStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loginStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.frame.height * 0.088),
@@ -190,9 +190,10 @@ class LoginViewController: UIViewController {
     
     private func presentIssueViewController(with loginInfo: LoginInfo) {
         DispatchQueue.main.async {
-            let tabBarVC = IssueTrackerTabBarController()
-            tabBarVC.modalPresentationStyle = .fullScreen
-            self.present(tabBarVC, animated: true, completion: nil)
+            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
+            let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
+            issueTrackerTabBarController.modalPresentationStyle = .fullScreen
+            self.present(issueTrackerTabBarController, animated: true, completion: nil)
         }
     }
     
@@ -203,30 +204,43 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func loginBtnTouchedDown(sender: UIButton!) {
-        print("하이~, H I~")
+    @objc private func loginWithGithubTouched(_ sender: UIButton) {
+        configureGithubLoginManager()
+        socialLoginManager?.login()
     }
     
-    @objc private func appleLoginTouched(_ sender: UIButton) {
-        appleLoginManager?.login()
+    @objc private func loginWithAppleTouched(_ sender: UIButton) {
+        configureAppleLoginManager()
+        socialLoginManager?.login()
+    }
+    
+    private func configureGithubLoginManager() {
+        guard socialLoginManager as? GithubAuthorizationManager == nil else { return }
+        let githubKeyChainManager = LoginKeyChainManager(loginService: .github)
+        let githubLoginManager = GithubAuthorizationManager(viewController: self,
+                                                            delegate: self,
+                                                            keyChainSaver: githubKeyChainManager)
+        self.socialLoginManager = githubLoginManager
+    }
+    
+    private func configureAppleLoginManager() {
+        guard socialLoginManager as? AppleAuthorizationManager == nil else { return }
+        let appleKeyChainManager = LoginKeyChainManager(loginService: .apple)
+        let appleLoginManager = AppleAuthorizationManager(viewController: self,
+                                                          delegate: self,
+                                                          keyChainSaver: appleKeyChainManager)
+        self.socialLoginManager = appleLoginManager
     }
     
 }
 
-extension LoginViewController: AppleLoginManagerDelegate {
-    func didAppleLoginSuccess(with loginInfo: LoginInfo) {
-        let loginKeyChainManager = LoginKeyChainManager(loginService: .apple)
-        
-        if loginKeyChainManager.save(loginInfo) {
-            presentIssueViewController(with: loginInfo)
-        } else {
-            let saveErrorText = LoginError.keyChainSave.description
-            presentAlert(with: saveErrorText)
-        }
+extension LoginViewController: SocialLoginManagerDelegate {
+    func didSocialLoginSuccess(with loginInfo: LoginInfo) {
+        presentIssueViewController(with: loginInfo)
     }
     
-    func didAppleLoginFail(with error: Error) {
-        let appleLoginErrorText = LoginError.appleIDAccess.description
-        presentAlert(with: appleLoginErrorText)
+    func didSocialLoginFail(with error: LoginError) {
+        let errorText = error.description
+        presentAlert(with: errorText)
     }
 }
