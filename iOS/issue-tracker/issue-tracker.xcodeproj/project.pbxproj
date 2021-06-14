@@ -242,7 +242,6 @@
 				B3F527562670A0D5002B0812 /* Extension */,
 				49903DAC266F558700D2A6DD /* View */,
 				D0ADB69D266F0E7900E0762C /* Model */,
-				D0A88E0C26762D51005877F6 /* ModalViewController.swift */,
 				D0A88E102676563E005877F6 /* Modal.storyboard */,
 				D03AF8F126771FA3001C2CBF /* Login.storyboard */,
 			);
@@ -324,6 +323,7 @@
 		D0FD50E92671B0AD008C6031 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D0A88E0C26762D51005877F6 /* ModalViewController.swift */,
 				B32FEAC02671D9F600BF37A1 /* IssueListViewController.swift */,
 				B3B559E4266E095E00901C55 /* LoginViewController.swift */,
 				B3F527502670968F002B0812 /* LabelViewController.swift */,
