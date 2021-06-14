@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
-import team02.issue_tracker.exception.IllegalStatusException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -65,7 +64,6 @@ public class IssueService {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
                     Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-                    validateDeleted(issue);
                     issue.close();
                     return issue;
                 }).collect(Collectors.toList());
@@ -73,17 +71,10 @@ public class IssueService {
         issueRepository.saveAll(issues);
     }
 
-    private void validateDeleted(Issue issue) {
-        if (issue.isDeleted()) {
-            throw new IllegalStatusException("삭제된 이슈입니다.");
-        }
-    }
-
     public void openIssues(IssueIdsRequest issueIdsRequest) {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
                     Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-                    validateDeleted(issue);
                     issue.open();
                     return issue;
                 }).collect(Collectors.toList());
@@ -93,14 +84,12 @@ public class IssueService {
 
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        validateDeleted(issue);
         issue.replaceTitle(issueRequest.getTitle());
         issueRepository.save(issue);
     }
 
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        validateDeleted(issue);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
         issue.replaceIssueAssignees(issueAssignees);
         issueRepository.save(issue);
@@ -108,7 +97,6 @@ public class IssueService {
 
     public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        validateDeleted(issue);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
         issue.replaceIssueLabels(issueLabels);
         issueRepository.save(issue);
@@ -116,7 +104,6 @@ public class IssueService {
 
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        validateDeleted(issue);
         Milestone milestone = milestoneService.getMilestone(issueMilestoneRequest.getMilestoneId());
         issue.replaceMilestone(milestone);
         issueRepository.save(issue);
@@ -124,7 +111,6 @@ public class IssueService {
 
     public void addComment(Long issueId, Long userId, CommentRequest commentRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        validateDeleted(issue);
         User writer = userService.findOne(userId);
 
         Comment comment = commentRequest.toComment(writer);
