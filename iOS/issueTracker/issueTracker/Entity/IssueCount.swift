@@ -10,4 +10,11 @@ import Foundation
 struct IssueCount: Codable {
     var open: Int
     var closed: Int
+    
+    static let empty = Self()
+    
+    init() {
+        self.open = 0
+        self.closed = 0
+    }
 }

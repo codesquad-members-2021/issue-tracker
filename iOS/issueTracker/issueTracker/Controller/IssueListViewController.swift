@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+    
+    private var issueList: IssueDTO
     @IBOutlet weak var issueListTableView: UITableView!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     override func viewDidLoad() {
@@ -20,10 +22,39 @@ class IssueListViewController: UIViewController {
         setuptableViewCustomView()
         bottomToolbar.isHidden = true
     }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        issueList = IssueDTO.empty
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        issueList = IssueDTO.empty
+        super.init(coder: coder)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchIssueList()
+        super.viewDidAppear(true)
+    }
+    
+    func fetchIssueList() {
+        let issueListAPI = APIEndPoint.init(path: "/temp", httpMethod: .get)
+        NetworkManager.request(with: issueListAPI, type: IssueDTO.self) { result in
+            switch result {
+            case .success(let data):
+                self.issueList = data
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func set(navigationBarTitle: String) {
         self.navigationItem.title = navigationBarTitle
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     func setupLeftNavigationItem(buttonTitle: String) {
         let uibutton = UIButton()
         uibutton.setTitleColor(ButtonColors.buttonColor.value, for: .normal)
@@ -33,11 +64,13 @@ class IssueListViewController: UIViewController {
         let leftbarbutton = UIBarButtonItem(customView: uibutton)
         self.navigationItem.leftBarButtonItem = leftbarbutton
     }
+    
     @objc func pressedLeftbutton() {
         let identity = ViewControllerIdentity.issueListFilterViewController.description
         let nextVC = self.storyboard?.instantiateViewController(identifier: identity) as? IssueFilterViewController
         self.present(nextVC!, animated: true, completion: nil)
     }
+    
     func setupRightNavigationItem(buttonTitle: String) {
         let uibutton = UIButton()
         uibutton.setTitleColor(ButtonColors.buttonColor.value, for: .normal)
@@ -47,15 +80,18 @@ class IssueListViewController: UIViewController {
         let rightbarbutton = UIBarButtonItem(customView: uibutton)
         self.navigationItem.rightBarButtonItem = rightbarbutton
     }
+    
     func setupSearchbarcontroller() {
         let searchbarController = UISearchController(searchResultsController: nil)
         searchbarController.hidesNavigationBarDuringPresentation = true
         self.navigationItem.searchController = searchbarController
     }
+    
     func setuptableViewDelegateDataSource() {
         self.issueListTableView.dataSource = self
         self.issueListTableView.delegate = self
     }
+    
     func setuptableViewCustomView() {
         let viewFrame = CGRect(origin: .zero, size: CGSize(width: self.issueListTableView.frame.width, height: 100))
         let footerView = UIView(frame: viewFrame)
@@ -105,6 +141,7 @@ extension IssueListViewController: UITableViewDelegate {
 
 enum TableViewInformationMessage: CustomStringConvertible {
     case showSearchBar
+    
     var description: String {
         switch self {
         case .showSearchBar:
@@ -118,6 +155,7 @@ enum ButtonImagesTitle: CustomStringConvertible {
     case selector
     case delete
     case next
+    
     var description: String {
         switch self {
         case .filter:
