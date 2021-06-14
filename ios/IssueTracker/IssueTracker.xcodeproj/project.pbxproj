@@ -24,6 +24,7 @@
 		AECEA446266F3AD900855F20 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECEA444266F3AD900855F20 /* IssueCell.xib */; };
 		AEE2A4D32670A00300FA6274 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */; };
 		AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D42670A8C000FA6274 /* LabelView.swift */; };
+		FF76F8B52677300300342633 /* UIBarButtonItem+setTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76F8B42677300300342633 /* UIBarButtonItem+setTitle.swift */; };
 		FF89A95E266F0BD000983577 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A95D266F0BD000983577 /* AppDelegate.swift */; };
 		FF89A960266F0BD000983577 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A95F266F0BD000983577 /* SceneDelegate.swift */; };
 		FF89A962266F0BD000983577 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF89A961266F0BD000983577 /* IssueListViewController.swift */; };
@@ -86,6 +87,7 @@
 		AECEA444266F3AD900855F20 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		AEE2A4D42670A8C000FA6274 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		FF76F8B42677300300342633 /* UIBarButtonItem+setTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+setTitle.swift"; sourceTree = "<group>"; };
 		FF89A95A266F0BD000983577 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF89A95D266F0BD000983577 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF89A95F266F0BD000983577 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +182,8 @@
 				AE7D39422672033800BF9487 /* UIView+HiddenWithAnimation.swift */,
 				AE7505302670ED1F00BA14F7 /* UILabel+AddLineSpacing.swift */,
 				AE7505322670EE0600BA14F7 /* UIColor+hexToUIColor.swift */,
+				AE7D39402671E8CC00BF9487 /* Notification+Name.swift */,
+				FF76F8B42677300300342633 /* UIBarButtonItem+setTitle.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -514,6 +518,7 @@
 				FF89A99F2670793B00983577 /* IssueListMockData.swift in Sources */,
 				FF89A960266F0BD000983577 /* SceneDelegate.swift in Sources */,
 				AE7D391B2671A91400BF9487 /* UINibCreatable.swift in Sources */,
+				FF76F8B52677300300342633 /* UIBarButtonItem+setTitle.swift in Sources */,
 				FF89A999267077E800983577 /* User.swift in Sources */,
 				AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */,
 				AE7505332670EE0600BA14F7 /* UIColor+hexToUIColor.swift in Sources */,
