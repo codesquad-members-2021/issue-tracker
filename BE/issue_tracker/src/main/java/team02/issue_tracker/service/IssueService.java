@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
 
-    private static final Long EMPTY = 0L;
-
     private final IssueRepository issueRepository;
     private final UserService userService;
     private final CommentService commentService;
@@ -59,16 +57,9 @@ public class IssueService {
 
     private Issue makeIssue(IssueRequest issueRequest, User writer) {
         Issue issue = issueRequest.toIssue(writer);
-
-        if (!isMilestoneEmpty(issueRequest.getMilestoneId())) {
-            Milestone milestone = milestoneService.findOne(issueRequest.getMilestoneId());
-            issue.addMilestone(milestone);
-        }
+        Milestone milestone = milestoneService.getMilestone(issueRequest.getMilestoneId());
+        issue.addMilestone(milestone);
         return issueRepository.save(issue);
-    }
-
-    private boolean isMilestoneEmpty(Long milestoneId) {
-        return milestoneId == EMPTY;
     }
 
     public void closeIssues(IssueIdsRequest issueIdsRequest) {
@@ -127,16 +118,9 @@ public class IssueService {
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         validateDeleted(issue);
-        Milestone milestone = getMilestone(issueMilestoneRequest.getMilestoneId());
+        Milestone milestone = milestoneService.getMilestone(issueMilestoneRequest.getMilestoneId());
         issue.replaceMilestone(milestone);
         issueRepository.save(issue);
-    }
-
-    private Milestone getMilestone(Long milestoneId) {
-        if(isMilestoneEmpty(milestoneId)) {
-            return null;
-        }
-        return milestoneService.findOne(milestoneId);
     }
 
     public void addComment(Long issueId, Long userId, CommentRequest commentRequest) {

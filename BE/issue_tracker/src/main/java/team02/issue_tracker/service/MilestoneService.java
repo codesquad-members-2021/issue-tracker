@@ -9,6 +9,8 @@ import team02.issue_tracker.repository.MilestoneRepository;
 @Service
 public class MilestoneService {
 
+    private static final Long EMPTY = 0L;
+
     private final MilestoneRepository milestoneRepository;
 
     public MilestoneService(MilestoneRepository milestoneRepository) {
@@ -17,5 +19,16 @@ public class MilestoneService {
 
     public Milestone findOne(Long id) {
         return milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
+    }
+
+    public Milestone getMilestone(Long milestoneId) {
+        if(isMilestoneEmpty(milestoneId)) {
+            return null;
+        }
+        return findOne(milestoneId);
+    }
+
+    private boolean isMilestoneEmpty(Long milestoneId) {
+        return milestoneId == EMPTY;
     }
 }
