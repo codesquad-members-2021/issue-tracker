@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 
 type ListWrapperType = {
   wrapWidth: string;
@@ -26,3 +27,53 @@ export const ListWrapper = styled.div<ListWrapperType>`
   }
 `;
 
+export const inputStyles = makeStyles({
+  title: {
+    width: '100%',
+    marginBottom: '16px',
+    border: '1px solid #fff',
+    '& input': {
+      background: '#EFF0F6',
+      '&:focus': {
+        background: '#FEFEFE',
+        boxShadow: '0 0 0 1px #14142B',
+        borderRadius: '4px'
+      }
+    }
+  },
+  desc: {
+    width: '100%',
+    border: 'none',
+    padding: '0',
+    '& >div': {
+      background: '#EFF0F6',
+    },
+    '& textarea': {
+      '&:focus': {
+        background: '#FEFEFE',
+        boxShadow: '0 0 0 1px #14142B',
+        borderRadius: '4px'
+      }
+    }
+  },
+  fileButton: {
+    width: '100%',
+    padding: '16px',
+    background: '#EFF0F6',
+    borderTop: '1px dashed #c4c4c4',
+    justifyContent: 'start',
+    fontWeight: 700,
+    color: '#6E7191',
+    fontSize: '12px'
+  },
+  displayNone: {
+    display: 'none'
+  },
+  button: {
+    padding: '12px 84px',
+    marginLeft: '16px',
+    background: "#007AFF",
+    borderRadius: '20px',
+    fontSize: '18px',
+  }
+})

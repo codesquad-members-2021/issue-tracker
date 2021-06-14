@@ -76,6 +76,9 @@ function useAsync<D, E, F extends PromiseFn<D>>(promiseFn: F, skip = false, ...p
   useEffect(() => {
     if (skip) return;
     fetchData(...params);
+    return () => {
+      fetchData(...params);
+    }
   }, []);
 
   return [state, fetchData] as const;

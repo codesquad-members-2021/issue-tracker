@@ -30,7 +30,7 @@ type IconButtonType = {
 const IconButton = ({ icon, children, color, variant, background }: IconButtonType) => {
   return (
     <Button color={color} variant={variant}
-      style={{ borderRadius: "11px", padding: '0 1rem', background: background }}>
+      style={{ borderRadius: "11px", padding: '0 1rem', background: background , height:'100%'}}>
       <ImageTag src={icon ? iconKinds[icon] : ''} />
       {children}
     </Button>

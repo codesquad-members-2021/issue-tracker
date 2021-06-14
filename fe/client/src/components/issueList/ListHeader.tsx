@@ -3,7 +3,7 @@ import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import { issueCheckedItemAtom, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
 import IconButton from '@components/common/IconButton';
 import { IssueListItemType } from '@components/common/types/APIType';
-import FilterItem from './FilterWrapper';
+import FilterItem from './FilterItem';
 
 type ListHeaderType = {
   issueItems: Array<IssueListItemType>;
@@ -40,10 +40,9 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
       </div>
 
       <FilterListWrapper>
-        {filterItems.map(title => {
+        {filterItems.map((title) => {
           return <FilterItem key={title} {...{ title, handleClickShowFilterModal }} />
         })}
-
       </FilterListWrapper>
 
     </ListHeaderWrapper>

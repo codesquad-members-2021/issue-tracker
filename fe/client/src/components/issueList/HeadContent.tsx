@@ -5,6 +5,7 @@ import { InputAdornment, InputBase } from '@material-ui/core';
 import SearchIcon from '@/Icons/Search.svg';
 import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@components/common/FilterTab';
+import { Link } from 'react-router-dom';
 
 const issueFilterList = [
   '열린 이슈',
@@ -42,10 +43,12 @@ const HeadContent = ({ handleClickShowFilterModal }: HeadContentType) => {
       </FilterWrapper>
       <ButtonsWrapper>
         <LabelMilestoneToggle />
-        <IconButton icon="whitePlus" color="primary"
-          variant="contained" background="#007AFF">
-          이슈작성
-        </IconButton>
+        <Link to="/createIssue" style={{ textDecoration: 'none' }}>
+          <IconButton icon="whitePlus" color="primary"
+            variant="contained" background="#007AFF">
+            이슈작성
+          </IconButton>
+        </Link>
       </ButtonsWrapper>
     </HeadWrapper>
   )
