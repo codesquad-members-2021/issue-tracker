@@ -13,27 +13,29 @@ class MilestoneTableViewCell: UITableViewCell {
     static let reuseId = "MilestoneTableViewCell"
     
     private let verticalStackView: UIStackView = {
-        let stackViw = UIStackView()
-        stackViw.axis = .vertical
-        stackViw.alignment = .leading
-        stackViw.distribution = .equalSpacing
-        return stackViw
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        return stackView
     }()
     
     private let horizenStackView: UIStackView = {
-        let stackViw = UIStackView()
-        stackViw.axis = .horizontal
-        stackViw.alignment = .fill
-        stackViw.distribution = .equalCentering
-        return stackViw
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .top
+        stackView.distribution = .fill
+        return stackView
     }()
     
     private let IssueLabelStackView: UIStackView = {
-        let stackViw = UIStackView()
-        stackViw.axis = .horizontal
-        stackViw.alignment = .fill
-        stackViw.distribution = .fillEqually
-        return stackViw
+        let stackView = UIStackView()
+        stackView.spacing = 5
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        return stackView
     }()
     
     private let titleLabel: UILabel = {
@@ -53,53 +55,55 @@ class MilestoneTableViewCell: UITableViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 17)
         label.textColor = .systemGray
         label.text = "마일스톤 설명"
         return label
     }()
     
-    private let dueDateLabel: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "calendar"), for: .normal)
-        button.setTitle("2021-06-21", for: .normal)
-        button.setTitleColor(.secondaryLabel, for: .normal)
-        return button
+    private let dueDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17)
+        label.textColor = .systemGray
+        label.text = "2021-06-21"
+        return label
     }()
 
-    private let openedIssueLabel: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
-        button.setTitle("열린 이슈 1개", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 13)
-        return button
+    private let openedIssue: PaddingLabel = {
+        let label = PaddingLabel(withInsets: 5, 5, 10, 10)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 15
+        label.text = "Opend Issue 1개"
+        label.backgroundColor = UIColor.hexStringToUIColor(hex: "#B1CAE5")
+        return label
     }()
     
-    private let closedIssueLabel: UIButton = {
-        let button = UIButton()
-//        button.clipsToBounds = true
-//        button.backgroundColor = .systemPurple
-//        button.layer.cornerRadius = 10
-        button.setImage(UIImage(systemName: "archivebox"), for: .normal)
-        button.setTitle("닫힌 이슈 1개", for: .normal)
-        button.setTitleColor(.purple, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 13)
-        return button
+    private let closedIssue: PaddingLabel = {
+        let label = PaddingLabel(withInsets: 5, 5, 10, 10)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 15
+        label.text = "Closed Issue 1개"
+        label.backgroundColor = UIColor.hexStringToUIColor(hex: "#DFCD85")
+        return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        horizenStackView.addArrangedSubview(titleLabel)
-        horizenStackView.addArrangedSubview(achievementLabel)
+        IssueLabelStackView.addArrangedSubview(openedIssue)
+        IssueLabelStackView.addArrangedSubview(closedIssue)
         
-        IssueLabelStackView.addArrangedSubview(openedIssueLabel)
-        IssueLabelStackView.addArrangedSubview(closedIssueLabel)
-        
-        verticalStackView.addArrangedSubview(horizenStackView)
+        verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
         verticalStackView.addArrangedSubview(dueDateLabel)
         verticalStackView.addArrangedSubview(IssueLabelStackView)
-        addSubview(verticalStackView)
+        
+        horizenStackView.addArrangedSubview(verticalStackView)
+        horizenStackView.addArrangedSubview(achievementLabel)
+        addSubview(horizenStackView)
     }
     
     required init?(coder: NSCoder) {
@@ -108,7 +112,7 @@ class MilestoneTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        verticalStackView.snp.makeConstraints { (maker) in
+        horizenStackView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(20)
         }
     }
