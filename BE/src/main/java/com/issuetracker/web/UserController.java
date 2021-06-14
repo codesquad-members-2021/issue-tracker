@@ -2,7 +2,7 @@ package com.issuetracker.web;
 
 import com.issuetracker.auth.annotation.LoginRequired;
 import com.issuetracker.auth.annotation.UserId;
-import com.issuetracker.auth.dto.UserAgent;
+import com.issuetracker.auth.dto.UserAgentDTO;
 import com.issuetracker.service.UserService;
 import com.issuetracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestHeader("User-Agent") UserAgent userAgent, @RequestParam String code) {
+    public UserResponseDTO login(@RequestHeader("User-Agent") UserAgentDTO userAgent, @RequestParam String code) {
         logger.debug("로그인 요청");
         logger.debug("헤더 확인: {}", userAgent);
         return userService.login(code, userAgent);

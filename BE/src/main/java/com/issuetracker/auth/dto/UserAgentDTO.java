@@ -3,7 +3,7 @@ package com.issuetracker.auth.dto;
 import lombok.Setter;
 
 @Setter
-public class UserAgent {
+public class UserAgentDTO {
 
     private String userAgent;
 
