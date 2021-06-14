@@ -117,7 +117,9 @@ extension IssueListViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
         cell.selectionStyle = .none
         cell.check()
-        
+        //
+        let controller = IssueDetailViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
