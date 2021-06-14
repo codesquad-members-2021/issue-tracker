@@ -10,9 +10,9 @@ const IssueList = () => {
 	const [isAnyIssueSelected, setIsAnyIssueSelected] = useState(false); // 상태 위치 협의 후 수정
 	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
 	const [initCheck, setInitCheck] = useState(true);
-	const [selectedIssues, setSelectedIssues] = useRecoilState(
-		selectedIssueCntAtomState
-	);
+	const [_, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+	const [selectedCards, setSelectedCards] = useState(new Set());
+
 	useEffect(() => {
 		if (!initCheck && !isAllIssueSelected && !isAnyIssueSelected)
 			setSelectedIssues(() => 0);
@@ -27,6 +27,8 @@ const IssueList = () => {
 			setIsAllIssueSelected={setIsAllIssueSelected}
 			initCheck={initCheck}
 			setInitCheck={setInitCheck}
+			selectedCards={selectedCards}
+			setSelectedCards={setSelectedCards}
 		/>
 	));
 

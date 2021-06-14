@@ -16,6 +16,8 @@ const IssueCard = ({
 	setIsAllIssueSelected,
 	initCheck,
 	setInitCheck,
+	selectedCards,
+	setSelectedCards,
 }) => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
@@ -38,8 +40,10 @@ const IssueCard = ({
 			setIsAnyIssueSelected(true);
 			setSelectedIssues(() => selectedIssues + 1);
 			setInitCheck(false);
+			setSelectedCards(() => selectedCards.add(id));
 		} else if (!initCheck && !isChecked) {
 			setSelectedIssues(() => selectedIssues - 1);
+			selectedCards.delete(id);
 		}
 	}, [isChecked]);
 
