@@ -57,7 +57,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                 switch result {
                 case .success(let response):
                     let loginInfo = LoginInfo(userID: nil,
-                                              jwt: response.jwt,
+                                              jwt: response.jwt.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)
                     if self.keyChainSaver.save(loginInfo) {
