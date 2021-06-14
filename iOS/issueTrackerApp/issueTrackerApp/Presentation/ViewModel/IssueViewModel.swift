@@ -9,7 +9,9 @@ import Foundation
 
 protocol IssueViewModelProtocol {
     var issues: [Issue] { get }
+    var filteredIssues: [Issue] { get set }
     func fetchAllIssue()
+    func filterIssuesWithSearchText(_ string: String)
 }
 
 class IssueViewModel: IssueViewModelProtocol {
@@ -17,6 +19,12 @@ class IssueViewModel: IssueViewModelProtocol {
     var issues: [Issue] = [] {
         didSet {
             NotificationCenter.default.post(name: .didReceiveIssueData, object: nil)
+        }
+    }
+    
+    var filteredIssues: [Issue] = [] {
+        didSet {
+            NotificationCenter.default.post(name: .didFilterIssueData, object: nil)
         }
     }
     
@@ -30,4 +38,9 @@ class IssueViewModel: IssueViewModelProtocol {
         })
     }
     
+    func filterIssuesWithSearchText(_ string: String) {
+        self.filteredIssues = issues.filter({ (issue: Issue) -> Bool in
+            return issue.title.lowercased().contains(string.lowercased())
+        })
+    }
 }

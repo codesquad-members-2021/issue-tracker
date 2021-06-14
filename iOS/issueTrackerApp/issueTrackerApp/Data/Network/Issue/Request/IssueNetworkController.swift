@@ -18,8 +18,6 @@ class IssueNetworkController {
         let requestURL = req.urlRequest.url!
         requests[requestURL] = req
         
-        print("sdf")
-        
         req.execute { (result) in
             if let _ = result {
                 self.requests[requestURL] = nil

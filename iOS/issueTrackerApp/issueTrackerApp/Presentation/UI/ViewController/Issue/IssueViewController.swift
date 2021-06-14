@@ -14,7 +14,6 @@ class IssueViewController: UIViewController, IssueNetworked {
     var issueNetworkController: IssueNetworkController?
     var viewModel: IssueViewModelProtocol?
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredIssue: [String] = []
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -29,15 +28,22 @@ class IssueViewController: UIViewController, IssueNetworked {
         self.configureRightBarButtonItem()
         self.configureTableView()
         self.configureViewModel()
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveIssueData), name: .didReceiveIssueData, object: nil)
+        self.configureNotificationCenter()
         
-        viewModel?.fetchAllIssue()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.configureSearchController()
+    }
+    
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveIssueData), name: .didReceiveIssueData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidFilterIssueData), name: .didFilterIssueData, object: nil)
+    }
+    
+    @objc func onDidFilterIssueData() {
+        self.issueTableView.reloadData()
     }
     
     @objc func onDidReceiveIssueData() {
@@ -47,6 +53,7 @@ class IssueViewController: UIViewController, IssueNetworked {
     private func configureViewModel() {
         guard self.issueNetworkController != nil else { return }
         self.viewModel = IssueViewModel(issueNetworkController: self.issueNetworkController!)
+        viewModel?.fetchAllIssue()
     }
     
     private func configureLeftBarButtonItem() {
@@ -85,20 +92,34 @@ class IssueViewController: UIViewController, IssueNetworked {
 extension IssueViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        viewModel?.filterIssuesWithSearchText(searchBar.text!)
     }
     
 }
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isFiltering {
+            guard let filteredIssue = viewModel?.filteredIssues else { return 0 }
+            return filteredIssue.count
+        }
         guard let issues = viewModel?.issues else { return 0 }
         return issues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.issueTableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as! IssueCell
-        guard let issues = viewModel?.issues else { return cell }
-        cell.configureAll(with: issues[indexPath.row])
+        
+        if isFiltering {
+            guard let filteredIssues = viewModel?.filteredIssues else { return cell }
+            cell.configureAll(with: filteredIssues[indexPath.row])
+        } else {
+            guard let issues = viewModel?.issues else { return cell }
+            cell.configureAll(with: issues[indexPath.row])
+        }
+        
         return cell
     }
     

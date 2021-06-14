@@ -8,5 +8,6 @@
 import Foundation
 
 extension Notification.Name {
+    static let didFilterIssueData = Notification.Name("didFilterIssueData")
     static let didReceiveIssueData = Notification.Name("didReceiveIssueData")
 }
