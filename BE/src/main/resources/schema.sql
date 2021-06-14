@@ -55,9 +55,9 @@ DROP TABLE IF EXISTS `issue-tracker`.`user` ;
 CREATE TABLE IF NOT EXISTS `issue-tracker`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL DEFAULT 'Anonymous',
-    `user_id` VARCHAR(45) NOT NULL,
+    `login_id` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `github_id_UNIQUE` (`user_id` ASC) VISIBLE)
+    UNIQUE INDEX `github_id_UNIQUE` (`login_id` ASC) VISIBLE)
     ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `issue-tracker`.`issue`
@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `issue-tracker`.`issue` ;
 CREATE TABLE IF NOT EXISTS `issue-tracker`.`issue` (
    `id` INT NOT NULL AUTO_INCREMENT,
    `title` VARCHAR(45) NOT NULL DEFAULT 'no title',
-    `status` TINYINT NOT NULL DEFAULT 1,
+    `status` TINYINT(1) NOT NULL DEFAULT 1,
     `created_at` DATETIME NOT NULL,
     `content` VARCHAR(1000) NULL DEFAULT 'no contents',
     `milestone_id` INT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`issue` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `issue-tracker`.`label` ;
 CREATE TABLE IF NOT EXISTS `issue-tracker`.`label` (
-   `id` INT NOT NULL,
+   `id` INT NOT NULL AUTO_INCREMENT,
    `title` VARCHAR(45) NOT NULL DEFAULT 'no title',
     `content` VARCHAR(45) NULL DEFAULT 'no contents',
     `color` CHAR(6) NOT NULL DEFAULT 'F0F8FF',
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`label` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `issue-tracker`.`assignee` ;
 CREATE TABLE IF NOT EXISTS `issue-tracker`.`assignee` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `issue_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`assignee` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `issue-tracker`.`issue_label` ;
 CREATE TABLE IF NOT EXISTS `issue-tracker`.`issue_label` (
-     `id` INT NOT NULL,
+     `id` INT NOT NULL AUTO_INCREMENT,
      `issue_id` INT NOT NULL,
      `label_id` INT NOT NULL,
      PRIMARY KEY (`id`),
