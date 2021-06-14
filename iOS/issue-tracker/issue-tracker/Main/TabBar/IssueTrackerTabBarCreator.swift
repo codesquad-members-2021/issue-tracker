@@ -59,6 +59,8 @@ final class IssueTrackerTabBarCreator {
 extension IssueTrackerTabBarCreator {
     func create() -> IssueTrackerTabBarController {
         let issueTrackerTabBarController = IssueTrackerTabBarController()
+        issueTrackerTabBarController.configure(loginInfo: loginInfo)
+        
         let childs = childInfos.map{ generateChild(with: $0) }
         issueTrackerTabBarController.setViewControllers(childs, animated: true)
         return issueTrackerTabBarController

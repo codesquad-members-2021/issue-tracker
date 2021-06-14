@@ -41,8 +41,8 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
             return
         }
         
-        let deviceID = appleIDCredential.user
-        let loginInfo = LoginInfo(deviceID: deviceID, jwt: tokenInString, avatarURL: nil, name: name)
+        let userID = appleIDCredential.user
+        let loginInfo = LoginInfo(userID: userID, jwt: tokenInString, avatarURL: nil, name: name)
         
         if !keyChainSaver.save(loginInfo) {
             let saveError = LoginError.keyChainSave

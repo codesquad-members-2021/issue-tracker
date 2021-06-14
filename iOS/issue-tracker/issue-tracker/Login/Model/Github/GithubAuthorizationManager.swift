@@ -56,7 +56,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    let loginInfo = LoginInfo(deviceID: nil,
+                    let loginInfo = LoginInfo(userID: nil,
                                               jwt: response.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)

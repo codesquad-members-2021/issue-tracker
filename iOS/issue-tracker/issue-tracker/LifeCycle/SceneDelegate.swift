@@ -28,9 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let loginManager = loginManager, let loginInfo = loginInfo else { return }
 
-        if let deviceID = loginInfo.deviceID {
+        if let userID = loginInfo.userID {
             let appleIDProvider = ASAuthorizationAppleIDProvider()
-            appleIDProvider.getCredentialState(forUserID: deviceID) { [weak self] (credentialState, error) in
+            appleIDProvider.getCredentialState(forUserID: userID) { [weak self] (credentialState, error) in
                 switch credentialState {
                 case .authorized:
                     self?.straightToIssueTrackerScene(with: loginManager, loginInfo)
@@ -48,7 +48,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.async {
             let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
             let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
-            issueTrackerTabBarController.configure(loginInfo: loginInfo)
             self.window?.rootViewController = issueTrackerTabBarController
         }
     }
