@@ -32,6 +32,8 @@
 		D49B789326771EA200CF3FE4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789226771EA200CF3FE4 /* IssueList.swift */; };
 		D49B789526771EAA00CF3FE4 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789426771EAA00CF3FE4 /* IssueDetail.swift */; };
 		D49B789726771EC100CF3FE4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789626771EC100CF3FE4 /* Comment.swift */; };
+		D49B789926772F8C00CF3FE4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789826772F8C00CF3FE4 /* CommentCell.swift */; };
+		D49B789B26772FA400CF3FE4 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789A26772FA400CF3FE4 /* CommentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		D49B789226771EA200CF3FE4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		D49B789426771EAA00CF3FE4 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
 		D49B789626771EC100CF3FE4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D49B789826772F8C00CF3FE4 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		D49B789A26772FA400CF3FE4 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 			children = (
 				D49B78662670A67400CF3FE4 /* IssueCell.swift */,
 				D49B787A2673479C00CF3FE4 /* AdditionalInformationCell.swift */,
+				D49B789826772F8C00CF3FE4 /* CommentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 				D49B78722671E97300CF3FE4 /* FilterTableViewController.swift */,
 				D49B78782673313B00CF3FE4 /* AddingIssueViewController.swift */,
 				D49B787C2673586E00CF3FE4 /* IssueSelectViewController.swift */,
+				D49B789A26772FA400CF3FE4 /* CommentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 				D49B788F267627BC00CF3FE4 /* EndPoint.swift in Sources */,
 				D49B78732671E97300CF3FE4 /* FilterTableViewController.swift in Sources */,
 				D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */,
+				D49B789B26772FA400CF3FE4 /* CommentViewController.swift in Sources */,
 				D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */,
 				D49B784F266F0D0200CF3FE4 /* AppDelegate.swift in Sources */,
 				D49B787D2673586F00CF3FE4 /* IssueSelectViewController.swift in Sources */,
@@ -292,6 +299,7 @@
 				D49B78752671F4FB00CF3FE4 /* UIButton + Extension.swift in Sources */,
 				D49B7885267622CF00CF3FE4 /* Label.swift in Sources */,
 				D49B78812676216B00CF3FE4 /* Issue.swift in Sources */,
+				D49B789926772F8C00CF3FE4 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
