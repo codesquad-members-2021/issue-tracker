@@ -20,6 +20,7 @@ class AddingIssueViewController: UIViewController {
     
     func setNavigationItem() {
         let leftButton = UIButton.setButton(image: "Icon.png", title: " 취소")
+        leftButton.addTarget(self, action: #selector(backButtonTouched(_ :)), for: .touchUpInside)
         
         let rightButton = UIButton.setButton(image: "plus.png", title: " 저장")
         rightButton.semanticContentAttribute = .forceRightToLeft
@@ -40,6 +41,11 @@ class AddingIssueViewController: UIViewController {
         view.addSubview(label)
         return view
     }
+    
+    @objc func backButtonTouched(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func segmentControlTouched(_ sender: UISegmentedControl) {
     }
 }
