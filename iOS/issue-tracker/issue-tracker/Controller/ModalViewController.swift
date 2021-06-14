@@ -16,7 +16,6 @@ class ModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(DetailTextStyleTableViewCell.self, forCellReuseIdentifier: "cell")
         view.layer.cornerRadius = 15
         setupGestureRecognizers()
     }
