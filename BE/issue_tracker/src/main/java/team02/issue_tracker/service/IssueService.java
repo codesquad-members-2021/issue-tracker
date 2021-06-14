@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
-import team02.issue_tracker.exception.IllegalIssueStatusException;
+import team02.issue_tracker.exception.IllegalStatusException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
 
@@ -76,7 +76,7 @@ public class IssueService {
 
     private void validateDeleted(Issue issue) {
         if (issue.isDeleted()) {
-            throw new IllegalIssueStatusException("삭제된 이슈입니다.");
+            throw new IllegalStatusException("삭제된 이슈입니다.");
         }
     }
 
@@ -131,5 +131,26 @@ public class IssueService {
         Comment comment = commentRequest.toComment(writer);
         comment.addIssue(issue);
         commentService.save(comment);
+    }
+
+    /**
+     *
+     * Issue 삭제시 Comment도 삭제됨
+     */
+    public void deleteIssue(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        issue.delete();
+        issueRepository.save(issue);
+
+        List<Comment> comments = issue.getComments().stream()
+                .map(comment -> {
+                    comment.delete();
+                    commentService.deleteCommentEmoji(comment.getId());
+                    return comment;
+                }).collect(Collectors.toList());
+        commentService.saveAll(comments);
+
+        userService.deleteIssueAssignees(issue);
+        labelService.deleteIssueLabels(issue);
     }
 }
