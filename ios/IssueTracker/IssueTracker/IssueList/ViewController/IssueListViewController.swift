@@ -31,7 +31,6 @@ class IssueListViewController: UIViewController {
     }()
     
     private var isCheckAll: Bool!
-    
     private var viewModel: IssueViewModel!
     private var dataSource: IssueDataSource!
     
@@ -54,6 +53,8 @@ extension IssueListViewController {
     }
     
     private func setting() {
+        issueTableView.tableFooterView = UIView(frame: .zero)
+        issueTableView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.937254902, alpha: 1)
         issueTableView.dataSource = dataSource
         issueTableView.delegate = self
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
@@ -71,7 +72,6 @@ extension IssueListViewController {
         searchController.searchBar.placeholder = "Search"
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
         
