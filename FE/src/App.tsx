@@ -6,7 +6,7 @@ import GlobalStyle from './util/styles/GlobalStyle';
 import theme from './util/styles/theme';
 
 import Header from './components/Header';
-import { RegisterPage, LoginPage, IssuePage, IssueWritePage } from './pages';
+import { RegisterPage, LoginPage, IssuePage, IssueWritePage, LabelListPage } from './pages';
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
               <Switch>
                 <Route path={'/issues'} exact component={IssuePage} />
                 <Route path={'/issues/write'} exact component={IssueWritePage} />
-                <Route path={'/labels'} exact component={RegisterPage} />
+                <Route path={'/labels'} exact component={LabelListPage} />
               </Switch>
             </>
           </Switch>
