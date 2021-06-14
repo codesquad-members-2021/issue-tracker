@@ -4,7 +4,6 @@ import LabelSelectItem from 'components/common/LabelSelectItem';
 import MilestoneSelectItem from 'components/common/MilestoneSelectItem';
 import UserSelectItem from 'components/common/UserSelectItem';
 
-
 interface ModalContentListProps {
   filterType: string;
   setModalClose?: () => void;
@@ -17,14 +16,25 @@ export default function ModalContentList({
   let contentList;
 
   if (filterType === 'author') {
-   }
+    contentList = assignees.map((assignee) => (
+      <UserSelectItem
+        key={assignee.id}
+        imageURL={assignee.image}
+        name={assignee.userName}
+      ></UserSelectItem>
+    ));
+  }
   if (filterType === 'label') {
     contentList = labelSample.map((label) => <LabelSelectItem key={label.id} label={label} />);
   }
   if (filterType === 'assignee') {
-    contentList=assignees.map((assignee)=>
-    <UserSelectItem key={assignee.id} imageURL={assignee.image} name={assignee.userName}></UserSelectItem>)
-  
+    contentList = assignees.map((assignee) => (
+      <UserSelectItem
+        key={assignee.id}
+        imageURL={assignee.image}
+        name={assignee.userName}
+      ></UserSelectItem>
+    ));
   }
   if (filterType === 'milestone') {
     contentList = milestoneSample.map((milestone) => (
@@ -40,35 +50,37 @@ const ModalContentListBlock = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.color.white};
-
+  & > div:not(:last-child) {
+    border-bottom: 1px solid ${({ theme }) => theme.color.lineGrey};
+  }
 `;
-
 
 export const assignees = [
   {
-  id: 1,
-  image: "https://avatars.githubusercontent.com/u/63284310?v=4",
-  userName: "eNoLJ",
-  assigned: false
+    id: 1,
+    image: 'https://avatars.githubusercontent.com/u/63284310?v=4',
+    userName: 'eNoLJ',
+    assigned: false,
   },
   {
-  id: 2,
-  image: "https://avatars.githubusercontent.com/u/68000537?v=4",
-  userName: "janeljs",
-  assigned: false
+    id: 2,
+    image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
+    userName: 'janeljs',
+    assigned: false,
   },
   {
-  id: 3,
-  image: "https://avatars.githubusercontent.com/u/68000537?v=4",
-  userName: "zane",
-  assigned: false
+    id: 3,
+    image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
+    userName: 'zane',
+    assigned: false,
   },
   {
-  id: 4,
-  image: "https://avatars.githubusercontent.com/u/74946802?v=4",
-  userName: "torch-ray",
-  assigned: false
-  }
+    id: 4,
+    image: 'https://avatars.githubusercontent.com/u/74946802?v=4',
+    userName: 'torch-ray',
+    assigned: false,
+  },
+];
 const labelSample = [
   {
     id: 1,

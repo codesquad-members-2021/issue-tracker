@@ -17,6 +17,12 @@ const Theme = {
   size: {
     sm: 12,
   },
+  filterModalPosition: {
+    assignee: 260.5,
+    label: 181.5,
+    milestone: 90.5,
+    author: 11,
+  },
 };
 
 export const hoverGrey = styled.div`
