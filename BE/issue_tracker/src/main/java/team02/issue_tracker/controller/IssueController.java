@@ -1,6 +1,8 @@
 package team02.issue_tracker.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.dto.wrapping.ApiResult;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
@@ -9,6 +11,7 @@ import team02.issue_tracker.service.IssueService;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/issues")
 public class IssueController {
@@ -32,6 +35,7 @@ public class IssueController {
     @LoginRequired
     @PostMapping
     public ApiResult<String> createIssue(@RequestBody IssueRequest issueRequest, @UserId Long userId) {
+        log.info("user id: {}", userId);
         issueService.addIssue(issueRequest, userId);
         return ApiResult.ok();
     }
@@ -69,6 +73,14 @@ public class IssueController {
     @PatchMapping("/{issueId}/milestone")
     public ApiResult<String> modifyMilestone(@PathVariable Long issueId, @RequestBody IssueMilestoneRequest  issueMilestoneRequest) {
         issueService.modifyMilestone(issueId, issueMilestoneRequest);
+        return ApiResult.ok();
+    }
+
+    @LoginRequired
+    @PostMapping("/{issueId}/comments")
+    public ApiResult<String> createComment(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest, @UserId Long userId) {
+        log.info("user id: {}", userId);
+        issueService.addComment(issueId, userId, commentRequest);
         return ApiResult.ok();
     }
 
