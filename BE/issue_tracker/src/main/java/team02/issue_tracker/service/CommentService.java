@@ -16,9 +16,13 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Comment save(IssueRequest issueRequest, User writer, Issue issue) {
+    public Comment makeComment(IssueRequest issueRequest, User writer, Issue issue) {
         Comment comment = issueRequest.toComment(writer);
         comment.addIssue(issue);
+        return commentRepository.save(comment);
+    }
+
+    public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 }
