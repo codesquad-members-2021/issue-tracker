@@ -44,7 +44,7 @@ export default ListBody;
 // 1. 메인 (큰 틀)
 const ListBodyLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.grayScale.offWhite};
-  border-radius: 0px 0px 16px 16px;
+  border-radius: 0px 0px 0.5rem 0.5rem;
   width: inherit;
 `;
 
@@ -52,7 +52,7 @@ const ListBodyRow = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  padding: 18px 0;
+  padding: 1.05rem 0;
   :last-child {
     border-bottom: none;
   }
@@ -60,7 +60,7 @@ const ListBodyRow = styled.div`
 
 const ListBodyBlock = styled.div`
   display: flex;
-  column-gap: 8px;
+  column-gap: 0.8rem;
 `;
 // =====
 
@@ -68,12 +68,12 @@ const ListBodyBlock = styled.div`
 const TitleInfoBlock = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 0.4rem;
 `;
 
 const TitleBlock = styled.div`
   display: flex;
-  column-gap: 8px;
+  column-gap: 0.6rem;
 
   span {
     &.icon {
@@ -86,21 +86,21 @@ const TitleBlock = styled.div`
     &.label {
       font-size: ${({ theme }) => theme.fontSize.XS};
       background-color: ${({ theme }) => theme.colors.normal.blue};
-      border-radius: 30px;
-      padding: 4px 16px;
+      border-radius: 3rem;
+      padding: 0.4rem 1.6rem;
     }
   }
 `;
 
 const InfoBlock = styled.div`
   display: flex;
-  column-gap: 12px;
+  column-gap: 1.2rem;
   span {
     font-size: ${({ theme }) => theme.fontSize.XS};
     color: ${({ theme }) => theme.colors.grayScale.label};
     display: flex;
     align-items: center;
-    column-gap: 4px;
+    column-gap: 0.4rem;
 
     svg {
       fill: currentColor;
@@ -112,6 +112,6 @@ const InfoBlock = styled.div`
 const AssigneeProfileBlock = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 4px;
-  margin-right: 32px;
+  column-gap: 0.4rem;
+  margin-right: 3.2rem;
 `;

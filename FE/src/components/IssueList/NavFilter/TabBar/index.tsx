@@ -15,5 +15,5 @@ export default TabBar;
 const TabBarLayout = styled(Box)`
   display: flex;
   align-items: center;
-  column-gap: 20px;
+  column-gap: 2rem;
 `;

@@ -29,7 +29,7 @@ export default Tabs;
 const TabsLayout = styled(Box)`
   display: flex;
   align-items: center;
-  border-radius: 11px;
+  border-radius: 1.1rem;
   border: 1px solid transparent;
 `;
 
@@ -39,11 +39,11 @@ const TabButton = styled(Button)`
 
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  padding: 6px 24px;
+  padding: 0.4rem 1.4rem;
   & + & {
     border-left: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   }
 
   span { display: flex; align-items: center; }
-  span + span { margin-left: 4px; }
+  span + span { margin-left: 0.4rem; }
 `;

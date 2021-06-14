@@ -26,13 +26,13 @@ const SearchBarLayout = styled(Box)`
   align-items: center;
 
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  border-radius: 11px;
+  border-radius: 1.1rem;
 `;
 
 const FilterButton = styled(Button)`
   min-width: 20%;
   height: 100%;
-  padding: 0 4px;
+  padding: 0 0.4rem;
 
   display: flex;
   justify-content: space-around;
@@ -42,14 +42,14 @@ const FilterButton = styled(Button)`
   color: ${({ theme }) => theme.colors.grayScale.label};
   border-right: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   background-color: ${({ theme }) => theme.colors.grayScale.bgColor};
-  border-radius: 11px 0px 0px 11px;
+  border-radius: 1.1rem 0px 0px 1.1rem;
 `;
 
 const FilterInput = styled(Input)`
   height: 100%;
   width: 100%;
-  padding: 0 4px;
+  padding: 0 0.4rem;
 
   background-color: ${({ theme }) => theme.colors.grayScale.inputBgColor};
-  border-radius: 0px 11px 11px 0px;
+  border-radius: 0px 1.1rem 1.1rem 0px;
 `;

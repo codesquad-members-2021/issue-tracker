@@ -75,9 +75,9 @@ const ListHeadLayout = styled.div`
   width: inherit;
 
   background-color: ${({ theme }) => theme.colors.grayScale.bgColor};
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 0.5rem 0.5rem 0px 0px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grayScale.line}`};
-  padding: 12px 0;
+  padding: 1.05rem 0;
 `;
 
 const ListHeadRow = styled.div`
@@ -90,15 +90,15 @@ const ListHeadRow = styled.div`
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: 0.4rem;
 `;
 // =====
 
 // 3. Material-UI 커스터마이징
 const cssMuiTabStyle = css`
-  min-height: 24px;
-  height: 24px;
-  min-width: 32px;
+  min-height: 2.4rem;
+  height: 2.4rem;
+  min-width: 3.2rem;
 `;
 
 const LeftTabs = styled(Tabs)`
@@ -122,6 +122,6 @@ const RightButton = styled(Button)`
   color: ${({ theme }) => theme.colors.grayScale.label};
 
   span {
-    margin-right: 4px;
+    margin-right: 0.4rem;
   }
 `;
