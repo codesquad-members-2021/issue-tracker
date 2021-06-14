@@ -22,16 +22,20 @@ public class Milestone {
     private LocalDate createdDate;
     private LocalDate dueDate;
     private boolean isOpen;
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 
     public int getTotalIssueCount() {
-        return issues.size();
+        return (int) issues.stream()
+                .filter(issue -> !issue.isDeleted())
+                .count();
     }
 
     public int getOpenIssueCount() {
         return (int) issues.stream()
+                .filter(issue -> !issue.isDeleted())
                 .filter(Issue::isOpen)
                 .count();
     }

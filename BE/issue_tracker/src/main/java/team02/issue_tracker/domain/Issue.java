@@ -2,11 +2,13 @@ package team02.issue_tracker.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team02.issue_tracker.exception.IllegalStatusException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -23,6 +25,7 @@ public class Issue {
 
     private LocalDateTime createdTime;
     private boolean isOpen;
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
@@ -42,10 +45,51 @@ public class Issue {
         this.title = title;
         this.writer = writer;
         this.isOpen = isOpen;
-        createdTime = LocalDateTime.now();
+        this.createdTime = LocalDateTime.now();
+        this.isDeleted = false;
     }
 
     public void addMilestone(Milestone milestone) {
         this.milestone = milestone;
+    }
+
+    public void close() {
+        if (!isOpen) {
+            throw new IllegalStatusException("열린 이슈가 아닙니다.");
+        }
+        isOpen = false;
+    }
+
+    public void open() {
+        if (isOpen) {
+            throw new IllegalStatusException("닫힌 이슈가 아닙니다.");
+        }
+        isOpen = true;
+    }
+
+    public void replaceTitle(String title) {
+        this.title = title;
+    }
+
+    public void replaceIssueAssignees(List<IssueAssignee> issueAssignees) {
+        this.issueAssignees = issueAssignees;
+    }
+
+    public void replaceIssueLabels(List<IssueLabel> issueLabels) {
+        this.issueLabels = issueLabels;
+    }
+
+    public void replaceMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
+
+    public void delete() {
+        isDeleted = true;
+    }
+
+    public List<Comment> getComments() {
+        return comments.stream()
+                .filter(comment -> !comment.isDeleted())
+                .collect(Collectors.toList());
     }
 }

@@ -22,6 +22,7 @@ public class Label {
     private String title;
     private String content;
     private String color;
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
