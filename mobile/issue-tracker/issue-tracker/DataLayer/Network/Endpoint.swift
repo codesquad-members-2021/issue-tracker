@@ -20,7 +20,7 @@ enum Endpoint {
     static let basePath = "/api/ios/"
     static let headers = ["application/json": "Content-Type"]
 
-    private static func url(rount: Rounter) -> URL? {
+    static func url(rount: Rounter) -> URL? {
         var component = URLComponents()
         component.scheme = Endpoint.scheme
         component.host = Endpoint.host

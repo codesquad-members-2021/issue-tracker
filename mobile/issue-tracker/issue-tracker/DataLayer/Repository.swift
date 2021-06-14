@@ -9,11 +9,7 @@ import Foundation
 import Combine
 import AuthenticationServices
 
-protocol RepositoryProtocol {
-    func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError>
-}
-
-final class Repository: RepositoryProtocol {
+final class Repository {
 
     private let session: URLSession
     private var webAuthSession: ASWebAuthenticationSession?
