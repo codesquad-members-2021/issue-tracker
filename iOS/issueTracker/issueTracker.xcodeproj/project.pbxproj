@@ -23,6 +23,7 @@
 		82A6986C266F688A00F16D39 /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6986B266F688A00F16D39 /* IssueList.storyboard */; };
 		82A6987026707A9700F16D39 /* StoryBoardIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6986F26707A9700F16D39 /* StoryBoardIdentity.swift */; };
 		82A698732670A03000F16D39 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A698722670A03000F16D39 /* IssueListViewController.swift */; };
+		82A74F5126771B4500F3CCCD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A74F5026771B4500F3CCCD /* NetworkManager.swift */; };
 		82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED72675F1A700B85F98 /* Issue.swift */; };
 		82CB7EE22675F1A700B85F98 /* IssueCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED82675F1A700B85F98 /* IssueCount.swift */; };
 		82CB7EE32675F1A700B85F98 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7ED92675F1A700B85F98 /* Milestone.swift */; };
@@ -56,6 +57,7 @@
 		82A6986B266F688A00F16D39 /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
 		82A6986F26707A9700F16D39 /* StoryBoardIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoardIdentity.swift; sourceTree = "<group>"; };
 		82A698722670A03000F16D39 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
+		82A74F5026771B4500F3CCCD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		82CB7ED72675F1A700B85F98 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		82CB7ED82675F1A700B85F98 /* IssueCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCount.swift; sourceTree = "<group>"; };
 		82CB7ED92675F1A700B85F98 /* Milestone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		82A69856266F585100F16D39 /* issueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				82A74F4E26771B3200F3CCCD /* Network */,
 				827A16B426734AB700F3622F /* Entity */,
 				1E15AA232670B4DF00A573DB /* View */,
 				82A6987126707A9D00F16D39 /* Identity */,
@@ -182,6 +185,14 @@
 			path = Identity;
 			sourceTree = "<group>";
 		};
+		82A74F4E26771B3200F3CCCD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				82A74F5026771B4500F3CCCD /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		E7636DDF9A7D96DA85CD8F8A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +214,7 @@
 				82A69851266F585100F16D39 /* Frameworks */,
 				82A69852266F585100F16D39 /* Resources */,
 				827A16B3267344CA00F3622F /* ShellScript */,
+				9F3DF6E14ACECBF6031118FC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,6 +291,23 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
+		9F3DF6E14ACECBF6031118FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-issueTracker/Pods-issueTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-issueTracker/Pods-issueTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-issueTracker/Pods-issueTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A6579DDBCC215A9191530FA7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +340,7 @@
 				82CB7EE82675F1A700B85F98 /* History.swift in Sources */,
 				820550892671F3C700BF8857 /* NewIssueViewController.swift in Sources */,
 				82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */,
+				82A74F5126771B4500F3CCCD /* NetworkManager.swift in Sources */,
 				1E15AA292670F45F00A573DB /* filterOptionCell.swift in Sources */,
 				82A6985C266F585100F16D39 /* ViewController.swift in Sources */,
 				82CB7EE32675F1A700B85F98 /* Milestone.swift in Sources */,

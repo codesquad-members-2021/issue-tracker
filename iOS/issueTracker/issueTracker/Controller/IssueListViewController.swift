@@ -76,6 +76,7 @@ extension IssueListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identity = IssueTableViewCell.cellIdentity
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identity) as? IssueTableViewCell else {
@@ -145,6 +146,7 @@ enum NavigationItemTitles: CustomStringConvertible {
     case issue
     case filter
     case select
+    
     var description: String {
         switch self {
         case .issue:
