@@ -12,6 +12,8 @@ class IssueTableViewCell: UITableViewCell {
     
     static var identifier = "IssueTableViewCell"
     
+    var fakeData = [IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabel(title: "gdsfa", color: "#DFCD85"), IssueLabel(title: "gdsfa", color: "#DFCD85"), IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabel(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
+    
     var largeTitle: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
@@ -29,13 +31,9 @@ class IssueTableViewCell: UITableViewCell {
         return milestone
     }()
     
-    var labelView: PaddingLabel = {
-        var label = PaddingLabel(withInsets: 0, 0, 10, 10)
-        label.textAlignment = .center
-        label.textColor = .white
-        label.layer.masksToBounds = true
-        label.layer.cornerRadius = 15
-        return label
+    var labelsCollectionView: LabelsCollectionView = {
+        var collectionView = LabelsCollectionView()
+        return collectionView
     }()
     
     var checkBoxImageView: UIImageView = {
@@ -46,6 +44,7 @@ class IssueTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        labelsCollectionView.dataSource = self
         addSubviews()
         setAutolayout()
         checkBoxImageView.isHidden = true
@@ -56,7 +55,7 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     func addSubviews() {
-        addSubview(labelView)
+        addSubview(labelsCollectionView)
         addSubview(labelDescription)
         addSubview(milestoneView)
         addSubview(largeTitle)
@@ -82,11 +81,10 @@ class IssueTableViewCell: UITableViewCell {
             view.height.equalTo(22)
         }
         
-        labelView.snp.makeConstraints { view in
+        labelsCollectionView.snp.makeConstraints { view in
             view.top.equalTo(milestoneView.snp.bottom).offset(16)
-            view.leading.equalTo(16)
-            view.width.greaterThanOrEqualTo(30)
-            view.height.equalTo(30)
+            view.leading.trailing.equalToSuperview().inset(16)
+            view.bottom.equalToSuperview()
         }
         
         checkBoxImageView.snp.makeConstraints { image in
@@ -102,8 +100,6 @@ class IssueTableViewCell: UITableViewCell {
         self.largeTitle.text = title
         self.labelDescription.text = description
         self.milestoneView.setMilestoneTitle(title: milestoneTitle)
-        self.labelView.backgroundColor = UIColor.hexStringToUIColor(hex: color)
-        self.labelView.text = "레이블 이름"
     }
     
     func check() {
@@ -113,4 +109,23 @@ class IssueTableViewCell: UITableViewCell {
     func uncheck() {
         checkBoxImageView.isHidden = true
     }
+}
+
+extension IssueTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return fakeData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: indexPath) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
+        cell.configure(title: fakeData[indexPath.item].title, color: fakeData[indexPath.item].color)
+        return cell
+    }
+    
+    
+}
+
+struct IssueLabel {
+    var title: String
+    var color: String
 }

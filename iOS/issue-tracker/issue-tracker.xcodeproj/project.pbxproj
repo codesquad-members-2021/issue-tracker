@@ -29,6 +29,8 @@
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
 		B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */; };
+		B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */; };
+		B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */; };
 		B3F527512670968F002B0812 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527502670968F002B0812 /* LabelViewController.swift */; };
 		B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */; };
 		B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */; };
@@ -99,6 +101,8 @@
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
+		B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionView.swift; sourceTree = "<group>"; };
+		B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		B3F527502670968F002B0812 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		B3F527542670A0CD002B0812 /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
 		B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		B32FEAC42671DCD200BF37A1 /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
+				B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */,
+				B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */,
 				B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */,
 				B32FEACD267260E400BF37A1 /* AddIssueButton.swift */,
 				B32FEACB26724CF400BF37A1 /* IssueTableFooterView.swift */,
@@ -562,6 +568,8 @@
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
 				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
+				B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */,
+				B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */,
 				D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */,
 				D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */,
 			);
