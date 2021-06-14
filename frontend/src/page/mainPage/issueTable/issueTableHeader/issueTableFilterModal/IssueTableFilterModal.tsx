@@ -12,7 +12,7 @@ export default function IssueTableFilterModal({ modalRef }: FilterModalProps): R
   return (
     <IssueTableFilterModalBlock ref={modalRef}>
       <div className='modal__header'>{filterType} 선택</div>
-      <ModalContentList filterType={filterType}/>
+      <ModalContentList filterType={filterType} />
     </IssueTableFilterModalBlock>
   );
 }
@@ -25,5 +25,7 @@ const IssueTableFilterModalBlock = styled.div`
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
   border-radius: 16px;
   overflow: hidden;
-  .modal__header { padding: 8px 40px 8px 16px; }
+  .modal__header {
+    padding: 8px 40px 8px 16px;
+  }
 `;
