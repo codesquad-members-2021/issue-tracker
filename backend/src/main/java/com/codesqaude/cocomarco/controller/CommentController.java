@@ -8,12 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import static com.codesqaude.cocomarco.domain.user.User.SAMPLE_UUID;
+
 @RestController
 @RequestMapping("/issues/{issueId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
 
-    private static final String SAMPLE_UUID = "3eb62438-9604-45f9-a183-b838d2123793";
     private final CommentService commentService;
 
     @GetMapping
@@ -25,7 +26,7 @@ public class CommentController {
     @ResponseStatus(HttpStatus.CREATED)
     public void make(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
         //todo user id
-        commentService.write(issueId, SAMPLE_UUID, commentRequest);
+        commentService.create(issueId, SAMPLE_UUID, commentRequest);
     }
 
     @PutMapping("/{commentId}")

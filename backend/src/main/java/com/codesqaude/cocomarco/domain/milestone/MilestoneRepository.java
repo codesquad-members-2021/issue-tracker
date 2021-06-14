@@ -10,4 +10,5 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 
     @Query("select distinct m from Milestone m left join fetch m.issues")
     List<Milestone> findAllMilestone(Pageable pageable);
+    
 }

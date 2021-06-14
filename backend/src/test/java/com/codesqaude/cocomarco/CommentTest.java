@@ -2,6 +2,7 @@ package com.codesqaude.cocomarco;
 
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
+import com.codesqaude.cocomarco.domain.user.User;
 import com.codesqaude.cocomarco.service.CommentService;
 import com.codesqaude.cocomarco.service.IssueService;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +23,7 @@ class CommentTest {
     @DisplayName("코멘트 세이브 검증")
     void commentSave() {
         CommentRequest sample = new CommentRequest("sample");
-        commentService.write(1L, "3eb62438-9604-45f9-a183-b838d2123793", sample);
+        commentService.create(1L, User.SAMPLE_UUID, sample);
 
         Comment byId = commentService.show(1L);
 
