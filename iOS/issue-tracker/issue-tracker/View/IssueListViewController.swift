@@ -31,12 +31,18 @@ class IssueListViewController: UIViewController {
         setAddIssueButtonAutolayout()
         filterBarButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         selectBarButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-        addIssueButton.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(addIssueButtonTapped)))
+        addIssueButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addIssueButtonTapped)))
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     @objc func filterButtonTapped() {
-        
+        let controller = UINavigationController(rootViewController: IssueFilterViewController())
+        present(controller, animated: true)
     }
     
     @objc func selectButtonTapped() {
@@ -50,8 +56,8 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func addIssueButtonTapped() {
-        
-        
+        let controller = NewIssueViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func cancelButtonTapped() {
@@ -111,7 +117,9 @@ extension IssueListViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
         cell.selectionStyle = .none
         cell.check()
-        
+        //
+        let controller = IssueDetailViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

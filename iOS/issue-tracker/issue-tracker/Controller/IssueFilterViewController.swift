@@ -10,8 +10,9 @@ import UIKit
 class IssueFilterViewController: UIViewController {
 
     private let cellReuseIdentifier = "IssueFilterTableViewCell"
-    private let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.allowsMultipleSelection = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         return tableView
     }()
@@ -27,7 +28,7 @@ class IssueFilterViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소",
                                                                 style: .plain,
                                                                 target: self,
-                                                                action: nil)
+                                                                action: #selector(cancelButtonTapped))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                                  style: .plain,
                                                                  target: self,
@@ -40,6 +41,11 @@ class IssueFilterViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+    }
+    
+    @objc
+    private func cancelButtonTapped() {
+        dismiss(animated: true)
     }
 }
 

@@ -57,6 +57,11 @@ class NewIssueViewController: UIViewController {
         view.addSubview(tableView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         subject.snp.makeConstraints { maker in
