@@ -44,22 +44,19 @@ class IssueTrackerTabBarController: UITabBarController {
 }
 
 extension UITabBarController {
-    
     func addSubviewToLastTabItem(_ image: UIImage) {
+        //tabBar.tabBar.items?.last = MyAccountViewController
+        guard let myAccountTabBarItem = self.tabBar.items?.last else {return}
+        myAccountTabBarItem.image = nil
         
-        if let lastTabBarButton = self.tabBar.subviews.last, let tabItemImageView = lastTabBarButton.subviews.first {
-            if let accountTabBarItem = self.tabBar.items?.last {
-                accountTabBarItem.selectedImage = nil
-                accountTabBarItem.image = nil
-            }
-            let imgView = UIImageView()
-            imgView.frame = tabItemImageView.frame
-            imgView.layer.cornerRadius = tabItemImageView.frame.height/2
-            imgView.layer.masksToBounds = true
-            imgView.contentMode = .scaleAspectFill
-            imgView.clipsToBounds = true
-            imgView.image = image
-            self.tabBar.subviews.last?.addSubview(imgView)
-        }
+        let imgView = UIImageView()
+        
+        imgView.frame = CGRect(x: 34.3333, y: 7.33333, width: 25.3333, height: 24.3333) //하드코딩값. 실제 myAccountTabBarItem.image.size를 정확하게 가져올 방법을 못찾음.
+        imgView.layer.cornerRadius = 10
+        imgView.layer.masksToBounds = true
+        imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
+        imgView.image = image
+        self.tabBar.subviews.last?.addSubview(imgView)
     }
 }
