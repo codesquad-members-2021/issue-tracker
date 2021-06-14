@@ -19,17 +19,20 @@
                     </tabBar>
                     <connections>
                         <segue destination="6AQ-WN-I2S" kind="relationship" relationship="viewControllers" id="FCn-jV-wdX"/>
+                        <segue destination="N3s-zn-HFy" kind="relationship" relationship="viewControllers" id="5FH-oD-fIa"/>
+                        <segue destination="KKB-Fs-fzc" kind="relationship" relationship="viewControllers" id="lhd-TT-tOy"/>
+                        <segue destination="VHl-1W-czP" kind="relationship" relationship="viewControllers" id="GJe-K2-KHI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wo6-uk-3Ll" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1590" y="108"/>
+            <point key="canvasLocation" x="-1717" y="1151"/>
         </scene>
-        <!--Item-->
+        <!--Issues-->
         <scene sceneID="WBr-sQ-Nyp">
             <objects>
                 <navigationController id="6AQ-WN-I2S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="VKz-gg-TtE"/>
+                    <tabBarItem key="tabBarItem" title="Issues" image="exclamationmark.circle" catalog="system" id="VKz-gg-TtE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zji-g5-phm">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -41,6 +44,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1N-wG-j9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-733" y="109"/>
+        </scene>
+        <!--Milestone-->
+        <scene sceneID="Kzh-BR-c7X">
+            <objects>
+                <viewController id="KKB-Fs-fzc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UlI-cf-KY3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="DUU-w3-2Ug"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Milestone" image="signpost.right" catalog="system" id="ssf-TJ-L5J"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tgW-JT-99o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-733" y="1496"/>
+        </scene>
+        <!--Label-->
+        <scene sceneID="6RL-h0-Smg">
+            <objects>
+                <viewController id="N3s-zn-HFy" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ivk-4l-gSm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="che-uZ-7aG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Label" image="tag" catalog="system" id="abk-Y7-DpC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Otf-Gh-OCv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-733" y="799"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="jI2-qV-aO6">
+            <objects>
+                <viewController id="VHl-1W-czP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="807-vB-Aa5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="l6A-iy-JSQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Account" image="person.circle" catalog="system" id="S89-Rd-yIN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d7W-E2-naf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-733" y="2195"/>
         </scene>
         <!--Issue List View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -155,7 +206,11 @@
     <resources>
         <image name="archivebox" catalog="system" width="128" height="106"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="signpost.right" catalog="system" width="128" height="118"/>
+        <image name="tag" catalog="system" width="128" height="119"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
