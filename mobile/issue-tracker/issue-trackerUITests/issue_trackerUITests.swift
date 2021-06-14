@@ -8,31 +8,53 @@
 import XCTest
 
 class IssuetrackerUITests: XCTestCase {
-    let app = XCUIApplication()
 
-    override func setUp() {
-        super.setUp()
+    private var app: XCUIApplication!
+    private var expectation: XCTestExpectation!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        app = XCUIApplication()
         app.launch()
+        expectation = expectation(description: "LoginAlert")
     }
 
-    func test_LoginLogicUI() throws {
+    override func tearDownWithError() throws {
+        app = nil
+        expectation = nil
+        try super.tearDownWithError()
+    }
 
-        let test = expectation(description: "Login succeuss After")
-
+    func test_LoginCancel() throws {
         app/*@START_MENU_TOKEN@*/.staticTexts["Sign in with GitHub"]/*[[".buttons[\"Sign in with GitHub\"].staticTexts[\"Sign in with GitHub\"]",".staticTexts[\"Sign in with GitHub\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        _ = app.alerts["“issue-tracker” Wants to Use “github.com” to Sign In"]
-
         addUIInterruptionMonitor(withDescription: "Login Continue") { (alert) -> Bool in
-            alert.buttons["Continue"].tap()
-            test.fulfill()
-            return true
+            if alert.buttons["Cancel"].exists {
+                alert.buttons["Cancel"].tap()
+                 self.expectation.fulfill()
+                return true
+            }
+            return false
         }
         app.tap()
-        wait(for: [test], timeout: 5)
 
-        app.buttons["add"].tap()
-        let navigationBar = app.navigationBars["이슈"]
-        navigationBar.buttons["선택"].tap()
-        navigationBar.buttons["필터"].tap()
+        XCTAssertTrue(app.alerts["인증에 실패 하였습니다"].exists)
+
+        app.alerts.buttons["확인"].tap()
+        wait(for: [expectation], timeout: 5)
+    }
+
+    func test_LoginContinue() throws {
+
+        app/*@START_MENU_TOKEN@*/.staticTexts["Sign in with GitHub"]/*[[".buttons[\"Sign in with GitHub\"].staticTexts[\"Sign in with GitHub\"]",".staticTexts[\"Sign in with GitHub\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        addUIInterruptionMonitor(withDescription: "Login Continue") { (alert) -> Bool in
+            if alert.buttons["Continue"].exists {
+                alert.buttons["Continue"].tap()
+                self.expectation.fulfill()
+                return true
+            }
+            return false
+        }
+        app.tap()
+        wait(for: [expectation], timeout: 5)
     }
 }

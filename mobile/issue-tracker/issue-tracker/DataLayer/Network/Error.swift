@@ -14,6 +14,7 @@ enum NetworkError: Error, CustomStringConvertible {
     case invalidStatusCode(Int)
     case emptyData
     case failParsing
+    case failedAuthentication
 
     var description: String {
         switch self {
@@ -29,6 +30,8 @@ enum NetworkError: Error, CustomStringConvertible {
             return "올바르지 않은 데이터입니다"
         case .failParsing:
             return "올바르지 않은 데이터모델입니다"
+        case .failedAuthentication:
+            return "인증에 실패 하였습니다"
         }
     }
 }

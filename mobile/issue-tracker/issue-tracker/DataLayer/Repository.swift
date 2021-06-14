@@ -55,7 +55,7 @@ final class Repository {
 
         webAuthSession = .init(url: url, callbackURLScheme: callbackURLScheme) { (callback: URL?, error: Error?) in
             guard error == nil, let successURL = callback else {
-                completion(.failure(NetworkError.invalidResponse))
+                completion(.failure(NetworkError.failedAuthentication))
                 return
             }
 

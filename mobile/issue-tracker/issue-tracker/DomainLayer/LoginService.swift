@@ -22,7 +22,7 @@ final class LoginService {
         self.repository = repository
     }
 
-    func fetchGithubCode(from content: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, Error?) -> Void) {
+    func fetchGithubCode(from content: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, NetworkError?) -> Void) {
         repository.fetchGithubLoginCode(from: content) { result in
             switch result {
             case .failure(let error):

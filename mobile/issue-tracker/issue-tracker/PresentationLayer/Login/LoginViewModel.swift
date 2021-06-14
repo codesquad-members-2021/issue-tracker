@@ -24,7 +24,7 @@ final class LoginViewModel {
     func fetctGithubLogin(from content: ASWebAuthenticationPresentationContextProviding) {
         loginService.fetchGithubCode(from: content) { code, error in
             guard error == nil, let code = code else {
-                self.message = error.debugDescription
+                self.message = error?.description ?? ""
                 return
             }
             self.authorizeUser(to: Auth(code: code))
