@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import theme from "styles/theme";
 import { Link } from "react-router-dom";
@@ -13,11 +14,22 @@ const IssueCard = ({
 	isAllIssueSelected,
 	setIsAllIssueSelected,
 }) => {
+	const [isChecked, setIsChecked] = useState(false);
 	const { title, id, labelId, milestoneId, author, createdAt } = issue;
+
+	const handleCheck = () => {
+		setIsChecked(!isChecked);
+	};
+
+	useEffect(() => {
+		if (isAllIssueSelected) setIsChecked(true);
+		else if (!isAllIssueSelected) setIsChecked(false);
+	}, [isAllIssueSelected]);
+
 	return (
 		<StyleCard>
 			<CheckBox>
-				<input type="checkbox" checked={isAllIssueSelected} />
+				<input type="checkbox" checked={isChecked} onChange={handleCheck} />
 				<div>-</div>
 			</CheckBox>
 			<Contents>

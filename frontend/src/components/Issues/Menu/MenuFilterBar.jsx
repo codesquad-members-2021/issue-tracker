@@ -37,7 +37,7 @@ const MenuFilterBar = () => {
 					</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
-			{<FilterModal />}
+			{/* {<FilterModal />} */}
 		</>
 	);
 };
