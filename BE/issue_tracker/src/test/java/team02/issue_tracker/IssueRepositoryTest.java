@@ -10,6 +10,7 @@ import team02.issue_tracker.domain.Comment;
 import team02.issue_tracker.domain.CommentEmoji;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
+import team02.issue_tracker.exception.CommentNotFoundException;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.CommentEmojiRepository;
 import team02.issue_tracker.repository.CommentRepository;
@@ -64,7 +65,7 @@ public class IssueRepositoryTest {
     @Test
     @DisplayName("코멘트의 id로 CommentEmoji 리스트를 잘 반환하는지 확인한다.")
     void findCommentEmojiByCommentId() {
-        Comment comment = commentRepository.findById(1L).get();
+        Comment comment = commentRepository.findById(1L).orElseThrow(CommentNotFoundException::new);
         List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(comment.getId());
 
         Assertions.assertThat(commentEmojis.size()).isEqualTo(2);
