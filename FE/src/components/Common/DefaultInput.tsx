@@ -3,6 +3,8 @@ import { TChildren } from '../../util/types';
 
 interface IDefaultInput {
   children?: TChildren;
+  type: string;
+  placeholder?: string;
 }
 
 const DefaultInput = ({ children, ...props }: IDefaultInput) => (
