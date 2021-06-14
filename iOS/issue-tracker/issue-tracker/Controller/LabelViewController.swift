@@ -17,14 +17,26 @@ class LabelViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
     
-    lazy var tableHeaderView = LabelTabelHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 140))
+    var addLabelButton = AddLabelButton()
+    
     let fakeData = [Label(title: "hidsfadsfsafasfdfadsf", description: "hello", color: "#B1CAE5"), Label(title: "wow", description: "amazing", color: "#DFCD85")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
         labelTableView.dataSource = self
-        labelTableView.tableHeaderView = tableHeaderView
+        addLabelButton.addTarget(self, action: #selector(addLabelButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func addLabelButtonTapped() {
+        
+    }
+    
+    func setNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "레이블"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
     }
 }
 
