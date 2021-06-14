@@ -8,6 +8,7 @@ const StyledSpaceBetween = css`
 `;
 
 const fontSizes = {
+	xs: calcRem(13),
 	small: calcRem(14),
 	base: calcRem(16),
 	lg: calcRem(18),
@@ -61,7 +62,10 @@ const border_radius = {
 	xl: "20px",
 	xxl: "30px",
 };
-
+const border_radius_mix = {
+	right: "0 11px 11px 0",
+	left: "11px 0 0 11px",
+};
 const grayScale = {
 	title_active: "#14142B",
 	body: "#4E4B66",
@@ -102,6 +106,7 @@ const theme = {
 	colors,
 	deviceSizes,
 	border_radius,
+	border_radius_mix,
 	device,
 	paddings,
 	margins,
