@@ -6,11 +6,12 @@ const IssueListPage = () => {
   return (
     <IssueListLayout>
       <IssueListBlock>
-        이슈
+        <h1> 이슈 </h1>
       </IssueListBlock>
     </IssueListLayout>
   )
 }
+
 
 const IssueListLayout = styled.div`
 `;
