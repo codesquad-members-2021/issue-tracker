@@ -49,5 +49,5 @@ export default App;
 const Background = styled.div`
   background: ${({ theme }) => theme.colors.gr_background};
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
