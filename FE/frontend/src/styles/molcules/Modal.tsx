@@ -20,18 +20,19 @@ const Modal = (props: Props) => {
     })
   );
 
-  const toggle = () => {
+  const toggle = (): void => {
     setIsShown(!isShown);
   };
 
   return (
     <Div>
-      <Button onClick={toggle}>
+      <Button onClick={toggle} isShown={isShown}>
         <Text link sm>
           {props.label}
         </Text>
         <Downward />
       </Button>
+
       {isShown && (
         <DropDownWrapper>
           <DropDown
@@ -60,14 +61,14 @@ const Text = styled(Typo)`
   }
 `;
 
-const Button = styled.div`
+const Button = styled.div<{ isShown?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 128px;
   background: ${props => props.theme.greyscale.background};
   border-radius: 11px 0px 0px 11px;
-  cursor: pointer;
+  pointer-events: ${props => (props.isShown ? 'none' : 'auto')};
   //not working
   &:hover span {
     color: ${props => props.theme.greyscale.offWhite};

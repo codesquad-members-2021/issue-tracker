@@ -11,6 +11,9 @@ const GlobalStyles = createGlobalStyle`
         font-size: 14px;
         background-color: #F7F7FC;
     }
+    input {
+        border: 0;
+    }
 `;
 
 export default GlobalStyles;

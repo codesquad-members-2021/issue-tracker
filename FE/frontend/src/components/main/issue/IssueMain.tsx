@@ -5,6 +5,7 @@ import Tabs from './Tabs';
 import IssueTable from './IssueTable';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
+import { Link } from 'react-router-dom';
 
 const IssueMain = () => {
   return (
@@ -13,12 +14,14 @@ const IssueMain = () => {
         <SearchFilter />
         <RightListWrapper>
           <Tabs />
-          <Buttons initial small>
-            <IconWrapper>
-              <Plus />
-            </IconWrapper>
-            이슈 작성
-          </Buttons>
+          <Link style={{ textDecoration: 'none' }} to="newIssue">
+            <Buttons initial small>
+              <IconWrapper>
+                <Plus />
+              </IconWrapper>
+              이슈 작성
+            </Buttons>
+          </Link>
         </RightListWrapper>
       </UpperIssueWrapper>
       <IssueTableWrapper>

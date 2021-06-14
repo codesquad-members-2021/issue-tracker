@@ -49,7 +49,6 @@ const Search = styled.input`
   height: 38px;
   background: ${props => props.theme.greyscale.inputBackgound};
   border-radius: 0px 11px 11px 0px;
-  border: 0;
   padding-left: 40px;
 `;
 

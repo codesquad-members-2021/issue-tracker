@@ -6,7 +6,7 @@ import { ReactComponent as CheckOnCircle } from '../../icons/checkOnCircle.svg';
 
 interface Props {
   isShown: boolean;
-  toggle(): void;
+  toggle: () => void;
   exceptedDiv: string;
   options: { image?: string; name: string; isSelected: boolean }[];
   setOptions: Dispatch<SetStateAction<any>>;
@@ -29,9 +29,7 @@ const DropDown = (props: Props): JSX.Element => {
     );
   };
 
-  const onClickOutside = (
-    event: React.MouseEvent<HTMLInputElement> | Event
-  ) => {
+  const onClickOutside = (event: React.MouseEvent<any> | Event) => {
     const target = event.target as HTMLElement;
     if (target.classList.contains(props.exceptedDiv)) {
       return;
