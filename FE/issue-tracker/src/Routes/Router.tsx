@@ -4,6 +4,7 @@ import NewIssue from "@/Routes/NewIssuePage";
 import MainPage from "@/Routes/MainPage";
 import Tab from "@/Routes/TabPage";
 import IssueDetail from "@/Routes/IssueDetail";
+import Callback from "@/Routes/Callback";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/tab" component={Tab} />
         <Route path="/issueDetail" component={IssueDetail} />
         <Route path="/newIssue" component={NewIssue} />
+        <Route path="/callback" component={Callback} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
