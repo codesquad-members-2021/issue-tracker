@@ -10,21 +10,36 @@ import { filter } from "data";
 
 // import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
 // import { useRecoilState } from "MyRecoil";
-import { useRecoilState } from "recoil";
-import { selectedIssueCntAtomState, clickedFilterAtomState } from "RecoilStore/Atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+	selectedIssueCntAtomState,
+	clickedFilterAtomState,
+} from "RecoilStore/Atoms";
 
-const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, issuesCnt, initCheck, setInitCheck }) => {
-	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+const IssuesHeader = ({
+	isAnyIssueSelected,
+	setIsAnyIssueSelected,
+	isAllIssueSelected,
+	setIsAllIssueSelected,
+	issuesCnt,
+	initCheck,
+	setInitCheck,
+}) => {
+	const [selectedIssues, setSelectedIssues] = useRecoilState(
+		selectedIssueCntAtomState
+	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
-	const [clickedFilter, setClickedFilter] = useState("");
+	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback((e) => {
-		isFilterClicked === false ? setIsFilterClicked(true) : setIsFilterClicked(false);
+	const handleClick = useCallback(e => {
+		isFilterClicked === false
+			? setIsFilterClicked(true)
+			: setIsFilterClicked(false);
 		console.dir(e.target.textContent);
 		console.dir(e.target);
-		setClickedFilter(e.target.textContent);
+		setClickedFilterState(e.target.textContent);
 	});
 
 	useEffect(() => {
@@ -34,9 +49,14 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = (e) => {
+	const closeFilterModal = e => {
 		const target = e.target;
-		if (isFilterClicked && !target.closest(".filter-modal") && !target.closest(".issue-header-button")) setIsFilterClicked(false);
+		if (
+			isFilterClicked &&
+			!target.closest(".filter-modal") &&
+			!target.closest(".issue-header-button")
+		)
+			setIsFilterClicked(false);
 	};
 	//----------여기 까지 중복 코드from MeuFilter --------/
 
@@ -45,7 +65,9 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
 	};
 
-	console.log(`selectedIssues: ${selectedIssues}, isAnyissueSelected: ${isAnyIssueSelected}`);
+	console.log(
+		`selectedIssues: ${selectedIssues}, isAnyissueSelected: ${isAnyIssueSelected}`
+	);
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
@@ -73,19 +95,33 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 				{isAnyIssueSelected ? (
 					<OpenCloseEdit>
 						<TextIconDivider>
-							<DropDownButton text="상태 수정" clickEvent={handleClick} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.lg} border={"none"}></DropDownButton>
-							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+							<DropDownButton
+								text="상태 수정"
+								clickEvent={handleClick}
+								className={"issue-header-button"}
+								width={({ theme }) => theme.buttonWidths.lg}
+								border={"none"}
+							></DropDownButton>
+							{isFilterClicked && <FilterModal />}
 						</TextIconDivider>
 					</OpenCloseEdit>
 				) : (
 					<FiltersWrapper>
 						{buttonNames.map((filter, idx) => (
 							<TextIconDivider>
-								<DropDownButton text={filter} clickEvent={handleClick} key={`filter-${idx}`} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.small} border={"none"} id={filter}></DropDownButton>
+								<DropDownButton
+									text={filter}
+									clickEvent={handleClick}
+									key={`filter-${idx}`}
+									className={"issue-header-button"}
+									width={({ theme }) => theme.buttonWidths.small}
+									border={"none"}
+									id={filter}
+								></DropDownButton>
 							</TextIconDivider>
 						))}
 
-						{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+						{isFilterClicked && <FilterModal />}
 						{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
 						{/* 🔥recoil로 수정 필요 */}
 						{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
@@ -127,7 +163,7 @@ const OpenCloseEdit = styled.div`
 const FiltersWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
-	/* position: relative; */
+	position: relative;
 	/* outline: red 1px solid; */
 `;
 
@@ -137,5 +173,5 @@ export const CheckBox = styled.div`
 `;
 
 const TextIconDivider = styled.div`
-	position: relative;
+	/* position: relative; */
 `;

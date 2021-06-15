@@ -4,15 +4,16 @@ import DropDownButton from "components/common/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
 import { useState, useEffect, useCallback } from "react";
-import { filter } from "data";
+import { clickedFilterAtomState } from "RecoilStore/Atoms";
+import { useSetRecoilState } from "recoil";
 const MenuFilterBar = () => {
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const [clickedFilter, setClickedFilter] = useState("");
+	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
 	const handleClick = useCallback(e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
-		setClickedFilter(e.target.textContent);
+		setClickedFilterState(e.target.textContent);
 	});
 
 	useEffect(() => {
@@ -44,7 +45,7 @@ const MenuFilterBar = () => {
 					</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
-			{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+			{isFilterClicked && <FilterModal />}
 		</>
 	);
 };
