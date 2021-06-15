@@ -52,12 +52,12 @@ const LabelAddModal = () => {
             <S.ChangeFontColorDiv>
               <S.ColorTitle>텍스트 색상</S.ColorTitle>
               <S.FontColorRadioContent>
-                <input name="labelFontColor" type="radio" />
-                어두운 색
+                <input id="dark" name="labelFontColor" type="radio" />
+                <label htmlFor="dark">어두운 색</label>
               </S.FontColorRadioContent>
               <S.FontColorRadioContent>
-                <input name="labelFontColor" type="radio" />
-                밝은 색
+                <input id="bright" name="labelFontColor" type="radio" />
+                <label htmlFor="bright">밝은 색</label>
               </S.FontColorRadioContent>
             </S.ChangeFontColorDiv>
           </S.ChangeColorContainer>
