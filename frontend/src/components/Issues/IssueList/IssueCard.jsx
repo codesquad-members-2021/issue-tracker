@@ -14,29 +14,19 @@ import { useRecoilState } from "recoil";
 const IssueCard = ({ issue, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, initCheck, setInitCheck, selectedCards, setSelectedCards }) => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
-	// const [initCheck, setInitCheck] = useState(true);
 	const { title, id, labelId, milestoneId, author, createdAt } = issue;
 	const handleCheck = () => {
 		setIsChecked(!isChecked);
+		isChecked ? setSelectedIssues(selectedIssues - 1) : setSelectedIssues(selectedIssues + 1);
 	};
 
 	useEffect(() => {
-		if (isAllIssueSelected) {
-			setIsChecked(true);
-		} else if (!isAllIssueSelected) setIsChecked(false);
-	}, [isAllIssueSelected]);
+		isChecked ? setIsAnyIssueSelected(true) : setIsAnyIssueSelected(false);
+	}, [isChecked]);
 
 	useEffect(() => {
-		if (isChecked) {
-			setIsAnyIssueSelected(true);
-			setSelectedIssues(() => selectedIssues + 1);
-			setInitCheck(false);
-			setSelectedCards(() => selectedCards.add(id));
-		} else if (!initCheck && !isChecked) {
-			setSelectedIssues(() => selectedIssues - 1);
-			selectedCards.delete(id);
-		}
-	}, [isChecked]);
+		isAllIssueSelected ? setIsChecked(true) : setIsChecked(false);
+	}, [isAllIssueSelected]);
 
 	return (
 		<StyleCard>
