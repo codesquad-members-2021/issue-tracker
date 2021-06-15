@@ -5,8 +5,11 @@ import CheckBox from '../../../styles/atoms/CheckBox';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import ListFilters from './ListFilters';
+import useFetch from '../../../util/useFetch';
 
 const IssueTable = () => {
+  const { isLoading, data, error } = useFetch('issue', 'getAllData');
+  console.log(data);
   return (
     <TableWrapper>
       <IssueHeader>

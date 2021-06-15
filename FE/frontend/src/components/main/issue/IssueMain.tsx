@@ -57,5 +57,6 @@ const RightListWrapper = styled.div`
 
 const IssueTableWrapper = styled.div`
   padding: 12px 48px;
+  min-width: 1024px;
 `;
 export default IssueMain;

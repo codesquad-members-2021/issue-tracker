@@ -19,7 +19,7 @@ function App() {
             <BrowserRouter>
               <Switch>
                 <Route path="/" exact component={Login} />
-                <Route path="/oauth" component={Oauth} />
+                <Route path="/login/github" component={Oauth} />
                 <Route path="/main" component={Main} />
               </Switch>
             </BrowserRouter>

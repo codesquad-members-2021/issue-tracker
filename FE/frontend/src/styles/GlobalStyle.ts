@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 14px;
         background-color: #F7F7FC;
     }
-    input {
+    input, textarea {
         border: 0;
     }
 `;

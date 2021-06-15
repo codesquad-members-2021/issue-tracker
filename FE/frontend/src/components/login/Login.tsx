@@ -1,17 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Buttons from '../../styles/atoms/Buttons';
 import Typos from '../../styles/atoms/Typos';
+import Buttons from '../../styles/atoms/Buttons';
 import { ReactComponent as Logo } from '../../icons/logoLarge.svg';
+import { useHistory } from 'react-router';
 
 const Login = () => {
+  const history = useHistory();
+  const url = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://localhost:3000/login/github`;
+
+  if (localStorage.getItem('token')) {
+    history.push('/main');
+  }
+
   return (
     <LoginWrapper>
       <Logo />
-      <Link to="/oauth">
+      <a href={url}>
         <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
-      </Link>
+      </a>
       <TextInBetween sm>or</TextInBetween>
       <ManualLogin large>아이디</ManualLogin>
       <ManualLogin large>비밀번호</ManualLogin>
