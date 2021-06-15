@@ -17,11 +17,8 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    @Transactional
-    public UUID join(String name, String avatarImage) {
-        return userRepository.save(new User(name, avatarImage)).getId();
-    }
+    private final GitOauth oauth;
+    private static final String key = "q1w2e3r4";
 
     public User findById(UUID userId) {
         return userRepository.findById(userId).orElseThrow(NotFoundUserException::new);

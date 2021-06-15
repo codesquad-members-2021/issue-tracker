@@ -28,16 +28,32 @@ public class User {
     @OneToMany(mappedBy = "writer")
     private List<Issue> issues = new ArrayList<>();
 
+    private Long githubId;
+    private String email;
     private String name;
     private String avatarImage;
 
-    public User(String name, String avatarImage) {
+    public User(String name, String avatarImage, Long githubId, String email) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.avatarImage = avatarImage;
+        this.githubId = githubId;
+        this.email = email;
     }
 
     public boolean sameUser(UUID userId) {
         return id.equals(userId);
+    }
+
+    public void addIssue(Issue issue) {
+        issues.add(issue);
+    }
+
+    public void update(User user) {
+        this.name = user.name;
+        this.avatarImage = user.avatarImage;
+        this.githubId = user.githubId;
+        this.email = user.email;
     }
 
     @Override
@@ -49,7 +65,5 @@ public class User {
                 '}';
     }
 
-    public void addIssue(Issue issue) {
-        issues.add(issue);
-    }
+
 }
