@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import List from 'components/atom/List';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useToggle from 'hooks/useToggle';
-import { useSetRecoilState } from 'recoil';
-import { issueFilterTypeState } from 'store/issueInfoStore';
-import IssueTableFilterModal from './issueTableFilterModal/IssueTableFilterModal';
-interface Props {}
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { issueFilterTypeState, getTabInfoState } from 'store/issueInfoStore';
+import TabModal from 'components/common/tabModal/TabModal';
 
+interface Props {}
+interface filterObjType {
+  key: string;
+  name: string;
+}
 export default function IssueListHeaderRight({}: Props): ReactElement {
   const setFilterType = useSetRecoilState(issueFilterTypeState);
 
@@ -27,20 +31,20 @@ export default function IssueListHeaderRight({}: Props): ReactElement {
     modal: modalRef,
   });
 
-  const handleClick = (filterType: string): void => {
-    setFilterType(filterType);
+  const handleClick = ({ key, name }: filterObjType): void => {
+    setFilterType({ key, name, isMainPage: true });
   };
+
+  const filterStandardList = filterStandards.map(({ key, name, ref }, idx) => (
+    <div ref={ref} key={idx} onClick={() => handleClick({ key, name })}>
+      {name}
+      <ExpandMoreIcon />
+    </div>
+  ));
   return (
     <>
-      <IssueListHeaderRightBlock>
-        {filterStandards.map((standard, idx) => (
-          <div ref={standard.ref} key={idx} onClick={() => handleClick(standard.key)}>
-            {standard.name}
-            <ExpandMoreIcon />
-          </div>
-        ))}
-      </IssueListHeaderRightBlock>
-      {open && <IssueTableFilterModal modalRef={modalRef} />}
+      <IssueListHeaderRightBlock>{filterStandardList}</IssueListHeaderRightBlock>
+      {open && <TabModal modalRef={modalRef} />}
     </>
   );
 }

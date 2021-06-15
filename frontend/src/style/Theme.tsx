@@ -22,11 +22,17 @@ const Theme = {
   weight: {
     bold: 700,
   },
-  filterModalPosition: {
+  tabModalRightPosition: {
     assignee: 260.5,
     label: 181.5,
     milestone: 90.5,
     author: 11,
+  },
+  tabModalTopPosition: {
+    assignee: 0,
+    label: 0,
+    milestone: 0,
+    author: 0,
   },
 };
 
