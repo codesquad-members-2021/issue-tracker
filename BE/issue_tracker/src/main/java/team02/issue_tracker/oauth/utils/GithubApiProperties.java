@@ -15,6 +15,7 @@ public class GithubApiProperties {
     private final String GITHUB_IOS_CLIENT_ID;
     private final String GITHUB_IOS_CLIENT_SECRET;
     private final String GITHUB_IOS_REDIRECT_URI;
+
     private final String GITHUB_ACCESS_TOKEN_URI;
     private final String GITHUB_USER_INFO_URI;
 

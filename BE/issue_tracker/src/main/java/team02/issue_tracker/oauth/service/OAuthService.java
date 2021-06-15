@@ -29,6 +29,10 @@ public class OAuthService {
         this.webClient = webClient;
     }
 
+    public OAuthService(WebClient webClient) {
+
+    }
+
     public JwtResponse issueJwtForWeb(final String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForWeb(code));
@@ -52,13 +56,15 @@ public class OAuthService {
 
     private GithubUserProfile githubUserProfileFrom(
             final GithubAccessTokenRequestDto accessTokenRequest) {
-        return githubUserProfileFrom(accessTokenFrom(accessTokenRequest));
+        return githubUserProfileFrom(
+                accessTokenFrom(accessTokenRequest, githubApiProperties.accessTokenUri()));
     }
 
-    private GithubAccessTokenResponseDto accessTokenFrom(
-            final GithubAccessTokenRequestDto accessTokenRequest) {
+    public GithubAccessTokenResponseDto accessTokenFrom(
+            final GithubAccessTokenRequestDto accessTokenRequest,
+            final String accessTokenUri) {
         GithubAccessTokenResponseDto accessTokenResponse = webClient.post()
-                .uri(githubApiProperties.accessTokenUri())
+                .uri(accessTokenUri)
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(accessTokenRequest)
                 .retrieve()

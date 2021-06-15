@@ -1,10 +1,13 @@
 package team02.issue_tracker.oauth.dto;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
+
+@Builder
 @ToString @Getter
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GithubAccessTokenResponseDto {
 
     @JsonSetter("access_token")
