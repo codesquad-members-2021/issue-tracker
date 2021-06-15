@@ -1,12 +1,18 @@
 package com.codesquad.issuetracker.service;
 
-import com.codesquad.issuetracker.domain.Issue;
+import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
 import com.codesquad.issuetracker.repository.IssueRepository;
+import com.codesquad.issuetracker.repository.LabelRepository;
+import com.codesquad.issuetracker.repository.MilestoneRepository;
 import com.codesquad.issuetracker.response.IssueResponse;
+import com.codesquad.issuetracker.response.LabelResponse;
+import com.codesquad.issuetracker.response.MilestoneForIssueResponse;
+import com.codesquad.issuetracker.response.UserResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class IssueService {
@@ -46,17 +52,35 @@ public class IssueService {
         return issueToIssueResponse(issue);
     }
 
-    public Issue addIssue(Issue issue) {
-        return issueRepository.save(issue);
+    public IssueResponse addIssue(Issue issue) {
+        return issueToIssueResponse(issueRepository.save(issue));
+    } // IssueRequest의 User 수정 필요
+
+    public void updateTitle(Long issueId, String title) {
+      //id로 Issue찾기 - Issue의 내용 변경 - save()로 저장(후 저장한 값 리턴)
+        Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        updateIssue.setTitle(title);
+        issueRepository.save(updateIssue);
     }
 
-//    private IssueResponse issueToIssueResponse(Issue issue) {
-//        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(), issue.getCreatedAt(),
-//                issue.getLa)
+//    public Issue updateAssignee() {
+//
 //    }
-
-//    public Issue updateIssue(Long issueId, Issue issue) {
-//      //id로 Issue찾기 - Issue의 내용 변경 - save()로 저장(후 저장한 값 리턴)
+//
+//    public Issue updateContent() {
+//
+//    }
+//
+//    public Issue updateStatus() {
+//
+//    }
+//
+//    public Issue updateLabel() {
+//
+//    }
+//
+//    public Issue updateMilestone() {
+//
 //    }
 
     public void deleteIssue(Long issueId) {
