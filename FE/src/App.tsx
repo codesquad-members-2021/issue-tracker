@@ -8,7 +8,7 @@ import GlobalStyle from './util/styles/GlobalStyle';
 import theme from './util/styles/theme';
 
 import Header from './components/Header';
-import { RegisterPage, LoginPage, IssuePage, IssueWritePage, LabelListPage } from './pages';
+import { RegisterPage, LoginPage, IssuePage, IssueWritePage, LabelListPage, LoginCallBackPage } from './pages';
 import BackgroundFluid from './components/Common/BackgroundFluid';
 
 const App = () => {
@@ -23,6 +23,7 @@ const App = () => {
                 <Switch>
                   <Route path={'/'} exact component={LoginPage} />
                   <Route path={'/register'} exact component={RegisterPage} />
+                  <Route path={'/oauth-callback'} exact component={LoginCallBackPage} />
                   <>
                     <Header />
                     <Switch>
