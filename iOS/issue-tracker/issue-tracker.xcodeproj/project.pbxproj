@@ -29,7 +29,9 @@
 		E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD123267093700071B436 /* MyAccountViewController.swift */; };
 		E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD12526709C010071B436 /* UIViewControllerExtension.swift */; };
 		E43912C726776D8F003CD344 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912C626776D8F003CD344 /* LabelView.swift */; };
-		E43912CE26777310003CD344 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912CD26777310003CD344 /* ColorConverter.swift */; };
+		E43912CE26777310003CD344 /* HexColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912CD26777310003CD344 /* HexColorConverter.swift */; };
+		E43912D0267878BF003CD344 /* HexColorConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912CF267878BF003CD344 /* HexColorConvertable.swift */; };
+		E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D1267878F4003CD344 /* HexColorCode.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -67,7 +69,9 @@
 		E42AD123267093700071B436 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		E42AD12526709C010071B436 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		E43912C626776D8F003CD344 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
-		E43912CD26777310003CD344 /* ColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
+		E43912CD26777310003CD344 /* HexColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorConverter.swift; sourceTree = "<group>"; };
+		E43912CF267878BF003CD344 /* HexColorConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorConvertable.swift; sourceTree = "<group>"; };
+		E43912D1267878F4003CD344 /* HexColorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorCode.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -276,7 +280,9 @@
 		E43912CC267772E4003CD344 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E43912CD26777310003CD344 /* ColorConverter.swift */,
+				E43912CF267878BF003CD344 /* HexColorConvertable.swift */,
+				E43912CD26777310003CD344 /* HexColorConverter.swift */,
+				E43912D1267878F4003CD344 /* HexColorCode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,10 +392,11 @@
 				E426DAD126730DC50069E77D /* OAuthResponseDTO.swift in Sources */,
 				FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */,
 				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
-				E43912CE26777310003CD344 /* ColorConverter.swift in Sources */,
+				E43912CE26777310003CD344 /* HexColorConverter.swift in Sources */,
 				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
 				E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */,
+				E43912D0267878BF003CD344 /* HexColorConvertable.swift in Sources */,
 				FAC6D88D2671D8A100A9E5F9 /* SocialLoginManagable.swift in Sources */,
 				E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */,
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
@@ -397,6 +404,7 @@
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
+				E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E426DACB267206D10069E77D /* LoginInfoContainer.swift in Sources */,

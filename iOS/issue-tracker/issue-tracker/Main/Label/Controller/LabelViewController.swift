@@ -34,6 +34,9 @@ final class LabelViewController: UIViewController {
     
     private var loginInfo: LoginInfo?
     
+    private let colorConverter: HexColorConvertable = HexColorConverter()
+    private let colors = ["#558776", "#F3F0D7", "#FFC107", "#FFD8CC", "#CEE5D0", "#231E23"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -80,12 +83,16 @@ extension LabelViewController: UITableViewDelegate {
 
 extension LabelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellID = LabelTableViewCell.reuseID
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? LabelTableViewCell ?? LabelTableViewCell()
+        let hex = HexColorCode(from: colors[indexPath.row])
+        let backgroundColor = colorConverter.convertHex(hex)
+        let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
+        cell.configure(with: backgroundColor, titleColor, "졸력", "졸린 오후")
         return cell
     }
 }

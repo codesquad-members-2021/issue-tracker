@@ -63,19 +63,9 @@ final class LabelTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with colorCode: String,_ title: String,_ description: String?) {
-        let backgroundColor = hexCodeToColor(colorCode)
-        let textColor = textColor(from: colorCode)
-        labelView.configure(with: backgroundColor, textColor, title)
-        
+    func configure(with backgroundColor: UIColor,_ titleColor: UIColor, _ title: String,_ description: String?) {
+        labelView.configure(with: backgroundColor, titleColor, title)
         self.labelDescription.text = description
     }
-    
-    private func hexCodeToColor(_ hex: String) -> UIColor {
-        return UIColor.black
-    }
-    
-    private func textColor(from backgroundcolorCode: String) -> UIColor {
-        return UIColor.white
-    }
+
 }
