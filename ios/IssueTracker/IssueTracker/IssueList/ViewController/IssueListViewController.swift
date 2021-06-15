@@ -126,8 +126,7 @@ extension IssueListViewController {
     @objc private func editButtonTouched(_ sender: UIButton) {
         fillCheckButton(issueTableView)
         changeIssueNumLabel(issueTableView)
-        issueTableView.isEditing = !issueTableView.isEditing
-        issueTableView.setEditing(issueTableView.isEditing, animated: true)
+        issueTableView.setEditing(!issueTableView.isEditing, animated: true)
         editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
         navigationController?.navigationBar.topItem?.title = issueTableView.isEditing ? "Select Issues" : "Issues"
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
