@@ -36,11 +36,31 @@
                     </navigationItem>
                     <connections>
                         <outlet property="issueTableView" destination="jeM-5r-JuA" id="o9K-J0-bRC"/>
+                        <segue destination="59R-vt-YCW" kind="show" id="owK-D7-kCk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T52-Ei-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157.971014492754" y="-240.40178571428569"/>
+        </scene>
+        <!--이슈 선택-->
+        <scene sceneID="whG-uc-ybO">
+            <objects>
+                <tableViewController storyboardIdentifier="IssueSelectTableViewController" id="59R-vt-YCW" customClass="IssueSelectTableViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lRr-f6-Kep">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="59R-vt-YCW" id="qwg-8D-vSh"/>
+                            <outlet property="delegate" destination="59R-vt-YCW" id="eJ0-fm-Vhl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="이슈 선택" id="uQ6-qu-p1v"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vTe-2u-Jcr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3030" y="-240"/>
         </scene>
         <!--이슈-->
         <scene sceneID="cV0-f2-Z42">

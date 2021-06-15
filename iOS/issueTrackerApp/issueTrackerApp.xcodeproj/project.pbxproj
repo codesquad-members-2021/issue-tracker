@@ -30,6 +30,7 @@
 		88C3A9F9267742140090FAD8 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */; };
 		88C3A9FE26785B160090FAD8 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9FD26785B160090FAD8 /* Status.swift */; };
 		88C3AA0B267874470090FAD8 /* IssuePatchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3AA0A267874470090FAD8 /* IssuePatchRequest.swift */; };
+		88C3AA132678F7330090FAD8 /* IssueSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3AA122678F7330090FAD8 /* IssueSelectTableViewController.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		88C3A9FD26785B160090FAD8 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		88C3AA0A267874470090FAD8 /* IssuePatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePatchRequest.swift; sourceTree = "<group>"; };
+		88C3AA122678F7330090FAD8 /* IssueSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueSelectTableViewController.swift; sourceTree = "<group>"; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				883F5184266F5F090055EC9E /* IssueViewController.swift */,
+				88C3AA122678F7330090FAD8 /* IssueSelectTableViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				88C3A9FE26785B160090FAD8 /* Status.swift in Sources */,
 				883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */,
 				883F522A267312CE0055EC9E /* IssueEndPoint.swift in Sources */,
+				88C3AA132678F7330090FAD8 /* IssueSelectTableViewController.swift in Sources */,
 				883F51D4267204520055EC9E /* LabelModel.swift in Sources */,
 				883F51C7267200EA0055EC9E /* Issue.swift in Sources */,
 			);

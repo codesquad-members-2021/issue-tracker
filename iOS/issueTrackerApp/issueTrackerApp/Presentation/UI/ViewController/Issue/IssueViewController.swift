@@ -68,7 +68,10 @@ class IssueViewController: UIViewController, IssueNetworked {
     private func configureRightBarButtonItem() {
         let customRightBarButton = CustomBarButtonItem(title: "선택", image: UIImage(systemName: "checkmark.circle") ?? UIImage(), located: .right)
         customRightBarButton.addAction(UIAction(handler: { (touch) in
-            // todo
+            
+            let targetVC = self.storyboard?.instantiateViewController(identifier: "IssueSelectTableViewController") as! IssueSelectTableViewController
+            self.navigationController?.pushViewController(targetVC, animated: true)
+            
         }), for: .touchUpInside)
         let rightBarButtonItem = UIBarButtonItem(customView: customRightBarButton)
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
