@@ -28,6 +28,11 @@ export const authorAtomState = atom({
 	initialState: [],
 });
 
+export const selectedIssueCntAtomState = atom({
+	key: "selectedIssueCntAtomState",
+	initialState: 0,
+  )};
+
 export const clickedFilterAtomState = atom({
 	key: "clickedFilterAtomState",
 	initialState: null,

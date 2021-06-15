@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
-import { useEffect, useCallback } from "react";
 import DropDownButton from "components/common/DropDownButton";
 import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
-import { clickedFilterAtomState } from "MyRecoil/atom";
-import { useRecoilState } from "MyRecoil";
-const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 
-const IssuesHeader = ({}) => {
-	const [isIssueOpenFilter, setIsIssueOpenFilter] = useState(true); // means issueOpen clicked
-	const [isIssueSelected, setIsIssueSelected] = useState(false); // 상태 위치 협의 후 수정
-	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
-	const [clickedFilter, setClickedFilter] = useState("");
+
+import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
+import { useRecoilState } from "MyRecoil";
+
+const IssuesHeader = ({
+	isAnyIssueSelected,
+	setIsAnyIssueSelected,
+	isAllIssueSelected,
+	setIsAllIssueSelected,
+	issuesCnt,
+	initCheck,
+	setInitCheck,
+}) => {
+	const [selectedIssues, setSelectedIssues] = useRecoilState(
+		selectedIssueCntAtomState
+	);
+const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
+const [clickedFilter, setClickedFilter] = useState("");
+
 	const checkAllIssue = () => {
 		setIsAllIssueSelected(!isAllIssueSelected);
 	};
@@ -51,24 +61,46 @@ const IssuesHeader = ({}) => {
 	//----------여기 까지 중복 코드from MeuFilter --------/
 
 	useEffect(() => {
-		isAllIssueSelected && console.log("issue checkbox all selected");
+		if (isAllIssueSelected) {
+			setIsAnyIssueSelected(true);
+			setInitCheck(false);
+			setSelectedIssues(() => issuesCnt);
+		}
+		if (!initCheck && !isAllIssueSelected) {
+			setIsAnyIssueSelected(false);
+			setSelectedIssues(() => 0);
+		}
 	}, [isAllIssueSelected]);
+
+	useEffect(() => {
+		if (selectedIssues === 0) setIsAnyIssueSelected(false);
+		if (isAllIssueSelected && selectedIssues === 1)
+			setIsAnyIssueSelected(false);
+	}, [selectedIssues]);
 
 	return (
 		<StyledIssuesHeader>
 			<CheckBox>
 				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
-			<FilterOpenClose>
-				<TextIconDivider>
-					<Alert /> 열린 이슈(n)
-				</TextIconDivider>
-				<TextIconDivider>
-					<Archive /> 닫힌 이슈(n)
-				</TextIconDivider>
-			</FilterOpenClose>
+			{isAnyIssueSelected ? (
+				isAllIssueSelected ? (
+					<div>{selectedIssues - 1}개 이슈 선택</div>
+				) : (
+					<div>{selectedIssues}개 이슈 선택</div>
+				)
+			) : (
+				<FilterOpenClose>
+					<TextIconDivider>
+						<Alert /> 열린 이슈(n)
+					</TextIconDivider>
+					<TextIconDivider>
+						<Archive /> 닫힌 이슈(n)
+					</TextIconDivider>
+				</FilterOpenClose>
+			)}
 			<FilterMain>
-				{isIssueSelected ? (
+				{isAnyIssueSelected ? (
 					<OpenCloseEdit>
 						<TextIconDivider>
 							상태 수정
