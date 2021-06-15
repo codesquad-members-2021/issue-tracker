@@ -34,9 +34,11 @@ const NewIssue = {
   `,
   NavWrapper: styled.div`
     width: 30%;
+    margin-right: 30px;
   `,
   ButtonsWrapper: styled(BOX.FLEX_ROW_BOX)`
     justify-content: flex-end;
+    align-items: center;
   `,
   CreateButton: styled(Button)`
     border-radius: 20px;
@@ -44,11 +46,12 @@ const NewIssue = {
     opacity: 0.5;
     color: ${theme.COLOR.WHITE};
     padding: 16px 24px;
-    width: 17%;
+    margin-left: 40px;
+    width: 240px;
     font-size: ${theme.FONT_SIZE.TEXT_MEDIUM};
   `,
   UnCreateButton: styled(Button)`
-    width: 8%;
+    width: 100%;
   `,
 };
 
