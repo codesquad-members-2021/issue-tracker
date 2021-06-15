@@ -71,10 +71,7 @@ class MyAccountViewController: UIViewController {
     }
     
     @objc private func didLogoutTouched(_ sender: UIButton) {
-//        let logoutErrorText = LoginError.logout.description
-//        presentAlert(with: logoutErrorText)
-        
-        var loginManager: LoginKeyChainManager?        
+        var loginManager: LoginKeyChainManager?
         for loginService in LoginService.allCases {
             loginManager = LoginKeyChainManager(loginService: loginService)
             loginInfo = loginManager?.read()
