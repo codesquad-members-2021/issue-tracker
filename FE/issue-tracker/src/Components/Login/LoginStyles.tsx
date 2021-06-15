@@ -9,6 +9,9 @@ const Login = {
     justify-content: center;
     width: 400px;
     height: 100%;
+    a {
+      width: 100%;
+    }
   `,
   Title: styled.div`
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
@@ -21,8 +24,8 @@ const Login = {
     border-radius: 20px;
     background: ${theme.GRAY_SCALE.TITLE_ACTIVE};
     color: ${theme.COLOR.WHITE};
-    padding: 16px 24px;
-    width: 96%;
+    padding: 16px 0px;
+    width: 100%;
   `,
   LoginForm: styled(BOX.FLEX_COLUMN_CENTER_BOX)`
     width: 100%;
@@ -34,7 +37,7 @@ const Login = {
     margin-bottom: 24px;
   `,
   Input: styled(TextField)`
-    width: 96%;
+    width: 100%;
     background: ${theme.GRAY_SCALE.INPUT_BACKGROUND};
     font-size: ${theme.FONT_SIZE.TEXT_SMALL};
     color: ${theme.GRAY_SCALE.PLACEHOLDER};
@@ -46,8 +49,8 @@ const Login = {
     background: ${theme.COLOR.BLUE};
     opacity: 0.5;
     color: ${theme.COLOR.WHITE};
-    padding: 16px 24px;
-    width: 96%;
+    padding: 16px 0px;
+    width: 100%;
   `,
   SignUpButton: styled(Button)`
     font-size: ${theme.FONT_SIZE.TEXT_X_SMALL};
