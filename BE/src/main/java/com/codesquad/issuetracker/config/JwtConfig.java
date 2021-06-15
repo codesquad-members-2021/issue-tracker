@@ -18,6 +18,7 @@ public class JwtConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(bearerAuthInterceptor)
-                .addPathPatterns("/issue/**");
+                .addPathPatterns("/issue/**")
+                .addPathPatterns("/comment/**");
     }
 }
