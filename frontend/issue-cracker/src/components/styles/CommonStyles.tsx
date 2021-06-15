@@ -79,4 +79,12 @@ const Text = {
   `,
 };
 
-export { Issue, ProfileImg, Text };
+const Line = {
+  TableLine: styled.div`
+    border-bottom: 1px solid #d9dbe9;
+    height: 1px;
+    margin: 16px 0px;
+  `,
+};
+
+export { Issue, ProfileImg, Text, Line };
