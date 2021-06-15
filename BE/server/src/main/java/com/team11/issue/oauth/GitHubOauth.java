@@ -39,9 +39,9 @@ public class GitHubOauth implements Oauth {
 
         if (UserAgent.isIOS(userAgent))
             type = "ios";
-
-        if (UserAgent.isFront(userAgent))
+        else {
             type = "fe";
+        }
 
         gitHubOauthUtil.setGitHubOauthInfo(type);
         return gitHubOauthUtil;
