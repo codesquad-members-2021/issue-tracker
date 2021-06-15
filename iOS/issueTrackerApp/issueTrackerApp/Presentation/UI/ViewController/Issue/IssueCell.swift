@@ -31,10 +31,18 @@ class IssueCell: UITableViewCell {
     
     // will fetch issue data type from server later on
     public func configureAll(with issue: Issue) {
+        self.clearCell()
         self.configureTitleLabel(with: issue)
         self.configureDescriptionLabel(with: issue)
         self.configureMileStonesLabel(with: issue)
         self.configureTagLabelStack(with: issue)
+    }
+    
+    private func clearCell() {
+        self.titleLabel.text = ""
+        self.descriptionLabel.text = ""
+        self.milestonesLabel.attributedText = NSAttributedString(string: "")
+        self.tagStackView.removeAllTags()
     }
     
     private func configureTitleLabel(with issue: Issue) {

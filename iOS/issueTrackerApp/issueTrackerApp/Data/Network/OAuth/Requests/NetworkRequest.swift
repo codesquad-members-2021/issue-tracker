@@ -9,7 +9,7 @@ import Foundation
 
 protocol NetworkRequest: class {
     associatedtype ModelType
-    var urlRequest: URLRequest { get }
+    var fetchReq: URLRequest { get }
     var session: URLSession { get }
     var task: URLSessionDataTask? { get set }
     func deserialize(_ data: Data?, response: URLResponse?) -> ModelType?
@@ -17,7 +17,7 @@ protocol NetworkRequest: class {
 
 extension NetworkRequest {
     func execute(withCompletion completion: @escaping (ModelType?) -> Void) {
-        task = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+        task = session.dataTask(with: fetchReq) { [weak self] (data, response, error) in
             completion( self?.deserialize(data, response: response) )
         }
         task?.resume()

@@ -18,10 +18,10 @@ class IssueRequest {
 extension IssueRequest: JSONDataRequest {
     typealias ModelType = [Issue]
     
-    var urlRequest: URLRequest {
+    var fetchReq: URLRequest {
         let urlComponents = URLComponents(url: IssueEndPoint.url(), resolvingAgainstBaseURL: false)!
         let request = try! URLRequest(url: urlComponents, method: .get)
-
         return request
     }
+    
 }

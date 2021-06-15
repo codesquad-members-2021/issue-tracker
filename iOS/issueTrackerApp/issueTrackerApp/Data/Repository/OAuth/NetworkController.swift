@@ -25,7 +25,7 @@ class NetworkController {
     
     func authenticateWith(authorizationCode: String, client: String, completion: @escaping () -> Void) {
         let jWTRequest = JWTRequest(authorizationCode: authorizationCode, client: client)
-        let requestURL = jWTRequest.urlRequest.url!
+        let requestURL = jWTRequest.fetchReq.url!
         requests[requestURL] = jWTRequest
         
         jWTRequest.execute { (authorization) in

@@ -12,7 +12,7 @@ protocol IssueViewModelProtocol {
     var filteredIssues: [Issue] { get set }
     func fetchAllIssue()
     func filterIssuesWithSearchText(_ string: String)
-    func deleteIssue(at index: Int)
+    func deleteIssue(at index: Int, completionHandler: @escaping () -> Void)
 }
 
 class IssueViewModel: IssueViewModelProtocol {
@@ -45,9 +45,14 @@ class IssueViewModel: IssueViewModelProtocol {
         })
     }
     
-    func deleteIssue(at index: Int) {
-        
-//        issues[index].id
-        self.issues.remove(at: index)
+    func deleteIssue(at index: Int, completionHandler: @escaping () -> Void) {
+        let issueId = issues[index].id
+        networkController?.deleteIssue(with: issueId, completion: { (res) in
+            if res.status == "success" {
+                print("sss")
+                self.issues.remove(at: index)
+                completionHandler()
+            }
+        })
     }
 }

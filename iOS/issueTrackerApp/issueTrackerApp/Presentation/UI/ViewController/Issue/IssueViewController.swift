@@ -112,7 +112,7 @@ extension IssueViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.issueTableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as! IssueCell
-        
+    
         if isFiltering {
             guard let filteredIssues = viewModel?.filteredIssues else { return cell }
             cell.configureAll(with: filteredIssues[indexPath.row])
@@ -132,9 +132,9 @@ extension IssueViewController: UITableViewDelegate {
         // delete action
         let delete = UIContextualAction(style: .destructive,
                                         title: "삭제") { [weak self] (action, view, completionHandler) in
-            self?.viewModel?.deleteIssue(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            completionHandler(true)
+            self?.viewModel?.deleteIssue(at: indexPath.row, completionHandler: {
+                    completionHandler(true)
+            })
         }
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")

@@ -24,7 +24,7 @@ class JWTRequest {
 extension JWTRequest: JSONDataRequest {
     typealias ModelType = Authorization
     
-    var urlRequest: URLRequest {
+    var fetchReq: URLRequest {
         let url = URL(string: GitHubEndpoint.loginURL)!
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         urlComponents.queryItems = [

@@ -28,6 +28,8 @@
 		883F5239267654CB0055EC9E /* IssueNetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F5238267654CB0055EC9E /* IssueNetworkController.swift */; };
 		88C3A9F426773B660090FAD8 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9F326773B660090FAD8 /* IssueViewModel.swift */; };
 		88C3A9F9267742140090FAD8 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */; };
+		88C3A9FE26785B160090FAD8 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3A9FD26785B160090FAD8 /* Status.swift */; };
+		88C3AA0B267874470090FAD8 /* IssuePatchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C3AA0A267874470090FAD8 /* IssuePatchRequest.swift */; };
 		930FAE86266E112700422968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE85266E112700422968 /* AppDelegate.swift */; };
 		930FAE88266E112700422968 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930FAE87266E112700422968 /* SceneDelegate.swift */; };
 		930FAE8D266E112700422968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930FAE8B266E112700422968 /* Main.storyboard */; };
@@ -87,6 +89,8 @@
 		883F5238267654CB0055EC9E /* IssueNetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueNetworkController.swift; path = issueTrackerApp/Data/Network/Issue/Request/IssueNetworkController.swift; sourceTree = SOURCE_ROOT; };
 		88C3A9F326773B660090FAD8 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		88C3A9F8267742140090FAD8 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		88C3A9FD26785B160090FAD8 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		88C3AA0A267874470090FAD8 /* IssuePatchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePatchRequest.swift; sourceTree = "<group>"; };
 		930FAE82266E112700422968 /* issueTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = issueTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930FAE85266E112700422968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930FAE87266E112700422968 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				883F5233267318240055EC9E /* IssueRequest.swift */,
+				88C3AA0A267874470090FAD8 /* IssuePatchRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				883F51CB2672041A0055EC9E /* Milestones.swift */,
 				883F51D3267204520055EC9E /* LabelModel.swift */,
 				883F51DB267204DC0055EC9E /* Comment.swift */,
+				88C3A9FD26785B160090FAD8 /* Status.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -579,6 +585,7 @@
 				883F5239267654CB0055EC9E /* IssueNetworkController.swift in Sources */,
 				930FAE86266E112700422968 /* AppDelegate.swift in Sources */,
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
+				88C3AA0B267874470090FAD8 /* IssuePatchRequest.swift in Sources */,
 				931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */,
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
 				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
@@ -592,6 +599,7 @@
 				883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */,
 				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
 				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
+				88C3A9FE26785B160090FAD8 /* Status.swift in Sources */,
 				883F51B62671E1710055EC9E /* CustomBarButtonItem.swift in Sources */,
 				883F522A267312CE0055EC9E /* IssueEndPoint.swift in Sources */,
 				883F51D4267204520055EC9E /* LabelModel.swift in Sources */,
