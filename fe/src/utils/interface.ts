@@ -16,6 +16,21 @@ export interface IssueType {
 }
 
 export interface filterOptionType {
-    title: string
-    key: string
+  title: string;
+  key: string;
+}
+
+interface ListItemsType {
+  id: number;
+  title: string;
+}
+
+export interface IssueRefMenuProps {
+  buttonTitle: string;
+  listItems: ListItemsType[];
+}
+
+export interface SimpleAppBarProps {
+  openedIssue: IssueType[];
+  closedIssue: IssueType[];
 }

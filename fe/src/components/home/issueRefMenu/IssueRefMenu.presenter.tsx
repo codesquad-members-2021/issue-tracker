@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, ListItemText, MenuItem } from "@material-ui/core";
 import Menu, { MenuProps } from "@material-ui/core/Menu";
+import { IssueRefMenuProps } from "utils/interface";
 
-interface IssueFilterMenuProps {
-  buttonTitle: string;
-  listItems: string[];
+interface IssueRefMenuPresenterProps extends IssueRefMenuProps {
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+  handleClose: () => void;
+  anchorEl: null | HTMLElement;
 }
 
-export default function IssueRefMenu({ buttonTitle, listItems }: IssueFilterMenuProps) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+export default function IssueRefMenuPresenter(props: IssueRefMenuPresenterProps) {
+  const { buttonTitle, listItems, handleClick, handleClose, anchorEl } = props;
 
   return (
     <div>
@@ -39,7 +33,7 @@ export default function IssueRefMenu({ buttonTitle, listItems }: IssueFilterMenu
       >
         {listItems.map((item) => (
           <StyledMenuItem>
-            <ListItemText primary={item} />
+            <ListItemText primary={item.title} />
           </StyledMenuItem>
         ))}
       </StyledMenu>
