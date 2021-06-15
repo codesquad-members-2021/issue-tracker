@@ -1,30 +1,30 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  checkedItemState,
-  IssueList,
-  checkedState,
-} from "@/Components/Home/HomeStore";
+import { checkedItemState, IssueList } from "@/Components/Home/HomeStore";
 
 const TotalIssueCheckButton = () => {
   const [checkedItemList, setCheckedItemList] =
     useRecoilState(checkedItemState);
-  const [checked, setChecked] = useRecoilState(checkedState);
   const Issues = useRecoilValue(IssueList);
 
   const handletotalCheck = () => {
-    //
     if (Issues.length === checkedItemList.size) {
-      setChecked(!checked);
       checkedItemList.clear();
-      setCheckedItemList(checkedItemList);
+      setCheckedItemList(new Set(checkedItemList.values()));
     } else {
-      setChecked(!checked);
       Issues.forEach((issue) => checkedItemList.add(issue.id));
-      setCheckedItemList(checkedItemList);
+      setCheckedItemList(new Set(checkedItemList.values()));
     }
   };
+
   console.log(checkedItemList);
-  return <input type="checkbox" onChange={handletotalCheck} />;
+
+  return (
+    <input
+      checked={checkedItemList.size === Issues.length}
+      type="checkbox"
+      onChange={handletotalCheck}
+    />
+  );
 };
 
 export default TotalIssueCheckButton;

@@ -8,23 +8,20 @@ type CheckButtonProps = {
 };
 
 const CheckButton = ({ issueId }: CheckButtonProps) => {
-  const [checked, setChecked] = useRecoilState(checkedState);
   const [checkedItemList, setCheckedItemList] =
     useRecoilState(checkedItemState);
 
   const handleCheckedItem = (issueId: number, isChecked: boolean) => {
     if (isChecked) {
       checkedItemList.add(issueId);
-      setCheckedItemList(checkedItemList);
+      setCheckedItemList(new Set(checkedItemList.values()));
     } else if (!isChecked && checkedItemList.has(issueId)) {
       checkedItemList.delete(issueId);
-      setCheckedItemList(checkedItemList);
+      setCheckedItemList(new Set(checkedItemList.values()));
     }
-    console.log(checkedItemList.has(issueId));
   };
 
   const handleCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(!checked); //일종의 리렌더링을 위한 트리거?처럼 쓰고있는데 이게 맞을까?
     handleCheckedItem(issueId, e.target.checked);
   };
 

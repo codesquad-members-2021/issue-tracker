@@ -1,8 +1,17 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export const checkedItemState = atom({
   key: "checkedItemState",
   default: new Set(),
+});
+
+export const checkedItemsCountState = selector({
+  key: "checkedItemsCountState",
+  get: ({ get }) => {
+    const checkedItems = get(checkedItemState);
+
+    return checkedItems.size;
+  },
 });
 
 export const checkedState = atom({
@@ -24,6 +33,11 @@ export const categoryModalOpenState = atom<{
     openedModalTitle: "담당자",
     isOpen: false,
   },
+});
+
+export const editOpenCloseIssueModalState = atom({
+  key: "editOpenCloseIssueModalState",
+  default: false,
 });
 
 interface IssueObj {
