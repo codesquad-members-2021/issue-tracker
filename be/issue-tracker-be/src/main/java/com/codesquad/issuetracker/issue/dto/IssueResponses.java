@@ -1,13 +1,18 @@
 package com.codesquad.issuetracker.issue.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
-@Data(staticConstructor = "from")
+@Data
+@Builder
 public class IssueResponses {
 
     @JsonProperty("issues")
-    private final List<IssueResponse> issueResponses;
+    private List<IssueResponse> issueResponses;
+
+    private int openedIssueCount;
+    private int closedIssueCount;
 }

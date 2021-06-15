@@ -18,20 +18,26 @@ public class IssueDummyData {
     }
 
     public static IssueResponses issueResponses() {
-        return IssueResponses.from(Arrays.asList(
-                IssueResponse.builder()
-                        .id(1L)
-                        .number(1L)
-                        .title("title")
-                        .description("description설명")
-                        .hasSameAuthorComments(true)
-                        .createDateTime(LocalDateTime.now())
-                        .author(UserDummyData.userFreddie())
-                        .assignees(UserDummyData.usersResponse())
-                        .labels(LabelDummyData.labelResponses())
-                        .milestone(MilestoneDummyData.openedMilestoneResponse())
-                        .build()
-        ));
+        return IssueResponses.builder()
+                       .issueResponses(
+                               Arrays.asList(
+                                       IssueResponse.builder()
+                                               .id(1L)
+                                               .number(1L)
+                                               .title("title")
+                                               .description("description설명")
+                                               .hasSameAuthorComments(true)
+                                               .createDateTime(LocalDateTime.now())
+                                               .author(UserDummyData.userFreddie())
+                                               .assignees(UserDummyData.usersResponse())
+                                               .labels(LabelDummyData.labelResponses())
+                                               .milestone(MilestoneDummyData.openedMilestoneResponse())
+                                               .build()
+                               )
+                       )
+                       .openedIssueCount(2)
+                       .closedIssueCount(3)
+                       .build();
     }
 
     public static IssueDetailResponse issueDetailResponse() {
