@@ -6,23 +6,14 @@ import { ReactComponent as UserImageSmall } from "images/UserImageSmall.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as Milestone } from "images/milestone.svg";
 import getTimeStamp from "util/getTimeStamp";
-import { useRecoilState } from "MyRecoil/useRecoilState";
-import { selectedIssueCntAtomState } from "MyRecoil/atom";
+// import { useRecoilState } from "MyRecoil";
+// import { selectedIssueCntAtomState } from "MyRecoil/atom";
+import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
+import { useRecoilState } from "recoil";
 
-const IssueCard = ({
-	issue,
-	setIsAnyIssueSelected,
-	isAllIssueSelected,
-	setIsAllIssueSelected,
-	initCheck,
-	setInitCheck,
-	selectedCards,
-	setSelectedCards,
-}) => {
+const IssueCard = ({ issue, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, initCheck, setInitCheck, selectedCards, setSelectedCards }) => {
 	const [isChecked, setIsChecked] = useState(false);
-	const [selectedIssues, setSelectedIssues] = useRecoilState(
-		selectedIssueCntAtomState
-	);
+	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
 	// const [initCheck, setInitCheck] = useState(true);
 	const { title, id, labelId, milestoneId, author, createdAt } = issue;
 	const handleCheck = () => {
@@ -66,8 +57,7 @@ const IssueCard = ({
 				<TextTagDivider>
 					<span>#{id} </span>
 					<Padder>
-						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해
-						작성되었습니다
+						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해 작성되었습니다
 					</Padder>
 					<Padder>
 						<Milestone fill={theme.grayScale.label} />

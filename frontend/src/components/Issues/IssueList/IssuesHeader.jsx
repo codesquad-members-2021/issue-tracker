@@ -8,24 +8,15 @@ import DropDownButton from "components/common/DropDownButton";
 import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
 
+// import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
+// import { useRecoilState } from "MyRecoil";
+import { useRecoilState } from "recoil";
+import { selectedIssueCntAtomState, clickedFilterAtomState } from "RecoilStore/Atoms";
 
-import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
-import { useRecoilState } from "MyRecoil";
-
-const IssuesHeader = ({
-	isAnyIssueSelected,
-	setIsAnyIssueSelected,
-	isAllIssueSelected,
-	setIsAllIssueSelected,
-	issuesCnt,
-	initCheck,
-	setInitCheck,
-}) => {
-	const [selectedIssues, setSelectedIssues] = useRecoilState(
-		selectedIssueCntAtomState
-	);
-const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
-const [clickedFilter, setClickedFilter] = useState("");
+const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, issuesCnt, initCheck, setInitCheck }) => {
+	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
+	const [clickedFilter, setClickedFilter] = useState("");
 
 	const checkAllIssue = () => {
 		setIsAllIssueSelected(!isAllIssueSelected);
@@ -33,10 +24,8 @@ const [clickedFilter, setClickedFilter] = useState("");
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback(e => {
-		isFilterClicked === false
-			? setIsFilterClicked(true)
-			: setIsFilterClicked(false);
+	const handleClick = useCallback((e) => {
+		isFilterClicked === false ? setIsFilterClicked(true) : setIsFilterClicked(false);
 		console.dir(e.target.textContent);
 		console.dir(e.target);
 		setClickedFilter(e.target.textContent);
@@ -49,14 +38,9 @@ const [clickedFilter, setClickedFilter] = useState("");
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = e => {
+	const closeFilterModal = (e) => {
 		const target = e.target;
-		if (
-			isFilterClicked &&
-			!target.closest(".filter-modal") &&
-			!target.closest(".issue-header-button")
-		)
-			setIsFilterClicked(false);
+		if (isFilterClicked && !target.closest(".filter-modal") && !target.closest(".issue-header-button")) setIsFilterClicked(false);
 	};
 	//----------여기 까지 중복 코드from MeuFilter --------/
 
@@ -74,8 +58,7 @@ const [clickedFilter, setClickedFilter] = useState("");
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
-		if (isAllIssueSelected && selectedIssues === 1)
-			setIsAnyIssueSelected(false);
+		if (isAllIssueSelected && selectedIssues === 1) setIsAnyIssueSelected(false);
 	}, [selectedIssues]);
 
 	return (
@@ -111,15 +94,7 @@ const [clickedFilter, setClickedFilter] = useState("");
 					<FiltersWrapper>
 						<TextIconDivider>
 							{buttonNames.map((filter, idx) => (
-								<DropDownButton
-									text={filter}
-									clickEvent={handleClick}
-									key={`filter-${idx}`}
-									className={"issue-header-button"}
-									width={({ theme }) => theme.buttonWidths.small}
-									border={"none"}
-									id={filter}
-								></DropDownButton>
+								<DropDownButton text={filter} clickEvent={handleClick} key={`filter-${idx}`} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.small} border={"none"} id={filter}></DropDownButton>
 							))}
 							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
 							{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}

@@ -3,8 +3,10 @@ import styled from "styled-components";
 import IssuesHeader from "./IssuesHeader";
 import IssueCard from "./IssueCard";
 import { issues } from "data";
-import { selectedIssueCntAtomState } from "MyRecoil/atom";
-import { useRecoilState } from "MyRecoil/useRecoilState";
+// import { selectedIssueCntAtomState } from "MyRecoil/atom";
+import { useRecoilState } from "recoil";
+import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
+// import { useRecoilState } from "MyRecoil";
 
 const IssueList = () => {
 	const [isAnyIssueSelected, setIsAnyIssueSelected] = useState(false); // 상태 위치 협의 후 수정
@@ -14,40 +16,15 @@ const IssueList = () => {
 	const [selectedCards, setSelectedCards] = useState(new Set());
 
 	useEffect(() => {
-		if (!initCheck && !isAllIssueSelected && !isAnyIssueSelected)
-			setSelectedIssues(() => 0);
+		if (!initCheck && !isAllIssueSelected && !isAnyIssueSelected) setSelectedIssues(() => 0);
 	}, [isAnyIssueSelected]);
 
-	const issueList = issues.map(issue => (
-		<IssueCard
-			key={issue.id}
-			issue={issue}
-			setIsAnyIssueSelected={setIsAnyIssueSelected}
-			isAllIssueSelected={isAllIssueSelected}
-			setIsAllIssueSelected={setIsAllIssueSelected}
-			initCheck={initCheck}
-			setInitCheck={setInitCheck}
-			selectedCards={selectedCards}
-			setSelectedCards={setSelectedCards}
-		/>
-	));
+	const issueList = issues.map((issue) => <IssueCard key={issue.id} issue={issue} setIsAnyIssueSelected={setIsAnyIssueSelected} isAllIssueSelected={isAllIssueSelected} setIsAllIssueSelected={setIsAllIssueSelected} initCheck={initCheck} setInitCheck={setInitCheck} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />);
 
 	return (
 		<StyledIssueList>
-			<IssuesHeader
-				issuesCnt={issues.length}
-				isAnyIssueSelected={isAnyIssueSelected}
-				setIsAnyIssueSelected={setIsAnyIssueSelected}
-				isAllIssueSelected={isAllIssueSelected}
-				setIsAllIssueSelected={setIsAllIssueSelected}
-				initCheck={initCheck}
-				setInitCheck={setInitCheck}
-			/>
-			{issueList.length ? (
-				issueList
-			) : (
-				<ErrorCard>검색과 일치하는 결과가 없습니다</ErrorCard>
-			)}
+			<IssuesHeader issuesCnt={issues.length} isAnyIssueSelected={isAnyIssueSelected} setIsAnyIssueSelected={setIsAnyIssueSelected} isAllIssueSelected={isAllIssueSelected} setIsAllIssueSelected={setIsAllIssueSelected} initCheck={initCheck} setInitCheck={setInitCheck} />
+			{issueList.length ? issueList : <ErrorCard>검색과 일치하는 결과가 없습니다</ErrorCard>}
 		</StyledIssueList>
 	);
 };
