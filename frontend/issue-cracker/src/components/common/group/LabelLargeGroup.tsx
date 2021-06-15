@@ -26,7 +26,7 @@ const IssueLabelOpen = () => {
   return (
     <IssueLabelStyle>
       <CustomOpenChip
-        avatar={<OpenIconGroup type={'large'} />}
+        avatar={<OpenIconGroup type={'label'} />}
         label={OPEN_ISSUE}
         color="primary"
         variant="outlined"
