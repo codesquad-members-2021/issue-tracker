@@ -12,12 +12,12 @@ class IssueTrackerTabBarController: UITabBarController {
     private var loginInfo: LoginInfo?
     private let imageLoadManager = ImageLoadManager()
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {        
         super.viewDidLoad()
-        tabBar.tintColor = Colors.mainGrape
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        tabBar.tintColor = Colors.mainGrape
         super.viewDidAppear(animated)
     }
     
