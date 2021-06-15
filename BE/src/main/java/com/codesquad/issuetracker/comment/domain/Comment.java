@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +23,7 @@ public class Comment {
     @Column(columnDefinition = "BINARY(16)", name = "COMMENT_ID")
     private UUID id;
 
+    //Foreign Key constraint
     @Column(name = "ISSUE_ID")
     private Long issueId;
 
@@ -40,7 +40,7 @@ public class Comment {
     @NonNull
     private String content;
 
-    private Comment (Long issueId, User author, String content) {
+    private Comment(Long issueId, User author, String content) {
         this.issueId = issueId;
         this.author = author;
         this.content = content;
