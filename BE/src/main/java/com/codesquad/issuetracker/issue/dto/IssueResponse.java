@@ -33,6 +33,10 @@ public class IssueResponse {
     private final List<CommentResponse> comments;
 
     public static IssueResponse fromEntity(Issue issue, List<Comment> comments) {
+        MilestoneResponseDto milestone = null;
+        if (issue.getMilestone() != null) {
+            milestone = MilestoneResponseDto.fromEntity(issue.getMilestone());
+        }
         return new IssueResponse(
                 issue.getId(),
                 UserDto.fromEntity(issue.getAuthor()),
@@ -41,7 +45,7 @@ public class IssueResponse {
                 issue.getCreatedAt(),
                 issue.getLabels().stream().map(LabelDto::fromEntity).collect(Collectors.toSet()),
                 issue.getAssignees().stream().map(UserDto::fromEntity).collect(Collectors.toSet()),
-                MilestoneResponseDto.fromEntity(issue.getMilestone()),
+                milestone,
                 comments.stream().map(CommentResponse::fromEntity).collect(Collectors.toList()));
     }
 }

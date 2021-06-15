@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 public class IssueCreateRequest {
 
-    private final String title;
-    private final String comment;
-    private final List<UUID> assigneeIds;
-    private final List<UUID> labelIds;
-    private final UUID milestoneId;
+    private String title;
+    private String comment;
+    private List<UUID> assigneeIds;
+    private List<UUID> labelIds;
+    private UUID milestoneId;
 
     public Issue createIssue(User author) {
         return Issue.create(author, title);
