@@ -34,6 +34,16 @@ public class IssueDto {
         this.milestoneTitle = milestoneTitle;
     }
 
+    public IssueDto(Issue issue, String authorAvatarUrl, String milestoneTitle) {
+        this.id = issue.getId();
+        this.title = issue.getTitle();
+        this.description = issue.getDescription();
+        this.authorAvatarUrl = authorAvatarUrl;
+        this.issueNumber = issue.getNumber();
+        this.createdTime = issue.getCreatedTime();
+        this.milestoneTitle = milestoneTitle;
+    }
+
     public static IssueDto of(Issue issue, User user, String milestoneTitle) {
         return new IssueDto(
                 issue.getId(),

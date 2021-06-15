@@ -1,7 +1,8 @@
-package com.issuetracker.repository;
+package com.issuetracker.issue;
 
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
+import com.issuetracker.repository.IssueRepository;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.issuetracker.issue.IssueTestData.issue1;
+import static com.issuetracker.issue.IssueTestData.issue2;
+
 @SpringBootTest
 public class IssueRepositoryTests {
 
@@ -22,42 +26,6 @@ public class IssueRepositoryTests {
     @Autowired
     private IssueRepository issueRepository;
 
-    private final static Label firstLabel = new Label(1L, "테스트1", "테스트라벨1", "12345", "123411");
-
-    private final static Label secondLabel = new Label(2L, "테스트2", "테스트라벨2", "aa12345", "aa123411");
-
-    private final static List<Label> labels = new ArrayList<Label>(){{
-        add(firstLabel);
-        add(secondLabel);
-    }};
-
-    private final static Issue issue1 = new Issue(
-            3L,
-            "title",
-            "description",
-            1L,
-            LocalDateTime.now(),
-            true,
-            false,
-            1L,
-            1L,
-            4L,
-            labels
-    );
-
-    private final static Issue issue2 = new Issue(
-            4L,
-            "title2",
-            "description2",
-            2L,
-            LocalDateTime.now(),
-            false,
-            true,
-            2L,
-            2L,
-            3L,
-            labels
-    );
 
     @Test
     @Transactional

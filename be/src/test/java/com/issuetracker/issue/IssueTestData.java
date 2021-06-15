@@ -2,6 +2,7 @@ package com.issuetracker.issue;
 
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
+import com.issuetracker.oauth.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,6 +45,10 @@ public class IssueTestData {
             2L,
             3L,
             labels
+    );
+
+    public final static User USER_MJ = new User(
+            "MJ", 12345L, "https://avatars.githubusercontent.com/u/16694346?v=4"
     );
 
 }
