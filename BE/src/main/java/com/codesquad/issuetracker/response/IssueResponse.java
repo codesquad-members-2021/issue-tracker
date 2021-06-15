@@ -1,9 +1,5 @@
 package com.codesquad.issuetracker.response;
 
-import com.codesquad.issuetracker.domain.Milestone;
-import com.codesquad.issuetracker.domain.Label;
-import com.codesquad.issuetracker.domain.User;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
