@@ -7,7 +7,25 @@
 
 import Foundation
 
-enum EndPoint: String {
-    case OAuth = "http://3.34.122.67/api/login/ios"
-    case allLabels = "http://3.34.122.67/api/labels"
+enum EndPoint {
+    static let baseAddress = "http://3.34.122.67/api"
+    
+    case OAuth
+    case label
+    case milestone
+    
+    func fullAddress() -> String {
+        switch self {
+        case .OAuth:
+            return EndPoint.baseAddress + "/login/ios"
+        case .label:
+            return EndPoint.baseAddress + "/labels"
+        case .milestone:
+            return EndPoint.baseAddress + "/milestones"
+        }
+    }
+    
+    func fullAddress(with id: Int) -> String {
+        return fullAddress() + "\(id)"
+    }
 }

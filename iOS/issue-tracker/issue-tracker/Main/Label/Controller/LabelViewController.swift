@@ -64,7 +64,7 @@ final class LabelViewController: UIViewController {
     
     private func setNetworkManager() {
         guard let loginInfo = loginInfo else { return }
-        let url = EndPoint.allLabels.rawValue
+        let url = EndPoint.label.fullAddress()
         let headers = [Header.authorization.key(): loginInfo.jwt.description]
         let requestManager = RequestManager(url: url, headers: headers)
         networkManager = NetworkManager(requestManager: requestManager)

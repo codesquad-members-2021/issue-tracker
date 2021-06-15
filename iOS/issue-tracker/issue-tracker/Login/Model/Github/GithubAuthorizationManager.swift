@@ -58,7 +58,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                     .first?
                     .value else { return }
 
-            let url = EndPoint.OAuth.rawValue
+            let url = EndPoint.OAuth.fullAddress()
             let parameter = [codeKey: code]
             let requestManager = RequestManager(url: url, parameters: parameter)
             let networkmanager = NetworkManager(requestManager: requestManager)
