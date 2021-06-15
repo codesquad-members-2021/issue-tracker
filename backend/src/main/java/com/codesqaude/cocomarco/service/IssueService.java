@@ -70,10 +70,8 @@ public class IssueService {
         List<IssueListResponse> issueListResponse = new ArrayList<>();
 
         for (Issue issue : issues) {
-            List<Long> issueLabelIds = issue.getIssueLabels().stream().map(IssueLabel::getLabel).map(Label::getId).collect(Collectors.toList());
-            List<Label> labels = labelRepository.findAllById(issueLabelIds);
-            List<UUID> assignmentIds = issue.getAssignments().stream().map(Assignment::getUser).map(User::getId).collect(Collectors.toList());
-            List<User> assignments = userRepository.findAllById(assignmentIds);
+            List<Label> labels = issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList());
+            List<User> assignments = issue.getAssignments().stream().map(Assignment::getUser).collect(Collectors.toList());
 
             issueListResponse.add(IssueListResponse.of(issue, assignments, labels));
         }

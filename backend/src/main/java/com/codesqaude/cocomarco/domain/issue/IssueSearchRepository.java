@@ -17,6 +17,7 @@ import static com.codesqaude.cocomarco.domain.comment.QComment.comment;
 import static com.codesqaude.cocomarco.domain.issue.model.QAssignment.assignment;
 import static com.codesqaude.cocomarco.domain.issue.model.QIssue.issue;
 import static com.codesqaude.cocomarco.domain.issue.model.QIssueLabel.issueLabel;
+import static com.codesqaude.cocomarco.domain.label.QLabel.label;
 import static com.codesqaude.cocomarco.domain.milestone.QMilestone.milestone;
 import static com.codesqaude.cocomarco.domain.user.QUser.user;
 import static org.springframework.util.StringUtils.hasText;
@@ -35,9 +36,11 @@ public class IssueSearchRepository {
         return jpaQueryFactory
                 .select(issue)
                 .from(issue)
-                .leftJoin(issue.assignments, assignment).fetchJoin()
                 .leftJoin(issue.writer, user).fetchJoin()
+                .leftJoin(issue.assignments, assignment).fetchJoin()
+                .leftJoin(assignment.user, user).fetchJoin()
                 .leftJoin(issue.issueLabels, issueLabel).fetchJoin()
+                .leftJoin(issueLabel.label, label).fetchJoin()
                 .leftJoin(issue.milestone, milestone).fetchJoin()
                 .leftJoin(issue.comments, comment).fetchJoin()
                 .where(
