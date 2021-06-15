@@ -14,8 +14,10 @@ public class UserDto {
     private final UUID id;
     private final String nickName;
     private final String imageUrl;
+    private final String githubId;
+    private final String appleId;
 
     public static UserDto fromEntity (User user) {
-        return new UserDto(user.getId(), user.getNickName(), user.getImageUrl());
+        return new UserDto(user.getId(), user.getNickName(), user.getImageUrl(), user.getGitHubId(), user.getAppleId());
     }
 }

@@ -20,6 +20,8 @@ public class JwtUtils {
     private static final String ID = "id";
     private static final String NICKNAME = "nickName";
     private static final String IMAGE_URL = "imageUrl";
+    private static final String GITHUB_ID = "gitHubId";
+    private static final String APPLE_ID = "appleId";
 
     private final Algorithm ALGORITHM;
     private final JWTVerifier jwtVerifier;
@@ -37,6 +39,8 @@ public class JwtUtils {
                 .withClaim(ID, user.getId().toString())
                 .withClaim(NICKNAME, user.getNickName())
                 .withClaim(IMAGE_URL, user.getImageUrl())
+                .withClaim(GITHUB_ID, user.getGitHubId())
+                .withClaim(APPLE_ID, user.getAppleId())
                 .withIssuer(ISSUER)
                 .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(2)))
                 .sign(ALGORITHM);
@@ -47,7 +51,9 @@ public class JwtUtils {
         return User.instanceOf(
                 UUID.fromString(jwt.getClaim(ID).asString()),
                 jwt.getClaim(NICKNAME).asString(),
-                jwt.getClaim(IMAGE_URL).asString()
+                jwt.getClaim(IMAGE_URL).asString(),
+                jwt.getClaim(GITHUB_ID).asString(),
+                jwt.getClaim(APPLE_ID).asString()
         );
     }
 }

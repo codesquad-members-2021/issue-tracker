@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class User {
 
@@ -22,12 +23,11 @@ public class User {
     @Column(columnDefinition = "BINARY(16)", name = "USER_ID")
     private UUID id;
 
-    @NonNull
-    @Column(name = "USER_NICK_NAME", nullable = false)
+    @Column(name = "USER_NICK_NAME")
     private String nickName;
 
     @NonNull
-    @Column(name = "USER_IMAGE_URL",nullable = false)
+    @Column(name = "USER_IMAGE_URL")
     private String imageUrl;
 
     @Column(name = "USER_GITHUB_ID")
@@ -36,20 +36,14 @@ public class User {
     @Column(name = "USER_APPLE_ID")
     private String appleId;
 
-    private User(@NonNull String nickName, @NonNull String imageUrl, String gitHubId) {
+    private User(String nickName, String imageUrl, String gitHubId) {
         this.nickName = nickName;
         this.imageUrl = imageUrl;
         this.gitHubId = gitHubId;
     }
 
-    private User(UUID id,  String nickName, @NonNull String imageUrl) {
-        this.id = id;
-        this.nickName = nickName;
-        this.imageUrl = imageUrl;
-    }
-
-    public static User instanceOf(UUID id, String nickName, String imageUrl) {
-        return new User(id, nickName, imageUrl);
+    public static User instanceOf(UUID id, String nickName, String imageUrl, String gitHubId, String appleId) {
+        return new User(id, nickName, imageUrl, gitHubId, appleId);
     }
 
     public static User fromGitHubUser(GitHubUser gitHubUser) {
