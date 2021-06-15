@@ -32,3 +32,7 @@ export const FILTER = '필터';
 export const WRITTEN_ISSUE = '내가 작성한 이슈';
 export const ASSIGNED_ISSUE = '나에게 할당된 이슈';
 export const COMMENTED_ISSUE = '내가 댓글을 남긴 이슈';
+export const ISSUE_TABLE_HEADER_LIST = [ASSIGNEE, LABEL, MILESTONE, WRITER];
+
+// temp
+export const FILTER_DROPDOWN = ['Tami', 'Raccoon', 'Noel', 'Neo', 'Pyro'];

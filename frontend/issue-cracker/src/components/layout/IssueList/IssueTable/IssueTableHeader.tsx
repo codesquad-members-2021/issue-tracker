@@ -4,18 +4,16 @@ import CheckBoxes from '../../../common/CheckBoxes';
 import OpenIconGroup from '../../../common/group/OpenIconGroup';
 import ClosedIconGroup from '../../../common/group/ClosedIconGroup';
 import {
-  ASSIGNEE,
   CLOSED_ISSUE,
-  LABEL,
-  MILESTONE,
   OPEN_ISSUE,
-  WRITER,
+  ISSUE_TABLE_HEADER_LIST,
+  FILTER_DROPDOWN,
 } from '../../../../utils/const';
 import TextGroup from '../../../common/group/TextGroup';
 import CountGroup from '../../../common/group/CountGroup';
-
 import IssueHeaderButton from '../../../common/IssueHeaderButton';
 import FilterMenu from '../../../common/FilterMenu';
+import { v4 as uuidv4 } from 'uuid';
 
 const IssueTableHeader = (): JSX.Element => {
   return (
@@ -37,14 +35,9 @@ const IssueTableHeader = (): JSX.Element => {
         />
       </S.IssueTableHeaderLeft>
       <S.IssueTableHeaderRight>
-        {/* <TextGroup type="small" content={ASSIGNEE} color="#6E7191" />
-        <TextGroup type="small" content={LABEL} color="#6E7191" />
-        <TextGroup type="small" content={MILESTONE} color="#6E7191" />
-        <TextGroup type="small" content={WRITER} color="#6E7191" /> */}
-        <FilterMenu />
-        <FilterMenu />
-        <FilterMenu />
-        <FilterMenu />
+        {ISSUE_TABLE_HEADER_LIST.map((menu) => (
+          <FilterMenu {...{ menu }} list={FILTER_DROPDOWN} key={uuidv4()} />
+        ))}
       </S.IssueTableHeaderRight>
     </S.IssueTableHeader>
   );

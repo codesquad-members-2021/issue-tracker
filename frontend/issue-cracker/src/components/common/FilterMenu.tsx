@@ -5,14 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import TextGroup from './group/TextGroup';
-import {
-  ASSIGNED_ISSUE,
-  CLOSED_ISSUE,
-  COMMENTED_ISSUE,
-  FILTER,
-  OPEN_ISSUE,
-  WRITTEN_ISSUE,
-} from '../../utils/const';
+import { v4 as uuidv4 } from 'uuid';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -33,8 +26,13 @@ const BootstrapInput = withStyles((theme: Theme) =>
   })
 )(InputBase);
 
-function FilterMenu(): JSX.Element {
-  const [index, setIndex] = React.useState('필터');
+interface FilterMenuProps {
+  menu: string;
+  list: string[];
+}
+
+function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
+  const [index, setIndex] = React.useState(menu);
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setIndex(event.target.value as string);
   };
@@ -48,24 +46,14 @@ function FilterMenu(): JSX.Element {
         onChange={handleChange}
         input={<BootstrapInput />}
       >
-        <MenuItem value={FILTER}>
-          <TextGroup content={FILTER} color="#222" type="xSmall" />
+        <MenuItem value={menu}>
+          <TextGroup content={menu} color="#222" type="xSmall" />
         </MenuItem>
-        <MenuItem value={1}>
-          <TextGroup content={OPEN_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={2}>
-          <TextGroup content={WRITTEN_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={3}>
-          <TextGroup content={ASSIGNED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={4}>
-          <TextGroup content={COMMENTED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={5}>
-          <TextGroup content={CLOSED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
+        {list.map((menu, idx) => (
+          <MenuItem value={idx + 1} key={uuidv4()}>
+            <TextGroup content={menu} color="#222" type="xSmall" />
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
