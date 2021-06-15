@@ -9,4 +9,5 @@ public class UserResponse {
     private long id;
     private String email;
     private String name;
+    private String profileImage;
 }
