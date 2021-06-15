@@ -59,4 +59,11 @@ public class MilestoneService {
         milestone.edit(milestoneRequest);
         milestoneRepository.save(milestone);
     }
+
+    public void deleteMilestone(Long milestoneId) {
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        milestone.delete();
+        milestoneRepository.save(milestone);
+
+    }
 }

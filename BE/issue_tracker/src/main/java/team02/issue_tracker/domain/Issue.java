@@ -92,4 +92,8 @@ public class Issue {
                 .filter(comment -> !comment.isDeleted())
                 .collect(Collectors.toList());
     }
+
+    public void deleteMilestone() {
+        milestone = null;
+    }
 }

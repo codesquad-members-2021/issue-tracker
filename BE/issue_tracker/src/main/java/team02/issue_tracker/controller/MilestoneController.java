@@ -40,4 +40,10 @@ public class MilestoneController {
         milestoneService.modifyMilestone(milestoneId, milestoneRequest);
         return ApiResult.ok();
     }
+
+    @DeleteMapping("/{milestoneId}")
+    public ApiResult<String> deleteMilestone(@PathVariable Long milestoneId) {
+        milestoneService.deleteMilestone(milestoneId);
+        return ApiResult.ok();
+    }
 }
