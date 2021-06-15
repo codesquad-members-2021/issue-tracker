@@ -74,8 +74,7 @@ class MyAccountViewController: UIViewController {
 //        let logoutErrorText = LoginError.logout.description
 //        presentAlert(with: logoutErrorText)
         
-        var loginManager: LoginKeyChainManager?
-        
+        var loginManager: LoginKeyChainManager?        
         for loginService in LoginService.allCases {
             loginManager = LoginKeyChainManager(loginService: loginService)
             loginInfo = loginManager?.read()
