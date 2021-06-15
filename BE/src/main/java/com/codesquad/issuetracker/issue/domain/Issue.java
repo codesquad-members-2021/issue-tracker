@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.issue.domain;
 
-import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.user.domain.User;
@@ -8,11 +7,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Entity
@@ -48,10 +48,6 @@ public class Issue {
     @ManyToOne
     @JoinColumn(name = "MILESTONE_ID")
     private Milestone milestone;
-
-    @OneToMany
-    @JoinColumn(name = "ISSUE_ID")
-    private List<Comment> comments;
 
     private Issue(User author, String title) {
         this.author = author;
