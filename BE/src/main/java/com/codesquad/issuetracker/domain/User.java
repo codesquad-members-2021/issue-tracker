@@ -2,6 +2,9 @@ package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.domain.oauth.GitHubUser;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -29,36 +34,11 @@ public class User {
         this.id = id;
     }
 
-    public User() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLoginId() {
-        return loginId;
-    }
-
-    public User create(Long id, String name, String userId) {
-        return new User(id, name, userId);
+    public static User create(Long id, String name, String loginId) {
+        return new User(id, name, loginId);
     }
 
     public static User githubUserToUser(GitHubUser githubUser) {
         return new User(githubUser.getName(), githubUser.getLogin());
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", userId='" + loginId + '\'' +
-                '}';
     }
 }
