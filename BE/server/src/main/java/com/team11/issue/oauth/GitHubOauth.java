@@ -43,7 +43,6 @@ public class GitHubOauth implements Oauth {
         if (UserAgent.isFront(userAgent))
             type = "fe";
 
-        System.out.println(type);
         gitHubOauthUtil.setGitHubOauthInfo(type);
         return gitHubOauthUtil;
     }

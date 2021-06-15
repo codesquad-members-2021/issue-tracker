@@ -23,7 +23,7 @@ public class SwaggerConfig {
         responseContentType.add("application/json;charset=UTF-8");
 
         return new Docket(DocumentationType.SWAGGER_2)
-                /*.host("")*/
+                .host("ec2-52-79-56-138.ap-northeast-2.compute.amazonaws.com")
                 .groupName("issue-tracker")
                 .produces(responseContentType)
                 .apiInfo(apiInfo())
