@@ -1,7 +1,9 @@
 package com.codesquad.issuetracker.repository;
 
 import com.codesquad.issuetracker.domain.Milestone;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
+@Repository
+public interface MilestoneRepository extends CrudRepository<Milestone, Long> {
 }
