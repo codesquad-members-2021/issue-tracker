@@ -1,7 +1,10 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.dto.IssueDto;
+import com.issuetracker.oauth.User;
 import com.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +21,7 @@ public class IssueController {
     }
 
     @GetMapping("/issues")
-    public List<IssueDto> viewAllIssues() {
-        return issueService.getAllIssues();
+    public List<IssueDto> viewAllIssues(@RequestAttribute User user) {
+        return issueService.getAllIssues(user);
     }
 }

@@ -182,3 +182,8 @@ gradle-app.setting
 /src/resources/application.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,macos,gradle
+/.idea/*
+/src/main/resources/application.properties
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/src/main/resources/oauth.properties

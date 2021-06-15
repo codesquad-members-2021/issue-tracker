@@ -11,7 +11,8 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema issue_tracker_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `issue_tracker_db` DEFAULT CHARACTER SET utf8;
+DROP SCHEMA IF EXISTS `issue_tracker_db`;
+CREATE SCHEMA IF NOT EXISTS `issue_tracker_db` DEFAULT CHARACTER SET = utf8mb4;
 USE `issue_tracker_db`;
 
 -- -----------------------------------------------------
@@ -28,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`milestone`
     `closed`      TINYINT(1)  NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 )
-    ENGINE = InnoDB;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -43,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`user`
     `avatar_url` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`issue`
@@ -77,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`issue`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`label`
 -- -----------------------------------------------------
@@ -94,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`label`
     PRIMARY KEY (`id`),
     UNIQUE INDEX `color_code_UNIQUE` (`color_code` ASC)
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`comment`
@@ -123,8 +125,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`comment`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`emoji`
@@ -153,8 +155,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`emoji`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`issue_has_label`
@@ -179,8 +181,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`issue_has_label`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `issue_tracker_db`.`image`
@@ -207,8 +209,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`image`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = InnoDB;
-
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
 
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
