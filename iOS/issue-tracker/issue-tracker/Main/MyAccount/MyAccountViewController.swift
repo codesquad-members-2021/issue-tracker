@@ -13,8 +13,9 @@ class MyAccountViewController: UIViewController {
     private lazy var welcomeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .medium)
-        label.text = "\(userName) 님, 환영합니다!"
+        label.text = "\(userName) 님, \n환영합니다!"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
         return label
     }()
     
