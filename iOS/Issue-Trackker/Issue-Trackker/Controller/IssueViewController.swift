@@ -10,6 +10,7 @@ import UIKit
 class IssueViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var issueTableView: UITableView!
+    @IBOutlet weak var addIssueButton: UIButton!
     
     private var searchController: UISearchController?
 
@@ -19,7 +20,7 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
         self.searchController = UISearchController()
         self.searchController?.searchBar.delegate = self
         self.searchController?.hidesNavigationBarDuringPresentation = true
-
+        self.addIssueButton.addTarget(self, action: #selector(addIssueButtonTouched(_:)), for: .touchUpInside)
         setNavigationItem()
     }
     
@@ -67,7 +68,15 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
         }
         
         self.present(selectViewController, animated: true, completion: nil)
-        sender.isSelected = !sender.isSelected
+    }
+    
+    @objc func addIssueButtonTouched(_ sender: UIButton) {
+        guard let addIssueViewController = storyboard?.instantiateViewController(identifier: "AddIssue") as?              AddingIssueViewController else {
+            return
+        }
+        let naviController = UINavigationController(rootViewController: addIssueViewController)
+        naviController.modalPresentationStyle = .fullScreen
+        self.present(naviController, animated: true, completion: nil)
     }
 }
 
@@ -109,6 +118,15 @@ extension IssueViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let commentController = storyboard?.instantiateViewController(identifier: "Comment") as? CommentViewController else {
+            return
+        }
+        let naviController = UINavigationController(rootViewController: commentController)
+        naviController.modalPresentationStyle = .fullScreen
+        self.present(naviController, animated: true, completion: nil)
     }
 }
 
