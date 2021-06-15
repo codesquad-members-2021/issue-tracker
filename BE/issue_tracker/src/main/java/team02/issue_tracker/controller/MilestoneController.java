@@ -3,6 +3,7 @@ package team02.issue_tracker.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import team02.issue_tracker.dto.MilestoneCountResponse;
 import team02.issue_tracker.dto.MilestoneResponse;
 import team02.issue_tracker.dto.wrapping.ApiResult;
 import team02.issue_tracker.service.MilestoneService;
@@ -22,5 +23,10 @@ public class MilestoneController {
     @GetMapping
     public ApiResult<List<MilestoneResponse>> showAllMilestone() {
         return ApiResult.success(milestoneService.getAllMilestones());
+    }
+
+    @GetMapping("/count")
+    public ApiResult<MilestoneCountResponse> showMilestoneCount() {
+        return ApiResult.success(milestoneService.getMilestoneCount());
     }
 }

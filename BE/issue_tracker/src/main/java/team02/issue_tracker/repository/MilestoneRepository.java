@@ -16,4 +16,10 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 
     @Query("select m from Milestone m where m.isDeleted = false")
     List<Milestone> findAll();
+
+    @Query("select m from Milestone m where m.isDeleted = false and m.isOpen = true")
+    List<Milestone> findOpenMilestones();
+
+    @Query("select m  from Milestone m where m.isDeleted = false and m.isOpen = false")
+    List<Milestone> findClosedMilestones();
 }
