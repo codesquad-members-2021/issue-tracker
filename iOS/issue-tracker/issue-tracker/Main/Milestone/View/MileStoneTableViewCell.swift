@@ -18,6 +18,12 @@ class MileStoneTableViewCell: UITableViewCell {
         superStackView.distribution = .fillProportionally
         superStackView.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        //1 : sub스택
+        //   -1 Title 라벨
+        //   -2 몇 %인지 보이는 두개의 라벨
+        
+        
         let firstSubStackView = UIStackView()
         firstSubStackView.axis = .horizontal
         firstSubStackView.spacing = spacing * 0.5
@@ -27,24 +33,24 @@ class MileStoneTableViewCell: UITableViewCell {
                 
         
         let titleLabel = UILabel()
-        titleLabel.text = "잭잭잭"
-        titleLabel.font = .systemFont(ofSize: 17)
+        titleLabel.text = "제목"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        
         let completenessLabel = UILabel()
         completenessLabel.text = "100%"
-        completenessLabel.font = .systemFont(ofSize: 17)
+        completenessLabel.textColor = Colors.mileStoneSuceess
+        completenessLabel.font = UIFont.boldSystemFont(ofSize: 22)
         
         firstSubStackView.addArrangedSubview(titleLabel)
         firstSubStackView.addArrangedSubview(completenessLabel)
         
-        superStackView.addArrangedSubview(firstSubStackView)
-        //1 : sub스택
-        //   -1 Title 라벨
-        //   -2 몇 %인지 보이는 두개의 라벨
         //2 : 마일스톤에 대한 설명 라벨
         //3 : 완료일 라벨
         //4 : sub스택
         //   -1 열린 이슈 라벨
         //   -2 닫힌 이슈 라벨
+        
+        superStackView.addArrangedSubview(firstSubStackView)
         
         return superStackView
     }()
