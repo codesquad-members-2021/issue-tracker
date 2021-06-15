@@ -2,6 +2,7 @@ package com.issuetracker.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class Issue {
     private Long id;
@@ -19,7 +20,8 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(Long id, String title, String description, Long assignee, LocalDateTime createdTime, boolean closed, boolean deleted, Long milestoneId, Long authorUserId, Long number, List<Label> labels) {
+    public Issue(Long id, String title, String description, Long assignee, LocalDateTime createdTime,
+                 boolean closed, boolean deleted, Long milestoneId, Long authorUserId, Long number, List<Label> labels) {
         this.id = id;
         this.title = title;
         this.description = description;
