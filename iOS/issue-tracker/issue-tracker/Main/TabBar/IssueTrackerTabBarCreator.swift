@@ -36,7 +36,7 @@ final class IssueTrackerTabBarCreator {
         let label = TabBarChildInfo(title: Title.label, imageName: SystemImageName.label, type: LabelViewController.self)
         let milestone = TabBarChildInfo(title: Title.milestone, imageName: SystemImageName.milestone, type: MilestoneViewController.self)
         let myAccount = TabBarChildInfo(title: Title.myAccount, imageName: SystemImageName.myAccount, type: MyAccountViewController.self)
-        self.init(childInfos: [issue, label, milestone, myAccount], loginInfo: loginInfo)
+        self.init(childInfos: [issue, label, milestone, myAccount], loginInfo: loginInfo)        
     }
     
     private func generateChild(with info: TabBarChildInfo) -> UIViewController {
