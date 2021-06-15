@@ -79,7 +79,7 @@ export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
   },
 });
 interface TabInfoType {
-  [key: string]: string;
+  [key: string]: any;
 }
 
 export const getTabInfoState = selector({
