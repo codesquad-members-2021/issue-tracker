@@ -65,7 +65,6 @@ extension MilestoneViewController: LoginInfoContainer {
     }
 }
 
-
 extension MilestoneViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height * 0.336
