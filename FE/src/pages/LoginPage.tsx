@@ -13,11 +13,12 @@ const LoginPage = () => {
     or,
     register
   } = TextLogin;
+  const GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=04c310007c2531045237&redirect_uri=http://localhost:3000/oauth-callback`;
   return (
     <LoginLayout>
       <LoginContentLayout>
         <LoginLogoLayout>{TextHeader.logo}</LoginLogoLayout>
-        <GitHubButtonLayout btnStyle="medium">{github}</GitHubButtonLayout>
+        <GitHubButtonLayout btnStyle="medium"><a href={GITHUB_URL}>{github}</a></GitHubButtonLayout>
         <SeparatorLayout>{or}</SeparatorLayout>
         <InputLayout type="text" placeholder={placeHolder.id} />
         <InputLayout type="password" placeholder={placeHolder.password} />
@@ -62,6 +63,10 @@ const GitHubButtonLayout = styled(PrimaryButton)`
   background-color: #333;
   &:hover {
     background-color: ${({ theme }) => theme.colors.grayScale.title};
+  }
+  a {
+    text-decoration: none;
+    color: #fff;
   }
   border-radius: 0.75rem;
 `;

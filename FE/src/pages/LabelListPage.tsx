@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import PrimaryButton from '../components/Common/PrimaryButton';
+import AddIcon from '@material-ui/icons/Add';
+import { useState } from 'react';
+import { LabelEdit } from '../components/LabelList/LabelEdit';
 
 interface IlabelTitle {
   color: string;
@@ -26,6 +30,8 @@ const LabelListPage = () => {
     ]
   };
 
+  const [toggleEdit, setToggleEdit] = useState(true);
+
 
   const labels = data.label.map(label => 
     <StyleLabelItem>
@@ -38,12 +44,39 @@ const LabelListPage = () => {
     </StyleLabelItem>
   );
   return (
-    <StyleLabelList>
-      <li>3개의 레이블</li>
-      {labels}
-    </StyleLabelList>
+    <>
+      {
+        toggleEdit &&
+        <ul>
+          <LabelEdit headerText='새로운 레이블 추가' />
+        </ul>
+      }
+      <div>
+        {/* 레이블 / 마일스톤 버튼 넣을 공간 */}
+        <AddButtonLayout btnStyle="small">
+          <AddIcon />
+          추가
+        </AddButtonLayout>    
+      </div>
+      <StyleLabelList>
+        <li>3개의 레이블</li>
+        {labels}
+      </StyleLabelList>
+    </>
   )
 }
+
+const AddButtonLayout = styled(PrimaryButton)`
+  height: 100%;
+  a {
+    display: flex;
+    color: #fff;
+    text-decoration: none;
+  }
+  padding: 0.5rem;
+  width: 8rem;
+  justify-content: center;
+`;
 
 const StyleLabelList = styled.ul`
   border-radius: 1rem;
