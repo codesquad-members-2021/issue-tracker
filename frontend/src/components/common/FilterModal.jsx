@@ -12,16 +12,16 @@ import { filter } from "data";
 }
 const FilterModal = ({ filterType }) => {
 	const [value, setValue] = useState("");
-
+	console.log("filter modal");
 	// Recoil로직 (구현 예정)
 	// 1. 필터별로 선택된 필터는 atom으로 관리됨(default는 null임)
 	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
 
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setValue(event.target.value);
 	};
 
-	const getFilterModalData = type => {
+	const getFilterModalData = (type) => {
 		switch (type) {
 			case "담당자": {
 				return filter.assignee;
@@ -38,31 +38,21 @@ const FilterModal = ({ filterType }) => {
 			case "필터": {
 				return filter.issue;
 			}
+			case "상태 수정": {
+				return filter.openClose;
+			}
+			default: {
+				console.error("unhandled type");
+			}
 		}
 	};
 	const filterData = getFilterModalData(filterType);
 	return (
 		<FilterModalLayout className="filter-modal">
 			<FormControl component="fieldset">
-				<FilterTitle component="legend">
-					{filterType === "필터" && ""} 필터
-				</FilterTitle>
-				<FilterRadioContainer
-					aria-label="issue"
-					name="issue"
-					value={value}
-					onChange={handleChange}
-				>
-					{filterData &&
-						filterData.map((x, idx) => (
-							<FilterControlLabel
-								value={x}
-								control={<Radio color="default" />}
-								label={x}
-								labelPlacement="start"
-								key={idx}
-							/>
-						))}
+				<FilterTitle component="legend">{filterType === "필터" && ""} 필터</FilterTitle>
+				<FilterRadioContainer aria-label="issue" name="issue" value={value} onChange={handleChange}>
+					{filterData && filterData.map((x, idx) => <FilterControlLabel value={x} control={<Radio color="default" />} label={x} labelPlacement="start" key={idx} />)}
 				</FilterRadioContainer>
 			</FormControl>
 		</FilterModalLayout>
