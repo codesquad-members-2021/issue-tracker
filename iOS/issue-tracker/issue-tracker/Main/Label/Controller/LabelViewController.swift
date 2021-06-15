@@ -28,9 +28,10 @@ final class LabelViewController: UIViewController {
     
     private let colorConverter: HexColorConvertable = HexColorConverter()
     private var networkManager: NetworkManagerOperations?
+    private var labelTableDatasource: LabelTableViewDatasource?
+    private var labelTableDelegate: LabelTableDelegate?
     
     private var loginInfo: LoginInfo?
-    private var labels: [Label]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,11 @@ final class LabelViewController: UIViewController {
         addNavigationButton()
         addTableView()
         
-        labelTableView.dataSource = self
-        labelTableView.delegate = self
+        labelTableDatasource = LabelTableViewDatasource()
+        labelTableView.dataSource = labelTableDatasource
+        
+        labelTableDelegate = LabelTableDelegate(superViewFrame: view.frame)
+        labelTableView.delegate = labelTableDelegate
         
         setNetworkManager()
         loadLabels()
@@ -74,15 +78,19 @@ final class LabelViewController: UIViewController {
         networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, Error>) in
             switch result {
             case .success(let result):
-                let labels = result.data
-                self?.labels = labels
-                DispatchQueue.main.async {
-                    self?.labelTableView.reloadData()
-                }
+                guard let labels = result.data else { return }
+                self?.labelTableDatasource?.update(labels: labels)
+                self?.reloadTableView()
             case .failure(let error):
                 print(error)
             }
         })
+    }
+    
+    private func reloadTableView() {
+        DispatchQueue.main.async {
+            self.labelTableView.reloadData()
+        }
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
@@ -94,30 +102,5 @@ final class LabelViewController: UIViewController {
 extension LabelViewController: LoginInfoContainer {
     func setup(loginInfo: LoginInfo) {
         self.loginInfo = loginInfo
-    }
-}
-
-extension LabelViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height * 0.135
-    }
-}
-
-extension LabelViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return labels?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellID = LabelTableViewCell.reuseID
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? LabelTableViewCell ?? LabelTableViewCell()
-        
-        guard let labels = labels else { return cell }
-        let label = labels[indexPath.row]
-        let hex = HexColorCode(from: label.hexColorCode)
-        let backgroundColor = colorConverter.convertHex(hex)
-        let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
-        cell.configure(with: backgroundColor, titleColor, label.title, label.body)
-        return cell
     }
 }
