@@ -29,7 +29,7 @@ const Theme = {
     author: 11,
   },
   tabModalTopPosition: {
-    assignee: 0,
+    assignee: 110,
     label: 0,
     milestone: 0,
     author: 0,
