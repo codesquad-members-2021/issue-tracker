@@ -6,19 +6,19 @@ public class UserResponse {
 
     private String name;
 
-    @JsonProperty("user_id")
-    private String userId;
+    @JsonProperty("login_id")
+    private String loginId;
 
-    public UserResponse(String name, String userId) {
+    public UserResponse(String name, String loginId) {
         this.name = name;
-        this.userId = userId;
+        this.loginId = loginId;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getloginId() {
+        return loginId;
     }
 }
