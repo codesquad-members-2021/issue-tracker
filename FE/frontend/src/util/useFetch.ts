@@ -9,7 +9,7 @@ const getData = async (type: string, action: string) => {
       switch (action) {
         case 'getAllData':
           const allData = await axios.get(`${url}/issues`);
-          return allData.data;
+          return allData.data.data;
       }
   }
 };

@@ -9,9 +9,8 @@ import useFetch from '../../../util/useFetch';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
-  console.log(data);
   return (
-    <TableWrapper>
+    <>
       <IssueHeader>
         <LeftHeaderWrapper>
           <CheckBox />
@@ -26,15 +25,31 @@ const IssueTable = () => {
         </LeftHeaderWrapper>
         <ListFilters />
       </IssueHeader>
-      <IssueCell>
-        <CheckBox />
-        <AlertCircle />
-      </IssueCell>
-    </TableWrapper>
+      <div>
+        {data?.map((issue: any) => {
+          return (
+            <IssueCell>
+              <CheckBox />
+              <AlertCircle />
+              <div>{issue.title}</div>
+              <div>
+                {issue.labels.map((label: any) => {
+                  return <></>;
+                })}
+              </div>
+              <div>{issue.id}</div>
+              <div>
+                {issue.writer.username}가 {issue.created_time}에 만들었습니다
+              </div>
+              <div>{issue.milestone.title}</div>
+              <div>{issue.writer.profile_image}</div>
+            </IssueCell>
+          );
+        })}
+      </div>
+    </>
   );
 };
-
-const TableWrapper = styled.div``;
 
 const IssueHeader = styled.div`
   height: 64px;
@@ -55,12 +70,19 @@ const LeftHeaderWrapper = styled.div`
   div {
     padding: 0 18px;
   }
+  svg {
+    stroke: ${props => props.theme.greyscale.titleActive};
+  }
 `;
 
 const IssueCell = styled.div`
   height: 100px;
   background: ${props => props.theme.greyscale.offWhite};
   margin: 1px 0px;
+  svg {
+    stroke: ${props => props.theme.colors.primary};
+    fill: ${props => props.theme.colors.lightBlue};
+  }
 `;
 
 const Text = styled(Typo)`
