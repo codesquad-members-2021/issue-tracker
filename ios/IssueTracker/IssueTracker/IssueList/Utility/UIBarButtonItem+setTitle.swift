@@ -8,9 +8,9 @@
 import UIKit
 
 extension UIBarButtonItem {
-    func setTitle(_ title: String?, for: UIControl.State) {
+    func setTitle(_ title: String?, for state: UIControl.State) {
         let button = self.customView as? UIButton ?? UIButton()
-        button.setTitle(title, for: .normal)
+        button.setTitle(title, for: state)
     }
     
     func setIsHidden(_ hidden: Bool, animated: Bool) {

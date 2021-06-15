@@ -10,11 +10,26 @@ import Foundation
 class IssueViewModel {
     
     private(set) var issues: [Issue]
+    private(set) var error: Error?
     
-    init(issues: [Issue]) {
-        self.issues = issues
+    private var fetchIssueListUseCase: FetchIssueListUseCase
+
+    init(_ fetchIssueListUseCase: FetchIssueListUseCase) {
+        self.fetchIssueListUseCase = fetchIssueListUseCase
+        self.issues = []
+        load()
     }
     
+    private func load() {
+        fetchIssueListUseCase.excute { result in
+            switch result {
+            case .success(let issues):
+                self.issues = issues
+            case .failure(let error):
+                self.error = error
+            }
+        }
+    }
 }
 
 

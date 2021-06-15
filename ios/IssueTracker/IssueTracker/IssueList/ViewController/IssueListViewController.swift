@@ -7,9 +7,16 @@
 
 import UIKit
 
-class IssueListViewController: UIViewController {
+class IssueListViewController: UIViewController, ViewControllerIdentifierable {
     
-  
+    static func create(_ viewModel: IssueViewModel) -> IssueListViewController {
+        guard let vc = storyboard.instantiateViewController(identifier: storyboardID) as? IssueListViewController else {
+            return IssueListViewController()
+        }
+        vc.viewModel = viewModel
+        return vc
+    }
+    
     @IBOutlet private weak var issueTableView: UITableView!
     @IBOutlet private weak var plusButton: UIButton!
     @IBOutlet private weak var editStateView: UIView!
@@ -25,20 +32,18 @@ class IssueListViewController: UIViewController {
     }()
     private lazy var editButton: UIBarButtonItem = {
         let button = UIButton(type: .system)
-        button.setTitle("Filter", for: .normal)
+        button.setTitle("Edit", for: .normal)
         button.addTarget(self, action: #selector(editButtonTouched(_:)), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
     
     private var isCheckAll: Bool!
     private var viewModel: IssueViewModel!
-    private var dataSource: IssueDataSource!
+    private lazy var dataSource = IssueDataSource(viewModel: viewModel)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewModel(with: IssueListMock.data)
         setting()
-        setNavigation()
     }
     
 }
@@ -47,14 +52,13 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController {
     
-    func setViewModel(with issues: [Issue]) {
-        viewModel = IssueViewModel(issues: issues)
-        dataSource = IssueDataSource(viewModel: viewModel)
+    private func setting() {
+        setTableView()
+        setNavigation()
+        setUI()
     }
     
-    private func setting() {
-        issueTableView.tableFooterView = UIView(frame: .zero)
-        issueTableView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.937254902, alpha: 1)
+    private func setTableView() {
         issueTableView.dataSource = dataSource
         issueTableView.delegate = self
         issueTableView.register(UINib(nibName: IssueCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: IssueCell.reuseIdentifier)
@@ -77,6 +81,12 @@ extension IssueListViewController {
         
         navigationItem.leftBarButtonItem = filterButton
         navigationItem.rightBarButtonItem = editButton
+    }
+    
+    private func setUI() {
+        issueTableView.tableFooterView = UIView(frame: .zero)
+        issueTableView.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.937254902, alpha: 1)
+        tabBarItem = UITabBarItem(title: "Issues", image: UIImage(systemName: "exclamationmark.circle"), selectedImage: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,7 +137,7 @@ extension IssueListViewController {
         fillCheckButton(issueTableView)
         changeIssueNumLabel(issueTableView)
         issueTableView.setEditing(!issueTableView.isEditing, animated: true)
-        editButton.setTitle(issueTableView.isEditing ? "취소" : "편집", for: .normal)
+        editButton.setTitle(issueTableView.isEditing ? "Cancle" : "Edit", for: .normal)
         navigationController?.navigationBar.topItem?.title = issueTableView.isEditing ? "Select Issues" : "Issues"
         filterButton.setIsHidden(issueTableView.isEditing, animated: true)
         editStateView.setIsHidden(!issueTableView.isEditing, animated: true)
