@@ -36,13 +36,6 @@ public class User {
         this.avatarImage = avatarImage;
     }
 
-
-    public User(UUID id, String name, String avatarImage) {
-        this.id = id;
-        this.name = name;
-        this.avatarImage = avatarImage;
-    }
-
     public boolean sameUser(UUID userId) {
         return id.equals(userId);
     }
