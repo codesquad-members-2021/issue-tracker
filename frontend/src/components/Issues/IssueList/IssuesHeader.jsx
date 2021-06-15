@@ -18,10 +18,6 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 	const [clickedFilter, setClickedFilter] = useState("");
 
-	const checkAllIssue = () => {
-		setIsAllIssueSelected(!isAllIssueSelected);
-	};
-
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
 	const handleClick = useCallback((e) => {
@@ -44,21 +40,16 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 	};
 	//----------여기 까지 중복 코드from MeuFilter --------/
 
-	useEffect(() => {
-		if (isAllIssueSelected) {
-			setIsAnyIssueSelected(true);
-			setInitCheck(false);
-			setSelectedIssues(() => issuesCnt);
-		}
-		if (!initCheck && !isAllIssueSelected) {
-			setIsAnyIssueSelected(false);
-			setSelectedIssues(() => 0);
-		}
-	}, [isAllIssueSelected]);
+	const checkAllIssue = () => {
+		setIsAllIssueSelected(!isAllIssueSelected);
+		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
+	};
+
+	console.log(`selectedIssues: ${selectedIssues}, isAnyissueSelected: ${isAnyIssueSelected}`);
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
-		if (isAllIssueSelected && selectedIssues === 1) setIsAnyIssueSelected(false);
+		else setIsAnyIssueSelected(true);
 	}, [selectedIssues]);
 
 	return (
@@ -67,11 +58,7 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
 			{isAnyIssueSelected ? (
-				isAllIssueSelected ? (
-					<div>{selectedIssues - 1}개 이슈 선택</div>
-				) : (
-					<div>{selectedIssues}개 이슈 선택</div>
-				)
+				<div>{selectedIssues}개 이슈 선택</div>
 			) : (
 				<FilterOpenClose>
 					<TextIconDivider>
