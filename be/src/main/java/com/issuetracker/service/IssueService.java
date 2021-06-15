@@ -19,7 +19,7 @@ public class IssueService {
 
     public List<IssueDto> getAllIssues(User user) {
         return issueRepository.findAllIssues().stream()
-                .map(issue -> IssueDto.of(issue, user, issueRepository.findMilestoneTitleByIssueId(issue.getId())))
+                .map(issue -> IssueDto.of(issue, user, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId())))
                 .collect(Collectors.toList());
     }
 }

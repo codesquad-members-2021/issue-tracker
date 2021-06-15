@@ -1,12 +1,7 @@
 package com.issuetracker.issue;
 
-import static com.issuetracker.issue.IssueTestData.*;
-import static org.graalvm.compiler.options.OptionType.User;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import com.issuetracker.config.InterceptorConfig;
 import com.issuetracker.controller.IssueController;
-import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
 import com.issuetracker.service.IssueService;
 import org.junit.jupiter.api.Test;
@@ -15,11 +10,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.issuetracker.issue.IssueTestData.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

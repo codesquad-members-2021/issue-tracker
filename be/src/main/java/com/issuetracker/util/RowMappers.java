@@ -35,6 +35,7 @@ public class RowMappers {
         return label;
     };
 
+
     public static final RowMapper<Milestone> MILESTONE_ROW_MAPPER = (rs, rowNum) -> {
         Milestone milestone = new Milestone();
 

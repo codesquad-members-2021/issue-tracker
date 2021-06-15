@@ -1,10 +1,16 @@
 package com.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Label {
     private Long id;
     private String title;
     private String description;
+
+    @JsonProperty("color_code")
     private String colorCode;
+
+    @JsonProperty("text_color")
     private String textColor;
 
     public Label() {
