@@ -168,8 +168,8 @@ const LabelMilestoneTable = {
     background: linear-gradient(
       90deg,
       #007aff 0%,
-      #007aff 68.86%,
-      #eff0f6 68.87%,
+      #007aff 40%,
+      #eff0f6 40.01%,
       #eff0f6 100%
     );
     border-radius: 10px;
@@ -285,17 +285,27 @@ const AddNewModal = {
     &:hover {
       background: ${theme.COLOR.DARK_BLUE};
     }
+    &:disabled {
+      background: ${theme.GRAY_SCALE.LINE};
+    }
   `,
 
   ColorTitle: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
-    width: 80px;
+    width: 70px;
     height: 40px;
     color: ${theme.GRAY_SCALE.LABEL};
     font-size: ${theme.FONT_SIZE.TEXT_X_SMALL};
   `,
 
-  ColorContent: styled(BOX.FLEX_ROW_BOX)`
+  BackgroundColorContent: styled(BOX.FLEX_ROW_BOX)`
+    color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
+    font-size: ${theme.FONT_SIZE.TEXT_SMALL};
+    width: 123px;
+    height: 40px;
+  `,
+
+  FontColorRadioContent: styled(BOX.FLEX_ROW_BOX)`
     align-items: center;
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
     font-size: ${theme.FONT_SIZE.TEXT_SMALL};

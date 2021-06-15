@@ -29,19 +29,19 @@ const LabelAddModal = ({ id }: LabelEditProps) => {
           <S.ChangeColorContainer>
             <S.ChangeBackgroundDiv>
               <S.ColorTitle>배경색상</S.ColorTitle>
-              <S.ColorContent>#F0F0F0</S.ColorContent>
+              <S.BackgroundColorContent>#F0F0F0</S.BackgroundColorContent>
               <Icon.RefreshIcon />
             </S.ChangeBackgroundDiv>
             <S.ChangeFontColorDiv>
               <S.ColorTitle>텍스트 색상</S.ColorTitle>
-              <S.ColorContent>
+              <S.FontColorRadioContent>
                 <input name="labelFontColor" type="radio" />
                 어두운 색
-              </S.ColorContent>
-              <S.ColorContent>
+              </S.FontColorRadioContent>
+              <S.FontColorRadioContent>
                 <input name="labelFontColor" type="radio" />
                 밝은 색
-              </S.ColorContent>
+              </S.FontColorRadioContent>
             </S.ChangeFontColorDiv>
           </S.ChangeColorContainer>
           <S.FinishWriteBtnDiv>

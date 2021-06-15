@@ -22,7 +22,9 @@ const AddTabButton = () => {
 
   return (
     <>
-      {toggleAddMilestoneState ? (
+      {(
+        tabState === "label" ? toggleAddLabelState : toggleAddMilestoneState
+      ) ? (
         <S.WriteIssueBtn
           onClick={handleAddBtnClick}
           backgroundcolor="white"

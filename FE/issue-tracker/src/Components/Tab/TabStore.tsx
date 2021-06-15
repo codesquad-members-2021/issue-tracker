@@ -30,3 +30,13 @@ export const currentTabState = atom({
   key: "currentTabState",
   default: "label",
 });
+
+export const addNewLabelTitleState = atom({
+  key: "addNewLabelTitleState",
+  default: "",
+});
+
+export const addNewLabelDescriptionState = atom({
+  key: "addNewLabelDescriptionState",
+  default: "",
+});
