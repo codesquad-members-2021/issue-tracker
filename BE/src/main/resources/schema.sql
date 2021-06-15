@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`comment` (
     CONSTRAINT `fk_comment_issue1`
     FOREIGN KEY (`issue_id`)
     REFERENCES `issue-tracker`.`issue` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_comment_user1`
     FOREIGN KEY (`user_id`)
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`assignee` (
     CONSTRAINT `fk_assignee_issue1`
     FOREIGN KEY (`issue_id`)
     REFERENCES `issue-tracker`.`issue` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_assignee_user1`
     FOREIGN KEY (`user_id`)
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`issue_label` (
     CONSTRAINT `fk_issue_label_issue1`
     FOREIGN KEY (`issue_id`)
     REFERENCES `issue-tracker`.`issue` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_issue_label_label1`
     FOREIGN KEY (`label_id`)
