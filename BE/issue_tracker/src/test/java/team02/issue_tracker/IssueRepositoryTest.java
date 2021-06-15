@@ -33,6 +33,7 @@ public class IssueRepositoryTest {
     @DisplayName("issueRepository에서 findAll메소드가 잘 동작하는지 확인한다.")
     void findAll() {
         List<Issue> issues = issueRepository.findAll();
+
         Assertions.assertThat(issues.size()).isEqualTo(1);
     }
 
@@ -54,5 +55,21 @@ public class IssueRepositoryTest {
         List<IssueAssignee> issueAssignees = issueAssigneeRepository.findByIssueId(issue.getId());
 
         Assertions.assertThat(issueAssignees.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("findOpenIssues 메소드가 잘 동작하는지 확인한다.")
+    void findOpenIssues() {
+        List<Issue> issues = issueRepository.findOpenIssues();
+
+        Assertions.assertThat(issues.size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("findClosedIssues 메소드가 잘 동작하는지 확인한다.")
+    void findClosedIssues() {
+        List<Issue> issues = issueRepository.findClosedIssues();
+
+        Assertions.assertThat(issues.size()).isEqualTo(1);
     }
 }

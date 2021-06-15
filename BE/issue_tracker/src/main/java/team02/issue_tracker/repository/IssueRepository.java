@@ -16,4 +16,11 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     @Query("select i from Issue i where i.id = ?1 and i.isDeleted=false")
     Optional<Issue> findById(Long id);
+
+    @Query("select i from Issue i where i.isDeleted = false and i.isOpen = true")
+    List<Issue> findOpenIssues();
+
+    @Query("select i from Issue i where i.isDeleted = false and i.isOpen = false")
+    List<Issue> findClosedIssues();
+
 }
