@@ -19,9 +19,9 @@ public class IssueController {
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
     @GetMapping
-    public IssuesResponseDTO view(@RequestParam String status) {
+    public IssuesResponseDTO view(SearchRequestDTO requestDTO) {
         logger.debug("모든 이슈 조회");
-        return issueService.getIssues(status);
+        return issueService.getIssues(requestDTO);
     }
 
     @PatchMapping

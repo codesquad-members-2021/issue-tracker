@@ -1,6 +1,6 @@
 package com.issuetracker.web.dto.reqeust;
 
-import com.issuetracker.web.dto.response.vo.Assignee;
+import com.issuetracker.web.dto.vo.Assignee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

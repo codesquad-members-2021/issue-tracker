@@ -20,8 +20,8 @@ public class MilestoneDTO {
     private final String description;
     private final LocalDateTime createdDateTime;
     private final LocalDate dueDate;
-    private final Long openedIssuesCount;
-    private final Long closedIssuesCount;
+    private final Long openedIssueCount;
+    private final Long closedIssueCount;
 
     public static MilestoneDTO of(Milestone milestone) {
         return MilestoneDTO.builder()
@@ -30,8 +30,8 @@ public class MilestoneDTO {
                 .description(milestone.getDescription())
                 .createdDateTime(milestone.getCreatedDateTime())
                 .dueDate(milestone.getDueDate())
-                .openedIssuesCount(milestone.countOpenedIssues())
-                .closedIssuesCount(milestone.countClosedIssues())
+                .openedIssueCount(milestone.countOpenedIssues())
+                .closedIssueCount(milestone.countClosedIssues())
                 .build();
     }
 }

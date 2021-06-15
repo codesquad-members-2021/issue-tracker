@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface IssueRepository extends JpaRepository<Issue, Long> {
+public interface IssueRepository extends JpaRepository<Issue, Long>, CustomizedIssueRepository {
 
     List<Issue> findAllByIsOpenTrue();
 

@@ -19,7 +19,7 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestHeader("User-Agent") UserAgentDTO userAgent, @RequestParam String code) {
+    public UserResponseDTO login(@RequestHeader(name = "User-Agent") UserAgentDTO userAgent, @RequestParam String code) {
         logger.debug("로그인 요청");
         logger.debug("헤더 확인: {}", userAgent);
         return userService.login(code, userAgent);
