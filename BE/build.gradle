@@ -30,6 +30,11 @@ dependencies {
 
     // jasypt
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.0'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
 }
 
 test {
