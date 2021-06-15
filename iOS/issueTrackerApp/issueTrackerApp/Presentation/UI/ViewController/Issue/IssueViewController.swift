@@ -85,6 +85,7 @@ class IssueViewController: UIViewController, IssueNetworked {
     private func configureTableView() {
         self.issueTableView.register(IssueCell.nib, forCellReuseIdentifier: IssueCell.identifier)
         self.issueTableView.dataSource = self
+        self.issueTableView.delegate = self
     }
     
 }
@@ -123,4 +124,31 @@ extension IssueViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension IssueViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // delete action
+        let delete = UIContextualAction(style: .destructive,
+                                        title: "삭제") { [weak self] (action, view, completionHandler) in
+            self?.viewModel?.deleteIssue(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            completionHandler(true)
+        }
+        delete.backgroundColor = .systemRed
+        delete.image = UIImage(systemName: "trash")
+
+        // close action
+        let close = UIContextualAction(style: .normal,
+                                        title: "닫기") { [weak self] (action, view, completionHandler) in
+//                                        self?.handleCancel()
+                                        completionHandler(true)
+        }
+        close.backgroundColor = UIColor.hexString2UIColor(hexString: "#CCD4FF")
+        close.image = UIImage(systemName: "archivebox")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [close, delete])
+        return configuration
+    }
 }

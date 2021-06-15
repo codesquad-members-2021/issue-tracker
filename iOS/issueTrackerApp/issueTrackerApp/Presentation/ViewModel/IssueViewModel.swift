@@ -12,6 +12,7 @@ protocol IssueViewModelProtocol {
     var filteredIssues: [Issue] { get set }
     func fetchAllIssue()
     func filterIssuesWithSearchText(_ string: String)
+    func deleteIssue(at index: Int)
 }
 
 class IssueViewModel: IssueViewModelProtocol {
@@ -42,5 +43,11 @@ class IssueViewModel: IssueViewModelProtocol {
         self.filteredIssues = issues.filter({ (issue: Issue) -> Bool in
             return issue.title.lowercased().contains(string.lowercased())
         })
+    }
+    
+    func deleteIssue(at index: Int) {
+        
+//        issues[index].id
+        self.issues.remove(at: index)
     }
 }
