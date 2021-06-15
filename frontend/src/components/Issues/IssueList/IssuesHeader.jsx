@@ -11,17 +11,31 @@ import { filter } from "data";
 // import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
 // import { useRecoilState } from "MyRecoil";
 import { useRecoilState } from "recoil";
-import { selectedIssueCntAtomState, clickedFilterAtomState } from "RecoilStore/Atoms";
+import {
+	selectedIssueCntAtomState,
+	clickedFilterAtomState,
+} from "RecoilStore/Atoms";
 
-const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, issuesCnt, initCheck, setInitCheck }) => {
-	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+const IssuesHeader = ({
+	isAnyIssueSelected,
+	setIsAnyIssueSelected,
+	isAllIssueSelected,
+	setIsAllIssueSelected,
+	issuesCnt,
+	selectedCards,
+}) => {
+	const [selectedIssues, setSelectedIssues] = useRecoilState(
+		selectedIssueCntAtomState
+	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 	const [clickedFilter, setClickedFilter] = useState("");
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback((e) => {
-		isFilterClicked === false ? setIsFilterClicked(true) : setIsFilterClicked(false);
+	const handleClick = useCallback(e => {
+		isFilterClicked === false
+			? setIsFilterClicked(true)
+			: setIsFilterClicked(false);
 		console.dir(e.target.textContent);
 		console.dir(e.target);
 		setClickedFilter(e.target.textContent);
@@ -34,9 +48,14 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = (e) => {
+	const closeFilterModal = e => {
 		const target = e.target;
-		if (isFilterClicked && !target.closest(".filter-modal") && !target.closest(".issue-header-button")) setIsFilterClicked(false);
+		if (
+			isFilterClicked &&
+			!target.closest(".filter-modal") &&
+			!target.closest(".issue-header-button")
+		)
+			setIsFilterClicked(false);
 	};
 	//----------여기 까지 중복 코드from MeuFilter --------/
 
@@ -44,8 +63,6 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 		setIsAllIssueSelected(!isAllIssueSelected);
 		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
 	};
-
-	console.log(`selectedIssues: ${selectedIssues}, isAnyissueSelected: ${isAnyIssueSelected}`);
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
@@ -73,7 +90,13 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 				{isAnyIssueSelected ? (
 					<OpenCloseEdit>
 						<TextIconDivider>
-							<DropDownButton text="상태 수정" clickEvent={handleClick} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.lg} border={"none"}></DropDownButton>
+							<DropDownButton
+								text="상태 수정"
+								clickEvent={handleClick}
+								className={"issue-header-button"}
+								width={({ theme }) => theme.buttonWidths.lg}
+								border={"none"}
+							></DropDownButton>
 							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
 						</TextIconDivider>
 					</OpenCloseEdit>
@@ -81,7 +104,15 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 					<FiltersWrapper>
 						{buttonNames.map((filter, idx) => (
 							<TextIconDivider>
-								<DropDownButton text={filter} clickEvent={handleClick} key={`filter-${idx}`} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.small} border={"none"} id={filter}></DropDownButton>
+								<DropDownButton
+									text={filter}
+									clickEvent={handleClick}
+									key={`filter-${idx}`}
+									className={"issue-header-button"}
+									width={({ theme }) => theme.buttonWidths.small}
+									border={"none"}
+									id={filter}
+								></DropDownButton>
 							</TextIconDivider>
 						))}
 

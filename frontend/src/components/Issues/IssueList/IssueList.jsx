@@ -11,20 +11,41 @@ import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
 const IssueList = () => {
 	const [isAnyIssueSelected, setIsAnyIssueSelected] = useState(false); // 상태 위치 협의 후 수정
 	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
-	const [initCheck, setInitCheck] = useState(true);
 	const [_, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
 	const [selectedCards, setSelectedCards] = useState(new Set());
 
 	useEffect(() => {
-		if (!initCheck && !isAllIssueSelected && !isAnyIssueSelected) setSelectedIssues(() => 0);
+		if (!isAllIssueSelected && !isAnyIssueSelected && !selectedCards.size)
+			setSelectedIssues(() => 0);
 	}, [isAnyIssueSelected]);
 
-	const issueList = issues.map((issue) => <IssueCard key={issue.id} issue={issue} setIsAnyIssueSelected={setIsAnyIssueSelected} isAllIssueSelected={isAllIssueSelected} setIsAllIssueSelected={setIsAllIssueSelected} initCheck={initCheck} setInitCheck={setInitCheck} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />);
+	const issueList = issues.map(issue => (
+		<IssueCard
+			key={issue.id}
+			issue={issue}
+			setIsAnyIssueSelected={setIsAnyIssueSelected}
+			isAllIssueSelected={isAllIssueSelected}
+			setIsAllIssueSelected={setIsAllIssueSelected}
+			selectedCards={selectedCards}
+			setSelectedCards={setSelectedCards}
+		/>
+	));
 
 	return (
 		<StyledIssueList>
-			<IssuesHeader issuesCnt={issues.length} isAnyIssueSelected={isAnyIssueSelected} setIsAnyIssueSelected={setIsAnyIssueSelected} isAllIssueSelected={isAllIssueSelected} setIsAllIssueSelected={setIsAllIssueSelected} initCheck={initCheck} setInitCheck={setInitCheck} />
-			{issueList.length ? issueList : <ErrorCard>검색과 일치하는 결과가 없습니다</ErrorCard>}
+			<IssuesHeader
+				issuesCnt={issues.length}
+				isAnyIssueSelected={isAnyIssueSelected}
+				setIsAnyIssueSelected={setIsAnyIssueSelected}
+				isAllIssueSelected={isAllIssueSelected}
+				setIsAllIssueSelected={setIsAllIssueSelected}
+				selectedCards={selectedCards}
+			/>
+			{issueList.length ? (
+				issueList
+			) : (
+				<ErrorCard>검색과 일치하는 결과가 없습니다</ErrorCard>
+			)}
 		</StyledIssueList>
 	);
 };
