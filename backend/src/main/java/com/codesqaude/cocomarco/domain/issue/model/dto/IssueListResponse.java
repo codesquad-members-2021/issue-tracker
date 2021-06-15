@@ -1,6 +1,8 @@
 package com.codesqaude.cocomarco.domain.issue.model.dto;
 
+import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
+import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
 import com.codesqaude.cocomarco.domain.issue.model.IssueStatus;
 import com.codesqaude.cocomarco.domain.label.Label;
 import com.codesqaude.cocomarco.domain.label.dto.LabelResponse;
@@ -32,7 +34,10 @@ public class IssueListResponse {
     private IssueStatus status;
 
 
-    public static IssueListResponse of(Issue issue, List<User> assignments, List<Label> labels) {
+    public static IssueListResponse of(Issue issue) {
+        List<Label> labels = issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList());
+        List<User> assignments = issue.getAssignments().stream().map(Assignment::getUser).collect(Collectors.toList());
+
         List<UserResponse> assignmentResponses = assignments.stream().map(UserResponse::of).collect(Collectors.toList());
         List<LabelResponse> labelResponses = labels.stream().map(LabelResponse::of).collect(Collectors.toList());
         return new IssueListResponse.IssueListResponseBuilder()

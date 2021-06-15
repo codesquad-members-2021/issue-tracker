@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,25 +58,12 @@ public class IssueService {
 
     public IssueDetailResponse showDetail(Long issueId) {
         Issue issue = issueRepository.findByIdFetch(issueId).orElseThrow(NotFoundIssueException::new);
-        List<Label> labels = issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList());
-        List<User> assignments = issue.getAssignments().stream().map(Assignment::getUser).collect(Collectors.toList());
-
-        return IssueDetailResponse.of(issue, assignments, labels);
+        return IssueDetailResponse.of(issue);
     }
 
     public List<IssueListResponse> showList(IssueSearchRequest request) {
         List<Issue> issues = issueSearchRepository.searchByBuilder(request);
-        List<IssueListResponse> issueListResponse = new ArrayList<>();
-
-        for (Issue issue : issues) {
-            List<Label> labels = issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList());
-            List<User> assignments = issue.getAssignments().stream().map(Assignment::getUser).collect(Collectors.toList());
-
-            issueListResponse.add(IssueListResponse.of(issue, assignments, labels));
-        }
-
-
-        return issueListResponse;
+        return issues.stream().map(IssueListResponse::of).collect(Collectors.toList());
     }
 
     public Issue findById(Long issueId) {
