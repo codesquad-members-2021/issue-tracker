@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.issue.controller;
 
 import com.codesquad.issuetracker.comment.dto.CommentResponse;
 import com.codesquad.issuetracker.comment.vo.Emoji;
+import com.codesquad.issuetracker.comment.vo.Emojis;
 import com.codesquad.issuetracker.issue.dto.IssueDetailResponse;
 import com.codesquad.issuetracker.issue.dto.IssueResponse;
 import com.codesquad.issuetracker.issue.dto.IssueResponses;
@@ -11,7 +12,6 @@ import com.codesquad.issuetracker.user.controller.UserDummyData;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class IssueDummyData {
     private IssueDummyData() {
@@ -55,7 +55,7 @@ public class IssueDummyData {
                                             .author(UserDummyData.userFreddie())
                                             .contents("comment1")
                                             .createDateTime(LocalDateTime.now())
-                                            .emojis(new HashSet<>(Arrays.asList(
+                                            .emojis(Emojis.from(Arrays.asList(
                                                     Emoji.builder()
                                                             .value("😀")
                                                             .count(2)
