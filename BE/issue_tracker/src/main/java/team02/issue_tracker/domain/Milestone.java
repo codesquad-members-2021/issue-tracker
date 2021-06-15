@@ -2,6 +2,7 @@ package team02.issue_tracker.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team02.issue_tracker.dto.MilestoneRequest;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,5 +56,11 @@ public class Milestone {
                 .filter(issue -> !issue.isDeleted())
                 .filter(issue -> !issue.isOpen())
                 .count();
+    }
+
+    public void edit(MilestoneRequest milestoneRequest) {
+        this.title = milestoneRequest.getTitle();
+        this.content = milestoneRequest.getContent();
+        this.dueDate = milestoneRequest.getDueDate();
     }
 }

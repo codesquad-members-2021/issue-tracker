@@ -53,4 +53,10 @@ public class MilestoneService {
     public void addMilestone(MilestoneRequest milestoneRequest) {
         milestoneRepository.save(milestoneRequest.toMilestone());
     }
+
+    public void modifyMilestone(Long milestoneId, MilestoneRequest milestoneRequest) {
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        milestone.edit(milestoneRequest);
+        milestoneRepository.save(milestone);
+    }
 }

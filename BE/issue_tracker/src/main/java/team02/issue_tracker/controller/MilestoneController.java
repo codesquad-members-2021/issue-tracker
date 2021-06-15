@@ -34,4 +34,10 @@ public class MilestoneController {
         milestoneService.addMilestone(milestoneRequest);
         return ApiResult.ok();
     }
+
+    @PutMapping("/{milestoneId}")
+    public ApiResult<String> modifyMilestone(@PathVariable Long milestoneId, @RequestBody MilestoneRequest milestoneRequest) {
+        milestoneService.modifyMilestone(milestoneId, milestoneRequest);
+        return ApiResult.ok();
+    }
 }
