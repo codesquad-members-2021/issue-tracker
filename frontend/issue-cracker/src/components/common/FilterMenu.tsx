@@ -5,22 +5,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import TextGroup from './group/TextGroup';
-import {
-  ASSIGNED_ISSUE,
-  CLOSED_ISSUE,
-  COMMENTED_ISSUE,
-  FILTER,
-  OPEN_ISSUE,
-  WRITTEN_ISSUE,
-} from '../../utils/const';
+import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
     input: {
       borderRadius: 16,
       position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
       padding: '10px 26px 10px 12px',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
       fontFamily: ['Noto Sans KR'].join(','),
@@ -33,42 +25,42 @@ const BootstrapInput = withStyles((theme: Theme) =>
   })
 )(InputBase);
 
-function FilterMenu(): JSX.Element {
-  const [index, setIndex] = React.useState('필터');
+interface FilterMenuProps {
+  menu: string;
+  list: string[];
+}
+
+function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
+  const [index, setIndex] = React.useState(menu);
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setIndex(event.target.value as string);
   };
 
   return (
     <FormControl>
-      <Select
+      <CustomSelect
         labelId="demo-customized-select-label"
         id="demo-customized-select"
         value={index}
         onChange={handleChange}
         input={<BootstrapInput />}
       >
-        <MenuItem value={FILTER}>
-          <TextGroup content={FILTER} color="#222" type="xSmall" />
+        <MenuItem value={menu}>
+          <TextGroup content={menu} color="#222" type="xSmall" />
         </MenuItem>
-        <MenuItem value={1}>
-          <TextGroup content={OPEN_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={2}>
-          <TextGroup content={WRITTEN_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={3}>
-          <TextGroup content={ASSIGNED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={4}>
-          <TextGroup content={COMMENTED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-        <MenuItem value={5}>
-          <TextGroup content={CLOSED_ISSUE} color="#222" type="xSmall" />
-        </MenuItem>
-      </Select>
+        {list.map((menu, idx) => (
+          <MenuItem value={idx} key={uuidv4()}>
+            <TextGroup content={menu} color="#222" type="xSmall" />
+          </MenuItem>
+        ))}
+      </CustomSelect>
     </FormControl>
   );
 }
 
 export default FilterMenu;
+
+const CustomSelect = styled(Select)`
+  min-width: 100px;
+  text-align: right;
+`;
