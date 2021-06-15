@@ -28,6 +28,10 @@
 		BDCEAF6826733F8F005EE147 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDCEAF6626733F8F005EE147 /* LabelTableViewCell.xib */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
+		CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140C26787CF00009BB75 /* LoginManager.swift */; };
+		CEBF140F267883500009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
+		CEBF1412267887550009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
+		CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF141326788D910009BB75 /* JWTManagerTest.swift */; };
 		D1A7BE791A93D93FFEAD56C9 /* Pods_issue_tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9D20682EEABD0253D986DA /* Pods_issue_tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +87,9 @@
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		CEBF140C26787CF00009BB75 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		CEBF140E267883500009BB75 /* JWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManager.swift; sourceTree = "<group>"; };
+		CEBF141326788D910009BB75 /* JWTManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManagerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +176,8 @@
 				BD1D36FD266E428700B51184 /* Assets.xcassets */,
 				BD1D36FF266E428700B51184 /* LaunchScreen.storyboard */,
 				BD1D3702266E428700B51184 /* Info.plist */,
+				CEBF140C26787CF00009BB75 /* LoginManager.swift */,
+				CEBF140E267883500009BB75 /* JWTManager.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				BD1D370B266E428800B51184 /* issue_trackerTests.swift */,
+				CEBF141326788D910009BB75 /* JWTManagerTest.swift */,
 				BD1D370D266E428800B51184 /* Info.plist */,
 			);
 			path = "issue-trackerTests";
@@ -453,6 +463,8 @@
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
+				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
+				CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */,
 				BDCEAF6726733F8F005EE147 /* LabelTableViewCell.swift in Sources */,
 				BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */,
 				BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */,
@@ -467,6 +479,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD1D370C266E428800B51184 /* issue_trackerTests.swift in Sources */,
+				CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */,
+				CEBF1412267887550009BB75 /* JWTManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,7 +690,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8KRV7X8GQ6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "issue-trackerTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -699,7 +713,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8KRV7X8GQ6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "issue-trackerTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
