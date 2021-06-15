@@ -5,10 +5,10 @@ import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
 import Popover from '@material-ui/core/Popover';
 const testArray = [
-  { description: '테스트필터1' },
-  { description: '테스트필터2' },
-  { description: '테스트필터3' },
-  { description: '테스트필터4' },
+  { id: 1, description: '테스트필터1' },
+  { id: 2, description: '테스트필터2' },
+  { id: 3, description: '테스트필터3' },
+  { id: 4, description: '테스트필터4' },
 ];
 
 export default function IssueFilter() {

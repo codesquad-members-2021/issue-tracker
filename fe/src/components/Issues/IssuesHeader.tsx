@@ -6,10 +6,10 @@ import Filter from 'components/common/Filter';
 
 const IssuesHeader = () => {
   const testArray = [
-    { description: '테스트필터1' },
-    { description: '테스트필터2' },
-    { description: '테스트필터3' },
-    { description: '테스트필터4' },
+    { id: 1, description: '테스트필터1' },
+    { id: 2, description: '테스트필터2' },
+    { id: 3, description: '테스트필터3' },
+    { id: 4, description: '테스트필터4' },
   ];
 
   return (
@@ -25,10 +25,10 @@ const IssuesHeader = () => {
         </IssuesButton>
       </IssuesHeaderLeft>
       <IssuesHeaderRight>
-        <Filter filterTitle="담당자" filterList={testArray} />
-        <Filter filterTitle="레이블" filterList={testArray} />
-        <Filter filterTitle="마일스톤" filterList={testArray} />
-        <Filter filterTitle="작성자" filterList={testArray} />
+        <Filter filterType="milestoneList" />
+        <Filter filterType="labelList" />
+        <Filter filterType="labelList" />
+        <Filter filterType="labelList" />
       </IssuesHeaderRight>
     </StyledIssuesHeader>
   );

@@ -1,4 +1,5 @@
 export type FilterItemType = {
+  id: number;
   description: string;
   imgurl?: string | null;
   labelColor?: string;
@@ -15,6 +16,9 @@ export type FilterItemPropsType = {
 };
 
 export type FilterPropsType = {
-  filterTitle: string;
-  filterList: FilterItemType[];
-}
+  filterType: FilterSelectorType;
+};
+
+export type FilterSelectorType = 'milestoneList' | 'labelList';
+// | 'authorList'
+// | 'assigneeList';

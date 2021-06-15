@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
 import Popover from '@material-ui/core/Popover';
-import { FilterPropsType } from 'types/filterType';
+import { FilterPropsType, FilterSelectorType } from 'types/filterType';
+import { useRecoilValue } from 'recoil';
+import { filterSelector, labelQuery } from 'store';
 
-export default function Filter({ filterTitle, filterList }: FilterPropsType) {
+export default function Filter({ filterType }: FilterPropsType) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const ref = createRef();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -17,10 +19,24 @@ export default function Filter({ filterTitle, filterList }: FilterPropsType) {
     setAnchorEl(null);
   };
 
+  const dataList = useRecoilValue(filterSelector);
+  // let list;
+  // if (dataList) {
+  //   list = dataList[filterType];
+  // }
+  const getFilterTitle = (filterType: FilterSelectorType) =>
+    ({
+      milestoneList: '마일스톤',
+      labelList: '레이블',
+    }[filterType]);
+
+  // authorList: '작성자',
+  // assigneeList: '담당자',
   return (
     <>
       <FilterButton onClick={handleClick}>
-      {filterTitle} <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
+        {getFilterTitle(filterType)}
+        <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
       </FilterButton>
       <CustomMenu
         anchorOrigin={{
@@ -37,7 +53,10 @@ export default function Filter({ filterTitle, filterList }: FilterPropsType) {
         onClose={handleClose}
         ref={ref}
       >
-        <FilterList filterTitle={filterTitle} filterList={filterList} />
+        <FilterList
+          filterTitle={getFilterTitle(filterType)}
+          filterList={dataList[filterType]}
+        />
       </CustomMenu>
     </>
   );
@@ -50,7 +69,6 @@ const FilterButton = styled(Button)`
 `;
 
 const ArrowDownIcon = styled(ArrowDown)`
-
   &[aria-checked='true'] {
     transform: rotate(180deg);
   }
