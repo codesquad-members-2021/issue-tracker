@@ -44,11 +44,11 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
         let userID = appleIDCredential.user
         let loginInfo = LoginInfo(userID: userID, jwt: tokenInString, avatarURL: nil, name: name)
         
-        if !keyChainSaver.save(loginInfo) {
-            let saveError = LoginError.keyChainSave
-            delegate?.didSocialLoginFail(with: saveError)
-        } else {
+        if keyChainSaver.save(loginInfo) {
             delegate?.didSocialLoginSuccess(with: loginInfo)
+        } else {
+            let saveError = LoginError.keyChainSave
+            delegate?.didSocialLoginFail(with: saveError)            
         }
     }
     
