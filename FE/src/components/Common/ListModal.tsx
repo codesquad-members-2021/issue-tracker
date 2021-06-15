@@ -20,6 +20,7 @@ interface IListModal extends IModal {
     title: string;
     items: IListItem[];
   };
+  rightPos?: string;
 }
 
 // TEST DATA
@@ -44,7 +45,7 @@ export const testData: IListItem[] = [
 ];
 // -----
 
-const ListModal = ({ data, isModalVisible, modalType, ...props }: IListModal) => {
+const ListModal = ({ rightPos, data, isModalVisible, modalType, ...props }: IListModal) => {
   const { title, items } = data;
 
   const renderItems = useCallback(
@@ -66,6 +67,7 @@ const ListModal = ({ data, isModalVisible, modalType, ...props }: IListModal) =>
   return (
     <ListModalLayout
       {...props}
+      rightPos={rightPos}
       modalType={modalType}
       isModalVisible={isModalVisible}
     >
@@ -84,7 +86,7 @@ export default ListModal;
 
 // --- Styled Components ---
 // 1. 메인 (큰 틀)
-const ListModalLayout = styled(Modal)`
+const ListModalLayout = styled(Modal)<{rightPos?: string}>`
   position: absolute;
   z-index: 99;
 
@@ -92,6 +94,7 @@ const ListModalLayout = styled(Modal)`
   font-size: 0.9rem;
   border-radius: 0.6rem;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
+  right: ${({rightPos}) => rightPos ? rightPos : "auto" };
 `;
 
 const ListModalRow = styled.div<{ type: 'title' | 'items' }>`

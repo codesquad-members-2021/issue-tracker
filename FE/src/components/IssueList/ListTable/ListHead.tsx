@@ -4,6 +4,7 @@ import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { TNameValue } from '../../../util/reference';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import ListModal, { testData } from '../../Common/ListModal';
 
 interface IListHead {
   headerText: {
@@ -31,16 +32,33 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
           }
         />
       )),
-    [left /* 추후 이슈 추가가 되면 Count가 증가하니까.. 관련 Count State 넣어주기 */],
+    [
+      left /* 추후 이슈 추가가 되면 Count가 증가하니까.. 관련 Count State 넣어주기 */,
+    ],
   );
 
-  const renderRightButtons = useCallback(
+  const renderRightButtonItems = useCallback(
     () =>
       right.map(({ name, value }, idx) => (
-        <RightButton key={idx} name={name}>
-          <span>{value}</span>
-          <MdKeyboardArrowDown />
-        </RightButton>
+        <RightLayout key={idx}>
+          <RightRow>
+            <RightButton  name={name}>
+              <span>{value}</span>
+              <MdKeyboardArrowDown />
+            </RightButton>
+          </RightRow>
+          <RightRow>
+            <ListModal
+              rightPos="0"
+              modalType={name}
+              isModalVisible={true}
+              data={{
+                title: '테스트',
+                items: testData,
+              }}
+            />
+          </RightRow>
+        </RightLayout>
       )),
     [right],
   );
@@ -59,7 +77,7 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
       </ListHeadRow>
 
       {/* 우측 */}
-      <ListHeadRow>{renderRightButtons()}</ListHeadRow>
+      <ListHeadRow>{renderRightButtonItems()}</ListHeadRow>
     </ListHeadLayout>
   );
 };
@@ -91,6 +109,21 @@ const IconBlock = styled.div`
   display: flex;
   align-items: center;
   column-gap: 0.4rem;
+`;
+
+// 2-1) RightButton(필터) 전용 Wrapper
+const RightLayout = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 4px;
+`;
+
+const RightRow = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
 `;
 // =====
 
