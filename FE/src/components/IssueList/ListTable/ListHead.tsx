@@ -4,6 +4,7 @@ import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { TNameValue } from '../../../util/reference';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import ListModal, { testData } from '../../Common/ListModal';
 
 interface IListHead {
   headerText: {
@@ -19,8 +20,9 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
 
   const renderLeftTabItems = useCallback(
     () =>
-      left.map(({ name, value: label }) => (
+      left.map(({ name, value: label }, idx) => (
         <LeftTab
+          key={idx}
           label={
             <IconBlock>
               {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
@@ -30,16 +32,33 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
           }
         />
       )),
-    [left /* 추후 이슈 추가가 되면 Count가 증가하니까.. 관련 Count State 넣어주기 */],
+    [
+      left /* 추후 이슈 추가가 되면 Count가 증가하니까.. 관련 Count State 넣어주기 */,
+    ],
   );
 
-  const renderRightButtons = useCallback(
+  const renderRightButtonItems = useCallback(
     () =>
-      right.map(({ name, value }) => (
-        <RightButton name={name}>
-          <span>{value}</span>
-          <MdKeyboardArrowDown />
-        </RightButton>
+      right.map(({ name, value }, idx) => (
+        <RightLayout key={idx}>
+          <RightRow>
+            <RightButton  name={name}>
+              <span>{value}</span>
+              <MdKeyboardArrowDown />
+            </RightButton>
+          </RightRow>
+          <RightRow>
+            <ListModal
+              rightPos="0"
+              modalType={name}
+              isModalVisible={true}
+              data={{
+                title: '테스트',
+                items: testData,
+              }}
+            />
+          </RightRow>
+        </RightLayout>
       )),
     [right],
   );
@@ -58,7 +77,7 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
       </ListHeadRow>
 
       {/* 우측 */}
-      <ListHeadRow>{renderRightButtons()}</ListHeadRow>
+      <ListHeadRow>{renderRightButtonItems()}</ListHeadRow>
     </ListHeadLayout>
   );
 };
@@ -74,9 +93,9 @@ const ListHeadLayout = styled.div`
   width: inherit;
 
   background-color: ${({ theme }) => theme.colors.grayScale.bgColor};
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 0.5rem 0.5rem 0px 0px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grayScale.line}`};
-  padding: 12px 0;
+  padding: 1.05rem 0;
 `;
 
 const ListHeadRow = styled.div`
@@ -89,15 +108,30 @@ const ListHeadRow = styled.div`
 const IconBlock = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: 0.4rem;
+`;
+
+// 2-1) RightButton(필터) 전용 Wrapper
+const RightLayout = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 4px;
+`;
+
+const RightRow = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
 `;
 // =====
 
 // 3. Material-UI 커스터마이징
 const cssMuiTabStyle = css`
-  min-height: 24px;
-  height: 24px;
-  min-width: 32px;
+  min-height: 2.4rem;
+  height: 2.4rem;
+  min-width: 3.2rem;
 `;
 
 const LeftTabs = styled(Tabs)`
@@ -121,6 +155,6 @@ const RightButton = styled(Button)`
   color: ${({ theme }) => theme.colors.grayScale.label};
 
   span {
-    margin-right: 4px;
+    margin-right: 0.4rem;
   }
 `;

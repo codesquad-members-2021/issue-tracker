@@ -1,4 +1,4 @@
-import { ButtonGroup, Button, Box } from '@material-ui/core';
+import { ButtonGroup, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { TextIssueList } from '../../../../util/reference';
 import { IconLabel, IconMileStone } from '../../../Common/Icons';
@@ -8,8 +8,8 @@ const Tabs = () => {
 
   // render 관련
   const renderTabButtons = () =>
-    tabs.map(({ name, value }, i) => (
-      <TabButton name={name}>
+    tabs.map(({ name, value }, idx) => (
+      <TabButton name={name} key={idx}>
         <span>{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
         <span>{value}</span>
         <span>(3)</span>
@@ -26,10 +26,10 @@ const Tabs = () => {
 export default Tabs;
 
 // --- Styled Components ---
-const TabsLayout = styled(Box)`
+const TabsLayout = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 11px;
+  border-radius: 1.1rem;
   border: 1px solid transparent;
 `;
 
@@ -39,11 +39,11 @@ const TabButton = styled(Button)`
 
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  padding: 6px 24px;
+  padding: 0.4rem 1.4rem;
   & + & {
     border-left: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   }
 
   span { display: flex; align-items: center; }
-  span + span { margin-left: 4px; }
+  span + span { margin-left: 0.4rem; }
 `;

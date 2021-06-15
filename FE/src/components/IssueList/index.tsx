@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';
@@ -15,9 +14,9 @@ const IssueList = () => {
 export default IssueList;
 
 // --- Styled Components ---
-const IssueListLayout = styled(Box)`
+const IssueListLayout = styled.div`
   display: flex;
-  row-gap: 12px;
+  row-gap: 1.2rem;
   align-items: center;
   flex-wrap: wrap;
 `;

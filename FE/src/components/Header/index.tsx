@@ -19,7 +19,7 @@ export default Header;
 
 // --- Styled Components ---
 const HeaderLayout = styled.div`
-  padding: 27px 0;
+  padding: 2.3rem 0;
   display: flex;
   justify-content: space-between;
 `;

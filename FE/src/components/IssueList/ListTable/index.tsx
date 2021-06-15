@@ -21,5 +21,5 @@ const ListTableLayout = styled.div`
   flex-wrap: wrap;
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  border-radius: 16px;
+  border-radius: 0.5rem;
 `;

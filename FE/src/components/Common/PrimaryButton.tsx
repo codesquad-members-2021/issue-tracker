@@ -21,8 +21,8 @@ const PrimaryButtonLayout = styled(Button)<IAddButton>`
   align-items: center;
   color: ${({ theme }) => theme.colors.grayScale.offWhite};
 
-  padding: ${({ btnStyle }) => btnStyle === "medium" ? "0 24px" : "0 16px"};
-  border-radius: ${({ btnStyle }) => btnStyle === "medium" ? "20px" : "11px"};
+  padding: ${({ btnStyle }) => btnStyle === "medium" ? "0 2.4rem" : "0 1.6rem"};
+  border-radius: ${({ btnStyle }) => btnStyle === "medium" ? "2.0rem" : "1.1rem"};
 
   background-color: ${({ theme }) => theme.colors.normal.blue};
   &:hover { background-color: ${({ theme }) => theme.colors.normal.darkBlue}; }
