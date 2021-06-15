@@ -1,30 +1,38 @@
 package com.codesquad.issuetracker.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Entity
+@NoArgsConstructor
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
     private String content;
-    private final LocalDateTime createdAt;
-    private final Long issueId;
-    private final Long userId;
+    private LocalDateTime createdAt;
+    private Long issueId;
 
-    private Comment(Long id, String content, LocalDateTime createdAt, Long issueId, Long userId) {
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+    private Comment(Long id, String content, LocalDateTime createdAt, Long issueId, User user) {
         this.id = id;
         this.content = content;
         this.createdAt = createdAt;
         this.issueId = issueId;
-        this.userId = userId;
+        this.user = user;
     }
 
-    public Comment create(Long id, String content, LocalDateTime createdAt, Long issueId, Long userId) {
-        return new Comment(id, content, createdAt, issueId, userId);
+    public static Comment create(Long id, String content, LocalDateTime createdAt, Long issueId, User user) {
+        return new Comment(id, content, createdAt, issueId, user);
     }
 }

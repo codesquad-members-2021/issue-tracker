@@ -4,6 +4,7 @@ import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.request.CommentRequest;
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comment")
+@Slf4j
 public class CommentController {
-
-    private final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     private final CommentService commentService;
 
@@ -25,7 +25,7 @@ public class CommentController {
     @PostMapping
     public ApiResponse createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
 
-        logger.debug("Comment Request from User : {}", commentRequest);
+        log.debug("Comment Request from User : {}", commentRequest);
 
         commentService.create(commentRequest.create(user));
         return ApiResponse.ok("Create Comment");

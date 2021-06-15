@@ -8,8 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.jackson.io.JacksonDeserializer;
 import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.jsonwebtoken.lang.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +16,8 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class JwtProvider {
-
-    private final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
     private static final String USER_CLAIM_KEY = "user";
 
@@ -38,8 +36,8 @@ public class JwtProvider {
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds); // 유효시간 (지금 + 유효기간)
-        logger.info("now: {}", now);
-        logger.info("validity: {}", validity);
+        log.info("now: {}", now);
+        log.info("validity: {}", validity);
 
         return Jwts.builder()
                 .setClaims(claims)

@@ -7,8 +7,7 @@ import com.codesquad.issuetracker.domain.oauth.GitHubUser;
 import com.codesquad.issuetracker.repository.UserRepository;
 import com.codesquad.issuetracker.request.AccessTokenRequest;
 import com.codesquad.issuetracker.response.GitHubUserResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
@@ -17,13 +16,12 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class GitHubLoginService {
 
     private final UserRepository userRepository;
 
     private final JwtProvider jwtProvider;
-
-    private Logger logger = LoggerFactory.getLogger(GitHubLoginService.class);
 
     private static final String GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_USER_URL = "https://api.github.com/user";
@@ -39,7 +37,8 @@ public class GitHubLoginService {
 
     public GitHubUserResponse login(String code) {
         AccessTokenResponse accessTokenResponse = accessToken(code).orElseThrow(IllegalArgumentException::new);
-        logger.debug("Access token : {}", accessTokenResponse.getAccessToken());
+        log.debug("Access token : {}", accessTokenResponse.getAccessToken());
+
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
         return signIn(user, accessTokenResponse.getTokenType());
     }
@@ -68,10 +67,10 @@ public class GitHubLoginService {
     }
 
     private Optional<User> signUp(GitHubUser gitHubUser) {
-        logger.debug("github user : {}", gitHubUser);
+        log.debug("github user : {}", gitHubUser);
         if (!userRepository.findByLoginId(gitHubUser.getLogin()).isPresent()) {
             User user = User.githubUserToUser(gitHubUser);
-            logger.debug("User : {} ", user);
+            log.debug("User : {} ", user);
             userRepository.save(user);
         }
         return userRepository.findByLoginId(gitHubUser.getLogin());
@@ -79,7 +78,7 @@ public class GitHubLoginService {
 
     private GitHubUserResponse signIn(GitHubUser gitHubUser, String type) {
         User user = signUp(gitHubUser).orElseThrow(IllegalArgumentException::new);
-        String jwt = jwtProvider.createJwt(user.getId());
+        String jwt = jwtProvider.createJwt(user);
         return GitHubUserResponse.create(jwt, user, type);
     }
 

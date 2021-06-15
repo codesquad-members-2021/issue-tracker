@@ -3,8 +3,7 @@ package com.codesquad.issuetracker.jwt;
 import com.codesquad.issuetracker.component.JwtProvider;
 import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.exception.TokenEmptyException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -12,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@Slf4j
 public class BearerAuthInterceptor implements HandlerInterceptor {
-
-    private final Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
     private AuthorizationExtractor authorizationExtractor;
     private JwtProvider jwtProvider;
@@ -37,7 +35,7 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
 
         final User user = jwtProvider.getUser(jwtToken);
 
-        logger.debug("User info from JWT : {}", user);
+        log.debug("User info from JWT : {}", user);
 
         request.setAttribute("user", user);
         return true;
