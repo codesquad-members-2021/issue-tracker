@@ -1,4 +1,4 @@
-package com.issuetracker.web.dto.response.vo;
+package com.issuetracker.web.dto.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

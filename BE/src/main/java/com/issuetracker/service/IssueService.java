@@ -8,9 +8,10 @@ import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.ElementNotFoundException;
-import com.issuetracker.exception.InvalidSearchRequestException;
-import com.issuetracker.web.dto.response.vo.Assignee;
-import com.issuetracker.web.dto.response.vo.Count;
+import com.issuetracker.web.dto.vo.Assignee;
+import com.issuetracker.web.dto.vo.Count;
+import com.issuetracker.web.dto.vo.SearchRequest;
+import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,27 +28,38 @@ public class IssueService {
     private final MilestoneService milestoneService;
     private final UserService userService;
 
-    public IssuesResponseDTO getIssues(String status) {
+    public IssuesResponseDTO getIssues(SearchRequestDTO searchRequestDTO) {
+
+//        SearchRequest searchRequest = new SearchRequest(
+//                Status.statusToBoolean(searchRequestDTO.getStatus()),
+//                searchRequestDTO.getAuthor(),
+//                userService.findNullableUserByUserName(searchRequestDTO.getAssignee()),
+//                userService.findNullableUserByUserName(searchRequestDTO.getCommenter()),
+//                searchRequestDTO.getLabel(),
+//                milestoneService.findNullableMilestoneByTitle(searchRequestDTO.getMilestone())
+//        );
+
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.count())
                 .openedIssue((int) issueRepository.countAllByIsOpenTrue())
                 .closedIssue((int) issueRepository.countAllByIsOpenFalse())
                 .build();
-        List<IssueResponseDTO> issues = filterByStatus(status).stream()
+
+        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBy(searchRequestDTO).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);
     }
 
     private List<Issue> filterByStatus(String status) {
-        boolean newStatus = statusToBoolean(status);
+        boolean newStatus = Status.statusToBoolean(status);
         return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
     }
 
     @Transactional
     public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
-        boolean newStatus = !statusToBoolean(status);
+        boolean newStatus = !Status.statusToBoolean(status);
         issueRepository.updateStatusBy(newStatus, requestDTO.getIssueNumbers());
     }
 
@@ -172,13 +184,4 @@ public class IssueService {
                 .collect(Collectors.toList());
     }
 
-    private boolean statusToBoolean(String status) {
-        if (status.equals("open")) {
-            return true;
-        }
-        if (status.equals("close")) {
-            return false;
-        }
-        throw new InvalidSearchRequestException();
-    }
 }

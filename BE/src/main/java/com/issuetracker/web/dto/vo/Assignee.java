@@ -1,4 +1,4 @@
-package com.issuetracker.web.dto.response.vo;
+package com.issuetracker.web.dto.vo;
 
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.user.User;

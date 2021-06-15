@@ -7,14 +7,16 @@ import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
+import com.issuetracker.exception.InvalidSearchRequestException;
 import com.issuetracker.exception.UserNotFoundException;
 import com.issuetracker.web.dto.response.UserResponseDTO;
-import com.issuetracker.web.dto.response.vo.Assignee;
+import com.issuetracker.web.dto.vo.Assignee;
 import com.issuetracker.domain.issue.Issue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,9 +33,9 @@ public class UserService {
 
     public UserResponseDTO login(String code, UserAgentDTO userAgent) {
         AccessTokenResponseDTO token = oauth.getToken(code, userAgent.getUserAgent());
-        UserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
+        OAuthUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
-            User user = findByUserName(userInfo.getLogin());
+            User user = findUserByUserName(userInfo.getLogin());
             user.update(userInfo, token.getAccessToken());
             return UserResponseDTO.createUserResponseDTO(user, jwtService.createToken(userRepository.save(user)));
         }
@@ -70,10 +72,17 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    private User findByUserName(String userName) {
+    public User findUserByUserName(String userName) {
         return userRepository.findByUserName(userName).orElseThrow(
                 () -> new UserNotFoundException("Cannot find user by given username.")
         );
+    }
+
+    public User findNullableUserByUserName(String userName) {
+        if (userName == null) {
+            return null;
+        }
+        return userRepository.findByUserName(userName).orElseThrow(InvalidSearchRequestException::new);
     }
 
     private boolean verifyUser(String userName) {

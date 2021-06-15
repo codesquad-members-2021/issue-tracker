@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class User {
 
     @Id

@@ -44,6 +44,13 @@ public class MilestoneService {
         return milestoneRepository.findById(milestoneId).orElseThrow(EntityExistsException::new);
     }
 
+    public Milestone findNullableMilestoneByTitle(String title) {
+        if (title == null) {
+            return null;
+        }
+        return milestoneRepository.findByTitle(title).orElse(new Milestone());
+    }
+
     public List<MilestoneDTO> findAllMilestoneDTOs() {
         return milestoneRepository.findAll().stream().map(MilestoneDTO::of).collect(Collectors.toList());
     }
