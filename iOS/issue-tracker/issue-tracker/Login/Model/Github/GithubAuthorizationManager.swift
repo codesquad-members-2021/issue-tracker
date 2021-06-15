@@ -51,13 +51,15 @@ extension GithubAuthorizationManager: SocialLoginManagable {
             
             guard error == nil, let successURL = callbackURL else { return }
             
+            let codeKey = Parameter.code.key()
+            
             guard let code = NSURLComponents(string: (successURL.absoluteString))?
-                    .queryItems?.filter({$0.name == "code"})
+                    .queryItems?.filter({$0.name == codeKey})
                     .first?
                     .value else { return }
 
             let url = EndPoint.OAuth.rawValue
-            let parameter = ["code": code]
+            let parameter = [codeKey: code]
             let requestManager = RequestManager(url: url, parameters: parameter)
             let networkmanager = NetworkManager(requestManager: requestManager)
             
@@ -66,7 +68,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                 switch result {
                 case .success(let response):
                     let loginInfo = LoginInfo(userID: nil,
-                                              jwt: response.jwt.jwt,
+                                              jwt: response.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)
                     

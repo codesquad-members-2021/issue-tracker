@@ -15,7 +15,7 @@ final class LabelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = UIColor.systemGray2
         label.numberOfLines = 1
-        label.text = "No description provided"
+        label.text = placeholder
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -23,6 +23,8 @@ final class LabelTableViewCell: UITableViewCell {
     private lazy var spacing: CGFloat = {
         return frame.width * 0.05
     }()
+    
+    private let placeholder = "No description provided"
     
     static var reuseID: String {
         return String(describing: self)
@@ -63,9 +65,9 @@ final class LabelTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with backgroundColor: UIColor,_ titleColor: UIColor, _ title: String,_ description: String?) {
+    func configure(with backgroundColor: UIColor,_ titleColor: UIColor, _ title: String,_ description: String) {
         labelView.configure(with: backgroundColor, titleColor, title)
-        self.labelDescription.text = description
+        self.labelDescription.text = description.count != 0 ? description : placeholder
     }
 
 }

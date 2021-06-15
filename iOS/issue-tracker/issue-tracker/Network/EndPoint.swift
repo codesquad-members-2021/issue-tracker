@@ -9,4 +9,5 @@ import Foundation
 
 enum EndPoint: String {
     case OAuth = "http://3.34.122.67/api/login/ios"
+    case allLabels = "http://3.34.122.67/api/labels"
 }

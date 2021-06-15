@@ -9,7 +9,7 @@ import Foundation
 
 struct LoginInfo: Codable {
     let userID: String?
-    let jwt: String 
+    let jwt: JWT
     let avatarURL: String?
     let name: String
 }

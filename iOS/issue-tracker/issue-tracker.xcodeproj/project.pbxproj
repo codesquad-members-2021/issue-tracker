@@ -35,6 +35,9 @@
 		E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D326788CC3003CD344 /* ImageBarButton.swift */; };
 		E43912D626789812003CD344 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D526789812003CD344 /* RequestManager.swift */; };
 		E43912D826789A83003CD344 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D726789A83003CD344 /* EndPoint.swift */; };
+		E43912DA26789E16003CD344 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D926789E16003CD344 /* Label.swift */; };
+		E43912DC2678A737003CD344 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DB2678A737003CD344 /* JWT.swift */; };
+		E43912DE2678A76D003CD344 /* RequestKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DD2678A76D003CD344 /* RequestKeys.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -78,6 +81,9 @@
 		E43912D326788CC3003CD344 /* ImageBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBarButton.swift; sourceTree = "<group>"; };
 		E43912D526789812003CD344 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		E43912D726789A83003CD344 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		E43912D926789E16003CD344 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		E43912DB2678A737003CD344 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		E43912DD2678A76D003CD344 /* RequestKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestKeys.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 				E43912CF267878BF003CD344 /* HexColorConvertable.swift */,
 				E43912CD26777310003CD344 /* HexColorConverter.swift */,
 				E43912D1267878F4003CD344 /* HexColorCode.swift */,
+				E43912D926789E16003CD344 /* Label.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 		FAC6D8922671E1A800A9E5F9 /* Github */ = {
 			isa = PBXGroup;
 			children = (
+				E43912DB2678A737003CD344 /* JWT.swift */,
 				E426DAD026730DC50069E77D /* OAuthResponseDTO.swift */,
 				FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */,
 			);
@@ -315,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				E43912D726789A83003CD344 /* EndPoint.swift */,
+				E43912DD2678A76D003CD344 /* RequestKeys.swift */,
 				E43912D526789812003CD344 /* RequestManager.swift */,
 				FAEB30B32670B76200C17BE9 /* NetworkManager.swift */,
 				E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */,
@@ -403,6 +412,7 @@
 				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
 				E43912CE26777310003CD344 /* HexColorConverter.swift in Sources */,
 				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
+				E43912DE2678A76D003CD344 /* RequestKeys.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
 				E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */,
 				E43912D0267878BF003CD344 /* HexColorConvertable.swift in Sources */,
@@ -427,10 +437,12 @@
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
+				E43912DC2678A737003CD344 /* JWT.swift in Sources */,
 				E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */,
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
 				E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */,
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
+				E43912DA26789E16003CD344 /* Label.swift in Sources */,
 				E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

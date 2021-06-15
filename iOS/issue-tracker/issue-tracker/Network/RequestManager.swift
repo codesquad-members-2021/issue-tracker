@@ -14,10 +14,10 @@ final class RequestManager {
     private var parameters: [String: Any]?
     private var headers: HTTPHeaders?
     
-    init(url: String, parameters: [String: Any]? = nil, headers: HTTPHeaders? = nil) {
+    init(url: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) {
         self.url = url
         self.parameters = parameters
-        self.headers = headers
+        self.headers = HTTPHeaders(headers ?? [:])
     }
     
     func create(method: HTTPMethod) -> DataRequest {

@@ -42,7 +42,8 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
         }
         
         let userID = appleIDCredential.user
-        let loginInfo = LoginInfo(userID: userID, jwt: tokenInString, avatarURL: nil, name: name)
+        let jwt = JWT(jwt: tokenInString, tokenType: "Bearer")
+        let loginInfo = LoginInfo(userID: userID, jwt: jwt, avatarURL: nil, name: name)
         
         if keyChainSaver.save(loginInfo) {
             delegate?.didSocialLoginSuccess(with: loginInfo)

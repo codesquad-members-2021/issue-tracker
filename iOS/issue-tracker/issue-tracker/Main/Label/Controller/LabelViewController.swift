@@ -26,20 +26,25 @@ final class LabelViewController: UIViewController {
         return tableView
     }()
     
-    private var loginInfo: LoginInfo?
-    
     private let colorConverter: HexColorConvertable = HexColorConverter()
-    private let colors = ["#558776", "#F3F0D7", "#FFC107", "#FFD8CC", "#CEE5D0", "#231E23"]
+    private var networkManager: NetworkManagerOperations?
+    
+    private var loginInfo: LoginInfo?
+    private var labels: [Label]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         title = "레이블"
+        
         addNavigationButton()
         addTableView()
         
         labelTableView.dataSource = self
         labelTableView.delegate = self
+        
+        setNetworkManager()
+        loadLabels()
     }
     
     private func addNavigationButton() {
@@ -55,6 +60,29 @@ final class LabelViewController: UIViewController {
             labelTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             labelTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setNetworkManager() {
+        guard let loginInfo = loginInfo else { return }
+        let url = EndPoint.allLabels.rawValue
+        let headers = [Header.authorization.key(): loginInfo.jwt.description]
+        let requestManager = RequestManager(url: url, headers: headers)
+        networkManager = NetworkManager(requestManager: requestManager)
+    }
+    
+    private func loadLabels() {
+        networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, Error>) in
+            switch result {
+            case .success(let result):
+                let labels = result.data
+                self?.labels = labels
+                DispatchQueue.main.async {
+                    self?.labelTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
@@ -77,16 +105,19 @@ extension LabelViewController: UITableViewDelegate {
 
 extension LabelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return labels?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellID = LabelTableViewCell.reuseID
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? LabelTableViewCell ?? LabelTableViewCell()
-        let hex = HexColorCode(from: colors[indexPath.row])
+        
+        guard let labels = labels else { return cell }
+        let label = labels[indexPath.row]
+        let hex = HexColorCode(from: label.hexColorCode)
         let backgroundColor = colorConverter.convertHex(hex)
         let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
-        cell.configure(with: backgroundColor, titleColor, "졸력", "졸린 오후")
+        cell.configure(with: backgroundColor, titleColor, label.title, label.body)
         return cell
     }
 }
