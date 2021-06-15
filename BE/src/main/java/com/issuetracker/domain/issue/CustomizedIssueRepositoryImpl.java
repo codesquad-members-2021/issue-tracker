@@ -1,10 +1,11 @@
 package com.issuetracker.domain.issue;
 
-
+import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
 import com.issuetracker.web.dto.vo.Status;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +23,19 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Issue> findAllIssuesFilteredBy(SearchRequestDTO searchRequest) {
+    public List<Issue> findAllIssuesFilteredBySearchRequest(SearchRequestDTO searchRequest) {
+        return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest);
+    }
+
+    private List<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
+        return findIssuesByStatusAndSearchRequest(status, searchRequest).limit(100).fetch();
+    }
+
+    public long countIssueFilteredByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
+        return findIssuesByStatusAndSearchRequest(status, searchRequest).fetchCount();
+    }
+
+    private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
         return queryFactory
                 .select(issue)
                 .distinct()
@@ -31,38 +44,29 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                 .leftJoin(issue.labels, label)
                 .leftJoin(issue.milestone, milestone)
                 .leftJoin(issue.comments, comment1)
-                .where(statusEquals(searchRequest.getStatus()),
+                .where(
+                        statusEquals(status),
                         authorEquals(searchRequest.getAuthor()),
-//                        labelEquals(labelName),
+                        labelEquals(searchRequest.getLabel()),
                         milestoneEquals(searchRequest.getMilestone()),
                         assigneeEquals(searchRequest.getAssignee()),
-                        commenterEquals(searchRequest.getCommenter()))
-                .limit(100)
-                .fetch();
-
-//        return queryFactory
-//                .selectFrom(issue)
-//                .where(
-//                        statusEquals(searchRequest.getStatus()),
-//                        authorEquals(searchRequest.getAuthor()),
-//                        assigneeEquals(searchRequest.getAssignee())
-//                )
-//                .fetch();
+                        commenterEquals(searchRequest.getCommenter())
+                );
     }
 
-    public BooleanExpression statusEquals(String status) {
+    private BooleanExpression statusEquals(String status) {
         return hasText(status) ? issue.isOpen.eq(Status.statusToBoolean(status)) : null;
     }
 
-    public BooleanExpression authorEquals(String author) {
+    private BooleanExpression authorEquals(String author) {
         return hasText(author) ? user.userName.eq(author) : null;
     }
 
-    public BooleanExpression milestoneEquals(String milestoneTitle) {
+    private BooleanExpression milestoneEquals(String milestoneTitle) {
         return hasText(milestoneTitle) ? milestone.title.eq(milestoneTitle) : null;
     }
 
-    public BooleanExpression assigneeEquals(String assignee) {
+    private BooleanExpression assigneeEquals(String assignee) {
         if (!hasText(assignee)) {
             return null;
         }
@@ -86,11 +90,20 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                 .fetchFirst();
     }
 
-//    public BooleanExpression commenterEquals(User commenter) {
-//        return commenter != null ? issue.comments.contains(commenter) : null;
-//    }
-//
-//    public BooleanExpression labelEquals(List<String> label) {
-//        return label!=null?
-//    }
+    public BooleanExpression labelEquals(List<String> labels) {
+        if (labels.isEmpty()) {
+            return null;
+        }
+        List<Label> labelsList = getLabels(labels);
+        if (labelsList.isEmpty()) {
+            return null;
+        }
+        return label.in(labelsList);
+    }
+
+    public List<Label> getLabels(List<String> labels) {
+        return queryFactory.selectFrom(label)
+                .where(label.name.in(labels))
+                .fetch();
+    }
 }

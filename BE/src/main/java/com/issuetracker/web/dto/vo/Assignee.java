@@ -1,6 +1,5 @@
 package com.issuetracker.web.dto.vo;
 
-import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +17,7 @@ public class Assignee {
     private final String userName;
     private final boolean isAssigned;
 
-    public static Assignee of(User user, Issue issue, boolean isAssigned) {
+    public static Assignee of(User user, boolean isAssigned) {
         return Assignee.builder()
                 .id(user.getId())
                 .image(user.getAvatarUrl())

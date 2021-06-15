@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CustomizedIssueRepository {
 
-    List<Issue> findAllIssuesFilteredBy(SearchRequestDTO searchRequest);
+    List<Issue> findAllIssuesFilteredBySearchRequest(SearchRequestDTO searchRequest);
 
-//    List<Issue> findAllIssuesFilteredBy(SearchRequest searchRequest);
+    long countIssueFilteredByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest);
 }

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Status {
+
     OPEN("open"),
     CLOSE("close");
 
