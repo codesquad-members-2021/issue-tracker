@@ -21,6 +21,7 @@ public class UserDummyData {
                        .id(1L)
                        .email("freddie@freddie.com")
                        .name("freddie")
+                       .profileImage("/images/소라게.jpg")
                        .build();
     }
 
@@ -29,6 +30,7 @@ public class UserDummyData {
                        .id(2L)
                        .email("hiro@hiro.com")
                        .name("hiro")
+                       .profileImage("/images/소라게.jpg")
                        .build();
     }
 }
