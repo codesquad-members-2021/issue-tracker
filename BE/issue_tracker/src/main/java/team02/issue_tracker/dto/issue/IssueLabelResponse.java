@@ -1,4 +1,4 @@
-package team02.issue_tracker.dto;
+package team02.issue_tracker.dto.issue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
