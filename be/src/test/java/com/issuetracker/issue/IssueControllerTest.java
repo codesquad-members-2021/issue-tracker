@@ -3,6 +3,8 @@ package com.issuetracker.issue;
 import static com.issuetracker.issue.IssueTestData.*;
 import static org.graalvm.compiler.options.OptionType.User;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import com.issuetracker.config.InterceptorConfig;
 import com.issuetracker.controller.IssueController;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
@@ -29,6 +31,9 @@ public class IssueControllerTest {
 
     @MockBean
     private IssueService issueService;
+
+    @MockBean
+    private InterceptorConfig config;
 
     @Test
     public void 이슈_전체조회() throws Exception {
