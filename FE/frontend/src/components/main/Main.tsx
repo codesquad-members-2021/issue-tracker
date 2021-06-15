@@ -4,14 +4,9 @@ import Header from './Header';
 import IssueMain from './issue/IssueMain';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AddIssue from './issue/AddIssue';
-import useFetch from '../../util/useFetch';
+import LabelList from './label/LabelList';
 
 const Main = () => {
-  // const { isLoading, data, error } = useFetch('issue', 'getAllData');
-  useEffect(() => {
-    // console.log(data);
-  }, []);
-
   return (
     <MainWrapper>
       <BrowserRouter>
@@ -19,6 +14,7 @@ const Main = () => {
         <Switch>
           <Route path="/main" component={IssueMain} />
           <Route path="/newIssue" component={AddIssue} />
+          <Route path="/labelList" component={LabelList} />
         </Switch>
       </BrowserRouter>
     </MainWrapper>

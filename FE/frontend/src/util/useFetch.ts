@@ -11,6 +11,14 @@ const getData = async (type: string, action: string) => {
           const allData = await axios.get(`${url}/issues`);
           return allData.data.data;
       }
+      return;
+    case 'label':
+      switch (action) {
+        case 'getAllData':
+          const allData = await axios.get(`${url}/labels`);
+          return allData.data.data;
+      }
+      return;
   }
 };
 

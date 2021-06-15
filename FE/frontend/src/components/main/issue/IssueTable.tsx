@@ -8,9 +8,12 @@ import ListFilters from './ListFilters';
 import useFetch from '../../../util/useFetch';
 import Label from '../../../styles/atoms/Label';
 import User from '../../../styles/atoms/User';
+import Table from '../../../styles/molcules/Table';
+import moment from 'moment';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
+
   return (
     <>
       <IssueHeader>
@@ -27,39 +30,46 @@ const IssueTable = () => {
         </LeftHeaderWrapper>
         <ListFilters />
       </IssueHeader>
-      <div>
-        {data?.map((issue: any) => {
+      <TableWrapper>
+        {data?.map((issue: any, index: number) => {
           return (
-            <IssueCell>
-              <div>
+            <IssueCell key={index}>
+              <TextCell>
                 <UpperCell>
                   <CheckBox />
                   <AlertCircle />
                   <div>{issue.title}</div>
                   <Labels>
                     {issue.labels.map(
-                      (label: { id: number; title: string; color: string }) => {
+                      (
+                        label: { id: number; title: string; color: string },
+                        index: number
+                      ) => {
                         return (
-                          <Label title={label.title} color={label.color} />
+                          <Label
+                            key={index}
+                            title={label.title}
+                            color={label.color}
+                          />
                         );
                       }
                     )}
                   </Labels>
                 </UpperCell>
                 <LowerCell>
-                  <div>{issue.id}</div>
+                  <div>#{issue.id}</div>
                   <div>
-                    {issue.writer.username}가 {issue.created_time}에
-                    만들었습니다
+                    opened {moment(issue.created_time).fromNow()} by
+                    {issue.writer.username}
                   </div>
                   <div>{issue.milestone.title}</div>
                 </LowerCell>
-              </div>
+              </TextCell>
               <User imageURL={issue.writer.profile_image} />
             </IssueCell>
           );
         })}
-      </div>
+      </TableWrapper>
     </>
   );
 };
@@ -80,7 +90,7 @@ const IssueHeader = styled.div`
 
 const LeftHeaderWrapper = styled.div`
   padding: 0 24px;
-  div {
+  & > div {
     padding: 0 18px;
   }
   svg {
@@ -99,6 +109,18 @@ const IssueCell = styled.div`
     stroke: ${props => props.theme.colors.primary};
     fill: ${props => props.theme.colors.lightBlue};
   }
+  &:last-child {
+    border-radius: 0px 0px 16px 16px;
+  }
+`;
+
+const TextCell = styled.div`
+  & > div {
+    padding: 10px;
+    div {
+      margin: 0 5px;
+    }
+  }
 `;
 
 const UpperCell = styled.div`
@@ -116,6 +138,13 @@ const LowerCell = styled.div`
 const Text = styled(Typo)`
   svg {
     margin: 2px 6px 0 6px;
+  }
+`;
+
+const TableWrapper = styled.div`
+  border: ${props => `1px solid ${props.theme.greyscale.line}`};
+  &:last-child {
+    border-radius: 0px 0px 16px 16px;
   }
 `;
 

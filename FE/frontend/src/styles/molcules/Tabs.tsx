@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as MilestoneIcon } from '../../../icons/milestone.svg';
-import { ReactComponent as TagIcon } from '../../../icons/tag.svg';
-import Typo from '../../../styles/atoms/Typos';
+import { ReactComponent as MilestoneIcon } from '../../icons/milestone.svg';
+import { ReactComponent as TagIcon } from '../../icons/tag.svg';
+import Typos from '../atoms/Typos';
+import { Link } from 'react-router-dom';
 
 const Tabs = () => {
   return (
     <TabsWrapper>
-      <Label className="label target">
+      <Label
+        style={{ textDecoration: 'none' }}
+        className="label target"
+        to="labelList">
         <MilestoneIcon />
         <Text link sm>
           레이블
@@ -44,7 +48,10 @@ const TabsWrapper = styled.div`
   }
 `;
 
-const Label = styled.div`
+const Label = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
   border-radius: 11px 0px 0px 11px;
 `;
 
@@ -57,7 +64,7 @@ const Milestone = styled.div`
   border-radius: 0px 11px 11px 0px;
 `;
 
-const Text = styled(Typo)`
+const Text = styled(Typos)`
   padding-left: 10px;
   color: ${props => props.theme.greyscale.label};
 `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
-import Tabs from './Tabs';
+import Tabs from '../../../styles/molcules/Tabs';
 import IssueTable from './IssueTable';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
