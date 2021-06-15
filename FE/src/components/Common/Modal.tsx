@@ -3,15 +3,16 @@ import { TChildren } from '../../util/types';
 
 export interface IModal {
   children?: TChildren;
-  className?: string;
   isModalVisible: boolean;
+  modalType: string;
 }
 
-const Modal = ({ className, isModalVisible, children, ...props }: IModal) => {
+const Modal = ({ modalType, isModalVisible, children, ...props }: IModal) => {
   return (
     <ModalLayout
       {...props}
-      className={className}
+      id="modal"
+      data-modal-type={modalType}
       isModalVisible={isModalVisible}
     >
       {children}

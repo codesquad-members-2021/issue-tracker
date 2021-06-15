@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { filterModalVisible } from '../../../util/recoil';
+import { searchModalVisible } from '../../../util/recoil';
 import { Input, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import ListModal from '../../Common/ListModal';
@@ -16,8 +16,8 @@ const SearchBar = () => {
     items: filterList.map(({ name, value: text }) => ({ name, text })),
   };
 
-  const [isFilterModalVisible, setIsFilterModalVisible] = useRecoilState(filterModalVisible);
-  const handleFilterButtonClick = () => setIsFilterModalVisible(!isFilterModalVisible);
+  const [isSearchModalVisible, setIsSearchModalVisible] = useRecoilState(searchModalVisible);
+  const handleFilterButtonClick = () => setIsSearchModalVisible(!isSearchModalVisible);
 
   return (
     <SearchBarLayout>
@@ -31,8 +31,8 @@ const SearchBar = () => {
 
       <SearchBarRow>
         <ListModal
-          className="modal filterModal"
-          isModalVisible={isFilterModalVisible}
+          modalType={"searchBar"}
+          isModalVisible={isSearchModalVisible}
           data={data}
         />
       </SearchBarRow>

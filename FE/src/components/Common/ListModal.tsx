@@ -44,12 +44,7 @@ export const testData: IListItem[] = [
 ];
 // -----
 
-const ListModal = ({
-  data,
-  className,
-  isModalVisible,
-  ...props
-}: IListModal) => {
+const ListModal = ({ data, isModalVisible, modalType, ...props }: IListModal) => {
   const { title, items } = data;
 
   const renderItems = useCallback(
@@ -57,7 +52,7 @@ const ListModal = ({
       items.map(({ imgType, name, text, color, imgUrl }, idx) => (
         <MenuLabelTag key={idx}>
           <MenuTextBlock>
-            {(imgType !== 'text') && (color || imgUrl) && (
+            {imgType !== 'text' && (color || imgUrl) && (
               <MenuImageBlock imgType={imgType} color={color} imgUrl={imgUrl} />
             )}
             {text}
@@ -71,7 +66,7 @@ const ListModal = ({
   return (
     <ListModalLayout
       {...props}
-      className={className}
+      modalType={modalType}
       isModalVisible={isModalVisible}
     >
       {/* Title */}

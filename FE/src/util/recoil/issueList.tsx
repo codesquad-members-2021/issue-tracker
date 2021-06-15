@@ -1,14 +1,14 @@
 import { atom } from "recoil";
 
-export const filterModalVisible = atom({
-    key: 'filterModalVisible',
+export const searchModalVisible = atom({
+    key: 'searchModalVisible',
     default: false,
 });
 
-export const modalClassNames = atom({
-    key: 'modalClassNames',
+export const modalTypes = atom({
+    key: 'modalTypes',
     default: [
-        "filterModal"
+        "searchBar"
     ],
 });
 

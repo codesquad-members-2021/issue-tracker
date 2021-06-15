@@ -1,4 +1,4 @@
-import { filterModalVisible, modalClassNames } from './issueList';
+import { searchModalVisible, modalTypes } from './issueList';
 
-export { filterModalVisible, modalClassNames };
+export { searchModalVisible, modalTypes };
 
