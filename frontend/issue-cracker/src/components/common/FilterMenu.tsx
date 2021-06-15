@@ -6,14 +6,13 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import TextGroup from './group/TextGroup';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
     input: {
       borderRadius: 16,
       position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
       padding: '10px 26px 10px 12px',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
       fontFamily: ['Noto Sans KR'].join(','),
@@ -39,7 +38,7 @@ function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
 
   return (
     <FormControl>
-      <Select
+      <CustomSelect
         labelId="demo-customized-select-label"
         id="demo-customized-select"
         value={index}
@@ -50,13 +49,18 @@ function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
           <TextGroup content={menu} color="#222" type="xSmall" />
         </MenuItem>
         {list.map((menu, idx) => (
-          <MenuItem value={idx + 1} key={uuidv4()}>
+          <MenuItem value={idx} key={uuidv4()}>
             <TextGroup content={menu} color="#222" type="xSmall" />
           </MenuItem>
         ))}
-      </Select>
+      </CustomSelect>
     </FormControl>
   );
 }
 
 export default FilterMenu;
+
+const CustomSelect = styled(Select)`
+  min-width: 100px;
+  text-align: right;
+`;
