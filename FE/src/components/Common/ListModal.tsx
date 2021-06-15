@@ -46,8 +46,8 @@ export const testData: IListItem[] = [
 
 const ListModal = ({
   data,
+  className,
   isModalVisible,
-  setIsModalVisible,
   ...props
 }: IListModal) => {
   const { title, items } = data;
@@ -71,8 +71,8 @@ const ListModal = ({
   return (
     <ListModalLayout
       {...props}
+      className={className}
       isModalVisible={isModalVisible}
-      setIsModalVisible={setIsModalVisible}
     >
       {/* Title */}
       <ListModalRow type="title">
@@ -90,6 +90,9 @@ export default ListModal;
 // --- Styled Components ---
 // 1. 메인 (큰 틀)
 const ListModalLayout = styled(Modal)`
+  position: absolute;
+  z-index: 99;
+
   flex-direction: column;
   font-size: 0.9rem;
   border-radius: 0.6rem;
