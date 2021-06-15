@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct IssueDTO: Codable {
+struct IssueDTO: Codable, Equatable {
+    
+    static func == (lhs: IssueDTO, rhs: IssueDTO) -> Bool {
+        return lhs.issueId == rhs.issueId &&
+            lhs.history == rhs.history &&
+            lhs.isOpen == rhs.isOpen &&
+            lhs.title == rhs.title &&
+            lhs.contents == rhs.contents &&
+            lhs.assignees == rhs.assignees &&
+            lhs.author == rhs.author &&
+            lhs.milestone == rhs.milestone &&
+            lhs.issueCount == rhs.issueCount &&
+            lhs.labels == rhs.labels &&
+            lhs.comments == rhs.comments
+    }
+    
     var issueId: Int
     var history: Histroy
     var isOpen: Bool

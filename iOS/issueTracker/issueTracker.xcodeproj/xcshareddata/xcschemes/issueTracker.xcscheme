@@ -28,7 +28,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8291B69C2677919100AF3FC4"
+               BlueprintIdentifier = "822247362678559100BB0022"
                BuildableName = "issueTrackerTests.xctest"
                BlueprintName = "issueTrackerTests"
                ReferencedContainer = "container:issueTracker.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8291B69C2677919100AF3FC4"
+               BlueprintIdentifier = "822247362678559100BB0022"
                BuildableName = "issueTrackerTests.xctest"
                BlueprintName = "issueTrackerTests"
                ReferencedContainer = "container:issueTracker.xcodeproj">

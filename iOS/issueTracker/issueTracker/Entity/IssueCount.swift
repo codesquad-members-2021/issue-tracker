@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IssueCount: Codable {
+struct IssueCount: Codable, Equatable {
     var open: Int
     var closed: Int
     
