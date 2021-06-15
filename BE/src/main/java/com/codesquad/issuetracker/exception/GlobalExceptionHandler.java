@@ -10,4 +10,9 @@ public class GlobalExceptionHandler {
     public String handleTokenEmpty(TokenEmptyException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(NoSuchIssueException.class)
+    public String handleTokenEmpty(NoSuchIssueException e) {
+        return e.getMessage();
+    }
 }
