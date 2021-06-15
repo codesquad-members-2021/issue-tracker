@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+import org.hamcrest.Matchers;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ClientHttpConnector;
@@ -20,12 +20,8 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenResponseDto;
-import team02.issue_tracker.oauth.utils.GithubApiProperties;
-import team02.issue_tracker.oauth.utils.JwtUtils;
-import team02.issue_tracker.service.UserService;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,23 +35,7 @@ class OAuthServiceTest {
     private ClientHttpConnector connector;
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtUtils jwtUtils;
-
-    @Autowired
-    private GithubApiProperties githubApiProperties;
-
     private OAuthService oauthService;
-
-    @BeforeEach
-    void setup() {
-        this.mockWebServer = new MockWebServer();
-        this.connector = new ReactorClientHttpConnector();
-        this.objectMapper = new ObjectMapper();
-    }
 
     @AfterEach
     void shutdown() throws IOException {
@@ -63,39 +43,22 @@ class OAuthServiceTest {
     }
 
     private void startServer() {
+        this.mockWebServer = new MockWebServer();
+        this.connector = new ReactorClientHttpConnector();
+        this.objectMapper = new ObjectMapper();
         this.webClient = WebClient.builder()
                 .clientConnector(connector)
                 .baseUrl(mockWebServer.url("/").toString())
                 .build();
     }
 
+    @DisplayName("mock 서버에 mock access token request를 보내서 mock access token response를 받는다.")
     @Test
-    void retrieve() {
+    void requestGithubAccessToken() throws JsonProcessingException {
         startServer();
 
-        prepareResponse(mockResponse -> mockResponse
-                .addHeader("Content-Type", "text/plain")
-                .setBody("Hello Spring!!"));
+        oauthService = new OAuthService(null, null, null, webClient);
 
-        Mono<String> result = this.webClient.get()
-                .uri("/greeting")
-                .cookie("testkey", "testvalue")
-                .header("X-Test-Header", "testvalue")
-                .retrieve()
-                .bodyToMono(String.class);
-
-        StepVerifier.create(result)
-                .expectNext("Hello Spring!!")
-                .expectComplete()
-                .verify(Duration.ofSeconds(3));
-
-
-    }
-
-    @Test
-    void retrieveJson() {
-        startServer();
-        oauthService = new OAuthService(userService, jwtUtils, githubApiProperties, webClient);
         // mock 응답 바디 데이터 설정
         GithubAccessTokenResponseDto expectedMockResponse = GithubAccessTokenResponseDto
                 .builder()
@@ -124,12 +87,12 @@ class OAuthServiceTest {
                 .code("mock code")
                 .build();
 
-        // mock 요청을 mock 서버에 보내서 가져온 mock 응답
-        GithubAccessTokenResponseDto actualMockResponse =
+        // mock 요청을 mock 서버에 보내서 가져온 응답
+        GithubAccessTokenResponseDto receivedResponse =
                 oauthService.accessTokenFrom(mockAccessTokenRequest, "/mock/access_token");
 
-        // 위의 mock 응답이 설정한 mockd 응답과 일치하는지 검증
-        StepVerifier.create(Mono.just(actualMockResponse))
+        // 반환된 응답이 설정한 mock 응답과 일치하는지 검증
+        StepVerifier.create(Mono.just(receivedResponse))
                 .consumeNextWith(body -> assertThat(body).usingRecursiveComparison()
                         .isEqualTo(expectedMockResponse));
 
@@ -138,12 +101,16 @@ class OAuthServiceTest {
         expectRequest(request -> {
             assertThat(request.getPath()).isEqualTo("/mock/access_token");
             assertThat(request.getHeader(HttpHeaders.ACCEPT)).isEqualTo("application/json");
-//            try {
-//                assertThat(new JSONObject(request.getBody().readUtf8())).usingRecursiveComparison().isEqualTo
-//                System.out.println("@@@ result : " + result);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+
+            try {
+                JSONObject jsonObject = new JSONObject(request.getBody().readUtf8());
+                assertThat(jsonObject.get("client_id")).isEqualTo("mock client id");
+                assertThat(jsonObject.get("client_secret")).isEqualTo("mock client secret");
+                assertThat(jsonObject.get("redirect_uri")).isEqualTo("mock redirect uri");
+                assertThat(jsonObject.get("code")).isEqualTo("mock code");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         });
     }
 
