@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
+import { StylesProvider } from '@material-ui/core/styles';
 
 import GlobalStyle from './util/styles/GlobalStyle';
 import theme from './util/styles/theme';
