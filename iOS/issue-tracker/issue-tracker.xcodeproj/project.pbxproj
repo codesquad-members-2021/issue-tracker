@@ -234,7 +234,9 @@
 		E42AD11B26708EC80071B436 /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
-				E42AD121267093590071B436 /* MilestoneViewController.swift */,
+				FAB2C36626789ADD009F879C /* Model */,
+				FAB2C36726789AE3009F879C /* View */,
+				FAB2C36826789AE6009F879C /* Controller */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -296,6 +298,28 @@
 				E426DAB92670EC2D0069E77D /* AppleAuthorizationManager.swift */,
 			);
 			path = Apple;
+			sourceTree = "<group>";
+		};
+		FAB2C36626789ADD009F879C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAB2C36726789AE3009F879C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FAB2C36826789AE6009F879C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD121267093590071B436 /* MilestoneViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		FAC6D8922671E1A800A9E5F9 /* Github */ = {
