@@ -16,7 +16,7 @@ const SubmitButton = ({ innerText }: Props) => {
     if (innerText === "코멘트 작성") {
       return (
         <S.IssueSubmitButton
-          isOutlined={false}
+          data-is-outlined={false}
           variant="contained"
           color="primary"
         >
@@ -27,7 +27,7 @@ const SubmitButton = ({ innerText }: Props) => {
     } else if (innerText === "편집 완료") {
       return (
         <S.IssueSubmitButton
-          isOutlined={false}
+          data-is-outlined={false}
           variant="contained"
           color="primary"
         >
@@ -38,7 +38,7 @@ const SubmitButton = ({ innerText }: Props) => {
     } else {
       return (
         <S.IssueSubmitButton
-          isOutlined={true}
+          data-is-outlined={true}
           variant="outlined"
           color="primary"
           onClick={() =>

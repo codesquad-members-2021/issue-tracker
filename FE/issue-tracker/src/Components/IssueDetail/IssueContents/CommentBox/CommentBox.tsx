@@ -19,7 +19,7 @@ const CommentBox = ({ comment }: Props) => {
     <S.CommentBox>
       <UserImage imgUrl={comment.author.image_url} />
       <Comment isShow={isShow} comment={comment} />
-      <S.CommentEditBox isShow={isShow}>
+      <S.CommentEditBox data-is-show={isShow}>
         <TextArea
           placeholder={comment.content}
           rows={10}
