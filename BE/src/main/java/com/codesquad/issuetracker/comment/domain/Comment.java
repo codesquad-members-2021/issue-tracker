@@ -24,6 +24,7 @@ public class Comment {
     @Column(columnDefinition = "BINARY(16)", name = "COMMENT_ID")
     private UUID id;
 
+    @Column(name = "ISSUE_ID")
     private Long issueId;
 
     @ManyToOne

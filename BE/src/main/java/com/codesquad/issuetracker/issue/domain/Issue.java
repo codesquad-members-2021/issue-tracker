@@ -50,6 +50,7 @@ public class Issue {
     private Milestone milestone;
 
     @OneToMany
+    @JoinColumn(name = "ISSUE_ID")
     private List<Comment> comments;
 
     private Issue(User author, String title) {
