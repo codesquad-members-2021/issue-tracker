@@ -1,6 +1,5 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { checkedState } from "@/Components/Home/HomeStore";
 import { checkedItemState } from "@/Components/Home/HomeStore";
 
 type CheckButtonProps = {

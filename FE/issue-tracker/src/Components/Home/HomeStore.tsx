@@ -14,13 +14,13 @@ export const checkedItemsCountState = selector({
   },
 });
 
-export const checkedState = atom({
-  key: "checkedState",
+export const filterModalOpenState = atom({
+  key: "filterModalOpenState",
   default: false,
 });
 
-export const filterModalOpenState = atom({
-  key: "filterModalOpenState",
+export const IssueModalState = atom({
+  key: "ISsueModalState",
   default: false,
 });
 

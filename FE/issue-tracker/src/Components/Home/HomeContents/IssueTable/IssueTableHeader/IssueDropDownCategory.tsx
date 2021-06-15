@@ -6,8 +6,9 @@ import {
   categoryModalOpenState,
   editOpenCloseIssueModalState,
   checkedItemState,
-  checkedItemsCountState,
+  IssueModalState,
 } from "../../../HomeStore";
+import StateDropDown from "./DropDown/StateDropDown";
 
 const IssueDropDownCategory = () => {
   const modalTitleMock: string[] = ["담당자", "레이블", "마일스톤", "작성자"];
@@ -20,6 +21,8 @@ const IssueDropDownCategory = () => {
     editOpenCloseIssueModalState
   );
 
+  const [issueModalState, setIssueModalState] = useRecoilState(IssueModalState);
+
   const checkedItemsCount = useRecoilValue(checkedItemState);
   console.log("크기", checkedItemsCount);
   const handleCategClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -27,6 +30,10 @@ const IssueDropDownCategory = () => {
       openedModalTitle: (e.target as HTMLElement).dataset.title,
       isOpen: !categModalOpenState.isOpen,
     });
+  };
+
+  const handleIssueStateClick = () => {
+    setIssueModalState(!issueModalState);
   };
 
   useEffect(() => {
@@ -37,10 +44,13 @@ const IssueDropDownCategory = () => {
   return (
     <S.TableHeaderRight>
       {editIssueModalState ? (
-        <S.TableTh>
-          상태수정
-          <Icon.Down />
-        </S.TableTh>
+        <S.ThModalWrapDiv>
+          <S.TableTh onClick={handleIssueStateClick}>
+            상태수정
+            <Icon.Down />
+          </S.TableTh>
+          {issueModalState && <StateDropDown />}
+        </S.ThModalWrapDiv>
       ) : (
         modalTitleMock.map((modalTitle) => (
           <S.ThModalWrapDiv>
