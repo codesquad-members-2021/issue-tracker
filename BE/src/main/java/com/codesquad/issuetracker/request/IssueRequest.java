@@ -1,20 +1,35 @@
 package com.codesquad.issuetracker.request;
 
-import java.time.LocalDate;
+import com.codesquad.issuetracker.domain.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class IssueRequest {
 
     private String title;
+
     private String content;
-    private LocalDate createdAt;
+
+    @JsonProperty("created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+    private LocalDateTime createdAt;
+
     private ArrayList<String> label;
+
+    @JsonProperty("milestone_id")
     private Long milestoneId;
 
     @JsonProperty("user_id")
-    private Long userId;
+    private User userId;
 
-    public IssueRequest(String title, String content, LocalDate createdAt, ArrayList<String> label, Long milestoneId, String userId) {
+    public IssueRequest() {
+
+    }
+
+    public IssueRequest(String title, String content, LocalDateTime createdAt, ArrayList<String> label, Long milestoneId, User userId) {
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
@@ -31,7 +46,7 @@ public class IssueRequest {
         return content;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -43,7 +58,19 @@ public class IssueRequest {
         return milestoneId;
     }
 
-    public String getUserId() {
+    public User getUserId() {
         return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "IssueRequest{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdAt=" + createdAt +
+                ", label=" + label +
+                ", milestoneId=" + milestoneId +
+                ", userId=" + userId +
+                '}';
     }
 }
