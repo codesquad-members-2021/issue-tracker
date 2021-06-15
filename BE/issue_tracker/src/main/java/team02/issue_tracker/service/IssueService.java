@@ -138,4 +138,10 @@ public class IssueService {
         userService.deleteIssueAssignees(issue);
         labelService.deleteIssueLabels(issue);
     }
+
+    public IssueCountResponse getIssueCount() {
+        int openIssueCount = issueRepository.findOpenIssues().size();
+        int closedIssueCount = issueRepository.findClosedIssues().size();
+        return new IssueCountResponse(openIssueCount, closedIssueCount);
+    }
 }

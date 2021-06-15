@@ -32,6 +32,11 @@ public class IssueController {
         return ApiResult.success(issueService.getDetailIssueResponse(issueId));
     }
 
+    @GetMapping("/count")
+    public ApiResult<IssueCountResponse> showIssueCount() {
+        return ApiResult.success(issueService.getIssueCount());
+    }
+
     @LoginRequired
     @PostMapping
     public ApiResult<String> createIssue(@RequestBody IssueRequest issueRequest, @UserId Long userId) {
@@ -71,7 +76,7 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/milestone")
-    public ApiResult<String> modifyMilestone(@PathVariable Long issueId, @RequestBody IssueMilestoneRequest  issueMilestoneRequest) {
+    public ApiResult<String> modifyMilestone(@PathVariable Long issueId, @RequestBody IssueMilestoneRequest issueMilestoneRequest) {
         issueService.modifyMilestone(issueId, issueMilestoneRequest);
         return ApiResult.ok();
     }
