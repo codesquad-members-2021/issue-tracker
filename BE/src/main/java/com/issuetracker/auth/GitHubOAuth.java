@@ -4,7 +4,7 @@ import com.issuetracker.auth.exception.AccessTokenNotFoundException;
 import com.issuetracker.auth.exception.GitHubUserNotFoundException;
 import com.issuetracker.auth.dto.AccessTokenRequestDTO;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
-import com.issuetracker.auth.dto.UserResponseDTO;
+import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.service.GitHubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,13 +46,13 @@ public class GitHubOAuth implements OAuth {
     }
 
     @Override
-    public UserResponseDTO getUserInfo(String accessToken) {
+    public OAuthUserResponseDTO getUserInfo(String accessToken) {
         return webClient.get()
                 .uri(userUri)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, TOKEN + " " + accessToken)
                 .retrieve()
-                .bodyToMono(UserResponseDTO.class)
+                .bodyToMono(OAuthUserResponseDTO.class)
                 .blockOptional()
                 .orElseThrow(GitHubUserNotFoundException::new);
     }

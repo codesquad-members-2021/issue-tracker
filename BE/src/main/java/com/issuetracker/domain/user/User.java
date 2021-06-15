@@ -1,7 +1,7 @@
 package com.issuetracker.domain.user;
 
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
-import com.issuetracker.auth.dto.UserResponseDTO;
+import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.domain.issue.Issue;
 import lombok.*;
 
@@ -30,7 +30,7 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Issue> issues;
 
-    public static User createUser(UserResponseDTO user, AccessTokenResponseDTO token) {
+    public static User createUser(OAuthUserResponseDTO user, AccessTokenResponseDTO token) {
         return User.builder()
                 .name(user.getName())
                 .email(user.getEmail())
@@ -40,7 +40,7 @@ public class User {
                 .build();
     }
 
-    public void update(UserResponseDTO userInfo, String token) {
+    public void update(OAuthUserResponseDTO userInfo, String token) {
         name = userInfo.getName();
         email = userInfo.getEmail();
         userName = userInfo.getLogin();

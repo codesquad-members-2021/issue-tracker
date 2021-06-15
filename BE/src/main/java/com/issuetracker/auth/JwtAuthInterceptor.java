@@ -20,7 +20,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER = "Bearer";
-    private final JwtService jwtUtil;
+    private final JwtService jwtService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -40,9 +40,9 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         verifyHeader(header);
 
         String jwt = header.substring(BEARER.length()).trim();
-        DecodedJWT decodedJWT = jwtUtil.verifyToken(jwt);
+        DecodedJWT decodedJWT = jwtService.verifyToken(jwt);
 
-        request.setAttribute(USER_ID, jwtUtil.getUserId(decodedJWT));
+        request.setAttribute(USER_ID, jwtService.getUserId(decodedJWT));
     }
 
     private void verifyHeader(String header) {
