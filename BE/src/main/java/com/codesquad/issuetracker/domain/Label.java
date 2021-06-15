@@ -9,10 +9,13 @@ public class Label {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
     private String title;
     private String content;
     private String color;
+
+    @OneToMany(mappedBy="label")
+    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private Label(Long id, String title, String content, String color) {
         this.id = id;
