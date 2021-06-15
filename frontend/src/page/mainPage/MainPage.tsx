@@ -1,11 +1,9 @@
-import React, { ReactElement, Suspense, lazy } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 import styled from 'styled-components';
-// import IssueTable from 'page/mainPage/issueTable/IssueTable';
-// import OptionTable from 'page/mainPage/optionTable/OptionTable';
+import IssueTable from 'page/mainPage/issueTable/IssueTable';
+import OptionTable from 'page/mainPage/optionTable/OptionTable';
 
 export default function MainPage(): ReactElement {
-  const OptionTable = lazy(()=>import('page/mainPage/optionTable/OptionTable'))
-  const IssueTable = lazy(()=>import('page/mainPage/issueTable/IssueTable'))
   return (
     <MainPageBlock>
       <Suspense fallback='loading...'>
