@@ -41,7 +41,9 @@ public class IssueController {
 
     @PutMapping("/{issueId}/title")
     public ApiResponse editTitle(@PathVariable Long issueId, @RequestBody String title) {
-        return ApiResponse.ok("Edit Title of the Issue");
+        System.out.println(title);
+        issueService.updateTitle(issueId, title);
+        return ApiResponse.ok();
     }
 
     @PutMapping("/{issueId}/assignee")
@@ -63,7 +65,6 @@ public class IssueController {
     public ApiResponse editLabel(@PathVariable Long issueId, @RequestBody ArrayList<String> labelList) {
         return ApiResponse.ok("Edit Labels of the Issue");
     }
-
 
     @PutMapping("/{issueId}/milestone")
     public ApiResponse editMilestone(@PathVariable Long issueId, @RequestBody Long milestoneId) {
