@@ -40,3 +40,8 @@ export const addNewLabelDescriptionState = atom({
   key: "addNewLabelDescriptionState",
   default: "",
 });
+
+export const addNewLabelBackgroundState = atom({
+  key: "addNewLabelBackgroundState",
+  default: "",
+});

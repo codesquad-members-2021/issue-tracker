@@ -3,7 +3,9 @@ import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
 import {
   addNewLabelTitleState,
   addNewLabelDescriptionState,
+  addNewLabelBackgroundState,
 } from "../../TabStore";
+import NewLabelView from "./NewLabelView";
 
 const LabelAddModal = () => {
   const [newLabelTitleState, setNewLabelTitleState] = useRecoilState(
@@ -12,6 +14,10 @@ const LabelAddModal = () => {
 
   const [newLabelDescriptionState, setNewLabelDescriptionState] =
     useRecoilState(addNewLabelDescriptionState);
+
+  const [newLabelBackgroundState, setNewLabelBackgroundState] = useRecoilState(
+    addNewLabelBackgroundState
+  );
 
   const handleLabelTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewLabelTitleState(e.target.value);
@@ -23,11 +29,19 @@ const LabelAddModal = () => {
     setNewLabelDescriptionState(e.target.value);
   };
 
+  const handleLabelBackgroundInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setNewLabelBackgroundState(e.target.value);
+  };
+
   return (
     <S.AddModalDiv isLabel={true}>
       <S.AddModalTitle>새로운 레이블 추가</S.AddModalTitle>
       <S.ModalContent>
-        <S.ModalLeft>레이블</S.ModalLeft>
+        <S.ModalLeft>
+          <NewLabelView />
+        </S.ModalLeft>
         <S.ModalRight>
           <S.InputWrapper>
             <S.Input
@@ -45,7 +59,11 @@ const LabelAddModal = () => {
             <S.ChangeBackgroundDiv>
               <S.ColorTitle>배경색상</S.ColorTitle>
               <S.BackgroundColorContent>
-                <S.Input placeholder="색 입력" />
+                <S.Input
+                  placeholder="색 입력"
+                  value={newLabelBackgroundState}
+                  onChange={handleLabelBackgroundInput}
+                />
               </S.BackgroundColorContent>
               <Icon.RefreshIcon />
             </S.ChangeBackgroundDiv>
