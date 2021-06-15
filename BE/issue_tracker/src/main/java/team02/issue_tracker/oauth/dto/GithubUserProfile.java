@@ -11,6 +11,7 @@ public class GithubUserProfile implements SocialProfile {
     private Long id;
     private String name;
     private String email;
+    private String login;
 
     @JsonSetter("avatar_url")
     private String avatarUrl;
@@ -18,7 +19,7 @@ public class GithubUserProfile implements SocialProfile {
     public User becomeUser() {
         return User.builder()
                 .oauthResource(SocialLogin.GITHUB)
-                .username(this.name)
+                .username(this.login)
                 .email(this.email)
                 .profileImage(this.avatarUrl)
                 .build();

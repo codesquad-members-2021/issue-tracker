@@ -13,6 +13,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Override
     Optional<User> findById(Long id);
 
-    User findUserByOauthResourceAndEmail(
-            SocialLogin oauthResource, String password);
+    User findUserByOauthResourceAndUsername(
+            SocialLogin oauthResource, String username);
 }
