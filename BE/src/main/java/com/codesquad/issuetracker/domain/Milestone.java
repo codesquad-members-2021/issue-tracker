@@ -1,11 +1,5 @@
 package com.codesquad.issuetracker.domain;
 
-import com.codesquad.issuetracker.request.EditedMilestone;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +7,7 @@ import javax.persistence.Id;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class Milestone {
 
     @Id
@@ -24,33 +15,47 @@ public class Milestone {
     private Long id;
     private String title;
     private String content;
-
-    @JsonProperty("due_date")
     private LocalDateTime dueDate;
-
-    @JsonProperty("open_issue")
     private int openedIssue;
-
-    @JsonProperty("closed_issue")
     private int closedIssue;
 
-    public Milestone(String title, String content, LocalDateTime dueDate){
+    public Milestone() {
+    }
+
+    private Milestone(Long id, String title, String content, LocalDateTime dueDate, int openedIssue, int closedIssue) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.dueDate = dueDate;
+        this.openedIssue = openedIssue;
+        this.closedIssue = closedIssue;
     }
 
-    public static Milestone create(Long id, String title, String content, LocalDateTime dueDate, int openedIsssue, int closedIssue) {
+    public Milestone create(Long id, String title, String content, LocalDateTime dueDate, int openedIsssue, int closedIssue) {
         return new Milestone(id, title, content, dueDate, openedIsssue, closedIssue);
     }
 
-    public static Milestone create(String title, String content, LocalDateTime dueDate) {
-        return new Milestone(title, content, dueDate);
+    public Long getId() {
+        return id;
     }
 
-    public void update(EditedMilestone editedMilestone) {
-        this.title = editedMilestone.getTitle();
-        this.content = editedMilestone.getContent();
-        this.dueDate = editedMilestone.getDueDate();
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public int getOpenedIssue() {
+        return openedIssue;
+    }
+
+    public int getClosedIssue() {
+        return closedIssue;
     }
 }
