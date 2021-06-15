@@ -36,3 +36,4 @@ export const ISSUE_TABLE_HEADER_LIST = [ASSIGNEE, LABEL, MILESTONE, WRITER];
 
 // temp
 export const FILTER_DROPDOWN = ['Tami', 'Raccoon', 'Noel', 'Neo', 'Pyro'];
+export const SIDEBAR_MENU = [ASSIGNEE, LABEL, MILESTONE];

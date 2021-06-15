@@ -31,8 +31,8 @@ const LogIn: FC = () => {
         </a>
         <TextBox>or</TextBox>
         <InputBox>
-          <InputGroup type={LARGE} name={ID} />
-          <InputGroup type={LARGE} name={PASSWORD} />
+          <InputGroup type={LARGE} name={ID} variant={'filled'} />
+          <InputGroup type={LARGE} name={PASSWORD} variant={'filled'} />
         </InputBox>
         <ButtonBox>
           <ButtonList

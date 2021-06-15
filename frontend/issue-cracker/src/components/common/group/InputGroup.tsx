@@ -6,6 +6,7 @@ import { ClassNameMap } from '@material-ui/styles/withStyles';
 interface Prop {
   type: string;
   name: string;
+  variant: 'filled' | 'outlined';
 }
 type IInputType = ClassNameMap<
   'InputLarge' | 'InputMedium' | 'InputSmall' | 'InputText'
@@ -14,37 +15,38 @@ type IInputType = ClassNameMap<
 interface IInput {
   classes: IInputType;
   name: string;
+  variant: 'filled' | 'outlined';
 }
 
-const InputGroup: FC<Prop> = ({ type, name }: Prop) => {
+const InputGroup: FC<Prop> = ({ type, name, variant }: Prop) => {
   const classes = useInputStyles();
   return {
-    large: <InputLarge {...{ classes, name }} />,
-    medium: <InputMedium {...{ classes, name }} />,
-    small: <InputSmall {...{ classes, name }} />,
-    text: <InputText {...{ classes, name }} />,
+    large: <InputLarge {...{ classes, name, variant }} />,
+    medium: <InputMedium {...{ classes, name, variant }} />,
+    small: <InputSmall {...{ classes, name, variant }} />,
+    text: <InputText {...{ classes, name, variant }} />,
   }[type] as JSX.Element;
 };
 
 export default InputGroup;
 
-function InputLarge({ classes, name }: IInput): React.ReactElement {
+function InputLarge({ classes, name, variant }: IInput): React.ReactElement {
   return (
-    <TextField label={name} variant="filled" className={classes.InputLarge} />
+    <TextField label={name} variant={variant} className={classes.InputLarge} />
   );
 }
-function InputMedium({ classes, name }: IInput) {
+function InputMedium({ classes, name, variant }: IInput) {
   return (
-    <TextField label={name} variant="filled" className={classes.InputMedium} />
+    <TextField label={name} variant={variant} className={classes.InputMedium} />
   );
 }
-function InputSmall({ classes, name }: IInput) {
+function InputSmall({ classes, name, variant }: IInput) {
   return (
-    <TextField label={name} variant="filled" className={classes.InputSmall} />
+    <TextField label={name} variant={variant} className={classes.InputSmall} />
   );
 }
-function InputText({ classes, name }: IInput) {
+function InputText({ classes, name, variant }: IInput) {
   return (
-    <TextField label={name} variant="filled" className={classes.InputText} />
+    <TextField label={name} variant={variant} className={classes.InputText} />
   );
 }
