@@ -1,7 +1,8 @@
-function atom({ key, initialState }) {
-	return { key, initialState };
-}
+// function atom({ key, initialState }) {
+// 	return { key, initialState };
+// }
 
+import { atom } from "./index";
 export const issueAtomState = atom({
 	key: "issueAtomState",
 	initialState: true,
@@ -30,4 +31,9 @@ export const authorAtomState = atom({
 export const selectedIssueCntAtomState = atom({
 	key: "selectedIssueCntAtomState",
 	initialState: 0,
+  )};
+
+export const clickedFilterAtomState = atom({
+	key: "clickedFilterAtomState",
+	initialState: null,
 });

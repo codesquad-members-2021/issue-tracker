@@ -29,15 +29,11 @@ const MainPage = () => {
 			</Switch>
 		</MainPageLayout>
 	) : (
-		<Redirect to="/login"></Redirect>
+		<Redirect to="/login" />
 	);
 };
 
 const MainPageLayout = styled.div`
-	/* display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0 80px; */
 `;
 
 export default MainPage;

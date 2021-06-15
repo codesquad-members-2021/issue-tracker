@@ -3,33 +3,40 @@ import { ReactComponent as SearchIcon } from "images/search.svg";
 import DropDownButton from "components/common/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { filter } from "data";
 const MenuFilterBar = () => {
-	const [isFilterClicked, setIsFilterClicked] = useState(false); //isFilterClicked말고 flag에 쓸만한 이름 추천좀..
-	const handleClick = () => {
+	const [isFilterClicked, setIsFilterClicked] = useState(false);
+	const [clickedFilter, setClickedFilter] = useState("");
+	const handleClick = useCallback(e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
-	};
-	//토글 하면됨
+		setClickedFilter(e.target.textContent);
+	});
 
 	useEffect(() => {
-		document.body.addEventListener("click", closePopup);
+		window.addEventListener("click", closeFilterModal);
 		return function cleanup() {
-			window.removeEventListener("click", closePopup);
+			window.removeEventListener("click", closeFilterModal);
 		};
-	}, []);
+	}, [isFilterClicked]);
 
-	const closePopup = e => {
+	const closeFilterModal = e => {
 		const target = e.target;
-		// console.log(target);
-		!target.closest(".filter-modal") && setIsFilterClicked(false);
+		if (isFilterClicked && !target.closest(".filter-modal"))
+			setIsFilterClicked(false);
 	};
 
 	return (
 		<>
 			<MenuFilterLayout>
-				<DropDownButton text={"필터"} clickEvent={handleClick} />
+				<DropDownButton
+					text={"필터"}
+					clickEvent={handleClick}
+					width={({ theme }) => theme.buttonWidths.base}
+					radius={"left"}
+				/>
 				<FilterInputContainer>
 					<FilterInput>
 						<SearchIcon stroke={theme.grayScale.placeholder} />
@@ -37,7 +44,7 @@ const MenuFilterBar = () => {
 					</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
-			{/* {<FilterModal />} */}
+			{isFilterClicked && <FilterModal filterType={clickedFilter} />}
 		</>
 	);
 };

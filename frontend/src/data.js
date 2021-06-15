@@ -18,3 +18,18 @@ export const issues = [
 		isOpen: false,
 	},
 ];
+
+export const filter = {
+	issue: [
+		"열린 이슈",
+		"내가 작성한 이슈",
+		"나에게 할당한 이슈",
+		"나에게 할당된 이슈",
+		"내가 댓글을 남긴 이슈",
+		"닫힌 이슈",
+	],
+	assignee: ["daisy", "goody"],
+	label: ["bug", "document"],
+	milestone: ["마일스톤이 없는 필터", "마스터즈 코스"],
+	author: ["daisy", "goody"],
+};
