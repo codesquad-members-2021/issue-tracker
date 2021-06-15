@@ -61,7 +61,7 @@ public class LabelService {
 
     public void modifyLabel(Long labelId, LabelRequest labelRequest) {
         Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
-        label.modifyLabel(labelRequest);
+        label.edit(labelRequest);
         labelRepository.save(label);
     }
 

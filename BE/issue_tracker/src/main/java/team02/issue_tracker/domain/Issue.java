@@ -67,19 +67,19 @@ public class Issue {
         isOpen = true;
     }
 
-    public void replaceTitle(String title) {
+    public void editTitle(String title) {
         this.title = title;
     }
 
-    public void replaceIssueAssignees(List<IssueAssignee> issueAssignees) {
+    public void editIssueAssignees(List<IssueAssignee> issueAssignees) {
         this.issueAssignees = issueAssignees;
     }
 
-    public void replaceIssueLabels(List<IssueLabel> issueLabels) {
+    public void editIssueLabels(List<IssueLabel> issueLabels) {
         this.issueLabels = issueLabels;
     }
 
-    public void replaceMilestone(Milestone milestone) {
+    public void editMilestone(Milestone milestone) {
         this.milestone = milestone;
     }
 
@@ -91,5 +91,9 @@ public class Issue {
         return comments.stream()
                 .filter(comment -> !comment.isDeleted())
                 .collect(Collectors.toList());
+    }
+
+    public void deleteMilestone() {
+        milestone = null;
     }
 }
