@@ -12,7 +12,7 @@ interface Props {
 
 const Comment = ({ isShow, comment }: Props) => {
   return (
-    <S.Comment isShow={isShow}>
+    <S.Comment data-is-show={isShow}>
       <S.CommentUpper>
         <S.LeftWrapper>
           <UserName username={comment.author.name} />

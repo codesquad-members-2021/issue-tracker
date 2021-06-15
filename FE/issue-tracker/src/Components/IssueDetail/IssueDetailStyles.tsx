@@ -74,30 +74,30 @@ const IssueDetail = {
     margin-top: 16px;
   `,
   IssueDeleteButton: styled(Button)``,
-  IssueSubmitButton: styled(Button)<{ isOutlined: boolean }>`
+  IssueSubmitButton: styled(Button)<{ "data-is-outlined": boolean }>`
     margin-left: 16px;
     border-radius: 11px;
     background: ${(props) =>
-      props.isOutlined ? theme.COLOR.WHITE : theme.COLOR.BLUE};
+      props["data-is-outlined"] ? theme.COLOR.WHITE : theme.COLOR.BLUE};
     border: 2px solid ${theme.COLOR.BLUE};
     color: ${(props) =>
-      props.isOutlined ? theme.COLOR.BLUE : theme.COLOR.WHITE};
+      props["data-is-outlined"] ? theme.COLOR.BLUE : theme.COLOR.WHITE};
     padding: 10px 24px;
   `,
   CommentBox: styled(BOX.FLEX_ROW_BOX)`
     width: 100%;
     margin-bottom: 24px;
   `,
-  CommentEditBox: styled(BOX.FLEX_COLUMN_BOX)<{ isShow: boolean }>`
-    display: ${(props) => (props.isShow ? "flex" : "none")};
+  CommentEditBox: styled(BOX.FLEX_COLUMN_BOX)<{ "data-is-show": boolean }>`
+    display: ${(props) => (props["data-is-show"] ? "flex" : "none")};
     width: 100%;
     margin-bottom: 24px;
   `,
   UserImage: styled(Avatar)`
     margin-right: 16px;
   `,
-  Comment: styled.div<{ isShow: boolean }>`
-    display: ${(props) => (!props.isShow ? "block" : "none")};
+  Comment: styled.div<{ "data-is-show": boolean }>`
+    display: ${(props) => (!props["data-is-show"] ? "block" : "none")};
     width: 100%;
     border: 1px solid ${theme.GRAY_SCALE.LINE};
     border-radius: 16px;
@@ -128,15 +128,15 @@ const IssueDetail = {
   Time: styled.div`
     font-size: ${theme.FONT_SIZE.TEXT_SMALL};
   `,
-  AuthorLabel: styled.div<{ isShow: boolean }>`
-    display: ${(props) => (props.isShow ? "block" : "none")};
+  AuthorLabel: styled.div<{ "data-is-show": boolean }>`
+    display: ${(props) => (props["data-is-show"] ? "block" : "none")};
     padding: 4px 16px;
     border: 1px solid ${theme.GRAY_SCALE.LINE};
     border-radius: 30px;
     margin-right: 20px;
   `,
-  EditButton: styled(Button)<{ isShow: boolean }>`
-    display: ${(props) => (props.isShow ? "flex" : "none")};
+  EditButton: styled(Button)<{ "data-is-show": boolean }>`
+    display: ${(props) => (props["data-is-show"] ? "flex" : "none")};
     font-size: ${theme.FONT_SIZE.TEXT_X_SMALL};
     margin-right: 20px;
   `,

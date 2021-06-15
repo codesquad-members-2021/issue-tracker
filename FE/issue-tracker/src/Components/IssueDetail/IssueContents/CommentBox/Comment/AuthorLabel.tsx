@@ -5,7 +5,7 @@ interface Props {
 }
 
 const AuthorLabel = ({ isShow }: Props) => {
-  return <S.AuthorLabel isShow={isShow}>작성자</S.AuthorLabel>;
+  return <S.AuthorLabel data-is-show={isShow}>작성자</S.AuthorLabel>;
 };
 
 export default AuthorLabel;

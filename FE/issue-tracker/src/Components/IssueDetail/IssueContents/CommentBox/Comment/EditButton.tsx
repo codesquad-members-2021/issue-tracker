@@ -18,7 +18,11 @@ const EditButton = ({ id, isShow }: Props) => {
   };
 
   return (
-    <S.EditButton data-issue-id={id} onClick={handleOnClick} isShow={isShow}>
+    <S.EditButton
+      data-issue-id={id}
+      onClick={handleOnClick}
+      data-is-show={isShow}
+    >
       <S.EditIcon />
       편집
     </S.EditButton>
