@@ -73,21 +73,22 @@ const IssuesHeader = ({ isAnyIssueSelected, setIsAnyIssueSelected, isAllIssueSel
 				{isAnyIssueSelected ? (
 					<OpenCloseEdit>
 						<TextIconDivider>
-							상태 수정
-							<DownArrow />
+							<DropDownButton text="상태 수정" clickEvent={handleClick} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.lg} border={"none"}></DropDownButton>
+							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
 						</TextIconDivider>
 					</OpenCloseEdit>
 				) : (
 					<FiltersWrapper>
-						<TextIconDivider>
-							{buttonNames.map((filter, idx) => (
+						{buttonNames.map((filter, idx) => (
+							<TextIconDivider>
 								<DropDownButton text={filter} clickEvent={handleClick} key={`filter-${idx}`} className={"issue-header-button"} width={({ theme }) => theme.buttonWidths.small} border={"none"} id={filter}></DropDownButton>
-							))}
-							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
-							{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
-							{/* 🔥recoil로 수정 필요 */}
-							{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
-						</TextIconDivider>
+							</TextIconDivider>
+						))}
+
+						{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+						{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
+						{/* 🔥recoil로 수정 필요 */}
+						{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
 					</FiltersWrapper>
 				)}
 			</FilterMain>
@@ -120,12 +121,13 @@ const OpenCloseEdit = styled.div`
 	display: flex;
 	width: 200px;
 	justify-content: center;
+	/* position: relative; */
 `;
 
 const FiltersWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
-	position: relative;
+	/* position: relative; */
 	/* outline: red 1px solid; */
 `;
 
@@ -135,7 +137,5 @@ export const CheckBox = styled.div`
 `;
 
 const TextIconDivider = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	position: relative;
 `;
