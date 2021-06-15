@@ -17,6 +17,12 @@ struct JWT: Decodable {
     }
 }
 
+extension JWT: CustomStringConvertible {
+    var description: String {
+        return "\(tokenType) \(jwt)"
+    }
+}
+
 struct OAuthResponseDTO: Decodable {
     let jwt: JWT
     let avatarUrl: String

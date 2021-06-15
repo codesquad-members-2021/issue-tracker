@@ -9,21 +9,22 @@ import Foundation
 import Alamofire
 
 protocol NetworkManagerOperations {
-    func setInfoGithub<T: Decodable>(with code: String, completion: @escaping (Result<T,Error>) -> Void)
+    func get<T: Decodable>(completion: @escaping (Result<T,Error>) -> Void)
 }
 
-class NetworkManager: NetworkManagerOperations {
+final class NetworkManager: NetworkManagerOperations {
     
-    let accessTokenURL = "http://3.34.122.67/api/login/ios"
+    private let requestManager: RequestManager
     
-    func setInfoGithub<T: Decodable>(with code: String, completion: @escaping (Result<T, Error>) -> Void) {
+    init(requestManager: RequestManager) {
+        self.requestManager = requestManager
+    }
+
+    func get<T: Decodable>(completion: @escaping (Result<T, Error>) -> Void) {
             
-        let param: Parameters = [
-            "code" : code
-        ]
+        let request = requestManager.create(method: .get)
         
-        AF.request(accessTokenURL, method: .get, parameters: param)
-            .responseDecodable(of: T.self) { response in
+        request.responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))

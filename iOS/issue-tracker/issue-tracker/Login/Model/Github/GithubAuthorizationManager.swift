@@ -56,9 +56,12 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                     .first?
                     .value else { return }
 
-            let networkmanager = NetworkManager()
+            let url = EndPoint.OAuth.rawValue
+            let parameter = ["code": code]
+            let requestManager = RequestManager(url: url, parameters: parameter)
+            let networkmanager = NetworkManager(requestManager: requestManager)
             
-            networkmanager.setInfoGithub(with: code) { [weak self] (result: Result<OAuthResponseDTO, Error>) in
+            networkmanager.get { [weak self] (result: Result<OAuthResponseDTO, Error>) in
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
