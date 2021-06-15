@@ -1,7 +1,10 @@
 package com.codesquad.issuetracker.jwt;
 
 import com.codesquad.issuetracker.component.JwtProvider;
+import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.exception.TokenEmptyException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class BearerAuthInterceptor implements HandlerInterceptor {
+
+    private final Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
     private AuthorizationExtractor authorizationExtractor;
     private JwtProvider jwtProvider;
@@ -30,8 +35,11 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
             throw new IllegalArgumentException("유효하지 않은 토큰입니다");
         }
 
-        Long id = jwtProvider.getSubject(jwtToken);
-        request.setAttribute("id", id);
+        final User user = jwtProvider.getUser(jwtToken);
+
+        logger.debug("User info from JWT : {}", user);
+
+        request.setAttribute("user", user);
         return true;
     }
 }

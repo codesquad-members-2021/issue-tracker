@@ -1,21 +1,33 @@
 package com.codesquad.issuetracker.controller;
 
+import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.request.CommentRequest;
 import com.codesquad.issuetracker.response.ApiResponse;
-import com.codesquad.issuetracker.response.CommentResponse;
-import com.codesquad.issuetracker.response.UserResponse;
+import com.codesquad.issuetracker.service.CommentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
 
+    private final Logger logger = LoggerFactory.getLogger(CommentController.class);
+
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
+
     @PostMapping
-    public ApiResponse createComment(@RequestBody CommentRequest commentRequest) {
+    public ApiResponse createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
+
+        logger.debug("Comment Request from User : {}", commentRequest);
+
+        commentService.create(commentRequest.create(user));
         return ApiResponse.ok("Create Comment");
     }
 
