@@ -12,21 +12,38 @@ import java.util.List;
 public class IssueService {
 
     private final IssueRepository issueRepository;
+    private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
-    public IssueService(IssueRepository issueRepository) {
+    @Autowired
+    public IssueService(IssueRepository issueRepository, LabelRepository labelRepository,
+                        MilestoneRepository milestoneRepository) {
         this.issueRepository = issueRepository;
+        this.labelRepository = labelRepository;
+        this.milestoneRepository = milestoneRepository;
     }
 
-    public List<Issue> getOpenedIssues() {
-        return issueRepository.getIssuesByStatusTrue();
+    public List<IssueResponse> getOpenedIssues() {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepository.getIssuesByStatusTrue();
+        for(Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
     }
 
-    public List<Issue> getClosedIssues() {
-        return issueRepository.getIssuesByStatusFalse();
+    public List<IssueResponse> getClosedIssues() {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepository.getIssuesByStatusFalse();
+        for(Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
     }
 
-    public Issue getIssue(Long issueId) {
-        return issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+    public IssueResponse getIssue(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        return issueToIssueResponse(issue);
     }
 
     public Issue addIssue(Issue issue) {
@@ -46,4 +63,30 @@ public class IssueService {
         issueRepository.deleteById(issueId);
     }
 
+    private IssueResponse issueToIssueResponse(Issue issue) {
+        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(), issue.getCreatedAt(),
+                makeLabelResponses(issue.getId()), makeUserResponses(issue.getUser()),
+                makeMilestoneForIssueResponse(issue.getMilestoneId()));
+    }
+
+    private Set<LabelResponse> makeLabelResponses(Long issueId) {
+        Set<Label> labels = labelRepository.findByIssueId(issueId);
+        Set<LabelResponse> result = new HashSet<>();
+        for (Label label : labels) {
+            result.add(LabelResponse.labelToLabelResponse(label));
+        }
+        return result;
+    }
+
+    private UserResponse makeUserResponses(User user) {
+        return new UserResponse(user.getName(), user.getLoginId());
+    }
+
+    private MilestoneForIssueResponse makeMilestoneForIssueResponse(Long milestoneId) {
+        if (milestoneId == null) {
+            return new MilestoneForIssueResponse();
+        }
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
+        return MilestoneForIssueResponse.milestoneToMilestoneForIssueResponse(milestone);
+    }
 }
