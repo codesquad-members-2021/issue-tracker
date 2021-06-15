@@ -14,7 +14,7 @@ const useDebounceTyping = <T>(initialState: T, { start, end }: { start: number, 
       if (startTimer) clearTimeout(startTimer);
       if (endTimer) clearTimeout(endTimer)
     }
-  }, [state])
+  }, [state]);
 
   const setDebounce: any = (data: T) => {
     if (startTimer) clearTimeout(startTimer);

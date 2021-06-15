@@ -41,7 +41,7 @@ const Tabs = () => {
 const TabsWrapper = styled.div`
   min-width: 308px;
   height: max-content;
-  margin-left: 32px;
+  margin: 0 0 10px 32px;
   background:#fff;
   border:1px solid #D9DBE9;
   border-radius: 11px;

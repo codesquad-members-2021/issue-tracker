@@ -25,6 +25,9 @@ export const ListWrapper = styled.div<ListWrapperType>`
   > div + div{
     border-top: 1px solid #d9dbe9;
   }
+  & + &{
+    margin-top:40px;
+  }
 `;
 
 export const inputStyles = makeStyles({

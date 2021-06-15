@@ -8,6 +8,7 @@ import AlertCircleIcon from '@/Icons/AlertCircle.svg';
 import CloseBoxIcon from '@/Icons/CloseBox.svg';
 import ClipIcon from '@/Icons/Clip.svg';
 import EditIcon from '@/Icons/Edit.svg';
+import TrashIcon from '@/Icons/Trash.svg';
 
 const iconKinds: Record<string, any> = {
   whitePlus: WhitePlusIcon,
@@ -17,6 +18,7 @@ const iconKinds: Record<string, any> = {
   closeBox: CloseBoxIcon,
   clip: ClipIcon,
   edit: EditIcon,
+  trash: TrashIcon,
 }
 
 type IconButtonType = {
@@ -24,21 +26,33 @@ type IconButtonType = {
   color?: any;
   variant?: any;
   background?: string;
-  children: React.ReactNode;
+  minwidth?: string;
+  margin?: string;
+  height?: string;
+  children?: React.ReactNode;
+  style?:any;
 }
 
-const IconButton = ({ icon, children, color, variant, background }: IconButtonType) => {
+const IconButton = ({ icon, children, ...props }: IconButtonType) => {
   return (
-    <Button color={color} variant={variant}
-      style={{ borderRadius: "11px", padding: '0 1rem', background: background , height:'100%'}}>
+    <StyledButton {...{ ...props }}>
       <ImageTag src={icon ? iconKinds[icon] : ''} />
       {children}
-    </Button>
+    </StyledButton>
   )
 }
 
 const ImageTag = styled.img`
   margin-right: 1rem;
+`;
+
+const StyledButton = styled(Button) <IconButtonType>`
+  height: ${({ height }) => height ? height : '100%'};
+  padding: 0 1rem;
+  margin: ${({ margin }) => margin};
+  min-width: ${({ minwidth }) => minwidth};
+  background: ${({ background }) => background};
+  border-radius: 11px;
 `;
 
 export default IconButton;

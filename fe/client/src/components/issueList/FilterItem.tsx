@@ -4,7 +4,6 @@ import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@components/common/FilterTab';
 import useAsync, { AsyncState } from '@/utils/hook/useAsync';
 import API from '@/utils/API';
-import { useEffect } from 'react';
 
 const filterNames: { [key: string]: { apiName: string; name: string } } = {
   manager: { apiName: 'users', name: '담당자' },

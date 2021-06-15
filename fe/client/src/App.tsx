@@ -9,18 +9,26 @@ const IssueListLazy = React.lazy(() => import('@/Pages/IssueListPage'));
 const LoginLazy = React.lazy(() => import('@/Pages/LoginPage'));
 const Page404Lazy = React.lazy(() => import('@/Pages/Page404'));
 const CreateIssueLazy = React.lazy(() => import('@/Pages/CreateIssuePage'));
+const IssueDetailLazy = React.lazy(() => import('@/Pages/IssueDetailPage'));
 
+const routeArray = [
+  { path: '/issueList', component: IssueListLazy },
+  { path: '/createIssue', component: CreateIssueLazy },
+  { path: '/issueDetail', component: IssueDetailLazy },
+];
+const routePaths = routeArray.map(({ path }) => path);
 function App() {
   return (
     <RecoilRoot>
       <CssBaseline />
       <GlobalStyle />
       <Suspense fallback="loading...">
-        <HeaderLazy />
+        <HeaderLazy {...{ routePaths }} />
         <Switch>
           <Route exact path="/" component={LoginLazy} />
-          <Route exact path="/issueList" component={IssueListLazy} />
-          <Route exact path="/createIssue" component={CreateIssueLazy} />
+          {routeArray.map(({ path, component }) => {
+            return <Route exact {...{ path, component }} key={path}/>
+          })}
           <Route component={Page404Lazy} />
         </Switch >
       </Suspense>
@@ -30,10 +38,10 @@ function App() {
 
 
 const GlobalStyle = createGlobalStyle`
-  body{
-    background: #F7F7FC;
-    padding: 27px 80px 0;
+      body{
+        background: #F7F7FC;
+      padding: 27px 80px 0;
   }
-`
+      `
 
 export default App;

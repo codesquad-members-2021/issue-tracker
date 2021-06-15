@@ -26,6 +26,12 @@ const API: any = {
       const response = await fetch(`/milestones-count`);
       return response.json();
     },
+  },
+  post: {
+    files: async (formData: FormData) => {
+      const response = await fetch(`/files`, { method: 'POST', body: formData });
+      return response.json();
+    }
   }
 };
 
