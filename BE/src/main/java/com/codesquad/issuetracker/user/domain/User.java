@@ -1,10 +1,7 @@
 package com.codesquad.issuetracker.user.domain;
 
 import com.codesquad.issuetracker.auth.dto.GitHubUser;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -43,6 +40,16 @@ public class User {
         this.nickName = nickName;
         this.imageUrl = imageUrl;
         this.gitHubId = gitHubId;
+    }
+
+    private User(UUID id,  String nickName, @NonNull String imageUrl) {
+        this.id = id;
+        this.nickName = nickName;
+        this.imageUrl = imageUrl;
+    }
+
+    public static User instanceOf(UUID id, String nickName, String imageUrl) {
+        return new User(id, nickName, imageUrl);
     }
 
     public static User fromGitHubUser(GitHubUser gitHubUser) {
