@@ -6,6 +6,8 @@ import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import ListFilters from './ListFilters';
 import useFetch from '../../../util/useFetch';
+import Label from '../../../styles/atoms/Label';
+import User from '../../../styles/atoms/User';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
@@ -29,20 +31,31 @@ const IssueTable = () => {
         {data?.map((issue: any) => {
           return (
             <IssueCell>
-              <CheckBox />
-              <AlertCircle />
-              <div>{issue.title}</div>
               <div>
-                {issue.labels.map((label: any) => {
-                  return <></>;
-                })}
+                <UpperCell>
+                  <CheckBox />
+                  <AlertCircle />
+                  <div>{issue.title}</div>
+                  <Labels>
+                    {issue.labels.map(
+                      (label: { id: number; title: string; color: string }) => {
+                        return (
+                          <Label title={label.title} color={label.color} />
+                        );
+                      }
+                    )}
+                  </Labels>
+                </UpperCell>
+                <LowerCell>
+                  <div>{issue.id}</div>
+                  <div>
+                    {issue.writer.username}가 {issue.created_time}에
+                    만들었습니다
+                  </div>
+                  <div>{issue.milestone.title}</div>
+                </LowerCell>
               </div>
-              <div>{issue.id}</div>
-              <div>
-                {issue.writer.username}가 {issue.created_time}에 만들었습니다
-              </div>
-              <div>{issue.milestone.title}</div>
-              <div>{issue.writer.profile_image}</div>
+              <User imageURL={issue.writer.profile_image} />
             </IssueCell>
           );
         })}
@@ -77,12 +90,27 @@ const LeftHeaderWrapper = styled.div`
 
 const IssueCell = styled.div`
   height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
   background: ${props => props.theme.greyscale.offWhite};
   margin: 1px 0px;
   svg {
     stroke: ${props => props.theme.colors.primary};
     fill: ${props => props.theme.colors.lightBlue};
   }
+`;
+
+const UpperCell = styled.div`
+  display: flex;
+`;
+
+const Labels = styled.div`
+  display: flex;
+`;
+
+const LowerCell = styled.div`
+  display: flex;
 `;
 
 const Text = styled(Typo)`
