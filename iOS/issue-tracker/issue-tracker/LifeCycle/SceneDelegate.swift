@@ -41,7 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             straightToIssueTrackerScene(with: loginManager, loginInfo)
         }
-    
     }
     
     private func straightToIssueTrackerScene(with loginManager: LoginKeyChainManager,_ loginInfo: LoginInfo) {
@@ -51,5 +50,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = issueTrackerTabBarController
         }
     }
-
 }

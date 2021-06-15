@@ -14,8 +14,7 @@ class IssueTrackerTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.tintColor = Colors.mainGrape
-        definesPresentationContext = true
+        tabBar.tintColor = Colors.mainGrape        
     }
     
     override func viewDidAppear(_ animated: Bool) {

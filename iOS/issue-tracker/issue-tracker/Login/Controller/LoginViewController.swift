@@ -104,7 +104,6 @@ class LoginViewController: UIViewController {
         addLoginStackView()
         addLoginButtons()
         addSocialLoginButtons()
-        definesPresentationContext = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
