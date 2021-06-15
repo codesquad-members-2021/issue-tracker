@@ -35,6 +35,12 @@ final class GithubAuthorizationManager: NSObject, ASWebAuthenticationPresentatio
 extension GithubAuthorizationManager: SocialLoginManagable {
     
     func login(){
+        
+        if let loginInfo = keyChainSaver.read() {
+            self.delegate?.didSocialLoginSuccess(with: loginInfo)
+            return
+        }
+        
         var components = URLComponents(string: url)!
         components.queryItems = [
             URLQueryItem(name: "client_id", value: client_id),
@@ -60,6 +66,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                                               jwt: response.jwt.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)
+                    
                     if self.keyChainSaver.save(loginInfo) {
                         self.delegate?.didSocialLoginSuccess(with: loginInfo)
                     } else {
