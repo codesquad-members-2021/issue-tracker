@@ -48,11 +48,8 @@ public class Comment {
         isDeleted = true;
     }
 
-    public void replaceContent(String content) {
+    public void edit(String content, String file) {
         this.content = content;
-    }
-
-    public void replaceFile(String file) {
         this.file = file;
     }
 }

@@ -84,28 +84,28 @@ public class IssueService {
 
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        issue.replaceTitle(issueRequest.getTitle());
+        issue.editTitle(issueRequest.getTitle());
         issueRepository.save(issue);
     }
 
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
-        issue.replaceIssueAssignees(issueAssignees);
+        issue.editIssueAssignees(issueAssignees);
         issueRepository.save(issue);
     }
 
     public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
-        issue.replaceIssueLabels(issueLabels);
+        issue.editIssueLabels(issueLabels);
         issueRepository.save(issue);
     }
 
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         Milestone milestone = milestoneService.getMilestone(issueMilestoneRequest.getMilestoneId());
-        issue.replaceMilestone(milestone);
+        issue.editMilestone(milestone);
         issueRepository.save(issue);
     }
 
@@ -119,7 +119,6 @@ public class IssueService {
     }
 
     /**
-     *
      * Issue 삭제시 Comment도 삭제됨
      */
     public void deleteIssue(Long issueId) {

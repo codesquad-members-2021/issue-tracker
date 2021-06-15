@@ -53,8 +53,7 @@ public class CommentService {
 
     public void modifyComment(Long commentId, CommentRequest commentRequest) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
-        comment.replaceContent(commentRequest.getContent());
-        comment.replaceFile(commentRequest.getFile());
+        comment.edit(commentRequest.getContent(), commentRequest.getFile());
         commentRepository.save(comment);
     }
 }

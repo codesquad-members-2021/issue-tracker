@@ -37,7 +37,7 @@ public class Label {
         this.isDeleted = false;
     }
 
-    public void modifyLabel(LabelRequest labelRequest) {
+    public void edit(LabelRequest labelRequest) {
         this.title = labelRequest.getTitle();
         this.content = labelRequest.getContent();
         this.color = labelRequest.getColor();
