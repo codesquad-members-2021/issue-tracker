@@ -1,9 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { GiPaperClip } from 'react-icons/gi'
-interface Props {}
 
-export default function IssueInput({}: Props): ReactElement {
+export default function IssueInput(): ReactElement {
   return (
     <IssueInputBlock>
       <input type='text' className='input__title' placeholder='제목' />

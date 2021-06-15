@@ -2,13 +2,12 @@ import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header/Header';
-// import LoginPage from 'page/loginPage/LoginPage';
+import LoginPage from 'page/loginPage/LoginPage';
 // import MainPage from './page/mainPage/MainPage';
 // import CreateIssuePage from 'page/createIssuePage/CreateIssuePage';
 
 function App() {
   
-  const LoginPage = lazy(()=>import('./page/loginPage/LoginPage'))
   const MainPage = lazy(()=>import('./page/mainPage/MainPage'))
   const CreateIssuePage = lazy(()=>import('./page/createIssuePage/CreateIssuePage'))
   const isLogin = true;
