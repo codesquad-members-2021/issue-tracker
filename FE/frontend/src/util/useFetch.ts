@@ -19,6 +19,13 @@ const getData = async (type: string, action: string) => {
           return allData.data.data;
       }
       return;
+    case 'milestone':
+      switch (action) {
+        case 'getAllData':
+          const allData = await axios.get(`${url}/milestones`);
+          return allData.data.data;
+      }
+      return;
   }
 };
 

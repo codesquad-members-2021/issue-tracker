@@ -12,18 +12,21 @@ const Tabs = () => {
         style={{ textDecoration: 'none' }}
         className="label target"
         to="labelList">
-        <MilestoneIcon />
+        <TagIcon />
         <Text link sm>
           레이블
         </Text>
       </Label>
       <Line></Line>
-      <Milestone className="milestone target">
-        <TagIcon />
+      <Label
+        style={{ textDecoration: 'none' }}
+        className="milestone target"
+        to="milestoneList">
+        <MilestoneIcon />
         <Text link sm>
           마일스톤
         </Text>
-      </Milestone>
+      </Label>
     </TabsWrapper>
   );
 };
@@ -39,11 +42,20 @@ const TabsWrapper = styled.div`
   .label,
   .milestone {
     cursor: pointer;
-    width: 160px;
+    width: 158px;
     background: ${props => props.theme.greyscale.background};
     ${props => props.theme.alignCenter}
     &:hover {
       background: ${props => props.theme.greyscale.inputBackground};
+    }
+  }
+  .label {
+    border-radius: 11px 0px 0px 11px;
+  }
+  .milestone {
+    border-radius: 0px 11px 11px 0px;
+    svg {
+      fill: ${props => props.theme.greyscale.body};
     }
   }
 `;
@@ -52,16 +64,11 @@ const Label = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  border-radius: 11px 0px 0px 11px;
 `;
 
 const Line = styled.div`
   width: 1px;
   background: ${props => props.theme.greyscale.line};
-`;
-
-const Milestone = styled.div`
-  border-radius: 0px 11px 11px 0px;
 `;
 
 const Text = styled(Typos)`

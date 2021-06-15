@@ -8,7 +8,6 @@ import ListFilters from './ListFilters';
 import useFetch from '../../../util/useFetch';
 import Label from '../../../styles/atoms/Label';
 import User from '../../../styles/atoms/User';
-import Table from '../../../styles/molcules/Table';
 import moment from 'moment';
 
 const IssueTable = () => {
