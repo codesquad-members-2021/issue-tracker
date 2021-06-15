@@ -1,32 +1,65 @@
-import { Box, Input, Button } from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { filterModalVisible } from '../../../util/recoil';
+import { Input, Button } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons';
+import ListModal from '../../Common/ListModal';
 import { TextIssueList } from '../../../util/reference';
 
 const SearchBar = () => {
-  const { filter } = TextIssueList;
+  const {
+    filter: { caption, placeHolder, filterHeader: title, filterList },
+  } = TextIssueList;
+
+  const data = {
+    title,
+    items: filterList.map(({ name, value: text }) => ({ name, text })),
+  };
+
+  const [isFilterModalVisible, setIsFilterModalVisible] = useRecoilState(filterModalVisible);
+  const handleFilterButtonClick = () => setIsFilterModalVisible(!isFilterModalVisible);
 
   return (
     <SearchBarLayout>
-      <FilterButton>
-        <span className="caption">{filter.caption}</span>
-        <ExpandMore />
-      </FilterButton>
-      <FilterInput disableUnderline placeholder={filter.placeHolder} />
+      <SearchBarRow>
+        <FilterButton onClick={handleFilterButtonClick}>
+          <span className="caption">{caption}</span>
+          <ExpandMore />
+        </FilterButton>
+        <FilterInput disableUnderline placeholder={placeHolder} />
+      </SearchBarRow>
+
+      <SearchBarRow>
+        <ListModal
+          className="modal filterModal"
+          isModalVisible={isFilterModalVisible}
+          data={data}
+        />
+      </SearchBarRow>
     </SearchBarLayout>
   );
 };
 export default SearchBar;
 
 // --- Styled Components ---
-const SearchBarLayout = styled(Box)`
+const SearchBarLayout = styled.div`
   min-width: 50%;
 
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   border-radius: 1.1rem;
+
+  row-gap: 8px;
+`;
+
+const SearchBarRow = styled.div<{width?: number}>`
+  position: relative;
+  display: flex;
+  width: ${({width}) => width ? `${width}px` : `100%`};
+  height: 100%;
 `;
 
 const FilterButton = styled(Button)`
