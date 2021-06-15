@@ -29,6 +29,6 @@ public class IssueController {
 
     @GetMapping
     public IssueListResponseWrapper showList(IssueSearchRequest request) {
-        return new IssueListResponseWrapper(issueService.showList(request));
+        return issueService.showList(request);
     }
 }

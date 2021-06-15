@@ -22,7 +22,6 @@ public class IssueSearchRequest {
         this.mentions = mentions;
         this.labels = labels;
         this.milestone = milestone;
-        System.out.println(this.toString());
     }
 
     @Override

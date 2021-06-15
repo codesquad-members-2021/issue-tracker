@@ -8,10 +8,7 @@ import com.codesqaude.cocomarco.domain.issue.IssueSearchRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueDetailResponse;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueListResponse;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueSearchRequest;
+import com.codesqaude.cocomarco.domain.issue.model.dto.*;
 import com.codesqaude.cocomarco.domain.label.Label;
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
@@ -61,9 +58,10 @@ public class IssueService {
         return IssueDetailResponse.of(issue);
     }
 
-    public List<IssueListResponse> showList(IssueSearchRequest request) {
+    public IssueListResponseWrapper showList(IssueSearchRequest request) {
         List<Issue> issues = issueSearchRepository.searchByBuilder(request);
-        return issues.stream().map(IssueListResponse::of).collect(Collectors.toList());
+        List<IssueListResponse> responses = issues.stream().map(IssueListResponse::of).collect(Collectors.toList());
+        return new IssueListResponseWrapper(responses);
     }
 
     public Issue findById(Long issueId) {
