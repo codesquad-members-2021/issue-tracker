@@ -25,3 +25,20 @@ export const categoryModalOpenState = atom<{
     isOpen: false,
   },
 });
+
+interface IssueObj {
+  id: number;
+  title: string;
+  number: number;
+  writer: string;
+  created_time: number;
+  milestone: string;
+  isOpen: boolean;
+  asignee: object[];
+  label: object[];
+}
+
+export const IssueList = atom<IssueObj[]>({
+  key: "IssueList",
+  default: [],
+});

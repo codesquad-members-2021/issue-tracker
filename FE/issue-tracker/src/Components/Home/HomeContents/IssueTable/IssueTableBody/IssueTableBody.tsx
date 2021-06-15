@@ -1,14 +1,21 @@
-import React from "react";
 import { IssueTable as S } from "../../../HomeStyles";
 import IssueTableRow from "./IssueTableRow/IssueTableRow";
+import { IssueList as Issues } from "@/Utils/Mock/mockDatas";
+import { useRecoilState } from "recoil";
+import { IssueList } from "../../../HomeStore";
+import { useEffect } from "react";
 
 const IssueTableBody = () => {
-  const issues = Array.from({ length: 3 }, (_, i) => i);
+  const [issueList, checkIssueList] = useRecoilState(IssueList);
+
+  useEffect(() => {
+    checkIssueList(Issues);
+  }, []);
 
   return (
     <S.TableBody>
-      {issues.map((id, index) => (
-        <IssueTableRow id={id} key={index} />
+      {issueList.map((issue) => (
+        <IssueTableRow issue={issue} key={issue.id} />
       ))}
     </S.TableBody>
   );

@@ -6,17 +6,29 @@ import IssueTitle from "./IssueTitle";
 import IssueLabel from "./IssueLabel";
 
 type IssueTableRowProps = {
-  id: number;
+  issue: IssueObj;
 };
 
-const IssueTableRow = ({ id }: IssueTableRowProps) => {
+interface IssueObj {
+  id: number;
+  title: string;
+  number: number;
+  writer: string;
+  created_time: number;
+  milestone: string;
+  isOpen: boolean;
+  asignee: object[];
+  label: object[];
+}
+
+const IssueTableRow = ({ issue }: IssueTableRowProps) => {
   return (
     <S.TableRow>
       <S.TableRowLeft>
-        <CheckButton id={id} />
+        <CheckButton issueId={issue.id} />
         <S.IssueInfoDiv>
           <S.IssueInfoTop>
-            <IssueTitle />
+            <IssueTitle issueTitle={issue.title} />
             <IssueLabel />
           </S.IssueInfoTop>
           <IssueDescription />

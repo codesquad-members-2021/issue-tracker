@@ -3,11 +3,15 @@ import {
   HomeAssets as Icon,
 } from "@/Components/Home/HomeStyles";
 
-const IssueTitle = () => {
+type issueTitleProps = {
+  issueTitle: string;
+};
+
+const IssueTitle = ({ issueTitle }: issueTitleProps) => {
   return (
     <S.IssueInfoTitle>
       <Icon.IssueMark fillcolor="#C7EBFF" />
-      이슈제목
+      {issueTitle}
     </S.IssueInfoTitle>
   );
 };
