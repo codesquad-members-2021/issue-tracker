@@ -3,6 +3,7 @@ package team02.issue_tracker.service;
 import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.dto.MilestoneCountResponse;
+import team02.issue_tracker.dto.MilestoneRequest;
 import team02.issue_tracker.dto.MilestoneResponse;
 import team02.issue_tracker.exception.MilestoneNotFoundException;
 import team02.issue_tracker.repository.MilestoneRepository;
@@ -47,5 +48,9 @@ public class MilestoneService {
         int openMilestoneCount = milestoneRepository.findOpenMilestones().size();
         int closedMilestoneCount = milestoneRepository.findClosedMilestones().size();
         return new MilestoneCountResponse(openMilestoneCount, closedMilestoneCount);
+    }
+
+    public void addMilestone(MilestoneRequest milestoneRequest) {
+        milestoneRepository.save(milestoneRequest.toMilestone());
     }
 }

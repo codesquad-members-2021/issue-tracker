@@ -1,6 +1,7 @@
 package team02.issue_tracker.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Getter
 public class Milestone {
     @Id
@@ -26,6 +28,14 @@ public class Milestone {
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
+
+    public Milestone(String title, String content, LocalDate dueDate) {
+        this.title = title;
+        this.content = content;
+        this.dueDate = dueDate;
+        this.createdDate = LocalDate.now();
+        this.isOpen = true;
+    }
 
     public int getTotalIssueCount() {
         return (int) issues.stream()
