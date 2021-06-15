@@ -91,7 +91,7 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
     }
 
     public BooleanExpression labelEquals(List<String> labels) {
-        if (labels.isEmpty()) {
+        if (labels == null) {
             return null;
         }
         List<Label> labelsList = getLabels(labels);
