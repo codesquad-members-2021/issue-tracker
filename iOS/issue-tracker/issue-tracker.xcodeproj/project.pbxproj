@@ -32,6 +32,7 @@
 		E43912CE26777310003CD344 /* HexColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912CD26777310003CD344 /* HexColorConverter.swift */; };
 		E43912D0267878BF003CD344 /* HexColorConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912CF267878BF003CD344 /* HexColorConvertable.swift */; };
 		E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D1267878F4003CD344 /* HexColorCode.swift */; };
+		E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912D326788CC3003CD344 /* ImageBarButton.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -72,6 +73,7 @@
 		E43912CD26777310003CD344 /* HexColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorConverter.swift; sourceTree = "<group>"; };
 		E43912CF267878BF003CD344 /* HexColorConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorConvertable.swift; sourceTree = "<group>"; };
 		E43912D1267878F4003CD344 /* HexColorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColorCode.swift; sourceTree = "<group>"; };
+		E43912D326788CC3003CD344 /* ImageBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBarButton.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		E43912C926776DA0003CD344 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E43912D326788CC3003CD344 /* ImageBarButton.swift */,
 				E43912C626776D8F003CD344 /* LabelView.swift */,
 			);
 			path = View;
@@ -404,6 +407,7 @@
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
+				E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */,
 				E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,

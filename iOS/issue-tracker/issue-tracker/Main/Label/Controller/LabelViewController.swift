@@ -9,15 +9,9 @@ import UIKit
 
 final class LabelViewController: UIViewController {
     
-    private lazy var addLabelButton: UIButton = {
-        let button = UIButton()
-        let plusImage = UIImage(systemName: "plus")
-        button.setImage(plusImage, for: .normal)
-        button.tintColor = Colors.mainGrape
-        button.setTitle("추가", for: .normal)
-        button.setTitleColor(Colors.mainGrape, for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
+    private lazy var addLabelButton: ImageBarButton = {
+        let button = ImageBarButton()
+        button.configure(with: "plus", "추가")
         button.addTarget(self, action: #selector(addLabelTouched), for: .touchUpInside)
         return button
     }()
