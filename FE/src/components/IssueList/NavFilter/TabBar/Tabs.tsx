@@ -1,4 +1,4 @@
-import { ButtonGroup, Button, Box } from '@material-ui/core';
+import { ButtonGroup, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { TextIssueList } from '../../../../util/reference';
 import { IconLabel, IconMileStone } from '../../../Common/Icons';
@@ -26,7 +26,7 @@ const Tabs = () => {
 export default Tabs;
 
 // --- Styled Components ---
-const TabsLayout = styled(Box)`
+const TabsLayout = styled.div`
   display: flex;
   align-items: center;
   border-radius: 1.1rem;
