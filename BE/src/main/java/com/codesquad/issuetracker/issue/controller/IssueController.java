@@ -18,7 +18,7 @@ public class IssueController {
         this.issueService = issueService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public IssueWrapper readIssue(@PathVariable Long id) {
         return issueService.readIssueById(id);
     }
@@ -39,7 +39,7 @@ public class IssueController {
         issueService.addLabel(id, labelIdRequest);
     }
 
-    @DeleteMapping("{id}/labels/{labelId}")
+    @DeleteMapping("/{id}/labels/{labelId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeLabel(@PathVariable Long id, @PathVariable UUID labelId) {
         issueService.removeLabel(id, labelId);
@@ -51,9 +51,14 @@ public class IssueController {
         issueService.addAssignee(id, assigneeIdRequest);
     }
 
-    @DeleteMapping("{id}/assignees/{assigneeId}")
+    @DeleteMapping("/{id}/assignees/{assigneeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeAssignee(@PathVariable Long id, @PathVariable UUID assigneeId) {
         issueService.removeAssignee(id, assigneeId);
+    }
+
+    @PostMapping("/{id}/milestone")
+    public void setMilestone(@PathVariable Long id, @RequestBody MilestoneIdRequest milestoneIdRequest) {
+        issueService.setMilestone(id, milestoneIdRequest);
     }
 }

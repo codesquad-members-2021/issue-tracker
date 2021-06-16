@@ -7,6 +7,7 @@ import com.codesquad.issuetracker.issue.dto.*;
 import com.codesquad.issuetracker.issue.infra.IssueRepository;
 import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.label.infra.LabelRepository;
+import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.milestone.infra.MilestoneRepository;
 import com.codesquad.issuetracker.user.domain.User;
 import com.codesquad.issuetracker.user.infra.UserRepository;
@@ -102,5 +103,13 @@ public class IssueService {
         Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
         User assignee = userRepository.findById(assigneeId).orElseThrow(RuntimeException::new);
         issue.removeAssignee(assignee);
+    }
+
+    @Transactional
+    public void setMilestone(Long id, MilestoneIdRequest milestoneIdRequest) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Milestone milestone = milestoneRepository.findById(milestoneIdRequest.getMilestoneId())
+                .orElseThrow(RuntimeException::new);
+        issue.setMilestone(milestone);
     }
 }
