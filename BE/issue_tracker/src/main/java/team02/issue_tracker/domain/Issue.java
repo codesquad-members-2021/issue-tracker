@@ -24,8 +24,8 @@ public class Issue {
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private LocalDateTime createdTime;
-    private boolean isOpen;
-    private boolean isDeleted;
+    private boolean open;
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
@@ -41,12 +41,12 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
 
-    public Issue(String title, User writer, boolean isOpen) {
+    public Issue(String title, User writer, boolean open) {
         this.title = title;
         this.writer = writer;
-        this.isOpen = isOpen;
+        this.open = open;
         this.createdTime = LocalDateTime.now();
-        this.isDeleted = false;
+        this.deleted = false;
     }
 
     public void addMilestone(Milestone milestone) {
@@ -54,17 +54,17 @@ public class Issue {
     }
 
     public void close() {
-        if (!isOpen) {
+        if (!open) {
             throw new IllegalStatusException("열린 이슈가 아닙니다.");
         }
-        isOpen = false;
+        open = false;
     }
 
     public void open() {
-        if (isOpen) {
+        if (open) {
             throw new IllegalStatusException("닫힌 이슈가 아닙니다.");
         }
-        isOpen = true;
+        open = true;
     }
 
     public void editTitle(String title) {
@@ -84,7 +84,7 @@ public class Issue {
     }
 
     public void delete() {
-        isDeleted = true;
+        deleted = true;
     }
 
     public List<Comment> getComments() {
