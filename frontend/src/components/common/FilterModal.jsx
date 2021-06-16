@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -11,6 +12,7 @@ import {
 	clickedFilterAtomState,
 } from "RecoilStore/Atoms";
 import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import getEngKey from "util/getEngKey";
 {
 	/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state내림 */
 }
@@ -27,48 +29,50 @@ const FilterModal = () => {
 	//필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
 
 	//
+
 	const handleChange = event => {
 		setValue(event.target.value);
-		console.log(filterType);
-		console.log(event.target.value);
-		setFilterStateByType(value);
+		setFilterStateByType(event.target.value);
 	};
-	const setFilterStateByType = selectedFilter => {
-		console.log(filterType);
+
+	const key = getEngKey(filterType);
+
+	const setFilterStateByType = value => {
+		// console.log(filterType);
 		switch (filterType) {
 			case "담당자": {
 				console.log("담당자,filterBarInputState");
 				setFilterBarInputState({
 					...filterBarInputState,
-					assignee: selectedFilter,
+					assignee: value,
 				});
 				break;
 			}
 			case "레이블": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					label: selectedFilter,
+					label: value,
 				});
 				break;
 			}
 			case "마일스톤": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					milestone: selectedFilter,
+					milestone: value,
 				});
 				break;
 			}
 			case "작성자": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					author: selectedFilter,
+					author: value,
 				});
 				break;
 			}
 			case "필터": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					issue: selectedFilter,
+					issue: value,
 				});
 				break;
 			}
@@ -76,36 +80,14 @@ const FilterModal = () => {
 				console.error("setFilterStateByType unhandled type");
 			}
 		}
-		console.log(filterBarInputState);
 	};
 
 	const getFilterModalData = type => {
-		switch (type) {
-			case "담당자": {
-				return filter.assignee;
-			}
-			case "레이블": {
-				return filter.label;
-			}
-			case "마일스톤": {
-				return filter.milestone;
-			}
-			case "작성자": {
-				return filter.author;
-			}
-			case "필터": {
-				return filter.issue;
-			}
-			case "상태 수정": {
-				return filter.openClose;
-			}
-			default: {
-				console.error("unhandled type");
-			}
-		}
+		return filter[getEngKey(type)];
 	};
-	const filterData = getFilterModalData(filterType);
 
+	const filterData = getFilterModalData(filterType);
+	console.log(filterData);
 	return (
 		<FilterModalLayout className="filter-modal">
 			<FormControl component="fieldset">
@@ -119,13 +101,14 @@ const FilterModal = () => {
 					onChange={handleChange}
 				>
 					{filterData &&
-						filterData.map((filter, idx) => (
+						filterData.map((text, idx) => (
 							<FilterControlLabel
-								value={filter}
+								value={text}
 								control={<Radio color="default" />}
-								label={filter}
+								label={text}
 								labelPlacement="start"
 								key={idx}
+								checked={filterBarInputState[key] === text} //
 							/>
 						))}
 				</FilterRadioContainer>
