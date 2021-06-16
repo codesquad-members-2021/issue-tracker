@@ -42,6 +42,7 @@
 		E43912E22678AEB3003CD344 /* LabelTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */; };
 		E43912E42679C0DA003CD344 /* AddLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E32679C0DA003CD344 /* AddLabelViewController.swift */; };
 		E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */; };
+		E43912EA267A2351003CD344 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E9267A2351003CD344 /* NetworkError.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -92,6 +93,7 @@
 		E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableDelegate.swift; sourceTree = "<group>"; };
 		E43912E32679C0DA003CD344 /* AddLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelViewController.swift; sourceTree = "<group>"; };
 		E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLabelDTO.swift; sourceTree = "<group>"; };
+		E43912E9267A2351003CD344 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				E43912D726789A83003CD344 /* EndPoint.swift */,
 				E43912DD2678A76D003CD344 /* RequestKeys.swift */,
+				E43912E9267A2351003CD344 /* NetworkError.swift */,
 				E43912D526789812003CD344 /* RequestManager.swift */,
 				FAEB30B32670B76200C17BE9 /* NetworkManager.swift */,
 				E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */,
@@ -434,6 +437,7 @@
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				E43912C726776D8F003CD344 /* LabelView.swift in Sources */,
 				E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */,
+				E43912EA267A2351003CD344 /* NetworkError.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,

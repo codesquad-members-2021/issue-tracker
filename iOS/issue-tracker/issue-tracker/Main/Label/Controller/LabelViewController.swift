@@ -79,14 +79,14 @@ final class LabelViewController: UIViewController {
     }
     
     func loadData() {
-        networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, Error>) in
+        networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let labels = result.data else { return }
                 self?.labelTableDatasource?.update(labels: labels)
                 self?.reloadTableView()
             case .failure(let error):
-                print(error)
+                self?.presentAlert(with: error.description)
             }
         })
     }
@@ -94,6 +94,13 @@ final class LabelViewController: UIViewController {
     private func reloadTableView() {
         DispatchQueue.main.async {
             self.labelTableView.reloadData()
+        }
+    }
+    
+    private func presentAlert(with errorMessage: String) {
+        DispatchQueue.main.async {
+            let alert = AlertFactory.create(body: errorMessage)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

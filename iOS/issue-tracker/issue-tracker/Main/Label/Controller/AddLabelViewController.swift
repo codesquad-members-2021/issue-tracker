@@ -238,12 +238,24 @@ final class AddLabelViewController: UIViewController {
     }
     
     private func postNewLabel(_ newLabel: NewLabelDTO) {
-        networkManager?.post(requestBody: newLabel, completion: { [weak self] in
+        networkManager?.post(requestBody: newLabel, completion: { [weak self] error in
+            guard error != nil else {
+                self?.presentAlert(with: error!.description)
+                return
+            }
+            
             self?.dismiss(animated: true, completion: {
                 guard let dismissOperation = self?.dismissOperation else { return }
                 dismissOperation()
             })
         })
+    }
+    
+    private func presentAlert(with errorMessage: String) {
+        DispatchQueue.main.async {
+            let alert = AlertFactory.create(body: errorMessage)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @objc private func randomColorButtonTouched(_ sender: UIButton) {
