@@ -7,6 +7,7 @@ import theme from "styles/theme";
 import DropDownButton from "components/common/DropDownButton";
 import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
+import { StyledGridTitleCard } from "styles/StyledCards";
 
 // import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
 // import { useRecoilState } from "MyRecoil";
@@ -73,7 +74,7 @@ const IssuesHeader = ({
 	}, [selectedIssues]);
 
 	return (
-		<StyledIssuesHeader>
+		<StyledGridTitleCard gridRate={[0.5, 1.5, 8.3]}>
 			<CheckBox>
 				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>
@@ -125,20 +126,11 @@ const IssuesHeader = ({
 					</FiltersWrapper>
 				)}
 			</FilterMain>
-		</StyledIssuesHeader>
+		</StyledGridTitleCard>
 	);
 };
 
 export default IssuesHeader;
-
-const StyledIssuesHeader = styled.div`
-	display: grid;
-	align-items: center;
-	height: 64px;
-	border: 1px solid ${theme.grayScale.line};
-	border-radius: ${theme.border_radius.lg} ${theme.border_radius.lg} 0px 0px;
-	grid-template-columns: 0.5fr 1.5fr 8.3fr;
-`;
 
 const FilterOpenClose = styled.div`
 	display: flex;

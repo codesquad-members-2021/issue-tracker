@@ -10,6 +10,7 @@ import getTimeStamp from "util/getTimeStamp";
 // import { selectedIssueCntAtomState } from "MyRecoil/atom";
 import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
+import { StyledGridCard } from "styles/StyledCards";
 
 const IssueCard = ({
 	issue,
@@ -53,7 +54,7 @@ const IssueCard = ({
 	}, [isAllIssueSelected]);
 
 	return (
-		<StyleCard>
+		<StyledGridCard gridRate={[0.5, 9, 0.6]}>
 			<CheckBox>
 				<input type="checkbox" checked={isChecked} onChange={handleCheck} />
 				<div>-</div>
@@ -86,19 +87,11 @@ const IssueCard = ({
 			<UserIcon>
 				<UserImageSmall />
 			</UserIcon>
-		</StyleCard>
+		</StyledGridCard>
 	);
 };
 
 export default IssueCard;
-
-const StyleCard = styled.div`
-	display: grid;
-	grid-template-columns: 0.5fr 9fr 0.6fr;
-	background-color: ${theme.grayScale.off_white};
-	border: 1px solid ${theme.grayScale.line};
-	height: 100px;
-`;
 
 const CheckBox = styled.div`
 	display: flex;

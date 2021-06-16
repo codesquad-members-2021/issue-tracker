@@ -26,7 +26,7 @@ export const AddBtn = styled(Button)`
 	font-weight: bold;
 	background-color: ${({ theme }) => theme.colors.blue};
 	color: ${({ theme }) => theme.grayScale.off_white};
-	border: 1px solid ${({ theme }) => theme.grayScale.label};
+	/* border: 1px solid ${({ theme }) => theme.grayScale.label}; */
 	border-radius: 11px;
 	&:hover {
 		background-color: ${({ theme }) => theme.colors.dark_blue};
@@ -43,4 +43,13 @@ export const StyledLoginButton = styled(Button)`
 	&:hover {
 		background-color: ${({ theme }) => theme.grayScale.body};
 	}
+`;
+
+export const StyledCancelButton = styled(Button)`
+	width: ${props => props._width};
+	height: ${({ theme }) => theme.buttonHeights.small};
+	color: ${({ theme }) => theme.grayScale.label};
+	font-weight: bold;
+	font-size: ${({ theme }) => theme.fontSizes.xs};
+	border-radius: ${({ theme }) => theme.border_radius.small};
 `;

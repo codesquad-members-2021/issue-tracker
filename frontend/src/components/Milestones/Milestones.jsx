@@ -1,5 +1,14 @@
+import MilestonesHeader from "./MilestonesHeader";
+import MilestoneCard from "./MilestoneCard";
 const Milestones = () => {
-	return <div>마일스톤</div>;
+	return (
+		<>
+			<MilestonesHeader />
+			<MilestoneCard />
+			<MilestoneCard />
+			<MilestoneCard />
+		</>
+	);
 };
 
 export default Milestones;

@@ -1,5 +1,18 @@
+import styled from "styled-components";
+import Navigator from "components/common/Navigator";
+import Milestones from "components/Milestones/Milestones";
+
 const MilestonesPage = () => {
-	return <div>마일스톤페이지</div>;
+	return (
+		<div>
+			<Wrapper>
+				<Navigator />
+				<Milestones />
+			</Wrapper>
+		</div>
+	);
 };
 
 export default MilestonesPage;
+
+const Wrapper = styled.div``;
