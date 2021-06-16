@@ -13,7 +13,7 @@ extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
         return self.view.window ?? ASPresentationAnchor()
     }
     
-    func excuteOAuth(service: Service) {
+    func excuteOAuth(service: Service, completion: @escaping (Result<User, Error>) -> Void) {
         var webAuthSession: ASWebAuthenticationSession?
         let callbackUrlScheme = "issueTracker"
         let url = URL.init(string: "https://github.com/login/oauth/authorize?client_id=9bf0474340886bbb6ac8&scope=user:email")
@@ -42,6 +42,11 @@ extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
             
                 if let user = user {
                     _ = KeyChainService.shared.createUser(user, service: service)
+                    DispatchQueue.main.async {
+                                  // 순서 3.
+                        completion(.success(user))
+                    }
+                   
                 }
             }.resume()
         })
