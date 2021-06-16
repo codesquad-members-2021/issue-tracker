@@ -23,7 +23,7 @@ class IssueListViewController: UIViewController {
         setuptableViewDelegateDataSource()
         setuptableViewCustomView()
         bottomToolbar.isHidden = true
-        KeyChainService.shared.deleteUser(service: .gitHub)
+        _ = KeyChainService.shared.deleteUser(service: .gitHub)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

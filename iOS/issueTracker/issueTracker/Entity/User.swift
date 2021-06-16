@@ -21,4 +21,11 @@ struct User: Codable, Equatable {
         self.userId = 0
         self.jwtToken = ""
     }
+    
+    init(profileImage: String, userName: String, userId: Int, jwtToken: String) {
+        self.profileImage = profileImage
+        self.userName = userName
+        self.userId = userId
+        self.jwtToken = jwtToken
+    }
 }

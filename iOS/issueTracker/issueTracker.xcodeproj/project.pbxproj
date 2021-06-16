@@ -11,9 +11,15 @@
 		1E15AA252670B54B00A573DB /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15AA242670B54B00A573DB /* HeaderView.swift */; };
 		1E15AA292670F45F00A573DB /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15AA282670F45F00A573DB /* FilterOptionCell.swift */; };
 		1E6FDCD02675F7550007AD2E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1E6FDCCF2675F7550007AD2E /* .swiftlint.yml */; };
+		1EB37F30267A3B2C00F30AB8 /* KeyChaineServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB37F2F267A3B2C00F30AB8 /* KeyChaineServiceTests.swift */; };
+		1EB37F37267A3B9A00F30AB8 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF208726788945002DB7D5 /* KeyChainService.swift */; };
+		1EB37F38267A3B9D00F30AB8 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20892679757F002DB7D5 /* Service.swift */; };
+		1EB37F39267A3BB600F30AB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CB7EDB2675F1A700B85F98 /* User.swift */; };
 		1EBF20862678809D002DB7D5 /* OAuthManager+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20852678809D002DB7D5 /* OAuthManager+Extenstion.swift */; };
 		1EBF208826788945002DB7D5 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF208726788945002DB7D5 /* KeyChainService.swift */; };
 		1EBF208A2679757F002DB7D5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20892679757F002DB7D5 /* Service.swift */; };
+		1EBF20A2267A36C0002DB7D5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20892679757F002DB7D5 /* Service.swift */; };
+		1EBF20A3267A36CD002DB7D5 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF208726788945002DB7D5 /* KeyChainService.swift */; };
 		820550872671F30400BF8857 /* NewIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 820550862671F30400BF8857 /* NewIssue.storyboard */; };
 		820550892671F3C700BF8857 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820550882671F3C700BF8857 /* NewIssueViewController.swift */; };
 		8222473A2678559100BB0022 /* issueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822247392678559100BB0022 /* issueTrackerTests.swift */; };
@@ -56,6 +62,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1EB37F32267A3B2C00F30AB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82A6984C266F585000F16D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82A69853266F585100F16D39;
+			remoteInfo = issueTracker;
+		};
 		8222473C2678559100BB0022 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 82A6984C266F585000F16D39 /* Project object */;
@@ -70,6 +83,9 @@
 		1E15AA242670B54B00A573DB /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		1E15AA282670F45F00A573DB /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
 		1E6FDCCF2675F7550007AD2E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		1EB37F2D267A3B2C00F30AB8 /* KeyChaineServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyChaineServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB37F2F267A3B2C00F30AB8 /* KeyChaineServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChaineServiceTests.swift; sourceTree = "<group>"; };
+		1EB37F31267A3B2C00F30AB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EBF20852678809D002DB7D5 /* OAuthManager+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OAuthManager+Extenstion.swift"; sourceTree = "<group>"; };
 		1EBF208726788945002DB7D5 /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		1EBF20892679757F002DB7D5 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -111,6 +127,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1EB37F2A267A3B2C00F30AB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		822247342678559100BB0022 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,6 +170,15 @@
 				82847A1D267102FD009CFAE6 /* IssueTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1EB37F2E267A3B2C00F30AB8 /* KeyChaineServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				1EB37F2F267A3B2C00F30AB8 /* KeyChaineServiceTests.swift */,
+				1EB37F31267A3B2C00F30AB8 /* Info.plist */,
+			);
+			path = KeyChaineServiceTests;
 			sourceTree = "<group>";
 		};
 		1EBF208426788073002DB7D5 /* OAuth */ = {
@@ -191,6 +223,7 @@
 				1E6FDCCF2675F7550007AD2E /* .swiftlint.yml */,
 				82A69856266F585100F16D39 /* issueTracker */,
 				822247382678559100BB0022 /* issueTrackerTests */,
+				1EB37F2E267A3B2C00F30AB8 /* KeyChaineServiceTests */,
 				82A69855266F585100F16D39 /* Products */,
 				E7636DDF9A7D96DA85CD8F8A /* Pods */,
 				057D52C6D4F8B4891DF7EAFC /* Frameworks */,
@@ -202,6 +235,7 @@
 			children = (
 				82A69854266F585100F16D39 /* issueTracker.app */,
 				822247372678559100BB0022 /* issueTrackerTests.xctest */,
+				1EB37F2D267A3B2C00F30AB8 /* KeyChaineServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,6 +311,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1EB37F2C267A3B2C00F30AB8 /* KeyChaineServiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EB37F34267A3B2C00F30AB8 /* Build configuration list for PBXNativeTarget "KeyChaineServiceTests" */;
+			buildPhases = (
+				1EB37F29267A3B2C00F30AB8 /* Sources */,
+				1EB37F2A267A3B2C00F30AB8 /* Frameworks */,
+				1EB37F2B267A3B2C00F30AB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1EB37F33267A3B2C00F30AB8 /* PBXTargetDependency */,
+			);
+			name = KeyChaineServiceTests;
+			productName = KeyChaineServiceTests;
+			productReference = 1EB37F2D267A3B2C00F30AB8 /* KeyChaineServiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		822247362678559100BB0022 /* issueTrackerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 822247402678559100BB0022 /* Build configuration list for PBXNativeTarget "issueTrackerTests" */;
@@ -326,6 +378,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					1EB37F2C267A3B2C00F30AB8 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 82A69853266F585100F16D39;
+					};
 					822247362678559100BB0022 = {
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 82A69853266F585100F16D39;
@@ -350,11 +406,19 @@
 			targets = (
 				82A69853266F585100F16D39 /* issueTracker */,
 				822247362678559100BB0022 /* issueTrackerTests */,
+				1EB37F2C267A3B2C00F30AB8 /* KeyChaineServiceTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1EB37F2B267A3B2C00F30AB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		822247352678559100BB0022 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,11 +540,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1EB37F29267A3B2C00F30AB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB37F39267A3BB600F30AB8 /* User.swift in Sources */,
+				1EB37F30267A3B2C00F30AB8 /* KeyChaineServiceTests.swift in Sources */,
+				1EB37F37267A3B9A00F30AB8 /* KeyChainService.swift in Sources */,
+				1EB37F38267A3B9D00F30AB8 /* Service.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		822247332678559100BB0022 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8222474226785EF100BB0022 /* EndPoint.swift in Sources */,
+				1EBF20A2267A36C0002DB7D5 /* Service.swift in Sources */,
 				8222474126785EEE00BB0022 /* NetworkManager.swift in Sources */,
 				822247462678616600BB0022 /* SendIssue.swift in Sources */,
 				822247452678616600BB0022 /* Label.swift in Sources */,
@@ -491,6 +567,7 @@
 				8222474C2678617A00BB0022 /* Comment.swift in Sources */,
 				822247482678616600BB0022 /* User.swift in Sources */,
 				822247472678616600BB0022 /* IssueCount.swift in Sources */,
+				1EBF20A3267A36CD002DB7D5 /* KeyChainService.swift in Sources */,
 				8222474326785EFA00BB0022 /* Issue.swift in Sources */,
 				822247442678616600BB0022 /* History.swift in Sources */,
 			);
@@ -531,6 +608,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1EB37F33267A3B2C00F30AB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82A69853266F585100F16D39 /* issueTracker */;
+			targetProxy = 1EB37F32267A3B2C00F30AB8 /* PBXContainerItemProxy */;
+		};
 		8222473D2678559100BB0022 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 82A69853266F585100F16D39 /* issueTracker */;
@@ -558,6 +640,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1EB37F35267A3B2C00F30AB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KeyChaineServiceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = HongzCloud.KeyChaineServiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/issueTracker.app/issueTracker";
+			};
+			name = Debug;
+		};
+		1EB37F36267A3B2C00F30AB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = KeyChaineServiceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = HongzCloud.KeyChaineServiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/issueTracker.app/issueTracker";
+			};
+			name = Release;
+		};
 		8222473E2678559100BB0022 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E2D35139340D6F8F8685374 /* Pods-issueTrackerTests.debug.xcconfig */;
@@ -759,6 +879,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1EB37F34267A3B2C00F30AB8 /* Build configuration list for PBXNativeTarget "KeyChaineServiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EB37F35267A3B2C00F30AB8 /* Debug */,
+				1EB37F36267A3B2C00F30AB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		822247402678559100BB0022 /* Build configuration list for PBXNativeTarget "issueTrackerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

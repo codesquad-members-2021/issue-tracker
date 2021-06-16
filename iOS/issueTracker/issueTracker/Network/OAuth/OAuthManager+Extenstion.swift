@@ -38,10 +38,10 @@ extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
             
             URLSession.shared.dataTask(with: request) { data, _, _ in
                 
-                let result = try? JSONDecoder().decode(User.self, from: data!)
+                let user = try? JSONDecoder().decode(User.self, from: data!)
             
-                if let result = result {
-                    KeyChainService.shared.createUser(result, service: service)
+                if let user = user {
+                    _ = KeyChainService.shared.createUser(user, service: service)
                 }
             }.resume()
         })

@@ -52,6 +52,26 @@
                ReferencedContainer = "container:issueTracker.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1EBF20A7267A38DF002DB7D5"
+               BuildableName = "KeyChainServiceTests.xctest"
+               BlueprintName = "KeyChainServiceTests"
+               ReferencedContainer = "container:issueTracker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1EB37F2C267A3B2C00F30AB8"
+               BuildableName = "KeyChaineServiceTests.xctest"
+               BlueprintName = "KeyChaineServiceTests"
+               ReferencedContainer = "container:issueTracker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

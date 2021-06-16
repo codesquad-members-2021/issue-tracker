@@ -40,11 +40,11 @@ class KeyChainService {
       return user
     }
     
-    func updateUser(_ user: User) -> Bool {
+    func updateUser(_ user: User, service: Service) -> Bool {
       guard let data = try? JSONEncoder().encode(user) else { return false }
         
       let query: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
-                                    kSecAttrService: "서비스",
+                                    kSecAttrService: "\(service)",
                                     kSecAttrAccount: "계정"]
       let attributes: [CFString: Any] = [kSecAttrAccount: "계정",
                                          kSecAttrGeneric: data]
