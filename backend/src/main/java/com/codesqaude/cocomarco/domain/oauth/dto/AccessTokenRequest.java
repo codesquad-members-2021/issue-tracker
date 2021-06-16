@@ -1,4 +1,4 @@
-package com.codesqaude.cocomarco.domain.user.dto;
+package com.codesqaude.cocomarco.domain.oauth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

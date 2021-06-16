@@ -11,32 +11,31 @@ public class JwtUtils {
     private static final String TOKEN_TYPE = "Bearer";
     private static final String BLANK = " ";
 
-    public static String create(UUID uuid, String key){
+    public static String create(UUID uuid, String key) {
         Claims claims = Jwts.claims();
-        claims.put("id",uuid);
+        claims.put("id", uuid);
         Date now = new Date();
 
-        return TOKEN_TYPE+BLANK+Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256,key)
+        return TOKEN_TYPE + BLANK + Jwts.builder()
+                .signWith(SignatureAlgorithm.HS256, key)
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime()+TOKEN_VALID_TIME))
+                .setExpiration(new Date(now.getTime() + TOKEN_VALID_TIME))
                 .compact();
     }
 
-    public static boolean validateJwt(String jwt,String key){
+    public static boolean validateJwt(String jwt, String key) {
         String[] tokens = jwt.split(BLANK);
         String tokenType = tokens[0];
         String jwtToken = tokens[1];
 
-        try{
+        try {
             Jwts.parser()
                     .setSigningKey(key)
                     .parseClaimsJws(jwtToken);
-        }catch (ExpiredJwtException e){
+        } catch (ExpiredJwtException e) {
             //todo 예외?발생?
         }
-
         return true;
     }
 }

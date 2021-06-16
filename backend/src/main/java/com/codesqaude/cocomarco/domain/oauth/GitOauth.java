@@ -1,6 +1,7 @@
-package com.codesqaude.cocomarco.domain.user;
+package com.codesqaude.cocomarco.domain.oauth;
 
-import com.codesqaude.cocomarco.domain.user.dto.AccessTokenRequest;
+import com.codesqaude.cocomarco.domain.oauth.dto.AccessToken;
+import com.codesqaude.cocomarco.domain.oauth.dto.AccessTokenRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

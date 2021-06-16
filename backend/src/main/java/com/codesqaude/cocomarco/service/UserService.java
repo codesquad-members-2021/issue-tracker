@@ -1,13 +1,19 @@
 package com.codesqaude.cocomarco.service;
 
 import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
-import com.codesqaude.cocomarco.domain.user.*;
-import com.codesqaude.cocomarco.domain.user.dto.JwtResponse;
+import com.codesqaude.cocomarco.domain.oauth.GitOauth;
+import com.codesqaude.cocomarco.domain.oauth.GitUserInfo;
+import com.codesqaude.cocomarco.domain.oauth.dto.AccessToken;
+import com.codesqaude.cocomarco.domain.oauth.dto.JwtResponse;
+import com.codesqaude.cocomarco.domain.user.User;
+import com.codesqaude.cocomarco.domain.user.UserRepository;
+import com.codesqaude.cocomarco.domain.user.dto.UserWrapper;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,10 +34,10 @@ public class UserService {
     public JwtResponse login(String code) {
         AccessToken accessToken = oauth.accessToken(code);
         GitUserInfo userInfo = oauth.userInfo(accessToken);
-        return new JwtResponse(JwtUtils.create(insertUser(userInfo),key));
+        return new JwtResponse(JwtUtils.create(insertUser(userInfo), key));
     }
 
-    public UUID insertUser(GitUserInfo userInfo){
+    public UUID insertUser(GitUserInfo userInfo) {
         Optional<User> DBUser = userRepository.findByGithubId(userInfo.getId());
 
         if (DBUser.isPresent()) {
@@ -44,5 +50,10 @@ public class UserService {
         // create
         User user = userInfo.toEntity();
         return userRepository.save(user).getId();
+    }
+
+    public UserWrapper findAll() {
+        List<User> users = userRepository.findAll();
+        return new UserWrapper(users);
     }
 }

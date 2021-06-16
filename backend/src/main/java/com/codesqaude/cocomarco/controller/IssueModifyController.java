@@ -13,6 +13,7 @@ public class IssueModifyController {
 
     private final IssueModifyService issueModifyService;
 
+
     @PutMapping("/{issueId}/title")
     public void modifyTitle(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
         issueModifyService.modifyTitle(issueId, issueRequest);
