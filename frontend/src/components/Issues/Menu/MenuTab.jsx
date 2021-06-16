@@ -1,15 +1,20 @@
+import styled from "styled-components";
 import ButtonGroup from "components/common/ButtonGroup";
 import AddButton from "components/common/AddButton";
 import { Link } from "react-router-dom";
 const MenuTab = () => {
 	return (
-		<div>
+		<Wrapper>
 			<ButtonGroup milestoneCount={0} labelCount={0} />
 			<Link to="main/new">
 				<AddButton text={"이슈 작성"} />
 			</Link>
-		</div>
+		</Wrapper>
 	);
 };
+
+const Wrapper = styled.div`
+	display: flex;
+`;
 
 export default MenuTab;

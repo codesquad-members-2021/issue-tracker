@@ -1,5 +1,16 @@
+import LabelsHeader from "./LabelsHeader";
+import LabelCard from "./LabelCard";
+import LabelInput from "./LabelInput";
+
 const Labels = () => {
-	return <div>레이블</div>;
+	return (
+		<>
+			<LabelsHeader />
+			<LabelCard />
+			<LabelCard />
+			<LabelCard />
+		</>
+	);
 };
 
 export default Labels;
