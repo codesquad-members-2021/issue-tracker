@@ -1,38 +1,32 @@
 package com.codesquad.issuetracker.response;
 
-import com.codesquad.issuetracker.domain.User;
+import com.codesquad.issuetracker.domain.Comment;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
+@AllArgsConstructor
 public class CommentResponse {
 
     private final Long id;
+
     private String content;
+
     @JsonProperty("created_at")
     private final LocalDateTime createdAt;
+
     private UserResponse author;
 
-    public CommentResponse(Long id, String content, LocalDateTime createdAt, UserResponse author) {
-        this.id = id;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.author = author;
+    public static CommentResponse create(Comment comment) {
+        return new CommentResponse(
+                comment.getId(),
+                comment.getContent(),
+                comment.getCreatedAt(),
+                UserResponse.create(comment.getUser())
+        );
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public UserResponse getAuthor() {
-        return author;
-    }
 }
