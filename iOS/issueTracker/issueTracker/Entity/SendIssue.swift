@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SendingIssue {
+struct IssueRequest {
     var title: String
     var contents: String
     var assignees: [String]

@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct IssueDTO: Codable, Equatable {
+struct IssueResponse: Codable, Equatable {
     
-    static func == (lhs: IssueDTO, rhs: IssueDTO) -> Bool {
+    static func == (lhs: IssueResponse, rhs: IssueResponse) -> Bool {
         return lhs.issueId == rhs.issueId &&
             lhs.history == rhs.history &&
             lhs.isOpen == rhs.isOpen &&
@@ -31,7 +31,7 @@ struct IssueDTO: Codable, Equatable {
     var assignees: [User]?
     var author: User?
     var milestone: Milestone
-    var issueCount: IssueCount
+    var issueCount: IssueCount?
     var labels: [Label]
     var comments: [Comment]?
     
