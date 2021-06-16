@@ -38,4 +38,21 @@ public class JwtUtils {
         }
         return true;
     }
+
+    public static Jws<Claims> getClaims(String jwt, String key) {
+        validateJwt(jwt, key);
+
+        String[] tokens = jwt.split(BLANK);
+        String tokenType = tokens[0];
+        String jwtToken = tokens[1];
+
+        return Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(jwtToken);
+    }
+
+    public static Object getId(String jwt, String key) {
+        Jws<Claims> claims = getClaims(jwt, key);
+        return claims.getBody().get("id");
+    }
 }
