@@ -3,13 +3,8 @@ import styled from 'styled-components';
 import Title from 'components/atom/Title';
 import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
-<<<<<<< HEAD
-import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption'
-import PrimaryButton from 'components/atom/PrimaryButton'
-=======
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
->>>>>>> b48d3b50441756fa70290a6324eac7f09ad88d19
 interface Props {}
 
 export default function CreateIssuePage({}: Props): ReactElement {
