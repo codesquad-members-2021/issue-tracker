@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -24,4 +25,6 @@ public class Comment {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private LocalDateTime createDateTime;
 }
