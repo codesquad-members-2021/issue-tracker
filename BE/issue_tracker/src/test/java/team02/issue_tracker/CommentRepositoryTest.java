@@ -27,9 +27,9 @@ public class CommentRepositoryTest {
     @Test
     @DisplayName("코멘트의 id로 CommentEmoji 리스트를 잘 반환하는지 확인한다.")
     void findCommentEmojiByCommentId() {
-        Comment comment = commentRepository.findById(1L).orElseThrow(CommentNotFoundException::new);
+        Comment comment = commentRepository.findByIdAndDeletedFalse(1L).orElseThrow(CommentNotFoundException::new);
         List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(comment.getId());
 
-        Assertions.assertThat(commentEmojis.size()).isEqualTo(2);
+        Assertions.assertThat(commentEmojis.size()).isEqualTo(1);
     }
 }

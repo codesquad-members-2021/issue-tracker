@@ -19,9 +19,10 @@ public class LabelRepositoryTest {
     private LabelRepository labelRepository;
 
     @Test
-    @DisplayName("findAll 메소드가 잘 동작하는지 확인한다.")
-    public void findAll() {
-        List<Label> labels = labelRepository.findAll();
-        Assertions.assertThat(labels.size()).isEqualTo(1);
+    @DisplayName("findByDeletedFalse 메소드가 잘 동작하는지 확인한다.")
+    public void findByDeletedFalse() {
+        List<Label> labels = labelRepository.findByDeletedFalse();
+
+        Assertions.assertThat(labels.size()).isEqualTo(2);
     }
 }

@@ -25,45 +25,34 @@ public class IssueRepositoryTest {
     private IssueAssigneeRepository issueAssigneeRepository;
 
     @Test
-    @DisplayName("issueRepository에서 findAll메소드가 잘 동작하는지 확인한다.")
-    void findAll() {
-        List<Issue> issues = issueRepository.findAll();
+    @DisplayName("findByDeletedFalse 메소드가 잘 동작하는지 확인한다.")
+    void findByDeletedFalse() {
+        List<Issue> issues = issueRepository.findByDeletedFalse();
 
         Assertions.assertThat(issues.size()).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("마일스톤에서 이슈의 개수가 올바르게 반환되는지 확인한다.")
-    void getIssueCount() {
-        Issue issue = issueRepository.findById(1L).orElseThrow(IssueNotFoundException::new);
-        int issueCount = issue.getMilestone().getTotalIssueCount();
-        int openIssueCount = issue.getMilestone().getOpenIssueCount();
-
-        Assertions.assertThat(issueCount).isEqualTo(2);
-        Assertions.assertThat(openIssueCount).isEqualTo(1);
     }
 
     @Test
     @DisplayName("이슈의 id로 IssueAssignee 리스트를 잘 반환하는지 확인한다.")
     void findIssueAssigneesByIssueId() {
-        Issue issue = issueRepository.findById(1L).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findByIdAndDeletedFalse(1L).orElseThrow(IssueNotFoundException::new);
         List<IssueAssignee> issueAssignees = issueAssigneeRepository.findByIssueId(issue.getId());
 
-        Assertions.assertThat(issueAssignees.size()).isEqualTo(2);
+        Assertions.assertThat(issueAssignees.size()).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("findOpenIssues 메소드가 잘 동작하는지 확인한다.")
+    @DisplayName("findByOpenTrueAndDeletedFalse 메소드가 잘 동작하는지 확인한다.")
     void findOpenIssues() {
-        List<Issue> issues = issueRepository.findOpenIssues();
+        List<Issue> issues = issueRepository.findByOpenTrueAndDeletedFalse();
 
         Assertions.assertThat(issues.size()).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("findClosedIssues 메소드가 잘 동작하는지 확인한다.")
+    @DisplayName("findByOpenFalseAndDeletedFalse 메소드가 잘 동작하는지 확인한다.")
     void findClosedIssues() {
-        List<Issue> issues = issueRepository.findClosedIssues();
+        List<Issue> issues = issueRepository.findByOpenFalseAndDeletedFalse();
 
         Assertions.assertThat(issues.size()).isEqualTo(1);
     }
