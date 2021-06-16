@@ -3,11 +3,9 @@ package com.codesquad.issuetracker.issue.service;
 import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.comment.infra.CommentRepository;
 import com.codesquad.issuetracker.issue.domain.Issue;
-import com.codesquad.issuetracker.issue.dto.IssueCreateRequest;
-import com.codesquad.issuetracker.issue.dto.IssueRequest;
-import com.codesquad.issuetracker.issue.dto.IssueResponse;
-import com.codesquad.issuetracker.issue.dto.IssueWrapper;
+import com.codesquad.issuetracker.issue.dto.*;
 import com.codesquad.issuetracker.issue.infra.IssueRepository;
+import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.label.infra.LabelRepository;
 import com.codesquad.issuetracker.milestone.infra.MilestoneRepository;
 import com.codesquad.issuetracker.user.domain.User;
@@ -76,5 +74,19 @@ public class IssueService {
         List<Comment> comments = commentRepository.findAllByIssueId(id);
         issue.updateIssue(issueRequest);
         return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
+    }
+
+    @Transactional
+    public void addLabel(Long id, LabelIdRequest labelIdRequest) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Label label = labelRepository.findById(labelIdRequest.getLabelId()).orElseThrow(RuntimeException::new);
+        issue.addLabel(label);
+    }
+
+    @Transactional
+    public void removeLabel(Long id, UUID labelId) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Label label = labelRepository.findById(labelId).orElseThrow(RuntimeException::new);
+        issue.removeLabel(label);
     }
 }
