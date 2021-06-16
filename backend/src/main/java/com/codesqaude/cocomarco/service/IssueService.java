@@ -4,11 +4,11 @@ import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
+import com.codesqaude.cocomarco.domain.issue.IssueSearchRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.issue.model.IssueLabel;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueDetailResponse;
-import com.codesqaude.cocomarco.domain.issue.model.dto.IssueRequest;
+import com.codesqaude.cocomarco.domain.issue.model.dto.*;
 import com.codesqaude.cocomarco.domain.label.Label;
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
@@ -35,6 +35,8 @@ public class IssueService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
+    private final IssueSearchRepository issueSearchRepository;
+
 
     @Transactional
     public void create(IssueRequest issueRequest, UUID writerId) {
@@ -53,12 +55,13 @@ public class IssueService {
 
     public IssueDetailResponse showDetail(Long issueId) {
         Issue issue = issueRepository.findByIdFetch(issueId).orElseThrow(NotFoundIssueException::new);
-        List<Long> collect = issue.getIssueLabels().stream().map(IssueLabel::getLabel).map(Label::getId).collect(Collectors.toList());
-        List<Label> labels = labelRepository.findAllById(collect);
-        List<UUID> collect1 = issue.getAssignments().stream().map(Assignment::getUser).map(User::getId).collect(Collectors.toList());
-        List<User> assignments = userRepository.findAllById(collect1);
+        return IssueDetailResponse.of(issue);
+    }
 
-        return IssueDetailResponse.of(issue, assignments, labels);
+    public IssueListResponseWrapper showList(IssueSearchRequest request) {
+        List<Issue> issues = issueSearchRepository.searchByBuilder(request);
+        List<IssueListResponse> responses = issues.stream().map(IssueListResponse::of).collect(Collectors.toList());
+        return new IssueListResponseWrapper(responses);
     }
 
     public Issue findById(Long issueId) {
