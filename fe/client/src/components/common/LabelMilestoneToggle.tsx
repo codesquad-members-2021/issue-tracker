@@ -17,8 +17,8 @@ const LabelMilestoneToggle = () => {
   useEffect(() => {
     if (!(labelData && milestoneData)) return;
     setLabelMilestoneCountState({
-      label: labelData.labelsCount.count,
-      milestone: milestoneData.milestonesCount.count
+      label: labelData.count,
+      milestone: milestoneData.count
     });
   }, [labelData, milestoneData]);
 
@@ -27,13 +27,13 @@ const LabelMilestoneToggle = () => {
       <ToggleItem>
         <RadioButton type="radio" name="labelMilestone" />
         <LabelBelongSpan> <img src={LabelIcon} alt="" /> &nbsp; 레이블
-          {labelData && ` (${labelData.labelsCount.count})`}
+          {labelData && ` (${labelData.count})`}
         </LabelBelongSpan>
       </ToggleItem>
       <ToggleItem>
         <RadioButton type="radio" name="labelMilestone" />
         <LabelBelongSpan>  <img src={MilestoneIcon} alt="" /> &nbsp; 마일스톤
-          {milestoneData && ` (${milestoneData.milestonesCount.count})`}
+          {milestoneData && ` (${milestoneData.count})`}
         </LabelBelongSpan>
       </ToggleItem>
     </ToggleWrapper>

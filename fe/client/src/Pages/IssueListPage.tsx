@@ -23,9 +23,9 @@ const IssueListPage = () => {
       <HeadContent {...{ handleClickShowFilterModal }} />
       <ListWrapper wrapWidth="100%">
         {
-          data && <>
-            <ListHeader issueItems={data.issues} {...{ handleClickShowFilterModal }} />
-            {data.issues.map((issueItem: IssueListItemType) => {
+          data && <> 
+            <ListHeader issueItems={data} {...{ handleClickShowFilterModal }} />
+            {data.map((issueItem: IssueListItemType) => {
               return <ListItem key={issueItem.id} {...{ issueItem }} />
             })}
           </>

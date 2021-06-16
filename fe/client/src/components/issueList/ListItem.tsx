@@ -36,7 +36,7 @@ const ListItem = ({ issueItem }: ListItemType) => {
           <IssueTitleWrapper>
             <img src={AlertCircleIcon} alt="" />
             <IssueTitle>{issueItem.title}</IssueTitle>
-            {issueItem.labels.labels.length && issueItem.labels.labels.map(({ name, id, color }) => {
+            {issueItem.labels.length && issueItem.labels.map(({ name, id, color }) => {
               return <Label {...{ name, color }} key={id} />
             })}
           </IssueTitleWrapper>

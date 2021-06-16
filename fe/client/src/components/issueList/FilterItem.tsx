@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import FilterTab from '@components/common/FilterTab';
 import API from '@/utils/API';
@@ -31,7 +31,7 @@ const FilterItem = ({ title, handleClickShowFilterModal }: FilterItemType) => {
       {data &&
         <FilterTab
           header={title}
-          filterList={data[apiName].map(({ name }: { name: string }) => name)} />
+          filterList={data.map(({ name }: { name: string }) => name)} />
       }
     </FilterWrapper>
   )
