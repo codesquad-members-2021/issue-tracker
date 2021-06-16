@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -13,25 +14,30 @@ public class IssueResponse {
     private final boolean status;
 
     @JsonProperty("created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private final LocalDateTime createdAt;
-
-    @JsonProperty("label_list")
-    private final Set<LabelResponse> labelList;
 
     private final UserResponse author;
 
     private final MilestoneForIssueResponse milestone;
 
+    @JsonProperty("label_list")
+    private final Set<LabelResponse> labelList;
+
+    private Set<AssigneeForIssueResponse> assigneeList;
+
     public IssueResponse(Long id, String title, String content, boolean status, LocalDateTime createdAt,
-                         Set<LabelResponse> labelList, UserResponse author, MilestoneForIssueResponse milestone) {
+                         UserResponse author, MilestoneForIssueResponse milestone,
+                         Set<LabelResponse> labelList, Set<AssigneeForIssueResponse> assigneeList) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.status = status;
         this.createdAt = createdAt;
-        this.labelList = labelList;
         this.author = author;
         this.milestone = milestone;
+        this.labelList = labelList;
+        this.assigneeList = assigneeList;
     }
 
     public Long getId() {
@@ -64,6 +70,10 @@ public class IssueResponse {
 
     public MilestoneForIssueResponse getMilestone() {
         return milestone;
+    }
+
+    public Set<AssigneeForIssueResponse> getAssigneeList() {
+        return assigneeList;
     }
 }
 
