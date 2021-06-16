@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
@@ -6,7 +6,16 @@ import IssueClosedIcon from '../../styles/svg/IssueClosedIcon';
 import TextGroup from '../../common/group/TextGroup';
 import LabelLargeGroup from '../../common/group/LabelLargeGroup';
 
-const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
+const IssueDetailTitle = ({
+  title,
+  isOpen,
+}: {
+  title: string;
+  isOpen: boolean;
+}): JSX.Element => {
+  const [issueState, setIssueState] = useState(isOpen);
+  const handleClickIssueButton = () => setIssueState(false);
+
   return (
     <IssueDetailTitleStyle>
       <TitleUpperBox>
@@ -19,6 +28,7 @@ const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
             <TextGroup type="small" content={'제목 편집'} color="#007AFF" />
           </TitleEditButton>
           <TitleEditButton
+            onClick={handleClickIssueButton}
             startIcon={
               <IssueClosedIcon
                 color="#007AFF"
@@ -33,14 +43,26 @@ const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
       </TitleUpperBox>
       <TitleLowerBox>
         <ButtonBox>
-          <LabelLargeGroup type="open" />
+          {issueState ? (
+            <LabelLargeGroup type="open" />
+          ) : (
+            <LabelLargeGroup type="closed" />
+          )}
         </ButtonBox>
         <TextBox>
-          <TextGroup
-            type="small"
-            content={`이 이슈가 date분 전에 writer님에 의해 열렸습니다 ∙ 코멘트 1개`}
-            color="#6E7191"
-          />
+          {issueState ? (
+            <TextGroup
+              type="small"
+              content={`이 이슈가 date분 전에 writer님에 의해 열렸습니다 ∙ 코멘트 1개`}
+              color="#6E7191"
+            />
+          ) : (
+            <TextGroup
+              type="small"
+              content={`이 이슈가 date분 전에 writer님에 의해 닫혔습니다 ∙ 코멘트 1개`}
+              color="#6E7191"
+            />
+          )}
         </TextBox>
       </TitleLowerBox>
     </IssueDetailTitleStyle>
