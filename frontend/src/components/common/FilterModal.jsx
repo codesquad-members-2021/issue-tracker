@@ -10,14 +10,16 @@ import {
 	filterBarInputAtomState,
 	clickedFilterAtomState,
 } from "RecoilStore/Atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 {
 	/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state내림 */
 }
 const FilterModal = () => {
 	const [value, setValue] = useState("");
 	const filterType = useRecoilValue(clickedFilterAtomState);
-	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
+	const [filterBarInputState, setFilterBarInputState] = useRecoilState(
+		filterBarInputAtomState
+	);
 
 	// Recoil로직 (구현 예정)
 	// 1. 필터별로 선택된 필터는 atom으로 관리됨(default는 null임)
@@ -27,8 +29,54 @@ const FilterModal = () => {
 	//
 	const handleChange = event => {
 		setValue(event.target.value);
+		console.log(filterType);
 		console.log(event.target.value);
-		setFilterBarInputState(filterType);
+		setFilterStateByType(value);
+	};
+	const setFilterStateByType = selectedFilter => {
+		console.log(filterType);
+		switch (filterType) {
+			case "담당자": {
+				console.log("담당자,filterBarInputState");
+				setFilterBarInputState({
+					...filterBarInputState,
+					assignee: selectedFilter,
+				});
+				break;
+			}
+			case "레이블": {
+				setFilterBarInputState({
+					...filterBarInputState,
+					label: selectedFilter,
+				});
+				break;
+			}
+			case "마일스톤": {
+				setFilterBarInputState({
+					...filterBarInputState,
+					milestone: selectedFilter,
+				});
+				break;
+			}
+			case "작성자": {
+				setFilterBarInputState({
+					...filterBarInputState,
+					author: selectedFilter,
+				});
+				break;
+			}
+			case "필터": {
+				setFilterBarInputState({
+					...filterBarInputState,
+					issue: selectedFilter,
+				});
+				break;
+			}
+			default: {
+				console.error("setFilterStateByType unhandled type");
+			}
+		}
+		console.log(filterBarInputState);
 	};
 
 	const getFilterModalData = type => {
@@ -71,11 +119,11 @@ const FilterModal = () => {
 					onChange={handleChange}
 				>
 					{filterData &&
-						filterData.map((x, idx) => (
+						filterData.map((filter, idx) => (
 							<FilterControlLabel
-								value={x}
+								value={filter}
 								control={<Radio color="default" />}
-								label={x}
+								label={filter}
 								labelPlacement="start"
 								key={idx}
 							/>
@@ -98,6 +146,7 @@ const FilterControlLabel = styled(FormControlLabel)`
 	display: flex;
 	justify-content: space-between;
 	margin: 0;
+	outline: 1px solid red;
 `;
 
 const FilterRadioContainer = styled(RadioGroup)`
