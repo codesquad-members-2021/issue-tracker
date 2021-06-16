@@ -24,14 +24,13 @@ const IssuesHeader = ({
 	setIsAllIssueSelected,
 	issuesCnt,
 	selectedCards,
-
 }) => {
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntAtomState
 	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
-	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
+	// const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
@@ -42,7 +41,7 @@ const IssuesHeader = ({
 		console.dir(e.target.textContent);
 		console.dir(e.target);
 		setClickedFilterState(e.target.textContent);
-		setFilterBarInputState(e.target.textContent); //여기
+		// setFilterBarInputState(e.target.textContent); //여기
 	});
 
 	useEffect(() => {
@@ -67,7 +66,6 @@ const IssuesHeader = ({
 		setIsAllIssueSelected(!isAllIssueSelected);
 		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
 	};
-
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
