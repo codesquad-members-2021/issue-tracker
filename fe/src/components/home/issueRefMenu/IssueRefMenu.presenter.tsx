@@ -1,73 +1,54 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Button, ListItemText, MenuItem } from "@material-ui/core";
-import Menu, { MenuProps } from "@material-ui/core/Menu";
-import { IssueRefMenuProps } from "utils/interface";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { IssueRefMenuProps, UsefulObjectType } from "utils/interface";
 
 interface IssueRefMenuPresenterProps extends IssueRefMenuProps {
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
-  handleClose: () => void;
-  anchorEl: null | HTMLElement;
+  handleChange: (event: React.ChangeEvent<{}>) => void;
+  selectState: UsefulObjectType;
 }
 
 export default function IssueRefMenuPresenter(props: IssueRefMenuPresenterProps) {
-  const { buttonTitle, listItems, handleClick, handleClose, anchorEl } = props;
+  const { buttonTitle, listItems, handleChange, selectState } = props;
+  const classes = useStyles();
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        {buttonTitle}
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        {listItems.map((item) => (
-          <StyledMenuItem>
-            <ListItemText primary={item.title} />
-          </StyledMenuItem>
-        ))}
-      </StyledMenu>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel className={classes.select}>{buttonTitle}</InputLabel>
+        <Select
+          native
+          value={selectState[buttonTitle]}
+          onChange={handleChange}
+          label={buttonTitle}
+          inputProps={{
+            name: `${buttonTitle}`,
+            id: `outlined-${buttonTitle}-native-simple`,
+          }}
+        >
+          <option aria-label="None" value="" />
+          {listItems.map((item) => (
+            <option value={item.title}>{item.title}</option>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 }
 
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white,
-      },
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
     },
-  },
-}))(MenuItem);
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+    select: {
+      color: "white",
+    },
+  })
+);

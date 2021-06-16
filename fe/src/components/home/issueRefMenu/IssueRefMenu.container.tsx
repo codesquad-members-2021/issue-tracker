@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import IssueRefMenuPresenter from "./IssueRefMenu.presenter";
-import { IssueRefMenuProps } from "utils/interface";
+import { IssueRefMenuProps, UsefulObjectType } from "utils/interface";
 
 export default function IssueRefMenuContainer({ buttonTitle, listItems }: IssueRefMenuProps) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectState, setSelectState] = useState<UsefulObjectType>({
+    assignee: "",
+    author: "",
+    milestone: "",
+    label: "",
+  });
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleChange = (event: React.ChangeEvent<UsefulObjectType>) => {
+    const name = event.target.name as keyof typeof selectState;
+    setSelectState({
+      ...selectState,
+      [name]: event.target.value,
+    });
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <IssueRefMenuPresenter {...{ buttonTitle, listItems, handleClick, handleClose, anchorEl }} />
-  );
+  return <IssueRefMenuPresenter {...{ buttonTitle, listItems, handleChange, selectState }} />;
 }

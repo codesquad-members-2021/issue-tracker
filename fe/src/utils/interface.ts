@@ -20,13 +20,24 @@ export interface filterOptionType {
   key: string;
 }
 
+export interface UsefulObjectType {
+  [key: string]: string;
+}
+
 interface ListItemsType {
   id: number;
   title: string;
 }
 
+export interface IssueRefStateType {
+  assignee: string;
+  author: string;
+  milestone: string;
+  label: string;
+}
+
 export interface IssueRefMenuProps {
-  buttonTitle: string;
+  buttonTitle: keyof IssueRefStateType;
   listItems: ListItemsType[];
 }
 

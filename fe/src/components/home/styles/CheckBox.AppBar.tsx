@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { selector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { selectIssueAll, selectCheckBoxAppBar } from "utils/states";
 import { GreenCheckbox } from "./CheckBox.style";
 

@@ -1,4 +1,4 @@
-import { SimpleAppBarProps } from "utils/interface";
+import { IssueRefMenuProps, SimpleAppBarProps } from "utils/interface";
 import { useRecoilState } from "recoil";
 import IssueAppBarPresenter from "./IssueAppBar.presenter";
 import { openState, closeState } from "utils/states";
@@ -17,9 +17,9 @@ export default function IssueAppBarContainer({ openedIssue, closedIssue }: Simpl
     setClose(true);
   };
 
-  const issueRefArray = [
+  const issueRefArray: IssueRefMenuProps[] = [
     {
-      buttonTitle: "담당자",
+      buttonTitle: "assignee",
       listItems: [
         { id: 0, title: "Adela" },
         { id: 1, title: "Bibi" },
@@ -29,7 +29,7 @@ export default function IssueAppBarContainer({ openedIssue, closedIssue }: Simpl
       ],
     },
     {
-      buttonTitle: "레이블",
+      buttonTitle: "label",
       listItems: [
         { id: 0, title: "fe" },
         { id: 1, title: "be" },
@@ -37,7 +37,7 @@ export default function IssueAppBarContainer({ openedIssue, closedIssue }: Simpl
       ],
     },
     {
-      buttonTitle: "마일스톤",
+      buttonTitle: "milestone",
       listItems: [
         { id: 0, title: "마스터즈코스" },
         { id: 1, title: "프론트엔드" },
@@ -46,7 +46,7 @@ export default function IssueAppBarContainer({ openedIssue, closedIssue }: Simpl
       ],
     },
     {
-      buttonTitle: "작성자",
+      buttonTitle: "author",
       listItems: [
         { id: 0, title: "Adela" },
         { id: 1, title: "Bibi" },
