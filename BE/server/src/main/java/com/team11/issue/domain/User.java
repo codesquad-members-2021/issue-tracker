@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,14 +31,8 @@ public class User {
 
     private String accessToken;
 
-    @OneToOne(mappedBy = "user")
-    private Issue issue;
-
-    @OneToOne(mappedBy = "user")
-    private History history;
-
-    @ManyToMany(mappedBy = "users")
-    private List<Issue> issues;
+    @OneToMany(mappedBy = "user")
+    private List<Assignees> assignees = new ArrayList<>();
 
     public static User createUser(UserInfoDTO userInfoDTO, String accessToken) {
         return User.builder()

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,6 +25,6 @@ public class Label {
 
     private String bgColor;
 
-    @ManyToMany(mappedBy = "labels")
-    private List<Issue> issues;
+    @OneToMany(mappedBy = "label")
+    private List<IssueHasLabel> issueHasLabels = new ArrayList<>();
 }

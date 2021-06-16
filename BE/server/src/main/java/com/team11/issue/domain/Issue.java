@@ -29,18 +29,13 @@ public class Issue {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
 
-    @ManyToMany
-    @JoinTable(name = "assignees", joinColumns = @JoinColumn(name = "issue_id"),
-                inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "issue")
+    private List<Assignees> assignees = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name="issue_has_label", joinColumns = @JoinColumn(name = "issue_id"),
-                inverseJoinColumns = @JoinColumn(name = "label_id"))
-    private List<Label> labels = new ArrayList<>();
-
+    @OneToMany(mappedBy = "issue")
+    private List<IssueHasLabel> issueHasLabels = new ArrayList<>();
 }
