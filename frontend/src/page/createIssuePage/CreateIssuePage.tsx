@@ -5,9 +5,18 @@ import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { resetSelectedTab } from 'store/issueInfoStore';
 interface Props {}
 
 export default function CreateIssuePage({}: Props): ReactElement {
+  const resetSelectTab = useSetRecoilState(resetSelectedTab);
+
+  useEffect(() => {
+    resetSelectTab(null);
+  }, []);
+
   return (
     <CreateIssuePageBlock>
       <div className='create__section__header'>

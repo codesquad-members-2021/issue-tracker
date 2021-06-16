@@ -108,59 +108,11 @@ export interface selectedTabType {
   milestone: MilestoneType | null;
   [key: string]: [] | Array<UserType> | Array<LabelType> | MilestoneType | null;
 }
-//잠시 주석
-// export const selectedTabState = atom<selectedTabType>({
-//   key: 'selectedTabState',
-//   default: {
-//     assignee: null,
-//     label: null,
-//     milestone: null,
-//   },
-// });
 
 const headerInfo = {
   // headers: {
   //   Authorization: Bearer {token}
   // }
-};
-
-const mokData = {
-  assignee: [
-    {
-      id: 1,
-      image: 'https://avatars.githubusercontent.com/u/63284310?v=4',
-      userName: 'eNoLJ',
-      assigned: true,
-    },
-
-    {
-      id: 4,
-      image: 'https://avatars.githubusercontent.com/u/74946802?v=4',
-      userName: 'torch-ray',
-      assigned: true,
-    },
-  ],
-  label: [
-    {
-      id: 1,
-      name: 'bug',
-      color: {
-        backgroundColorCode: '#F47378',
-        textColorCode: '#000000',
-      },
-      description: 'bug fix',
-      checked: true,
-    },
-  ],
-  milestone: {
-    id: 1,
-    title: 'M1',
-    description: 'M1 마일스톤에 대한 설명',
-    createdDateTime: '2021-06-15T10:38:33',
-    dueDate: '2021-06-21',
-    openedIssueCount: 5,
-    closedIssueCount: 0,
-  },
 };
 
 export const selectedTabState = selector<selectedTabType>({
@@ -174,15 +126,26 @@ export const selectedTabState = selector<selectedTabType>({
   },
 });
 
+export const resetSelectedTab = selector<null>({
+  key: 'resetSelectedTab',
+  get: () => null,
+  set: ({ get, reset }) => {
+    reset(selectedUserState);
+    reset(selectedLabelState);
+    reset(selectedMilestoneState);
+    console.log(get(selectedUserState));
+  },
+});
+
 export const selectedUserState = atom<Array<UserType> | []>({
   key: 'selectedUserTabState',
-  default: mokData.assignee,
+  default: [],
 });
 export const selectedLabelState = atom<Array<LabelType> | []>({
   key: 'selectedLabelTabState',
-  default: mokData.label,
+  default: [],
 });
 export const selectedMilestoneState = atom<MilestoneType | null>({
   key: 'selectedMilestoneTabState',
-  default: mokData.milestone,
+  default: null,
 });

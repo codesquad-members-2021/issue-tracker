@@ -65,6 +65,10 @@ export default function IssueDetailOption({ id }: Props): ReactElement {
   */
 
   useEffect(() => {
+    setSelectTabToRender(selectTab);
+  }, []);
+
+  useEffect(() => {
     if (open || !selectTab) return;
     setSelectTabToRender(selectTab);
     // atom상태값을 => useState상태에 setting
@@ -74,7 +78,7 @@ export default function IssueDetailOption({ id }: Props): ReactElement {
     setFilterType({ key, name, isMainPage: false });
   };
 
-  const checkedList: any = {
+  const checkedList: { [key: string]: ReactElement | Array<ReactElement> | null } = {
     assignee: selectTabToRender.assignee?.map((user) => (
       <SelectedTabUser key={user.id} user={user} />
     )),
@@ -90,7 +94,7 @@ export default function IssueDetailOption({ id }: Props): ReactElement {
   };
 
   const tabOptionList = tabOptions.map(({ key, name, ref }) => {
-    let selectedList: any = checkedList[key];
+    let selectedList = checkedList[key];
     const tabListClassName = `selected__${key}`;
     return (
       <TabOptionItemBlock key={key} ref={ref} onClick={() => handleClick({ key, name })}>
