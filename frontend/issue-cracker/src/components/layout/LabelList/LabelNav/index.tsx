@@ -3,25 +3,39 @@ import styled from 'styled-components';
 import { SMALL_FILL } from '../../../../utils/const';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import TapGroup from '../../../common/group/TabGroup';
-import { Link } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { useRecoilState } from 'recoil';
+import { addState } from '../../../../store/Recoil';
 
 const LabelNav: FC = () => {
+  const [issueAddState, setIssueAddState] = useRecoilState(addState);
+
+  const handleClickbutton = () => setIssueAddState((prev) => !prev);
+
   return (
     <LabelNavDiv>
       <LabelNavContainer>
         <TabBox>
           <TapGroup />
         </TabBox>
-        <Link to="/main/label-add">
-          <ButtonBox>
+        {issueAddState ? (
+          <ButtonBox onClick={handleClickbutton}>
+            <ButtonGroup
+              type={SMALL_FILL}
+              name={'삭제'}
+              icon={<DeleteOutlineIcon style={{ fontSize: 16 }} />}
+            />
+          </ButtonBox>
+        ) : (
+          <ButtonBox onClick={handleClickbutton}>
             <ButtonGroup
               type={SMALL_FILL}
               name={'추가'}
               icon={<AddIcon style={{ fontSize: 16 }} />}
             />
           </ButtonBox>
-        </Link>
+        )}
       </LabelNavContainer>
     </LabelNavDiv>
   );

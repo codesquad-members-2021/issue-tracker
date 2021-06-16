@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import { ProfileImg as S } from '../../styles/CommonStyles';
 import Logo from '../../common/Logo';
 import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
+import { Link } from 'react-router-dom';
+
 const Header: FC = () => {
   const profileURL = localStorage.getItem('profileImageUrl');
   const profileName = localStorage.getItem('name');
 
   return (
     <HeaderDiv>
-      <Logo type={MEDIUM} name={LOGO_TITLE} />
+      <Link to="/">
+        <Logo type={MEDIUM} name={LOGO_TITLE} />
+      </Link>
       <UserDiv>
         <AccountName>{profileName}</AccountName>
         {profileURL && <S.ProfileImgLarge src={profileURL} />}
@@ -24,6 +28,11 @@ const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 27px 0 57px 0;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 const UserDiv = styled.div`
   display: flex;

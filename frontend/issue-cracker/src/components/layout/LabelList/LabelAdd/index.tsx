@@ -8,8 +8,13 @@ import LabelSmallGroup from '../../../common/group/LabelSmallGroup';
 import SyncIcon from '@material-ui/icons/Sync';
 import { SMALL_FILL } from '../../../../utils/const';
 import AddIcon from '@material-ui/icons/Add';
+import { useSetRecoilState } from 'recoil';
+import { addState } from '../../../../store/Recoil';
 
 const LabelAdd = (): JSX.Element => {
+  const setAddState = useSetRecoilState(addState);
+  const handleClickButton = () => setAddState((prev) => !prev);
+
   return (
     <LabelAddStyle>
       <LabelAddHeader>
@@ -71,7 +76,7 @@ const LabelAdd = (): JSX.Element => {
         </InputContainer>
       </LabelAddCell>
       <ButtonContainer>
-        <ButtonBox>
+        <ButtonBox onClick={handleClickButton}>
           <ButtonGroup
             type={SMALL_FILL}
             name={'완료'}
