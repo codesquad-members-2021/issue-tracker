@@ -149,6 +149,7 @@ final class AddLabelViewController: UIViewController {
     }()
     
     private let sceneTitle = "새로운 레이블"
+    private let colorConverter = HexColorConverter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -222,6 +223,27 @@ final class AddLabelViewController: UIViewController {
     }
     
     @objc private func randomColorButtonTouched(_ sender: UIButton) {
+        let hexColor = randomColor()
+        backgroundLabel.text = hexColor
+        changePreviewLabel(with: hexColor)
+    }
+    
+    private func randomColor() -> String {
+        let colorRange = 0...255
+        let randomRed = Int.random(in: colorRange)
+        let randomGreen = Int.random(in: colorRange)
+        let randomBlue = Int.random(in: colorRange)
         
+        let hexRed = String(randomRed, radix: 16)
+        let hexGreen = String(randomGreen, radix: 16)
+        let hexBlue = String(randomBlue, radix: 16)
+        return "#\(hexRed)\(hexGreen)\(hexBlue)"
+    }
+    
+    private func changePreviewLabel(with hexColorString: String) {
+        let hex = HexColorCode(from: hexColorString)
+        let backgroundColor = colorConverter.convertHex(hex)
+        let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
+        previewLabel.configure(with: backgroundColor, titleColor, nil)
     }
 }
