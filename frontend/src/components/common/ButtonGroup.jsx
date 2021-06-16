@@ -17,7 +17,7 @@ const ButtonGroup = ({
 	buttonText,
 }) => {
 	return (
-		<>
+		<Wrapper>
 			<Link to="/main/milestones">
 				<TabButton
 					onClick={milestoneClickEvent}
@@ -38,9 +38,14 @@ const ButtonGroup = ({
 					<ButtonText>레이블 ({labelCount})</ButtonText>
 				</TabButton>
 			</Link>
-		</>
+		</Wrapper>
 	);
 };
+
+const Wrapper = styled.div`
+	display: flex;
+	justify-content: center;
+`;
 
 const ButtonText = styled.div`
 	padding: 0 4%;
