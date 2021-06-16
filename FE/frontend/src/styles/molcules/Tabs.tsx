@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as MilestoneIcon } from '../../icons/milestone.svg';
 import { ReactComponent as TagIcon } from '../../icons/tag.svg';
+import useFetch from '../../util/useFetch';
 import Typos from '../atoms/Typos';
 import { Link } from 'react-router-dom';
 
 const Tabs = () => {
+  const { data: count } = useFetch('common', 'count');
+  const totalMilestoneCount = count?.open_milestones + count?.closed_milestones;
+
   return (
     <TabsWrapper>
       <Label
@@ -14,7 +18,7 @@ const Tabs = () => {
         to="labelList">
         <TagIcon />
         <Text link sm>
-          레이블
+          레이블 ({count?.lables})
         </Text>
       </Label>
       <Line></Line>
@@ -24,7 +28,7 @@ const Tabs = () => {
         to="milestoneList">
         <MilestoneIcon />
         <Text link sm>
-          마일스톤
+          마일스톤 ({totalMilestoneCount})
         </Text>
       </Label>
     </TabsWrapper>
