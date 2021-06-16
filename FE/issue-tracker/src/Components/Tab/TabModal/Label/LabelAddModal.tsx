@@ -4,6 +4,7 @@ import {
   addNewLabelTitleState,
   addNewLabelDescriptionState,
   addNewLabelBackgroundState,
+  addnewLabelFontColor,
 } from "../../TabStore";
 import NewLabelView from "./NewLabelView";
 
@@ -19,6 +20,9 @@ const LabelAddModal = () => {
     addNewLabelBackgroundState
   );
 
+  const [newLabelFontColor, setNewLabelFontColor] =
+    useRecoilState(addnewLabelFontColor);
+
   const handleLabelTitleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewLabelTitleState(e.target.value);
   };
@@ -33,6 +37,13 @@ const LabelAddModal = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setNewLabelBackgroundState(e.target.value);
+  };
+
+  const handleLabelBlackWhiteInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    //
+    setNewLabelFontColor(e.target.dataset.color);
   };
 
   return (
@@ -70,12 +81,24 @@ const LabelAddModal = () => {
             <S.ChangeFontColorDiv>
               <S.ColorTitle>텍스트 색상</S.ColorTitle>
               <S.FontColorRadioContent>
-                <input id="dark" name="labelFontColor" type="radio" />
-                <label htmlFor="dark">어두운 색</label>
+                <input
+                  id="black"
+                  data-color="black"
+                  name="labelFontColor"
+                  type="radio"
+                  onChange={handleLabelBlackWhiteInput}
+                />
+                <label htmlFor="black">어두운 색</label>
               </S.FontColorRadioContent>
               <S.FontColorRadioContent>
-                <input id="bright" name="labelFontColor" type="radio" />
-                <label htmlFor="bright">밝은 색</label>
+                <input
+                  id="white"
+                  data-color="white"
+                  name="labelFontColor"
+                  type="radio"
+                  onChange={handleLabelBlackWhiteInput}
+                />
+                <label htmlFor="white">밝은 색</label>
               </S.FontColorRadioContent>
             </S.ChangeFontColorDiv>
           </S.ChangeColorContainer>

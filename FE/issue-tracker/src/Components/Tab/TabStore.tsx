@@ -45,3 +45,8 @@ export const addNewLabelBackgroundState = atom({
   key: "addNewLabelBackgroundState",
   default: "",
 });
+
+export const addnewLabelFontColor = atom<string | undefined>({
+  key: "addnewLabelFontColor",
+  default: "black",
+});

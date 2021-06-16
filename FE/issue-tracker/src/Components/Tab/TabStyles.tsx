@@ -273,6 +273,7 @@ const AddNewModal = {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    gap: 10px;
   `,
 
   FinishWriteBtn: styled(Button)`
@@ -287,6 +288,19 @@ const AddNewModal = {
     }
     &:disabled {
       background: ${theme.GRAY_SCALE.LINE};
+    }
+  `,
+
+  Canclebtn: styled(Button)`
+    width: 120px;
+    height: 40px;
+    background: ${theme.GRAY_SCALE.OFF_WHITE};
+    color: ${theme.COLOR.BLUE};
+    font-weight: bold;
+    border-radius: 11px;
+    border: 2px solid ${theme.COLOR.BLUE};
+    &:hover {
+      background: ${theme.COLOR.LIGHT_BLUE};
     }
   `,
 
