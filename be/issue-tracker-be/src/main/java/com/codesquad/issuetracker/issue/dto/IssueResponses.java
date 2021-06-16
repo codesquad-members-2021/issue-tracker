@@ -12,7 +12,4 @@ public class IssueResponses {
 
     @JsonValue
     private List<IssueResponse> issueResponses;
-
-    private int openedIssueCount;
-    private int closedIssueCount;
 }

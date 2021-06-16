@@ -3,6 +3,7 @@ package com.codesquad.issuetracker.issue.controller;
 import com.codesquad.issuetracker.comment.dto.CommentResponse;
 import com.codesquad.issuetracker.comment.vo.Emoji;
 import com.codesquad.issuetracker.comment.vo.Emojis;
+import com.codesquad.issuetracker.issue.dto.IssueCountResponse;
 import com.codesquad.issuetracker.issue.dto.IssueDetailResponse;
 import com.codesquad.issuetracker.issue.dto.IssueResponse;
 import com.codesquad.issuetracker.issue.dto.IssueResponses;
@@ -69,4 +70,10 @@ public class IssueDummyData {
                        .build();
     }
 
+    public static IssueCountResponse issueCountResponse() {
+        return IssueCountResponse.builder()
+                       .openedIssueCount(3)
+                       .closedIssueCount(2)
+                       .build();
+    }
 }
