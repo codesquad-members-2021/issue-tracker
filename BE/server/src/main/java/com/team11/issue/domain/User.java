@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
@@ -27,6 +30,9 @@ public class User {
     private String profileImage;
 
     private String accessToken;
+
+    @OneToMany(mappedBy = "user")
+    private List<Assignees> assignees = new ArrayList<>();
 
     public static User createUser(UserInfoDTO userInfoDTO, String accessToken) {
         return User.builder()
