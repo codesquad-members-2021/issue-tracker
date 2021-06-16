@@ -20,7 +20,6 @@ const DropDownButton = ({ text, clickEvent, width, border, radius }) => {
 };
 
 const ButtonText = styled.div`
-	/* outline: red 1px solid; */
 	padding-right: 30%;
 `;
 export default DropDownButton;

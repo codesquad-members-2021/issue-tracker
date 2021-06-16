@@ -1,8 +1,4 @@
-import {
-	ButtonGroupLeftBtn,
-	ButtonGroupRightBtn,
-	TabButton,
-} from "styles/StyledButtons";
+import { TabButton } from "styles/StyledButtons";
 import styled from "styled-components";
 import { ReactComponent as LabelIcon } from "images/tag.svg";
 import { ReactComponent as MileStoneIcon } from "images/milestone.svg";
@@ -14,7 +10,6 @@ const ButtonGroup = ({
 	milestoneClickEvent,
 	labelCount,
 	labelClickEvent,
-	buttonText,
 }) => {
 	return (
 		<Wrapper>

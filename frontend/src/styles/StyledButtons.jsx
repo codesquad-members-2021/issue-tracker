@@ -19,15 +19,6 @@ export const TabButton = styled(Button)`
 		theme.grayScale.background}; //str넣었는데 str넣으라고 오류뜸
 `;
 
-export const ButtonGroupRightBtn = styled(TabButton)`
-	border-radius: ${({ theme }) => theme.border_radius_mix.right};
-	width: ${({ theme }) => theme.buttonWidths.base};
-`;
-
-export const ButtonGroupLeftBtn = styled(TabButton)`
-	border-radius: ${({ theme }) => theme.border_radius_mix.left};
-`;
-
 export const AddBtn = styled(Button)`
 	width: 160px;
 	height: ${({ theme }) => theme.buttonHeights.base};
