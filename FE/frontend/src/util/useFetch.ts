@@ -19,7 +19,7 @@ const getData = async (type: string, action: string, filter?: Props) => {
           const allData = await axios.get(`${url}/issues`);
           return allData.data.data;
         case 'count':
-          const count = await axios.get(`${url}/issues`);
+          const count = await axios.get(`${url}/issues/count`);
           return count.data.data;
         case 'detail':
           const detail = await axios.get(`${url}${filter?.id}`);
@@ -40,6 +40,12 @@ const getData = async (type: string, action: string, filter?: Props) => {
           return allData.data.data;
       }
       return;
+    case 'common':
+      switch (action) {
+        case 'count':
+          const count = await axios.get(`${url}/count`);
+          return count.data.data;
+      }
   }
 };
 

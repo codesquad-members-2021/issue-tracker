@@ -52,8 +52,11 @@ const IssueDetail = () => {
                   <>
                     <User />
                     <CommentWrapper>
-                      <CommentTab></CommentTab>
-                      <Comment></Comment>
+                      <CommentTab>
+                        <span>{comment.writer.username}</span>
+                        <span>{moment(comment.created_time).fromNow()}</span>
+                      </CommentTab>
+                      <Comment>{comment.content}</Comment>
                     </CommentWrapper>
                   </>
                 );

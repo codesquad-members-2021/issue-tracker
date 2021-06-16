@@ -14,6 +14,7 @@ import 'moment/locale/ko';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
+  const { data: count } = useFetch('issue', 'count');
 
   return (
     <>
@@ -22,11 +23,11 @@ const IssueTable = () => {
           <CheckBox />
           <Text link sm>
             <AlertCircle />
-            열린 이슈
+            열린 이슈({count?.open_issues})
           </Text>
           <Text link sm>
             <Archive />
-            닫힌 이슈
+            닫힌 이슈({count?.closed_issues})
           </Text>
         </LeftHeaderWrapper>
         <ListFilters />
