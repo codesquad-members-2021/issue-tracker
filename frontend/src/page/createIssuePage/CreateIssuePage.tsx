@@ -6,16 +6,19 @@ import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
-import fetchData from 'util/api/createIssue'
+import { createIssue } from 'store/issueInfoStore'
+import { useRecoilValue } from 'recoil'
 export default function CreateIssuePage(): ReactElement {
-  const history = useHistory()
   const sample = {
-    title: "새애애애로운이슈",
-    comment: "이슈 내용 뉴_뉴",
+    title: "z코쿼",
+    comment: "제인이노레이카일주나미",
     assignees: [1],
-    labels: [1, 2, 3],
-    milestone: 2
+    labels: [1],
+    milestone: 3
   }
+  const {fetchData} = useRecoilValue(createIssue({issueInputs:sample, skip:true}))
+  const history = useHistory()
+
   
 
   const handleClick = async (btnType: string) =>{
