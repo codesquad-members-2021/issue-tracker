@@ -4,9 +4,11 @@ import { useRecoilValueLoadable } from 'recoil';
 
 import { wholeIssueLists } from '@store/atoms/issueList';
 
+import { IssueSkeleton } from '@components/common/Skeleton';
 import TableHeader from '../tableHeader/TableHeader';
 import Issue from './Issue';
-import { IssueSkeleton } from '@components/common/Skeleton';
+import NoIssue from './NoIssue';
+import ErrorIssueList from './ErrorIssueList';
 
 function IssueTable() {
   const [isClosed, setIsClosed] = useState(false);
@@ -19,15 +21,22 @@ function IssueTable() {
     if (targetState === 'close') setIsClosed(true);
   };
 
-  if (state === 'hasError') return <div>이슈를 불러오는 데 실패했어요.</div>;
+  const renderNoIssue = (contents: any) => {
+    if (typeof contents === 'string' || contents.length === 0) {
+      return <NoIssue isSearched={false} />;
+    }
+  };
+
   return (
     <IssueTableWrap>
       <TableHeader isClosed={isClosed} handleClickTab={handleClickTab} />
+      {state === 'hasError' && <ErrorIssueList>{contents}</ErrorIssueList>}
       {state === 'loading' && <IssueSkeleton />}
       {state === 'hasValue' &&
         contents.map((issueInfo: IssueInfo) => (
           <Issue key={issueInfo.id} info={issueInfo} />
         ))}
+      {renderNoIssue(contents)}
     </IssueTableWrap>
   );
 }
