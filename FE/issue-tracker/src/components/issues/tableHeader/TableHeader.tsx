@@ -1,26 +1,45 @@
 import styled from 'styled-components';
+import { useRecoilValueLoadable } from 'recoil';
+
+import { issueCounts } from '@store/atoms/issueList';
 
 import AssigneeFilter from './AssigneeFilter';
 import LabelFilter from './LabelFilter';
 import MilestoneFilter from './MilestoneFilter';
 import AuthorFilter from './AuthorFilter';
 
-function TableHeader() {
+function TableHeader({ isClosed, handleClickTab }: Props) {
+  const { state, contents } = useRecoilValueLoadable(issueCounts);
+
   return (
     <TableHeaderWrap>
       <HeaderLeft>
         <input type="checkbox" name="" id="" />
         <IssueTab>
-          <li>열린 이슈(2)</li>
-          <li>닫힌 이슈(2)</li>
+          <IssueOpenTab
+            isClosed={isClosed}
+            data-state="open"
+            onClick={handleClickTab}
+          >
+            {state === 'loading' && `열린 이슈 (0)`}
+            {state === 'hasValue' && `열린 이슈 (${contents.openIssueCount})`}
+          </IssueOpenTab>
+          <IssueCloseTab
+            isClosed={isClosed}
+            data-state="close"
+            onClick={handleClickTab}
+          >
+            {state === 'loading' && `닫힌 이슈 (0)`}
+            {state === 'hasValue' && `닫힌 이슈 (${contents.closeIssueCount})`}
+          </IssueCloseTab>
         </IssueTab>
       </HeaderLeft>
       <HeaderRight>
         <FilterLists>
-          <AssigneeFilter />
+          <AuthorFilter />
           <LabelFilter />
           <MilestoneFilter />
-          <AuthorFilter />
+          <AssigneeFilter />
         </FilterLists>
       </HeaderRight>
     </TableHeaderWrap>
@@ -28,6 +47,15 @@ function TableHeader() {
 }
 
 export default TableHeader;
+
+type Props = {
+  handleClickTab: (e: React.MouseEvent) => void;
+  isClosed: boolean;
+};
+
+type issueTab = {
+  isClosed: boolean;
+};
 
 const TableHeaderWrap = styled.div`
   margin-top: 24px;
@@ -63,11 +91,23 @@ const FilterLists = styled.div`
 
 const IssueTab = styled.ul`
   display: flex;
+`;
 
-  li {
-    ${({ theme }) => theme.flexCenter}
-    margin-left: 24px;
-    width: 100px;
-    height: 28px;
-  }
+const IssueTabList = styled.li<issueTab>`
+  ${({ theme }) => theme.flexCenter}
+  margin-left: 24px;
+  width: 100px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
+
+const IssueOpenTab = styled(IssueTabList)`
+  color: ${({ theme, isClosed }) =>
+    isClosed ? theme.colors.gr_label : theme.colors.gr_titleActive};
+`;
+
+const IssueCloseTab = styled(IssueTabList)`
+  color: ${({ theme, isClosed }) =>
+    isClosed ? theme.colors.gr_titleActive : theme.colors.gr_label};
 `;

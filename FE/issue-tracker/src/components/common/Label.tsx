@@ -22,6 +22,7 @@ interface LabelTagType {
 }
 
 const LabelTag = styled.span<LabelTagType>`
+  margin-right: 4px;
   padding: 4px 16px;
   font-size: ${({ theme }) => theme.fontSizes.xs};
   border-radius: 30px;
