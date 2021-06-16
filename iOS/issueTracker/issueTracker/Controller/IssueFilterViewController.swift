@@ -7,50 +7,46 @@
 
 import UIKit
 
-class IssueFilterViewController: UIViewController, customNavigationHeader {
+class IssueFilterViewController: UIViewController {
     @IBOutlet weak var filterTableView: UITableView!
-    private var headerView: HeaderView!
+    private var filterOptionHeaderView: HeaderView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         filterTableView.dataSource = self
         filterTableView.delegate = self
         configHeaderView()
         configFilterOptionTableView()
-        configfilterOptionTableView()
-        headerView.set(delegate: self)
-        headerView.setUpBackButton2(viewController: self)
-    }
-    func close() {
-        self.dismiss(animated: true, completion: nil)
+        filterOptionHeaderView.setUpBackButton2(viewController: self)
     }
     @objc
-    func testt() {
+    func closeFilterController() {
         self.dismiss(animated: true, completion: nil)
     }
-    private func configfilterOptionTableView() {
+    
+    private func configFilterOptionTableView() {
         filterTableView.tableHeaderView?.backgroundColor = .black
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = .clear
         filterTableView.tableFooterView = footerView
-    }
-    private func configHeaderView() {
-        headerView = HeaderView(frame: .zero)
-        headerView.setUpTitle(text: CustomHeaderViewTitle.headerViewFilter.description)
-        headerView.setUpBackButton(text: CustomHeaderViewTitle.headerViewCancel.description)
-        headerView.setUpSaveButton(text: CustomHeaderViewTitle.headerViewSave.description)
-        self.view.addSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: self.view.frame.height/12).isActive = true
-    }
-    private func configFilterOptionTableView() {
         filterTableView.translatesAutoresizingMaskIntoConstraints = false
-        filterTableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor).isActive = true
+        filterTableView.topAnchor.constraint(equalTo: self.filterOptionHeaderView.bottomAnchor).isActive = true
         filterTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         filterTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         filterTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    private func configHeaderView() {
+        filterOptionHeaderView = HeaderView(frame: .zero)
+        filterOptionHeaderView.setUpTitle(text: CustomHeaderViewTitle.headerViewFilter.description)
+        filterOptionHeaderView.setUpBackButton(text: CustomHeaderViewTitle.headerViewCancel.description)
+        filterOptionHeaderView.setUpSaveButton(text: CustomHeaderViewTitle.headerViewSave.description)
+        self.view.addSubview(filterOptionHeaderView)
+        filterOptionHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        filterOptionHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        filterOptionHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        filterOptionHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        filterOptionHeaderView.heightAnchor.constraint(equalToConstant: self.view.frame.height/12).isActive = true
     }
 }
 
@@ -69,30 +65,25 @@ extension IssueFilterViewController: UITableViewDataSource {
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterOptionCell") as? FilterOptionCell else {
             return UITableViewCell()
         }
         return cell
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionModels = ["상태", "작성자", "레이블", "마일스톤"]
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .systemGray6
-        let label = UILabel(frame: .zero)
-        label.text = sectionModels[section]
-        label.textColor = .gray
-        label.sizeToFit()
-
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        return view
+        let customView = CustomSectionHeader.init(frame: .zero)
+        customView.set(color: .systemGray6)
+        customView.initCustomLabel(index: section)
+        return customView
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }

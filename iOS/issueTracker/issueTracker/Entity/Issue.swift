@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IssueDTO: Codable {
+struct IssueResponse: Codable {
     var issueId: Int
     var history: Histroy
     var isOpen: Bool

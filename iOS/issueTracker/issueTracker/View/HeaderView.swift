@@ -7,13 +7,8 @@
 
 import UIKit
 
-protocol customNavigationHeader: AnyObject {
-    func close()
-}
-
 class HeaderView: UIView {
     private var backButton: UIButton!
-    private weak var delegate: customNavigationHeader?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,14 +19,12 @@ class HeaderView: UIView {
     }
     
     func setUpBackButton2(viewController: UIViewController) {
-        guard let vc2 = viewController as? IssueFilterViewController else {
+        guard let IFViewController = viewController as? IssueFilterViewController else {
             return
         }
-        self.backButton.addTarget(delegate, action: #selector(vc2.testt), for: .touchDown)
-    }
-    
-    func set(delegate: customNavigationHeader) {
-        self.delegate = delegate
+        self.backButton.addTarget(IFViewController,
+                                  action: #selector(IFViewController.closeFilterController),
+                                  for: .touchDown)
     }
     
     func setUpTitle(text: String) {

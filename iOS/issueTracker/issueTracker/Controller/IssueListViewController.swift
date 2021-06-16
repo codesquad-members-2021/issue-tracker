@@ -9,7 +9,7 @@ import UIKit
 
 class IssueListViewController: UIViewController {
     
-    private var issueList: IssueDTO
+    private var issueList: IssueResponse
     @IBOutlet weak var issueListTableView: UITableView!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     override func viewDidLoad() {
@@ -24,12 +24,12 @@ class IssueListViewController: UIViewController {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        issueList = IssueDTO.empty
+        issueList = IssueResponse.empty
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        issueList = IssueDTO.empty
+        issueList = IssueResponse.empty
         super.init(coder: coder)
     }
     
@@ -39,8 +39,8 @@ class IssueListViewController: UIViewController {
     }
     
     func fetchIssueList() {
-        let issueListAPI = APIEndPoint.init(path: "/temp", httpMethod: .get)
-        NetworkManager.request(with: issueListAPI, type: IssueDTO.self) { result in
+        let issueListAPI = APIEndPoint.init(path: "/temp", httpMethod: .get, decodingStrategy: .convertFromSnakeCase)
+        NetworkManager.request(with: issueListAPI, type: IssueResponse.self) { result in
             switch result {
             case .success(let data):
                 self.issueList = data

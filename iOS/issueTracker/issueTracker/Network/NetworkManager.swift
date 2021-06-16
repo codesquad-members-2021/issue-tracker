@@ -10,19 +10,19 @@ import Alamofire
 
 class NetworkManager {
     
-    static func request<T: Decodable> (with endPoint: Requestable,
+    static func request<T: Decodable> (with request: Requestable,
                                        type: T.Type,
                                        completion: @escaping (Result<T, AFError>) -> Void) {
         
-        guard let url = endPoint.url() else {
+        guard let url = request.url else {
             let networkErrorDescription = NetworkError.url(description: ("Couldn't Create URL"))
             completion(.failure(AFError.createURLRequestFailed(error: networkErrorDescription)))
             return
         }
         
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        AF.request(url, method: endPoint.httpMethod)
+        decoder.keyDecodingStrategy = request.decodingStrategy
+        AF.request(url, method: request.httpMethod)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: T.self, decoder: decoder) { response in
                 switch response.result {
