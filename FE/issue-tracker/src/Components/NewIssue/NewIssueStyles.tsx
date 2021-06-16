@@ -17,7 +17,7 @@ const NewIssue = {
     width: 100%;
   `,
   NewIssueBody: styled(BOX.FLEX_ROW_BOX)`
-    padding: 32px 0px 16px 0px;
+    padding: 32px 0px;
     width: 100%;
     border-bottom: 1px solid ${theme.GRAY_SCALE.LINE};
     margin-bottom: 32px;

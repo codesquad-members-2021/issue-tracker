@@ -71,7 +71,7 @@ const IssueDetail = {
   `,
   IssueButtonWrapper: styled(BOX.FLEX_ROW_BOX)`
     justify-content: flex-end;
-    margin-top: 16px;
+    margin-top: 10px;
   `,
   IssueDeleteButton: styled(Button)``,
   IssueSubmitButton: styled(Button)<{ "data-is-outlined": boolean }>`
@@ -91,7 +91,7 @@ const IssueDetail = {
   CommentEditBox: styled(BOX.FLEX_COLUMN_BOX)<{ "data-is-show": boolean }>`
     display: ${(props) => (props["data-is-show"] ? "flex" : "none")};
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 5px;
   `,
   UserImage: styled(Avatar)`
     margin-right: 16px;

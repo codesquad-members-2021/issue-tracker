@@ -6,6 +6,7 @@ import TextArea from "@/Components/AtomicComponents/TextArea/TextArea";
 import CreateButton from "./CreateButton";
 import UnCreateButton from "./UnCreateButton";
 import SettingSideBar from "@/Components/AtomicComponents/SettingSideBar/SettingSideBar";
+import Editor from "@/Components/AtomicComponents/Editor/Editor";
 import { NewIssue as S } from "@/Components/NewIssue/NewIssueStyles";
 
 const NewIssue = () => {
@@ -31,17 +32,14 @@ const NewIssue = () => {
               placeholder={"제목"}
               rows={1}
               handleOnChange={handleOnChange}
-              isFileAttachButtonShow={false}
             />
           </S.TextAreaWrapper>
-          <S.TextAreaWrapper>
-            <TextArea
-              placeholder={"코멘트를 입력하세요"}
-              rows={20}
-              handleOnChange={handleOnChange}
-              isFileAttachButtonShow={true}
-            />
-          </S.TextAreaWrapper>
+          <Editor
+            value={"### 코멘트를 입력하세요"}
+            height={400}
+            visiableDragbar={false}
+            hideToolbar={true}
+          />
         </S.BodyContentsWrapper>
         <S.NavWrapper>
           <SettingSideBar />
