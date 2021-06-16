@@ -13,13 +13,16 @@ const OAuthCallbackPage = () => {
       
       localStorage.setItem("issue-tracker-user", JSON.stringify(checkedUserInfo));
       alert(`안녕하세요 ${checkedUserInfo.name}`);
-      window.location.href = '/';
+      window.location.href = '/issues';
     }
     
     fetchCode();
   }, [])
 
-  return <></>;
+  return (
+    <h1>로그인 중입니다</h1>
+  );
+  
 }
 
 export default OAuthCallbackPage
