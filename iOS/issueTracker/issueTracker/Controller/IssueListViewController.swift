@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+
+    private var user: User!
     
     private var issueList: IssueDTO
     @IBOutlet weak var issueListTableView: UITableView!
@@ -21,6 +23,7 @@ class IssueListViewController: UIViewController {
         setuptableViewDelegateDataSource()
         setuptableViewCustomView()
         bottomToolbar.isHidden = true
+        KeyChainService.shared.deleteUser(service: .gitHub)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -36,6 +39,10 @@ class IssueListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         fetchIssueList()
         super.viewDidAppear(true)
+    }
+
+    func getUser(_ user: User) {
+        self.user = user
     }
     
     func fetchIssueList() {

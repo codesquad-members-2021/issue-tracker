@@ -12,6 +12,8 @@
 		1E15AA292670F45F00A573DB /* FilterOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15AA282670F45F00A573DB /* FilterOptionCell.swift */; };
 		1E6FDCD02675F7550007AD2E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1E6FDCCF2675F7550007AD2E /* .swiftlint.yml */; };
 		1EBF20862678809D002DB7D5 /* OAuthManager+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20852678809D002DB7D5 /* OAuthManager+Extenstion.swift */; };
+		1EBF208826788945002DB7D5 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF208726788945002DB7D5 /* KeyChainService.swift */; };
+		1EBF208A2679757F002DB7D5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBF20892679757F002DB7D5 /* Service.swift */; };
 		820550872671F30400BF8857 /* NewIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 820550862671F30400BF8857 /* NewIssue.storyboard */; };
 		820550892671F3C700BF8857 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820550882671F3C700BF8857 /* NewIssueViewController.swift */; };
 		8222473A2678559100BB0022 /* issueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822247392678559100BB0022 /* issueTrackerTests.swift */; };
@@ -69,6 +71,8 @@
 		1E15AA282670F45F00A573DB /* FilterOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCell.swift; sourceTree = "<group>"; };
 		1E6FDCCF2675F7550007AD2E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1EBF20852678809D002DB7D5 /* OAuthManager+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OAuthManager+Extenstion.swift"; sourceTree = "<group>"; };
+		1EBF208726788945002DB7D5 /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
+		1EBF20892679757F002DB7D5 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		305ACED3A38DB57F487B1AF3 /* Pods-issueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-issueTrackerTests/Pods-issueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		633BA7E5461C40B4CD6E9BD4 /* Pods-issueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issueTracker.debug.xcconfig"; path = "Target Support Files/Pods-issueTracker/Pods-issueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		7E2D35139340D6F8F8685374 /* Pods-issueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-issueTrackerTests/Pods-issueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				1EBF20852678809D002DB7D5 /* OAuthManager+Extenstion.swift */,
+				1EBF208726788945002DB7D5 /* KeyChainService.swift */,
+				1EBF20892679757F002DB7D5 /* Service.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -404,7 +410,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n\n";
 		};
 		9F3DF6E14ACECBF6031118FC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -496,6 +502,7 @@
 			files = (
 				82CB7EE82675F1A700B85F98 /* History.swift in Sources */,
 				820550892671F3C700BF8857 /* NewIssueViewController.swift in Sources */,
+				1EBF208A2679757F002DB7D5 /* Service.swift in Sources */,
 				82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */,
 				82A74F5126771B4500F3CCCD /* NetworkManager.swift in Sources */,
 				82F44A62267730AB0010991F /* EndPoint.swift in Sources */,
@@ -515,6 +522,7 @@
 				82A6985A266F585100F16D39 /* SceneDelegate.swift in Sources */,
 				1E15AA252670B54B00A573DB /* HeaderView.swift in Sources */,
 				1EBF20862678809D002DB7D5 /* OAuthManager+Extenstion.swift in Sources */,
+				1EBF208826788945002DB7D5 /* KeyChainService.swift in Sources */,
 				82CB7EEA2675F1A700B85F98 /* Label.swift in Sources */,
 				82CB7EE92675F1A700B85F98 /* Issues.swift in Sources */,
 			);

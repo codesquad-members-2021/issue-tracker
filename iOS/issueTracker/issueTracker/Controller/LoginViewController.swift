@@ -8,8 +8,10 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
     @IBAction func segueNextViewController(_ sender: Any) {
@@ -17,6 +19,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func didTapGitHubLogin(_ sender: Any) {
-        self.excuteOAuth()
+        self.excuteOAuth(service: .gitHub)
     }
 }
