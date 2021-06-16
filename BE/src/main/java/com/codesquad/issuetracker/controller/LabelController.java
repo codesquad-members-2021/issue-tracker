@@ -2,7 +2,8 @@ package com.codesquad.issuetracker.controller;
 
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.request.LabelRequest;
-import com.codesquad.issuetracker.response.LabelResponse;
+import com.codesquad.issuetracker.service.LabelService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashSet;
@@ -12,9 +13,16 @@ import java.util.Set;
 @RequestMapping("/label")
 public class LabelController {
 
+    private final LabelService labelService;
+
+    public LabelController(LabelService labelService) {
+        this.labelService = labelService;
+    }
+
     @PostMapping
-    public ApiResponse createLabel(@RequestBody LabelRequest labelRequest) {
-        return ApiResponse.ok("Create label");
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createLabel(@RequestBody LabelRequest labelRequest) {
+        labelService.create(labelRequest.create());
     }
 
     @GetMapping
