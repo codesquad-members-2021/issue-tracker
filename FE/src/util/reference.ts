@@ -13,6 +13,13 @@ export type TNameValue = {
   value: string;
 };
 
+export type TIssueListTableHeader =
+  | 'search'
+  | 'assignee'
+  | 'label'
+  | 'milestone'
+  | 'writer';
+
 interface ITextIssueList {
   filter: {
     caption: string;
@@ -24,7 +31,11 @@ interface ITextIssueList {
 
   table: {
     header: {
-      [leftOrRight: string]: TNameValue[];
+      left: TNameValue[];
+      right: {
+        name: TIssueListTableHeader;
+        value: string;
+      }[]
     };
   };
 }
@@ -35,7 +46,7 @@ interface ITextLogin {
   placeHolder: {
     id: string;
     password: string;
-  }
+  };
   or: string;
   register: string;
 }
@@ -84,8 +95,8 @@ const TextLogin: ITextLogin = {
     password: '비밀번호',
   },
   or: 'or',
-  register: '회원가입'
-}
+  register: '회원가입',
+};
 
 export type { ITextHeader, ITextIssueList, ITextLogin };
 export { TextHeader, TextIssueList, TextLogin };

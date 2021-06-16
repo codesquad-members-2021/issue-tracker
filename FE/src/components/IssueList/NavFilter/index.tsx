@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-
+import { IIssueList } from '..';
 import SearchBar from './SearchBar';
 import TabBar from './TabBar';
 
-const NavFilter = () => {
+const NavFilter = ({ handleFilterModalClick } : IIssueList) => {
   return (
     <NavFilterLayout>
-      <SearchBar />
+      <SearchBar handleFilterModalClick={handleFilterModalClick} />
       <TabBar />
     </NavFilterLayout>
   );

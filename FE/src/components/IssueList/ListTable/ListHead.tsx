@@ -1,74 +1,34 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { atoms } from '../../../util/store';
+import { filterVisibleAtom, TFilterVisibleAtomTypes } from '../../../util/store/issueListAtoms';
 
+import { IIssueList } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
-import { TNameValue } from '../../../util/reference';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ListModal, { testData } from '../../Common/ListModal';
+import { TextIssueList } from '../../../util/reference';
 
-interface IListHead {
-  headerText: {
-    [leftOrRight: string]: TNameValue[];
-  };
-}
-
-const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
-  // 1. 일반
+const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
+  // 1. 일반 (Recoil 등)
+  const { table: {header: {left, right}} } = TextIssueList;
   const [leftTabsState, setLeftTabsState] = useState(0);
-  const {
-    issueList: {
-      assigneeModalVisible, labelModalVisible,
-      milestoneModalVisible, writerModalVisible,
-    }
-  } = atoms;
-
-  const [isAssigneeModalVisible, setIsAssigneeModalVisible] = useRecoilState(assigneeModalVisible);
-  const [isLabelModalVisible, setIsLabelModalVisible] = useRecoilState(labelModalVisible);
-  const [isMilestoneModalVisible, setIsMilestoneModalVisible] = useRecoilState(milestoneModalVisible);
-  const [isWriterModalVisible, setIsWriterModalVisible] = useRecoilState(writerModalVisible);
-
-  const arrRightTexts = right.map(({ name, value }, i) => {
-    let modalState : boolean = false;
-    let handleRightButtonClick;
-
-    switch (name) {
-      case 'assignee':
-        modalState = isAssigneeModalVisible;
-        handleRightButtonClick = () =>
-          setIsAssigneeModalVisible(!isAssigneeModalVisible);
-        break;
-      case 'label':
-        modalState = isLabelModalVisible;
-        handleRightButtonClick = () =>
-          setIsLabelModalVisible(!isLabelModalVisible);
-        break;
-      case 'milestone':
-        modalState = isMilestoneModalVisible;
-        handleRightButtonClick = () =>
-          setIsMilestoneModalVisible(!isMilestoneModalVisible);
-        break;
-      case 'writer':
-        modalState = isWriterModalVisible;
-        handleRightButtonClick = () =>
-          setIsWriterModalVisible(!isWriterModalVisible);
-        break;
-      default:
-        break;
-    }
-    return { name, value, modalState, handleRightButtonClick };
-  });
+  const [filterVisibleState, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
   // 2. events
   const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
-  const handleHideAllModals = () => {
-    isAssigneeModalVisible && setIsAssigneeModalVisible(false);
-    isLabelModalVisible && setIsLabelModalVisible(false);
-    isMilestoneModalVisible && setIsMilestoneModalVisible(false);
-    isWriterModalVisible && setIsWriterModalVisible(false);
-  };
+  const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
+    setFilterVisibleState((filterVisibleState) => ({
+      ...filterVisibleState,
+      assignee: false,
+      label: false,
+      milestone: false,
+      search: false,
+      writer: false,
+    }));
+    handleFilterModalClick(name);
+  }
 
   // 3-1. render
   const renderLeftTabItems = () =>
@@ -84,34 +44,32 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
         }
       />
     ));
-  
   // 3-2. render (already rendered)
     // rightButtonItems는 함수 형식으로 render하면 recoil 관련값들이 전부 작동안함..
-  const rightButtonItems = arrRightTexts.map(
-    ({ name, value, modalState, handleRightButtonClick }, idx) => (
+  const rightButtonItems = right.map(
+    ({ name, value }, idx) => (
       <RightLayout key={idx}>
         <RightRow>
           <RightButton
+            id="modalBtn"
             name={name}
-            onClick={() => {
-              handleHideAllModals();
-              handleRightButtonClick && handleRightButtonClick();
-            }}
+            onClick={() => handleRightBtnsClick(name)}
           >
             <span>{value}</span>
             <MdKeyboardArrowDown />
           </RightButton>
         </RightRow>
-        <RightRow>
-          <ListModal
-            rightPos="0"
-            isModalVisible={modalState}
-            data={{
-              title: '테스트',
-              items: testData,
-            }}
-          />
-        </RightRow>
+        {filterVisibleState[name] && (
+          <RightRow>
+            <ListModal
+              rightPos="0"
+              data={{
+                title: '테스트',
+                items: testData,
+              }}
+            />
+          </RightRow>
+        )}
       </RightLayout>
     ),
   );
@@ -149,7 +107,7 @@ const ListHeadLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.grayScale.bgColor};
   border-radius: 0.5rem 0.5rem 0px 0px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grayScale.line}`};
-  padding: 1.05rem 0;
+  padding: 0.75rem 0;
 `;
 
 const ListHeadRow = styled.div`
@@ -170,7 +128,6 @@ const RightLayout = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  row-gap: 4px;
 `;
 
 const RightRow = styled.div`

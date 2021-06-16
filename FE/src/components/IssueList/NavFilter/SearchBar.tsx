@@ -1,39 +1,38 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { atoms } from '../../../util/store';
+import { filterVisibleAtom } from '../../../util/store/issueListAtoms';
+
+import { IIssueList } from '..';
 import { Input, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import ListModal from '../../Common/ListModal';
 import { TextIssueList } from '../../../util/reference';
 
-const SearchBar = () => {
+const SearchBar = ({ handleFilterModalClick } : IIssueList) => {
   const { filter: { caption, placeHolder, filterHeader: title, filterList } } = TextIssueList;
-  const { issueList: { searchModalVisible } } = atoms;
 
   const data = {
     title,
     items: filterList.map(({ name, value: text }) => ({ name, text })),
   };
 
-  const [isSearchModalVisible, setIsSearchModalVisible] = useRecoilState(searchModalVisible);
-  const handleFilterButtonClick = () => setIsSearchModalVisible(!isSearchModalVisible);
+  const [filterVisibleState] = useRecoilState(filterVisibleAtom);
 
   return (
     <SearchBarLayout>
       <SearchBarRow>
-        <FilterButton onClick={handleFilterButtonClick}>
+        <FilterButton id="modalBtn" onClick={() => handleFilterModalClick('search')}>
           <span className="caption">{caption}</span>
           <ExpandMore />
         </FilterButton>
         <FilterInput disableUnderline placeholder={placeHolder} />
       </SearchBarRow>
 
-      <SearchBarRow>
-        <ListModal
-          isModalVisible={isSearchModalVisible}
-          data={data}
-        />
-      </SearchBarRow>
+      {filterVisibleState.search && (
+        <SearchBarRow>
+          <ListModal data={data} />
+        </SearchBarRow>
+      )}
     </SearchBarLayout>
   );
 };
@@ -49,8 +48,6 @@ const SearchBarLayout = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   border-radius: 1.1rem;
-
-  row-gap: 8px;
 `;
 
 const SearchBarRow = styled.div<{width?: number}>`
