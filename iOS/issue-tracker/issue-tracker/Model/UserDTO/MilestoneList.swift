@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MilestoneList {
+struct MilestoneList: Codable {
     let milestone: [Milestone]
 }
 
@@ -24,6 +24,5 @@ struct Milestone: Codable {
         case id, title, description, closedIssueCount, openedIssueCount
         case createdTime = "created_time"
         case dueDate = "due_date"
-        
     }
 }

@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MilestoneViewController: UIViewController {
-
+    
+    private let viewModel = MilestoneViewModel()
+    private let disposeBag = DisposeBag()
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 200
@@ -18,13 +23,16 @@ class MilestoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
+        
         tableView.delegate = self
         view.addSubview(tableView)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "마일스톤"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMilestone))
+        
+        setupObserver()
+        setupCellConfiguration()
     }
     
     override func viewDidLayoutSubviews() {
@@ -38,14 +46,27 @@ class MilestoneViewController: UIViewController {
     }
 }
 
-extension MilestoneViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+private extension MilestoneViewController {
+    func setupObserver() {
+        viewModel
+            .subject.asObservable()
+            .subscribe(onNext: {
+                [unowned self] milestones in
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MilestoneTableViewCell.reuseId, for: indexPath)
-        return cell
+    func setupCellConfiguration() {
+        viewModel
+            .subject
+            .bind(to: tableView
+                    .rx
+                    .items(cellIdentifier: MilestoneTableViewCell.reuseId,
+                           cellType: MilestoneTableViewCell.self)) { row, milestone, cell in
+                cell.configure(with: milestone)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
