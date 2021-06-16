@@ -7,9 +7,8 @@
 
 import UIKit
 
-class SettingViewController: UIViewController, MainCoordinated, Networked {
-    
-    var networkController: NetworkController?
+class SettingViewController: UIViewController, MainCoordinated, LoginNetworked {
+    private var loginNetworkManager: LoginNetworkManager!
     weak var mainCoordinator: MainFlowCoordinator?
 
     override func viewDidLoad() {
@@ -17,8 +16,12 @@ class SettingViewController: UIViewController, MainCoordinated, Networked {
 
     }
     
+    func setLoginNetworkManager(_ loginNetworkManager: LoginNetworkManager) {
+        self.loginNetworkManager = loginNetworkManager
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        networkController?.logOut()
+        loginNetworkManager?.logOut()
         mainCoordinator?.logOut()
     }
 }

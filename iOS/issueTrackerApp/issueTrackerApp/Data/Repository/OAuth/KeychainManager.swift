@@ -1,5 +1,5 @@
 //
-//  KeychainController.swift
+//  KeychainManager.swift
 //  issueTrackerApp
 //
 //  Created by zombietux on 2021/06/08.
@@ -8,7 +8,7 @@
 import Foundation
 import JWTDecode
 
-class KeychainController {
+class KeychainManager {
     private static let accountName = "AppUser"
     
     func readJWT() -> String? {
@@ -52,11 +52,11 @@ class KeychainController {
 }
 
 //MARK:- Private
-private extension KeychainController {
+private extension KeychainManager {
     var tokenQuery: [String: Any] {
         return [
             kSecClass as String: kSecClassInternetPassword,
-            kSecAttrAccount as String: KeychainController.accountName,
+            kSecAttrAccount as String: KeychainManager.accountName,
             kSecAttrServer as String: GitHubEndpoint.serverURL.absoluteString
         ]
     }

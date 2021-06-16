@@ -1,5 +1,5 @@
 //
-//  NetworkController.swift
+//  LoginNetworkManager.swift
 //  issueTrackerApp
 //
 //  Created by zombietux on 2021/06/08.
@@ -7,16 +7,16 @@
 
 import Foundation
 
-class NetworkController {
-    private let keychainController: KeychainController
+class LoginNetworkManager {
+    private let keychainManager: KeychainManager
     private var requests: [URL: AnyObject] = [:]
     
-    init(keychainController: KeychainController) {
-        self.keychainController = keychainController
+    init(keychainManager: KeychainManager) {
+        self.keychainManager = keychainManager
     }
     
     var jWT: String? {
-        return keychainController.readJWT()
+        return keychainManager.readJWT()
     }
     
     var isClientAuthenticated: Bool {
@@ -30,7 +30,7 @@ class NetworkController {
         
         jWTRequest.execute { (authorization) in
             if let jWT = authorization?.jwt {
-                self.keychainController.store(jWT: jWT)
+                self.keychainManager.store(jWT: jWT)
             }
             self.requests[requestURL] = nil
             self.fetchUserAvatarImage()//test
@@ -39,10 +39,10 @@ class NetworkController {
     }
     
     func logOut() {
-        keychainController.deleteJWT()
+        keychainManager.deleteJWT()
     }
     
     func fetchUserAvatarImage() {
-        keychainController.storeAvatarImage(jWT: self.jWT ?? "")
+        keychainManager.storeAvatarImage(jWT: self.jWT ?? "")
     }
 }

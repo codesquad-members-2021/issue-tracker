@@ -8,9 +8,8 @@
 import UIKit
 
 class IssueSelectTableViewController: UITableViewController, IssueViewModelType, MainCoordinated {
-
-    var issueViewModel: IssueViewModel?  // 0x000001
-//    var issues: [Issue] = []
+   
+    private var issueViewModel: IssueViewModel!
     var mainCoordinator: MainFlowCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +18,10 @@ class IssueSelectTableViewController: UITableViewController, IssueViewModelType,
         self.configureBackBarButtonItem()
         self.configureRightBarButtonItem()
     }
-
-//    public func prepare(with issues: [Issue]) {
-//        self.issues = issues
-//    }
+    
+    func setIssueViewModel(_ issueViewModel: IssueViewModel) {
+        self.issueViewModel = issueViewModel
+    }
     
     private func configureTableView() {
         self.tableView.register(IssueCell.nib, forCellReuseIdentifier: IssueCell.identifier)
@@ -42,9 +41,7 @@ class IssueSelectTableViewController: UITableViewController, IssueViewModelType,
     }
     
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.issues.count
         return issueViewModel?.issues.count ?? 0
     }
 

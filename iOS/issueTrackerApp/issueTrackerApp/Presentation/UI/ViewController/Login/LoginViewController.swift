@@ -8,15 +8,14 @@
 import UIKit
 import AuthenticationServices
 
-class LoginViewController: UIViewController, LoginCoordinated, Networked {
+class LoginViewController: UIViewController, LoginCoordinated, LoginNetworked {
 
     @IBOutlet weak var gitHubLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: UIStackView!
     
     private let state = UUID().description
-    
     weak var loginCoordinator: LoginFlowCoordinator?
-    var networkController: NetworkController?
+    private var loginNetworkManager: LoginNetworkManager!
     
     var isAuthenticating: Bool = false {
         didSet {
@@ -27,6 +26,10 @@ class LoginViewController: UIViewController, LoginCoordinated, Networked {
     override func viewDidLoad() {
         super.viewDidLoad()
         configAppleLoginButton()
+    }
+    
+    func setLoginNetworkManager(_ loginNetworkManager: LoginNetworkManager) {
+        self.loginNetworkManager = loginNetworkManager
     }
 }
 
@@ -74,7 +77,7 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 extension LoginViewController {
     func performAuthorization(with authorizationCode: String) {
         isAuthenticating = true
-        networkController?.authenticateWith(authorizationCode: authorizationCode, client: GitHubEndpoint.FieldNames.client) { [weak self] in
+        loginNetworkManager?.authenticateWith(authorizationCode: authorizationCode, client: GitHubEndpoint.FieldNames.client) { [weak self] in
             self?.loginCoordinator?.loginViewControllerDidFinishAuthorization()
         }
     }

@@ -24,17 +24,16 @@ protocol LoginCoordinated: AnyObject {
     var loginCoordinator: LoginFlowCoordinator? { get set }
 }
 
-protocol Networked: class {
-    var networkController: NetworkController? { get set }
+protocol LoginNetworked: class {
+    func setLoginNetworkManager(_ loginNetworkManager: LoginNetworkManager)
 }
 
 protocol AddIssueViewModelType: AnyObject {
-//    var addIssueViewModel: AddIssueViewModel? { get set }
     func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel)
 }
 
 protocol IssueViewModelType: AnyObject {
-    var issueViewModel: IssueViewModel? { get set }
+    func setIssueViewModel(_ issueViewModel: IssueViewModel)
 }
 
 protocol IssueNetworked: class {
@@ -43,7 +42,7 @@ protocol IssueNetworked: class {
 
 class MainFlowCoordinator: NSObject {
     private let mainTabBarController: MainTabBarController
-    private let keyChainController = KeychainController()
+    private let keychainManager = KeychainManager()
     private let loginFlowCoordinator = LoginFlowCoordinator()
     private let addIssueViewModel = AddIssueViewModel()
     private let issueViewModel = IssueViewModel()
@@ -63,11 +62,11 @@ class MainFlowCoordinator: NSObject {
 extension MainFlowCoordinator: Coordinator {
     func configure(viewController: UIViewController) {
         (viewController as? MainCoordinated)?.mainCoordinator = self
-        (viewController as? Networked)?.networkController = NetworkController(keychainController: keyChainController)
+        (viewController as? LoginNetworked)?.setLoginNetworkManager(LoginNetworkManager(keychainManager: keychainManager))
         (viewController as? LoginCoordinated)?.loginCoordinator = loginFlowCoordinator
         (viewController as? AddIssueViewModelType)?.setAddIssueViewModel(addIssueViewModel)
         (viewController as? IssueNetworked)?.setIssueNetworkController(IssueNetworkController())
-        (viewController as? IssueViewModelType)?.issueViewModel = issueViewModel
+        (viewController as? IssueViewModelType)?.setIssueViewModel(issueViewModel)
         
         if let tabBarController = viewController as? UITabBarController {
             tabBarController.viewControllers?.forEach(configure(viewController:))

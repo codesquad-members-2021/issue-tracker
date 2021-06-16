@@ -11,7 +11,7 @@ class IssueViewController: UIViewController, IssueViewModelType, MainCoordinated
 
     @IBOutlet weak var issueTableView: UITableView!
     
-    var issueViewModel: IssueViewModel?
+    private var issueViewModel: IssueViewModel!
     var mainCoordinator: MainFlowCoordinator?
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -33,6 +33,10 @@ class IssueViewController: UIViewController, IssueViewModelType, MainCoordinated
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.configureSearchController()
+    }
+    
+    func setIssueViewModel(_ issueViewModel: IssueViewModel) {
+        self.issueViewModel = issueViewModel
     }
     
     private func configureNotificationCenter() {

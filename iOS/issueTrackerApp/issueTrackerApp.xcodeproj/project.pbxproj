@@ -54,9 +54,9 @@
 		931BAEA52677973200CD9244 /* AddIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEA42677973200CD9244 /* AddIssueViewModel.swift */; };
 		931BAEAD2678843200CD9244 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEAC2678843200CD9244 /* CommentViewController.swift */; };
 		931BAEB226788EA700CD9244 /* MarkdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEB126788EA700CD9244 /* MarkdownViewController.swift */; };
-		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
+		9343E2CA266EF9CD0086F977 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainManager.swift */; };
 		9343E2D3266EFBA70086F977 /* GitHubEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */; };
-		9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* NetworkController.swift */; };
+		9343E2D8266F03E90086F977 /* LoginNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2D7266F03E90086F977 /* LoginNetworkManager.swift */; };
 		9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2F1266F5CC70086F977 /* Coordinator.swift */; };
 		9343E2F7266F5E890086F977 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2F6266F5E890086F977 /* MainTabBarController.swift */; };
 		9343E300266F603C0086F977 /* AccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2FF266F603C0086F977 /* AccessTokenRequest.swift */; };
@@ -133,9 +133,9 @@
 		931BAEA42677973200CD9244 /* AddIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIssueViewModel.swift; sourceTree = "<group>"; };
 		931BAEAC2678843200CD9244 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		931BAEB126788EA700CD9244 /* MarkdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewController.swift; sourceTree = "<group>"; };
-		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
+		9343E2C9266EF9CD0086F977 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		9343E2D2266EFBA70086F977 /* GitHubEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubEndpoint.swift; sourceTree = "<group>"; };
-		9343E2D7266F03E90086F977 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		9343E2D7266F03E90086F977 /* LoginNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetworkManager.swift; sourceTree = "<group>"; };
 		9343E2F1266F5CC70086F977 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		9343E2F6266F5E890086F977 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9343E2FF266F603C0086F977 /* AccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRequest.swift; sourceTree = "<group>"; };
@@ -310,7 +310,6 @@
 			children = (
 				930FAEBE266E128700422968 /* UseCase */,
 				930FAEBD266E127B00422968 /* Entity */,
-				9343E2F0266F5CBC0086F977 /* Coordinator */,
 				931BAE692674EE5E00CD9244 /* Dummy data */,
 				931BAE742674FA8F00CD9244 /* Protocols and extentions */,
 			);
@@ -333,6 +332,7 @@
 		930FAEBE266E128700422968 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				9343E2F0266F5CBC0086F977 /* Coordinator */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -421,8 +421,8 @@
 		931BADFF26720C0200CD9244 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
-				9343E2C9266EF9CD0086F977 /* KeychainController.swift */,
-				9343E2D7266F03E90086F977 /* NetworkController.swift */,
+				9343E2C9266EF9CD0086F977 /* KeychainManager.swift */,
+				9343E2D7266F03E90086F977 /* LoginNetworkManager.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -659,7 +659,7 @@
 				931BAEA52677973200CD9244 /* AddIssueViewModel.swift in Sources */,
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
 				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
-				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,
+				9343E2D8266F03E90086F977 /* LoginNetworkManager.swift in Sources */,
 				883F51CC2672041A0055EC9E /* Milestones.swift in Sources */,
 				883F51DC267204DC0055EC9E /* Comment.swift in Sources */,
 				9343E2F2266F5CC70086F977 /* Coordinator.swift in Sources */,
@@ -671,7 +671,7 @@
 				931BAEB226788EA700CD9244 /* MarkdownViewController.swift in Sources */,
 				883F51AE2670B2F70055EC9E /* UIColorExtension.swift in Sources */,
 				931BAE762674FC4700CD9244 /* ArrayTableViewDataSource.swift in Sources */,
-				9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */,
+				9343E2CA266EF9CD0086F977 /* KeychainManager.swift in Sources */,
 				931BAE5526749FCD00CD9244 /* MoreInfoCell.swift in Sources */,
 				883F51A92670ABDC0055EC9E /* TagLabel.swift in Sources */,
 				88C3A9FE26785B160090FAD8 /* Status.swift in Sources */,
