@@ -4,12 +4,13 @@ import Button from '@material-ui/core/Button';
 
 interface PrimaryButtonType {
   value: string;
+  className?: string;
 }
 
-export default function PrimaryButton({ value }: PrimaryButtonType) {
+export default function PrimaryButton({ value, className }: PrimaryButtonType) {
   return (
     <PrimaryButtonBlock>
-      <Button variant='contained' size='medium' color='primary'>
+      <Button variant='contained' size='medium' color='primary' className={className}>
         {value}
       </Button>
     </PrimaryButtonBlock>
