@@ -2,13 +2,13 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import TitleInput from '@components/common/TitleInput';
+import InputField from '@/components/common/InputField';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import API from '@/utils/API';
 import useDebounceTyping from '@/utils/hook/useDebounce';
 import ClipIcon from '@/Icons/Clip.svg';
 
-const InputField = () => {
+const TitleInput = () => {
   const classes = inputStyles();
   const [debouncedCount, setDebounceCount] = useDebounceTyping<number>(0, { start: 500, end: 2000 });
   const handleChangeTyping = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ const InputField = () => {
 
   return (
     <InputWrapper>
-      <TitleInput />
+      <InputField />
       <TextAreaWrapper>
         <TextField
           label="코멘트를 입력하세요"
@@ -89,4 +89,4 @@ const TypingCountWrapper = styled.div`
   font-size: 12px;
   color:#6E7191;
 `;
-export default InputField;
+export default TitleInput;

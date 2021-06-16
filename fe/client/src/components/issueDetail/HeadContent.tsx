@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import TitleInput from '@components/common/TitleInput';
+import InputField from '@/components/common/InputField';
 import IconButton from '@components/common/IconButton';
 import CloseOrOpenLabel from '@components/common/CloseOrOpenLabel';
 
@@ -8,7 +8,7 @@ const HeadContent = () => {
   return (
     <>
       <HeadTitleWrapper>
-        <TitleInput />
+        <InputField />
         <IconButton icon="close" variant="outlined" color="primary" minwidth="130px" margin='0 0 0 92px'>
           <ButtonText>편집 취소</ButtonText>
         </IconButton>

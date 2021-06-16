@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { InputAdornment } from '@material-ui/core';
 import Label from '@components/common/Label';
-import TitleInput from '@components/common/TitleInput';
+import InputField from '@/components/common/InputField';
 import IconButton from '@components/common/IconButton';
 import { LabelItemType } from '@components/common/types/LabelType';
 import { getRandomColor } from '@/utils/serviceUtils';
@@ -33,9 +33,9 @@ const LabelEditItem = ({ name, color, description, setToggleItem }: LabelItemTyp
           <Label {...{ name }} color={colorState} />
         </LabelWrapper>
         <InputsWrapper>
-          <TitleInput defaultValue={name} label='레이블이름' />
-          <TitleInput defaultValue={description} label='설명(선택)' />
-          <TitleInput inputRef={colorInputColRef} defaultValue={color} label='배경 색상'
+          <InputField defaultValue={name} label='레이블이름' />
+          <InputField defaultValue={description} label='설명(선택)' />
+          <InputField inputRef={colorInputColRef} defaultValue={color} label='배경 색상'
             width="30%" endAdornment={reFreshButton} />
           <IconButtonsWrapper>
             <IconButton variant="outlined" color="primary"

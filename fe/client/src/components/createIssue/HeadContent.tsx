@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const HeadContent = () => {
   return (
-      <HeadContentWrapper>
-        새로운 이슈작성
-      </HeadContentWrapper>
+    <HeadContentWrapper>
+      새로운 이슈작성
+    </HeadContentWrapper>
   )
 }
 

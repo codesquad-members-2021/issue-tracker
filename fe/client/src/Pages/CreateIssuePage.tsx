@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Tabs from '@components/createIssue/Tabs';
-import InputField from '@components/createIssue/InputField';
+import TitleInput from '@components/createIssue/TitleInput';
 import IconButton from '@components/common/IconButton';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
 
@@ -16,7 +16,7 @@ const CreateIssuePage = () => {
       <Hr />
       <ContentsWrapper>
         <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" />
-        <InputField />
+        <TitleInput />
         <Tabs />
       </ContentsWrapper>
       <Hr />
