@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
-import { IssueListItemType } from '../common/types/APIType';
-import MilestoneIcon from '@/Icons/Milestone.svg';
+import { IssueListItemType } from '@components/common/types/APIType';
 import { getTimeTaken } from '@/utils/serviceUtils';
+import MilestoneIcon from '@/Icons/Milestone.svg';
 type IssueDescType = {
   issueItem: IssueListItemType
 }

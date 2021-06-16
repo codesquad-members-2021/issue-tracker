@@ -1,7 +1,7 @@
 import React from 'react'
+import styled from 'styled-components';
 import HeadContent from '@components/issueDetail/HeadContent';
 import Tabs from '@components/createIssue/Tabs';
-import styled from 'styled-components';
 import CommentItem from '@components/issueDetail/CommentItem';
 import IconButton from '@components/common/IconButton';
 

@@ -1,17 +1,40 @@
+import { useEffect } from 'react';
 import styled from "styled-components";
+import { labelMilestoneCountAtom } from "@components/common/atoms/labelMilestoneAtom";
+import useFetch, { AsyncState } from "@/utils/hook/useFetch";
+import API from "@/utils/API";
+import { useRecoilState } from "@/utils/myRecoil/useRecoilState";
 import LabelIcon from '@/Icons/Label.svg';
 import MilestoneIcon from '@/Icons/Milestone.svg';
 
 const LabelMilestoneToggle = () => {
+  const [labelState] = useFetch(API.get.labelsCount);
+  const [milestoneState] = useFetch(API.get.milestonesCount);
+  const { data: labelData }: AsyncState<any, any> = labelState;
+  const { data: milestoneData }: AsyncState<any, any> = milestoneState;
+  const [, setLabelMilestoneCountState] = useRecoilState(labelMilestoneCountAtom);
+
+  useEffect(() => {
+    if (!(labelData && milestoneData)) return;
+    setLabelMilestoneCountState({
+      label: labelData.count,
+      milestone: milestoneData.count
+    });
+  }, [labelData, milestoneData]);
+
   return (
     <ToggleWrapper>
       <ToggleItem>
         <RadioButton type="radio" name="labelMilestone" />
-        <LabelBelongSpan> <img src={LabelIcon} alt="" /> &nbsp; 레이블 </LabelBelongSpan>
+        <LabelBelongSpan> <img src={LabelIcon} alt="" /> &nbsp; 레이블
+          {labelData && ` (${labelData.count})`}
+        </LabelBelongSpan>
       </ToggleItem>
       <ToggleItem>
         <RadioButton type="radio" name="labelMilestone" />
-        <LabelBelongSpan>  <img src={MilestoneIcon} alt="" /> &nbsp; 마일스톤</LabelBelongSpan>
+        <LabelBelongSpan>  <img src={MilestoneIcon} alt="" /> &nbsp; 마일스톤
+          {milestoneData && ` (${milestoneData.count})`}
+        </LabelBelongSpan>
       </ToggleItem>
     </ToggleWrapper>
   );

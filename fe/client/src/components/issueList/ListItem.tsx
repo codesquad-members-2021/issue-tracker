@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import styled from 'styled-components';
-import { useCallback } from 'react';
-import { IssueListItemType } from '@components/common/types/APIType';
-import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { issueCheckedItemAtom, CheckBoxItemType, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
-import AlertCircleIcon from '@/Icons/AlertCircle.svg';
-import Label from '@components/common/Label';
 import IssueDesc from './IssueDesc';
+import Label from '@components/common/Label';
+import { IssueListItemType } from '@components/common/types/APIType';
+import { issueCheckedItemAtom, CheckBoxItemType, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
+import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
+import AlertCircleIcon from '@/Icons/AlertCircle.svg';
 type ListItemType = {
   issueItem: IssueListItemType
 }
@@ -37,7 +36,7 @@ const ListItem = ({ issueItem }: ListItemType) => {
           <IssueTitleWrapper>
             <img src={AlertCircleIcon} alt="" />
             <IssueTitle>{issueItem.title}</IssueTitle>
-            {issueItem.labels.labels.length && issueItem.labels.labels.map(({ name, id, color }) => {
+            {issueItem.labels.length && issueItem.labels.map(({ name, id, color }) => {
               return <Label {...{ name, color }} key={id} />
             })}
           </IssueTitleWrapper>

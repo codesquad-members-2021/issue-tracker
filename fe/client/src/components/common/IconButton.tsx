@@ -30,7 +30,8 @@ type IconButtonType = {
   margin?: string;
   height?: string;
   children?: React.ReactNode;
-  style?:any;
+  style?: any;
+  [key: string]: any;
 }
 
 const IconButton = ({ icon, children, ...props }: IconButtonType) => {

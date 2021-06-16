@@ -17,16 +17,14 @@ export type IssueListItemType = {
       name: string
     }
   ],
-  labels: {
-    labels: [
-      {
-        id: number,
-        name: string,
-        description: string,
-        color: string
-      }
-    ]
-  },
+  labels: [
+    {
+      id: number,
+      name: string,
+      description: string,
+      color: string
+    }
+  ],
   milestone: {
     id: number,
     name: string,

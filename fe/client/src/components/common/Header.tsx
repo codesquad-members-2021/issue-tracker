@@ -1,7 +1,7 @@
 import React from 'react'
+import { useLocation } from 'react-router';
 import styled from 'styled-components';
 import LogoIcon from '@/Icons/MediumLogo.svg';
-import { useLocation } from 'react-router';
 
 const Header = ({ routePaths }: { routePaths: string[] }) => {
   const location = useLocation();

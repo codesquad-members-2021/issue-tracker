@@ -1,7 +1,7 @@
 import React from 'react'
+import styled from 'styled-components';
 import TitleInput from '@components/common/TitleInput';
 import IconButton from '@components/common/IconButton';
-import styled from 'styled-components';
 import CloseOrOpenLabel from '@components/common/CloseOrOpenLabel';
 
 const HeadContent = () => {

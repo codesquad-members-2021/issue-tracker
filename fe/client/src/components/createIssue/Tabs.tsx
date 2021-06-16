@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components';
-import PlusIcon from '@/Icons/Plus.svg';
 import FilterTab from '@components/common/FilterTab';
+import { filterAtom, FilterBooleanType } from '@components/common/atoms/filterAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom, FilterBooleanType } from '../common/atoms/filterAtom';
+import PlusIcon from '@/Icons/Plus.svg';
 
 const tabItems = [
   { name: '담당자', title: 'manager' },

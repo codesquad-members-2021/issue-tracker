@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { filterAtom, filterDefaultCheckerAtom, FilterStringType } from './atoms/filterAtom';
+import { filterAtom, filterDefaultCheckerAtom, FilterStringType } from '@components/common/atoms/filterAtom';
 
 type FilterTabType = {
   header: string;
