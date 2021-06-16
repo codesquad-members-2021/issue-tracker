@@ -74,7 +74,7 @@ public class IssueService {
     public IssueWrapper updateIssue (IssueRequest issueRequest, Long id) {
         Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
         List<Comment> comments = commentRepository.findAllByIssueId(id);
-        issue.updateIssue(issueRequest.getTitle());
+        issue.updateIssue(issueRequest);
         return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
     }
 }

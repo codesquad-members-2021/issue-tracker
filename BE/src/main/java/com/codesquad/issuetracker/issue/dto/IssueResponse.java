@@ -3,11 +3,8 @@ package com.codesquad.issuetracker.issue.dto;
 import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.comment.dto.CommentResponse;
 import com.codesquad.issuetracker.issue.domain.Issue;
-import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.label.dto.LabelDto;
-import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.milestone.dto.MilestoneResponseDto;
-import com.codesquad.issuetracker.user.domain.User;
 import com.codesquad.issuetracker.user.dto.UserDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,7 +21,7 @@ public class IssueResponse {
 
     private final Long id;
     private final UserDto author;
-    private final boolean isOpen;
+    private final boolean open;
     private final String title;
     private final LocalDateTime createdAt;
     private final Set<LabelDto> labels;

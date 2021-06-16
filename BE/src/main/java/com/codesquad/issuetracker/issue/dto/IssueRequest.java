@@ -5,4 +5,5 @@ import lombok.Getter;
 @Getter
 public class IssueRequest {
     private String title;
+    private boolean open;
 }

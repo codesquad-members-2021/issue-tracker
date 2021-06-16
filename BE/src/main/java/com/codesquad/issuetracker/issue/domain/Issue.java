@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.issue.domain;
 
+import com.codesquad.issuetracker.issue.dto.IssueRequest;
 import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.user.domain.User;
@@ -30,7 +31,7 @@ public class Issue {
 
     @NonNull
     @Column(name = "ISSUE_IS_OPEN", nullable = false)
-    private boolean isOpen = true;
+    private boolean open = true;
 
     @NonNull
     @Column(name = "ISSUE_TITLE", nullable = false)
@@ -53,14 +54,6 @@ public class Issue {
         this.author = author;
         this.title = title;
         this.createdAt = LocalDateTime.now();
-    }
-
-    public void open() {
-        this.isOpen = true;
-    }
-
-    public void close() {
-        this.isOpen = false;
     }
 
     public void addLabel(Label label) {
@@ -87,8 +80,9 @@ public class Issue {
         this.milestone = null;
     }
 
-    public void updateIssue(String title) {
-        this.title = title;
+    public void updateIssue(IssueRequest issueRequest) {
+        this.title = issueRequest.getTitle();
+        this.open = issueRequest.isOpen();
     }
 
     public static Issue create(User author, String title) {

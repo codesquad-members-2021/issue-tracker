@@ -27,7 +27,7 @@ public class IssueController {
         return issueService.createIssue(issueCreateRequest, author);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public IssueWrapper updateIssue(@RequestBody IssueRequest issueRequest, @PathVariable Long id) {
         return issueService.updateIssue(issueRequest, id);
     }
