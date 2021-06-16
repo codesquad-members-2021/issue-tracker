@@ -162,7 +162,27 @@ const mokData = {
     closedIssueCount: 0,
   },
 };
-export const selectedTabState = atom<selectedTabType>({
+
+export const selectedTabState = selector<selectedTabType>({
   key: 'selectedTabState',
-  default: mokData,
+  get: ({ get }) => {
+    const selectUser = get(selectedUserState);
+    const selectLabel = get(selectedLabelState);
+    const selectMilestone = get(selectedMilestoneState);
+
+    return { assignee: selectUser, label: selectLabel, milestone: selectMilestone };
+  },
+});
+
+const selectedUserState = atom<Array<UserType> | []>({
+  key: 'selectedUserTabState',
+  default: mokData.assignee,
+});
+const selectedLabelState = atom<Array<LabelType> | []>({
+  key: 'selectedLabelTabState',
+  default: mokData.label,
+});
+const selectedMilestoneState = atom<MilestoneType | null>({
+  key: 'selectedMilestoneTabState',
+  default: mokData.milestone,
 });
