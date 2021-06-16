@@ -12,7 +12,7 @@ const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
       const { code } = qs.parse(location.search, {
         ignoreQueryPrefix: true,
       });
-      console.log(code);
+
       try {
         const response = await fetch(`${authUri}`, {
           method: 'POST',
@@ -25,15 +25,13 @@ const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
         });
         const data = await response.json();
 
-        console.log('data', data);
         localStorage.setItem('token', data.token);
 
         const token = localStorage.getItem('token');
         if (!token) return;
-        console.log('token?"', token);
+
         const decoded =
           jwtDecode<{ name: string; profileImageUrl: string }>(token);
-        console.log(decoded);
 
         localStorage.setItem('name', decoded.name);
         localStorage.setItem('profileImageUrl', decoded.profileImageUrl);

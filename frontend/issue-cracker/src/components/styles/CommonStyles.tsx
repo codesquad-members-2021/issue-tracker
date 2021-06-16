@@ -21,7 +21,6 @@ const Issue = {
     width: 100%;
     height: 64px;
     padding: 24px 24px 24px 0px;
-    margin-top: 10px;
     border-radius: 16px 16px 0px 0px;
     border: 1px solid #d9dbe9;
     background: #f7f7fc;

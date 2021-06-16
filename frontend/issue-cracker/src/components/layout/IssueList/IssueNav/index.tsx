@@ -4,6 +4,7 @@ import { SMALL_FILL, WRITING_ISSUE } from '../../../../utils/const';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import IssueFilter from './IssueFilter';
 import TapGroup from '../../../common/group/TabGroup';
+import { Link } from 'react-router-dom';
 
 const IssueNav: FC = () => {
   return (
@@ -16,9 +17,11 @@ const IssueNav: FC = () => {
           <TabBox>
             <TapGroup />
           </TabBox>
-          <ButtonBox>
-            <ButtonGroup type={SMALL_FILL} name={WRITING_ISSUE} />
-          </ButtonBox>
+          <Link to="/main/issue-add">
+            <ButtonBox>
+              <ButtonGroup type={SMALL_FILL} name={WRITING_ISSUE} />
+            </ButtonBox>
+          </Link>
         </AnotherBox>
       </IssueNavContainer>
     </IssueNavDiv>
@@ -27,7 +30,9 @@ const IssueNav: FC = () => {
 
 export default IssueNav;
 
-const IssueNavDiv = styled.div``;
+const IssueNavDiv = styled.div`
+  margin-bottom: 10px;
+`;
 
 const IssueNavContainer = styled.div`
   display: flex;

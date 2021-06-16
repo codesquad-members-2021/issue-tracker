@@ -8,6 +8,7 @@ import CheckBoxes from '../../../common/CheckBoxes';
 import IssueOpenIcon from '../../../styles/svg/IssueOpenIcon';
 import styled from 'styled-components';
 import LabelSmallGroup from '../../../common/group/LabelSmallGroup';
+import { Link } from 'react-router-dom';
 
 const IssueCell = (): JSX.Element => {
   const profileURL = localStorage.getItem('profileImageUrl');
@@ -17,14 +18,32 @@ const IssueCell = (): JSX.Element => {
       <IssueCellStyle>
         <CheckBoxes />
         <IssueContent>
-          <IssueUpper>
-            <IssueOpenIcon color="#3f51b5" style={{ width: 24, height: 24 }} />
-            <IssueTitle>맛있는 저녁 메뉴 선정</IssueTitle>
-            <LabelSmallGroup
-              color={'#1E4174'}
-              label="밥에 관한 것"
-            ></LabelSmallGroup>
-          </IssueUpper>
+          <Link
+            to={{
+              pathname: '/main/issue-detail/1',
+              state: {
+                issueNumber: 1,
+                title: '맛있는 저녁 메뉴 선정',
+                content: '뭘 먹을까?! 피그 인 더 가든?!',
+                isOpen: true,
+                writer: 'ink-O',
+                date: '',
+              },
+            }}
+          >
+            <IssueUpper>
+              <IssueOpenIcon
+                color="#3f51b5"
+                style={{ width: 24, height: 24 }}
+              />
+              <IssueTitle>맛있는 저녁 메뉴 선정</IssueTitle>
+              <LabelSmallGroup
+                color={'#fff'}
+                backgroundColor={'#1E4174'}
+                label="밥에 관한 것"
+              ></LabelSmallGroup>
+            </IssueUpper>
+          </Link>
           <T.TextSmall color="#6E7191">
             <IssueLower>
               <IssueID>#1</IssueID>이 이슈가8분전 ,ink-0님에 의해 작성되었습니다
@@ -48,6 +67,11 @@ const IssueContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 const IssueUpper = styled.div`
   display: flex;

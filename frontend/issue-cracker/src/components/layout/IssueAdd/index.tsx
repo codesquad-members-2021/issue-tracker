@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import IssueAddTitle from '../IssueAdd/IssueAddTitle';
-import IssueAddBox from './IssueAddBox/IssueAddBox';
+import IssueAddBox from '../IssueAdd/IssueAddBox';
 import { Line as S } from '../../styles/CommonStyles';
 import IssueAddButton from './IssueAddButton';
 
