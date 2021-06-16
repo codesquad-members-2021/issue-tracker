@@ -33,6 +33,8 @@ const MainPage = () => {
 	);
 };
 
-const MainPageLayout = styled.div``;
+const MainPageLayout = styled.div`
+	padding: 0 5%;
+`;
 
 export default MainPage;

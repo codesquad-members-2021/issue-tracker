@@ -24,6 +24,7 @@ const StyleHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	padding: 27px 0px;
 `;
 
 const ImgWrapper = styled.div`

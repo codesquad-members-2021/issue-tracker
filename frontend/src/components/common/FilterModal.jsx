@@ -118,7 +118,7 @@ const FilterModal = () => {
 };
 const FilterModalLayout = styled.div`
 	position: absolute;
-	top: 110%;
+	top: 45px;
 	background-color: white;
 	text-align: left;
 	border-radius: 16px;
@@ -129,7 +129,6 @@ const FilterControlLabel = styled(FormControlLabel)`
 	display: flex;
 	justify-content: space-between;
 	margin: 0;
-	outline: 1px solid red;
 `;
 
 const FilterRadioContainer = styled(RadioGroup)`
