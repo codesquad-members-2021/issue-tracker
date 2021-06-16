@@ -18,9 +18,6 @@ function App() {
         <Background>
           <BrowserRouter>
             <Switch>
-              <Route path="/" exact>
-                <Login />
-              </Route>
               <Route path="/issues">
                 <Issues />
               </Route>
@@ -35,6 +32,9 @@ function App() {
               </Route>
               <Route path="/milestones">
                 <Milestones />
+              </Route>
+              <Route path="/">
+                <Login />
               </Route>
             </Switch>
           </BrowserRouter>
