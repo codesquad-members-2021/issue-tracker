@@ -1,28 +1,25 @@
 package com.codesquad.issuetracker.request;
 
-import java.time.LocalDate;
+import com.codesquad.issuetracker.domain.Milestone;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+import java.time.LocalDateTime;
+
+@Getter
+@AllArgsConstructor
 public class MilestoneRequest {
+
     private String title;
     private String content;
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
 
-    public MilestoneRequest(String title, String content, LocalDate dueDate) {
-        this.title = title;
-        this.content = content;
-        this.dueDate = dueDate;
+    public Milestone create(Long id) {
+        return Milestone.create(id, title, content, dueDate);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
+    public Milestone create(){
+        return create(null);
     }
 
 }
