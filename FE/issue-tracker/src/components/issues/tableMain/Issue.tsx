@@ -2,8 +2,25 @@ import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/avatar';
 import Label from '@components/common/Label';
+import { ReactComponent as MilestoneIcon } from '@assets/milestone.svg';
 
-function Issue() {
+import type { IssueInfo } from './IssueTable';
+
+type Props = {
+  info: IssueInfo;
+};
+
+function Issue({ info }: Props) {
+  const {
+    id,
+    title,
+    description,
+    author_avatar_url,
+    label_list,
+    issue_number,
+    created_time,
+    milestone_title,
+  } = info;
   const defaultAvatarPosition = '32px';
 
   return (
@@ -12,30 +29,28 @@ function Issue() {
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
           <IssueTitle>
-            <h2>이것은 제목입니다.</h2>
-            <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
+            <h2>{title}</h2>
+            {label_list.map(({ id, title, color_code }) => (
+              <Label
+                key={id}
+                name={title}
+                colorCode={color_code}
+                fontLight={true}
+              />
+            ))}
           </IssueTitle>
         </StyledDiv>
         <Description>
-          <span>#이슈번호</span>
-          <span>작성자 및 타임스탬프</span>
-          <span>마일스톤</span>
+          <span>#{issue_number}</span>
+          <span>작성자 및 {created_time}</span>
+          <div>
+            <MilestoneIcon />
+            <span>{milestone_title}</span>
+          </div>
         </Description>
       </IssueContainer>
       <AvatarContainer>
         <AvatarBox>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="20px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="8px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="-4px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="-16px">
           <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
         </AvatarBox>
       </AvatarContainer>
@@ -108,9 +123,20 @@ const CheckBox = styled.input`
 const Description = styled.div`
   margin: 8px 0 0 40px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 
   span {
     padding-right: 16px;
     color: ${({ theme }) => theme.colors.gr_label};
+
+    &:last-child {
+      padding-left: 8px;
+    }
   }
 `;
