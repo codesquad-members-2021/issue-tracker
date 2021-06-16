@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.issue.repository;
+package com.codesquad.issuetracker.issue.infra;
 
 import com.codesquad.issuetracker.issue.domain.Issue;
 import org.springframework.data.repository.CrudRepository;

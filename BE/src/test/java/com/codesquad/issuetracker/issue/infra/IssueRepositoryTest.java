@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.issue.repository;
+package com.codesquad.issuetracker.issue.infra;
 
 import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import com.codesquad.issuetracker.issue.domain.Issue;
