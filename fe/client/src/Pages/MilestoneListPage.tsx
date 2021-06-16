@@ -1,14 +1,18 @@
 import React from 'react'
 import styled from 'styled-components';
 import HeadContent from '@components/milestoneList/HeadContent';
+import MilestoneCreate from '@components/milestoneList/MilestoneCreate';
 import MilestoneSwitching from '@components/milestoneList/MilestoneSwitching';
 import IconButton from '@components/common/IconButton';
 import { ListWrapper } from '@components/common/baseStyle/baseStyle';
+import useToggle from '@/utils/hook/useToggle';
 
 const MilestoneListPage = () => {
+  const [isShowCreate, setShowCreate] = useToggle(false);
   return (
     <>
-      <HeadContent />
+      <HeadContent {...{ isShowCreate, setShowCreate }} />
+      {isShowCreate && <MilestoneCreate />}
       <ListWrapper wrapWidth="100%">
         <ListHeader>
           <IconButton icon='milestone'>

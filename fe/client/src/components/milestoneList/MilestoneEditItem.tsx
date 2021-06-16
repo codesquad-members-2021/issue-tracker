@@ -1,23 +1,21 @@
 import React from 'react'
-import styled from 'styled-components';
-import InputField from '@/components/common/InputField';
+import IconButton from '@components/common/IconButton';
+import { MilestoneItemType } from '@components/common/types/MilestoneType';
+import NewMilestone from './NewMilestone';
 
-const MilestoneEditItem = () => {
+const MilestoneEditItem = ({ setToggleMilestone }: MilestoneItemType) => {
   return (
-    <EditItemWrapper>
-      <EditTitle>마일스톤 편집</EditTitle>
-      <InputField defaultValue='마스터즈코스' label='레이블이름' />
-    </EditItemWrapper>
+    <NewMilestone title='마일스톤 편집'>
+      <IconButton variant="outlined" color="primary" margin='0 8px 0 0'
+        icon='close' height="40px" onClick={setToggleMilestone}>
+        취소
+      </IconButton>
+      <IconButton variant="contained" color="primary"
+        icon='edit' height="40px" background="#007AFF">
+        완료
+      </IconButton>
+    </NewMilestone>
   )
 }
-
-const EditItemWrapper = styled.div`
-  padding: 16px 0;
-`;
-
-const EditTitle = styled.div`
-  margin-bottom: 24px;
-  font-size: 24px;
-`;
 
 export default MilestoneEditItem;

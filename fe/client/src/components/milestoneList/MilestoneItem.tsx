@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components';
 import IconButton from '@components/common/IconButton';
 import ProgressBar from '@components/common/ProgressBar';
+import { MilestoneItemType } from '@components/common/types/MilestoneType';
 import { ReactComponent as MilestoneIcon } from '@/Icons/Milestone.svg';
 import { ReactComponent as CalendarIcon } from '@/Icons/Calendar.svg';
 
-const MilestoneItem = () => {
+const MilestoneItem = ({ setToggleMilestone }: MilestoneItemType) => {
   return (
     <ItemWrapper>
       <LeftContentWrapper>
@@ -24,7 +25,7 @@ const MilestoneItem = () => {
           <IconButton icon="closeBox">
             닫기
           </IconButton>
-          <IconButton icon="edit">
+          <IconButton icon="edit" onClick={setToggleMilestone}>
             편집
           </IconButton>
           <IconButton icon="trash">

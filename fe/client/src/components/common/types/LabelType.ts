@@ -5,5 +5,5 @@ export type LabelSwitchType = {
 }
 
 export type LabelItemType = LabelSwitchType & {
-  setToggleItem: any;
+  setToggleLabel: any;
 }
