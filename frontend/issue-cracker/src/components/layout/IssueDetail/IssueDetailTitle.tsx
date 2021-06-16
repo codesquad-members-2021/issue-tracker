@@ -81,7 +81,6 @@ const ButtonBox = styled.div`
 `;
 
 const TitleEditButton = styled(Button)`
-  border: 1px solid red;
   width: 120px;
   height: 40px;
   margin: 5px;

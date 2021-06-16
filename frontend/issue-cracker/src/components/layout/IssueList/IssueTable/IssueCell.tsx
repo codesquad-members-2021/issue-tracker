@@ -38,7 +38,8 @@ const IssueCell = (): JSX.Element => {
               />
               <IssueTitle>맛있는 저녁 메뉴 선정</IssueTitle>
               <LabelSmallGroup
-                color={'#1E4174'}
+                color={'#fff'}
+                backgroundColor={'#1E4174'}
                 label="밥에 관한 것"
               ></LabelSmallGroup>
             </IssueUpper>

@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextGroup from '../../common/group/TextGroup';
 import ButtonGroup from '../../common/group/ButtonGroup';
-import CloseIcon from '@material-ui/icons/Close';
 
 const IssueDetailButton = (): JSX.Element => {
   return (
     <IssueDetailButtonStyle>
-      <ButtonGroup type="smallFill" name="완료" />
+      <ButtonGroup type="smallFill" name="코멘트 작성" />
     </IssueDetailButtonStyle>
   );
 };

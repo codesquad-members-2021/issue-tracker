@@ -15,6 +15,5 @@ const IssueDetailInputContent = (): JSX.Element => {
 export default IssueDetailInputContent;
 
 const IssueDetailInputContentStyle = styled.div`
-  margin: 16px 0px;
   padding-left: 50px;
 `;

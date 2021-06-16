@@ -30,7 +30,9 @@ const IssueNav: FC = () => {
 
 export default IssueNav;
 
-const IssueNavDiv = styled.div``;
+const IssueNavDiv = styled.div`
+  margin-bottom: 10px;
+`;
 
 const IssueNavContainer = styled.div`
   display: flex;
