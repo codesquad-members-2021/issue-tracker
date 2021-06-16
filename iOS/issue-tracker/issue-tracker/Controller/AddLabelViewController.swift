@@ -9,6 +9,7 @@ import UIKit
 
 class AddLabelViewController: UIViewController {
     private let cellReuseIdentifier = "AddLabelViewControllerCell"
+    let addLabelViewModel = AddLabelViewModel()
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
