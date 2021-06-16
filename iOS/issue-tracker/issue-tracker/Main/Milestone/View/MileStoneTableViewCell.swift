@@ -41,7 +41,7 @@ class MileStoneTableViewCell: UITableViewCell {
     private lazy var secondSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -64,7 +64,7 @@ class MileStoneTableViewCell: UITableViewCell {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.description
-        label.text = "마일스톤에 대한 설명(한 줄만 보여짐,  생략 가능)"
+        label.text = "마일스톤에 대한 설명(한 줄만 보여짐, 생략 가능)"
         label.font = .systemFont(ofSize: 17)
         return label
     }()
@@ -72,7 +72,6 @@ class MileStoneTableViewCell: UITableViewCell {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         var dateText = "완료일(생략가능)"
-        
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "calendar")
@@ -84,6 +83,17 @@ class MileStoneTableViewCell: UITableViewCell {
         attributedString.append(dateString)
         label.attributedText = attributedString
         return label
+    }()
+    
+    private lazy var openMileStoneLabelView: MileStoneLabelView = {
+        let mileStoneLabelView = MileStoneLabelView(chooseNum: 0) 
+        return mileStoneLabelView
+    }()
+    
+    private lazy var closedMileStoneLabelView: MileStoneLabelView = {
+        let mileStoneLabelView = MileStoneLabelView(chooseNum: 1)
+
+        return mileStoneLabelView
     }()
     
     static var reuseID: String {
@@ -106,6 +116,7 @@ class MileStoneTableViewCell: UITableViewCell {
     }
     
     private func addMileStoneStackView() {
+        
         addSubview(mileStoneStackView)
         NSLayoutConstraint.activate([
             mileStoneStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -117,6 +128,9 @@ class MileStoneTableViewCell: UITableViewCell {
         //MARK: 1 : sub스택
         //   -1 Title 라벨
         //   -2 몇 %인지 보이는 두개의 라벨
+        
+        //titleLabel, titleLabel 자체에 너비를 비율을 맞추어놓고 설정을 해주기.
+        //firstSubStackView를 .fillProptionally로 바꾸어주기.
         mileStoneStackView.addArrangedSubview(firstSubStackView)
         
         NSLayoutConstraint.activate([
@@ -135,34 +149,27 @@ class MileStoneTableViewCell: UITableViewCell {
         //MARK: 3 : 완료일 스택 or Label with Img
         mileStoneStackView.addArrangedSubview(dateLabel)
         
+        //MARK: 4 : sub스택
+        //-1 열린 이슈 라벨
+        //-2 닫힌 이슈 라벨
+        mileStoneStackView.addArrangedSubview(secondSubStackView)
+        
+        NSLayoutConstraint.activate([
+            secondSubStackView.leadingAnchor.constraint(equalTo: mileStoneStackView.leadingAnchor),
+            secondSubStackView.trailingAnchor.constraint(equalTo: mileStoneStackView.trailingAnchor)
+        ])
+        
+        secondSubStackView
+            .addArrangedSubview(openMileStoneLabelView)
+        secondSubStackView
+            .addArrangedSubview(closedMileStoneLabelView)
+        
+        NSLayoutConstraint.activate([
+            openMileStoneLabelView.widthAnchor.constraint(equalTo: secondSubStackView.widthAnchor,constant: 1/2),
+            
+//            openMileStoneLabelView.leadingAnchor.constraint(equalTo: secondSubStackView.leadingAnchor),
+//            
+//            closedMileStoneLabelView.leadingAnchor.constraint(equalTo: openMileStoneLabelView.leadingAnchor),
+            ])
     }
 }
-
-/*
- 
- let firstSubStackView = UIStackView()
- firstSubStackView.axis = .horizontal
- firstSubStackView.spacing = spacing * 0.5
- firstSubStackView.distribution = .fill
- //        firstSubStackView.layoutMargins = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
- firstSubStackView.isLayoutMarginsRelativeArrangement = true
- 
- 
- let titleLabel = UILabel()
- titleLabel.text = "제목"
- titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
- //        titleLabel.leadingAnchor.constraint(equalTo: firstSubStackView.leadingAnchor, constant: 16).isActive = true
- 
- //        titleLabel.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
- 
- let completenessLabel = UILabel()
- completenessLabel.text = "100%"
- completenessLabel.textColor = Colors.mileStoneSuceess
- completenessLabel.font = UIFont.boldSystemFont(ofSize: 22)
- //        completenessLabel.trailingAnchor.constraint(equalTo: firstSubStackView.trailingAnchor, constant: 16).isActive = true
- //        completenessLabel.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
- 
- firstSubStackView.addArrangedSubview(titleLabel)
- firstSubStackView.addArrangedSubview(completenessLabel)
- //        superStackView.addArrangedSubview(firstSubStackView)
- */
