@@ -1,78 +1,72 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import {
+	filterBarInputAtomState,
+	clickedFilterAtomState,
+} from "RecoilStore/Atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
+import styled from "styled-components";
+
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { useState } from "react";
-import styled from "styled-components";
 import { filter } from "data";
-import {
-	filterBarInputAtomState,
-	clickedFilterAtomState,
-} from "RecoilStore/Atoms";
-import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+
 import getEngKey from "util/getEngKey";
-{
-	/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state내림 */
-}
+
 const FilterModal = () => {
-	const [value, setValue] = useState("");
+	const [clickedFilterState, setClickedFilterState] = useState("");
 	const filterType = useRecoilValue(clickedFilterAtomState);
 	const [filterBarInputState, setFilterBarInputState] = useRecoilState(
 		filterBarInputAtomState
 	);
 
-	// Recoil로직 (구현 예정)
-	// 1. 필터별로 선택된 필터는 atom으로 관리됨(default는 null임)
-	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 ent.target.value);
-	//필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
-
-	//
-
+	const key = getEngKey(filterType);
 	const handleChange = event => {
-		setValue(event.target.value);
+		setClickedFilterState(event.target.value);
 		setFilterStateByType(event.target.value);
 	};
 
-	const key = getEngKey(filterType);
+	const setFilterStateByType = clickedValue => {
+		const updatedValue =
+			clickedValue === filterBarInputState[getEngKey(filterType)]
+				? null
+				: clickedValue;
 
-	const setFilterStateByType = value => {
-		// console.log(filterType);
 		switch (filterType) {
 			case "담당자": {
-				console.log("담당자,filterBarInputState");
 				setFilterBarInputState({
 					...filterBarInputState,
-					assignee: value,
+					assignee: updatedValue,
 				});
 				break;
 			}
 			case "레이블": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					label: value,
+					label: updatedValue,
 				});
 				break;
 			}
 			case "마일스톤": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					milestone: value,
+					milestone: updatedValue,
 				});
 				break;
 			}
 			case "작성자": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					author: value,
+					author: updatedValue,
 				});
 				break;
 			}
 			case "필터": {
 				setFilterBarInputState({
 					...filterBarInputState,
-					issue: value,
+					issue: updatedValue,
 				});
 				break;
 			}
@@ -82,12 +76,8 @@ const FilterModal = () => {
 		}
 	};
 
-	const getFilterModalData = type => {
-		return filter[getEngKey(type)];
-	};
+	const filterData = filter[getEngKey(filterType)];
 
-	const filterData = getFilterModalData(filterType);
-	console.log(filterData);
 	return (
 		<FilterModalLayout className="filter-modal">
 			<FormControl component="fieldset">
@@ -97,8 +87,8 @@ const FilterModal = () => {
 				<FilterRadioContainer
 					aria-label="issue"
 					name="issue"
-					value={value}
-					onChange={handleChange}
+					value={clickedFilterState}
+					onClick={handleChange}
 				>
 					{filterData &&
 						filterData.map((text, idx) => (
@@ -107,8 +97,8 @@ const FilterModal = () => {
 								control={<Radio color="default" />}
 								label={text}
 								labelPlacement="start"
-								key={idx}
-								checked={filterBarInputState[key] === text} //
+								key={`filter-control-label-${idx}`}
+								checked={filterBarInputState[key] === text}
 							/>
 						))}
 				</FilterRadioContainer>
@@ -116,9 +106,10 @@ const FilterModal = () => {
 		</FilterModalLayout>
 	);
 };
+
 const FilterModalLayout = styled.div`
 	position: absolute;
-	top: 110%;
+	top: 45px;
 	background-color: white;
 	text-align: left;
 	border-radius: 16px;
@@ -129,12 +120,12 @@ const FilterControlLabel = styled(FormControlLabel)`
 	display: flex;
 	justify-content: space-between;
 	margin: 0;
-	outline: 1px solid red;
 `;
 
 const FilterRadioContainer = styled(RadioGroup)`
 	padding: 8px 16px;
 `;
+
 const FilterTitle = styled(FormLabel)`
 	background-color: ${({ theme }) => theme.grayScale.background};
 	width: 100%;
