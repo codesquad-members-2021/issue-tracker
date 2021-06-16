@@ -33,7 +33,7 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
-        self.issueTableView.tableFooterView = configureFooterView()
+        self.issueTableView.tableFooterView = makeFooterView()
         
         let filterButton = UIButton.makeButton(image: "filter.png", title: " 필터")
         filterButton.addTarget(self, action: #selector(filterButtonTouched(_:)), for: .touchUpInside)
@@ -46,7 +46,7 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    private func configureFooterView() -> UIView {
+    private func makeFooterView() -> UIView {
         let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 100)))
         let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 20)))
         label.text = "아래로 당기면 검색바가 보여요! 👀"

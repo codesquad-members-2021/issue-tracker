@@ -14,7 +14,7 @@ class AddingIssueViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        additionalInformationTableView.tableHeaderView = configureTableHeaderView()
+        additionalInformationTableView.tableHeaderView = makeTableHeaderView()
         configureNavigationItem()
     }
     
@@ -30,7 +30,7 @@ class AddingIssueViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
     }
     
-    private func configureTableHeaderView() -> UIView {
+    private func makeTableHeaderView() -> UIView {
         let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.additionalInformationTableView.frame.width, height: 44)))
         
         let label = UILabel(frame: CGRect(origin: .zero,
