@@ -11,21 +11,45 @@ import getTimeStamp from "util/getTimeStamp";
 import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
 
-const IssueCard = ({ issue, setIsAnyIssueSelected, isAllIssueSelected, setIsAllIssueSelected, initCheck, setInitCheck, selectedCards, setSelectedCards }) => {
+const IssueCard = ({
+	issue,
+	setIsAnyIssueSelected,
+	isAllIssueSelected,
+	setIsAllIssueSelected,
+	selectedCards,
+	setSelectedCards,
+}) => {
 	const [isChecked, setIsChecked] = useState(false);
-	const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+	const [selectedIssues, setSelectedIssues] = useRecoilState(
+		selectedIssueCntAtomState
+	);
 	const { title, id, labelId, milestoneId, author, createdAt } = issue;
 	const handleCheck = () => {
 		setIsChecked(!isChecked);
-		isChecked ? setSelectedIssues(selectedIssues - 1) : setSelectedIssues(selectedIssues + 1);
+		if (isChecked) {
+			setSelectedIssues(selectedIssues - 1);
+			selectedCards.delete(id);
+		}
+		if (!isChecked) {
+			setSelectedIssues(selectedIssues + 1);
+			setSelectedCards(selectedCards.add(id));
+		}
 	};
-
+	console.log(selectedCards);
+	// console.log(selectedIssues);
 	useEffect(() => {
 		isChecked ? setIsAnyIssueSelected(true) : setIsAnyIssueSelected(false);
 	}, [isChecked]);
 
 	useEffect(() => {
-		isAllIssueSelected ? setIsChecked(true) : setIsChecked(false);
+		if (isAllIssueSelected) {
+			setIsChecked(true);
+			setSelectedCards(selectedCards.add(id));
+		}
+		if (!isAllIssueSelected) {
+			setIsChecked(false);
+			selectedCards.delete(id);
+		}
 	}, [isAllIssueSelected]);
 
 	return (
@@ -47,7 +71,8 @@ const IssueCard = ({ issue, setIsAnyIssueSelected, isAllIssueSelected, setIsAllI
 				<TextTagDivider>
 					<span>#{id} </span>
 					<Padder>
-						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해 작성되었습니다
+						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해
+						작성되었습니다
 					</Padder>
 					<Padder>
 						<Milestone fill={theme.grayScale.label} />

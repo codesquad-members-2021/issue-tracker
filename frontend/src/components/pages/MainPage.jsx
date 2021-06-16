@@ -29,11 +29,10 @@ const MainPage = () => {
 			</Switch>
 		</MainPageLayout>
 	) : (
-		<Redirect to="/login" />
+		<Redirect to="/" />
 	);
 };
 
-const MainPageLayout = styled.div`
-`;
+const MainPageLayout = styled.div``;
 
 export default MainPage;

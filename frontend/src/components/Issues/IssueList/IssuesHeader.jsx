@@ -23,8 +23,8 @@ const IssuesHeader = ({
 	isAllIssueSelected,
 	setIsAllIssueSelected,
 	issuesCnt,
-	initCheck,
-	setInitCheck,
+	selectedCards,
+
 }) => {
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntAtomState
@@ -68,9 +68,6 @@ const IssuesHeader = ({
 		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
 	};
 
-	console.log(
-		`selectedIssues: ${selectedIssues}, isAnyissueSelected: ${isAnyIssueSelected}`
-	);
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);

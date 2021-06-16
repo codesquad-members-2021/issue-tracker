@@ -1,5 +1,5 @@
 const LabelsPage = () => {
-	return <div></div>;
+	return <div>라벨페이지</div>;
 };
 
 export default LabelsPage;
