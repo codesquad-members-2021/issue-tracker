@@ -1,20 +1,33 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { issueFilterTypeState } from 'store/issueInfoStore';
+import { issueFilterTypeState, selectedTabState, selectedTabType } from 'store/issueInfoStore';
 import useToggle from 'hooks/useToggle';
 import TabModal from 'components/common/tabModal/TabModal';
+import SelectedTabUser from 'page/createIssuePage/issueDetailOption/SelectedTabUser';
+import SelectedTabLabel from 'page/createIssuePage/issueDetailOption/SelectedTabLabel';
+import SelectedTabMilestone from 'page/createIssuePage/issueDetailOption/SelectedTabMilestone';
 
-interface Props {}
+interface Props {
+  id?: number;
+}
 
 interface filterObjType {
   key: string;
   name: string;
 }
 
-export default function IssueDetailOption({}: Props): ReactElement {
+export default function IssueDetailOption({ id }: Props): ReactElement {
   const setFilterType = useSetRecoilState(issueFilterTypeState);
+  //선택한 애들?
+  const selectTab = useRecoilValue(selectedTabState);
+  //렌더링시 사용할 상태
+  const [selectTabToRender, setSelectTabToRender] = useState<selectedTabType>({
+    assignee: [],
+    label: [],
+    milestone: null,
+  });
 
   const assigneeToggle = useRef<HTMLDivElement>(null);
   const labelToggle = useRef<HTMLDivElement>(null);
@@ -32,16 +45,63 @@ export default function IssueDetailOption({}: Props): ReactElement {
     modal: modalRef,
   });
 
+  /*
+  props로 issue생성 페이지 | issue Detail 페이지 인지 구별 
+  (id?:number)로구별
+  
+  구별해서 useGetRecoilValue(fetch-get-data);
+  useEffect{
+    assigned & checked 한거 상태에 등록 (atom & 현재 상태 )
+  ,[]}
+
+  useEffect{
+    !open {
+      atom상태값을 => useState상태에 setting
+    }
+  ,[open]}
+
+  이 컴포넌트 렌더링은 useState상태만 기준으로 렌더링
+  fetch에 보낼 데이터는 atom에 있음
+  */
+
+  useEffect(() => {
+    if (open || !selectTab) return;
+    setSelectTabToRender(selectTab);
+    // atom상태값을 => useState상태에 setting
+  }, [open]);
+
   const handleClick = ({ key, name }: filterObjType) => {
     setFilterType({ key, name, isMainPage: false });
   };
 
-  const tabOptionList = tabOptions.map(({ key, name, ref }) => (
-    <div key={key} ref={ref} onClick={() => handleClick({ key, name })}>
-      <div>{name}</div>
-      <AddOutlinedIcon />
-    </div>
-  ));
+  const checkedList: any = {
+    assignee: selectTabToRender.assignee?.map((user) => (
+      <SelectedTabUser key={user.id} user={user} />
+    )),
+    label: selectTabToRender.label?.map((label) => (
+      <SelectedTabLabel key={label.id} label={label} />
+    )),
+    milestone: selectTabToRender.milestone ? (
+      <SelectedTabMilestone
+        key={selectTabToRender.milestone.id}
+        milestone={selectTabToRender.milestone}
+      />
+    ) : null,
+  };
+
+  const tabOptionList = tabOptions.map(({ key, name, ref }) => {
+    let selectedList: any = checkedList[key];
+    const tabListClassName = `selected__${key}`;
+    return (
+      <TabOptionItemBlock key={key} ref={ref} onClick={() => handleClick({ key, name })}>
+        <div>
+          <span>{name}</span>
+          <AddOutlinedIcon />
+        </div>
+        <div className={tabListClassName}>{selectedList}</div>
+      </TabOptionItemBlock>
+    );
+  });
 
   return (
     <>
@@ -56,12 +116,26 @@ const IssueDetailOptionBlock = styled.div`
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
   over-flow: hidden;
   height: min-content;
-  > div {
+  & > div {
     padding: 34px 32px;
-    display: flex;
-    justify-content: space-between;
+    & > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
     &:not(:last-child) {
       border-bottom: 1px solid ${({ theme }) => theme.color.lineGrey};
     }
+  }
+`;
+
+const TabOptionItemBlock = styled.div`
+  .selected__assignee {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .selected__label {
+    display: flex;
   }
 `;

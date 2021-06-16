@@ -1,3 +1,4 @@
+import { LabelType, MilestoneType, UserType } from 'components/common/tabModal/tapDataType';
 import { atom, selector } from 'recoil';
 import API from 'util/api/api';
 interface countType {
@@ -78,13 +79,14 @@ export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
     }
   },
 });
+
 interface TabInfoType {
   [key: string]: any;
 }
 
 export const getTabInfoState = selector({
   key: 'GET/tabinfo',
-  get: async ({}) => {
+  get: async () => {
     try {
       const response = await fetch(API.tabType);
       const tabData = await response.json();
@@ -100,8 +102,97 @@ export const getTabInfoState = selector({
   },
 });
 
+export interface selectedTabType {
+  assignee: Array<UserType> | [];
+  label: Array<LabelType> | [];
+  milestone: MilestoneType | null;
+}
+//잠시 주석
+// export const selectedTabState = atom<selectedTabType>({
+//   key: 'selectedTabState',
+//   default: {
+//     assignee: null,
+//     label: null,
+//     milestone: null,
+//   },
+// });
+
 const headerInfo = {
   // headers: {
   //   Authorization: Bearer {token}
   // }
 };
+
+const mokData = {
+  assignee: [
+    {
+      id: 1,
+      image: 'https://avatars.githubusercontent.com/u/63284310?v=4',
+      userName: 'eNoLJ',
+      assigned: true,
+    },
+    {
+      id: 2,
+      image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
+      userName: 'janeljs',
+      assigned: true,
+    },
+    {
+      id: 3,
+      image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
+      userName: 'zane',
+      assigned: true,
+    },
+    {
+      id: 4,
+      image: 'https://avatars.githubusercontent.com/u/74946802?v=4',
+      userName: 'torch-ray',
+      assigned: true,
+    },
+  ],
+  label: [
+    {
+      id: 1,
+      name: 'bug',
+      color: {
+        backgroundColorCode: '#F47378',
+        textColorCode: '#000000',
+      },
+      description: 'bug fix',
+      checked: true,
+    },
+    {
+      id: 2,
+      name: 'feature',
+      color: {
+        backgroundColorCode: '#6BD089',
+        textColorCode: '#000000',
+      },
+      description: 'new feature',
+      checked: true,
+    },
+    {
+      id: 3,
+      name: 'documentation',
+      color: {
+        backgroundColorCode: '#C785C8',
+        textColorCode: '#000000',
+      },
+      description: 'new documentation',
+      checked: true,
+    },
+  ],
+  milestone: {
+    id: 1,
+    title: 'M1',
+    description: 'M1 마일스톤에 대한 설명',
+    createdDateTime: '2021-06-15T10:38:33',
+    dueDate: '2021-06-21',
+    openedIssueCount: 5,
+    closedIssueCount: 0,
+  },
+};
+export const selectedTabState = atom<selectedTabType>({
+  key: 'selectedTabState',
+  default: mokData,
+});
