@@ -1,3 +1,5 @@
+import theme from '@styles/theme.js';
+
 const titleInput = {
   marginBottom: '16px',
   padding: '16px',
@@ -25,4 +27,26 @@ const progressBar = {
   marginBottom: '4px',
 };
 
-export { titleInput, contentsInput, progressBar };
+const modalStyle = {
+  borderRadius: '16px',
+  border: `1px solid ${theme.colors.gr_line}`,
+  backgroundColor: theme.colors.gr_background,
+  overflow: 'hidden',
+};
+
+const modalTitleStyle = {
+  fontSize: '16px',
+  fontWeight: '400',
+};
+const modalListStyle = {
+  backgroundColor: theme.colors.gr_offWhite,
+};
+
+export {
+  titleInput,
+  contentsInput,
+  progressBar,
+  modalStyle,
+  modalTitleStyle,
+  modalListStyle,
+};
