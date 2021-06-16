@@ -10,11 +10,9 @@ import Buttons from '../../../styles/atoms/Buttons';
 
 const IssueDetail = () => {
   const location = useLocation();
-  const { isLoading, data, error } = useFetch(
-    'issue',
-    'detail',
-    location.pathname
-  );
+  const { isLoading, data, error } = useFetch('issue', 'detail', {
+    id: location.pathname,
+  });
 
   return (
     <>

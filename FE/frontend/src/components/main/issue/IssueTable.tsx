@@ -34,12 +34,12 @@ const IssueTable = () => {
       <TableWrapper>
         {data?.map((issue: any, index: number) => {
           return (
-            <IssueCell key={index} to={`/issues/${issue.id}`}>
+            <IssueCell key={index}>
               <TextCell>
                 <UpperCell>
                   <CheckBox />
                   <AlertCircle />
-                  <div>{issue.title}</div>
+                  <Title to={`/issues/${issue.id}`}>{issue.title}</Title>
                   <Labels>
                     {issue.labels.map(
                       (
@@ -99,9 +99,7 @@ const LeftHeaderWrapper = styled.div`
   }
 `;
 
-const IssueCell = styled(Link)`
-  text-decoration: none;
-  color: inherit;
+const IssueCell = styled.div`
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -115,6 +113,11 @@ const IssueCell = styled(Link)`
   &:last-child {
     border-radius: 0px 0px 16px 16px;
   }
+`;
+
+const Title = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `;
 
 const TextCell = styled.div`
