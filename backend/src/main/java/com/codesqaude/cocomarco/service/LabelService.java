@@ -23,29 +23,29 @@ public class LabelService {
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
 
-    public Label findById(Long labelId){
+    public Label findById(Long labelId) {
         return labelRepository.findById(labelId).orElseThrow(NotFoundLabelException::new);
     }
 
-    public LabelWrapper findAll(Pageable pageable){
+    public LabelWrapper findAll(Pageable pageable) {
         Page<Label> labelPage = labelRepository.findAll(pageable);
         List<LabelResponse> labelResponses = labelPage.stream().map(LabelResponse::of).collect(Collectors.toList());
         return new LabelWrapper(labelResponses, milestoneRepository.count());
     }
 
     @Transactional
-    public void create(LabelRequest labelRequest){
+    public void create(LabelRequest labelRequest) {
         labelRepository.save(labelRequest.toEntity());
     }
 
     @Transactional
-    public void modify(Long labelId, LabelRequest labelRequest){
+    public void modify(Long labelId, LabelRequest labelRequest) {
         Label label = findById(labelId);
         label.modify(labelRequest.toEntity());
     }
 
     @Transactional
-    public void delete(Long labelId){
+    public void delete(Long labelId) {
         labelRepository.delete(findById(labelId));
     }
 }
