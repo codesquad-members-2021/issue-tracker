@@ -8,7 +8,7 @@ import { TextIssueList } from '../../../util/reference';
 
 const SearchBar = () => {
   const { filter: { caption, placeHolder, filterHeader: title, filterList } } = TextIssueList;
-  const { searchModalVisible } = atoms;
+  const { issueList: { searchModalVisible } } = atoms;
 
   const data = {
     title,

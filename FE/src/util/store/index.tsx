@@ -1,2 +1,2 @@
-import * as atoms from './atoms';
+import atoms from './atoms';
 export { atoms };

@@ -8,17 +8,31 @@ interface IBackgroundFluid {
 }
 
 const BackgroundFluid = ({ children, ...props }: IBackgroundFluid) => {
-  const {searchModalVisible} = atoms;
+  const {
+    issueList: {
+      searchModalVisible,
+      assigneeModalVisible, labelModalVisible,
+      milestoneModalVisible, writerModalVisible,
+    }
+  } = atoms;
 
-  const [isSearchModalVisible, setSearchModalVisible] =
-    useRecoilState(searchModalVisible);
+  const [isSearchModalVisible, setSearchModalVisible] = useRecoilState(searchModalVisible);
+  const [isAssigneeModalVisible, setIsAssigneeModalVisible] = useRecoilState(assigneeModalVisible);
+  const [isLabelModalVisible, setIsLabelModalVisible] = useRecoilState(labelModalVisible);
+  const [isMilestoneModalVisible, setIsMilestoneModalVisible] = useRecoilState(milestoneModalVisible);
+  const [isWriterModalVisible, setIsWriterModalVisible] = useRecoilState(writerModalVisible);
 
   const handleBackgroundClick = (e: React.MouseEvent | Event) => {
     const target = e.target as HTMLElement;
     const closestTarget: HTMLElement | null = target.closest('#modal');
 
     if (closestTarget && closestTarget.contains(target)) return;
+
     isSearchModalVisible && setSearchModalVisible(false);
+    isAssigneeModalVisible && setIsAssigneeModalVisible(false);
+    isLabelModalVisible && setIsLabelModalVisible(false);
+    isMilestoneModalVisible && setIsMilestoneModalVisible(false);
+    isWriterModalVisible && setIsWriterModalVisible(false);
   };
 
   return (
