@@ -24,8 +24,8 @@ public class Milestone {
     private String content;
     private LocalDate createdDate;
     private LocalDate dueDate;
-    private boolean isOpen;
-    private boolean isDeleted;
+    private boolean open;
+    private boolean deleted;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Milestone {
         this.content = content;
         this.dueDate = dueDate;
         this.createdDate = LocalDate.now();
-        this.isOpen = true;
+        this.open = true;
     }
 
     public int getTotalIssueCount() {
@@ -65,7 +65,7 @@ public class Milestone {
     }
 
     public void delete() {
-        isDeleted = true;
+        deleted = true;
         issues.stream()
                 .forEach(issue -> issue.deleteMilestone());
     }

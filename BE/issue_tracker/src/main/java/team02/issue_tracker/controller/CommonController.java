@@ -25,11 +25,11 @@ public class CommonController {
 
     @GetMapping
     public ApiResult<CountResponse> showAllCount() {
-        int openIssueCount = issueRepository.findOpenIssues().size();
-        int closedIssueCount = issueRepository.findClosedIssues().size();
-        int labelCount = labelRepository.findAll().size();
-        int openMilestoneCount = milestoneRepository.findOpenMilestones().size();
-        int closedMilestoneCount = milestoneRepository.findClosedMilestones().size();
+        int openIssueCount = issueRepository.findByOpenTrueAndDeletedFalse().size();
+        int closedIssueCount = issueRepository.findByOpenFalseAndDeletedFalse().size();
+        int labelCount = labelRepository.findByDeletedFalse().size();
+        int openMilestoneCount = milestoneRepository.findByOpenTrueAndDeletedFalse().size();
+        int closedMilestoneCount = milestoneRepository.findByOpenFalseAndDeletedFalse().size();
 
         return ApiResult.success(new CountResponse(openIssueCount, closedIssueCount, labelCount, openMilestoneCount, closedMilestoneCount));
     }
