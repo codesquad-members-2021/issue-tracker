@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { RecoilRoot } from 'recoil';
+
 import { ChakraProvider } from '@chakra-ui/react';
 import customTheme from '@styles/theme';
 
@@ -9,9 +11,11 @@ import '@styles/reset.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider theme={customTheme}>
-      <App />
-    </ChakraProvider>
+    <RecoilRoot>
+      <ChakraProvider theme={customTheme}>
+        <App />
+      </ChakraProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
