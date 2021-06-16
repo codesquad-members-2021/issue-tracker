@@ -5,6 +5,7 @@ import ButtonGroup from '../../../common/group/ButtonGroup';
 import IssueFilter from './IssueFilter';
 import TapGroup from '../../../common/group/TabGroup';
 import { Link } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 const IssueNav: FC = () => {
   return (
@@ -19,7 +20,11 @@ const IssueNav: FC = () => {
           </TabBox>
           <Link to="/main/issue-add">
             <ButtonBox>
-              <ButtonGroup type={SMALL_FILL} name={WRITING_ISSUE} />
+              <ButtonGroup
+                type={SMALL_FILL}
+                name={WRITING_ISSUE}
+                icon={<AddIcon style={{ fontSize: 16 }} />}
+              />
             </ButtonBox>
           </Link>
         </AnotherBox>

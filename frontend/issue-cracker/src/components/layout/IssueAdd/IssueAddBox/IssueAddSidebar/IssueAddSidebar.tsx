@@ -11,7 +11,7 @@ const IssueAddSidebar = (): JSX.Element => {
     <IssueAddSidebarStyle>
       {SIDEBAR_MENU.map((menu) => (
         <SideBarCell key={uuidv4()}>
-          <TextGroup type="xSmall" content={menu} color="#6E7191" />
+          <TextGroup type="small" content={menu} color="#6E7191" />
           <CustomAddIcon />
         </SideBarCell>
       ))}
@@ -42,7 +42,7 @@ const SideBarCell = styled(S.IssueCell)`
 `;
 
 const CustomAddIcon = styled(AddIcon)`
-  font-size: 14px;
+  font-size: 16px;
   color: #6e7191;
   cursor: pointer;
 `;

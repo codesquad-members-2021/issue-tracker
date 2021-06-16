@@ -9,6 +9,7 @@ import Header from './components/layout/Header';
 import IssueList from './components/layout/IssueList';
 import IssueAdd from './components/layout/IssueAdd';
 import IssueDetail from './components/layout/IssueDetail';
+import LabelList from './components/layout/LabelList';
 
 function App(): JSX.Element {
   const token = localStorage.getItem('token');
@@ -31,6 +32,7 @@ function App(): JSX.Element {
           <Route exact path="/main/issue-list" component={IssueList} />
           <Route exact path="/main/issue-add" component={IssueAdd} />
           <Route exact path="/main/issue-detail/:id" component={IssueDetail} />
+          <Route exact path="/main/label-list" component={LabelList} />
         </AppStyle>
       </ThemeProvider>
     </BrowserRouter>

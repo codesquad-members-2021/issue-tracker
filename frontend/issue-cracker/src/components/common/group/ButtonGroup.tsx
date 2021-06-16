@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import useButtonStyles from '../../styles/ButtonStyles';
 import { ClassNameMap } from '@material-ui/styles/withStyles';
 import styled from 'styled-components';
@@ -9,6 +8,7 @@ interface Prop {
   type: string;
   name: string;
   color?: string;
+  icon?: JSX.Element;
 }
 type IButtonType = ClassNameMap<
   | 'buttonLarge'
@@ -23,18 +23,19 @@ interface IButton {
   classes: IButtonType;
   name: string;
   color?: string;
+  icon?: JSX.Element | undefined;
 }
 
-const ButtonGroup: FC<Prop> = ({ type, name, color = 'white' }: Prop) => {
+const ButtonGroup: FC<Prop> = ({ type, name, color = 'white', icon }: Prop) => {
   const classes = useButtonStyles();
 
   return {
     large: <ButtonLarge {...{ classes, name, color }} />,
     medium: <ButtonMedium {...{ classes, name, color }} />,
-    smallFill: <ButtonSmallFill {...{ classes, name, color }} />,
-    smallBorder: <ButtonSmallBorder {...{ classes, name, color }} />,
-    mediumText: <ButtonMediumText {...{ classes, name, color }} />,
-    smallText: <ButtonSmallText {...{ classes, name, color }} />,
+    smallFill: <ButtonSmallFill {...{ classes, name, color, icon }} />,
+    smallBorder: <ButtonSmallBorder {...{ classes, name, color, icon }} />,
+    mediumText: <ButtonMediumText {...{ classes, name, color, icon }} />,
+    smallText: <ButtonSmallText {...{ classes, name, color, icon }} />,
   }[type] as JSX.Element;
 };
 
@@ -69,11 +70,11 @@ function ButtonMedium({ classes, name, color }: IButton) {
   );
 }
 
-function ButtonSmallFill({ classes, name, color }: IButton) {
+function ButtonSmallFill({ classes, name, color, icon }: IButton) {
   return (
     <CustomButton
       variant="contained"
-      startIcon={<AddIcon />}
+      startIcon={icon}
       className={classes.buttonSmallFill}
       style={{
         backgroundColor: `${color}`,
@@ -85,11 +86,11 @@ function ButtonSmallFill({ classes, name, color }: IButton) {
   );
 }
 
-function ButtonSmallBorder({ classes, name, color }: IButton) {
+function ButtonSmallBorder({ classes, name, color, icon }: IButton) {
   return (
     <Button
       variant="outlined"
-      startIcon={<AddIcon />}
+      startIcon={icon}
       className={classes.buttonSmallBorder}
       style={{
         border: `1px solid ${color}`,
@@ -100,11 +101,11 @@ function ButtonSmallBorder({ classes, name, color }: IButton) {
   );
 }
 
-function ButtonMediumText({ classes, name }: IButton) {
+function ButtonMediumText({ classes, name, icon }: IButton) {
   return (
     <Button
       variant="text"
-      startIcon={<AddIcon />}
+      startIcon={icon}
       className={classes.buttonMediumText}
     >
       {name}
@@ -112,13 +113,9 @@ function ButtonMediumText({ classes, name }: IButton) {
   );
 }
 
-function ButtonSmallText({ classes, name }: IButton) {
+function ButtonSmallText({ classes, name, icon }: IButton) {
   return (
-    <Button
-      variant="text"
-      startIcon={<AddIcon />}
-      className={classes.buttonSmallText}
-    >
+    <Button variant="text" startIcon={icon} className={classes.buttonSmallText}>
       {name}
     </Button>
   );

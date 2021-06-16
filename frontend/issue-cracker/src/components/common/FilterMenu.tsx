@@ -46,11 +46,11 @@ function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
         input={<BootstrapInput />}
       >
         <MenuItem value={menu}>
-          <TextGroup content={menu} color="#222" type="xSmall" />
+          <TextGroup content={menu} color="#222" type="small" />
         </MenuItem>
         {list.map((menu, idx) => (
           <MenuItem value={idx} key={uuidv4()}>
-            <TextGroup content={menu} color="#222" type="xSmall" />
+            <TextGroup content={menu} color="#222" type="small" />
           </MenuItem>
         ))}
       </CustomSelect>
