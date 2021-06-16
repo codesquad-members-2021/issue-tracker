@@ -1,11 +1,11 @@
 package com.codesquad.issuetracker.label.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
 @Data(staticConstructor = "from")
 public class LabelResponseWrapper {
 
-    @JsonProperty("label")
+    @JsonValue
     private final LabelResponse labelResponse;
 }

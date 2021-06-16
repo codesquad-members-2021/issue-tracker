@@ -23,17 +23,8 @@ public class IssueDetailResponse {
     private LocalDateTime createDateTime;
     private UserResponse author;
     private UserResponses assignees;
-
-    @JsonUnwrapped
     private LabelResponses labels;
-
     private MilestoneResponse milestone;
     private CommentResponse mainComment;
-
-    @JsonUnwrapped
     private CommentResponses comments;
-
-    public Collection<UserResponse> getAssignees() {
-        return assignees.getUserResponses();
-    }
 }

@@ -22,15 +22,7 @@ public class IssueResponse {
     private boolean hasSameAuthorComments;
     private LocalDateTime createDateTime;
     private UserResponse author;
-
     private UserResponses assignees;
-
-    @JsonUnwrapped
     private LabelResponses labels;
-
     private MilestoneResponse milestone;
-
-    public Collection<UserResponse> getAssignees() {
-        return assignees.getUserResponses();
-    }
 }

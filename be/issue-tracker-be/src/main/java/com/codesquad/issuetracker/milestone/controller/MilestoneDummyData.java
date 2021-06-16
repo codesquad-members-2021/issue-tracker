@@ -11,7 +11,7 @@ public class MilestoneDummyData {
     private MilestoneDummyData() {
     }
 
-    public static MilestoneResponses milestonesResponse() {
+    public static MilestoneResponses milestonesResponses() {
         return MilestoneResponses.from(Arrays.asList(
                 openedMilestoneResponse(),
                 closedMilestoneResponse()

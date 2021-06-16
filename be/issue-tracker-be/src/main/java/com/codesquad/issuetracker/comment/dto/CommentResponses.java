@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.comment.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
 import java.util.List;
@@ -8,6 +8,6 @@ import java.util.List;
 @Data(staticConstructor = "from")
 public class CommentResponses {
 
-    @JsonProperty("comments")
+    @JsonValue
     private final List<CommentResponse> commentResponses;
 }
