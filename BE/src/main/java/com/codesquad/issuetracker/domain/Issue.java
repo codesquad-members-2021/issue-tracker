@@ -24,35 +24,35 @@ public class Issue {
     @DateTimeFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime createdAt;
 
-    @JsonProperty("milestone_id")
-    private Long milestoneId;
-
     @OneToOne
     private User user;
+
+    @JsonProperty("milestone_id")
+    private Long milestoneId;
 
     @OneToMany(mappedBy = "issue")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
+    @OneToMany
+    // @JoinColumn(name = "issue_id")
+    private List<Assignee> assignees = new ArrayList<>();
+
     public Issue() {
     }
 
-    private Issue(Long id, String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
+    public Issue(Long id, String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
         this(title, content, status, createdAt, milestoneId, user);
         this.id = id;
 
     }
 
-    private Issue(String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
+    public Issue(String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
         this.title = title;
         this.content = content;
         this.status = status;
         this.createdAt = createdAt;
         this.milestoneId = milestoneId;
         this.user = user;
-    }
-
-    public Issue create(Long id, String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User userId) {
-        return new Issue(id, title, content, status, createdAt, milestoneId, userId);
     }
 
     public Long getId() {
@@ -87,6 +87,10 @@ public class Issue {
         return issueLabels;
     }
 
+    public List<Assignee> getAssignees() {
+        return assignees;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -97,10 +101,6 @@ public class Issue {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public void setMilestoneId(Long milestoneId) {
@@ -115,9 +115,13 @@ public class Issue {
         this.issueLabels = issueLabels;
     }
 
+    public void setAssignees(List<Assignee> assignees) {
+        this.assignees = assignees;
+    }
+
     public static Issue issueRequestToIssue(IssueRequest issueRequest) {
         return new Issue(issueRequest.getTitle(), issueRequest.getContent(), true, issueRequest.getCreatedAt(),
-                issueRequest.getMilestoneId(), issueRequest.getUserId());
+                issueRequest.getMilestoneId(), issueRequest.getUser());
     }
 
     @Override
@@ -128,9 +132,10 @@ public class Issue {
                 ", content='" + content + '\'' +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
+                ", user=" + user +
                 ", milestoneId=" + milestoneId +
-                ", userId=" + user +
                 ", issueLabels=" + issueLabels +
+                ", assignees=" + assignees +
                 '}';
     }
 }

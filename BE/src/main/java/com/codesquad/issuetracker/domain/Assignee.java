@@ -1,9 +1,8 @@
 package com.codesquad.issuetracker.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 
 @Entity
 public class Assignee {
@@ -11,7 +10,9 @@ public class Assignee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JoinColumn(name = "issue_id")
     private Long issueId;
+    @JsonProperty("user_id")
     private Long userId;
 
     public Assignee() {
@@ -25,5 +26,17 @@ public class Assignee {
 
     public Assignee create(Long id, Long issueId, Long userId) {
          return new Assignee(id, issueId, userId);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 }
