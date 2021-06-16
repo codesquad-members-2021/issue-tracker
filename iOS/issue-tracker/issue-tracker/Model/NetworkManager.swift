@@ -12,7 +12,7 @@ protocol Networkable {
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void)
 }
 
-class NetworkManager {
+class NetworkManager: Networkable {
     private let httpHeaders: HTTPHeaders = ["Content-Type": "application/json", "Accept": "application/json"]
 
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void) {
