@@ -22,6 +22,7 @@ const progressBar = {
   hasStripe: true,
   colorScheme: 'green',
   borderRadius: '16px',
+  marginBottom: '4px',
 };
 
 export { titleInput, contentsInput, progressBar };
