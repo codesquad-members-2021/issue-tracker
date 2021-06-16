@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,6 +21,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
 import team02.issue_tracker.oauth.dto.GithubAccessTokenResponseDto;
+import team02.issue_tracker.oauth.dto.GithubUserProfile;
 
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -54,7 +56,7 @@ class OAuthServiceTest {
 
     @DisplayName("mock 서버에 mock access token request를 보내서 mock access token response를 받는다.")
     @Test
-    void requestGithubAccessToken() throws JsonProcessingException {
+    void requestGithubAccessToken() {
         startServer();
 
         oauthService = new OAuthService(null, null, null, webClient);
@@ -111,6 +113,50 @@ class OAuthServiceTest {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    @DisplayName("mock 서버에 mock user info request를 보내 mock user info response를 받는다")
+    @Test
+    void requestGithubUser() {
+        startServer();
+
+        oauthService = new OAuthService(null, null, null, webClient);
+
+        GithubUserProfile expectedResponse = GithubUserProfile.builder()
+                .id(-1L)
+                .name("mock name")
+                .email("mock email")
+                .login("mock login")
+                .avatarUrl("mock url")
+                .build();
+
+        prepareResponse(response -> {
+            try {
+                response.addHeader("Content-Type", "application/json");
+                response.setBody(objectMapper.writeValueAsString(expectedResponse));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        });
+
+        GithubAccessTokenResponseDto mockAccessToken =
+                GithubAccessTokenResponseDto.builder()
+                .accessToken("mock access token")
+                .build();
+
+        GithubUserProfile receivedResponse =
+                oauthService.githubUserProfileFrom(mockAccessToken, "/mock/userInfo");
+
+        StepVerifier.create(Mono.just(receivedResponse))
+                .consumeNextWith(body -> assertThat(body).usingRecursiveComparison()
+                        .isEqualTo(expectedResponse));
+
+        expectRequestCount(1);
+        expectRequest(request -> {
+            assertThat(request.getPath()).isEqualTo("/mock/userInfo");
+            assertThat(request.getHeader(HttpHeaders.AUTHORIZATION))
+                    .isEqualTo("token " + mockAccessToken.accessToken());
         });
     }
 

@@ -54,7 +54,8 @@ public class OAuthService {
     private GithubUserProfile githubUserProfileFrom(
             final GithubAccessTokenRequestDto accessTokenRequest) {
         return githubUserProfileFrom(
-                accessTokenFrom(accessTokenRequest, githubApiProperties.accessTokenUri()));
+                accessTokenFrom(accessTokenRequest, githubApiProperties.accessTokenUri()),
+                githubApiProperties.userInfoUri());
     }
 
     public GithubAccessTokenResponseDto accessTokenFrom(
@@ -72,10 +73,11 @@ public class OAuthService {
         return accessTokenResponse;
     }
 
-    private GithubUserProfile githubUserProfileFrom(
-            final GithubAccessTokenResponseDto accessTokenResponse) {
+    public GithubUserProfile githubUserProfileFrom(
+            final GithubAccessTokenResponseDto accessTokenResponse,
+            final String userInfoUri) {
         GithubUserProfile githubUserProfile = webClient.get()
-                .uri(githubApiProperties.userInfoUri())
+                .uri(userInfoUri)
                 .header(HttpHeaders.AUTHORIZATION
                         , "token " + accessTokenResponse.accessToken())
                 .retrieve()
