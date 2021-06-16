@@ -61,4 +61,10 @@ public class IssueController {
     public void setMilestone(@PathVariable Long id, @RequestBody MilestoneIdRequest milestoneIdRequest) {
         issueService.setMilestone(id, milestoneIdRequest);
     }
+
+    @DeleteMapping("/{id}/milestone")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeMilestone(@PathVariable Long id) {
+        issueService.removeMilestone(id);
+    }
 }

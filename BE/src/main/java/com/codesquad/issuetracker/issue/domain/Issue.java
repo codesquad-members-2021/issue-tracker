@@ -77,6 +77,10 @@ public class Issue {
     }
 
     public void removeMilestone() {
+        if (this.milestone == null) {
+            return;
+        }
+
         this.milestone = null;
     }
 

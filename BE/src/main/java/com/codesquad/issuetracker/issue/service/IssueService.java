@@ -112,4 +112,10 @@ public class IssueService {
                 .orElseThrow(RuntimeException::new);
         issue.setMilestone(milestone);
     }
+
+    @Transactional
+    public void removeMilestone(Long id) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        issue.removeMilestone();
+    }
 }
