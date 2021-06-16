@@ -37,7 +37,7 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public String upload(MultipartFile multipartFile) throws SdkClientException, IOException {
+    public String upload(MultipartFile multipartFile) throws IOException {
         ObjectMetadata data = new ObjectMetadata();
         data.setContentType(multipartFile.getContentType());
         data.setContentLength(multipartFile.getSize());
