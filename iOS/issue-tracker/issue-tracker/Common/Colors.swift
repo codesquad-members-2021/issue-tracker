@@ -15,4 +15,6 @@ enum Colors {
     static let openBrocoli = UIColor(named: "OpenBrocoli") ?? UIColor.purple
     static let mainGrape = UIColor(named: "MainGrape") ?? UIColor.purple
     static let mileStoneSuceess = UIColor(named: "MileStoneSuccess") ?? UIColor.green
+    static let description = UIColor(named: "Description") ?? UIColor.systemGray2
+    
 }

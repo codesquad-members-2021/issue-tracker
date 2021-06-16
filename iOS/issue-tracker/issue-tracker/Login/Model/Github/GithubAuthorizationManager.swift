@@ -55,7 +55,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                     .queryItems?.filter({$0.name == "code"})
                     .first?
                     .value else { return }
-
+            
             let networkmanager = NetworkManager()
             
             networkmanager.setInfoGithub(with: code) { [weak self] (result: Result<OAuthResponseDTO, Error>) in
