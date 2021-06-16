@@ -21,7 +21,7 @@ final class LabelTableViewCell: UITableViewCell {
     }()
     
     private lazy var spacing: CGFloat = {
-        return frame.width * 0.05
+        return frame.height * 0.25
     }()
     
     private let placeholder = "No description provided"
@@ -51,7 +51,7 @@ final class LabelTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             labelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
-            labelView.topAnchor.constraint(equalTo: topAnchor, constant: spacing * 1.5)
+            labelView.topAnchor.constraint(equalTo: topAnchor, constant: spacing * 2.2)
         ])
     }
     
@@ -61,7 +61,7 @@ final class LabelTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
             labelDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
-            labelDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing * 1.5)
+            labelDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing * 2.2)
         ])
     }
     

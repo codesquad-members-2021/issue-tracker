@@ -44,7 +44,7 @@ final class LabelViewController: UIViewController {
         labelTableDatasource = LabelTableViewDatasource()
         labelTableView.dataSource = labelTableDatasource
         
-        labelTableDelegate = LabelTableDelegate(superViewFrame: view.frame)
+        labelTableDelegate = LabelTableDelegate()
         labelTableView.delegate = labelTableDelegate
         
         setNetworkManager()
