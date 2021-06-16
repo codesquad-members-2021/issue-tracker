@@ -24,7 +24,6 @@ const IssueContents = () => {
             placeholder={"코멘트를 입력하세요"}
             rows={10}
             handleOnChange={handleOnChange}
-            isFileAttachButtonShow={true}
           />
         </S.TextAreaWrapper>
         <SubmitButton innerText={"코멘트 작성"} />

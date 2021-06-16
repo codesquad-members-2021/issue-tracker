@@ -1,19 +1,13 @@
-import FileAttachButton from "./FileAttachButton";
+import FileAttachButton from "../Editor/FileAttachButton";
 import { TextArea as S } from "./TextAreaStyles";
 
 interface Props {
   placeholder: string;
   rows: number;
   handleOnChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  isFileAttachButtonShow: boolean;
 }
 
-const TextArea = ({
-  placeholder,
-  rows,
-  handleOnChange,
-  isFileAttachButtonShow,
-}: Props) => {
+const TextArea = ({ placeholder, rows, handleOnChange }: Props) => {
   return (
     <S.TextAreaWrapper>
       <S.TextArea
@@ -21,7 +15,6 @@ const TextArea = ({
         rows={rows}
         onChange={handleOnChange}
       />
-      <FileAttachButton isShow={isFileAttachButtonShow} />
     </S.TextAreaWrapper>
   );
 };

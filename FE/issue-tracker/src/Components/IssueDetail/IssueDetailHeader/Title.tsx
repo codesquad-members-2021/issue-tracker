@@ -20,7 +20,6 @@ const Title = () => {
       placeholder={issue.title}
       rows={1}
       handleOnChange={handleOnChange}
-      isFileAttachButtonShow={false}
     />
   ) : (
     <S.Title>{issue.title}</S.Title>
