@@ -3,7 +3,7 @@ import { ReactComponent as SearchIcon } from "images/search.svg";
 import DropDownButton from "components/common/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
 	clickedFilterAtomState,
 	filterBarInputAtomState,
@@ -20,17 +20,16 @@ const MenuFilterBar = () => {
 				if (item[0] === "placeholder") acc += `${item[1]} `;
 				else acc += `${item[0]}:${item[1]} `;
 			}
-			console.log(acc);
 			return acc;
 		}, "");
 	};
 
-	const handleClick = useCallback(e => {
+	const handleClick = e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
 		setClickedFilterState(e.target.textContent);
-	});
+	};
 
 	useEffect(() => {
 		window.addEventListener("click", closeFilterModal);
@@ -44,6 +43,7 @@ const MenuFilterBar = () => {
 		if (isFilterClicked && !target.closest(".filter-modal"))
 			setIsFilterClicked(false);
 	};
+	const handleInputChange = () => {};
 
 	return (
 		<>
@@ -54,15 +54,12 @@ const MenuFilterBar = () => {
 					width={({ theme }) => theme.buttonWidths.base}
 					radius={"left"}
 				/>
+
 				<FilterInputContainer>
-					<FilterInput>
-						<FilterInputIconContainer>
-							<SearchIcon stroke={theme.grayScale.placeholder} />
-						</FilterInputIconContainer>
-						<FilterInputText
-							value={getFilterBarString(filterBarInput)}
-						></FilterInputText>
-					</FilterInput>
+					<FilterInputIconContainer>
+						<SearchIcon stroke={theme.grayScale.placeholder} />
+					</FilterInputIconContainer>
+					<FilterInput>{getFilterBarString(filterBarInput)}</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
 			{isFilterClicked && <FilterModal />}
@@ -77,26 +74,20 @@ const MenuFilterLayout = styled.div`
 	position: relative;
 	margin-bottom: 24px;
 `;
+
 const FilterInputContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	border: 1px solid ${theme.grayScale.line};
-	border-radius: ${theme.border_radius_mix.right};
-`;
-const FilterInput = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100%;
-	padding: 0;
+	padding: 11px;
+	border: 1px solid ${theme.grayScale.line};
 	background-color: ${theme.grayScale.input_background};
 	border-radius: ${theme.border_radius_mix.right};
 `;
-const FilterInputIconContainer = styled.div`
-	padding: 11px;
-`;
-const FilterInputText = styled.input`
+const FilterInputIconContainer = styled.div``;
+const FilterInput = styled.div`
 	width: 100%;
-	height: 100%;
+	padding-left: 10px;
 	border: none;
 	background-color: ${theme.grayScale.input_background};
 	color: ${theme.grayScale.placeholder};

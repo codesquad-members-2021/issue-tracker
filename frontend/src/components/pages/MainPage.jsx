@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import NewIssue from "./NewIssuePage";
 import NoMatch from "./NoMatchPage";

@@ -114,7 +114,6 @@ const IssuesHeader = ({
 									className={"issue-header-button"}
 									width={({ theme }) => theme.buttonWidths.small}
 									border={"none"}
-									id={filter}
 								></DropDownButton>
 							</TextIconDivider>
 						))}

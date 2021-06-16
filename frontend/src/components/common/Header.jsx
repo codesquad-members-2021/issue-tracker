@@ -5,7 +5,7 @@ import getUserInfo from "util/getUserInfo";
 
 const Header = () => {
 	const userInfo = getUserInfo();
-	console.log(userInfo);
+
 	return (
 		<StyleHeader>
 			<Link to="/main">

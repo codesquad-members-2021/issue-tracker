@@ -35,7 +35,7 @@ const IssueCard = ({
 			setSelectedCards(selectedCards.add(id));
 		}
 	};
-	console.log(selectedCards);
+	// console.log(selectedCards);
 	// console.log(selectedIssues);
 	useEffect(() => {
 		isChecked ? setIsAnyIssueSelected(true) : setIsAnyIssueSelected(false);
