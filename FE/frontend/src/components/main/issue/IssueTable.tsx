@@ -8,7 +8,9 @@ import ListFilters from './ListFilters';
 import useFetch from '../../../util/useFetch';
 import Label from '../../../styles/atoms/Label';
 import User from '../../../styles/atoms/User';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
+import 'moment/locale/ko';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
@@ -32,7 +34,7 @@ const IssueTable = () => {
       <TableWrapper>
         {data?.map((issue: any, index: number) => {
           return (
-            <IssueCell key={index}>
+            <IssueCell key={index} to={`/issues/${issue.id}`}>
               <TextCell>
                 <UpperCell>
                   <CheckBox />
@@ -58,8 +60,8 @@ const IssueTable = () => {
                 <LowerCell>
                   <div>#{issue.id}</div>
                   <div>
-                    opened {moment(issue.created_time).fromNow()} by
-                    {issue.writer.username}
+                    이 이슈가 {moment(issue.created_time).fromNow()},
+                    {issue.writer.username}님에 의해 작성되었습니다.
                   </div>
                   <div>{issue.milestone.title}</div>
                 </LowerCell>
@@ -97,11 +99,13 @@ const LeftHeaderWrapper = styled.div`
   }
 `;
 
-const IssueCell = styled.div`
+const IssueCell = styled(Link)`
+  text-decoration: none;
+  color: inherit;
   height: 100px;
   display: flex;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 12px 14px;
   background: ${props => props.theme.greyscale.offWhite};
   margin: 1px 0px;
   svg {

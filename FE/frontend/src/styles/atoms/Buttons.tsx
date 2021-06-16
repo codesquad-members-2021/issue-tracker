@@ -13,7 +13,11 @@ const ButtonWrapper = styled.div<Props>`
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
-  color: ${props => props.theme.greyscale.offWhite};
+  color: ${props => {
+    if (props.detail) return props.theme.colors.primary;
+    return props.theme.greyscale.offWhite;
+  }};
+
   ${props => props.theme.alignCenter}
   ${props =>
     props.large &&
@@ -39,6 +43,10 @@ const ButtonWrapper = styled.div<Props>`
   background-color: ${props => {
     if (props.initial || props.focus || props.disabled)
       return props.theme.colors.primary;
+    return props.theme.greyscale.offWhite;
+  }};
+  border: ${props => {
+    if (props.detail) return `2px solid ${props.theme.colors.primary}`;
   }};
   opacity: ${props => {
     if (props.disabled) return 0.5;

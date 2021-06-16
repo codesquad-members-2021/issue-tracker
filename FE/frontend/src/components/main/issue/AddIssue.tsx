@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Paperclip } from '../../../icons/paperclip.svg';
 import Typos from '../../../styles/atoms/Typos';
+import User from '../../../styles/atoms/User';
 
 const AddIssue = () => {
   return (
@@ -25,6 +26,7 @@ const AddIssue = () => {
         </InputWrapper>
         <Assignees></Assignees>
       </MainWrapper>
+
       <BottomWrapper>
         <Line />
       </BottomWrapper>
@@ -51,7 +53,6 @@ const Line = styled.div`
   height: 1px;
   margin-top: 32px;
   background: ${props => props.theme.greyscale.line};
-  transform: matrix(1, 0, 0, -1, 0, 0);
 `;
 
 const MainWrapper = styled.div`
@@ -64,14 +65,6 @@ const MainWrapper = styled.div`
   & > div {
     margin: 0 12px;
   }
-`;
-
-const User = styled.div`
-  min-width: 44px;
-  height: 44px;
-  border-radius: 22px;
-  border: ${props => `1px solid ${props.theme.greyscale.line}`};
-  box-sizing: border-box;
 `;
 
 const InputWrapper = styled.div`
@@ -135,6 +128,10 @@ const Assignees = styled.div`
 
 const BottomWrapper = styled.div`
   padding: 24px 48px;
+  div {
+    position: fixed;
+    top: 200px;
+  }
 `;
 
 export default AddIssue;

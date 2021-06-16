@@ -3,13 +3,24 @@ import axios from 'axios';
 
 const url = 'https://44c597b3-b68a-4a8a-b608-3fe8108c0210.mock.pstmn.io/api';
 
-const getData = async (type: string, action: string) => {
+interface Props {
+  type: string;
+  action: string;
+  id?: number;
+}
+const getData = async (type: string, action: string, id?: string) => {
   switch (type) {
     case 'issue':
       switch (action) {
         case 'getAllData':
           const allData = await axios.get(`${url}/issues`);
           return allData.data.data;
+        case 'count':
+          const count = await axios.get(`${url}/issues`);
+          return count.data.data;
+        case 'detail':
+          const detail = await axios.get(`${url}${id}`);
+          return detail.data.data;
       }
       return;
     case 'label':
@@ -29,6 +40,6 @@ const getData = async (type: string, action: string) => {
   }
 };
 
-export default function useFetch(type: string, action: string) {
-  return useQuery([type, action], () => getData(type, action));
+export default function useFetch(type: string, action: string, id?: string) {
+  return useQuery([type, action, id], () => getData(type, action, id));
 }
