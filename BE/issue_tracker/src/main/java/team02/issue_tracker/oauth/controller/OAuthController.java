@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.dto.ApiResult;
+import team02.issue_tracker.oauth.service.GoogleLoginService;
 import team02.issue_tracker.oauth.service.OAuthService;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.annotation.UserId;
@@ -17,9 +18,11 @@ import team02.issue_tracker.oauth.dto.JwtResponse;
 public class OAuthController {
 
     private final OAuthService oauthService;
+    private final GoogleLoginService googleLoginService;
 
-    public OAuthController(OAuthService oauthService) {
+    public OAuthController(OAuthService oauthService, GoogleLoginService googleLoginService) {
         this.oauthService = oauthService;
+        this.googleLoginService = googleLoginService;
     }
 
     @GetMapping("/login/github/web")
@@ -30,6 +33,12 @@ public class OAuthController {
     @GetMapping("/login/github/ios")
     public ApiResult<JwtResponse> issueJwtForIos(@RequestParam("code") String code) {
         return ApiResult.success(oauthService.issueJwtForIos(code));
+    }
+
+    @GetMapping("/login/google")
+    public ApiResult<JwtResponse> issueJwtGoogle(@RequestParam("code") String code) {
+
+        return ApiResult.success(googleLoginService.issueJwtGoogle(code));
     }
 
     // jwt interceptor 테스트 목적 (임시)
