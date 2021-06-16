@@ -4,6 +4,7 @@ import { SMALL_FILL } from '../../../../utils/const';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import TapGroup from '../../../common/group/TabGroup';
 import { Link } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 const LabelNav: FC = () => {
   return (
@@ -14,7 +15,11 @@ const LabelNav: FC = () => {
         </TabBox>
         <Link to="/main/label-add">
           <ButtonBox>
-            <ButtonGroup type={SMALL_FILL} name={'추가'} />
+            <ButtonGroup
+              type={SMALL_FILL}
+              name={'추가'}
+              icon={<AddIcon style={{ fontSize: 16 }} />}
+            />
           </ButtonBox>
         </Link>
       </LabelNavContainer>
@@ -25,7 +30,7 @@ const LabelNav: FC = () => {
 export default LabelNav;
 
 const LabelNavDiv = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const LabelNavContainer = styled.div`
