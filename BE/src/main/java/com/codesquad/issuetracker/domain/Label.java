@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.domain;
 
+import com.codesquad.issuetracker.request.LabelRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,11 @@ public class Label {
 
     public static Label create(Long id, String title, String content, String color) {
         return new Label(id, title, content, color);
+    }
+
+    public void update(LabelRequest labelRequest) {
+        this.title = labelRequest.getTitle();
+        this.content = labelRequest.getContent();
+        this.color = labelRequest.getColor();
     }
 }

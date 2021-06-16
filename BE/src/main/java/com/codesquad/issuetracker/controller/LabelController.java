@@ -18,13 +18,19 @@ public class LabelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createLabel(@RequestBody LabelRequest labelRequest) {
-        labelService.create(labelRequest.create());
+    public ApiResponse createLabel(@RequestBody LabelRequest labelRequest) {
+        return ApiResponse.ok(labelService.create(labelRequest.create()));
     }
 
     @GetMapping
-    public ApiResponse getLabels(){
+    public ApiResponse getLabels() {
         return ApiResponse.ok(labelService.getLabels());
+    }
+
+    @PutMapping("/{labelId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void editLabel(@PathVariable Long labelId, @RequestBody LabelRequest labelRequest) {
+        labelService.edit(labelId, labelRequest);
     }
 
 }
