@@ -87,7 +87,7 @@ public class Issue {
         this.milestone = null;
     }
 
-    public void updateTitle(String title) {
+    public void updateIssue(String title) {
         this.title = title;
     }
 

@@ -4,19 +4,19 @@ import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.comment.infra.CommentRepository;
 import com.codesquad.issuetracker.issue.domain.Issue;
 import com.codesquad.issuetracker.issue.dto.IssueCreateRequest;
+import com.codesquad.issuetracker.issue.dto.IssueRequest;
 import com.codesquad.issuetracker.issue.dto.IssueResponse;
 import com.codesquad.issuetracker.issue.dto.IssueWrapper;
-import com.codesquad.issuetracker.issue.repository.IssueRepository;
+import com.codesquad.issuetracker.issue.infra.IssueRepository;
 import com.codesquad.issuetracker.label.infra.LabelRepository;
-import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.milestone.infra.MilestoneRepository;
 import com.codesquad.issuetracker.user.domain.User;
 import com.codesquad.issuetracker.user.infra.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -62,5 +62,19 @@ public class IssueService {
         commentRepository.save(comment);
 
         return IssueWrapper.wrap(IssueResponse.fromEntity(issue, Collections.singletonList(comment)));
+    }
+
+    public IssueWrapper readIssueById(Long id) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        List<Comment> comments = commentRepository.findAllByIssueId(id);
+        return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
+    }
+
+    @Transactional
+    public IssueWrapper updateIssue (IssueRequest issueRequest, Long id) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        List<Comment> comments = commentRepository.findAllByIssueId(id);
+        issue.updateIssue(issueRequest.getTitle());
+        return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
     }
 }
