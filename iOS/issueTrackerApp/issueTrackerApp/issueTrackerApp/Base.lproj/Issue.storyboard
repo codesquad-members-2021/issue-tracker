@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LAR-4B-Kul">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OnM-5d-5ES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -36,11 +36,31 @@
                     </navigationItem>
                     <connections>
                         <outlet property="issueTableView" destination="jeM-5r-JuA" id="o9K-J0-bRC"/>
+                        <segue destination="h00-aC-kjN" kind="show" id="mps-Jd-quh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T52-Ei-9Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157.971014492754" y="-240.40178571428569"/>
+        </scene>
+        <!--이슈 선택-->
+        <scene sceneID="3Ku-iV-xc9">
+            <objects>
+                <tableViewController storyboardIdentifier="IssueSelectTableViewController" id="h00-aC-kjN" customClass="IssueSelectTableViewController" customModule="issueTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vHW-Sx-dmb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="h00-aC-kjN" id="RPl-Pp-l0F"/>
+                            <outlet property="delegate" destination="h00-aC-kjN" id="zil-A9-FBF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="이슈 선택" id="UaY-Js-a3g"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6SL-Bk-oyU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2998" y="-231"/>
         </scene>
         <!--Add Issue View Controller-->
         <scene sceneID="Gg2-FK-aH5">
