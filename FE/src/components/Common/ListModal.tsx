@@ -45,7 +45,7 @@ export const testData: IListItem[] = [
 ];
 // -----
 
-const ListModal = ({ rightPos, data, isModalVisible, modalType, ...props }: IListModal) => {
+const ListModal = ({ rightPos, data, isModalVisible, ...props }: IListModal) => {
   const { title, items } = data;
 
   const renderItems = useCallback(
@@ -68,7 +68,6 @@ const ListModal = ({ rightPos, data, isModalVisible, modalType, ...props }: ILis
     <ListModalLayout
       {...props}
       rightPos={rightPos}
-      modalType={modalType}
       isModalVisible={isModalVisible}
     >
       {/* Title */}

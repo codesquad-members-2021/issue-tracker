@@ -50,7 +50,6 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
           <RightRow>
             <ListModal
               rightPos="0"
-              modalType={name}
               isModalVisible={true}
               data={{
                 title: '테스트',

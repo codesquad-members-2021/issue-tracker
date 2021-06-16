@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { searchModalVisible } from '../../../util/recoil';
+import { atoms } from '../../../util/store';
 import { Input, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import ListModal from '../../Common/ListModal';
 import { TextIssueList } from '../../../util/reference';
 
 const SearchBar = () => {
-  const {
-    filter: { caption, placeHolder, filterHeader: title, filterList },
-  } = TextIssueList;
+  const { filter: { caption, placeHolder, filterHeader: title, filterList } } = TextIssueList;
+  const { searchModalVisible } = atoms;
 
   const data = {
     title,
@@ -31,7 +30,6 @@ const SearchBar = () => {
 
       <SearchBarRow>
         <ListModal
-          modalType={"searchBar"}
           isModalVisible={isSearchModalVisible}
           data={data}
         />
