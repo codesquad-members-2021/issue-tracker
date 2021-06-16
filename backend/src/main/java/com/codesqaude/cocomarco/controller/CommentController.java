@@ -43,5 +43,4 @@ public class CommentController {
         //todo user id
         commentService.delete(SAMPLE_UUID, commentId);
     }
-
 }
