@@ -15,4 +15,4 @@ const ResponsiveLayer = styled.div`
   padding: 0 80px;
   box-sizing: border-box;
 `
-export default ResponsiveLayout
+export default ResponsiveLayout;
