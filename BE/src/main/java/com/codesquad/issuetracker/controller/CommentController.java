@@ -2,13 +2,16 @@ package com.codesquad.issuetracker.controller;
 
 import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.request.CommentRequest;
+import com.codesquad.issuetracker.request.EditedComment;
 import com.codesquad.issuetracker.response.ApiResponse;
+import com.codesquad.issuetracker.response.CommentResponse;
 import com.codesquad.issuetracker.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -33,12 +36,17 @@ public class CommentController {
 
     @GetMapping("/{issueId}")
     public ApiResponse getComments(@PathVariable Long issueId) {
-        return ApiResponse.ok(commentService.getComments(issueId));
+        return ApiResponse.ok(
+                commentService.getComments(issueId).stream()
+                        .map(comment -> CommentResponse.create(comment))
+                        .collect(Collectors.toList())
+        );
     }
 
-    @PutMapping("/{issueId}/{commentId}")
-    public ApiResponse editComment(@PathVariable Long issueId, @PathVariable Long commentId) {
-        return ApiResponse.ok("Edit Comment " + commentId + " from Issue Number " + issueId);
+    @PutMapping("/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void editComment(@PathVariable Long commentId, @RequestBody EditedComment content) {
+        commentService.editComment(commentId, content);
     }
 
     @DeleteMapping("/{issueId}/{commentId}")

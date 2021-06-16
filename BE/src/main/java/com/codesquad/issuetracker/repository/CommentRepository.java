@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.repository;
 
 import com.codesquad.issuetracker.domain.Comment;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
