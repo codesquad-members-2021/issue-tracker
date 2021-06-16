@@ -20,10 +20,20 @@ final class RequestManager {
         self.headers = HTTPHeaders(headers ?? [:])
     }
     
-    func create(method: HTTPMethod) -> DataRequest {
+    func create(method: HTTPMethod, parameters: [String: Any]? = nil) -> DataRequest {
+        let params = parameters != nil ? parameters : self.parameters
+    
         return AF.request(self.url,
                           method: method,
-                          parameters: self.parameters,
+                          parameters: params,
+                          headers: self.headers)
+    }
+    
+    func create<T: Encodable>(method: HTTPMethod, encodableParameters: T) -> DataRequest {
+        return AF.request(self.url,
+                          method: method,
+                          parameters: encodableParameters,
+                          encoder: JSONParameterEncoder(),
                           headers: self.headers)
     }
     

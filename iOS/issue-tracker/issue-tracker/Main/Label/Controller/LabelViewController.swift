@@ -48,7 +48,11 @@ final class LabelViewController: UIViewController {
         labelTableView.delegate = labelTableDelegate
         
         setNetworkManager()
-        loadLabels()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
     }
     
     private func addNavigationButton() {
@@ -74,7 +78,7 @@ final class LabelViewController: UIViewController {
         networkManager = NetworkManager(requestManager: requestManager)
     }
     
-    private func loadLabels() {
+    func loadData() {
         networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, Error>) in
             switch result {
             case .success(let result):
@@ -94,8 +98,13 @@ final class LabelViewController: UIViewController {
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
+        guard let loginInfo = loginInfo else { return }
         let addLabelViewController = AddLabelViewController()
+        addLabelViewController.setup(loginInfo: loginInfo)
         addLabelViewController.modalPresentationStyle = .formSheet
+        addLabelViewController.setUpDismissOperation { [weak self] in
+            self?.loadData()
+        }
         present(addLabelViewController, animated: true, completion: nil)
     }
 }

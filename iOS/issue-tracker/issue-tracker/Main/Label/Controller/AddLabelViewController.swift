@@ -148,8 +148,11 @@ final class AddLabelViewController: UIViewController {
         return singleLineHeight * 0.5
     }()
     
+    private var loginInfo: LoginInfo?
     private let sceneTitle = "새로운 레이블"
-    private let colorConverter = HexColorConverter()
+    private let colorConverter: HexColorConvertable = HexColorConverter()
+    private var networkManager: NetworkManagerOperations?
+    private var dismissOperation: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,6 +161,8 @@ final class AddLabelViewController: UIViewController {
         addTopMenu()
         addEditStackView()
         addLabelPreview()
+        
+        titleTextfield.delegate = self
     }
     
     private func addTopMenu() {
@@ -214,12 +219,31 @@ final class AddLabelViewController: UIViewController {
         ])
     }
     
+    func setUpDismissOperation(_ operation: @escaping () -> Void) {
+        self.dismissOperation = operation
+    }
+    
     @objc private func cancelButtonTouched(_ sender: UIBarButtonItem) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func saveButtonTouched(_ sender: UIBarButtonItem) {
+        guard let labelTitle = titleTextfield.text, let colorCode = backgroundLabel.text else { return }
         
+        let newLabel = NewLabelDTO(name: labelTitle,
+                                   content: descriptionTextfield.text ?? "",
+                                   colorCode: colorCode)
+        
+        postNewLabel(newLabel)
+    }
+    
+    private func postNewLabel(_ newLabel: NewLabelDTO) {
+        networkManager?.post(requestBody: newLabel, completion: { [weak self] in
+            self?.dismiss(animated: true, completion: {
+                guard let dismissOperation = self?.dismissOperation else { return }
+                dismissOperation()
+            })
+        })
     }
     
     @objc private func randomColorButtonTouched(_ sender: UIButton) {
@@ -245,5 +269,29 @@ final class AddLabelViewController: UIViewController {
         let backgroundColor = colorConverter.convertHex(hex)
         let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
         previewLabel.configure(with: backgroundColor, titleColor, nil)
+    }
+}
+
+extension AddLabelViewController: LoginInfoContainer {
+    func setup(loginInfo: LoginInfo) {
+        self.loginInfo = loginInfo
+        setNetworkManager()
+    }
+    
+    private func setNetworkManager() {
+        guard let loginInfo = loginInfo else { return }
+        let url = EndPoint.label.fullAddress()
+        let headers = [Header.authorization.key(): loginInfo.jwt.description]
+        let requestManager = RequestManager(url: url, parameters: nil, headers: headers)
+        networkManager = NetworkManager(requestManager: requestManager)
+    }
+}
+
+extension AddLabelViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        DispatchQueue.main.async {
+            self.saveButton.isEnabled = text.count > 0
+        }
     }
 }
