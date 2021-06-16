@@ -6,14 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import team02.issue_tracker.domain.Comment;
-import team02.issue_tracker.domain.CommentEmoji;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
-import team02.issue_tracker.exception.CommentNotFoundException;
 import team02.issue_tracker.exception.IssueNotFoundException;
-import team02.issue_tracker.repository.CommentEmojiRepository;
-import team02.issue_tracker.repository.CommentRepository;
 import team02.issue_tracker.repository.IssueAssigneeRepository;
 import team02.issue_tracker.repository.IssueRepository;
 

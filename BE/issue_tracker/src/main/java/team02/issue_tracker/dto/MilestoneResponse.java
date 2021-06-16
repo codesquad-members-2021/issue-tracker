@@ -24,6 +24,5 @@ public class MilestoneResponse {
         this.dueDate = milestone.getDueDate();
         this.openIssue = milestone.getOpenIssueCount();
         this.closedIssue = milestone.getClosedIssueCount();
-
     }
 }

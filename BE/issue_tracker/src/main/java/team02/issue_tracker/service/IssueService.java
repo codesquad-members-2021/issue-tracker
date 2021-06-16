@@ -119,7 +119,6 @@ public class IssueService {
     }
 
     /**
-     *
      * Issue 삭제시 Comment도 삭제됨
      */
     public void deleteIssue(Long issueId) {
