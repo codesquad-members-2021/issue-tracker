@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { LABEL, MILESTONE } from '../../../utils/const';
 import TextGroup from '../group/TextGroup';
 import CountGroup from '../group/CountGroup';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,14 +33,18 @@ const TabGroup = (): JSX.Element => {
         color="primary"
         aria-label="large outlined primary button group"
       >
-        <TabButton startIcon={<LocalOfferIcon />}>
-          <TextGroup type="small" content={LABEL} color="#6E7191" />
-          <CountGroup count={0} color="#6E7191" />
-        </TabButton>
-        <TabButton startIcon={<FlagIcon />}>
-          <TextGroup type="small" content={MILESTONE} color="#6E7191" />
-          <CountGroup count={0} color="#6E7191" />
-        </TabButton>
+        <Link to="/main/label-list">
+          <TabButton startIcon={<LocalOfferIcon />}>
+            <TextGroup type="small" content={LABEL} color="#6E7191" />
+            <CountGroup count={0} color="#6E7191" />
+          </TabButton>
+        </Link>
+        <Link to="/main/milestone">
+          <TabButton startIcon={<FlagIcon />}>
+            <TextGroup type="small" content={MILESTONE} color="#6E7191" />
+            <CountGroup count={0} color="#6E7191" />
+          </TabButton>
+        </Link>
       </CustomTabGroup>
     </div>
   );
@@ -55,13 +60,19 @@ const TabButton = styled(Button)`
 `;
 
 const CustomTabGroup = styled(ButtonGroup)`
+  a {
+    border: 1px solid ${({ theme }) => `${theme.colors.gray3}`};
+    border-radius: 16px;
+  }
+
   button {
     border-color: ${({ theme }) => `${theme.colors.gray3}`};
     color: ${({ theme }) => `${theme.colors.gray3}`};
-    border-radius: 16px;
+    padding: 0px 15px;
 
     :hover {
       border-color: ${({ theme }) => `${theme.colors.gray3}`};
+      background: transparent;
     }
   }
 
