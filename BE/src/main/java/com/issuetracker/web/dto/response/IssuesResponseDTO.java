@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -21,4 +23,16 @@ public class IssuesResponseDTO {
                 .issues(issues)
                 .build();
     }
+
+//    public static IssuesResponseDTO blankIssuesResponseDTO(int ) {
+//        return IssuesResponseDTO.builder()
+//                .count(Count.builder()
+//                        .label(0)
+//                        .milestone(0)
+//                        .openedIssue(0)
+//                        .closedIssue(0)
+//                        .build())
+//                .issues(new ArrayList<>())
+//                .build();
+//    }
 }
