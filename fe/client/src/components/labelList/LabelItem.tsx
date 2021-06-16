@@ -14,7 +14,7 @@ const LabelItem = ({ name, color, description, setToggleItem }: LabelItemType) =
         {description}
       </DescWrapper>
       <ButtonsWrapper>
-        <IconButton icon="edit" >
+        <IconButton icon="edit" onClick={setToggleItem}>
           편집
         </IconButton>
         <IconButton icon="trash">
@@ -24,7 +24,6 @@ const LabelItem = ({ name, color, description, setToggleItem }: LabelItemType) =
     </>
   )
 }
-
 
 const LabelWrapper = styled.div`
   width: 208px;

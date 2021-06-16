@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import FilterTab from '@components/common/FilterTab';
 import API from '@/utils/API';
