@@ -10,6 +10,11 @@ export const closeState = atom({
   default: false,
 });
 
+export const selectCheckBoxAppBar = atom({
+  key: "selectCheckBoxAppBar",
+  default: false,
+});
+
 export const selectIssueAll = atom({
   key: "selectIssueAll",
   default: false,

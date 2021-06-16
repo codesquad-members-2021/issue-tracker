@@ -1,29 +1,36 @@
-import React from "react";
-import { CheckboxProps, Checkbox, FormControlLabel } from "@material-ui/core";
-import { amber } from "@material-ui/core/colors";
-import { withStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { selector, useRecoilState, useRecoilValue } from "recoil";
+import { selectIssueAll, selectCheckBoxAppBar } from "utils/states";
+import { GreenCheckbox } from "./CheckBox.style";
 
-const AmberCheckbox = withStyles({
-  root: {
-    color: amber[400],
-    "&$checked": {
-      color: amber[600],
-    },
-  },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+export default function CheckBox() {
+  const [selectedCheckBoxAppBar, setSelectedCheckBoxAppBar] = useRecoilState(selectCheckBoxAppBar);
+  const selectedIssueAll = useRecoilValue(selectIssueAll);
+  const [state, setState] = useState(false);
 
-interface checkBoxProps {
-  checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name: string;
-}
+  useEffect(() => {
+    setState(selectedIssueAll);
+  }, [selectedIssueAll]);
 
-export default function CheckBox({ checked, name, onChange }: checkBoxProps) {
+  useEffect(() => {
+    if (!selectedCheckBoxAppBar) return;
+    setState(selectedCheckBoxAppBar);
+  }, [selectedCheckBoxAppBar]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedCheckBoxAppBar && !event.target.checked) setSelectedCheckBoxAppBar(false);
+
+    setState(event.target.checked);
+  };
+
   return (
-    <FormControlLabel
-      control={<AmberCheckbox checked={checked} onChange={onChange} name={name} />}
-      label=""
-    />
+    <FormGroup row>
+      <FormControlLabel
+        control={<GreenCheckbox checked={state} onChange={handleChange} name="checkedG" />}
+        label=""
+      />
+    </FormGroup>
   );
 }
