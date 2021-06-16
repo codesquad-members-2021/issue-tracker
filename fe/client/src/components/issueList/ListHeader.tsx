@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { issueCheckedItemAtom, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
+import FilterItem from './FilterItem';
 import IconButton from '@components/common/IconButton';
 import { IssueListItemType } from '@components/common/types/APIType';
-import FilterItem from './FilterItem';
+import { issueCheckedItemAtom, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
+import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 
 type ListHeaderType = {
   issueItems: Array<IssueListItemType>;

@@ -1,6 +1,6 @@
 import React from 'react'
-import LabelMilestoneToggle from '@components/common/LabelMilestoneToggle';
 import styled from 'styled-components';
+import LabelMilestoneToggle from '@components/common/LabelMilestoneToggle';
 import IconButton from '@components/common/IconButton';
 
 const HeadContent = () => {

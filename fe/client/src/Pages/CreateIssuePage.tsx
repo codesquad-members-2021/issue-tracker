@@ -1,11 +1,11 @@
 import HeadContent from '@components/createIssue/HeadContent';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Tabs from '@components/createIssue/Tabs';
 import Button from '@material-ui/core/Button';
+import Tabs from '@components/createIssue/Tabs';
+import InputField from '@components/createIssue/InputField';
 import IconButton from '@components/common/IconButton';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
-import InputField from '@components/createIssue/InputField';
-import { Link } from 'react-router-dom';
 
 const CreateIssuePage = () => {
   const classes = inputStyles();

@@ -1,15 +1,15 @@
+import { useEffect } from 'react';
 import styled from "styled-components";
+import { labelMilestoneCountAtom } from "@components/common/atoms/labelMilestoneAtom";
+import useFetch, { AsyncState } from "@/utils/hook/useFetch";
+import API from "@/utils/API";
+import { useRecoilState } from "@/utils/myRecoil/useRecoilState";
 import LabelIcon from '@/Icons/Label.svg';
 import MilestoneIcon from '@/Icons/Milestone.svg';
-import useAsync, { AsyncState } from "@/utils/hook/useAsync";
-import API from "@/utils/API";
-import { useEffect } from 'react';
-import { useRecoilState } from "@/utils/myRecoil/useRecoilState";
-import { labelMilestoneCountAtom } from "@components/common/atoms/labelMilestoneAtom";
 
 const LabelMilestoneToggle = () => {
-  const [labelState] = useAsync(API.get.labelsCount);
-  const [milestoneState] = useAsync(API.get.milestonesCount);
+  const [labelState] = useFetch(API.get.labelsCount);
+  const [milestoneState] = useFetch(API.get.milestonesCount);
   const { data: labelData }: AsyncState<any, any> = labelState;
   const { data: milestoneData }: AsyncState<any, any> = milestoneState;
   const [, setLabelMilestoneCountState] = useRecoilState(labelMilestoneCountAtom);

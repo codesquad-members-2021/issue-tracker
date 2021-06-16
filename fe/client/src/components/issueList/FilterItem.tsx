@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
-import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 import FilterTab from '@components/common/FilterTab';
-import useAsync, { AsyncState } from '@/utils/hook/useAsync';
 import API from '@/utils/API';
+import useFetch, { AsyncState } from '@/utils/hook/useFetch';
+import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
 
 const filterNames: { [key: string]: { apiName: string; name: string } } = {
   manager: { apiName: 'users', name: '담당자' },
@@ -19,7 +19,7 @@ type FilterItemType = {
 
 const FilterItem = ({ title, handleClickShowFilterModal }: FilterItemType) => {
   const { apiName } = filterNames[title];
-  const [users] = useAsync(API.get[apiName]);
+  const [users] = useFetch(API.get[apiName]);
   const { data }: AsyncState<any, any> = users;
 
   return (

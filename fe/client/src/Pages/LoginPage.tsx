@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import LargeLogo from '@/Icons/LargeLogo.svg';
 import Button from '@material-ui/core/Button';
+import LargeLogo from '@/Icons/LargeLogo.svg';
 
 const LoginPage = () => {
   return (

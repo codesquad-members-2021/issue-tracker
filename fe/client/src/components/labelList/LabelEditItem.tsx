@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
+import { InputAdornment } from '@material-ui/core';
 import Label from '@components/common/Label';
 import TitleInput from '@components/common/TitleInput';
 import IconButton from '@components/common/IconButton';
-import RefreshIcon from '@/Icons/Refresh.svg';
-import { InputAdornment } from '@material-ui/core';
 import { LabelItemType } from '@components/common/types/LabelType';
+import RefreshIcon from '@/Icons/Refresh.svg';
 
 const LabelEditItem = ({ name, color, description }: LabelItemType) => {
   const reFreshButton = (<InputAdornment position="end" onClick={() => console.log(123)}>

@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 import LabelItem from './LabelItem';
 import LabelEditItem from './LabelEditItem';
+import { LabelSwitchType } from '@components/common/types/LabelType';
 import useToggle from '@/utils/hook/useToggle';
-import { LabelSwitchType } from '../common/types/LabelType';
 
 const LabelSwitching = ({ name, color, description }: LabelSwitchType) => {
   const [isEdit, setToggleItem] = useToggle(false);

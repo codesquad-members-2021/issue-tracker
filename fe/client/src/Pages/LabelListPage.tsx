@@ -1,20 +1,21 @@
 import React from 'react'
-import HeadContent from '@/components/labelList/HeadContent';
-import { ListWrapper } from '@components/common/baseStyle/baseStyle';
-import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
-import { labelMilestoneCountAtom } from '@components/common/atoms/labelMilestoneAtom';
 import styled from 'styled-components';
-import useAsync, { AsyncState } from '@/utils/hook/useAsync';
+import HeadContent from '@components/labelList/HeadContent';
+import { ListWrapper } from '@components/common/baseStyle/baseStyle';
+import LabelSwitching from '@components/labelList/LabelSwitching';
+import { LabelSwitchType } from '@components/common/types/LabelType';
+import { labelMilestoneCountAtom } from '@components/common/atoms/labelMilestoneAtom';
 import API from '@/utils/API';
-import LabelSwitching from '@/components/labelList/LabelSwitching';
-import { LabelSwitchType } from '@/components/common/types/LabelType';
+import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
+import useFetch, { AsyncState } from '@/utils/hook/useFetch';
+
 type LabelsType = LabelSwitchType & {
   id: number;
 }
 
 const LabelListPage = () => {
   const [labelMilestoneCount] = useRecoilState(labelMilestoneCountAtom);
-  const [labelListState] = useAsync(API.get.labels);
+  const [labelListState] = useFetch(API.get.labels);
   const { data, loading, error }: AsyncState<any, any> = labelListState;
   return (
     <>

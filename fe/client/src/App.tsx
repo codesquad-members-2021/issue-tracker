@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { Switch, Route } from 'react-router-dom';
-import { RecoilRoot } from '@/utils/myRecoil/RecoilRoot';
 import { createGlobalStyle } from 'styled-components';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { RecoilRoot } from '@/utils/myRecoil/RecoilRoot';
 
 const HeaderLazy = React.lazy(() => import('@components/common/Header'));
 const LoginLazy = React.lazy(() => import('@/Pages/LoginPage'));
