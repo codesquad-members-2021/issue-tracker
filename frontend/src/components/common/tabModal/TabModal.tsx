@@ -28,9 +28,9 @@ interface StyleProps {
 }
 const TabModalBlock = styled.div<StyleProps>`
   position: absolute;
-  top: ${({ theme, filterType, isMainPage }) => (isMainPage ? 50 : 45)}px;
+  top: ${({ theme, filterType, isMainPage }) => (isMainPage ? '50px' : '6%')};
   right: ${({ filterType, theme, isMainPage }) =>
-    isMainPage ? theme.tabModalRightPosition[filterType] : 262}px;
+    isMainPage ? `${theme.tabModalRightPosition[filterType]}px` : '19.4%'};
   width: 240px;
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
   border-radius: 16px;
