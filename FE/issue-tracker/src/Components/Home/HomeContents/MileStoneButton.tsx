@@ -1,4 +1,3 @@
-import React from "react";
 import { HomeAssets as S } from "../HomeStyles";
 import { Home as Styled } from "../HomeStyles";
 

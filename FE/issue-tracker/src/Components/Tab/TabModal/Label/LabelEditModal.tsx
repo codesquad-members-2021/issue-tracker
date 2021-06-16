@@ -1,6 +1,7 @@
 import { AddNewModal as S, TabAssets as Icon } from "../../TabStyles";
 import { toggleEditLabelState } from "../../TabStore";
 import { useSetRecoilState } from "recoil";
+import EditLabelView from "./EditLabelView";
 
 type LabelEditProps = {
   id: number;
@@ -20,7 +21,9 @@ const LabelAddModal = ({ id }: LabelEditProps) => {
     <S.AddModalDiv isLabel={true}>
       <S.AddModalTitle>레이블 편집</S.AddModalTitle>
       <S.ModalContent>
-        <S.ModalLeft>레이블</S.ModalLeft>
+        <S.ModalLeft>
+          <EditLabelView />
+        </S.ModalLeft>
         <S.ModalRight>
           <S.InputWrapper>
             <S.Input placeholder="레이블 이름" />
@@ -29,22 +32,25 @@ const LabelAddModal = ({ id }: LabelEditProps) => {
           <S.ChangeColorContainer>
             <S.ChangeBackgroundDiv>
               <S.ColorTitle>배경색상</S.ColorTitle>
-              <S.ColorContent>#F0F0F0</S.ColorContent>
+              <S.BackgroundColorContent>
+                <S.Input placeholder="색 입력" />
+              </S.BackgroundColorContent>
               <Icon.RefreshIcon />
             </S.ChangeBackgroundDiv>
             <S.ChangeFontColorDiv>
               <S.ColorTitle>텍스트 색상</S.ColorTitle>
-              <S.ColorContent>
+              <S.FontColorRadioContent>
                 <input name="labelFontColor" type="radio" />
                 어두운 색
-              </S.ColorContent>
-              <S.ColorContent>
+              </S.FontColorRadioContent>
+              <S.FontColorRadioContent>
                 <input name="labelFontColor" type="radio" />
                 밝은 색
-              </S.ColorContent>
+              </S.FontColorRadioContent>
             </S.ChangeFontColorDiv>
           </S.ChangeColorContainer>
           <S.FinishWriteBtnDiv>
+            <S.Canclebtn onClick={handleEditCloseBtnClick}>취소</S.Canclebtn>
             <S.FinishWriteBtn onClick={handleEditCloseBtnClick}>
               + 완료
             </S.FinishWriteBtn>
