@@ -71,13 +71,13 @@ class IssueTableViewCell: UITableViewCell {
         
         labelDescription.snp.makeConstraints { label in
             label.top.equalTo(largeTitle.snp.bottom).offset(16)
-            label.leading.trailing.equalToSuperview().offset(16)
+            label.leading.trailing.equalToSuperview().inset(16)
             label.height.equalTo(22)
         }
         
         milestoneView.snp.makeConstraints { view in
             view.top.equalTo(labelDescription.snp.bottom).offset(16)
-            view.leading.trailing.equalTo(16)
+            view.leading.trailing.equalToSuperview().inset(16)
             view.height.equalTo(22)
         }
         
