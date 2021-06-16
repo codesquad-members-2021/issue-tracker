@@ -174,15 +174,15 @@ export const selectedTabState = selector<selectedTabType>({
   },
 });
 
-const selectedUserState = atom<Array<UserType> | []>({
+export const selectedUserState = atom<Array<UserType> | []>({
   key: 'selectedUserTabState',
   default: mokData.assignee,
 });
-const selectedLabelState = atom<Array<LabelType> | []>({
+export const selectedLabelState = atom<Array<LabelType> | []>({
   key: 'selectedLabelTabState',
   default: mokData.label,
 });
-const selectedMilestoneState = atom<MilestoneType | null>({
+export const selectedMilestoneState = atom<MilestoneType | null>({
   key: 'selectedMilestoneTabState',
   default: mokData.milestone,
 });

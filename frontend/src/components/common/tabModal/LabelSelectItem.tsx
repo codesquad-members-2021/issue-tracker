@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { hoverGrey } from 'style/Theme';
+import { useSetRecoilState } from 'recoil';
 import { LabelType } from 'components/common/tabModal/tapDataType';
 import { ReactComponent as RadioButton } from 'assets/icon/RadioButton.svg';
+import { selectedLabelState } from 'store/issueInfoStore';
 
 interface LabelSelectItemProps {
   label: LabelType;
@@ -10,11 +12,22 @@ interface LabelSelectItemProps {
 }
 
 export default function LabelSelectItem({
-  label: { name, color },
+  label: { id, name, color },
+  label,
   selected,
 }: LabelSelectItemProps) {
+  const setSelectLabel = useSetRecoilState(selectedLabelState);
+
+  const handeClick = () => {
+    if (selected) {
+      setSelectLabel((selectedLabel) => selectedLabel.filter((item) => item.id !== id));
+    } else {
+      setSelectLabel((selectedLabel) => [...selectedLabel, label]);
+    }
+  };
+
   return (
-    <LabelSelectItemBlock colorCode={color.backgroundColorCode}>
+    <LabelSelectItemBlock colorCode={color} onClick={handeClick}>
       <div className='label'>
         <div className='label__label'></div>
         <div className='label__title'>{name}</div>
@@ -25,7 +38,10 @@ export default function LabelSelectItem({
 }
 
 interface StyledProps {
-  colorCode: string;
+  colorCode: {
+    backgroundColorCode: string;
+    textColorCode: string;
+  };
 }
 
 const LabelSelectItemBlock = styled(hoverGrey)<StyledProps>`
@@ -42,7 +58,7 @@ const LabelSelectItemBlock = styled(hoverGrey)<StyledProps>`
     width: 20px;
     height: 20px;
     border: 1px solid #d9dbe9;
-    background-color: ${({ colorCode }) => colorCode};
+    background-color: ${({ colorCode }) => colorCode.backgroundColorCode};
     border-radius: 100%;
     margin-right: 8px;
   }

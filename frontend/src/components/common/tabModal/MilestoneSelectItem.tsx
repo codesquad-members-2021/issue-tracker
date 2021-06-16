@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import { hoverGrey } from 'style/Theme';
 import { MilestoneType } from 'components/common/tabModal/tapDataType';
 import { ReactComponent as RadioButton } from 'assets/icon/RadioButton.svg';
+import { selectedMilestoneState } from 'store/issueInfoStore';
 
 interface Props {
   milestone: MilestoneType;
@@ -11,10 +13,21 @@ interface Props {
 
 export default function MilestoneSelectItem({
   milestone: { title },
+  milestone,
   selected,
 }: Props): ReactElement {
+  const setSelectMilestone = useSetRecoilState(selectedMilestoneState);
+
+  const handleClick = () => {
+    if (selected) {
+      setSelectMilestone(null);
+    } else {
+      setSelectMilestone(milestone);
+    }
+  };
+
   return (
-    <MilestoneSelectItemBlock>
+    <MilestoneSelectItemBlock onClick={handleClick}>
       <div>{title}</div>
       {selected && <RadioButton />}
     </MilestoneSelectItemBlock>

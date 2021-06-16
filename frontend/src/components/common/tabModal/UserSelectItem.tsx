@@ -1,18 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import { hoverGrey } from 'style/Theme';
+import { useSetRecoilState } from 'recoil';
 import ProfileImg from 'components/atom/ProfileImg';
 import { UserType } from 'components/common/tabModal/tapDataType';
 import { ReactComponent as RadioButton } from 'assets/icon/RadioButton.svg';
+import { selectedUserState } from 'store/issueInfoStore';
 
 interface UserProps {
   user: UserType;
   selected: boolean;
 }
 
-export default function UserSelectItem({ user: { image, userName }, selected }: UserProps) {
+export default function UserSelectItem({
+  user: { id, image, userName },
+  user,
+  selected,
+}: UserProps) {
+  const setSelectUser = useSetRecoilState(selectedUserState);
+
+  const handeClick = () => {
+    if (selected) {
+      setSelectUser((selectedUser) => selectedUser.filter((item) => item.id !== id));
+    } else {
+      setSelectUser((selectedUser) => [...selectedUser, user]);
+    }
+  };
+
   return (
-    <UserSelectItemBlock>
+    <UserSelectItemBlock onClick={handeClick}>
       <div className='user-select__info'>
         <div className='user-select__image'>
           <ProfileImg avatarURL={image} isSmall={true} />
