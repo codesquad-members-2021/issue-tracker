@@ -27,7 +27,7 @@
 		D49B7885267622CF00CF3FE4 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B7884267622CF00CF3FE4 /* Label.swift */; };
 		D49B7887267622D800CF3FE4 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B7886267622D800CF3FE4 /* Milestone.swift */; };
 		D49B788B2676278800CF3FE4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D49B788A2676278800CF3FE4 /* Alamofire */; };
-		D49B788D2676279500CF3FE4 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* Network.swift */; };
+		D49B788D2676279500CF3FE4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* NetworkManager.swift */; };
 		D49B788F267627BC00CF3FE4 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788E267627BC00CF3FE4 /* EndPoint.swift */; };
 		D49B789326771EA200CF3FE4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789226771EA200CF3FE4 /* IssueList.swift */; };
 		D49B789526771EAA00CF3FE4 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789426771EAA00CF3FE4 /* IssueDetail.swift */; };
@@ -35,7 +35,7 @@
 		D49B789926772F8C00CF3FE4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789826772F8C00CF3FE4 /* CommentCell.swift */; };
 		D49B789B26772FA400CF3FE4 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789A26772FA400CF3FE4 /* CommentViewController.swift */; };
 		D4F09F2626788C1300240AA3 /* Issue_TrackkerNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */; };
-		D4F09F2D26788CB900240AA3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* Network.swift */; };
+		D4F09F2D26788CB900240AA3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* NetworkManager.swift */; };
 		D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788E267627BC00CF3FE4 /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +71,7 @@
 		D49B7882267622A500CF3FE4 /* Assignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		D49B7884267622CF00CF3FE4 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		D49B7886267622D800CF3FE4 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
-		D49B788C2676279500CF3FE4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		D49B788C2676279500CF3FE4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D49B788E267627BC00CF3FE4 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		D49B789226771EA200CF3FE4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		D49B789426771EAA00CF3FE4 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		D49B78882676270D00CF3FE4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D49B788C2676279500CF3FE4 /* Network.swift */,
+				D49B788C2676279500CF3FE4 /* NetworkManager.swift */,
 				D49B788E267627BC00CF3FE4 /* EndPoint.swift */,
 			);
 			path = Network;
@@ -345,7 +345,7 @@
 				D49B78692670AD9900CF3FE4 /* PaddingLabel.swift in Sources */,
 				D49B78672670A67400CF3FE4 /* IssueCell.swift in Sources */,
 				D49B789526771EAA00CF3FE4 /* IssueDetail.swift in Sources */,
-				D49B788D2676279500CF3FE4 /* Network.swift in Sources */,
+				D49B788D2676279500CF3FE4 /* NetworkManager.swift in Sources */,
 				D49B789326771EA200CF3FE4 /* IssueList.swift in Sources */,
 				D49B7853266F0D0200CF3FE4 /* SignInViewController.swift in Sources */,
 				D49B7887267622D800CF3FE4 /* Milestone.swift in Sources */,
@@ -372,7 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */,
-				D4F09F2D26788CB900240AA3 /* Network.swift in Sources */,
+				D4F09F2D26788CB900240AA3 /* NetworkManager.swift in Sources */,
 				D4F09F2626788C1300240AA3 /* Issue_TrackkerNetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

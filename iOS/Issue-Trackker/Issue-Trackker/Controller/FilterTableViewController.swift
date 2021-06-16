@@ -23,6 +23,7 @@ class FilterTableViewController: UITableViewController {
             }
         }
     }
+    
     enum IssueState: CustomStringConvertible, CaseIterable {
         case open, closed, write, assign, comment
         
@@ -44,19 +45,19 @@ class FilterTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationItems()
+        configureNavigationItem()
     }
     
-    func setNavigationItems() {
+    private func configureNavigationItem() {
         self.navigationItem.title = "필터"
 
         self.navigationController?.navigationBar.barTintColor = .systemGray4
         self.navigationController?.navigationBar.isTranslucent = false
         
-        let leftButton = UIButton.setButton(image: "Icon.png", title: " 취소")
+        let leftButton = UIButton.makeButton(image: "Icon.png", title: " 취소")
         leftButton.addTarget(self, action: #selector(cancelButtonTouched(_:)), for: .touchUpInside)
         
-        let rightButton = UIButton.setButton(image: nil, title: "저장")
+        let rightButton = UIButton.makeButton(image: nil, title: "저장")
         rightButton.addTarget(self, action: #selector(saveButtonTouched(_:)), for: .touchUpInside)
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)

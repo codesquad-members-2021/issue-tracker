@@ -22,7 +22,7 @@ extension Session: SessionProtocol {
     
 }
 
-class Network {
+class NetworkManager {
     func request<T: Decodable> (with request: Requestable, dataType: T.Type, completion: @escaping (Result<T,AFError>) -> Void) {
 
         let url = request.url()

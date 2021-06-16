@@ -17,24 +17,27 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.addIssueButton.addTarget(self, action: #selector(addIssueButtonTouched(_:)), for: .touchUpInside)
+        configureSearchController()
+        configureNavigationItem()
+    }
+    
+    private func configureSearchController() {
         self.searchController = UISearchController()
         self.searchController?.searchBar.delegate = self
         self.searchController?.hidesNavigationBarDuringPresentation = true
-        self.addIssueButton.addTarget(self, action: #selector(addIssueButtonTouched(_:)), for: .touchUpInside)
-        setNavigationItem()
     }
     
-    func setNavigationItem() {
+    private func configureNavigationItem() {
         self.navigationItem.title = "이슈"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
-        self.issueTableView.tableFooterView = setFooterView()
+        self.issueTableView.tableFooterView = configureFooterView()
         
-        let filterButton = UIButton.setButton(image: "filter.png", title: " 필터")
+        let filterButton = UIButton.makeButton(image: "filter.png", title: " 필터")
         filterButton.addTarget(self, action: #selector(filterButtonTouched(_:)), for: .touchUpInside)
-      
-        let selectButton = UIButton.setButton(image: "select.png", title: "선택")
+        let selectButton = UIButton.makeButton(image: "select.png", title: "선택")
         selectButton.addTarget(self, action: #selector(selectButtonTouched(_:)), for: .touchUpInside)
         selectButton.semanticContentAttribute = .forceRightToLeft
 
@@ -43,7 +46,7 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    func setFooterView() -> UIView {
+    private func configureFooterView() -> UIView {
         let footerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 100)))
         let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: self.issueTableView.bounds.width, height: 20)))
         label.text = "아래로 당기면 검색바가 보여요! 👀"

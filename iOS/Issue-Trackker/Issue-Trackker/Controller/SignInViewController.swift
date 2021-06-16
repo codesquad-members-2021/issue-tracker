@@ -23,9 +23,9 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInButtonToucehd(_ sender: UIButton) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tabbar")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let issueViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Tabbar")
+        issueViewController.modalPresentationStyle = .fullScreen
+        self.present(issueViewController, animated: true, completion: nil)
     }
 }
 

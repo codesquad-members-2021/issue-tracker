@@ -16,10 +16,9 @@ protocol Requestable {
 }
 
 class MainEndPoint: Requestable {
+    
     var baseURL: String = "https://naver.com"
-    
     var path: String
-    
     var httpMethod: HTTPMethod
     
     init(path: String, httpMethod: HTTPMethod) {

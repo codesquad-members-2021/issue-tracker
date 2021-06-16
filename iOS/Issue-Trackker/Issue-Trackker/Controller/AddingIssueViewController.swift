@@ -14,22 +14,23 @@ class AddingIssueViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        additionalInformationTableView.tableHeaderView = setTableHeaderView()
-        setNavigationItem()
+        additionalInformationTableView.tableHeaderView = configureTableHeaderView()
+        configureNavigationItem()
     }
     
-    func setNavigationItem() {
-        let leftButton = UIButton.setButton(image: "Icon.png", title: " 취소")
+    private func configureNavigationItem() {
+        let leftButton = UIButton.makeButton(image: "Icon.png", title: " 취소")
         leftButton.addTarget(self, action: #selector(backButtonTouched(_ :)), for: .touchUpInside)
         
-        let rightButton = UIButton.setButton(image: "plus.png", title: " 저장")
+        let rightButton = UIButton.makeButton(image: "plus.png", title: " 저장")
         rightButton.semanticContentAttribute = .forceRightToLeft
+        
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
     }
     
-    func setTableHeaderView() -> UIView {
+    private func configureTableHeaderView() -> UIView {
         let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: self.additionalInformationTableView.frame.width, height: 44)))
         
         let label = UILabel(frame: CGRect(origin: .zero,

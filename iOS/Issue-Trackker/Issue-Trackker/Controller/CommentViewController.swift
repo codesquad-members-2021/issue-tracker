@@ -17,14 +17,14 @@ class CommentViewController: UIViewController {
         sendButton.setImage(UIImage(named: "ButtonSend.png"), for: .normal)
         commentTextField.rightView = sendButton
         commentTextField.rightViewMode = .always
-        setNavigationItem()
+        configureNavigationItem()
     }
     
-    func setNavigationItem() {
-        let leftButton = UIButton.setButton(image: "Icon.png", title: " 목록")
+    private func configureNavigationItem() {
+        let leftButton = UIButton.makeButton(image: "Icon.png", title: " 목록")
         leftButton.addTarget(self, action: #selector(backButtonTouched(_ :)), for: .touchUpInside)
         
-        let rightButton = UIButton.setButton(image: "more.png", title: "")
+        let rightButton = UIButton.makeButton(image: "more.png", title: "")
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)

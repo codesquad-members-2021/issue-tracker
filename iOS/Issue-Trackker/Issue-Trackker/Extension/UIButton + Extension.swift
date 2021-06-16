@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIButton {
-    static func setButton(image: String?, title: String) -> UIButton {
+    static func makeButton(image: String?, title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.setTitleColor(UIColor(red: 0, green: 0.478, blue: 1, alpha: 1), for: .normal)
