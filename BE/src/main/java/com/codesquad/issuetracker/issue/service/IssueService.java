@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
@@ -117,5 +118,13 @@ public class IssueService {
     public void removeMilestone(Long id) {
         Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
         issue.removeMilestone();
+    }
+
+    public IssuesWrapper readAllIssues() {
+        return IssuesWrapper.wrap(
+                issueRepository.findAll().stream()
+                .map(IssueSummaryResponse::fromEntity)
+                .collect(Collectors.toList())
+        );
     }
 }
