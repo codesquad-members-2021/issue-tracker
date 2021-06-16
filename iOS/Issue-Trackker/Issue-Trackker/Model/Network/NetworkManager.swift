@@ -8,26 +8,22 @@
 import Foundation
 import Alamofire
 
-protocol SessionProtocol {
-    func request(_ convertible: URLConvertible,
-                      method: HTTPMethod,
-                      parameters: Parameters?,
-                      encoding: ParameterEncoding,
-                      headers: HTTPHeaders?,
-                      interceptor: RequestInterceptor?,
-                      requestModifier: Session.RequestModifier?) -> DataRequest
-}
-
-extension Session: SessionProtocol {
-    
-}
-
 class NetworkManager {
-    func request<T: Decodable> (with request: Requestable, dataType: T.Type, completion: @escaping (Result<T,AFError>) -> Void) {
+    
+    private var decoder: JSONDecoder
+    private var request: Requestable
+    
+    init(with request: Requestable, with decoder: JSONDecoder) {
+        self.request = request
+        self.decoder = decoder
+    }
+    
+    func request<T: Decodable> (dataType: T.Type, completion: @escaping (Result<T,AFError>) -> Void) {
+        decoder.keyDecodingStrategy = request.decodingStrategy
 
-        let url = request.url()
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let url = request.url() else {
+            return
+        }
 
         AF.request(url, method: request.httpMethod)
             .validate(statusCode: 200..<300)
@@ -38,6 +34,6 @@ class NetworkManager {
                 case .success(let data):
                     completion(.success((data)))
                 }
-            }
+        }
     }
 }

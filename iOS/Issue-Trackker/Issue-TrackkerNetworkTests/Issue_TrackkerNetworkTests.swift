@@ -8,43 +8,45 @@
 import XCTest
 @testable import Alamofire
 
-class MockManager: SessionProtocol {
-    var requestParameters: (
-        url: URLConvertible,
-        method: HTTPMethod,
-        parameters: Parameters?
-    )?
-    
-    func request(_ convertible: URLConvertible, method: HTTPMethod, parameters: Parameters?, encoding: ParameterEncoding, headers: HTTPHeaders?, interceptor: RequestInterceptor?, requestModifier: Session.RequestModifier?) -> DataRequest {
-        
-        self.requestParameters = (
-            url: convertible,
-            method: method,
-            parameters: parameters
-        )
-        
-        let convertible = Session.RequestConvertible(url: convertible,
-                                             method: method,
-                                             parameters: parameters,
-                                             encoding: encoding,
-                                             headers: headers,
-                                             requestModifier: requestModifier)
-        
-        return Session().request(convertible, interceptor: interceptor)
-    }
-}
-
 class Issue_TrackkerNetworkTests: XCTestCase {
-    func testNetwork() {
-        let NetworkManager: MockManager
-        let network = Network()
-        let endPoint = MainEndPoint(path: "/index", httpMethod: .get)
+    
+    func testNetwork_withoutInternet() {
+        let mockAF: MockManager = MockManager()
+        let request = MainEndPoint(path: "/index", httpMethod: .get, decodingStrategy: .convertFromSnakeCase)
+    
+        mockAF.request(request.url()!,
+                       method: request.httpMethod,
+                       parameters: nil,
+                       encoding: URLEncoding.default,
+                       headers: nil,
+                       interceptor: nil,
+                       requestModifier: nil)
+
+        XCTAssertEqual(try mockAF.requestParameters?.url.asURL().absoluteString, "/index")
+        XCTAssertEqual(mockAF.requestParameters?.method, .get)
+    }
+    
+    func testNetwork_availableInternet() {
         
-        XCTAssertEqual(endPoint.url(), "https://naver.com/index")
-        XCTAssertEqual(endPoint.httpMethod, .get)
-        XCTAssertEqual(endPoint.path, "/index")
+        let request = LocalEndPoint(path: Bundle.main.path(forResource: "mockData", ofType: "json")!,
+                                   httpMethod: .get,
+                                   decodingStrategy: .convertFromSnakeCase)
+        
+        let networkManager = NetworkManager(with: request, with: JSONDecoder())
+        let expectation = XCTestExpectation()
+        
+        networkManager.request(dataType: IssueList.self) { result in
+            switch result {
+            case .success(let _):
+                XCTAssertEqual(result.success?.issues.contains(where: { issue in
+                    issue.title == "이슈 제목"
+                }), true)
+                expectation.fulfill()
+            case .failure(_):
+                XCTFail("실패")
+            }
+        }
+        
+        XCTWaiter.wait(for: [expectation], timeout: 5)
     }
 }
-
-
-

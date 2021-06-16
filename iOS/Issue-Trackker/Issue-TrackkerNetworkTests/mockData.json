@@ -1,0 +1,33 @@
+{
+  "issues": [
+    {
+      "id": 1,
+      "title": "이슈 제목",
+      "writer": "작성자 닉네임",
+      "writeTime": "2021-03-01'T'05:01:07",
+      "milestone": {
+        "id": 1,
+        "name": "마일 스톤"
+      },
+      "assignments": [
+        {
+          "id": "유저 아이디",
+          "name": "유저 닉네임",
+          "avatarImage": "http://sample1.com"
+        },
+        {
+          "id": "유저 아이디1",
+          "name": "유저 닉네임2",
+          "avatarImage": "http://sample2.com"
+        }
+      ],
+      "labels": [
+        {
+          "id": 1,
+          "name": "레이블 이름",
+          "hexCode": "#ffffff"
+        }
+      ]
+    }
+  ]
+}
