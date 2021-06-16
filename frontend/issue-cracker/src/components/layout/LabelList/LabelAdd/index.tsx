@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { Issue as S } from '../../../styles/CommonStyles';
 import TextGroup from '../../../common/group/TextGroup';
 import InputGroup from '../../../common/group/InputGroup';
+import ButtonGroup from '../../../common/group/ButtonGroup';
 import LabelSmallGroup from '../../../common/group/LabelSmallGroup';
+import SyncIcon from '@material-ui/icons/Sync';
+import { SMALL_FILL } from '../../../../utils/const';
+import AddIcon from '@material-ui/icons/Add';
 
 const LabelAdd = (): JSX.Element => {
   return (
@@ -35,12 +39,46 @@ const LabelAdd = (): JSX.Element => {
             <InputGroup variant="outlined" name="설명(선택)" type="large" />
           </InputBox>
           <InputColorBox>
-            <BackgroundColorBox>배경색상</BackgroundColorBox>
-            <TextColorBox>텍스트 색상</TextColorBox>
+            <BackgroundColorBox>
+              <TextGroup type="xSmall" content="배경 색상" color="#6E7191" />
+              <TextGroup type="small" content={'#FFFFFF'} color="#14142B" />
+              <div>
+                <SyncIcon
+                  style={{
+                    color: '#6E7191',
+                    fontSize: 20,
+                    transform: `rotate(-45deg)`,
+                    cursor: 'pointer',
+                  }}
+                />
+              </div>
+            </BackgroundColorBox>
+            <TextColorBox>
+              <TextGroup type="xSmall" content="텍스트 색상" color="#6E7191" />
+              <TextGroup type="small" content={'#FFFFFF'} color="#14142B" />
+              <div>
+                <SyncIcon
+                  style={{
+                    color: '#6E7191',
+                    fontSize: 20,
+                    transform: `rotate(-45deg)`,
+                    cursor: 'pointer',
+                  }}
+                />
+              </div>
+            </TextColorBox>
           </InputColorBox>
         </InputContainer>
       </LabelAddCell>
-      <LabelAddCell></LabelAddCell>
+      <ButtonContainer>
+        <ButtonBox>
+          <ButtonGroup
+            type={SMALL_FILL}
+            name={'완료'}
+            icon={<AddIcon style={{ fontSize: 16 }} />}
+          />
+        </ButtonBox>
+      </ButtonContainer>
     </LabelAddStyle>
   );
 };
@@ -61,7 +99,16 @@ const LabelAddHeader = styled(S.IssueTableHeader)`
 const LabelAddCell = styled(S.IssueCell)`
   justify-content: center;
   height: fit-content;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
+
+  :nth-child(2) {
+    border-bottom: none;
+  }
+`;
+const ButtonContainer = styled(S.IssueCell)`
+  justify-content: flex-end;
+  height: fit-content;
+  padding: 20px;
 `;
 
 const TextBox = styled.div`
@@ -78,7 +125,7 @@ const LabelContainer = styled.div`
 `;
 
 const InputBox = styled.div`
-  padding: 0px 20px;
+  padding: 10px 20px;
 
   div {
     width: 100%;
@@ -102,28 +149,48 @@ const LabelBox = styled.div``;
 
 const InputColorBox = styled.div`
   display: flex;
-  padding: 0px 20px;
+  padding: 10px 20px;
 `;
 
 const BackgroundColorBox = styled.div`
-  width: 240px;
+  width: fit-content;
   height: 40px;
   background: #eff0f6;
   border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
   color: #6e7191;
+
+  div {
+    display: flex;
+    margin-left: 20px;
+
+    :last-child {
+      margin-right: 20px;
+    }
+  }
 `;
 
 const TextColorBox = styled.div`
-  width: 240px;
+  width: fit-content;
   height: 40px;
   background: #eff0f6;
   border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: 0px 10px;
   color: #6e7191;
+
+  div {
+    display: flex;
+    margin-left: 20px;
+
+    :last-child {
+      margin-right: 20px;
+    }
+  }
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
 `;
