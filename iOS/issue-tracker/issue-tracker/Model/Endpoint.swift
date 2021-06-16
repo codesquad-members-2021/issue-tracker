@@ -25,6 +25,7 @@ struct Endpoint {
 
     enum Path: String {
         case login = "/login"
+        case label = "/label"
 
         var pathString: String {
             return self.rawValue
