@@ -1,9 +1,6 @@
 package com.codesquad.issuetracker.issue.controller;
 
-import com.codesquad.issuetracker.issue.dto.IssueCreateRequest;
-import com.codesquad.issuetracker.issue.dto.IssueRequest;
-import com.codesquad.issuetracker.issue.dto.IssueWrapper;
-import com.codesquad.issuetracker.issue.dto.LabelIdRequest;
+import com.codesquad.issuetracker.issue.dto.*;
 import com.codesquad.issuetracker.issue.service.IssueService;
 import com.codesquad.issuetracker.user.domain.User;
 import org.springframework.http.HttpStatus;
@@ -48,5 +45,15 @@ public class IssueController {
         issueService.removeLabel(id, labelId);
     }
 
+    @PostMapping("/{id}/assignees")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addAssignee(@PathVariable Long id, @RequestBody AssigneeIdRequest assigneeIdRequest) {
+        issueService.addAssignee(id, assigneeIdRequest);
+    }
 
+    @DeleteMapping("{id}/assignees/{assigneeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeAssignee(@PathVariable Long id, @PathVariable UUID assigneeId) {
+        issueService.removeAssignee(id, assigneeId);
+    }
 }

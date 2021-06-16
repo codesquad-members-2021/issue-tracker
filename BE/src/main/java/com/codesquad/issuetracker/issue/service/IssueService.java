@@ -89,4 +89,18 @@ public class IssueService {
         Label label = labelRepository.findById(labelId).orElseThrow(RuntimeException::new);
         issue.removeLabel(label);
     }
+
+    @Transactional
+    public void addAssignee(Long id, AssigneeIdRequest assigneeIdRequest) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        User assignee = userRepository.findById(assigneeIdRequest.getAssigneeId()).orElseThrow(RuntimeException::new);
+        issue.addAssignee(assignee);
+    }
+
+    @Transactional
+    public void removeAssignee(Long id, UUID assigneeId) {
+        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        User assignee = userRepository.findById(assigneeId).orElseThrow(RuntimeException::new);
+        issue.removeAssignee(assignee);
+    }
 }
