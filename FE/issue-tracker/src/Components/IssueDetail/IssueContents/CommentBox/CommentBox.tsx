@@ -14,6 +14,8 @@ const CommentBox = ({ comment }: Props) => {
   const editCommentBox = useRecoilValue(editCommentBoxState);
   const isShow = editCommentBox.isShow && comment.id === editCommentBox.id;
 
+  const handleOnChange = () => {};
+
   return (
     <S.CommentBox>
       <UserImage imgUrl={comment.author.image_url} />
@@ -24,6 +26,7 @@ const CommentBox = ({ comment }: Props) => {
           height={200}
           visiableDragbar={false}
           hideToolbar={true}
+          handleOnChange={handleOnChange}
         />
         <S.IssueButtonWrapper>
           <SubmitButton innerText={"편집 취소"} />

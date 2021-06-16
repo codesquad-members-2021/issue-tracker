@@ -1,4 +1,3 @@
-import FileAttachButton from "../Editor/FileAttachButton";
 import { TextArea as S } from "./TextAreaStyles";
 
 interface Props {

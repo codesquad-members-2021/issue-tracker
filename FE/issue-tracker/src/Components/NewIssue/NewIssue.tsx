@@ -1,5 +1,8 @@
-import { useSetRecoilState } from "recoil";
-import { createButtonFlagState } from "@/Components/NewIssue/NewIssueStore";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  createButtonFlagState,
+  newIssueState,
+} from "@/Components/NewIssue/NewIssueStore";
 import Title from "./Title";
 import MyIcon from "./MyIcon";
 import TextArea from "@/Components/AtomicComponents/TextArea/TextArea";
@@ -11,14 +14,21 @@ import { NewIssue as S } from "@/Components/NewIssue/NewIssueStyles";
 
 const NewIssue = () => {
   const setCreateButtonFlag = useSetRecoilState(createButtonFlagState);
+  const [newIssue, setNewIssue] = useRecoilState(newIssueState);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.placeholder === "코멘트를 입력하세요") return;
+  const handleTextAreaOnChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     if (e.target.value.length > 0) {
       setCreateButtonFlag(false);
     } else {
       setCreateButtonFlag(true);
     }
+    setNewIssue({ ...newIssue, title: e.target.value });
+  };
+
+  const handleEditorOnChange = (e: string) => {
+    setNewIssue({ ...newIssue, comment: e });
   };
 
   return (
@@ -31,7 +41,7 @@ const NewIssue = () => {
             <TextArea
               placeholder={"제목"}
               rows={1}
-              handleOnChange={handleOnChange}
+              handleOnChange={handleTextAreaOnChange}
             />
           </S.TextAreaWrapper>
           <Editor
@@ -39,6 +49,7 @@ const NewIssue = () => {
             height={400}
             visiableDragbar={false}
             hideToolbar={true}
+            handleOnChange={handleEditorOnChange}
           />
         </S.BodyContentsWrapper>
         <S.NavWrapper>
