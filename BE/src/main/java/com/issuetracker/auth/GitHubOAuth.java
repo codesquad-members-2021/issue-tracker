@@ -14,18 +14,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-@RequiredArgsConstructor
 public class GitHubOAuth implements OAuth {
 
     private static final String TOKEN = "token";
     private final GitHubService gitHubService;
     private final WebClient webClient;
+    private final String accessTokenUri;
+    private final String userUri;
 
-    @Value("${github.access.token.uri}")
-    private String accessTokenUri;
-
-    @Value("${github.user.uri}")
-    private String userUri;
+    public GitHubOAuth(GitHubService gitHubService,
+                       WebClient webClient,
+                       @Value("${github.access.token.uri}") String accessTokenUri,
+                       @Value("${github.user.uri}") String userUri) {
+        this.gitHubService = gitHubService;
+        this.webClient = webClient;
+        this.accessTokenUri = accessTokenUri;
+        this.userUri = userUri;
+    }
 
     @Override
     public AccessTokenResponseDTO getToken(String code, String userAgent) {

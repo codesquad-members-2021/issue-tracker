@@ -9,14 +9,16 @@ import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
 import com.issuetracker.exception.InvalidSearchRequestException;
 import com.issuetracker.exception.UserNotFoundException;
+import com.issuetracker.web.dto.response.AssigneesResponseDTO;
+import com.issuetracker.web.dto.response.AuthorsResponseDTO;
 import com.issuetracker.web.dto.response.UserResponseDTO;
 import com.issuetracker.web.dto.vo.Assignee;
 import com.issuetracker.domain.issue.Issue;
+import com.issuetracker.web.dto.vo.Author;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,8 +57,22 @@ public class UserService {
 
     public List<Assignee> usersToAssignees(Issue issue) {
         return userRepository.findAll().stream()
-                .map(user -> Assignee.of(user, issue, checkAssignees(user, issue)))
+                .map(user -> Assignee.of(user, checkAssignees(user, issue)))
                 .collect(Collectors.toList());
+    }
+
+    public AssigneesResponseDTO getAssignees() {
+        List<Assignee> assignees = userRepository.findAssignees().stream()
+                .map(Assignee::of)
+                .collect(Collectors.toList());
+        return new AssigneesResponseDTO(assignees);
+    }
+
+    public AuthorsResponseDTO getAuthors() {
+        List<Author> authors = userRepository.findAuthors().stream()
+                .map(Author::of)
+                .collect(Collectors.toList());
+        return new AuthorsResponseDTO(authors);
     }
 
     private boolean checkAssignees(User user, Issue issue) {

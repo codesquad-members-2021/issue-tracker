@@ -4,6 +4,8 @@ import com.issuetracker.auth.annotation.LoginRequired;
 import com.issuetracker.auth.annotation.UserId;
 import com.issuetracker.auth.dto.UserAgentDTO;
 import com.issuetracker.service.UserService;
+import com.issuetracker.web.dto.response.AssigneesResponseDTO;
+import com.issuetracker.web.dto.response.AuthorsResponseDTO;
 import com.issuetracker.web.dto.response.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,5 +32,17 @@ public class UserController {
     public void logout(@UserId Long userId) {
         logger.debug("로그아웃 요청");
         userService.logout(userId);
+    }
+
+    @GetMapping("/assignees")
+    public AssigneesResponseDTO getAssignees() {
+        logger.debug("모든 담당자 조회");
+        return userService.getAssignees();
+    }
+
+    @GetMapping("/authors")
+    public AuthorsResponseDTO getAuthors() {
+        logger.debug("모든 작성자 조회");
+        return userService.getAuthors();
     }
 }

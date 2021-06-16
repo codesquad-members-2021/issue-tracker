@@ -10,7 +10,6 @@ import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.ElementNotFoundException;
 import com.issuetracker.web.dto.vo.Assignee;
 import com.issuetracker.web.dto.vo.Count;
-import com.issuetracker.web.dto.vo.SearchRequest;
 import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.issuetracker.web.dto.vo.Status.CLOSE;
+import static com.issuetracker.web.dto.vo.Status.OPEN;
 
 @Service
 @RequiredArgsConstructor
@@ -32,19 +34,13 @@ public class IssueService {
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.count())
-                .openedIssue((int) issueRepository.countAllByIsOpenTrue())
-                .closedIssue((int) issueRepository.countAllByIsOpenFalse())
+                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), searchRequestDTO))
+                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), searchRequestDTO))
                 .build();
-
-        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBy(searchRequestDTO).stream()
+        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(searchRequestDTO).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);
-    }
-
-    private List<Issue> filterByStatus(String status) {
-        boolean newStatus = Status.statusToBoolean(status);
-        return newStatus ? issueRepository.findAllByIsOpenTrue() : issueRepository.findAllByIsOpenFalse();
     }
 
     @Transactional
@@ -61,7 +57,7 @@ public class IssueService {
                 .build();
     }
 
-    public void createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
+    public IssueNumberResponseDTO createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
         Issue issue = Issue.create(
                 issueRequestDTO.getTitle(),
                 issueRequestDTO.getComment(),
@@ -70,7 +66,7 @@ public class IssueService {
                 userService.findAssignees(issueRequestDTO.getAssignees()),
                 milestoneService.findMilestoneById(issueRequestDTO.getMilestone())
         );
-        issueRepository.save(issue);
+        return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
     }
 
     public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
