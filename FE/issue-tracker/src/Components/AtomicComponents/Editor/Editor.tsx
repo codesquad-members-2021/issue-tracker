@@ -6,9 +6,16 @@ interface Props {
   height: number;
   visiableDragbar: boolean;
   hideToolbar: boolean;
+  handleOnChange: (e: any) => void;
 }
 
-const Editor = ({ value, height, visiableDragbar, hideToolbar }: Props) => {
+const Editor = ({
+  value,
+  height,
+  visiableDragbar,
+  hideToolbar,
+  handleOnChange,
+}: Props) => {
   return (
     <S.EditorWrapper>
       <S.Editor
@@ -16,6 +23,7 @@ const Editor = ({ value, height, visiableDragbar, hideToolbar }: Props) => {
         height={height}
         visiableDragbar={visiableDragbar}
         hideToolbar={hideToolbar}
+        onChange={handleOnChange}
       />
       <FileAttachButton />
     </S.EditorWrapper>
