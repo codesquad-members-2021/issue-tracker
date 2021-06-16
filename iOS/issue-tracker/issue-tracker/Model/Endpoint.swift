@@ -9,7 +9,7 @@ import Foundation
 
 struct Endpoint {
     let scheme: String = "https"
-    let host: String = ""
+    let host: String = "77b8f295-a324-4645-9ff3-3d93eaf7b630.mock.pstmn.io"
     let port: Int = 8080
     var path: Path
 
@@ -17,7 +17,7 @@ struct Endpoint {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
-        urlComponents.port = port
+//        urlComponents.port = port
         urlComponents.path = path.pathString
         urlComponents.queryItems = queryItems
         return urlComponents.url
