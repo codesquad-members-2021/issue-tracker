@@ -5,9 +5,9 @@ const Navigator = () => {
 	return (
 		<Wrapper>
 			<ButtonGroup
-				milestoneCount={3}
+				milestoneCount={"N"}
 				milestoneClickEvent={() => {}}
-				labelCount={3}
+				labelCount={"N"}
 				labelClickEvent={() => {}}
 			/>
 			<AddButton text="추가" clickEvent={() => {}} />
