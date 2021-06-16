@@ -71,7 +71,7 @@ class IssueViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc func addIssueButtonTouched(_ sender: UIButton) {
-        guard let addIssueViewController = storyboard?.instantiateViewController(identifier: "AddIssue") as?              AddingIssueViewController else {
+        guard let addIssueViewController = storyboard?.instantiateViewController(identifier: "AddIssue") as? AddingIssueViewController else {
             return
         }
         let naviController = UINavigationController(rootViewController: addIssueViewController)

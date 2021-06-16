@@ -12,11 +12,11 @@ protocol Requestable {
     var baseURL: String { get }
     var path: String { get }
     var httpMethod: HTTPMethod { get }
-    func url() -> URL?
+    func url() -> String
 }
 
 class MainEndPoint: Requestable {
-    var baseURL: String = ""
+    var baseURL: String = "https://naver.com"
     
     var path: String
     
@@ -27,7 +27,7 @@ class MainEndPoint: Requestable {
         self.httpMethod = httpMethod
     }
     
-    func url() -> URL? {
-        return URL(string: baseURL + path)
+    func url() -> String {
+        return baseURL + path
     }
 }

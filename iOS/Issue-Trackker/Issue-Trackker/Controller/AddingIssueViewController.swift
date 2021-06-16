@@ -27,7 +27,6 @@ class AddingIssueViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
-        //self.navigationItem.titleView = UISegmentedControl()
     }
     
     func setTableHeaderView() -> UIView {

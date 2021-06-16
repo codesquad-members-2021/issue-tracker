@@ -34,7 +34,20 @@
 		D49B789726771EC100CF3FE4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789626771EC100CF3FE4 /* Comment.swift */; };
 		D49B789926772F8C00CF3FE4 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789826772F8C00CF3FE4 /* CommentCell.swift */; };
 		D49B789B26772FA400CF3FE4 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789A26772FA400CF3FE4 /* CommentViewController.swift */; };
+		D4F09F2626788C1300240AA3 /* Issue_TrackkerNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */; };
+		D4F09F2D26788CB900240AA3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* Network.swift */; };
+		D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788E267627BC00CF3FE4 /* EndPoint.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4F09F2826788C1300240AA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D49B7843266F0D0200CF3FE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D49B784A266F0D0200CF3FE4;
+			remoteInfo = "Issue-Trackker";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D49B784B266F0D0200CF3FE4 /* Issue-Trackker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Issue-Trackker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +78,9 @@
 		D49B789626771EC100CF3FE4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		D49B789826772F8C00CF3FE4 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		D49B789A26772FA400CF3FE4 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		D4F09F2326788C1300240AA3 /* Issue-TrackkerNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Issue-TrackkerNetworkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue_TrackkerNetworkTests.swift; sourceTree = "<group>"; };
+		D4F09F2726788C1300240AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +92,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4F09F2026788C1300240AA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				D49B784D266F0D0200CF3FE4 /* Issue-Trackker */,
+				D4F09F2426788C1300240AA3 /* Issue-TrackkerNetworkTests */,
 				D49B784C266F0D0200CF3FE4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				D49B784B266F0D0200CF3FE4 /* Issue-Trackker.app */,
+				D4F09F2326788C1300240AA3 /* Issue-TrackkerNetworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +226,15 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		D4F09F2426788C1300240AA3 /* Issue-TrackkerNetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */,
+				D4F09F2726788C1300240AA3 /* Info.plist */,
+			);
+			path = "Issue-TrackkerNetworkTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -224,6 +258,24 @@
 			productReference = D49B784B266F0D0200CF3FE4 /* Issue-Trackker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D4F09F2226788C1300240AA3 /* Issue-TrackkerNetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4F09F2C26788C1300240AA3 /* Build configuration list for PBXNativeTarget "Issue-TrackkerNetworkTests" */;
+			buildPhases = (
+				D4F09F1F26788C1300240AA3 /* Sources */,
+				D4F09F2026788C1300240AA3 /* Frameworks */,
+				D4F09F2126788C1300240AA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4F09F2926788C1300240AA3 /* PBXTargetDependency */,
+			);
+			name = "Issue-TrackkerNetworkTests";
+			productName = "Issue-TrackkerNetworkTests";
+			productReference = D4F09F2326788C1300240AA3 /* Issue-TrackkerNetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,6 +287,10 @@
 				TargetAttributes = {
 					D49B784A266F0D0200CF3FE4 = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					D4F09F2226788C1300240AA3 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = D49B784A266F0D0200CF3FE4;
 					};
 				};
 			};
@@ -255,6 +311,7 @@
 			projectRoot = "";
 			targets = (
 				D49B784A266F0D0200CF3FE4 /* Issue-Trackker */,
+				D4F09F2226788C1300240AA3 /* Issue-TrackkerNetworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +325,13 @@
 				D49B785B266F0D0400CF3FE4 /* LaunchScreen.storyboard in Resources */,
 				D49B7858266F0D0400CF3FE4 /* Assets.xcassets in Resources */,
 				D49B7856266F0D0200CF3FE4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4F09F2126788C1300240AA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +367,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4F09F1F26788C1300240AA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */,
+				D4F09F2D26788CB900240AA3 /* Network.swift in Sources */,
+				D4F09F2626788C1300240AA3 /* Issue_TrackkerNetworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4F09F2926788C1300240AA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D49B784A266F0D0200CF3FE4 /* Issue-Trackker */;
+			targetProxy = D4F09F2826788C1300240AA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D49B7854266F0D0200CF3FE4 /* Main.storyboard */ = {
@@ -479,6 +561,46 @@
 			};
 			name = Release;
 		};
+		D4F09F2A26788C1300240AA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				INFOPLIST_FILE = "Issue-TrackkerNetworkTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Issue-TrackkerNetworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Issue-Trackker.app/Issue-Trackker";
+			};
+			name = Debug;
+		};
+		D4F09F2B26788C1300240AA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				INFOPLIST_FILE = "Issue-TrackkerNetworkTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Issue-TrackkerNetworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Issue-Trackker.app/Issue-Trackker";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -496,6 +618,15 @@
 			buildConfigurations = (
 				D49B7860266F0D0400CF3FE4 /* Debug */,
 				D49B7861266F0D0400CF3FE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4F09F2C26788C1300240AA3 /* Build configuration list for PBXNativeTarget "Issue-TrackkerNetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4F09F2A26788C1300240AA3 /* Debug */,
+				D4F09F2B26788C1300240AA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

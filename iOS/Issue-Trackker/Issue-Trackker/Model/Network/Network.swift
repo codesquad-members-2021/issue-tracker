@@ -8,16 +8,28 @@
 import Foundation
 import Alamofire
 
-class Network {
-    func request<T: Decodable> (with endPoint: Requestable, dataType: T.Type, completion: @escaping (Result<T,AFError>) -> Void) {
+protocol SessionProtocol {
+    func request(_ convertible: URLConvertible,
+                      method: HTTPMethod,
+                      parameters: Parameters?,
+                      encoding: ParameterEncoding,
+                      headers: HTTPHeaders?,
+                      interceptor: RequestInterceptor?,
+                      requestModifier: Session.RequestModifier?) -> DataRequest
+}
 
-        guard let url = endPoint.url() else {
-            completion(.failure(AFError.createURLRequestFailed(error: NetworkError.url(description: ("Couldn't Create URL")))))
-            return
-        }
+extension Session: SessionProtocol {
+    
+}
+
+class Network {
+    func request<T: Decodable> (with request: Requestable, dataType: T.Type, completion: @escaping (Result<T,AFError>) -> Void) {
+
+        let url = request.url()
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        AF.request(url, method: endPoint.httpMethod)
+
+        AF.request(url, method: request.httpMethod)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: T.self, decoder: decoder) { response in
                 switch response.result {
@@ -28,8 +40,4 @@ class Network {
                 }
             }
     }
-}
-
-enum NetworkError:Error {
-    case url(description: String)
 }

@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,7 +51,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iM4-aE-bLq" customClass="PaddingLabel" customModule="Issue_Trackker" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iM4-aE-bLq" customClass="PaddingLabel">
                                                     <rect key="frame" x="16" y="141" width="44.5" height="20.5"/>
                                                     <color key="backgroundColor" red="0.36698226049999999" green="0.69068723919999997" blue="0.2665603459" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -260,128 +259,6 @@
             </objects>
             <point key="canvasLocation" x="957.97101449275374" y="774.77678571428567"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="sWX-4b-Jtb">
-            <objects>
-                <viewController id="zW2-7C-TuO" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Aqn-7z-Xeb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z7x-oF-UTf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Nab-Ua-8YZ">
-                                    <size key="itemSize" width="414" height="111"/>
-                                    <size key="headerReferenceSize" width="50" height="123"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CommentCell" id="OfU-P7-jNX" customClass="CommentCell" customModule="Issue_Trackker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="123" width="414" height="111"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="qnP-yG-Wwy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UF6-xL-X4z">
-                                                    <rect key="frame" x="68" y="47.5" width="42" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" systemColor="systemGray2Color"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="UF6-xL-X4z" secondAttribute="trailing" constant="304" id="4Ip-y3-efy"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="414" height="111"/>
-                                    </collectionViewCell>
-                                </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CommentHeader" id="RbB-Zo-CRg">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="123"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="테스트 이슈 작성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1l-Ro-wl4">
-                                            <rect key="frame" x="16" y="16" width="181.5" height="42"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-Su-78y">
-                                            <rect key="frame" x="205.5" y="16" width="34" height="33.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <color key="textColor" systemColor="systemGray2Color"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cps-Zj-qui" customClass="PaddingLabel" customModule="Issue_Trackker" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="74" width="36" height="21"/>
-                                            <color key="backgroundColor" red="0.46721446509999998" green="0.65403449540000003" blue="0.88238143920000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
-                                                    <real key="value" value="12"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
-                                                    <real key="value" value="12"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
-                                                    <real key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
-                                                    <real key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="15"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5l-J2-0zr">
-                                            <rect key="frame" x="60" y="74" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" systemColor="systemGray2Color"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="o1l-Ro-wl4" firstAttribute="top" secondItem="RbB-Zo-CRg" secondAttribute="top" constant="16" id="9D3-kF-aIT"/>
-                                        <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Rhy-Su-78y" secondAttribute="trailing" constant="244" id="ALY-cX-ROS"/>
-                                        <constraint firstItem="Cps-Zj-qui" firstAttribute="top" secondItem="o1l-Ro-wl4" secondAttribute="bottom" constant="16" id="CkQ-Ut-K6a"/>
-                                        <constraint firstItem="b5l-J2-0zr" firstAttribute="leading" secondItem="Cps-Zj-qui" secondAttribute="trailing" constant="8" id="Kb4-i4-oNG"/>
-                                        <constraint firstItem="b5l-J2-0zr" firstAttribute="top" secondItem="o1l-Ro-wl4" secondAttribute="bottom" constant="16" id="Sak-Pr-xFp"/>
-                                        <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="b5l-J2-0zr" secondAttribute="trailing" constant="304" id="Wia-YK-HQF"/>
-                                        <constraint firstItem="Rhy-Su-78y" firstAttribute="leading" secondItem="o1l-Ro-wl4" secondAttribute="trailing" constant="8" id="b9x-si-2Cc"/>
-                                        <constraint firstItem="Rhy-Su-78y" firstAttribute="top" secondItem="RbB-Zo-CRg" secondAttribute="top" constant="16" id="cae-8s-qCC"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Cps-Zj-qui" secondAttribute="bottom" constant="20" id="eUX-OB-nuB"/>
-                                        <constraint firstItem="Cps-Zj-qui" firstAttribute="leading" secondItem="RbB-Zo-CRg" secondAttribute="leading" constant="16" id="ovi-OJ-pYL"/>
-                                        <constraint firstItem="o1l-Ro-wl4" firstAttribute="leading" secondItem="RbB-Zo-CRg" secondAttribute="leading" constant="16" id="pEb-yG-eXp"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="b5l-J2-0zr" secondAttribute="bottom" constant="20" id="q9g-6e-VMk"/>
-                                    </constraints>
-                                </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="m6K-bj-1vM">
-                                    <rect key="frame" x="0.0" y="234" width="414" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </collectionReusableView>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="620-xx-X4F"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="z7x-oF-UTf" firstAttribute="leading" secondItem="620-xx-X4F" secondAttribute="leading" id="5eg-0R-VRO"/>
-                            <constraint firstItem="620-xx-X4F" firstAttribute="trailing" secondItem="z7x-oF-UTf" secondAttribute="trailing" id="7IR-z7-iPt"/>
-                            <constraint firstItem="620-xx-X4F" firstAttribute="bottom" secondItem="z7x-oF-UTf" secondAttribute="bottom" id="gJm-li-gTF"/>
-                            <constraint firstItem="z7x-oF-UTf" firstAttribute="top" secondItem="620-xx-X4F" secondAttribute="top" id="pQS-FR-B0G"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GYg-vY-DCE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1840.5797101449277" y="774.77678571428567"/>
-        </scene>
         <!--Comment View Controller-->
         <scene sceneID="HOI-KH-fMl">
             <objects>
@@ -495,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBR-kn-qDH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2569.5652173913045" y="774.77678571428567"/>
+            <point key="canvasLocation" x="1841" y="775"/>
         </scene>
         <!--필터-->
         <scene sceneID="05O-fj-ymy">
@@ -541,10 +418,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IssueCell" id="1Y9-Js-lxk" customClass="IssueCell" customModule="Issue_Trackker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="198"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="205.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Y9-Js-lxk" id="3yd-XW-YQt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="205.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMw-Cc-txb">
@@ -572,7 +449,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-3L-iEs" customClass="PaddingLabel" customModule="Issue_Trackker" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="141" width="42" height="21"/>
+                                                    <rect key="frame" x="16" y="141" width="73.5" height="28.5"/>
                                                     <color key="backgroundColor" red="0.36698226049999999" green="0.69068723919999997" blue="0.2665603459" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -666,10 +543,7 @@
     </scenes>
     <designables>
         <designable name="Cll-3L-iEs">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="Cps-Zj-qui">
-            <size key="intrinsicContentSize" width="36" height="20.5"/>
+            <size key="intrinsicContentSize" width="73.5" height="28.5"/>
         </designable>
         <designable name="iM4-aE-bLq">
             <size key="intrinsicContentSize" width="44.5" height="20.5"/>
