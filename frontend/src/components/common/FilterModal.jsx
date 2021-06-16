@@ -6,22 +6,32 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { useState } from "react";
 import styled from "styled-components";
 import { filter } from "data";
-
+import {
+	filterBarInputAtomState,
+	clickedFilterAtomState,
+} from "RecoilStore/Atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 {
 	/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state내림 */
 }
-const FilterModal = ({ filterType }) => {
+const FilterModal = () => {
 	const [value, setValue] = useState("");
-	console.log("filter modal");
+	const filterType = useRecoilValue(clickedFilterAtomState);
+	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
+
 	// Recoil로직 (구현 예정)
 	// 1. 필터별로 선택된 필터는 atom으로 관리됨(default는 null임)
-	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
+	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 ent.target.value);
+	//필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
 
-	const handleChange = (event) => {
+	//
+	const handleChange = event => {
 		setValue(event.target.value);
+		console.log(event.target.value);
+		setFilterBarInputState(filterType);
 	};
 
-	const getFilterModalData = (type) => {
+	const getFilterModalData = type => {
 		switch (type) {
 			case "담당자": {
 				return filter.assignee;
@@ -47,12 +57,29 @@ const FilterModal = ({ filterType }) => {
 		}
 	};
 	const filterData = getFilterModalData(filterType);
+
 	return (
 		<FilterModalLayout className="filter-modal">
 			<FormControl component="fieldset">
-				<FilterTitle component="legend">{filterType === "필터" && ""} 필터</FilterTitle>
-				<FilterRadioContainer aria-label="issue" name="issue" value={value} onChange={handleChange}>
-					{filterData && filterData.map((x, idx) => <FilterControlLabel value={x} control={<Radio color="default" />} label={x} labelPlacement="start" key={idx} />)}
+				<FilterTitle component="legend">
+					{filterType === "필터" ? "" : filterType} 필터
+				</FilterTitle>
+				<FilterRadioContainer
+					aria-label="issue"
+					name="issue"
+					value={value}
+					onChange={handleChange}
+				>
+					{filterData &&
+						filterData.map((x, idx) => (
+							<FilterControlLabel
+								value={x}
+								control={<Radio color="default" />}
+								label={x}
+								labelPlacement="start"
+								key={idx}
+							/>
+						))}
 				</FilterRadioContainer>
 			</FormControl>
 		</FilterModalLayout>

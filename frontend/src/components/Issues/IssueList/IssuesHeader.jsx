@@ -10,10 +10,11 @@ import { filter } from "data";
 
 // import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
 // import { useRecoilState } from "MyRecoil";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
 	selectedIssueCntAtomState,
 	clickedFilterAtomState,
+	filterBarInputAtomState,
 } from "RecoilStore/Atoms";
 
 const IssuesHeader = ({
@@ -23,12 +24,14 @@ const IssuesHeader = ({
 	setIsAllIssueSelected,
 	issuesCnt,
 	selectedCards,
+
 }) => {
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntAtomState
 	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
-	const [clickedFilter, setClickedFilter] = useState("");
+	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
+	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
@@ -38,7 +41,8 @@ const IssuesHeader = ({
 			: setIsFilterClicked(false);
 		console.dir(e.target.textContent);
 		console.dir(e.target);
-		setClickedFilter(e.target.textContent);
+		setClickedFilterState(e.target.textContent);
+		setFilterBarInputState(e.target.textContent); //여기
 	});
 
 	useEffect(() => {
@@ -63,6 +67,7 @@ const IssuesHeader = ({
 		setIsAllIssueSelected(!isAllIssueSelected);
 		isAllIssueSelected ? setSelectedIssues(0) : setSelectedIssues(issuesCnt);
 	};
+
 
 	useEffect(() => {
 		if (selectedIssues === 0) setIsAnyIssueSelected(false);
@@ -97,7 +102,7 @@ const IssuesHeader = ({
 								width={({ theme }) => theme.buttonWidths.lg}
 								border={"none"}
 							></DropDownButton>
-							{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+							{isFilterClicked && <FilterModal />}
 						</TextIconDivider>
 					</OpenCloseEdit>
 				) : (
@@ -116,7 +121,7 @@ const IssuesHeader = ({
 							</TextIconDivider>
 						))}
 
-						{isFilterClicked && <FilterModal filterType={clickedFilter} />}
+						{isFilterClicked && <FilterModal />}
 						{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
 						{/* 🔥recoil로 수정 필요 */}
 						{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
@@ -158,7 +163,7 @@ const OpenCloseEdit = styled.div`
 const FiltersWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
-	/* position: relative; */
+	position: relative;
 	/* outline: red 1px solid; */
 `;
 
@@ -168,5 +173,5 @@ export const CheckBox = styled.div`
 `;
 
 const TextIconDivider = styled.div`
-	position: relative;
+	/* position: relative; */
 `;
