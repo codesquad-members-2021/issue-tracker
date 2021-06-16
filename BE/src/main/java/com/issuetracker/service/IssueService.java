@@ -57,7 +57,7 @@ public class IssueService {
                 .build();
     }
 
-    public void createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
+    public IssueNumberResponseDTO createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
         Issue issue = Issue.create(
                 issueRequestDTO.getTitle(),
                 issueRequestDTO.getComment(),
@@ -66,7 +66,7 @@ public class IssueService {
                 userService.findAssignees(issueRequestDTO.getAssignees()),
                 milestoneService.findMilestoneById(issueRequestDTO.getMilestone())
         );
-        issueRepository.save(issue);
+        return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
     }
 
     public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {

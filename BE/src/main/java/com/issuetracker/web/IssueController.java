@@ -39,10 +39,10 @@ public class IssueController {
 
     @LoginRequired
     @PostMapping("/form")
-    public void create(@RequestBody IssueRequestDTO issueRequestDTO, @UserId Long userId) {
+    public IssueNumberResponseDTO create(@RequestBody IssueRequestDTO issueRequestDTO, @UserId Long userId) {
         logger.debug("이슈 생성");
         logger.debug("issue 요청 확인: {}", issueRequestDTO.toString());
-        issueService.createIssue(issueRequestDTO, userId);
+        return issueService.createIssue(issueRequestDTO, userId);
     }
 
     @LoginRequired

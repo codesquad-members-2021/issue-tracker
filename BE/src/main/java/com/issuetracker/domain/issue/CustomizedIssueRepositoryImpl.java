@@ -90,7 +90,7 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                 .fetchFirst();
     }
 
-    public BooleanExpression labelEquals(List<String> labels) {
+    private BooleanExpression labelEquals(List<String> labels) {
         if (labels == null) {
             return null;
         }
@@ -101,7 +101,7 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
         return label.in(labelsList);
     }
 
-    public List<Label> getLabels(List<String> labels) {
+    private List<Label> getLabels(List<String> labels) {
         return queryFactory.selectFrom(label)
                 .where(label.name.in(labels))
                 .fetch();
