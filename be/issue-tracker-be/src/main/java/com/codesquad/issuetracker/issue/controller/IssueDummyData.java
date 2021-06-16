@@ -36,8 +36,6 @@ public class IssueDummyData {
                                                .build()
                                )
                        )
-                       .openedIssueCount(2)
-                       .closedIssueCount(3)
                        .build();
     }
 
