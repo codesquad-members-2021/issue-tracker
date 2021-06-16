@@ -8,5 +8,5 @@
 import Foundation
 
 struct LabelList: Decodable {
-    let labels: [IssueLabel]
+    let data: [IssueLabel]
 }
