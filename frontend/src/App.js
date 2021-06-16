@@ -7,6 +7,7 @@ import OAuthCallbackPage from 'pages/OAuthCallbackPage';
 import IssueListPage from 'pages/IssueListPage';
 import AddIssuePage from 'pages/AddIssuePage';
 
+import Header from 'components/common/Header';
 // import CountMyRecoil from './components/Count/CountMyRecoil';
 
 function App() {
@@ -18,6 +19,10 @@ function App() {
           <CountMyRecoil />
         </RecoilRoot>
       */}
+      { 
+        window.location.pathname !== "/signin" 
+        && <Header />
+      }
       <BrowserRouter>
         <Route exact path="/" component={AddIssuePage} />
         <Route path="/main" component={MainPage} />

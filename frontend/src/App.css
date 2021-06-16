@@ -12,6 +12,9 @@ a {
 :root {
   --TitleFontSize: 4.2rem;
 }
+body {
+  min-width: 1046px;
+}
 
 /* ====== Custom CSS - Dico, ppamppam ====== */
 

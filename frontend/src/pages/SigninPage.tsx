@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import ResponsiveLayout from '../components/common/ResponsiveLayout';
@@ -5,6 +6,13 @@ import ResponsiveLayout from '../components/common/ResponsiveLayout';
 import * as Signin from '../components/SignIn';
 
 const SigninPage = () => {
+  useEffect(() => {
+    // for test
+    if (localStorage.getItem("issue-tracker-user")) {
+      localStorage.removeItem("issue-tracker-user");
+    }
+  }, []);
+
   return (
     <SigninPageLayout>
       <SigninPageBlock>
