@@ -31,8 +31,8 @@ class LabelViewController: UIViewController {
     }
     
     func bindTableView() {
-        labelListViewModel.labelList?.bind(to: labelTableView.rx.items) { talbeView, index, element in
-            guard let cell = talbeView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
+        labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, index, element in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
             cell.setLabelCell(title: element.title, description: element.description!, color: element.color)
             return cell
         }
