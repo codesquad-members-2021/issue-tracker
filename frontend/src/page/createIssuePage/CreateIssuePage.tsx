@@ -1,13 +1,34 @@
 import React, { ReactElement } from 'react';
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 import Title from 'components/atom/Title';
 import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
-interface Props {}
+import fetchData from 'util/api/createIssue'
+export default function CreateIssuePage(): ReactElement {
+  const history = useHistory()
+  const sample = {
+    title: "새애애애로운이슈",
+    comment: "이슈 내용 뉴_뉴",
+    assignees: [1],
+    labels: [1, 2, 3],
+    milestone: 2
+  }
+  
 
-export default function CreateIssuePage({}: Props): ReactElement {
+  const handleClick = async (btnType: string) =>{
+   console.log(btnType)
+    if (btnType==='cancle'){
+      history.push('/main')
+    }
+    else{ 
+      const isSuccess = await fetchData(sample)
+      if(isSuccess===200) history.push('/main')
+    }
+  }
+  
   return (
     <CreateIssuePageBlock>
       <div className='create__section__header'>
@@ -19,17 +40,15 @@ export default function CreateIssuePage({}: Props): ReactElement {
         <IssueDetailOption />
       </div>
       <div className='create__section__footer'>
-        <div>⨯ 작성 취소</div>
-        <PrimaryButton value='완료' className='create__submit-btn' />
-      </div>
-      <div className='create__section__footer'>
-        <div>⨯ 작성 취소</div>
-        <PrimaryButton>완료</PrimaryButton>
+         {/* //?onClick사용하기 위해 styled로 변경, 상위에서 한번만 내리고 싶음 => spanButton styled도 지우고*/}
+        <SpanButton  onClick={()=>handleClick('cancel')}>⨯ 작성 취소</SpanButton>
+        <PrimaryButton value='완료' className='create__submit-btn' onClick={()=>handleClick('create')}/>
       </div>
     </CreateIssuePageBlock>
   );
 }
-
+const SpanButton =styled.div`
+cursor:pointer;`
 const CreateIssuePageBlock = styled.div`
   padding: 50px 80px;
   .create__title {
@@ -51,6 +70,7 @@ const CreateIssuePageBlock = styled.div`
     justify-content: flex-end;
     align-items: center;
     .create__submit-btn {
+      cursor:pointer;
       margin-left: 2rem;
       width: 240px;
       height: 56px;
