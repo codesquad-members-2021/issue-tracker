@@ -13,7 +13,17 @@ const MenuFilterBar = () => {
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
 	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
 	const filterBarInput = useRecoilValue(filterBarInputAtomState);
-	console.log(filterBarInput);
+
+	const getFilterBarString = () => {
+		return Object.entries(filterBarInput).reduce((acc, item) => {
+			if (item[1]) {
+				if (item[0] === "placeholder") acc += `${item[1]} `;
+				else acc += `${item[0]}:${item[1]} `;
+			}
+			console.log(acc);
+			return acc;
+		}, "");
+	};
 
 	const handleClick = useCallback(e => {
 		isFilterClicked === false
@@ -45,9 +55,13 @@ const MenuFilterBar = () => {
 					radius={"left"}
 				/>
 				<FilterInputContainer>
-					<FilterInput value={filterBarInput}>
-						<SearchIcon stroke={theme.grayScale.placeholder} />
-						<FilterInputText></FilterInputText>
+					<FilterInput>
+						<FilterInputIconContainer>
+							<SearchIcon stroke={theme.grayScale.placeholder} />
+						</FilterInputIconContainer>
+						<FilterInputText
+							value={getFilterBarString(filterBarInput)}
+						></FilterInputText>
 					</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
@@ -58,9 +72,10 @@ const MenuFilterBar = () => {
 
 const MenuFilterLayout = styled.div`
 	display: flex;
-	width: 601px;
+	width: 700px;
 	height: 40px;
 	position: relative;
+	margin-bottom: 24px;
 `;
 const FilterInputContainer = styled.div`
 	width: 100%;
@@ -72,13 +87,20 @@ const FilterInput = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100%;
-	padding: 2.3%;
+	padding: 0;
 	background-color: ${theme.grayScale.input_background};
 	border-radius: ${theme.border_radius_mix.right};
 `;
-const FilterInputText = styled.div`
-	padding: 0.4% 2%;
+const FilterInputIconContainer = styled.div`
+	padding: 11px;
+`;
+const FilterInputText = styled.input`
+	width: 100%;
+	height: 100%;
+	border: none;
+	background-color: ${theme.grayScale.input_background};
 	color: ${theme.grayScale.placeholder};
+	border-radius: ${theme.border_radius_mix.right};
 `;
 
 export default MenuFilterBar;
