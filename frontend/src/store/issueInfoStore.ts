@@ -106,6 +106,7 @@ export interface selectedTabType {
   assignee: Array<UserType> | [];
   label: Array<LabelType> | [];
   milestone: MilestoneType | null;
+  [key: string]: [] | Array<UserType> | Array<LabelType> | MilestoneType | null;
 }
 //잠시 주석
 // export const selectedTabState = atom<selectedTabType>({
@@ -131,18 +132,7 @@ const mokData = {
       userName: 'eNoLJ',
       assigned: true,
     },
-    {
-      id: 2,
-      image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
-      userName: 'janeljs',
-      assigned: true,
-    },
-    {
-      id: 3,
-      image: 'https://avatars.githubusercontent.com/u/68000537?v=4',
-      userName: 'zane',
-      assigned: true,
-    },
+
     {
       id: 4,
       image: 'https://avatars.githubusercontent.com/u/74946802?v=4',
@@ -159,26 +149,6 @@ const mokData = {
         textColorCode: '#000000',
       },
       description: 'bug fix',
-      checked: true,
-    },
-    {
-      id: 2,
-      name: 'feature',
-      color: {
-        backgroundColorCode: '#6BD089',
-        textColorCode: '#000000',
-      },
-      description: 'new feature',
-      checked: true,
-    },
-    {
-      id: 3,
-      name: 'documentation',
-      color: {
-        backgroundColorCode: '#C785C8',
-        textColorCode: '#000000',
-      },
-      description: 'new documentation',
       checked: true,
     },
   ],
