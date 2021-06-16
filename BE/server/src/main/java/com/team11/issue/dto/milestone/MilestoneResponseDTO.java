@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 
-@JsonPropertyOrder({"userName", "historyDatetime", "flag"})
+@JsonPropertyOrder({"milestoneId", "title", "deadLineDate", "description", "issueCount"})
 @RequiredArgsConstructor
 @Builder
 @Getter

@@ -16,13 +16,13 @@ import java.time.LocalDateTime;
 public class HistoryResponseDTO {
 
     @JsonProperty("userName")
-    private final String name;
+    private final String userName;
     private final LocalDateTime historyDateTime;
     private final String flag;
 
     public static HistoryResponseDTO from(History history) {
         return HistoryResponseDTO.builder()
-                .name(history.getUser().getName())
+                .userName(history.getUser().getName())
                 .historyDateTime(history.getHistoryDateTime())
                 .flag(history.getFlag())
                 .build();

@@ -6,20 +6,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@JsonPropertyOrder({"id", "name", "profileImage"})
+@JsonPropertyOrder({"userId", "userName", "profileImage"})
 @RequiredArgsConstructor
 @Builder
 @Getter
 public class UserResponseDTO {
 
-    private final Long id;
-    private final String name;
+    private final Long userId;
+    private final String userName;
     private final String profileImage;
 
     public static UserResponseDTO from(User user) {
         return UserResponseDTO.builder()
-                .id(user.getId())
-                .name(user.getName())
+                .userId(user.getId())
+                .userName(user.getName())
                 .profileImage(user.getProfileImage())
                 .build();
     }
