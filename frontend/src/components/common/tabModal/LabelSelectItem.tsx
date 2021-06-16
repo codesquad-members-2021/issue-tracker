@@ -1,19 +1,17 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { hoverGrey } from 'style/Theme';
+import { LabelType } from 'components/common/tabModal/tapDataType';
 
-interface Props {
-  label: {
-    id: number;
-    name: string;
-    colorCode: string;
-    description: string;
-  };
+interface LabelSelectItemProps {
+  label: LabelType;
 }
 
-export default function LabelSelectItem({ label: { name, colorCode } }: Props): ReactElement {
+export default function LabelSelectItem({
+  label: { name, color },
+}: LabelSelectItemProps): ReactElement {
   return (
-    <LabelSelectItemBlock colorCode={colorCode}>
+    <LabelSelectItemBlock colorCode={color.backgroundColorCode}>
       <div className='label__label'></div>
       <div className='label__title'>{name}</div>
     </LabelSelectItemBlock>

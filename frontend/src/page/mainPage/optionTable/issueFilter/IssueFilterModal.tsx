@@ -31,12 +31,12 @@ export default function IssueFilterModal({ modalRef }: ModalProps): ReactElement
     { key: 'status', select: 'close', value: '닫힌 이슈' },
   ];
 
-  const handleFilterClick = ({ key, select }: filterItmeType) => {
+  const handleFilterClick = ({ key, select, value }: filterItmeType) => {
     if (key === 'status') {
       setIssueStatus(select);
       return;
     }
-    setFilterType(key);
+    setFilterType({ key, name: value, isMainPage: false });
     setFilterSelect(select);
     setIsFilterFullSetting(true);
   };

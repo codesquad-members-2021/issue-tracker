@@ -1,9 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import LabelSelectItem from 'components/common/LabelSelectItem';
-import MilestoneSelectItem from 'components/common/MilestoneSelectItem';
-import UserSelectItem from 'components/common/UserSelectItem';
-
+import LabelSelectItem from 'components/common/tabModal/LabelSelectItem';
+import MilestoneSelectItem from 'components/common/tabModal/MilestoneSelectItem';
+import UserSelectItem from 'components/common/tabModal/UserSelectItem';
+import { getTabInfoState } from 'store/issueInfoStore';
+import { useRecoilValue } from 'recoil';
+import { UserType, LabelType, MilestoneType } from 'components/common/tabModal/tapDataType';
 interface ModalContentListProps {
   filterType: string;
   setModalClose?: () => void;
@@ -15,8 +17,11 @@ export default function ModalContentList({
 }: ModalContentListProps): ReactElement {
   let contentList;
 
-  if (filterType === 'author') {
-    contentList = assignees.map((assignee) => (
+  const tabInfo = useRecoilValue(getTabInfoState);
+  if (filterType === 'author' || filterType === 'assignee') {
+    const tabInfoKey = filterType === 'author' ? 'assignee' : filterType;
+    const userData: Array<UserType> = tabInfo[tabInfoKey];
+    contentList = userData.map((assignee) => (
       <UserSelectItem
         key={assignee.id}
         imageURL={assignee.image}
@@ -25,19 +30,13 @@ export default function ModalContentList({
     ));
   }
   if (filterType === 'label') {
-    contentList = labelSample.map((label) => <LabelSelectItem key={label.id} label={label} />);
+    const labelData: Array<LabelType> = tabInfo[filterType];
+    contentList = labelData.map((label) => <LabelSelectItem key={label.id} label={label} />);
   }
-  if (filterType === 'assignee') {
-    contentList = assignees.map((assignee) => (
-      <UserSelectItem
-        key={assignee.id}
-        imageURL={assignee.image}
-        name={assignee.userName}
-      ></UserSelectItem>
-    ));
-  }
+
   if (filterType === 'milestone') {
-    contentList = milestoneSample.map((milestone) => (
+    const milestoneData: Array<MilestoneType> = tabInfo[filterType];
+    contentList = milestoneData.map((milestone) => (
       <MilestoneSelectItem key={milestone.id} title={milestone.title} />
     ));
   }

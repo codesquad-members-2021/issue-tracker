@@ -3,27 +3,34 @@ import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { issueFilterTypeState } from 'store/issueInfoStore';
 import ModalContentList from './ModalContentList';
-interface FilterModalProps {
+interface TabModalProps {
   modalRef: RefObject<HTMLDivElement>;
 }
-export default function IssueTableFilterModal({ modalRef }: FilterModalProps): ReactElement {
-  const filterType = useRecoilValue(issueFilterTypeState);
+interface filterObjType {
+  key: string;
+  name: string;
+  isMainPage: boolean;
+}
+export default function TabModal({ modalRef }: TabModalProps): ReactElement {
+  const filterType = useRecoilValue<filterObjType>(issueFilterTypeState);
 
   return (
-    <IssueTableFilterModalBlock filterType={filterType} ref={modalRef}>
-      <div className='modal__header'>{filterType} 선택</div>
-      <ModalContentList filterType={filterType} />
-    </IssueTableFilterModalBlock>
+    <TabModalBlock filterType={filterType.key} ref={modalRef} isMainPage={filterType.isMainPage}>
+      <div className='modal__header'>{filterType.name} 선택</div>
+      <ModalContentList filterType={filterType.key} />
+    </TabModalBlock>
   );
 }
 
 interface StyleProps {
   filterType: string;
+  isMainPage: boolean;
 }
-const IssueTableFilterModalBlock = styled.div<StyleProps>`
+const TabModalBlock = styled.div<StyleProps>`
   position: absolute;
-  top: 50px;
-  right: ${({ filterType, theme }) => theme.filterModalPosition[filterType]}px;
+  top: ${({ theme, filterType, isMainPage }) => (isMainPage ? 50 : 45)}px;
+  right: ${({ filterType, theme, isMainPage }) =>
+    isMainPage ? theme.tabModalRightPosition[filterType] : 262}px;
   width: 240px;
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
   border-radius: 16px;
