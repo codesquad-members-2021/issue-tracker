@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddViewController: UIViewController {
-    private let cellReuseIdentifier = "AddViewControllerCell"
+class AddLabelViewController: UIViewController {
+    private let cellReuseIdentifier = "AddLabelViewControllerCell"
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -18,7 +18,7 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "새로운 마일스톤"
+        navigationItem.title = "새로운 레이블"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로",
                                                                 style: .plain,
                                                                 target: self,
@@ -38,7 +38,7 @@ class AddViewController: UIViewController {
     }
 }
 
-extension AddViewController: UITableViewDataSource {
+extension AddLabelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -55,7 +55,7 @@ extension AddViewController: UITableViewDataSource {
             cell.textLabel?.text = "설명"
             return cell
         case 2:
-            cell.textLabel?.text = "완료일"
+            cell.textLabel?.text = "배경색"
             return cell
         default:
             fatalError()
