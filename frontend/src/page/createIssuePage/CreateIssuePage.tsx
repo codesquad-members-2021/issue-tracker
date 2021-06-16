@@ -4,6 +4,7 @@ import Title from 'components/atom/Title';
 import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption'
+import PrimaryButton from 'components/atom/PrimaryButton'
 interface Props {}
 
 export default function CreateIssuePage({}: Props): ReactElement {
@@ -16,6 +17,10 @@ export default function CreateIssuePage({}: Props): ReactElement {
         <ProfileImg />
         <IssueInput />
         <IssueDetailOption/>
+      </div>
+      <div className='create__section__footer'>
+        <div>⨯ 작성 취소</div>
+        <PrimaryButton>완료</PrimaryButton>
       </div>
     </CreateIssuePageBlock>
   );
