@@ -22,6 +22,7 @@ final class ImageBarButton: UIButton {
     private func configure() {
         tintColor = Colors.mainGrape
         setTitleColor(Colors.mainGrape, for: .normal)
+        setTitleColor(UIColor.lightGray, for: .disabled)
         semanticContentAttribute = .forceRightToLeft
         imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
     }

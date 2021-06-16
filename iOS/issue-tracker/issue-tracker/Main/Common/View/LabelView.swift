@@ -53,9 +53,12 @@ final class LabelView: UIView {
         ])
     }
     
-    func configure(with backgroundColor: UIColor,_ textColor: UIColor,_ title: String) {
+    func configure(with backgroundColor: UIColor,_ textColor: UIColor,_ title: String?) {
         self.backgroundColor = backgroundColor
         labelTitle.textColor = textColor
-        labelTitle.text = title
+        
+        if let title = title {
+            labelTitle.text = title
+        }
     }
 }

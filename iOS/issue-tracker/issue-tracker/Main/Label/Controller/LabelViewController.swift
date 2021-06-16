@@ -94,9 +94,10 @@ final class LabelViewController: UIViewController {
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
-        
+        let addLabelViewController = AddLabelViewController()
+        addLabelViewController.modalPresentationStyle = .formSheet
+        present(addLabelViewController, animated: true, completion: nil)
     }
-    
 }
 
 extension LabelViewController: LoginInfoContainer {
