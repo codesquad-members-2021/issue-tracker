@@ -9,6 +9,37 @@ import UIKit
 
 final class AddLabelViewController: UIViewController {
     
+    private lazy var topMenuView: UIView = {
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(saveButton)
+        NSLayoutConstraint.activate([
+            saveButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
+            saveButton.widthAnchor.constraint(equalToConstant: spacing * 2),
+            saveButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
+            saveButton.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
+        ])
+        
+        container.addSubview(cancelButton)
+        NSLayoutConstraint.activate([
+            cancelButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: spacing * 2),
+            cancelButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
+            cancelButton.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
+        ])
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sceneTitle
+        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+        ])
+        return container
+    }()
+    
     private lazy var cancelButton: ImageBarButton = {
         let button = ImageBarButton()
         button.configure(with: "chevron.backward", "취소")
@@ -123,47 +154,19 @@ final class AddLabelViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.background
         
-        addTopButtons()
+        addTopMenu()
         addEditStackView()
         addLabelPreview()
     }
     
-    private func addTopButtons() {
-        let container = UIView()
-        container.translatesAutoresizingMaskIntoConstraints = false
+    private func addTopMenu() {
+        view.addSubview(topMenuView)
         
-        view.addSubview(container)
         NSLayoutConstraint.activate([
-            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing),
-            container.heightAnchor.constraint(equalToConstant: singleLineHeight)
-        ])
-        
-        container.addSubview(saveButton)
-        NSLayoutConstraint.activate([
-            saveButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            saveButton.widthAnchor.constraint(equalToConstant: spacing * 2),
-            saveButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
-            saveButton.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
-        ])
-        
-        container.addSubview(cancelButton)
-        NSLayoutConstraint.activate([
-            cancelButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            cancelButton.widthAnchor.constraint(equalToConstant: spacing * 2),
-            cancelButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
-            cancelButton.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
-        ])
-        
-        let titleLabel = UILabel()
-        titleLabel.text = sceneTitle
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+            topMenuView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topMenuView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            topMenuView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing),
+            topMenuView.heightAnchor.constraint(equalToConstant: singleLineHeight)
         ])
     }
     
@@ -172,7 +175,7 @@ final class AddLabelViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             newLabelEditStackView.heightAnchor.constraint(equalToConstant: singleLineHeight * 3),
-            newLabelEditStackView.topAnchor.constraint(equalTo: saveButton.safeAreaLayoutGuide.bottomAnchor, constant: 40),
+            newLabelEditStackView.topAnchor.constraint(equalTo: topMenuView.safeAreaLayoutGuide.bottomAnchor, constant: 40),
             newLabelEditStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             newLabelEditStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
