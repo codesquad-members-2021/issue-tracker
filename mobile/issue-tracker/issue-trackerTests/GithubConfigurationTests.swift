@@ -15,11 +15,11 @@ class GithubConfigurationTests: XCTestCase {
         XCTAssertEqual(baseURLString, expectedBaseURLString)
     }
 
-    func test_번들에서_클라이언트Id_가져오기() {
+    func test_BundlePath_ClientID_Fetct() {
         XCTAssertEqual(fetctMockKey(), "testClientId")
     }
 
-    func test_클라이언트포함URL_isCorrect() throws {
+    func test_ClientAddURL_IsCorrect() throws {
         let baseURLString = GithubConfiguration.scheme + "://" + GithubConfiguration.host + GithubConfiguration.path +
             "?client_id=" + fetctMockKey()
         let expectedGithubRequsetURL = "https://github.com/login/oauth/authorize?client_id=testClientId"

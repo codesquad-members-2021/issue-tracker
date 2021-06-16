@@ -18,7 +18,7 @@ enum Endpoint {
     static let host = "localhost"
     static let port = 8080
     static let basePath = "/api/ios/"
-    static let headers = ["application/json": "Content-Type"]
+    static let headers = ["Content-Type": "application/json"]
 
     static func url(rount: Rounter) -> URL? {
         var component = URLComponents()
@@ -36,8 +36,7 @@ enum Endpoint {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = Method.post.rawValue
         urlRequest.httpBody = code.encode()
-        urlRequest.setValue(headers.keys.first ?? "",
-                            forHTTPHeaderField: headers.values.first ?? "")
+        urlRequest.allHTTPHeaderFields = headers
         return urlRequest
     }
 }

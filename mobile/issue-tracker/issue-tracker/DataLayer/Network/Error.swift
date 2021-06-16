@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error, CustomStringConvertible {
+enum NetworkError: Error, CustomStringConvertible, Equatable {
     case invalidURL
     case invalidRequest
     case invalidResponse

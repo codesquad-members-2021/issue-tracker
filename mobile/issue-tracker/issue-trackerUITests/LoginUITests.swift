@@ -6,8 +6,9 @@
 //
 
 import XCTest
+import KeychainSwift
 
-class IssuetrackerUITests: XCTestCase {
+class LoginUITests: XCTestCase {
 
     private var app: XCUIApplication!
     private var expectation: XCTestExpectation!
@@ -16,7 +17,7 @@ class IssuetrackerUITests: XCTestCase {
         try super.setUpWithError()
         app = XCUIApplication()
         app.launch()
-        expectation = expectation(description: "LoginAlert")
+        expectation = XCTestExpectation(description: "Login Success/Failure")
     }
 
     override func tearDownWithError() throws {
@@ -30,17 +31,16 @@ class IssuetrackerUITests: XCTestCase {
         addUIInterruptionMonitor(withDescription: "Login Continue") { (alert) -> Bool in
             if alert.buttons["Cancel"].exists {
                 alert.buttons["Cancel"].tap()
-                 self.expectation.fulfill()
+                self.expectation.fulfill()
                 return true
             }
             return false
         }
         app.tap()
+        wait(for: [expectation], timeout: 3)
 
         XCTAssertTrue(app.alerts["인증에 실패 하였습니다"].exists)
-
         app.alerts.buttons["확인"].tap()
-        wait(for: [expectation], timeout: 5)
     }
 
     func test_LoginContinue() throws {
