@@ -6,27 +6,37 @@
 //
 
 import UIKit
-
-struct Label {
-    let title: String
-    let description: String
-    let color: String
-}
+import RxSwift
+import RxCocoa
 
 class LabelViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
     
+    var labelListViewModel = LabelListViewModel(networkManager: NetworkManager())
     var addLabelButton = AddLabelButton()
-    
-    let fakeData = [Label(title: "hidsfadsfsafasfdfadsf", description: "hello", color: "#B1CAE5"), Label(title: "wow", description: "amazing", color: "#DFCD85")]
+    var bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
         labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
-        labelTableView.dataSource = self
         addLabelButton.addTarget(self, action: #selector(addLabelButtonTapped), for: .touchUpInside)
+        fetchLabel()
+        bindTableView()
+    }
+    
+    func fetchLabel() {
+        labelListViewModel.fetchLabelList()
+    }
+    
+    func bindTableView() {
+        labelListViewModel.labelList?.bind(to: labelTableView.rx.items) { talbeView, index, element in
+            guard let cell = talbeView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
+            cell.setLabelCell(title: element.title, description: element.description!, color: element.color)
+            return cell
+        }
+        .disposed(by: bag)
     }
     
     @objc func addLabelButtonTapped() {
@@ -38,19 +48,4 @@ class LabelViewController: UIViewController {
         navigationItem.title = "레이블"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
     }
-}
-
-extension LabelViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell() }
-        cell.setLabelCell(title: fakeData[indexPath.row].title, description: fakeData[indexPath.row].description, color: fakeData[indexPath.row].color)
-        
-        return cell
-    }
-    
-    
 }
