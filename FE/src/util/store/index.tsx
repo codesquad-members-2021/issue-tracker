@@ -1,2 +1,2 @@
-import atoms from './atoms';
-export { atoms };
+import * as issueListAtoms from './issueListAtoms';
+export { issueListAtoms };
