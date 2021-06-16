@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import qs from 'qs';
-import jwt_decode from 'jwt-decode';
 import { RouteComponentProps } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface decodedInterface {
   exp?: number;
@@ -16,9 +16,6 @@ const LoginCallBackPage = ({ history }: RouteComponentProps) => {
   const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
   const code:string = query.code as string;
 
-  // const headers = new Headers();
-  // headers.set('User-Agent', 'IssueTrackerFE');
-
   const getLoginToken = async () => {
     const data = await fetch(
       `http://ec2-52-79-56-138.ap-northeast-2.compute.amazonaws.com/api/user/login`,  {
@@ -29,23 +26,19 @@ const LoginCallBackPage = ({ history }: RouteComponentProps) => {
         body: JSON.stringify({ code })
       }
     );
-    console.log(data);
-
     const json = await data.json();
     console.log(json);
-    // // const decoded: decodedInterface = jwt_decode(json.jwt);
-    // const decoded: any = jwt_decode(json.jwt);
-    // console.log(decoded);
-    // localStorage.setItem('token', json.jwt);
-    // if (decoded?.id && decoded?.github) {
-    //   localStorage.setItem('id', decoded.id.toString());
-    //   localStorage.setItem('name', decoded.github.toString());
-    // }
-    // const nextURL = localStorage.getItem('prev') || '/';
-    // localStorage.removeItem('prev');
-    // history.push(nextURL);
+    localStorage.setItem('token', json.jwtToken);
+    localStorage.setItem('id', json.userId.toString());
+    localStorage.setItem('name', json.userName.toString());
+    localStorage.setItem('email', json.email.toString());
+    localStorage.setItem('profileImage', json.profileImage.toString());
+    history.push('/issues');
   };
-  getLoginToken();
+
+  useEffect(() => {
+    getLoginToken();
+  }, []);
 
   return (
     <StyledLogin>
