@@ -6,21 +6,29 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { useState } from "react";
 import styled from "styled-components";
 import { filter } from "data";
-import { clickedFilterAtomState } from "RecoilStore/Atoms";
-import { useRecoilValue } from "recoil";
+import {
+	filterBarInputAtomState,
+	clickedFilterAtomState,
+} from "RecoilStore/Atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 {
 	/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state내림 */
 }
 const FilterModal = () => {
 	const [value, setValue] = useState("");
 	const filterType = useRecoilValue(clickedFilterAtomState);
+	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
 
 	// Recoil로직 (구현 예정)
 	// 1. 필터별로 선택된 필터는 atom으로 관리됨(default는 null임)
-	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
+	// 2. 이슈리스트 필터링, 검색창에 현재 선택된 ent.target.value);
+	//필터들 보여줄 때는 그 Atom의 조합으로 보여줌 (특히 검색창엔 selector이용해서 붙이면 간단할듯)
 
+	//
 	const handleChange = event => {
 		setValue(event.target.value);
+		console.log(event.target.value);
+		setFilterBarInputState(filterType);
 	};
 
 	const getFilterModalData = type => {

@@ -14,6 +14,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import {
 	selectedIssueCntAtomState,
 	clickedFilterAtomState,
+	filterBarInputAtomState,
 } from "RecoilStore/Atoms";
 
 const IssuesHeader = ({
@@ -30,6 +31,7 @@ const IssuesHeader = ({
 	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
+	const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
@@ -40,6 +42,7 @@ const IssuesHeader = ({
 		console.dir(e.target.textContent);
 		console.dir(e.target);
 		setClickedFilterState(e.target.textContent);
+		setFilterBarInputState(e.target.textContent); //여기
 	});
 
 	useEffect(() => {

@@ -4,11 +4,17 @@ import DropDownButton from "components/common/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
 import { useState, useEffect, useCallback } from "react";
-import { clickedFilterAtomState } from "RecoilStore/Atoms";
-import { useSetRecoilState } from "recoil";
+import {
+	clickedFilterAtomState,
+	filterBarInputAtomState,
+} from "RecoilStore/Atoms";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 const MenuFilterBar = () => {
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
 	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
+	const filterBarInput = useRecoilValue(filterBarInputAtomState);
+	console.log(filterBarInput);
+
 	const handleClick = useCallback(e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
@@ -39,9 +45,9 @@ const MenuFilterBar = () => {
 					radius={"left"}
 				/>
 				<FilterInputContainer>
-					<FilterInput>
+					<FilterInput value={filterBarInput}>
 						<SearchIcon stroke={theme.grayScale.placeholder} />
-						<FilterInputText>is:issue is:open</FilterInputText>
+						<FilterInputText></FilterInputText>
 					</FilterInput>
 				</FilterInputContainer>
 			</MenuFilterLayout>
