@@ -7,12 +7,12 @@
 
 import UIKit
 
-class IssueViewController: UIViewController, IssueNetworked {
-    
+class IssueViewController: UIViewController, IssueViewModelType, MainCoordinated {
+
     @IBOutlet weak var issueTableView: UITableView!
     
-    var issueNetworkController: IssueNetworkController?
-    var viewModel: IssueViewModelProtocol?
+    var issueViewModel: IssueViewModel?
+    var mainCoordinator: MainFlowCoordinator?
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -23,13 +23,11 @@ class IssueViewController: UIViewController, IssueNetworked {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.configureLeftBarButtonItem()
         self.configureRightBarButtonItem()
         self.configureTableView()
-        self.configureViewModel()
+        self.issueViewModel?.fetchAllIssue()
         self.configureNotificationCenter()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,12 +48,6 @@ class IssueViewController: UIViewController, IssueNetworked {
         self.issueTableView.reloadData()
     }
     
-    private func configureViewModel() {
-        guard self.issueNetworkController != nil else { return }
-        self.viewModel = IssueViewModel(issueNetworkController: self.issueNetworkController!)
-        viewModel?.fetchAllIssue()
-    }
-    
     private func configureLeftBarButtonItem() {
         let customLeftBarButton = CustomBarButtonItem(title: "필터", image: UIImage(systemName: "line.horizontal.3.decrease") ?? UIImage(), located: .left)
         customLeftBarButton.addAction(UIAction.init(handler: { (touch) in
@@ -71,7 +63,7 @@ class IssueViewController: UIViewController, IssueNetworked {
             
             guard let self = self else { return }
             let targetVC = self.storyboard?.instantiateViewController(identifier: "IssueSelectTableViewController") as! IssueSelectTableViewController
-            targetVC.prepare(with: self.viewModel!.issues)
+            self.mainCoordinator?.configure(viewController: targetVC)
             self.navigationController?.pushViewController(targetVC, animated: true)
             
         }), for: .touchUpInside)
@@ -92,26 +84,24 @@ class IssueViewController: UIViewController, IssueNetworked {
         self.issueTableView.dataSource = self
         self.issueTableView.delegate = self
     }
-    
 }
 
 extension IssueViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        viewModel?.filterIssuesWithSearchText(searchBar.text!)
+        issueViewModel?.filterIssuesWithSearchText(searchBar.text!)
     }
-    
 }
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if isFiltering {
-            guard let filteredIssue = viewModel?.filteredIssues else { return 0 }
+            guard let filteredIssue = issueViewModel?.filteredIssues else { return 0 }
             return filteredIssue.count
         }
-        guard let issues = viewModel?.issues else { return 0 }
+        guard let issues = issueViewModel?.issues else { return 0 }
         return issues.count
         
     }
@@ -120,10 +110,10 @@ extension IssueViewController: UITableViewDataSource {
         let cell = self.issueTableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as! IssueCell
     
         if isFiltering {
-            guard let filteredIssues = viewModel?.filteredIssues else { return cell }
+            guard let filteredIssues = issueViewModel?.filteredIssues else { return cell }
             cell.configureAll(with: filteredIssues[indexPath.row])
         } else {
-            guard let issues = viewModel?.issues else { return cell }
+            guard let issues = issueViewModel?.issues else { return cell }
             cell.configureAll(with: issues[indexPath.row])
         }
         
@@ -138,7 +128,7 @@ extension IssueViewController: UITableViewDelegate {
         // delete action
         let delete = UIContextualAction(style: .destructive,
                                         title: "삭제") { [weak self] (action, view, completionHandler) in
-            self?.viewModel?.deleteIssue(at: indexPath.row, completionHandler: {
+            self?.issueViewModel?.deleteIssue(at: indexPath.row, completionHandler: {
                     completionHandler(true)
             })
         }

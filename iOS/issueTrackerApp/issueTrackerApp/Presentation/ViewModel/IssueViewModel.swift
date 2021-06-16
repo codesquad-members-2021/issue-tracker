@@ -29,7 +29,7 @@ class IssueViewModel: IssueViewModelProtocol {
         }
     }
     
-    init(issueNetworkController: IssueNetworkController) {
+    init(issueNetworkController: IssueNetworkController = IssueNetworkController()) {
         self.networkController = issueNetworkController
     }
     

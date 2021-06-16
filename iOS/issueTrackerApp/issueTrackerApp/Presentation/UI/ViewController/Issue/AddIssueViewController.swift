@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddIssueViewController: UIViewController, Stateful, MainCoordinated {
+class AddIssueViewController: UIViewController, AddIssueViewModelType, MainCoordinated {
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var saveButton: UIButton!
     @IBOutlet private weak var markdownSegmentedControl: UISegmentedControl!
@@ -15,12 +15,12 @@ class AddIssueViewController: UIViewController, Stateful, MainCoordinated {
     @IBOutlet private weak var moreInformationView: UIView!
     @IBOutlet private weak var commentView: UIView!
     
-    var stateController: StateController?
+    private var addIssueViewModel: AddIssueViewModel!
     weak var mainCoordinator: MainFlowCoordinator?
     private lazy var commentInputViewControler: CommentViewController = {
         let storyboard = UIStoryboard(name: "Issue", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(identifier: "CommentViewController") as! CommentViewController
-        viewController.stateController = stateController
+        viewController.setAddIssueViewModel(self.addIssueViewModel)
         self.add(asChildViewController: viewController)
         return viewController
     }()
@@ -28,7 +28,7 @@ class AddIssueViewController: UIViewController, Stateful, MainCoordinated {
     private lazy var markdownInputViewControler: MarkdownViewController = {
         let storyboard = UIStoryboard(name: "Issue", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(identifier: "MarkdownViewController") as! MarkdownViewController
-        viewController.stateController = stateController
+        viewController.setAddIssueViewModel(self.addIssueViewModel)
         self.add(asChildViewController: viewController)
         return viewController
     }()
@@ -41,6 +41,10 @@ class AddIssueViewController: UIViewController, Stateful, MainCoordinated {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         mainCoordinator?.configure(viewController: segue.destination)
+    }
+    
+    func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel) {
+        self.addIssueViewModel = addIssueViewModel
     }
 }
 

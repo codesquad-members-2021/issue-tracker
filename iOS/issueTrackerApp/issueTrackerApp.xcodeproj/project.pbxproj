@@ -51,7 +51,7 @@
 		931BAE702674F0D000CD9244 /* DummyDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE6F2674F0D000CD9244 /* DummyDataLoader.swift */; };
 		931BAE762674FC4700CD9244 /* ArrayTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE752674FC4700CD9244 /* ArrayTableViewDataSource.swift */; };
 		931BAE7E2675A27000CD9244 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAE7D2675A27000CD9244 /* UITableView.swift */; };
-		931BAEA52677973200CD9244 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEA42677973200CD9244 /* StateController.swift */; };
+		931BAEA52677973200CD9244 /* AddIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEA42677973200CD9244 /* AddIssueViewModel.swift */; };
 		931BAEAD2678843200CD9244 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEAC2678843200CD9244 /* CommentViewController.swift */; };
 		931BAEB226788EA700CD9244 /* MarkdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931BAEB126788EA700CD9244 /* MarkdownViewController.swift */; };
 		9343E2CA266EF9CD0086F977 /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9343E2C9266EF9CD0086F977 /* KeychainController.swift */; };
@@ -130,7 +130,7 @@
 		931BAE6F2674F0D000CD9244 /* DummyDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataLoader.swift; sourceTree = "<group>"; };
 		931BAE752674FC4700CD9244 /* ArrayTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTableViewDataSource.swift; sourceTree = "<group>"; };
 		931BAE7D2675A27000CD9244 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
-		931BAEA42677973200CD9244 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		931BAEA42677973200CD9244 /* AddIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIssueViewModel.swift; sourceTree = "<group>"; };
 		931BAEAC2678843200CD9244 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		931BAEB126788EA700CD9244 /* MarkdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewController.swift; sourceTree = "<group>"; };
 		9343E2C9266EF9CD0086F977 /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
@@ -183,11 +183,11 @@
 			isa = PBXGroup;
 			children = (
 				883F5184266F5F090055EC9E /* IssueViewController.swift */,
+				88C3AA122678F7330090FAD8 /* IssueSelectTableViewController.swift */,
 				931BAE40267343B900CD9244 /* AddIssueViewController.swift */,
 				931BAE4526734FA500CD9244 /* MoreInformationViewController.swift */,
 				931BAEAC2678843200CD9244 /* CommentViewController.swift */,
 				931BAEB126788EA700CD9244 /* MarkdownViewController.swift */,
-				88C3AA122678F7330090FAD8 /* IssueSelectTableViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -333,7 +333,6 @@
 		930FAEBE266E128700422968 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				931BAEA42677973200CD9244 /* StateController.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -387,6 +386,7 @@
 		930FAEC4266E12E900422968 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				931BAEA42677973200CD9244 /* AddIssueViewModel.swift */,
 				88C3A9F326773B660090FAD8 /* IssueViewModel.swift */,
 			);
 			path = ViewModel;
@@ -656,7 +656,7 @@
 				9343E305266F60B50086F977 /* NetworkRequest.swift in Sources */,
 				88C3AA0B267874470090FAD8 /* IssuePatchRequest.swift in Sources */,
 				931BAE1E26730C8600CD9244 /* SettingViewController.swift in Sources */,
-				931BAEA52677973200CD9244 /* StateController.swift in Sources */,
+				931BAEA52677973200CD9244 /* AddIssueViewModel.swift in Sources */,
 				883F51A42670AAAB0055EC9E /* TagStackView.swift in Sources */,
 				883F519E2670940E0055EC9E /* IssueCell.swift in Sources */,
 				9343E2D8266F03E90086F977 /* NetworkController.swift in Sources */,

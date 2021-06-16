@@ -28,19 +28,25 @@ protocol Networked: class {
     var networkController: NetworkController? { get set }
 }
 
-protocol Stateful: AnyObject {
-    var stateController: StateController? { get set }
+protocol AddIssueViewModelType: AnyObject {
+//    var addIssueViewModel: AddIssueViewModel? { get set }
+    func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel)
+}
+
+protocol IssueViewModelType: AnyObject {
+    var issueViewModel: IssueViewModel? { get set }
 }
 
 protocol IssueNetworked: class {
-    var issueNetworkController: IssueNetworkController? { get set }
+    func setIssueNetworkController(_ issueNetworkController: IssueNetworkController)
 }
 
 class MainFlowCoordinator: NSObject {
-    let mainTabBarController: MainTabBarController
-    let keyChainController = KeychainController()
-    let loginFlowCoordinator = LoginFlowCoordinator()
-    let stateController = StateController()
+    private let mainTabBarController: MainTabBarController
+    private let keyChainController = KeychainController()
+    private let loginFlowCoordinator = LoginFlowCoordinator()
+    private let addIssueViewModel = AddIssueViewModel()
+    private let issueViewModel = IssueViewModel()
     
     init(mainViewController: MainTabBarController) {
         self.mainTabBarController = mainViewController
@@ -59,8 +65,9 @@ extension MainFlowCoordinator: Coordinator {
         (viewController as? MainCoordinated)?.mainCoordinator = self
         (viewController as? Networked)?.networkController = NetworkController(keychainController: keyChainController)
         (viewController as? LoginCoordinated)?.loginCoordinator = loginFlowCoordinator
-        (viewController as? Stateful)?.stateController = stateController
-        (viewController as? IssueNetworked)?.issueNetworkController = IssueNetworkController()
+        (viewController as? AddIssueViewModelType)?.setAddIssueViewModel(addIssueViewModel)
+        (viewController as? IssueNetworked)?.setIssueNetworkController(IssueNetworkController())
+        (viewController as? IssueViewModelType)?.issueViewModel = issueViewModel
         
         if let tabBarController = viewController as? UITabBarController {
             tabBarController.viewControllers?.forEach(configure(viewController:))

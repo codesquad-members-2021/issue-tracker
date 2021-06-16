@@ -7,16 +7,16 @@
 
 import UIKit
 
-class MoreInformationViewController: UIViewController, Stateful, MainCoordinated {
+class MoreInformationViewController: UIViewController, AddIssueViewModelType, MainCoordinated {
     
     @IBOutlet private weak var tableView: UITableView!
     private var dataSource: MoreInfoTableViewDataSource?
-    var stateController: StateController?
+    private var addIssueViewModel: AddIssueViewModel!
     weak var mainCoordinator: MainFlowCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let moreInfos = stateController?.moreInfos else { return }
+        guard let moreInfos = addIssueViewModel?.moreInfos else { return }
         let dataSource = MoreInfoTableViewDataSource(moreInfos: moreInfos)
         self.dataSource = dataSource
         tableView.dataSource = dataSource
@@ -25,5 +25,9 @@ class MoreInformationViewController: UIViewController, Stateful, MainCoordinated
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         mainCoordinator?.configure(viewController: segue.destination)
+    }
+    
+    func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel) {
+        self.addIssueViewModel = addIssueViewModel
     }
 }

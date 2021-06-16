@@ -7,22 +7,26 @@
 
 import UIKit
 
-class CommentViewController: UIViewController, Stateful, MainCoordinated {
+class CommentViewController: UIViewController, AddIssueViewModelType, MainCoordinated {
     
     @IBOutlet weak var commentTextView: UITextView!
     
-    var stateController: StateController?
+    private var addIssueViewModel: AddIssueViewModel!
     weak var mainCoordinator: MainFlowCoordinator?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         commentTextView.delegate = self
     }
+    
+    func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel) {
+        self.addIssueViewModel = addIssueViewModel
+    }
 }
 
 extension CommentViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
-        stateController?.updateComment(textView.text ?? "")
+        addIssueViewModel?.updateComment(textView.text ?? "")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

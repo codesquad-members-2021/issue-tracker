@@ -8,11 +8,11 @@
 import UIKit
 import MarkdownKit
 
-class MarkdownViewController: UIViewController, Stateful, MainCoordinated {
-    
+class MarkdownViewController: UIViewController, AddIssueViewModelType, MainCoordinated {
+
     @IBOutlet weak var markdownLabel: UILabel!
     
-    var stateController: StateController?
+    private var addIssueViewModel: AddIssueViewModel!
     weak var mainCoordinator: MainFlowCoordinator?
     private let markdownParser = MarkdownParser()
     
@@ -21,7 +21,11 @@ class MarkdownViewController: UIViewController, Stateful, MainCoordinated {
         configureMarkdownView()
     }
     
+    func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel) {
+        self.addIssueViewModel = addIssueViewModel
+    }
+    
     private func configureMarkdownView() {
-        markdownLabel.attributedText = markdownParser.parse(stateController?.comment ?? "")
+        markdownLabel.attributedText = markdownParser.parse(addIssueViewModel?.comment ?? "")
     }
 }

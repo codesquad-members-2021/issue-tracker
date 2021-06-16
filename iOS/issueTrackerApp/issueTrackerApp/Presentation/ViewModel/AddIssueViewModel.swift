@@ -1,5 +1,5 @@
 //
-//  StateController.swift
+//  AddIssueViewModel.swift
 //  issueTrackerApp
 //
 //  Created by zombietux on 2021/06/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StateController {
+class AddIssueViewModel {
     //수정해야함!!!!
     var issueTitle = String()
     var comment = String()

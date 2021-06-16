@@ -7,10 +7,11 @@
 
 import UIKit
 
-class IssueSelectTableViewController: UITableViewController {
-    
-    var issues: [Issue] = []
-    
+class IssueSelectTableViewController: UITableViewController, IssueViewModelType, MainCoordinated {
+
+    var issueViewModel: IssueViewModel?  // 0x000001
+//    var issues: [Issue] = []
+    var mainCoordinator: MainFlowCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,9 +20,9 @@ class IssueSelectTableViewController: UITableViewController {
         self.configureRightBarButtonItem()
     }
 
-    public func prepare(with issues: [Issue]) {
-        self.issues = issues
-    }
+//    public func prepare(with issues: [Issue]) {
+//        self.issues = issues
+//    }
     
     private func configureTableView() {
         self.tableView.register(IssueCell.nib, forCellReuseIdentifier: IssueCell.identifier)
@@ -43,13 +44,15 @@ class IssueSelectTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.issues.count
+//        return self.issues.count
+        return issueViewModel?.issues.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: IssueCell.identifier) as? IssueCell else { return UITableViewCell() }
-        cell.configureAll(with: issues[indexPath.row])
+        guard let issue = issueViewModel?.issues[indexPath.row] else { return UITableViewCell() }
+        cell.configureAll(with: issue)
         
         return cell
     }
