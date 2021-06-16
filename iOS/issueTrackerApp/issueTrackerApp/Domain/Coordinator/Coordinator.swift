@@ -32,6 +32,10 @@ protocol Stateful: AnyObject {
     var stateController: StateController? { get set }
 }
 
+protocol IssueNetworked: class {
+    var issueNetworkController: IssueNetworkController? { get set }
+}
+
 class MainFlowCoordinator: NSObject {
     let mainTabBarController: MainTabBarController
     let keyChainController = KeychainController()
@@ -56,6 +60,8 @@ extension MainFlowCoordinator: Coordinator {
         (viewController as? Networked)?.networkController = NetworkController(keychainController: keyChainController)
         (viewController as? LoginCoordinated)?.loginCoordinator = loginFlowCoordinator
         (viewController as? Stateful)?.stateController = stateController
+        (viewController as? IssueNetworked)?.issueNetworkController = IssueNetworkController()
+        
         if let tabBarController = viewController as? UITabBarController {
             tabBarController.viewControllers?.forEach(configure(viewController:))
         }

@@ -133,7 +133,7 @@
                                         </constraints>
                                     </stackView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0NO-ma-St8">
-                                        <rect key="frame" x="0.0" y="83" width="414" height="420"/>
+                                        <rect key="frame" x="0.0" y="83" width="414" height="420.5"/>
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -311,6 +311,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZUo-5h-a8z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ENy-Ky-EQB" secondAttribute="trailing" constant="16" id="1oX-md-Uxz"/>

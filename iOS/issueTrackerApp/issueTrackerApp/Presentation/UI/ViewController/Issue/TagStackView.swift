@@ -14,4 +14,9 @@ class TagStackView: UIStackView {
         self.addArrangedSubview(tagLabel)
     }
     
+    public func removeAllTags() {
+        self.arrangedSubviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
 }
