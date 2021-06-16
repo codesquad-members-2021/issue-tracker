@@ -23,7 +23,7 @@ public class MilestoneService {
     }
 
     public Milestone findOne(Long id) {
-        Milestone milestone = milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findByIdAndDeletedFalse(id).orElseThrow(MilestoneNotFoundException::new);
         return milestone;
     }
 
@@ -39,14 +39,14 @@ public class MilestoneService {
     }
 
     public List<MilestoneResponse> getAllMilestones() {
-        return milestoneRepository.findAll().stream()
+        return milestoneRepository.findByDeletedFalse().stream()
                 .map(MilestoneResponse::new)
                 .collect(Collectors.toList());
     }
 
     public MilestoneCountResponse getMilestoneCount() {
-        int openMilestoneCount = milestoneRepository.findOpenMilestones().size();
-        int closedMilestoneCount = milestoneRepository.findClosedMilestones().size();
+        int openMilestoneCount = milestoneRepository.findByOpenTrueAndDeletedFalse().size();
+        int closedMilestoneCount = milestoneRepository.findByOpenFalseAndDeletedFalse().size();
         return new MilestoneCountResponse(openMilestoneCount, closedMilestoneCount);
     }
 
@@ -55,13 +55,13 @@ public class MilestoneService {
     }
 
     public void modifyMilestone(Long milestoneId, MilestoneRequest milestoneRequest) {
-        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findByIdAndDeletedFalse(milestoneId).orElseThrow(MilestoneNotFoundException::new);
         milestone.edit(milestoneRequest);
         milestoneRepository.save(milestone);
     }
 
     public void deleteMilestone(Long milestoneId) {
-        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findByIdAndDeletedFalse(milestoneId).orElseThrow(MilestoneNotFoundException::new);
         milestone.delete();
         milestoneRepository.save(milestone);
 

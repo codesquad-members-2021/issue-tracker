@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface EmojiRepository extends JpaRepository<Emoji, Long> {
 
-    @Override
-    Optional<Emoji> findById(Long id);
+    Optional<Emoji> findByIdAndDeletedFalse(Long id);
 }
