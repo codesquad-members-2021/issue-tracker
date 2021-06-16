@@ -3,15 +3,13 @@ import { TChildren } from '../../util/types';
 
 export interface IModal {
   children?: TChildren;
-  isModalVisible: boolean;
 }
 
-const Modal = ({ isModalVisible, children, ...props }: IModal) => {
+const Modal = ({ children, ...props }: IModal) => {
   return (
     <ModalLayout
       {...props}
       id="modal"
-      isModalVisible={isModalVisible}
     >
       {children}
     </ModalLayout>
@@ -21,8 +19,6 @@ const Modal = ({ isModalVisible, children, ...props }: IModal) => {
 export default Modal;
 
 // --- Styled Components ---
-const ModalLayout = styled.div<{ isModalVisible: boolean }>`
+const ModalLayout = styled.div`
   display: flex;
-  visibility: ${({ isModalVisible }) =>
-    isModalVisible ? 'visible' : 'hidden'};
 `;
