@@ -17,8 +17,9 @@ function NoIssue({ isSearched }: Prop) {
 export default NoIssue;
 
 const NoIssueWrap = styled.div`
+  height: 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.colors.gr_offWhite};
 `;
