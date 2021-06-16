@@ -9,7 +9,6 @@ import theme from './util/styles/theme';
 
 import Header from './components/Header';
 import { RegisterPage, LoginPage, IssuePage, IssueWritePage, LabelListPage, LoginCallBackPage } from './pages';
-import BackgroundFluid from './components/Common/BackgroundFluid';
 
 const App = () => {
   return (
@@ -17,25 +16,23 @@ const App = () => {
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <BackgroundFluid>
-            <Container maxWidth="lg">
-              <Router>
-                <Switch>
-                  <Route path={'/'} exact component={LoginPage} />
-                  <Route path={'/register'} exact component={RegisterPage} />
-                  <Route path={'/oauth-callback'} exact component={LoginCallBackPage} />
-                  <>
-                    <Header />
-                    <Switch>
-                      <Route path={'/issues'} exact component={IssuePage} />
-                      <Route path={'/issues/write'} exact component={IssueWritePage} />
-                      <Route path={'/labels'} exact component={LabelListPage} />
-                    </Switch>
-                  </>
-                </Switch>
-              </Router>
-            </Container>
-          </BackgroundFluid>
+          <Container maxWidth="lg">
+            <Router>
+              <Switch>
+                <Route path={'/'} exact component={LoginPage} />
+                <Route path={'/register'} exact component={RegisterPage} />
+                <Route path={'/oauth-callback'} exact component={LoginCallBackPage} />
+                <>
+                  <Header />
+                  <Switch>
+                    <Route path={'/issues'} exact component={IssuePage} />
+                    <Route path={'/issues/write'} exact component={IssueWritePage} />
+                    <Route path={'/labels'} exact component={LabelListPage} />
+                  </Switch>
+                </>
+              </Switch>
+            </Router>
+          </Container>
         </ThemeProvider>
       </StylesProvider>
     </RecoilRoot>

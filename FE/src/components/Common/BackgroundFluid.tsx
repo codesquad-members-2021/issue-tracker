@@ -1,42 +1,16 @@
-import { useRecoilState } from 'recoil';
+// 사용안함. Body를 대체하여 Modal 컨트롤하는 이벤트를 걸려했는데
+  // 다 수정하려면 지금 (2021.06.16) 구조상 너무 복잡해짐
 import styled from 'styled-components';
-import { atoms } from '../../util/store';
 import { TChildren } from '../../util/types';
 
 interface IBackgroundFluid {
   children?: TChildren;
+  onClick?: (e: Event | React.MouseEvent) => void;
 }
 
-const BackgroundFluid = ({ children, ...props }: IBackgroundFluid) => {
-  const {
-    issueList: {
-      searchModalVisible,
-      assigneeModalVisible, labelModalVisible,
-      milestoneModalVisible, writerModalVisible,
-    }
-  } = atoms;
-
-  const [isSearchModalVisible, setSearchModalVisible] = useRecoilState(searchModalVisible);
-  const [isAssigneeModalVisible, setIsAssigneeModalVisible] = useRecoilState(assigneeModalVisible);
-  const [isLabelModalVisible, setIsLabelModalVisible] = useRecoilState(labelModalVisible);
-  const [isMilestoneModalVisible, setIsMilestoneModalVisible] = useRecoilState(milestoneModalVisible);
-  const [isWriterModalVisible, setIsWriterModalVisible] = useRecoilState(writerModalVisible);
-
-  const handleBackgroundClick = (e: React.MouseEvent | Event) => {
-    const target = e.target as HTMLElement;
-    const closestTarget: HTMLElement | null = target.closest('#modal');
-
-    if (closestTarget && closestTarget.contains(target)) return;
-
-    isSearchModalVisible && setSearchModalVisible(false);
-    isAssigneeModalVisible && setIsAssigneeModalVisible(false);
-    isLabelModalVisible && setIsLabelModalVisible(false);
-    isMilestoneModalVisible && setIsMilestoneModalVisible(false);
-    isWriterModalVisible && setIsWriterModalVisible(false);
-  };
-
+const BackgroundFluid = ({ children, onClick, ...props }: IBackgroundFluid) => {
   return (
-    <BackgroundFluidLayout {...props} onClick={handleBackgroundClick}>
+    <BackgroundFluidLayout {...props} onClick={onClick}>
       {children}
     </BackgroundFluidLayout>
   );
