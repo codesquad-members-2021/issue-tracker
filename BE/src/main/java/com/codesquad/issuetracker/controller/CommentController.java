@@ -7,8 +7,7 @@ import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.response.CommentResponse;
 import com.codesquad.issuetracker.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -26,12 +25,12 @@ public class CommentController {
     }
 
     @PostMapping
-    public ApiResponse createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
 
         log.debug("Comment Request from User : {}", commentRequest);
 
         commentService.create(commentRequest.create(user));
-        return ApiResponse.ok("Create Comment");
     }
 
     @GetMapping("/{issueId}")
