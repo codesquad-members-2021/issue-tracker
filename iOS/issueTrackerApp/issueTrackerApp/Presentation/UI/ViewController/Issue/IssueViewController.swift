@@ -67,9 +67,11 @@ class IssueViewController: UIViewController, IssueNetworked {
     
     private func configureRightBarButtonItem() {
         let customRightBarButton = CustomBarButtonItem(title: "선택", image: UIImage(systemName: "checkmark.circle") ?? UIImage(), located: .right)
-        customRightBarButton.addAction(UIAction(handler: { (touch) in
+        customRightBarButton.addAction(UIAction(handler: { [weak self] (touch) in
             
+            guard let self = self else { return }
             let targetVC = self.storyboard?.instantiateViewController(identifier: "IssueSelectTableViewController") as! IssueSelectTableViewController
+            targetVC.prepare(with: self.viewModel!.issues)
             self.navigationController?.pushViewController(targetVC, animated: true)
             
         }), for: .touchUpInside)
@@ -104,13 +106,14 @@ extension IssueViewController: UISearchResultsUpdating {
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         if isFiltering {
             guard let filteredIssue = viewModel?.filteredIssues else { return 0 }
             return filteredIssue.count
         }
         guard let issues = viewModel?.issues else { return 0 }
         return issues.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,7 +148,7 @@ extension IssueViewController: UITableViewDelegate {
         // close action
         let close = UIContextualAction(style: .normal,
                                         title: "닫기") { [weak self] (action, view, completionHandler) in
-//                                        self?.handleCancel()
+        // todo
                                         completionHandler(true)
         }
         close.backgroundColor = UIColor.hexString2UIColor(hexString: "#CCD4FF")

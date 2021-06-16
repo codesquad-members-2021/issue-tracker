@@ -30,9 +30,11 @@ struct Issue: Codable {
 }
 
 struct Label: Codable {
+    let id: Int
     let title, colorCode: String
 
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case colorCode = "color_code"
     }
