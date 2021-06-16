@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
-
 import { ChakraProvider } from '@chakra-ui/react';
 import customTheme from '@styles/theme';
 
