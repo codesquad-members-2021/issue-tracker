@@ -2,14 +2,14 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import { inputStyles } from './baseStyle/baseStyle';
 
-type TitleInputType = {
+type InputFieldType = {
   defaultValue?: string;
   label?: string;
   width?: string;
   [x: string]: any;
 }
 
-const TitleInput = ({ defaultValue, label, width, ...props }: TitleInputType) => {
+const InputField = ({ defaultValue, label, width, ...props }: InputFieldType) => {
   const classes = inputStyles();
   return (
     <TextField
@@ -27,4 +27,4 @@ const TitleInput = ({ defaultValue, label, width, ...props }: TitleInputType) =>
   )
 }
 
-export default TitleInput;
+export default InputField;

@@ -6,6 +6,7 @@ import { IssueListItemType } from '@components/common/types/APIType';
 import { issueCheckedItemAtom, CheckBoxItemType, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import AlertCircleIcon from '@/Icons/AlertCircle.svg';
+
 type ListItemType = {
   issueItem: IssueListItemType
 }
@@ -24,10 +25,10 @@ const ListItem = ({ issueItem }: ListItemType) => {
     })
   }, []);
 
-
   useEffect(() => {
     setCheckedState(isAllIssueChecked);
   }, [isAllIssueChecked])
+
   return (
     <ListItemWrapper>
       <LeftWrapper>

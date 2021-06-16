@@ -10,6 +10,7 @@ const IssueListLazy = React.lazy(() => import('@/Pages/IssueListPage'));
 const CreateIssueLazy = React.lazy(() => import('@/Pages/CreateIssuePage'));
 const IssueDetailLazy = React.lazy(() => import('@/Pages/IssueDetailPage'));
 const LabelListLazy = React.lazy(() => import('@/Pages/LabelListPage'));
+const MilestoneLazy = React.lazy(() => import('@/Pages/MilestoneListPage'));
 const Page404Lazy = React.lazy(() => import('@/Pages/Page404'));
 
 const routeArray = [
@@ -17,7 +18,9 @@ const routeArray = [
   { path: '/createIssue', component: CreateIssueLazy },
   { path: '/issueDetail', component: IssueDetailLazy },
   { path: '/labelList', component: LabelListLazy },
+  { path: '/milestoneList', component: MilestoneLazy }
 ];
+
 const routePaths = routeArray.map(({ path }) => path);
 function App() {
   return (
@@ -40,10 +43,15 @@ function App() {
 
 
 const GlobalStyle = createGlobalStyle`
-      body{
-        background: #F7F7FC;
-      padding: 27px 80px 0;
+  body {
+    background: #F7F7FC;
+    padding: 27px 80px 0;
   }
-      `
+  a {
+    width: inherit;
+    text-decoration: none;
+    color: inherit;
+  }
+`;
 
 export default App;

@@ -4,7 +4,7 @@ import Label from '@components/common/Label';
 import IconButton from '@components/common/IconButton';
 import { LabelItemType } from '@components/common/types/LabelType';
 
-const LabelItem = ({ name, color, description, setToggleItem }: LabelItemType) => {
+const LabelItem = ({ name, color, description, setToggleLabel }: LabelItemType) => {
   return (
     <>
       <LabelWrapper>
@@ -14,7 +14,7 @@ const LabelItem = ({ name, color, description, setToggleItem }: LabelItemType) =
         {description}
       </DescWrapper>
       <ButtonsWrapper>
-        <IconButton icon="edit" onClick={setToggleItem}>
+        <IconButton icon="edit" onClick={setToggleLabel}>
           편집
         </IconButton>
         <IconButton icon="trash">

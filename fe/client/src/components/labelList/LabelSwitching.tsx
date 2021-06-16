@@ -6,14 +6,14 @@ import { LabelSwitchType } from '@components/common/types/LabelType';
 import useToggle from '@/utils/hook/useToggle';
 
 const LabelSwitching = ({ name, color, description }: LabelSwitchType) => {
-  const [isEdit, setToggleItem] = useToggle(true);
-  
+  const [isEditLabel, setToggleLabel] = useToggle(false);
+
   return (
     <div>
       <ListItem>
-        {isEdit
-          ? <LabelItem {...{ name, color, description, setToggleItem }} />
-          : <LabelEditItem {...{ name, color, description, setToggleItem }} />
+        {isEditLabel
+          ? <LabelEditItem {...{ name, color, description, setToggleLabel }} />
+          : <LabelItem {...{ name, color, description, setToggleLabel }} />
         }
       </ListItem>
     </div>
