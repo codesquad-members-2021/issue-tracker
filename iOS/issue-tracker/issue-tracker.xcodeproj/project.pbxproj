@@ -62,7 +62,6 @@
 		D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */; };
 		D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */; };
 		D0FD50D4267192AF008C6031 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50D3267192AF008C6031 /* AddViewController.swift */; };
-		D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50DB2671AA04008C6031 /* InputView.swift */; };
 		D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -144,7 +143,6 @@
 		D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
 		D0FD50D3267192AF008C6031 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		D0FD50DB2671AA04008C6031 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E7F242466FC866CAD16EFF69 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F0166F39C919837292E32AEF /* Pods_issue_tracker_issue_trackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_tracker_issue_trackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */,
-				D0FD50DB2671AA04008C6031 /* InputView.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -608,7 +605,6 @@
 				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
 				D0A88E0F26765325005877F6 /* UIKit+Extension.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
-				D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */,
 				B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */,
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */,

@@ -29,13 +29,13 @@ class LabelTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
     }
     
     func addSubviews() {
@@ -43,7 +43,7 @@ class LabelTableViewCell: UITableViewCell {
         addSubview(labelDescription)
     }
     
-    func setAutolayout() {
+    func setupAutolayout() {
         labelView.snp.makeConstraints { view in
             view.top.equalToSuperview().offset(24)
             view.left.equalToSuperview().offset(16)
@@ -58,7 +58,7 @@ class LabelTableViewCell: UITableViewCell {
         }
     }
     
-    func setLabelCell(title: String, description: String, color: String) {
+    func setupLabelCell(title: String, description: String, color: String) {
         self.labelView.text = title
         self.labelView.backgroundColor = UIColor.hexStringToUIColor(hex: color)
         self.labelDescription.text = description

@@ -24,13 +24,13 @@ class MilestoneView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
     }
     
     func addSubviews() {
@@ -38,7 +38,7 @@ class MilestoneView: UIView {
         addSubview(milestoneTitle)
     }
     
-    func setAutolayout() {
+    func setupAutolayout() {
         sfsymbolImageView.snp.makeConstraints { imageView in
             imageView.top.leading.bottom.equalToSuperview()
             imageView.width.equalTo(sfsymbolImageView.snp.height).multipliedBy(1)

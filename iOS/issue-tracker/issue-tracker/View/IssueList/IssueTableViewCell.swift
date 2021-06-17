@@ -46,7 +46,7 @@ class IssueTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         labelsCollectionView.dataSource = self
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
         checkBoxImageView.isHidden = true
     }
     
@@ -54,7 +54,7 @@ class IssueTableViewCell: UITableViewCell {
         super.init(coder: coder)
         labelsCollectionView.dataSource = self
         addSubviews()
-        setAutolayout()
+        setupAutolayout()
         checkBoxImageView.isHidden = true
     }
     
@@ -66,7 +66,7 @@ class IssueTableViewCell: UITableViewCell {
         addSubview(checkBoxImageView)
     }
     
-    func setAutolayout() {
+    func setupAutolayout() {
         largeTitle.snp.makeConstraints { title in
             title.top.equalTo(24)
             title.leading.trailing.equalTo(16)
@@ -98,7 +98,7 @@ class IssueTableViewCell: UITableViewCell {
         }
     }
     
-    func setIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
+    func setupIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
         self.largeTitle.text = title
         self.labelDescription.text = description
         self.milestoneView.setMilestoneTitle(title: milestoneTitle)

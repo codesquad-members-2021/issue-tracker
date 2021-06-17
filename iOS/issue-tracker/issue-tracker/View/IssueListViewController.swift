@@ -26,9 +26,9 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationItem()
-        setIssueTableView()
-        setAddIssueButtonAutolayout()
+        setupNavigationItem()
+        setupIssueTableView()
+        setupAddIssueButtonAutolayout()
         filterBarButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         selectBarButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
         addIssueButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addIssueButtonTapped)))
@@ -52,7 +52,7 @@ class IssueListViewController: UIViewController {
         navigationItem.searchController = nil
         tabBarController?.tabBar.isHidden = true
         view.addSubview(issueToolbar)
-        setToolbarAutoulayout()
+        setupToolbarAutoulayout()
     }
     
     @objc func addIssueButtonTapped() {
@@ -61,12 +61,12 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func cancelButtonTapped() {
-        setNavigationItem()
+        setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
     }
     
-    func setAddIssueButtonAutolayout() {
+    func setupAddIssueButtonAutolayout() {
         view.addSubview(addIssueButton)
         addIssueButton.snp.makeConstraints { button in
             button.width.height.equalTo(64)
@@ -75,7 +75,7 @@ class IssueListViewController: UIViewController {
         }
     }
     
-    func setToolbarAutoulayout() {
+    func setupToolbarAutoulayout() {
         issueToolbar.snp.makeConstraints { toolbar in
             toolbar.leading.trailing.equalToSuperview()
             toolbar.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -83,7 +83,7 @@ class IssueListViewController: UIViewController {
         }
     }
     
-    func setNavigationItem() {
+    func setupNavigationItem() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "이슈"
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterBarButton)
@@ -91,7 +91,7 @@ class IssueListViewController: UIViewController {
         navigationItem.searchController = searchController
     }
     
-    func setIssueTableView() {
+    func setupIssueTableView() {
         issueTableView.register(IssueTableViewCell.self, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.allowsMultipleSelection = true
         issueTableView.dataSource = self
@@ -107,7 +107,7 @@ extension IssueListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-        cell.setIssueCell(title: "제목", description: "이슈에 대한 설명", milestoneTitle: "마일스톤 이름", color: "#DFCD85")
+        cell.setupIssueCell(title: "제목", description: "이슈에 대한 설명", milestoneTitle: "마일스톤 이름", color: "#DFCD85")
         return cell
     }
 }

@@ -23,7 +23,7 @@ class LabelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
+        seuptNavigationBar()
         labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
         labelTableView.dataSource = self
         addLabelButton.addTarget(self, action: #selector(addLabelButtonTapped), for: .touchUpInside)
@@ -33,7 +33,7 @@ class LabelViewController: UIViewController {
         
     }
     
-    func setNavigationBar() {
+    func seuptNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "레이블"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
@@ -47,7 +47,7 @@ extension LabelViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell() }
-        cell.setLabelCell(title: fakeData[indexPath.row].title, description: fakeData[indexPath.row].description, color: fakeData[indexPath.row].color)
+        cell.setupLabelCell(title: fakeData[indexPath.row].title, description: fakeData[indexPath.row].description, color: fakeData[indexPath.row].color)
         
         return cell
     }

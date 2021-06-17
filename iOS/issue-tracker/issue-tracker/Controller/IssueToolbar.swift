@@ -35,15 +35,15 @@ class IssueToolbar: UIToolbar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setToolbar()
+        setupToolbar()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setToolbar()
+        setupToolbar()
     }
     
-    func setToolbar() {
+    func setupToolbar() {
         let items = [checkBoxBarButtonItem, flexibleBarButtonItem, labelBarButtonItem, flexibleBarButtonItem, closeIssueBarButtonItem]
         setItems(items, animated: false)
     }

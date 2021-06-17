@@ -23,16 +23,16 @@ class LabelsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(label)
-        setAutolayout()
+        setupAutolayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubview(label)
-        setAutolayout()
+        setupAutolayout()
     }
     
-    func setAutolayout() {
+    func setupAutolayout() {
         label.snp.makeConstraints { label in
             label.edges.equalToSuperview()
         }
