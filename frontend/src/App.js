@@ -3,13 +3,11 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import LoginPage from 'page/loginPage/LoginPage';
-// import MainPage from './page/mainPage/MainPage';
-// import CreateIssuePage from 'page/createIssuePage/CreateIssuePage';
-
 function App() {
   
   const MainPage = lazy(()=>import('./page/mainPage/MainPage'))
   const CreateIssuePage = lazy(()=>import('./page/createIssuePage/CreateIssuePage'))
+  const DetailIssuePage = lazy(()=>import('./page/detailIssuePage/DetailIssuePage'))
   const isLogin = true;
   return (
     <div className='App'>
@@ -21,6 +19,7 @@ function App() {
             <Route path='/' component={LoginPage} exact />
             <Route path='/main' component={MainPage} />
             <Route path='/create' component={CreateIssuePage} />
+            <Route path='/detail' component={DetailIssuePage} />
           </Switch>
         </Suspense>
       </Router>

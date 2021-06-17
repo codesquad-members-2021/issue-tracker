@@ -25,8 +25,8 @@ const LabelBadgeBlock = styled.div<StyledProps>`
   text-align: center;
   border-radius: 30px;
   font-size: ${({ theme }) => theme.size.sm}px;
-  color: ${({ labelColor }) => labelColor.backgroundColorCode};
-  background-color: ${({ labelColor }) => labelColor.textColorCode};
+  color: ${({ labelColor }) => labelColor.textColorCode};
+  background-color: ${({ labelColor }) => labelColor.backgroundColorCode};
 `;
 
 export default LabelBadge;
