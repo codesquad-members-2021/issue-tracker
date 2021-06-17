@@ -49,4 +49,8 @@ public class MilestoneService {
         milestone.update(editedMilestone);
         milestoneRepository.save(milestone);
     }
+
+    public void delete(Long milestoneId) {
+        milestoneRepository.deleteById(milestoneId);
+    }
 }

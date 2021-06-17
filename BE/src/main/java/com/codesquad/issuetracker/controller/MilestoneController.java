@@ -27,7 +27,6 @@ public class MilestoneController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ApiResponse getMilestones() {
         final int DEFAULT_PAGE = 0;
         return ApiResponse.ok(milestoneService.getList(DEFAULT_PAGE));
@@ -42,6 +41,12 @@ public class MilestoneController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editMilestone(@NotNull @PathVariable Long milestoneId, @RequestBody EditedMilestone editedMilestone) {
         milestoneService.edit(milestoneId, editedMilestone);
+    }
+
+    @DeleteMapping("/{milestoneId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMilestone(@NotNull @PathVariable Long milestoneId){
+        milestoneService.delete(milestoneId);
     }
 
 }
