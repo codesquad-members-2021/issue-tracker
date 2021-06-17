@@ -4,13 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor
 @Builder
 @Getter
 public class UsersResponseDTO {
 
-    private final List<UserResponseDTO> users = new ArrayList<>();
+    private final List<UserResponseDTO> users;
+
+    public static UsersResponseDTO from(List<UserResponseDTO> userResponseDTOS) {
+        return  UsersResponseDTO.builder()
+                .users(userResponseDTOS)
+                .build();
+    }
 }

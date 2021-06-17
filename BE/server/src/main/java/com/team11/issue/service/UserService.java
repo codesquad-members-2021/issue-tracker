@@ -4,11 +4,17 @@ import com.team11.issue.domain.User;
 import com.team11.issue.dto.oauth.UserInfoDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
 import com.team11.issue.dto.user.LoginResponseDTO;
+import com.team11.issue.dto.user.UserResponseDTO;
+import com.team11.issue.dto.user.UsersResponseDTO;
 import com.team11.issue.exception.AccessTokenNotFoundException;
 import com.team11.issue.oauth.GitHubOauth;
 import com.team11.issue.repository.UserRepository;
 import com.team11.issue.util.JwtUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -77,5 +83,12 @@ public class UserService {
         user.removeAccessToken();
 
         userRepository.save(user);
+    }
+
+    public UsersResponseDTO userList() {
+        List<UserResponseDTO> userResponseDTOS = userRepository.findAll().stream()
+        .map(user -> UserResponseDTO.from(user))
+        .collect(Collectors.toList());
+        return UsersResponseDTO.from(userResponseDTOS);
     }
 }
