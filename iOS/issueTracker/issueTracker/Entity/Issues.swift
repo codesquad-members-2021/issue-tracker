@@ -8,5 +8,5 @@
 import Foundation
 
 struct Issues: Codable {
-    var issues: [IssueDTO]
+    var issues: [IssueResponse]
 }

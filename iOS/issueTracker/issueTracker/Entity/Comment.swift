@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Comment: Codable {
+struct Comment: Codable, Equatable {
     var authorId: Int
     var authorName: String
     var contents: String

@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Histroy: Codable {
+struct Histroy: Codable, Equatable {
+    
     var userName: String
     var historyDatetime: String
     var flag: String

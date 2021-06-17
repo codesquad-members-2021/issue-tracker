@@ -10,9 +10,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
+        
+        if KeyChainService.shared.getCurrentUserJWT() != "" {
+            let storyboard = UIStoryboard(name: "IssueList", bundle: nil)
+
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "IssueList")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
