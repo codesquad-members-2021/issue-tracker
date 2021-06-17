@@ -77,20 +77,24 @@ public class Issue {
 
         if(this.open) {
             this.milestone.countOpenIssuesUp();
-        } else {
+        }
+
+        if(!this.open) {
             this.milestone.countClosedIssuesUp();
         }
     }
 
     public void removeMilestone() {
-        if(this.open) {
-            this.milestone.countOpenIssuesDown();
-        } else {
-            this.milestone.countClosedIssuesDown();
-        }
-
         if (this.milestone == null) {
             return;
+        }
+
+        if(this.open) {
+            this.milestone.countOpenIssuesDown();
+        }
+
+        if(!this.open) {
+            this.milestone.countClosedIssuesDown();
         }
 
         this.milestone = null;
