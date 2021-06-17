@@ -43,6 +43,7 @@
 		D03AF8F626774707001C2CBF /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F526774707001C2CBF /* UserList.swift */; };
 		D03AF8F826774909001C2CBF /* MilestoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F726774909001C2CBF /* MilestoneList.swift */; };
 		D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F92677494F001C2CBF /* Comment.swift */; };
+		D04C6956267B2C560056DD79 /* ToolBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C6955267B2C560056DD79 /* ToolBarTextField.swift */; };
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
 		D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0A88E062674D9F0005877F6 /* MarkdownKit */; };
@@ -130,6 +131,7 @@
 		D03AF8F526774707001C2CBF /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		D03AF8F726774909001C2CBF /* MilestoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneList.swift; sourceTree = "<group>"; };
 		D03AF8F92677494F001C2CBF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		D04C6955267B2C560056DD79 /* ToolBarTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarTextField.swift; sourceTree = "<group>"; };
 		D0A88E0126732D21005877F6 /* NewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewController.swift; sourceTree = "<group>"; };
 		D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		B32FEAC42671DCD200BF37A1 /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
+				D04C6955267B2C560056DD79 /* ToolBarTextField.swift */,
 				B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */,
 				B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */,
 				B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */,
@@ -610,6 +613,7 @@
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */,
 				D0FD50D4267192AF008C6031 /* AddViewController.swift in Sources */,
+				D04C6956267B2C560056DD79 /* ToolBarTextField.swift in Sources */,
 				B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,

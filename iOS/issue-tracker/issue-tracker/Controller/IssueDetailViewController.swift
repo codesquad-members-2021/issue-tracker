@@ -13,35 +13,20 @@ class IssueDetailViewController: UIViewController {
     private let cellReuseIdentifier = "IssueDetailCell"
     private let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     
-    private lazy var tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 130
-        tableView.register(IssueDetailTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(IssueDetailTableViewCell.self, forCellReuseIdentifier: "IssueDetailCell")
         return tableView
     }()
-    
-    private let up = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"),
-                                     style: .plain, target: self, action: #selector(scrollToBefore))
-    
-    private let down = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
-                                       style: .plain, target: self, action: #selector(scrollToNext))
-    
-    private let textField: UITextField = {
-        let textField = UITextField(frame: .zero)
-        textField.placeholder = "코멘트를 입력하세요"
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
-        button.addTarget(self, action: #selector(postComment), for: .touchUpInside)
-        textField.rightView = button
-        textField.rightViewMode = .always
-        textField.layer.cornerRadius = 10
-        textField.layer.masksToBounds = true
-        return textField
-    }()
 
-    private lazy var toolbar: UIToolbar = {
+    private let toolbar: UIToolbar = {
         let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
-        
+        let textField = ToolBarTextField(frame: toolbar.bounds)
+        let up = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"),
+                                         style: .plain, target: self, action: #selector(scrollToBefore))
+        let down = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
+                                           style: .plain, target: self, action: #selector(scrollToNext))
         let comment = UIBarButtonItem(customView: textField)
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: comment, action: nil)
         toolbar.setItems([up, down, space, comment], animated: false)
@@ -93,12 +78,6 @@ class IssueDetailViewController: UIViewController {
               indexPath.row + 1 < data.count else { return }
         tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
                             animated: true, scrollPosition: .bottom)
-    }
-    
-    @objc
-    private func postComment() {
-        print(textField.text as Any)
-        textField.text = ""
     }
     
     @objc
