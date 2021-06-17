@@ -26,6 +26,6 @@ enum EndPoint {
     }
     
     func fullAddress(with id: Int) -> String {
-        return fullAddress() + "\(id)"
+        return fullAddress() + "/\(id)"
     }
 }

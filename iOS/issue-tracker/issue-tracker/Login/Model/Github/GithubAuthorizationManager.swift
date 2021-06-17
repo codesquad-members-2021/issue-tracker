@@ -60,10 +60,10 @@ extension GithubAuthorizationManager: SocialLoginManagable {
 
             let url = EndPoint.OAuth.fullAddress()
             let parameter = [codeKey: code]
-            let requestManager = RequestManager(url: url, parameters: parameter)
+            let requestManager = RequestManager(url: url)
             let networkmanager = NetworkManager(requestManager: requestManager)
             
-            networkmanager.get { [weak self] (result: Result<OAuthResponseDTO, NetworkError>) in
+            networkmanager.get(queryParameters: parameter) { [weak self] (result: Result<OAuthResponseDTO, NetworkError>) in
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):

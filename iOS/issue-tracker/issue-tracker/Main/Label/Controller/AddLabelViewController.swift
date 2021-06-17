@@ -238,16 +238,16 @@ final class AddLabelViewController: UIViewController {
     }
     
     private func postNewLabel(_ newLabel: NewLabelDTO) {
-        networkManager?.post(requestBody: newLabel, completion: { [weak self] error in
-            guard error != nil else {
-                self?.presentAlert(with: error!.description)
-                return
+        networkManager?.post(requestBody: newLabel, completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.dismiss(animated: true, completion: {
+                    guard let dismissOperation = self?.dismissOperation else { return }
+                    dismissOperation()
+                })
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
             }
-            
-            self?.dismiss(animated: true, completion: {
-                guard let dismissOperation = self?.dismissOperation else { return }
-                dismissOperation()
-            })
         })
     }
     
@@ -294,7 +294,7 @@ extension AddLabelViewController: LoginInfoContainer {
         guard let loginInfo = loginInfo else { return }
         let url = EndPoint.label.fullAddress()
         let headers = [Header.authorization.key(): loginInfo.jwt.description]
-        let requestManager = RequestManager(url: url, parameters: nil, headers: headers)
+        let requestManager = RequestManager(url: url, headers: headers)
         networkManager = NetworkManager(requestManager: requestManager)
     }
 }

@@ -11,22 +11,21 @@ import Alamofire
 final class RequestManager {
     
     private var url: String
-    private var parameters: [String: Any]?
     private var headers: HTTPHeaders?
+    private let successCodeRange = 200..<300
     
-    init(url: String, parameters: [String: Any]? = nil, headers: [String: String]? = nil) {
+    init(url: String, headers: [String: String]? = nil) {
         self.url = url
-        self.parameters = parameters
         self.headers = HTTPHeaders(headers ?? [:])
     }
     
-    func create(method: HTTPMethod, parameters: [String: Any]? = nil) -> DataRequest {
-        let params = parameters != nil ? parameters : self.parameters
-    
+    func create(method: HTTPMethod, queryParameters: [String: Any]?) -> DataRequest {
         return AF.request(self.url,
                           method: method,
-                          parameters: params,
+                          parameters: queryParameters,
+                          encoding: URLEncoding.queryString,
                           headers: self.headers)
+            .validate(statusCode: successCodeRange)
     }
     
     func create<T: Encodable>(method: HTTPMethod, encodableParameters: T) -> DataRequest {
@@ -35,6 +34,6 @@ final class RequestManager {
                           parameters: encodableParameters,
                           encoder: JSONParameterEncoder(),
                           headers: self.headers)
+            .validate(statusCode: successCodeRange)
     }
-    
 }
