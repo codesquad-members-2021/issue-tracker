@@ -22,6 +22,7 @@
 		B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FEACD267260E400BF37A1 /* AddIssueButton.swift */; };
 		B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */; };
 		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
+		B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */; };
 		B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB57267840290060DC85 /* LabelListViewModel.swift */; };
 		B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB5A26784AA50060DC85 /* LabelList.swift */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
@@ -33,6 +34,9 @@
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
 		B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C3267735CC000F02F4 /* IssueList.swift */; };
 		B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C826773AEA000F02F4 /* NewIssue.swift */; };
+		B3E01193267A0B44001155D4 /* AddLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */; };
+		B3E01196267A28B2001155D4 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = B3E01195267A28B2001155D4 /* MarkdownKit */; };
+		B3E01198267A29E8001155D4 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E01197267A29E8001155D4 /* AddTableViewCell.swift */; };
 		B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */; };
 		B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */; };
 		B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */; };
@@ -103,6 +107,7 @@
 		B32FEACD267260E400BF37A1 /* AddIssueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIssueButton.swift; sourceTree = "<group>"; };
 		B349997C266F8D0B0091A44A /* GitHubLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginButton.swift; sourceTree = "<group>"; };
 		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
+		B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedLabelView.swift; sourceTree = "<group>"; };
 		B3A5CB57267840290060DC85 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		B3A5CB5A26784AA50060DC85 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +126,8 @@
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D7D0C3267735CC000F02F4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		B3D7D0C826773AEA000F02F4 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
+		B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLabelViewModel.swift; sourceTree = "<group>"; };
+		B3E01197267A29E8001155D4 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
 		B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionView.swift; sourceTree = "<group>"; };
 		B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -162,6 +169,7 @@
 				9F61736E94FA27116F3653A8 /* Pods_issue_tracker.framework in Frameworks */,
 				D0ADB6D5266F4F3D00E0762C /* RxSwift in Frameworks */,
 				D0ADB6CC266F4F1C00E0762C /* Alamofire in Frameworks */,
+				B3E01196267A28B2001155D4 /* MarkdownKit in Frameworks */,
 				D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A5CB57267840290060DC85 /* LabelListViewModel.swift */,
+				B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -366,6 +375,8 @@
 				D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */,
 				B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */,
 				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
+				B3E01197267A29E8001155D4 /* AddTableViewCell.swift */,
+				B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -415,6 +426,7 @@
 				D0ADB6D0266F4F3D00E0762C /* RxCocoa */,
 				D0ADB6D4266F4F3D00E0762C /* RxSwift */,
 				D0ADB6D6266F4F4700E0762C /* SnapKit */,
+				B3E01195267A28B2001155D4 /* MarkdownKit */,
 			);
 			productName = "issue-tracker";
 			productReference = B3B559DD266E095E00901C55 /* issue-tracker.app */;
@@ -493,6 +505,7 @@
 				B3B55A10266E0C8600901C55 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B3B55A13266E0D5600901C55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				B3F50EE7266E12340009C260 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B3E01194267A28B1001155D4 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
 			);
 			productRefGroup = B3B559DE266E095E00901C55 /* Products */;
 			projectDirPath = "";
@@ -642,10 +655,13 @@
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */,
+				B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */,
 				D03AF8F42677253C001C2CBF /* IssueFilterViewController.swift in Sources */,
 				D0ADB694266F0A5000E0762C /* Endpoint.swift in Sources */,
 				B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */,
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
+				B3E01193267A0B44001155D4 /* AddLabelViewModel.swift in Sources */,
+				B3E01198267A29E8001155D4 /* AddTableViewCell.swift in Sources */,
 				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
 				B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */,
 				B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */,
@@ -1008,6 +1024,14 @@
 				minimumVersion = 6.2.0;
 			};
 		};
+		B3E01194267A28B1001155D4 /* XCRemoteSwiftPackageReference "MarkdownKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bmoliveira/MarkdownKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 		B3F50EE7266E12340009C260 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1019,6 +1043,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B3E01195267A28B2001155D4 /* MarkdownKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3E01194267A28B1001155D4 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
+			productName = MarkdownKit;
+		};
 		D0ADB6CB266F4F1C00E0762C /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3B55A10266E0C8600901C55 /* XCRemoteSwiftPackageReference "Alamofire" */;
