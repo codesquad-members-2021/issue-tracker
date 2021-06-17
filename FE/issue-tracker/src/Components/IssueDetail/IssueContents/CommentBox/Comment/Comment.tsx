@@ -8,9 +8,10 @@ import { IssueDetail as S } from "@/Components/IssueDetail/IssueDetailStyles";
 interface Props {
   comment: any;
   isShow: boolean;
+  editComment: string;
 }
 
-const Comment = ({ isShow, comment }: Props) => {
+const Comment = ({ isShow, comment, editComment }: Props) => {
   return (
     <S.Comment data-is-show={isShow}>
       <S.CommentUpper>
@@ -24,7 +25,7 @@ const Comment = ({ isShow, comment }: Props) => {
           <SentimentSatisfiedIcon />
         </S.RightWrapper>
       </S.CommentUpper>
-      <S.CommentBottom>{comment.content}</S.CommentBottom>
+      <S.CommentBottom source={editComment} />
     </S.Comment>
   );
 };

@@ -24,9 +24,10 @@ const IssueControlButton = ({ innerText }: Props) => {
         // 이슈 업데이트 api 사용
       }
       setEditTitleFlag((prev) => !prev);
-    } else {
+    } else if (editButton === "이슈 닫기") {
       // 이슈 닫기이면 이슈 닫기 api
-      return;
+    } else {
+      // 이슈 열기이면 이슈 열기 api
     }
   };
 

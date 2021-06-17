@@ -70,3 +70,8 @@ export const editCommentBoxState = atom({
   key: "editCommentBoxState",
   default: { isShow: false, id: 0 },
 });
+
+export const newCommentState = atom({
+  key: "newCommentState",
+  default: "",
+});

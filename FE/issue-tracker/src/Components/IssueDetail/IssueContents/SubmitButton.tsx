@@ -7,9 +7,14 @@ import { IssueDetail as S } from "@/Components/IssueDetail/IssueDetailStyles";
 
 interface Props {
   innerText: string;
+  commentId?: number;
+  editComment?: string;
+  issueNumber?: number;
+  newComment?: string;
+  disabled?: boolean;
 }
 
-const SubmitButton = ({ innerText }: Props) => {
+const SubmitButton = ({ innerText, disabled }: Props) => {
   const [editCommentBox, setEditCommentBox] =
     useRecoilState(editCommentBoxState);
   const makeButton = () => {
@@ -17,8 +22,12 @@ const SubmitButton = ({ innerText }: Props) => {
       return (
         <S.IssueSubmitButton
           data-is-outlined={false}
+          disabled={disabled}
           variant="contained"
           color="primary"
+          onClick={() => {
+            // POST(issueNumber,newComment)
+          }}
         >
           <AddIcon />
           코멘트 작성
@@ -28,8 +37,13 @@ const SubmitButton = ({ innerText }: Props) => {
       return (
         <S.IssueSubmitButton
           data-is-outlined={false}
+          disabled={disabled}
           variant="contained"
           color="primary"
+          onClick={
+            () => setEditCommentBox({ ...editCommentBox, isShow: false })
+            // PATCH(commentId,editComment)
+          }
         >
           <BorderColorIcon />
           편집 완료

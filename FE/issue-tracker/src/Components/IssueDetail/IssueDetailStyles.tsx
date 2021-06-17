@@ -4,15 +4,15 @@ import theme from "@/Styles/theme";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
+import MDEditor from "@uiw/react-md-editor";
 
 const IssueDetail = {
   IssueDetail: styled.div`
     width: 100%;
-    margin-top: 30px;
   `,
   IssueDetailHeader: styled.div`
     width: 100%;
-    padding: 30px 0px;
+    padding-bottom: 30px;
     border-bottom: 1px solid ${theme.GRAY_SCALE.LINE};
   `,
   HeaderUpper: styled(BOX.FLEX_ROW_BOX)`
@@ -83,6 +83,9 @@ const IssueDetail = {
     color: ${(props) =>
       props["data-is-outlined"] ? theme.COLOR.BLUE : theme.COLOR.WHITE};
     padding: 10px 24px;
+    :disabled {
+      border: 2px solid ${theme.GRAY_SCALE.LINE};
+    }
   `,
   CommentBox: styled(BOX.FLEX_ROW_BOX)`
     width: 100%;
@@ -112,7 +115,7 @@ const IssueDetail = {
     border-radius: 16px 16px 0px 0px;
     border-bottom: 1px solid ${theme.GRAY_SCALE.LINE};
   `,
-  CommentBottom: styled.div`
+  CommentBottom: styled(MDEditor.Markdown)`
     width: 100%;
     padding: 18px 24px;
     border-radius: 0px 0px 16px 16px;

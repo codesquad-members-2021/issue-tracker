@@ -14,11 +14,10 @@ const Home = {
   HomeContent: styled(BOX.FLEX_COLUMN_BOX)`
     width: 100%;
     height: fit-content;
-    padding: 0 80px;
   `,
   ContentNavDiv: styled(BOX.FLEX_ROW_BOX)`
     justify-content: space-between;
-    margin: 30px 0;
+    margin-bottom: 30px;
   `,
 
   ContentNavLeft: styled(BOX.FLEX_ROW_BOX)`
