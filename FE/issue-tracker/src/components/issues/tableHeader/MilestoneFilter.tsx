@@ -1,3 +1,5 @@
+import { useRecoilState } from 'recoil';
+
 import {
   Menu,
   MenuButton,
@@ -6,22 +8,23 @@ import {
   Button,
   Checkbox,
 } from '@chakra-ui/react';
-
 import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
 import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
-
-import MenuTitle from '@components/common/MenuTitle';
 import { menuBtnStyle } from './style';
 
+import { milestoneFilterList } from '@store/atoms/issueFilter';
+
+import MenuTitle from '@components/common/MenuTitle';
+import { fetchOnMouseEnter } from '@utils/fetchOnEnter';
+
 function MilestoneFilter() {
-  const query = 'milestones';
-  const fetchOnMouseEnter = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    query: string
-  ) => {};
+  const [milestoneList, setMilestoneList] = useRecoilState(milestoneFilterList);
+  const { data } = milestoneList;
 
   return (
-    <div onMouseEnter={(e) => fetchOnMouseEnter(e, query)}>
+    <div
+      onMouseEnter={() => fetchOnMouseEnter(milestoneList, setMilestoneList)}
+    >
       <Menu>
         <MenuButton
           className="menu-title"
@@ -33,14 +36,14 @@ function MilestoneFilter() {
         </MenuButton>
         <MenuList>
           <MenuTitle>마일스톤 필터</MenuTitle>
-          <MenuItem {...menuItemStyle}>
-            마일스톤 없는 필터
-            <Checkbox {...checkBoxStyle} />
-          </MenuItem>
-          <MenuItem {...menuItemStyle}>
-            마스터즈 코스
-            <Checkbox {...checkBoxStyle} />
-          </MenuItem>
+          {data.map(({ id, title }) => {
+            return (
+              <MenuItem key={id} {...menuItemStyle}>
+                {title}
+                <Checkbox {...checkBoxStyle} />
+              </MenuItem>
+            );
+          })}
         </MenuList>
       </Menu>
     </div>

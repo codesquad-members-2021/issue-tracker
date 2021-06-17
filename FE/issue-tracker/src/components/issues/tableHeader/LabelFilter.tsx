@@ -1,3 +1,5 @@
+import { useRecoilState } from 'recoil';
+
 import {
   Menu,
   MenuButton,
@@ -6,39 +8,43 @@ import {
   Button,
   Checkbox,
 } from '@chakra-ui/react';
-
-import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
-import MenuTitle from '@components/common/MenuTitle';
 import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
+import { ReactComponent as DropDownIcon } from '@assets/dropDown.svg';
 import { menuBtnStyle } from './style';
 
+import { labelFilterList } from '@store/atoms/issueFilter';
+import { fetchOnMouseEnter } from '@utils/fetchOnEnter';
+
+import MenuTitle from '@components/common/MenuTitle';
+
 function LabelFilter() {
+  const [labelList, setLabelList] = useRecoilState(labelFilterList);
+  const { data } = labelList;
+
   return (
-    <Menu>
-      <MenuButton
-        className="menu-title"
-        {...menuBtnStyle}
-        as={Button}
-        rightIcon={<DropDownIcon />}
-      >
-        레이블
-      </MenuButton>
-      <MenuList>
-        <MenuTitle>레이블 필터</MenuTitle>
-        <MenuItem {...menuItemStyle}>
-          <span>레이블이 없는 이슈</span>
-          <Checkbox {...checkBoxStyle} />
-        </MenuItem>
-        <MenuItem {...menuItemStyle}>
-          color Bug
-          <Checkbox {...checkBoxStyle} />
-        </MenuItem>
-        <MenuItem {...menuItemStyle}>
-          color documentation
-          <Checkbox {...checkBoxStyle} />
-        </MenuItem>
-      </MenuList>
-    </Menu>
+    <div onMouseEnter={() => fetchOnMouseEnter(labelList, setLabelList)}>
+      <Menu>
+        <MenuButton
+          className="menu-title"
+          {...menuBtnStyle}
+          as={Button}
+          rightIcon={<DropDownIcon />}
+        >
+          레이블
+        </MenuButton>
+        <MenuList>
+          <MenuTitle>레이블 필터</MenuTitle>
+          {data.map(({ id, title }) => {
+            return (
+              <MenuItem key={id} {...menuItemStyle}>
+                {title}
+                <Checkbox {...checkBoxStyle} />
+              </MenuItem>
+            );
+          })}
+        </MenuList>
+      </Menu>
+    </div>
   );
 }
 
