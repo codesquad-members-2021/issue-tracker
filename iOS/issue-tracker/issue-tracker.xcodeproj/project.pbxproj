@@ -44,6 +44,7 @@
 		D03AF8F826774909001C2CBF /* MilestoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F726774909001C2CBF /* MilestoneList.swift */; };
 		D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F92677494F001C2CBF /* Comment.swift */; };
 		D04C694E267A35960056DD79 /* MilestoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C694D267A35960056DD79 /* MilestoneViewModel.swift */; };
+		D04C6950267A389D0056DD79 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C694F267A389D0056DD79 /* AddTableViewCell.swift */; };
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
 		D0A88E072674D9F0005877F6 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0A88E062674D9F0005877F6 /* MarkdownKit */; };
@@ -132,6 +133,7 @@
 		D03AF8F726774909001C2CBF /* MilestoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneList.swift; sourceTree = "<group>"; };
 		D03AF8F92677494F001C2CBF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		D04C694D267A35960056DD79 /* MilestoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewModel.swift; sourceTree = "<group>"; };
+		D04C694F267A389D0056DD79 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		D0A88E0126732D21005877F6 /* NewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewController.swift; sourceTree = "<group>"; };
 		D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				D0A88E102676563E005877F6 /* Modal.storyboard */,
 				D03AF8F126771FA3001C2CBF /* Login.storyboard */,
 				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
+				D04C694F267A389D0056DD79 /* AddTableViewCell.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
 				B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */,
+				D04C6950267A389D0056DD79 /* AddTableViewCell.swift in Sources */,
 				D03AF8F626774707001C2CBF /* UserList.swift in Sources */,
 				B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */,
 				D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */,

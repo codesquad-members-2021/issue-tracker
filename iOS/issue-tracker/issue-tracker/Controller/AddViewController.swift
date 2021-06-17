@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class AddViewController: UIViewController {
-    private let cellReuseIdentifier = "AddViewControllerCell"
+
+    private let disposeBag = DisposeBag()
+    private let viewModel: MilestoneViewModel! = MilestoneViewModel()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.reuseIdentifier)
         return tableView
     }()
 
@@ -26,15 +30,30 @@ class AddViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                                  style: .plain,
                                                                  target: self,
-                                                                 action: nil)
+                                                                 action: #selector(didTapSave))
         
         tableView.dataSource = self
+        tableView.frame = view.bounds
+        
         view.addSubview(tableView)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+    @objc
+    private func didTapSave() {
+        // 저장을 눌렀을 때 텍스트 필드의 값들을 post
+        let urlString = "https://77b8f295-a324-4645-9ff3-3d93eaf7b630.mock.pstmn.io/milestone"
+        let url = URL(string: urlString)!
+        
+        print(viewModel.model)
+        let new = Milestone(id: 1, title: viewModel.model["제목"]!,
+                            description: viewModel.model["설명"],
+                            createdTime: nil,
+                            dueDate: viewModel.model["완료일"],
+                            closedIssueCount: nil,
+                            openedIssueCount: nil)
+        NetworkManager().postRequest(url: url, encodable: new) { milestone in
+            print(milestone)
+        }
     }
 }
 
@@ -44,21 +63,26 @@ extension AddViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-        let textField = UITextField(frame: CGRect(x: cell.frame.origin.x + 120, y: cell.frame.origin.y, width: cell.frame.width - 140, height: 44))
-        cell.contentView.addSubview(textField)
-        switch indexPath.row {
-        case 0:
-            cell.textLabel?.text = "제목"
-            return cell
-        case 1:
-            cell.textLabel?.text = "설명"
-            return cell
-        case 2:
-            cell.textLabel?.text = "완료일"
-            return cell
-        default:
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.reuseIdentifier, for: indexPath) as? AddTableViewCell else {
             fatalError()
         }
+        if indexPath.row == 1 {
+            cell.becomeFirstResponder()
+        }
+        let textLabel = ["제목", "설명", "완료일"]
+        cell.textLabel?.text = textLabel[indexPath.row]
+        cell.bind { textField in
+            textField.rx.text
+                .orEmpty
+                .observe(on: MainScheduler.instance)
+                .distinctUntilChanged()
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .subscribe(onNext: { text in
+                    let key = textLabel[indexPath.row]
+                    self.viewModel.model[key] = text
+                })
+                .disposed(by: disposeBag)
+        }
+        return cell
     }
 }
