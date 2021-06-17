@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Menu, MenuButton, Button } from '@chakra-ui/react';
 
@@ -5,8 +6,15 @@ import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import Label from '@components/common/Label';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import LabelModal from './LabelModal';
+import { fetchModal } from '@utils/fetchModal';
 
 function SelectLabel() {
+  const [labels, setLabels] = useState(null);
+
+  const handleClickLabels = () => {
+    fetchModal({ path: 'labels', setState: setLabels });
+  };
+
   return (
     <Wrap>
       <Menu>
@@ -16,10 +24,11 @@ function SelectLabel() {
           rightIcon={<PlusIcon />}
           textAlign="left"
           _focus={{ border: 0 }}
+          onClick={handleClickLabels}
         >
           레이블
         </MenuButton>
-        <LabelModal />
+        <LabelModal labels={labels} />
       </Menu>
       <AddList>
         <li>

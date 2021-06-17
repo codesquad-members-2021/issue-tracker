@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Menu, MenuButton, Button, Progress } from '@chakra-ui/react';
 
@@ -5,8 +6,15 @@ import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import { progressBar } from '../style';
 import MilestoneModal from './MilestoneModal';
+import { fetchModal } from '@utils/fetchModal';
 
 function SelectMilestone() {
+  const [milestones, setMilestones] = useState(null);
+
+  const handleClickMilestone = () => {
+    fetchModal({ path: 'milestones', setState: setMilestones });
+  };
+
   return (
     <Wrap>
       <Menu>
@@ -16,10 +24,11 @@ function SelectMilestone() {
           rightIcon={<PlusIcon />}
           textAlign="left"
           _focus={{ border: 0 }}
+          onClick={handleClickMilestone}
         >
           마일스톤
         </MenuButton>
-        <MilestoneModal />
+        <MilestoneModal milestones={milestones} />
       </Menu>
       <AddList>
         <li>

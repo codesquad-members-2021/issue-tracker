@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Menu, MenuButton, Button } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/avatar';
@@ -5,8 +6,15 @@ import { Avatar } from '@chakra-ui/avatar';
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import AssigneeModal from './AssigneeModal';
+import { fetchModal } from '@utils/fetchModal';
 
 function SelectAssignee() {
+  const [assignees, setAssignees] = useState(null);
+
+  const handleClickAssignee = () => {
+    fetchModal({ path: 'assignees', setState: setAssignees });
+  };
+
   return (
     <Wrap>
       <Menu>
@@ -16,10 +24,11 @@ function SelectAssignee() {
           rightIcon={<PlusIcon />}
           textAlign="left"
           _focus={{ border: 0 }}
+          onClick={handleClickAssignee}
         >
           담당자
         </MenuButton>
-        <AssigneeModal />
+        <AssigneeModal assignees={assignees} />
       </Menu>
       {/* ----사용자가 선택한 것들을 렌더링---- */}
       <AddList>
