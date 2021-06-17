@@ -100,9 +100,9 @@ public class IssueController {
 
     @LoginRequired
     @PostMapping("/{issueId}/comments")
-    public void createComment(@UserId Long userId, @PathVariable Long issueId, @RequestBody CommentDTO comment) {
+    public CommentDTO createComment(@UserId Long userId, @PathVariable Long issueId, @RequestBody CommentDTO comment) {
         logger.debug("이슈의 코멘트 생성");
-        issueService.createComment(userId, issueId, comment);
+        return issueService.createComment(userId, issueId, comment);
     }
 
     @LoginRequired
