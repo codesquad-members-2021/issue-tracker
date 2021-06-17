@@ -33,7 +33,7 @@ class JWTManagerTest: XCTestCase {
     
     func test_jwt_get_success() {
         let jwtManager = JWTManager()
-        let status = jwtManager.set(jwt: "1234")
+        var _ = jwtManager.set(jwt: "1234")
         let get = jwtManager.get()
         
         XCTAssertEqual(get, "1234")
@@ -41,7 +41,7 @@ class JWTManagerTest: XCTestCase {
     
     func test_jwt_get_failure() {
         let jwtManager = JWTManager()
-        let status = jwtManager.set(jwt: "1234")
+        var _ = jwtManager.set(jwt: "1234")
         let get = jwtManager.get()
         
         XCTAssertNotEqual(get, "234")

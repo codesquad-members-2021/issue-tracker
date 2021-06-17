@@ -91,7 +91,7 @@ class IssueListViewController: UIViewController {
     
     //MARK: - TableView Cell Swipe Action Method
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "삭제", handler: { (action, view, success) in
+        let action = UIContextualAction(style: .normal, title: "삭제", handler: { (_, _, success) in
             
             self.issueTableView.deleteRows(at: [indexPath], with: .automatic)
             success(true)
@@ -102,8 +102,8 @@ class IssueListViewController: UIViewController {
     }
     
     func closeAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (action, view, success) in
-            
+        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, success) in
+            success(true)
         })
         action.image = UIImage(systemName: "archivebox")
         
