@@ -20,22 +20,29 @@ export const filterAtom = atom<FilterBooleanType>({
   }
 })
 
-export type FilterStringType = {
-  issue: string;
-  manager: string;
-  label: string;
-  milestone: string;
-  writer: string;
+export type FilterRadioButtonListType = {
+  [key: string]: { name: string, info: any }
 }
 
-export const filterDefaultCheckerAtom = atom<FilterStringType>({
+export const filterRadioButtonListAtom = atom<FilterRadioButtonListType>({
   key: 'filterDefaultCheckerAtom',
   default: {
-    issue: '',
-    manager: '',
-    label: '',
-    milestone: '',
-    writer:'' 
+    issue: { name: '', info: {} },
+    manager: { name: '', info: {} },
+    label: { name: '', info: {} },
+    milestone: { name: '', info: {} },
+    writer: { name: '', info: {} }
   }
 })
 
+export type FilterCheckboxListType = {
+  manager: string[];
+  label: string[];
+  milestone: string[];
+  [key: string]: string[];
+}
+
+export const filterCheckboxListAtom = atom<FilterCheckboxListType>({
+  key: 'filterCheckboxListAtom',
+  default: { manager: [], label: [], milestone: [] }
+});

@@ -30,6 +30,7 @@ const HeadContent = ({ handleClickShowFilterModal }: HeadContentType) => {
               style={{ transform: 'translateY(3px)' }} />
           </div>
           <FilterTab
+            inputType='radio'
             header="issue"
             filterList={issueFilterList} />
         </FilterButton>
