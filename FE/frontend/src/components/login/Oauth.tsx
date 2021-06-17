@@ -32,7 +32,6 @@ const Oauth: React.FC<Props> = ({ history, location }) => {
     getToken();
   }, [location, history]);
 
-  history.push('/main');
   return <Main />;
 };
 

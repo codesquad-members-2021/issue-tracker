@@ -3,15 +3,9 @@ import styled from 'styled-components';
 import Typos from '../../styles/atoms/Typos';
 import Buttons from '../../styles/atoms/Buttons';
 import { ReactComponent as Logo } from '../../icons/logoLarge.svg';
-import { useHistory } from 'react-router';
 
 const Login = () => {
-  const history = useHistory();
   const url = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://localhost:3000/login/github`;
-
-  if (localStorage.getItem('token')) {
-    history.push('/main');
-  }
 
   return (
     <LoginWrapper>

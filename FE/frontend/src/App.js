@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './components/login/Login';
 import Main from './components/main/Main';
 import Oauth from './components/login/Oauth';
+import { Redirect } from 'react-router';
 
 const queryClient = new QueryClient();
 function App() {
@@ -18,7 +19,13 @@ function App() {
           <RecoilRoot>
             <BrowserRouter>
               <Switch>
-                <Route path="/" exact component={Login} />
+                <Route exact path="/">
+                  {localStorage.getItem('token') ? (
+                    <Redirect to="/main" />
+                  ) : (
+                    <Login />
+                  )}
+                </Route>
                 <Route path="/login/github" component={Oauth} />
                 <Route path="/main" component={Main} />
               </Switch>
