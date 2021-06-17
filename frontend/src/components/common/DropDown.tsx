@@ -13,7 +13,7 @@ const DropDown = ({ info }) => {
   return (
     <DropdownLayout alignment={info.alignment}>
       <DropdownButton onClick={handleDropDownButtonClick}> 
-        {info.name}
+        {info.icon && info.icon()}<DropdownButtonText>{info.name}</DropdownButtonText>
       </DropdownButton>
       {isClicked && 
       
@@ -40,11 +40,17 @@ const DropdownLayout = styled.div<any>`
 `;
 const DropdownButton = styled.button`
   padding: 0 30px;
-  background: #F7F7FC;
-  border: 1px solid #D9DBE9;
-  border-radius: 11px 0px 0px 11px;
+  border: none;
+  background-color: rgba( 255, 255, 255, 0 );
+  /* background: #F7F7FC; */
+  /* border: 1px solid #D9DBE9;
+  border-radius: 11px 0px 0px 11px; */
   
+  display: flex;
   flex-basis: 120px;
+  align-items: center;
+
+  span { margin-left: 10px; white-space:nowrap; }
 `;
 
 const DropDownLayer = styled.div<any>`
@@ -54,7 +60,7 @@ const DropDownLayer = styled.div<any>`
   
   /* background: #D9DBE9; */
   border: 1px solid #D9DBE9;
-  border-radius: 16px;
+  border-radius: 16px !important;
 
   ul {
     list-style-type: none;
@@ -93,6 +99,9 @@ const DropdownElement = styled.li`
   }
 `;
 
+const DropdownButtonText = styled.span`
+  cursor: pointer;
+`;
 const Radio = styled.input``
 
 export default DropDown;
