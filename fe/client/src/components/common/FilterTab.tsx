@@ -52,6 +52,7 @@ const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
             [header]: [...state[header].slice(0, presentIndex), ...state[header].slice(presentIndex + 1)]
           }
         }
+        if (header === 'milestone') return { ...state, [header]: [{ name, info }] };
         return { ...state, [header]: [{ name, info }, ...state[header]] }
       });
     }

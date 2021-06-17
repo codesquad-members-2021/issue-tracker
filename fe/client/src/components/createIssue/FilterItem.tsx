@@ -22,19 +22,36 @@ const FilterItem = ({ header }: { header: string }) => {
 
   return (
     <>
-      <CheckedItemWrapper>
-        <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" alt="" />
-        <span>Oni</span>
-      </CheckedItemWrapper>
+      {header === 'manager' && checkedItems[header].length
+        ? checkedItems[header].map(({ name, info }: { name: string, info: any }) => {
+          return <CheckedItemWrapper key={name}>
+            <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" alt="" />
+            <span>{name}</span>
+          </CheckedItemWrapper>
+        })
+        : null
+      }
 
-      <CheckedItemWrapper>
-        <Label name='라벨네임' color='#0049' />
-      </CheckedItemWrapper>
+      {header === 'label' && checkedItems[header].length
+        ? checkedItems[header].map(({ name, info: { color } }: { name: string, info: any }) => {
+          return <CheckedItemWrapper key={name}>
+            <Label name={name} color={color} />
+          </CheckedItemWrapper>
+        })
+        : null
+      }
 
-      <ProgressBarWrapper>
-        <ProgressBar variant="determinate" value={50} />
-        <span>마스터즈 코스</span>
-      </ProgressBarWrapper>
+      {header === 'milestone' && checkedItems[header].length
+        ? checkedItems[header].map(({ name, info }: { name: string, info: any }) => {
+          const { openedIssueCount, closedIssueCount } = info;
+          const allIssueCount = openedIssueCount + closedIssueCount;
+          return <ProgressBarWrapper key={name}>
+            <ProgressBar variant="determinate" value={openedIssueCount / allIssueCount * 100} />
+            <span>{name}</span>
+          </ProgressBarWrapper>
+        })
+        : null
+      }
 
       {data && <FilterTab
         {...{ header }}

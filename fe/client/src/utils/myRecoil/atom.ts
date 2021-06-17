@@ -1,4 +1,4 @@
-type AtomType<T> = {
+export type AtomType<T> = {
   key: string;
   default: T;
 }

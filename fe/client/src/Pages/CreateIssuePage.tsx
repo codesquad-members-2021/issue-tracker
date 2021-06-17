@@ -1,15 +1,12 @@
 import HeadContent from '@components/createIssue/HeadContent';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
 import Tabs from '@components/createIssue/Tabs';
 import TitleInput from '@components/createIssue/TitleInput';
+import SendButton from '@components/createIssue/SendButton';
 import IconButton from '@components/common/IconButton';
-import { inputStyles } from '@components/common/baseStyle/baseStyle';
 
 const CreateIssuePage = () => {
-  const classes = inputStyles();
-
   return (
     <>
       <HeadContent />
@@ -26,9 +23,7 @@ const CreateIssuePage = () => {
             <FontBold>작성취소</FontBold>
           </IconButton>
         </Link>
-        <Button color="primary"
-          variant="contained"
-          className={classes.button}>완료</Button>
+        <SendButton />
       </BottomContents>
     </>
   )
