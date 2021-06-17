@@ -4,9 +4,8 @@ import { Avatar } from '@chakra-ui/avatar';
 import { ReactComponent as MilestoneIcon } from '@assets/milestone.svg';
 
 import Label from '@components/common/Label';
-import type { IssueInfo } from './IssueTable';
+import type { IssueInfo } from './IssueList';
 
-import { pipe } from '@utils/pipe';
 import {
   checkIfDayPassedFromCreation,
   getCreatedTime,
@@ -15,6 +14,7 @@ import {
   getTime,
   getTotalMinutesBetweenGap,
 } from '@utils/renderTimeText';
+import pipe from '@utils/pipe';
 
 type Props = {
   info: IssueInfo;
@@ -33,9 +33,7 @@ function Issue({ info }: Props) {
   } = info;
   const defaultAvatarPosition = '32px';
 
-  const getCurrentTime = () => new Date().getTime();
-
-  const currentTime = getCurrentTime();
+  const currentTime = new Date().getTime();
   const noticeTimePassed = pipe(
     getCreatedTime,
     getTimeGapFromCreation(currentTime),
@@ -43,7 +41,7 @@ function Issue({ info }: Props) {
     checkIfDayPassedFromCreation,
     getTime,
     getRenderingText
-  )('2021-06-17 18:30');
+  )(created_time);
 
   return (
     <IssueWrap>
