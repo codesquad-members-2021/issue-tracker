@@ -1,5 +1,5 @@
+import React from 'react';
 import styled from 'styled-components';
-import React, { ReactElement } from 'react';
 import LoginLogo from 'page/loginPage/loginLogo/LoginLogo';
 import SocialLoginBtn from 'page/loginPage/socialLoginBtn/SocialLoginBtn';
 import LoginForm from 'page/loginPage/loginForm/LoginForm';
@@ -7,7 +7,7 @@ import Copyright from 'components/common/Copyright';
 
 interface Props {}
 
-export default function LoginPage({}: Props): ReactElement {
+export default function LoginPage({}: Props) {
   return (
     <LoginPageBlock>
       <div className='social-login'>
