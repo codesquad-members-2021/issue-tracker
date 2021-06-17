@@ -32,6 +32,12 @@ public class Milestone {
     @Column(name = "MILESTONE_DUE_DATE")
     private LocalDate dueDate;
 
+    @Column(name = "MILESTONE_OPEN_ISSUES")
+    private int openIssues = 0;
+
+    @Column(name = "MILESTONE_CLOSED_ISSUES")
+    private int closedIssues = 0;
+
     private Milestone(@NonNull String title, @NonNull String description, LocalDate dueDate) {
         this.title = title;
         this.description = description;

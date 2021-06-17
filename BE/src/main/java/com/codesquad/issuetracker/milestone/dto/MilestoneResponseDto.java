@@ -23,11 +23,18 @@ public class MilestoneResponseDto {
 
     private final LocalDate dueDate;
 
-    public static MilestoneResponseDto fromEntity (Milestone entity) {
+    private final int openIssues;
+
+    private final int closedIssues;
+
+    public static MilestoneResponseDto fromEntity(Milestone entity) {
         return new MilestoneResponseDto(entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
-                entity.getDueDate());
+                entity.getDueDate(),
+                entity.getOpenIssues(),
+                entity.getClosedIssues()
+        );
     }
 
     @Override
