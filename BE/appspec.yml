@@ -1,18 +1,15 @@
 version: 0.0
-
 os: linux
 
 files:
   - source: /
     destination: /home/ubuntu/issue-tracker
-    overwrite: yes
 
 permissions:
   - object: /home/ubuntu/issue-tracker
     owner: ubuntu
     group: ubuntu
     mode: 755
-
 hooks:
   AfterInstall:
     - location: deploy.sh
