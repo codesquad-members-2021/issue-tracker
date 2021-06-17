@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 import LogIn from './components/layout/LogIn';
-import Callback from './components/Callback';
+import Authentication from './components/Authentication';
 import Header from './components/layout/Header';
 import IssueList from './components/layout/IssueList';
 import IssueAdd from './components/layout/IssueAdd';
@@ -27,7 +27,7 @@ function App(): JSX.Element {
             )}
           </Route>
           <Route exact path="/login" component={LogIn} />
-          <Route exact path="/callback" component={Callback} />
+          <Route exact path="/callback" component={Authentication} />
           <Route path="/main" component={Header} />
           <Route exact path="/main/issue-list" component={IssueList} />
           <Route exact path="/main/issue-add" component={IssueAdd} />

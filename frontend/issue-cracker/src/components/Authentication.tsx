@@ -4,7 +4,10 @@ import { RouteComponentProps } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import Loader from './layout/Loader';
 
-const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
+const Authentication = ({
+  history,
+  location,
+}: RouteComponentProps): JSX.Element => {
   const authUri = `http://localhost:8080/api/web/auth`;
 
   useEffect(() => {
@@ -45,4 +48,4 @@ const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
   return <Loader />;
 };
 
-export default Callback;
+export default Authentication;
