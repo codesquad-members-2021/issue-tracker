@@ -88,6 +88,7 @@ const grayScale = {
 	input_background: "#EFF0F6",
 	background: "#F7F7FC",
 	off_white: "#FEFEFE",
+	black: "#000000",
 };
 
 const colors = {
@@ -103,6 +104,10 @@ const colors = {
 	green: "#34C759",
 	light_green: "#DDFFE6",
 	dark_green: "#00A028",
+};
+
+const getColorByCondition = (condition, colorA, colorB) => {
+	return condition ? colorA : colorB;
 };
 
 const device = {
@@ -128,6 +133,7 @@ const theme = {
 	StyledSpaceBetween,
 	buttonWidths,
 	buttonHeights,
+	getColorByCondition,
 };
 
 export default theme;

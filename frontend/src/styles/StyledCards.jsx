@@ -18,3 +18,11 @@ export const StyledGridCard = styled.div`
 	border: 1px solid ${({ theme }) => theme.grayScale.line};
 	height: 100px;
 `;
+
+export const StyledFlexCard = styled.div`
+	display: flex;
+	justify-content: center;
+	background-color: ${({ theme }) => theme.grayScale.off_white};
+	border: 1px solid ${({ theme }) => theme.grayScale.line};
+	height: 100px;
+`;

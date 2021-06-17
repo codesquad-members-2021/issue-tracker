@@ -13,7 +13,7 @@ const MenuFilterBar = () => {
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
 	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
 	const filterBarInput = useRecoilValue(filterBarInputAtomState);
-
+	console.log(filterBarInput);
 	const getFilterBarString = () => {
 		return Object.entries(filterBarInput).reduce((acc, item) => {
 			if (item[1]) {
@@ -24,7 +24,7 @@ const MenuFilterBar = () => {
 		}, "");
 	};
 
-	const handleClick = e => {
+	const handleClick = (e) => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -38,7 +38,7 @@ const MenuFilterBar = () => {
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = e => {
+	const closeFilterModal = (e) => {
 		const target = e.target;
 		if (isFilterClicked && !target.closest(".filter-modal"))
 			setIsFilterClicked(false);
