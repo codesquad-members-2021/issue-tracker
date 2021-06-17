@@ -6,8 +6,6 @@ import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
 @RequestMapping("/issue")
 public class IssueController {
@@ -35,7 +33,6 @@ public class IssueController {
 
     @PostMapping
     public ApiResponse createIssue(@RequestBody IssueRequest issueRequest) {
-        System.out.println(issueRequest.toString());
         return ApiResponse.ok(issueService.addIssue(Issue.issueRequestToIssue(issueRequest)));
     }
 
@@ -63,11 +60,11 @@ public class IssueController {
             return ApiResponse.ok();
     }
 
-//    @PutMapping("/{issueId}/label")
-//    public ApiResponse editLabel(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
-//        issueService.updateLabel(issueId, issueRequest.getLabel());
-//        return ApiResponse.ok();
-//    }
+    @PutMapping("/{issueId}/label")
+    public ApiResponse editLabel(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
+        issueService.updateLabelAdd(issueId, issueRequest);
+        return ApiResponse.ok();
+    }
 
     @PutMapping("/{issueId}/assignee")
     public ApiResponse editAssignee(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {

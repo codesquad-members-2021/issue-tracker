@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "label")
 public class Label {
 
     @Id
@@ -17,7 +18,7 @@ public class Label {
     @OneToMany(mappedBy="label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    private Label(Long id, String title, String content, String color) {
+    public Label(Long id, String title, String content, String color) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -2,10 +2,7 @@ package com.codesquad.issuetracker.service;
 
 import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
-import com.codesquad.issuetracker.repository.AssigneeRepository;
-import com.codesquad.issuetracker.repository.IssueRepository;
-import com.codesquad.issuetracker.repository.LabelRepository;
-import com.codesquad.issuetracker.repository.MilestoneRepository;
+import com.codesquad.issuetracker.repository.*;
 import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +15,17 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
     private final LabelRepository labelRepository;
+    private final IssueLabelRepository issueLabelRepository;
     private final MilestoneRepository milestoneRepository;
     private final AssigneeRepository assigneeRepository;
 
     @Autowired
     public IssueService(IssueRepository issueRepository, LabelRepository labelRepository,
+                        IssueLabelRepository issueLabelRepository,
                         MilestoneRepository milestoneRepository, AssigneeRepository assigneeRepository) {
         this.issueRepository = issueRepository;
         this.labelRepository = labelRepository;
+        this.issueLabelRepository = issueLabelRepository;
         this.milestoneRepository = milestoneRepository;
         this.assigneeRepository = assigneeRepository;
     }
@@ -82,10 +82,23 @@ public class IssueService {
         issueRepository.save(updateIssue);
     }
 
-//    public Issue updateLabel(Long issueId, List<String> labels) {
-//        Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
-//        updateIssue.set
-//    }
+    public void updateLabelAdd(Long issueId, IssueRequest issueRequest) {
+        // IssueLabel을 Issue의 ID 기준으로 찾아 온 다음 더하거나(INSERT) 삭제(DELETE)한다
+        List<IssueLabel> labelsToEdited = issueLabelRepository.findIssueLabelsByIssueId(issueId); // 현재 IssueLabel 목록
+        ArrayList<Label> labelsToEdit = issueRequest.getLabelList(); // 수정할것
+        for (int i = 0; i < labelsToEdit.size(); i++) {
+            if (labelsToEdited.contains(labelsToEdit.get(i))) { // 현재 목록에 수정할 항목이 존재하면 넘어감 (추가/삭제 필요 x)
+                continue;
+            }
+            if (! labelsToEdited.contains(labelsToEdit.get(i))) { // 현재 목록에 수정할 항목이 없으면 추가함
+                IssueLabel issueLabel = IssueLabel.issueToIssueLabel(issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new), labelsToEdit.get(i));
+                labelsToEdited.add(issueLabel);
+            }
+            if (! labelsToEdit.contains(labelsToEdited.get(i))) {// 수정할 목록 중 현재목록 항목이 없으면 삭제함
+                issueRepository.deleteById(labelsToEdited.get(i).getId());
+            }
+        }
+    }
 
     public void updateMilestone(Long issueId, IssueRequest issueRequest) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
@@ -97,6 +110,10 @@ public class IssueService {
         issueRepository.deleteById(issueId);
     }
 
+    private Set<Label> getLabelsForIssue(Long issueId) {
+        return labelRepository.findByIssueId(issueId);
+    }
+
     private IssueResponse issueToIssueResponse(Issue issue) {
         return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(),
                 issue.getCreatedAt(), makeUserResponses(issue.getUser()),
@@ -105,7 +122,7 @@ public class IssueService {
     }
 
     private Set<LabelResponse> makeLabelResponses(Long issueId) {
-        Set<Label> labels = labelRepository.findByIssueId(issueId);
+        Set<Label> labels = getLabelsForIssue(issueId);
         Set<LabelResponse> result = new HashSet<>();
         for (Label label : labels) {
             result.add(LabelResponse.labelToLabelResponse(label));

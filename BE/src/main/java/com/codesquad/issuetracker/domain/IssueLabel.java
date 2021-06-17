@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.persistence.JoinColumn;
 
 @Entity
+@Table(name = "issue_label")
 public class IssueLabel {
 
     @Id
@@ -18,10 +19,14 @@ public class IssueLabel {
     @JoinColumn(name = "label_id")
     private Label label;
 
-    public IssueLabel(Long id, Issue issue, Label label) {
-        this.id = id;
+    private IssueLabel(Issue issue, Label label) {
         this.issue = issue;
         this.label = label;
+    }
+
+    public IssueLabel(Long id, Issue issue, Label label) {
+        this(issue, label);
+        this.id = id;
     }
 
     public IssueLabel() {
@@ -50,5 +55,9 @@ public class IssueLabel {
 
     public void setLabel(Label label) {
         this.label = label;
+    }
+
+    public static IssueLabel issueToIssueLabel(Issue issue, Label label) {
+        return new IssueLabel(issue, label);
     }
 }

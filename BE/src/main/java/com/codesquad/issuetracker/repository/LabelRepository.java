@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Repository
 public interface LabelRepository extends CrudRepository<Label, Long> {
-    @Query("SELECT l.id, l.title, l.content, l.color FROM Label l " +
-            "LEFT JOIN IssueLabel il ON il.label.id = :issueId where il.issue.id = :issueId")
+    @Query("SELECT new Label(l.id, l.title, l.content, l.color) FROM Label l " +
+            "LEFT JOIN IssueLabel il ON il.label.id = l.id WHERE il.issue.id = :issueId")
     Set<Label> findByIssueId(@Param("issueId") Long issueId);
 }
