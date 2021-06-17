@@ -1,47 +1,48 @@
-import React, { ReactElement, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import React, { ReactElement, useRef, MutableRefObject, RefObject } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from 'components/atom/Title';
 import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
-import { createIssue } from 'store/issueInfoStore'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { resetSelectedTab } from 'store/issueInfoStore';
-import { Link } from 'react-router-dom'
+import { createIssue } from 'store/issueInfoStore';
+import { useRecoilValue } from 'recoil';
+import { selectedTabState } from 'store/issueInfoStore';
 
 export default function CreateIssuePage(): ReactElement {
+  const titleRef = useRef(null);
+  const {
+    assignee: selectUser,
+    label: selectLabel,
+    milestone: selectMilestone,
+  } = useRecoilValue(selectedTabState);
+  console.log(selectUser, selectLabel, selectMilestone);
   const sample = {
-    title: "z코쿼",
-    comment: "제인이노레이카일주나미",
+    title: 'z코쿼',
+    comment: '제인이노레이카일주나미',
     assignees: [1],
     labels: [1],
-    milestone: 3
-  }
-  const {fetchData} = useRecoilValue(createIssue({issueInputs:sample, skip:true}))
-  const history = useHistory()
+    milestone: 3,
+  };
 
-  
+  const { fetchData } = useRecoilValue(createIssue({ issueInputs: sample, skip: true }));
+  const history = useHistory();
 
-  const handleClick = async (btnType: string) =>{
-    if (btnType==='cancle'){
-      history.push('/main')
+  const handleClick = async (btnType: string) => {
+    if (btnType === 'cancle') {
+      history.push('/main');
+    } else {
+      const titleInput = titleRef?.current as HTMLInputElement | null;
+      const title = titleInput?.value;
+      console.dir(title);
+      const isSuccess = await fetchData(sample);
+      const createdIssueID = isSuccess?.issueId;
+
+      history.push(`/detail/${createdIssueID}`);
     }
-    else{ 
-      const isSuccess = await fetchData(sample)
-      const createdIssueID = isSuccess?.issueId
-      
-      // history.push('/main') 아이디 받아서 이슈 상세 페이지로 바로 이동.
-    }
-  }
+  };
 
-  const resetSelectTab = useSetRecoilState(resetSelectedTab);
-
-  useEffect(() => {
-    resetSelectTab(null);
-  }, []);
-  
   return (
     <CreateIssuePageBlock>
       <div className='create__section__header'>
@@ -49,19 +50,24 @@ export default function CreateIssuePage(): ReactElement {
       </div>
       <div className='create__section__body'>
         <ProfileImg />
-        <IssueInput />
+        <IssueInput titleRef={titleRef} />
         <IssueDetailOption />
       </div>
       <div className='create__section__footer'>
-         {/* //?onClick사용하기 위해 styled로 변경, 상위에서 한번만 내리고 싶음 => spanButton styled도 지우고*/}
-        <SpanButton  onClick={()=>handleClick('cancel')}>⨯ 작성 취소</SpanButton>
-        <PrimaryButton value='완료' className='create__submit-btn' onClick={()=>handleClick('create')}/>
+        {/* //?onClick사용하기 위해 styled로 변경, 상위에서 한번만 내리고 싶음 => spanButton styled도 지우고*/}
+        <SpanButton onClick={() => handleClick('cancel')}>⨯ 작성 취소</SpanButton>
+        <PrimaryButton
+          value='완료'
+          className='create__submit-btn'
+          onClick={() => handleClick('create')}
+        />
       </div>
     </CreateIssuePageBlock>
   );
 }
-const SpanButton =styled.div`
-cursor:pointer;`
+const SpanButton = styled.div`
+  cursor: pointer;
+`;
 const CreateIssuePageBlock = styled.div`
   padding: 50px 80px;
   .create__title {
@@ -83,7 +89,7 @@ const CreateIssuePageBlock = styled.div`
     justify-content: flex-end;
     align-items: center;
     .create__submit-btn {
-      cursor:pointer;
+      cursor: pointer;
       margin-left: 2rem;
       width: 240px;
       height: 56px;

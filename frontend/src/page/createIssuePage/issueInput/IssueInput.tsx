@@ -1,21 +1,28 @@
-import React, { ReactElement, ChangeEvent, useState } from 'react';
+import React, { ReactElement, ChangeEvent, useState, RefObject } from 'react';
 import styled from 'styled-components';
 import { GiPaperClip } from 'react-icons/gi';
-
-export default function IssueInput(): ReactElement {
+interface inputProps {
+  titleRef: RefObject<HTMLInputElement>;
+}
+export default function IssueInput({ titleRef }: inputProps): ReactElement {
+  // const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target.value.length);
     setComment(e.target.value);
   };
+  // const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   console.log(e.target.value);
+  //   setTitle(e.target.value);
+  // };
   return (
     <IssueInputBlock>
-      <input type='text' className='input__title' placeholder='제목' />
+      <input type='text' className='input__title' placeholder='제목' ref={titleRef} />
       <div className='input___comment'>
         <textarea
           className='input__description'
           placeholder='코멘트를 입력하세요.'
-          onChange={handleChange}
+          onChange={handleCommentChange}
           value={comment}
         />
         <div className='input__addFile'>
