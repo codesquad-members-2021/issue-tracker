@@ -99,6 +99,10 @@ public class Issue extends BaseTimeEntity {
         return comments.get(0).getComment();
     }
 
+    public Comment getLastComment() {
+        return comments.get(comments.size() - 1);
+    }
+
     public int getCommentNumber() {
         return comments.size();
     }

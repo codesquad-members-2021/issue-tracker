@@ -127,10 +127,11 @@ public class IssueService {
         issueRepository.save(issue);
     }
 
-    public void createComment(Long userId, Long issueId, CommentDTO commentDTO) {
+    public CommentDTO createComment(Long userId, Long issueId, CommentDTO commentDTO) {
         User user = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
-        issueRepository.save(issue.addComment(Comment.create(user, commentDTO.getComment())));
+        Issue updatedIssue = issueRepository.save(issue.addComment(Comment.create(user, commentDTO.getComment())));
+        return CommentDTO.createCommentDTO(user, updatedIssue, updatedIssue.getLastComment());
     }
 
     public void updateComment(Long userId, Long issueId, CommentDTO commentDTO) {
