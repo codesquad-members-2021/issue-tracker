@@ -74,9 +74,21 @@ public class Issue {
 
     public void setMilestone(Milestone milestone) {
         this.milestone = milestone;
+
+        if(this.open) {
+            this.milestone.countOpenIssuesUp();
+        } else {
+            this.milestone.countClosedIssuesUp();
+        }
     }
 
     public void removeMilestone() {
+        if(this.open) {
+            this.milestone.countOpenIssuesDown();
+        } else {
+            this.milestone.countClosedIssuesDown();
+        }
+
         if (this.milestone == null) {
             return;
         }

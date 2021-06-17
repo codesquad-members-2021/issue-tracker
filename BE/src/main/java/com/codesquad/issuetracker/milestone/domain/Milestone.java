@@ -53,4 +53,20 @@ public class Milestone {
         this.description = milestoneRequest.getDescription();
         this.dueDate = milestoneRequest.getDueDate();
     }
+
+    public void countOpenIssuesUp() {
+        this.openIssues++;
+    }
+
+    public void countClosedIssuesUp() {
+        this.closedIssues++;
+    }
+
+    public void countOpenIssuesDown() {
+        this.openIssues--;
+    }
+
+    public void countClosedIssuesDown() {
+        this.closedIssues--;
+    }
 }
