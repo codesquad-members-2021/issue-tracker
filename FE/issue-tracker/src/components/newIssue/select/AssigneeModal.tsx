@@ -3,16 +3,29 @@ import { MenuList, MenuOptionGroup, MenuItemOption } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/avatar';
 import { modalStyle, modalTitleStyle, modalListStyle } from '../style';
 
-function AssigneeModal() {
+type Props = {
+  assignees: { user_id: number; name: string; avatar_url: string }[] | null;
+};
+
+function AssigneeModal({ assignees }: Props) {
   return (
     <MenuList {...modalStyle}>
       <MenuOptionGroup {...modalTitleStyle} type="checkbox" title="담당자 추가">
-        <MenuItemOption {...modalListStyle} value="Qbabo">
-          <ItemWrap>
-            <Avatar size="sm" src="./janmang.jpeg" />
-            <Text>Qbabo</Text>
-          </ItemWrap>
-        </MenuItemOption>
+        {assignees &&
+          assignees.map(({ user_id, name, avatar_url }) => {
+            return (
+              <MenuItemOption
+                {...modalListStyle}
+                value={user_id.toString()}
+                key={user_id}
+              >
+                <ItemWrap>
+                  <Avatar size="sm" src={avatar_url} />
+                  <Text>{name}</Text>
+                </ItemWrap>
+              </MenuItemOption>
+            );
+          })}
       </MenuOptionGroup>
     </MenuList>
   );

@@ -4,15 +4,36 @@ import { MenuList, MenuOptionGroup, MenuItemOption } from '@chakra-ui/react';
 import Label from '@components/common/Label';
 import { modalStyle, modalTitleStyle, modalListStyle } from '../style';
 
-function LabelModal() {
+type Props = {
+  labels:
+    | {
+        id: number;
+        title: string;
+        description: string;
+        color_code: string;
+        text_color: string;
+      }[]
+    | null;
+};
+
+function LabelModal({ labels }: Props) {
   return (
     <MenuList {...modalStyle}>
       <MenuOptionGroup {...modalTitleStyle} type="checkbox" title="레이블 추가">
-        <MenuItemOption {...modalListStyle} value="Qbabo">
-          <ItemWrap>
-            <Label name="Qbabo" colorCode="#00A5B7" fontLight={true} />
-          </ItemWrap>
-        </MenuItemOption>
+        {labels &&
+          labels.map(({ id, title, color_code }) => {
+            return (
+              <MenuItemOption
+                {...modalListStyle}
+                value={id.toString()}
+                key={id}
+              >
+                <ItemWrap>
+                  <Label name={title} colorCode={color_code} fontLight={true} />
+                </ItemWrap>
+              </MenuItemOption>
+            );
+          })}
       </MenuOptionGroup>
     </MenuList>
   );
