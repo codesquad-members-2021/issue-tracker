@@ -17,14 +17,16 @@ export function IssueSkeleton() {
       <IssueContainer>
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
-          <Skeleton>
-            <LabelSkeleton />
-          </Skeleton>
+          <IssueTitle>
+            <Skeleton height="20px" width="100px" />
+            <Skeleton height="20px" width="60px" />
+            <Skeleton height="20px" width="60px" />
+          </IssueTitle>
         </StyledDiv>
         <Description>
-          <Skeleton height="20px" width="40px" />
-          <Skeleton height="20px" width="40px" />
-          <Skeleton height="20px" width="40px" />
+          <Skeleton height="20px" width="30px" />
+          <Skeleton height="20px" width="80px" />
+          <Skeleton height="20px" width="80px" />
         </Description>
       </IssueContainer>
       <AvatarContainer>
@@ -78,9 +80,7 @@ const IssueTitle = styled.div`
   height: 32px;
 
   div {
-    margin: 0 8px 0 24px;
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    margin: 0 4px 0 12px;
   }
 `;
 
@@ -97,12 +97,12 @@ const CheckBox = styled.input`
 `;
 
 const Description = styled.div`
-  margin: 8px 0 0 40px;
+  margin: 8px 0 0 28px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
   div {
-    margin-left: 16px;
+    margin-right: 16px;
   }
 `;
