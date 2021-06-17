@@ -18,7 +18,7 @@ const Tabs = () => {
         to="labelList">
         <TagIcon />
         <Text link sm>
-          레이블 ({count?.lables})
+          레이블 ({count?.labels})
         </Text>
       </Label>
       <Line></Line>

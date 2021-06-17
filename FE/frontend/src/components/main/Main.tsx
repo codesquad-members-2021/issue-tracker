@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from './Header';
 import IssueMain from './issue/IssueMain';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AddIssue from './issue/AddIssue';
+import NewIssue from './issue/NewIssue';
 import LabelList from './label/LabelList';
 import MilstoneList from './milestone/MilestoneList';
 import IssueDetail from './issue/IssueDetail';
@@ -15,7 +15,7 @@ const Main = () => {
         <Header />
         <Switch>
           <Route path="/main" component={IssueMain} />
-          <Route path="/newIssue" component={AddIssue} />
+          <Route path="/newIssue" component={NewIssue} />
           <Route path="/labelList" component={LabelList} />
           <Route path="/milestoneList" component={MilstoneList} />
           <Route path="/issues/:id" component={IssueDetail} />
