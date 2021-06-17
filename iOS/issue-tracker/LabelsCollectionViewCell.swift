@@ -28,6 +28,8 @@ class LabelsCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        addSubview(label)
+        setAutolayout()
     }
     
     func setAutolayout() {

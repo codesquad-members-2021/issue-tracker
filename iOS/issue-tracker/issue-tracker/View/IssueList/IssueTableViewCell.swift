@@ -51,7 +51,11 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        labelsCollectionView.dataSource = self
+        addSubviews()
+        setAutolayout()
+        checkBoxImageView.isHidden = true
     }
     
     func addSubviews() {
@@ -92,8 +96,6 @@ class IssueTableViewCell: UITableViewCell {
             image.trailing.equalToSuperview().inset(16)
             image.width.height.equalTo(30)
         }
-        
-        
     }
     
     func setIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
@@ -121,8 +123,6 @@ extension IssueTableViewCell: UICollectionViewDataSource {
         cell.configure(title: fakeData[indexPath.item].title, color: fakeData[indexPath.item].color)
         return cell
     }
-    
-    
 }
 
 struct IssueLabels {

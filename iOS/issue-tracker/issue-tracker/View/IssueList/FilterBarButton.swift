@@ -16,6 +16,9 @@ class FilterBarButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
+        setTitle("필터", for: .normal)
+        setTitleColor(.systemBlue, for: .normal)
     }
 }

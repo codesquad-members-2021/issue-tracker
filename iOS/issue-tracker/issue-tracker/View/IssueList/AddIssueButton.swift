@@ -16,6 +16,7 @@ class AddIssueButton: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setButton()
     }
     
     override func draw(_ rect: CGRect) {
@@ -33,6 +34,5 @@ class AddIssueButton: UIView {
         clipsToBounds = true
         layer.cornerRadius = self.bounds.size.width * 0.5
         backgroundColor = .systemBlue
-        
     }
 }

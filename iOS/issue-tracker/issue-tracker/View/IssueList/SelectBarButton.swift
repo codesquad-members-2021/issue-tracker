@@ -17,6 +17,10 @@ class SelectBarButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        setTitle("선택", for: .normal)
+        setTitleColor(.systemBlue, for: .normal)
+        semanticContentAttribute = .forceRightToLeft
     }
 }

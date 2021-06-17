@@ -17,6 +17,10 @@ class AddLabelButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setImage(UIImage(systemName: "plus"), for: .normal)
+        setTitle("추가", for: .normal)
+        setTitleColor(.systemBlue, for: .normal)
+        semanticContentAttribute = .forceRightToLeft
     }
 }

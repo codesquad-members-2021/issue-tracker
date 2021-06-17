@@ -107,7 +107,18 @@ class MilestoneTableViewCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        IssueLabelStackView.addArrangedSubview(openedIssue)
+        IssueLabelStackView.addArrangedSubview(closedIssue)
+        
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(descriptionLabel)
+        verticalStackView.addArrangedSubview(dueDateLabel)
+        verticalStackView.addArrangedSubview(IssueLabelStackView)
+        
+        horizenStackView.addArrangedSubview(verticalStackView)
+        horizenStackView.addArrangedSubview(achievementLabel)
+        addSubview(horizenStackView)
     }
 
     override func layoutSubviews() {

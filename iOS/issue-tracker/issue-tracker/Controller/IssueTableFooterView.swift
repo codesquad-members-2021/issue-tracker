@@ -37,5 +37,4 @@ class IssueTableFooterView: UIView {
             label.top.equalTo(39)
         }
     }
-    
 }

@@ -12,7 +12,6 @@ class IssueToolbar: UIToolbar {
     let checkBoxBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.image = UIImage(systemName: "checkmark.circle")
-        
         return item
     }()
     
