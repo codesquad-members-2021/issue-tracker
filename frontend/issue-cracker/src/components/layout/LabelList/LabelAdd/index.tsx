@@ -6,7 +6,12 @@ import InputGroup from '../../../common/group/InputGroup';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import LabelSmallGroup from '../../../common/group/LabelSmallGroup';
 import SyncIcon from '@material-ui/icons/Sync';
-import { SMALL_FILL } from '../../../../utils/const';
+import {
+  TYPE as T,
+  LABEL as L,
+  BUTTON_SIZE as BS,
+  BUTTON_NAME as BN,
+} from '../../../../utils/const';
 import AddIcon from '@material-ui/icons/Add';
 import { useSetRecoilState } from 'recoil';
 import { addState } from '../../../../store/Recoil';
@@ -19,18 +24,14 @@ const LabelAdd = (): JSX.Element => {
     <LabelAddStyle>
       <LabelAddHeader>
         <TextBox>
-          <TextGroup
-            type="large"
-            content="새로운 레이블 추가"
-            color="#14142B"
-          />
+          <TextGroup type={T.LARGE} content={L.ADD} color="#14142B" />
         </TextBox>
       </LabelAddHeader>
       <LabelAddCell>
         <LabelContainer>
           <LabelBox>
             <LabelSmallGroup
-              label="레이블 이름"
+              label={L.NAME}
               backgroundColor="#EFF0F6"
               color="#14142B"
             />
@@ -38,15 +39,19 @@ const LabelAdd = (): JSX.Element => {
         </LabelContainer>
         <InputContainer>
           <InputBox>
-            <InputGroup variant="outlined" name="레이블 이름" type="large" />
+            <InputGroup variant="outlined" name={L.NAME} type={T.LARGE} />
           </InputBox>
           <InputBox>
-            <InputGroup variant="outlined" name="설명(선택)" type="large" />
+            <InputGroup variant="outlined" name={L.DESC} type={T.LARGE} />
           </InputBox>
           <InputColorBox>
             <BackgroundColorBox>
-              <TextGroup type="xSmall" content="배경 색상" color="#6E7191" />
-              <TextGroup type="small" content={'#FFFFFF'} color="#14142B" />
+              <TextGroup
+                type={T.XSMALL}
+                content={L.BACKGROUND_COLOR}
+                color="#6E7191"
+              />
+              <TextGroup type={T.SMALL} content={'#FFFFFF'} color="#14142B" />
               <div>
                 <SyncIcon
                   style={{
@@ -59,8 +64,12 @@ const LabelAdd = (): JSX.Element => {
               </div>
             </BackgroundColorBox>
             <TextColorBox>
-              <TextGroup type="xSmall" content="텍스트 색상" color="#6E7191" />
-              <TextGroup type="small" content={'#FFFFFF'} color="#14142B" />
+              <TextGroup
+                type={T.XSMALL}
+                content={L.TEXT_COLOR}
+                color="#6E7191"
+              />
+              <TextGroup type={T.SMALL} content={'#FFFFFF'} color="#14142B" />
               <div>
                 <SyncIcon
                   style={{
@@ -78,8 +87,8 @@ const LabelAdd = (): JSX.Element => {
       <ButtonContainer>
         <ButtonBox onClick={handleClickButton}>
           <ButtonGroup
-            type={SMALL_FILL}
-            name={'완료'}
+            type={BS.SMALL_FILL}
+            name={BN.COMPLETE}
             icon={<AddIcon style={{ fontSize: 16 }} />}
           />
         </ButtonBox>

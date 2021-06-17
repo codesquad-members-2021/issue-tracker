@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import IssueClosedIcon from '../../styles/svg/IssueClosedIcon';
 import Chip from '@material-ui/core/Chip';
 import OpenIconGroup from '../group/OpenIconGroup';
-import { CLOSED_ISSUE, OPEN_ISSUE } from '../../../utils/const';
+import { TEXT as T } from '../../../utils/const';
 
 interface Prop {
   type: string;
@@ -27,7 +27,7 @@ const IssueLabelOpen = () => {
     <IssueLabelStyle>
       <CustomOpenChip
         avatar={<OpenIconGroup type={'label'} />}
-        label={OPEN_ISSUE}
+        label={T.OPEN_ISSUE}
         color="primary"
         variant="outlined"
       />
@@ -45,7 +45,7 @@ const IssueLabelClosed = () => {
         avatar={
           <IssueClosedIcon color="#0025E7" style={{ width: 16, height: 16 }} />
         }
-        label={CLOSED_ISSUE}
+        label={T.CLOSED_ISSUE}
         color="secondary"
         variant="outlined"
       />

@@ -10,6 +10,7 @@ import IssueList from './components/layout/IssueList';
 import IssueAdd from './components/layout/IssueAdd';
 import IssueDetail from './components/layout/IssueDetail';
 import LabelList from './components/layout/LabelList';
+import { PATH as P } from './utils/const';
 
 function App(): JSX.Element {
   const token = localStorage.getItem('token');
@@ -19,20 +20,16 @@ function App(): JSX.Element {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <AppStyle>
-          <Route exact path="/">
-            {token ? (
-              <Redirect to="/main/issue-list" />
-            ) : (
-              <Redirect to="/login" />
-            )}
+          <Route exact path={P.ROOT}>
+            {token ? <Redirect to={P.ISSUE_LIST} /> : <Redirect to={P.LOGIN} />}
           </Route>
-          <Route exact path="/login" component={LogIn} />
-          <Route exact path="/callback" component={Authentication} />
-          <Route path="/main" component={Header} />
-          <Route exact path="/main/issue-list" component={IssueList} />
-          <Route exact path="/main/issue-add" component={IssueAdd} />
-          <Route exact path="/main/issue-detail/:id" component={IssueDetail} />
-          <Route exact path="/main/label-list" component={LabelList} />
+          <Route exact path={P.LOGIN} component={LogIn} />
+          <Route exact path={P.AUTH} component={Authentication} />
+          <Route path={P.MAIN} component={Header} />
+          <Route exact path={P.ISSUE_LIST} component={IssueList} />
+          <Route exact path={P.ISSUE_ADD} component={IssueAdd} />
+          <Route exact path={P.ISSUE_DETAIL} component={IssueDetail} />
+          <Route exact path={P.ISSUE_LABELLIST} component={LabelList} />
         </AppStyle>
       </ThemeProvider>
     </BrowserRouter>

@@ -3,12 +3,13 @@ import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import Loader from './layout/Loader';
+import { URL as U, PATH as P } from '../utils/const';
 
 const Authentication = ({
   history,
   location,
 }: RouteComponentProps): JSX.Element => {
-  const authUri = `http://localhost:8080/api/web/auth`;
+  const authUri = U.AUTH;
 
   useEffect(() => {
     const getToken = async () => {
@@ -39,12 +40,13 @@ const Authentication = ({
         localStorage.setItem('name', decoded.name);
         localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
 
-        history.push('/main/issue-list');
+        history.push(P.ISSUE_LABELLIST);
       } catch (error) {}
     };
 
     getToken();
   }, [location, history, authUri]);
+
   return <Loader />;
 };
 

@@ -5,39 +5,36 @@ import InputGroup from '../../common/group/InputGroup';
 import RegisterButton from '../../common/RegisterButton';
 import Logo from '../../common/Logo';
 import {
-  ID,
-  PASSWORD,
-  LARGE,
   LOGO_TITLE,
-  GITHUB_LOGIN,
-  DEFAULT_LOGIN,
+  BUTTON_SIZE as B,
+  LOGIN as L,
+  URL as U,
 } from '../../../utils/const';
 import theme from '../../styles/theme';
 
 const LogIn: FC = () => {
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user&redirect_uri=http://localhost:3000/callback`;
   return (
     <LogInDiv>
       <LogInBox>
-        <Logo type={LARGE} name={LOGO_TITLE} />
-        <a href={loginUri}>
+        <Logo type={B.LARGE} name={LOGO_TITLE} />
+        <a href={U.LOGIN}>
           <ButtonBox>
             <ButtonList
-              type={LARGE}
-              name={GITHUB_LOGIN}
+              type={B.LARGE}
+              name={L.GITHUB_LOGIN}
               color={theme.colors.blue}
             />
           </ButtonBox>
         </a>
         <TextBox>or</TextBox>
         <InputBox>
-          <InputGroup type={LARGE} name={ID} variant={'filled'} />
-          <InputGroup type={LARGE} name={PASSWORD} variant={'filled'} />
+          <InputGroup type={B.LARGE} name={L.ID} variant={'filled'} />
+          <InputGroup type={B.LARGE} name={L.PASSWORD} variant={'filled'} />
         </InputBox>
         <ButtonBox>
           <ButtonList
-            type={LARGE}
-            name={DEFAULT_LOGIN}
+            type={B.LARGE}
+            name={L.DEFAULT_LOGIN}
             // color={theme.colors.yellow}
           />
         </ButtonBox>

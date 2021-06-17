@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { ProfileImg as S } from '../../styles/CommonStyles';
 import Logo from '../../common/Logo';
-import { MEDIUM, LOGO_TITLE } from '../../../utils/const';
+import { LOGO_TITLE, BUTTON_SIZE as BS } from '../../../utils/const';
 import { Link } from 'react-router-dom';
 
 const Header: FC = () => {
@@ -12,7 +12,7 @@ const Header: FC = () => {
   return (
     <HeaderDiv>
       <Link to="/">
-        <Logo type={MEDIUM} name={LOGO_TITLE} />
+        <Logo type={BS.MEDIUM} name={LOGO_TITLE} />
       </Link>
       <UserDiv>
         <AccountName>{profileName}</AccountName>
