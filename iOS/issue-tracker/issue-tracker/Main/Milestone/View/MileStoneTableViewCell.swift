@@ -92,7 +92,6 @@ class MileStoneTableViewCell: UITableViewCell {
     
     private lazy var closedMileStoneLabelView: MileStoneLabelView = {
         let mileStoneLabelView = MileStoneLabelView(chooseNum: 1)
-
         return mileStoneLabelView
     }()
     
@@ -143,6 +142,15 @@ class MileStoneTableViewCell: UITableViewCell {
         firstSubStackView
             .addArrangedSubview(completenessLabel)
         
+        firstSubStackView.spacing = 16
+        completenessLabel.textAlignment = .right
+        
+        NSLayoutConstraint.activate([
+            titleLabel.widthAnchor.constraint(greaterThanOrEqualTo: firstSubStackView.widthAnchor, multiplier: 0.6),
+            completenessLabel.widthAnchor.constraint(equalTo: firstSubStackView.widthAnchor, multiplier: 0.2)
+        ])
+        
+        
         //MARK: 2 : 마일스톤에 대한 설명 라벨
         mileStoneStackView.addArrangedSubview(descriptionLabel)
         
@@ -152,6 +160,7 @@ class MileStoneTableViewCell: UITableViewCell {
         //MARK: 4 : sub스택
         //-1 열린 이슈 라벨
         //-2 닫힌 이슈 라벨
+        /*
         mileStoneStackView.addArrangedSubview(secondSubStackView)
         
         NSLayoutConstraint.activate([
@@ -167,9 +176,10 @@ class MileStoneTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             openMileStoneLabelView.widthAnchor.constraint(equalTo: secondSubStackView.widthAnchor,constant: 1/2),
             
-//            openMileStoneLabelView.leadingAnchor.constraint(equalTo: secondSubStackView.leadingAnchor),
-//            
-//            closedMileStoneLabelView.leadingAnchor.constraint(equalTo: openMileStoneLabelView.leadingAnchor),
+            openMileStoneLabelView.leadingAnchor.constraint(equalTo: secondSubStackView.leadingAnchor),
+            closedMileStoneLabelView.leadingAnchor.constraint(equalTo: openMileStoneLabelView.leadingAnchor),
             ])
+ 
+ */
     }
 }
