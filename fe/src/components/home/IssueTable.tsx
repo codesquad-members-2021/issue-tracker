@@ -15,8 +15,6 @@ export default function IssueTable({ issueListItems }: IssueTableType) {
   const selectState = useRecoilValue(selectionState);
 
   // console.log(issueListItems);
-  // console.log(selectState);
-  // issueListItems = getFilteredListItems(issueListItems, selectState);
 
   return (
     <div>
@@ -30,8 +28,12 @@ export default function IssueTable({ issueListItems }: IssueTableType) {
                   {item.title}
                 </Link>
                 {item.label_list.map((label) => (
-                  <Badge color={label.color}>{label.title}</Badge>
-                  // <Chip className={classes.chip} color="primary" size="small" label={label.title} />
+                  <Chip
+                    className={classes.chip}
+                    style={{ backgroundColor: label.color }}
+                    size="small"
+                    label={label.title}
+                  />
                 ))}
               </CardHeader>
               <CardFooter>
