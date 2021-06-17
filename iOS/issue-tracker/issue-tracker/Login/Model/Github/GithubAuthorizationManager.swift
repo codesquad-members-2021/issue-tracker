@@ -62,7 +62,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
             let parameter = [codeKey: code]
             let requestManager = RequestManager(url: url)
             let networkmanager = NetworkManager(requestManager: requestManager)
-            
+
             networkmanager.get(queryParameters: parameter) { [weak self] (result: Result<OAuthResponseDTO, NetworkError>) in
                 guard let self = self else { return }
                 switch result {
