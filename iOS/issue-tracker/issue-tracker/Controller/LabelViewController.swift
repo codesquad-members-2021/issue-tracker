@@ -40,7 +40,7 @@ class LabelViewController: UIViewController {
     }
     
     @objc func addLabelButtonTapped() {
-        let vc = AddLabelViewController().add
+        let vc = AddLabelViewController()
         let nv = UINavigationController(rootViewController: vc)
         present(nv, animated: true, completion: nil)
     }
