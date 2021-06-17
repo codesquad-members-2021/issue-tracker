@@ -13,6 +13,13 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env: 
+  APPLICATION_NAME: issue-tracker-code-deploy
+  S3_BUCKET_NAME: issue-tracker-jane-eno 
+  PROJECT_NAME: issue-tracker
+  DEPLOY_GROUP: issue-tracker-deploy-group
+  DEPLOY_CONFIG: CodeDeployDefault.AllAtOnce
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -45,6 +52,11 @@ jobs:
         shell: bash
         working-directory: ./BE
         
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+        working-directory: ./BE/build/libs
+        
       - name: Configure AWS credentials 
         uses: aws-actions/configure-aws-credentials@v1 
         with: 
@@ -53,5 +65,8 @@ jobs:
           aws-region: ap-northeast-2
         
       - name: Upload to S3 
-        run: aws s3 cp ./issue-tracker-0.0.1-SNAPSHOT.jar s3://issue-tracker-jane-eno/issue-tracker.jar
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
         working-directory: BE/build/libs
+      
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name $APPLICATION_NAME --deployment-config-name $DEPLOY_CONFIG --deployment-group-name $DEPLOY_GROUP --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
