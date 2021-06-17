@@ -5,11 +5,11 @@ import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
 import Popover from '@material-ui/core/Popover';
 const testArray = [
-  { id: 1, description: '열린 이슈' },
-  { id: 2, description: '내가 작성한 이슈' },
-  { id: 3, description: '나에게 할당된 이슈' },
-  { id: 4, description: '내가 댓글을 남긴 이슈' },
-  { id: 5, description: '닫힌 이슈' },
+  { id: 1, title: '열린 이슈' },
+  { id: 2, title: '내가 작성한 이슈' },
+  { id: 3, title: '나에게 할당된 이슈' },
+  { id: 4, title: '내가 댓글을 남긴 이슈' },
+  { id: 5, title: '닫힌 이슈' },
 ];
 
 export default function IssueFilter() {

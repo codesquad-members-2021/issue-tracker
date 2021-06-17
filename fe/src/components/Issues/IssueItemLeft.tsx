@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { IssueItemLeftPropsType } from 'types/issueType';
 import { ReactComponent as Open } from 'icons/openIssue.svg';
-import { ReactComponent as Close } from 'icons/closeIssue.svg';
+// import { ReactComponent as Close } from 'icons/closeIssue.svg';
 import { ReactComponent as Milestone } from 'icons/openMilestone.svg';
 import { Checkbox } from '@material-ui/core';
 import Label from 'components/common/Label';

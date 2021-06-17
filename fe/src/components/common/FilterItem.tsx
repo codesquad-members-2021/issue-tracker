@@ -6,7 +6,7 @@ import { ReactComponent as CheckOff } from 'icons/check-off-circle.svg';
 import { ReactComponent as CheckOn } from 'icons/check-on-circle.svg';
 const FilterItem = ({ filterItem, isEnd }: FilterItemPropsType) => {
   const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-    console.log(filterItem.id);   
+    console.log(filterItem.id);
   };
   return (
     <>
@@ -15,7 +15,7 @@ const FilterItem = ({ filterItem, isEnd }: FilterItemPropsType) => {
           {filterItem.labelColor ? (
             <StyledColor colorCode={filterItem.labelColor} />
           ) : null}
-          {filterItem.description}
+          {filterItem.title}
         </StyledSpan>
         <Checkbox icon={<CheckOff />} checkedIcon={<CheckOn />} />
       </StyledFilterItem>

@@ -1,12 +1,12 @@
 import axios from 'axios';
-import useAxios from 'hook/useAxios';
-import { atom, selector } from 'recoil';
+import { selector } from 'recoil';
 import { FilterItemType } from 'types/filterType';
 type LabelDataType = {
   id: number;
   title: string;
   description: string;
   color_code: string;
+  text_color: string;
 };
 
 type MilestoneDataType = {
@@ -26,13 +26,13 @@ type UserDataType = {
 };
 
 export const totalCountOfLabels = selector<number>({
-  key: 'labellength',
+  key: 'totalCountOfLabels',
   get: ({ get }) => {
     return get(labelQuery).length;
   },
 });
 
-export const labelQuery = selector<FilterItemType[]>({
+export const labelQuery = selector<LabelItemType[]>({
   key: 'labelQuery',
   get: async () => {
     const { data } = await axios.get(
@@ -41,14 +41,16 @@ export const labelQuery = selector<FilterItemType[]>({
 
     return data.map((labelItem: LabelDataType) => ({
       id: labelItem.id,
-      description: labelItem.title,
+      title: labelItem.title,
+      description: labelItem.description,
       labelColor: labelItem.color_code,
+      textColor: labelItem.text_color,
     }));
   },
 });
 
 export const totalCountOfMilestone = selector<number>({
-  key: 'milestonelength',
+  key: 'totalCountOfMilestone',
   get: ({ get }) => {
     return get(milestoneQuery).length;
   },
@@ -67,34 +69,34 @@ export const milestoneQuery = selector<FilterItemType[]>({
   },
 });
 
-// export const authorQuery = selector({
-//   key: 'authorQuery',
-//   get: async () => {
-//     const { data } = await axios.get(
-//       `${process.env.REACT_APP_API_URL}/api/authors`
-//     );
+export const authorQuery = selector({
+  key: 'authorQuery',
+  get: async () => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/authors`
+    );
 
-//     return data.map((user: UserDataType) => ({
-//       id: user.user_id,
-//       description: user.name,
-//       imgurl: user.avatar_url,
-//     }));
-//   },
-// });
+    return data.map((user: UserDataType) => ({
+      id: user.user_id,
+      description: user.name,
+      imgurl: user.avatar_url,
+    }));
+  },
+});
 
-// export const assigneeQuery = selector({
-//   key: 'assigneeQuery',
-//   get: async () => {
-//     const { data } = await axios.get(
-//       `${process.env.REACT_APP_API_URL}/api/assignees`
-//     );
-//     return data.map((user: UserDataType) => ({
-//       id: user.user_id,
-//       description: user.name,
-//       imgurl: user.avatar_url,
-//     }));
-//   },
-// });
+export const assigneeQuery = selector({
+  key: 'assigneeQuery',
+  get: async () => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/assignees`
+    );
+    return data.map((user: UserDataType) => ({
+      id: user.user_id,
+      description: user.name,
+      imgurl: user.avatar_url,
+    }));
+  },
+});
 
 export const filterSelector = selector<TestType>({
   key: 'filterSelector',
@@ -102,15 +104,23 @@ export const filterSelector = selector<TestType>({
     return {
       labelList: get(labelQuery),
       milestoneList: get(milestoneQuery),
-      // authorList: get(authorQuery),
-      // assigneeList: get(assigneeQuery),
+      authorList: get(authorQuery),
+      assigneeList: get(assigneeQuery),
     };
   },
 });
 
 type TestType = {
-  labelList: FilterItemType[];
+  labelList: LabelItemType[];
   milestoneList: FilterItemType[];
-  // authorList: FilterItemType[];
-  // assigneeList: FilterItemType[];
+  authorList: FilterItemType[];
+  assigneeList: FilterItemType[];
+};
+
+type LabelItemType = {
+  id: number;
+  title: string;
+  description: string;
+  labelColor: string;
+  textColor: 'black' | 'white';
 };

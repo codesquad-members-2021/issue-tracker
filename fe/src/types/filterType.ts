@@ -1,6 +1,6 @@
 export type FilterItemType = {
   id: number;
-  description: string;
+  title: string;
   imgurl?: string | null;
   labelColor?: string;
 };
@@ -15,11 +15,10 @@ export type FilterItemPropsType = {
   isEnd: boolean;
 };
 
-export type FilterPropsType = { 
+export type FilterPropsType = {
   filterType: FilterSelectorType;
-  isPluse?: boolean; 
+  isPluse?: boolean;
 };
 
 export type FilterSelectorType = 'milestoneList' | 'labelList';
 //| 'authorList'| 'assigneeList';
- 

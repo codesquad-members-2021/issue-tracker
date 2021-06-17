@@ -22,7 +22,7 @@ export default LabelsItem;
 
 const StyledLabelsItem = styled.li`
   ${({ theme }) => theme.style.flexSpaceBetween}
-  padding: 1rem;
+  padding: 2.25rem 2rem;
   box-sizing: border-box;
   border-top: 1px solid ${({ theme }) => theme.color.grayscale.line};
 `;

@@ -1,4 +1,3 @@
-import Header from 'components/header/Header';
 import Milestones from 'components/milestones/Milestones';
 
 import NavbarButtons from 'components/navbar/NavbarButtons';
