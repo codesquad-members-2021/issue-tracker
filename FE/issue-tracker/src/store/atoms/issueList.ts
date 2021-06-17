@@ -8,7 +8,7 @@ import {
 import { issueAPI, urlErrorMsg, issueListErrorMsg, hostAPI } from '@const/var';
 
 const handleError = (status: number, errorText: string) => {
-  if (status >= 400) throw errorText;
+  if (status >= 400 && status < 500) throw errorText;
 };
 
 const wholeIssueLists = selectorFamily({
