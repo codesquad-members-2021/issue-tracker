@@ -29,6 +29,7 @@ public class JwtUtil {
         return decodedJWT.getClaims().get(CLAIM_KEY).as(TextNode.class).asText();
     }
 
+    // TODO: 사용자 정의 이셉션 적용(만료기한이 지났습니다)
     private static DecodedJWT verifyToken(String token) {
         try {
             JWTVerifier verifier = JWT.require(algorithmHS)
