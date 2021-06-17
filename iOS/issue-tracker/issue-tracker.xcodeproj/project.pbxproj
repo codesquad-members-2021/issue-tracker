@@ -32,6 +32,10 @@
 		CEA84DF1267B079C0006CC2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CEA84DF3267B0D350006CC2E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF2267B0D350006CC2E /* EndPoint.swift */; };
 		CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */; };
+		CEA84DF7267B760F0006CC2E /* TabBarRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */; };
+		CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */; };
+		CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */; };
+		CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */; };
 		CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140C26787CF00009BB75 /* LoginManager.swift */; };
 		CEBF140F267883500009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
 		CEBF1412267887550009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
@@ -95,6 +99,10 @@
 		CEA84DF0267B079C0006CC2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEA84DF2267B0D350006CC2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRootController.swift; sourceTree = "<group>"; };
+		CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserInfoUseCase.swift; sourceTree = "<group>"; };
+		CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponseDTO.swift; sourceTree = "<group>"; };
+		CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		CEBF140C26787CF00009BB75 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		CEBF140E267883500009BB75 /* JWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManager.swift; sourceTree = "<group>"; };
 		CEBF141326788D910009BB75 /* JWTManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManagerTest.swift; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 			children = (
 				BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */,
 				BD1D36F3266E428700B51184 /* issue-tracker */,
+				BD1D3727266F121B00B51184 /* AppCycle */,
 				BD1D370A266E428800B51184 /* issue-trackerTests */,
 				BD1D3715266E428800B51184 /* issue-trackerUITests */,
 				BD1D36F2266E428700B51184 /* Products */,
@@ -177,19 +186,15 @@
 		BD1D36F3266E428700B51184 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
-				CEA84DED267B06FD0006CC2E /* DTO */,
 				BD1D3736266F5DA200B51184 /* View */,
-				BD1D3727266F121B00B51184 /* AppCycle */,
 				BD1D3726266F121000B51184 /* ViewController */,
+				CEA84DFE267B86250006CC2E /* ViewModel */,
+				CEA84DF8267B76FF0006CC2E /* UseCase */,
+				CEA84DF9267B77270006CC2E /* Network */,
 				BD1D36FA266E428700B51184 /* Main.storyboard */,
 				BD1D36FD266E428700B51184 /* Assets.xcassets */,
 				BD1D36FF266E428700B51184 /* LaunchScreen.storyboard */,
 				BD1D3702266E428700B51184 /* Info.plist */,
-				CEBF140C26787CF00009BB75 /* LoginManager.swift */,
-				CEBF140E267883500009BB75 /* JWTManager.swift */,
-				CEA84DF0267B079C0006CC2E /* NetworkManager.swift */,
-				CEA84DF2267B0D350006CC2E /* EndPoint.swift */,
-				CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				BD920F112672583600EDD555 /* IssueSelectionViewController.swift */,
 				BDCEAF61267315C9005EE147 /* IssueAdditionViewController.swift */,
 				BDCEAF6326733EEC005EE147 /* LabelViewController.swift */,
+				CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -251,8 +257,38 @@
 			isa = PBXGroup;
 			children = (
 				CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */,
+				CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		CEA84DF8267B76FF0006CC2E /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */,
+				CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		CEA84DF9267B77270006CC2E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CEA84DED267B06FD0006CC2E /* DTO */,
+				CEBF140C26787CF00009BB75 /* LoginManager.swift */,
+				CEBF140E267883500009BB75 /* JWTManager.swift */,
+				CEA84DF0267B079C0006CC2E /* NetworkManager.swift */,
+				CEA84DF2267B0D350006CC2E /* EndPoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CEA84DFE267B86250006CC2E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,17 +516,21 @@
 			files = (
 				CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */,
 				BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */,
+				CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */,
 				CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
+				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
 				CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */,
+				CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */,
 				CEA84DEF267B07390006CC2E /* JWTResponseDTO.swift in Sources */,
 				BDCEAF6726733F8F005EE147 /* LabelTableViewCell.swift in Sources */,
 				BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */,
 				CEA84DF3267B0D350006CC2E /* EndPoint.swift in Sources */,
 				BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */,
+				CEA84DF7267B760F0006CC2E /* TabBarRootController.swift in Sources */,
 				CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */,
 				CEA84DF1267B079C0006CC2E /* NetworkManager.swift in Sources */,
 				BD1D36F7266E428700B51184 /* SceneDelegate.swift in Sources */,

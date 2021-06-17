@@ -15,7 +15,7 @@ struct NetworkManager {
         }
         
         var request = URLRequest(url: url)
-        let requestValue = "bearer " + jwt
+        let requestValue = "Bearer " + jwt
         let headerField = "Authorization"
         
         request.setValue(requestValue, forHTTPHeaderField: headerField)
@@ -44,4 +44,11 @@ struct NetworkManager {
             }.eraseToAnyPublisher()
     }
     
+}
+
+enum NetworkError: Error {
+    case encoding(description: String)
+    case decoding(description: String)
+    case url(description: String)
+    case networkConnection(desciption: String)
 }

@@ -689,10 +689,10 @@
             </objects>
             <point key="canvasLocation" x="3097" y="875"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Root Controller-->
         <scene sceneID="J67-YZ-aC2">
             <objects>
-                <tabBarController id="oAx-ab-YaI" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarRootController" id="oAx-ab-YaI" customClass="TabBarRootController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="6qU-NV-xxV"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aug-Ur-z4B">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

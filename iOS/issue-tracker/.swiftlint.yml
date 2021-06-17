@@ -3,5 +3,6 @@ disabled_rules:
 - trailing_whitespace
 - comment_spacing
 - mark
+- identifier_name
 included:
 excluded:

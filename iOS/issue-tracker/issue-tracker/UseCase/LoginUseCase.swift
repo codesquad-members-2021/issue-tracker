@@ -3,11 +3,17 @@ import Combine
 
 class LoginUseCase {
     
-    private let endPoint = EndPoint()
-    private let jwtManager = JWTManager()
-    private let loginManager = LoginManager()
-    private let networkManager = NetworkManager()
-    private var subscriptions = Set<AnyCancellable>()
+    private let jwtManager: JWTManager
+    private let loginManager: LoginManager
+    private let networkManager: NetworkManager
+    private var subscriptions: Set<AnyCancellable>
+    
+    init() {
+        self.jwtManager = JWTManager()
+        self.loginManager = LoginManager()
+        self.networkManager = NetworkManager()
+        self.subscriptions = Set<AnyCancellable>()
+    }
 
     func getGitHubLoginURL() -> (URL, String) {
         return loginManager.requestGitHubAuthorization()
@@ -19,7 +25,7 @@ class LoginUseCase {
     }
     
     func executeGitHubLogIn(url: URL?, completion: @escaping (Bool) -> Void) {
-        self.loginManager.get(with: url, type: JWTResponseDTO.self)
+        self.networkManager.get(with: url, type: JWTResponseDTO.self)
             .sink { result in
                 switch result {
                 case .failure(_):
