@@ -58,7 +58,8 @@ extension AddViewController: UITableViewDataSource {
             cell.textLabel?.text = "완료일"
             return cell
         default:
-            fatalError()
+            assert(indexPath.row > 2, "index path out of range")
         }
+        return cell
     }
 }
