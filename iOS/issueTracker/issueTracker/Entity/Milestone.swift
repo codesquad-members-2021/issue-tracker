@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Milestone: Codable {
+struct Milestone: Codable, Equatable {
     var milestoneId: Int?
     var title: String
     var deadLineDate: String

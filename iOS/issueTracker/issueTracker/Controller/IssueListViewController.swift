@@ -8,7 +8,7 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-    
+
     private var issueList: IssueResponse
     @IBOutlet weak var issueListTableView: UITableView!
     @IBOutlet weak var bottomToolbar: UIToolbar!
@@ -21,6 +21,7 @@ class IssueListViewController: UIViewController {
         setuptableViewDelegateDataSource()
         setuptableViewCustomView()
         bottomToolbar.isHidden = true
+        _ = KeyChainService.shared.deleteUser(service: .gitHub)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

@@ -7,14 +7,25 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Equatable {
+    var userId: Int
     var profileImage: String
     var userName: String
+    var jwtToken: String
     
     static let empty = Self()
     
     init() {
         self.profileImage = ""
         self.userName = ""
+        self.userId = 0
+        self.jwtToken = ""
+    }
+    
+    init(profileImage: String, userName: String, userId: Int, jwtToken: String) {
+        self.profileImage = profileImage
+        self.userName = userName
+        self.userId = userId
+        self.jwtToken = jwtToken
     }
 }

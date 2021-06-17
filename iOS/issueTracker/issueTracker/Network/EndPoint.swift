@@ -13,6 +13,7 @@ protocol Requestable {
     var path: String { get }
     var httpMethod: HTTPMethod { get }
     var url: URL? { get }
+    var localurl: URL { get }
     var decodingStrategy: JSONDecoder.KeyDecodingStrategy { get }
 }
 
@@ -25,6 +26,10 @@ struct APIEndPoint: Requestable {
     
     var url: URL? {
         return URL(string: baseURL + path)
+    }
+
+    var localurl: URL {
+        return URL(fileURLWithPath: path)
     }
     
     init(path: String, httpMethod: HTTPMethod, decodingStrategy: JSONDecoder.KeyDecodingStrategy) {
