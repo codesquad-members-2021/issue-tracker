@@ -13,10 +13,12 @@ import Issues from "components/Issues/Issues";
 
 const MainPage = () => {
 	const { pathname } = window.location;
-
 	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
+			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
+				<Navigator />
+			)}
 			{pathname === "/main" && <Issues />}
 			<Switch>
 				<Route exact path="/main/milestones" component={MilestonesPage} />
