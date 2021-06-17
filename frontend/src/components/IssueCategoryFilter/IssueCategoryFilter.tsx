@@ -2,12 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
+import ArrowIcon from 'components/common/icons/ArrowIcon';
 
 const IssueCategoryFilter = () => {
   const [isClicked, setIsClicked] = useState(false);
   const IssueCategoryFilterInfo = {
     name: "필터",
     header: "이슈 필터",
+    icon: ArrowIcon,
     elements: [
       {contents: "열린 이슈", value: "OPENED"},
       {contents: "내가 작성한 이슈", value: "WRITTEN"},
