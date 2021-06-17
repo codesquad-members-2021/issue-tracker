@@ -41,6 +41,11 @@ class IssueCoordinator: NSObject, Coordinator {
     func pushImagePickerView() {
         let imagePickerDelegate = ImagePickerDelegate()
         let imagePicker = ImagePicker.init(presentationController: self.navigationController, delegate: imagePickerDelegate)
+        imagePicker.coordinator = self
         self.navigationController.present(imagePicker.pickerController, animated: true, completion: nil)
+    }
+    
+    func dismiss(view: UIViewController) {
+        view.dismiss(animated: true, completion: nil)
     }
 }

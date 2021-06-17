@@ -13,6 +13,7 @@ public protocol ImagePickerDelegatable: AnyObject {
 
 class ImagePicker: NSObject {
     
+    weak var coordinator: Coordinator!
     let pickerController: UIImagePickerController
     private weak var delegate: ImagePickerDelegatable?
     
@@ -28,7 +29,10 @@ class ImagePicker: NSObject {
     }
     
     private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
-        controller.dismiss(animated: true, completion: nil)
+        guard let coordinator = self.coordinator as? IssueCoordinator else {
+            return
+        }
+        coordinator.dismiss(view: self.pickerController)
         self.delegate?.didSelect(image: image)
     }
 }
