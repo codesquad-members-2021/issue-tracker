@@ -15,7 +15,7 @@ final class AddLabelViewController: UIViewController {
         container.addSubview(saveButton)
         NSLayoutConstraint.activate([
             saveButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            saveButton.widthAnchor.constraint(equalToConstant: spacing * 2),
+            saveButton.widthAnchor.constraint(greaterThanOrEqualToConstant: spacing * 2),
             saveButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
             saveButton.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
         ])
@@ -23,7 +23,7 @@ final class AddLabelViewController: UIViewController {
         container.addSubview(cancelButton)
         NSLayoutConstraint.activate([
             cancelButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            cancelButton.widthAnchor.constraint(equalToConstant: spacing * 2),
+            cancelButton.widthAnchor.constraint(greaterThanOrEqualToConstant: spacing * 2),
             cancelButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
             cancelButton.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
         ])
