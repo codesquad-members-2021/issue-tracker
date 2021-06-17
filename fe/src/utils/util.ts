@@ -1,4 +1,5 @@
 import { ParsedQs } from 'qs';
+import { NavType } from 'types/issueType';
 import { titleType } from 'types/newIssueType';
 
 export const getUrl = {
@@ -14,3 +15,6 @@ export const getTitle = (type: titleType) =>
     assigneeList: '담당자',
   }[type]);
 
+
+
+export const getNavButtonTitle = (type: NavType) => type === 'All' ? '이슈 작성' : '추가'

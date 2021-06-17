@@ -25,17 +25,32 @@ type UserDataType = {
   avatar_url: string | undefined;
 };
 
+export const totalCountOfLabels = selector<number>({
+  key: 'labellength',
+  get: ({ get }) => {
+    return get(labelQuery).length;
+  },
+});
+
 export const labelQuery = selector<FilterItemType[]>({
   key: 'labelQuery',
   get: async () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API_URL}/api/labels`
     );
+
     return data.map((labelItem: LabelDataType) => ({
       id: labelItem.id,
       description: labelItem.title,
       labelColor: labelItem.color_code,
     }));
+  },
+});
+
+export const totalCountOfMilestone = selector<number>({
+  key: 'milestonelength',
+  get: ({ get }) => {
+    return get(milestoneQuery).length;
   },
 });
 

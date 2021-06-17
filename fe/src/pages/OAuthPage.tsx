@@ -31,15 +31,18 @@ const OAuthPage = () => {
 };
 
 const Div = styled.div`
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
+  top:0;
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   font-size: 3rem;
 
   span {
+    margin-top: 5rem;
     margin-left: 1rem;
   }
 `;

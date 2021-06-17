@@ -7,8 +7,7 @@ import styled from 'styled-components';
 const MilestoneListPage = () => {
   return (
     <>
-      <Header />
-      <NavbarButtons buttonType="추가" />
+      <NavbarButtons type="Milestone" />
       <StyledSpace>
         <Milestones />
       </StyledSpace>

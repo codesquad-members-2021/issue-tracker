@@ -1,11 +1,20 @@
 import { Button } from '@material-ui/core';
 import { ReactComponent as PlusIconSvg } from 'icons/pluse.svg';
+import { MouseEvent } from 'react';
 import { ReactChild } from 'react';
 import styled from 'styled-components';
 
-const CreateButton = ({ children }: { children: ReactChild }) => {
+const CreateButton = ({
+  children,
+  onClick,
+}: {
+  children: ReactChild;
+  onClick: ( event : MouseEvent) => void
+}) => {
   return (
-    <StyledCreateButton startIcon={<PlusIcon />}>{children}</StyledCreateButton>
+    <StyledCreateButton onClick={onClick} startIcon={<PlusIcon />}>
+      {children}
+    </StyledCreateButton>
   );
 };
 

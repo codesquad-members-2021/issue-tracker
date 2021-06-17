@@ -2,23 +2,41 @@ import { Button, Divider } from '@material-ui/core';
 import { ReactComponent as LabelIconSvg } from 'icons/label.svg';
 import { ReactComponent as MilestoneIconSvg } from 'icons/openMilestone.svg';
 import CreateButton from 'components/buttons/CreateButton';
+import { NavType } from 'types/issueType';
 import styled from 'styled-components';
+import { getNavButtonTitle } from 'utils/util';
+import { useRecoilValue } from 'recoil';
+import { totalCountOfLabels, totalCountOfMilestone } from 'store';
+import { Link, useHistory } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
-const NavbarButtons = ({ buttonType }: { buttonType: string }) => {
+const NavbarButtons = ({ type }: { type: NavType }) => {
+  const MilestoneCnt = useRecoilValue(totalCountOfMilestone);
+  const LabelCnt = useRecoilValue(totalCountOfLabels);
+  const history = useHistory();
+  const clickHandler = (event: MouseEvent) => {
+    if (type === 'All') history.push('/issues/new-issue');
+  };
   return (
     <StyledNavbarButtons>
       <LabelAndMilestone>
-        <LabelButton startIcon={<LabelIcon />}>
-          <div className="button-text">레이블</div>
-          <div className="button-count">(0)</div>
-        </LabelButton>
+        <Link to="/labels">
+          <LabelButton buttontype={type} startIcon={<LabelIcon />}>
+            <div className="button-text">레이블</div>
+            <div className="button-count">({LabelCnt})</div>
+          </LabelButton>
+        </Link>
         <Divider orientation="vertical" flexItem />
-        <MilestoneButton startIcon={<MilestoneIcon />}>
-          <div className="button-text">마일스톤</div>
-          <div className="button-count">(0)</div>
-        </MilestoneButton>
+        <Link to="/milestones">
+          <MilestoneButton buttontype={type} startIcon={<MilestoneIcon />}>
+            <div className="button-text">마일스톤</div>
+            <div className="button-count">({MilestoneCnt})</div>
+          </MilestoneButton>
+        </Link>
       </LabelAndMilestone>
-      <CreateButton>{buttonType}</CreateButton>
+      <CreateButton onClick={clickHandler}>
+        {getNavButtonTitle(type)}
+      </CreateButton>
     </StyledNavbarButtons>
   );
 };
@@ -42,25 +60,29 @@ const LabelIcon = styled(LabelIconSvg)`
 
 const MilestoneIcon = styled(MilestoneIconSvg)``;
 
-const LabelButton = styled(Button)`
+const LabelButton = styled(Button)<{ buttontype: NavType }>`
   width: 10rem;
   height: 2.5rem;
   border-radius: 0.7rem 0 0 0.7rem;
   color: ${({ theme }) => theme.color.grayscale.label};
   font-weight: ${({ theme }) => theme.fontWeight.bold2};
-
+  background-color: ${({ buttontype, theme }) => {
+    if (buttontype === 'Label') return theme.color.grayscale.line;
+  }};
   .button-text {
     margin-right: 0.5rem;
   }
 `;
 
-const MilestoneButton = styled(Button)`
+const MilestoneButton = styled(Button)<{ buttontype: NavType }>`
   width: 10rem;
   height: 2.5rem;
   border-radius: 0 0.7rem 0.7rem 0;
   color: ${({ theme }) => theme.color.grayscale.label};
   font-weight: ${({ theme }) => theme.fontWeight.bold2};
-
+  background-color: ${({ buttontype, theme }) => {
+    if (buttontype === 'Milestone') return theme.color.grayscale.line;
+  }};
   .button-text {
     margin-right: 0.5rem;
   }

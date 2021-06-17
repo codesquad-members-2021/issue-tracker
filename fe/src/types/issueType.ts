@@ -1,3 +1,6 @@
+
+export type NavType = 'All' | 'Milestone' | 'Label'
+
 export interface IssueItemType extends IssueItemLeftPropsType {
   isOpen: boolean;
   author: authorType;

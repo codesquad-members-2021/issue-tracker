@@ -2,19 +2,19 @@ import { InputBase } from '@material-ui/core';
 import IssueFilter from 'components/common/IssueFilter';
 import styled from 'styled-components';
 import { ReactComponent as SearchIconSvg } from 'icons/search.svg';
-import NavbarButtons from './NavbarButtons';
+import NavbarButtons from './NavbarButtons'; 
 
 const Navbar = () => {
-  return (
+  return ( 
     <Nav>
       <NavbarLeft>
-        <IssueFilter />
+        <IssueFilter />    
         <SearchIcon />
         <FilterSearchBar />
       </NavbarLeft>
 
       <NavbarRight>
-        <NavbarButtons buttonType="이슈 작성" />
+        <NavbarButtons type="All" />
       </NavbarRight>
     </Nav>
   );
