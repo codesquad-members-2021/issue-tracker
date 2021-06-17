@@ -1,7 +1,6 @@
 import { Box } from '@material-ui/core';
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Comment from 'components/issue-detail/Comment';
-import CommentInput from 'components/common/CommentInput';
 import styled from 'styled-components';
 
 const IssueDetailBody = () => (
@@ -20,7 +19,7 @@ const IssueDetailBody = () => (
       <NewCommentWrapper display="flex">
         <AuthorAvatar size="L" name="eamon" />
         <Spacer />
-        <CommentInput />
+        {/* comment input ui */}
       </NewCommentWrapper>
     </CommentArea>
     <AssignArea></AssignArea>
