@@ -21,7 +21,7 @@ public class UserController {
         return userService.login(code);
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public UserWrapper findAll(){
         return userService.findAll();
     }

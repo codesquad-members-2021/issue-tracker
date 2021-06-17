@@ -7,6 +7,7 @@ import com.codesqaude.cocomarco.domain.oauth.dto.AccessToken;
 import com.codesqaude.cocomarco.domain.oauth.dto.JwtResponse;
 import com.codesqaude.cocomarco.domain.user.User;
 import com.codesqaude.cocomarco.domain.user.UserRepository;
+import com.codesqaude.cocomarco.domain.user.dto.UserResponse;
 import com.codesqaude.cocomarco.domain.user.dto.UserWrapper;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -54,6 +56,7 @@ public class UserService {
 
     public UserWrapper findAll() {
         List<User> users = userRepository.findAll();
-        return new UserWrapper(users);
+        List<UserResponse> userResponses = users.stream().map(UserResponse::of).collect(Collectors.toList());
+        return new UserWrapper(userResponses);
     }
 }
