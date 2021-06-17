@@ -41,7 +41,6 @@ class MilestoneTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.text = "마일스톤 타이틀"
         label.textAlignment = .left
         return label
     }()
@@ -57,7 +56,6 @@ class MilestoneTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
         label.textColor = .systemGray
-        label.text = "마일스톤 설명"
         return label
     }()
     
@@ -65,7 +63,6 @@ class MilestoneTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
         label.textColor = .systemGray
-        label.text = "2021-06-21"
         return label
     }()
 
@@ -75,7 +72,6 @@ class MilestoneTableViewCell: UITableViewCell {
         label.textColor = .white
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 15
-        label.text = "Opend Issue 1개"
         label.backgroundColor = UIColor.hexStringToUIColor(hex: "#B1CAE5")
         return label
     }()
@@ -86,7 +82,6 @@ class MilestoneTableViewCell: UITableViewCell {
         label.textColor = .white
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 15
-        label.text = "Closed Issue 1개"
         label.backgroundColor = UIColor.hexStringToUIColor(hex: "#DFCD85")
         return label
     }()
@@ -125,6 +120,18 @@ class MilestoneTableViewCell: UITableViewCell {
         super.layoutSubviews()
         horizenStackView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(20)
+        }
+    }
+    
+    func configure(with milestone: Milestone) {
+        titleLabel.text = milestone.title
+        descriptionLabel.text = milestone.description
+        dueDateLabel.text = milestone.dueDate
+        if let open = milestone.openedIssueCount {
+            openedIssue.text = "열린 이슈 \(open)개"
+        }
+        if let close = milestone.closedIssueCount {
+            closedIssue.text = "닫힌 이슈 \(close)개"
         }
     }
 }
