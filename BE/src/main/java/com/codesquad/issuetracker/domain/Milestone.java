@@ -34,12 +34,18 @@ public class Milestone {
     @JsonProperty("closed_issue")
     private int closedIssue;
 
+    public Milestone(String title, String content, LocalDateTime dueDate){
+        this.title = title;
+        this.content = content;
+        this.dueDate = dueDate;
+    }
+
     public static Milestone create(Long id, String title, String content, LocalDateTime dueDate, int openedIsssue, int closedIssue) {
         return new Milestone(id, title, content, dueDate, openedIsssue, closedIssue);
     }
 
-    public static Milestone create(Long id, String title, String content, LocalDateTime dueDate) {
-        return new Milestone(id, title, content, dueDate, 0, 0);
+    public static Milestone create(String title, String content, LocalDateTime dueDate) {
+        return new Milestone(title, content, dueDate);
     }
 
     public void update(EditedMilestone editedMilestone) {

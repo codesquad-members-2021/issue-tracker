@@ -22,12 +22,8 @@ public class MilestoneRequest {
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime dueDate;
 
-    public Milestone create(Long id) {
-        return Milestone.create(id, title, content, dueDate);
-    }
-
     public Milestone create(){
-        return create(null);
+        return Milestone.create(title, content, dueDate);
     }
 
 }
