@@ -13,7 +13,9 @@ VALUES ("comment content 1", NOW(), 1, 1);
 
 INSERT INTO `label` (title, content, color)
 VALUES ("label title 1", "label content 1", "FFFFFF"),
-       ("label title 2", "label content 2", "FF0000");
+       ("label title 2", "label content 2", "FF0000"),
+       ("label title 3", "label content 3", "FF0000"),
+       ("label title 4", "label content 4", "FFFFFF");
 
 INSERT INTO `assignee` (issue_id, user_id)
 VALUES (1, 1),
@@ -21,4 +23,5 @@ VALUES (1, 1),
 
 INSERT INTO `issue_label` (issue_id, label_id)
 VALUES (1, 1),
-       (1, 2);
+       (1, 2),
+       (1, 3);

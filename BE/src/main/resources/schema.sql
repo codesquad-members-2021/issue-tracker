@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `issue-tracker`.`issue_label` (
     CONSTRAINT `fk_issue_label_label1`
     FOREIGN KEY (`label_id`)
     REFERENCES `issue-tracker`.`label` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
