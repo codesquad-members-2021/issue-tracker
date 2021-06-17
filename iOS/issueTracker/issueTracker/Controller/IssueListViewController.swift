@@ -9,8 +9,6 @@ import UIKit
 
 class IssueListViewController: UIViewController {
 
-    private var user: User!
-    
     private var issueList: IssueResponse
     @IBOutlet weak var issueListTableView: UITableView!
     @IBOutlet weak var bottomToolbar: UIToolbar!
@@ -39,10 +37,6 @@ class IssueListViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         fetchIssueList()
         super.viewDidAppear(true)
-    }
-
-    func getUser(_ user: User) {
-        self.user = user
     }
     
     func fetchIssueList() {

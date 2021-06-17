@@ -13,10 +13,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
     }
-
-    @IBAction func segueNextViewController(_ sender: Any) {
-        self.performSegue(withIdentifier: "IssueList", sender: nil)
-    }
     
     @IBAction func didTapGitHubLogin(_ sender: Any) {
         self.excuteOAuth(service: .gitHub) { _ in

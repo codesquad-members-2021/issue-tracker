@@ -19,8 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let storyboard = UIStoryboard(name: "IssueList", bundle: nil)
 
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "IssueList")
-            // 키체인에서 가져온 user를 컨트롤러로 넘겨줌
-            // initialViewController?.getUser(user!)
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }
