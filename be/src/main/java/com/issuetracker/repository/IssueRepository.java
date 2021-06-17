@@ -75,5 +75,8 @@ public class IssueRepository {
         return jdbcTemplate.queryForObject(query, MILESTONE_TITLE_ROW_MAPPER, issueId);
     }
 
-
+    public void saveForIssueHasLabels(Long issueId, Long labelId) {
+        String query = "insert into issue_has_label (issue_id, label_id) values (?, ?)";
+        jdbcTemplate.update(query, issueId, labelId);
+    }
 }

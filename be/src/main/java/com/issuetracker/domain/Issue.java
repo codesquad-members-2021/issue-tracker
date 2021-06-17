@@ -40,7 +40,7 @@ public class Issue {
         this.labels = labels;
     }
 
-    public void setIssueFromDto(IssueRequestDto requestDto, User user) {
+    public void setIssueFromDto(IssueRequestDto requestDto, User user, Long lastNumOfIssue) {
         this.title = requestDto.getTitle();
         this.description = requestDto.getDescription();
         this.assignee = requestDto.getAssignee();
@@ -50,7 +50,7 @@ public class Issue {
         this.milestoneId = requestDto.getMilestoneId();
         this.authorUserId = user.getId();
         //TODO: 추후 변경
-        this.number = 6L;
+        this.number = lastNumOfIssue + 1;
     }
 
     public Long getId() {

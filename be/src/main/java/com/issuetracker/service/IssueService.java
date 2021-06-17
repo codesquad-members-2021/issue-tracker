@@ -31,14 +31,18 @@ public class IssueService {
     }
 
     public ResponseStatusDto saveIssue(IssueRequestDto requestDto, User user) {
-//        int lastNumOfIssues = issueRepository.findAllIssues().size();
+        int lastNumOfIssues = issueRepository.findAllIssues().size();
 
         Issue issueForSaving = new Issue();
-        issueForSaving.setIssueFromDto(requestDto, user);
+        issueForSaving.setIssueFromDto(requestDto, user, (long) lastNumOfIssues);
 
         Long savedIssueId = issueRepository.simpleSave(issueForSaving);
         logger.info("id :{}", savedIssueId);
-//        labelRepository.save();
+
+        for (Long labelId : requestDto.getLabelIds()) {
+            issueRepository.saveForIssueHasLabels(savedIssueId, labelId);
+        }
+
         return new ResponseStatusDto("success");
     }
 }
