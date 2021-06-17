@@ -9,7 +9,7 @@ import com.codesqaude.cocomarco.domain.label.Label;
 import com.codesqaude.cocomarco.domain.label.dto.LabelResponse;
 import com.codesqaude.cocomarco.domain.milestone.dto.MilestoneSoloResponse;
 import com.codesqaude.cocomarco.domain.user.User;
-import com.codesqaude.cocomarco.domain.user.UserResponse;
+import com.codesqaude.cocomarco.domain.user.dto.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
 
