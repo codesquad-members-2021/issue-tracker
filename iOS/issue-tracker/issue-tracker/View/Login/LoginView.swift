@@ -35,8 +35,8 @@ class LoginView: UIView {
         return button
     }()
     
-    let appleLoginButton = GitHubLoginButton()
-    let githubLoginButton = AppleLoginButton()
+    let appleLoginButton = AppleLoginButton()
+    let githubLoginButton = GitHubLoginButton()
     let textField = IDPasswordTextField()
     
     override init(frame: CGRect) {

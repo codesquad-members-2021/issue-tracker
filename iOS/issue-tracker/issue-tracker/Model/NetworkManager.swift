@@ -10,18 +10,32 @@ import Alamofire
 
 protocol Networkable {
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void)
+    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void)
 }
 
-class NetworkManager {
+class NetworkManager: Networkable {
     private let httpHeaders: HTTPHeaders = ["Content-Type": "application/json", "Accept": "application/json"]
 
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void) {
-        AF.request(url, method: .get, encoding: URLEncoding.default, headers: httpHeaders)
+        AF.request(url, method: .get, headers: httpHeaders)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: decodableType) { (response) in
                 switch response.result {
                 case .success(let data):
                     completion(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void) {
+        AF.request(url, method: .post, parameters: encodable, encoder: JSONParameterEncoder.default, headers: httpHeaders)
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success :
+                    completion()
                 case .failure(let error):
                     print(error)
                 }

@@ -37,7 +37,7 @@ class MilestoneViewController: UIViewController {
     }
     
     @objc func addMilestone() {
-        let nav = UINavigationController(rootViewController: AddViewController())
+        let nav = UINavigationController(rootViewController: AddMilestoneViewController())
         present(nav, animated: true, completion: nil)
     }
 }
