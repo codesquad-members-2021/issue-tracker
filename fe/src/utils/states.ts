@@ -19,3 +19,13 @@ export const selectIssueAll = atom({
   key: "selectIssueAll",
   default: false,
 });
+
+export const selectionState = atom({
+  key: "selectState",
+  default: {
+    assignee: "",
+    author: "",
+    milestone: "",
+    label: "",
+  },
+});

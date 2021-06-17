@@ -1,11 +1,25 @@
+export interface ListItemsType {
+  id: number | string;
+  title: string;
+}
+
+interface LabelType extends ListItemsType {
+  content: string | null;
+  color: string;
+}
+
 export interface IssueType {
   id: number;
   title: string;
   content: string;
   status: boolean;
   created_at: string;
-  label_list: string[];
+  label_list: LabelType[];
   author: {
+    name: string;
+    user_id: string;
+  };
+  assignee: {
     name: string;
     user_id: string;
   };
@@ -21,12 +35,7 @@ export interface filterOptionType {
 }
 
 export interface UsefulObjectType {
-  [key: string]: string;
-}
-
-interface ListItemsType {
-  id: number;
-  title: string;
+  [key: string]: string | ListItemsType;
 }
 
 export interface IssueRefStateType {
