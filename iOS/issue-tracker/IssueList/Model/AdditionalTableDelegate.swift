@@ -15,7 +15,9 @@ class AdditionalTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-        let header = view as! UITableViewHeaderFooterView
+        guard let header = view as? UITableViewHeaderFooterView else {
+            return
+        }
         header.contentView.backgroundColor = .white
         header.textLabel?.textColor = UIColor.black
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
