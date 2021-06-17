@@ -20,7 +20,6 @@ const IssueTableHeader = (): JSX.Element => {
     <S.IssueTableHeader>
       <S.IssueTableHeaderLeft>
         <CheckBoxes />
-
         <IssueHeaderButton
           icon={<OpenIconGroup type={'default'} />}
           text={

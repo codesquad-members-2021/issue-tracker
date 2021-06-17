@@ -3,8 +3,12 @@ import InputGroup from '../../../../common/group/InputGroup';
 import styled from 'styled-components';
 import { ProfileImg as P } from '../../../../styles/CommonStyles';
 import { TYPE as T } from '../../../../../utils/const';
+import { useRecoilValue } from 'recoil';
+import { decodedToken } from '../../../../../store/Recoil';
 const IssueAddInputTitle = (): JSX.Element => {
-  const profileURL = localStorage.getItem('profileImageUrl');
+  const decoded = decodedToken && useRecoilValue(decodedToken);
+  const profileURL = decoded && decoded.profileImageUrl;
+
   return (
     <IssueAddInputTitleStyle>
       <ProfileImgStyle>

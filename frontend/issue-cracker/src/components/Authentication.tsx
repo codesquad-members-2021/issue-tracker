@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
-import { RouteComponentProps } from 'react-router-dom';
 import Loader from './layout/Loader';
 import { URL as U, PATH as P } from '../utils/const';
-import useToken from '../utils/useToken';
-import { useSetRecoilState } from 'recoil';
-import { token } from '../store/Recoil';
+import { useHistory, useLocation } from 'react-router';
+// import useToken from '../utils/useToken';
+// import { useSetRecoilState } from 'recoil';
+// import { token } from '../store/Recoil';
 
-const Authentication = ({
-  history,
-  location,
-}: RouteComponentProps): JSX.Element => {
+const Authentication = (): JSX.Element => {
   const authUri = U.AUTH;
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     const getToken = async () => {

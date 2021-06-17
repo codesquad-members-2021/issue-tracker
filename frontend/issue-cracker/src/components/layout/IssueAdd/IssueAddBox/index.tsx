@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueAddInput from './IssueAddInput/IssueAddInput';
-import IssueAddSidebar from './IssueAddSidebar/IssueAddSidebar';
+import IssueAddInput from './IssueAddInput';
+import IssueAddSidebar from './IssueAddSidebar';
 
 const IssueAddBox = (): JSX.Element => {
   return (

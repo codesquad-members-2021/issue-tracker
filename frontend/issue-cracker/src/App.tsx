@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';
@@ -23,13 +23,27 @@ function App(): JSX.Element {
           <Route exact path={P.ROOT}>
             {token ? <Redirect to={P.ISSUE_LIST} /> : <Redirect to={P.LOGIN} />}
           </Route>
-          <Route exact path={P.LOGIN} component={LogIn} />
-          <Route exact path={P.AUTH} component={Authentication} />
-          <Route path={P.MAIN} component={Header} />
-          <Route exact path={P.ISSUE_LIST} component={IssueList} />
-          <Route exact path={P.ISSUE_ADD} component={IssueAdd} />
-          <Route exact path={P.ISSUE_DETAIL} component={IssueDetail} />
-          <Route exact path={P.ISSUE_LABELLIST} component={LabelList} />
+          <Route exact path={P.LOGIN}>
+            <LogIn />
+          </Route>
+          <Route exact path={P.AUTH}>
+            <Authentication />
+          </Route>
+          <Route path={P.MAIN}>
+            <Header />
+          </Route>
+          <Route exact path={P.ISSUE_LIST}>
+            <IssueList />
+          </Route>
+          <Route exact path={P.ISSUE_ADD}>
+            <IssueAdd />
+          </Route>
+          <Route exact path={P.ISSUE_DETAIL}>
+            <IssueDetail />
+          </Route>
+          <Route exact path={P.ISSUE_LABELLIST}>
+            <LabelList />
+          </Route>
         </AppStyle>
       </ThemeProvider>
     </BrowserRouter>

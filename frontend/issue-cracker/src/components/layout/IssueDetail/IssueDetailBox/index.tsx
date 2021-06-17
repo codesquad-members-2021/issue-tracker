@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueDetailInput from './IssueDetailInput/IssueDetailInput';
-import IssueDetailSidebar from './IssueDetailSidebar/IssueDetailSidebar';
+import IssueDetailInput from './IssueDetailInput';
+import IssueDetailSidebar from './IssueDetailSidebar';
 
 const IssueDetailBox = (): JSX.Element => {
   return (

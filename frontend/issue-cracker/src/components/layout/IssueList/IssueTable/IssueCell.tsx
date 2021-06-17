@@ -9,9 +9,12 @@ import IssueOpenIcon from '../../../styles/svg/IssueOpenIcon';
 import styled from 'styled-components';
 import LabelSmallGroup from '../../../common/group/LabelSmallGroup';
 import { Link } from 'react-router-dom';
+import { decodedToken } from '../../../../store/Recoil';
+import { useRecoilValue } from 'recoil';
 
 const IssueCell = (): JSX.Element => {
-  const profileURL = localStorage.getItem('profileImageUrl');
+  const decoded = decodedToken && useRecoilValue(decodedToken);
+  const profileURL = decoded && decoded.profileImageUrl;
 
   return (
     <S.IssueCell>

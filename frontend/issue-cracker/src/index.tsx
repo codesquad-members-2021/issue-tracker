@@ -6,11 +6,11 @@ import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <StylesProvider injectFirst>
+    <StylesProvider injectFirst>
+      <RecoilRoot>
         <App />
-      </StylesProvider>
-    </RecoilRoot>
+      </RecoilRoot>
+    </StylesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

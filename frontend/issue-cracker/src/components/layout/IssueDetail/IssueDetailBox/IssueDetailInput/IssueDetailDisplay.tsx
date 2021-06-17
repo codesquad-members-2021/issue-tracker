@@ -8,9 +8,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import { TYPE as T } from '../../../../../utils/const';
+import { useRecoilValue } from 'recoil';
+import { decodedToken } from '../../../../../store/Recoil';
 
 const IssueDetailDisplay = (): JSX.Element => {
-  const profileURL = localStorage.getItem('profileImageUrl');
+  const decoded = decodedToken && useRecoilValue(decodedToken);
+  const profileURL = decoded && decoded.profileImageUrl;
   return (
     <IssueDisplayStyle>
       <DisplayWrapper>

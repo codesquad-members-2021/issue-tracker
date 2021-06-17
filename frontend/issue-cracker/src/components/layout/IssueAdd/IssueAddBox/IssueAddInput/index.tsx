@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueAddInputContent from '../IssueAddInput/IssueAddInputContent';
-import IssueAddInputTitle from '../IssueAddInput/IssueAddInputTitle';
+import IssueAddInputContent from './IssueAddInputContent';
+import IssueAddInputTitle from './IssueAddInputTitle';
 
 const IssueAddInput = (): JSX.Element => {
   return (
