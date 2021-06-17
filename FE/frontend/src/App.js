@@ -2,12 +2,12 @@ import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './components/login/Login';
 import Main from './components/main/Main';
 import Oauth from './components/login/Oauth';
-import { Redirect } from 'react-router';
 
 const queryClient = new QueryClient();
 function App() {

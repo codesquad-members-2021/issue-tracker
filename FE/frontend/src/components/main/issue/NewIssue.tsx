@@ -1,35 +1,46 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Paperclip } from '../../../icons/paperclip.svg';
-import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
+import { Link } from 'react-router-dom';
 import Typos from '../../../styles/atoms/Typos';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
-import { Link } from 'react-router-dom';
+import { ReactComponent as Paperclip } from '../../../icons/paperclip.svg';
+import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 const AddIssue = () => {
   const [inputCount, setInputCount] = useState(0);
+  const [disabled, setDisabled] = useState(true);
+  const [initial, setInitial] = useState(false);
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value.length;
-    setInputCount(newValue);
+    const valueCount = e.target.value.length;
+
+    if (valueCount) {
+      setDisabled(false);
+      setInitial(true);
+    } else {
+      setDisabled(true);
+      setInitial(false);
+    }
+
+    setInputCount(valueCount);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     clearTimeout(debounceTimeoutId);
-    debounceTimeoutId = setTimeout(() => countInput(e), 2000);
+    debounceTimeoutId = setTimeout(() => countInput(e), 500);
   };
 
   return (
-    <AddIssueWrapper>
-      <TopWrapper>
+    <AddIssueContainer>
+      <TopContainer>
         <Title>새로운 이슈 작성</Title>
-      </TopWrapper>
+      </TopContainer>
       <Line />
-      <MainWrapper>
+      <MainContainer>
         <User />
-        <InputWrapper>
+        <InputContainer>
           <TitleInput placeholder="제목"></TitleInput>
           <CommentInput
             onChange={onChange}
@@ -37,36 +48,36 @@ const AddIssue = () => {
           <Count xs>띄어쓰기 포함 {inputCount}자</Count>
           <FileSection>
             <input type="file" id="BtnBrowseHidden" hidden />
-            <LabelWrapper htmlFor="BtnBrowseHidden">
+            <LabelContainer htmlFor="BtnBrowseHidden">
               <Paperclip />
               <Typos sm>파일을 추가하세요</Typos>
-            </LabelWrapper>
+            </LabelContainer>
           </FileSection>
-        </InputWrapper>
+        </InputContainer>
         <Assignees></Assignees>
-      </MainWrapper>
+      </MainContainer>
       <Line />
-      <BottomWrapper>
-        <CancelButtonWrapper to={`/main`}>
+      <BottomContainer>
+        <CancelButtonContainer to={`/main`}>
           <Typos sm>
             <XSquare />
             작성 취소
           </Typos>
-        </CancelButtonWrapper>
-        <Buttons disabled medium>
+        </CancelButtonContainer>
+        <Buttons disabled={disabled} initial={initial} medium>
           완료
         </Buttons>
-      </BottomWrapper>
-    </AddIssueWrapper>
+      </BottomContainer>
+    </AddIssueContainer>
   );
 };
 
-const AddIssueWrapper = styled.div`
+const AddIssueContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const TopWrapper = styled.div`
+const TopContainer = styled.div`
   padding: 0px 48px;
 `;
 
@@ -83,7 +94,7 @@ const Line = styled.div`
   background: ${props => props.theme.greyscale.line};
 `;
 
-const MainWrapper = styled.div`
+const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -92,7 +103,7 @@ const MainWrapper = styled.div`
   }
 `;
 
-const InputWrapper = styled.div`
+const InputContainer = styled.div`
   position: relative;
   width: 880px;
   font-size: 16px;
@@ -143,7 +154,7 @@ const FileSection = styled.div`
   }
 `;
 
-const LabelWrapper = styled.label`
+const LabelContainer = styled.label`
   display: flex;
 `;
 
@@ -158,7 +169,7 @@ const Assignees = styled.div`
   margin: 1px 0px;
 `;
 
-const BottomWrapper = styled.div`
+const BottomContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -168,7 +179,7 @@ const BottomWrapper = styled.div`
   }
 `;
 
-const CancelButtonWrapper = styled(Link)`
+const CancelButtonContainer = styled(Link)`
   text-decoration: none;
   color: inherit;
   & > div {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import useFetch from '../../../util/useFetch';
 import Tabs from '../../../styles/molcules/Tabs';
 import Buttons from '../../../styles/atoms/Buttons';
 import Typos from '../../../styles/atoms/Typos';
@@ -9,13 +10,12 @@ import { ReactComponent as MilestoneIcon } from '../../../icons/milestone.svg';
 import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 import { ReactComponent as Trash } from '../../../icons/trash.svg';
-import useFetch from '../../../util/useFetch';
 
 const MilestoneList = () => {
   const { isLoading, data, error } = useFetch('milestone', 'getAllData');
 
   return (
-    <MilestoneListWrapper>
+    <MilestoneListContainer>
       <MilstoneTab>
         <Tabs />
         <Buttons initial small>
@@ -25,18 +25,18 @@ const MilestoneList = () => {
           추가
         </Buttons>
       </MilstoneTab>
-      <MilestoneTableWrapper>
+      <MilestoneTableContainer>
         <MilestoneHeader>
-          <Text link sm>
+          <MilestoneContainer link sm>
             <MilestoneIcon />
             열린 마일스톤
-          </Text>
-          <Text link sm>
+          </MilestoneContainer>
+          <MilestoneContainer link sm>
             <Archive />
             닫힌 마일스톤
-          </Text>
+          </MilestoneContainer>
         </MilestoneHeader>
-        <TableWrapper>
+        <TableContainer>
           {data?.map((milestone: any, index: number) => {
             const progressPercentage = `${~~(
               (milestone.closed_issue /
@@ -46,7 +46,7 @@ const MilestoneList = () => {
 
             return (
               <IssueCell key={index}>
-                <LeftCellWrapper>
+                <LeftCellContainer>
                   <UpperCell>
                     <Typos link sm>
                       <MilestoneIcon />
@@ -58,8 +58,8 @@ const MilestoneList = () => {
                     </Typos>
                   </UpperCell>
                   <Typos sm> {milestone.content}</Typos>
-                </LeftCellWrapper>
-                <RightCellWrapper>
+                </LeftCellContainer>
+                <RightCellContainer>
                   <Bottom>
                     <EditWrapper link sm>
                       <Archive /> 닫기
@@ -68,9 +68,9 @@ const MilestoneList = () => {
                     <EditWrapper link sm>
                       <Edit /> 편집
                     </EditWrapper>
-                    <TrashWrapper link sm>
+                    <TrashContainer link sm>
                       <Trash /> 삭제
-                    </TrashWrapper>
+                    </TrashContainer>
                   </Bottom>
                   <LowerCell>
                     <ProgressBar percent={progressPercentage} />
@@ -80,17 +80,17 @@ const MilestoneList = () => {
                       <Typos xs>닫힌 이슈 {milestone.closed_issue}</Typos>
                     </Bottom>
                   </LowerCell>
-                </RightCellWrapper>
+                </RightCellContainer>
               </IssueCell>
             );
           })}
-        </TableWrapper>
-      </MilestoneTableWrapper>
-    </MilestoneListWrapper>
+        </TableContainer>
+      </MilestoneTableContainer>
+    </MilestoneListContainer>
   );
 };
 
-const MilestoneListWrapper = styled.div`
+const MilestoneListContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -103,7 +103,7 @@ const MilstoneTab = styled.div`
   padding: 24px 48px;
 `;
 
-const MilestoneTableWrapper = styled.div`
+const MilestoneTableContainer = styled.div`
   padding: 12px 48px;
   min-width: 1024px;
   border-radius: 16px;
@@ -152,20 +152,20 @@ const IssueCell = styled.div`
   }
 `;
 
-const TableWrapper = styled.div`
+const TableContainer = styled.div`
   border: ${props => `1px solid ${props.theme.greyscale.line}`};
   &:last-child {
     border-radius: 0px 0px 16px 16px;
   }
 `;
 
-const LeftCellWrapper = styled.div`
+const LeftCellContainer = styled.div`
   div {
     padding-right: 24px;
   }
 `;
 
-const RightCellWrapper = styled.div`
+const RightCellContainer = styled.div`
   display: flex;
   flex-direction: column;
   div {
@@ -201,7 +201,7 @@ const ProgressBar = styled.div<{ percent: string }>`
   border-radius: 10px;
 `;
 
-const Text = styled(Typos)`
+const MilestoneContainer = styled(Typos)`
   padding-left: 10px;
   color: ${props => props.theme.greyscale.label};
 `;
@@ -213,7 +213,7 @@ const EditWrapper = styled(Typos)`
   }
 `;
 
-const TrashWrapper = styled(Typos)`
+const TrashContainer = styled(Typos)`
   color: ${props => props.theme.colors.error};
   svg {
     stroke: ${props => props.theme.colors.error};

@@ -9,7 +9,7 @@ const ListFilters = () => {
   const author = ['작성자가 없는 이슈'];
 
   return (
-    <FilterWrapper>
+    <FilterContainer>
       <Modal
         label="담당자"
         options={assignees}
@@ -38,11 +38,11 @@ const ListFilters = () => {
         type="text"
         innerTitle="작성자 필터"
       />
-    </FilterWrapper>
+    </FilterContainer>
   );
 };
 
-const FilterWrapper = styled.div`
+const FilterContainer = styled.div`
   display: flex;
 `;
 

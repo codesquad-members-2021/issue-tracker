@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import DropDown from './DropDown';
 import Typo from '../atoms/Typos';
 import { ReactComponent as Downward } from '../../icons/downward.svg';
-import DropDown from './DropDown';
-
 interface Props {
   label: string;
   options: string[];

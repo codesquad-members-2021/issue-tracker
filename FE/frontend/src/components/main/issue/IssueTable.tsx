@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import Typo from '../../../styles/atoms/Typos';
-import CheckBox from '../../../styles/atoms/CheckBox';
-import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
-import { ReactComponent as Archive } from '../../../icons/archive.svg';
-import { ReactComponent as MilestoneIcon } from '../../../icons/milestone.svg';
-import ListFilters from './ListFilters';
-import useFetch from '../../../util/useFetch';
-import Label from '../../../styles/atoms/Label';
-import User from '../../../styles/atoms/User';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
+import useFetch from '../../../util/useFetch';
+import ListFilters from './ListFilters';
+import Typo from '../../../styles/atoms/Typos';
+import CheckBox from '../../../styles/atoms/CheckBox';
+import Label from '../../../styles/atoms/Label';
+import User from '../../../styles/atoms/User';
+import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
+import { ReactComponent as Archive } from '../../../icons/archive.svg';
+import { ReactComponent as MilestoneIcon } from '../../../icons/milestone.svg';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');
@@ -20,7 +20,7 @@ const IssueTable = () => {
   return (
     <>
       <IssueHeader>
-        <LeftHeaderWrapper>
+        <LeftHeaderContainer>
           <CheckBox />
           <Text link sm>
             <AlertCircle />
@@ -30,10 +30,10 @@ const IssueTable = () => {
             <Archive />
             닫힌 이슈({count?.closed_issues})
           </Text>
-        </LeftHeaderWrapper>
+        </LeftHeaderContainer>
         <ListFilters />
       </IssueHeader>
-      <TableWrapper>
+      <TableContainer>
         {data?.map((issue: any, index: number) => {
           return (
             <IssueCell key={index}>
@@ -56,7 +56,7 @@ const IssueTable = () => {
                             <Label
                               key={index}
                               title={label.title}
-                              color={label.color}
+                              background={label.color}
                             />
                           );
                         }
@@ -79,7 +79,7 @@ const IssueTable = () => {
             </IssueCell>
           );
         })}
-      </TableWrapper>
+      </TableContainer>
     </>
   );
 };
@@ -98,7 +98,7 @@ const IssueHeader = styled.div`
   }
 `;
 
-const LeftHeaderWrapper = styled.div`
+const LeftHeaderContainer = styled.div`
   padding: 0 24px;
   & > div {
     padding: 0 18px;
@@ -175,7 +175,7 @@ const Text = styled(Typo)`
   }
 `;
 
-const TableWrapper = styled.div`
+const TableContainer = styled.div`
   border: ${props => `1px solid ${props.theme.greyscale.line}`};
   &:last-child {
     border-radius: 0px 0px 16px 16px;

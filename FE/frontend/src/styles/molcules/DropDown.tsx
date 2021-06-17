@@ -15,6 +15,7 @@ interface Props {
 }
 
 const DropDown = (props: Props): JSX.Element => {
+  console.log(props.options);
   const setChecked = (
     option: { name: string; isSelected: boolean },
     options: { name: string; isSelected: boolean }[],

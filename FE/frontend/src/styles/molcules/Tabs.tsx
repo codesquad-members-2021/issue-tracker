@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as MilestoneIcon } from '../../icons/milestone.svg';
-import { ReactComponent as TagIcon } from '../../icons/tag.svg';
+import { Link } from 'react-router-dom';
 import useFetch from '../../util/useFetch';
 import Typos from '../atoms/Typos';
-import { Link } from 'react-router-dom';
+import { ReactComponent as MilestoneIcon } from '../../icons/milestone.svg';
+import { ReactComponent as TagIcon } from '../../icons/tag.svg';
 
 const Tabs = () => {
   const { data: count } = useFetch('common', 'count');

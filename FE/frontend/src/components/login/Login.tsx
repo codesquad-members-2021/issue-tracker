@@ -8,7 +8,7 @@ const Login = () => {
   const url = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://localhost:3000/login/github`;
 
   return (
-    <LoginWrapper>
+    <LoginContainer>
       <Logo />
       <a href={url}>
         <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
@@ -22,11 +22,11 @@ const Login = () => {
       <Typos link xs>
         회원가입
       </Typos>
-    </LoginWrapper>
+    </LoginContainer>
   );
 };
 
-const LoginWrapper = styled.div`
+const LoginContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;

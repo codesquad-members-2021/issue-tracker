@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import IssueMain from './issue/IssueMain';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NewIssue from './issue/NewIssue';
+import IssueDetail from './issue/IssueDetail';
 import LabelList from './label/LabelList';
 import MilstoneList from './milestone/MilestoneList';
-import IssueDetail from './issue/IssueDetail';
 
 const Main = () => {
   return (

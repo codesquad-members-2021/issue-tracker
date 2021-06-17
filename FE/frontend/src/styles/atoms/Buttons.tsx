@@ -17,6 +17,9 @@ const ButtonWrapper = styled.div<Props>`
     if (props.detail) return props.theme.colors.primary;
     return props.theme.greyscale.offWhite;
   }};
+  pointer-events: ${props => {
+    if (props.disabled) return 'none';
+  }};
 
   ${props => props.theme.alignCenter}
   ${props =>

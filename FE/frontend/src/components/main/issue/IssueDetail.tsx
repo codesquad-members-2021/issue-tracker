@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import useFetch from '../../../util/useFetch';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
+import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
+import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 
 const IssueDetail = () => {
   const location = useLocation();
@@ -17,13 +17,13 @@ const IssueDetail = () => {
   return (
     <>
       {data && (
-        <LabelListWrapper>
-          <TopWrapper>
-            <InfoWrapper>
+        <LabelListContainer>
+          <TopContainer>
+            <InfoContainer>
               <div>
                 <Title>{data.title}</Title> <Id>#{data.id}</Id>
               </div>
-              <LowerTitleWrapper>
+              <LowerTitleContainer>
                 <IssueStatus>
                   <AlertCircle />
                   열린 이슈
@@ -33,43 +33,43 @@ const IssueDetail = () => {
                   {data.writer.username}님에 의해 열렸습니다.
                 </span>
                 <span>코멘트{data.comments.length}개</span>
-              </LowerTitleWrapper>
-            </InfoWrapper>
-            <ButtonWrapper>
+              </LowerTitleContainer>
+            </InfoContainer>
+            <ButtonContainer>
               <Buttons small detail>
                 제목 편집
               </Buttons>
               <Buttons small detail>
                 이슈 닫기
               </Buttons>
-            </ButtonWrapper>
-          </TopWrapper>
+            </ButtonContainer>
+          </TopContainer>
           <Line />
-          <MainWrapper>
-            <CommentsWrapper>
+          <MainContainer>
+            <CommentsContainer>
               {data.comments.map((comment: any, index: number) => {
                 return (
                   <>
                     <User />
-                    <CommentWrapper>
+                    <CommentContainer>
                       <CommentTab>
                         <span>{comment.writer.username}</span>
                         <span>{moment(comment.created_time).fromNow()}</span>
                       </CommentTab>
                       <Comment>{comment.content}</Comment>
-                    </CommentWrapper>
+                    </CommentContainer>
                   </>
                 );
               })}
-            </CommentsWrapper>
+            </CommentsContainer>
             <Assignees></Assignees>
-          </MainWrapper>
-        </LabelListWrapper>
+          </MainContainer>
+        </LabelListContainer>
       )}
     </>
   );
 };
-const LabelListWrapper = styled.div`
+const LabelListContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -80,7 +80,7 @@ const Line = styled.div`
   background: ${props => props.theme.greyscale.line};
 `;
 
-const InfoWrapper = styled.div``;
+const InfoContainer = styled.div``;
 
 const Title = styled.span`
   font-size: 32px;
@@ -94,7 +94,7 @@ const Id = styled.span`
   color: ${props => props.theme.greyscale.label};
 `;
 
-const LowerTitleWrapper = styled.div`
+const LowerTitleContainer = styled.div`
   display: flex;
   align-items: center;
   padding-top: 16px;
@@ -117,20 +117,20 @@ const IssueStatus = styled.div`
   }
 `;
 
-const TopWrapper = styled.div`
+const TopContainer = styled.div`
   padding: 24px 48px;
   display: flex;
   justify-content: space-between;
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   & > div {
     margin-left: 10px;
   }
 `;
 
-const MainWrapper = styled.div`
+const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -140,11 +140,11 @@ const MainWrapper = styled.div`
   }
 `;
 
-const CommentsWrapper = styled.div`
+const CommentsContainer = styled.div`
   display: flex;
 `;
 
-const CommentWrapper = styled.div`
+const CommentContainer = styled.div`
   width: 880px;
   font-size: 16px;
   margin-left: 24px;

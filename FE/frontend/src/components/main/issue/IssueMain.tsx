@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import SearchFilter from './SearchFilter';
-import Tabs from '../../../styles/molcules/Tabs';
 import IssueTable from './IssueTable';
+import Tabs from '../../../styles/molcules/Tabs';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
-import { Link } from 'react-router-dom';
 
 const IssueMain = () => {
   return (
-    <MainWrapper>
-      <UpperIssueWrapper>
+    <MainContainer>
+      <UpperIssueContainer>
         <SearchFilter />
-        <RightListWrapper>
+        <RightListContainer>
           <Tabs />
           <Link style={{ textDecoration: 'none' }} to="newIssue">
             <Buttons initial small>
@@ -22,16 +22,16 @@ const IssueMain = () => {
               이슈 작성
             </Buttons>
           </Link>
-        </RightListWrapper>
-      </UpperIssueWrapper>
-      <IssueTableWrapper>
+        </RightListContainer>
+      </UpperIssueContainer>
+      <IssueTableContainer>
         <IssueTable />
-      </IssueTableWrapper>
-    </MainWrapper>
+      </IssueTableContainer>
+    </MainContainer>
   );
 };
 
-const MainWrapper = styled.div`
+const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -44,18 +44,18 @@ const IconWrapper = styled.div`
   }
 `;
 
-const UpperIssueWrapper = styled.div`
+const UpperIssueContainer = styled.div`
   width: 1280px;
   display: flex;
   justify-content: space-between;
   padding: 24px 48px;
 `;
 
-const RightListWrapper = styled.div`
+const RightListContainer = styled.div`
   display: flex;
 `;
 
-const IssueTableWrapper = styled.div`
+const IssueTableContainer = styled.div`
   padding: 12px 48px;
   min-width: 1024px;
 `;

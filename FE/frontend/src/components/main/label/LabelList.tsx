@@ -1,60 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import useFetch from '../../../util/useFetch';
 import Tabs from '../../../styles/molcules/Tabs';
 import Buttons from '../../../styles/atoms/Buttons';
 import Typos from '../../../styles/atoms/Typos';
+import Label from '../../../styles/atoms/Label';
+import NewLabel from './NewLabel';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 import { ReactComponent as Trash } from '../../../icons/trash.svg';
-import useFetch from '../../../util/useFetch';
-import Label from '../../../styles/atoms/Label';
 
 const LabelList = () => {
   const { isLoading, data, error } = useFetch('label', 'getAllData');
+  const [isNewLabelOpened, setIsNewLabelOpened] = useState(false);
+  const addLabel = () => {
+    setIsNewLabelOpened(true);
+  };
 
   return (
-    <LabelListWrapper>
+    <LabelListContainer>
       <LabelTab>
         <Tabs />
-        <Buttons initial small>
+        <Buttons initial small onClick={addLabel}>
           <IconWrapper>
             <Plus />
           </IconWrapper>
           추가
         </Buttons>
       </LabelTab>
-      <LabelTableWrapper>
+
+      <LabelTableContainer>
+        {isNewLabelOpened && <NewLabel />}
         <LabelHeader>
           <Typos link sm>
             개의 레이블
           </Typos>
         </LabelHeader>
-        <TableWrapper>
+        <TableContainer>
           {data?.map((label: any, index: number) => {
             return (
               <IssueCell>
-                <LeftCellWrapper>
-                  <Label key={index} title={label.title} color={label.color} />
+                <LeftCellContainer>
+                  <Label
+                    key={index}
+                    title={label.title}
+                    background={label.color}
+                  />
                   <Typos sm>{label.content}</Typos>
-                </LeftCellWrapper>
-                <RightCellWrapper>
+                </LeftCellContainer>
+                <RightCellContainer>
                   <EditWrapper link sm>
                     <Edit /> 편집
                   </EditWrapper>
                   <TrashWrapper link sm>
                     <Trash /> 삭제
                   </TrashWrapper>
-                </RightCellWrapper>
+                </RightCellContainer>
               </IssueCell>
             );
           })}
-        </TableWrapper>
-      </LabelTableWrapper>
-    </LabelListWrapper>
+        </TableContainer>
+      </LabelTableContainer>
+    </LabelListContainer>
   );
 };
 
-const LabelListWrapper = styled.div`
+const LabelListContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -67,7 +78,7 @@ const LabelTab = styled.div`
   padding: 24px 48px;
 `;
 
-const LabelTableWrapper = styled.div`
+const LabelTableContainer = styled.div`
   padding: 12px 48px;
   min-width: 1024px;
   border-radius: 16px;
@@ -78,7 +89,7 @@ const LabelHeader = styled.div`
   background: ${props => props.theme.greyscale.background};
   border: ${props => `1px solid ${props.theme.greyscale.line}`};
   border-radius: 16px 16px 0px 0px;
-  margin: 1px 0px;
+  margin-top: 24px;
   padding-left: 48px;
   display: flex;
   justify-content: space-between;
@@ -95,7 +106,7 @@ const IconWrapper = styled.div`
   }
 `;
 
-const TableWrapper = styled.div`
+const TableContainer = styled.div`
   border: ${props => `1px solid ${props.theme.greyscale.line}`};
   &:last-child {
     border-radius: 0px 0px 16px 16px;
@@ -118,13 +129,13 @@ const IssueCell = styled.div`
   }
 `;
 
-const LeftCellWrapper = styled.div`
+const LeftCellContainer = styled.div`
   & > div {
     margin: 0 24px;
   }
 `;
 
-const RightCellWrapper = styled.div`
+const RightCellContainer = styled.div`
   div {
     padding: 0 18px;
   }

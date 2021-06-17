@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import Modal from '../../../styles/molcules/Modal';
+import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 
 const SearchFilter = () => {
   const mainFilterOptions = [
@@ -14,7 +14,7 @@ const SearchFilter = () => {
 
   return (
     <>
-      <FilterWrapper>
+      <FilterContainer>
         <Modal
           label="필터"
           options={mainFilterOptions}
@@ -26,12 +26,12 @@ const SearchFilter = () => {
         <IconWrapper>
           <SearchIcon />
         </IconWrapper>
-      </FilterWrapper>
+      </FilterContainer>
     </>
   );
 };
 
-const FilterWrapper = styled.div`
+const FilterContainer = styled.div`
   position: relative;
   width: 601px;
   height: 40px;

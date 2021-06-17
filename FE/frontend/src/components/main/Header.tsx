@@ -5,14 +5,14 @@ import { ReactComponent as Logo } from '../../icons/logoMedium.svg';
 
 const Header = () => {
   return (
-    <HeaderWrapper>
+    <HeaderContainer>
       <Logo />
       <User />
-    </HeaderWrapper>
+    </HeaderContainer>
   );
 };
 
-const HeaderWrapper = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 24px 48px;
