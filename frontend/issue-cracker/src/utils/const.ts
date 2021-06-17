@@ -14,7 +14,7 @@ export const PATH = {
   MAIN: '/main',
   ISSUE_LIST: '/main/issue-list',
   ISSUE_ADD: '/main/issue-add',
-  ISSUE_DETAIL: '/main/issue-datail/:id',
+  ISSUE_DETAIL: '/main/issue-detail/:id',
   ISSUE_LABELLIST: '/main/label-list',
 };
 
