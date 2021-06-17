@@ -20,7 +20,7 @@ const Navigator = () => {
 	};
 
 	return (
-		<Wrapper>
+		<NavigatorLayout>
 			<ButtonGroup
 				milestoneCount={"N"}
 				milestoneClickEvent={handleMilestoneClick}
@@ -29,13 +29,13 @@ const Navigator = () => {
 				isMainPage={false}
 			/>
 			<AddButton text="추가" clickEvent={() => {}} />
-		</Wrapper>
+		</NavigatorLayout>
 	);
 };
 
-export default Navigator;
-
-const Wrapper = styled.div`
+const NavigatorLayout = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
+
+export default Navigator;
