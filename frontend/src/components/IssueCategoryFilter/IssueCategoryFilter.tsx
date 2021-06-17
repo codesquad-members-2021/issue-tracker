@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
@@ -37,7 +38,8 @@ const IssueCategoryFilter = () => {
       <FilterHeaderBlock>
         <FilterCategoryButton type={'left'}> 레이블 </FilterCategoryButton>
         <FilterCategoryButton type={'right'}> 마일스톤 </FilterCategoryButton>
-        <IssueCreateButton> ﹢ 이슈 작성 </IssueCreateButton>
+        
+        <Link to="/"> <IssueCreateButton> ﹢ 이슈 작성 </IssueCreateButton> </Link>
       </FilterHeaderBlock>
     </FilterHeaderLayer>
   )
@@ -61,10 +63,14 @@ const FilterCategoryButton = styled.button<any>`
   flex-basis: 160px;
 `;
 const IssueCreateButton = styled.button`
-  padding: 0 30px;
-  margin-left: 15px;
+  height: 100%;
   color: white;
   background-color: #007AFF;
+  white-space: nowrap;
+
+  padding: 0 30px;
+  margin-left: 15px;
+  
   border: none;
   border-radius: 11px;
   

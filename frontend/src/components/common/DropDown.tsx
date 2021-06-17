@@ -20,9 +20,9 @@ const DropDown = ({ info }) => {
       <DropDownLayer isClicked={isClicked}>
         <DropdownHeader>{info.header}</DropdownHeader>
         <DropdownUnorderedList>
-          {info.elements.map((element) => {
+          {info.elements.map((element, i) => {
             return (
-              <DropdownElement>
+              <DropdownElement key={`dropdown-${i}`}>
                 {element.contents} <Radio type="radio" value={element.value} name={`dropdown-${info.name}`} />
               </DropdownElement>
             )
@@ -60,7 +60,7 @@ const DropDownLayer = styled.div<any>`
   
   /* background: #D9DBE9; */
   border: 1px solid #D9DBE9;
-  border-radius: 16px !important;
+  border-radius: 16px;
 
   ul {
     list-style-type: none;

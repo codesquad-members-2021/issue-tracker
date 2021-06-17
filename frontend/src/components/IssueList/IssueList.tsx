@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
 import ArrowIcon from 'components/common/icons/ArrowIcon';
+import Label from 'components/common/Label';
 
 const IssueManagerFilterInfo = {
   name: "담당자",
@@ -80,7 +81,10 @@ const IssueList = () => {
               <input type="checkbox" />
             </IssueListCheckBoxLayer>
             <IssueListDetailInfomationLayer>
-              <DetailInformationTitle>이슈 제목</DetailInformationTitle>
+              <DetailInformationTitleArea>
+                <DetailInformationTitle> 이슈 제목 </DetailInformationTitle>
+                <Label type={"DEFAULT"} value={"레이블 이름"} />
+              </DetailInformationTitleArea>
               <DetailInformationContents># 이슈 번호 ... </DetailInformationContents>
             </IssueListDetailInfomationLayer>
             <IssueListProfileLayer>
@@ -101,7 +105,7 @@ const IssueListLayout = styled.div`
   display: flex;
   flex-direction: column;
   
-  div:last-child {
+  & > div:last-child {
     border-radius: 0 0 16px 16px;
   }
 `;
@@ -152,11 +156,16 @@ const IssueListDetailInfomationLayer = styled(IssueListLayer)`
   width: 100%;
 `
 
-const DetailInformationTitle = styled(IssueListLayer)`
-  margin-top: 10px;
+const DetailInformationTitle = styled.span`
   font-weight: 700;
   font-size: 1.89rem;
+  margin-right: 10px;
 `;
+
+const DetailInformationTitleArea = styled(IssueListLayer)`
+  margin-top: 10px;
+`
+
 const DetailInformationContents = styled(IssueListLayer)`
   margin-top: 10px;
 `;
