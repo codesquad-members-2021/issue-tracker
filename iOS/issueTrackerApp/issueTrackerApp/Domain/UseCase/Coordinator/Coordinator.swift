@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: Protocols
-protocol Coordinator: AnyObject {
+protocol Coordinator: class {
     func configure(viewController: UIViewController)
 }
 
@@ -16,11 +16,11 @@ protocol Coordinated: class {
     var coordinator: Coordinator? { get set }
 }
 
-protocol MainCoordinated: AnyObject {
+protocol MainCoordinated: class {
     var mainCoordinator: MainFlowCoordinator? { get set }
 }
 
-protocol LoginCoordinated: AnyObject {
+protocol LoginCoordinated: class {
     var loginCoordinator: LoginFlowCoordinator? { get set }
 }
 
@@ -28,16 +28,16 @@ protocol LoginNetworked: class {
     func setLoginNetworkManager(_ loginNetworkManager: LoginNetworkManager)
 }
 
-protocol AddIssueViewModelType: AnyObject {
+protocol IssueNetworked: class {
+    func setIssueNetworkController(_ issueNetworkController: IssueNetworkController)
+}
+
+protocol AddIssueViewModelType: class {
     func setAddIssueViewModel(_ addIssueViewModel: AddIssueViewModel)
 }
 
-protocol IssueViewModelType: AnyObject {
+protocol IssueViewModelType: class {
     func setIssueViewModel(_ issueViewModel: IssueViewModel)
-}
-
-protocol IssueNetworked: class {
-    func setIssueNetworkController(_ issueNetworkController: IssueNetworkController)
 }
 
 class MainFlowCoordinator: NSObject {
