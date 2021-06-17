@@ -166,6 +166,9 @@
                             <constraint firstItem="joF-lb-xtI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="yzc-eH-LLK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="oAx-ab-YaI" kind="presentation" identifier="ToIssueList" modalPresentationStyle="fullScreen" id="Xju-N3-0v5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

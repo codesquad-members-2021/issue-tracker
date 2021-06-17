@@ -5,10 +5,7 @@ import AuthenticationServices
 class LoginViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
 
     private var webAuthSession: ASWebAuthenticationSession?
-    private let loginManager = LoginManager()
-    private let jwtManager = JWTManager()
-    private let endPoint = EndPoint()
-    private var subscriptions = Set<AnyCancellable>()
+    private let loginUseCase = LoginUseCase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,33 +17,27 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
     
     func configureWebAuthSession() {
-        loginManager.requestAuthorization {  url, callBackUrlScheme in
-            self.webAuthSession = ASWebAuthenticationSession.init(url: url, callbackURLScheme: callBackUrlScheme, completionHandler: { callBack, error in
-                guard error == nil, let successURL = callBack else {
-                    print("로그인 실패")
-                    return
+        let githubLoginURL = loginUseCase.getGitHubLoginURL()
+        let url = githubLoginURL.0
+        let callbackURLScheme = githubLoginURL.1
+        
+        self.webAuthSession = ASWebAuthenticationSession.init(url: url, callbackURLScheme: callbackURLScheme, completionHandler: { [weak self] callBack, error in
+            guard error == nil, let callBack = callBack else {
+                return
+            }
+            
+            let logInURL = self?.loginUseCase.convertToGitHubLogInURL(from: callBack) 
+            
+            self?.loginUseCase.executeGitHubLogIn(url: logInURL) { completion in
+                if completion {
+                    DispatchQueue.main.async {
+                        self?.performSegue(withIdentifier: "ToIssueList", sender: nil)
+                    }
+                } else {
+                    print("로그인 에러")
                 }
-                let code = self.loginManager.extractAuthorizationCode(from: successURL)
-                let url = self.loginManager.convertToURL(with: code)
-
-                self.loginManager.get(with: url, type: JWTDTO.self)
-                    .sink(receiveCompletion: { completion in
-                        switch completion {
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        case .finished:
-                            DispatchQueue.main.async {
-                                guard let issueListViewController = self.storyboard?.instantiateViewController(identifier: "IssueListViewController") else {
-                                    return
-                                }
-                                self.present(issueListViewController, animated: true, completion: nil)
-                            }
-                        }
-                    }, receiveValue: { jwtDTO in
-                        self.loginManager.setSecurity(jwt: jwtDTO.data.jwt)
-                    }).store(in: &self.subscriptions)
-            })
-        }
+            }
+        })
         self.webAuthSession?.presentationContextProvider = self
     }
     

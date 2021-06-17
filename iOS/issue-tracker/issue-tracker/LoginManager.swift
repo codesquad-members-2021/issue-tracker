@@ -3,18 +3,12 @@ import Combine
 
 class LoginManager {
     
-    private let jwtManager: JWTManager
-    
-    init() {
-        self.jwtManager = JWTManager()
-    }
-    
-    func requestAuthorization(handler: @escaping (URL, String) -> Void) {
+    func requestGitHubAuthorization() -> (URL, String) {
         let redirectURI = "issueTracker://login"
         let callbackUrlScheme = "issueTracker"
         let url = URL(string: "https://github.com/login/oauth/authorize?client_id=04fb3475fc652d5304a3&redirect_uri=\(redirectURI)")!
         
-        handler(url, callbackUrlScheme)
+        return (url, callbackUrlScheme)
     }
     
     func extractAuthorizationCode(from url: URL) -> String {
@@ -49,14 +43,6 @@ class LoginManager {
                     .mapError { _ in NetworkError.decoding(description: "Decode Error")}.eraseToAnyPublisher()
                 return decodeData
             }.eraseToAnyPublisher()
-    }
-    
-    func setSecurity(jwt: String) {
-        self.jwtManager.set(jwt: jwt)
-    }
-    
-    func getSecurity() -> String? {
-        return self.jwtManager.get()
     }
 }
 
