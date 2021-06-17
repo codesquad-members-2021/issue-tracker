@@ -5,11 +5,10 @@ import OAuthPage from 'pages/OAuthPage';
 import NewIssuePage from 'pages/NewIssuePage';
 import LabelPage from 'pages/LabelPage';
 import MilestoneListPage from 'pages/MilestoneListPage';
-
+import IssueDetailPage from 'pages/IssueDetailPage';
 
 const Router = () => {
   return (
-      <>
     <BrowserRouter>
       <Switch>
         <Route path={['/', '/issues']} exact>
@@ -30,9 +29,11 @@ const Router = () => {
         <Route path="/milestones" exact>
           <MilestoneListPage />
         </Route>
+        <Route path="/issues/detail">
+          <IssueDetailPage />
+        </Route>
       </Switch>
     </BrowserRouter>
-    </>
   );
 };
 

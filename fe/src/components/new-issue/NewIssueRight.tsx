@@ -17,7 +17,7 @@ const NewIssueRight = () => {
 export default NewIssueRight;
 
 const StyledNewIssueRight = styled.div`
-  ${({ theme }) => theme.style.flexColum};
+  ${({ theme }) => theme.style.flexColumn};
   border-radius: ${({ theme }) => theme.border.radius.M};
   border: 2px solid ${({ theme }) => theme.color.grayscale.line};
   width: 25%;

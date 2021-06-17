@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-
 export const Wrapper = styled.div`
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   box-sizing: border-box;
 `;
 

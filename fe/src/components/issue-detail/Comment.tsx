@@ -40,7 +40,7 @@ const Comment = () => (
 );
 
 const CommentWrapper = styled.div`
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   box-sizing: border-box;
   margin-left: 1rem;
 `;

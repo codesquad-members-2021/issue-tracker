@@ -18,7 +18,7 @@ function App() {
         <MuiThemeProvider theme={MuiTheme}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
-             <Header />
+            <Header />
             <Router />
           </ThemeProvider>
         </MuiThemeProvider>

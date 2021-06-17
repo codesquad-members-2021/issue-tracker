@@ -15,11 +15,11 @@ const MilestonesItemRight = ({
   return (
     <StyledDiv>
       <StyledButtons>
-      <Button startIcon={<CloseIcon />}>닫기</Button>
-      <Button startIcon={<EditIcon />}>편집</Button>
-      <Button color="secondary" startIcon={<DeleteIcon />}>
-        삭제
-      </Button>
+        <Button startIcon={<CloseIcon />}>닫기</Button>
+        <Button startIcon={<EditIcon />}>편집</Button>
+        <Button color="secondary" startIcon={<DeleteIcon />}>
+          삭제
+        </Button>
       </StyledButtons>
       <MilestoneBar {...{ openedIssueCount, closedIssueCount }} />
       <MilestonesItemSubtitle>
@@ -38,7 +38,7 @@ const StyledButtons = styled.div`
   justify-content: flex-end;
 `;
 const StyledDiv = styled.div`
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   width: 20rem;
 `;
 
@@ -49,10 +49,8 @@ const MilestonesItemSubtitle = styled.div`
   margin-top: 0.7rem;
 `;
 
-const CloseIcon= styled(CloseIssue)``;
-
+const CloseIcon = styled(CloseIssue)``;
 
 const EditIcon = styled(EditSvg)``;
-
 
 const DeleteIcon = styled(DeleteSvg)``;

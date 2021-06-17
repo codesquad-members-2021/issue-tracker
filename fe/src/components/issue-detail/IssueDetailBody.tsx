@@ -37,7 +37,7 @@ const IssueDescription = styled.div`
 
 const Comments = styled.ul`
   all: unset;
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   gap: 1.5rem;
 `;
 

@@ -24,7 +24,7 @@ const StyledCommentInput = styled.div`
   padding-left: 3.6rem;
 `;
 const StyledNewIssueLeft = styled.div`
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   width: 75%;
 `;
 

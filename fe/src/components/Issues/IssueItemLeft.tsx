@@ -22,7 +22,7 @@ const IssueItemLeft = ({
           {title}
         </span>
         {labeList.length
-          ? labeList.map((label,idx) => <Label key={idx} {...{ ...label }} />)
+          ? labeList.map((label, idx) => <Label key={idx} {...{ ...label }} />)
           : null}
       </IssueTitle>
       <IssueSubtitle>
@@ -35,13 +35,12 @@ const IssueItemLeft = ({
 export default IssueItemLeft;
 
 const StyledIssueItemLeft = styled.div`
-  ${({ theme }) => theme.style.flexColum};
+  ${({ theme }) => theme.style.flexColumn};
 `;
 
 const IssueTitle = styled.div`
   ${({ theme }) => theme.style.flexAlignItemsCenter};
 `;
-
 
 const OpenSvg = styled(Open)`
   path {
