@@ -16,11 +16,11 @@ interface LocationStateProps {
 
 const IssueDetail = (): JSX.Element => {
   const { state } = useLocation<LocationStateProps>();
-  const { title, content } = state;
+  const { title, content, isOpen } = state;
   return (
     <>
       <IssueDetailStyle>
-        <IssueDetailTitle {...{ title }} />
+        <IssueDetailTitle {...{ title, isOpen }} />
         <S.TableLine />
         <IssueDetailBox />
       </IssueDetailStyle>
