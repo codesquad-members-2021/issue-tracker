@@ -1,34 +1,16 @@
-import { useRecoilState } from 'recoil';
+// 사용안함. Body를 대체하여 Modal 컨트롤하는 이벤트를 걸려했는데
+  // 다 수정하려면 지금 (2021.06.16) 구조상 너무 복잡해짐
 import styled from 'styled-components';
-import { modalTypes, searchModalVisible } from '../../util/recoil';
 import { TChildren } from '../../util/types';
 
 interface IBackgroundFluid {
   children?: TChildren;
+  onClick?: (e: Event | React.MouseEvent) => void;
 }
 
-const BackgroundFluid = ({ children, ...props }: IBackgroundFluid) => {
-  const [arrModalTypes] = useRecoilState(modalTypes);
-  const [isSearchModalVisible, setSearchModalVisible] =
-    useRecoilState(searchModalVisible);
-
-  const handleBackgroundClick = (e: React.MouseEvent | Event) => {
-    const target = e.target as HTMLElement;
-    const closestTarget: HTMLElement | null = target.closest('#modal');
-    // closestTarget에 해당이 안된다..? ==> modal이 아니다.
-    // modal이 아니라면 모달 체크 후 모달을 꺼야한다.
-
-    if (closestTarget) {
-      const currModalType = closestTarget.dataset.modalType;
-      const isModal = arrModalTypes.some((modalType) => currModalType === modalType);
-      if (isModal) return;
-    }
-
-    isSearchModalVisible && setSearchModalVisible(false);
-  };
-
+const BackgroundFluid = ({ children, onClick, ...props }: IBackgroundFluid) => {
   return (
-    <BackgroundFluidLayout {...props} onClick={handleBackgroundClick}>
+    <BackgroundFluidLayout {...props} onClick={onClick}>
       {children}
     </BackgroundFluidLayout>
   );

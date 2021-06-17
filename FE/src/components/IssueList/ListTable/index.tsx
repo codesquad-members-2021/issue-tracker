@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import { TextIssueList } from '../../../util/reference';
+import { IIssueList } from '..';
 import ListHead from './ListHead';
 import ListBody from './ListBody';
 
-const ListTable = ({ ...props }) => {
-  const { table: { header } } = TextIssueList;
-
+const ListTable = ({ handleFilterModalClick, ...props } : IIssueList) => {
   return (
     <ListTableLayout {...props}>
-      <ListHead headerText={header} />
+      <ListHead handleFilterModalClick={handleFilterModalClick} />
       <ListBody />
     </ListTableLayout>
   );

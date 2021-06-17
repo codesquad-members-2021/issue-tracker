@@ -1,67 +1,79 @@
 import styled, { css } from 'styled-components';
-import { useCallback, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { filterVisibleAtom, TFilterVisibleAtomTypes } from '../../../util/store/issueListAtoms';
+
+import { IIssueList } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
-import { TNameValue } from '../../../util/reference';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ListModal, { testData } from '../../Common/ListModal';
+import { TextIssueList } from '../../../util/reference';
 
-interface IListHead {
-  headerText: {
-    [leftOrRight: string]: TNameValue[];
-  };
-}
+const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
+  // 1. 일반 (Recoil 등)
+  const { table: {header: {left, right}} } = TextIssueList;
+  const [leftTabsState, setLeftTabsState] = useState(0);
+  const [filterVisibleState, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
-const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
-  const [issueState, setIssueState] = useState(0);
+  // 2. events
+  const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
+  const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
+    setFilterVisibleState((filterVisibleState) => ({
+      ...filterVisibleState,
+      assignee: false,
+      label: false,
+      milestone: false,
+      search: false,
+      writer: false,
+    }));
+    handleFilterModalClick(name);
+  }
 
-  const handleIssueState = (e: React.ChangeEvent<{}>, value: number) =>
-    setIssueState(value);
-
-  const renderLeftTabItems = useCallback(
-    () =>
-      left.map(({ name, value: label }, idx) => (
-        <LeftTab
-          key={idx}
-          label={
-            <IconBlock>
-              {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
-              {label}
-              {'(3)'}
-            </IconBlock>
-          }
-        />
-      )),
-    [
-      left /* 추후 이슈 추가가 되면 Count가 증가하니까.. 관련 Count State 넣어주기 */,
-    ],
-  );
-
-  const renderRightButtonItems = useCallback(
-    () =>
-      right.map(({ name, value }, idx) => (
-        <RightLayout key={idx}>
-          <RightRow>
-            <RightButton  name={name}>
-              <span>{value}</span>
-              <MdKeyboardArrowDown />
-            </RightButton>
-          </RightRow>
+  // 3-1. render
+  const renderLeftTabItems = () =>
+    left.map(({ name, value: label }, idx) => (
+      <LeftTab
+        key={idx}
+        label={
+          <IconBlock>
+            {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
+            {label}
+            {'(3)'}
+          </IconBlock>
+        }
+      />
+    ));
+  // 3-2. render (already rendered)
+    // rightButtonItems는 함수 형식으로 render하면 recoil 관련값들이 전부 작동안함..
+  const rightButtonItems = right.map(
+    ({ name, value }, idx) => (
+      <RightLayout key={idx}>
+        <RightRow>
+          <RightButton
+            id="modalBtn"
+            name={name}
+            onClick={() => handleRightBtnsClick(name)}
+          >
+            <span>{value}</span>
+            <MdKeyboardArrowDown />
+          </RightButton>
+        </RightRow>
+        {filterVisibleState[name] && (
           <RightRow>
             <ListModal
               rightPos="0"
-              modalType={name}
-              isModalVisible={true}
               data={{
                 title: '테스트',
                 items: testData,
               }}
             />
           </RightRow>
-        </RightLayout>
-      )),
-    [right],
+        )}
+      </RightLayout>
+    ),
   );
+  // ====
 
   return (
     <ListHeadLayout {...props}>
@@ -71,13 +83,13 @@ const ListHead = ({ headerText: { left, right }, ...props }: IListHead) => {
         {/* 아이템 모두 선택되어 있을때 checked만 true */}
         {/* 아이템 선택X --> 모두 false */}
         <Checkbox color="primary" indeterminate checked />
-        <LeftTabs value={issueState} onChange={handleIssueState}>
+        <LeftTabs value={leftTabsState} onChange={handleLeftTabsState}>
           {renderLeftTabItems()}
         </LeftTabs>
       </ListHeadRow>
 
       {/* 우측 */}
-      <ListHeadRow>{renderRightButtonItems()}</ListHeadRow>
+      <ListHeadRow>{rightButtonItems}</ListHeadRow>
     </ListHeadLayout>
   );
 };
@@ -95,7 +107,7 @@ const ListHeadLayout = styled.div`
   background-color: ${({ theme }) => theme.colors.grayScale.bgColor};
   border-radius: 0.5rem 0.5rem 0px 0px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grayScale.line}`};
-  padding: 1.05rem 0;
+  padding: 0.75rem 0;
 `;
 
 const ListHeadRow = styled.div`
@@ -116,7 +128,6 @@ const RightLayout = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  row-gap: 4px;
 `;
 
 const RightRow = styled.div`

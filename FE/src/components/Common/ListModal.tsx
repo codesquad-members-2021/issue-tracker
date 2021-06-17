@@ -45,7 +45,7 @@ export const testData: IListItem[] = [
 ];
 // -----
 
-const ListModal = ({ rightPos, data, isModalVisible, modalType, ...props }: IListModal) => {
+const ListModal = ({ rightPos, data, ...props }: IListModal) => {
   const { title, items } = data;
 
   const renderItems = useCallback(
@@ -68,8 +68,6 @@ const ListModal = ({ rightPos, data, isModalVisible, modalType, ...props }: ILis
     <ListModalLayout
       {...props}
       rightPos={rightPos}
-      modalType={modalType}
-      isModalVisible={isModalVisible}
     >
       {/* Title */}
       <ListModalRow type="title">
@@ -94,6 +92,8 @@ const ListModalLayout = styled(Modal)<{rightPos?: string}>`
   font-size: 0.9rem;
   border-radius: 0.6rem;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
+
+  top: 0.2rem;
   right: ${({rightPos}) => rightPos ? rightPos : "auto" };
 `;
 
