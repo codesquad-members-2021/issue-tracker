@@ -7,7 +7,7 @@
 
 import XCTest
 
-class LoginUITests: XCTestCase {
+class LoginUITests2: XCTestCase {
 
     private var app: XCUIApplication!
     private var expectation: XCTestExpectation!
@@ -25,22 +25,22 @@ class LoginUITests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_LoginCancel() throws {
+    func test_LoginContinue() throws {
+
         app/*@START_MENU_TOKEN@*/.staticTexts["Sign in with GitHub"]/*[[".buttons[\"Sign in with GitHub\"].staticTexts[\"Sign in with GitHub\"]",".staticTexts[\"Sign in with GitHub\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         addUIInterruptionMonitor(withDescription: "Login Continue") { (alert) -> Bool in
-            if alert.buttons["Cancel"].exists {
-                alert.buttons["Cancel"].tap()
+            if alert.buttons["Continue"].exists {
+                alert.buttons["Continue"].tap()
                 self.expectation.fulfill()
                 return true
             }
             return false
         }
         app.tap()
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
 
-        XCTAssertTrue(app.alerts["인증에 실패 하였습니다"].exists)
-        app.alerts.buttons["확인"].tap()
-
-        XCTAssertTrue(app.otherElements["LoginView"].exists)
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["이슈"].tap()
+        XCTAssertTrue(app.otherElements["MainView"].exists)
     }
 }

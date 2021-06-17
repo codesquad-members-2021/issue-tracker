@@ -18,7 +18,7 @@ class ViewSwitcher {
 
     func updateViewController() {
         var rootViewController: UIViewController?
-
+//        keyChain.delete("token")
         if keyChain.get("token") != nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let mainTapController = storyBoard.instantiateViewController(withIdentifier: "Main")

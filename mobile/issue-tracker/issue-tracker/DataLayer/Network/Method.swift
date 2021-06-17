@@ -7,7 +7,16 @@
 
 import Foundation
 
-enum Method: String {
-    case get = "GET"
-    case post = "POST"
+enum Method {
+    case get
+    case post
+
+    static func status(_ value: Self) -> String {
+        switch value {
+        case .get:
+            return "GET"
+        case .post:
+            return "POST"
+        }
+    }
 }
