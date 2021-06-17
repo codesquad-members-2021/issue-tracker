@@ -47,18 +47,5 @@ class IssueToolbar: UIToolbar {
     func setToolbar() {
         let items = [checkBoxBarButtonItem, flexibleBarButtonItem, labelBarButtonItem, flexibleBarButtonItem, closeIssueBarButtonItem]
         setItems(items, animated: false)
-        
-    }
-    
-    func setCheckMode(count: Int) {
-        checkBoxBarButtonItem.image = UIImage(systemName: "checkmark.circle")
-        labelBarButtonItem.title = "\(count)개의 이슈가 선택됨"
-        labelBarButtonItem.tintColor = .black
-    }
-    
-    func setUncheckMode() {
-        checkBoxBarButtonItem.image = UIImage(systemName: "checkmark.circle.fill")
-        labelBarButtonItem.title = "이슈를 선택하세요"
-        labelBarButtonItem.tintColor = .lightGray
     }
 }
