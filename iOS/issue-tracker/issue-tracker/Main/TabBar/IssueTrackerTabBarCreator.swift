@@ -10,7 +10,7 @@ import UIKit
 final class IssueTrackerTabBarCreator {
     
     private let childInfos: [TabBarChildInfo]
-    private var loginInfo: LoginInfo
+//    private var loginInfo: LoginInfo
     
     enum Title {
         static let issue = "이슈"
@@ -26,27 +26,23 @@ final class IssueTrackerTabBarCreator {
         static let myAccount = "person.circle"
     }
     
-    init(childInfos: [TabBarChildInfo], loginInfo: LoginInfo) {
+    init(childInfos: [TabBarChildInfo]) {
         self.childInfos = childInfos
-        self.loginInfo = loginInfo
+//        self.loginInfo = loginInfo
     }
     
-    convenience init(loginInfo: LoginInfo) {
+    convenience init() {
         let issue = TabBarChildInfo(title: Title.issue, imageName: SystemImageName.issue, type: IssueViewController.self)
         let label = TabBarChildInfo(title: Title.label, imageName: SystemImageName.label, type: LabelViewController.self)
         let milestone = TabBarChildInfo(title: Title.milestone, imageName: SystemImageName.milestone, type: MilestoneViewController.self)
         let myAccount = TabBarChildInfo(title: Title.myAccount, imageName: SystemImageName.myAccount, type: MyAccountViewController.self)
-        self.init(childInfos: [issue, label, milestone, myAccount], loginInfo: loginInfo)        
+        self.init(childInfos: [issue, label, milestone, myAccount])
     }
     
     private func generateChild(with info: TabBarChildInfo) -> UIViewController {
         let tabBarItem = UITabBarItem(title: info.title, image: info.image, selectedImage: nil)
         let childViewController = info.type.create()
         childViewController.tabBarItem = tabBarItem
-        
-        if let loginInfoContainer = childViewController as? LoginInfoContainer {
-            loginInfoContainer.setup(loginInfo: self.loginInfo)
-        }
         
         let navigationController = UINavigationController()
         navigationController.navigationBar.prefersLargeTitles = true 
@@ -58,8 +54,7 @@ final class IssueTrackerTabBarCreator {
 
 extension IssueTrackerTabBarCreator {
     func create() -> IssueTrackerTabBarController {
-        let issueTrackerTabBarController = IssueTrackerTabBarController()
-        issueTrackerTabBarController.configure(loginInfo: loginInfo)        
+        let issueTrackerTabBarController = IssueTrackerTabBarController()                
         let childs = childInfos.map{ generateChild(with: $0) }
         issueTrackerTabBarController.setViewControllers(childs, animated: true)
         return issueTrackerTabBarController

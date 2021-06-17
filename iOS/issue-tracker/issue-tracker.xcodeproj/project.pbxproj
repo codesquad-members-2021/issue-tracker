@@ -14,7 +14,6 @@
 		E426DAC42671D95D0069E77D /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC32671D95D0069E77D /* LoginService.swift */; };
 		E426DAC72671F6A00069E77D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC62671F6A00069E77D /* LoginError.swift */; };
 		E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAC82671F7760069E77D /* AlertFactory.swift */; };
-		E426DACB267206D10069E77D /* LoginInfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DACA267206D10069E77D /* LoginInfoContainer.swift */; };
 		E426DAD126730DC50069E77D /* OAuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426DAD026730DC50069E77D /* OAuthResponseDTO.swift */; };
 		E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FD266E52FB0071B436 /* AppDelegate.swift */; };
 		E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42AD0FF266E52FB0071B436 /* SceneDelegate.swift */; };
@@ -43,6 +42,7 @@
 		E43912E42679C0DA003CD344 /* AddLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E32679C0DA003CD344 /* AddLabelViewController.swift */; };
 		E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */; };
 		E43912EA267A2351003CD344 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E9267A2351003CD344 /* NetworkError.swift */; };
+		E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -63,7 +63,6 @@
 		E426DAC32671D95D0069E77D /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		E426DAC62671F6A00069E77D /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		E426DAC82671F7760069E77D /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
-		E426DACA267206D10069E77D /* LoginInfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoContainer.swift; sourceTree = "<group>"; };
 		E426DAD026730DC50069E77D /* OAuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthResponseDTO.swift; sourceTree = "<group>"; };
 		E42AD0FA266E52FB0071B436 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AD0FD266E52FB0071B436 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		E43912E32679C0DA003CD344 /* AddLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelViewController.swift; sourceTree = "<group>"; };
 		E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLabelDTO.swift; sourceTree = "<group>"; };
 		E43912E9267A2351003CD344 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoDTO.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -120,8 +120,9 @@
 		E426DACC267301010069E77D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E426DAC32671D95D0069E77D /* LoginService.swift */,
 				E426DABB2670EC5E0069E77D /* LoginInfo.swift */,
+				E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */,
+				E426DAC32671D95D0069E77D /* LoginService.swift */,
 				E426DAC62671F6A00069E77D /* LoginError.swift */,
 				E426DACD267302BA0069E77D /* Protocol */,
 				FAC6D8922671E1A800A9E5F9 /* Github */,
@@ -213,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				E42AD116267087F40071B436 /* TabBar */,
-				E426DACA267206D10069E77D /* LoginInfoContainer.swift */,
 				E42AD11926708EBA0071B436 /* Issue */,
 				E42AD11A26708EC00071B436 /* Label */,
 				E42AD11B26708EC80071B436 /* Milestone */,
@@ -440,13 +440,13 @@
 				E43912EA267A2351003CD344 /* NetworkError.swift in Sources */,
 				E42AD122267093590071B436 /* MilestoneViewController.swift in Sources */,
 				E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */,
+				E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */,
 				E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E43912D626789812003CD344 /* RequestManager.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
-				E426DACB267206D10069E77D /* LoginInfoContainer.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E43912D826789A83003CD344 /* EndPoint.swift in Sources */,
 				E426DABE2670EC830069E77D /* SocialLoginManagerDelegate.swift in Sources */,

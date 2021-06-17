@@ -7,20 +7,11 @@
 
 import UIKit
 
-class MilestoneViewController: UIViewController {
-    
-    private var loginInfo: LoginInfo?
-    
+class MilestoneViewController: UIViewController {    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.yellow
         title = "마일스톤"
     }
     
-}
-
-extension MilestoneViewController: LoginInfoContainer {
-    func setup(loginInfo: LoginInfo) {
-        self.loginInfo = loginInfo
-    }
 }

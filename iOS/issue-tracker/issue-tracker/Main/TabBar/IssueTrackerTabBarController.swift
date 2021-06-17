@@ -8,8 +8,7 @@
 import UIKit
 
 class IssueTrackerTabBarController: UITabBarController {
-    
-    private var loginInfo: LoginInfo?
+        
     private let imageLoadManager = ImageLoadManager()
     
     override func viewDidLoad() {
@@ -25,14 +24,10 @@ class IssueTrackerTabBarController: UITabBarController {
         super.viewDidLayoutSubviews()
         updateUserImage()
     }
-    
-    func configure(loginInfo: LoginInfo) {
-        self.loginInfo = loginInfo
-    }
-    
+
     private func updateUserImage() {
-        
-        guard let imageURL = self.loginInfo?.avatarURL else { return }
+        let loginInfo = LoginInfo.shared
+        guard let imageURL = loginInfo.avatarURL else { return }
         imageLoadManager.load(from: imageURL) { cachePath in
             guard let userImage = UIImage(contentsOfFile: cachePath) else {return}
             DispatchQueue.main.async {

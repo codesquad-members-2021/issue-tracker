@@ -161,7 +161,7 @@ final class AddLabelViewController: UIViewController {
         addTopMenu()
         addEditStackView()
         addLabelPreview()
-        
+        setNetworkManager()
         titleTextfield.delegate = self
     }
     
@@ -282,18 +282,12 @@ final class AddLabelViewController: UIViewController {
         let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
         previewLabel.configure(with: backgroundColor, titleColor, nil)
     }
-}
-
-extension AddLabelViewController: LoginInfoContainer {
-    func setup(loginInfo: LoginInfo) {
-        self.loginInfo = loginInfo
-        setNetworkManager()
-    }
     
     private func setNetworkManager() {
-        guard let loginInfo = loginInfo else { return }
+        let loginInfo = LoginInfo.shared
+        guard let jwt = loginInfo.jwt else { return }
         let url = EndPoint.label.fullAddress()
-        let headers = [Header.authorization.key(): loginInfo.jwt.description]
+        let headers = [Header.authorization.key(): jwt.description]
         let requestManager = RequestManager(url: url, headers: headers)
         networkManager = NetworkManager(requestManager: requestManager)
     }

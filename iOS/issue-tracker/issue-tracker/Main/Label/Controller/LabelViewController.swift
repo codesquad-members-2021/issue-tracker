@@ -31,8 +31,6 @@ final class LabelViewController: UIViewController {
     private var labelTableDatasource: LabelTableViewDatasource?
     private var labelTableDelegate: LabelTableDelegate?
     
-    private var loginInfo: LoginInfo?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -71,15 +69,16 @@ final class LabelViewController: UIViewController {
     }
     
     private func setNetworkManager() {
-        guard let loginInfo = loginInfo else { return }
+        let loginInfo = LoginInfo.shared
+        guard let jwt = loginInfo.jwt else { return }
         let url = EndPoint.label.fullAddress()
-        let headers = [Header.authorization.key(): loginInfo.jwt.description]
+        let headers = [Header.authorization.key(): jwt.description]
         let requestManager = RequestManager(url: url, headers: headers)
         networkManager = NetworkManager(requestManager: requestManager)
     }
     
     func loadData() {
-        networkManager?.get(completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
+        networkManager?.get(queryParameters: nil, completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let labels = result.data else { return }
@@ -105,9 +104,7 @@ final class LabelViewController: UIViewController {
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
-        guard let loginInfo = loginInfo else { return }
-        let addLabelViewController = AddLabelViewController()
-        addLabelViewController.setup(loginInfo: loginInfo)
+        let addLabelViewController = AddLabelViewController()        
         addLabelViewController.modalPresentationStyle = .formSheet
         addLabelViewController.setUpDismissOperation { [weak self] in
             self?.loadData()
@@ -116,8 +113,3 @@ final class LabelViewController: UIViewController {
     }
 }
 
-extension LabelViewController: LoginInfoContainer {
-    func setup(loginInfo: LoginInfo) {
-        self.loginInfo = loginInfo
-    }
-}

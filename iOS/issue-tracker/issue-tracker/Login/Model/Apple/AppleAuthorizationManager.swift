@@ -8,7 +8,7 @@
 import AuthenticationServices
 
 final class AppleAuthorizationManager: NSObject, SocialLoginManagable {
-    
+
     private weak var viewController: UIViewController?
     private weak var delegate: SocialLoginManagerDelegate?
     private var keyChainSaver: LoginKeyChainManager
@@ -43,10 +43,10 @@ extension AppleAuthorizationManager: ASAuthorizationControllerDelegate {
         
         let userID = appleIDCredential.user
         let jwt = JWT(jwt: tokenInString, tokenType: "Bearer")
-        let loginInfo = LoginInfo(userID: userID, jwt: jwt, avatarURL: nil, name: name)
+        let loginInfoDTO = LoginInfoDTO(userID: userID, jwt: jwt, avatarURL: nil, name: name)
         
-        if keyChainSaver.save(loginInfo) {
-            delegate?.didSocialLoginSuccess(with: loginInfo)
+        if keyChainSaver.save(loginInfoDTO) {
+            delegate?.didSocialLoginSuccess(with: loginInfoDTO)
         } else {
             let saveError = LoginError.keyChainSave
             delegate?.didSocialLoginFail(with: saveError)            

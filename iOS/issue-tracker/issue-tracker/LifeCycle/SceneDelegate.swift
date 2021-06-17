@@ -11,17 +11,19 @@ import AuthenticationServices
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private let loginInfo = LoginInfo.shared
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     
         var loginManager: LoginKeyChainManager?
-        var loginInfo: LoginInfo?
+        var loginInfo: LoginInfoDTO?
         
         for loginService in LoginService.allCases {
             loginManager = LoginKeyChainManager(loginService: loginService)
             loginInfo = loginManager?.read()
             
             if loginInfo != nil {
+                self.loginInfo.service = loginService
                 break
             }
         }
@@ -43,9 +45,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    private func straightToIssueTrackerScene(with loginManager: LoginKeyChainManager,_ loginInfo: LoginInfo) {
+    private func straightToIssueTrackerScene(with loginManager: LoginKeyChainManager,_ loginInfoDTO: LoginInfoDTO) {
+        loginInfo.store(loginInfoDTO: loginInfoDTO)
+        
         DispatchQueue.main.async {
-            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
+            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
             let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
             self.window?.rootViewController = issueTrackerTabBarController
         }
