@@ -70,7 +70,7 @@ class IssueTrackerTests: XCTestCase {
         NetworkManager.requestLocal(with: requestable, type: Issues.self) { result in
             switch result {
             case .success(let data):
-                XCTAssertEqual(data.issues[0].issueId, 1)
+                XCTAssertEqual(data.issues[0].issueId, 0)
                 promise.fulfill()
             case .failure(_):
                 XCTFail("네트워크 접속 오류")
@@ -90,7 +90,8 @@ class IssueTrackerTests: XCTestCase {
         let param = sessionManager.requestParam
         
         // then
-        XCTAssertEqual(try param?.url.asURL().absoluteString, "ec2-52-79-56-138.ap-northeast-2.compute.amazonaws.com/endpoint")
+        XCTAssertEqual(try param?.url.asURL().absoluteString,
+                       "ec2-52-79-56-138.ap-northeast-2.compute.amazonaws.com/endpoint")
         XCTAssertEqual(param?.method, .post)
     }
 }

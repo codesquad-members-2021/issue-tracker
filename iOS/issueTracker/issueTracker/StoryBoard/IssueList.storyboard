@@ -21,14 +21,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="issueCell" id="Ar2-Q1-fBS" customClass="IssueTableViewCell" customModule="issueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="213"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ar2-Q1-fBS" id="5HE-ed-Bgc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UaT-BY-Jrm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckw-BQ-7fv">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -48,10 +48,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JR7-G6-67J">
-                                                            <rect key="frame" x="0.0" y="50" width="414" height="63"/>
+                                                            <rect key="frame" x="0.0" y="50" width="414" height="62"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ㅇㅁㄴ어항너마ㅣ;ㄴ어라ㅣ;ㄴㅇ머리ㅏㄴ어리;ㅏㄴ어라ㅣ머이ㅏㄹ멍나ㅣ런아ㅣ럼ㄴ아ㅣㄹ먼아ㅣㄹ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ev-fi-aKh">
-                                                                    <rect key="frame" x="16" y="11" width="382" height="41"/>
+                                                                    <rect key="frame" x="16" y="10.5" width="382" height="41"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="YJx-O0-IPd"/>
                                                                     </constraints>
@@ -69,7 +69,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qm-rY-BVm">
-                                                            <rect key="frame" x="0.0" y="113" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="112" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마일스톤 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glx-JK-IWV">
                                                                     <rect key="frame" x="37" y="15" width="93" height="20.5"/>
@@ -91,7 +91,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-cn-4AV">
-                                                            <rect key="frame" x="0.0" y="163" width="414" height="50"/>
+                                                            <rect key="frame" x="0.0" y="162" width="414" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS3-vA-DQF">
                                                                     <rect key="frame" x="16" y="10" width="114" height="30"/>
