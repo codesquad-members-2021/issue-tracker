@@ -11,6 +11,7 @@ import NoIssue from './NoIssue';
 import ErrorIssueList from './ErrorIssueList';
 
 function IssueTable() {
+  // 이 부분은 이제 쿼리에 따라서 렌더링이 되어야한다.
   const [isClosed, setIsClosed] = useState(false);
   const { state, contents } = useRecoilValueLoadable(wholeIssueLists(isClosed));
 
