@@ -6,7 +6,7 @@ interface Props {
   height: number;
   visiableDragbar: boolean;
   hideToolbar: boolean;
-  handleOnChange: (e: any) => void;
+  handleOnChange?: (e: any) => void;
 }
 
 const Editor = ({

@@ -12,7 +12,7 @@ const NewIssue = {
   Title: styled.div`
     font-size: ${theme.FONT_SIZE.DISPLAY};
     color: ${theme.GRAY_SCALE.TITLE_ACTIVE};
-    padding: 32px 0px;
+    padding-bottom: 32px;
     border-bottom: 1px solid ${theme.GRAY_SCALE.LINE};
     width: 100%;
   `,
