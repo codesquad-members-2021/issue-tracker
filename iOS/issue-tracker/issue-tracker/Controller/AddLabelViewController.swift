@@ -16,7 +16,7 @@ class AddLabelViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.allowsSelection = false
-        tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.identifier)
+        tableView.register(AddLabelTableViewCell.self, forCellReuseIdentifier: AddLabelTableViewCell.identifier)
         return tableView
     }()
     var estimatedLabelView = EstimatedLabelView()
@@ -77,7 +77,7 @@ extension AddLabelViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.identifier, for: indexPath) as? AddTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddLabelTableViewCell.identifier, for: indexPath) as? AddLabelTableViewCell else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "제목"

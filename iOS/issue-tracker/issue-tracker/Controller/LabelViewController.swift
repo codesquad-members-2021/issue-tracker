@@ -33,7 +33,7 @@ class LabelViewController: UIViewController {
     func bindTableView() {
         labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, index, element in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
-            cell.setLabelCell(title: element.title, description: element.description!, color: element.color)
+            cell.setupLabelCell(title: element.title, description: element.description!, color: element.color)
             return cell
         }
         .disposed(by: bag)
@@ -49,18 +49,5 @@ class LabelViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "레이블"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
-    }
-}
-
-extension LabelViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell() }
-        cell.setupLabelCell(title: fakeData[indexPath.row].title, description: fakeData[indexPath.row].description, color: fakeData[indexPath.row].color)
-        
-        return cell
     }
 }
