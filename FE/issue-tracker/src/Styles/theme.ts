@@ -1,0 +1,43 @@
+const COLOR = {
+  BLUE: "#007AFF",
+  LIGHT_BLUE: "#C7EBFF",
+  DARK_BLUE: "#004DE3",
+  PURPLE: "#0025E7",
+  LIGHT_PURPLE: "#CCD4FF",
+  DARK_PURPLE: "#020070",
+  RED: "#FF3B30",
+  LIGHT_RED: "#FFD1CF",
+  DARK_RED: "#C60B00",
+  GREEN: "#34C759",
+  LIGHT_GREEN: "#DDFFE6",
+  DARK_GREEN: "#00A028",
+  WHITE: "#fff",
+};
+const GRAY_SCALE = {
+  OFF_WHITE: "#FEFEFE",
+  BACKGROUND: "#F7F7FC",
+  INPUT_BACKGROUND: "#EFF0F6",
+  LINE: "#D9DBE9",
+  PLACEHOLDER: "#A0A3BD",
+  LABEL: "#6E7191",
+  BODY: "#4E4B66",
+  TITLE_ACTIVE: "#14142B",
+};
+const FONT_SIZE = {
+  DISPLAY: "32px",
+  TEXT_LARGE: "24px",
+  TEXT_MEDIUM: "18px",
+  LINK_MEDIUM: "18px",
+  TEXT_SMALL: "16px",
+  LINK_SMALL: "16px",
+  TEXT_X_SMALL: "12px",
+  LINK_S_SMALL: "12px",
+  LOGOTYPE_LARGE: "56px",
+  LOGOTYPE_REGULAR: "32px",
+};
+const theme = {
+  COLOR,
+  GRAY_SCALE,
+  FONT_SIZE,
+};
+export default theme;
