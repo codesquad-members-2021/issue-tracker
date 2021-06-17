@@ -33,7 +33,7 @@ jobs:
       - name: Set property
         run: echo ${{ secrets.JASYPT_PASSWORD }} >> application.properties
         shell: bash
-        working-directory: ./BE/
+        working-directory: ./BE/src/main/resources
           
       - name: Grant execute permission for gradlew 
         run: chmod +x gradlew 
@@ -43,7 +43,7 @@ jobs:
       - name: Build with Gradle 
         run: ./gradlew build -x test 
         shell: bash
-        working-directory: ./BE/src/main/resources
+        working-directory: ./BE
         
       - name: Configure AWS credentials 
         uses: aws-actions/configure-aws-credentials@v1 
