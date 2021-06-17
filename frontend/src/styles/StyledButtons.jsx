@@ -2,21 +2,26 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 
 export const TabButton = styled(Button)`
-	width: ${props => props._width};
+	width: ${(props) => props._width};
 	height: ${({ theme }) => theme.buttonHeights.base};
 	font-size: ${({ theme }) => theme.fontSizes.xs};
 	font-weight: bold;
 	color: ${({ theme }) => theme.grayScale.label};
 	border: 1px solid
-		${props => (props._border === "none" ? "none" : props.theme.grayScale.line)};
-	border-radius: ${props =>
+		${(props) =>
+			props._border === "none" ? "none" : props.theme.grayScale.line};
+	border-radius: ${(props) =>
 		props._radius === "right"
 			? props.theme.border_radius_mix.right
 			: props._radius === "left"
 			? props.theme.border_radius_mix.left
 			: props.theme.border_radius_mix.all};
-	background-color: ${({ theme }) =>
-		theme.grayScale.background}; //str넣었는데 str넣으라고 오류뜸
+	background-color: ${(props) =>
+		props.bgColor && !props.isMainPage
+			? props.theme.grayScale.line
+			: props.theme.grayScale.background};
+	/* background-color: ${({ theme }) =>
+		theme.grayScale.background}; //str넣었는데 str넣으라고 오류뜸 */
 `;
 
 export const AddBtn = styled(Button)`
@@ -26,7 +31,6 @@ export const AddBtn = styled(Button)`
 	font-weight: bold;
 	background-color: ${({ theme }) => theme.colors.blue};
 	color: ${({ theme }) => theme.grayScale.off_white};
-	/* border: 1px solid ${({ theme }) => theme.grayScale.label}; */
 	border-radius: 11px;
 	&:hover {
 		background-color: ${({ theme }) => theme.colors.dark_blue};
@@ -46,7 +50,7 @@ export const StyledLoginButton = styled(Button)`
 `;
 
 export const StyledCancelButton = styled(Button)`
-	width: ${props => props._width};
+	width: ${(props) => props._width};
 	height: ${({ theme }) => theme.buttonHeights.small};
 	color: ${({ theme }) => theme.grayScale.label};
 	font-weight: bold;
