@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as SearchIcon } from "images/search.svg";
-import DropDownButton from "components/common/DropDownButton";
+import DropDownButton from "components/common/Button/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
 import { useState, useEffect } from "react";
@@ -21,7 +21,7 @@ const MenuFilterBar = () => {
 		}, "");
 	};
 
-	const handleClick = (e) => {
+	const handleClick = e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -35,7 +35,7 @@ const MenuFilterBar = () => {
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = (e) => {
+	const closeFilterModal = e => {
 		const target = e.target;
 		if (isFilterClicked && !target.closest(".filter-modal"))
 			setIsFilterClicked(false);

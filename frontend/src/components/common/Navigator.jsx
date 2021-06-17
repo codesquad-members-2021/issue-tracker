@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ButtonGroup from "./ButtonGroup";
-import AddButton from "./AddButton";
+import ButtonGroup from "./Button/ButtonGroup";
+import AddButton from "./Button/AddButton";
 import { useSetRecoilState } from "recoil";
 import {
 	labelButtonFlagState,

@@ -8,23 +8,24 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { filter } from "data";
+import { filterData } from "data";
 
 import getEngKey from "util/getEngKey";
 
 const FilterModal = () => {
 	const [clickedFilter, setClickedFilterState] = useState("");
 	const filterType = useRecoilValue(clickedFilterState);
-	const [filterBarInput, setFilterBarInputState] =
-		useRecoilState(filterBarInputState);
+	const [filterBarInput, setFilterBarInputState] = useRecoilState(
+		filterBarInputState
+	);
 
 	const key = getEngKey(filterType);
-	const handleChange = (event) => {
+	const handleChange = event => {
 		setClickedFilterState(event.target.value);
 		setFilterStateByType(event.target.value);
 	};
 
-	const setFilterStateByType = (clickedValue) => {
+	const setFilterStateByType = clickedValue => {
 		const updatedValue =
 			clickedValue === filterBarInput[getEngKey(filterType)]
 				? null
@@ -72,7 +73,7 @@ const FilterModal = () => {
 		}
 	};
 
-	const filterData = filter[getEngKey(filterType)];
+	const filterDataByType = filterData[getEngKey(filterType)];
 
 	return (
 		<FilterModalLayout className="filter-modal">
@@ -86,8 +87,8 @@ const FilterModal = () => {
 					value={clickedFilter}
 					onClick={handleChange}
 				>
-					{filterData &&
-						filterData.map((text, idx) => (
+					{filterDataByType &&
+						filterDataByType.map((text, idx) => (
 							<FilterControlLabel
 								value={text}
 								control={<Radio color="default" />}

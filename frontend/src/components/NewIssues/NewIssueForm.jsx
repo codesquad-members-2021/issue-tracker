@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import NewIssueInput from "./NewIssueInput";
 import IssueCategoryList from "components/common/IssueCategoryList";
-import SubmitButton from "components/common/SubmitButton";
-import CancelButton from "components/common/CancelButton";
+import SubmitButton from "components/common/Button/SubmitButton";
+import CancelButton from "components/common/Button/CancelButton";
 
 const NewIssueForm = () => {
 	return (
