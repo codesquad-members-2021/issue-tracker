@@ -1,14 +1,17 @@
 package com.team11.issue.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.team11.issue.dto.label.LabelRequestDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "label")
 public class Label {
@@ -27,4 +30,13 @@ public class Label {
 
     @OneToMany(mappedBy = "label")
     private List<IssueHasLabel> issueHasLabels = new ArrayList<>();
+
+    public static Label createLabel(LabelRequestDTO labelRequestDTO) {
+        return Label.builder()
+                .title(labelRequestDTO.getTitle())
+                .description(labelRequestDTO.getDescription())
+                .color(labelRequestDTO.getColor())
+                .bgColor(labelRequestDTO.getBgColor())
+                .build();
+    }
 }

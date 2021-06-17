@@ -1,14 +1,17 @@
 package com.team11.issue.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.team11.issue.dto.issue.IssueRequestDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "issue")
 public class Issue {
@@ -38,4 +41,14 @@ public class Issue {
 
     @OneToMany(mappedBy = "issue")
     private List<IssueHasLabel> issueHasLabels = new ArrayList<>();
+
+    public static Issue createIssue(User user, IssueRequestDTO issueRequestDTO, Milestone milestone) {
+        return Issue.builder()
+                .isOpen(true)
+                .title(issueRequestDTO.getTitle())
+                .contents(issueRequestDTO.getContents())
+                .user(user)
+                .milestone(milestone)
+                .build();
+    }
 }
