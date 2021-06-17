@@ -10,6 +10,7 @@ import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
 import NewIssuePage from 'pages/NewIssuePage';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
+import IssueDetailPage from 'pages/IssueDetailPage';
 import LabelPage from 'pages/LabelPage';
 import MilestoneListPage from 'pages/MilestoneListPage';
 
@@ -35,6 +36,9 @@ function App() {
                 </Route>
                 <Route path="/login/oauth">
                   <OAuthPage />
+                </Route>
+                <Route path="/issues/detail">
+                  <IssueDetailPage />
                 </Route>
                 <Route path="/labels" exact>
                   <LabelPage />
