@@ -9,13 +9,13 @@ import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
 import { StyledGridTitleCard } from "styles/StyledCards";
 
-// import { selectedIssueCntAtomState, clickedFilterAtomState } from "MyRecoil/atom";
+// import { selectedIssueCntState, clickedFilterState } from "MyRecoil/atom";
 // import { useRecoilState } from "MyRecoil";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
-	selectedIssueCntAtomState,
-	clickedFilterAtomState,
-	filterBarInputAtomState,
+	selectedIssueCntState,
+	clickedFilterState,
+	filterBarInputState,
 } from "RecoilStore/Atoms";
 
 const IssuesHeader = ({
@@ -27,15 +27,15 @@ const IssuesHeader = ({
 	selectedCards,
 }) => {
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
-		selectedIssueCntAtomState
+		selectedIssueCntState
 	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
-	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
-	// const setFilterBarInputState = useSetRecoilState(filterBarInputAtomState);
+	const setClickedFilterState = useSetRecoilState(clickedFilterState);
+	// const setFilterBarInputState = useSetRecoilState(filterBarInputState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback(e => {
+	const handleClick = useCallback((e) => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -52,7 +52,7 @@ const IssuesHeader = ({
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = e => {
+	const closeFilterModal = (e) => {
 		const target = e.target;
 		if (
 			isFilterClicked &&

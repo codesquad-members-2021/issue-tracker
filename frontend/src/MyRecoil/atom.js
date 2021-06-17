@@ -3,37 +3,37 @@
 // // }
 
 // import { atom } from "./index";
-// export const issueAtomState = atom({
-// 	key: "issueAtomState",
+// export const issueState = atom({
+// 	key: "issueState",
 // 	initialState: true,
 // });
 
-// export const milestoneAtomState = atom({
-// 	key: "milestoneAtomState",
+// export const milestoneState = atom({
+// 	key: "milestoneState",
 // 	initialState: [],
 // });
 
-// export const asigneeAtomState = atom({
-// 	key: "asigneeAtomState",
+// export const asigneeState = atom({
+// 	key: "asigneeState",
 // 	initialState: [],
 // });
 
-// export const labelAtomState = atom({
-// 	key: "labelAtomState",
+// export const labelState = atom({
+// 	key: "labelState",
 // 	initialState: [],
 // });
 
-// export const authorAtomState = atom({
-// 	key: "authorAtomState",
+// export const authorState = atom({
+// 	key: "authorState",
 // 	initialState: [],
 // });
 
-// export const selectedIssueCntAtomState = atom({
-// 	key: "selectedIssueCntAtomState",
+// export const selectedIssueCntState = atom({
+// 	key: "selectedIssueCntState",
 // 	initialState: 0,
 // });
 
-// export const clickedFilterAtomState = atom({
-// 	key: "clickedFilterAtomState",
+// export const clickedFilterState = atom({
+// 	key: "clickedFilterState",
 // 	initialState: null,
 // });

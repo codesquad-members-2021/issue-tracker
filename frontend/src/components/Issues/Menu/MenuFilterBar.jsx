@@ -4,15 +4,12 @@ import DropDownButton from "components/common/DropDownButton";
 import theme from "styles/theme";
 import FilterModal from "components/common/FilterModal";
 import { useState, useEffect } from "react";
-import {
-	clickedFilterAtomState,
-	filterBarInputAtomState,
-} from "RecoilStore/Atoms";
+import { clickedFilterState, filterBarInputState } from "RecoilStore/Atoms";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 const MenuFilterBar = () => {
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const setClickedFilterState = useSetRecoilState(clickedFilterAtomState);
-	const filterBarInput = useRecoilValue(filterBarInputAtomState);
+	const setClickedFilterState = useSetRecoilState(clickedFilterState);
+	const filterBarInput = useRecoilValue(filterBarInputState);
 	console.log(filterBarInput);
 	const getFilterBarString = () => {
 		return Object.entries(filterBarInput).reduce((acc, item) => {

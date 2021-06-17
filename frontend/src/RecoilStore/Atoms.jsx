@@ -1,23 +1,33 @@
 import { atom } from "recoil";
 
-export const selectedIssueCntAtomState = atom({
-	key: "selectedIssueCntAtomState",
+export const selectedIssueCntState = atom({
+	key: "selectedIssueCntState",
 	default: 0,
 });
 
-export const clickedFilterAtomState = atom({
-	key: "clickedFilterAtomState",
+export const clickedFilterState = atom({
+	key: "clickedFilterState",
 	default: null,
 });
 
-export const filterBarInputAtomState = atom({
-	key: "filterBarInputAtomState",
+export const filterBarInputState = atom({
+	key: "filterBarInputState",
 	default: {
 		placeholder: "is:issue is:open",
-		assignee: null, // asignee 필터 모달 에서 마지막으로 클릭한 값이 저장
-		label: null, // label 필터모달 에서 마지막으로 클릭한 값이 저장
-		milestone: null, // "마일스톤": null
+		assignee: null,
+		label: null,
+		milestone: null,
 		author: null,
 		issue: null,
 	},
+});
+
+export const labelButtonFlagState = atom({
+	key: "labelButtonFlag",
+	default: false,
+});
+
+export const milestoneButtonFlagState = atom({
+	key: "milestoneButtonFlag",
+	default: false,
 });

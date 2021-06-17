@@ -1,23 +1,22 @@
 import { useState } from "react";
 import { useRecoilState } from "MyRecoil/useRecoilState";
-import { labelAtomState } from "MyRecoil/atom";
+import { labelState } from "MyRecoil/atom";
 import { AnotherTest } from "./AnotherTest";
 
 export const Test = () => {
 	const [labelFilterInput, setLabelFilterInput] = useState();
-	const [labelFilterState, setLabelFilterState] =
-		useRecoilState(labelAtomState);
+	const [labelFilterState, setLabelFilterState] = useRecoilState(labelState);
 
 	const labelFilterList = labelFilterState.map((filter, i) => (
 		<span key={i}>{filter}</span>
 	));
 
-	const setLabelFilterInputVal = e => {
+	const setLabelFilterInputVal = (e) => {
 		setLabelFilterInput(e.target.value);
 	};
 
 	const setLabelFilter = () => {
-		setLabelFilterState(labelFilterState => [
+		setLabelFilterState((labelFilterState) => [
 			...labelFilterState,
 			labelFilterInput,
 		]);

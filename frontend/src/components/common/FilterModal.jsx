@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-	filterBarInputAtomState,
-	clickedFilterAtomState,
-} from "RecoilStore/Atoms";
+import { filterBarInputState, clickedFilterState } from "RecoilStore/Atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 import styled from "styled-components";
 
@@ -16,56 +13,55 @@ import { filter } from "data";
 import getEngKey from "util/getEngKey";
 
 const FilterModal = () => {
-	const [clickedFilterState, setClickedFilterState] = useState("");
-	const filterType = useRecoilValue(clickedFilterAtomState);
-	const [filterBarInputState, setFilterBarInputState] = useRecoilState(
-		filterBarInputAtomState
-	);
+	const [clickedFilter, setClickedFilterState] = useState("");
+	const filterType = useRecoilValue(clickedFilterState);
+	const [filterBarInput, setFilterBarInputState] =
+		useRecoilState(filterBarInputState);
 
 	const key = getEngKey(filterType);
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setClickedFilterState(event.target.value);
 		setFilterStateByType(event.target.value);
 	};
 
-	const setFilterStateByType = clickedValue => {
+	const setFilterStateByType = (clickedValue) => {
 		const updatedValue =
-			clickedValue === filterBarInputState[getEngKey(filterType)]
+			clickedValue === filterBarInput[getEngKey(filterType)]
 				? null
 				: clickedValue;
 
 		switch (filterType) {
 			case "담당자": {
 				setFilterBarInputState({
-					...filterBarInputState,
+					...filterBarInput,
 					assignee: updatedValue,
 				});
 				break;
 			}
 			case "레이블": {
 				setFilterBarInputState({
-					...filterBarInputState,
+					...filterBarInput,
 					label: updatedValue,
 				});
 				break;
 			}
 			case "마일스톤": {
 				setFilterBarInputState({
-					...filterBarInputState,
+					...filterBarInput,
 					milestone: updatedValue,
 				});
 				break;
 			}
 			case "작성자": {
 				setFilterBarInputState({
-					...filterBarInputState,
+					...filterBarInput,
 					author: updatedValue,
 				});
 				break;
 			}
 			case "필터": {
 				setFilterBarInputState({
-					...filterBarInputState,
+					...filterBarInput,
 					issue: updatedValue,
 				});
 				break;
@@ -87,7 +83,7 @@ const FilterModal = () => {
 				<FilterRadioContainer
 					aria-label="issue"
 					name="issue"
-					value={clickedFilterState}
+					value={clickedFilter}
 					onClick={handleChange}
 				>
 					{filterData &&
@@ -98,7 +94,7 @@ const FilterModal = () => {
 								label={text}
 								labelPlacement="start"
 								key={`filter-control-label-${idx}`}
-								checked={filterBarInputState[key] === text}
+								checked={filterBarInput[key] === text}
 							/>
 						))}
 				</FilterRadioContainer>

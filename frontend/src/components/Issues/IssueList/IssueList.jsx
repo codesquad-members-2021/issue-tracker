@@ -3,15 +3,15 @@ import styled from "styled-components";
 import IssuesHeader from "./IssuesHeader";
 import IssueCard from "./IssueCard";
 import { issues } from "data";
-// import { selectedIssueCntAtomState } from "MyRecoil/atom";
+// import { selectedIssueCntState } from "MyRecoil/atom";
 import { useRecoilState } from "recoil";
-import { selectedIssueCntAtomState } from "RecoilStore/Atoms";
+import { selectedIssueCntState } from "RecoilStore/Atoms";
 // import { useRecoilState } from "MyRecoil";
 
 const IssueList = () => {
 	const [isAnyIssueSelected, setIsAnyIssueSelected] = useState(false); // 상태 위치 협의 후 수정
 	const [isAllIssueSelected, setIsAllIssueSelected] = useState(false);
-	const [_, setSelectedIssues] = useRecoilState(selectedIssueCntAtomState);
+	const [_, setSelectedIssues] = useRecoilState(selectedIssueCntState);
 	const [selectedCards, setSelectedCards] = useState(new Set());
 
 	useEffect(() => {
@@ -19,7 +19,7 @@ const IssueList = () => {
 			setSelectedIssues(() => 0);
 	}, [isAnyIssueSelected]);
 
-	const issueList = issues.map(issue => (
+	const issueList = issues.map((issue) => (
 		<IssueCard
 			key={issue.id}
 			issue={issue}
