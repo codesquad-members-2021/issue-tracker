@@ -1,11 +1,10 @@
 import React from "react";
-import { createStyles, makeStyles, Theme, ThemeProvider } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { IssueRefMenuProps, UsefulObjectType } from "utils/interface";
-import { createMuiTheme, MenuItem } from "@material-ui/core";
-// import MenuItem from "material-ui/MenuItem";
+import {  MenuItem } from "@material-ui/core";
 
 interface IssueRefMenuPresenterProps extends IssueRefMenuProps {
   handleChange: (event: React.ChangeEvent<{}>) => void;
@@ -27,7 +26,7 @@ function IssueRefMenuPresenter(props: IssueRefMenuPresenterProps) {
           name={buttonTitle}
           classes={{ root: classes.whiteColor, icon: classes.whiteColor }}
         >
-          <MenuItem value="">{"　"}</MenuItem>
+          <MenuItem value="all">전체</MenuItem>
           {listItems.map((item) => (
             <MenuItem value={item.id}>{item.title}</MenuItem>
           ))}

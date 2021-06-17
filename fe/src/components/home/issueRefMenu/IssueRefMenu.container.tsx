@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import IssueRefMenuPresenter from "./IssueRefMenu.presenter";
 import { IssueRefMenuProps, UsefulObjectType } from "utils/interface";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { selectionState } from "utils/states";
 
 export default function IssueRefMenuContainer({ buttonTitle, listItems }: IssueRefMenuProps) {

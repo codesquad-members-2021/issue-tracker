@@ -4,19 +4,19 @@ export const labels = {
       id: 10,
       title: "BE",
       content: null,
-      color: "0052CC",
+      color: "#f59342",
     },
     {
       id: 11,
       title: "FE",
       content: null,
-      color: "FBCA04",
+      color: "#f242f5",
     },
     {
       id: 12,
       title: "Feature",
       content: null,
-      color: "FFFFFF",
+      color: "#1ed469",
     },
   ],
 };

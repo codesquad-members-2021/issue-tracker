@@ -1,6 +1,6 @@
 import React from "react";
-import { IssueRefMenuProps, IssueRefStateType, IssueType } from "utils/interface";
-import { selectionState } from "utils/states";
+// import { IssueRefMenuProps, IssueRefStateType, IssueType } from "utils/interface";
+// import { selectionState } from "utils/states";
 import IssueAppBarContainer from "./issueAppBar/IssueAppBar.container";
 import { openedIssue } from "data/openIssue";
 import { closedIssue } from "data/closeIssue";
