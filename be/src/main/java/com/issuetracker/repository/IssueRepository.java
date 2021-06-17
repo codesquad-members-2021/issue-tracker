@@ -3,6 +3,7 @@ package com.issuetracker.repository;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -44,6 +45,14 @@ public class IssueRepository {
 //                issue.getDescription(),
 //                issue.getAssignee()
     }
+
+    public long simpleSave(Issue issue) {
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("issue")
+                .usingGeneratedKeyColumns("id");
+        return simpleJdbcInsert.executeAndReturnKey(issue.toMap()).longValue();
+    }
+
 
     public List<Label> findAllLabelsByIssueId(Long issueId) {
         System.out.println(issueId);

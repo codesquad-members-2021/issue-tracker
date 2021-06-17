@@ -1,17 +1,18 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
+import com.issuetracker.dto.IssueRequestDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.oauth.User;
 import com.issuetracker.service.IssueService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/issues")
 public class IssueController {
 
     private final IssueService issueService;
@@ -20,8 +21,13 @@ public class IssueController {
         this.issueService = issueService;
     }
 
-    @GetMapping("/issues")
+    @GetMapping
     public List<IssueDto> viewAllIssues(@RequestAttribute User user) {
         return issueService.getAllIssues(user);
+    }
+
+    @PostMapping
+    public ResponseStatusDto create(@RequestBody IssueRequestDto issue, @RequestAttribute User user){
+        return issueService.saveIssue(issue, user);
     }
 }
