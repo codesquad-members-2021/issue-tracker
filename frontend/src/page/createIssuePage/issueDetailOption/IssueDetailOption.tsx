@@ -64,14 +64,8 @@ export default function IssueDetailOption({ id }: Props): ReactElement {
   fetch에 보낼 데이터는 atom에 있음
   */
 
-  // useEffect(() => {
-  //   setSelectTabToRender(selectTab);
-  // }, []);
-
   useEffect(() => {
-    // if (open || !selectTab) return;
     setSelectTabToRender(selectTab);
-    // atom상태값을 => useState상태에 setting
   }, [selectTab]);
 
   const handleClick = ({ key, name }: filterObjType) => {

@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { resetSelectedTab } from 'store/issueInfoStore';
 
-interface Props {}
-
-export default function OptionTable({}: Props): ReactElement {
+export default function OptionTable(): ReactElement {
   const resetSelectTab = useSetRecoilState(resetSelectedTab);
   const handleCreateClick = () => {
     resetSelectTab(null);
