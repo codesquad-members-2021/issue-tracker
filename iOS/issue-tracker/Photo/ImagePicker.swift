@@ -7,35 +7,29 @@
 
 import UIKit
 
-public protocol ImagePickerDelegate: AnyObject {
+public protocol ImagePickerDelegatable: AnyObject {
     func didSelect(image: UIImage?)
 }
+
 class ImagePicker: NSObject {
     
-    private let pickerController: UIImagePickerController
-    private weak var presentationController: UIViewController?
-    private weak var delegate: ImagePickerDelegate?
+    let pickerController: UIImagePickerController
+    private weak var delegate: ImagePickerDelegatable?
     
-    public init(presentationController: UIViewController, delegate: ImagePickerDelegate) {
+    public init(presentationController: UIViewController, delegate: ImagePickerDelegatable) {
         self.pickerController = UIImagePickerController()
         
         super.init()
-        self.presentationController = presentationController
         self.delegate = delegate
         
         self.pickerController.delegate = self
         self.pickerController.allowsEditing = true
         self.pickerController.mediaTypes = ["public.image"]
-
     }
     
     private func pickerController(_ controller: UIImagePickerController, didSelect image: UIImage?) {
         controller.dismiss(animated: true, completion: nil)
         self.delegate?.didSelect(image: image)
-    }
-    
-    func present() {
-        self.presentationController?.present(pickerController, animated: true)
     }
 }
 
@@ -56,4 +50,10 @@ extension ImagePicker: UIImagePickerControllerDelegate {
 
 extension ImagePicker: UINavigationControllerDelegate {
     
+}
+
+class ImagePickerDelegate: ImagePickerDelegatable {
+    func didSelect(image: UIImage?) {
+        
+    }
 }

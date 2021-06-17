@@ -16,8 +16,6 @@ class IssueEditViewController: UIViewController, ReuseIdentity {
     private var tableDelegate = AdditionalTableDelegate()
     private var tableDataSource = AdditionalTableViewDataSource()
     
-    private lazy var photoPicker = ImagePicker(presentationController: self, delegate: self)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +40,10 @@ class IssueEditViewController: UIViewController, ReuseIdentity {
 
     @objc
     func insertPhoto() {
-        self.photoPicker.present()
+        guard let issueCoordinator = coordinator as? IssueCoordinator else {
+            return
+        }
+        issueCoordinator.pushImagePickerView()
     }
     
 }
@@ -54,9 +55,3 @@ extension IssueEditViewController: UITextViewDelegate {
     }
 }
 
-extension IssueEditViewController: ImagePickerDelegate {
-    
-    func didSelect(image: UIImage?) {
-        
-    }
-}

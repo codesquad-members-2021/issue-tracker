@@ -9,10 +9,13 @@ import UIKit
 
 class IssueListViewController: UIViewController, ReuseIdentity {
 
-    weak var coordinator: IssueCoordinator?
+    weak var coordinator: Coordinator?
     
     @IBAction func pushToEditView(_ sender: Any) {
-        coordinator?.pushEditView()
+        guard let issueCoordinator = coordinator as? IssueCoordinator else {
+            return
+        }
+        issueCoordinator.pushEditView()
     }
     
     override func viewDidLoad() {

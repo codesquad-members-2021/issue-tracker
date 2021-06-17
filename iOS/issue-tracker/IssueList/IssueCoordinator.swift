@@ -26,7 +26,13 @@ class IssueCoordinator: NSObject, Coordinator {
     func pushEditView() {
         let issueEditVC = UIStoryboard(name: StoryBoardName.IssueEdit.description, bundle: nil)
             .instantiateViewController(withIdentifier: IssueEditViewController.reuseIdentifier) as! IssueEditViewController
-        
+        issueEditVC.coordinator = self
         navigationController.pushViewController(issueEditVC, animated: true)
+    }
+    
+    func pushImagePickerView() {
+        let imagePickerDelegate = ImagePickerDelegate()
+        let imagePicker = ImagePicker.init(presentationController: self.navigationController, delegate: imagePickerDelegate)
+        self.navigationController.present(imagePicker.pickerController, animated: true, completion: nil)
     }
 }
