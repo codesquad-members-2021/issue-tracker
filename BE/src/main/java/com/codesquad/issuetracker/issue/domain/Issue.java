@@ -47,7 +47,8 @@ public class Issue {
     private final Set<User> assignees = new LinkedHashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "MILESTONE_ID")
+    @JoinColumn(name = "MILESTONE_ID", foreignKey =
+    @ForeignKey(foreignKeyDefinition = "FOREIGN KEY (`MILESTONE_ID`) REFERENCES `milestone`(MILESTONE_ID) ON DELETE SET NULL"))
     private Milestone milestone;
 
     private Issue(User author, String title) {
