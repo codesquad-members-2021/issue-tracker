@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
 @Data(staticConstructor = "from")
-public class IssueDetailResponseWrapper {
+public class IssueCountResponseWrapper {
 
     @JsonValue
-    private final IssueDetailResponse issueDetailResponse;
+    private final IssueCountResponse issueCountResponse;
 }

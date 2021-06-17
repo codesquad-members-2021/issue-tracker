@@ -14,7 +14,7 @@ public class MilestoneController {
 
     @GetMapping("/milestones")
     public MilestoneResponses readAll() {
-        return MilestoneDummyData.milestonesResponse();
+        return MilestoneDummyData.milestonesResponses();
     }
 
     @PostMapping("/milestones")
