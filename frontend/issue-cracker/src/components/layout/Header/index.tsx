@@ -4,10 +4,30 @@ import { ProfileImg as S } from '../../styles/CommonStyles';
 import Logo from '../../common/Logo';
 import { LOGO_TITLE, BUTTON_SIZE as BS } from '../../../utils/const';
 import { Link } from 'react-router-dom';
+import useToken from '../../../utils/useToken';
+import jwtDecode from 'jwt-decode';
+import { useSetRecoilState } from 'recoil';
+import { decodedToken } from '../../../store/Recoil';
 
+interface TokenProps {
+  name: string;
+  profileImageUrl: string;
+}
 const Header: FC = () => {
-  const profileURL = localStorage.getItem('profileImageUrl');
-  const profileName = localStorage.getItem('name');
+  const token = localStorage.getItem('token');
+  const decoded = token && jwtDecode<TokenProps>(token);
+  const setDecodedToken = useSetRecoilState(decodedToken);
+  decoded &&
+    setDecodedToken({
+      name: decoded.name,
+      profileImageUrl: decoded.profileImageUrl,
+    });
+  // 1) 여기서 useSetStateRecoil 값을 넣어준다
+  // 2) 여기서 하지말ㄷ고 걍 Recoil.txt 에서 selector 로 하자 (토큰은 그럼 어디서 넣을래..)
+  // const profileURL = localStorage.getItem('profileImageUrl');
+  // const profileName = localStorage.getItem('name');
+  const profileURL = decoded && decoded.profileImageUrl;
+  const profileName = decoded && decoded.name;
 
   return (
     <HeaderDiv>

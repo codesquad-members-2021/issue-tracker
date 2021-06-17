@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import Loader from './layout/Loader';
 import { URL as U, PATH as P } from '../utils/const';
+import useToken from '../utils/useToken';
+import { useSetRecoilState } from 'recoil';
+import { token } from '../store/Recoil';
 
 const Authentication = ({
   history,
@@ -31,20 +33,19 @@ const Authentication = ({
 
         localStorage.setItem('token', data.token);
 
-        const token = localStorage.getItem('token');
-        if (!token) return;
+        // const decoded = await useToken(); //
 
-        const decoded =
-          jwtDecode<{ name: string; profileImageUrl: string }>(token);
+        // decoded && localStorage.setItem('name', decoded.name);
+        // decoded &&
+        //   localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
 
-        localStorage.setItem('name', decoded.name);
-        localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
-
-        history.push(P.ISSUE_LABELLIST);
+        history.push(P.ISSUE_LIST);
       } catch (error) {}
     };
 
     getToken();
+    // const setToken = useSetRecoilState(token);
+    //     setToken(data.token);
   }, [location, history, authUri]);
 
   return <Loader />;
