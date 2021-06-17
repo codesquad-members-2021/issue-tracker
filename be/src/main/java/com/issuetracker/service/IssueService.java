@@ -27,7 +27,7 @@ public class IssueService {
         this.userRepository = userRepository;
     }
 
-    public List<IssueDto> getAllIssues(User user) {
+    public List<IssueDto> getAllIssues() {
         return issueRepository.findAllIssues().stream()
                 .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
                         userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))

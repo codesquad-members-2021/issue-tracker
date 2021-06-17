@@ -22,8 +22,8 @@ public class IssueController {
     }
 
     @GetMapping
-    public List<IssueDto> viewAllIssues(@RequestAttribute User user) {
-        return issueService.getAllIssues(user);
+    public List<IssueDto> viewAllIssues() {
+        return issueService.getAllIssues();
     }
 
     @PostMapping
