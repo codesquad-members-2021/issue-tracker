@@ -2,11 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
+import ArrowIcon from 'components/common/icons/ArrowIcon';
+import Label from 'components/common/Label';
 
 const IssueManagerFilterInfo = {
   name: "담당자",
   header: "담당자 필터",
   alignment: "reverse",
+  icon: ArrowIcon,
   elements: [
     {contents: "담당자가 없는 이슈", value: 0, options:{}},
     // {} 동적 생성
@@ -17,6 +20,7 @@ const IssueLabelFilterInfo = {
   name: "레이블",
   header: "레이블 필터",
   alignment: "reverse",
+  icon: ArrowIcon,
   elements: [
     {contents: "레이블이 없는 이슈", value: 0, options:{}},
     {contents: "bug", value: 1, options:{color: "red"}},
@@ -29,6 +33,7 @@ const IssueMilestoneFilterInfo = {
   name: "마일스톤",
   header: "마일스톤 필터",
   alignment: "reverse",
+  icon: ArrowIcon,
   elements: [
     {contents: "마일스톤이 없는 이슈", value: 0, options:{}},
     {contents: "마스터즈 코스", value: 1, options:{}},
@@ -41,6 +46,7 @@ const IssueAuthorFilterInfo = {
   name: "작성자",
   header: "작성자 필터",
   alignment: "reverse",
+  icon: ArrowIcon,
   elements: [
     {contents: "테스트 계정", value: 0, options:{}},
     // {contents: "마스터즈 코스", value: 1, options:{}},
@@ -75,8 +81,11 @@ const IssueList = () => {
               <input type="checkbox" />
             </IssueListCheckBoxLayer>
             <IssueListDetailInfomationLayer>
-              <DetailInformationTitle>디코</DetailInformationTitle>
-              <DetailInformationContents>최고다</DetailInformationContents>
+              <DetailInformationTitleArea>
+                <DetailInformationTitle> 이슈 제목 </DetailInformationTitle>
+                <Label type={"DEFAULT"} value={"레이블 이름"} />
+              </DetailInformationTitleArea>
+              <DetailInformationContents># 이슈 번호 ... </DetailInformationContents>
             </IssueListDetailInfomationLayer>
             <IssueListProfileLayer>
               profile img
@@ -96,7 +105,7 @@ const IssueListLayout = styled.div`
   display: flex;
   flex-direction: column;
   
-  div:last-child {
+  & > div:last-child {
     border-radius: 0 0 16px 16px;
   }
 `;
@@ -147,9 +156,16 @@ const IssueListDetailInfomationLayer = styled(IssueListLayer)`
   width: 100%;
 `
 
-const DetailInformationTitle = styled(IssueListLayer)`
-  margin-top: 10px;
+const DetailInformationTitle = styled.span`
+  font-weight: 700;
+  font-size: 1.89rem;
+  margin-right: 10px;
 `;
+
+const DetailInformationTitleArea = styled(IssueListLayer)`
+  margin-top: 10px;
+`
+
 const DetailInformationContents = styled(IssueListLayer)`
   margin-top: 10px;
 `;
