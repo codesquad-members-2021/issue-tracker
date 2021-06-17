@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import KeychainSwift
 
 class LoginUITests: XCTestCase {
 
@@ -41,6 +40,8 @@ class LoginUITests: XCTestCase {
 
         XCTAssertTrue(app.alerts["인증에 실패 하였습니다"].exists)
         app.alerts.buttons["확인"].tap()
+
+        XCTAssertTrue(app.otherElements["LoginView"].exists)
     }
 
     func test_LoginContinue() throws {
@@ -56,5 +57,9 @@ class LoginUITests: XCTestCase {
         }
         app.tap()
         wait(for: [expectation], timeout: 5)
+
+        let tabBar = app.tabBars["Tab Bar"]
+        tabBar.buttons["이슈"].tap()
+        XCTAssertTrue(app.otherElements["MainView"].exists)
     }
 }

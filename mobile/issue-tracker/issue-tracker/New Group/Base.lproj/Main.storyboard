@@ -45,6 +45,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="MainView"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5aC-AE-mki" secondAttribute="bottom" constant="16" id="2GO-dr-G6m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p5k-Wn-cPB" secondAttribute="bottom" id="6Ss-8Y-LGx"/>
