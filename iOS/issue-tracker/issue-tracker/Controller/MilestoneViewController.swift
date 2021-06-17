@@ -61,9 +61,9 @@ private extension MilestoneViewController {
         viewModel
             .subject
             .bind(to: tableView
-                    .rx
-                    .items(cellIdentifier: MilestoneTableViewCell.reuseId,
-                           cellType: MilestoneTableViewCell.self)) { row, milestone, cell in
+                .rx
+                .items(cellIdentifier: MilestoneTableViewCell.reuseId,
+                        cellType: MilestoneTableViewCell.self)) { row, milestone, cell in
                 cell.configure(with: milestone)
             }
             .disposed(by: disposeBag)

@@ -40,7 +40,6 @@ class AddViewController: UIViewController {
     
     @objc
     private func didTapSave() {
-        // 저장을 눌렀을 때 텍스트 필드의 값들을 post
         let urlString = "https://77b8f295-a324-4645-9ff3-3d93eaf7b630.mock.pstmn.io/milestone"
         let url = URL(string: urlString)!
         
@@ -66,7 +65,7 @@ extension AddViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.reuseIdentifier, for: indexPath) as? AddTableViewCell else {
             fatalError()
         }
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             cell.becomeFirstResponder()
         }
         let textLabel = ["제목", "설명", "완료일"]
