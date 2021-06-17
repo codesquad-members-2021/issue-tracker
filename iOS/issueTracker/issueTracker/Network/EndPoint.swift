@@ -27,7 +27,7 @@ struct APIEndPoint: Requestable {
     var url: URL? {
         return URL(string: baseURL + path)
     }
-    
+
     var localurl: URL {
         return URL(fileURLWithPath: path)
     }

@@ -22,7 +22,7 @@ struct IssueResponse: Codable, Equatable {
             lhs.labels == rhs.labels &&
             lhs.comments == rhs.comments
     }
-    
+
     var issueId: Int
     var history: Histroy
     var isOpen: Bool

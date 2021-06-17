@@ -177,8 +177,15 @@
 		1EB37F2E267A3B2C00F30AB8 /* KeyChaineServiceTests */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				1EB37F2F267A3B2C00F30AB8 /* KeyChaineServiceTests.swift */,
 				1EB37F31267A3B2C00F30AB8 /* Info.plist */,
+=======
+				1E15AA242670B54B00A573DB /* HeaderView.swift */,
+				1E15AA282670F45F00A573DB /* filterOptionCell.swift */,
+				82847A1D267102FD009CFAE6 /* IssueTableViewCell.swift */,
+				82AC14432679B66F00DE31E6 /* CustomSectionHeader.swift */,
+>>>>>>> f751918719f32e11084457e14154f26623d3f91c
 			);
 			path = KeyChaineServiceTests;
 			sourceTree = "<group>";
@@ -460,7 +467,10 @@
 				82AC14482679BAD300DE31E6 /* MileStone.storyboard in Resources */,
 				82A69861266F585200F16D39 /* Assets.xcassets in Resources */,
 				82A6985F266F585100F16D39 /* Main.storyboard in Resources */,
+<<<<<<< HEAD
 				827E6CA72679E4F800FA1832 /* test.json in Resources */,
+=======
+>>>>>>> f751918719f32e11084457e14154f26623d3f91c
 				82AC14462679BAC600DE31E6 /* Label.storyboard in Resources */,
 				82A6986C266F688A00F16D39 /* IssueList.storyboard in Resources */,
 			);
@@ -610,7 +620,11 @@
 				82CB7EE12675F1A700B85F98 /* Issue.swift in Sources */,
 				82A74F5126771B4500F3CCCD /* NetworkManager.swift in Sources */,
 				82F44A62267730AB0010991F /* EndPoint.swift in Sources */,
+<<<<<<< HEAD
 				1E15AA292670F45F00A573DB /* FilterOptionCell.swift in Sources */,
+=======
+				1E15AA292670F45F00A573DB /* filterOptionCell.swift in Sources */,
+>>>>>>> f751918719f32e11084457e14154f26623d3f91c
 				82AC14442679B66F00DE31E6 /* CustomSectionHeader.swift in Sources */,
 				82A6985C266F585100F16D39 /* LoginViewController.swift in Sources */,
 				82CB7EE32675F1A700B85F98 /* Milestone.swift in Sources */,
