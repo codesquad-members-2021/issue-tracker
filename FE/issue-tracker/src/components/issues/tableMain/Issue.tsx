@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/avatar';
-import Label from '@components/common/Label';
 import { ReactComponent as MilestoneIcon } from '@assets/milestone.svg';
 
+import Label from '@components/common/Label';
 import type { IssueInfo } from './IssueTable';
+
+import { pipe } from '@utils/pipe';
+import {
+  checkIfDayPassedFromCreation,
+  getCreatedTime,
+  getRenderingText,
+  getTimeGapFromCreation,
+  getTime,
+  getTotalMinutesBetweenGap,
+} from '@utils/renderTimeText';
 
 type Props = {
   info: IssueInfo;
@@ -22,6 +32,18 @@ function Issue({ info }: Props) {
     milestone_title,
   } = info;
   const defaultAvatarPosition = '32px';
+
+  const getCurrentTime = () => new Date().getTime();
+
+  const currentTime = getCurrentTime();
+  const noticeTimePassed = pipe(
+    getCreatedTime,
+    getTimeGapFromCreation(currentTime),
+    getTotalMinutesBetweenGap,
+    checkIfDayPassedFromCreation,
+    getTime,
+    getRenderingText
+  )('2021-06-17 18:30');
 
   return (
     <IssueWrap>
@@ -42,7 +64,7 @@ function Issue({ info }: Props) {
         </StyledDiv>
         <Description>
           <span>#{issue_number}</span>
-          <span>작성자 및 {created_time}</span>
+          <span>작성자 및 {noticeTimePassed}</span>
           <div>
             <MilestoneIcon />
             <span>{milestone_title}</span>

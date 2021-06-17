@@ -23,6 +23,7 @@ function TableHeader({ isClosed, handleClickTab }: Props) {
           >
             {state === 'loading' && `열린 이슈 (0)`}
             {state === 'hasValue' && `열린 이슈 (${contents.openIssueCount})`}
+            {state === 'hasError' && `열린 이슈 (??)`}
           </IssueOpenTab>
           <IssueCloseTab
             isClosed={isClosed}
@@ -31,6 +32,7 @@ function TableHeader({ isClosed, handleClickTab }: Props) {
           >
             {state === 'loading' && `닫힌 이슈 (0)`}
             {state === 'hasValue' && `닫힌 이슈 (${contents.closeIssueCount})`}
+            {state === 'hasError' && `닫힌 이슈 (??)`}
           </IssueCloseTab>
         </IssueTab>
       </HeaderLeft>
