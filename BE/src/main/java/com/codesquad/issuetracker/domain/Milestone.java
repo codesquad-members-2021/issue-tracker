@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,14 @@ public class Milestone {
     private Long id;
     private String title;
     private String content;
+    
+    @JsonProperty("due_date")
     private LocalDateTime dueDate;
+
+    @JsonProperty("open_issue")
     private int openedIssue;
+
+    @JsonProperty("closed_issue")
     private int closedIssue;
 
 
