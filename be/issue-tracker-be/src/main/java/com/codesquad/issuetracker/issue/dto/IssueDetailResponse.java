@@ -6,14 +6,14 @@ import com.codesquad.issuetracker.label.dto.LabelResponses;
 import com.codesquad.issuetracker.milestone.dto.MilestoneResponse;
 import com.codesquad.issuetracker.user.dto.UserResponse;
 import com.codesquad.issuetracker.user.dto.UserResponses;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Builder
 public class IssueDetailResponse {
     private Long id;
