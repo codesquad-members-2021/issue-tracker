@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.service;
 
 import com.codesquad.issuetracker.domain.Milestone;
 import com.codesquad.issuetracker.repository.MilestoneRepository;
+import com.codesquad.issuetracker.request.EditedMilestone;
 import com.codesquad.issuetracker.request.MilestoneRequest;
 import com.codesquad.issuetracker.response.MilestoneResponse;
 import com.codesquad.issuetracker.util.PaginationUtil;
@@ -30,16 +31,22 @@ public class MilestoneService {
         return milestoneRepository.save(milestone);
     }
 
-    public List<MilestoneResponse> getMilestones(int page) {
+    public List<MilestoneResponse> getList(int page) {
         return milestoneRepository.findAll(PaginationUtil.descendingPageable(page, PAGE_SIZE, SORT_BY)).stream()
                 .map(milestone -> MilestoneResponse.create(milestone))
                 .collect(Collectors.toList());
     }
 
 
-    public MilestoneResponse getMilestone(Long id) {
+    public MilestoneResponse getOne(Long id) {
         Milestone milestone = milestoneRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
         return MilestoneResponse.create(milestone);
+    }
+
+    public void edit(Long milestoneId, EditedMilestone editedMilestone) {
+        Milestone milestone = milestoneRepository.getById(milestoneId);
+        milestone.update(editedMilestone);
+        milestoneRepository.save(milestone);
     }
 }

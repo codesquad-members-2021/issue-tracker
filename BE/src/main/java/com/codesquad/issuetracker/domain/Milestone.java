@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.domain;
 
+import com.codesquad.issuetracker.request.EditedMilestone;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Milestone {
     private Long id;
     private String title;
     private String content;
-    
+
     @JsonProperty("due_date")
     private LocalDateTime dueDate;
 
@@ -39,5 +40,11 @@ public class Milestone {
 
     public static Milestone create(Long id, String title, String content, LocalDateTime dueDate) {
         return new Milestone(id, title, content, dueDate, 0, 0);
+    }
+
+    public void update(EditedMilestone editedMilestone) {
+        this.title = editedMilestone.getTitle();
+        this.content = editedMilestone.getContent();
+        this.dueDate = editedMilestone.getDueDate();
     }
 }

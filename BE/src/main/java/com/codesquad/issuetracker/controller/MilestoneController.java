@@ -1,16 +1,14 @@
 package com.codesquad.issuetracker.controller;
 
+import com.codesquad.issuetracker.request.EditedMilestone;
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.request.MilestoneRequest;
-import com.codesquad.issuetracker.response.MilestoneResponse;
 import com.codesquad.issuetracker.service.MilestoneService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("/milestone")
@@ -32,12 +30,18 @@ public class MilestoneController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ApiResponse getMilestones() {
         final int DEFAULT_PAGE = 0;
-        return ApiResponse.ok(milestoneService.getMilestones(DEFAULT_PAGE));
+        return ApiResponse.ok(milestoneService.getList(DEFAULT_PAGE));
     }
 
     @GetMapping("/{milestoneId}")
     public ApiResponse getMilestone(@NotNull @PathVariable Long milestoneId) {
-        return ApiResponse.ok(milestoneService.getMilestone(milestoneId));
+        return ApiResponse.ok(milestoneService.getOne(milestoneId));
+    }
+
+    @PutMapping("/{milestoneId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void editMilestone(@NotNull @PathVariable Long milestoneId, @RequestBody EditedMilestone editedMilestone) {
+        milestoneService.edit(milestoneId, editedMilestone);
     }
 
 }
