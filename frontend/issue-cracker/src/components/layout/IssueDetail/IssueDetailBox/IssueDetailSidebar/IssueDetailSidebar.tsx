@@ -5,13 +5,13 @@ import { SIDEBAR_MENU } from '../../../../../utils/const';
 import { v4 as uuidv4 } from 'uuid';
 import TextGroup from '../../../../common/group/TextGroup';
 import AddIcon from '@material-ui/icons/Add';
-
+import { TYPE as T } from '../../../../../utils/const';
 const IssueDetailSidebar = (): JSX.Element => {
   return (
     <IssueDetailSidebarStyle>
       {SIDEBAR_MENU.map((menu) => (
         <SideBarCell key={uuidv4()}>
-          <TextGroup type="small" content={menu} color="#6E7191" />
+          <TextGroup type={T.SMALL} content={menu} color="#6E7191" />
           <CustomAddIcon />
         </SideBarCell>
       ))}

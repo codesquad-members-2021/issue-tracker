@@ -6,6 +6,7 @@ import TextGroup from '../../../common/group/TextGroup';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { TYPE as T } from '../../../../utils/const';
 
 const LabelCell = (): JSX.Element => {
   return (
@@ -19,7 +20,7 @@ const LabelCell = (): JSX.Element => {
           ></LabelSmallGroup>{' '}
         </LabelBox>
         <TextBox>
-          <TextGroup type="small" content={'content'} color="#6E7191" />
+          <TextGroup type={T.SMALL} content={'content'} color="#6E7191" />
         </TextBox>
       </LabelContent>
       <ButtonBox>
@@ -27,7 +28,7 @@ const LabelCell = (): JSX.Element => {
           <Button
             startIcon={<EditIcon style={{ color: '#6E7191', fontSize: 16 }} />}
           >
-            <TextGroup type="small" content={'편집'} color="#6E7191" />
+            <TextGroup type={T.SMALL} content={'편집'} color="#6E7191" />
           </Button>
         </EditButtonBox>
         <DeleteButtonBox>
@@ -36,7 +37,7 @@ const LabelCell = (): JSX.Element => {
               <DeleteIcon style={{ color: '#FF3B30', fontSize: 16 }} />
             }
           >
-            <TextGroup type="small" content={'삭제'} color="#FF3B30" />
+            <TextGroup type={T.SMALL} content={'삭제'} color="#FF3B30" />
           </Button>
         </DeleteButtonBox>
       </ButtonBox>

@@ -2,7 +2,7 @@ import React from 'react';
 import InputGroup from '../../../../common/group/InputGroup';
 import styled from 'styled-components';
 import { ProfileImg as P } from '../../../../styles/CommonStyles';
-
+import { TYPE as T } from '../../../../../utils/const';
 const IssueAddInputTitle = (): JSX.Element => {
   const profileURL = localStorage.getItem('profileImageUrl');
   return (
@@ -11,7 +11,7 @@ const IssueAddInputTitle = (): JSX.Element => {
         {profileURL && <P.ProfileImgLarge src={profileURL} />}
       </ProfileImgStyle>
       <InputGroupStyle>
-        <InputGroup type="medium" name="제목" variant="outlined" />
+        <InputGroup type={T.MEDIUM} name="제목" variant="outlined" />
       </InputGroupStyle>
     </IssueAddInputTitleStyle>
   );

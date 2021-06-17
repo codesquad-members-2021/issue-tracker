@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import Loader from './layout/Loader';
+import { URL as U, PATH as P } from '../utils/const';
+import useToken from '../utils/useToken';
+import { useSetRecoilState } from 'recoil';
+import { token } from '../store/Recoil';
 
-const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
-  const authUri = `http://localhost:8080/api/web/auth`;
+const Authentication = ({
+  history,
+  location,
+}: RouteComponentProps): JSX.Element => {
+  const authUri = U.AUTH;
 
   useEffect(() => {
     const getToken = async () => {
@@ -27,22 +33,22 @@ const Callback = ({ history, location }: RouteComponentProps): JSX.Element => {
 
         localStorage.setItem('token', data.token);
 
-        const token = localStorage.getItem('token');
-        if (!token) return;
+        // const decoded = await useToken(); //
 
-        const decoded =
-          jwtDecode<{ name: string; profileImageUrl: string }>(token);
+        // decoded && localStorage.setItem('name', decoded.name);
+        // decoded &&
+        //   localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
 
-        localStorage.setItem('name', decoded.name);
-        localStorage.setItem('profileImageUrl', decoded.profileImageUrl);
-
-        history.push('/main/issue-list');
+        history.push(P.ISSUE_LIST);
       } catch (error) {}
     };
 
     getToken();
+    // const setToken = useSetRecoilState(token);
+    //     setToken(data.token);
   }, [location, history, authUri]);
+
   return <Loader />;
 };
 
-export default Callback;
+export default Authentication;

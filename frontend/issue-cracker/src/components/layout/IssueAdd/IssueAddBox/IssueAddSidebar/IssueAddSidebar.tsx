@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Issue as S } from '../../../../styles/CommonStyles';
+import { TYPE as T } from '../../../../../utils/const';
 import { SIDEBAR_MENU } from '../../../../../utils/const';
 import { v4 as uuidv4 } from 'uuid';
 import TextGroup from '../../../../common/group/TextGroup';
@@ -11,7 +12,7 @@ const IssueAddSidebar = (): JSX.Element => {
     <IssueAddSidebarStyle>
       {SIDEBAR_MENU.map((menu) => (
         <SideBarCell key={uuidv4()}>
-          <TextGroup type="small" content={menu} color="#6E7191" />
+          <TextGroup type={T.SMALL} content={menu} color="#6E7191" />
           <CustomAddIcon />
         </SideBarCell>
       ))}

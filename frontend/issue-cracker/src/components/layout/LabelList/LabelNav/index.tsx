@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { SMALL_FILL } from '../../../../utils/const';
+import { BUTTON_SIZE as BS, BUTTON_NAME as BN } from '../../../../utils/const';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import TapGroup from '../../../common/group/TabGroup';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,16 +22,16 @@ const LabelNav: FC = () => {
         {issueAddState ? (
           <ButtonBox onClick={handleClickbutton}>
             <ButtonGroup
-              type={SMALL_FILL}
-              name={'삭제'}
+              type={BS.SMALL_FILL}
+              name={BN.DELETE}
               icon={<DeleteOutlineIcon style={{ fontSize: 16 }} />}
             />
           </ButtonBox>
         ) : (
           <ButtonBox onClick={handleClickbutton}>
             <ButtonGroup
-              type={SMALL_FILL}
-              name={'추가'}
+              type={BS.SMALL_FILL}
+              name={BN.ADD}
               icon={<AddIcon style={{ fontSize: 16 }} />}
             />
           </ButtonBox>

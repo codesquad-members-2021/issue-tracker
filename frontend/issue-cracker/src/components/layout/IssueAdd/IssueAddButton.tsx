@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import TextGroup from '../../common/group/TextGroup';
 import ButtonGroup from '../../common/group/ButtonGroup';
 import CloseIcon from '@material-ui/icons/Close';
+import { BUTTON_SIZE as BS, TYPE as T } from '../../../utils/const';
 
 const IssueAddButton = (): JSX.Element => {
   return (
     <IssueAddButtonStyle>
       <CancelButton>
         <WriteCancelButton />
-        <TextGroup type="xSmall" content="작성 취소" color="#6E7191" />
+        <TextGroup type={T.SMALL} content="작성 취소" color="#6E7191" />
       </CancelButton>
-      <ButtonGroup type="medium" name="완료" color="#fff" />
+      <ButtonGroup type={BS.MEDIUM} name="완료" color="#fff" />
     </IssueAddButtonStyle>
   );
 };
