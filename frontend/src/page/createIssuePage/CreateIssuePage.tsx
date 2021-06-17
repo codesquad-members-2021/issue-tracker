@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 import Title from 'components/atom/Title';
@@ -7,7 +7,9 @@ import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
 import { createIssue } from 'store/issueInfoStore'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { resetSelectedTab } from 'store/issueInfoStore';
+
 export default function CreateIssuePage(): ReactElement {
   const sample = {
     title: "z코쿼",
@@ -22,7 +24,6 @@ export default function CreateIssuePage(): ReactElement {
   
 
   const handleClick = async (btnType: string) =>{
-   console.log(btnType)
     if (btnType==='cancle'){
       history.push('/main')
     }
@@ -31,6 +32,12 @@ export default function CreateIssuePage(): ReactElement {
       if(isSuccess===200) history.push('/main')
     }
   }
+
+  const resetSelectTab = useSetRecoilState(resetSelectedTab);
+
+  useEffect(() => {
+    resetSelectTab(null);
+  }, []);
   
   return (
     <CreateIssuePageBlock>
