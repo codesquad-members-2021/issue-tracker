@@ -20,7 +20,7 @@ public class History {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private LocalDateTime historyDatetime;
+    private LocalDateTime historyDateTime;
 
     private String flag;
 

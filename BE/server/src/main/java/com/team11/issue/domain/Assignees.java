@@ -1,7 +1,12 @@
 package com.team11.issue.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "assignees")
 public class Assignees {
