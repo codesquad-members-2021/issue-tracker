@@ -1,13 +1,16 @@
 package com.team11.issue.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.team11.issue.dto.milestone.MilestoneRequestDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@ToString
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "milestone")
 public class Milestone {
@@ -16,12 +19,17 @@ public class Milestone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
     private String title;
 
-    @Column(length = 100)
     private LocalDate deadLineDate;
 
-    @Column(length = 100)
     private String description;
+
+    public static Milestone createMilestone(MilestoneRequestDTO milestoneRequestDTO) {
+        return Milestone.builder()
+                .title(milestoneRequestDTO.getTitle())
+                .deadLineDate(milestoneRequestDTO.getDeadLineDate())
+                .description(milestoneRequestDTO.getDescription())
+                .build();
+    }
 }
