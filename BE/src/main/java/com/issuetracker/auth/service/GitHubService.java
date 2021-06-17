@@ -23,22 +23,16 @@ public class GitHubService {
     }
 
     public String getClientId(String userAgent) {
-        if (UserAgent.isFront(userAgent)) {
-            return frontClientId;
-        }
         if (UserAgent.isIOS(userAgent)) {
             return iOSClientId;
         }
-        throw new UnknownUserAgentException();
+        return frontClientId;
     }
 
     public String getClientSecret(String userAgent) {
-        if (UserAgent.isFront(userAgent)) {
-            return frontClientSecret;
-        }
         if (UserAgent.isIOS(userAgent)) {
             return iOSClientSecret;
         }
-        throw new UnknownUserAgentException();
+        return frontClientSecret;
     }
 }
