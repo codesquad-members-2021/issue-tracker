@@ -48,14 +48,14 @@ jobs:
         working-directory: ./BE
         
       - name: Build with Gradle 
-        run: ./gradlew build -x test 
+        run: ./gradlew bootjar -x test
         shell: bash
         working-directory: ./BE
         
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
-        working-directory: ./BE/build/libs
+        working-directory: ./BE
         
       - name: Configure AWS credentials 
         uses: aws-actions/configure-aws-credentials@v1 
@@ -66,7 +66,7 @@ jobs:
         
       - name: Upload to S3 
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
-        working-directory: BE/build/libs
+        working-directory: ./BE
       
       - name: Code Deploy
         run: aws deploy create-deployment --application-name $APPLICATION_NAME --deployment-config-name $DEPLOY_CONFIG --deployment-group-name $DEPLOY_GROUP --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
