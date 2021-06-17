@@ -9,6 +9,7 @@ import PrimaryButton from 'components/atom/PrimaryButton';
 import { createIssue } from 'store/issueInfoStore'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { resetSelectedTab } from 'store/issueInfoStore';
+import { Link } from 'react-router-dom'
 
 export default function CreateIssuePage(): ReactElement {
   const sample = {
@@ -29,7 +30,9 @@ export default function CreateIssuePage(): ReactElement {
     }
     else{ 
       const isSuccess = await fetchData(sample)
-      if(isSuccess===200) history.push('/main')
+      const createdIssueID = isSuccess?.issueId
+      
+      // history.push('/main') 아이디 받아서 이슈 상세 페이지로 바로 이동.
     }
   }
 
