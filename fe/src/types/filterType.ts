@@ -15,10 +15,11 @@ export type FilterItemPropsType = {
   isEnd: boolean;
 };
 
-export type FilterPropsType = {
+export type FilterPropsType = { 
   filterType: FilterSelectorType;
+  isPluse?: boolean; 
 };
 
 export type FilterSelectorType = 'milestoneList' | 'labelList';
-// | 'authorList'
-// | 'assigneeList';
+//| 'authorList'| 'assigneeList';
+ 

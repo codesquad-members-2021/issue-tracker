@@ -6,27 +6,26 @@ type Action =
   | { type: 'FETCH_SUCCESS'; payload: any }
   | { type: 'FETCH_FAILURE'; payload: null };
 
-interface FetchOption {
-  headers?: OptionData;
-  body?: OptionData;
-}
 
 interface OptionData {
   [key: string]: string;
 }
 
-const createFetchOptions = (headerData?: OptionData, bodyData?: OptionData) => {
-  const headers = { 'Content-Type': 'application/json', ...headerData };
-  let options: OptionData = { headers: JSON.stringify(headers) };
-  if (bodyData) options = { ...options, body: JSON.stringify(bodyData) };
-  return options;
-};
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+const createFetchOptions = (bodyData?: OptionData) => {
+  if (bodyData) return;
+  return {
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bodyData),
+  };
+};
 function useAxios(
   Props: boolean,
   initialUrl: string,
   methods: Method,
-  option?: FetchOption
+  bodyData?: OptionData
 ) {
   const [url] = useState(initialUrl);
 
@@ -42,21 +41,24 @@ function useAxios(
       dispatch({ type: 'FETCH_INIT', payload: null });
       try {
         if (!url) throw new Error(`Error: URL IS NULL`);
-        await axios(url).then((result) =>
+        await axios(url, createFetchOptions(bodyData)).then((result) =>
           dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
         );
       } catch (error) {
         console.error(error)
+        if(error.response.status === 401) console.error("Unauthorized Request");
+
         dispatch({ type: 'FETCH_FAILURE', payload: null });
       }
     };
 
     if (!Props) return;
     fetchData();
-  }, [url, methods, Props]);
+  }, [url, methods, Props, bodyData]);
 
   return { ...state };
 }
+
 
 function requestReducer(
   state: {

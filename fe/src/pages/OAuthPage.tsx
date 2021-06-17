@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import qs from 'qs';
 import useAxios from 'hook/useAxios';
 import { useEffect } from 'react';
+import { getUrl } from 'utils/util';
 
 const OAuthPage = () => {
   const location = useLocation();
@@ -10,7 +11,8 @@ const OAuthPage = () => {
   const res = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const url = `${process.env.REACT_APP_API_URL}/api/login/auth?client=web&code=${res.code}`;
+
+  const url = getUrl.LOGIN(res.code);
   const { isSuccess, data } = useAxios(true, url, 'get');
 
   useEffect(() => {

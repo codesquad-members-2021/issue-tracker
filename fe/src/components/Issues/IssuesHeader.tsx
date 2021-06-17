@@ -5,12 +5,6 @@ import { ReactComponent as Close } from 'icons/closeIssue.svg';
 import Filter from 'components/common/Filter';
 
 const IssuesHeader = () => {
-  const testArray = [
-    { id: 1, description: '테스트필터1' },
-    { id: 2, description: '테스트필터2' },
-    { id: 3, description: '테스트필터3' },
-    { id: 4, description: '테스트필터4' },
-  ];
 
   return (
     <StyledIssuesHeader>

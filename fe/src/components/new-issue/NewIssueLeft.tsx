@@ -1,6 +1,5 @@
-import { TextField } from '@material-ui/core';
 import AuthorAvatar from 'components/common/AuthorAvatar';
-import CommentInput from 'components/common/CommentInput';
+import CommentTextarea from 'components/common/CommentTextarea';
 import IssueTitleInput from 'components/common/IssueTitleInput';
 import styled from 'styled-components';
 
@@ -12,7 +11,7 @@ const NewIssueLeft = () => {
         <IssueTitleInput />
       </NewIssueTitle>
       <StyledCommentInput>
-        <CommentInput />
+        <CommentTextarea />
       </StyledCommentInput>
     </StyledNewIssueLeft>
   );

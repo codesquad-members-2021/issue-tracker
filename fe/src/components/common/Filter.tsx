@@ -1,16 +1,17 @@
 import { Button } from '@material-ui/core';
-import { createRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
+import { ReactComponent as PlusIconSvg } from 'icons/pluse.svg';
 import Popover from '@material-ui/core/Popover';
-import { FilterPropsType, FilterSelectorType } from 'types/filterType';
+import { FilterPropsType } from 'types/filterType';
 import { useRecoilValue } from 'recoil';
-import { filterSelector, labelQuery } from 'store';
+import { filterSelector } from 'store';
+import { getTitle } from 'utils/util';
 
-export default function Filter({ filterType }: FilterPropsType) {
+export default function Filter({ isPluse, filterType }: FilterPropsType) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const ref = createRef();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -20,23 +21,18 @@ export default function Filter({ filterType }: FilterPropsType) {
   };
 
   const dataList = useRecoilValue(filterSelector);
-  // let list;
-  // if (dataList) {
-  //   list = dataList[filterType];
-  // }
-  const getFilterTitle = (filterType: FilterSelectorType) =>
-    ({
-      milestoneList: '마일스톤',
-      labelList: '레이블',
-    }[filterType]);
 
-  // authorList: '작성자',
-  // assigneeList: '담당자',
   return (
     <>
       <FilterButton onClick={handleClick}>
-        {getFilterTitle(filterType)}
-        <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
+        {isPluse ? (
+          <PlusIcon />
+        ) : (
+          <>
+            {getTitle(filterType)}
+            <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
+          </>
+        )}
       </FilterButton>
       <CustomMenu
         anchorOrigin={{
@@ -51,10 +47,9 @@ export default function Filter({ filterType }: FilterPropsType) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        ref={ref}
       >
         <FilterList
-          filterTitle={getFilterTitle(filterType)}
+          filterTitle={getTitle(filterType)}
           filterList={dataList[filterType]}
         />
       </CustomMenu>
@@ -83,5 +78,11 @@ const CustomMenu = styled(Popover)`
   .MuiPaper-elevation8 {
     border-radius: 25px;
     background-color: ${({ theme }) => theme.color.grayscale.inputBG};
+  }
+`;
+
+const PlusIcon = styled(PlusIconSvg)`
+  path {
+    stroke: ${({ theme }) => theme.color.grayscale.label};
   }
 `;

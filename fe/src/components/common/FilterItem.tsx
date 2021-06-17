@@ -5,8 +5,7 @@ import { FilterItemPropsType } from '../../types/filterType';
 import { ReactComponent as CheckOff } from 'icons/check-off-circle.svg';
 import { ReactComponent as CheckOn } from 'icons/check-on-circle.svg';
 const FilterItem = (
-  { filterItem, isEnd }: FilterItemPropsType,
-  ref: Ref<HTMLElement>
+  { filterItem, isEnd }: FilterItemPropsType
 ) => {
   const handleClick = (e: MouseEvent<HTMLLIElement>) => {
     console.log(filterItem.id);
@@ -43,5 +42,5 @@ const StyledColor = styled.div<{ colorCode: string }>`
   border: 1px solid ${({ theme }) => theme.color.grayscale.line};
   margin-right: 0.5rem;
 `;
-export default forwardRef(FilterItem);
+export default FilterItem;
 // ${({ colorCode }) => colorCode}

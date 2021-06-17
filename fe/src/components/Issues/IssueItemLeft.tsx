@@ -41,9 +41,7 @@ const StyledIssueItemLeft = styled.div`
 const IssueTitle = styled.div`
   ${({ theme }) => theme.style.flexAlignItemsCenter};
 `;
-const IssueItemRight = styled.div`
-  padding-right: 1.4rem;
-`;
+
 
 const OpenSvg = styled(Open)`
   path {
