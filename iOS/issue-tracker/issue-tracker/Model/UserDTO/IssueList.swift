@@ -54,7 +54,7 @@ struct Author: Codable {
 
 // MARK: - IssueLabel
 struct IssueLabel: Codable {
-    let id: Int
+    let id: Int?
     let title, color: String
     let fontColor: String?
     let description: String?
