@@ -97,8 +97,20 @@ public class Issue {
     }
 
     public void updateIssue(IssueRequest issueRequest) {
+        boolean isIssueOpenRequest = issueRequest.isOpen();
+
+        if(this.open !=  isIssueOpenRequest && milestone != null) {
+            if (isIssueOpenRequest) {
+                this.milestone.openIssue();
+            }
+
+            if (!isIssueOpenRequest) {
+                this.milestone.closeIssue();
+            }
+        }
+
         this.title = issueRequest.getTitle();
-        this.open = issueRequest.isOpen();
+        this.open = isIssueOpenRequest;
     }
 
     public static Issue create(User author, String title) {

@@ -69,4 +69,14 @@ public class Milestone {
     public void countClosedIssuesDown() {
         this.closedIssues--;
     }
+
+    public void openIssue() {
+        this.openIssues++;
+        this.closedIssues--;
+    }
+
+    public void closeIssue() {
+        this.openIssues--;
+        this.closedIssues++;
+    }
 }
