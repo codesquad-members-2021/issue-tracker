@@ -6,6 +6,7 @@ import com.issuetracker.dto.IssueRequestDto;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
+import com.issuetracker.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,22 +20,25 @@ public class IssueService {
     Logger logger = LoggerFactory.getLogger(IssueService.class);
 
     private final IssueRepository issueRepository;
+    private final UserRepository userRepository;
 
-    public IssueService(IssueRepository issueRepository) {
+    public IssueService(IssueRepository issueRepository, UserRepository userRepository) {
         this.issueRepository = issueRepository;
+        this.userRepository = userRepository;
     }
 
     public List<IssueDto> getAllIssues(User user) {
         return issueRepository.findAllIssues().stream()
-                .map(issue -> IssueDto.of(issue, user, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId())))
+                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
+                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
                 .collect(Collectors.toList());
     }
 
-    public ResponseStatusDto saveIssue(IssueRequestDto requestDto, User user) {
+    public ResponseStatusDto saveIssue(IssueRequestDto requestDto, User author) {
         int lastNumOfIssues = issueRepository.findAllIssues().size();
 
         Issue issueForSaving = new Issue();
-        issueForSaving.setIssueFromDto(requestDto, user, (long) lastNumOfIssues);
+        issueForSaving.setIssueFromDto(requestDto, author, (long) lastNumOfIssues);
 
         Long savedIssueId = issueRepository.simpleSave(issueForSaving);
         logger.info("id :{}", savedIssueId);

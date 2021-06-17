@@ -4,7 +4,7 @@ public class ResponseStatusDto {
     private String status;
 
     public ResponseStatusDto(String status) {
-        status = status;
+        this.status = status;
     }
 
     public String getStatus() {

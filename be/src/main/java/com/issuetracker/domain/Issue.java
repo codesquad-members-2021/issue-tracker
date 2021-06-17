@@ -14,11 +14,11 @@ public class Issue {
     private String title;
     private String description;
     private Long assignee;
+    private Long authorUserId;
     private LocalDateTime createdTime;
     private boolean closed;
     private boolean deleted;
     private Long milestoneId;
-    private Long authorUserId;
     private Long number;
     private List<Label> labels;
 
@@ -40,7 +40,7 @@ public class Issue {
         this.labels = labels;
     }
 
-    public void setIssueFromDto(IssueRequestDto requestDto, User user, Long lastNumOfIssue) {
+    public void setIssueFromDto(IssueRequestDto requestDto, User author, Long lastNumOfIssue) {
         this.title = requestDto.getTitle();
         this.description = requestDto.getDescription();
         this.assignee = requestDto.getAssignee();
@@ -48,7 +48,7 @@ public class Issue {
         this.closed = false;
         this.deleted = false;
         this.milestoneId = requestDto.getMilestoneId();
-        this.authorUserId = user.getId();
+        this.authorUserId = author.getId();
         //TODO: 추후 변경
         this.number = lastNumOfIssue + 1;
     }
