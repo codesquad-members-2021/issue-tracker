@@ -48,7 +48,7 @@ jobs:
         working-directory: ./BE
         
       - name: Build with Gradle 
-        run: ./gradlew build -x test 
+        run: ./gradlew bootjar -x test
         shell: bash
         working-directory: ./BE
         
