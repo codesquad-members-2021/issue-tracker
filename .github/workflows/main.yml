@@ -29,6 +29,11 @@ jobs:
         uses: actions/setup-java@v1 
         with: 
           java-version: 1.8 
+      
+      - name: Set property
+        run: echo ${{ secrets.JASYPT_PASSWORD }} >> application.properties
+        shell: bash
+        working-directory: ./BE/
           
       - name: Grant execute permission for gradlew 
         run: chmod +x gradlew 
@@ -38,7 +43,7 @@ jobs:
       - name: Build with Gradle 
         run: ./gradlew build -x test 
         shell: bash
-        working-directory: ./BE
+        working-directory: ./BE/src/main/resources
         
       - name: Configure AWS credentials 
         uses: aws-actions/configure-aws-credentials@v1 
