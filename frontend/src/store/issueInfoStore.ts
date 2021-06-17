@@ -113,10 +113,13 @@ type Icreate = SerializableParam&{
   issueInputs: inputsType
   skip: boolean
 }
-interface ResultType{
-  postResult:Promise<number>|null
-  fetchData:(issueInputs: inputsType) => Promise<number>
 
+type issueNumber={
+  issueId : number
+}
+interface ResultType{
+  postResult:Promise<issueNumber>|null
+  fetchData:(issueInputs: inputsType) => Promise<issueNumber>
 }
 export const createIssue = selectorFamily({
   key: 'POST/createIssue',
@@ -135,7 +138,8 @@ export const createIssue = selectorFamily({
           }
         );
         if(response.status!==200) throw new Error('잘못된 요청입니다.');
-        return response.status
+        const issueID = response.json()
+        return issueID
       } catch (err) {
         throw new Error('잘못된 요청입니다.');
       }
@@ -192,3 +196,4 @@ export const selectedMilestoneState = atom<MilestoneType | null>({
   key: 'selectedMilestoneTabState',
   default: null,
 });
+ 
