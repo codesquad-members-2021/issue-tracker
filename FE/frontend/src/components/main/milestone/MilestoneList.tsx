@@ -10,7 +10,6 @@ import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 import { ReactComponent as Trash } from '../../../icons/trash.svg';
 import useFetch from '../../../util/useFetch';
-import Label from '../../../styles/atoms/Label';
 
 const MilestoneList = () => {
   const { isLoading, data, error } = useFetch('milestone', 'getAllData');
