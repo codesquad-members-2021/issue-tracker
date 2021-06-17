@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentEmojiRequest;
 import team02.issue_tracker.dto.CommentRequest;
+import team02.issue_tracker.dto.EmojiResponse;
 import team02.issue_tracker.dto.issue.IssueRequest;
 import team02.issue_tracker.exception.CommentNotFoundException;
 import team02.issue_tracker.exception.EmojiNotFoundException;
@@ -12,6 +13,7 @@ import team02.issue_tracker.repository.CommentRepository;
 import team02.issue_tracker.repository.EmojiRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -55,5 +57,11 @@ public class CommentService {
         Comment comment = commentRepository.findByIdAndDeletedFalse(commentId).orElseThrow(CommentNotFoundException::new);
         comment.edit(commentRequest.getContent(), commentRequest.getFile());
         commentRepository.save(comment);
+    }
+
+    public List<EmojiResponse> getAllEmojiResponses() {
+        return emojiRepository.findByDeletedFalse().stream()
+                .map(EmojiResponse::new)
+                .collect(Collectors.toList());
     }
 }
