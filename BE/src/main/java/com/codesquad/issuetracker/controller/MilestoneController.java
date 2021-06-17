@@ -7,6 +7,7 @@ import com.codesquad.issuetracker.service.MilestoneService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -28,20 +29,15 @@ public class MilestoneController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ApiResponse getMilestones() {
-        MilestoneResponse milestoneResponse1 = new MilestoneResponse(1L, "[BE] DB 설계", null, LocalDateTime.now(), 1, 1, 50);
-        MilestoneResponse milestoneResponse2 = new MilestoneResponse(1L, "[BE] API 설계", null, LocalDateTime.now(), 2, 2, 50);
-        Set<MilestoneResponse> milestoneResponseSet = new LinkedHashSet<>();
-        milestoneResponseSet.add(milestoneResponse1);
-        milestoneResponseSet.add(milestoneResponse2);
-        return ApiResponse.ok(milestoneResponseSet);
+        final int DEFAULT_PAGE = 0;
+        return ApiResponse.ok(milestoneService.getMilestones(DEFAULT_PAGE));
     }
 
     @GetMapping("/{milestoneId}")
-    public ApiResponse getMilestone(@PathVariable Long milestoneId) {
-        MilestoneResponse milestoneResponse = new MilestoneResponse(1L, "[BE] DB 설계", null, LocalDateTime.now(), 1, 1, 50);
-
-        return ApiResponse.ok(milestoneResponse);
+    public ApiResponse getMilestone(@NotNull @PathVariable Long milestoneId) {
+        return ApiResponse.ok(milestoneService.getMilestone(milestoneId));
     }
 
 }

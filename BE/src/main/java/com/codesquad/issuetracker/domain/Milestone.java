@@ -33,7 +33,6 @@ public class Milestone {
     @JsonProperty("closed_issue")
     private int closedIssue;
 
-
     public static Milestone create(Long id, String title, String content, LocalDateTime dueDate, int openedIsssue, int closedIssue) {
         return new Milestone(id, title, content, dueDate, openedIsssue, closedIssue);
     }
