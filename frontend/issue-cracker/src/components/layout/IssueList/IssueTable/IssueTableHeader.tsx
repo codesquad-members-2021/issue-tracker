@@ -4,9 +4,9 @@ import CheckBoxes from '../../../common/CheckBoxes';
 import OpenIconGroup from '../../../common/group/OpenIconGroup';
 import ClosedIconGroup from '../../../common/group/ClosedIconGroup';
 import {
-  CLOSED_ISSUE,
-  OPEN_ISSUE,
-  ISSUE_TABLE_HEADER_LIST,
+  TEXT as TT,
+  TYPE as T,
+  FILTER as F,
   FILTER_DROPDOWN,
 } from '../../../../utils/const';
 import TextGroup from '../../../common/group/TextGroup';
@@ -23,19 +23,25 @@ const IssueTableHeader = (): JSX.Element => {
 
         <IssueHeaderButton
           icon={<OpenIconGroup type={'default'} />}
-          text={<TextGroup type="small" content={OPEN_ISSUE} color="#222" />}
+          text={
+            <TextGroup type={T.SMALL} content={TT.OPEN_ISSUE} color="#222" />
+          }
           count={<CountGroup count={0} color="#222" />}
         />
         <IssueHeaderButton
           icon={<ClosedIconGroup type={'disabled'} />}
           text={
-            <TextGroup type="small" content={CLOSED_ISSUE} color="#6E7191" />
+            <TextGroup
+              type={T.SMALL}
+              content={TT.CLOSED_ISSUE}
+              color="#6E7191"
+            />
           }
           count={<CountGroup count={0} color="#6E7191" />}
         />
       </S.IssueTableHeaderLeft>
       <S.IssueTableHeaderRight>
-        {ISSUE_TABLE_HEADER_LIST.map((menu) => (
+        {F.ISSUE_TABLE_HEADER_LIST.map((menu) => (
           <FilterMenu {...{ menu }} list={FILTER_DROPDOWN} key={uuidv4()} />
         ))}
       </S.IssueTableHeaderRight>

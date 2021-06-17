@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { SMALL_FILL, WRITING_ISSUE } from '../../../../utils/const';
+import { BUTTON_SIZE as BS, BUTTON_NAME as BN } from '../../../../utils/const';
 import ButtonGroup from '../../../common/group/ButtonGroup';
 import IssueFilter from './IssueFilter';
 import TapGroup from '../../../common/group/TabGroup';
@@ -21,8 +21,8 @@ const IssueNav: FC = () => {
           <Link to="/main/issue-add">
             <ButtonBox>
               <ButtonGroup
-                type={SMALL_FILL}
-                name={WRITING_ISSUE}
+                type={BS.SMALL_FILL}
+                name={BN.WRITING_ISSUE}
                 icon={<AddIcon style={{ fontSize: 16 }} />}
               />
             </ButtonBox>

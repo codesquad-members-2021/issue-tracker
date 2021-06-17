@@ -7,7 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import TextGroup from './group/TextGroup';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-
+import { TYPE as T } from '../../utils/const';
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
     input: {
@@ -46,11 +46,11 @@ function FilterMenu({ menu, list }: FilterMenuProps): JSX.Element {
         input={<BootstrapInput />}
       >
         <MenuItem value={menu}>
-          <TextGroup content={menu} color="#222" type="small" />
+          <TextGroup content={menu} color="#222" type={T.SMALL} />
         </MenuItem>
         {list.map((menu, idx) => (
           <MenuItem value={idx} key={uuidv4()}>
-            <TextGroup content={menu} color="#222" type="small" />
+            <TextGroup content={menu} color="#222" type={T.SMALL} />
           </MenuItem>
         ))}
       </CustomSelect>

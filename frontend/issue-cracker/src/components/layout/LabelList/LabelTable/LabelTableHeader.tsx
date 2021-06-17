@@ -3,12 +3,13 @@ import { Issue as S } from '../../../styles/CommonStyles';
 import TextGroup from '../../../common/group/TextGroup';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { TYPE as T } from '../../../../utils/const';
 
 const LabelTableHeader = (): JSX.Element => {
   return (
     <S.IssueTableHeader>
       <TextBox>
-        <TextGroup type="small" content={'3개의 레이블'} color="#6E7191" />
+        <TextGroup type={T.SMALL} content={'3개의 레이블'} color="#6E7191" />
       </TextBox>
     </S.IssueTableHeader>
   );

@@ -5,18 +5,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import IssueClosedIcon from '../../styles/svg/IssueClosedIcon';
 import TextGroup from '../../common/group/TextGroup';
 import LabelLargeGroup from '../../common/group/LabelLargeGroup';
-
+import { TYPE as T } from '../../../utils/const';
 const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
   return (
     <IssueDetailTitleStyle>
       <TitleUpperBox>
         <TextBox>
-          <TextGroup type="large" content={title} color="#222" />
-          <TextGroup type="large" content={`#1`} color="#6E7191" />
+          <TextGroup type={T.LARGE} content={title} color="#222" />
+          <TextGroup type={T.LARGE} content={`#1`} color="#6E7191" />
         </TextBox>
         <ButtonBox>
           <TitleEditButton startIcon={<TitleEditIcon />} color="primary">
-            <TextGroup type="small" content={'제목 편집'} color="#007AFF" />
+            <TextGroup type={T.SMALL} content={'제목 편집'} color="#007AFF" />
           </TitleEditButton>
           <TitleEditButton
             startIcon={
@@ -27,7 +27,7 @@ const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
             }
             color="primary"
           >
-            <TextGroup type="small" content={'이슈 닫기'} color="#007AFF" />
+            <TextGroup type={T.SMALL} content={'이슈 닫기'} color="#007AFF" />
           </TitleEditButton>
         </ButtonBox>
       </TitleUpperBox>
@@ -37,7 +37,7 @@ const IssueDetailTitle = ({ title }: { title: string }): JSX.Element => {
         </ButtonBox>
         <TextBox>
           <TextGroup
-            type="small"
+            type={T.SMALL}
             content={`이 이슈가 date분 전에 writer님에 의해 열렸습니다 ∙ 코멘트 1개`}
             color="#6E7191"
           />

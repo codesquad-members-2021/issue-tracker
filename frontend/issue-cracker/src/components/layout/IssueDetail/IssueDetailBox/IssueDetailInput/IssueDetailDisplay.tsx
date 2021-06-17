@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import { TYPE as T } from '../../../../../utils/const';
 
 const IssueDetailDisplay = (): JSX.Element => {
   const profileURL = localStorage.getItem('profileImageUrl');
@@ -20,10 +21,10 @@ const IssueDetailDisplay = (): JSX.Element => {
           <S.IssueTableHeader>
             <LeftBox>
               <WriterBox>
-                <TextGroup type="small" content={'Raccoon'} color="#14142B" />
+                <TextGroup type={T.SMALL} content={'Raccoon'} color="#14142B" />
               </WriterBox>
               <DateBox>
-                <TextGroup type="small" content={'20분 전'} color="#6E7191" />
+                <TextGroup type={T.SMALL} content={'20분 전'} color="#6E7191" />
               </DateBox>
             </LeftBox>
             <RightBox>
@@ -39,7 +40,7 @@ const IssueDetailDisplay = (): JSX.Element => {
                   startIcon={<TitleEditIcon style={{ fontSize: '14px' }} />}
                   color="primary"
                 >
-                  <TextGroup type="xSmall" content={'편집'} color="#6e7191" />
+                  <TextGroup type={T.XSMALL} content={'편집'} color="#6e7191" />
                 </TitleEditButton>
               </EditButtonBox>
               <EmoticonBox>
@@ -50,7 +51,7 @@ const IssueDetailDisplay = (): JSX.Element => {
           </S.IssueTableHeader>
           <S.IssueCell>
             <ContentBox>
-              <TextGroup type="small" content={'내용 출력'} color="#6e7191" />
+              <TextGroup type={T.SMALL} content={'내용 출력'} color="#6e7191" />
             </ContentBox>
           </S.IssueCell>
         </DisplayBox>
@@ -64,10 +65,10 @@ const IssueDetailDisplay = (): JSX.Element => {
           <S.IssueTableHeader>
             <LeftBox>
               <WriterBox>
-                <TextGroup type="small" content={'ink-O'} color="#14142B" />
+                <TextGroup type={T.SMALL} content={'ink-O'} color="#14142B" />
               </WriterBox>
               <DateBox>
-                <TextGroup type="small" content={'10분 전'} color="#6E7191" />
+                <TextGroup type={T.SMALL} content={'10분 전'} color="#6E7191" />
               </DateBox>
             </LeftBox>
             <RightBox>

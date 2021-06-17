@@ -11,14 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import TextGroup from '../../../common/group/TextGroup';
-import {
-  ASSIGNED_ISSUE,
-  CLOSED_ISSUE,
-  COMMENTED_ISSUE,
-  FILTER,
-  OPEN_ISSUE,
-  WRITTEN_ISSUE,
-} from '../../../../utils/const';
+import { FILTER as F, TEXT as TT, TYPE as T } from '../../../../utils/const';
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -71,23 +64,31 @@ function IssueFilter(): JSX.Element {
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value={FILTER}>
-            <TextGroup content={FILTER} color="#222" type="xSmall" />
+          <MenuItem value={F.FILTER}>
+            <TextGroup content={F.FILTER} color="#222" type={T.XSMALL} />
           </MenuItem>
           <MenuItem value={1}>
-            <TextGroup content={OPEN_ISSUE} color="#222" type="xSmall" />
+            <TextGroup content={TT.OPEN_ISSUE} color="#222" type={T.XSMALL} />
           </MenuItem>
           <MenuItem value={2}>
-            <TextGroup content={WRITTEN_ISSUE} color="#222" type="xSmall" />
+            <TextGroup content={F.WRITTEN_ISSUE} color="#222" type={T.XSMALL} />
           </MenuItem>
           <MenuItem value={3}>
-            <TextGroup content={ASSIGNED_ISSUE} color="#222" type="xSmall" />
+            <TextGroup
+              content={F.ASSIGNED_ISSUE}
+              color="#222"
+              type={T.XSMALL}
+            />
           </MenuItem>
           <MenuItem value={4}>
-            <TextGroup content={COMMENTED_ISSUE} color="#222" type="xSmall" />
+            <TextGroup
+              content={F.COMMENTED_ISSUE}
+              color="#222"
+              type={T.XSMALL}
+            />
           </MenuItem>
           <MenuItem value={5}>
-            <TextGroup content={CLOSED_ISSUE} color="#222" type="xSmall" />
+            <TextGroup content={TT.CLOSED_ISSUE} color="#222" type={T.XSMALL} />
           </MenuItem>
         </Select>
       </FormControl>

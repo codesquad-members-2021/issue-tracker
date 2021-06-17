@@ -5,7 +5,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import FlagIcon from '@material-ui/icons/Flag';
 import styled from 'styled-components';
-import { LABEL, MILESTONE } from '../../../utils/const';
+import { TEXT as TT, TYPE as T } from '../../../utils/const';
 import TextGroup from '../group/TextGroup';
 import CountGroup from '../group/CountGroup';
 import { Link } from 'react-router-dom';
@@ -35,13 +35,13 @@ const TabGroup = (): JSX.Element => {
       >
         <Link to="/main/label-list">
           <TabButton startIcon={<LocalOfferIcon />}>
-            <TextGroup type="small" content={LABEL} color="#6E7191" />
+            <TextGroup type={T.SMALL} content={TT.LABEL} color="#6E7191" />
             <CountGroup count={0} color="#6E7191" />
           </TabButton>
         </Link>
         <Link to="/main/milestone">
           <TabButton startIcon={<FlagIcon />}>
-            <TextGroup type="small" content={MILESTONE} color="#6E7191" />
+            <TextGroup type={T.SMALL} content={TT.MILESTONE} color="#6E7191" />
             <CountGroup count={0} color="#6E7191" />
           </TabButton>
         </Link>
