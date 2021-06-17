@@ -66,7 +66,6 @@
 		D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
 		D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */; };
 		D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */; };
-		D0FD50D4267192AF008C6031 /* AddMilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50D3267192AF008C6031 /* AddMilestoneViewController.swift */; };
 		D0FD50DC2671AA04008C6031 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50DB2671AA04008C6031 /* InputView.swift */; };
 		D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -153,7 +152,6 @@
 		D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
-		D0FD50D3267192AF008C6031 /* AddMilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMilestoneViewController.swift; sourceTree = "<group>"; };
 		D0FD50DB2671AA04008C6031 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E7F242466FC866CAD16EFF69 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 				B3B559E4266E095E00901C55 /* LoginViewController.swift */,
 				B3F527502670968F002B0812 /* LabelViewController.swift */,
 				D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */,
-				D0FD50D3267192AF008C6031 /* AddMilestoneViewController.swift */,
 				491F08932679E5410081C5C5 /* AddLabelViewController.swift */,
 				D0A88E0126732D21005877F6 /* NewIssueViewController.swift */,
 				D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */,
@@ -638,7 +635,6 @@
 				B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */,
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */,
-				D0FD50D4267192AF008C6031 /* AddMilestoneViewController.swift in Sources */,
 				B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
