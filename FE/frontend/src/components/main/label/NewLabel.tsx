@@ -5,6 +5,8 @@ import Typos from '../../../styles/atoms/Typos';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Refresh } from '../../../icons/refresh.svg';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
+import { ReactComponent as CheckOffCircle } from '../../../icons/checkOffCircle.svg';
+import { ReactComponent as CheckOnCircle } from '../../../icons/checkOnCircle.svg';
 
 const NewLabel = () => {
   const [backgroundColor, setBackgroundColor] = useState(
@@ -15,16 +17,15 @@ const NewLabel = () => {
     brightColor: false,
   });
 
-  const changeColor = () => {
+  const changeBackgroundColor = () => {
     setBackgroundColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
   };
-
   return (
     <NewLabelContainer>
       <Typos lg>새로운 레이블 추가</Typos>
       <MainContainer>
         <LabelWrapper>
-          <Label background={backgroundColor} />
+          <Label background={backgroundColor} color={textColor} />
         </LabelWrapper>
         <InputContainer>
           <TextInput type="text" placeholder="레이블 이름" />
@@ -33,12 +34,40 @@ const NewLabel = () => {
             <BackgroundColorPicker>
               <Typos xs>배경 색상</Typos>
               <Typos sm> {backgroundColor}</Typos>
-              <RefreshWrapper onClick={changeColor}>
+              <RefreshWrapper onClick={changeBackgroundColor}>
                 <Refresh />
               </RefreshWrapper>
             </BackgroundColorPicker>
             <TextColorPicker>
               <Typos xs>텍스트 색상</Typos>
+              <div>
+                <CheckBoxWrapper
+                  onClick={() => {
+                    setTextColor({
+                      ...textColor,
+                      darkColor: true,
+                      brightColor: false,
+                    });
+                  }}>
+                  {!textColor.darkColor && <CheckOffCircle />}
+                  {textColor.darkColor && <CheckOnCircle />}
+                  <Typos sm>어두운 색</Typos>
+                </CheckBoxWrapper>
+              </div>
+              <div>
+                <CheckBoxWrapper
+                  onClick={() => {
+                    setTextColor({
+                      ...textColor,
+                      darkColor: false,
+                      brightColor: true,
+                    });
+                  }}>
+                  {!textColor.brightColor && <CheckOffCircle />}
+                  {textColor.brightColor && <CheckOnCircle />}
+                  <Typos sm>밝은 색</Typos>
+                </CheckBoxWrapper>
+              </div>
             </TextColorPicker>
           </ColorOptionContainer>
           <ButtonWrapper>
@@ -70,6 +99,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const LabelWrapper = styled.div`
   display: flex;
   margin: 0 auto 6% auto;
@@ -129,6 +159,8 @@ const PlusWrapper = styled.div`
 
 const TextColorPicker = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   width: 352px;
   background: ${props => props.theme.greyscale.inputBackground};
   border-radius: 11px;
@@ -137,5 +169,13 @@ const TextColorPicker = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const CheckBoxWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  div {
+    padding: 0 5px;
+  }
 `;
 export default NewLabel;

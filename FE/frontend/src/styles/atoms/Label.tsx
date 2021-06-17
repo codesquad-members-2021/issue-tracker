@@ -4,13 +4,13 @@ import styled from 'styled-components';
 interface Props {
   title?: string;
   background?: string;
-  color?: string;
+  color?: { [key: string]: boolean };
 }
 
 const Label = (props: Props) => {
   return (
     <LabelWrapper background={props.background ? props.background : '#EFF0F6'}>
-      <Title color={props.color ? props.color : '#14142B'}>
+      <Title color={props.color}>
         {props.title ? props.title : '레이블 이름'}
       </Title>
     </LabelWrapper>
@@ -24,11 +24,20 @@ const LabelWrapper = styled.div<{ background: string }>`
   border-radius: 30px;
 `;
 
-const Title = styled.div<{ color: string }>`
+const Title = styled.div<{
+  color: { [key: string]: boolean } | undefined;
+}>`
   width: auto;
   padding: 0 20px;
   font-weight: 500;
   font-size: ${props => props.theme.fontSize.xs};
-  color: ${props => props.theme.greyscale.titleActive};
+  color: ${props => {
+    if (props?.color?.darkColor) {
+      return props.theme.greyscale.body;
+    } else if (props?.color?.brightColor) {
+      return props.theme.greyscale.offWhite;
+    }
+    return props.theme.greyscale.body;
+  }};
 `;
 export default Label;
