@@ -41,13 +41,21 @@ public class Issue {
     private LocalDateTime createdAt;
 
     @ManyToMany
+    @JoinColumn(foreignKey =
+    @ForeignKey(foreignKeyDefinition =
+            "FOREIGN KEY (`labels_label_id`) REFERENCES `label`(`label_id`) ON DELETE CASCADE"))
     private final Set<Label> labels = new LinkedHashSet<>();
 
     @ManyToMany
+    @JoinColumn(foreignKey =
+    @ForeignKey(foreignKeyDefinition =
+            "FOREIGN KEY (`assignees_user_id`) REFERENCES `user`(`user_id`) ON DELETE CASCADE"))
     private final Set<User> assignees = new LinkedHashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "MILESTONE_ID")
+    @JoinColumn(name = "MILESTONE_ID", foreignKey =
+    @ForeignKey(foreignKeyDefinition =
+            "FOREIGN KEY (`MILESTONE_ID`) REFERENCES `milestone`(MILESTONE_ID) ON DELETE SET NULL"))
     private Milestone milestone;
 
     private Issue(User author, String title) {
