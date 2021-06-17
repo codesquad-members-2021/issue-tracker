@@ -11,8 +11,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CommentRequest {
 
-    private final UUID id;
-
     private final String content;
 
     private final Long issueId;

@@ -6,6 +6,8 @@ import com.codesquad.issuetracker.comment.service.CommentService;
 import com.codesquad.issuetracker.user.domain.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
@@ -21,8 +23,8 @@ public class CommentController {
         return commentService.createComment(commentRequest, author);
     }
 
-    @PutMapping
-    public CommentWrapper updateComment(@RequestBody CommentRequest commentRequest) {
-        return commentService.updateComment(commentRequest);
+    @PutMapping("/{id}")
+    public CommentWrapper updateComment(@RequestBody CommentRequest commentRequest, @PathVariable UUID id) {
+        return commentService.updateComment(commentRequest, id);
     }
 }

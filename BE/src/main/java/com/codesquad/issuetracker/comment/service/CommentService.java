@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 public class CommentService {
 
@@ -29,8 +31,8 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentWrapper updateComment(CommentRequest commentRequest) {
-        Comment comment = commentRepository.findById(commentRequest.getId())
+    public CommentWrapper updateComment(CommentRequest commentRequest, UUID id) {
+        Comment comment = commentRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
         comment.updateContent(commentRequest);
         return CommentWrapper.wrap(CommentResponse.fromEntity(comment));

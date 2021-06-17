@@ -32,6 +32,12 @@ public class Milestone {
     @Column(name = "MILESTONE_DUE_DATE")
     private LocalDate dueDate;
 
+    @Column(name = "MILESTONE_OPEN_ISSUES")
+    private int openIssues = 0;
+
+    @Column(name = "MILESTONE_CLOSED_ISSUES")
+    private int closedIssues = 0;
+
     private Milestone(@NonNull String title, @NonNull String description, LocalDate dueDate) {
         this.title = title;
         this.description = description;
@@ -46,5 +52,31 @@ public class Milestone {
         this.title = milestoneRequest.getTitle();
         this.description = milestoneRequest.getDescription();
         this.dueDate = milestoneRequest.getDueDate();
+    }
+
+    public void countOpenIssuesUp() {
+        this.openIssues++;
+    }
+
+    public void countClosedIssuesUp() {
+        this.closedIssues++;
+    }
+
+    public void countOpenIssuesDown() {
+        this.openIssues--;
+    }
+
+    public void countClosedIssuesDown() {
+        this.closedIssues--;
+    }
+
+    public void openIssue() {
+        this.openIssues++;
+        this.closedIssues--;
+    }
+
+    public void closeIssue() {
+        this.openIssues--;
+        this.closedIssues++;
     }
 }
