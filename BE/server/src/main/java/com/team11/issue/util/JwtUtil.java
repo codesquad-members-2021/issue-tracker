@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.fasterxml.jackson.databind.node.TextNode;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class JwtUtil {
         return decodedJWT.getClaims().get(CLAIM_KEY).as(TextNode.class).asText();
     }
 
+    // TODO: 사용자 정의 이셉션 적용(만료기한이 지났습니다)
     private static DecodedJWT verifyToken(String token) {
         try {
             JWTVerifier verifier = JWT.require(algorithmHS)

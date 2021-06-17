@@ -1,6 +1,8 @@
 package com.team11.issue.controller;
 
+import com.team11.issue.domain.Issue;
 import com.team11.issue.dto.ResponseDTO;
+import com.team11.issue.dto.issue.IssueResponseDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
 import com.team11.issue.dto.user.LoginResponseDTO;
 import com.team11.issue.service.UserService;
@@ -29,9 +31,9 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "code를 가지고 로그인을 합니다.")
     public ResponseEntity<LoginResponseDTO> login(@ApiParam("IssueTrackerFE || IssueTrackerIOS") @RequestHeader("User-Agent") String userAgent,
-                                                  @ApiParam("github code")  @RequestBody LoginRequestDTO loginRequestDTO) {
-        logger.info("로그인 요청: "+ userAgent);
-        return ResponseEntity.ok().body(userService.login(userAgent,loginRequestDTO));
+                                                  @ApiParam("github code") @RequestBody LoginRequestDTO loginRequestDTO) {
+        logger.info("로그인 요청: " + userAgent);
+        return ResponseEntity.ok().body(userService.login(userAgent, loginRequestDTO));
     }
 
     @PutMapping("/logout")
@@ -41,6 +43,5 @@ public class UserController {
         userService.logout(authorization);
         return ResponseEntity.ok().body(new ResponseDTO("logout"));
     }
-
 
 }
