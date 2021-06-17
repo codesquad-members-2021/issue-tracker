@@ -209,7 +209,7 @@
         <!--Issue List View Controller-->
         <scene sceneID="z1m-pj-Jw5">
             <objects>
-                <viewController id="sqk-8h-LsM" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueListViewController" id="sqk-8h-LsM" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="76P-zK-Alf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

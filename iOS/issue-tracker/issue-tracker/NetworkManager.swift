@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class LoginManager {
+struct NetworkManager {
     
     private let jwtManager: JWTManager
     
@@ -9,24 +9,17 @@ class LoginManager {
         self.jwtManager = JWTManager()
     }
     
-    func requestAuthorization(handler: @escaping (URL, String) -> Void) {
-        let redirectURI = "issueTracker://login"
-        let callbackUrlScheme = "issueTracker"
-        let url = URL(string: "https://github.com/login/oauth/authorize?client_id=04fb3475fc652d5304a3&redirect_uri=\(redirectURI)")!
-        
-        handler(url, callbackUrlScheme)
-    }
-    
-    func extractAuthorizationCode(from url: URL) -> String {
-        guard let code = url.absoluteString.components(separatedBy: "=").last else {
-            return ""
+    func setAuthorizationRequest(url: URL) -> URLRequest {
+        guard let jwt = jwtManager.get() else {
+            return URLRequest(url: url)
         }
-        return code
-    }
-    
-    func convertToURL(with code: String) -> URL? {
-        let loginURLString = "http://13.125.35.62/api/login/github/ios?code=\(code)"
-        return URL(string: loginURLString)
+        
+        var request = URLRequest(url: url)
+        let requestValue = "bearer " + jwt
+        let headerField = "Authorization"
+        
+        request.setValue(requestValue, forHTTPHeaderField: headerField)
+        return request
     }
     
     func get<T>(with url: URL?, type: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
@@ -35,7 +28,7 @@ class LoginManager {
             return Fail(error: error).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return URLSession.shared.dataTaskPublisher(for: self.setAuthorizationRequest(url: url))
             .mapError { _ in NetworkError.networkConnection(desciption: "Network Error") }
             .flatMap { data, response -> AnyPublisher<T, NetworkError> in
                 guard let httpResponse = response as? HTTPURLResponse else {
@@ -51,18 +44,4 @@ class LoginManager {
             }.eraseToAnyPublisher()
     }
     
-    func setSecurity(jwt: String) {
-        self.jwtManager.set(jwt: jwt)
-    }
-    
-    func getSecurity() -> String? {
-        return self.jwtManager.get()
-    }
-}
-
-enum NetworkError: Error {
-    case encoding(description: String)
-    case decoding(description: String)
-    case url(description: String)
-    case networkConnection(desciption: String)
 }
