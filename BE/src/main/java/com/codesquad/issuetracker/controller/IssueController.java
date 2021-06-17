@@ -62,7 +62,7 @@ public class IssueController {
 
     @PutMapping("/{issueId}/label")
     public ApiResponse editLabel(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
-        issueService.updateLabelAdd(issueId, issueRequest);
+        issueService.updateLabel(issueId, issueRequest);
         return ApiResponse.ok();
     }
 

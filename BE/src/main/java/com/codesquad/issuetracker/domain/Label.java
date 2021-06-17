@@ -1,11 +1,21 @@
 package com.codesquad.issuetracker.domain;
 
+import com.codesquad.issuetracker.request.LabelRequest;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "label")
+@Getter
+@NoArgsConstructor
+@ToString
 public class Label {
 
     @Id
@@ -25,42 +35,13 @@ public class Label {
         this.color = color;
     }
 
-    public Label() {
-
-    }
-
-    public Label create(Long id, String title, String content, String color) {
+    public static Label create(Long id, String title, String content, String color) {
         return new Label(id, title, content, color);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public List<IssueLabel> getIssueLabels() {
-        return issueLabels;
-    }
-
-    @Override
-    public String toString() {
-        return "Label{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", color='" + color + '\'' +
-                ", issueLabels=" + issueLabels +
-                '}';
+    public void update(LabelRequest labelRequest) {
+        this.title = labelRequest.getTitle();
+        this.content = labelRequest.getContent();
+        this.color = labelRequest.getColor();
     }
 }

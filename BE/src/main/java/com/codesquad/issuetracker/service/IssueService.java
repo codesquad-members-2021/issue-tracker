@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
@@ -33,7 +34,7 @@ public class IssueService {
     public List<IssueResponse> getOpenedIssues() {
         List<IssueResponse> result = new ArrayList<>();
         List<Issue> issues = issueRepository.getIssuesByStatusTrue();
-        for(Issue issue : issues) {
+        for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }
         return result;
@@ -42,7 +43,7 @@ public class IssueService {
     public List<IssueResponse> getClosedIssues() {
         List<IssueResponse> result = new ArrayList<>();
         List<Issue> issues = issueRepository.getIssuesByStatusFalse();
-        for(Issue issue : issues) {
+        for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }
         return result;
@@ -58,7 +59,6 @@ public class IssueService {
     } // IssueRequest의 User 수정 필요
 
     public void updateTitle(Long issueId, IssueRequest issueRequest) {
-      //id로 Issue찾기 - Issue의 내용 변경 - save()로 저장(후 저장한 값 리턴)
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
         updateIssue.setTitle(issueRequest.getTitle());
         issueRepository.save(updateIssue);
@@ -82,20 +82,23 @@ public class IssueService {
         issueRepository.save(updateIssue);
     }
 
-    public void updateLabelAdd(Long issueId, IssueRequest issueRequest) {
+    public void updateLabel(Long issueId, IssueRequest issueRequest) {
         // IssueLabel을 Issue의 ID 기준으로 찾아 온 다음 더하거나(INSERT) 삭제(DELETE)한다
-        List<IssueLabel> labelsToEdited = issueLabelRepository.findIssueLabelsByIssueId(issueId); // 현재 IssueLabel 목록
-        ArrayList<Label> labelsToEdit = issueRequest.getLabelList(); // 수정할것
-        for (int i = 0; i < labelsToEdit.size(); i++) {
-            if (labelsToEdited.contains(labelsToEdit.get(i))) { // 현재 목록에 수정할 항목이 존재하면 넘어감 (추가/삭제 필요 x)
+        List<Long> labelIdsBeEdited = issueLabelRepository.findIssueLabelsLabelIdByIssueId(issueId); // 원본
+        ArrayList<Label> labelsToEdit = issueRequest.getLabelList(); // 요청 (수정할것)
+        List<Long> labelIdsToEdit = labelsToEdit.stream().map(label -> label.getId()).collect(Collectors.toList());
+        for (Label label : labelsToEdit) {
+            if (labelIdsBeEdited.contains(label.getId())) { // 원본에 요청항목이 존재하면 넘어감 (추가/삭제 필요 x)
                 continue;
             }
-            if (! labelsToEdited.contains(labelsToEdit.get(i))) { // 현재 목록에 수정할 항목이 없으면 추가함
-                IssueLabel issueLabel = IssueLabel.issueToIssueLabel(issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new), labelsToEdit.get(i));
-                labelsToEdited.add(issueLabel);
+            if (!labelIdsBeEdited.contains(label.getId())) { // 원본에 수정할 항목이 없으면 추가함
+                IssueLabel issueLabel = IssueLabel.issueToIssueLabel(issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new), label);
+                issueLabelRepository.save(issueLabel);
             }
-            if (! labelsToEdit.contains(labelsToEdited.get(i))) {// 수정할 목록 중 현재목록 항목이 없으면 삭제함
-                issueRepository.deleteById(labelsToEdited.get(i).getId());
+        }
+        for (int i = 0; i < labelIdsBeEdited.size(); i++) {
+            if (!labelIdsToEdit.contains(labelIdsBeEdited.get(i))) {
+                issueLabelRepository.deleteIssueLabelByIssueIdAndLabelId(issueId, labelIdsBeEdited.get(i));
             }
         }
     }

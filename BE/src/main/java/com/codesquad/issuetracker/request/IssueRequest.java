@@ -25,8 +25,10 @@ public class IssueRequest {
     @JsonProperty("milestone_id")
     private Long milestoneId;
 
+    @JsonProperty("label_list")
     private ArrayList<Label> labelList;
 
+    @JsonProperty("assignee_list")
     private ArrayList<Assignee> assigneeList;
 
     public IssueRequest() {
