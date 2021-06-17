@@ -5,10 +5,12 @@ import com.codesquad.issuetracker.user.dto.UserResponse;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Builder
 public class CommentResponse {
     private Long id;

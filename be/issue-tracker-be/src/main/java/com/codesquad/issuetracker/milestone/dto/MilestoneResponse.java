@@ -2,10 +2,12 @@ package com.codesquad.issuetracker.milestone.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(of = {"id"})
 @Builder
 public class MilestoneResponse {
     private Long id;
