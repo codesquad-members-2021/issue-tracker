@@ -20,16 +20,12 @@ class MilestoneViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.frame = view.bounds
         view.addSubview(tableView)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "마일스톤"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMilestone))
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
     }
     
     @objc func addMilestone() {

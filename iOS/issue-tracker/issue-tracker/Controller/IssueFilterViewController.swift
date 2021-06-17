@@ -35,12 +35,9 @@ class IssueFilterViewController: UIViewController {
                                                                  action: nil)
         tableView.delegate = self
         tableView.dataSource = self
-        view.addSubview(tableView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        
+        view.addSubview(tableView)
     }
     
     @objc

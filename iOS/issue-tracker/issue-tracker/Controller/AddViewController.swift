@@ -29,12 +29,9 @@ class AddViewController: UIViewController {
                                                                  action: nil)
         
         tableView.dataSource = self
-        view.addSubview(tableView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        
+        view.addSubview(tableView)
     }
 }
 

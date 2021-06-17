@@ -43,20 +43,21 @@ class IssueDetailViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.frame = view.bounds
         tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
         
         view.addSubview(tableView)
         view.addSubview(toolbar)
+        
+        setupAutolayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
-        tableView.frame = view.bounds
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func setupAutolayout() {
         toolbar.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
