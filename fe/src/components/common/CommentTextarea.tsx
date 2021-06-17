@@ -16,6 +16,7 @@ const CommentTextarea = () => {
 
 export default CommentTextarea;
 const StyledCommentTextarea = styled.div`
+  width: 100%;
   position: relative;
   &:focus {
     label {

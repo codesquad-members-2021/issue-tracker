@@ -24,4 +24,3 @@ const StyledNewIssueRight = styled.div`
   height: fit-content;
   margin-left: 2rem;
 `;
- 

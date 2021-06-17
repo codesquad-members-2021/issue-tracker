@@ -2,6 +2,7 @@ import { Box } from '@material-ui/core';
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Comment from 'components/issue-detail/Comment';
 import styled from 'styled-components';
+import CommentTextarea from 'components/common/CommentTextarea';
 
 const IssueDetailBody = () => (
   <Box display="flex">
@@ -19,7 +20,7 @@ const IssueDetailBody = () => (
       <NewCommentWrapper display="flex">
         <AuthorAvatar size="L" name="eamon" />
         <Spacer />
-        {/* comment input ui */}
+        <CommentTextarea />
       </NewCommentWrapper>
     </CommentArea>
     <AssignArea></AssignArea>
@@ -30,11 +31,14 @@ const CommentArea = styled.section`
   width: 70%;
 `;
 
-const IssueDescription = styled.div``;
+const IssueDescription = styled.div`
+  margin-bottom: 1.5rem;
+`;
 
 const Comments = styled.ul`
+  all: unset;
   ${({ theme }) => theme.style.flexColum}
-  gap: 24px;
+  gap: 1.5rem;
 `;
 
 const NewCommentWrapper = styled(Box)`
