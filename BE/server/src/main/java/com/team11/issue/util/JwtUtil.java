@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.fasterxml.jackson.databind.node.TextNode;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
