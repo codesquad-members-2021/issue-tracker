@@ -1,21 +1,43 @@
-import {
-  atom,
-  atomFamily,
-  selector,
-  selectorFamily,
-  SerializableParam,
-} from 'recoil';
+import { atom, selector, selectorFamily, SerializableParam } from 'recoil';
+
 import { issueAPI, urlErrorMsg, issueListErrorMsg, hostAPI } from '@const/var';
+
+import pipe from '@utils/pipe';
+import { getQueryStringified, getQueryWhichHasValue } from '@utils/query';
+
+const querySet = atom<QuerySet>({
+  key: 'querySet',
+  default: {
+    closed: 'false',
+    author: null,
+    label: null,
+    milestone: null,
+  },
+});
+
+const queryString = selector({
+  key: 'queryString',
+  get: ({ get }) => {
+    const queryStringified = pipe(
+      get,
+      getQueryWhichHasValue,
+      getQueryStringified
+    )(querySet);
+    return queryStringified;
+  },
+});
 
 const handleError = (status: number, errorText: string) => {
   if (status >= 400 && status < 500) throw errorText;
 };
 
-const wholeIssueLists = selectorFamily({
+const wholeIssueLists = selector({
   key: 'wholeIssueLists',
-  get: (isClosed) => async () => {
+  get: async ({ get }) => {
     try {
-      const res = await fetch(`${issueAPI}?closed=${String(isClosed)}`);
+      const query = get(queryString);
+      const url = `${issueAPI}?closed=${query}`;
+      const res = await fetch(url);
       handleError(res.status, issueListErrorMsg);
       const issues = await res.json();
       return issues;
@@ -43,10 +65,6 @@ const issueCounts = selector({
   },
 });
 
-type Param = {
-  query: SerializableParam;
-};
-
 const filterList = selectorFamily({
   key: 'filterList',
   get: (query: Param) => async () => {
@@ -61,4 +79,19 @@ const filterList = selectorFamily({
   },
 });
 
-export { wholeIssueLists, issueCounts, filterList };
+export { wholeIssueLists, issueCounts, filterList, querySet, queryString };
+
+export type QuerySet = {
+  closed?: string;
+  author?: string | null;
+  label?: number | null;
+  milestone?: number | null;
+};
+
+export type QueryReduce = {
+  [key: string]: string | number;
+};
+
+type Param = {
+  query: SerializableParam;
+};
