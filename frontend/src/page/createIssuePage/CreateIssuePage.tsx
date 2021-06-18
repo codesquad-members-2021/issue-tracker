@@ -8,41 +8,38 @@ import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetai
 import PrimaryButton from 'components/atom/PrimaryButton';
 import { useRecoilValue } from 'recoil';
 import { IssueFormDataState } from 'store/issueInfoStore';
-import fetchData from 'util/api/fetchCreate'
-
+import fetchData from 'util/api/fetchCreate';
 
 type inputsType = {
   title?: string;
   comment: string;
   assignees: number[] | [];
-  labels: number[] | []; 
-  milestone: number | undefined; 
+  labels: number[] | [];
+  milestone: number | null;
 };
 
 export default function CreateIssuePage(): ReactElement {
-  const {assigneeID, labelID, milestoneID} = useRecoilValue(IssueFormDataState)
+  const { assigneeID, labelID, milestoneID } = useRecoilValue(IssueFormDataState);
   const history = useHistory();
   const titleRef = useRef(null);
   const [comment, setComment] = useState('');
-
 
   const handleClick = async (btnType: string) => {
     if (btnType === 'cancle') {
       history.push('/main');
     } else {
-      
       const titleInput = titleRef?.current as HTMLInputElement | null;
       const titleValue = titleInput?.value;
-
-      const sample:inputsType = {
-        title: titleValue,
-        comment: comment,
+      const sample: inputsType = {
+        title: titleValue ? titleValue : '제목 없음',
+        comment: comment ? comment : '',
         assignees: assigneeID,
         labels: labelID,
-        milestone: milestoneID,
+        milestone: milestoneID ? milestoneID : null,
       };
-      const isSuccess = await fetchData(sample);
-      const createdIssueID = isSuccess?.issueId;
+
+      const createdIssueData = await fetchData(sample);
+      const createdIssueID = createdIssueData?.issueId;
       history.push(`/detail/${createdIssueID}`);
     }
   };
@@ -54,7 +51,7 @@ export default function CreateIssuePage(): ReactElement {
       </div>
       <div className='create__section__body'>
         <ProfileImg />
-        <IssueInput titleRef={titleRef} comment={comment} setComment={setComment}/>
+        <IssueInput titleRef={titleRef} comment={comment} setComment={setComment} />
         <IssueDetailOption />
       </div>
       <div className='create__section__footer'>

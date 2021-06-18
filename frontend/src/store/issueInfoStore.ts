@@ -63,9 +63,16 @@ export const issueFilterSelectState = atom<string>({
   default: '',
 });
 
+export const getIssueTrigger = atom<boolean>({
+  key: 'getIssueTrigger',
+  default: false,
+});
+
 export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
   key: 'GET/issues',
   get: async ({ get }) => {
+    const trigger = get(getIssueTrigger);
+    console.log('셀렉터안에서', trigger);
     const issueType = get(issueTypeState);
     const isFilterSetting = get(isFilterFullSetting);
     if (!isFilterSetting) return null;
@@ -128,15 +135,19 @@ export const selectedTabState = selector<selectedTabType>({
 
 //create
 export const IssueFormDataState = selector({
-  key:'create/issue/form',
-  get:({get})=>{
-    const { assignee: selectUser, label: selectLabel, milestone: selectMilestone }= get(selectedTabState);
-    const assigneeID = selectUser.map(user=>user.id)
-    const labelID = selectLabel.map(label=>label.id)
-    const milestoneID = selectMilestone?.id
-    return {assigneeID, labelID, milestoneID}
-  }
-})
+  key: 'create/issue/form',
+  get: ({ get }) => {
+    const {
+      assignee: selectUser,
+      label: selectLabel,
+      milestone: selectMilestone,
+    } = get(selectedTabState);
+    const assigneeID = selectUser.map((user) => user.id);
+    const labelID = selectLabel.map((label) => label.id);
+    const milestoneID = selectMilestone?.id;
+    return { assigneeID, labelID, milestoneID };
+  },
+});
 
 export const resetSelectedTab = selector<null>({
   key: 'resetSelectedTab',
