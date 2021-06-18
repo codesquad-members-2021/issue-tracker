@@ -11,7 +11,7 @@
 - Jane([@janeljs](https://github.com/janeljs))
 
 # IOS
-### 스텝별 진행상황 및 실행화면
+## IssueTracker 진행상황
 - [WIKI - iOS ](https://github.com/janeljs/issue-tracker/wiki/%5BiOS%5D)
 
 
