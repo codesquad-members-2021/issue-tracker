@@ -48,7 +48,7 @@ public class LabelService {
 
     public List<LabelDTO> findAllLabelDTOs() {
         return labelRepository.findAll().stream()
-                .map(LabelDTO::of)
+                .map(label -> LabelDTO.of(label, false))
                 .collect(Collectors.toList());
     }
 
@@ -61,6 +61,12 @@ public class LabelService {
     public List<LabelDTO> labelsToLabelDTOs(Issue issue) {
         return labelRepository.findAll().stream()
                 .map(label -> LabelDTO.of(label, checkLabels(label, issue)))
+                .collect(Collectors.toList());
+    }
+
+    public List<LabelDTO> getCheckedLabels(Issue issue) {
+        return issue.getLabels().stream()
+                .map(label -> LabelDTO.of(label, true))
                 .collect(Collectors.toList());
     }
 

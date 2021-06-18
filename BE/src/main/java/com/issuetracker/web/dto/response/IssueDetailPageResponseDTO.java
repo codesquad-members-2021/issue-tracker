@@ -20,9 +20,9 @@ public class IssueDetailPageResponseDTO {
     private final List<CommentDTO> comments;
     private final List<Assignee> assignees;
     private final List<LabelDTO> labels;
-    private final List<MilestoneDTO> milestones;
+    private final MilestoneDTO milestone;
 
-    public static IssueDetailPageResponseDTO of(Issue issue, List<CommentDTO> comments, List<Assignee> assignees, List<LabelDTO> labels, List<MilestoneDTO> milestones) {
+    public static IssueDetailPageResponseDTO of(Issue issue, List<CommentDTO> comments, List<Assignee> assignees, List<LabelDTO> labels, MilestoneDTO milestone) {
         return IssueDetailPageResponseDTO.builder()
                 .id(issue.getId())
                 .title(issue.getTitle())
@@ -31,7 +31,7 @@ public class IssueDetailPageResponseDTO {
                 .comments(comments)
                 .assignees(assignees)
                 .labels(labels)
-                .milestones(milestones)
+                .milestone(milestone)
                 .build();
     }
 }

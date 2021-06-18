@@ -75,9 +75,9 @@ public class IssueService {
         return IssueDetailPageResponseDTO.of(
                 issue,
                 commentsToCommentDTOs(loginUser, issue),
-                userService.usersToAssignees(issue),
-                labelService.labelsToLabelDTOs(issue),
-                milestoneService.findAllMilestoneDTOs()
+                userService.getCheckedAssignees(issue),
+                labelService.getCheckedLabels(issue),
+                milestoneService.findMilestoneInIssue(issue)
         );
     }
 
@@ -118,7 +118,7 @@ public class IssueService {
 
     public MilestonesInIssueResponseDTO getMilestones(Long issueId) {
         Issue issue = findIssueById(issueId);
-        return new MilestonesInIssueResponseDTO(MilestoneDTO.of(issue.getMilestone()));
+        return new MilestonesInIssueResponseDTO(milestoneService.milestonesToMilestoneDTOs(issue));
     }
 
     public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestone) {

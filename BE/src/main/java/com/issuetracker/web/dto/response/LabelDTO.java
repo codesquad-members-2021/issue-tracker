@@ -28,14 +28,4 @@ public class LabelDTO {
                 .isChecked(isChecked)
                 .build();
     }
-
-    public static LabelDTO of(Label label) {
-        return LabelDTO.builder()
-                .id(label.getId())
-                .name(label.getName())
-                .color(label.getColor())
-                .description(label.getDescription())
-                .isChecked(false)
-                .build();
-    }
 }

@@ -63,9 +63,15 @@ public class UserService {
 
     public AssigneesResponseDTO getAssignees() {
         List<Assignee> assignees = userRepository.findAssignees().stream()
-                .map(Assignee::of)
+                .map(assignee -> Assignee.of(assignee, false))
                 .collect(Collectors.toList());
         return new AssigneesResponseDTO(assignees);
+    }
+
+    public List<Assignee> getCheckedAssignees(Issue issue) {
+        return issue.getAssignees().stream()
+                .map(assignee -> Assignee.of(assignee, true))
+                .collect(Collectors.toList());
     }
 
     public AuthorsResponseDTO getAuthors() {
@@ -84,7 +90,7 @@ public class UserService {
 
     public List<Assignee> usersToAssignees() {
         return userRepository.findAll().stream()
-                .map(Assignee::of)
+                .map(assignee -> Assignee.of(assignee, false))
                 .collect(Collectors.toList());
     }
 
