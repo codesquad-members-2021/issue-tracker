@@ -12,6 +12,7 @@ protocol NetworkManagerOperations {
     func get<T: Decodable>(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<T, NetworkError>) -> Void)
     func delete(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<Void, NetworkError>) -> Void)
     func post<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void)
+    func put<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void)
 }
 
 final class NetworkManager: NetworkManagerOperations {
@@ -45,6 +46,11 @@ final class NetworkManager: NetworkManagerOperations {
     
     func post<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         let request = requestManager.create(endpoint: endpoint, method: .post, encodableParameters: requestBody)
+        executeVoidRequest(request: request, completion: completion)
+    }
+    
+    func put<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        let request = requestManager.create(endpoint: endpoint, method: .put, encodableParameters: requestBody)
         executeVoidRequest(request: request, completion: completion)
     }
     

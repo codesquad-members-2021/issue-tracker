@@ -69,13 +69,13 @@ final class LabelViewController: UIViewController {
     }
     
     private func swipeActionHandler(_ index: Int, _ action: CellAction) {
-        guard let targetId = labelTableDatasource?.labels[index].id else { return }
+        guard let targetLabel = labelTableDatasource?.labels[index] else { return }
         
         switch action {
         case .delete:
-            deleteLabel(for: targetId)
+            deleteLabel(for: targetLabel.id)
         case .edit:
-            print("수정")
+            presentEditLabelViewController(for: targetLabel)
         default:
             assert(false)
         }
@@ -83,14 +83,28 @@ final class LabelViewController: UIViewController {
     
     private func deleteLabel(for id: Int) {
         let deleteLabelEndpoint = EndPoint.label.path(with: id)
-        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { (result: Result<Void, NetworkError>) in
+        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
             switch result {
             case .success(_):
-                self.loadData()
+                self?.loadData()
             case .failure(let error):
-                self.presentAlert(with: error.description)
+                self?.presentAlert(with: error.description)
             }
         })
+    }
+    
+    private func presentEditLabelViewController(for targetLabel: Label) {
+        let editLabelViewController = EditLabelViewController()
+        editLabelViewController.setSceneTitle(title: "레이블 수정하기")
+        editLabelViewController.setLabelToEdit(label: targetLabel)
+        editLabelViewController.modalPresentationStyle = .formSheet
+        editLabelViewController.setUpDismissOperation { [weak self] in
+            self?.loadData()
+        }
+        
+        DispatchQueue.main.async {
+            self.present(editLabelViewController, animated: true, completion: nil)
+        }
     }
     
     private func setNetworkManager() {
@@ -129,12 +143,16 @@ final class LabelViewController: UIViewController {
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
-        let addLabelViewController = AddLabelViewController()        
+        let addLabelViewController = AddLabelViewController()
+        addLabelViewController.setSceneTitle(title: "새로운 레이블")
         addLabelViewController.modalPresentationStyle = .formSheet
         addLabelViewController.setUpDismissOperation { [weak self] in
             self?.loadData()
         }
-        present(addLabelViewController, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.present(addLabelViewController, animated: true, completion: nil)
+        }
     }
 }
 
