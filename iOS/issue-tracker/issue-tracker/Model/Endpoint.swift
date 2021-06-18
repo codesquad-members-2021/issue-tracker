@@ -17,7 +17,6 @@ struct Endpoint {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
-//        urlComponents.port = port
         urlComponents.path = path.pathString
         urlComponents.queryItems = queryItems
         return urlComponents.url
