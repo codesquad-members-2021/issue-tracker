@@ -52,9 +52,9 @@ class LabelControlViewController: UIViewController {
     private lazy var saveButton: ImageBarButton = {
         let button = ImageBarButton()
         button.configure(with: "", "저장")
-        button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(saveButtonTouched), for: .touchUpInside)
+        changeSaveButtonEnableStatus(baseOn: titleTextfield)
         return button
     }()
   
@@ -135,7 +135,9 @@ class LabelControlViewController: UIViewController {
     
     private lazy var previewLabel: LabelView = {
         let labelView = LabelView()
-        labelView.configure(with: UIColor.black, UIColor.white, "레이블")
+        let colorText = backgroundLabel.text ?? "#000000"
+        let hex = HexColorCode(from: colorText)
+        labelView.configure(with: hex, titleTextfield.text)
         labelView.translatesAutoresizingMaskIntoConstraints = false
         return labelView
     }()
@@ -150,8 +152,6 @@ class LabelControlViewController: UIViewController {
     
     private var loginInfo: LoginInfo?
     var sceneTitle: String?
-    
-    private let colorConverter: HexColorConvertable = HexColorConverter()
     var networkManager: NetworkManagerOperations?
     var dismissOperation: (() -> Void)?
     
@@ -164,6 +164,14 @@ class LabelControlViewController: UIViewController {
         addLabelPreview()
         setNetworkManager()
         titleTextfield.delegate = self
+    }
+    
+    private func changeSaveButtonEnableStatus(baseOn textField: UITextField) {
+        guard let text = textField.text else { return }
+        
+        DispatchQueue.main.async {
+            self.saveButton.isEnabled = text.count > 0
+        }
     }
     
     private func addTopMenu() {
@@ -228,26 +236,13 @@ class LabelControlViewController: UIViewController {
         self.dismissOperation = operation
     }
     
-    @objc private func cancelButtonTouched(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    ///이 메소드를 오버라이드하여 레이블 생성 or 수정 구현
-    @objc func saveButtonTouched(_ sender: UIBarButtonItem) { }
-    
     func presentAlert(with errorMessage: String) {
         DispatchQueue.main.async {
             let alert = AlertFactory.create(body: errorMessage)
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    @objc private func randomColorButtonTouched(_ sender: UIButton) {
-        let hexColor = randomColor()
-        backgroundLabel.text = hexColor
-        changePreviewLabel(with: hexColor)
-    }
-    
+
     private func randomColor() -> String {
         let colorRange = 0...255
         let randomRed = Int.random(in: colorRange)
@@ -260,11 +255,11 @@ class LabelControlViewController: UIViewController {
         return "#\(hexRed)\(hexGreen)\(hexBlue)"
     }
     
-    private func changePreviewLabel(with hexColorString: String) {
+    private func changePreviewLabel() {
+        let hexColorString = backgroundLabel.text ?? "#000000"
+        let title = titleTextfield.text ?? "레이블"
         let hex = HexColorCode(from: hexColorString)
-        let backgroundColor = colorConverter.convertHex(hex)
-        let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
-        previewLabel.configure(with: backgroundColor, titleColor, nil)
+        previewLabel.configure(with: hex, title)
     }
     
     private func setNetworkManager() {
@@ -273,13 +268,24 @@ class LabelControlViewController: UIViewController {
         let headers = [Header.authorization.key(): jwt.description]
         networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
+    
+    @objc private func cancelButtonTouched(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    ///이 메소드를 오버라이드하여 레이블 생성 or 수정 구현
+    @objc func saveButtonTouched(_ sender: UIBarButtonItem) { }
+    
+    @objc private func randomColorButtonTouched(_ sender: UIButton) {
+        let hexColor = randomColor()
+        backgroundLabel.text = hexColor
+        changePreviewLabel()
+    }
 }
 
 extension LabelControlViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        DispatchQueue.main.async {
-            self.saveButton.isEnabled = text.count > 0
-        }
+        changeSaveButtonEnableStatus(baseOn: textField)
+        changePreviewLabel()
     }
 }
