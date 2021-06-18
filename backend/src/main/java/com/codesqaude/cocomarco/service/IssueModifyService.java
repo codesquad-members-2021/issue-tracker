@@ -2,6 +2,7 @@ package com.codesqaude.cocomarco.service;
 
 import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
+import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +36,9 @@ public class IssueModifyService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
 
-    public void modifyTitle(Long issueId, IssueRequest issueRequest) {
+    public void modifyTitle(Long issueId, UUID userId, IssueRequest issueRequest) {
         Issue issue = findById(issueId);
+        issue.sameWriter(findUserById(userId));
         issue.changeTitle(issueRequest.getTitle());
     }
 
@@ -71,5 +74,10 @@ public class IssueModifyService {
     @Transactional
     public Issue findById(Long issueId) {
         return issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
+    }
+
+    @Transactional
+    public User findUserById(UUID userId) {
+        return userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
     }
 }
