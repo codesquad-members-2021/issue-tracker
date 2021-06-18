@@ -1,12 +1,11 @@
 package com.codesquad.issuetracker.component;
 
 import com.codesquad.issuetracker.domain.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.codesquad.issuetracker.jwt.JacksonSerializer;
+import com.codesquad.issuetracker.jwt.JacksonDeserializer;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.jackson.io.JacksonDeserializer;
-import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.jsonwebtoken.lang.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +41,7 @@ public class JwtProvider {
         return Jwts.builder()
                 .setClaims(claims)
                 .claim(USER_CLAIM_KEY, user)
-                .serializeToJsonWith(new JacksonSerializer(new ObjectMapper()))
+                .serializeToJsonWith(JacksonSerializer.getInstance())
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
