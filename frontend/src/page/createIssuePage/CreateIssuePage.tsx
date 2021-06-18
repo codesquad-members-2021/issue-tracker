@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, MutableRefObject, RefObject } from 'react';
+import React, { useState, ReactElement, useRef, MutableRefObject, RefObject } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from 'components/atom/Title';
@@ -6,39 +6,43 @@ import ProfileImg from 'components/atom/ProfileImg';
 import IssueInput from 'page/createIssuePage/issueInput/IssueInput';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 import PrimaryButton from 'components/atom/PrimaryButton';
-import { createIssue } from 'store/issueInfoStore';
 import { useRecoilValue } from 'recoil';
-import { selectedTabState } from 'store/issueInfoStore';
+import { IssueFormDataState } from 'store/issueInfoStore';
+import fetchData from 'util/api/fetchCreate'
+
+
+type inputsType = {
+  title?: string;
+  comment: string;
+  assignees: number[] | [];
+  labels: number[] | []; 
+  milestone: number | undefined; 
+};
 
 export default function CreateIssuePage(): ReactElement {
-  const titleRef = useRef(null);
-  const {
-    assignee: selectUser,
-    label: selectLabel,
-    milestone: selectMilestone,
-  } = useRecoilValue(selectedTabState);
-  console.log(selectUser, selectLabel, selectMilestone);
-  const sample = {
-    title: 'z코쿼',
-    comment: '제인이노레이카일주나미',
-    assignees: [1],
-    labels: [1],
-    milestone: 3,
-  };
-
-  const { fetchData } = useRecoilValue(createIssue({ issueInputs: sample, skip: true }));
+  const {assigneeID, labelID, milestoneID} = useRecoilValue(IssueFormDataState)
   const history = useHistory();
+  const titleRef = useRef(null);
+  const [comment, setComment] = useState('');
+
 
   const handleClick = async (btnType: string) => {
     if (btnType === 'cancle') {
       history.push('/main');
     } else {
+      
       const titleInput = titleRef?.current as HTMLInputElement | null;
-      const title = titleInput?.value;
-      console.dir(title);
+      const titleValue = titleInput?.value;
+
+      const sample:inputsType = {
+        title: titleValue,
+        comment: comment,
+        assignees: assigneeID,
+        labels: labelID,
+        milestone: milestoneID,
+      };
       const isSuccess = await fetchData(sample);
       const createdIssueID = isSuccess?.issueId;
-
       history.push(`/detail/${createdIssueID}`);
     }
   };
@@ -50,7 +54,7 @@ export default function CreateIssuePage(): ReactElement {
       </div>
       <div className='create__section__body'>
         <ProfileImg />
-        <IssueInput titleRef={titleRef} />
+        <IssueInput titleRef={titleRef} comment={comment} setComment={setComment}/>
         <IssueDetailOption />
       </div>
       <div className='create__section__footer'>
