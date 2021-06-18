@@ -5,12 +5,15 @@ import { modalStyle, modalTitleStyle, modalListStyle } from '../style';
 
 type Props = {
   assignees: { user_id: number; name: string; avatar_url: string }[] | null;
+  errorMsg: string | null;
 };
 
-function AssigneeModal({ assignees }: Props) {
+function AssigneeModal({ assignees, errorMsg }: Props) {
+  const modalTitle = errorMsg == null ? '담당자 추가' : errorMsg;
+
   return (
     <MenuList {...modalStyle}>
-      <MenuOptionGroup {...modalTitleStyle} type="checkbox" title="담당자 추가">
+      <MenuOptionGroup {...modalTitleStyle} type="checkbox" title={modalTitle}>
         {assignees &&
           assignees.map(({ user_id, name, avatar_url }) => {
             return (

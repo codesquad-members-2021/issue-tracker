@@ -13,12 +13,15 @@ type Props = {
         closed_issue_count: number;
       }[]
     | null;
+  errorMsg: string | null;
 };
 
-function MilestoneModal({ milestones }: Props) {
+function MilestoneModal({ milestones, errorMsg }: Props) {
+  const modalTitle = errorMsg == null ? '마일스톤 추가' : errorMsg;
+
   return (
     <MenuList {...modalStyle}>
-      <MenuOptionGroup {...modalTitleStyle} type="radio" title="마일스톤 추가">
+      <MenuOptionGroup {...modalTitleStyle} type="radio" title={modalTitle}>
         {milestones &&
           milestones.map(({ id, title, due_date }) => {
             return (
