@@ -9,7 +9,8 @@ INSERT INTO `issue` (title, status, created_at, content, milestone_id, user_id)
 VALUES ("title1", true, NOW(), "content1", NULL, 1);
 
 INSERT INTO `comment` (content, created_at, issue_id, user_id)
-VALUES ("comment content 1", NOW(), 1, 1);
+VALUES ("comment content 1", NOW(), 1, 1),
+       ("comment content 2", NOW(), 1, 2);
 
 INSERT INTO `label` (title, content, color)
 VALUES ("label title 1", "label content 1", "FFFFFF"),
