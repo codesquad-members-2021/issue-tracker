@@ -11,23 +11,22 @@ import MarkdownKit
 
 @IBDesignable
 class NewIssueViewController: UIViewController {
-    
     private let additionalInfo = ["레이블", "마일스톤", "작성자"]
     private let cellReuseIdentifier = "NewIssueViewCell"
     private let markdownParser = MarkdownParser()
-    
+
     private let subject: UILabel = {
         let label = UILabel()
         label.text = "제목"
         return label
     }()
-    
+
     private let textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "제목을 입력하세요."
         return textField
     }()
-    
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
@@ -38,30 +37,30 @@ class NewIssueViewController: UIViewController {
     private let segmentedControl = UISegmentedControl(items: ["마크다운", "미리보기"])
     private var textView: UITextView?
     private var textString: String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+
         tableView.dataSource = self
         tableView.delegate = self
-        
+
         let save = UIBarButtonItem(title: "저장", style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = save
         navigationItem.titleView = segmentedControl
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(reload), for: .valueChanged)
-        
+
         view.addSubview(subject)
         view.addSubview(textField)
         view.addSubview(tableView)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         subject.snp.makeConstraints { maker in
@@ -80,7 +79,7 @@ class NewIssueViewController: UIViewController {
             maker.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     @objc
     func reload(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -99,7 +98,7 @@ extension NewIssueViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -110,7 +109,7 @@ extension NewIssueViewController: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
@@ -135,7 +134,7 @@ extension NewIssueViewController: UITableViewDelegate {
         }
         return nil
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -146,7 +145,7 @@ extension NewIssueViewController: UITableViewDelegate {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

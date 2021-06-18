@@ -36,10 +36,10 @@ class IssueFilterViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
-        
+
         view.addSubview(tableView)
     }
-    
+
     @objc
     private func cancelButtonTapped() {
         dismiss(animated: true)
@@ -59,12 +59,12 @@ extension IssueFilterViewController: UITableViewDelegate {
             return nil
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableView.cellForRow(at: indexPath)
         selected?.accessoryType = .checkmark
     }
-    
+
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let selected = tableView.cellForRow(at: indexPath)
         selected?.accessoryType = .none
@@ -75,7 +75,7 @@ extension IssueFilterViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -88,7 +88,7 @@ extension IssueFilterViewController: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
