@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 interface loginStateType {
-  image: string;
+  avatarUrl: string;
   userName: string;
   token: string;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -10,6 +11,9 @@ const useStyle = makeStyles(() => ({
     flex: 1,
     fontFamily: "'Raleway', sans-serif",
     fontSize: '30px',
+  },
+  modalStyles: {
+    backgroundColor: 'red',
   },
 }));
 
@@ -29,28 +33,41 @@ function Header() {
     padding: '0 80px',
   };
   return (
-    <AppBar position='static' color='transparent'>
-      <Toolbar style={toolbarStyle}>
-        <Typography className={classes.typographyStyles}>Issue Tracker</Typography>
-        <div>
-          <IconButton
-            aria-label='account of current user'
-            aria-controls='menu-appbar'
-            aria-haspopup='true'
-            onClick={handleMenu}
-            color='inherit'
-          >
-            {loginData ? <ProfileImg avatarURL={loginData?.image} /> : <AccountCircleIcon />}
-          </IconButton>
-          <Menu id='menu-appbar' anchorEl={anchorEl} open={open} onClose={handleClose}>
-            <MenuItem onClick={handleClose}>{loginData?.userName}</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
-        </div>
-      </Toolbar>
-    </AppBar>
+    <HeaderBlock>
+      <AppBar position='static' color='transparent'>
+        <Toolbar style={toolbarStyle}>
+          <Typography className={classes.typographyStyles}>Issue Tracker</Typography>
+          <div>
+            <IconButton
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              {loginData ? (
+                <ProfileImg avatarURL={loginData?.avatarUrl} className='login__profile-img' />
+              ) : (
+                <AccountCircleIcon />
+              )}
+            </IconButton>
+            <Menu id='menu-appbar' anchorEl={anchorEl} open={open} onClose={handleClose}>
+              <MenuItem onClick={handleClose}>{loginData?.userName}</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </HeaderBlock>
   );
 }
 
 export default Header;
+
+const HeaderBlock = styled.div`
+  .login__profile-img {
+    width: 30px;
+    height: 30px;
+  }
+`;

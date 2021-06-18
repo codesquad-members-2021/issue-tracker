@@ -17,6 +17,7 @@ export default function MainPage() {
 
   const setLoginData = async (loginCode: string) => {
     const loginData = await fetchLogin(loginCode);
+    console.log(loginData);
     setLogin(loginData);
     localStorage.setItem('token', loginData.token);
   };
