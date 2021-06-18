@@ -1,5 +1,6 @@
 package team02.issue_tracker.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team02.issue_tracker.dto.MilestoneRequest;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Milestone {
     @Id
     @GeneratedValue

@@ -1,5 +1,6 @@
 package team02.issue_tracker.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team02.issue_tracker.exception.IllegalStatusException;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
