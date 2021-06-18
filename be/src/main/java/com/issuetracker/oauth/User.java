@@ -6,6 +6,7 @@ public class User {
     @JsonProperty("user_id")
     private Long id;
 
+    @JsonProperty("name")
     private String login;
     private String avatar_url;
 
