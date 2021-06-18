@@ -1,0 +1,6 @@
+# BE
+.gradle
+build
+.idea
+logs/
+*.log
