@@ -13,12 +13,12 @@ class LabelListViewModel {
     let networkManager: NetworkManager
     var labelList = BehaviorRelay<[IssueLabel]>(value: [])
     var bag = DisposeBag()
-    
+
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
         fetchLabelList()
     }
-    
+
     func fetchLabelList() {
         networkManager.request(url: Endpoint(path: .label).url()!, decodableType: LabelList.self) { label in
             self.labelList.accept(label.data)
