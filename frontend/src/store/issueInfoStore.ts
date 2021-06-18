@@ -82,7 +82,8 @@ export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
       const issuesInfoState = { issues: issuesData.issues, count: issuesData.count };
       return issuesInfoState;
     } catch (err) {
-      throw new Error('잘못된 요청입니다.');
+      console.log('이슈 리스트 패치');
+      throw err;
     }
   },
 });

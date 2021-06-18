@@ -3,7 +3,7 @@ import API from 'util/api/api';
 export async function fetchLogin(code: string): Promise<any> {
   try {
     const postLoginOption = {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },

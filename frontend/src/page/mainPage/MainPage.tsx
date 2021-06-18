@@ -18,9 +18,14 @@ export default function MainPage() {
     setIssueTrigger(false);
   }, []);
   const setLoginData = async (loginCode: string) => {
-    const loginData = await fetchLogin(loginCode);
-    setLogin(loginData);
-    localStorage.setItem('token', loginData.token);
+    try {
+      const loginData = await fetchLogin(loginCode);
+      setLogin(loginData);
+      localStorage.setItem('token', loginData.token);
+    } catch (err) {
+      console.log('로그인 패치');
+      throw err;
+    }
   };
 
   return (
