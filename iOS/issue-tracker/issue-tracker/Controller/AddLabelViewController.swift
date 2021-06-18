@@ -44,7 +44,7 @@ final class AddLabelViewController: UIViewController {
     private func binding() {
         addLabelViewModel.color
             .map { UIColor.hexStringToUIColor(hex: $0)}
-            .bind(to: estimatedLabelView.label.rx.backgroundColor)
+            .bind(to: estimatedLabelView.getLabel().rx.backgroundColor)
             .disposed(by: bag)
 
         saveButton.rx.tap
