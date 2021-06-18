@@ -1,10 +1,14 @@
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/button';
 import { ReactComponent as CancelIcon } from '@assets/cancel.svg';
+import { isInputtedTitleState } from '@store/atoms/newIssue';
 
 function ButtonBox() {
+  const isInputtedTitle = useRecoilValue(isInputtedTitleState);
+
   return (
     <ButtonBoxWrap>
       <Link to="issues">
@@ -13,20 +17,26 @@ function ButtonBox() {
           <span>작성취소</span>
         </CancelBtn>
       </Link>
-      <Button
-        width="240px"
-        height="56px"
-        colorScheme="blue"
-        background="bl_initial"
-        borderRadius="20px"
-      >
-        완료
-      </Button>
+      {isInputtedTitle ? (
+        <Button {...CompleteBtnStyle}>완료</Button>
+      ) : (
+        <Button {...CompleteBtnStyle} opacity=".4" isDisabled>
+          완료
+        </Button>
+      )}
     </ButtonBoxWrap>
   );
 }
 
 export default ButtonBox;
+
+const CompleteBtnStyle = {
+  width: '240px',
+  height: '56px',
+  colorScheme: 'blue',
+  background: 'bl_initial',
+  borderRadius: '20px',
+};
 
 const ButtonBoxWrap = styled.div`
   display: flex;
