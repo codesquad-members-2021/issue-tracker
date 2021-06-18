@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/68000537/122493911-74fb6f80-d023-11eb-9397-9dd73318f97b.png)
 
 ### iOS
-- Ray(@torch-ray)
+- Ray([@torch-ray](https://github.com/torch-ray))
 ### FE
 - Kyle(@hayoung123)
 - Junami(@skawnkk)
