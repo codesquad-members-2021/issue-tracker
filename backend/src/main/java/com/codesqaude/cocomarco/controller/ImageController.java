@@ -11,15 +11,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/images")
 @AllArgsConstructor
 public class ImageController {
 
     private final ImageService imageService;
+    private final static String S3_DIRECTORY_NAME = "static";
 
     @PostMapping
     public String upload(@RequestParam("data") MultipartFile multipartFile) throws IOException {
-        return imageService.upload(multipartFile, "static");
+        return imageService.upload(multipartFile, S3_DIRECTORY_NAME);
     }
 }
 

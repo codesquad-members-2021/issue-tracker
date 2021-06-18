@@ -52,7 +52,7 @@ public class ImageService {
 
     private Optional<File> convert(MultipartFile multipartFile) throws IOException {
         File convertFile = new File(multipartFile.getOriginalFilename());
-        if (!convertFile.createNewFile()) {
+        if (convertFile.createNewFile()) {
             try (FileOutputStream fileOutputStream = new FileOutputStream(convertFile)) {
                 fileOutputStream.write((multipartFile.getBytes()));
             }
