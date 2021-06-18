@@ -98,3 +98,4 @@ $RECYCLE.BIN/
 generated
 
 # Application properties
+/src/main/resources/application-key.properties
