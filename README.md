@@ -17,6 +17,10 @@
 
 # FE
 
+## 실행화면
+
+![FE-1차 실행화면](https://user-images.githubusercontent.com/67357426/122525609-5f526e00-d054-11eb-96a1-fb73c86a4320.gif)
+
 ## IssueTracker 진행상황
 - [WIKI - FE 정리](https://github.com/janeljs/issue-tracker/wiki/%5BFE%5D%EC%A0%95%EB%A6%AC)
 
