@@ -9,30 +9,32 @@ import UIKit
 
 final class MileStoneLabelView: UIView {
     
-    var texts: String?
-    var fontColors: UIColor?
-    var backgroundColors: UIColor?
+    var text: String?
+    var fontColor: UIColor?
+    var bgColor: UIColor?
     var imgName: String?
     var issueCount: Int?
     
     private lazy var labelTitle: UILabel = {
         let label = UILabel()
         
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
         guard let imgName = self.imgName else { return UILabel() }
-        guard let fontColors = self.fontColors else { return UILabel() }
-        guard let texts = self.texts else { return UILabel() }
+        guard let fontColors = self.fontColor else { return UILabel() }
+        guard let texts = self.text else { return UILabel() }
         guard let issueCount = self.issueCount else { return UILabel() }
         
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : fontColors]
-        let dateString = NSMutableAttributedString(string:"\(texts) \(issueCount)개", attributes:attrs)
+        let issueCountString = NSMutableAttributedString(string:"\(texts) \(issueCount)개", attributes:attrs)
         
         imageAttachment.image = UIImage(systemName: imgName)
         attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(dateString)
+        attributedString.append(issueCountString)
         label.attributedText = attributedString
-        label.backgroundColor = backgroundColor
+        
         return label
     }()
     
@@ -52,12 +54,13 @@ final class MileStoneLabelView: UIView {
         configure()
     }
     
-    required init(texts: String, fontColors: UIColor, backgroundColors: UIColor, imgName: String, issueCount: Int) {
-//        super.init(frame: .zero)
-        super.init(frame: CGRect(x: 0, y: 0, width: 113, height: 30))
-        self.texts = texts
-        self.fontColors = fontColors
-        self.backgroundColors = backgroundColors
+    required init(text: String, fontColor: UIColor, bgColor: UIColor, imgName: String, issueCount: Int) {
+        
+        //init을 무엇을 줘도 상관이 없는듯.
+        super.init(frame: .zero)
+        self.text = text
+        self.fontColor = fontColor
+        self.bgColor = bgColor
         self.imgName = imgName
         self.issueCount = issueCount
 
@@ -70,23 +73,22 @@ final class MileStoneLabelView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         addLabelTitle()
+        backgroundColor = bgColor
     }
     
     private func addLabelTitle() {
         
         addSubview(labelTitle)
         
+        //예이!!!!!!!
         NSLayoutConstraint.activate([
             labelTitle.centerXAnchor.constraint(equalTo: centerXAnchor),
             labelTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
-            //widthAnchor.constraint(equalTo: labelTitle.widthAnchor, constant: spacing)
             widthAnchor.constraint(equalTo: widthAnchor),
             heightAnchor.constraint(equalToConstant: labelHeight)
         ])
     }
-    
     func updateIssueCount(_ issueCount: Int) { //후에 issuecount를 변경
         self.issueCount = issueCount
     }
-    
 }
