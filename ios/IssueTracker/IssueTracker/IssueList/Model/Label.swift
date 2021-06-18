@@ -8,8 +8,8 @@
 import Foundation
 
 struct Label {
-    var id: Int
-    var name: String
-    var description: String?
-    var color: String
+    let id: Int
+    let name: String
+    let description: String?
+    let color: String
 }

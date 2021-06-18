@@ -8,15 +8,15 @@
 import Foundation
 
 struct Issue {
-    var id: Int
-    var number: Int
-    var title: String
-    var description: String
-    var isOpened: Bool
-    var isMyCommentExist: Bool
-    var timeStamp: String
-    var writer: User
-    var assignees: [User]?
-    var labels: [Label]?
-    var milestone: Milestone?
+    let id: Int
+    let number: Int
+    let title: String
+    let description: String
+    let isOpened: Bool
+    let isMyCommentExist: Bool
+    let timeStamp: String
+    let writer: User
+    let assignees: [User]?
+    let labels: [Label]?
+    let milestone: Milestone?
 }

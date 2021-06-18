@@ -8,10 +8,10 @@
 import Foundation
 
 struct Milestone {
-    var id: Int
-    var name: String
-    var description: String?
-    var isOpend: Bool
-    var openedIssueCount: Int
-    var closedIssueCount: Int
+    let id: Int
+    let name: String
+    let description: String?
+    let isOpend: Bool
+    let openedIssueCount: Int
+    let closedIssueCount: Int
 }

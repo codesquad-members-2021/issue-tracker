@@ -8,7 +8,7 @@
 import Foundation
 
 struct User {
-    var id: Int
-    var name: String
-    var imageURL: String?
+    let id: Int
+    let name: String
+    let imageURL: String?
 }
