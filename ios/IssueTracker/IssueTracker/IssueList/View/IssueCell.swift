@@ -14,6 +14,7 @@ final class IssueCell: UITableViewCell, ReuseIdentifierable, UINibCreatable {
     @IBOutlet private weak var milestoneView: UIView!
     @IBOutlet private weak var milestoneLabel: UILabel!
     @IBOutlet private weak var labelStackView: UIStackView!
+    @IBOutlet private weak var milestoneHeightAnchor: NSLayoutConstraint!
     
 }
 
@@ -43,11 +44,10 @@ extension IssueCell {
         if let milestone = milestone {
             milestoneView.isHidden = false
             milestoneLabel.text = milestone.name
+            milestoneHeightAnchor.constant  = 30
         } else {
             milestoneView.isHidden = true
-            NSLayoutConstraint.activate([
-                milestoneView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0)
-            ])
+            milestoneHeightAnchor.constant = 0
         }
     }
     

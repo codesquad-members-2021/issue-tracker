@@ -51,19 +51,20 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OLm-oa-SJA" firstAttribute="leading" secondItem="r8k-B7-nLH" secondAttribute="leading" id="CHh-KQ-EEK"/>
-                            <constraint firstAttribute="bottom" secondItem="OLm-oa-SJA" secondAttribute="bottom" constant="5" id="H3l-2e-Dm9"/>
-                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" constant="5" id="WXP-Tl-rKs"/>
-                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="leading" secondItem="OLm-oa-SJA" secondAttribute="trailing" constant="5" id="eqc-T0-HLO"/>
-                            <constraint firstItem="OLm-oa-SJA" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" constant="5" id="hFl-Ki-tZE"/>
+                            <constraint firstItem="OLm-oa-SJA" firstAttribute="leading" secondItem="r8k-B7-nLH" secondAttribute="leading" priority="750" id="CHh-KQ-EEK"/>
+                            <constraint firstAttribute="bottom" secondItem="OLm-oa-SJA" secondAttribute="bottom" priority="750" constant="5" id="H3l-2e-Dm9"/>
+                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" priority="750" constant="5" id="WXP-Tl-rKs"/>
+                            <constraint firstItem="Bkd-p9-xjf" firstAttribute="leading" secondItem="OLm-oa-SJA" secondAttribute="trailing" priority="750" constant="5" id="eqc-T0-HLO"/>
+                            <constraint firstItem="OLm-oa-SJA" firstAttribute="top" secondItem="r8k-B7-nLH" secondAttribute="top" priority="750" constant="5" id="hFl-Ki-tZE"/>
                             <constraint firstAttribute="height" constant="30" id="jfx-cE-HP3"/>
-                            <constraint firstAttribute="bottom" secondItem="Bkd-p9-xjf" secondAttribute="bottom" constant="5" id="pcj-RV-7Jo"/>
+                            <constraint firstAttribute="bottom" secondItem="Bkd-p9-xjf" secondAttribute="bottom" priority="750" constant="5" id="pcj-RV-7Jo"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="left" ambiguous="YES" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4sH-Hc-qno">
+                    <stackView opaque="NO" contentMode="left" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4sH-Hc-qno">
                         <rect key="frame" x="15" y="110" width="60" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="EyK-cp-eVu"/>
                             <constraint firstAttribute="height" constant="30" id="t5M-j2-7HY"/>
                         </constraints>
                     </stackView>
@@ -76,6 +77,7 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="4sH-Hc-qno" secondAttribute="trailing" priority="750" constant="315" id="7GL-AO-Y9S"/>
                     <constraint firstItem="b1u-BX-WeN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="As6-ep-1n9"/>
                     <constraint firstItem="67T-wX-Tmx" firstAttribute="bottom" secondItem="4sH-Hc-qno" secondAttribute="bottom" constant="15" id="DTK-mh-gVk"/>
                     <constraint firstItem="67T-wX-Tmx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EY1-QI-Ixt"/>
@@ -97,6 +99,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="WN5-Kw-WYQ" id="Tcq-up-NFJ"/>
                 <outlet property="labelStackView" destination="4sH-Hc-qno" id="emQ-UX-hz8"/>
+                <outlet property="milestoneHeightAnchor" destination="jfx-cE-HP3" id="YCg-vq-Zrd"/>
                 <outlet property="milestoneLabel" destination="Bkd-p9-xjf" id="ZTu-Du-Xmv"/>
                 <outlet property="milestoneView" destination="r8k-B7-nLH" id="q50-Ez-Q71"/>
                 <outlet property="titleLabel" destination="b1u-BX-WeN" id="bFN-j0-QJb"/>
