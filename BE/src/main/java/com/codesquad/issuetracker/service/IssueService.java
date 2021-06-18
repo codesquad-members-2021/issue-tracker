@@ -3,7 +3,6 @@ package com.codesquad.issuetracker.service;
 import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
 import com.codesquad.issuetracker.repository.*;
-import com.codesquad.issuetracker.request.AssigneeRequest;
 import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +19,16 @@ public class IssueService {
     private final IssueLabelRepository issueLabelRepository;
     private final MilestoneRepository milestoneRepository;
     private final AssigneeRepository assigneeRepository;
-    private final CommentRepository commentRepository;
 
     @Autowired
     public IssueService(IssueRepository issueRepository, LabelRepository labelRepository,
-                        IssueLabelRepository issueLabelRepository, MilestoneRepository milestoneRepository,
-                        AssigneeRepository assigneeRepository, CommentRepository commentRepository) {
+                        IssueLabelRepository issueLabelRepository,
+                        MilestoneRepository milestoneRepository, AssigneeRepository assigneeRepository) {
         this.issueRepository = issueRepository;
         this.labelRepository = labelRepository;
         this.issueLabelRepository = issueLabelRepository;
         this.milestoneRepository = milestoneRepository;
         this.assigneeRepository = assigneeRepository;
-        this.commentRepository = commentRepository;
     }
 
     public List<IssueResponse> getOpenedIssues() {
@@ -69,12 +66,7 @@ public class IssueService {
 
     public void updateAssignee(Long issueId, IssueRequest issueRequest) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
-        ArrayList<AssigneeRequest> assigneeRequestList = issueRequest.getAssigneeList();
-        List<Assignee> assigneesToSet = new ArrayList<>();
-        for (AssigneeRequest assigneeRequest : assigneeRequestList) {
-            assigneesToSet.add(Assignee.assigneeRequestToassignee(assigneeRequest));
-        }
-        updateIssue.setAssignees(assigneesToSet);
+        updateIssue.setAssignees(issueRequest.getAssigneeList());
         issueRepository.save(updateIssue);
     }
 
@@ -129,11 +121,7 @@ public class IssueService {
         return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(),
                 issue.getCreatedAt(), makeUserResponses(issue.getUser()),
                 makeMilestoneForIssueResponse(issue.getMilestoneId()), makeLabelResponses(issue.getId()),
-                makeAssigneeForIssueResponse(issue.getId()), makeCommentResponse(issue.getId()));
-    }
-
-    private UserResponse makeUserResponses(User user) {
-        return new UserResponse(user.getName(), user.getLoginId());
+                makeAssigneeForIssueResponse(issue.getId()));
     }
 
     private Set<LabelResponse> makeLabelResponses(Long issueId) {
@@ -143,6 +131,10 @@ public class IssueService {
             result.add(LabelResponse.labelToLabelResponse(label));
         }
         return result;
+    }
+
+    private UserResponse makeUserResponses(User user) {
+        return new UserResponse(user.getId(), user.getName(), user.getLoginId());
     }
 
     private MilestoneForIssueResponse makeMilestoneForIssueResponse(Long milestoneId) {
@@ -158,15 +150,6 @@ public class IssueService {
         Set<AssigneeForIssueResponse> result = new HashSet<>();
         for (Assignee assignee : assignees) {
             result.add(AssigneeForIssueResponse.assigneeToAssigneeForIssueResponse(assignee));
-        }
-        return result;
-    }
-
-    private Set<CommentResponse> makeCommentResponse(Long issueId) {
-        List<Comment> comments = commentRepository.getCommentsByIssueId(issueId);
-        Set<CommentResponse> result = new HashSet<>();
-        for (Comment comment : comments) {
-            result.add(CommentResponse.create(comment));
         }
         return result;
     }
