@@ -45,4 +45,10 @@ public class UserController {
         logger.debug("모든 작성자 조회");
         return userService.getAuthors();
     }
+
+    @GetMapping("/userInfo")
+    @LoginRequired
+    public UserResponseDTO getUserInfo(@UserId Long userId) {
+        return userService.getUserInfo(userId);
+    }
 }

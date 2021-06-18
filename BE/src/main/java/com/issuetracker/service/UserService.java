@@ -39,10 +39,10 @@ public class UserService {
         if (verifyUser(userInfo.getLogin())) {
             User user = findUserByUserName(userInfo.getLogin());
             user.update(userInfo, token.getAccessToken());
-            return UserResponseDTO.createUserResponseDTO(user, jwtService.createToken(userRepository.save(user)));
+            return UserResponseDTO.of(user, jwtService.createToken(userRepository.save(user)));
         }
         User user = User.createUser(userInfo, token);
-        return UserResponseDTO.createUserResponseDTO(user, jwtService.createToken(userRepository.save(user)));
+        return UserResponseDTO.of(user, jwtService.createToken(userRepository.save(user)));
     }
 
     public void logout(Long userId) {
@@ -92,6 +92,10 @@ public class UserService {
         return userRepository.findByUserName(userName).orElseThrow(
                 () -> new UserNotFoundException("Cannot find user by given username.")
         );
+    }
+
+    public UserResponseDTO getUserInfo(Long userId) {
+        return UserResponseDTO.of(findUserById(userId));
     }
 
     public User findNullableUserByUserName(String userName) {
