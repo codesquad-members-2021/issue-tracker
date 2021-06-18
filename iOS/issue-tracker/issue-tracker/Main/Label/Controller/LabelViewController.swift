@@ -26,6 +26,7 @@ final class LabelViewController: UIViewController {
         return tableView
     }()
     
+    private let sceneTitle = "레이블"
     private let colorConverter: HexColorConvertable = HexColorConverter()
     private var networkManager: NetworkManagerOperations?
     private var labelTableDatasource: LabelTableViewDatasource?
@@ -33,24 +34,22 @@ final class LabelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        title = "레이블"
-        
-        addNavigationButton()
-        addTableView()
-        
-        labelTableDatasource = LabelTableViewDatasource()
-        labelTableView.dataSource = labelTableDatasource
-        
-        labelTableDelegate = LabelTableDelegate(cellActionHandler: swipeActionHandler)
-        labelTableView.delegate = labelTableDelegate
-        
+        configureViews()
+        setTableViewSupporters()
         setNetworkManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
+    }
+    
+    private func configureViews() {
+        view.backgroundColor = UIColor.white
+        title = sceneTitle
+        
+        addNavigationButton()
+        addTableView()
     }
     
     private func addNavigationButton() {
@@ -68,43 +67,12 @@ final class LabelViewController: UIViewController {
         ])
     }
     
-    private func swipeActionHandler(_ index: Int, _ action: CellAction) {
-        guard let targetLabel = labelTableDatasource?.labels[index] else { return }
+    private func setTableViewSupporters() {
+        labelTableDatasource = LabelTableViewDatasource()
+        labelTableView.dataSource = labelTableDatasource
         
-        switch action {
-        case .delete:
-            deleteLabel(for: targetLabel.id)
-        case .edit:
-            presentEditLabelViewController(for: targetLabel)
-        default:
-            assert(false)
-        }
-    }
-    
-    private func deleteLabel(for id: Int) {
-        let deleteLabelEndpoint = EndPoint.label.path(with: id)
-        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
-            switch result {
-            case .success(_):
-                self?.loadData()
-            case .failure(let error):
-                self?.presentAlert(with: error.description)
-            }
-        })
-    }
-    
-    private func presentEditLabelViewController(for targetLabel: Label) {
-        let editLabelViewController = EditLabelViewController()
-        editLabelViewController.setSceneTitle(title: "레이블 수정하기")
-        editLabelViewController.setLabelToEdit(label: targetLabel)
-        editLabelViewController.modalPresentationStyle = .formSheet
-        editLabelViewController.setUpDismissOperation { [weak self] in
-            self?.loadData()
-        }
-        
-        DispatchQueue.main.async {
-            self.present(editLabelViewController, animated: true, completion: nil)
-        }
+        labelTableDelegate = LabelTableDelegate(cellActionHandler: swipeActionHandler)
+        labelTableView.delegate = labelTableDelegate
     }
     
     private func setNetworkManager() {
@@ -114,7 +82,7 @@ final class LabelViewController: UIViewController {
         networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
     
-    func loadData() {
+    private func loadData() {
         let labelListEndpoint = EndPoint.label.path()
         networkManager?.get(endpoint: labelListEndpoint, queryParameters: nil,
                             completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
@@ -135,6 +103,30 @@ final class LabelViewController: UIViewController {
         }
     }
     
+    private func swipeActionHandler(_ index: Int, _ action: CellAction) {
+        guard let targetLabel = labelTableDatasource?.labels[index] else { return }
+        
+        switch action {
+        case .delete:
+            deleteLabel(for: targetLabel.id)
+        case .edit:
+            presentEditLabelViewController(for: targetLabel)
+        default:
+            assert(false)
+        }
+    }
+    
+    private func presentEditLabelViewController(for targetLabel: Label) {
+        let editLabelViewController = LabelControlViewController()
+        editLabelViewController.configure(withTitle: "레이블 수정하기", currentLabel: targetLabel)
+        editLabelViewController.setSaveOperation(putEditedLabel)
+        editLabelViewController.modalPresentationStyle = .formSheet
+        
+        DispatchQueue.main.async {
+            self.present(editLabelViewController, animated: true, completion: nil)
+        }
+    }
+    
     private func presentAlert(with errorMessage: String) {
         DispatchQueue.main.async {
             let alert = AlertFactory.create(body: errorMessage)
@@ -143,16 +135,57 @@ final class LabelViewController: UIViewController {
     }
     
     @objc private func addLabelTouched(_ sender: UIButton) {
-        let addLabelViewController = AddLabelViewController()
-        addLabelViewController.setSceneTitle(title: "새로운 레이블")
+        let addLabelViewController = LabelControlViewController()
+        addLabelViewController.configure(withTitle: "새로운 레이블", currentLabel: nil)
+        addLabelViewController.setSaveOperation(postNewLabel)
         addLabelViewController.modalPresentationStyle = .formSheet
-        addLabelViewController.setUpDismissOperation { [weak self] in
-            self?.loadData()
-        }
-        
+ 
         DispatchQueue.main.async {
             self.present(addLabelViewController, animated: true, completion: nil)
         }
     }
 }
 
+//MARK: - Network Methods
+extension LabelViewController {
+    private func deleteLabel(for id: Int) {
+        let deleteLabelEndpoint = EndPoint.label.path(with: id)
+        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
+            switch result {
+            case .success(_):
+                self?.loadData()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
+    private func postNewLabel(_ newLabel: Label) {
+        let newLabelEndpoint = EndPoint.label.path()
+        let requestBody = NewLabelDTO(name: newLabel.title, content: newLabel.body, colorCode: newLabel.hexColorCode)
+        
+        networkManager?.post(endpoint: newLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.loadData()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
+    private func putEditedLabel(_ editedLabel: Label) {
+        let labelId = editedLabel.id
+        let editLabelEndpoint = EndPoint.label.path(with: labelId)
+        let requestBody = NewLabelDTO(name: editedLabel.title, content: editedLabel.body, colorCode: editedLabel.hexColorCode)
+        
+        networkManager?.put(endpoint: editLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.loadData()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+}

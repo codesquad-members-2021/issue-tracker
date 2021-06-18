@@ -56,19 +56,19 @@ class LabelControlViewController: UIViewController {
         return stackView
     }()
     
-    lazy var titleTextfield: UITextField = {
+    private lazy var titleTextfield: UITextField = {
         let textField = UITextField()
         textField.placeholder = "(필수 입력)"
         return textField
     }()
     
-    lazy var descriptionTextfield: UITextField = {
+    private lazy var descriptionTextfield: UITextField = {
         let textField = UITextField()
         textField.placeholder = "(선택 사항)"
         return textField
     }()
     
-    lazy var backgroundLabel: UILabel = {
+    private lazy var backgroundLabel: UILabel = {
         let label = UILabel()
         label.text = "#000000"
         return label
@@ -102,28 +102,23 @@ class LabelControlViewController: UIViewController {
         return singleLineHeight * 0.5
     }()
     
-    private var loginInfo: LoginInfo?
-    var sceneTitle: String?
-    var networkManager: NetworkManagerOperations?
-    var dismissOperation: (() -> Void)?
+    private var currentLabel: Label?
+    private var sceneTitle: String?
+    private var saveOperation: ((Label) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViews()
+        setTitleTextFieldSupporter()
+    }
+    
+    private func configureViews() {
         view.backgroundColor = Colors.background
-        
         addTopMenu()
         addEditStackView()
         addLabelPreview()
-        setNetworkManager()
-        titleTextfield.delegate = self
     }
-    
-    private func changeSaveButtonEnableStatus(baseOn textField: UITextField) {
-        DispatchQueue.main.async {
-            self.saveButton.isEnabled = !textField.isEmpty()
-        }
-    }
-    
+        
     private func addTopMenu() {
         view.addSubview(topMenuView)
         
@@ -164,21 +159,52 @@ class LabelControlViewController: UIViewController {
         ])
     }
     
-    func setSceneTitle(title: String) {
-        self.sceneTitle = title
+    private func setTitleTextFieldSupporter() {
+        titleTextfield.delegate = self
     }
     
-    func setUpDismissOperation(_ operation: @escaping () -> Void) {
-        self.dismissOperation = operation
+    func configure(withTitle sceneTitle: String, currentLabel: Label?) {
+        self.sceneTitle = sceneTitle
+        self.currentLabel = currentLabel
+        
+        setUpCurrentLabelInfo()
     }
     
-    func presentAlert(with errorMessage: String) {
-        DispatchQueue.main.async {
-            let alert = AlertFactory.create(body: errorMessage)
-            self.present(alert, animated: true, completion: nil)
-        }
+    private func setUpCurrentLabelInfo() {
+        guard let currentLabel = currentLabel else { return }
+        titleTextfield.text = currentLabel.title
+        descriptionTextfield.text = currentLabel.body
+        backgroundLabel.text = currentLabel.hexColorCode
     }
-
+    
+    func setSaveOperation(_ operation: @escaping (Label) -> Void) {
+        self.saveOperation = operation
+    }
+    
+    @objc private func cancelButtonTouched(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func saveButtonTouched(_ sender: UIBarButtonItem) {
+        guard let labelTitle = titleTextfield.text,
+              let colorCode = backgroundLabel.text,
+              let saveOperation = saveOperation else { return }
+        
+        let label = Label(id: currentLabel?.id ?? -1,
+                          title: labelTitle,
+                          body: descriptionTextfield.text ?? "",
+                          hexColorCode: colorCode)
+        
+        saveOperation(label)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func randomColorButtonTouched(_ sender: UIButton) {
+        let hexColor = randomColor()
+        backgroundLabel.text = hexColor
+        changePreviewLabel()
+    }
+    
     private func randomColor() -> String {
         let colorRange = 0...255
         let randomRed = Int.random(in: colorRange)
@@ -188,34 +214,8 @@ class LabelControlViewController: UIViewController {
         let hexRed = String(randomRed, radix: 16)
         let hexGreen = String(randomGreen, radix: 16)
         let hexBlue = String(randomBlue, radix: 16)
+        
         return "#\(hexRed)\(hexGreen)\(hexBlue)"
-    }
-    
-    private func changePreviewLabel() {
-        let hexColorString = backgroundLabel.text ?? "#000000"
-        let hex = HexColorCode(from: hexColorString)
-        let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
-        previewLabel.configure(with: hex, titleText)
-    }
-    
-    private func setNetworkManager() {
-        let loginInfo = LoginInfo.shared
-        guard let jwt = loginInfo.jwt else { return }
-        let headers = [Header.authorization.key(): jwt.description]
-        networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
-    }
-    
-    @objc private func cancelButtonTouched(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    ///이 메소드를 오버라이드하여 레이블 생성 or 수정 구현
-    @objc func saveButtonTouched(_ sender: UIBarButtonItem) { }
-    
-    @objc private func randomColorButtonTouched(_ sender: UIButton) {
-        let hexColor = randomColor()
-        backgroundLabel.text = hexColor
-        changePreviewLabel()
     }
 }
 
@@ -223,5 +223,18 @@ extension LabelControlViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         changeSaveButtonEnableStatus(baseOn: textField)
         changePreviewLabel()
+    }
+    
+    private func changeSaveButtonEnableStatus(baseOn textField: UITextField) {
+        DispatchQueue.main.async {
+            self.saveButton.isEnabled = !textField.isEmpty()
+        }
+    }
+    
+    private func changePreviewLabel() {
+        let hexColorString = backgroundLabel.text ?? "#000000"
+        let hex = HexColorCode(from: hexColorString)
+        let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
+        previewLabel.configure(with: hex, titleText)
     }
 }

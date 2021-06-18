@@ -39,13 +39,11 @@
 		E43912DE2678A76D003CD344 /* RequestKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DD2678A76D003CD344 /* RequestKeys.swift */; };
 		E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */; };
 		E43912E22678AEB3003CD344 /* LabelTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */; };
-		E43912E42679C0DA003CD344 /* AddLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E32679C0DA003CD344 /* AddLabelViewController.swift */; };
 		E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */; };
 		E43912EA267A2351003CD344 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E9267A2351003CD344 /* NetworkError.swift */; };
 		E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */; };
 		E43912EE267C3C0E003CD344 /* CellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912ED267C3C0E003CD344 /* CellAction.swift */; };
 		E43912F0267C3EED003CD344 /* LabelControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912EF267C3EED003CD344 /* LabelControlViewController.swift */; };
-		E43912F2267C423A003CD344 /* EditLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F1267C423A003CD344 /* EditLabelViewController.swift */; };
 		E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */; };
 		E43912F6267CAE01003CD344 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F5267CAE01003CD344 /* TopMenuView.swift */; };
 		E43912F8267CB3D7003CD344 /* MultipleLineInputStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */; };
@@ -96,13 +94,11 @@
 		E43912DD2678A76D003CD344 /* RequestKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestKeys.swift; sourceTree = "<group>"; };
 		E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewDatasource.swift; sourceTree = "<group>"; };
 		E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableDelegate.swift; sourceTree = "<group>"; };
-		E43912E32679C0DA003CD344 /* AddLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelViewController.swift; sourceTree = "<group>"; };
 		E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLabelDTO.swift; sourceTree = "<group>"; };
 		E43912E9267A2351003CD344 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoDTO.swift; sourceTree = "<group>"; };
 		E43912ED267C3C0E003CD344 /* CellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAction.swift; sourceTree = "<group>"; };
 		E43912EF267C3EED003CD344 /* LabelControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelControlViewController.swift; sourceTree = "<group>"; };
-		E43912F1267C423A003CD344 /* EditLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLabelViewController.swift; sourceTree = "<group>"; };
 		E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		E43912F5267CAE01003CD344 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLineInputStackView.swift; sourceTree = "<group>"; };
@@ -315,8 +311,6 @@
 				E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */,
 				E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */,
 				E43912EF267C3EED003CD344 /* LabelControlViewController.swift */,
-				E43912E32679C0DA003CD344 /* AddLabelViewController.swift */,
-				E43912F1267C423A003CD344 /* EditLabelViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -478,8 +472,6 @@
 				E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */,
-				E43912E42679C0DA003CD344 /* AddLabelViewController.swift in Sources */,
-				E43912F2267C423A003CD344 /* EditLabelViewController.swift in Sources */,
 				E43912DC2678A737003CD344 /* JWT.swift in Sources */,
 				E43912E22678AEB3003CD344 /* LabelTableDelegate.swift in Sources */,
 				E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */,
