@@ -7,17 +7,21 @@ function App() {
   const MainPage = lazy(() => import('./page/mainPage/MainPage'));
   const CreateIssuePage = lazy(() => import('./page/createIssuePage/CreateIssuePage'));
   const DetailIssuePage = lazy(() => import('./page/detailIssuePage/DetailIssuePage'));
+  const LablePage = lazy(() => import('./page/lablePage/LablePage'));
+  const MilestonePage = lazy(() => import('./page/milestonePage/MilestonePage'));
   const isLogin = true;
   return (
     <div className='App'>
       <Router>
-        <Suspense fallback={<h1>Loading...🎢</h1>}>
+        <Suspense fallback={<h1>Loading...</h1>}>
           {isLogin && <Header />}
           <Switch>
             <Route path='/' component={LoginPage} exact />
             <Route path='/main' component={MainPage} />
             <Route path='/create' component={CreateIssuePage} />
             <Route path='/detail' component={DetailIssuePage} />
+            <Route path='/label' component={LablePage} />
+            <Route path='/milestone' component={MilestonePage} />
           </Switch>
         </Suspense>
       </Router>
