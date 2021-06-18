@@ -18,7 +18,7 @@
 # FE
 
 ## IssueTracker 진행상황
-- [WIKI - FE 정리] (https://github.com/janeljs/issue-tracker/wiki/%5BFE%5D%EC%A0%95%EB%A6%AC)
+- [WIKI - FE 정리](https://github.com/janeljs/issue-tracker/wiki/%5BFE%5D%EC%A0%95%EB%A6%AC)
 
 
 # BE
