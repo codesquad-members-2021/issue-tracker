@@ -11,7 +11,7 @@ import SnapKit
 class MilestoneTableViewCell: UITableViewCell {
 
     static let reuseId = "MilestoneTableViewCell"
-    
+
     private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 10
@@ -20,7 +20,7 @@ class MilestoneTableViewCell: UITableViewCell {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    
+
     private let horizenStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -28,8 +28,8 @@ class MilestoneTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         return stackView
     }()
-    
-    private let IssueLabelStackView: UIStackView = {
+
+    private let issueLabelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 5
         stackView.axis = .horizontal
@@ -37,28 +37,28 @@ class MilestoneTableViewCell: UITableViewCell {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.textAlignment = .left
         return label
     }()
-    
+
     private let achievementLabel: UILabel = {
         let label = UILabel()
         label.text = "50%"
         label.textAlignment = .right
         return label
     }()
-    
+
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
         label.textColor = .systemGray
         return label
     }()
-    
+
     private let dueDateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
@@ -75,7 +75,7 @@ class MilestoneTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor.hexStringToUIColor(hex: "#B1CAE5")
         return label
     }()
-    
+
     private let closedIssue: PaddingLabel = {
         let label = PaddingLabel(withInsets: 5, 5, 10, 10)
         label.textAlignment = .center
@@ -88,29 +88,29 @@ class MilestoneTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        IssueLabelStackView.addArrangedSubview(openedIssue)
-        IssueLabelStackView.addArrangedSubview(closedIssue)
-        
+        issueLabelStackView.addArrangedSubview(openedIssue)
+        issueLabelStackView.addArrangedSubview(closedIssue)
+
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
         verticalStackView.addArrangedSubview(dueDateLabel)
-        verticalStackView.addArrangedSubview(IssueLabelStackView)
-        
+        verticalStackView.addArrangedSubview(issueLabelStackView)
+
         horizenStackView.addArrangedSubview(verticalStackView)
         horizenStackView.addArrangedSubview(achievementLabel)
         addSubview(horizenStackView)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        IssueLabelStackView.addArrangedSubview(openedIssue)
-        IssueLabelStackView.addArrangedSubview(closedIssue)
-        
+        issueLabelStackView.addArrangedSubview(openedIssue)
+        issueLabelStackView.addArrangedSubview(closedIssue)
+
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
         verticalStackView.addArrangedSubview(dueDateLabel)
-        verticalStackView.addArrangedSubview(IssueLabelStackView)
-        
+        verticalStackView.addArrangedSubview(issueLabelStackView)
+
         horizenStackView.addArrangedSubview(verticalStackView)
         horizenStackView.addArrangedSubview(achievementLabel)
         addSubview(horizenStackView)
@@ -122,7 +122,7 @@ class MilestoneTableViewCell: UITableViewCell {
             maker.edges.equalToSuperview().inset(20)
         }
     }
-    
+
     func configure(with milestone: Milestone) {
         titleLabel.text = milestone.title
         descriptionLabel.text = milestone.description
