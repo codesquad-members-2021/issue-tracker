@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { TIssueListFilterType } from '../../util/reference';
 import CircleCheckBox from './CircleCheckBox';
 import Modal, { IModal } from './Modal';
 
@@ -15,35 +16,10 @@ interface IListItem extends IListItemImgType {
   text: string;
 }
 
-interface IListModal extends IModal {
-  data: {
-    title: string;
-    items: IListItem[];
-  };
+interface IListModal {
   rightPos?: string;
+  data: TIssueListFilterType;
 }
-
-// TEST DATA
-export const testData: IListItem[] = [
-  {
-    name: 'open',
-    text: '열린 이슈',
-    imgType: 'color',
-    color: '#000',
-  },
-  {
-    name: 'close',
-    text: '닫힌 이슈',
-    imgType: 'image',
-    imgUrl: 'https://avatars.githubusercontent.com/u/33610315?s=60&v=4',
-  },
-  {
-    name: 'close',
-    text: '내가 작성한 이슈',
-    imgType: 'text',
-  },
-];
-// -----
 
 const ListModal = ({ rightPos, data, ...props }: IListModal) => {
   const { title, items } = data;
