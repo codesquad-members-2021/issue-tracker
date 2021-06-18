@@ -18,7 +18,7 @@ class IssueDetailTableViewCell: UITableViewCell {
         stackViw.spacing = 10
         return stackViw
     }()
-    
+
     private let verticalStackView: UIStackView = {
         let stackViw = UIStackView()
         stackViw.axis = .vertical
@@ -26,7 +26,7 @@ class IssueDetailTableViewCell: UITableViewCell {
         stackViw.distribution = .fill
         return stackViw
     }()
-    
+
     private let profile: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "bell")
@@ -35,14 +35,14 @@ class IssueDetailTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = imageView.frame.width / 2
         return imageView
     }()
-    
+
     private let author: UILabel = {
         let label = UILabel()
         label.text = "Oni"
         label.textColor = .label
         return label
     }()
-    
+
     private let timestamp: UILabel = {
         let label = UILabel()
         label.text = "1분 전"
@@ -50,7 +50,7 @@ class IssueDetailTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 14)
         return label
     }()
-    
+
     private let comment: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -58,7 +58,7 @@ class IssueDetailTableViewCell: UITableViewCell {
         label.textColor = .label
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .gray
@@ -69,11 +69,11 @@ class IssueDetailTableViewCell: UITableViewCell {
         horizenStackView.addArrangedSubview(verticalStackView)
         contentView.addSubview(horizenStackView)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         profile.snp.makeConstraints { maker in
