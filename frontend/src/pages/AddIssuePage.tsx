@@ -1,5 +1,7 @@
-import styled from 'styled-components';
 import { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+
 import ResponsiveLayout from '../components/common/ResponsiveLayout';
 import Plus from '../components/common/icons/Plus';
 import Close from '../components/common/icons/Close';
@@ -151,7 +153,9 @@ const AddIssuePage = () => {
       </ContentBlock>
       <ButtonBlock>
         <CancelButton><Close/>작성 취소</CancelButton>
-        <UploadButton>완료</UploadButton>
+        <Link to="/issues"> 
+          <UploadButton>완료</UploadButton> 
+        </Link>
       </ButtonBlock>
     </AddIssueLayout>
   )
