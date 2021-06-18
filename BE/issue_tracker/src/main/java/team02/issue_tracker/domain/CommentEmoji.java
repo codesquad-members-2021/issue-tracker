@@ -1,7 +1,6 @@
 package team02.issue_tracker.domain;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.composite_key.CommentEmojiId;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @IdClass(CommentEmojiId.class)
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentEmoji {
     @Id
@@ -23,4 +21,9 @@ public class CommentEmoji {
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_comment_emoji_emoji1"))
     private Emoji emoji;
+
+    public CommentEmoji(Comment comment, Emoji emoji) {
+        this.comment = comment;
+        this.emoji = emoji;
+    }
 }

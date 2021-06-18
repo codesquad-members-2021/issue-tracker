@@ -1,7 +1,6 @@
 package team02.issue_tracker.domain;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.composite_key.IssueLabelId;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @IdClass(IssueLabelId.class)
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueLabel {
 
@@ -25,4 +23,8 @@ public class IssueLabel {
     @JoinColumn(name = "label_id")
     private Label label;
 
+    public IssueLabel(Issue issue, Label label) {
+        this.issue = issue;
+        this.label = label;
+    }
 }
