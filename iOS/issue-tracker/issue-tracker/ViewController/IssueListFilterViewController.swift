@@ -77,4 +77,9 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return configureHeaderView(section: section)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let heightForRowAt: CGFloat = 44
+        return heightForRowAt
+    }
 }

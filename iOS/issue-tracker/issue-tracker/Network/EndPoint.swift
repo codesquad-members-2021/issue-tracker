@@ -4,14 +4,13 @@ struct EndPoint {
     
     private let scheme = "http"
     private let host = "13.125.35.62"
-    private let apiPath = "/api"
-    private let userPath = "/user"
+    private let userPath = "/api/user"
     
     func makeUserInfoURL() -> URL? {
         var component = URLComponents()
         component.scheme = scheme
         component.host = host
-        component.path = apiPath + userPath
+        component.path = userPath
         return component.url
     }
     

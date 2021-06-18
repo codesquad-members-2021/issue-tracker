@@ -19,16 +19,14 @@ class FetchUserInfoUseCase {
             .sink { result in
                 switch result {
                 case .failure(_):
-                    completion("networkFail")
+                    completion("Network Fail")
                 case .finished:
                     break
                 }
             } receiveValue: { userInfoResponDTO in
-                print(userInfoResponDTO, "========")
                 guard let data = userInfoResponDTO.data else {
                     return
                 }
-                print(data, "data============")
                 completion(data.profileImage)
             }.store(in: &subscriptions)
     }
