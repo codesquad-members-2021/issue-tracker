@@ -25,8 +25,10 @@ public class GitHubLoginService {
 
     private static final String GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_USER_URL = "https://api.github.com/user";
+
     private final String GITHUB_CLIENT_ID;
     private final String GITHUB_CLIENT_SECRETS;
+
     private final String GITHUB_CLIENT_ID_IOS;
     private final String GITHUB_CLIENT_SECRETS_IOS;
 
@@ -40,7 +42,8 @@ public class GitHubLoginService {
     }
 
     public GitHubUserResponse login(String code) {
-        AccessTokenResponse accessTokenResponse = accessTokenForWeb(code).orElseThrow(IllegalArgumentException::new);
+        AccessTokenResponse accessTokenResponse = accessToken(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code)
+                .orElseThrow(IllegalArgumentException::new);
         log.debug("Web Access token : {}", accessTokenResponse.getAccessToken());
 
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
@@ -48,33 +51,23 @@ public class GitHubLoginService {
     }
 
     public GitHubUserResponse loginIOS(String code) {
-        AccessTokenResponse accessTokenResponse = accessTokenForIOS(code).orElseThrow(IllegalArgumentException::new);
+        AccessTokenResponse accessTokenResponse = accessToken(GITHUB_CLIENT_ID_IOS, GITHUB_CLIENT_SECRETS_IOS, code)
+                .orElseThrow(IllegalArgumentException::new);
         log.debug("iOS Access token : {}", accessTokenResponse.getAccessToken());
 
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
         return signIn(user, accessTokenResponse.getTokenType());
     }
 
-    private Optional<AccessTokenResponse> accessTokenForWeb(String code) {
+    private Optional<AccessTokenResponse> accessToken(String clientId, String clientSecrets, String code) {
         RequestEntity<AccessTokenRequest> accessTokenRequestEntity = RequestEntity.post(GITHUB_ACCESS_TOKEN_URL) // 보낼 request를 만듦
                 .header("Accept", "application/json")// 받아올 리턴 값을 json형식으로 설정
-                .body(AccessTokenRequest.create(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code));
+                .body(AccessTokenRequest.create(clientId, clientSecrets, code));
 
         return Optional.ofNullable(
                 new RestTemplate()
                         .exchange(accessTokenRequestEntity, AccessTokenResponse.class)
                         .getBody()); // 액세스토큰 받아오기
-    }
-
-    private Optional<AccessTokenResponse> accessTokenForIOS(String code) {
-        RequestEntity<AccessTokenRequest> accessTokenRequestEntity = RequestEntity.post(GITHUB_ACCESS_TOKEN_URL)
-                .header("Accept", "application/json")
-                .body(AccessTokenRequest.create(GITHUB_CLIENT_ID_IOS, GITHUB_CLIENT_SECRETS_IOS, code));
-
-        return Optional.ofNullable(
-                new RestTemplate()
-                        .exchange(accessTokenRequestEntity, AccessTokenResponse.class)
-                        .getBody());
     }
 
     private Optional<GitHubUser> getUserInfo(String accessToken) {
