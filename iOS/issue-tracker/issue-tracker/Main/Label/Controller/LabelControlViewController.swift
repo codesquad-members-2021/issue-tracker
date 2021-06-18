@@ -9,44 +9,11 @@ import UIKit
 
 class LabelControlViewController: UIViewController {
 
-    private lazy var topMenuView: UIView = {
-        let container = UIView()
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(saveButton)
-        NSLayoutConstraint.activate([
-            saveButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            saveButton.widthAnchor.constraint(greaterThanOrEqualToConstant: spacing * 2),
-            saveButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
-            saveButton.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing)
-        ])
-        
-        container.addSubview(cancelButton)
-        NSLayoutConstraint.activate([
-            cancelButton.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
-            cancelButton.widthAnchor.constraint(greaterThanOrEqualToConstant: spacing * 2),
-            cancelButton.heightAnchor.constraint(equalToConstant: spacing * 1.5),
-            cancelButton.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing)
-        ])
-        
-        let titleLabel = UILabel()
-        titleLabel.text = sceneTitle
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor)
-        ])
-        return container
-    }()
-    
-    private lazy var cancelButton: ImageBarButton = {
-        let button = ImageBarButton()
-        button.configure(with: "chevron.backward", "취소")
-        button.moveImageToLeft()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(cancelButtonTouched), for: .touchUpInside)
-        return button
+    private lazy var topMenuView: TopMenuView = {
+        let topMenuView = TopMenuView()
+        topMenuView.configure(withTitle: sceneTitle, rightButton: saveButton, leftButton: cancelButton)
+        topMenuView.translatesAutoresizingMaskIntoConstraints = false
+        return topMenuView
     }()
     
     private lazy var saveButton: ImageBarButton = {
@@ -55,6 +22,15 @@ class LabelControlViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(saveButtonTouched), for: .touchUpInside)
         changeSaveButtonEnableStatus(baseOn: titleTextfield)
+        return button
+    }()
+    
+    private lazy var cancelButton: ImageBarButton = {
+        let button = ImageBarButton()
+        button.configure(with: "chevron.backward", "취소")
+        button.moveImageToLeft()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(cancelButtonTouched), for: .touchUpInside)
         return button
     }()
   
