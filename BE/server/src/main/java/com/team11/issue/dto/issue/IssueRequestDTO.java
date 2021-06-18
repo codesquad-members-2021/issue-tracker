@@ -1,10 +1,10 @@
 package com.team11.issue.dto.issue;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,8 +14,15 @@ public class IssueRequestDTO {
 
     private String title;
     private String contents;
-    private List<Long> assignees = new ArrayList<>();
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Long> assignees;
+
     private Long authorId;
-    private List<Long> labels = new ArrayList<>();
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Long> labels;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long milestone;
 }

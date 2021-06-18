@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,21 +20,33 @@ public class IssueService {
     private final IssueHasLabelRepository issueHasLabelRepository;
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
+    private final HistoryRepository historyRepository;
 
     @Transactional
     public void createIssue(IssueRequestDTO issueRequestDTO, String userName) {
         User user = userRepository.findByName(userName).orElseThrow(RuntimeException::new);
-        Milestone milestone = milestoneRepository.findById(issueRequestDTO.getMilestone()).orElseThrow(RuntimeException::new);
+        Milestone milestone = null;
+        if(issueRequestDTO.getMilestone() != null) {
+            milestone = milestoneRepository.findById(issueRequestDTO.getMilestone()).orElseThrow(RuntimeException::new);
+        }
         Issue issue = issueRepository.save(Issue.createIssue(user, issueRequestDTO, milestone));
 
-        List<IssueHasLabel> issueHasLabels = issueRequestDTO.getLabels().stream()
-                .map(labelId -> IssueHasLabel.createIssueHasLabel(issue, labelRepository.findById(labelId).orElseThrow(RuntimeException::new)))
-                .collect(Collectors.toList());
-        issueHasLabelRepository.saveAll(issueHasLabels);
+        if(issueRequestDTO.getLabels() != null) {
+            List<IssueHasLabel> issueHasLabels = issueRequestDTO.getLabels().stream()
+                    .map(labelId -> IssueHasLabel.createIssueHasLabel(issue, labelRepository.findById(labelId).orElseThrow(RuntimeException::new)))
+                    .collect(Collectors.toList());
+            issueHasLabelRepository.saveAll(issueHasLabels);
+        }
 
-        List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
-                .map(userId -> Assignees.createAssignees(issue, userRepository.findById(userId).orElseThrow(RuntimeException::new)))
-                .collect(Collectors.toList());
-        assigneeRepository.saveAll(assignees);
+        if(issueRequestDTO.getAssignees() != null) {
+            List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
+                    .map(userId -> Assignees.createAssignees(issue, userRepository.findById(userId).orElseThrow(RuntimeException::new)))
+                    .collect(Collectors.toList());
+            assigneeRepository.saveAll(assignees);
+        }
+
+        History history = History.createHistory(user, issue);
+        historyRepository.save(history);
+
     }
 }
