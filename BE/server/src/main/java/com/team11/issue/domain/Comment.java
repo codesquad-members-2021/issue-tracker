@@ -1,5 +1,8 @@
 package com.team11.issue.domain;
 
+import com.team11.issue.dto.comment.CommentRequestDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -7,7 +10,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Comment {
 
@@ -15,7 +20,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,4 +31,13 @@ public class Comment {
     private User user;
 
     private LocalDateTime createDateTime;
+
+    public static Comment createComment(User user, Issue issue, CommentRequestDTO commentRequestDTO) {
+        return Comment.builder()
+                .contents(commentRequestDTO.getContents())
+                .issue(issue)
+                .user(user)
+                .createDateTime(LocalDateTime.now())
+                .build();
+    }
 }
