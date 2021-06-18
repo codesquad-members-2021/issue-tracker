@@ -1,7 +1,8 @@
 package com.codesqaude.cocomarco.service;
 
-import com.codesqaude.cocomarco.common.exception.NotFoundLabelException;
-import com.codesqaude.cocomarco.domain.label.*;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundLabelException;
+import com.codesqaude.cocomarco.domain.label.Label;
+import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.label.dto.LabelRequest;
 import com.codesqaude.cocomarco.domain.label.dto.LabelResponse;
 import com.codesqaude.cocomarco.domain.label.dto.LabelWrapper;

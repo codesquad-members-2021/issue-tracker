@@ -1,8 +1,8 @@
 package com.codesqaude.cocomarco.service;
 
-import com.codesqaude.cocomarco.common.exception.NotFoundCommentException;
-import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
-import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundCommentException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundIssueException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.comment.CommentRepository;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;

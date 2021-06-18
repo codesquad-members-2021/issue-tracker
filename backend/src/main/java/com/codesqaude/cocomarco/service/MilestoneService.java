@@ -1,6 +1,6 @@
 package com.codesqaude.cocomarco.service;
 
-import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.domain.label.LabelRepository;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import com.codesqaude.cocomarco.domain.milestone.MilestoneRepository;

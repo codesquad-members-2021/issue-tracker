@@ -1,7 +1,7 @@
 package com.codesqaude.cocomarco.service;
 
 import com.codesqaude.cocomarco.common.auth.JwtKey;
-import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.oauth.GitOauth;
 import com.codesqaude.cocomarco.domain.oauth.GitUserInfo;
 import com.codesqaude.cocomarco.domain.oauth.dto.AccessToken;

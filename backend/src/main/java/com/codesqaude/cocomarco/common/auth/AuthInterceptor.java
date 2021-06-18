@@ -1,6 +1,6 @@
 package com.codesqaude.cocomarco.common.auth;
 
-import com.codesqaude.cocomarco.common.exception.NotLoggedInException;
+import com.codesqaude.cocomarco.common.exception.auth.NotLoggedInException;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
