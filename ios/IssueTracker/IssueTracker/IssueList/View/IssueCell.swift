@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueCell: UITableViewCell, ReuseIdentifierable, UINibCreatable {
+final class IssueCell: UITableViewCell, ReuseIdentifierable, UINibCreatable {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!

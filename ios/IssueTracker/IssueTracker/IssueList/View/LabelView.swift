@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelView: UILabel {
+final class LabelView: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

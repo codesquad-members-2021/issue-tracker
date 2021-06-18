@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueListViewController: UIViewController, ViewControllerIdentifierable {
+final class IssueListViewController: UIViewController, ViewControllerIdentifierable {
     
     static func create(_ viewModel: IssueViewModel) -> IssueListViewController {
         guard let vc = storyboard.instantiateViewController(identifier: storyboardID) as? IssueListViewController else {

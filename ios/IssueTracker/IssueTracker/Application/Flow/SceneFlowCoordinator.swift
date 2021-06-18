@@ -12,7 +12,7 @@ protocol SceneFlowCoordinatorDependencies {
 }
 
 
-class SceneFlowCoordinator {
+final class SceneFlowCoordinator {
     private weak var rootVC: UINavigationController?
     private var dependencies: SceneFlowCoordinatorDependencies
     

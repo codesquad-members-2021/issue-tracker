@@ -7,7 +7,7 @@
 
 import Foundation
 
-class IssueViewModel {
+final class IssueViewModel {
     
     private(set) var issues: [Issue]
     private(set) var error: Error?

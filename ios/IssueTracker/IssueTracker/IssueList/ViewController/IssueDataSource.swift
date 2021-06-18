@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueDataSource: NSObject {
+final class IssueDataSource: NSObject {
     
     private var viewModel: IssueViewModel
     

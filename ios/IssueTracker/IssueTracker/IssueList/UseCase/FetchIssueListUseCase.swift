@@ -13,13 +13,13 @@ protocol FetchIssueListUseCase {
     func excute(completion: @escaping (Result<[Issue], Error>) -> Void)
 }
 
-class DefaultFetchIssueListUseCase: FetchIssueListUseCase {
+final class DefaultFetchIssueListUseCase: FetchIssueListUseCase {
     func excute(completion: @escaping (Result<[Issue], Error>) -> Void) {
         // 기준이 될 UseCase 입니다. NetworkService를 가지고 있으며 Network 통신을 이용한 Issue List Fetch 가 이루어 져야 합니다.
     }
 }
 
-class MockFetchIssueListUseCase: FetchIssueListUseCase {
+final class MockFetchIssueListUseCase: FetchIssueListUseCase {
     func excute(completion: @escaping (Result<[Issue], Error>) -> Void) {
         completion(.success(IssueListMock.data))
     }

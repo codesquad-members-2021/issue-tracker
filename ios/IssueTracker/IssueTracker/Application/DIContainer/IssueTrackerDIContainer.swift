@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueTrackerDIContainer: SceneFlowCoordinatorDependencies {
+final class IssueTrackerDIContainer: SceneFlowCoordinatorDependencies {
     private func makeFetchIssueListUseCase() -> FetchIssueListUseCase {
         return MockFetchIssueListUseCase()
     }
