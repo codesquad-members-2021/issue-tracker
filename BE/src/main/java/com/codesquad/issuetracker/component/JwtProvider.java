@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.component;
 
 import com.codesquad.issuetracker.domain.User;
+import com.codesquad.issuetracker.jwt.JacksonDeserializer;
 import com.codesquad.issuetracker.jwt.JacksonSerializer;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Slf4j
@@ -38,9 +41,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .claim("id", user.getId())
-                .claim("name", user.getName())
-                .claim("login_id", user.getLoginId())
+                .claim("user", user)
                 .serializeToJsonWith(JacksonSerializer.getInstance())
                 .setIssuedAt(now)
                 .setExpiration(validity)
@@ -64,8 +65,13 @@ public class JwtProvider {
     }
 
     private Claims getClaims(String token) {
+        Map<String, Class> deserialziedType = new HashMap<>();
+        deserialziedType.put(USER_CLAIM_KEY, User.class);
         return Jwts.parser()
                 .setSigningKey(secretKey)
+                .deserializeJsonWith(
+                        new JacksonDeserializer(deserialziedType)
+                )
                 .parseClaimsJws(token)
                 .getBody();
     }

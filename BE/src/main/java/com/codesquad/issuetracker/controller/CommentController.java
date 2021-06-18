@@ -44,13 +44,14 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editComment(@PathVariable Long commentId, @RequestBody EditedComment content) {
+    public void editComment(@PathVariable Long commentId, @RequestBody EditedComment content, @RequestAttribute User user) {
+//        UserValidator.
         commentService.editComment(commentId, content);
     }
 
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComment(@PathVariable Long commentId) {
+    public void deleteComment(@PathVariable Long commentId, @RequestAttribute User user) {
         commentService.removeComment(commentId);
     }
 
