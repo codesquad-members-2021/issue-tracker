@@ -9,13 +9,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LabelViewController: UIViewController {
+final class LabelViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
 
-    var labelListViewModel = LabelListViewModel(networkManager: NetworkManager())
-    var addLabelButton = AddLabelButton()
-    var bag = DisposeBag()
+    private var labelListViewModel = LabelListViewModel(networkManager: NetworkManager())
+    private var addLabelButton = AddLabelButton()
+    private var bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,11 @@ class LabelViewController: UIViewController {
         bindTableView()
     }
 
-    func fetchLabel() {
+    private func fetchLabel() {
         labelListViewModel.fetchLabelList()
     }
 
-    func bindTableView() {
+    private func bindTableView() {
         labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, _, element in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
             cell.setupLabelCell(title: element.title, description: element.description!, color: element.color)
@@ -39,13 +39,13 @@ class LabelViewController: UIViewController {
         .disposed(by: bag)
     }
 
-    @objc func addLabelButtonTapped() {
+    @objc private func addLabelButtonTapped() {
         let viewController = AddLabelViewController()
         let navigationViewController = UINavigationController(rootViewController: viewController)
         present(navigationViewController, animated: true, completion: nil)
     }
 
-    func seuptNavigationBar() {
+    private func seuptNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "레이블"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)

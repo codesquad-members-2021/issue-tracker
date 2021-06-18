@@ -8,16 +8,16 @@
 import UIKit
 import SnapKit
 
-class IssueListViewController: UIViewController {
+final class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
 
-    let addIssueButton = AddIssueButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
-    let filterBarButton = FilterBarButton()
-    let selectBarButton = SelectBarButton()
-    let cancelButton = CancelButton()
-    let issueToolbar = IssueToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-    let searchController: UISearchController = {
+    private let addIssueButton = AddIssueButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
+    private let filterBarButton = FilterBarButton()
+    private let selectBarButton = SelectBarButton()
+    private let cancelButton = CancelButton()
+    private let issueToolbar = IssueToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    private let searchController: UISearchController = {
         var searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.setImage(UIImage(systemName: "mic.fill"), for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
@@ -40,12 +40,12 @@ class IssueListViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    @objc func filterButtonTapped() {
+    @objc private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
     }
 
-    @objc func selectButtonTapped() {
+    @objc private  func selectButtonTapped() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.title = "이슈 선택"
@@ -55,18 +55,18 @@ class IssueListViewController: UIViewController {
         setupToolbarAutoulayout()
     }
 
-    @objc func addIssueButtonTapped() {
+    @objc private func addIssueButtonTapped() {
         let controller = NewIssueViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    @objc func cancelButtonTapped() {
+    @objc private func cancelButtonTapped() {
         setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
     }
 
-    func setupAddIssueButtonAutolayout() {
+    private func setupAddIssueButtonAutolayout() {
         view.addSubview(addIssueButton)
         addIssueButton.snp.makeConstraints { button in
             button.width.height.equalTo(64)
@@ -75,7 +75,7 @@ class IssueListViewController: UIViewController {
         }
     }
 
-    func setupToolbarAutoulayout() {
+    private func setupToolbarAutoulayout() {
         issueToolbar.snp.makeConstraints { toolbar in
             toolbar.leading.trailing.equalToSuperview()
             toolbar.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -83,7 +83,7 @@ class IssueListViewController: UIViewController {
         }
     }
 
-    func setupNavigationItem() {
+    private func setupNavigationItem() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "이슈"
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterBarButton)
@@ -91,7 +91,7 @@ class IssueListViewController: UIViewController {
         navigationItem.searchController = searchController
     }
 
-    func setupIssueTableView() {
+    private func setupIssueTableView() {
         issueTableView.register(IssueTableViewCell.self, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.allowsMultipleSelection = true
         issueTableView.dataSource = self

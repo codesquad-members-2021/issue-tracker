@@ -10,17 +10,17 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class AddLabelViewController: UIViewController {
-    var addLabelViewModel: AddLabelViewModel!
+final class AddLabelViewController: UIViewController {
+    private var addLabelViewModel: AddLabelViewModel!
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.allowsSelection = false
         tableView.register(AddLabelTableViewCell.self, forCellReuseIdentifier: AddLabelTableViewCell.identifier)
         return tableView
     }()
-    var estimatedLabelView = EstimatedLabelView()
-    var bag = DisposeBag()
-    var saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
+    private var estimatedLabelView = EstimatedLabelView()
+    private var bag = DisposeBag()
+    private var saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class AddLabelViewController: UIViewController {
         binding()
     }
 
-    func binding() {
+    private func binding() {
         addLabelViewModel.color
             .map { UIColor.hexStringToUIColor(hex: $0)}
             .bind(to: estimatedLabelView.label.rx.backgroundColor)
@@ -56,7 +56,7 @@ class AddLabelViewController: UIViewController {
             .disposed(by: bag)
     }
 
-    func configureAutolayout() {
+    private func configureAutolayout() {
         tableView.snp.makeConstraints { view in
             view.top.equalToSuperview().inset(40)
             view.leading.trailing.bottom.equalToSuperview()
