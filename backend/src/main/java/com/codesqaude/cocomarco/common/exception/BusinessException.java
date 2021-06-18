@@ -1,5 +1,8 @@
 package com.codesqaude.cocomarco.common.exception;
 
+import lombok.Getter;
+
+@Getter
 public class BusinessException extends RuntimeException {
 
     private ErrorCode errorCode;

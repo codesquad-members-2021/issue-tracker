@@ -1,5 +1,8 @@
 package com.codesqaude.cocomarco.common.exception;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorCode {
 
     /**
@@ -15,7 +18,10 @@ public enum ErrorCode {
      * AUTH EXCEPTION
      */
     NO_PERMISSION_USER(403, "해당 권한이 없습니다."),
-    NOT_LOGGED_IN(401, "로그인 되어있지 않습니다.");
+    NOT_LOGGED_IN(401, "로그인 되어있지 않습니다."),
+
+
+    INTERNAL_SERVER_ERROR(500, "서버에러 입니다.");
 
     private int httpStatus;
     private String message;
