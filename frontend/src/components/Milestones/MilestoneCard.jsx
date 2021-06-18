@@ -4,7 +4,12 @@ import { ReactComponent as Milestone } from "images/milestone.svg";
 import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Trash } from "images/trash.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
+import getPercent from "util/getPercent";
+
 const MilestoneCard = () => {
+	const openedIssueCnt = 1;
+	const closedIssueCnt = 1;
+
 	return (
 		<StyledFlexCard>
 			<ContentsWrapper>
@@ -35,13 +40,16 @@ const MilestoneCard = () => {
 					</EditBlock>
 					<div>
 						<ProgressWrapper>
-							<progress value="20" max="100" />
+							<progress
+								value={closedIssueCnt}
+								max={closedIssueCnt + openedIssueCnt}
+							/>
 						</ProgressWrapper>
 						<Detail>
-							<GrayFont>00%</GrayFont>
+							<GrayFont>{getPercent(openedIssueCnt, closedIssueCnt)}%</GrayFont>
 							<Block>
-								<IssueCnt>열린 이슈 N</IssueCnt>{" "}
-								<IssueCnt>닫힌 이슈 N</IssueCnt>
+								<IssueCnt>열린 이슈 {openedIssueCnt}</IssueCnt>{" "}
+								<IssueCnt>닫힌 이슈 {closedIssueCnt}</IssueCnt>
 							</Block>
 						</Detail>
 					</div>
