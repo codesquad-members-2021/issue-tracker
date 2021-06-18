@@ -12,7 +12,6 @@ import com.team11.issue.repository.UserRepository;
 import com.team11.issue.util.JwtUtil;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,12 +43,6 @@ public class UserService {
         return JwtUtil.createToken(userName);
     }
 
-    private String getJwtToken(String authorization) {
-        if (authorization.startsWith("Bearer "))
-            return authorization.substring(7);
-        return null;
-    }
-
     private boolean verifyUser(String userName) {
         return userRepository.findByName(userName).isPresent();
     }
@@ -74,11 +67,7 @@ public class UserService {
         return new LoginResponseDTO(user, createJwtToken(user.getName()));
 
     }
-
-    public void logout(String authorization) {
-        String jwtToken = getJwtToken(authorization);
-        String userName = JwtUtil.getUserIdFromJwtToken(jwtToken);
-
+    public void logout(String userName) {
         User user = findByName(userName);
         user.removeAccessToken();
 
