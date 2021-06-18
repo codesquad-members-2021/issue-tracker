@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UnknownHostException extends OAuthException {
+public class InvalidGitHubRequestException extends OAuthException {
 
-    public UnknownHostException() {
-        super("Unknown host detected.");
+    public InvalidGitHubRequestException() {
+        super("GitHub request is not valid.");
     }
 }
