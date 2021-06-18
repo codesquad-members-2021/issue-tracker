@@ -137,7 +137,8 @@ class LabelControlViewController: UIViewController {
         let labelView = LabelView()
         let colorText = backgroundLabel.text ?? "#000000"
         let hex = HexColorCode(from: colorText)
-        labelView.configure(with: hex, titleTextfield.text)
+        let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
+        labelView.configure(with: hex, titleText)
         labelView.translatesAutoresizingMaskIntoConstraints = false
         return labelView
     }()
@@ -167,10 +168,8 @@ class LabelControlViewController: UIViewController {
     }
     
     private func changeSaveButtonEnableStatus(baseOn textField: UITextField) {
-        guard let text = textField.text else { return }
-        
         DispatchQueue.main.async {
-            self.saveButton.isEnabled = text.count > 0
+            self.saveButton.isEnabled = !textField.isEmpty()
         }
     }
     
@@ -257,9 +256,9 @@ class LabelControlViewController: UIViewController {
     
     private func changePreviewLabel() {
         let hexColorString = backgroundLabel.text ?? "#000000"
-        let title = titleTextfield.text ?? "레이블"
         let hex = HexColorCode(from: hexColorString)
-        previewLabel.configure(with: hex, title)
+        let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
+        previewLabel.configure(with: hex, titleText)
     }
     
     private func setNetworkManager() {
