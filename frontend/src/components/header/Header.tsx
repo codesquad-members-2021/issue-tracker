@@ -2,6 +2,9 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useRecoilValue } from 'recoil';
+import { loginState } from 'store/loginStore';
+import ProfileImg from 'components/atom/ProfileImg';
 const useStyle = makeStyles(() => ({
   typographyStyles: {
     flex: 1,
@@ -14,6 +17,8 @@ function Header() {
   const classes = useStyle();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const loginData = useRecoilValue(loginState);
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,9 +40,10 @@ function Header() {
             onClick={handleMenu}
             color='inherit'
           >
-            <AccountCircleIcon />
+            {loginData ? <ProfileImg avatarURL={loginData?.image} /> : <AccountCircleIcon />}
           </IconButton>
           <Menu id='menu-appbar' anchorEl={anchorEl} open={open} onClose={handleClose}>
+            <MenuItem onClick={handleClose}>{loginData?.userName}</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>

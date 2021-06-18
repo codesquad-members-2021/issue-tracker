@@ -7,7 +7,7 @@ function App() {
   const MainPage = lazy(() => import('./page/mainPage/MainPage'));
   const CreateIssuePage = lazy(() => import('./page/createIssuePage/CreateIssuePage'));
   const DetailIssuePage = lazy(() => import('./page/detailIssuePage/DetailIssuePage'));
-  const isLogin = true;
+  const isLogin = !!localStorage.getItem('token');
   return (
     <div className='App'>
       <Router>

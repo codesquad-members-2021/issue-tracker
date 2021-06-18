@@ -4,7 +4,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 
 interface Props {
-  avatarURL?: string;
+  avatarURL?: string | null;
   isSmall?: boolean;
   className?: string;
 }
