@@ -2,11 +2,9 @@ package com.codesquad.issuetracker.component;
 
 import com.codesquad.issuetracker.domain.User;
 import com.codesquad.issuetracker.jwt.JacksonSerializer;
-import com.codesquad.issuetracker.jwt.JacksonDeserializer;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.lang.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -40,7 +38,9 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .claim(USER_CLAIM_KEY, user)
+                .claim("id", user.getId())
+                .claim("name", user.getName())
+                .claim("login_id", user.getLoginId())
                 .serializeToJsonWith(JacksonSerializer.getInstance())
                 .setIssuedAt(now)
                 .setExpiration(validity)
@@ -49,8 +49,12 @@ public class JwtProvider {
     }
 
     public User getUser(String token) {
-        return getClaims(token)
-                .get(USER_CLAIM_KEY, User.class);
+        Claims claims = getClaims(token);
+        Long id = (Long) claims.get("id");
+        String name = (String) claims.get("name");
+        String loginId = (String) claims.get("login_id");
+        User user = new User(id, name, loginId);
+        return user;
     }
 
     public boolean validateToken(String token) {
@@ -60,12 +64,8 @@ public class JwtProvider {
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parserBuilder()
+        return Jwts.parser()
                 .setSigningKey(secretKey)
-                .deserializeJsonWith(
-                        new JacksonDeserializer(Maps.of(USER_CLAIM_KEY, User.class).build())
-                )
-                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
