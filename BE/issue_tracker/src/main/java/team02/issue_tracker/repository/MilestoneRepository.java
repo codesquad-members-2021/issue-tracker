@@ -14,7 +14,7 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 
     List<Milestone> findByDeletedFalse();
 
-    List<Milestone> findByOpenTrueAndDeletedFalse();
+    Long countByOpenTrueAndDeletedFalse();
 
-    List<Milestone> findByOpenFalseAndDeletedFalse();
+    Long countByOpenFalseAndDeletedFalse();
 }

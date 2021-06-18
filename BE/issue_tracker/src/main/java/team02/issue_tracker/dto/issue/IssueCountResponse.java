@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class IssueCountResponse {
 
-    private int openIssues;
-    private int closedIssues;
+    private Long openIssues;
+    private Long closedIssues;
 }

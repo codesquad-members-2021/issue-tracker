@@ -13,4 +13,6 @@ public interface LabelRepository extends JpaRepository<Label, Long> {
     Optional<Label> findByIdAndDeletedFalse(Long id);
 
     List<Label> findByDeletedFalse();
+
+    Long countByDeletedFalse();
 }

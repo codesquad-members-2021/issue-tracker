@@ -14,8 +14,8 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     Optional<Issue> findByIdAndDeletedFalse(Long id);
 
-    List<Issue> findByOpenTrueAndDeletedFalse();
+    Long countByOpenTrueAndDeletedFalse();
 
-    List<Issue> findByOpenFalseAndDeletedFalse();
+    Long countByOpenFalseAndDeletedFalse();
 
 }

@@ -139,8 +139,16 @@ public class IssueService {
     }
 
     public IssueCountResponse getIssueCount() {
-        int openIssueCount = issueRepository.findByOpenTrueAndDeletedFalse().size();
-        int closedIssueCount = issueRepository.findByOpenFalseAndDeletedFalse().size();
+        Long openIssueCount = getOpenIssueCount();
+        Long closedIssueCount = getClosedIssueCount();
         return new IssueCountResponse(openIssueCount, closedIssueCount);
+    }
+
+    public Long getOpenIssueCount() {
+        return issueRepository.countByOpenTrueAndDeletedFalse();
+    }
+
+    public Long getClosedIssueCount() {
+        return issueRepository.countByOpenFalseAndDeletedFalse();
     }
 }

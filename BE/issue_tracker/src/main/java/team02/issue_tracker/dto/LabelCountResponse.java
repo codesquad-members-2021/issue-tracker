@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class LabelCountResponse {
 
-    private int labels;
+    private Long labels;
 }

@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class MilestoneCountResponse {
 
-    private int openMilestones;
-    private int closedMilestones;
+    private Long openMilestones;
+    private Long closedMilestones;
 }

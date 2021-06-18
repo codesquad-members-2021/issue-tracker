@@ -45,9 +45,15 @@ public class MilestoneService {
     }
 
     public MilestoneCountResponse getMilestoneCount() {
-        int openMilestoneCount = milestoneRepository.findByOpenTrueAndDeletedFalse().size();
-        int closedMilestoneCount = milestoneRepository.findByOpenFalseAndDeletedFalse().size();
-        return new MilestoneCountResponse(openMilestoneCount, closedMilestoneCount);
+        return new MilestoneCountResponse(getOpenMilestoneCount(), getClosedMilestoneCount());
+    }
+
+    public Long getOpenMilestoneCount() {
+        return milestoneRepository.countByOpenTrueAndDeletedFalse();
+    }
+
+    public Long getClosedMilestoneCount() {
+        return milestoneRepository.countByOpenFalseAndDeletedFalse();
     }
 
     public void addMilestone(MilestoneRequest milestoneRequest) {

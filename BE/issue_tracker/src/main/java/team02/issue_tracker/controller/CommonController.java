@@ -5,31 +5,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.dto.CountResponse;
 import team02.issue_tracker.dto.wrapping.ApiResult;
-import team02.issue_tracker.repository.IssueRepository;
-import team02.issue_tracker.repository.LabelRepository;
-import team02.issue_tracker.repository.MilestoneRepository;
+import team02.issue_tracker.service.IssueService;
+import team02.issue_tracker.service.LabelService;
+import team02.issue_tracker.service.MilestoneService;
 
 @RestController
 @RequestMapping("/api/common")
 public class CommonController {
 
-    private final IssueRepository issueRepository;
-    private final LabelRepository labelRepository;
-    private final MilestoneRepository milestoneRepository;
+    private final IssueService issueService;
+    private final LabelService labelService;
+    private final MilestoneService milestoneService;
 
-    public CommonController(IssueRepository issueRepository, LabelRepository labelRepository, MilestoneRepository milestoneRepository) {
-        this.issueRepository = issueRepository;
-        this.labelRepository = labelRepository;
-        this.milestoneRepository = milestoneRepository;
+    public CommonController(IssueService issueService, LabelService labelService, MilestoneService milestoneService) {
+        this.issueService = issueService;
+        this.labelService = labelService;
+        this.milestoneService = milestoneService;
     }
 
     @GetMapping("/count")
     public ApiResult<CountResponse> showAllCount() {
-        int openIssueCount = issueRepository.findByOpenTrueAndDeletedFalse().size();
-        int closedIssueCount = issueRepository.findByOpenFalseAndDeletedFalse().size();
-        int labelCount = labelRepository.findByDeletedFalse().size();
-        int openMilestoneCount = milestoneRepository.findByOpenTrueAndDeletedFalse().size();
-        int closedMilestoneCount = milestoneRepository.findByOpenFalseAndDeletedFalse().size();
+        Long openIssueCount = issueService.getOpenIssueCount();
+        Long closedIssueCount = issueService.getClosedIssueCount();
+        Long labelCount = labelService.getLabelCount();
+        Long openMilestoneCount = milestoneService.getOpenMilestoneCount();
+        Long closedMilestoneCount = milestoneService.getClosedMilestoneCount();
 
         return ApiResult.success(new CountResponse(openIssueCount, closedIssueCount, labelCount, openMilestoneCount, closedMilestoneCount));
     }

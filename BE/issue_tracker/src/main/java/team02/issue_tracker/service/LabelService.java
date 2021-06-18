@@ -54,9 +54,12 @@ public class LabelService {
                 .collect(Collectors.toList());
     }
 
-    public LabelCountResponse getLabelCount() {
-        int labelCount = labelRepository.findByDeletedFalse().size();
-        return new LabelCountResponse(labelCount);
+    public LabelCountResponse getLabelCountResponse() {
+        return new LabelCountResponse(getLabelCount());
+    }
+
+    public Long getLabelCount() {
+        return labelRepository.countByDeletedFalse();
     }
 
     public void modifyLabel(Long labelId, LabelRequest labelRequest) {

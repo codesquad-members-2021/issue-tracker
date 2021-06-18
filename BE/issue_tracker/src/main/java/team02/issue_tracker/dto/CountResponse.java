@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public class CountResponse {
 
-    private int openIssues;
-    private int closedIssues;
-    private int labels;
-    private int openMilestones;
-    private int closedMilestones;
+    private Long openIssues;
+    private Long closedIssues;
+    private Long labels;
+    private Long openMilestones;
+    private Long closedMilestones;
 }
