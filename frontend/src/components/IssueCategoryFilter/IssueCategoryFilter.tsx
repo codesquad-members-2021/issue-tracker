@@ -39,7 +39,7 @@ const IssueCategoryFilter = () => {
         <FilterCategoryButton type={'left'}> 레이블 </FilterCategoryButton>
         <FilterCategoryButton type={'right'}> 마일스톤 </FilterCategoryButton>
         
-        <Link to="/"> <IssueCreateButton> ﹢ 이슈 작성 </IssueCreateButton> </Link>
+        <Link to="/add/issue"> <IssueCreateButton> ﹢ 이슈 작성 </IssueCreateButton> </Link>
       </FilterHeaderBlock>
     </FilterHeaderLayer>
   )

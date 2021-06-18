@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react';
 import styled from 'styled-components';
+import { Link, withRouter } from 'react-router-dom';
 
 import ResponsiveLayout from 'components/common/ResponsiveLayout';
 
@@ -15,11 +16,15 @@ const Header = () => {
     }
   }, [])
 
+  const handleHeaderClick = () => {
+    window.location.href = "/issues";
+  }
+
   if (!userInfo) return <></>;
   
   return (
     <HeaderLayout>
-      <HeaderTitle>Issue Tracker</HeaderTitle>
+      <HeaderTitle onClick={handleHeaderClick}>Issue Tracker</HeaderTitle>
       {userInfo.profileImage && 
         <HeaderThumbnail src={userInfo.profileImage}></HeaderThumbnail>
       }
@@ -39,6 +44,7 @@ const HeaderTitle = styled.span`
   font-weight: 500; 
   font-style: italic;
   font-size: 3.2rem;
+  cursor: pointer;
 `;
 
 const HeaderThumbnail = styled.img`

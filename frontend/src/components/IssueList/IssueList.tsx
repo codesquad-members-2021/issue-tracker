@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
 import ArrowIcon from 'components/common/icons/ArrowIcon';
 import Label from 'components/common/Label';
+
+import API from 'lib/API/API';
 
 const IssueManagerFilterInfo = {
   name: "담당자",
@@ -56,6 +58,18 @@ const IssueAuthorFilterInfo = {
 }
 
 const IssueList = () => {
+  const [issues, setIssues] = useState<any>([]);
+  
+  useEffect(() => {
+    const fetchIssues = async () => {
+      const result = await API.get.issues("is open");
+      console.log("fetchIssues", result)
+      setIssues(result.issueList);
+    }
+    fetchIssues();
+  }, [])
+
+  if (issues.length === 0) {return <></>}
   return (
     <IssueListLayout>
       <IssueListHeader>
@@ -93,6 +107,27 @@ const IssueList = () => {
           </IssueListContents>
         )
       })}
+      {
+        issues.map((issue) => {
+          return (
+            <IssueListContents>
+            <IssueListCheckBoxLayer>
+              <input type="checkbox" />
+            </IssueListCheckBoxLayer>
+            <IssueListDetailInfomationLayer>
+              <DetailInformationTitleArea>
+                <DetailInformationTitle> {issue.issueDTO.issueInfo.title} </DetailInformationTitle>
+                <Label type={"DEFAULT"} value={"레이블 이름"} />
+              </DetailInformationTitleArea>
+              <DetailInformationContents>#{issue.issueDTO.issueInfo.issueId} </DetailInformationContents>
+            </IssueListDetailInfomationLayer>
+            <IssueListProfileLayer>
+              <ProfileImg src={issue.issueDTO.userDTO.profileImage} />
+            </IssueListProfileLayer>
+          </IssueListContents>
+          )
+        })
+      }
     </IssueListLayout>
   )
 }
@@ -172,6 +207,12 @@ const DetailInformationContents = styled(IssueListLayer)`
 
 const IssueListProfileLayer = styled(IssueListLayer)`
   margin-left: auto;
+`;
+
+const ProfileImg = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 `;
 
 export default IssueList;
