@@ -5,7 +5,7 @@ import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 
 public interface OAuth {
 
-    AccessTokenResponseDTO getToken(String code, String userAgent);
+    AccessTokenResponseDTO getToken(String code, String host);
 
     OAuthUserResponseDTO getUserInfo(String token);
 }

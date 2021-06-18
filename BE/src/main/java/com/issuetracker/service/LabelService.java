@@ -1,5 +1,6 @@
 package com.issuetracker.service;
 
+import com.issuetracker.exception.LabelNotFoundException;
 import com.issuetracker.web.dto.response.LabelDTO;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.label.Label;
@@ -48,19 +49,23 @@ public class LabelService {
 
     public List<LabelDTO> findAllLabelDTOs() {
         return labelRepository.findAll().stream()
-                .map(LabelDTO::of)
+                .map(label -> LabelDTO.of(label, false))
                 .collect(Collectors.toList());
     }
 
     private Label findLabelById(Long id) {
-        return labelRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find label by given id.")
-        );
+        return labelRepository.findById(id).orElseThrow(LabelNotFoundException::new);
     }
 
     public List<LabelDTO> labelsToLabelDTOs(Issue issue) {
         return labelRepository.findAll().stream()
                 .map(label -> LabelDTO.of(label, checkLabels(label, issue)))
+                .collect(Collectors.toList());
+    }
+
+    public List<LabelDTO> getCheckedLabels(Issue issue) {
+        return issue.getLabels().stream()
+                .map(label -> LabelDTO.of(label, true))
                 .collect(Collectors.toList());
     }
 

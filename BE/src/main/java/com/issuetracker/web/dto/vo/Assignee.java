@@ -25,13 +25,4 @@ public class Assignee {
                 .isAssigned(isAssigned)
                 .build();
     }
-
-    public static Assignee of(User user) {
-        return Assignee.builder()
-                .id(user.getId())
-                .image(user.getAvatarUrl())
-                .userName(user.getUserName())
-                .isAssigned(false)
-                .build();
-    }
 }

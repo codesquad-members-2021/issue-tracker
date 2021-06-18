@@ -1,17 +1,19 @@
 package com.issuetracker.auth;
 
 import com.issuetracker.auth.exception.AccessTokenNotFoundException;
+import com.issuetracker.auth.exception.InvalidGitHubRequestException;
 import com.issuetracker.auth.exception.GitHubUserNotFoundException;
 import com.issuetracker.auth.dto.AccessTokenRequestDTO;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
 import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.service.GitHubService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Component
 public class GitHubOAuth implements OAuth {
@@ -33,16 +35,10 @@ public class GitHubOAuth implements OAuth {
     }
 
     @Override
-    public AccessTokenResponseDTO getToken(String code, String userAgent) {
-        System.out.println("코드: -----------------------" + code);
-        System.out.println("에이전트: -----------------------" + userAgent);
-        System.out.println("아이디: -----------------------" + gitHubService.getClientId(userAgent));
-        System.out.println("시크릿: -----------------------" + gitHubService.getClientSecret(userAgent));
-
-
+    public AccessTokenResponseDTO getToken(String code, String host) {
         AccessTokenRequestDTO accessTokenRequest = AccessTokenRequestDTO.builder()
-                .clientId(gitHubService.getClientId(userAgent))
-                .clientSecret(gitHubService.getClientSecret(userAgent))
+                .clientId(gitHubService.getClientId(host))
+                .clientSecret(gitHubService.getClientSecret(host))
                 .code(code)
                 .build();
 
@@ -51,6 +47,7 @@ public class GitHubOAuth implements OAuth {
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(accessTokenRequest)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, error -> Mono.error(InvalidGitHubRequestException::new))
                 .bodyToMono(AccessTokenResponseDTO.class)
                 .blockOptional()
                 .orElseThrow(AccessTokenNotFoundException::new);
@@ -58,12 +55,12 @@ public class GitHubOAuth implements OAuth {
 
     @Override
     public OAuthUserResponseDTO getUserInfo(String accessToken) {
-        System.out.println("토큰: -----------------------" + accessToken);
         return webClient.get()
                 .uri(userUri)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, TOKEN + " " + accessToken)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, error -> Mono.error(InvalidGitHubRequestException::new))
                 .bodyToMono(OAuthUserResponseDTO.class)
                 .blockOptional()
                 .orElseThrow(GitHubUserNotFoundException::new);

@@ -1,5 +1,6 @@
 package com.issuetracker.auth.service;
 
+import com.issuetracker.auth.exception.UnknownHostException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +22,23 @@ public class GitHubService {
         this.iOSClientSecret = iOSClientSecret;
     }
 
-    public String getClientId(String userAgent) {
-        if (UserAgent.isIOS(userAgent)) {
+    public String getClientId(String host) {
+        if (Host.isFront(host)) {
+            return frontClientId;
+        }
+        if (Host.isIOS(host)) {
             return iOSClientId;
         }
-        return frontClientId;
+        throw new UnknownHostException();
     }
 
-    public String getClientSecret(String userAgent) {
-        if (UserAgent.isIOS(userAgent)) {
+    public String getClientSecret(String host) {
+        if (Host.isFront(host)) {
+            return frontClientSecret;
+        }
+        if (Host.isIOS(host)) {
             return iOSClientSecret;
         }
-        return frontClientSecret;
+        throw new UnknownHostException();
     }
 }

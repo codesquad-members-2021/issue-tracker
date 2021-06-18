@@ -81,6 +81,9 @@ public class Issue extends BaseTimeEntity {
     }
 
     public String getMilestoneTitle() {
+        if (milestone == null) {
+            return null;
+        }
         return milestone.getTitle();
     }
 

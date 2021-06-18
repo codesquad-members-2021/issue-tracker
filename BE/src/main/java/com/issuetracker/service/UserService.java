@@ -2,7 +2,7 @@ package com.issuetracker.service;
 
 import com.issuetracker.auth.OAuth;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
-import com.issuetracker.auth.dto.UserAgentDTO;
+import com.issuetracker.auth.dto.HostDTO;
 import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.user.User;
@@ -33,8 +33,8 @@ public class UserService {
         return userRepository.findAllById(assigneeIdList);
     }
 
-    public UserResponseDTO login(String code, UserAgentDTO userAgent) {
-        AccessTokenResponseDTO token = oauth.getToken(code, userAgent.getUserAgent());
+    public UserResponseDTO login(String code, HostDTO host) {
+        AccessTokenResponseDTO token = oauth.getToken(code, host.getHost());
         OAuthUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
             User user = findUserByUserName(userInfo.getLogin());
@@ -63,9 +63,15 @@ public class UserService {
 
     public AssigneesResponseDTO getAssignees() {
         List<Assignee> assignees = userRepository.findAssignees().stream()
-                .map(Assignee::of)
+                .map(assignee -> Assignee.of(assignee, false))
                 .collect(Collectors.toList());
         return new AssigneesResponseDTO(assignees);
+    }
+
+    public List<Assignee> getCheckedAssignees(Issue issue) {
+        return issue.getAssignees().stream()
+                .map(assignee -> Assignee.of(assignee, true))
+                .collect(Collectors.toList());
     }
 
     public AuthorsResponseDTO getAuthors() {
@@ -84,14 +90,12 @@ public class UserService {
 
     public List<Assignee> usersToAssignees() {
         return userRepository.findAll().stream()
-                .map(Assignee::of)
+                .map(assignee -> Assignee.of(assignee, false))
                 .collect(Collectors.toList());
     }
 
     public User findUserByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(
-                () -> new UserNotFoundException("Cannot find user by given username.")
-        );
+        return userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
     }
 
     public UserResponseDTO getUserInfo(Long userId) {

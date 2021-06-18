@@ -1,15 +1,17 @@
 package com.issuetracker.service;
 
-import com.issuetracker.web.dto.reqeust.*;
-import com.issuetracker.web.dto.response.*;
 import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
+import com.issuetracker.exception.CommentNotFoundException;
 import com.issuetracker.exception.ElementNotFoundException;
+import com.issuetracker.web.dto.reqeust.*;
+import com.issuetracker.web.dto.response.CommentDTO;
+import com.issuetracker.web.dto.response.IssueNumberResponseDTO;
+import com.issuetracker.web.dto.response.LabelDTO;
 import com.issuetracker.web.dto.vo.Assignee;
-import com.issuetracker.web.dto.vo.Count;
 import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,43 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.issuetracker.web.dto.vo.Status.CLOSE;
-import static com.issuetracker.web.dto.vo.Status.OPEN;
-
 @Service
 @RequiredArgsConstructor
-public class IssueService {
+public class IssueCommandService {
 
     private final IssueRepository issueRepository;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
     private final UserService userService;
 
-    public IssuesResponseDTO getIssues(SearchRequestDTO searchRequestDTO) {
-        Count count = Count.builder()
-                .label((int) labelService.count())
-                .milestone((int) milestoneService.count())
-                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), searchRequestDTO))
-                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), searchRequestDTO))
-                .build();
-        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(searchRequestDTO).stream()
-                .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
-                .collect(Collectors.toList());
-        return IssuesResponseDTO.of(count, issues);
-    }
-
     @Transactional
     public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
         boolean newStatus = !Status.statusToBoolean(status);
         issueRepository.updateStatusBy(newStatus, requestDTO.getIssueNumbers());
-    }
-
-    public IssueFormResponseDTO getIssueForm() {
-        return IssueFormResponseDTO.builder()
-                .assignees(userService.usersToAssignees())
-                .labels(labelService.findAllLabelDTOs())
-                .milestones(milestoneService.findAllMilestoneDTOs())
-                .build();
     }
 
     public IssueNumberResponseDTO createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
@@ -69,26 +47,9 @@ public class IssueService {
         return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
     }
 
-    public IssueDetailPageResponseDTO getDetailPage(Long issueId, Long userId) {
-        Issue issue = findIssueById(issueId);
-        User loginUser = userService.findUserById(userId);
-        return IssueDetailPageResponseDTO.of(
-                issue,
-                commentsToCommentDTOs(loginUser, issue),
-                userService.usersToAssignees(issue),
-                labelService.labelsToLabelDTOs(issue),
-                milestoneService.findAllMilestoneDTOs()
-        );
-    }
-
     public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
         Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO);
         issueRepository.save(updatedIssue);
-    }
-
-    public AssigneesResponseDTO getAssignees(Long issueId) {
-        Issue issue = findIssueById(issueId);
-        return new AssigneesResponseDTO(userService.usersToAssignees(issue));
     }
 
     public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO assigneesToUpdateRequestDTO) {
@@ -101,11 +62,6 @@ public class IssueService {
         issueRepository.save(issue);
     }
 
-    public LabelsInIssueResponseDTO getLabels(Long issueId) {
-        Issue issue = findIssueById(issueId);
-        return new LabelsInIssueResponseDTO(labelService.labelsToLabelDTOs(issue));
-    }
-
     public void updateLabels(Long issueId, LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
         Issue issue = findIssueById(issueId);
         List<Long> labelIds = labelsToUpdateRequestDTO.getLabels().stream()
@@ -114,11 +70,6 @@ public class IssueService {
                 .collect(Collectors.toList());
         issue.updateLabels(labelService.findLabels(labelIds));
         issueRepository.save(issue);
-    }
-
-    public MilestonesInIssueResponseDTO getMilestones(Long issueId) {
-        Issue issue = findIssueById(issueId);
-        return new MilestonesInIssueResponseDTO(MilestoneDTO.of(issue.getMilestone()));
     }
 
     public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestone) {
@@ -140,9 +91,7 @@ public class IssueService {
         Comment targetComment = issue.getComments().stream()
                 .filter(comment -> comment.matchCommentId(commentDTO.getId()) && comment.matchAuthor(user))
                 .findFirst()
-                .orElseThrow(
-                        () -> new ElementNotFoundException("Cannot find comment by given id.")
-                );
+                .orElseThrow(CommentNotFoundException::new);
         targetComment.update(commentDTO.getComment());
         issueRepository.save(issue);
     }
@@ -153,22 +102,12 @@ public class IssueService {
         Comment targetComment = issue.getComments().stream()
                 .filter(comment -> comment.matchCommentId(commentId) && comment.matchAuthor(loginUser))
                 .findFirst()
-                .orElseThrow(
-                        () -> new ElementNotFoundException("Cannot find comment by given id.")
-                );
+                .orElseThrow(CommentNotFoundException::new);
         issue.deleteComment(targetComment);
         issueRepository.save(issue);
     }
 
     private Issue findIssueById(Long id) {
-        return issueRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Cannot find issue by given id."));
+        return issueRepository.findById(id).orElseThrow(CommentNotFoundException::new);
     }
-
-    private List<CommentDTO> commentsToCommentDTOs(User user, Issue issue) {
-        return issue.getComments().stream()
-                .map(comment -> CommentDTO.createCommentDTO(user, issue, comment))
-                .collect(Collectors.toList());
-    }
-
 }
