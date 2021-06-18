@@ -14,7 +14,7 @@ class FilterBarButton: UIButton {
         setTitle("필터", for: .normal)
         setTitleColor(.systemBlue, for: .normal)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)

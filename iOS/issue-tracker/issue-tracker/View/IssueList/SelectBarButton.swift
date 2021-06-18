@@ -15,7 +15,7 @@ class SelectBarButton: UIButton {
         setTitleColor(.systemBlue, for: .normal)
         semanticContentAttribute = .forceRightToLeft
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setImage(UIImage(systemName: "checkmark.circle"), for: .normal)

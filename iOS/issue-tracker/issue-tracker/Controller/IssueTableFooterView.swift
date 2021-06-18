@@ -16,21 +16,21 @@ class IssueTableFooterView: UIView {
         label.textColor = .lightGray
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = #colorLiteral(red: 0.9489405751, green: 0.9490727782, blue: 0.9685038924, alpha: 1)
         addSubview(label)
         setupAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = #colorLiteral(red: 0.9489405751, green: 0.9490727782, blue: 0.9685038924, alpha: 1)
         addSubview(label)
         setupAutolayout()
     }
-    
+
     func setupAutolayout() {
         label.snp.makeConstraints { label in
             label.centerX.equalToSuperview()

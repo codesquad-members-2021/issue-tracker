@@ -13,7 +13,7 @@ class CancelButton: UIButton {
         setTitle("취소", for: .normal)
         setTitleColor(.systemBlue, for: .normal)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setTitle("취소", for: .normal)

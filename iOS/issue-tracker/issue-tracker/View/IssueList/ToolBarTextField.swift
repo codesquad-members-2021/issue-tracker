@@ -14,7 +14,7 @@ class ToolBarTextField: UITextField {
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         return button
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.placeholder = "코멘트를 입력하세요"
@@ -24,7 +24,7 @@ class ToolBarTextField: UITextField {
         self.layer.masksToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

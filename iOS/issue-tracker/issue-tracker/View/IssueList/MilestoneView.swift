@@ -14,30 +14,30 @@ class MilestoneView: UIView {
         imageView.image = UIImage(named: "vector")
         return imageView
     }()
-    
+
     var milestoneTitle: UILabel = {
         var label = UILabel()
         label.textColor = .lightGray
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
         setupAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubviews()
         setupAutolayout()
     }
-    
+
     func addSubviews() {
         addSubview(sfsymbolImageView)
         addSubview(milestoneTitle)
     }
-    
+
     func setupAutolayout() {
         sfsymbolImageView.snp.makeConstraints { imageView in
             imageView.top.leading.bottom.equalToSuperview()
@@ -49,7 +49,7 @@ class MilestoneView: UIView {
             label.width.greaterThanOrEqualTo(30)
         }
     }
-    
+
     func setMilestoneTitle(title: String) {
         self.milestoneTitle.text = title
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class LabelsCollectionView: UICollectionView {
-    
+
     var labelsLayout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -17,16 +17,15 @@ class LabelsCollectionView: UICollectionView {
         layout.minimumInteritemSpacing = 10
         return layout
     }()
-    
+
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: labelsLayout)
         register(LabelsCollectionViewCell.self, forCellWithReuseIdentifier: LabelsCollectionViewCell.identifiers)
         isScrollEnabled = false
         backgroundColor = .white
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
 }
