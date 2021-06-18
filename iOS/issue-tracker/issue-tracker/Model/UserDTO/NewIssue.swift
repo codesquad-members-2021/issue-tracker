@@ -13,7 +13,7 @@ struct NewIssue {
     let labelsID: [Int]
     let milestoneID: Int
     let assigneeID: [Int]
-    
+
     enum CodingKeys: String, CodingKey {
         case title, comment
         case labelsID = "labels_ids"

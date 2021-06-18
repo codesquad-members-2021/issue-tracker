@@ -11,7 +11,6 @@ import RxCocoa
 import SnapKit
 
 class AddLabelViewController: UIViewController {
-    
     var addLabelViewModel: AddLabelViewModel!
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -27,42 +26,42 @@ class AddLabelViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9494308829, green: 0.9485411048, blue: 0.9703034759, alpha: 1)
         self.addLabelViewModel = AddLabelViewModel(networkManager: NetworkManager())
-        
+
         navigationItem.title = "새로운 레이블"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로",
                                                                 style: .plain,
                                                                 target: self,
                                                                 action: nil)
         self.navigationItem.rightBarButtonItem = saveButton
-        
+
         tableView.dataSource = self
         view.addSubview(tableView)
         view.addSubview(estimatedLabelView)
         configureAutolayout()
         binding()
     }
-    
+
     func binding() {
         addLabelViewModel.color
             .map { UIColor.hexStringToUIColor(hex: $0)}
             .bind(to: estimatedLabelView.label.rx.backgroundColor)
             .disposed(by: bag)
-        
+
         saveButton.rx.tap
-            .subscribe { [weak self] observer in
+            .subscribe { [weak self] _ in
                 self?.addLabelViewModel.postAddedLabel(completion: {
                     self?.dismiss(animated: true, completion: nil)
                 })
             }
             .disposed(by: bag)
     }
-    
+
     func configureAutolayout() {
         tableView.snp.makeConstraints { view in
             view.top.equalToSuperview().inset(40)
             view.leading.trailing.bottom.equalToSuperview()
         }
-        
+
         estimatedLabelView.snp.makeConstraints { view in
             view.leading.trailing.equalToSuperview().inset(16)
             view.centerX.centerY.equalToSuperview()
@@ -75,7 +74,7 @@ extension AddLabelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddLabelTableViewCell.identifier, for: indexPath) as? AddLabelTableViewCell else { return UITableViewCell() }
         switch indexPath.row {
@@ -101,16 +100,16 @@ extension AddLabelViewController: UITableViewDataSource {
             return cell
         case 2:
             cell.textLabel?.text = "배경색"
-            
+
             addLabelViewModel.color
                 .bind(to: cell.textField.rx.text)
                 .disposed(by: bag)
-            
+
             cell.reloadButton.rx.tap
                 .map { UIColor.getRandomColor().convertHexToString() }
                 .bind(to: addLabelViewModel.color)
                 .disposed(by: bag)
-            
+
             cell.configureBackgroundCellMode()
             return cell
         default:

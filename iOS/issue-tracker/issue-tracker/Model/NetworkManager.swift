@@ -28,7 +28,7 @@ class NetworkManager: Networkable {
                 }
             }
     }
-    
+
     func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void) {
         AF.request(url, method: .post, parameters: encodable, encoder: JSONParameterEncoder.default, headers: httpHeaders)
             .validate(statusCode: 200..<300)
@@ -42,5 +42,3 @@ class NetworkManager: Networkable {
             }
     }
 }
-
-

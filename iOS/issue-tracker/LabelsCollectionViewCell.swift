@@ -10,7 +10,7 @@ import SnapKit
 
 class LabelsCollectionViewCell: UICollectionViewCell {
     static var identifiers = "LabelsCollectionViewCell"
-    
+
     let label: PaddingLabel = {
         var label = PaddingLabel(withInsets: 0, 0, 10, 10)
         label.textAlignment = .center
@@ -19,25 +19,25 @@ class LabelsCollectionViewCell: UICollectionViewCell {
         label.layer.cornerRadius = 15
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(label)
         setupAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubview(label)
         setupAutolayout()
     }
-    
+
     func setupAutolayout() {
         label.snp.makeConstraints { label in
             label.edges.equalToSuperview()
         }
     }
-    
+
     func configure(title: String, color: String) {
         label.text = title
         label.backgroundColor = UIColor.hexStringToUIColor(hex: color)

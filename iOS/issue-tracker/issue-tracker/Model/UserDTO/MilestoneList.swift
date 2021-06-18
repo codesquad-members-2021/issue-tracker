@@ -19,7 +19,7 @@ struct Milestone: Codable {
     let createdTime: String?
     let dueDate: String?
     let closedIssueCount, openedIssueCount: Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, title, description, closedIssueCount, openedIssueCount
         case createdTime = "created_time"

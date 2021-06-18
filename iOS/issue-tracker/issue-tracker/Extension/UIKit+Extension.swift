@@ -12,11 +12,11 @@ extension UIViewController {
         guard let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height else { return 0 }
         return statusBarHeight
     }
-    
+
     var topBarHeight: CGFloat {
         return statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0)
     }
-    
+
     var bottomSafeAreaHeight: CGFloat {
         return view.safeAreaInsets.bottom
     }

@@ -12,11 +12,11 @@ import RxCocoa
 class LabelViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
-    
+
     var labelListViewModel = LabelListViewModel(networkManager: NetworkManager())
     var addLabelButton = AddLabelButton()
     var bag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         seuptNavigationBar()
@@ -25,26 +25,26 @@ class LabelViewController: UIViewController {
         fetchLabel()
         bindTableView()
     }
-    
+
     func fetchLabel() {
         labelListViewModel.fetchLabelList()
     }
-    
+
     func bindTableView() {
-        labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, index, element in
+        labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, _, element in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
             cell.setupLabelCell(title: element.title, description: element.description!, color: element.color)
             return cell
         }
         .disposed(by: bag)
     }
-    
+
     @objc func addLabelButtonTapped() {
-        let vc = AddLabelViewController()
-        let nv = UINavigationController(rootViewController: vc)
-        present(nv, animated: true, completion: nil)
+        let viewController = AddLabelViewController()
+        let navigationViewController = UINavigationController(rootViewController: viewController)
+        present(navigationViewController, animated: true, completion: nil)
     }
-    
+
     func seuptNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "레이블"

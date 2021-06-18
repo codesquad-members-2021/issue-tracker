@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class AppleLoginButton: UIView {
-    
+
     var stackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .horizontal
@@ -18,14 +18,14 @@ class AppleLoginButton: UIView {
         stackView.spacing = 2
         return stackView
     }()
-    
+
     var appleImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "apple")
         return imageView
     }()
-    
+
     var loginLabel: UILabel = {
         var label = UILabel()
         label.text = "Apple 계정으로 로그인"
@@ -33,7 +33,7 @@ class AppleLoginButton: UIView {
         label.textColor = .white
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setGitHubLoginButton()
@@ -41,7 +41,7 @@ class AppleLoginButton: UIView {
         self.addSubview(stackView)
         setAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setGitHubLoginButton()
@@ -49,23 +49,23 @@ class AppleLoginButton: UIView {
         self.addSubview(stackView)
         setAutolayout()
     }
-    
+
     func setGitHubLoginButton() {
         self.backgroundColor = .black
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
     }
-    
+
     func setStackView() {
         stackView.addArrangedSubview(appleImageView)
         stackView.addArrangedSubview(loginLabel)
     }
-    
+
     func setAutolayout() {
         appleImageView.snp.makeConstraints { image in
             image.width.height.equalTo(50)
         }
-        
+
         stackView.snp.makeConstraints { stackView in
             stackView.centerX.centerY.equalToSuperview()
         }

@@ -12,7 +12,6 @@ class AddMilestoneViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
     private let viewModel: MilestoneViewModel! = MilestoneViewModel()
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.reuseIdentifier)
@@ -31,16 +30,16 @@ class AddMilestoneViewController: UIViewController {
                                                                  style: .plain,
                                                                  target: self,
                                                                  action: #selector(didTapSave))
-        
+
         tableView.dataSource = self
         tableView.frame = view.bounds
-        
+
         view.addSubview(tableView)
     }
-    
+
     @objc
     private func didTapSave() {
-        
+
     }
 }
 
@@ -48,7 +47,7 @@ extension AddMilestoneViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.reuseIdentifier, for: indexPath) as? AddTableViewCell else {
             fatalError()

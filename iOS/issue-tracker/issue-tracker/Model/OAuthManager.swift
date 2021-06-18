@@ -12,9 +12,9 @@ class OAuthManager {
     private let cliendId = ""
     private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)&scope=user:email")!
     private let callbackUrlScheme = "issueTracker"
-    
+
     var networkManager: Networkable
-    
+
     init(networkManager: Networkable) {
         self.networkManager = networkManager
     }
@@ -33,14 +33,13 @@ class OAuthManager {
         })
         return authenticationSession
     }
-    
+
     private func requestJWTToken(with code: String) {
         let query = URLQueryItem(name: "code", value: code)
         let endpoint = Endpoint(path: .login)
         guard let url = endpoint.url(queryItems: [query]) else { return }
         networkManager.request(url: url, decodableType: [String: String].self) { (token) in
             UserDefaults.standard.set(token, forKey: "token")
-            // 메인 이슈 화면으로
         }
     }
 }
