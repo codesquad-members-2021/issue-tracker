@@ -26,7 +26,7 @@
 
 
 # BE
-## 기술 스펙
+## 기술 스택
 - Java
 - Spring boot, Spring Data JPA, Querydsl
 - AWS EC2, S3, VPC, RDS, Code Deploy
