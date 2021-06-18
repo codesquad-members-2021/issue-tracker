@@ -8,11 +8,11 @@ const LabelsItem = ({
   description,
   title,
   textColor,
-  colorCode,
+  labelColor,
 }: LabelsItemProps) => {
   return (
     <StyledLabelsItem>
-      <LabelsItemLeft {...{ description, title, colorCode, textColor }} />
+      <LabelsItemLeft {...{ id, description, title, labelColor, textColor }} />
       <LabelsItemRight />
     </StyledLabelsItem>
   );

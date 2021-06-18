@@ -17,7 +17,7 @@ export type FilterItemPropsType = {
 
 export type FilterPropsType = {
   filterType: FilterSelectorType;
-  isPluse?: boolean;
+  isPlus?: boolean;
 };
 
 export type FilterSelectorType = 'milestoneList' | 'labelList';

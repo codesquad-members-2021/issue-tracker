@@ -1,29 +1,13 @@
+import { TestType } from './types/storeTypes';
 import axios from 'axios';
 import { selector } from 'recoil';
 import { FilterItemType } from 'types/filterType';
-type LabelDataType = {
-  id: number;
-  title: string;
-  description: string;
-  color_code: string;
-  text_color: string;
-};
-
-type MilestoneDataType = {
-  id: number;
-  title: string;
-  description: string;
-  due_date: string;
-  opened_issue_count: number;
-  closed_issue_count: number;
-};
-
-type UserDataType = {
-  // 작성자, 담당자 공통
-  user_id: number;
-  name: string;
-  avatar_url: string | undefined;
-};
+import { LabelItemType } from 'types/issueType';
+import {
+  LabelDataType,
+  MilestoneDataType,
+  UserDataType,
+} from 'types/storeTypes';
 
 export const totalCountOfLabels = selector<number>({
   key: 'totalCountOfLabels',
@@ -109,18 +93,3 @@ export const filterSelector = selector<TestType>({
     };
   },
 });
-
-type TestType = {
-  labelList: LabelItemType[];
-  milestoneList: FilterItemType[];
-  authorList: FilterItemType[];
-  assigneeList: FilterItemType[];
-};
-
-type LabelItemType = {
-  id: number;
-  title: string;
-  description: string;
-  labelColor: string;
-  textColor: 'black' | 'white';
-};

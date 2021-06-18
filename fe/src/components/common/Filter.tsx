@@ -3,15 +3,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
-import { ReactComponent as PlusIconSvg } from 'icons/pluse.svg';
+import { ReactComponent as PlusIconSvg } from 'icons/plus.svg';
 import Popover from '@material-ui/core/Popover';
 import { FilterPropsType } from 'types/filterType';
 import { useRecoilValue } from 'recoil';
 import { filterSelector } from 'store';
 import { getTitle } from 'utils/util';
 
-export default function Filter({ isPluse, filterType }: FilterPropsType) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+export default function Filter({ isPlus, filterType }: FilterPropsType) {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -25,7 +25,7 @@ export default function Filter({ isPluse, filterType }: FilterPropsType) {
   return (
     <>
       <FilterButton onClick={handleClick}>
-        {isPluse ? (
+        {isPlus ? (
           <PlusIcon />
         ) : (
           <>

@@ -21,9 +21,10 @@ const IssueItemLeft = ({
           <OpenSvg />
           {title}
         </span>
-        {labeList.length
-          ? labeList.map((label, idx) => <Label key={idx} {...{ ...label }} />)
-          : null}
+        <SelectedLables>
+          {labeList.length &&
+            labeList.map((label, idx) => <Label key={idx} {...{ ...label }} />)}
+        </SelectedLables>
       </IssueTitle>
       <IssueSubtitle>
         #{issueNumber} {createdTime} <MilestoneSvg /> {milestoneTitle}
@@ -48,6 +49,11 @@ const OpenSvg = styled(Open)`
     fill: ${({ theme }) => theme.color.lightBlue};
   }
   margin-right: 0.2rem;
+`;
+
+const SelectedLables = styled.div`
+  display: flex;
+  gap: 0.3rem;
 `;
 
 const MilestoneSvg = styled(Milestone)`

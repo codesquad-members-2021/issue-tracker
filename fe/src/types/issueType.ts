@@ -1,22 +1,23 @@
+export type NavType = 'All' | 'Milestone' | 'Label';
 
-export type NavType = 'All' | 'Milestone' | 'Label'
+export type IssueItemLeftPropsType = {
+  title: string;
+  labeList: LabelItemType[];
+  issueNumber: number;
+  createdTime: string;
+  milestoneTitle: string;
+};
 
 export interface IssueItemType extends IssueItemLeftPropsType {
   isOpen: boolean;
   author: authorType;
 }
 
-export type IssueItemLeftPropsType = {
+export type LabelItemType = {
+  id: number;
   title: string;
-  labeList: labelType[];
-  issueNumber: number;
-  createdTime: string;
-  milestoneTitle: string;
-};
-
-export type labelType = {
-  title: string;
-  colorCode: string;
+  description: string;
+  labelColor: string;
   textColor: 'black' | 'white';
 };
 
@@ -26,9 +27,10 @@ export type authorType = {
 };
 
 export interface LabelsItemLeftProps {
+  id: number;
   description: string;
   title: string;
-  colorCode: string;
+  labelColor: string;
   textColor: 'black' | 'white';
 }
 
@@ -49,6 +51,6 @@ export type MilestoneBarProps = {
 };
 
 export type MilestonesItemProps = MilestonesItemLeftProps &
-MilestoneBarProps & {
+  MilestoneBarProps & {
     id: number;
   };

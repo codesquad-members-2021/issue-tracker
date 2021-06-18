@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { labelType } from 'types/issueType';
+import { LabelItemType } from 'types/issueType';
 
-const Label = ({ title, colorCode, textColor }: labelType) => {
+const Label = ({ title, labelColor, textColor }: LabelItemType) => {
   return (
-    <StyledLabel aria-controls={textColor} backgroundColor={colorCode}>
+    <StyledLabel aria-controls={textColor} backgroundColor={labelColor}>
       {title}
     </StyledLabel>
   );

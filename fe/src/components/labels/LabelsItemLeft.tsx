@@ -3,15 +3,16 @@ import Label from 'components/common/Label';
 import styled from 'styled-components';
 
 const LabelsItemLeft = ({
+  id,
   description,
   title,
-  colorCode,
+  labelColor,
   textColor,
 }: LabelsItemLeftProps) => {
   return (
     <StyledLabelsItemLeft>
       <LabelPreviewArea>
-        <Label {...{ title, colorCode, textColor }} />
+        <Label {...{ id, description, title, labelColor, textColor }} />
       </LabelPreviewArea>
       <StyledSpan>{description}</StyledSpan>
     </StyledLabelsItemLeft>

@@ -23,7 +23,7 @@ const Labels = () => {
             title={labelItem.title}
             description={labelItem.description}
             textColor={labelItem.textColor}
-            colorCode={labelItem.labelColor}
+            labelColor={labelItem.labelColor}
           />
         ))}
       </Lower>
