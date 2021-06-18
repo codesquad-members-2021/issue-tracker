@@ -20,16 +20,18 @@ public class IssueService {
     private final IssueLabelRepository issueLabelRepository;
     private final MilestoneRepository milestoneRepository;
     private final AssigneeRepository assigneeRepository;
+    private final CommentRepository commentRepository;
 
     @Autowired
     public IssueService(IssueRepository issueRepository, LabelRepository labelRepository,
-                        IssueLabelRepository issueLabelRepository,
-                        MilestoneRepository milestoneRepository, AssigneeRepository assigneeRepository) {
+                        IssueLabelRepository issueLabelRepository, MilestoneRepository milestoneRepository,
+                        AssigneeRepository assigneeRepository, CommentRepository commentRepository) {
         this.issueRepository = issueRepository;
         this.labelRepository = labelRepository;
         this.issueLabelRepository = issueLabelRepository;
         this.milestoneRepository = milestoneRepository;
         this.assigneeRepository = assigneeRepository;
+        this.commentRepository = commentRepository;
     }
 
     public List<IssueResponse> getOpenedIssues() {
@@ -127,7 +129,11 @@ public class IssueService {
         return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(),
                 issue.getCreatedAt(), makeUserResponses(issue.getUser()),
                 makeMilestoneForIssueResponse(issue.getMilestoneId()), makeLabelResponses(issue.getId()),
-                makeAssigneeForIssueResponse(issue.getId()));
+                makeAssigneeForIssueResponse(issue.getId()), makeCommentResponse(issue.getId()));
+    }
+
+    private UserResponse makeUserResponses(User user) {
+        return new UserResponse(user.getName(), user.getLoginId());
     }
 
     private Set<LabelResponse> makeLabelResponses(Long issueId) {
@@ -137,10 +143,6 @@ public class IssueService {
             result.add(LabelResponse.labelToLabelResponse(label));
         }
         return result;
-    }
-
-    private UserResponse makeUserResponses(User user) {
-        return new UserResponse(user.getName(), user.getLoginId());
     }
 
     private MilestoneForIssueResponse makeMilestoneForIssueResponse(Long milestoneId) {
@@ -156,6 +158,15 @@ public class IssueService {
         Set<AssigneeForIssueResponse> result = new HashSet<>();
         for (Assignee assignee : assignees) {
             result.add(AssigneeForIssueResponse.assigneeToAssigneeForIssueResponse(assignee));
+        }
+        return result;
+    }
+
+    private Set<CommentResponse> makeCommentResponse(Long issueId) {
+        List<Comment> comments = commentRepository.getCommentsByIssueId(issueId);
+        Set<CommentResponse> result = new HashSet<>();
+        for (Comment comment : comments) {
+            result.add(CommentResponse.create(comment));
         }
         return result;
     }

@@ -2,6 +2,9 @@ package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.request.IssueRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
 @Entity
 public class Issue {
 
@@ -37,6 +43,9 @@ public class Issue {
     // @JoinColumn(name = "issue_id")
     private List<Assignee> assignees = new ArrayList<>();
 
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
     public Issue() {
     }
 
@@ -55,87 +64,9 @@ public class Issue {
         this.user = user;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public Long getMilestoneId() {
-        return milestoneId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public List<IssueLabel> getIssueLabels() {
-        return issueLabels;
-    }
-
-    public List<Assignee> getAssignees() {
-        return assignees;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public void setMilestoneId(Long milestoneId) {
-        this.milestoneId = milestoneId;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setIssueLabels(List<IssueLabel> issueLabels) {
-        this.issueLabels = issueLabels;
-    }
-
-    public void setAssignees(List<Assignee> assignees) {
-        this.assignees = assignees;
-    }
-
     public static Issue issueRequestToIssue(IssueRequest issueRequest) {
         return new Issue(issueRequest.getTitle(), issueRequest.getContent(), true, issueRequest.getCreatedAt(),
                 issueRequest.getMilestoneId(), issueRequest.getUser());
     }
 
-    @Override
-    public String toString() {
-        return "Issue{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                ", user=" + user +
-                ", milestoneId=" + milestoneId +
-                ", issueLabels=" + issueLabels +
-                ", assignees=" + assignees +
-                '}';
-    }
 }
