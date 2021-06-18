@@ -12,7 +12,7 @@ permissions:
     mode: 755
 hooks:
   AfterInstall:
-    - location: deploy.sh
+    - location: after.sh
       timeout: 60
       runas: root
 
