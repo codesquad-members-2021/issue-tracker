@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from "styled-components";
-import AddButton from "components/common/AddButton";
+import AddButton from "components/common/Button/AddButton";
 
 const MilestoneInput = () => {
 	return (

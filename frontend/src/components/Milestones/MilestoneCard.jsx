@@ -5,6 +5,7 @@ import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Trash } from "images/trash.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import getPercent from "util/getPercent";
+import theme from "styles/theme";
 
 const MilestoneCard = () => {
 	const openedIssueCnt = 1;
@@ -25,16 +26,16 @@ const MilestoneCard = () => {
 				</Info>
 				<Edit>
 					<EditBlock>
-						<EditBtn>
+						<EditBtn _color={({ theme }) => theme.grayScale.label}>
 							<Archive />
 							닫기
 						</EditBtn>
-						<EditBtn>
-							<EditIcon />
+						<EditBtn _color={({ theme }) => theme.grayScale.label}>
+							<EditIcon stroke={theme.grayScale.label} />
 							편집
 						</EditBtn>
-						<EditBtn>
-							<Trash />
+						<EditBtn _color={({ theme }) => theme.colors.red}>
+							<Trash stroke={theme.colors.red} />
 							삭제
 						</EditBtn>
 					</EditBlock>
@@ -123,7 +124,7 @@ const ProgressWrapper = styled.div`
 
 const EditBtn = styled.div`
 	padding: 0 ${({ theme }) => theme.fontSizes.xl};
-	color: ${({ theme }) => theme.grayScale.label};
+	color: ${(props) => props._color};
 	:last-child {
 		padding-right: 0;
 		padding-left: ${({ theme }) => theme.fontSizes.xl};
