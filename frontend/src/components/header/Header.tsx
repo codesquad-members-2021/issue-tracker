@@ -15,7 +15,7 @@ const useStyle = makeStyles(() => ({
 
 function Header() {
   const classes = useStyle();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
   const loginData = useRecoilValue(loginState);
 
