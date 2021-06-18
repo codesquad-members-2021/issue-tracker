@@ -9,12 +9,12 @@ function App() {
   const DetailIssuePage = lazy(() => import('./page/detailIssuePage/DetailIssuePage'));
   const LablePage = lazy(() => import('./page/lablePage/LablePage'));
   const MilestonePage = lazy(() => import('./page/milestonePage/MilestonePage'));
-  const isLogin = !!localStorage.getItem('token');
+
   return (
     <div className='App'>
       <Router>
+        <Header />
         <Suspense fallback={<h1>Loading...</h1>}>
-          {isLogin && <Header />}
           <Switch>
             <Route path='/' component={LoginPage} exact />
             <Route path='/main' component={MainPage} />
