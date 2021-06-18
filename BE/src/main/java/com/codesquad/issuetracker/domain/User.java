@@ -2,16 +2,14 @@ package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.domain.oauth.GitHubUser;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
 @Getter
 @NoArgsConstructor
 public class User {
@@ -29,7 +27,7 @@ public class User {
         this.loginId = loginId;
     }
 
-    private User(Long id, String name, String loginId) {
+    public User(Long id, String name, String loginId) {
         this(name, loginId);
         this.id = id;
     }
