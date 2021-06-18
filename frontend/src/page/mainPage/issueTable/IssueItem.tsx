@@ -20,9 +20,9 @@ export default function IssueItem({
     title,
   },
 }: IssueItemProps): ReactElement {
-  const labelList = labels.map((label) => (
-    <LabelBadge key={label.id} color={label.color} desc={label.name} />
-  ));
+  const labelList = labels
+    .filter((label) => label.checked)
+    .map((label) => <LabelBadge key={label.id} color={label.color} desc={label.name} />);
 
   const passedTime = timeChecker(createdDateTime);
 
