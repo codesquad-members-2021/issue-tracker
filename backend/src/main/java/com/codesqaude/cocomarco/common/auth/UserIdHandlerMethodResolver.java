@@ -1,6 +1,7 @@
 package com.codesqaude.cocomarco.common.auth;
 
 import com.codesqaude.cocomarco.util.JwtUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -9,10 +10,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.util.UUID;
 
+import static com.codesqaude.cocomarco.util.JwtUtils.HEADER_TYPE;
+
+@RequiredArgsConstructor
 public class UserIdHandlerMethodResolver implements HandlerMethodArgumentResolver {
 
-    private static final String HEADER_TYPE = "Authorization";
-    private static final String key = "q1w2e3r4";
+    private final String jwtKey;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -24,7 +27,7 @@ public class UserIdHandlerMethodResolver implements HandlerMethodArgumentResolve
     public UUID resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         String jwt = webRequest.getHeader(HEADER_TYPE);
 
-        Object infoFromJwt = JwtUtils.getId(jwt,key);
+        Object infoFromJwt = JwtUtils.getId(jwt, jwtKey);
         return UUID.fromString(String.valueOf(infoFromJwt));
     }
 }

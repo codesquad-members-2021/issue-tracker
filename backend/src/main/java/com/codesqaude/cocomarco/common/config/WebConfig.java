@@ -2,6 +2,7 @@ package com.codesqaude.cocomarco.common.config;
 
 import com.codesqaude.cocomarco.common.auth.AuthInterceptor;
 import com.codesqaude.cocomarco.common.auth.UserIdHandlerMethodResolver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -13,9 +14,12 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${jwt-key}")
+    private String key;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthInterceptor())
+        registry.addInterceptor(new AuthInterceptor(key))
                 .addPathPatterns("/issues/**")
                 .addPathPatterns("/milestones/**")
                 .addPathPatterns("/labels/**");
@@ -23,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new UserIdHandlerMethodResolver());
+        resolvers.add(new UserIdHandlerMethodResolver(key));
     }
 
     @Override

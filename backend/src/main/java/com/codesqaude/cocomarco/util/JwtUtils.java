@@ -7,13 +7,15 @@ import java.util.UUID;
 
 public class JwtUtils {
 
+    public static final String HEADER_TYPE = "Authorization";
     private static final long TOKEN_VALID_TIME = 6 * 60 * 60 * 1000L;
     private static final String TOKEN_TYPE = "Bearer";
     private static final String BLANK = " ";
+    private static final String ID = "id";
 
     public static String create(UUID uuid, String key) {
         Claims claims = Jwts.claims();
-        claims.put("id", uuid);
+        claims.put(ID, uuid);
         Date now = new Date();
 
         return TOKEN_TYPE + BLANK + Jwts.builder()
@@ -24,35 +26,24 @@ public class JwtUtils {
                 .compact();
     }
 
-    public static boolean validateJwt(String jwt, String key) {
+    public static Jws<Claims> parser(String jwt, String key) {
+        Jws<Claims> claimsJws = null;
         String[] tokens = jwt.split(BLANK);
         String tokenType = tokens[0];
         String jwtToken = tokens[1];
 
         try {
-            Jwts.parser()
+            claimsJws = Jwts.parser()
                     .setSigningKey(key)
                     .parseClaimsJws(jwtToken);
         } catch (ExpiredJwtException e) {
             //todo 예외?발생?
         }
-        return true;
-    }
-
-    public static Jws<Claims> getClaims(String jwt, String key) {
-        validateJwt(jwt, key);
-
-        String[] tokens = jwt.split(BLANK);
-        String tokenType = tokens[0];
-        String jwtToken = tokens[1];
-
-        return Jwts.parser()
-                .setSigningKey(key)
-                .parseClaimsJws(jwtToken);
+        return claimsJws;
     }
 
     public static Object getId(String jwt, String key) {
-        Jws<Claims> claims = getClaims(jwt, key);
-        return claims.getBody().get("id");
+        Jws<Claims> claims = parser(jwt, key);
+        return claims.getBody().get(ID);
     }
 }
