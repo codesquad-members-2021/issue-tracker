@@ -40,9 +40,9 @@ public class UserService {
         List<IssueAssignee> issueAssignees = new ArrayList<>();
 
         assigneeIds.forEach(assigneeId -> {
-                    User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
-                    issueAssignees.add(new IssueAssignee(issue, assignee));
-                });
+            User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
+            issueAssignees.add(new IssueAssignee(issue, assignee));
+        });
 
         return issueAssigneeRepository.saveAll(issueAssignees);
     }
