@@ -75,62 +75,6 @@ class MileStoneTableViewCell: UITableViewCell {
     //       -1 열린 이슈 라벨
     //       -2 닫힌 이슈 라벨
     
-    private lazy var openLabelTitle: UILabel = {
-        let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "exclamationmark.circle")
-        
-        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : Colors.openMileStoneTint]
-        let dateString = NSMutableAttributedString(string: "열린 이슈 0개", attributes:attrs)
-        
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(dateString)
-        label.attributedText = attributedString
-        label.backgroundColor = Colors.openMileStoneBG
-        return label
-    }()
-    
-    private lazy var closeLabelTitle: UILabel = {
-        let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "archivebox")
-        
-        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : Colors.closeMileStoneTint]
-        let dateString = NSMutableAttributedString(string:"닫힌 이슈 0개", attributes:attrs)
-        
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(dateString)
-        label.attributedText = attributedString
-        label.backgroundColor = Colors.closeMileStoneBG
-        return label
-    }()
-    
-    private lazy var openMileStoneView: UIView = {
-        let uiView = UIView()
-        uiView.layer.cornerRadius = 30 * 0.5
-        translatesAutoresizingMaskIntoConstraints = false
-        //        uiView.addSubview(openLabelTitle)
-        return uiView
-    }()
-    
-    private lazy var closeMileStoneView: UIView = {
-        let uiView = UIView()
-        uiView.layer.cornerRadius = 30 * 0.5
-        translatesAutoresizingMaskIntoConstraints = false
-        //        uiView.addSubview(openLabelTitle)
-        
-        //        NSLayoutConstraint.activate([
-        //            closeLabelTitle.centerXAnchor.constraint(equalTo: centerXAnchor),
-        //            closeLabelTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
-        //            widthAnchor.constraint(equalTo: closeLabelTitle.widthAnchor, constant: 15),
-        //            heightAnchor.constraint(equalToConstant: 30)
-        //        ])
-        
-        return uiView
-    }()
-    
     private lazy var secondSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -138,6 +82,17 @@ class MileStoneTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private lazy var openMilestoneLabelView: MileStoneLabelView = {
+        let milestoneLabelView = MileStoneLabelView(texts: "열린 이슈", fontColors: Colors.openMileStoneTint, backgroundColors: Colors.openMileStoneBG, imgName: "exclamationmark.circle", issueCount: 0)
+        return milestoneLabelView
+    }()
+    
+    private lazy var closeMilestoneLabelView: MileStoneLabelView = {
+        let milestoneLabelView = MileStoneLabelView(texts: "닫힌 이슈", fontColors: Colors.closeMileStoneTint, backgroundColors: Colors.closeMileStoneBG, imgName: "archivebox", issueCount: 0)
+        return milestoneLabelView
+    }()
+    
     
     static var reuseID: String {
         return String(describing: self)
@@ -203,7 +158,7 @@ class MileStoneTableViewCell: UITableViewCell {
         //MARK: 4 : sub스택
         //-1 열린 이슈 라벨
         //-2 닫힌 이슈 라벨
-        /*
+        
         mileStoneStackView.addArrangedSubview(secondSubStackView)
         
         NSLayoutConstraint.activate([
@@ -212,37 +167,20 @@ class MileStoneTableViewCell: UITableViewCell {
         ])
         
         secondSubStackView
-            .addArrangedSubview(openMileStoneView)
+            .addArrangedSubview(openMilestoneLabelView)
         secondSubStackView
-            .addArrangedSubview(closeMileStoneView)
+            .addArrangedSubview(closeMilestoneLabelView)
         
-        openMileStoneView.addSubview(openLabelTitle)
-        closeMileStoneView.addSubview(closeLabelTitle)
+        /*
+        
+        secondSubStackView.spacing = 16
         
         NSLayoutConstraint.activate([
-            openLabelTitle.centerXAnchor.constraint(equalTo: openMileStoneView.centerXAnchor),
-            openLabelTitle.centerYAnchor.constraint(equalTo: openMileStoneView.centerYAnchor),
-            openLabelTitle.widthAnchor.constraint(equalTo: openMileStoneView.widthAnchor, constant: 15),
-//            openLabelTitle.heightAnchor.constraint(equalToConstant: 30),
-            
-            closeMileStoneView.centerXAnchor.constraint(equalTo: closeMileStoneView.centerXAnchor),
-            closeMileStoneView.centerYAnchor.constraint(equalTo: closeMileStoneView.centerYAnchor),
-            closeMileStoneView.widthAnchor.constraint(equalTo: closeMileStoneView.widthAnchor, constant: 15),
-//            closeMileStoneView.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        
-        
-        */
-        //
-        //         NSLayoutConstraint.activate([
-        //         openMileStoneLabelView.widthAnchor.constraint(equalTo: secondSubStackView.widthAnchor,constant: 1/2),
-        //
-        //         openMileStoneLabelView.leadingAnchor.constraint(equalTo: secondSubStackView.leadingAnchor),
-        //         closedMileStoneLabelView.leadingAnchor.constraint(equalTo: openMileStoneLabelView.leadingAnchor),
-        //         ])
-        
-        
+            openMilestoneLabelView.leadingAnchor.constraint(equalTo: secondSubStackView.leadingAnchor,constant: 4),
+            openMilestoneLabelView.topAnchor.constraint(equalTo: secondSubStackView.topAnchor,constant: 4),
+            closeMilestoneLabelView.leadingAnchor.constraint(equalTo: openMilestoneLabelView.trailingAnchor,constant: 4),
+            closeMilestoneLabelView.topAnchor.constraint(equalTo: secondSubStackView.topAnchor,constant: 4),
+        ])*/
     }
     
     func configure(title: String, description: String, due_date: String) {
