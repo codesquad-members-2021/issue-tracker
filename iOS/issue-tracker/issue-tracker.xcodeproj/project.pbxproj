@@ -43,6 +43,7 @@
 		E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */; };
 		E43912EA267A2351003CD344 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E9267A2351003CD344 /* NetworkError.swift */; };
 		E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */; };
+		E43912EE267C3C0E003CD344 /* CellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912ED267C3C0E003CD344 /* CellAction.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -94,6 +95,7 @@
 		E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLabelDTO.swift; sourceTree = "<group>"; };
 		E43912E9267A2351003CD344 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoDTO.swift; sourceTree = "<group>"; };
+		E43912ED267C3C0E003CD344 /* CellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAction.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				E43912C926776DA0003CD344 /* View */,
+				E43912ED267C3C0E003CD344 /* CellAction.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				E43912D826789A83003CD344 /* EndPoint.swift in Sources */,
 				E426DABE2670EC830069E77D /* SocialLoginManagerDelegate.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
+				E43912EE267C3C0E003CD344 /* CellAction.swift in Sources */,
 				E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */,
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */,

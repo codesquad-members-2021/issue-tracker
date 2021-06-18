@@ -42,7 +42,7 @@ final class LabelViewController: UIViewController {
         labelTableDatasource = LabelTableViewDatasource()
         labelTableView.dataSource = labelTableDatasource
         
-        labelTableDelegate = LabelTableDelegate()
+        labelTableDelegate = LabelTableDelegate(cellActionHandler: swipeActionHandler)
         labelTableView.delegate = labelTableDelegate
         
         setNetworkManager()
@@ -68,17 +68,42 @@ final class LabelViewController: UIViewController {
         ])
     }
     
+    private func swipeActionHandler(_ index: Int, _ action: CellAction) {
+        guard let targetId = labelTableDatasource?.labels[index].id else { return }
+        
+        switch action {
+        case .delete:
+            deleteLabel(for: targetId)
+        case .edit:
+            print("수정")
+        default:
+            assert(false)
+        }
+    }
+    
+    private func deleteLabel(for id: Int) {
+        let deleteLabelEndpoint = EndPoint.label.path(with: id)
+        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { (result: Result<Void, NetworkError>) in
+            switch result {
+            case .success(_):
+                self.loadData()
+            case .failure(let error):
+                self.presentAlert(with: error.description)
+            }
+        })
+    }
+    
     private func setNetworkManager() {
         let loginInfo = LoginInfo.shared
         guard let jwt = loginInfo.jwt else { return }
-        let url = EndPoint.label.fullAddress()
         let headers = [Header.authorization.key(): jwt.description]
-        let requestManager = RequestManager(url: url, headers: headers)
-        networkManager = NetworkManager(requestManager: requestManager)
+        networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
     
     func loadData() {
-        networkManager?.get(queryParameters: nil, completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
+        let labelListEndpoint = EndPoint.label.path()
+        networkManager?.get(endpoint: labelListEndpoint, queryParameters: nil,
+                            completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let labels = result.data else { return }

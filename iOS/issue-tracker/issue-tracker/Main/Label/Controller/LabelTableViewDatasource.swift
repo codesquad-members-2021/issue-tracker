@@ -9,7 +9,7 @@ import UIKit
 
 final class LabelTableViewDatasource: NSObject, UITableViewDataSource {
     
-    private var labels = [Label]()
+    private(set) var labels = [Label]()
     private let colorConverter = HexColorConverter()
     
     func update(labels: [Label]) {
