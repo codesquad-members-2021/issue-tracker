@@ -8,8 +8,8 @@ import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetai
 import PrimaryButton from 'components/atom/PrimaryButton';
 import { useRecoilValue } from 'recoil';
 import { IssueFormDataState } from 'store/issueInfoStore';
-import fetchData from 'util/api/fetchCreate'
-
+import fetchCreate from 'util/api/fetchCreate'
+import ErrorPage from 'page/ErrorPage';
 
 type inputsType = {
   title?: string;
@@ -24,7 +24,7 @@ export default function CreateIssuePage(): ReactElement {
   const history = useHistory();
   const titleRef = useRef(null);
   const [comment, setComment] = useState('');
-
+  const [error, setError] = useState(false)
 
   const handleClick = async (btnType: string) => {
     if (btnType === 'cancle') {
@@ -41,14 +41,23 @@ export default function CreateIssuePage(): ReactElement {
         labels: labelID,
         milestone: milestoneID,
       };
-      const isSuccess = await fetchData(sample);
-      const createdIssueID = isSuccess?.issueId;
-      history.push(`/detail/${createdIssueID}`);
+
+      try{
+        const isSuccess = await fetchCreate(sample);
+        const createdIssueID = isSuccess?.issueId;
+        history.push(`/detail/${createdIssueID}`);
+      } catch(error){
+        console.log('에러가발생했다!', error)
+        setError(true)
+      }
     }
   };
 
   return (
-    <CreateIssuePageBlock>
+    error 
+      ? <ErrorPage/>
+      : ( 
+      <CreateIssuePageBlock>
       <div className='create__section__header'>
         <Title className='create__title'>새로운 이슈 작성</Title>
       </div>
@@ -66,7 +75,8 @@ export default function CreateIssuePage(): ReactElement {
           onClick={() => handleClick('create')}
         />
       </div>
-    </CreateIssuePageBlock>
+      </CreateIssuePageBlock>
+      )
   );
 }
 const SpanButton = styled.div`
