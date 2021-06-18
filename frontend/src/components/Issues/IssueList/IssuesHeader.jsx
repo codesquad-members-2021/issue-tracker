@@ -4,7 +4,7 @@ import { ReactComponent as Archive } from "images/archive.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as DownArrow } from "images/chevron_down.svg";
 import theme from "styles/theme";
-import DropDownButton from "components/common/DropDownButton";
+import DropDownButton from "components/common/Button/DropDownButton";
 import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
 import { StyledGridTitleCard } from "styles/StyledCards";
@@ -35,7 +35,7 @@ const IssuesHeader = ({
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback((e) => {
+	const handleClick = useCallback(e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -52,7 +52,7 @@ const IssuesHeader = ({
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = (e) => {
+	const closeFilterModal = e => {
 		const target = e.target;
 		if (
 			isFilterClicked &&

@@ -19,7 +19,7 @@ export const issues = [
 	},
 ];
 
-export const filter = {
+export const filterData = {
 	issue: [
 		"열린 이슈",
 		"내가 작성한 이슈",

@@ -21,24 +21,12 @@ const ButtonGroup = ({
 	const labelFlag = useRecoilValue(labelButtonFlagState);
 
 	return (
-		<Wrapper>
-			<Link to="/main/milestones">
-				<TabButton
-					onClick={milestoneClickEvent}
-					_width={({ theme }) => theme.buttonWidths.base}
-					_radius={"left"}
-					bgColor={milestoneFlag}
-					isMainPage={isMainPage}
-				>
-					<MileStoneIcon fill={theme.grayScale.label} />
-					<ButtonText>마일스톤 ({milestoneCount})</ButtonText>
-				</TabButton>
-			</Link>
+		<ButtonGroupLayout>
 			<Link to="/main/labels">
 				<TabButton
 					onClick={labelClickEvent}
 					_width={({ theme }) => theme.buttonWidths.base}
-					_radius={"right"}
+					_radius={"left"}
 					bgColor={labelFlag}
 					isMainPage={isMainPage}
 				>
@@ -46,13 +34,26 @@ const ButtonGroup = ({
 					<ButtonText>레이블 ({labelCount})</ButtonText>
 				</TabButton>
 			</Link>
-		</Wrapper>
+			<Link to="/main/milestones">
+				<TabButton
+					onClick={milestoneClickEvent}
+					_width={({ theme }) => theme.buttonWidths.base}
+					_radius={"right"}
+					bgColor={milestoneFlag}
+					isMainPage={isMainPage}
+				>
+					<MileStoneIcon fill={theme.grayScale.label} />
+					<ButtonText>마일스톤 ({milestoneCount})</ButtonText>
+				</TabButton>
+			</Link>
+		</ButtonGroupLayout>
 	);
 };
 
-const Wrapper = styled.div`
+const ButtonGroupLayout = styled.div`
 	display: flex;
 	justify-content: center;
+	margin-bottom: 24px;
 `;
 
 const ButtonText = styled.div`

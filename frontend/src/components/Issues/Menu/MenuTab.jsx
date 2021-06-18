@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ButtonGroup from "components/common/ButtonGroup";
-import AddButton from "components/common/AddButton";
+import ButtonGroup from "components/common/Button/ButtonGroup";
+import AddButton from "components/common/Button/AddButton";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import {
