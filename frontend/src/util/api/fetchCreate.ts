@@ -5,7 +5,7 @@ type inputsType = {
   comment: string;
   assignees: number[] | []; //일단이렇게
   labels: number[] | []; //일단이렇게
-  milestone: number | undefined; //일단이렇게
+  milestone: number | null; //일단이렇게
 };
 
 export default async function fetchData(issueInputs: inputsType) {
@@ -25,5 +25,4 @@ export default async function fetchData(issueInputs: inputsType) {
   } catch (err) {
     throw new Error('잘못된 요청입니다.');
   }
-
 }
