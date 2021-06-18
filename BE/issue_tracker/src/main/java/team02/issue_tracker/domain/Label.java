@@ -1,7 +1,6 @@
 package team02.issue_tracker.domain;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team02.issue_tracker.dto.LabelRequest;
@@ -15,7 +14,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Label {
 
@@ -35,7 +33,6 @@ public class Label {
         this.title = title;
         this.content = content;
         this.color = color;
-        this.deleted = false;
     }
 
     public void edit(LabelRequest labelRequest) {

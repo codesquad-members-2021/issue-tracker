@@ -47,7 +47,6 @@ public class Issue {
         this.writer = writer;
         this.open = open;
         this.createdTime = LocalDateTime.now();
-        this.deleted = false;
     }
 
     public void addMilestone(Milestone milestone) {
