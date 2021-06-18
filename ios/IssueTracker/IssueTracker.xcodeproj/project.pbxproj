@@ -23,7 +23,7 @@
 		AECEA445266F3AD900855F20 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECEA443266F3AD900855F20 /* IssueCell.swift */; };
 		AECEA446266F3AD900855F20 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECEA444266F3AD900855F20 /* IssueCell.xib */; };
 		AEE2A4D32670A00300FA6274 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */; };
-		AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D42670A8C000FA6274 /* LabelView.swift */; };
+		AEE2A4D52670A8C000FA6274 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE2A4D42670A8C000FA6274 /* IssueLabel.swift */; };
 		FF76F8B52677300300342633 /* UIBarButtonItem+setTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76F8B42677300300342633 /* UIBarButtonItem+setTitle.swift */; };
 		FF76F8C82678701000342633 /* IssueTrackerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76F8C72678701000342633 /* IssueTrackerDIContainer.swift */; };
 		FF76F8CC2678704200342633 /* SceneFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76F8CB2678704200342633 /* SceneFlowCoordinator.swift */; };
@@ -90,7 +90,7 @@
 		AECEA443266F3AD900855F20 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		AECEA444266F3AD900855F20 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		AEE2A4D22670A00300FA6274 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
-		AEE2A4D42670A8C000FA6274 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		AEE2A4D42670A8C000FA6274 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		FF76F8B42677300300342633 /* UIBarButtonItem+setTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+setTitle.swift"; sourceTree = "<group>"; };
 		FF76F8C72678701000342633 /* IssueTrackerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerDIContainer.swift; sourceTree = "<group>"; };
 		FF76F8CB2678704200342633 /* SceneFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		AE7505362670EFD300BA14F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AEE2A4D42670A8C000FA6274 /* LabelView.swift */,
+				AEE2A4D42670A8C000FA6274 /* IssueLabel.swift */,
 				AECEA443266F3AD900855F20 /* IssueCell.swift */,
 				AECEA444266F3AD900855F20 /* IssueCell.xib */,
 			);
@@ -567,7 +567,7 @@
 				AE7D391B2671A91400BF9487 /* UINibCreatable.swift in Sources */,
 				FF76F8B52677300300342633 /* UIBarButtonItem+setTitle.swift in Sources */,
 				FF89A999267077E800983577 /* User.swift in Sources */,
-				AEE2A4D52670A8C000FA6274 /* LabelView.swift in Sources */,
+				AEE2A4D52670A8C000FA6274 /* IssueLabel.swift in Sources */,
 				AE7505332670EE0600BA14F7 /* UIColor+hexToUIColor.swift in Sources */,
 				FF89A997267075CD00983577 /* Issue.swift in Sources */,
 				FF89A99D2670784200983577 /* Milestone.swift in Sources */,

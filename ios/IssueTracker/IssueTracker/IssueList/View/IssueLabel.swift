@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LabelView: UILabel {
+final class IssueLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ final class LabelView: UILabel {
 }
 
 
-extension LabelView {
+extension IssueLabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false

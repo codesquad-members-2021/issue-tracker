@@ -34,7 +34,7 @@ extension IssueCell {
             label.removeFromSuperview()
         }
         labels.forEach { label in
-            let label_ = LabelView()
+            let label_ = IssueLabel()
             label_.fillUI(with: label)
             self.labelStackView.addArrangedSubview(label_)
         }
