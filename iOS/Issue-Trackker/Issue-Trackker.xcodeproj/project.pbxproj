@@ -37,8 +37,8 @@
 		D4F09F2626788C1300240AA3 /* Issue_TrackkerNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */; };
 		D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788E267627BC00CF3FE4 /* EndPoint.swift */; };
 		D4F09F2F2679BA5900240AA3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B788C2676279500CF3FE4 /* NetworkManager.swift */; };
-		D4F09F312679D00500240AA3 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F302679D00500240AA3 /* MockManager.swift */; };
-		D4F09F322679D04E00240AA3 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F302679D00500240AA3 /* MockManager.swift */; };
+		D4F09F312679D00500240AA3 /* FakeAF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F302679D00500240AA3 /* FakeAF.swift */; };
+		D4F09F322679D04E00240AA3 /* FakeAF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F09F302679D00500240AA3 /* FakeAF.swift */; };
 		D4F09F342679D31300240AA3 /* mockData.json in Resources */ = {isa = PBXBuildFile; fileRef = D4F09F332679D31300240AA3 /* mockData.json */; };
 		D4F09F352679D40B00240AA3 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789226771EA200CF3FE4 /* IssueList.swift */; };
 		D4F09F362679D59400240AA3 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49B789426771EAA00CF3FE4 /* IssueDetail.swift */; };
@@ -91,7 +91,7 @@
 		D4F09F2326788C1300240AA3 /* Issue-TrackkerNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Issue-TrackkerNetworkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue_TrackkerNetworkTests.swift; sourceTree = "<group>"; };
 		D4F09F2726788C1300240AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4F09F302679D00500240AA3 /* MockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
+		D4F09F302679D00500240AA3 /* FakeAF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAF.swift; sourceTree = "<group>"; };
 		D4F09F332679D31300240AA3 /* mockData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,7 +213,6 @@
 			children = (
 				D49B788C2676279500CF3FE4 /* NetworkManager.swift */,
 				D49B788E267627BC00CF3FE4 /* EndPoint.swift */,
-				D4F09F302679D00500240AA3 /* MockManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -242,6 +241,7 @@
 		D4F09F2426788C1300240AA3 /* Issue-TrackkerNetworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				D4F09F302679D00500240AA3 /* FakeAF.swift */,
 				D4F09F332679D31300240AA3 /* mockData.json */,
 				D4F09F2526788C1300240AA3 /* Issue_TrackkerNetworkTests.swift */,
 				D4F09F2726788C1300240AA3 /* Info.plist */,
@@ -368,7 +368,7 @@
 				D49B78732671E97300CF3FE4 /* FilterTableViewController.swift in Sources */,
 				D49B78772673299400CF3FE4 /* IssueViewController.swift in Sources */,
 				D49B789B26772FA400CF3FE4 /* CommentViewController.swift in Sources */,
-				D4F09F312679D00500240AA3 /* MockManager.swift in Sources */,
+				D4F09F312679D00500240AA3 /* FakeAF.swift in Sources */,
 				D49B787B2673479C00CF3FE4 /* AdditionalInformationCell.swift in Sources */,
 				D49B784F266F0D0200CF3FE4 /* AppDelegate.swift in Sources */,
 				D49B787D2673586F00CF3FE4 /* IssueSelectViewController.swift in Sources */,
@@ -390,7 +390,7 @@
 				D4F09F392679D59C00240AA3 /* Assignment.swift in Sources */,
 				D4F09F352679D40B00240AA3 /* IssueList.swift in Sources */,
 				D4F09F2F2679BA5900240AA3 /* NetworkManager.swift in Sources */,
-				D4F09F322679D04E00240AA3 /* MockManager.swift in Sources */,
+				D4F09F322679D04E00240AA3 /* FakeAF.swift in Sources */,
 				D4F09F372679D59700240AA3 /* Comment.swift in Sources */,
 				D4F09F2E26788CDF00240AA3 /* EndPoint.swift in Sources */,
 				D4F09F362679D59400240AA3 /* IssueDetail.swift in Sources */,

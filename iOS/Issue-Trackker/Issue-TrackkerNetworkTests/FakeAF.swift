@@ -8,7 +8,7 @@
 import Foundation
 @testable import Alamofire
 
-class MockManager: SessionProtocol {
+class FakeAF: SessionProtocol {
     var requestParameters: (
         url: URLConvertible,
         method: HTTPMethod,

@@ -418,10 +418,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IssueCell" id="1Y9-Js-lxk" customClass="IssueCell" customModule="Issue_Trackker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="205.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="197.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Y9-Js-lxk" id="3yd-XW-YQt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="205.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="197.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMw-Cc-txb">
@@ -449,7 +449,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-3L-iEs" customClass="PaddingLabel" customModule="Issue_Trackker" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="141" width="73.5" height="28.5"/>
+                                                    <rect key="frame" x="16" y="141" width="41.5" height="20.5"/>
                                                     <color key="backgroundColor" red="0.36698226049999999" green="0.69068723919999997" blue="0.2665603459" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -533,7 +533,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="N0t-zS-8o2" kind="custom" id="mty-AB-vIr"/>
+                        <segue destination="N0t-zS-8o2" kind="custom" identifier="Issue" customClass="IssueViewController" customModule="Issue_Trackker" customModuleProvider="target" id="mty-AB-vIr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVH-GT-tZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -543,7 +543,7 @@
     </scenes>
     <designables>
         <designable name="Cll-3L-iEs">
-            <size key="intrinsicContentSize" width="73.5" height="28.5"/>
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
         <designable name="iM4-aE-bLq">
             <size key="intrinsicContentSize" width="44.5" height="20.5"/>

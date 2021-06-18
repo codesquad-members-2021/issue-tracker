@@ -11,28 +11,28 @@ import XCTest
 class Issue_TrackkerNetworkTests: XCTestCase {
     
     func testNetwork_withoutInternet() {
-        let mockAF: MockManager = MockManager()
-        let request = MainEndPoint(path: "/index", httpMethod: .get, decodingStrategy: .convertFromSnakeCase)
-    
-        mockAF.request(request.url()!,
-                       method: request.httpMethod,
-                       parameters: nil,
-                       encoding: URLEncoding.default,
-                       headers: nil,
-                       interceptor: nil,
-                       requestModifier: nil)
-
-        XCTAssertEqual(try mockAF.requestParameters?.url.asURL().absoluteString, "/index")
-        XCTAssertEqual(mockAF.requestParameters?.method, .get)
+        let fakeAF: FakeAF = FakeAF()
+        let request = MainEndPoint(path: "/index", httpMethod: .get)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let networkManager = NetworkManager(with: fakeAF, with: request, with: decoder)
+        
+        networkManager.request(dataType: IssueList.self, completion: { _ in
+        })
+        
+        let param = fakeAF.requestParameters
+        
+        XCTAssertEqual(try param?.url.asURL().absoluteString, "/index")
+        XCTAssertEqual(param?.method, .get)
     }
     
     func testNetwork_availableInternet() {
         
         let request = LocalEndPoint(path: Bundle.main.path(forResource: "mockData", ofType: "json")!,
-                                   httpMethod: .get,
-                                   decodingStrategy: .convertFromSnakeCase)
+                                   httpMethod: .get)
         
-        let networkManager = NetworkManager(with: request, with: JSONDecoder())
+        let networkManager = NetworkManager(with: AF, with: request, with: JSONDecoder())
         let expectation = XCTestExpectation()
         
         networkManager.request(dataType: IssueList.self) { result in
