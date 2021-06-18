@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class LabelTableViewCell: UITableViewCell {
-    
+
     static var identifier = "LabelTableViewCell"
 
     var labelView: PaddingLabel = {
@@ -20,29 +20,29 @@ class LabelTableViewCell: UITableViewCell {
         label.layer.cornerRadius = 15
         return label
     }()
-    
+
     var labelDescription: UILabel = {
         var label = UILabel()
         return label
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setupAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubviews()
         setupAutolayout()
     }
-    
+
     func addSubviews() {
         addSubview(labelView)
         addSubview(labelDescription)
     }
-    
+
     func setupAutolayout() {
         labelView.snp.makeConstraints { view in
             view.top.equalToSuperview().offset(24)
@@ -50,14 +50,14 @@ class LabelTableViewCell: UITableViewCell {
             view.width.greaterThanOrEqualTo(50)
             view.height.equalTo(30)
         }
-        
+
         labelDescription.snp.makeConstraints { label in
             label.top.equalTo(labelView.snp.bottom).offset(16)
             label.leading.trailing.equalToSuperview().offset(16)
             label.height.equalTo(22)
         }
     }
-    
+
     func setupLabelCell(title: String, description: String, color: String) {
         self.labelView.text = title
         self.labelView.backgroundColor = UIColor.hexStringToUIColor(hex: color)

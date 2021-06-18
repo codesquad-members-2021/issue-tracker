@@ -15,7 +15,7 @@ class AddLabelButton: UIButton {
         setTitleColor(.systemBlue, for: .normal)
         semanticContentAttribute = .forceRightToLeft
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setImage(UIImage(systemName: "plus"), for: .normal)

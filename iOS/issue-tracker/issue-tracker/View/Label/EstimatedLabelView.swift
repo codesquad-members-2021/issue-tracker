@@ -17,7 +17,7 @@ class EstimatedLabelView: UIView {
         label.layer.cornerRadius = 10
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(label)
@@ -26,22 +26,22 @@ class EstimatedLabelView: UIView {
         self.backgroundColor = #colorLiteral(red: 0.9102189541, green: 0.9093225002, blue: 0.9310914278, alpha: 1)
         configureLabelAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func configureLabelAutolayout() {
         label.snp.makeConstraints { label in
             label.centerX.centerY.equalToSuperview()
         }
     }
-    
+
     func modifyLabelTitle(title: String) {
         self.label.text = title
         label.sizeToFit()
     }
-    
+
     func setupLabelColor(color: UIColor) {
         self.label.backgroundColor = color
     }
