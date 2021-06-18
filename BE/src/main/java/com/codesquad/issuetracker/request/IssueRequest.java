@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.request;
 
-import com.codesquad.issuetracker.domain.Assignee;
 import com.codesquad.issuetracker.domain.Label;
 import com.codesquad.issuetracker.domain.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,14 +28,14 @@ public class IssueRequest {
     private ArrayList<Label> labelList;
 
     @JsonProperty("assignee_list")
-    private ArrayList<Assignee> assigneeList;
+    private ArrayList<AssigneeRequest> assigneeList;
 
     public IssueRequest() {
 
     }
 
     public IssueRequest(String title, String content, boolean status, LocalDateTime createdAt,
-                        User user, Long milestoneId, ArrayList<Label> labelList, ArrayList<Assignee> assigneeList) {
+                        User user, Long milestoneId, ArrayList<Label> labelList, ArrayList<AssigneeRequest> assigneeList) {
         this.title = title;
         this.content = content;
         this.status = status;
@@ -75,7 +74,7 @@ public class IssueRequest {
         return user;
     }
 
-    public ArrayList<Assignee> getAssigneeList() {
+    public ArrayList<AssigneeRequest> getAssigneeList() {
         return assigneeList;
     }
 

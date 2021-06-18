@@ -3,6 +3,7 @@ package com.codesquad.issuetracker.service;
 import com.codesquad.issuetracker.domain.*;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
 import com.codesquad.issuetracker.repository.*;
+import com.codesquad.issuetracker.request.AssigneeRequest;
 import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,12 @@ public class IssueService {
 
     public void updateAssignee(Long issueId, IssueRequest issueRequest) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
-        updateIssue.setAssignees(issueRequest.getAssigneeList());
+        ArrayList<AssigneeRequest> assigneeRequestList = issueRequest.getAssigneeList();
+        List<Assignee> assigneesToSet = new ArrayList<>();
+        for (AssigneeRequest assigneeRequest : assigneeRequestList) {
+            assigneesToSet.add(Assignee.assigneeRequestToassignee(assigneeRequest));
+        }
+        updateIssue.setAssignees(assigneesToSet);
         issueRepository.save(updateIssue);
     }
 

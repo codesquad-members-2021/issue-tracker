@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.domain;
 
+import com.codesquad.issuetracker.request.AssigneeRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -18,10 +19,14 @@ public class Assignee {
     public Assignee() {
     }
 
-    private Assignee(Long id, Long issueId, Long userId) {
-        this.id = id;
+    private Assignee(Long issueId, Long userId) {
         this.issueId = issueId;
         this.userId = userId;
+    }
+
+    private Assignee(Long id, Long issueId, Long userId) {
+        this(issueId, userId);
+        this.id = id;
     }
 
     public Assignee create(Long id, Long issueId, Long userId) {
@@ -38,5 +43,9 @@ public class Assignee {
 
     public Long getUserId() {
         return userId;
+    }
+
+    public static Assignee assigneeRequestToassignee(AssigneeRequest assigneeRequest) {
+        return new Assignee(assigneeRequest.getIssueId(), assigneeRequest.getUserId());
     }
 }
