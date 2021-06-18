@@ -1,4 +1,6 @@
-export const pipe =
+const pipe =
   (...fns: any) =>
-  (...args: any) =>
+  (args: any) =>
     fns.reduce((acc: any, fn: any) => fn(acc), args);
+
+export default pipe;

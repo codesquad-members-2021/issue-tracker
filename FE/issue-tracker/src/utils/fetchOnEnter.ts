@@ -13,7 +13,9 @@ export const fetchOnMouseEnter = async (
   { query, cachingTime }: FetchOnEnter,
   setState: State
 ) => {
-  const shouldNotFetch = (Date.now() - cachingTime) / 1000 < 3600;
+  const ONE_MINUTE = 60;
+  const NOW = Date.now();
+  const shouldNotFetch = (NOW - cachingTime) / 1000 < ONE_MINUTE;
   if (shouldNotFetch) return;
 
   const res = await fetch(`${hostAPI}/${query}`);
@@ -21,6 +23,6 @@ export const fetchOnMouseEnter = async (
   setState({
     query: query,
     data: fetchedData,
-    cachingTime: Date.now(),
+    cachingTime: NOW,
   });
 };
