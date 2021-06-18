@@ -9,7 +9,7 @@ import {
 
 type FilterTabType = {
   header: string;
-  filterList: Array<string>;
+  filterList: Array<{ name: string, info?: any }>;
   inputType: string;
 }
 
@@ -18,7 +18,8 @@ const filterHeaderNames: { [key: string]: string } = {
   manager: '담당자',
   label: '레이블',
   milestone: '마일스톤',
-  writer: '작성자'
+  writer: '작성자',
+  stateChange: '상태 수정'
 }
 
 const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
@@ -36,6 +37,7 @@ const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
       label: false,
       milestone: false,
       writer: false,
+      stateChange: false,
     })
   }, []);
 
@@ -73,6 +75,7 @@ const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
       label: false,
       milestone: false,
       writer: false,
+      stateChange: false,
     });
   }, [defaultCheckerState])
 
@@ -84,13 +87,14 @@ const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
       {filterList.map((listItem: any, idx) => {
 
         return (<div key={`${header}-${idx}`}>
-          <FilterLabel>
+          <FilterLabel isReverse={header !== 'stateChange'}>
             <input type={inputType} name={header}
               onChange={handleChangeDefaultChecker(listItem)}
               checked={inputType === 'radio' ?
                 defaultCheckerState[header].name === listItem.name :
                 defaultCheckerState[header]
-                  .findIndex((item: any) => item.name === listItem.name) !== -1} />
+                  .findIndex((item: any) => item.name === listItem.name) !== -1}
+              style={{ display: header === 'stateChange' ? 'none' : '' }} />
             <span>{listItem.name}</span>
           </FilterLabel>
         </div>)
@@ -128,10 +132,10 @@ const FilterTabHeader = styled.div`
 `;
 
 
-const FilterLabel = styled.label`
+const FilterLabel = styled.label<{ isReverse: boolean }>`
       display:flex;
       justify-content: space-between;
-      flex-direction: row-reverse;
+      flex-direction: ${({ isReverse }) => isReverse && 'row-reverse'};
   & > span{
         color: #A3A1B0;
       font-size: 12px;

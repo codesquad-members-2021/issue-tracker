@@ -7,6 +7,7 @@ export type FilterBooleanType = {
   label: boolean;
   milestone: boolean;
   writer: boolean;
+  stateChange: boolean;
 }
 
 export const filterAtom = atom<FilterBooleanType>({
@@ -16,7 +17,8 @@ export const filterAtom = atom<FilterBooleanType>({
     manager: false,
     label: false,
     milestone: false,
-    writer: false
+    writer: false,
+    stateChange: false,
   }
 })
 
@@ -31,7 +33,8 @@ export const filterRadioButtonListAtom = atom<FilterRadioButtonListType>({
     manager: { name: '', info: {} },
     label: { name: '', info: {} },
     milestone: { name: '', info: {} },
-    writer: { name: '', info: {} }
+    writer: { name: '', info: {} },
+    stateChange: { name: '', info: {} }
   }
 })
 

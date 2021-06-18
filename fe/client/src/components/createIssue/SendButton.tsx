@@ -19,18 +19,17 @@ const SendButton = () => {
   const [commentInputValue] = useRecoilState(issueCommentInputAtom);
 
   const handleClickSendData = async () => {
-
     const data = {
       title: titleInputValue,
       mainCommentContents: commentInputValue,
       authorId: 3, //수정필요 
       assigneeIds: checkedItems.manager.map(getCheckedItemId),
       labelIds: checkedItems.label.map(getCheckedItemId),
-      milestoneId: checkedItems.milestone.map(getCheckedItemId)[0]
+      milestoneId: checkedItems.milestone.length && checkedItems.milestone[0].id
     };
-
-    const a = await API.post.issues(data);
-    console.log(a);
+    console.log(data)
+    const responseData = await API.post.issues(data);
+    console.log(responseData);
   }
 
   return (
@@ -43,8 +42,6 @@ const SendButton = () => {
   )
 }
 
-function getCheckedItemId({ info: { id } }: FilteredIdType) {
-  return id;
-}
+const getCheckedItemId = ({ info: { id } }: FilteredIdType) => id;
 
 export default SendButton;

@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import FilterItem from './FilterItem';
+import IssueStateChangeFilter from './IssueStateChangeFilter';
 import IconButton from '@components/common/IconButton';
 import { IssueListItemType } from '@components/common/types/APIType';
 import { issueCheckedItemAtom, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
@@ -12,13 +14,13 @@ type ListHeaderType = {
 }
 
 const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) => {
-  const [, setCheckedIssueItems] = useRecoilState(issueCheckedItemAtom);
+  const [checkedIssueItem, setCheckedIssueItems] = useRecoilState(issueCheckedItemAtom);
   const [isAllIssueChecked, setAllIssueChecked] = useRecoilState(issueCheckedAllItemAtom);
-
+  
   const handleChangeAllCheck = () => {
     isAllIssueChecked
-      ? setCheckedIssueItems(new Set(issueItems.map(({ id }: { id: number }) => id)))
-      : setCheckedIssueItems(new Set());
+      ? setCheckedIssueItems(new Set())
+      : setCheckedIssueItems(new Set(issueItems.map(({ id }: { id: number }) => id)));
     setAllIssueChecked(!isAllIssueChecked);
   };
 
@@ -36,25 +38,37 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
     <ListHeaderWrapper>
       <div>
         <AllCheckerInput type="checkbox" checked={isAllIssueChecked} onChange={handleChangeAllCheck} />
-        <IconButton icon="alertCircle">
-          <ToggleItem>
-            <RadioButton type="radio" name="issueToggle" defaultChecked={true} />
-            <span>열린 이슈 ({openIssueCount})</span>
-          </ToggleItem>
-        </IconButton>
-        <IconButton icon='closeBox'>
-          <ToggleItem>
-            <RadioButton type="radio" name="issueToggle" />
-            <span>닫힌 이슈 ({closeIssueCount})</span>
-          </ToggleItem>
-        </IconButton>
-      </div>
+        {checkedIssueItem.size
+          ? <>{checkedIssueItem.size}개 이슈 선택</>
+          :
+          <>
+            <IconButton icon="alertCircle">
+              <ToggleItem>
+                <RadioButton type="radio" name="issueToggle" defaultChecked={true} />
+                <span>열린 이슈 ({openIssueCount})</span>
+              </ToggleItem>
+            </IconButton>
+            <IconButton icon='closeBox'>
+              <ToggleItem>
+                <RadioButton type="radio" name="issueToggle" />
+                <span>닫힌 이슈 ({closeIssueCount})</span>
+              </ToggleItem>
+            </IconButton>
+          </>
+        }
 
-      <FilterListWrapper>
-        {filterItems.map((title) => {
-          return <FilterItem key={title} {...{ title, handleClickShowFilterModal }} />
-        })}
-      </FilterListWrapper>
+      </div>
+      {checkedIssueItem.size
+        ? <FilterListWrapper>
+          <IssueStateChangeFilter title='stateChange'{...{ handleClickShowFilterModal }} />
+        </FilterListWrapper>
+
+        : <FilterListWrapper>
+          {filterItems.map((title) => {
+            return <FilterItem key={title} {...{ title, handleClickShowFilterModal }} />
+          })}
+        </FilterListWrapper>
+      }
 
     </ListHeaderWrapper>
   )
