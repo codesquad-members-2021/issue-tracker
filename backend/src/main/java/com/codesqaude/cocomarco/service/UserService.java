@@ -11,6 +11,8 @@ import com.codesqaude.cocomarco.domain.user.dto.UserResponse;
 import com.codesqaude.cocomarco.domain.user.dto.UserWrapper;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,8 +56,8 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
-    public UserWrapper findAll() {
-        List<User> users = userRepository.findAll();
+    public UserWrapper findAll(Pageable pageable) {
+        Page<User> users = userRepository.findAll(pageable);
         List<UserResponse> userResponses = users.stream().map(UserResponse::of).collect(Collectors.toList());
         return new UserWrapper(userResponses);
     }

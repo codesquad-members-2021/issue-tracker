@@ -25,22 +25,23 @@ public class IssueModifyController {
 
     @Auth
     @PutMapping("/{issueId}/milestone")
-    public void changeMilestone(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest, @UserId UUID userId) {
+    public void changeMilestone(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
         issueModifyService.changeMilestone(issueId, issueRequest);
     }
 
     @Auth
     @PutMapping("/{issueId}/assignments")
-    public void changeAssignments(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest, @UserId UUID userId) {
+    public void changeAssignments(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
         issueModifyService.changeAssignments(issueId, issueRequest);
     }
 
     @Auth
     @PutMapping("/{issueId}/labels")
-    public void changeLabels(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest, @UserId UUID userId) {
+    public void changeLabels(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
         issueModifyService.changeLabels(issueId, issueRequest);
     }
-
+    
+    @Auth
     @PutMapping("/status")
     public void changeStatus(@RequestBody IssueStatusRequest issueStatusRequest) {
         issueModifyService.changeStatus(issueStatusRequest);
