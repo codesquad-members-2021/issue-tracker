@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ToolBarTextField: UITextField {
+final class ToolBarTextField: UITextField {
 
-    let sendButton: UIButton = {
+    private let sendButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         return button

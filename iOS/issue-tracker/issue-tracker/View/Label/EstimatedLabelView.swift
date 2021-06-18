@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class EstimatedLabelView: UIView {
+final class EstimatedLabelView: UIView {
 
-    var label: PaddingLabel = {
+    private var label: PaddingLabel = {
         var label = PaddingLabel(withInsets: 0, 0, 10, 10)
         label.text = "레이블"
         label.layer.masksToBounds = true
@@ -31,7 +31,7 @@ class EstimatedLabelView: UIView {
         super.init(coder: coder)
     }
 
-    func configureLabelAutolayout() {
+    private func configureLabelAutolayout() {
         label.snp.makeConstraints { label in
             label.centerX.centerY.equalToSuperview()
         }
@@ -44,5 +44,9 @@ class EstimatedLabelView: UIView {
 
     func setupLabelColor(color: UIColor) {
         self.label.backgroundColor = color
+    }
+
+    func getLabel() -> PaddingLabel {
+        return self.label
     }
 }

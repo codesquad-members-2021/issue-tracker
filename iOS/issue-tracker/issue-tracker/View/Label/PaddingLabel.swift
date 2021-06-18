@@ -7,12 +7,12 @@
 
 import UIKit
 
-class PaddingLabel: UILabel {
+final class PaddingLabel: UILabel {
 
-    var topInset: CGFloat
-    var bottomInset: CGFloat
-    var leftInset: CGFloat
-    var rightInset: CGFloat
+    private var topInset: CGFloat
+    private var bottomInset: CGFloat
+    private var leftInset: CGFloat
+    private var rightInset: CGFloat
 
     required init(withInsets top: CGFloat, _ bottom: CGFloat, _ left: CGFloat, _ right: CGFloat) {
         self.topInset = top

@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class IssueTableFooterView: UIView {
+final class IssueTableFooterView: UIView {
 
-    var label: UILabel = {
+    private var label: UILabel = {
         var label = UILabel()
         label.text = "아래로 당기면 검색바가 보여요!👀"
         label.textColor = .lightGray
@@ -31,7 +31,7 @@ class IssueTableFooterView: UIView {
         setupAutolayout()
     }
 
-    func setupAutolayout() {
+    private func setupAutolayout() {
         label.snp.makeConstraints { label in
             label.centerX.equalToSuperview()
             label.top.equalTo(39)

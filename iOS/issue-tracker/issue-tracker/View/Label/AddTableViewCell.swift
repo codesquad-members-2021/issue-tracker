@@ -8,12 +8,12 @@
 import UIKit
 import RxSwift
 
-class AddTableViewCell: UITableViewCell {
+final class AddTableViewCell: UITableViewCell {
 
     static let identifier = "AddTableViewCell"
 
-    let textField = UITextField()
-    let reloadButton: UIButton = {
+    private let textField = UITextField()
+    private let reloadButton: UIButton = {
         var button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "gobackward"), for: .normal)
         return button

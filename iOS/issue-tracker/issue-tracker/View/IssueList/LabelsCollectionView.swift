@@ -7,9 +7,9 @@
 
 import UIKit
 
-class LabelsCollectionView: UICollectionView {
+final class LabelsCollectionView: UICollectionView {
 
-    var labelsLayout: UICollectionViewFlowLayout = {
+    private var labelsLayout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = CGSize(width: 84, height: 22)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLabelButton: UIButton {
+final class AddLabelButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setImage(UIImage(systemName: "plus"), for: .normal)
