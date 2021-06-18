@@ -10,9 +10,17 @@ import { fetchModal } from '@utils/fetchModal';
 
 function SelectMilestone() {
   const [milestones, setMilestones] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const handleClickMilestone = () => {
-    fetchModal({ path: 'milestones', setState: setMilestones });
+    const fetchMilestones = async () => {
+      try {
+        await fetchModal({ path: 'milestones', setState: setMilestones });
+      } catch (errorTxt) {
+        setErrorMsg(errorTxt);
+      }
+    };
+    fetchMilestones();
   };
 
   return (
@@ -28,7 +36,7 @@ function SelectMilestone() {
         >
           마일스톤
         </MenuButton>
-        <MilestoneModal milestones={milestones} />
+        <MilestoneModal milestones={milestones} errorMsg={errorMsg} />
       </Menu>
       <AddList>
         <li>

@@ -10,9 +10,17 @@ import { fetchModal } from '@utils/fetchModal';
 
 function SelectLabel() {
   const [labels, setLabels] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const handleClickLabels = () => {
-    fetchModal({ path: 'labels', setState: setLabels });
+    const fetchLabels = async () => {
+      try {
+        await fetchModal({ path: 'labels', setState: setLabels });
+      } catch (errorTxt) {
+        setErrorMsg(errorTxt);
+      }
+    };
+    fetchLabels();
   };
 
   return (
@@ -28,7 +36,7 @@ function SelectLabel() {
         >
           레이블
         </MenuButton>
-        <LabelModal labels={labels} />
+        <LabelModal labels={labels} errorMsg={errorMsg} />
       </Menu>
       <AddList>
         <li>

@@ -10,9 +10,17 @@ import { fetchModal } from '@utils/fetchModal';
 
 function SelectAssignee() {
   const [assignees, setAssignees] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const handleClickAssignee = () => {
-    fetchModal({ path: 'assignees', setState: setAssignees });
+    const fetchAssignees = async () => {
+      try {
+        await fetchModal({ path: 'assignees', setState: setAssignees });
+      } catch (errorTxt) {
+        setErrorMsg(errorTxt);
+      }
+    };
+    fetchAssignees();
   };
 
   return (
@@ -28,7 +36,7 @@ function SelectAssignee() {
         >
           담당자
         </MenuButton>
-        <AssigneeModal assignees={assignees} />
+        <AssigneeModal assignees={assignees} errorMsg={errorMsg} />
       </Menu>
       {/* ----사용자가 선택한 것들을 렌더링---- */}
       <AddList>
