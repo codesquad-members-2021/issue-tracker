@@ -18,6 +18,7 @@ class IssueListViewController: UIViewController {
         configureNavigationItem()
         configureTableViewFooterView()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         configureFilterButton()
         configureSelectButton()
@@ -115,6 +116,7 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 임시 값
         return 2
     }
 

@@ -29,7 +29,7 @@ class LabelViewController: UIViewController {
     }
     
     @objc func showNewLabelView() {
-        
+        // 레이블 추가 화면으로 전환하기
     }
 }
 

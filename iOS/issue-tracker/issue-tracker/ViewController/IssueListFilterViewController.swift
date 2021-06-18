@@ -65,6 +65,7 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FilterTableViewCell.identifier, for: indexPath) as? FilterTableViewCell else {
             return UITableViewCell()
         }
+        // 임시 값
         cell.title.text = "asdfasdfasdf"
         cell.checkImage.isHidden = false
         return cell

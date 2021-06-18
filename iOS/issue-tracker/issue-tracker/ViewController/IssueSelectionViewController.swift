@@ -34,7 +34,9 @@ class IssueSelectionViewController: UIViewController {
     @objc func pressedCancelButton() {
         self.navigationController?.popViewController(animated: false)
     }
+    
 }
+
 extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4

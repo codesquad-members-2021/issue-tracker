@@ -19,7 +19,7 @@ class TabBarRootController: UITabBarController {
     
     func bind() {
         userInfoViewModel.configureThumbnailImage()
-        userInfoViewModel.didUpdateThumbnailImage { url in
+        userInfoViewModel.didUpdateThumbnailImage { [weak self] url in
             guard let imageURL = URL(string: url) else { return }
             let imageData = try? Data(contentsOf: imageURL)
             guard let data = imageData else { return }
@@ -30,7 +30,7 @@ class TabBarRootController: UITabBarController {
             image.draw(in: rect)
             image = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
-            self.tabBar.items?.last?.image = image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+            self?.tabBar.items?.last?.image = image.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         }
     }
 }
