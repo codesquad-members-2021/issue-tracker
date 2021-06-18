@@ -1,21 +1,26 @@
-import React, { ReactElement, ChangeEvent, useState } from 'react';
+import React, { ReactElement, ChangeEvent, useState, RefObject } from 'react';
 import styled from 'styled-components';
 import { GiPaperClip } from 'react-icons/gi';
-
-export default function IssueInput(): ReactElement {
-  const [comment, setComment] = useState('');
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value.length);
+interface inputProps {
+  titleRef: RefObject<HTMLInputElement>;
+  comment: string;
+  setComment:(comment:string)=>void
+}
+export default function IssueInput({ titleRef, comment, setComment }: inputProps): ReactElement {
+  const [length, setLength] = useState(0)
+  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
+    setLength(e.target.value.length);
   };
+
   return (
     <IssueInputBlock>
-      <input type='text' className='input__title' placeholder='제목' />
+      <input type='text' className='input__title' placeholder='제목' ref={titleRef} />
       <div className='input___comment'>
         <textarea
           className='input__description'
           placeholder='코멘트를 입력하세요.'
-          onChange={handleChange}
+          onChange={handleCommentChange}
           value={comment}
         />
         <div className='input__addFile'>
@@ -25,6 +30,7 @@ export default function IssueInput(): ReactElement {
           </label>
           <input type='file' id='add_file' className='input__file' accept='.png, .jpg, .jpeg' />
         </div>
+        <div className='input__lengthCheck'>공백포함 {length}자</div>
       </div>
     </IssueInputBlock>
   );
@@ -71,5 +77,10 @@ const IssueInputBlock = styled.div`
   }
   .input__file {
     height: 0px;
+  }
+  .input__lengthCheck{
+    position: absolute;
+    right: 21%;
+    bottom: 20%;
   }
 `;

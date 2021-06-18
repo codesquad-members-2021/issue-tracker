@@ -63,9 +63,16 @@ export const issueFilterSelectState = atom<string>({
   default: '',
 });
 
+export const getIssueTrigger = atom<boolean>({
+  key: 'getIssueTrigger',
+  default: false,
+});
+
 export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
   key: 'GET/issues',
   get: async ({ get }) => {
+    const trigger = get(getIssueTrigger);
+    console.log('셀렉터안에서', trigger);
     const issueType = get(issueTypeState);
     const isFilterSetting = get(isFilterFullSetting);
     if (!isFilterSetting) return null;
@@ -102,53 +109,6 @@ export const getTabInfoState = selector({
   },
 });
 
-type inputsType = {
-  title: string;
-  comment: string;
-  assignees: number[]|[];//일단이렇게
-  labels: number[]|[];//일단이렇게
-  milestone: number|null;//일단이렇게
-}
-type Icreate = SerializableParam&{
-  issueInputs: inputsType
-  skip: boolean
-}
-
-type issueNumber={
-  issueId : number
-}
-interface ResultType{
-  postResult:Promise<issueNumber>|null
-  fetchData:(issueInputs: inputsType) => Promise<issueNumber>
-}
-export const createIssue = selectorFamily({
-  key: 'POST/createIssue',
-  get: ({issueInputs, skip=false}:Icreate)=>({}):ResultType => {
-
-    async function fetchData(issueInputs:inputsType){
-      try {
-        const response = await fetch(API.createIssue, 
-          { 
-            method:'POST',
-            headers:{
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcImlzc3VlLXRyYWNrZXItdGVhbS0wNlwiIiwidXNlcklkIjoxfQ.WCMSnjyZCjZ80aSBN9GCNckS8Q_FkdpWXPWJwsx3kVA'
-            },
-            body: JSON.stringify(issueInputs)
-          }
-        );
-        if(response.status!==200) throw new Error('잘못된 요청입니다.');
-        const issueID = response.json()
-        return issueID
-      } catch (err) {
-        throw new Error('잘못된 요청입니다.');
-      }
-    }
-    if(skip) return {postResult:null, fetchData};
-    const postResult = fetchData(issueInputs)
-    return {postResult, fetchData}
-  },
-});
 export interface selectedTabType {
   assignee: Array<UserType> | [];
   label: Array<LabelType> | [];
@@ -173,6 +133,22 @@ export const selectedTabState = selector<selectedTabType>({
   },
 });
 
+//create
+export const IssueFormDataState = selector({
+  key: 'create/issue/form',
+  get: ({ get }) => {
+    const {
+      assignee: selectUser,
+      label: selectLabel,
+      milestone: selectMilestone,
+    } = get(selectedTabState);
+    const assigneeID = selectUser.map((user) => user.id);
+    const labelID = selectLabel.map((label) => label.id);
+    const milestoneID = selectMilestone?.id;
+    return { assigneeID, labelID, milestoneID };
+  },
+});
+
 export const resetSelectedTab = selector<null>({
   key: 'resetSelectedTab',
   get: () => null,
@@ -180,7 +156,6 @@ export const resetSelectedTab = selector<null>({
     reset(selectedUserState);
     reset(selectedLabelState);
     reset(selectedMilestoneState);
-    console.log(get(selectedUserState));
   },
 });
 
@@ -196,4 +171,3 @@ export const selectedMilestoneState = atom<MilestoneType | null>({
   key: 'selectedMilestoneTabState',
   default: null,
 });
- 

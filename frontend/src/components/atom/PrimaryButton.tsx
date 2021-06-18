@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 interface PrimaryButtonType {
   value: string;
   className?: string;
-  onClick?: ()=>Promise<void>;
+  onClick?: () => Promise<void> | void;
 }
 
 export default function PrimaryButton({ value, className, onClick }: PrimaryButtonType) {

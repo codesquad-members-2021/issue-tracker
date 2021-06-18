@@ -15,7 +15,6 @@ export default function ModalContentList({
   filterType,
   setModalClose,
 }: ModalContentListProps): ReactElement {
-  let contentList;
   const selectedTab = useRecoilValue(selectedTabState);
   const tabInfo = useRecoilValue(getTabInfoState);
   const isSelectedTabItem = (type: string, id: number, selected?: boolean) => {
@@ -31,30 +30,39 @@ export default function ModalContentList({
     return false;
   };
 
-  if (filterType === 'author' || filterType === 'assignee') {
-    const tabInfoKey = filterType === 'author' ? 'assignee' : filterType;
-    const userData: Array<UserType> = tabInfo[tabInfoKey];
-    contentList = userData.map((user) => {
-      const selected = isSelectedTabItem(tabInfoKey, user.id, user.assigned);
-      return <UserSelectItem key={user.id} {...{ user, selected }}></UserSelectItem>;
-    });
-  }
-  if (filterType === 'label') {
-    const labelData: Array<LabelType> = tabInfo[filterType];
-    contentList = labelData.map((label) => {
-      const selected = isSelectedTabItem(filterType, label.id, label.checked);
-      return <LabelSelectItem key={label.id} {...{ label, selected }} />;
-    });
+  interface contentListType {
+    assignee: (type: string) => JSX.Element[];
+    label: (type: string) => JSX.Element[];
+    milestone: (type: string) => JSX.Element[];
+    [key: string]: any;
   }
 
-  if (filterType === 'milestone') {
-    const milestoneData: Array<MilestoneType> = tabInfo[filterType];
-    contentList = milestoneData.map((milestone) => {
-      const selected = isSelectedTabItem(filterType, milestone.id);
-      return <MilestoneSelectItem key={milestone.id} {...{ milestone, selected }} />;
-    });
-  }
+  const getContentList: contentListType = {
+    assignee: (type: string): JSX.Element[] => {
+      const userData: Array<UserType> = tabInfo[type];
+      return userData.map((user) => {
+        const selected = isSelectedTabItem(type, user.id, user.assigned);
+        return <UserSelectItem key={user.id} {...{ user, selected }}></UserSelectItem>;
+      });
+    },
+    label: (type: string): JSX.Element[] => {
+      const labelData: Array<LabelType> = tabInfo[type];
+      return labelData.map((label) => {
+        const selected = isSelectedTabItem(type, label.id, label.checked);
+        return <LabelSelectItem key={label.id} {...{ label, selected }} />;
+      });
+    },
+    milestone: (type: string): JSX.Element[] => {
+      const milestoneData: Array<MilestoneType> = tabInfo[type];
+      return milestoneData.map((milestone) => {
+        const selected = isSelectedTabItem(type, milestone.id);
+        return <MilestoneSelectItem key={milestone.id} {...{ milestone, selected }} />;
+      });
+    },
+  };
 
+  const type = filterType === 'author' ? 'assignee' : filterType;
+  const contentList = getContentList[type](type);
   return <ModalContentListBlock>{contentList}</ModalContentListBlock>;
 }
 

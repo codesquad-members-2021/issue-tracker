@@ -21,7 +21,7 @@ function useToggle({ toggle, modal }: CtrlModal): toggleReturnType {
     };
   }, []);
 
-  const handleClick = (e: MouseEvent): void => {
+  const handleClick = (e: MouseEvent) => {
     const target = e.target as HTMLDivElement;
 
     if (!toggle.length) return;
