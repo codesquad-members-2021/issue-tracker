@@ -1,15 +1,27 @@
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 
 import { Input } from '@chakra-ui/input';
 import { Textarea } from '@chakra-ui/textarea';
 
 import { ReactComponent as FileIcon } from '@assets/file.svg';
 import { contentsInput, titleInput } from './style';
+import { isInputtedTitleState } from '@store/atoms/newIssue';
 
 function TextBox() {
+  const [isInputtedTitle, setIsInputtedTitle] =
+    useRecoilState(isInputtedTitleState);
+
+  const handleChangeTitle = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    if (!isInputtedTitle && target.value.length > 0) setIsInputtedTitle(true);
+    else if (isInputtedTitle && target.value.length === 0)
+      setIsInputtedTitle(false);
+  };
+
   return (
     <TextBoxWrap>
-      <Input {...titleInput} />
+      <Input {...titleInput} onChange={handleChangeTitle} />
       <Description>
         <Textarea {...contentsInput} />
         <Span>띄어쓰기 포함 \d\d 자</Span>
