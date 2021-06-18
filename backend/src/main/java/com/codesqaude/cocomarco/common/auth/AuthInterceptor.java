@@ -16,7 +16,7 @@ import static com.codesqaude.cocomarco.util.JwtUtils.HEADER_TYPE;
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
 
-    private final String jwtKey;
+    private final JwtKey jwtKey;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -29,7 +29,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (Objects.isNull(auth)) {
             return true;
         }
-        JwtUtils.parser(hetJwt(request), jwtKey);
+        JwtUtils.parser(hetJwt(request), jwtKey.getKey());
         return true;
     }
 
