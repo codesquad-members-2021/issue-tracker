@@ -4,11 +4,11 @@
 ### iOS
 - Ray([@torch-ray](https://github.com/torch-ray))
 ### FE
-- Kyle(@hayoung123)
-- Junami(@skawnkk)
+- Kyle([@hayoung123](https://github.com/hayoung123))
+- Junami([@skawnkk](https://github.com/skawnkk))
 ### BE
-- 이노(@eNoLJ)
-- Jane(@janeljs)
+- 이노([@eNoLJ](https://github.com/eNoLJ))
+- Jane([@janeljs](https://github.com/janeljs))
 
 # IOS
 ### 스텝별 진행상황 및 실행화면
