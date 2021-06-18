@@ -33,42 +33,17 @@ class LabelControlViewController: UIViewController {
         button.addTarget(self, action: #selector(cancelButtonTouched), for: .touchUpInside)
         return button
     }()
-  
-    private lazy var newLabelEditStackView: UIStackView = {
+    
+    private lazy var labelEditStackView: MultipleLineInputStackView = {
         let viewWidth = view.frame.width
         let stackViewFrame = CGRect(x: 0, y: 0, width: viewWidth, height: singleLineHeight * 3)
-        let stackView = UIStackView(frame: stackViewFrame)
-        stackView.backgroundColor = UIColor.white
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let stackView = MultipleLineInputStackView(frame: stackViewFrame)
         
-        let categories = ["제목", "설명", "배경색"]
-        let contentViews: [UIView] = [titleTextfield, descriptionTextfield, backgroundLabel]
+        let titleInputItem = InputLineItem(category: "제목", inputView: titleTextfield)
+        let descriptionInputItem = InputLineItem(category: "설명", inputView: descriptionTextfield)
+        let backgroundColorInputItem = InputLineItem(category: "배경색", inputView: backgroundLabel)
+        stackView.configure(with: [titleInputItem, descriptionInputItem, backgroundColorInputItem])
         
-        categories.enumerated().forEach { (idx, category) in
-            let containerFrame = CGRect(x: 0, y: 0, width: viewWidth, height: singleLineHeight)
-            let container = UIView(frame: containerFrame)
-            
-            let titleLabel = UILabel()
-            titleLabel.text = category
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            container.addSubview(titleLabel)
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
-                titleLabel.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
-            ])
-        
-            let contentView = contentViews[idx]
-            contentView.translatesAutoresizingMaskIntoConstraints = false
-            container.addSubview(contentView)
-            NSLayoutConstraint.activate([
-                contentView.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 5),
-                contentView.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
-                contentView.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
-            ])
-            stackView.addArrangedSubview(container)
-        }
         guard let backgroundEditView = stackView.arrangedSubviews.last else { return stackView }
         
         backgroundEditView.addSubview(randomColorButton)
@@ -161,31 +136,16 @@ class LabelControlViewController: UIViewController {
     }
     
     private func addEditStackView() {
-        view.addSubview(newLabelEditStackView)
+        view.addSubview(labelEditStackView)
         
         NSLayoutConstraint.activate([
-            newLabelEditStackView.heightAnchor.constraint(equalToConstant: singleLineHeight * 3),
-            newLabelEditStackView.topAnchor.constraint(equalTo: topMenuView.safeAreaLayoutGuide.bottomAnchor, constant: 40),
-            newLabelEditStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            newLabelEditStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            labelEditStackView.heightAnchor.constraint(equalToConstant: singleLineHeight * 3),
+            labelEditStackView.topAnchor.constraint(equalTo: topMenuView.safeAreaLayoutGuide.bottomAnchor, constant: 40),
+            labelEditStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            labelEditStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        addLoginStackViewDivisionLine()
     }
-    
-    private func addLoginStackViewDivisionLine() {
-        let borderColor = Colors.border.cgColor
-        let borderWidth: CGFloat = 1
-        let size = CGSize(width: view.frame.width - spacing, height: borderWidth)
-        
-        for i in 1...2 {
-            let line = CALayer()
-            let origin = CGPoint(x: spacing, y: singleLineHeight * CGFloat(i) - borderWidth)
-            line.frame = CGRect(origin: origin, size: size)
-            line.backgroundColor = borderColor
-            newLabelEditStackView.layer.addSublayer(line)
-        }
-    }
-    
+
     private func addLabelPreview() {
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.systemGray5
@@ -193,11 +153,12 @@ class LabelControlViewController: UIViewController {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backgroundView)
         backgroundView.addSubview(previewLabel)
+
         NSLayoutConstraint.activate([
             backgroundView.widthAnchor.constraint(equalToConstant: view.frame.width - spacing * 2),
             backgroundView.heightAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75),
             backgroundView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            backgroundView.topAnchor.constraint(equalTo: newLabelEditStackView.safeAreaLayoutGuide.bottomAnchor, constant: 24),
+            backgroundView.topAnchor.constraint(equalTo: labelEditStackView.safeAreaLayoutGuide.bottomAnchor, constant: 24),
             previewLabel.centerXAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.centerXAnchor),
             previewLabel.centerYAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.centerYAnchor)
         ])

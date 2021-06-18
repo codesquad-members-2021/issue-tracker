@@ -48,6 +48,7 @@
 		E43912F2267C423A003CD344 /* EditLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F1267C423A003CD344 /* EditLabelViewController.swift */; };
 		E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */; };
 		E43912F6267CAE01003CD344 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F5267CAE01003CD344 /* TopMenuView.swift */; };
+		E43912F8267CB3D7003CD344 /* MultipleLineInputStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
@@ -104,6 +105,7 @@
 		E43912F1267C423A003CD344 /* EditLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLabelViewController.swift; sourceTree = "<group>"; };
 		E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		E43912F5267CAE01003CD344 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
+		E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLineInputStackView.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				E43912D326788CC3003CD344 /* ImageBarButton.swift */,
 				E43912C626776D8F003CD344 /* LabelView.swift */,
 				E43912F5267CAE01003CD344 /* TopMenuView.swift */,
+				E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				E43912F0267C3EED003CD344 /* LabelControlViewController.swift in Sources */,
 				E43912DE2678A76D003CD344 /* RequestKeys.swift in Sources */,
 				E42AD102266E52FB0071B436 /* LoginViewController.swift in Sources */,
+				E43912F8267CB3D7003CD344 /* MultipleLineInputStackView.swift in Sources */,
 				E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */,
 				E43912D0267878BF003CD344 /* HexColorConvertable.swift in Sources */,
 				FAC6D88D2671D8A100A9E5F9 /* SocialLoginManagable.swift in Sources */,
