@@ -25,9 +25,15 @@ public class GitHubLoginController {
 
     @GetMapping("/github")
     public ApiResponse<GitHubUserResponse> githubLogin(@RequestParam String code) {
-        logger.debug("code : {} ", code);
+        logger.debug("web code : {} ", code);
         GitHubUserResponse response = loginService.login(code);
         return ApiResponse.ok(response);
     }
 
+    @GetMapping("/github/iOS")
+    public ApiResponse<GitHubUserResponse> githubIOSLogin(@RequestParam String code) {
+        logger.debug("iOS code : {} ", code);
+        GitHubUserResponse response = loginService.loginIOS(code);
+        return ApiResponse.ok(response);
+    }
 }
