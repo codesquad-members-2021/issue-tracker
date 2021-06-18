@@ -10,7 +10,7 @@ import team02.issue_tracker.repository.LabelRepository;
 import team02.issue_tracker.repository.MilestoneRepository;
 
 @RestController
-@RequestMapping("/api/count")
+@RequestMapping("/api/common")
 public class CommonController {
 
     private final IssueRepository issueRepository;
@@ -23,7 +23,7 @@ public class CommonController {
         this.milestoneRepository = milestoneRepository;
     }
 
-    @GetMapping
+    @GetMapping("/count")
     public ApiResult<CountResponse> showAllCount() {
         int openIssueCount = issueRepository.findByOpenTrueAndDeletedFalse().size();
         int closedIssueCount = issueRepository.findByOpenFalseAndDeletedFalse().size();
