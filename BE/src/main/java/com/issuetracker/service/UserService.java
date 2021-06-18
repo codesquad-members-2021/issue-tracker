@@ -95,9 +95,7 @@ public class UserService {
     }
 
     public User findUserByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(
-                () -> new UserNotFoundException("Cannot find user by given username.")
-        );
+        return userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
     }
 
     public UserResponseDTO getUserInfo(Long userId) {

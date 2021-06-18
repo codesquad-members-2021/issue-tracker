@@ -2,14 +2,13 @@ package com.issuetracker.service;
 
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.milestone.MilestoneRepository;
+import com.issuetracker.exception.MilestoneNotFoundException;
 import com.issuetracker.web.dto.response.MilestoneDTO;
 import com.issuetracker.domain.label.LabelRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.web.dto.response.MilestonesResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +44,7 @@ public class MilestoneService {
         if (milestoneId == null) {
             return null;
         }
-        return milestoneRepository.findById(milestoneId).orElseThrow(EntityExistsException::new);
+        return milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
     }
 
     public Milestone findNullableMilestoneByTitle(String title) {
