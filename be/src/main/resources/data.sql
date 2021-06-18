@@ -40,16 +40,16 @@ values (9, '[BE] CI/CD 구축', 'GitHub Action 활용하여 CI/CD 구현', 2, CU
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`label`
 -- -----------------------------------------------------
-insert into label (id, title, description, color_code, text_color)
-VALUES (1, 'BE', '백엔드 작업', '#FF0000', 'black');
-insert into label (id, title, description, color_code, text_color)
-VALUES (2, 'refactor', '리팩토링 필요', '#DC143C', 'black');
-insert into label (id, title, description, color_code, text_color)
-VALUES (3, 'FE', '웹 프런트 작업', '#800000', 'black');
-insert into label (id, title, description, color_code, text_color)
-VALUES (4, 'Bug', '버그 해결 필', '#B22222', 'black');
-insert into label (id, title, description, color_code, text_color)
-VALUES (5, 'iOS', 'iOS 작업', '#8B0000', 'black');
+insert into label (id, title, description, color_code)
+VALUES (1, 'BE', '백엔드 작업', '#FF0000');
+insert into label (id, title, description, color_code)
+VALUES (2, 'refactor', '리팩토링 필요', '#DC143C');
+insert into label (id, title, description, color_code)
+VALUES (3, 'FE', '웹 프런트 작업', '#800000');
+insert into label (id, title, description, color_code)
+VALUES (4, 'Bug', '버그 해결 필', '#B22222');
+insert into label (id, title, description, color_code)
+VALUES (5, 'iOS', 'iOS 작업', '#8B0000');
 
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`issue_has_label`

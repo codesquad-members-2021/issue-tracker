@@ -31,7 +31,7 @@ public class RowMappers {
         label.setTitle(rs.getString("title"));
         label.setDescription(rs.getString("description"));
         label.setColorCode(rs.getString("color_code"));
-        label.setTextColor(rs.getString("text_color"));
+        label.setFontLight(rs.getBoolean("font_light"));
 
         return label;
     };

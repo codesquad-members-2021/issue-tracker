@@ -62,7 +62,7 @@ public class IssueRepository {
 
     public List<Label> findAllLabelsByIssueId(Long issueId) {
         System.out.println(issueId);
-        String query = "select lbl.id, lbl.title, lbl.description, lbl.color_code, lbl.text_color\n" +
+        String query = "select lbl.id, lbl.title, lbl.description, lbl.color_code, lbl.font_light\n" +
                 "from issue iss\n" +
                 "inner join issue_has_label\n" +
                 "on iss.id = issue_has_label.issue_id\n" +
