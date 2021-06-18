@@ -18,7 +18,7 @@ enum UserAgent {
     }
 
     public static boolean isIOS(String userAgent) {
-        return IOS.userAgent.equals(userAgent) || POSTMAN.userAgent.equals(userAgent);
+        return IOS.userAgent.equals(userAgent);
     }
 }
 

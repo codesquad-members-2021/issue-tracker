@@ -34,6 +34,12 @@ public class GitHubOAuth implements OAuth {
 
     @Override
     public AccessTokenResponseDTO getToken(String code, String userAgent) {
+        System.out.println("코드: -----------------------" + code);
+        System.out.println("에이전트: -----------------------" + userAgent);
+        System.out.println("아이디: -----------------------" + gitHubService.getClientId(userAgent));
+        System.out.println("시크릿: -----------------------" + gitHubService.getClientSecret(userAgent));
+
+
         AccessTokenRequestDTO accessTokenRequest = AccessTokenRequestDTO.builder()
                 .clientId(gitHubService.getClientId(userAgent))
                 .clientSecret(gitHubService.getClientSecret(userAgent))
@@ -52,6 +58,7 @@ public class GitHubOAuth implements OAuth {
 
     @Override
     public OAuthUserResponseDTO getUserInfo(String accessToken) {
+        System.out.println("토큰: -----------------------" + accessToken);
         return webClient.get()
                 .uri(userUri)
                 .accept(MediaType.APPLICATION_JSON)

@@ -41,6 +41,9 @@ public class MilestoneService {
     }
 
     public Milestone findMilestoneById(Long milestoneId) {
+        if (milestoneId == null) {
+            return null;
+        }
         return milestoneRepository.findById(milestoneId).orElseThrow(EntityExistsException::new);
     }
 
