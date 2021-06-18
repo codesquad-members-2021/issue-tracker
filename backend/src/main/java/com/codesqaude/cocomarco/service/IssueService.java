@@ -1,8 +1,8 @@
 package com.codesqaude.cocomarco.service;
 
-import com.codesqaude.cocomarco.common.exception.NotFoundIssueException;
-import com.codesqaude.cocomarco.common.exception.NotFoundMilestoneException;
-import com.codesqaude.cocomarco.common.exception.NotFoundUserException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundIssueException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundMilestoneException;
+import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.issue.IssueRepository;
 import com.codesqaude.cocomarco.domain.issue.IssueSearchRepository;
 import com.codesqaude.cocomarco.domain.issue.model.Assignment;

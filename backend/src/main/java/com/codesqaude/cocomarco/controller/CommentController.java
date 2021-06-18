@@ -1,5 +1,7 @@
 package com.codesqaude.cocomarco.controller;
 
+import com.codesqaude.cocomarco.common.auth.Auth;
+import com.codesqaude.cocomarco.common.auth.UserId;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentRequest;
 import com.codesqaude.cocomarco.domain.comment.dto.CommentResponseWrapper;
 import com.codesqaude.cocomarco.service.CommentService;
@@ -8,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import static com.codesqaude.cocomarco.domain.user.User.SAMPLE_UUID;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/issues/{issueId}/comments")
@@ -22,25 +24,25 @@ public class CommentController {
         return commentService.showAll(issueId, pageable);
     }
 
+    @Auth
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void make(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest) {
-        //todo user id
-        commentService.create(issueId, SAMPLE_UUID, commentRequest);
+    public void make(@PathVariable Long issueId, @RequestBody CommentRequest commentRequest, @UserId UUID userId) {
+        commentService.create(issueId, userId, commentRequest);
     }
 
+    @Auth
     @PutMapping("/{commentId}")
     public void modify(@PathVariable Long issueId,
                        @PathVariable Long commentId,
-                       @RequestBody CommentRequest commentRequest) {
-        //todo user id
-        commentService.modify(SAMPLE_UUID, commentRequest, commentId);
+                       @RequestBody CommentRequest commentRequest, @UserId UUID userId) {
+        commentService.modify(userId, commentRequest, commentId);
     }
 
+    @Auth
     @DeleteMapping("/{commentId}")
     public void delete(@PathVariable Long issueId,
-                       @PathVariable Long commentId) {
-        //todo user id
-        commentService.delete(SAMPLE_UUID, commentId);
+                       @PathVariable Long commentId, @UserId UUID userId) {
+        commentService.delete(userId, commentId);
     }
 }
