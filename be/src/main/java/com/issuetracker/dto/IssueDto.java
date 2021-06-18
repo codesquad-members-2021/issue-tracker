@@ -12,6 +12,7 @@ public class IssueDto {
     private Long id;
     private String title;
     private String description;
+    private boolean closed;
 
     private User assignee;
     private User author;
@@ -28,12 +29,11 @@ public class IssueDto {
     @JsonProperty("milestone_title")
     private String milestoneTitle;
 
-    public IssueDto(Long id, String title, String description, User assignee,
-                    User author, List<Label> labelList, Long issueNumber,
-                    LocalDateTime createdTime, String milestoneTitle) {
+    public IssueDto(Long id, String title, String description, boolean closed, User assignee, User author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.closed = closed;
         this.assignee = assignee;
         this.author = author;
         this.labelList = labelList;
@@ -58,6 +58,7 @@ public class IssueDto {
                 issue.getId(),
                 issue.getTitle(),
                 issue.getDescription(),
+                issue.isClosed(),
                 assignee,
                 author,
                 labels,
@@ -77,6 +78,10 @@ public class IssueDto {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
     public User getAssignee() {

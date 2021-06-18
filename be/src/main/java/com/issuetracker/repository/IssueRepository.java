@@ -94,25 +94,25 @@ public class IssueRepository {
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getClosed());
         }
 
-        if (searchCondition.getAuthorUserId() != null){
+        if (searchCondition.getAuthor() != null){
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where author_user_id = ? ";
-            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAuthorUserId());
+            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAuthor());
         }
 
-        if (searchCondition.getMilestoneId() != null){
+        if (searchCondition.getMilestone() != null){
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where milestone_id = ? ";
-            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getMilestoneId());
+            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getMilestone());
         }
 
-        if (searchCondition.getAssigneeUserId() != null){
+        if (searchCondition.getAssignee() != null){
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where assignee = ? ";
-            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAssigneeUserId());
+            return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAssignee());
         }
 
         logger.info("not matching anything");

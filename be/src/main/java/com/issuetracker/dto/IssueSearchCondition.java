@@ -4,53 +4,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class IssueSearchCondition {
     private Boolean closed;
-    private Long authorUserId;
-    private Long labelId;
-    private Long milestoneId;
-    private Long assigneeUserId;
+    private Long author;
+    private Long label;
+    private Long milestone;
+    private Long assignee;
 
-    @JsonProperty("closed")
     public Boolean getClosed() {
         return closed;
-    }
-
-    @JsonProperty("author_id")
-    public Long getAuthorUserId() {
-        return authorUserId;
-    }
-
-    @JsonProperty("label_id")
-    public Long getLabelId() {
-        return labelId;
-    }
-
-    @JsonProperty("milestone_id")
-    public Long getMilestoneId() {
-        return milestoneId;
-    }
-
-    @JsonProperty("assignee_id")
-    public Long getAssigneeUserId() {
-        return assigneeUserId;
     }
 
     public void setClosed(Boolean closed) {
         this.closed = closed;
     }
 
-    public void setAuthorUserId(Long authorUserId) {
-        this.authorUserId = authorUserId;
+    public Long getAuthor() {
+        return author;
     }
 
-    public void setLabelId(Long labelId) {
-        this.labelId = labelId;
+    public void setAuthor(Long author) {
+        this.author = author;
     }
 
-    public void setMilestoneId(Long milestoneId) {
-        this.milestoneId = milestoneId;
+    public Long getLabel() {
+        return label;
     }
 
-    public void setAssigneeUserId(Long assigneeUserId) {
-        this.assigneeUserId = assigneeUserId;
+    public void setLabel(Long label) {
+        this.label = label;
+    }
+
+    public Long getMilestone() {
+        return milestone;
+    }
+
+    public void setMilestone(Long milestone) {
+        this.milestone = milestone;
+    }
+
+    public Long getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(Long assignee) {
+        this.assignee = assignee;
     }
 }
