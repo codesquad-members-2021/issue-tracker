@@ -238,7 +238,8 @@ final class AddLabelViewController: UIViewController {
     }
     
     private func postNewLabel(_ newLabel: NewLabelDTO) {
-        networkManager?.post(requestBody: newLabel, completion: { [weak self] result in
+        let newLabelEndpoint = EndPoint.label.path()
+        networkManager?.post(endpoint: newLabelEndpoint, requestBody: newLabel, completion: { [weak self] result in
             switch result {
             case .success(_):
                 self?.dismiss(animated: true, completion: {
@@ -286,10 +287,8 @@ final class AddLabelViewController: UIViewController {
     private func setNetworkManager() {
         let loginInfo = LoginInfo.shared
         guard let jwt = loginInfo.jwt else { return }
-        let url = EndPoint.label.fullAddress()
         let headers = [Header.authorization.key(): jwt.description]
-        let requestManager = RequestManager(url: url, headers: headers)
-        networkManager = NetworkManager(requestManager: requestManager)
+        networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
 }
 

@@ -9,20 +9,22 @@ import Foundation
 import Alamofire
 
 protocol NetworkManagerOperations {
-    func get<T: Decodable>(queryParameters: [String: Any]?, completion: @escaping (Result<T, NetworkError>) -> Void)
-    func post<T: Encodable>(requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void)
+    func get<T: Decodable>(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<T, NetworkError>) -> Void)
+    func delete(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<Void, NetworkError>) -> Void)
+    func post<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void)
 }
 
 final class NetworkManager: NetworkManagerOperations {
     
     private let requestManager: RequestManager
     
-    init(requestManager: RequestManager) {
+    init(baseAddress: String, headers: [String: String]? = nil) {
+        let requestManager = RequestManager(baseAddress: baseAddress, headers: headers)
         self.requestManager = requestManager
     }
 
-    func get<T: Decodable>(queryParameters: [String: Any]?, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        let request = requestManager.create(method: .get, queryParameters: queryParameters)
+    func get<T: Decodable>(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        let request = requestManager.create(endpoint: endpoint, method: .get, queryParameters: queryParameters)
         
         request.responseDecodable(of: T.self) { [weak self] response in
                 switch response.result {
@@ -36,9 +38,17 @@ final class NetworkManager: NetworkManagerOperations {
         }
     }
     
-    func post<T: Encodable>(requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        let request = requestManager.create(method: .post, encodableParameters: requestBody)
-        
+    func delete(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        let request = requestManager.create(endpoint: endpoint, method: .delete, queryParameters: queryParameters)
+        executeVoidRequest(request: request, completion: completion)
+    }
+    
+    func post<T: Encodable>(endpoint: String, requestBody: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        let request = requestManager.create(endpoint: endpoint, method: .post, encodableParameters: requestBody)
+        executeVoidRequest(request: request, completion: completion)
+    }
+    
+    private func executeVoidRequest(request: DataRequest, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         request.response { [weak self] response in
                 switch response.result {
                 case .success(_):
