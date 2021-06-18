@@ -33,6 +33,7 @@
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
+		B3CBD19B267C359500F8D733 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B3CBD19A267C359500F8D733 /* .swiftlint.yml */; };
 		B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C3267735CC000F02F4 /* IssueList.swift */; };
 		B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C826773AEA000F02F4 /* NewIssue.swift */; };
 		B3E01193267A0B44001155D4 /* AddLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */; };
@@ -127,6 +128,7 @@
 		B3B559FE266E096000901C55 /* issue-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "issue-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3CBD19A267C359500F8D733 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B3D7D0C3267735CC000F02F4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		B3D7D0C826773AEA000F02F4 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
 		B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLabelViewModel.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		B3B559D4266E095E00901C55 = {
 			isa = PBXGroup;
 			children = (
+				B3CBD19A267C359500F8D733 /* .swiftlint.yml */,
 				B3B559DF266E095E00901C55 /* issue-tracker */,
 				B3B559F6266E096000901C55 /* issue-trackerTests */,
 				B3B55A01266E096000901C55 /* issue-trackerUITests */,
@@ -433,6 +436,7 @@
 				B3B559D9266E095E00901C55 /* Sources */,
 				B3B559DA266E095E00901C55 /* Frameworks */,
 				B3B559DB266E095E00901C55 /* Resources */,
+				B3CBD199267C34F200F8D733 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -541,6 +545,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3CBD19B267C359500F8D733 /* .swiftlint.yml in Resources */,
 				D0A88E112676563E005877F6 /* Modal.storyboard in Resources */,
 				B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */,
 				B3B559EA266E096000901C55 /* Assets.xcassets in Resources */,
@@ -609,6 +614,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B3CBD199267C34F200F8D733 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		F949EFDA4F0A02CAD51691D6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
