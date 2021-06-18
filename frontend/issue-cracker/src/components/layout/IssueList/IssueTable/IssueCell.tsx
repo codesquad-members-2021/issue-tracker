@@ -18,9 +18,9 @@ const IssueCell = (): JSX.Element => {
 
   return (
     <S.IssueCell>
-      <IssueCellStyle>
+      <LeftBox>
         <CheckBoxes />
-        <IssueContent>
+        <IssueCellContent>
           <Link
             to={{
               pathname: '/main/issue-detail/1',
@@ -49,24 +49,35 @@ const IssueCell = (): JSX.Element => {
           </Link>
           <T.TextSmall color="#6E7191">
             <IssueLower>
-              <IssueID>#1</IssueID>이 이슈가8분전 ,ink-0님에 의해 작성되었습니다
+              <IssueID>#1</IssueID>
+              <IssueContent>
+                이 이슈가8분전 ,ink-0님에 의해 작성되었습니다
+              </IssueContent>
               <IssueMileStone>마스터즈 코스</IssueMileStone>
             </IssueLower>
           </T.TextSmall>
-        </IssueContent>
-      </IssueCellStyle>
-      {profileURL && <P.ProfileImgLarge src={profileURL} />}
+        </IssueCellContent>
+      </LeftBox>
+      <RightBox>
+        {profileURL && <P.ProfileImgSmall src={profileURL} />}
+      </RightBox>
     </S.IssueCell>
   );
 };
 
 export default IssueCell;
 
-const IssueCellStyle = styled.div`
+const LeftBox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const IssueContent = styled.div`
+const RightBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 40px;
+`;
+const IssueCellContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -86,7 +97,11 @@ const IssueLower = styled.div`
   flex-direction: row;
 `;
 const IssueID = styled.div``;
+const IssueContent = styled.div`
+  margin: 0 16px;
+`;
 const IssueMileStone = styled.div``;
 const IssueTitle = styled.div`
   font-weight: 600;
+  margin: 0 9px;
 `;
