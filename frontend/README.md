@@ -21,6 +21,7 @@
 
 ### 로그인 페이지 (시작 페이지)
 - Github OAuth 로그인 구현
+
 ![login(시작) 페이지](https://user-images.githubusercontent.com/65105537/122518922-d126b980-d04c-11eb-9e19-241a978734ff.gif)
 
 <br>
@@ -28,6 +29,7 @@
 ### 이슈 목록 페이지
 - Dropdown 필터 구현
 - `이슈 작성` 버튼 클릭 시 이슈 작성 페이지로 이동(react-router)
+
 ![issues 페이지](https://user-images.githubusercontent.com/65105537/122519049-f9aeb380-d04c-11eb-8181-f70b472fb42e.gif)
 
 
@@ -35,6 +37,7 @@
 
 ### 이슈 작성 페이지
 - Markdown으로 작성 가능한 Editor 구현
+
 ![addIssue 페이지](https://user-images.githubusercontent.com/65105537/122519129-134ffb00-d04d-11eb-8a03-17fbda0f73b9.gif)
 
 <br>
