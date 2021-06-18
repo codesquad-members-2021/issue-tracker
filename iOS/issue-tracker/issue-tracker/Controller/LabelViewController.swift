@@ -12,11 +12,11 @@ import RxCocoa
 class LabelViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
-    
+
     var labelListViewModel = LabelListViewModel(networkManager: NetworkManager())
     var addLabelButton = AddLabelButton()
     var bag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         seuptNavigationBar()

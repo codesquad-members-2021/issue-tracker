@@ -20,10 +20,10 @@ class IssueFilterViewController: UIViewController {
     var authors = ["Zeke", "Soo"]
     private let issueFilter = ["열린 이슈", "내가 작성한 이슈", "나에게 할당된 이슈", "내가 댓글을 남긴 이슈", "닫힌 이슈"]
     private let issueLabels = ["레이블 없음", "bug", "feature"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = "필터"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소",
                                                                 style: .plain,

@@ -18,7 +18,7 @@ class MilestoneViewController: UIViewController {
         tableView.register(MilestoneTableViewCell.self, forCellReuseIdentifier: MilestoneTableViewCell.reuseId)
         return tableView
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

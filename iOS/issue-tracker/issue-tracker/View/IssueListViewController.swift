@@ -11,7 +11,7 @@ import SnapKit
 class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
-    
+
     let addIssueButton = AddIssueButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
     let filterBarButton = FilterBarButton()
     let selectBarButton = SelectBarButton()
@@ -23,7 +23,7 @@ class IssueListViewController: UIViewController {
         searchController.searchBar.showsBookmarkButton = true
         return searchController
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
@@ -44,7 +44,7 @@ class IssueListViewController: UIViewController {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
     }
-    
+
     @objc func selectButtonTapped() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
