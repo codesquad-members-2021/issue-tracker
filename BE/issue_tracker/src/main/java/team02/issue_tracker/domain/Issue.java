@@ -25,8 +25,8 @@ public class Issue {
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private LocalDateTime createdTime;
-    private boolean open;
-    private boolean deleted;
+    private boolean isOpen;
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
@@ -45,7 +45,7 @@ public class Issue {
     public Issue(String title, User writer, boolean open) {
         this.title = title;
         this.writer = writer;
-        this.open = open;
+        this.isOpen = open;
         this.createdTime = LocalDateTime.now();
     }
 
@@ -54,17 +54,17 @@ public class Issue {
     }
 
     public void close() {
-        if (!open) {
+        if (!isOpen) {
             throw new IllegalStatusException("열린 이슈가 아닙니다.");
         }
-        open = false;
+        isOpen = false;
     }
 
     public void open() {
-        if (open) {
+        if (isOpen) {
             throw new IllegalStatusException("닫힌 이슈가 아닙니다.");
         }
-        open = true;
+        isOpen = true;
     }
 
     public void editTitle(String title) {
@@ -84,7 +84,7 @@ public class Issue {
     }
 
     public void delete() {
-        deleted = true;
+        isDeleted = true;
     }
 
     public List<Comment> getComments() {

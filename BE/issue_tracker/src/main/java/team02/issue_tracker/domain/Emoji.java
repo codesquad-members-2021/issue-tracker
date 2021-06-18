@@ -19,7 +19,7 @@ public class Emoji {
     private Long id;
 
     private String name;
-    private boolean deleted;
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "emoji")
     private List<CommentEmoji> commentEmojis = new ArrayList<>();

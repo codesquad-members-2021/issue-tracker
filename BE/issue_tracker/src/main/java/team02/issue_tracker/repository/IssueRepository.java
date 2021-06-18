@@ -10,12 +10,12 @@ import java.util.Optional;
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
 
-    List<Issue> findByDeletedFalse();
+    List<Issue> findByIsDeletedFalse();
 
-    Optional<Issue> findByIdAndDeletedFalse(Long id);
+    Optional<Issue> findByIdAndIsDeletedFalse(Long id);
 
-    Long countByOpenTrueAndDeletedFalse();
+    Long countByIsOpenTrueAndIsDeletedFalse();
 
-    Long countByOpenFalseAndDeletedFalse();
+    Long countByIsOpenFalseAndIsDeletedFalse();
 
 }
