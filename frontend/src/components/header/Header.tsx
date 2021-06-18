@@ -8,6 +8,11 @@ const useStyle = makeStyles(() => ({
     fontFamily: "'Raleway', sans-serif",
     fontSize: '30px',
   },
+  modal:{
+    position: 'absolute',
+    top: 50
+
+  }
 }));
 
 function Header() {
@@ -23,6 +28,7 @@ function Header() {
   const toolbarStyle = {
     padding: '0 80px',
   };
+
   return (
     <AppBar position='static' color='transparent'>
       <Toolbar style={toolbarStyle}>

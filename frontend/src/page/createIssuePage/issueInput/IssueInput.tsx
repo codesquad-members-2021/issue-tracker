@@ -80,7 +80,7 @@ const IssueInputBlock = styled.div`
   }
   .input__lengthCheck{
     position: absolute;
-    right: 280px;
-    bottom: 104px;
+    right: 21%;
+    bottom: 20%;
   }
 `;
