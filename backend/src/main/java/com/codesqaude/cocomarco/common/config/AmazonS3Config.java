@@ -1,4 +1,4 @@
-package com.codesqaude.cocomarco.util;
+package com.codesqaude.cocomarco.common.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

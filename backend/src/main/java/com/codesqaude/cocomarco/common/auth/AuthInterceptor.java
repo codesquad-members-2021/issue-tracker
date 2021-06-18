@@ -18,13 +18,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if(HttpMethod.OPTIONS.matches(request.getMethod())){
+        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
             return true;
         }
 
         Auth auth = ((HandlerMethod) handler).getMethodAnnotation(Auth.class);
         if (Objects.isNull(auth)) {
-            return false;
+            return true;
         }
         JwtUtils.validateJwt(hetJwt(request), key);
         return true;

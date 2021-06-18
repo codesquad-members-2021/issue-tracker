@@ -1,4 +1,4 @@
-package com.codesqaude.cocomarco.util;
+package com.codesqaude.cocomarco.common.config;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
