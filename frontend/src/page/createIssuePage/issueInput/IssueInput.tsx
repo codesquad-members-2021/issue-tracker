@@ -3,18 +3,16 @@ import styled from 'styled-components';
 import { GiPaperClip } from 'react-icons/gi';
 interface inputProps {
   titleRef: RefObject<HTMLInputElement>;
+  comment: string;
+  setComment:(comment:string)=>void
 }
-export default function IssueInput({ titleRef }: inputProps): ReactElement {
-  // const [title, setTitle] = useState('');
-  const [comment, setComment] = useState('');
+export default function IssueInput({ titleRef, comment, setComment }: inputProps): ReactElement {
+  const [length, setLength] = useState(0)
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value.length);
     setComment(e.target.value);
+    setLength(e.target.value.length);
   };
-  // const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   console.log(e.target.value);
-  //   setTitle(e.target.value);
-  // };
+
   return (
     <IssueInputBlock>
       <input type='text' className='input__title' placeholder='제목' ref={titleRef} />
@@ -32,6 +30,7 @@ export default function IssueInput({ titleRef }: inputProps): ReactElement {
           </label>
           <input type='file' id='add_file' className='input__file' accept='.png, .jpg, .jpeg' />
         </div>
+        <div className='input__lengthCheck'>공백포함 {length}자</div>
       </div>
     </IssueInputBlock>
   );
@@ -78,5 +77,10 @@ const IssueInputBlock = styled.div`
   }
   .input__file {
     height: 0px;
+  }
+  .input__lengthCheck{
+    position: absolute;
+    right: 280px;
+    bottom: 104px;
   }
 `;
