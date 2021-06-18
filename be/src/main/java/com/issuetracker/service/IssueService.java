@@ -3,6 +3,7 @@ package com.issuetracker.service;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
 import com.issuetracker.dto.IssueRequestDto;
+import com.issuetracker.dto.IssueSearchCondition;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
@@ -48,6 +49,14 @@ public class IssueService {
         }
 
         return new ResponseStatusDto("success");
+    }
+
+    public List<IssueDto> searchIssuesByConditions(IssueSearchCondition searchCondition) {
+        return issueRepository.findIssuesByConditions(searchCondition).stream()
+                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
+                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
+                .collect(Collectors.toList());
+
     }
 }
 

@@ -3,6 +3,7 @@ package com.issuetracker.controller;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.IssueDto;
 import com.issuetracker.dto.IssueRequestDto;
+import com.issuetracker.dto.IssueSearchCondition;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.oauth.User;
 import com.issuetracker.service.IssueService;
@@ -22,9 +23,11 @@ public class IssueController {
     }
 
     @GetMapping
-    public List<IssueDto> viewAllIssues() {
-        return issueService.getAllIssues();
+    public List<IssueDto> viewAllIssues(IssueSearchCondition searchCondition) {
+//        return issueService.getAllIssues();
+        return issueService.searchIssuesByConditions(searchCondition);
     }
+
 
     @PostMapping
     public ResponseStatusDto create(@RequestBody IssueRequestDto issue, @RequestAttribute User user){
