@@ -1,13 +1,41 @@
 import styled from 'styled-components';
 import { useEffect, useState, useRef } from 'react'
 import ResponsiveLayout from '../components/common/ResponsiveLayout';
-import Plus from '../components/common/icons/plus';
+import Plus from '../components/common/icons/Plus';
+import Close from '../components/common/icons/Close';
+import DropDown from 'components/common/DropDown';
 
 const AddIssuePage = () => {
   const [lastPressedKey, setLastPressedKey] = useState<any>();
   const [accumulateLetters, setAccumulateLetters] = useState<any>([]);
   const [textBlock, setTextBlock] = useState<any>({});
   const $OutputTextBox = useRef<any>()
+  const AssigneeFilterInfo = {
+    name: "담당자",
+    header: "담당자 추가",
+    elements: [
+      {contents: "빰빰", value: "PPAMPPAM"},
+      {contents: "Dico", value: "DICO"}
+    ]
+  }
+  const LabelFilterInfo = {
+    name: "레이블",
+    header: "레이블 추가",
+    elements: [
+      {contents: "documentation", value: "DOCUMENTATION"},
+      {contents: "frontend", value: "FRONTEND"},
+      {contents: "backend", value: "BACKEND"},
+      {contents: "ios", value: "IOS"}
+    ]
+  }
+  const MilestoneFilterInfo = {
+    name: "마일스톤",
+    header: "마일스톤 추가",
+    elements: [
+      {contents: "마스터즈 코스", value: "MASTERS_COURSE"},
+      {contents: "이슈 트래커", value: "ISSUE_TRACKER"}
+    ]
+  }
 
   useEffect(() => {
     console.log("textBlock", textBlock);
@@ -15,14 +43,11 @@ const AddIssuePage = () => {
 
   useEffect(() => {
     $OutputTextBox.current.innerHTML = "";
-    let template = '';
     accumulateLetters.forEach((block) => {
-      // $OutputTextBox.current.insertAdjacentHTML("beforeend", block.tag);
-      template += block.tag;
+      $OutputTextBox.current.insertAdjacentHTML("beforeend", block.tag);
     });
-    $OutputTextBox.current.innerHTML = template;
-
-  }, [accumulateLetters?.slice(-1)[0]])
+    console.log("accumulateLetters",accumulateLetters)
+  }, [accumulateLetters?.slice(-1)[0]]) //제일 최근에 추가된 요소(마지막 요소)의 tag만 비교한다.
 
   const inspectLastPressedKey = (curKey) => {
     if (curKey === " " && lastPressedKey === "-") {
@@ -94,15 +119,16 @@ const AddIssuePage = () => {
       </ProfilePictureBlock>
       <ContentBlock>
         <InputLayer>
-          <TitleInput type={"text"} placeholder={"제목"} />
+          <TitleInput
+            type={"text"}
+            placeholder={"제목"}
+          />
           <CommentLayer>
             <CommentInput
               placeholder={"코멘트를 입력하세요"}
               onKeyDown={handleKeyDownEvent}
             />
-            <CommentOutput ref={$OutputTextBox}>
-              {/* {textBlock.contents} */}
-            </CommentOutput>
+            <CommentOutput ref={$OutputTextBox}/>
           </CommentLayer>
           <AddFileLayer>
             <AddFile type={"file"}/>
@@ -110,20 +136,23 @@ const AddIssuePage = () => {
         </InputLayer>
         <OptionBlock>
           <OptionLayer>
-            <div>담당자</div>
+            <DropDown info={AssigneeFilterInfo}/>
             <button><Plus/></button>
           </OptionLayer>
           <OptionLayer>
-            <div>레이블</div>
+            <DropDown info={LabelFilterInfo}/>
             <button><Plus/></button>
           </OptionLayer>
           <OptionLayer>
-            <div>마일스톤</div>
+            <DropDown info={MilestoneFilterInfo}/>
             <button><Plus/></button>
           </OptionLayer>
         </OptionBlock>
       </ContentBlock>
-      <UploadButton>완료</UploadButton>
+      <ButtonBlock>
+        <CancelButton><Close/>작성 취소</CancelButton>
+        <UploadButton>완료</UploadButton>
+      </ButtonBlock>
     </AddIssueLayout>
   )
 }
@@ -140,7 +169,6 @@ const AddIssueLayout = styled(ResponsiveLayout)`
 `
 const TitleBlock = styled.div`
 `
-
 const ProfilePictureBlock = styled.div``
 
 const ContentBlock = styled.div`
@@ -258,6 +286,25 @@ const OptionLayer = styled.div`
     border-top: 1px solid #D9DBE9;
   }
 `
+const ButtonBlock = styled.div`
+  
+`
+
+const CancelButton = styled.button`
+  border: none;
+  background-color: transparent;
+  width: 100px;
+  height: 32px;
+  color: #6E7191;
+  cursor: pointer;
+  font-weight: bold;
+
+  position: absolute;
+  top: 74rem;
+  left: 100rem;
+
+`
+
 const UploadButton = styled.button`
   width: 24rem;
   height: 5.6rem;

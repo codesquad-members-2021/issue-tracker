@@ -20,13 +20,13 @@ function App() {
         </RecoilRoot>
       */}
       { 
-        window.location.pathname !== "/signin" 
+        window.location.pathname !== "/" 
         && <Header />
       }
       <BrowserRouter>
-        <Route exact path="/" component={AddIssuePage} />
+        <Route exact path="/" component={SigninPage} />
         <Route path="/main" component={MainPage} />
-        <Route path="/signin" component={SigninPage} />
+        <Route path="/add/issue" component={AddIssuePage} />
         <Route path="/auth/github/callback" component={OAuthCallbackPage} />
         <Route path="/issues" component={IssueListPage} />
       </BrowserRouter>
