@@ -2,7 +2,7 @@ package com.issuetracker.service;
 
 import com.issuetracker.auth.OAuth;
 import com.issuetracker.auth.dto.AccessTokenResponseDTO;
-import com.issuetracker.auth.dto.UserAgentDTO;
+import com.issuetracker.auth.dto.HostDTO;
 import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.user.User;
@@ -33,8 +33,8 @@ public class UserService {
         return userRepository.findAllById(assigneeIdList);
     }
 
-    public UserResponseDTO login(String code, UserAgentDTO userAgent) {
-        AccessTokenResponseDTO token = oauth.getToken(code, userAgent.getUserAgent());
+    public UserResponseDTO login(String code, HostDTO host) {
+        AccessTokenResponseDTO token = oauth.getToken(code, host.getHost());
         OAuthUserResponseDTO userInfo = oauth.getUserInfo(token.getAccessToken());
         if (verifyUser(userInfo.getLogin())) {
             User user = findUserByUserName(userInfo.getLogin());
