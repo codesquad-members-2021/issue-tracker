@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CommentType } from 'components/common/tabModal/tapDataType';
 import Comment from 'page/detailIssuePage/commentList/Comment';
 import CommentInput from './CommentInput';
+import PrimaryButton from 'components/atom/PrimaryButton';
 
 interface Props {
   comments: Array<CommentType> | [];
@@ -14,8 +15,17 @@ export default function CommentList({ comments }: Props) {
     <CommentListBlock>
       {commentList}
       <CommentInput />
+      <div className='comment__create-btn'>
+        <PrimaryButton value='+ 코멘트 작성' />
+      </div>
     </CommentListBlock>
   );
 }
 
-const CommentListBlock = styled.div``;
+const CommentListBlock = styled.div`
+  margin-right: 4rem;
+  .comment__create-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;

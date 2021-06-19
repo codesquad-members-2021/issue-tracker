@@ -44,7 +44,7 @@ const CommentInputBlock = styled.div`
   }
   .comment__input {
     position: relative;
-    width: 90%;
+    width: 100%;
     background-color: ${({ theme }) => theme.color.inputBg};
     border-radius: 14px;
   }
