@@ -12,7 +12,17 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
 
+    private Milestone findMilestone(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId).orElseThrow(RuntimeException::new);
+    }
+
     public void createMilestone(MilestoneRequestDTO milestoneRequestDTO) {
         milestoneRepository.save(Milestone.createMilestone(milestoneRequestDTO));
+    }
+
+    public void updateMilestone(Long milestoneId, MilestoneRequestDTO milestoneRequestDTO) {
+        Milestone milestone = findMilestone(milestoneId);
+        milestone.updateMilestone(milestoneRequestDTO);
+        milestoneRepository.save(milestone);
     }
 }

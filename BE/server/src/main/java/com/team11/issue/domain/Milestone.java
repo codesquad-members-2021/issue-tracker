@@ -32,4 +32,10 @@ public class Milestone {
                 .description(milestoneRequestDTO.getDescription())
                 .build();
     }
+
+    public void updateMilestone(MilestoneRequestDTO milestoneRequestDTO) {
+        this.title = milestoneRequestDTO.getTitle();
+        this.description = milestoneRequestDTO.getDescription();
+        this.deadLineDate = milestoneRequestDTO.getDeadLineDate();
+    }
 }
