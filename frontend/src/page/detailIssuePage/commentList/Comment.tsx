@@ -51,7 +51,7 @@ const CommentBlock = styled.div`
   .comment {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 90%;
     height: 125px;
     border: 1px solid #d9dbe9;
     border-radius: 16px;

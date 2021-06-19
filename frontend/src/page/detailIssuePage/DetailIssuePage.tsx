@@ -66,16 +66,8 @@ const sampleData = {
       owner: true,
     },
     {
-      id: 2,
+      id: 4,
       userName: 'hayoung',
-      comment: '코멘트 샘플 데이터',
-      createdDateTime: '2021-06-19T21:37:13.029',
-      author: false,
-      owner: false,
-    },
-    {
-      id: 2,
-      userName: 'junami',
       comment: '코멘트 샘플 데이터',
       createdDateTime: '2021-06-19T21:37:13.029',
       author: false,
