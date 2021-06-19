@@ -9,7 +9,7 @@ type InputFieldType = {
   [x: string]: any;
 }
 
-const InputField = ({ defaultValue, label, width, ...props }: InputFieldType) => {
+const InputField = ({ defaultValue, label, width, endAdornment, ...props }: InputFieldType) => {
   const classes = inputStyles();
   return (
     <TextField
@@ -18,10 +18,10 @@ const InputField = ({ defaultValue, label, width, ...props }: InputFieldType) =>
       className={classes.title}
       style={{ marginBottom: '16px', width }}
       defaultValue={defaultValue}
-    
+      {...props}
       InputProps={{
         disableUnderline: true,
-        ...props
+        endAdornment: endAdornment
       }}
     />
   )

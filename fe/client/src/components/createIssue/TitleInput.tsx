@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputField from '@/components/common/InputField';
+import { issueCommentInputAtom, issueTitleInputAtom } from '@components/common/atoms/issueInputAtom';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import API from '@/utils/API';
 import useDebounceTyping from '@/utils/hook/useDebounce';
 import ClipIcon from '@/Icons/Clip.svg';
+import useRecoilInput from '@/utils/hook/useRecoilInput';
 
 const TitleInput = () => {
   const classes = inputStyles();
   const [debouncedCount, setDebounceCount] = useDebounceTyping<number>(0, { start: 500, end: 2000 });
+  const titleInputState = useRecoilInput(issueTitleInputAtom);
+  const { value: commentInputValue, onChange: commentOnChange } = useRecoilInput(issueCommentInputAtom);
+
   const handleChangeTyping = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setDebounceCount(event.target.value.length);
+    commentOnChange(event)
   }, []);
 
   const handleChangeFile = async (event: React.ChangeEvent<any>) => {
@@ -21,7 +27,8 @@ const TitleInput = () => {
     formData.append("fileName", event.target.files[0].name);
     try {
       const data = await API.post.files(formData);
-      console.log(data)
+      const fileAddData = `\n[${data.name}](${data.path})`;
+      commentOnChange(event, fileAddData);
     } catch (e) {
       console.log(e);
     }
@@ -29,7 +36,7 @@ const TitleInput = () => {
 
   return (
     <InputWrapper>
-      <InputField />
+      <InputField {...titleInputState} />
       <TextAreaWrapper>
         <TextField
           label="코멘트를 입력하세요"
@@ -38,6 +45,7 @@ const TitleInput = () => {
           className={classes.desc}
           variant="filled"
           onChange={handleChangeTyping}
+          value={commentInputValue}
           InputProps={{
             disableUnderline: true
           }}

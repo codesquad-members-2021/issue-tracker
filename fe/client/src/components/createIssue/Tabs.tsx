@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components';
-import FilterTab from '@components/common/FilterTab';
-import { filterAtom, FilterBooleanType } from '@components/common/atoms/filterAtom';
+import { filterModalAtom, FilterBooleanType } from '@components/common/atoms/filterAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import PlusIcon from '@/Icons/Plus.svg';
+import FilterItem from './FilterItem';
 
 const tabItems = [
   { name: '담당자', title: 'manager' },
@@ -11,10 +11,8 @@ const tabItems = [
   { name: '마일스톤', title: 'milestone' }
 ];
 
-const mockup = ['비모', '비모2', '비모3'];
 const Tabs = () => {
-  const [, setFilterModalState] = useRecoilState(filterAtom);
-
+  const [, setFilterModalState] = useRecoilState(filterModalAtom);
   const handleClickShowFilterModal = useCallback((title: string) => () => {
     setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
   }, []);
@@ -28,9 +26,7 @@ const Tabs = () => {
               <span>{name}</span>
               <img src={PlusIcon} alt="" />
             </TabContents>
-            <FilterTab
-              header={title}
-              filterList={mockup} />
+            <FilterItem header={title} />
           </TabItems>
         )
       })}

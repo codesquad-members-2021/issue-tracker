@@ -18,6 +18,7 @@ function useRecoilState<T>(atom: AtomType<T>) {
   useEffect(() => {
     store.subscribe({ key, fn: forceUpdate });
   }, []);
+
   return [store.getData(key), store.setData(key)];
 };
 

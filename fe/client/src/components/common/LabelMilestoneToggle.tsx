@@ -10,7 +10,6 @@ import MilestoneIcon from '@/Icons/Milestone.svg';
 
 const LabelMilestoneToggle = () => {
   const location = useLocation();
-  const defaultChecked = location.pathname === '/labelList';
   const [labelState] = useFetch(API.get.labelsCount);
   const [milestoneState] = useFetch(API.get.milestonesCount);
   const { data: labelData }: AsyncState<any, any> = labelState;
@@ -29,7 +28,8 @@ const LabelMilestoneToggle = () => {
     <ToggleWrapper>
       <Link to="/labelList">
         <ToggleItem>
-          <RadioButton type="radio" name="labelMilestone" defaultChecked={defaultChecked} />
+          <RadioButton type="radio" name="labelMilestone"
+            defaultChecked={location.pathname === '/labelList'} />
           <LabelBelongSpanLeft> <img src={LabelIcon} alt="" /> &nbsp; 레이블
             {labelData && ` (${labelData.count})`}
           </LabelBelongSpanLeft>
@@ -37,7 +37,8 @@ const LabelMilestoneToggle = () => {
       </Link>
       <Link to="/milestoneList">
         <ToggleItem>
-          <RadioButton type="radio" name="labelMilestone" defaultChecked={!defaultChecked} />
+          <RadioButton type="radio" name="labelMilestone"
+            defaultChecked={location.pathname === '/milestoneList'} />
           <LabelBelongSpanRight>  <img src={MilestoneIcon} alt="" /> &nbsp; 마일스톤
             {milestoneData && ` (${milestoneData.count})`}
           </LabelBelongSpanRight>

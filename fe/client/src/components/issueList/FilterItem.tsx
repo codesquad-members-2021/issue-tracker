@@ -19,8 +19,8 @@ type FilterItemType = {
 
 const FilterItem = ({ title, handleClickShowFilterModal }: FilterItemType) => {
   const { apiName } = filterNames[title];
-  const [users] = useFetch(API.get[apiName]);
-  const { data }: AsyncState<any, any> = users;
+  const [filterList] = useFetch(API.get[apiName]);
+  const { data }: AsyncState<any, any> = filterList;
 
   return (
     <FilterWrapper>
@@ -30,8 +30,9 @@ const FilterItem = ({ title, handleClickShowFilterModal }: FilterItemType) => {
       </div>
       {data &&
         <FilterTab
+          inputType='radio'
           header={title}
-          filterList={data.map(({ name }: { name: string }) => name)} />
+          filterList={data} />
       }
     </FilterWrapper>
   )

@@ -35,4 +35,15 @@ export type IssueListItemType = {
     closed: boolean
   },
   closed: boolean
+  [key: string]: any;
+};
+
+
+export type IssueCreateType = {
+  title: string;
+  mainCommentContents: string;
+  authorId: number;
+  assigneeIds: Array<string>;
+  labelIds: Array<string>;
+  milestoneId: number;
 }
