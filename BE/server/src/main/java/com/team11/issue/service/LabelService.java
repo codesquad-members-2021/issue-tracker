@@ -3,9 +3,13 @@ package com.team11.issue.service;
 import com.team11.issue.domain.Label;
 import com.team11.issue.dto.label.LabelRequestDTO;
 import com.team11.issue.dto.label.LabelResponseDTO;
+import com.team11.issue.dto.label.LabelsResponseDTO;
 import com.team11.issue.repository.LabelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,5 +37,13 @@ public class LabelService {
 
     public LabelResponseDTO showLabel(Long labelId) {
         return LabelResponseDTO.from(findLabel(labelId));
+    }
+
+    public LabelsResponseDTO showAllLabel() {
+        List<LabelResponseDTO> labels = labelRepository.findAll().stream()
+                .map(label -> LabelResponseDTO.from(label))
+                .collect(Collectors.toList());
+
+        return LabelsResponseDTO.from(labels);
     }
 }
