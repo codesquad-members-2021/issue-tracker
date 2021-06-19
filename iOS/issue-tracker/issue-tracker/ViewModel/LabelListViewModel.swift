@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
 
 class LabelListViewModel {
     let networkManager: NetworkManager
     var labelList = BehaviorRelay<[IssueLabel]>(value: [])
-    var bag = DisposeBag()
 
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -20,9 +18,8 @@ class LabelListViewModel {
     }
 
     func fetchLabelList() {
-        networkManager.request(url: Endpoint(path: .label).url()!, decodableType: LabelList.self) { label in
-            self.labelList.accept(label.data)
+        networkManager.request(url: Endpoint(path: .label).url()!, decodableType: LabelList.self) { [weak self] label in
+            self?.labelList.accept(label.data)
         }
     }
-
 }
