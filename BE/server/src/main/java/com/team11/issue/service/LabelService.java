@@ -2,6 +2,7 @@ package com.team11.issue.service;
 
 import com.team11.issue.domain.Label;
 import com.team11.issue.dto.label.LabelRequestDTO;
+import com.team11.issue.dto.label.LabelResponseDTO;
 import com.team11.issue.repository.LabelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,9 @@ public class LabelService {
 
     public void deleteLabel(Long labelId) {
         labelRepository.delete(findLabel(labelId));
+    }
+
+    public LabelResponseDTO showLabel(Long labelId) {
+        return LabelResponseDTO.from(findLabel(labelId));
     }
 }
