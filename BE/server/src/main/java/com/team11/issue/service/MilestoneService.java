@@ -25,4 +25,8 @@ public class MilestoneService {
         milestone.updateMilestone(milestoneRequestDTO);
         milestoneRepository.save(milestone);
     }
+
+    public void deleteMilestone(Long milestoneId) {
+        milestoneRepository.delete(findMilestone(milestoneId));
+    }
 }
