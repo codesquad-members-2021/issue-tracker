@@ -16,7 +16,7 @@ interface LocationStateProps {
 
 const IssueDetail = (): JSX.Element => {
   const { state } = useLocation<LocationStateProps>();
-  const { title, content, isOpen } = state;
+  const { title, isOpen } = state;
   return (
     <>
       <IssueDetailStyle>
