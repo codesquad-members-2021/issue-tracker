@@ -11,7 +11,7 @@ type inputsType = {
 export default async function fetchCreate(issueInputs: inputsType) {
   try {
     const response = await fetch(API.createIssue, {
-      method: 'GET',//POST
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization:
