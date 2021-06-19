@@ -4,10 +4,14 @@ import com.team11.issue.domain.Milestone;
 import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneRequestDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
+import com.team11.issue.dto.milestone.MilestonesResponseDTO;
 import com.team11.issue.repository.IssueRepository;
 import com.team11.issue.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -42,5 +46,13 @@ public class MilestoneService {
 
     public MilestoneResponseDTO showMilestone(Long milestoneId) {
         return MilestoneResponseDTO.from(findMilestone(milestoneId), getIssueCountResponseDTO(milestoneId));
+    }
+
+    public MilestonesResponseDTO showAllMilestone() {
+        List<MilestoneResponseDTO> milestones = milestoneRepository.findAll().stream()
+                .map(milestone -> MilestoneResponseDTO.from(milestone, getIssueCountResponseDTO(milestone.getId())))
+                .collect(Collectors.toList());
+
+        return MilestonesResponseDTO.from(milestones);
     }
 }
