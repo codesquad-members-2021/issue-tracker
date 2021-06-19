@@ -1,12 +1,14 @@
+import React from 'react';
+import styled from 'styled-components';
 import {
   CommentType,
   LabelType,
   MilestoneType,
   UserType,
 } from 'components/common/tabModal/tapDataType';
-import React from 'react';
-import styled from 'styled-components';
 import DetailIssueHeader from 'page/detailIssuePage/detailHeader/DetailIssueHeader';
+import CommentList from './commentList/CommentList';
+import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
 
 interface Props {}
 //api에 작성자가 누구인지 있어야될 것 같다.
@@ -31,12 +33,22 @@ export default function DetailIssuePage({}: Props) {
   return (
     <DetailIssuePageBlock>
       <DetailIssueHeader issueData={issueData} />
+      <div className='detail__main'>
+        <CommentList comments={issueData.comments} />
+        <IssueDetailOption />
+      </div>
     </DetailIssuePageBlock>
   );
 }
 
 const DetailIssuePageBlock = styled.div`
   padding: 50px 80px;
+  .detail__main {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding-top: 33px;
+    /* grid-gap: 10px; */
+  }
 `;
 
 const sampleData = {
@@ -50,8 +62,24 @@ const sampleData = {
       userName: 'eNoLJ',
       comment: '이슈 내용',
       createdDateTime: '2021-06-18T21:37:13.029',
-      author: false,
+      author: true,
       owner: true,
+    },
+    {
+      id: 2,
+      userName: 'hayoung',
+      comment: '코멘트 샘플 데이터',
+      createdDateTime: '2021-06-19T21:37:13.029',
+      author: false,
+      owner: false,
+    },
+    {
+      id: 2,
+      userName: 'junami',
+      comment: '코멘트 샘플 데이터',
+      createdDateTime: '2021-06-19T21:37:13.029',
+      author: false,
+      owner: false,
     },
   ],
   assignees: [
