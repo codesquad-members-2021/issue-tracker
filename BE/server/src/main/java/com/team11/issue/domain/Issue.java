@@ -51,4 +51,15 @@ public class Issue {
                 .milestone(milestone)
                 .build();
     }
+
+    public Issue updateStatus(String status) {
+        if(status.equals("open")) {
+            this.isOpen = true;
+        }
+
+        if(status.equals("closed")) {
+            this.isOpen = false;
+        }
+        return this;
+    }
 }

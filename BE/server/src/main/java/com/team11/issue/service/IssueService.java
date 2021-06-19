@@ -1,6 +1,7 @@
 package com.team11.issue.service;
 
 import com.team11.issue.domain.*;
+import com.team11.issue.dto.issue.IssueChangeStatusRequestDTO;
 import com.team11.issue.dto.issue.IssueRequestDTO;
 import com.team11.issue.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +23,17 @@ public class IssueService {
     private final LabelRepository labelRepository;
     private final HistoryRepository historyRepository;
 
+    private User findUser(String userName) {
+        return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
+    }
+
+    private Issue findIssue(Long issueId) {
+        return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
+    }
+
     @Transactional
     public void createIssue(IssueRequestDTO issueRequestDTO, String userName) {
-        User user = userRepository.findByName(userName).orElseThrow(RuntimeException::new);
+        User user = findUser(userName);
         Milestone milestone = null;
         if(issueRequestDTO.getMilestone() != null) {
             milestone = milestoneRepository.findById(issueRequestDTO.getMilestone()).orElseThrow(RuntimeException::new);
@@ -49,4 +58,23 @@ public class IssueService {
         historyRepository.save(history);
 
     }
+
+    @Transactional
+    public void changeIssueStatus(IssueChangeStatusRequestDTO issueChangeStatusRequestDTO, String userName) {
+        String status = issueChangeStatusRequestDTO.getChangeState();
+        List<Issue> issues = issueChangeStatusRequestDTO.getIssueIds().stream()
+                .map(issueId -> findIssue(issueId).updateStatus(status))
+                .collect(Collectors.toList());
+        issueRepository.saveAll(issues);
+
+        User user = findUser(userName);
+
+        List<History> historys = issueChangeStatusRequestDTO.getIssueIds().stream()
+                .map(issueId -> History.createHistory(user, findIssue(issueId)))
+                .collect(Collectors.toList());
+        historyRepository.saveAll(historys);
+
+
+    }
+
 }

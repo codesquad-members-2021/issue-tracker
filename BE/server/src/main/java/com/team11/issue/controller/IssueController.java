@@ -1,6 +1,7 @@
 package com.team11.issue.controller;
 
 import com.team11.issue.dto.ResponseDTO;
+import com.team11.issue.dto.issue.IssueChangeStatusRequestDTO;
 import com.team11.issue.dto.issue.IssueRequestDTO;
 import com.team11.issue.service.IssueService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,12 @@ public class IssueController {
     @PostMapping("/issue")
     public ResponseEntity<ResponseDTO> createIssue(@RequestBody IssueRequestDTO issueRequestDTO, @RequestAttribute String userName) {
         issueService.createIssue(issueRequestDTO, userName);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
+    @PutMapping("/issues/status")
+    public ResponseEntity<ResponseDTO> changeIssueStatus(@RequestBody IssueChangeStatusRequestDTO issueChangeStatusRequestDTO, @RequestAttribute String userName) {
+        issueService.changeIssueStatus(issueChangeStatusRequestDTO, userName);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
