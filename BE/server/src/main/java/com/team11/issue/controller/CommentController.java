@@ -28,4 +28,10 @@ public class CommentController {
         commentService.updateComment(issueId, commentId, userName, commentRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
+
+    @DeleteMapping("/issue/{issueId}/comment/{commentId}")
+    public ResponseEntity<ResponseDTO> deleteComment(@PathVariable Long issueId, @PathVariable Long commentId, @RequestAttribute String userName) {
+        commentService.deleteComment(issueId, commentId, userName);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
 }
