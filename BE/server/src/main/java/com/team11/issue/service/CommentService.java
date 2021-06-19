@@ -49,7 +49,9 @@ public class CommentService {
      */
     public void updateComment(Long issueId, Long commentId, String userName, CommentRequestDTO commentRequestDTO) {
         Comment comment = findComment(commentId);
-        verifyUser(userName, comment);
+        if(!verifyUser(userName, comment)) {
+            throw new RuntimeException("작성자만 글을 수정하실 수 있습니다");
+        }
         comment.updateComment(commentRequestDTO.getContents());
         commentRepository.save(comment);
     }
@@ -60,7 +62,7 @@ public class CommentService {
         TODO : 사용자 정의 예외 처리
          */
         if(!verifyUser(userName, comment)) {
-            throw new RuntimeException();
+            throw new RuntimeException("작성자만 글을 삭제하실 수 있습니다");
         }
         commentRepository.delete(comment);
     }

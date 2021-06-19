@@ -67,4 +67,8 @@ public class Issue {
         this.contents = issueRequestDTO.getContents();
         this.milestone = milestone;
     }
+
+    public void deleteIssue() {
+        this.isDelete = true;
+    }
 }

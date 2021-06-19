@@ -136,4 +136,14 @@ public class IssueService {
 
         createHistory(findUser(userName), issue, "update");
     }
+
+    /*
+    TODO:verify 추가
+     */
+    public void deleteIssue(Long issueId, String userName) {
+        Issue issue = findIssue(issueId);
+        issue.deleteIssue();
+        issueRepository.save(issue);
+    }
+
 }
