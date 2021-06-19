@@ -6,10 +6,18 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @JsonPropertyOrder({"open", "closed"})
-@RequiredArgsConstructor
 @Getter
+@RequiredArgsConstructor
+@Builder
 public class IssueCountResponseDTO {
 
     private final Integer open;
     private final Integer closed;
+
+    public static IssueCountResponseDTO from(int open, int closed) {
+        return IssueCountResponseDTO.builder()
+                .open(open)
+                .closed(closed)
+                .build();
+    }
 }
