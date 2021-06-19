@@ -6,11 +6,12 @@ import { CenterAi } from "styles/StyledLayout ";
 const Labels = () => {
 	return (
 		<>
-			<LabelInput />
+			<LabelInput isEditor={false} />
 			<StyledGridTitleCard gridRate={[1]}>
 				<HeaderTitle>N개의 레이블</HeaderTitle>
 			</StyledGridTitleCard>
 			<LabelCard />
+			<LabelInput isEditor={true} />
 			<LabelCard />
 			<LabelCard />
 		</>

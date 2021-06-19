@@ -33,3 +33,19 @@ export const filterData = {
 	author: ["daisy", "goody"],
 	openClose: ["선택된 이슈 열기", "선택된 이슈 닫기"],
 };
+
+export const labelData = {
+	creatorTitle: "새로운 레이블 추가",
+	editorTitle: "레이블 편집",
+	inputTitles: ["레이블 이름", "설명(선택)"],
+	bgColorTitles: "배경 색상",
+	textColorTitles: "텍스트 색상",
+	buttons: {
+		cancel: "취소",
+		submit: "완료",
+		radio: [
+			{ value: "light", text: "밝은 색" },
+			{ value: "dark", text: "어두운 색" },
+		],
+	},
+};
