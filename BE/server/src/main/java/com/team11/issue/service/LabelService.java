@@ -25,4 +25,8 @@ public class LabelService {
         label.updateLabel(labelRequestDTO);
         labelRepository.save(label);
     }
+
+    public void deleteLabel(Long labelId) {
+        labelRepository.delete(findLabel(labelId));
+    }
 }
