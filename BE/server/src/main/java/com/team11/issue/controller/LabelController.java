@@ -3,6 +3,7 @@ package com.team11.issue.controller;
 import com.team11.issue.dto.ResponseDTO;
 import com.team11.issue.dto.label.LabelRequestDTO;
 import com.team11.issue.dto.label.LabelResponseDTO;
+import com.team11.issue.dto.label.LabelsResponseDTO;
 import com.team11.issue.service.LabelService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -17,6 +18,11 @@ public class LabelController {
 
     private final LabelService labelService;
     private final Logger logger = LoggerFactory.getLogger(LabelController.class);
+
+    @GetMapping("/labels")
+    public ResponseEntity<LabelsResponseDTO> showAllLabel() {
+        return ResponseEntity.ok().body(labelService.showAllLabel());
+    }
 
     @GetMapping("/label/{labelId}")
     public ResponseEntity<LabelResponseDTO> showLabel(@PathVariable Long labelId) {
