@@ -44,4 +44,13 @@ public class Assignees {
     public int hashCode() {
         return Objects.hash(user);
     }
+
+    @Override
+    public String toString() {
+        return "Assignees{" +
+                "id=" + id +
+                ", issue=" + issue +
+                ", user=" + user +
+                '}';
+    }
 }

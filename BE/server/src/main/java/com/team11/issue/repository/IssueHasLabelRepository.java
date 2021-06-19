@@ -12,4 +12,6 @@ public interface IssueHasLabelRepository extends CrudRepository<IssueHasLabel, L
     <S extends IssueHasLabel> Iterable<S> saveAll(Iterable<S> entities);
 
     void deleteAllByIssueId(Long issueId);
+
+    List<IssueHasLabel> findAllByIssueId(Long issueId);
 }
