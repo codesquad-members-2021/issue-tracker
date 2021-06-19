@@ -24,3 +24,12 @@ export interface MilestoneType {
   openedIssueCount: number;
   closedIssueCount: number;
 }
+
+export interface CommentType {
+  id: number;
+  userName: string;
+  comment: string;
+  createdDateTime: string;
+  author: boolean;
+  owner: boolean;
+}

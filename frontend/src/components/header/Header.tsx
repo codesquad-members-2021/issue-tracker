@@ -84,7 +84,7 @@ interface StyleProps {
 }
 
 const HeaderBlock = styled.div<StyleProps>`
-  display: ${({ isLogin }) => (isLogin ? 'block' : 'none')};
+  /* display: ${({ isLogin }) => (isLogin ? 'block' : 'none')}; */
   .login__profile-img {
     width: 30px;
     height: 30px;
