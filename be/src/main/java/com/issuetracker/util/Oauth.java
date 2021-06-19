@@ -22,11 +22,27 @@ public class Oauth {
     public static final String CLIENT_SECRET = "github.secret";
     public static final String SCOPE = "github.scope";
 
+    private static final String REDIRECT_iOS_URI = "github.callback.url.ios";
+    public static final String CLIENT_ID_iOS = "github.client.id.ios";
+    public static final String CLIENT_SECRET_iOS = "github.secret.ios";
+
     public static final String ALGORITHM_SECRET = "jwt.algorithm.secret";
     public static final String ISSUER = "jwt.issuer";
 
     private String access_token;
 
+
+    public String getClientIdIos() {
+        return environment.getProperty(CLIENT_ID_iOS);
+    }
+
+    public String getClientSecretIos() {
+        return environment.getProperty(CLIENT_SECRET_iOS);
+    }
+
+    public String getRedirectUriIos() {
+        return environment.getProperty(REDIRECT_iOS_URI);
+    }
     public String getClientId() {
         return environment.getProperty(CLIENT_ID);
     }

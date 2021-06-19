@@ -31,14 +31,15 @@ public class LoginController {
         String accessTokenUri = oauthUtil.getUriForAccesToken(code);
         RequestEntity<GithubAccessTokenRequestDto> requestDto = null;
 
-        // TODO: iOS 파트 추가//        if(client.equals("iOS")){
-//            requestDto = RequestEntity
-//                    .post(accessTokenUri)
-//                    .header("Accept", "application/json")
-//                    .body(new GithubAccessTokenRequestDto(
-//                            oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
-//                    ));
-//        }
+        // TODO: iOS 파트 추가//
+          if(client.equals("ios")){
+            requestDto = RequestEntity
+                    .post(accessTokenUri)
+                    .header("Accept", "application/json")
+                    .body(new GithubAccessTokenRequestDto(
+                            oauthUtil.getClientIdIos(), oauthUtil.getClientSecretIos(), code, oauthUtil.getRedirectUriIos()
+                    ));
+        }
 
         if (client.equals("web")){
             requestDto = RequestEntity
