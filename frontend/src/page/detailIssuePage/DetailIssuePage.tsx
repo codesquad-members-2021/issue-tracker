@@ -9,6 +9,7 @@ import {
 import DetailIssueHeader from 'page/detailIssuePage/detailHeader/DetailIssueHeader';
 import CommentList from './commentList/CommentList';
 import IssueDetailOption from 'page/createIssuePage/issueDetailOption/IssueDetailOption';
+import { ReactComponent as IssueDeleteBtn } from 'assets/icon/IssueDeleteBtn.svg';
 
 interface Props {}
 //api에 작성자가 누구인지 있어야될 것 같다.
@@ -35,7 +36,12 @@ export default function DetailIssuePage({}: Props) {
       <DetailIssueHeader issueData={issueData} />
       <div className='detail__main'>
         <CommentList comments={issueData.comments} />
-        <IssueDetailOption />
+        <div className='detail__option'>
+          <IssueDetailOption />
+          <div className='issue__delete-btn'>
+            <IssueDeleteBtn />
+          </div>
+        </div>
       </div>
     </DetailIssuePageBlock>
   );
@@ -48,6 +54,12 @@ const DetailIssuePageBlock = styled.div`
     grid-template-columns: 80% 20%;
     padding-top: 33px;
     /* grid-gap: 10px; */
+  }
+  .issue__delete-btn {
+    margin-top: 1rem;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 
