@@ -244,6 +244,7 @@
 			children = (
 				B3A5CB57267840290060DC85 /* LabelListViewModel.swift */,
 				B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */,
+				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -285,9 +286,6 @@
 				D0ADB69D266F0E7900E0762C /* Model */,
 				D0A88E102676563E005877F6 /* Modal.storyboard */,
 				D03AF8F126771FA3001C2CBF /* Login.storyboard */,
-				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
-				D04C694F267A389D0056DD79 /* AddTableViewCell.swift */,
-				B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */,
 			);
 			path = "issue-tracker";
 			sourceTree = "<group>";
@@ -386,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */,
+				D04C694F267A389D0056DD79 /* AddTableViewCell.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -398,6 +397,7 @@
 				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
 				B3E01197267A29E8001155D4 /* AddTableViewCell.swift */,
 				B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */,
+				B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";

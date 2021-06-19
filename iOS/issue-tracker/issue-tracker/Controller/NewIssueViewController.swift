@@ -7,13 +7,13 @@
 
 import UIKit
 import SnapKit
-//import MarkdownKit
+import MarkdownKit
 
 @IBDesignable
 class NewIssueViewController: UIViewController {
     private let additionalInfo = ["레이블", "마일스톤", "작성자"]
     private let cellReuseIdentifier = "NewIssueViewCell"
-//    private let markdownParser = MarkdownParser()
+    private let markdownParser = MarkdownParser()
 
     private let subject: UILabel = {
         let label = UILabel()
@@ -87,7 +87,7 @@ class NewIssueViewController: UIViewController {
             textView?.text = textString
         case 1:
             textString = textView?.text
-//            textView?.attributedText = markdownParser.parse(textView!.text)
+            textView?.attributedText = markdownParser.parse(textView!.text)
         default:
             break
         }
