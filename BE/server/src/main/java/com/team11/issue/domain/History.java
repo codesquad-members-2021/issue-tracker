@@ -32,11 +32,11 @@ public class History {
     @JoinColumn(name = "issue_id")
     private Issue issue;
 
-    public static History createHistory(User user, Issue issue) {
+    public static History createHistory(User user, Issue issue, String flag) {
         return History.builder()
                 .user(user)
                 .historyDateTime(LocalDateTime.now())
-                .flag("write")
+                .flag(flag)
                 .issue(issue)
                 .build();
     }

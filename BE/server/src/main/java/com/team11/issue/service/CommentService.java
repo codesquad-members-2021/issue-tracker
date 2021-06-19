@@ -56,7 +56,12 @@ public class CommentService {
 
     public void deleteComment(Long issueId, Long commentId, String userName) {
         Comment comment = findComment(commentId);
-        verifyUser(userName, comment);
+        /*
+        TODO : 사용자 정의 예외 처리
+         */
+        if(!verifyUser(userName, comment)) {
+            throw new RuntimeException();
+        }
         commentRepository.delete(comment);
     }
 }

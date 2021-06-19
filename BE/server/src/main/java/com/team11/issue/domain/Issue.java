@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -61,5 +60,11 @@ public class Issue {
             this.isOpen = false;
         }
         return this;
+    }
+
+    public void updateIssue(IssueRequestDTO issueRequestDTO, Milestone milestone) {
+        this.title = issueRequestDTO.getTitle();
+        this.contents = issueRequestDTO.getContents();
+        this.milestone = milestone;
     }
 }
