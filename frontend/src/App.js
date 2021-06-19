@@ -21,9 +21,7 @@ function App() {
             {/* <Route path='/main' component={MainPage} /> */}
             <Route path='/main'>
               <ErrorBoundary>
-                <ErrorBoundary>
-                  <MainPage />
-                </ErrorBoundary>
+                <MainPage />
               </ErrorBoundary>
             </Route>
             <Route path='/create' component={CreateIssuePage} />
