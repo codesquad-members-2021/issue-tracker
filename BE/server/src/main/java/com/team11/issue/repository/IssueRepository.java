@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IssueRepository extends CrudRepository<Issue,Long> {
+
+    int countByMilestoneIdAndIsOpen(Long milestoneId, boolean isOpen);
 }

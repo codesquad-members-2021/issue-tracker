@@ -1,7 +1,10 @@
 package com.team11.issue.service;
 
 import com.team11.issue.domain.Milestone;
+import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneRequestDTO;
+import com.team11.issue.dto.milestone.MilestoneResponseDTO;
+import com.team11.issue.repository.IssueRepository;
 import com.team11.issue.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,9 +14,16 @@ import org.springframework.stereotype.Service;
 public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
+    private final IssueRepository issueRepository;
 
     private Milestone findMilestone(Long milestoneId) {
         return milestoneRepository.findById(milestoneId).orElseThrow(RuntimeException::new);
+    }
+
+    private IssueCountResponseDTO getIssueCountResponseDTO(Long milestoneId) {
+        int open = issueRepository.countByMilestoneIdAndIsOpen(milestoneId, true);
+        int closed = issueRepository.countByMilestoneIdAndIsOpen(milestoneId, false);
+        return IssueCountResponseDTO.from(open, closed);
     }
 
     public void createMilestone(MilestoneRequestDTO milestoneRequestDTO) {
@@ -28,5 +38,9 @@ public class MilestoneService {
 
     public void deleteMilestone(Long milestoneId) {
         milestoneRepository.delete(findMilestone(milestoneId));
+    }
+
+    public MilestoneResponseDTO showMilestone(Long milestoneId) {
+        return MilestoneResponseDTO.from(findMilestone(milestoneId), getIssueCountResponseDTO(milestoneId));
     }
 }

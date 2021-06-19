@@ -2,6 +2,7 @@ package com.team11.issue.controller;
 
 import com.team11.issue.dto.ResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneRequestDTO;
+import com.team11.issue.dto.milestone.MilestoneResponseDTO;
 import com.team11.issue.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -16,6 +17,11 @@ public class MilestoneController {
 
     private final MilestoneService milestoneService;
     private final Logger logger = LoggerFactory.getLogger(MilestoneController.class);
+
+    @GetMapping("/milestone/{milestoneId}")
+    public ResponseEntity<MilestoneResponseDTO> showMilestone(@PathVariable Long milestoneId) {
+        return ResponseEntity.ok().body(milestoneService.showMilestone(milestoneId));
+    }
 
     @PostMapping("/milestone")
     public ResponseEntity<ResponseDTO> createMilestone(@RequestBody MilestoneRequestDTO milestoneRequestDTO) {
