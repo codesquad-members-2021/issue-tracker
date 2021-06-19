@@ -39,4 +39,11 @@ public class Label {
                 .bgColor(labelRequestDTO.getBgColor())
                 .build();
     }
+
+    public void updateLabel(LabelRequestDTO labelRequestDTO) {
+        this.title = labelRequestDTO.getTitle();
+        this.description = labelRequestDTO.getDescription();
+        this.color = labelRequestDTO.getColor();
+        this.bgColor = labelRequestDTO.getBgColor();
+    }
 }

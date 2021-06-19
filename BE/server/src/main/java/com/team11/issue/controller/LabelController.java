@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("api")
@@ -23,6 +20,12 @@ public class LabelController {
     @PostMapping("/label")
     public ResponseEntity<ResponseDTO> createLabel(@RequestBody LabelRequestDTO labelRequestDTO) {
         labelService.createLabel(labelRequestDTO);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
+    @PutMapping("/label/{labelId}")
+    public ResponseEntity<ResponseDTO> updateLabel(@PathVariable Long labelId, @RequestBody LabelRequestDTO labelRequestDTO) {
+        labelService.updateLabel(labelId, labelRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
