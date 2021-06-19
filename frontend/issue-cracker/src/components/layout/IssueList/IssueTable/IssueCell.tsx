@@ -69,11 +69,9 @@ export default IssueCell;
 
 const LeftBox = styled.div`
   display: flex;
-  flex-direction: row;
 `;
 const RightBox = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   margin-right: 40px;
 `;
@@ -89,12 +87,10 @@ const IssueCellContent = styled.div`
 `;
 const IssueUpper = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
 `;
 const IssueLower = styled.div`
   display: flex;
-  flex-direction: row;
 `;
 const IssueID = styled.div``;
 const IssueContent = styled.div`

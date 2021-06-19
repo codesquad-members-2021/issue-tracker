@@ -54,22 +54,22 @@ const TextAreaStyle = styled.div`
   }
 `;
 
-const TextAreaBox = styled.textarea`
-  background: inherit;
-  min-width: 340px;
-  min-height: 100px;
-  max-height: 200px;
-  outline: none;
-  border: none;
-  font-size: 16px;
-  line-height: 28px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  font-family: inherit;
-  ::placeholder {
-    color: #a0a3bd;
-  }
-`;
+// const TextAreaBox = styled.textarea`
+//   background: inherit;
+//   min-width: 340px;
+//   min-height: 100px;
+//   max-height: 200px;
+//   outline: none;
+//   border: none;
+//   font-size: 16px;
+//   line-height: 28px;
+//   border-top-left-radius: 16px;
+//   border-top-right-radius: 16px;
+//   font-family: inherit;
+//   ::placeholder {
+//     color: #a0a3bd;
+//   }
+// `;
 
 const DashedLine = styled.div`
   position: absolute;

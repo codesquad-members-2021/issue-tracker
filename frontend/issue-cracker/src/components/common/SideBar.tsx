@@ -11,8 +11,8 @@ import jwtDecode from 'jwt-decode';
 import { useSetRecoilState } from 'recoil';
 import { decodedToken } from '../../store/Recoil';
 import { ProfileImg as P } from '../styles/CommonStyles';
-import ProgressBar from '../common/ProgrerssBar';
-import SideBarDropDown from '../common/SideBarDropDown';
+import ProgressBar from './ProgressBar';
+import SideBarDrop from './SideBarDrop';
 interface TokenProps {
   name: string;
   profileImageUrl: string;
@@ -40,7 +40,7 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'담당자'} color="#6E7191" />
           <CustomAddIcon />
-          <SideBarDropDown />
+          <SideBarDrop />
         </SideBarTitle>
         <SideBarContent>
           <div>

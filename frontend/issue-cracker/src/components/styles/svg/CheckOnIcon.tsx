@@ -27,6 +27,8 @@ const IssueOnIcon = (): JSX.Element => {
 export default IssueOnIcon;
 
 const IssueOnIconStyle = styled.div`
+  display: flex;
+  align-items: center;
   svg {
     width: 16px;
     height: 16px;
