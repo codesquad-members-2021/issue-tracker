@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
+    Comment findByIssueAndId(Long issueId, Long commentId);
 }
