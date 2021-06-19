@@ -8,35 +8,35 @@
 import UIKit
 import SnapKit
 
-class IssueTableViewCell: UITableViewCell {
+final class IssueTableViewCell: UITableViewCell {
 
     static var identifier = "IssueTableViewCell"
 
-    var fakeData = [IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
+    private var fakeData = [IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
 
-    var largeTitle: UILabel = {
+    private var largeTitle: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
 
-    var labelDescription: UILabel = {
+    private var labelDescription: UILabel = {
         var label = UILabel()
         label.textColor = .lightGray
         return label
     }()
 
-    var milestoneView: MilestoneView = {
+    private var milestoneView: MilestoneView = {
         var milestone = MilestoneView()
         return milestone
     }()
 
-    var labelsCollectionView: LabelsCollectionView = {
+    private var labelsCollectionView: LabelsCollectionView = {
         var collectionView = LabelsCollectionView()
         return collectionView
     }()
 
-    var checkBoxImageView: UIImageView = {
+    private var checkBoxImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "checkmark.circle.fill")
         return imageView
@@ -58,7 +58,7 @@ class IssueTableViewCell: UITableViewCell {
         checkBoxImageView.isHidden = true
     }
 
-    func addSubviews() {
+    private func addSubviews() {
         addSubview(labelsCollectionView)
         addSubview(labelDescription)
         addSubview(milestoneView)
@@ -66,7 +66,7 @@ class IssueTableViewCell: UITableViewCell {
         addSubview(checkBoxImageView)
     }
 
-    func setupAutolayout() {
+    private func setupAutolayout() {
         largeTitle.snp.makeConstraints { title in
             title.top.equalTo(24)
             title.leading.trailing.equalTo(16)

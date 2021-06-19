@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-class MilestoneView: UIView {
-    var sfsymbolImageView: UIImageView = {
+final class MilestoneView: UIView {
+    private var sfsymbolImageView: UIImageView = {
        var imageView = UIImageView()
         imageView.image = UIImage(named: "vector")
         return imageView
     }()
 
-    var milestoneTitle: UILabel = {
+    private var milestoneTitle: UILabel = {
         var label = UILabel()
         label.textColor = .lightGray
         return label
@@ -33,12 +33,12 @@ class MilestoneView: UIView {
         setupAutolayout()
     }
 
-    func addSubviews() {
+    private func addSubviews() {
         addSubview(sfsymbolImageView)
         addSubview(milestoneTitle)
     }
 
-    func setupAutolayout() {
+    private func setupAutolayout() {
         sfsymbolImageView.snp.makeConstraints { imageView in
             imageView.top.leading.bottom.equalToSuperview()
             imageView.width.equalTo(sfsymbolImageView.snp.height).multipliedBy(1)

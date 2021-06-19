@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddIssueButton: UIView {
+final class AddIssueButton: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,7 +30,7 @@ class AddIssueButton: UIView {
         path.stroke()
     }
 
-    func setupButton() {
+    private func setupButton() {
         clipsToBounds = true
         layer.cornerRadius = self.bounds.size.width * 0.5
         backgroundColor = .systemBlue

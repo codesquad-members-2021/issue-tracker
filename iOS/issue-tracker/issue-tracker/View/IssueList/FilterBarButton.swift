@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterBarButton: UIButton {
+final class FilterBarButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)

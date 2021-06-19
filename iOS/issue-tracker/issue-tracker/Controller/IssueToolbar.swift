@@ -7,28 +7,28 @@
 
 import UIKit
 
-class IssueToolbar: UIToolbar {
+final class IssueToolbar: UIToolbar {
 
-    let checkBoxBarButtonItem: UIBarButtonItem = {
+    private let checkBoxBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.image = UIImage(systemName: "checkmark.circle")
         return item
     }()
 
-    let closeIssueBarButtonItem: UIBarButtonItem = {
+    private let closeIssueBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.image = UIImage(systemName: "archivebox")
         return item
     }()
 
-    let labelBarButtonItem: UIBarButtonItem = {
+    private let labelBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.title = "이슈를 선택하세요"
         item.isEnabled = false
         return item
     }()
 
-    let flexibleBarButtonItem: UIBarButtonItem = {
+    private let flexibleBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         return item
     }()
@@ -43,7 +43,7 @@ class IssueToolbar: UIToolbar {
         setupToolbar()
     }
 
-    func setupToolbar() {
+    private func setupToolbar() {
         let items = [checkBoxBarButtonItem, flexibleBarButtonItem, labelBarButtonItem, flexibleBarButtonItem, closeIssueBarButtonItem]
         setItems(items, animated: false)
     }

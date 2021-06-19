@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class LabelTableViewCell: UITableViewCell {
+final class LabelTableViewCell: UITableViewCell {
 
     static var identifier = "LabelTableViewCell"
 
-    var labelView: PaddingLabel = {
+    private var labelView: PaddingLabel = {
         var label = PaddingLabel(withInsets: 0, 0, 10, 10)
         label.textAlignment = .center
         label.textColor = .white
@@ -21,7 +21,7 @@ class LabelTableViewCell: UITableViewCell {
         return label
     }()
 
-    var labelDescription: UILabel = {
+    private var labelDescription: UILabel = {
         var label = UILabel()
         return label
     }()
@@ -38,12 +38,12 @@ class LabelTableViewCell: UITableViewCell {
         setupAutolayout()
     }
 
-    func addSubviews() {
+    private func addSubviews() {
         addSubview(labelView)
         addSubview(labelDescription)
     }
 
-    func setupAutolayout() {
+    private func setupAutolayout() {
         labelView.snp.makeConstraints { view in
             view.top.equalToSuperview().offset(24)
             view.left.equalToSuperview().offset(16)

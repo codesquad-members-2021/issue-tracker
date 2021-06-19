@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectBarButton: UIButton {
+final class SelectBarButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
