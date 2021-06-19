@@ -41,6 +41,9 @@ public class CommentService {
         commentRepository.save(Comment.createComment(findUser(userName), findIssue(issueId), commentRequestDTO));
     }
 
+    /*
+     TODO : jpa AND 조건 / JPQL등을 학습해서 issueId를 where절로 추가할 방법 확인
+     */
     public void updateComment(Long issueId, Long commentId, String userName, CommentRequestDTO commentRequestDTO) {
         Comment comment = findComment(commentId);
         verifyUser(userName, comment);
