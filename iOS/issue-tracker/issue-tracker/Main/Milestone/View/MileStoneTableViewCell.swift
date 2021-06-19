@@ -74,7 +74,6 @@ class MileStoneTableViewCell: UITableViewCell {
     //MARK:    4 : sub스택
     //       -1 열린 이슈 라벨
     //       -2 닫힌 이슈 라벨
-    
     private lazy var milestoneLabelSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -108,12 +107,10 @@ class MileStoneTableViewCell: UITableViewCell {
     }
     
     private func setViews() {
-        addMileStoneStackView()
-        test()
+        addMileStoneStackView()        
     }
     
     private func addMileStoneStackView() {
-        
         addSubview(mileStoneStackView)
         NSLayoutConstraint.activate([
             mileStoneStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -125,9 +122,7 @@ class MileStoneTableViewCell: UITableViewCell {
         //MARK: 1 : sub스택
         //   -1 Title 라벨
         //   -2 몇 %인지 보이는 두개의 라벨
-        
-        //titleLabel, titleLabel 자체에 너비를 비율을 맞추어놓고 설정을 해주기.
-        //firstSubStackView를 .fillProptionally로 바꾸어주기.
+
         mileStoneStackView.addArrangedSubview(firstSubStackView)
         
         NSLayoutConstraint.activate([
@@ -163,7 +158,6 @@ class MileStoneTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             milestoneLabelSubStackView.leadingAnchor.constraint(equalTo: mileStoneStackView.leadingAnchor),
-//            milestoneLabelSubStackView.widthAnchor.constraint(equalToConstant: mileStoneStackView.frame.width * 0.5)
             milestoneLabelSubStackView.trailingAnchor.constraint(equalTo: mileStoneStackView.trailingAnchor)
         ])
         
@@ -174,17 +168,15 @@ class MileStoneTableViewCell: UITableViewCell {
         
         milestoneLabelSubStackView.spacing = 4
      
-        NSLayoutConstraint.activate([
+        //스택fill 이슈
+//        NSLayoutConstraint.activate([
 //            openMilestoneLabelView.widthAnchor
 //            .constraint(lessThanOrEqualTo: milestoneLabelSubStackView.widthAnchor, multiplier: 0.329),
 //            closeMilestoneLabelView.widthAnchor
 //            .constraint(lessThanOrEqualTo: milestoneLabelSubStackView.widthAnchor, multiplier: 0.329)
-        ])
+//        ])
     }
     
-    func test(){
-        
-    }
     func configure(title: String, description: String, due_date: String) {
         titleLabel.text = title
         descriptionLabel.text = description        
