@@ -19,8 +19,8 @@ const BorderLinearProgress = withStyles((theme: Theme) =>
   })
 )(LinearProgress);
 
-const LinearIndeterminate = (): JSX.Element => {
+const ProgressBar = (): JSX.Element => {
   return <BorderLinearProgress variant="determinate" value={50} />;
 };
 
-export default LinearIndeterminate;
+export default ProgressBar;
