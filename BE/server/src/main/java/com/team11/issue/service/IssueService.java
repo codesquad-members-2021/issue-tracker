@@ -1,13 +1,8 @@
 package com.team11.issue.service;
 
 import com.team11.issue.domain.*;
-import com.team11.issue.dto.issue.IssueChangeStatusRequestDTO;
-import com.team11.issue.dto.issue.IssueDetailResponseDTO;
-import com.team11.issue.dto.issue.IssueRequestDTO;
-import com.team11.issue.dto.issue.IssueResponseDTO;
-import com.team11.issue.dto.label.LabelResponseDTO;
+import com.team11.issue.dto.issue.*;
 import com.team11.issue.dto.milestone.IssueCountResponseDTO;
-import com.team11.issue.dto.milestone.MilestoneRequestDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
 import com.team11.issue.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -189,4 +184,11 @@ public class IssueService {
     }
 
 
+    public IssuesResponseDTO showAllIssue() {
+        List<IssueResponseDTO> issueResponseDTOS = issueRepository.findAllByIsDeleteFalse().stream()
+                .map(issue -> IssueResponseDTO.from(issue, historyRepository.findFirstByIssueIdOrderByHistoryDateTimeDesc(issue.getId()), findMilestone(issue),issueHasLabelRepository.findAllByIssueId(issue.getId())))
+                .collect(Collectors.toList());
+
+        return IssuesResponseDTO.from(issueResponseDTOS);
+    }
 }

@@ -1,10 +1,7 @@
 package com.team11.issue.controller;
 
 import com.team11.issue.dto.ResponseDTO;
-import com.team11.issue.dto.issue.IssueChangeStatusRequestDTO;
-import com.team11.issue.dto.issue.IssueDetailResponseDTO;
-import com.team11.issue.dto.issue.IssueRequestDTO;
-import com.team11.issue.dto.issue.IssueResponseDTO;
+import com.team11.issue.dto.issue.*;
 import com.team11.issue.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +16,11 @@ public class IssueController {
 
     private final IssueService issueService;
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
+
+    @GetMapping("/issues")
+    public ResponseEntity<IssuesResponseDTO> showAllIssue(){
+        return ResponseEntity.ok().body(issueService.showAllIssue());
+    }
 
     @GetMapping("/issue/{issueId}")
     public ResponseEntity<IssueDetailResponseDTO> showIssue(@PathVariable Long issueId, @RequestAttribute String userName){
