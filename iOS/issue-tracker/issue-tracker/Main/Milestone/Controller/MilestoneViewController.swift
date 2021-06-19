@@ -72,14 +72,16 @@ class MilestoneViewController: UIViewController {
     private func setNetworkManager() {
         let loginInfo = LoginInfo.shared
         guard let jwt = loginInfo.jwt else { return }
-        let url = EndPoint.milestone.fullAddress()
+//        let url = EndPoint.milestone.fullAddress()
         let headers = [Header.authorization.key(): jwt.description]
-        let requestManager = RequestManager(url: url, headers: headers)
-        networkManager = NetworkManager(requestManager: requestManager)
+//        let requestManager = RequestManager(url: url, headers: headers)
+        networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
     
     func loadData() {
-        networkManager?.get(queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
+        let mileStoneListEndpoint =
+            EndPoint.milestone.path()
+        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let mileStone = result.data else { return }
