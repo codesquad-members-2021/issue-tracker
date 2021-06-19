@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(1),
       },
     },
+    button: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: '40px',
+      color: 'gray',
+    },
   })
 );
 
@@ -33,18 +40,28 @@ const TabGroup = (): JSX.Element => {
         color="primary"
         aria-label="large outlined primary button group"
       >
-        <Link to="/main/label-list">
-          <TabButton startIcon={<LocalOfferIcon />}>
-            <TextGroup type={T.SMALL} content={TT.LABEL} color="#6E7191" />
-            <CountGroup count={0} color="#6E7191" />
-          </TabButton>
-        </Link>
-        <Link to="/main/milestone">
-          <TabButton startIcon={<FlagIcon />}>
-            <TextGroup type={T.SMALL} content={TT.MILESTONE} color="#6E7191" />
-            <CountGroup count={0} color="#6E7191" />
-          </TabButton>
-        </Link>
+        {/* <Link to="/main/label-list"> */}
+        <Button
+          className={classes.button}
+          startIcon={<LocalOfferIcon />}
+          component={Link}
+          to="/main/label-list"
+        >
+          <TextGroup type={T.SMALL} content={TT.LABEL} color="#6E7191" />
+          <CountGroup count={0} color="#6E7191" />
+        </Button>
+        {/* </Link> */}
+        {/* <Link to="/main/milestone"> */}
+        <Button
+          className={classes.button}
+          startIcon={<FlagIcon />}
+          component={Link}
+          to="/main/milestone"
+        >
+          <TextGroup type={T.SMALL} content={TT.MILESTONE} color="#6E7191" />
+          <CountGroup count={0} color="#6E7191" />
+        </Button>
+        {/* </Link> */}
       </CustomTabGroup>
     </div>
   );
