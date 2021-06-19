@@ -1,8 +1,24 @@
 import { useState, useEffect } from "react";
 
-const useFetchGet = (url) => {
-	const [data, setData] = useState();
+const useFetch = (url, method, callback, reqData = null) => {
 	const [status, setStatus] = useState("대기 중");
+
+	const fetchContent =
+		method === "GET"
+			? {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+					},
+			  }
+			: {
+					method: method,
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+					},
+					body: JSON.stringify(reqData),
+			  };
 
 	useEffect(() => {
 		if (!url) return;
@@ -10,11 +26,11 @@ const useFetchGet = (url) => {
 		const fetchData = async () => {
 			try {
 				setStatus(`fetch start from ${url}`);
-				const res = await fetch(url);
+				const res = await fetch(url, fetchContent);
 				if (!res.ok) throw new Error(res.status);
 				else {
 					const resData = await res.json();
-					setData(resData);
+					callback(resData);
 					setStatus(`fetch complete from ${url}`);
 				}
 			} catch (error) {
@@ -24,8 +40,7 @@ const useFetchGet = (url) => {
 
 		fetchData();
 	}, [url]);
-
-	return { status, data };
+	return status;
 };
 
-export default useFetchGet;
+export default useFetch;
