@@ -1,4 +1,4 @@
-import { atom, selector, selectorFamily, SerializableParam } from 'recoil';
+import { atom, selector, selectorFamily, SerializableParam, DefaultValue } from 'recoil';
 import { LabelType, MilestoneType, UserType } from 'components/common/tabModal/tapDataType';
 import API from 'util/api/api';
 interface countType {
@@ -72,12 +72,12 @@ export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
   key: 'GET/issues',
   get: async ({ get }) => {
     const trigger = get(getIssueTrigger);
-    console.log('셀렉터안에서', trigger);
     const issueType = get(issueTypeState);
     const isFilterSetting = get(isFilterFullSetting);
     if (!isFilterSetting) return null;
     try {
       const response = await fetch(API.getIssue + issueType);
+      console.log(response)
       const issuesData = await response.json();
       const issuesInfoState = { issues: issuesData.issues, count: issuesData.count };
       return issuesInfoState;
@@ -153,7 +153,7 @@ export const IssueFormDataState = selector({
 export const resetSelectedTab = selector<null>({
   key: 'resetSelectedTab',
   get: () => null,
-  set: ({ get, reset }) => {
+  set: ({ reset }) => {
     reset(selectedUserState);
     reset(selectedLabelState);
     reset(selectedMilestoneState);
@@ -172,3 +172,31 @@ export const selectedMilestoneState = atom<MilestoneType | null>({
   key: 'selectedMilestoneTabState',
   default: null,
 });
+
+
+//레이블,모달 클릭 감지 및 리셑
+export const lableClick = atom({
+  key:'lablePage',
+  default: false
+})
+export const milestoneClick = atom({
+  key:'milestone',
+  default: false
+})
+
+interface TabClick{
+  lableClickState: boolean;
+  milestoneClickState: boolean;
+}
+export const lableMilestoneCtrl = selector<DefaultValue|TabClick>({
+  key:'clickCtrl',
+  get: ({ get }) => {
+    const lableClickState = get(lableClick)
+    const milestoneClickState = get(milestoneClick)
+    return {lableClickState, milestoneClickState}
+  },
+  set: ({reset})=>{
+    reset(lableClick)
+    reset(milestoneClick)
+  }
+})

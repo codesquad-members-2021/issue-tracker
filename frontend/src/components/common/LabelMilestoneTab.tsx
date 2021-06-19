@@ -3,34 +3,48 @@ import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MilestoneIcon from 'components/atom/MilestoneIcon';
-import { getIssuesInfoState } from 'store/issueInfoStore';
+import { getIssuesInfoState, lableClick, milestoneClick } from 'store/issueInfoStore';
 import { Link } from 'react-router-dom'
-export default function LabelMilestoneTab(): ReactElement {
 
-  const IssuesInfoData = useRecoilValue(getIssuesInfoState);
+interface Props{
+  lableState?: boolean
+  milestoneState?: boolean
+}
+export default function LabelMilestoneTab(): ReactElement {
+  const lableState = useRecoilValue(lableClick)
+  const milestoneState = useRecoilValue(milestoneClick)
+  
+  // const IssuesInfoData = useRecoilValue(getIssuesInfoState);
 
   return (
     <LabelMilestoneTabBlock>
       
       <Link to='/lable'>
-        <div>
+        <LableBlock lableState={lableState}>
           <LoyaltyIcon fontSize='small' />
-          &nbsp;레이블 ({IssuesInfoData?.count?.label})
-        </div>
+          &nbsp;레이블 ({})
+          {/* `IssuesInfoData?.count?.label` */}
+        </LableBlock>
       </Link>
       
       
       <Link to='/milestone'>
-        <div>
+        <MilestoneBlock milestoneState={milestoneState}>
           <MilestoneIcon sizeType={14} />
-          마일스톤 ({IssuesInfoData?.count?.milestone})
-        </div>
+          마일스톤 ({})
+          {/* `IssuesInfoData?.count?.milestone` */}
+        </MilestoneBlock>
       </Link>
       
     </LabelMilestoneTabBlock>
   );
 }
-
+const MilestoneBlock = styled.div<Props>`
+border-radius: 0 11px 11px 0;
+background-color: ${({milestoneState, theme})=>milestoneState? theme.color.bgGrey: theme.color.white };`
+const LableBlock = styled.div<Props>`
+border-radius: 11px 0 0 11px;
+background-color: ${({lableState, theme})=>lableState? theme.color.bgGrey : theme.color.white };`
 const LabelMilestoneTabBlock = styled.div`
   display: flex;
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
@@ -39,7 +53,7 @@ const LabelMilestoneTabBlock = styled.div`
     color: ${({ theme }) => theme.color.fontGrey};
     text-decoration:none;
     div {
-  
+     
       width: 160px;
       height: 40px;
       display: flex;

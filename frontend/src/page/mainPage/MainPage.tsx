@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import IssueTable from 'page/mainPage/issueTable/IssueTable';
 import OptionTable from 'page/mainPage/optionTable/OptionTable';
 import { fetchLogin } from 'util/api/fetchLogin';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { controlLoginState } from 'store/loginStore';
-import { getIssueTrigger } from 'store/issueInfoStore';
+import { getIssueTrigger, lableMilestoneCtrl } from 'store/issueInfoStore';
 
 export default function MainPage() {
+  const resetLableMilestoneClick = useResetRecoilState(lableMilestoneCtrl)
+  resetLableMilestoneClick()
+
   const setLogin = useSetRecoilState(controlLoginState);
   const [issueTrigger, setIssueTrigger] = useRecoilState(getIssueTrigger);
 
@@ -21,10 +24,9 @@ export default function MainPage() {
     try {
       const loginData = await fetchLogin(loginCode);
       setLogin(loginData);
-      localStorage.setItem('token', loginData.token);
+      // localStorage.setItem('token', loginData.token);
     } catch (err) {
-      console.log('로그인 패치');
-      throw err;
+      console.log('로그인 패치', err);
     }
   };
 
