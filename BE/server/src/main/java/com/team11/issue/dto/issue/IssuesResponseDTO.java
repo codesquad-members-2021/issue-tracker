@@ -7,10 +7,19 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor
 @Builder
 @Getter
 public class IssuesResponseDTO {
 
-    private final List<IssueResponseDTO> issues = new ArrayList<>();
+    private final List<IssueResponseDTO> issues;
+
+
+    public static IssuesResponseDTO from(List<IssueResponseDTO> issues) {
+        return IssuesResponseDTO.builder()
+                .issues(issues)
+                .build();
+    }
+
+
 }
