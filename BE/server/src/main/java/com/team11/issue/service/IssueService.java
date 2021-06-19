@@ -23,6 +23,16 @@ public class IssueService {
     private final LabelRepository labelRepository;
     private final HistoryRepository historyRepository;
 
+//    private boolean verifyAssignees(String userName, Issue issue) {
+//
+//        List<User> users = assigneeRepository.findAllByIssueId(issue.getId()).stream()
+//                .map(assignees -> assignees.getUser())
+//                .collect(Collectors.toList());
+//
+//        System.out.println(users.contains(findUser(userName)));
+//        return users.contains(findUser(userName));
+//    }
+
     private User findUser(String userName) {
         return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
     }
@@ -109,6 +119,11 @@ public class IssueService {
     @Transactional
     public void updateIssue(Long issueId, IssueRequestDTO issueRequestDTO, String userName) {
         Issue issue = findIssue(issueId);
+
+//        if(!verifyAssignees(userName, issue)) {
+//            throw new RuntimeException("assignees에 포함이 안되어있습니다.");
+//        }
+
         Milestone milestone = findMilestone(issueRequestDTO);
         issue.updateIssue(issueRequestDTO, milestone);
         issueRepository.save(issue);

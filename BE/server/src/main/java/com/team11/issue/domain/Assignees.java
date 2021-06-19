@@ -3,8 +3,8 @@ package com.team11.issue.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@ToString
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,5 +30,18 @@ public class Assignees {
                 .issue(issue)
                 .user(user)
                 .build();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assignees assignees = (Assignees) o;
+        return Objects.equals(user, assignees.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user);
     }
 }
