@@ -18,8 +18,14 @@ public class CommentController {
     private final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     @PostMapping("/issue/{issueId}/comment")
-    public ResponseEntity<ResponseDTO> makeComment(@PathVariable Long issueId, @RequestAttribute String userName, @RequestBody CommentRequestDTO commentRequestDTO) {
+    public ResponseEntity<ResponseDTO> createComment(@PathVariable Long issueId, @RequestAttribute String userName, @RequestBody CommentRequestDTO commentRequestDTO) {
         commentService.createComment(issueId, userName, commentRequestDTO);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
+    @PutMapping("/issue/{issueId}/comment/{commentId}")
+    public ResponseEntity<ResponseDTO> updateComment(@PathVariable Long issueId, @PathVariable Long commentId, @RequestAttribute String userName, @RequestBody CommentRequestDTO commentRequestDTO) {
+        commentService.updateComment(issueId, commentId, userName, commentRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 }

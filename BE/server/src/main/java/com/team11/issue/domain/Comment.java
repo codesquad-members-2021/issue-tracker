@@ -40,4 +40,9 @@ public class Comment {
                 .createDateTime(LocalDateTime.now())
                 .build();
     }
+
+    public void updateComment(String contents) {
+        this.contents = contents;
+    }
+
 }

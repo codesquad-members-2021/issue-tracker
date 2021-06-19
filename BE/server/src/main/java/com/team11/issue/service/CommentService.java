@@ -18,12 +18,36 @@ public class CommentService {
     private final UserRepository userRepository;
     private final IssueRepository issueRepository;
 
+    private User findUser(String userName) {
+        return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
+    }
+
+    private Issue findIssue(Long issueId) {
+        return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
+    }
+
+    private Comment findComment(Long commentId) {
+        return commentRepository.findById(commentId).orElseThrow(RuntimeException::new);
+    }
+
+    private boolean verifyUser(String userName, Comment comment) {
+        if(findUser(userName).equals(comment.getUser())) {
+            return true;
+        }
+        return false;
+    }
+
     public void createComment(Long issueId, String userName, CommentRequestDTO commentRequestDTO) {
+        commentRepository.save(Comment.createComment(findUser(userName), findIssue(issueId), commentRequestDTO));
+    }
 
-        User user = userRepository.findByName(userName).orElseThrow(RuntimeException::new);
-
-        Issue issue = issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
-
-        commentRepository.save(Comment.createComment(user, issue, commentRequestDTO));
+    /*
+     TODO : jpa AND 조건 / JPQL등을 학습해서 issueId를 where절로 추가할 방법 확인
+     */
+    public void updateComment(Long issueId, Long commentId, String userName, CommentRequestDTO commentRequestDTO) {
+        Comment comment = findComment(commentId);
+        verifyUser(userName, comment);
+        comment.updateComment(commentRequestDTO.getContents());
+        commentRepository.save(comment);
     }
 }
