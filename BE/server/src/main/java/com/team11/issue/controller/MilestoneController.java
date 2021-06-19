@@ -29,4 +29,10 @@ public class MilestoneController {
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
+    @DeleteMapping("/milestone/{milestoneId}")
+    public ResponseEntity<ResponseDTO> deleteMilestone(@PathVariable Long milestoneId) {
+        milestoneService.deleteMilestone(milestoneId);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
 }
