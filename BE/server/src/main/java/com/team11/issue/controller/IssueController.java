@@ -30,4 +30,12 @@ public class IssueController {
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
+    @PutMapping("/issue/{issueId}")
+    public ResponseEntity<ResponseDTO> updateIssue(@PathVariable Long issueId, @RequestBody IssueRequestDTO issueRequestDTO,  @RequestAttribute String userName) {
+        issueService.updateIssue(issueId, issueRequestDTO, userName);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
+
+
 }

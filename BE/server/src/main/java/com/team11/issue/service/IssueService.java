@@ -31,21 +31,60 @@ public class IssueService {
         return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
     }
 
-    @Transactional
-    public void createIssue(IssueRequestDTO issueRequestDTO, String userName) {
-        User user = findUser(userName);
+    private Milestone findMilestone(IssueRequestDTO issueRequestDTO) {
         Milestone milestone = null;
         if(issueRequestDTO.getMilestone() != null) {
             milestone = milestoneRepository.findById(issueRequestDTO.getMilestone()).orElseThrow(RuntimeException::new);
         }
-        Issue issue = issueRepository.save(Issue.createIssue(user, issueRequestDTO, milestone));
+        return milestone;
+    }
 
+    private void saveIssueHasLabels(IssueRequestDTO issueRequestDTO, Issue issue) {
         if(issueRequestDTO.getLabels() != null) {
             List<IssueHasLabel> issueHasLabels = issueRequestDTO.getLabels().stream()
                     .map(labelId -> IssueHasLabel.createIssueHasLabel(issue, labelRepository.findById(labelId).orElseThrow(RuntimeException::new)))
                     .collect(Collectors.toList());
             issueHasLabelRepository.saveAll(issueHasLabels);
         }
+    }
+
+    private void deleteIssueHasLabels(Issue issue) {
+        issueHasLabelRepository.deleteAllByIssueId(issue.getId());
+    }
+
+    private void createHistorysByStatus(IssueChangeStatusRequestDTO issueChangeStatusRequestDTO, String userName, String flag) {
+        User user = findUser(userName);
+        List<History> historys = issueChangeStatusRequestDTO.getIssueIds().stream()
+                .map(issueId -> History.createHistory(user, findIssue(issueId), flag))
+                .collect(Collectors.toList());
+        historyRepository.saveAll(historys);
+    }
+
+    private void createHistory(User user, Issue issue, String flag) {
+        History history = History.createHistory(user, issue, flag);
+        historyRepository.save(history);
+    }
+
+    private void saveAssignees(IssueRequestDTO issueRequestDTO, Issue issue) {
+        if(issueRequestDTO.getAssignees() != null) {
+            List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
+                    .map(userId -> Assignees.createAssignees(issue, userRepository.findById(userId).orElseThrow(RuntimeException::new)))
+                    .collect(Collectors.toList());
+            assigneeRepository.saveAll(assignees);
+        }
+    }
+
+    private void deleteAssignees(Issue issue) {
+        assigneeRepository.deleteAllByIssueId(issue.getId());
+    }
+
+    @Transactional
+    public void createIssue(IssueRequestDTO issueRequestDTO, String userName) {
+        User user = findUser(userName);
+        Milestone milestone = findMilestone(issueRequestDTO);
+        Issue issue = issueRepository.save(Issue.createIssue(user, issueRequestDTO, milestone));
+
+        saveIssueHasLabels(issueRequestDTO, issue);
 
         if(issueRequestDTO.getAssignees() != null) {
             List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
@@ -53,10 +92,7 @@ public class IssueService {
                     .collect(Collectors.toList());
             assigneeRepository.saveAll(assignees);
         }
-
-        History history = History.createHistory(user, issue);
-        historyRepository.save(history);
-
+        createHistory(user, issue, "write");
     }
 
     @Transactional
@@ -67,14 +103,22 @@ public class IssueService {
                 .collect(Collectors.toList());
         issueRepository.saveAll(issues);
 
-        User user = findUser(userName);
-
-        List<History> historys = issueChangeStatusRequestDTO.getIssueIds().stream()
-                .map(issueId -> History.createHistory(user, findIssue(issueId)))
-                .collect(Collectors.toList());
-        historyRepository.saveAll(historys);
-
-
+        createHistorysByStatus(issueChangeStatusRequestDTO, userName, status);
     }
 
+    @Transactional
+    public void updateIssue(Long issueId, IssueRequestDTO issueRequestDTO, String userName) {
+        Issue issue = findIssue(issueId);
+        Milestone milestone = findMilestone(issueRequestDTO);
+        issue.updateIssue(issueRequestDTO, milestone);
+        issueRepository.save(issue);
+
+        deleteIssueHasLabels(issue);
+        saveIssueHasLabels(issueRequestDTO, issue);
+
+        deleteAssignees(issue);
+        saveAssignees(issueRequestDTO, issue);
+
+        createHistory(findUser(userName), issue, "update");
+    }
 }

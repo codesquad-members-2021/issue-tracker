@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AssigneeRepository extends CrudRepository<Assignees, Long> {
+
+    void deleteAllByIssueId(Long issueId);
 }

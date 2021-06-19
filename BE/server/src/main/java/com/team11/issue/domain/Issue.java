@@ -62,4 +62,10 @@ public class Issue {
         }
         return this;
     }
+
+    public void updateIssue(IssueRequestDTO issueRequestDTO, Milestone milestone) {
+        this.title = issueRequestDTO.getTitle();
+        this.contents = issueRequestDTO.getContents();
+        this.milestone = milestone;
+    }
 }
