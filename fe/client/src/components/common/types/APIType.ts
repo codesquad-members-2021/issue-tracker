@@ -35,6 +35,7 @@ export type IssueListItemType = {
     closed: boolean
   },
   closed: boolean
+  [key: string]: any;
 };
 
 

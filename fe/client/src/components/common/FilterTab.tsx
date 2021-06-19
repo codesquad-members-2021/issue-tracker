@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import styled from 'styled-components';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import {
-  filterAtom, filterCheckboxListAtom,
+  filterModalAtom, filterCheckboxListAtom,
   FilterCheckboxListType,
   filterRadioButtonListAtom, FilterRadioButtonListType
 } from '@components/common/atoms/filterAtom';
@@ -23,7 +23,7 @@ const filterHeaderNames: { [key: string]: string } = {
 }
 
 const FilterTab = ({ header, filterList, inputType }: FilterTabType) => {
-  const [filterModalState, setFilterModalState] = useRecoilState(filterAtom);
+  const [filterModalState, setFilterModalState] = useRecoilState(filterModalAtom);
   const switchAtom = inputType === 'radio' ? filterRadioButtonListAtom : filterCheckboxListAtom;
   const [defaultCheckerState, setDefaultCheckerState] = useRecoilState<any>(switchAtom);
 

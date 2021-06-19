@@ -1,10 +1,12 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { filterCheckboxListAtom } from '@components/common/atoms/filterAtom';
 import { issueTitleInputAtom, issueCommentInputAtom } from '@components/common/atoms/issueInputAtom';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import API from '@/utils/API';
+import useRecoilInput from '@/utils/hook/useRecoilInput';
 
 type FilteredIdType = {
   info: {
@@ -14,9 +16,10 @@ type FilteredIdType = {
 
 const SendButton = () => {
   const classes = inputStyles();
+  const history = useHistory();
   const [checkedItems] = useRecoilState(filterCheckboxListAtom);
-  const [titleInputValue] = useRecoilState(issueTitleInputAtom);
-  const [commentInputValue] = useRecoilState(issueCommentInputAtom);
+  const { value: titleInputValue } = useRecoilInput(issueTitleInputAtom);
+  const { value: commentInputValue } = useRecoilInput(issueCommentInputAtom);
 
   const handleClickSendData = async () => {
     const data = {
@@ -28,8 +31,11 @@ const SendButton = () => {
       milestoneId: checkedItems.milestone.length && checkedItems.milestone[0].id
     };
     console.log(data)
+
     const responseData = await API.post.issues(data);
     console.log(responseData);
+
+    return history.push('/issueList');
   }
 
   return (

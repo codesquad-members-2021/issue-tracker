@@ -27,6 +27,7 @@ const ListItem = ({ issueItem }: ListItemType) => {
 
   useEffect(() => {
     setCheckedState(isAllIssueChecked);
+    return () => setCheckedState(isAllIssueChecked);
   }, [isAllIssueChecked])
 
   return (

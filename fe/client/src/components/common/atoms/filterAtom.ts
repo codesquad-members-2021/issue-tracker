@@ -10,7 +10,7 @@ export type FilterBooleanType = {
   stateChange: boolean;
 }
 
-export const filterAtom = atom<FilterBooleanType>({
+export const filterModalAtom = atom<FilterBooleanType>({
   key: 'filterAtom',
   default: {
     issue: false,

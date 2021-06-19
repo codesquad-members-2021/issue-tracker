@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components';
-import { filterAtom, FilterBooleanType } from '@components/common/atoms/filterAtom';
+import { filterModalAtom, FilterBooleanType } from '@components/common/atoms/filterAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import PlusIcon from '@/Icons/Plus.svg';
 import FilterItem from './FilterItem';
@@ -12,7 +12,7 @@ const tabItems = [
 ];
 
 const Tabs = () => {
-  const [, setFilterModalState] = useRecoilState(filterAtom);
+  const [, setFilterModalState] = useRecoilState(filterModalAtom);
   const handleClickShowFilterModal = useCallback((title: string) => () => {
     setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
   }, []);

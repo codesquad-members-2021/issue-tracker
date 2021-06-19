@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import HeadContent from '@components/issueList/HeadContent';
 import { ListWrapper } from '@components/common/baseStyle/baseStyle';
-import { filterAtom, FilterBooleanType } from '@/components/common/atoms/filterAtom';
+import { filterModalAtom, FilterBooleanType } from '@/components/common/atoms/filterAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import IssueList from './../components/issueList/IssueList';
 
 const IssueListPage = () => {
-  const [, setFilterModalState] = useRecoilState(filterAtom);
+  const [, setFilterModalState] = useRecoilState(filterModalAtom);
   const handleClickShowFilterModal = useCallback((title: string) => () => {
     setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
   }, []);

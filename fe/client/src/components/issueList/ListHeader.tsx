@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import FilterItem from './FilterItem';
 import IssueStateChangeFilter from './IssueStateChangeFilter';
@@ -7,6 +6,7 @@ import { IssueListItemType } from '@components/common/types/APIType';
 import { issueCheckedItemAtom, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import { pipe, getLength, _ } from '@/utils/functionalUtils';
+import { filterRadioButtonListAtom, FilterRadioButtonListType } from '../common/atoms/filterAtom';
 
 type ListHeaderType = {
   issueItems: Array<IssueListItemType>;
@@ -16,7 +16,8 @@ type ListHeaderType = {
 const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) => {
   const [checkedIssueItem, setCheckedIssueItems] = useRecoilState(issueCheckedItemAtom);
   const [isAllIssueChecked, setAllIssueChecked] = useRecoilState(issueCheckedAllItemAtom);
-  
+  const [checkedFilteredState, setCheckedFilteredState] = useRecoilState(filterRadioButtonListAtom);
+
   const handleChangeAllCheck = () => {
     isAllIssueChecked
       ? setCheckedIssueItems(new Set())
@@ -34,6 +35,10 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
     getLength
   )(issueItems);
 
+  const handleChangeOpenCloseIssue = (issueName: string) => () => {
+    setCheckedFilteredState((state: FilterRadioButtonListType) => ({ ...state, issue: { name: issueName, info: {} } }))
+  }
+
   return (
     <ListHeaderWrapper>
       <div>
@@ -44,13 +49,17 @@ const ListHeader = ({ issueItems, handleClickShowFilterModal }: ListHeaderType) 
           <>
             <IconButton icon="alertCircle">
               <ToggleItem>
-                <RadioButton type="radio" name="issueToggle" defaultChecked={true} />
+                <RadioButton type="radio" name="issueToggle"
+                  onChange={handleChangeOpenCloseIssue('열린 이슈')}
+                  checked={checkedFilteredState.issue.name !== '닫힌 이슈'} />
                 <span>열린 이슈 ({openIssueCount})</span>
               </ToggleItem>
             </IconButton>
             <IconButton icon='closeBox'>
               <ToggleItem>
-                <RadioButton type="radio" name="issueToggle" />
+                <RadioButton type="radio" name="issueToggle"
+                  onChange={handleChangeOpenCloseIssue('닫힌 이슈')}
+                  checked={checkedFilteredState.issue.name === '닫힌 이슈'} />
                 <span>닫힌 이슈 ({closeIssueCount})</span>
               </ToggleItem>
             </IconButton>
