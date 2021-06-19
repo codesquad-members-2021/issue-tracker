@@ -36,6 +36,10 @@ public class IssueController {
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
-
+    @DeleteMapping("/issue/{issueId}")
+    public ResponseEntity<ResponseDTO> deleteIssue(@PathVariable Long issueId, @RequestAttribute String userName) {
+        issueService.deleteIssue(issueId, userName);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
 
 }
