@@ -13,19 +13,22 @@ enum EndPoint {
     case OAuth
     case label
     case milestone
+    case none
     
-    func fullAddress() -> String {
+    func path() -> String {
         switch self {
         case .OAuth:
-            return EndPoint.baseAddress + "/login/ios"
+            return "/login/ios"
         case .label:
-            return EndPoint.baseAddress + "/labels"
+            return "/labels"
         case .milestone:
-            return EndPoint.baseAddress + "/milestones"
+            return "/milestones"
+        case .none:
+            return ""
         }
     }
     
-    func fullAddress(with id: Int) -> String {
-        return fullAddress() + "/\(id)"
+    func path(with id: Int) -> String {
+        return path() + "/\(id)"
     }
 }

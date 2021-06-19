@@ -24,6 +24,8 @@ final class LabelView: UIView {
         return spacing * 2
     }()
     
+    private let colorConverter = HexColorConverter()
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure()
@@ -60,5 +62,11 @@ final class LabelView: UIView {
         if let title = title {
             labelTitle.text = title
         }
+    }
+    
+    func configure(with hexColorCode: HexColorCode,_ title: String?) {
+        let backgroundColor = colorConverter.convertHex(hexColorCode)
+        let textColor = colorConverter.isColorDark(hex: hexColorCode) ? UIColor.white : UIColor.black
+        configure(with: backgroundColor, textColor, title)
     }
 }

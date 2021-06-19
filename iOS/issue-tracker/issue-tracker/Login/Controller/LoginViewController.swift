@@ -217,10 +217,17 @@ class LoginViewController: UIViewController {
     private func configureLoginManager(service: LoginService) {
         let keyChainManager = LoginKeyChainManager(loginService: service)
         loginInfo.service = service
-        let loginManager = GithubAuthorizationManager(viewController: self,
-                                                      delegate: self,
-                                                      keyChainSaver: keyChainManager)
-        self.socialLoginManager = loginManager
+        
+        switch service {
+        case .github:
+            socialLoginManager = GithubAuthorizationManager(viewController: self,
+                                                                 delegate: self,
+                                                                 keyChainSaver: keyChainManager)
+        case .apple:
+            socialLoginManager = AppleAuthorizationManager(viewController: self,
+                                                           delegate: self,
+                                                           keyChainSaver: keyChainManager)
+        }
     }
 }
 

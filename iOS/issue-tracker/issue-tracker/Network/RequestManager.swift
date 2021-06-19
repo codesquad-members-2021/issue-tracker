@@ -10,17 +10,17 @@ import Alamofire
 
 final class RequestManager {
     
-    private var url: String
+    private var baseAddress: String
     private var headers: HTTPHeaders?
     private let successCodeRange = 200..<300
     
-    init(url: String, headers: [String: String]? = nil) {
-        self.url = url
+    init(baseAddress: String, headers: [String: String]? = nil) {
+        self.baseAddress = baseAddress
         self.headers = HTTPHeaders(headers ?? [:])
     }
     
-    func create(method: HTTPMethod, queryParameters: [String: Any]?) -> DataRequest {
-        return AF.request(self.url,
+    func create(endpoint: String = "", method: HTTPMethod, queryParameters: [String: Any]?) -> DataRequest {
+        return AF.request(self.baseAddress + endpoint,
                           method: method,
                           parameters: queryParameters,
                           encoding: URLEncoding.queryString,
@@ -28,8 +28,8 @@ final class RequestManager {
             .validate(statusCode: successCodeRange)
     }
     
-    func create<T: Encodable>(method: HTTPMethod, encodableParameters: T) -> DataRequest {
-        return AF.request(self.url,
+    func create<T: Encodable>(endpoint: String = "", method: HTTPMethod, encodableParameters: T) -> DataRequest {
+        return AF.request(self.baseAddress + endpoint,
                           method: method,
                           parameters: encodableParameters,
                           encoder: JSONParameterEncoder(),
