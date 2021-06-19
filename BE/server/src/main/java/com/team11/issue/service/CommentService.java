@@ -18,6 +18,9 @@ public class CommentService {
     private final UserRepository userRepository;
     private final IssueRepository issueRepository;
 
+    /*
+     TODO : 사용자 예외처리
+     */
     private User findUser(String userName) {
         return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
     }
@@ -49,5 +52,11 @@ public class CommentService {
         verifyUser(userName, comment);
         comment.updateComment(commentRequestDTO.getContents());
         commentRepository.save(comment);
+    }
+
+    public void deleteComment(Long issueId, Long commentId, String userName) {
+        Comment comment = findComment(commentId);
+        verifyUser(userName, comment);
+        commentRepository.delete(comment);
     }
 }
