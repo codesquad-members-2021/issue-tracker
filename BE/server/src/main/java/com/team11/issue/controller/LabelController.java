@@ -29,5 +29,11 @@ public class LabelController {
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
+    @DeleteMapping("/label/{labelId}")
+    public ResponseEntity<ResponseDTO> deleteLabel(@PathVariable Long labelId) {
+        labelService.deleteLabel(labelId);
+        return ResponseEntity.ok().body(new ResponseDTO("OK"));
+    }
+
 
 }
