@@ -41,5 +41,13 @@ public class History {
                 .build();
     }
 
+    @Override
+    public String toString() {
+        return "History{" +
+                "id=" + id +
+                ", user=" + user +
+                ", historyDateTime=" + historyDateTime +
+                ", flag='" + flag + '\'' +
+                '}';
+    }
 }
-

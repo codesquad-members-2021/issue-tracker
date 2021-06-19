@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HistoryRepository extends CrudRepository<History, Long> {
+    History findFirstByIssueIdOrderByHistoryDateTimeDesc(Long issueId);
+
 }

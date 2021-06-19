@@ -7,10 +7,16 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor
 @Builder
 @Getter
 public class CommentsResponseDTO {
 
-    private final List<CommentResponseDTO> comments = new ArrayList<>();
+    private final List<CommentResponseDTO> comments;
+
+    public static CommentsResponseDTO from(List<CommentResponseDTO> commentResponseDTOS){
+        return CommentsResponseDTO.builder()
+                .comments(commentResponseDTOS)
+                .build();
+    }
 }
