@@ -144,6 +144,8 @@ public class IssueService {
         Issue issue = findIssue(issueId);
         issue.deleteIssue();
         issueRepository.save(issue);
+
+        createHistory(findUser(userName), issue, "delete");
     }
 
 }
