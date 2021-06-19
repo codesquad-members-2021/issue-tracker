@@ -29,13 +29,25 @@ public class LoginController {
     public JwtDto login(@RequestParam String client, @RequestParam String code) {
         RestTemplate githubRequest = new RestTemplate();
         String accessTokenUri = oauthUtil.getUriForAccesToken(code);
+        RequestEntity<GithubAccessTokenRequestDto> requestDto = null;
 
-        RequestEntity<GithubAccessTokenRequestDto> requestDto = RequestEntity
-                .post(accessTokenUri)
-                .header("Accept", "application/json")
-                .body(new GithubAccessTokenRequestDto(
-                        oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
-                ));
+        // TODO: iOS 파트 추가//        if(client.equals("iOS")){
+//            requestDto = RequestEntity
+//                    .post(accessTokenUri)
+//                    .header("Accept", "application/json")
+//                    .body(new GithubAccessTokenRequestDto(
+//                            oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
+//                    ));
+//        }
+
+        if (client.equals("web")){
+            requestDto = RequestEntity
+                    .post(accessTokenUri)
+                    .header("Accept", "application/json")
+                    .body(new GithubAccessTokenRequestDto(
+                            oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
+                    ));
+        }
 
         ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
 

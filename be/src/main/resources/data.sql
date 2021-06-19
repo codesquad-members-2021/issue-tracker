@@ -3,7 +3,7 @@
 -- -----------------------------------------------------
 insert into user (`id`, `name`, `avatar_url`) values (1, 'MJ', 'https://avatars.githubusercontent.com/u/16694346?v=4');
 insert into user (`id`, `name`, `avatar_url`) values (2, 'Kyu', 'https://avatars.githubusercontent.com/u/59721293?v=4');
-insert into user (`id`, `name`, `avatar_url`) values (16694346, 'MJbae', 'https://avatars.githubusercontent.com/u/16694346?v=4');
+--insert into user (`id`, `name`, `avatar_url`) values (16694346, 'MJbae', 'https://avatars.githubusercontent.com/u/16694346?v=4');
 
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`milestone`
