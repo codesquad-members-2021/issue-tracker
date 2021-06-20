@@ -22,6 +22,12 @@ final class MultipleLineInputStackView: UIStackView {
         return lineHeight / 2
     }()
     
+    //마일스톤 날짜 체크를 위해 따로 생성.
+    private var lastItemLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+        
     private var items: [InputLineItem]?
     private let borderColor = Colors.border.cgColor
     private let borderWidth: CGFloat = 1
@@ -46,12 +52,20 @@ final class MultipleLineInputStackView: UIStackView {
     func configure(with items: [InputLineItem]) {
         self.items = items
         
-        items.forEach { inputLineItem in
+        items.enumerated().forEach { index, inputLineItem in
             let containerFrame = CGRect(x: 0, y: 0, width: frame.width, height: lineHeight)
             let container = UIView(frame: containerFrame)
             
             let category = inputLineItem.category
-            let titleLabel = UILabel()
+            
+            var titleLabel: UILabel
+            
+            if index == 2 { //마일스톤 데이트체크를 위한 라벨. 하드코딩느낌.. 라벨 배열을 만들어야 할지 헷갈림.
+                titleLabel = lastItemLabel
+            }else {
+                titleLabel = UILabel()
+            }
+            
             titleLabel.text = category
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             
@@ -73,6 +87,15 @@ final class MultipleLineInputStackView: UIStackView {
             addArrangedSubview(container)
         }
         addDivisionLines()
+    }
+    
+    //[요구사항] 마일스톤 날짜뷰 형식에 안맞으면 해당 라벨 색상 변경 필요.
+    func setLabelColor(correct: Bool) {
+        if correct {
+            lastItemLabel.textColor = Colors.mainGrape
+        }else {
+            lastItemLabel.textColor = UIColor.red
+        }
     }
     
     private func addDivisionLines() {

@@ -60,20 +60,13 @@ class MileStoneControlViewController: UIViewController {
         return textField
     }()
     
+    let validityType: String.ValidityType = .date
+    
     private lazy var completeDateTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "YYYY-MM-DD(선택사항)"
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
-    }()
-    
-    private lazy var previewLabel: LabelView = {
-        let labelView = LabelView()
-        let colorText = completeDateTextField.text ?? "YYYY-MM-DD(선택사항)"
-        let hex = HexColorCode(from: colorText)
-        let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
-        labelView.configure(with: hex, titleText)
-        labelView.translatesAutoresizingMaskIntoConstraints = false
-        return labelView
     }()
     
     private lazy var singleLineHeight: CGFloat = {
@@ -92,6 +85,18 @@ class MileStoneControlViewController: UIViewController {
         super.viewDidLoad()
         configureViews()
         setTitleTextFieldSupporter()
+    }
+    
+    @objc func handleTextChange() {
+        guard let text = completeDateTextField.text else { return }
+        switch validityType {
+        case .date:
+            if text.isValid(validityType) {
+                mileStoneEditStackView.setLabelColor(correct: true)
+            }else{                
+                mileStoneEditStackView.setLabelColor(correct: false)
+            }
+        }
     }
     
     private func configureViews() {

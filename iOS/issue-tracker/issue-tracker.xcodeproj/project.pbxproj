@@ -53,6 +53,7 @@
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
 		FA431FF9267F36FA0010EA91 /* MileStoneControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA431FF8267F36FA0010EA91 /* MileStoneControlViewController.swift */; };
 		FA431FFB267F3B680010EA91 /* NewMileStoneDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA431FFA267F3B680010EA91 /* NewMileStoneDTO.swift */; };
+		FA431FFD267F61150010EA91 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA431FFC267F61150010EA91 /* String.swift */; };
 		FA733A2E267C3D77005A40C8 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A2D267C3D77005A40C8 /* Milestone.swift */; };
 		FA733A30267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A2F267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift */; };
 		FA733A32267C3EAA005A40C8 /* MileStoneTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A31267C3EAA005A40C8 /* MileStoneTableDelegate.swift */; };
@@ -115,6 +116,7 @@
 		E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarCreator.swift; sourceTree = "<group>"; };
 		FA431FF8267F36FA0010EA91 /* MileStoneControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneControlViewController.swift; sourceTree = "<group>"; };
 		FA431FFA267F3B680010EA91 /* NewMileStoneDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMileStoneDTO.swift; sourceTree = "<group>"; };
+		FA431FFC267F61150010EA91 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FA733A2D267C3D77005A40C8 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		FA733A2F267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewDataSource.swift; sourceTree = "<group>"; };
 		FA733A31267C3EAA005A40C8 /* MileStoneTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				E42AD12526709C010071B436 /* UIViewControllerExtension.swift */,
 				E426DAC82671F7760069E77D /* AlertFactory.swift */,
 				E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */,
+				FA431FFC267F61150010EA91 /* String.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */,
 				E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */,
+				FA431FFD267F61150010EA91 /* String.swift in Sources */,
 				FAB2C36C2679F6CC009F879C /* MileStoneLabelView.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
 				E43912D626789812003CD344 /* RequestManager.swift in Sources */,
