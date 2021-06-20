@@ -1,6 +1,8 @@
+// issueList (IssuePage)
 import { atom } from 'recoil';
+import { ILabelsInfo, IMilestonesInfo, IUsersInfo, IIssuesInfo } from 'util/types';
 
-// Issues Page - Modal 관련
+// 1. Modal 관련
 interface IFilterVisibleAtom {
   search: boolean;
   assignee: boolean;
@@ -27,7 +29,32 @@ const filterVisibleAtom = atom<IFilterVisibleAtom>({
   },
 });
 
+// 2. API 관련
+
+// IssuePage 데이터 (IssuePage 컴포넌트에서 최초로 불러옴)
+type TissuePageData = {
+  isLoading: boolean;
+  data: {
+    labels?: ILabelsInfo,
+    milestones?: IMilestonesInfo,
+    users?: IUsersInfo,
+    issues?: IIssuesInfo
+  };
+};
+
+const issuePageDataAtom = atom<TissuePageData>({
+  key: 'issuePageDataAtom',
+  default: {
+    isLoading: true,
+    data: {
+      issues: undefined,
+      milestones: undefined,
+      labels: undefined
+    }
+  }
+});
+
 // =====
 
-export { filterVisibleAtom };
+export { filterVisibleAtom, issuePageDataAtom };
 export type { IFilterVisibleAtom, TFilterVisibleAtomTypes };

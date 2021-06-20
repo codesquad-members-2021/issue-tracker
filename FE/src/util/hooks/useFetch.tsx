@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// namespace가 뭔지 찾아보기.
-namespace IFetchParams {
-  export type url = string;
-  export type options = IFetchOption;
-}
-
 type HTTP_METHODS = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS';
 
 interface IFetchOption {
@@ -47,7 +41,14 @@ const queryMaker = (url: URL) =>
       return { [key]: value };
     });
 
-function useFetch<T>(url: IFetchParams.url, options?: IFetchParams.options) {
+// useFetch
+interface IuseFetch {
+  url: string;
+  options?: IFetchOption;
+  checkBeforeFetchExecute?: () => boolean;
+}
+
+function useFetch<T>({ url, options, checkBeforeFetchExecute } : IuseFetch) {
   const urlObjects = new URL(url);
   const initialFetchState: IFetchState = {
     endpoint: urlObjects.host,
@@ -74,7 +75,9 @@ function useFetch<T>(url: IFetchParams.url, options?: IFetchParams.options) {
   };
 
   useEffect(() => {
-    fetchData();
+    checkBeforeFetchExecute
+      ? checkBeforeFetchExecute() && fetchData()
+      : fetchData();
   }, []);
 
   return { result, fetchState };

@@ -1,5 +1,5 @@
-import { IFilterVisibleAtom, TFilterVisibleAtomTypes, filterVisibleAtom } from './issueList';
+import { IFilterVisibleAtom, TFilterVisibleAtomTypes, filterVisibleAtom, issuePageDataAtom } from './issueList';
 
 // issueList
 export type { IFilterVisibleAtom, TFilterVisibleAtomTypes };
-export { filterVisibleAtom };
+export { filterVisibleAtom, issuePageDataAtom };
