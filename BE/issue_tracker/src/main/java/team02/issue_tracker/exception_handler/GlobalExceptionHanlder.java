@@ -15,25 +15,25 @@ public class GlobalExceptionHanlder {
 
     @ExceptionHandler(IncorrectTokenTypeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult incorrectTokenTypeException(IncorrectTokenTypeException e) {
+    public ApiResult<Void> incorrectTokenTypeException(IncorrectTokenTypeException e) {
         return ApiResult.fail(e);
     }
 
     @ExceptionHandler(JwtNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResult jwtNotFoundException(JwtNotFoundException e) {
+    public ApiResult<Void> jwtNotFoundException(JwtNotFoundException e) {
         return ApiResult.fail(e);
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResult notFoundException(NotFoundException e) {
+    public ApiResult<Void> notFoundException(NotFoundException e) {
         return ApiResult.fail(e);
     }
 
     @ExceptionHandler(IllegalStatusException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult illegalIssueStatusException(IllegalStatusException e) {
+    public ApiResult<Void> illegalIssueStatusException(IllegalStatusException e) {
         return ApiResult.fail(e);
     }
 }
