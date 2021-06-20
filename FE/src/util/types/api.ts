@@ -26,9 +26,13 @@ interface IMilestone {
   title: string;
 }
 
-// ----
+interface IUser {
+  userId: number;
+  userName: string;
+  profileImage: string;
+}
 
-interface IIssueInfo {
+interface IIssue {
   contents: string;
   history: IHistory;
   isOpen: boolean;
@@ -38,22 +42,34 @@ interface IIssueInfo {
   title: string;
 }
 
-interface IIssuesInfo {
-  issues: IIssueInfo[];
-}
-
+// -----
 interface ILabelsInfo {
   labels: ILabel[];
 }
 
 interface IMilestonesInfo {
-  milestones:  IMilestone[];
+  milestones: IMilestone[];
 }
 
-interface IIssuesPageData {
-  issues?: IIssuesInfo,
-  milestones?: IMilestonesInfo,
-  labels?: ILabelsInfo,
+interface IUsersInfo {
+  users: IUser[];
 }
 
-export type { IIssueInfo, IIssuesInfo, ILabelsInfo, IMilestonesInfo, IIssuesPageData };
+interface IIssuesInfo {
+  issues: IIssue[];
+}
+
+interface IAllGetRequestDatas {
+  labels?: ILabelsInfo;
+  milestones?: IMilestonesInfo;
+  users?: IUsersInfo;
+  issues?: IIssuesInfo;
+}
+
+export type {
+  ILabel, ILabelsInfo,
+  IMilestone, IMilestonesInfo,
+  IUser, IUsersInfo,
+  IIssue, IIssuesInfo,
+  IAllGetRequestDatas,
+};
