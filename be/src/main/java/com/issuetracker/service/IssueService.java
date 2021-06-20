@@ -77,5 +77,9 @@ public class IssueService {
 
         return IssueDetailDto.of(issue, milestoneDto, labelListDto);
     }
+
+    public IssueCountDto searchNumberOfIssuesClosedAndOpened() {
+        return new IssueCountDto(issueRepository.countAllOpenedIssues(), issueRepository.countAllClosedIssues());
+    }
 }
 

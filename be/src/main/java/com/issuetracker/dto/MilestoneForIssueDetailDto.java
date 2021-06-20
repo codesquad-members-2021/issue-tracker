@@ -1,7 +1,6 @@
 package com.issuetracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.issuetracker.domain.Milestone;
 
 public class MilestoneForIssueDetailDto {
     private String title;
