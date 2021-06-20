@@ -1,32 +1,26 @@
-import { IssueCreateType, LabelSendType } from "@/components/common/types/APIType";
+import { IssueCreateType, LabelSendType, MilestoneSendType } from "@components/common/types/APIType";
 
 const API_END_POINT = 'https://issue-tracker-swagger.herokuapp.com';
 
 const API: any = {
   get: {
     issues: async () => {
-      const response = await fetch(`/issues`);
-      return response.json();
+      return (await fetch(`/issues`)).json();
     },
     users: async () => {
-      const response = await fetch(`/users`);
-      return response.json();
+      return (await fetch(`/users`)).json();
     },
     labels: async () => {
-      const response = await fetch(`/labels`);
-      return response.json();
+      return (await fetch(`/labels`)).json();
     },
     milestones: async () => {
-      const response = await fetch(`/milestones`);
-      return response.json();
+      return (await fetch(`/milestones`)).json();
     },
     labelsCount: async () => {
-      const response = await fetch(`/labels-count`);
-      return response.json();
+      return (await fetch(`/labels-count`)).json();
     },
     milestonesCount: async () => {
-      const response = await fetch(`/milestones-count`);
-      return response.json();
+      return (await fetch(`/milestones-count`)).json();
     },
   },
   post: {
@@ -54,6 +48,16 @@ const API: any = {
       });
       return response.json();
     },
+    milestones: async (data: MilestoneSendType) => {
+      const response = await fetch(`/milestones`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    },
   },
   put: {
     labels: async (labelId: number, data: LabelSendType) => {
@@ -64,7 +68,17 @@ const API: any = {
         },
         body: JSON.stringify(data)
       });
-      return response.json();
+      return response;
+    },
+    milestones: async (milestoneId: number, data: MilestoneSendType) => {
+      const response = await fetch(`/milestones/${milestoneId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      return response;
     }
   }
 };

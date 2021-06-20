@@ -5,25 +5,37 @@ import ProgressBar from '@components/common/ProgressBar';
 import { MilestoneItemType } from '@components/common/types/MilestoneType';
 import { ReactComponent as MilestoneIcon } from '@/Icons/Milestone.svg';
 import { ReactComponent as CalendarIcon } from '@/Icons/Calendar.svg';
+import API from '@/utils/API';
 
-const MilestoneItem = ({ setToggleMilestone }: MilestoneItemType) => {
+const MilestoneItem = ({ milestoneItem, setToggleMilestone }: MilestoneItemType) => {
+  const { id, name, description, dueDate, openedIssueCount, closedIssueCount, closed } = milestoneItem;
+
+  const handleClickSendCloseMilestone = async () => {
+    const putData = {
+      name,
+      dueDate,
+      description,
+      closed: !closed
+    }
+    API.put.milestones(id, putData);
+  }
   return (
     <ItemWrapper>
       <LeftContentWrapper>
         <TitleWrapper>
           <MilestoneBlueIcon />
-          <TitleSpan>제목</TitleSpan>
+          <TitleSpan>{name}</TitleSpan>
           <CalendarIcon />
-          <MilestoneTermSpan>완료일정</MilestoneTermSpan>
+          <MilestoneTermSpan>{dueDate}</MilestoneTermSpan>
         </TitleWrapper>
         <DescWrapper>
-          레이블설명
+          {description}
         </DescWrapper>
       </LeftContentWrapper>
       <RightContentWrapper>
         <ButtonsWrapper>
-          <IconButton icon="closeBox">
-            닫기
+          <IconButton icon="closeBox" onClick={handleClickSendCloseMilestone}>
+            {closed ? '다시 열기' : '닫기'}
           </IconButton>
           <IconButton icon="edit" onClick={setToggleMilestone}>
             편집
@@ -36,9 +48,9 @@ const MilestoneItem = ({ setToggleMilestone }: MilestoneItemType) => {
         <ProgressInfoWrapper>
           <span>50%</span>
           <span>
-            <span>열린 이슈 0</span>
+            <span>열린 이슈 {openedIssueCount}</span>
             &nbsp;
-            <span>닫힌 이슈 1</span>
+            <span>닫힌 이슈 {closedIssueCount}</span>
           </span>
         </ProgressInfoWrapper>
       </RightContentWrapper>

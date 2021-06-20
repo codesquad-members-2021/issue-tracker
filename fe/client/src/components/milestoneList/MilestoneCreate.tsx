@@ -1,14 +1,33 @@
 import React from 'react'
+import styled from 'styled-components';
 import NewMilestone from './NewMilestone';
 import IconButton from '@components/common/IconButton';
-import styled from 'styled-components';
+import API from '@/utils/API';
+import useInput from '@/utils/hook/useInput';
 
 const MilestoneCreate = () => {
+  const milestoneNameState = useInput('');
+  const milestoneDateState = useInput('');
+  const milestoneDescState = useInput('');
+
+  const handleClickSendNewMilestone = async () => {
+    const postData = {
+      name: milestoneNameState.value,
+      description: milestoneDescState.value,
+      dueDate: milestoneDateState.value,
+      closed: false
+    }
+    const responseData = await API.post.milestones(postData)
+    console.log(responseData);
+  }
+
   return (
     <MilestoneCreateWrapper>
-      <NewMilestone title='새로운 마일스톤 추가'>
+      <NewMilestone title='새로운 마일스톤 추가'
+        {...{ milestoneNameState, milestoneDateState, milestoneDescState }}>
         <IconButton variant="contained" color="primary"
-          icon='plus' height="40px" background="#007AFF">
+          icon='plus' height="40px" background="#007AFF"
+          onClick={handleClickSendNewMilestone}>
           완료
         </IconButton>
       </NewMilestone>
