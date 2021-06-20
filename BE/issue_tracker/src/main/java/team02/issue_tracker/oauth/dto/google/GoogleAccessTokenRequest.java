@@ -1,13 +1,13 @@
-package team02.issue_tracker.oauth.dto;
+package team02.issue_tracker.oauth.dto.google;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
+import team02.issue_tracker.oauth.dto.AccessTokenRequest;
 
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class GoogleAccessTokenRequestDto {
+public class GoogleAccessTokenRequest implements AccessTokenRequest {
 
     @JsonProperty("client_id")
     private String clientId;

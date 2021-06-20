@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-import org.hamcrest.Matchers;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
@@ -13,31 +12,31 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
-import team02.issue_tracker.oauth.dto.GithubAccessTokenResponseDto;
-import team02.issue_tracker.oauth.dto.GithubUserProfile;
+import team02.issue_tracker.oauth.dto.AccessToken;
+import team02.issue_tracker.oauth.dto.SocialProfile;
+import team02.issue_tracker.oauth.dto.github.GithubAccessTokenRequest;
+import team02.issue_tracker.oauth.dto.github.GithubAccessToken;
+import team02.issue_tracker.oauth.dto.github.GithubUserProfile;
 
 import java.io.IOException;
 import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class OAuthServiceTest {
+class GithubLoginServiceTest {
 
     private MockWebServer mockWebServer;
     private WebClient webClient;
     private ClientHttpConnector connector;
     private ObjectMapper objectMapper;
 
-    private OAuthService oauthService;
+    private GithubLoginService oauthService;
 
     @AfterEach
     void shutdown() throws IOException {
@@ -59,10 +58,10 @@ class OAuthServiceTest {
     void requestGithubAccessToken() {
         startServer();
 
-        oauthService = new OAuthService(null, null, null, webClient);
+        oauthService = new GithubLoginService(webClient);
 
         // mock 응답 바디 데이터 설정
-        GithubAccessTokenResponseDto expectedMockResponse = GithubAccessTokenResponseDto
+        GithubAccessToken expectedMockResponse = GithubAccessToken
                 .builder()
                 .accessToken("mock access token")
                 .scope("mock scope")
@@ -81,7 +80,7 @@ class OAuthServiceTest {
         });
 
         // mock 요청 바디 데이터 설정
-        GithubAccessTokenRequestDto mockAccessTokenRequest = GithubAccessTokenRequestDto
+        GithubAccessTokenRequest mockAccessTokenRequest = GithubAccessTokenRequest
                 .builder()
                 .clientId("mock client id")
                 .clientSecret("mock client secret")
@@ -90,8 +89,8 @@ class OAuthServiceTest {
                 .build();
 
         // mock 요청을 mock 서버에 보내서 가져온 응답
-        GithubAccessTokenResponseDto receivedResponse =
-                oauthService.accessTokenFrom(mockAccessTokenRequest, "/mock/access_token");
+        AccessToken receivedResponse =
+                oauthService.accessToken(mockAccessTokenRequest, "/mock/access_token");
 
         // 반환된 응답이 설정한 mock 응답과 일치하는지 검증
         StepVerifier.create(Mono.just(receivedResponse))
@@ -121,7 +120,7 @@ class OAuthServiceTest {
     void requestGithubUser() {
         startServer();
 
-        oauthService = new OAuthService(null, null, null, webClient);
+        oauthService = new GithubLoginService(webClient);
 
         GithubUserProfile expectedResponse = GithubUserProfile.builder()
                 .id(-1L)
@@ -140,13 +139,13 @@ class OAuthServiceTest {
             }
         });
 
-        GithubAccessTokenResponseDto mockAccessToken =
-                GithubAccessTokenResponseDto.builder()
+        GithubAccessToken mockAccessToken =
+                GithubAccessToken.builder()
                 .accessToken("mock access token")
                 .build();
 
-        GithubUserProfile receivedResponse =
-                oauthService.githubUserProfileFrom(mockAccessToken, "/mock/userInfo");
+        SocialProfile receivedResponse =
+                oauthService.userProfile(mockAccessToken, "/mock/userInfo");
 
         StepVerifier.create(Mono.just(receivedResponse))
                 .consumeNextWith(body -> assertThat(body).usingRecursiveComparison()

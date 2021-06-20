@@ -3,7 +3,7 @@ package team02.issue_tracker.oauth.utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import team02.issue_tracker.oauth.dto.GithubAccessTokenRequestDto;
+import team02.issue_tracker.oauth.dto.github.GithubAccessTokenRequest;
 
 @PropertySource("classpath:oauth.properties")
 @Component
@@ -46,8 +46,8 @@ public class GithubApiProperties {
         return GITHUB_USER_INFO_URI;
     }
 
-    public GithubAccessTokenRequestDto accessTokenRequestForWeb(String code) {
-        return GithubAccessTokenRequestDto.builder()
+    public GithubAccessTokenRequest accessTokenRequestForWeb(String code) {
+        return GithubAccessTokenRequest.builder()
                 .clientId(GITHUB_WEB_CLIENT_ID)
                 .clientSecret(GITHUB_WEB_CLIENT_SECRET)
                 .redirectUri(GITHUB_WEB_REDIRECT_URI)
@@ -55,8 +55,8 @@ public class GithubApiProperties {
                 .build();
     }
 
-    public GithubAccessTokenRequestDto accessTokenRequestForIos(String code) {
-        return GithubAccessTokenRequestDto.builder()
+    public GithubAccessTokenRequest accessTokenRequestForIos(String code) {
+        return GithubAccessTokenRequest.builder()
                 .clientId(GITHUB_IOS_CLIENT_ID)
                 .clientSecret(GITHUB_IOS_CLIENT_SECRET)
                 .redirectUri(GITHUB_IOS_REDIRECT_URI)

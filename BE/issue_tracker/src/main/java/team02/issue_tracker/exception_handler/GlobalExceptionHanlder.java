@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team02.issue_tracker.dto.ApiResult;
+import team02.issue_tracker.oauth.exception.InvalidGithubAccessTokenRequestException;
 import team02.issue_tracker.oauth.exception.InvalidGithubUserRequestException;
 import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
@@ -27,6 +28,12 @@ public class GlobalExceptionHanlder {
     @ExceptionHandler(InvalidGithubUserRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResult invalidGithubUserRequest(InvalidGithubUserRequestException e) {
+        return ApiResult.fail(e);
+    }
+
+    @ExceptionHandler(InvalidGithubAccessTokenRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResult invalidGithubAccessTokenRequestException(InvalidGithubAccessTokenRequestException e) {
         return ApiResult.fail(e);
     }
 }
