@@ -1,4 +1,6 @@
-export type TChildren =
+// ** 일반 Interface & Type 정의
+
+type TChildren =
   | React.ReactNode
   | React.ReactChild
   | React.ReactChild[]
@@ -7,6 +9,8 @@ export type TChildren =
   // Material 전용
   | NonNullable<React.ReactNode>
   | {};
-  // --
+// --
 
-export type TMouseEvent = (e: React.MouseEvent<HTMLElement>) => void;
+type TMouseEvent = (e: React.MouseEvent<HTMLElement>) => void;
+
+export type { TChildren, TMouseEvent };
