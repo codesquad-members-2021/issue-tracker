@@ -2,8 +2,15 @@ import styled from "styled-components";
 import LabelCard from "./LabelCard";
 import LabelInput from "./LabelInput";
 import { StyledGridTitleCard } from "styles/StyledCards";
-import { CenterAi } from "styles/StyledLayout ";
+import useFetch from "hooks/useFetch";
+import { useState } from "react";
+import API from "util/API";
+
 const Labels = () => {
+	const [LabelData, setLabelData] = useState();
+	const status = useFetch(API.labels(), "GET", setLabelData);
+	console.log(LabelData, "status", status);
+
 	return (
 		<>
 			<LabelInput isEditor={false} />

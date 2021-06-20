@@ -1,7 +1,7 @@
 import { useState } from "react";
 import API from "util/API";
 import Milestones from "components/Milestones/Milestones";
-import useFetch from "hooks/useFetchGet";
+import useFetch from "hooks/useFetch";
 
 const MilestonesPage = () => {
 	const [milestoneData, setMilestoneData] = useState();

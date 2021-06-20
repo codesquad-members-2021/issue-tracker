@@ -4,12 +4,26 @@ import { ReactComponent as RefreshIcon } from "images/refresh-ccw.svg";
 import { ReactComponent as XIcon } from "images/x-square.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import { ReactComponent as PlusIcon } from "images/plus.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
+import useDebounce from "hooks/useDebounce";
 const LabelInput = ({ isEditor }) => {
-	const [inputValue, setInputValue] = useState(false);
+	//🔥아래 상태 한번에 관리할까 말까 고민중⭐️
+	const initLabelState = {
+		name: null,
+		description: null,
+		bgColor: null,
+		textColor: null,
+	};
+	const [input, setInput] = useState("");
+	const [textColor, setTextColor] = useState(false);
+	const [backGroundColor, setBackGroundColor] = useState(
+		theme.grayScale.input_background
+	);
+	const [labelName, setLabelName] = useState("레이블 이름");
+	const [labelDescription, setLabelDescription] = useState("");
 	const {
 		creatorTitle,
 		editorTitle,
@@ -18,12 +32,35 @@ const LabelInput = ({ isEditor }) => {
 		textColorTitles,
 		buttons,
 	} = labelData;
+	console.log(textColor);
+
 	const handleClickRadioButton = event => {
 		const value = event.target.value;
-		setInputValue(value);
+		setTextColor(value);
 	};
 
-	const changeColor = () => {};
+	const test = useDebounce(input, 1000); //커스텀 훅은 컴포넌트 안에서 호출되어야 하는 부분 고려!
+	console.log(test);
+	console.log(backGroundColor);
+	const handleTypingName = event => {
+		if (event.target.id === "0") {
+			const textInput = event.target.value;
+			setLabelName(textInput);
+		} else {
+			//🔥description 해결중 : 작성 후 1초 뒤에 set되면서 리렌더링 되도록 하고 싶음(디바운스)
+			setInput(event.target.value);
+			setLabelDescription(input);
+		}
+	};
+	const getFontColor = () => {
+		return textColor === "light"
+			? theme.grayScale.off_white
+			: theme.grayScale.black;
+	};
+	const changeColor = () => {
+		const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+		setBackGroundColor(`#${randomColor}`);
+	};
 
 	return (
 		<LabelInputLayout isEditor={isEditor}>
@@ -31,23 +68,27 @@ const LabelInput = ({ isEditor }) => {
 			<MainLayout>
 				<PreviewContainer>
 					<LabelBadge
-						text={"모닝알고리즘"}
-						fontColor={"white"}
-						bgColor={"#004de3"}
+						text={labelName}
+						fontColor={getFontColor()}
+						bgColor={backGroundColor}
 					/>
 				</PreviewContainer>
 
 				<SettingContainer>
-					{inputTitles.map(title => (
-						<TextInputContainer _width={"100%"}>
+					{inputTitles.map((title, idx) => (
+						<TextInputContainer _width={"100%"} key={`title-${idx}`}>
 							<SubTitle>{title}</SubTitle>
-							<TextInput />
+							<TextInput
+								id={idx}
+								onChange={handleTypingName}
+								autocomplete="off"
+							/>
 						</TextInputContainer>
 					))}
 					<DisplayFlex>
 						<TextInputContainer _width={"20%"}>
 							<SubTitle>{bgColorTitles}</SubTitle>
-							<TextInput />
+							<TextInput defaultValue={backGroundColor} />
 							<Icon onClick={changeColor} />
 						</TextInputContainer>
 						<TextInputContainer _width={"40%"}>
@@ -59,7 +100,7 @@ const LabelInput = ({ isEditor }) => {
 											<RadioButton
 												type="radio"
 												value={button.value}
-												checked={inputValue === button.value}
+												checked={textColor === button.value}
 												onChange={handleClickRadioButton}
 												key={`radio-${idx}`}
 											/>
@@ -186,6 +227,8 @@ const SubTitle = styled(CenterAi)`
 const TextInput = styled.input`
 	background: ${({ theme }) => theme.grayScale.input_background};
 	width: 100%;
+	height: 100%;
+
 	color: ${({ theme }) => theme.grayScale.title_active};
 	border: none;
 `;

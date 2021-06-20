@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useFetch = (url, method, callback, reqData = null) => {
+	"";
 	const [status, setStatus] = useState("대기 중");
 
 	const fetchContent =
