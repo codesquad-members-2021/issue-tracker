@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import team02.issue_tracker.domain.User;
 import team02.issue_tracker.oauth.dto.*;
 import team02.issue_tracker.oauth.utils.GithubApiProperties;
-import team02.issue_tracker.oauth.utils.JwtUtils;
+import team02.issue_tracker.oauth.jwt.JwtFactory;
 import team02.issue_tracker.service.UserService;
 
 @Slf4j
@@ -16,26 +16,23 @@ import team02.issue_tracker.service.UserService;
 public class OAuthService {
 
     private final UserService userService;
-    private final JwtUtils jwtUtils;
     private final GithubApiProperties githubApiProperties;
 
-    public OAuthService(UserService userService, JwtUtils jwtUtils
-            , GithubApiProperties githubApiProperties) {
+    public OAuthService(UserService userService, GithubApiProperties githubApiProperties) {
         this.userService = userService;
-        this.jwtUtils = jwtUtils;
         this.githubApiProperties = githubApiProperties;
     }
 
     public AuthJwt issueJwtForWeb(String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForWeb(code));
-        return jwtUtils.getJwt(userFrom(githubUserProfile));
+        return JwtFactory.generateJwt(userFrom(githubUserProfile));
     }
 
     public AuthJwt issueJwtForIos(String code) {
         GithubUserProfile githubUserProfile = githubUserProfileFrom(
                 githubApiProperties.accessTokenRequestForIos(code));
-        return jwtUtils.getJwt(userFrom(githubUserProfile));
+        return JwtFactory.generateJwt(userFrom(githubUserProfile));
     }
 
     private User userFrom(SocialProfile socialProfile) {
