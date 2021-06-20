@@ -174,7 +174,7 @@ export const selectedMilestoneState = atom<MilestoneType | null>({
 });
 
 
-//레이블,모달 클릭 감지 및 리셑
+//레이블,모달 클릭 감지 및 리셑_____________________________________
 export const lableClick = atom({
   key:'lablePage',
   default: false
