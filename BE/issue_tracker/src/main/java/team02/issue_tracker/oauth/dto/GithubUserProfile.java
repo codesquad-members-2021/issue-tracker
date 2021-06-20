@@ -16,6 +16,7 @@ public class GithubUserProfile implements SocialProfile {
     @JsonSetter("avatar_url")
     private String avatarUrl;
 
+    @Override
     public User becomeUser() {
         return User.builder()
                 .oauthResource(SocialLogin.GITHUB)
