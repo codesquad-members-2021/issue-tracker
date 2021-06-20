@@ -1,4 +1,5 @@
 export type LabelSwitchType = {
+  id?: number;
   name: string;
   color: string;
   description: string;

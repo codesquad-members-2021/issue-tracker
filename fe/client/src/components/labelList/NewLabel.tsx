@@ -1,29 +1,32 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { InputAdornment } from '@material-ui/core';
 import Label from '@components/common/Label';
 import InputField from '@/components/common/InputField';
-import { LabelSwitchType } from '@components/common/types/LabelType';
 import { getRandomColor } from '@/utils/serviceUtils';
 import RefreshIcon from '@/Icons/Refresh.svg';
 
-type NewLabelType = LabelSwitchType & {
+type NewLabelType = {
   title: string;
+  labelNameState: {
+    value: string;
+    onChange: Function;
+  }
+  labelDescState: {
+    value: string;
+    onChange: Function;
+  }
+  labelColorState: {
+    value: string;
+    onChange: Function;
+  }
   children: React.ReactNode;
 }
 
-const NewLabel = ({ name, color, description,title, children }: NewLabelType) => {
-  const colorInputColRef = useRef(null);
-  const [colorState, setColorState] = useState(color);
-
-  const handleClickRefreshColor = () => {
-    setColorState(getRandomColor());
+const NewLabel = ({ labelNameState, labelDescState, labelColorState, title, children }: NewLabelType) => {
+  const handleClickRefreshColor = ({ target }: { target: any }) => {
+    labelColorState.onChange({ target }, getRandomColor());
   }
-
-  useEffect(() => {
-    const current = colorInputColRef.current as unknown as HTMLInputElement;
-    current.value = colorState;
-  }, [colorState]);
 
   const reFreshButton = (<InputAdornment position="end" onClick={handleClickRefreshColor}>
     <ImageTag src={RefreshIcon} alt="" />
@@ -34,12 +37,12 @@ const NewLabel = ({ name, color, description,title, children }: NewLabelType) =>
       <LabelEditTitle>{title}</LabelEditTitle>
       <ContentsWrapper>
         <LabelWrapper>
-          <Label {...{ name }} color={colorState} />
+          <Label name={labelNameState.value} color={labelColorState.value} />
         </LabelWrapper>
         <InputsWrapper>
-          <InputField defaultValue={name} label='레이블이름' />
-          <InputField defaultValue={description} label='설명(선택)' />
-          <InputField inputRef={colorInputColRef} defaultValue={color} label='배경 색상'
+          <InputField {...labelNameState} label='레이블이름' />
+          <InputField {...labelDescState} label='설명(선택)' />
+          <InputField {...labelColorState} label='배경 색상'
             width="30%" endAdornment={reFreshButton} />
           <IconButtonsWrapper>
             {children}

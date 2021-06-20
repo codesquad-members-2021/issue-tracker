@@ -1,4 +1,4 @@
-import { IssueCreateType } from "@/components/common/types/APIType";
+import { IssueCreateType, LabelSendType } from "@/components/common/types/APIType";
 
 const API_END_POINT = 'https://issue-tracker-swagger.herokuapp.com';
 
@@ -37,6 +37,28 @@ const API: any = {
     issues: async (data: IssueCreateType) => {
       const response = await fetch(`/issues`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    },
+    labels: async (data: LabelSendType) => {
+      const response = await fetch(`/labels`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      return response.json();
+    },
+  },
+  put: {
+    labels: async (labelId: number, data: LabelSendType) => {
+      const response = await fetch(`/labels/${labelId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },

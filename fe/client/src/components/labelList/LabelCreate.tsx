@@ -3,13 +3,30 @@ import NewLabel from './NewLabel';
 import IconButton from '@components/common/IconButton';
 import styled from 'styled-components';
 import { getRandomColor } from '@/utils/serviceUtils';
+import useInput from '@/utils/hook/useInput';
+import API from '@/utils/API';
 
 const LabelCreate = () => {
+  const labelNameState = useInput('');
+  const labelDescState = useInput('');
+  const labelColorState = useInput(getRandomColor());
+
+  const handleClickLabelCreate = async () => {
+    const postData = {
+      name: labelNameState.value,
+      description: labelDescState.value,
+      color: labelColorState.value
+    }
+    const responseData = await API.post.labels(postData);
+    console.log(responseData)
+  }
+
   return (
     <LabelCreateWrapper>
-      <NewLabel name='' color={getRandomColor()} description='' title='새로운 레이블 추가'>
+      <NewLabel {...{ labelNameState, labelDescState, labelColorState }} title='새로운 레이블 추가'>
         <IconButton variant="contained" color="primary"
-          icon='plus' height="40px" background="#007AFF">
+          icon='plus' height="40px" background="#007AFF"
+          onClick={handleClickLabelCreate}>
           완료
         </IconButton>
       </NewLabel>

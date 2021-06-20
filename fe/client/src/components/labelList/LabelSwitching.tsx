@@ -5,15 +5,15 @@ import LabelEditItem from './LabelEditItem';
 import { LabelSwitchType } from '@components/common/types/LabelType';
 import useToggle from '@/utils/hook/useToggle';
 
-const LabelSwitching = ({ name, color, description }: LabelSwitchType) => {
+const LabelSwitching = ({ id, name, color, description }: LabelSwitchType) => {
   const [isEditLabel, setToggleLabel] = useToggle(false);
 
   return (
     <div>
       <ListItem>
         {isEditLabel
-          ? <LabelEditItem {...{ name, color, description, setToggleLabel }} />
-          : <LabelItem {...{ name, color, description, setToggleLabel }} />
+          ? <LabelEditItem {...{ id, name, color, description, setToggleLabel }} />
+          : <LabelItem {...{ id, name, color, description, setToggleLabel }} />
         }
       </ListItem>
     </div>
