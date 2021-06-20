@@ -9,6 +9,9 @@ import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
 import useDebounce from "hooks/useDebounce";
+import API from "util/API";
+import fetchData from "util/fetchData";
+import CancelButton from "components/common/Button/CancelButton";
 const LabelInput = ({ isEditor }) => {
 	const {
 		creatorTitle,
@@ -25,6 +28,7 @@ const LabelInput = ({ isEditor }) => {
 		backgroundColor: theme.grayScale.input_background,
 		textColor: false,
 	};
+
 	const reducer = (state, { type, payload }) => {
 		switch (type) {
 			case "name":
@@ -54,6 +58,25 @@ const LabelInput = ({ isEditor }) => {
 		} else {
 			// 디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
 			dispatch({ type: "description", payload: event.target.value });
+		}
+	};
+	const handleSubmit = async () => {
+		const testData = {
+			name: "feature",
+			description: "새 기능",
+			colors: {
+				backgroundColor: "#000000",
+				textColor: "#FFFFFF",
+			},
+		};
+		if (isEditor) {
+			console.log("editor~");
+			const res = await fetchData(API.labels(), "POST", testData);
+			console.log(res);
+		} else {
+			console.log("신규~");
+			const res = await fetchData(API.labels(), "POST", testData);
+			console.log("res", res);
 		}
 	};
 	const getFontColor = () => {
@@ -128,7 +151,7 @@ const LabelInput = ({ isEditor }) => {
 								{buttons.cancel}
 							</CancelButton>
 						)}
-						<SubmitButton>
+						<SubmitButton onClick={handleSubmit}>
 							{isEditor ? (
 								<EditIcon stroke={theme.grayScale.off_white} />
 							) : (
@@ -186,20 +209,20 @@ const TextInputContainer = styled(CenterAi)`
 	color: ${({ theme }) => theme.grayScale.title_active};
 `;
 
-const CancelButton = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0px 16px;
-	margin: 0 3px;
-	width: 120px;
-	height: 40px;
-	color: ${theme.colors.blue};
-	background: ${theme.colors.off_white};
-	border: 2px solid ${theme.colors.blue};
-	border-radius: 11px;
-	cursor: pointer;
-`;
+// const CancelButton = styled.div`
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	padding: 0px 16px;
+// 	margin: 0 3px;
+// 	width: 120px;
+// 	height: 40px;
+// 	color: ${theme.colors.blue};
+// 	background: ${theme.colors.off_white};
+// 	border: 2px solid ${theme.colors.blue};
+// 	border-radius: 11px;
+// 	cursor: pointer;
+// `;
 
 const SubmitButton = styled.div`
 	display: flex;

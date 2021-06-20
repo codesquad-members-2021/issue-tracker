@@ -1,9 +1,9 @@
-import { StyledCancelButton } from "styles/StyledButtons";
+import { StyledWhiteButton } from "styles/StyledButtons";
 
 const CancelButton = ({ clickEvent, children }) => {
 	return (
 		<>
-			<StyledCancelButton onClick={clickEvent}>{children}</StyledCancelButton>
+			<StyledWhiteButton onClick={clickEvent}>{children}</StyledWhiteButton>
 		</>
 	);
 };

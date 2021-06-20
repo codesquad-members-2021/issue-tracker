@@ -7,8 +7,9 @@ import {
 	milestoneButtonFlagState,
 	milestoneAddButtonFlagState,
 } from "RecoilStore/Atoms";
-
+import { useState } from "react";
 const Navigator = () => {
+	const [isAddButton, setIsAddButton] = useState(true);
 	const [milestoneFlag, setMilestoneFlag] = useRecoilState(
 		milestoneButtonFlagState
 	);
@@ -40,7 +41,10 @@ const Navigator = () => {
 				labelClickEvent={handleLabelClick}
 				isMainPage={false}
 			/>
-			<AddButton text="추가" clickEvent={handelAddClick} />
+			<AddButton
+				text={isAddButton ? "추가" : "닫기"}
+				clickEvent={handelAddClick}
+			/>
 		</NavigatorLayout>
 	);
 };

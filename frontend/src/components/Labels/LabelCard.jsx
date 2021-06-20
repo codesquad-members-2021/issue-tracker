@@ -6,7 +6,8 @@ import { ReactComponent as TrashIcon } from "images/trash.svg";
 import theme from "styles/theme";
 import { CenterJcAi, CenterAi } from "styles/StyledLayout ";
 
-const LabelCard = () => {
+const LabelCard = ({ name, description, colors }) => {
+	// const { backgroundColor, textColor } = colors;
 	return (
 		<>
 			<StyledGridCard gridRate={[0.5, 1.5, 0.5]}>
