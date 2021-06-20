@@ -3,10 +3,15 @@ import { useState, useCallback } from "react";
 import AddButton from "components/common/Button/AddButton";
 import useFetch from "hooks/useFetch";
 import API from "util/API";
+import { useSetRecoilState } from "recoil";
+import { milestoneAddButtonFlagState } from "RecoilStore/Atoms";
 
 const MilestoneInput = () => {
 	const [inputData, setInputData] = useState({});
 	const [milestoneData, setMilestoneData] = useState();
+	const setMilestoneAddButtonFlag = useSetRecoilState(
+		milestoneAddButtonFlagState
+	);
 	const { res, fetchData } = useFetch(
 		API.milestones(),
 		"POST",
@@ -37,6 +42,7 @@ const MilestoneInput = () => {
 
 	const handleSubmit = () => {
 		fetchData();
+		setMilestoneAddButtonFlag(false);
 	};
 
 	return (
