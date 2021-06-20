@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Tabs from './Tabs';
 import AddButton from './AddButton';
-import { IIssuesPageData } from 'util/types';
+import { IAllGetRequestDatas } from 'util/types';
 
-const TabBar = ({ milestones, labels }: IIssuesPageData) => (
+const TabBar = ({ milestones, labels }: IAllGetRequestDatas) => (
   <TabBarLayout>
     <Tabs {...{ milestones, labels }} />
     <AddButton />

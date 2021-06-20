@@ -9,9 +9,9 @@ import {
 
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';
-import { IIssuesPageData } from 'util/types/api';
+import { IAllGetRequestDatas } from 'util/types/api';
 
-export interface IIssueList { data?: IIssuesPageData }
+export interface IIssueList { data?: IAllGetRequestDatas }
 
 // IssueList를 구성하는 다른 부품에서 쓰임.
 export interface IIssueListChildren extends IIssueList { 

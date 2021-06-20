@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ButtonGroup, Button } from '@material-ui/core';
 import { TextIssueList } from 'util/reference';
-import { IIssuesPageData } from 'util/types';
+import { IAllGetRequestDatas } from 'util/types';
 import { IconLabel, IconMileStone } from 'components/Common/Icons';
 
-const Tabs = ({ milestones, labels }: IIssuesPageData) => {
+const Tabs = ({ milestones, labels }: IAllGetRequestDatas) => {
   const { tabs } = TextIssueList;
 
   const [milestoneCount, setMilestoneCount] = useState(0);
