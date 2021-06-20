@@ -47,12 +47,7 @@ class MileStoneViewController: UIViewController {
         title = "마일스톤"
         addNavigationButton()
         addTableView()
-        
-        mileStoneTableDatasource = MilestoneTableViewDataSource()
-        mileStoneTableDelegate = MileStoneTableDelegate()
-        mileStoneTableView.dataSource = mileStoneTableDatasource
-        mileStoneTableView.delegate = mileStoneTableDelegate
-        
+        setTableViewSupporters()
         setNetworkManager()
     }
     
@@ -74,6 +69,14 @@ class MileStoneViewController: UIViewController {
             mileStoneTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mileStoneTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setTableViewSupporters() {
+        mileStoneTableDatasource = MilestoneTableViewDataSource()
+        mileStoneTableView.dataSource = mileStoneTableDatasource
+        
+        mileStoneTableDelegate = MileStoneTableDelegate(cellActionHandler: swipeActionHandler)
+        mileStoneTableView.delegate = mileStoneTableDelegate
     }
     
     private func setNetworkManager() {
@@ -109,27 +112,36 @@ class MileStoneViewController: UIViewController {
             self.mileStoneTableView.reloadData()
         }
     }
+    private func swipeActionHandler(_ index: Int, _ action: CellAction) {
+        guard let targetMileStone = mileStoneTableDatasource?.milestones[index] else { return }
+        
+        switch action {
+        case .edit:
+            presentEditMileStoneViewController(for: targetMileStone)
+        case .delete:
+            deleteMileStone(for: targetMileStone.id)        
+        default:
+            assert(false)
+        }
+    }
+    
+    private func presentEditMileStoneViewController(for targetMileStone: MileStone) {
+        let editMileStoneViewController = MileStoneControlViewController()
+        editMileStoneViewController.configure(withTitle: "마일스톤 수정하기", currentMileStone: targetMileStone)
+        editMileStoneViewController.setSaveOperation(putEditedMileStone)
+        editMileStoneViewController.modalPresentationStyle = .formSheet
+        
+        DispatchQueue.main.async {
+            self.present(editMileStoneViewController, animated: true, completion: nil)
+        }
+    }
 }
 
 //MARK: - Network Methods
 extension MileStoneViewController {
-//    private func deleteMileStone(for id: Int) {
-//        let deleteLabelEndpoint = EndPoint.milestone.path(with: id)
-//        networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
-//            switch result {
-//            case .success(_):
-//                self?.loadData()
-//            case .failure(let error):
-//                self?.presentAlert(with: error.description)
-//            }
-//        })
-//    }
-    
-    private func postNewMileStone(_ newMileStone: MileStone) {
-        let newLabelEndpoint = EndPoint.milestone.path()
-        let requestBody = NewMileStoneDTO(title: newMileStone.title, description: newMileStone.description ?? "", due_date: newMileStone.due_date ?? "")
-        
-        networkManager?.post(endpoint: newLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
+    private func deleteMileStone(for id: Int) {
+        let deleteMileStoneEndpoint = EndPoint.milestone.path(with: id)
+        networkManager?.delete(endpoint: deleteMileStoneEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
             switch result {
             case .success(_):
                 self?.loadData()
@@ -139,18 +151,32 @@ extension MileStoneViewController {
         })
     }
     
-//    private func putEditedMileStone(_ editedLabel: MileStone) {
-//        let labelId = editedLabel.id
-//        let editLabelEndpoint = EndPoint.milestone.path(with: labelId)
-//        let requestBody = NewLabelDTO(name: editedLabel.title, content: editedLabel.body, colorCode: editedLabel.hexColorCode)
-//
-//        networkManager?.put(endpoint: editLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
-//            switch result {
-//            case .success(_):
-//                self?.loadData()
-//            case .failure(let error):
-//                self?.presentAlert(with: error.description)
-//            }
-//        })
-//    }
+    private func postNewMileStone(_ newMileStone: MileStone) {
+        let newMileStoneEndpoint = EndPoint.milestone.path()
+        let requestBody = NewMileStoneDTO(title: newMileStone.title, description: newMileStone.description ?? "", due_date: newMileStone.due_date ?? "")
+        
+        networkManager?.post(endpoint: newMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.loadData()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
+    private func putEditedMileStone(_ editedMileStone: MileStone) {
+        let mileStoneId = editedMileStone.id
+        let editMileStoneEndpoint = EndPoint.milestone.path(with: mileStoneId)
+        let requestBody = NewMileStoneDTO(title: editedMileStone.title, description: editedMileStone.description ?? "", due_date: editedMileStone.due_date ?? "")
+
+        networkManager?.put(endpoint: editMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.loadData()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
 }

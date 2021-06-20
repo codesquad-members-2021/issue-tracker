@@ -9,7 +9,7 @@ import UIKit
 
 class MilestoneTableViewDataSource: NSObject, UITableViewDataSource {
     
-    private var milestones = [MileStone]()
+    private(set) var milestones = [MileStone]()
     
     func update(milestones: [MileStone]) {
         self.milestones = milestones
