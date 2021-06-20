@@ -26,8 +26,8 @@ final class LoginService {
         self.repository = repository
     }
 
-    func fetchGithubCode(from content: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, NetworkError?) -> Void) {
-        repository.fetchGithubLoginCode(from: content) { result in
+    func fetchGithubCode(viewController: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, NetworkError?) -> Void) {
+        repository.fetchGithubLoginCode(from: viewController) { result in
             switch result {
             case .failure(let error):
                 completionHandler(nil, error)

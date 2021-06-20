@@ -21,8 +21,8 @@ final class LoginViewModel {
         self.loginService = loginService
     }
 
-    func fetctGithubLogin(from content: ASWebAuthenticationPresentationContextProviding) {
-        loginService.fetchGithubCode(from: content) { code, error in
+    func fetctGithubLogin(viewController: ASWebAuthenticationPresentationContextProviding) {
+        loginService.fetchGithubCode(viewController: viewController) { code, error in
             guard error == nil, let code = code else {
                 self.message = error?.description ?? ""
                 return

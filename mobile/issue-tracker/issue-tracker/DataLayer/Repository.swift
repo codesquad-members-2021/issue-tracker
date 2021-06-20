@@ -26,7 +26,7 @@ final class Repository: Repositorable {
 
     func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
 
-        guard let url = EndPoint().authURLRequest(to: code, method: .get) else {
+        guard let url = EndPoint().authURLRequest(to: code, method: .post) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
@@ -51,7 +51,7 @@ final class Repository: Repositorable {
             }.eraseToAnyPublisher()
     }
 
-    func fetchGithubLoginCode(from content: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<String, NetworkError>) -> Void) {
+    func fetchGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<String, NetworkError>) -> Void) {
         guard let url = GithubConfiguration().url() else {
             completion(.failure(NetworkError.invalidURL))
             return
@@ -67,7 +67,7 @@ final class Repository: Repositorable {
             let code = queryItems?.filter { $0.name == "code" }.first?.value ?? ""
             completion(.success(code))
         }
-        configureWebAuthSession(from: content)
+        configureWebAuthSession(from: viewController)
     }
 
     private func configureWebAuthSession(from content: ASWebAuthenticationPresentationContextProviding) {

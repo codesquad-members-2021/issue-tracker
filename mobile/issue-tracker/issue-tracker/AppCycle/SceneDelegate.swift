@@ -18,16 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = screen
-        ViewSwitcher().updateViewController()
+        window?.rootViewController = IntialViewController()
         window?.makeKeyAndVisible()
-    }
-
-    func changeRootViewController (_ vc: UIViewController) {
-        guard let window = self.window else { return }
-        window.rootViewController = vc
-        UIView.transition(with: window,
-                          duration: 0.4,
-                          options: [.transitionCrossDissolve],
-                          animations: nil, completion: nil)
     }
 }

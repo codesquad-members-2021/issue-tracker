@@ -18,19 +18,18 @@
 		BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
 		BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
 		BF0A6C19266F67EE000F3BC5 /* GithubConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */; };
-		BF370D622672782100E6C090 /* ViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF370D612672782100E6C090 /* ViewSwitcher.swift */; };
 		BF370DB22676688E00E6C090 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BF370DB32676689800E6C090 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
 		BF370DB4267668A100E6C090 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */; };
 		BF370DB62677208400E6C090 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF370DB52677208400E6C090 /* RepositoryTests.swift */; };
 		BF370DB726772F0700E6C090 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
 		BF370DB82677308000E6C090 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D52671C015002C6D80 /* Error.swift */; };
+		BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */; };
 		BF7DE027267A418D0019B519 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
 		BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF8C7F042678905C005ABB38 /* ClientId.plist */; };
 		BF8C7F3A267A5E7D005ABB38 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BF8C7F4D267A6131005ABB38 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BF8C7F4C267A6131005ABB38 /* KeychainSwift */; };
 		BF8C7F51267A810A005ABB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6BD7266F4EE5000F3BC5 /* SceneDelegate.swift */; };
-		BF8C7F55267A8191005ABB38 /* ViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF370D612672782100E6C090 /* ViewSwitcher.swift */; };
 		BF8C7F59267A81A0005ABB38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
 		BF8C7F5D267A81C3005ABB38 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
 		BF8C7F5E267A81C3005ABB38 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
@@ -95,8 +94,8 @@
 		BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		BF0A6C18266F67EE000F3BC5 /* GithubConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubConfiguration.swift; sourceTree = "<group>"; };
-		BF370D612672782100E6C090 /* ViewSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSwitcher.swift; sourceTree = "<group>"; };
 		BF370DB52677208400E6C090 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
+		BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialViewController.swift; sourceTree = "<group>"; };
 		BF8C7F042678905C005ABB38 /* ClientId.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientId.plist; sourceTree = "<group>"; };
 		BF8C7F8A267B2C06005ABB38 /* LoginUITests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUITests2.swift; sourceTree = "<group>"; };
 		BFB399CA2671B387002C6D80 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -170,7 +169,6 @@
 				BF0A6C0F266F5F07000F3BC5 /* DataLayer */,
 				BF0A6C0E266F5F05000F3BC5 /* DomainLayer */,
 				BF0A6C0D266F5F03000F3BC5 /* PresentationLayer */,
-				BF370D6326734B9300E6C090 /* New Group */,
 				BF0A6BDE266F4EE7000F3BC5 /* Assets.xcassets */,
 				BF0A6BE0266F4EE7000F3BC5 /* LaunchScreen.storyboard */,
 				BF8C7F042678905C005ABB38 /* ClientId.plist */,
@@ -212,7 +210,9 @@
 		BF0A6C0D266F5F03000F3BC5 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				BF370D6326734B9300E6C090 /* New Group */,
 				BF0A6C10266F5F31000F3BC5 /* Login */,
+				BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -287,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				BFB399DD2671F696002C6D80 /* AlertFactory.swift */,
-				BF370D612672782100E6C090 /* ViewSwitcher.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -471,7 +470,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
-				BF370D622672782100E6C090 /* ViewSwitcher.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
 				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
 				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
@@ -485,6 +483,7 @@
 				BFB399D92671D7C7002C6D80 /* Auth.swift in Sources */,
 				BFB399DE2671F696002C6D80 /* AlertFactory.swift in Sources */,
 				BFB399D22671BE6B002C6D80 /* Repository.swift in Sources */,
+				BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,
 			);
@@ -517,7 +516,6 @@
 				BF8C7F63267A81DC005ABB38 /* Endpoint.swift in Sources */,
 				BF8C7F65267A81DC005ABB38 /* Error.swift in Sources */,
 				BF8C7F71267A81EF005ABB38 /* GithubConfiguration.swift in Sources */,
-				BF8C7F55267A8191005ABB38 /* ViewSwitcher.swift in Sources */,
 				BF0A6BF8266F4EE8000F3BC5 /* LoginUITests.swift in Sources */,
 				BF8C7F75267A81FD005ABB38 /* Encodable+Extension.swift in Sources */,
 				BF8C7F59267A81A0005ABB38 /* LoginViewController.swift in Sources */,

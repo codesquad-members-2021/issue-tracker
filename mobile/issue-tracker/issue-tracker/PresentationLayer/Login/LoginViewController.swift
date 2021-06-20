@@ -19,7 +19,7 @@ final class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTouched(_ sender: Any) {
-        loginViewModel.fetctGithubLogin(from: self)
+        loginViewModel.fetctGithubLogin(viewController: self)
     }
 
     private func bind() {
@@ -32,7 +32,7 @@ final class LoginViewController: UIViewController {
         loginViewModel.AuthorizeCompltion()
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                ViewSwitcher().updateViewController()
+                self.dismiss(animated: false, completion: nil)
             }.store(in: &cancellable)
     }
 }
