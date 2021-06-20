@@ -25,7 +25,7 @@ class MilestoneTableViewDataSource: NSObject, UITableViewDataSource {
         
         let milesonte = milestones[indexPath.row]
         
-        cell.configure(title: milesonte.title, description: milesonte.description, due_date: milesonte.due_date)
+        cell.configure(title: milesonte.title, description: milesonte.description ?? "", due_date: milesonte.due_date ?? "")
         return cell
     }
 }

@@ -21,8 +21,8 @@ struct MileStoneDTO: Decodable {
 struct MileStone: Decodable {
     let id: Int
     let title: String
-    let description: String
-    let due_date: String
+    let description: String?
+    let due_date: String?
     
     enum CodingKeys: String, CodingKey {
         case id
