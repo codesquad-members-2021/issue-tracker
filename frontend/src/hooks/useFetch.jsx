@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url, method, callback, reqData = null) => {
-	"";
-	const [status, setStatus] = useState("대기 중");
+import fetchData from "util/fetchData";
 
-	const fetchContent =
+const useFetch = (url, method, callback, reqData = null) => {
+	const [status, setStatus] = useState("대기 중");
+	const [error, setError] = useState(null);
+	console.log("useFetch initiated");
+
+	const option =
 		method === "GET"
 			? {
 					headers: {
@@ -21,27 +24,32 @@ const useFetch = (url, method, callback, reqData = null) => {
 					body: JSON.stringify(reqData),
 			  };
 
-	useEffect(() => {
-		if (!url) return;
 
-		const fetchData = async () => {
-			try {
-				setStatus(`fetch start from ${url}`);
-				const res = await fetch(url, fetchContent);
-				if (!res.ok) throw new Error(res.status);
-				else {
-					const resData = await res.json();
-					callback(resData);
-					setStatus(`fetch complete from ${url}`);
-				}
-			} catch (error) {
-				setStatus(`fetch failed from ${url} due to ${error}`);
+	const fetchData = async () => {
+		console.log("fetchData func initiated");
+		try {
+			setStatus(`fetch start from ${url}`);
+			const res = await fetch(url, option);
+			const resData = await res.json();
+			if (!res.ok) throw new Error(res.status);
+			else {
+				console.log("in useFetch:", resData);
+				callback(resData);
+				setStatus(`fetch complete from ${url}`);
+				return { resData, status };
 			}
-		};
+		} catch (error) {
+			setStatus(`fetch failed from ${url} due to ${error}`);
+			setError(error);
+		}
+	};
 
+	useEffect(() => {
 		fetchData();
 	}, [url]);
-	return status;
+
+	return { status, fetchData };
+
 };
 
 export default useFetch;
