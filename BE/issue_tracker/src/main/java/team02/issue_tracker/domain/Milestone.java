@@ -3,12 +3,11 @@ package team02.issue_tracker.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import team02.issue_tracker.dto.MilestoneRequest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,10 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE milestone SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Milestone {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -28,7 +30,7 @@ public class Milestone {
     private boolean isOpen;
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "milestone")
+    @OneToMany(mappedBy = "milestone", fetch = FetchType.LAZY)
     private List<Issue> issues = new ArrayList<>();
 
     public Milestone(String title, String content, LocalDate dueDate) {

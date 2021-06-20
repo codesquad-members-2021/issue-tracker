@@ -3,6 +3,8 @@ package team02.issue_tracker.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import team02.issue_tracker.exception.IllegalStatusException;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE issue SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,25 +25,25 @@ public class Issue {
 
     private String title;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private LocalDateTime createdTime;
     private boolean isOpen;
     private boolean isDeleted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
     private User writer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone1"))
     private Milestone milestone;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<IssueAssignee> issueAssignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Comment> comments = new ArrayList<>();
 
     public Issue(String title, User writer, boolean open) {
@@ -83,10 +87,6 @@ public class Issue {
         this.milestone = milestone;
     }
 
-    public void delete() {
-        isDeleted = true;
-    }
-
     public List<Comment> getComments() {
         return comments.stream()
                 .filter(comment -> !comment.isDeleted())
@@ -95,5 +95,17 @@ public class Issue {
 
     public void deleteMilestone() {
         milestone = null;
+    }
+
+    public void addIssueLabels(List<IssueLabel> issueLabels) {
+        this.issueLabels = issueLabels;
+    }
+
+    public void addIssueAssignees(List<IssueAssignee> issueAssignees) {
+        this.issueAssignees = issueAssignees;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

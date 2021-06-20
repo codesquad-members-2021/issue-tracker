@@ -10,9 +10,11 @@ import java.util.Optional;
 @Repository
 public interface LabelRepository extends JpaRepository<Label, Long> {
 
-    Optional<Label> findByIdAndIsDeletedFalse(Long id);
+    @Override
+    Optional<Label> findById(Long id);
 
-    List<Label> findByIsDeletedFalse();
+    @Override
+    List<Label> findAll();
 
     Long countByIsDeletedFalse();
 }

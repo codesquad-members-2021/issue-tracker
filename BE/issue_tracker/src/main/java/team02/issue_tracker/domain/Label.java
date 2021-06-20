@@ -3,18 +3,19 @@ package team02.issue_tracker.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import team02.issue_tracker.dto.LabelRequest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE label SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Label {
 
     @Id
@@ -26,7 +27,7 @@ public class Label {
     private String color;
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "label")
+    @OneToMany(mappedBy = "label", fetch = FetchType.LAZY)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     public Label(String title, String content, String color) {
@@ -39,9 +40,5 @@ public class Label {
         this.title = labelRequest.getTitle();
         this.content = labelRequest.getContent();
         this.color = labelRequest.getColor();
-    }
-
-    public void delete() {
-        isDeleted = true;
     }
 }
