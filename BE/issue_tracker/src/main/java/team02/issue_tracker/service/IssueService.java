@@ -1,6 +1,7 @@
 package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import team02.issue_tracker.domain.*;
 import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
@@ -86,18 +87,18 @@ public class IssueService {
         issueRepository.save(issue);
     }
 
+    @Transactional
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
         issue.editIssueAssignees(issueAssignees);
-        issueRepository.save(issue);
     }
 
+    @Transactional
     public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
         issue.editIssueLabels(issueLabels);
-        issueRepository.save(issue);
     }
 
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {

@@ -41,7 +41,8 @@ public class LabelService {
 
     public List<IssueLabel> modifyIssueLabels(Issue issue, IssueLabelIdsRequest issueLabelIdsRequest) {
         deleteIssueLabels(issue);
-        return makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
+        List<IssueLabel> issueLabels = makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
+        return issueLabelRepository.saveAll(issueLabels);
     }
 
     public void deleteIssueLabels(Issue issue) {
