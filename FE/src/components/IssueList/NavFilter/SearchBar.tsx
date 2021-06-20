@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom } from '../../../util/store/issueListAtoms';
+import { filterVisibleAtom } from 'util/store/issueListAtoms';
 
 import { IIssueListChildren } from '..';
 import { Input, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
-import ListModal from '../../Common/ListModal';
-import { TextIssueList, TextIssueListFilterMock } from '../../../util/reference';
+import ListModal from 'components/Common/ListModal';
+import { TextIssueList, TextIssueListFilterMock } from 'util/reference';
 
 const SearchBar = ({ handleFilterModalClick } : IIssueListChildren) => {
   const { filter: { caption, placeHolder } } = TextIssueList;

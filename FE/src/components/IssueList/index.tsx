@@ -5,11 +5,11 @@ import {
   filterVisibleAtom,
   IFilterVisibleAtom,
   TFilterVisibleAtomTypes,
-} from '../../util/store/issueListAtoms';
+} from 'util/store/issueListAtoms';
 
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';
-import { IIssuesPageData } from '../../util/types/api';
+import { IIssuesPageData } from 'util/types/api';
 
 export interface IIssueList { data?: IIssuesPageData }
 

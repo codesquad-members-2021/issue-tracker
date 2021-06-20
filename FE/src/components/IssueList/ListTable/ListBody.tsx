@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { IIssueList } from '..';
-import { IIssuesInfo } from '../../../util/types';
+import { IIssuesInfo } from 'util/types';
 import { Checkbox } from '@material-ui/core';
 import { IconAlertCircle, IconMileStone } from '../../Common/Icons';
 import { FaHashtag } from 'react-icons/fa';
 import Label from '../../Common/Label';
-import { useEffect } from 'react';
 
 const ListBody = ({ data, ...props }: IIssueList) => {
   const [issues, setIssues] = useState<IIssuesInfo>();

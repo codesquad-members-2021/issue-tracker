@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Tabs from './Tabs';
 import AddButton from './AddButton';
-import { IIssuesPageData } from '../../../../util/types';
+import { IIssuesPageData } from 'util/types';
 
 const TabBar = ({ milestones, labels }: IIssuesPageData) => (
   <TabBarLayout>

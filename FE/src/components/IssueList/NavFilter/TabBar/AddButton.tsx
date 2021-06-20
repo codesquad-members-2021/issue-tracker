@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PrimaryButton from '../../../Common/PrimaryButton';
+import PrimaryButton from 'components/Common/PrimaryButton';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
 

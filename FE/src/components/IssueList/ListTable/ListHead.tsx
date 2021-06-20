@@ -1,15 +1,14 @@
 import styled, { css } from 'styled-components';
-import React, { MouseEventHandler, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom, TFilterVisibleAtomTypes } from '../../../util/store/issueListAtoms';
+import { filterVisibleAtom, TFilterVisibleAtomTypes } from 'util/store/issueListAtoms';
 
 import { IIssueListChildren } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ListModal from '../../Common/ListModal';
-import { TextIssueList, TextIssueListFilterMock } from '../../../util/reference';
-import { useEffect } from 'react';
+import { TextIssueList, TextIssueListFilterMock } from 'util/reference';
 
 const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren) => {
   // 1. 일반 (Recoil 등)

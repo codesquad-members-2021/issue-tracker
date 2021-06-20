@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { TextHeader } from '../../util/reference';
-import { useEffect } from 'react';
+
 
 export interface IHeaderUser {
   profileImage?: string | null;
