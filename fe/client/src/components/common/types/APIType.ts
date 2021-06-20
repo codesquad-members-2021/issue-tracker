@@ -47,3 +47,10 @@ export type IssueCreateType = {
   labelIds: Array<string>;
   milestoneId: number;
 }
+
+
+export type LabelSendType = {
+  name: string;
+  description: string;
+  color: string;
+}

@@ -28,7 +28,7 @@ const LabelListPage = () => {
       <ListWrapper wrapWidth="100%">
         <ListHeader>{labelMilestoneCount.label}개의 레이블</ListHeader>
         {data && data.map(({ id, description, name, color }: LabelsType) => {
-          return <LabelSwitching key={id} {...{ description, name, color }} />
+          return <LabelSwitching key={id} {...{ id, description, name, color }} />
         })}
         {loading && <>loading...</>}
         {error && <>error...</>}
