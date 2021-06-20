@@ -30,6 +30,7 @@ const Milestones = () => {
 
 	useEffect(() => {
 		fetchMilestones();
+		setMilestoneAddBtn(false);
 	}, []);
 
 	return (

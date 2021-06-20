@@ -8,6 +8,7 @@ import {
 	milestoneAddButtonFlagState,
 	milestoneUpdateState,
 } from "RecoilStore/Atoms";
+import fetchData from "util/fetchData";
 
 const MilestoneInput = ({
 	title,
@@ -24,19 +25,13 @@ const MilestoneInput = ({
 	);
 	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
 
-	const { postRes, fetchData: postData } = useFetch(
-		API.milestones(),
-		"POST",
-		setMilestoneData,
-		inputData
-	);
+	const putMilestone = async () => {
+		await fetchData(API.milestonesId(id), "PUT", inputData);
+	};
 
-	const { putRes, fetchData: putData } = useFetch(
-		API.milestonesId(id),
-		"PUT",
-		setMilestoneData,
-		inputData
-	);
+	const postMilestone = async () => {
+		await fetchData(API.milestonesId(id), "POST", inputData);
+	};
 
 	const handleTitleChange = e => {
 		setInputData({
@@ -60,16 +55,18 @@ const MilestoneInput = ({
 	};
 
 	const handleSubmit = () => {
-		postData();
+		console.log("submit clicked");
+		postMilestone();
 		setMilestoneAddButtonFlag(false);
-		forceUpdate(!update);
+		// forceUpdate(!update);
 	};
 
 	const handleEdit = () => {
-		putData();
+		console.log("edit clicked");
+		putMilestone();
 		setMilestoneAddButtonFlag(false);
 		// setEditMode(false);
-		forceUpdate(!update);
+		// forceUpdate(!update);
 	};
 
 	console.log(editMode);
