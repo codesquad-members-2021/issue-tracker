@@ -13,10 +13,12 @@ const Theme = {
     blue: '#007AFF',
     transparent: '#00ffff00',
     primary: '#3f51b5',
+    red: '#FF3B30'
   },
   size: {
     sm: 12,
     md: 16,
+    md2: 18,
     lg: 32,
   },
   weight: {

@@ -7,7 +7,7 @@ interface MilestoneIconProps {
 function MilestoneIcon({ sizeType = 12 }: MilestoneIconProps) {
   return (
     <MilestoneIconBlock style={{ width: 'fit-content' }}>
-      <img src={process.env.PUBLIC_URL + '/miles.png'} alt='milestoneIcon' width={sizeType} />
+      <img src={process.env.PUBLIC_URL + '/miles.png'} alt='milestoneIcon' width={sizeType} height={sizeType} />
     </MilestoneIconBlock>
   );
 }

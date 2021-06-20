@@ -17,6 +17,7 @@ interface StyledProps {
 const LabelBadgeBlock = styled.div<StyledProps>`
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: 10px;
   padding: 0 5px;
   height: 20px;
