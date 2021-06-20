@@ -11,7 +11,7 @@ const LabelCreate = () => {
   const labelDescState = useInput('');
   const labelColorState = useInput(getRandomColor());
 
-  const handleClickLabelCreate = async () => {
+  const handleClickSendNewLabel = async () => {
     const postData = {
       name: labelNameState.value,
       description: labelDescState.value,
@@ -26,7 +26,7 @@ const LabelCreate = () => {
       <NewLabel {...{ labelNameState, labelDescState, labelColorState }} title='새로운 레이블 추가'>
         <IconButton variant="contained" color="primary"
           icon='plus' height="40px" background="#007AFF"
-          onClick={handleClickLabelCreate}>
+          onClick={handleClickSendNewLabel}>
           완료
         </IconButton>
       </NewLabel>

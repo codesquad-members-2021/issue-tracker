@@ -54,3 +54,10 @@ export type LabelSendType = {
   description: string;
   color: string;
 }
+
+export type MilestoneSendType = {
+  name: string;
+  description: string;
+  dueDate: string;
+  closed: boolean;
+}

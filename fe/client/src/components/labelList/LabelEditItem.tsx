@@ -9,7 +9,7 @@ const LabelEditItem = ({ id, name, color, description, setToggleLabel }: LabelIt
   const labelDescState = useInput(description);
   const labelColorState = useInput(color);
 
-  const handleClickLabelEdit = async () => {
+  const handleClickSendEditLabel = async () => {
     const putData = {
       name: labelNameState.value,
       description: labelDescState.value,
@@ -26,7 +26,7 @@ const LabelEditItem = ({ id, name, color, description, setToggleLabel }: LabelIt
         취소
       </IconButton>
       <IconButton variant="contained" color="primary"
-        icon='edit' height="40px" background="#007AFF" onClick={handleClickLabelEdit}>
+        icon='edit' height="40px" background="#007AFF" onClick={handleClickSendEditLabel}>
         완료
       </IconButton>
     </NewLabel >
