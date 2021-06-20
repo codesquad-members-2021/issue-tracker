@@ -7,9 +7,8 @@ import { ReactComponent as EditIcon } from "images/edit.svg";
 import getPercent from "util/getPercent";
 import theme from "styles/theme";
 
-const MilestoneCard = () => {
-	const openedIssueCnt = 1;
-	const closedIssueCnt = 1;
+const MilestoneCard = ({ data }) => {
+	const { id, title, description, dueDate, openIssues, closedIssues } = data;
 
 	return (
 		<StyledFlexCard>
@@ -18,11 +17,11 @@ const MilestoneCard = () => {
 					<Block>
 						<span>
 							<Milestone fill="#000000" />
-							마일스톤 제목
+							{title}
 						</span>
-						<Span>완료일 일정</Span>
+						<Span>{dueDate}</Span>
 					</Block>
-					<GrayFont>마일스톤에 대한 설명</GrayFont>
+					<GrayFont>{description}</GrayFont>
 				</Info>
 				<Edit>
 					<EditBlock>
@@ -41,16 +40,13 @@ const MilestoneCard = () => {
 					</EditBlock>
 					<div>
 						<ProgressWrapper>
-							<progress
-								value={closedIssueCnt}
-								max={closedIssueCnt + openedIssueCnt}
-							/>
+							<progress value={closedIssues} max={closedIssues + openIssues} />
 						</ProgressWrapper>
 						<Detail>
-							<GrayFont>{getPercent(openedIssueCnt, closedIssueCnt)}%</GrayFont>
+							<GrayFont>{getPercent(openIssues, closedIssues)}%</GrayFont>
 							<Block>
-								<IssueCnt>열린 이슈 {openedIssueCnt}</IssueCnt>{" "}
-								<IssueCnt>닫힌 이슈 {closedIssueCnt}</IssueCnt>
+								<IssueCnt>열린 이슈 {openIssues}</IssueCnt>{" "}
+								<IssueCnt>닫힌 이슈 {closedIssues}</IssueCnt>
 							</Block>
 						</Detail>
 					</div>
@@ -72,11 +68,13 @@ const Edit = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+	align-items: flex-end;
 	width: 20%;
 `;
 
 const Detail = styled.div`
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 `;
 
@@ -124,7 +122,7 @@ const ProgressWrapper = styled.div`
 
 const EditBtn = styled.div`
 	padding: 0 ${({ theme }) => theme.fontSizes.xl};
-	color: ${(props) => props._color};
+	color: ${props => props._color};
 	:last-child {
 		padding-right: 0;
 		padding-left: ${({ theme }) => theme.fontSizes.xl};
