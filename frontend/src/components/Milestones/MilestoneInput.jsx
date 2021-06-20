@@ -9,16 +9,31 @@ import {
 	milestoneUpdateState,
 } from "RecoilStore/Atoms";
 
-const MilestoneInput = () => {
+const MilestoneInput = ({
+	title,
+	dueDate,
+	description,
+	id,
+	editMode,
+	setEditMode,
+}) => {
 	const [inputData, setInputData] = useState({});
 	const [milestoneData, setMilestoneData] = useState();
 	const setMilestoneAddButtonFlag = useSetRecoilState(
 		milestoneAddButtonFlagState
 	);
-	const [_, update] = useRecoilState(milestoneUpdateState);
-	const { res, fetchData } = useFetch(
+	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
+
+	const { postRes, fetchData: postData } = useFetch(
 		API.milestones(),
 		"POST",
+		setMilestoneData,
+		inputData
+	);
+
+	const { putRes, fetchData: putData } = useFetch(
+		API.milestonesId(id),
+		"PUT",
 		setMilestoneData,
 		inputData
 	);
@@ -45,33 +60,49 @@ const MilestoneInput = () => {
 	};
 
 	const handleSubmit = () => {
-		fetchData();
+		postData();
 		setMilestoneAddButtonFlag(false);
-		update();
+		forceUpdate(!update);
 	};
+
+	const handleEdit = () => {
+		putData();
+		setMilestoneAddButtonFlag(false);
+		// setEditMode(false);
+		forceUpdate(!update);
+	};
+
+	console.log(editMode);
 
 	return (
 		<CardWrapper>
-			<Header>새로운 마일스톤 추가</Header>
+			<Header>{editMode ? "마일스톤 편집" : "새로운 마일스톤 추가"}</Header>
 			<InputWrapper>
 				<InputHalf>
 					<Input
 						type="text"
-						placeholder="마일스톤 이름"
+						placeholder={title ? title : "마일스톤 이름"}
 						onChange={handleTitleChange}
 					/>
 				</InputHalf>
 				<InputHalf>
 					<Input
 						type="date"
-						placeholder="완료일(선택) ex. YYYY-MM-DD"
+						placeholder={dueDate ? dueDate : "완료일(선택) ex. YYYY-MM-DD"}
 						onChange={handleDateChange}
 					/>
 				</InputHalf>
 			</InputWrapper>
-			<Input type="text" placeholder="설명(선택)" onChange={handleDescChange} />
+			<Input
+				type="text"
+				placeholder={description ? description : "설명(선택)"}
+				onChange={handleDescChange}
+			/>
 			<BtnWrapper>
-				<AddButton text="완료" clickEvent={handleSubmit} />
+				<AddButton
+					text="완료"
+					clickEvent={editMode ? handleEdit : handleSubmit}
+				/>
 			</BtnWrapper>
 		</CardWrapper>
 	);

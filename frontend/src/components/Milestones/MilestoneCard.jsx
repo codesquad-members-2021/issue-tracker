@@ -15,10 +15,12 @@ import {
 	milestoneUpdateState,
 } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
+import MilestoneInput from "./MilestoneInput";
 
 const MilestoneCard = ({ data }) => {
 	const { id, title, description, dueDate, openIssues, closedIssues } = data;
-	const [_, update] = useRecoilState(milestoneUpdateState);
+	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
+	const [editMode, setEditMode] = useState(false);
 	const [milestoneAddBtn, setMilestoneAddBtn] = useRecoilState(
 		milestoneAddButtonFlagState
 	);
@@ -29,65 +31,85 @@ const MilestoneCard = ({ data }) => {
 
 	const handleClose = () => {};
 
-	const handleEdit = () => {};
+	const handleEdit = () => {
+		setEditMode(true);
+	};
 
 	const handleDelete = () => {
 		deleteMilestone();
-		update(!_);
+		forceUpdate(!update);
 	};
 
 	return (
-		<StyledFlexCard>
-			<ContentsWrapper>
-				<Info>
-					<Block>
-						<span>
-							<Milestone fill="#000000" />
-							{title}
-						</span>
-						<Span>{dueDate}</Span>
-					</Block>
-					<GrayFont>{description}</GrayFont>
-				</Info>
-				<Edit>
-					<EditBlock>
-						<EditBtn
-							_color={({ theme }) => theme.grayScale.label}
-							onClick={handleClose}
-						>
-							<Archive />
-							닫기
-						</EditBtn>
-						<EditBtn
-							_color={({ theme }) => theme.grayScale.label}
-							onClick={handleEdit}
-						>
-							<EditIcon stroke={theme.grayScale.label} />
-							편집
-						</EditBtn>
-						<EditBtn
-							_color={({ theme }) => theme.colors.red}
-							onClick={handleDelete}
-						>
-							<Trash stroke={theme.colors.red} />
-							삭제
-						</EditBtn>
-					</EditBlock>
-					<div>
-						<ProgressWrapper>
-							<progress value={closedIssues} max={closedIssues + openIssues} />
-						</ProgressWrapper>
-						<Detail>
-							<GrayFont>{getPercent(openIssues, closedIssues)}%</GrayFont>
+		<>
+			{editMode ? (
+				<MilestoneInput
+					title={title}
+					dueDate={dueDate}
+					description={description}
+					id={id}
+					setEditMode={setEditMode}
+					editMode={editMode}
+					update={update}
+					forceUpdate={forceUpdate}
+				/>
+			) : (
+				<StyledFlexCard>
+					<ContentsWrapper>
+						<Info>
 							<Block>
-								<IssueCnt>열린 이슈 {openIssues}</IssueCnt>{" "}
-								<IssueCnt>닫힌 이슈 {closedIssues}</IssueCnt>
+								<span>
+									<Milestone fill="#000000" />
+									{title}
+								</span>
+								<Span>{dueDate}</Span>
 							</Block>
-						</Detail>
-					</div>
-				</Edit>
-			</ContentsWrapper>
-		</StyledFlexCard>
+							<GrayFont>{description}</GrayFont>
+						</Info>
+						<Edit>
+							<EditBlock>
+								<EditBtn
+									_color={({ theme }) => theme.grayScale.label}
+									onClick={handleClose}
+								>
+									<Archive />
+									닫기
+								</EditBtn>
+								<EditBtn
+									_color={({ theme }) => theme.grayScale.label}
+									onClick={handleEdit}
+								>
+									<EditIcon stroke={theme.grayScale.label} />
+									편집
+								</EditBtn>
+								<EditBtn
+									_color={({ theme }) => theme.colors.red}
+									onClick={handleDelete}
+								>
+									<Trash stroke={theme.colors.red} />
+									삭제
+								</EditBtn>
+							</EditBlock>
+							<div>
+								<ProgressWrapper>
+									<progress
+										value={closedIssues}
+										max={closedIssues + openIssues}
+									/>
+								</ProgressWrapper>
+								<Detail>
+									<GrayFont>{getPercent(openIssues, closedIssues)}%</GrayFont>
+									<Block>
+										<IssueCnt>열린 이슈 {openIssues}</IssueCnt>{" "}
+										<IssueCnt>닫힌 이슈 {closedIssues}</IssueCnt>
+									</Block>
+								</Detail>
+							</div>
+						</Edit>
+					</ContentsWrapper>
+				</StyledFlexCard>
+			)}
+		</>
 	);
 };
 
