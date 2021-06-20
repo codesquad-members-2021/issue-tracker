@@ -12,7 +12,7 @@ import AuthenticationServices
 final class LoginViewModel {
 
     private let loginService: LoginService
-    private var successSubject = PassthroughSubject<Void, Never>()
+    private var tokenState = PassthroughSubject<TokenState, Never>()
     private var cancellable = Set<AnyCancellable>()
 
     @Published private var message = ""
@@ -36,8 +36,8 @@ final class LoginViewModel {
             if case .failure(let error) = fail {
                 self.message = error.description
             }
-        } receiveValue: { [weak self] _ in
-            self?.successSubject.send()
+        } receiveValue: { [weak self] success in
+            self?.tokenState.send(success)
         }.store(in: &cancellable)
     }
 
@@ -47,7 +47,7 @@ final class LoginViewModel {
             .eraseToAnyPublisher()
     }
 
-    func AuthorizeCompltion() -> AnyPublisher<Void, Never> {
-        return successSubject.eraseToAnyPublisher()
+    func AuthorizeCompltion() -> AnyPublisher<TokenState, Never> {
+        return tokenState.eraseToAnyPublisher()
     }
 }

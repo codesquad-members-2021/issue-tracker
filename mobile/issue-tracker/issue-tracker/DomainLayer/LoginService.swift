@@ -10,6 +10,10 @@ import Combine
 import KeychainSwift
 import AuthenticationServices
 
+enum TokenState {
+    case success
+}
+
 final class LoginService {
 
     private let keychain: KeychainSwift
@@ -33,16 +37,15 @@ final class LoginService {
         }
     }
 
-    func fetchToken(to code: Encodable) -> AnyPublisher<Void, NetworkError> {
+    func fetchToken(to code: Encodable) -> AnyPublisher<TokenState, NetworkError> {
         return repository.requestUserAuth(to: code)
             .catch { error in
                 return Fail(error: error).eraseToAnyPublisher()
             }
             .map { [weak self] value in
-                guard let self = self else { return }
-                self.keychain.set(value[self.token] ?? "",
-                                  forKey: self.token)
-                return
+                self?.keychain.set(value[self?.token ?? ""] ?? "",
+                                  forKey: self?.token ?? "")
+                return .success
             }.eraseToAnyPublisher()
     }
 }

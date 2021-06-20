@@ -9,11 +9,11 @@ import Foundation
 import Combine
 import AuthenticationServices
 
-protocol RepositoryProtocol {
+protocol Repositorable {
     func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError>
 }
 
-final class Repository: RepositoryProtocol {
+final class Repository: Repositorable {
 
     private let session: URLSession
     private var webAuthSession: ASWebAuthenticationSession?
@@ -26,7 +26,7 @@ final class Repository: RepositoryProtocol {
 
     func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
 
-        guard let url = Endpoint.authURLRequest(to: code) else {
+        guard let url = EndPoint().authURLRequest(to: code, method: .get) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
@@ -52,7 +52,7 @@ final class Repository: RepositoryProtocol {
     }
 
     func fetchGithubLoginCode(from content: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<String, NetworkError>) -> Void) {
-        guard let url = GithubConfiguration.url() else {
+        guard let url = GithubConfiguration().url() else {
             completion(.failure(NetworkError.invalidURL))
             return
         }

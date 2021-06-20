@@ -7,34 +7,42 @@
 
 import Foundation
 
-enum PathRouter: String {
+enum URLRouter {
     case auth
     case issues
+
+    func path(url: Self) -> String {
+        switch self {
+        case .auth:
+            return "auth"
+        case .issues:
+            return "issues"
+        }
+    }
 }
 
-enum Endpoint {
+struct EndPoint {
+    private let scheme = "http"
+    private let host = "localhost"
+    private let port = 8080
+    private let basePath = "/api/ios/"
+    private let headers = ["Content-Type": "application/json"]
 
-    private static let scheme = "http"
-    private static let host = "localhost"
-    private static let port = 8080
-    private static let basePath = "/api/ios/"
-    private static let headers = ["Content-Type": "application/json"]
-
-    static func url(router: PathRouter) -> URL? {
+    private func url(router: URLRouter) -> URL? {
         var component = URLComponents()
-        component.scheme = Endpoint.scheme
-        component.host = Endpoint.host
-        component.port = Endpoint.port
-        component.path = Endpoint.basePath + router.rawValue
+        component.scheme = scheme
+        component.host = host
+        component.port = port
+        component.path = basePath + router.path(url: .auth)
         return component.url
     }
 
-    static func authURLRequest(to code: Encodable) -> URLRequest? {
-        guard let url = Endpoint.url(router: .auth) else {
+    func authURLRequest(to code: Encodable, method: Method) -> URLRequest? {
+        guard let url = EndPoint().url(router: .auth) else {
             return nil
         }
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = Method.status(.post)
+        urlRequest.httpMethod = method.description
         urlRequest.httpBody = code.encode()
         urlRequest.allHTTPHeaderFields = headers
         return urlRequest

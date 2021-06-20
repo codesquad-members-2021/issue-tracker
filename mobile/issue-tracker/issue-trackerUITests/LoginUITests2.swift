@@ -37,7 +37,7 @@ class LoginUITests2: XCTestCase {
             return false
         }
         app.tap()
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 10)
 
         let tabBar = app.tabBars["Tab Bar"]
         tabBar.buttons["이슈"].tap()

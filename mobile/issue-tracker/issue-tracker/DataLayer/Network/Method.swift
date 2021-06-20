@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Method {
+enum Method: CustomStringConvertible {
     case get
     case post
 
-    static func status(_ value: Self) -> String {
-        switch value {
+    var description: String {
+        switch self {
         case .get:
             return "GET"
         case .post:
