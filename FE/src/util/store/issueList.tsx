@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 
+// Issues Page - Modal 관련
 interface IFilterVisibleAtom {
   search: boolean;
   assignee: boolean;

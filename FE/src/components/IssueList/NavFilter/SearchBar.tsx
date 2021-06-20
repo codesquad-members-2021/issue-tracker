@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom } from 'util/store/issueListAtoms';
+import { filterVisibleAtom } from 'util/store';
 
 import { IIssueListChildren } from '..';
 import { Input, Button } from '@material-ui/core';

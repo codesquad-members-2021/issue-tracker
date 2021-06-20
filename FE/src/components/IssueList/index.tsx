@@ -5,7 +5,7 @@ import {
   filterVisibleAtom,
   IFilterVisibleAtom,
   TFilterVisibleAtomTypes,
-} from 'util/store/issueListAtoms';
+} from 'util/store';
 
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';

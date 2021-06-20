@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom, TFilterVisibleAtomTypes } from 'util/store/issueListAtoms';
+import { filterVisibleAtom, TFilterVisibleAtomTypes } from 'util/store';
 
 import { IIssueListChildren } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
