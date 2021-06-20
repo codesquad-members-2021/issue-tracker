@@ -4,6 +4,7 @@ import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.*;
 import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
+import com.issuetracker.repository.MilestoneRepository;
 import com.issuetracker.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +20,12 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
     private final UserRepository userRepository;
+    private final MilestoneRepository milestoneRepository;
 
-    public IssueService(IssueRepository issueRepository, UserRepository userRepository) {
+    public IssueService(IssueRepository issueRepository, UserRepository userRepository, MilestoneRepository milestoneRepository) {
         this.issueRepository = issueRepository;
         this.userRepository = userRepository;
+        this.milestoneRepository = milestoneRepository;
     }
 
     public List<IssueDto> getAllIssues() {
@@ -59,6 +62,20 @@ public class IssueService {
     public ResponseStatusDto editIssueByIssueId(Long id, IssueRequestDto issue) {
         issueRepository.editIssueByIssueId(id, issue);
         return new ResponseStatusDto("success");
+    }
+
+    public IssueDetailDto searchIssueDetailByIssueId(Long id) {
+        Issue issue = issueRepository.findIssueByIssueId(id);
+        MilestoneForIssueDetailDto milestoneDto = MilestoneForIssueDetailDto.of(
+                milestoneRepository.findMilestoneByMilestoneId(issue.getMilestoneId()),
+                issueRepository.countOpenedIssuesByMilestoneId(issue.getMilestoneId()),
+                issueRepository.countClosedIssuesByMilestoneId(issue.getMilestoneId())
+        );
+        List<LabelForIssueDetailDto> labelListDto = issueRepository.findAllLabelsByIssueId(id).stream()
+                .map(label -> LabelForIssueDetailDto.of(label))
+                .collect(Collectors.toList());
+
+        return IssueDetailDto.of(issue, milestoneDto, labelListDto);
     }
 }
 
