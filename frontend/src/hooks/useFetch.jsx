@@ -5,7 +5,7 @@ import fetchData from "util/fetchData";
 const useFetch = (url, method, callback, reqData = null) => {
 	const [status, setStatus] = useState("대기 중");
 	const [error, setError] = useState(null);
-	console.log("useFetch initiated");
+	console.log(method, "initiated");
 
 	const option =
 		method === "GET"
@@ -23,7 +23,6 @@ const useFetch = (url, method, callback, reqData = null) => {
 					},
 					body: JSON.stringify(reqData),
 			  };
-
 
 	const fetchData = async () => {
 		console.log("fetchData func initiated");
@@ -49,7 +48,6 @@ const useFetch = (url, method, callback, reqData = null) => {
 	}, [url]);
 
 	return { status, fetchData };
-
 };
 
 export default useFetch;
