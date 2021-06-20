@@ -42,7 +42,7 @@ class MileStoneControlViewController: UIViewController {
         
         let titleInputItem = InputLineItem(category: "제목", inputView: titleTextfield)
         let descriptionInputItem = InputLineItem(category: "설명", inputView: descriptionTextfield)
-        let completeDateInputItem = InputLineItem(category: "완료일", inputView: completeDateMileStone)
+        let completeDateInputItem = InputLineItem(category: "완료일", inputView: completeDateTextField)
         stackView.configure(with: [titleInputItem, descriptionInputItem, completeDateInputItem])
                 
         return stackView
@@ -60,7 +60,7 @@ class MileStoneControlViewController: UIViewController {
         return textField
     }()
     
-    private lazy var completeDateMileStone: UITextField = {
+    private lazy var completeDateTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "YYYY-MM-DD(선택사항)"
         return textField
@@ -68,7 +68,7 @@ class MileStoneControlViewController: UIViewController {
     
     private lazy var previewLabel: LabelView = {
         let labelView = LabelView()
-        let colorText = completeDateMileStone.text ?? "YYYY-MM-DD(선택사항)"
+        let colorText = completeDateTextField.text ?? "YYYY-MM-DD(선택사항)"
         let hex = HexColorCode(from: colorText)
         let titleText = titleTextfield.isEmpty() ? "레이블" : titleTextfield.text
         labelView.configure(with: hex, titleText)
@@ -129,6 +129,14 @@ class MileStoneControlViewController: UIViewController {
     func configure(withTitle sceneTitle: String, currentMileStone: MileStone?) {
         self.sceneTitle = sceneTitle
         self.currentMileStone = currentMileStone
+        setUpCurrentMileStoneInfo()
+    }
+    
+    private func setUpCurrentMileStoneInfo() {
+        guard let currentMileStone = currentMileStone else { return }
+        titleTextfield.text = currentMileStone.title
+        descriptionTextfield.text = currentMileStone.description
+        completeDateTextField.text = currentMileStone.due_date
     }
     
     func setSaveOperation(_ operation: @escaping (MileStone) -> Void) {
@@ -141,7 +149,7 @@ class MileStoneControlViewController: UIViewController {
     
     @objc func saveButtonTouched(_ sender: UIBarButtonItem) {
         guard let mileStoneTitle = titleTextfield.text,
-              let completeDtae = completeDateMileStone.text,
+              let completeDtae = completeDateTextField.text,
               let saveOperation = saveOperation else { return }
         
         let mileStone = MileStone(id: currentMileStone?.id ?? -1, title: mileStoneTitle, description: descriptionTextfield.text ?? "", due_date: completeDtae)

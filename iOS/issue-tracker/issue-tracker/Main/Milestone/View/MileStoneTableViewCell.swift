@@ -10,16 +10,6 @@ import UIKit
 class MileStoneTableViewCell: UITableViewCell {
     
     private let spacing: CGFloat = 16
-    //
-    //    mileStoneStackView스택을 만들고
-    //    1 : sub스택
-    //       -1 Title 라벨
-    //       -2 몇 %인지 보이는 두개의 라벨
-    //    2 : 마일스톤에 대한 설명 라벨
-    //    3 : 데이트 라벨
-    //    4 : sub스택
-    //       -1 열린 이슈 라벨
-    //       -2 닫힌 이슈 라벨
     
     private lazy var mileStoneStackView: UIStackView = {
         let superStackView = UIStackView() //커다란 SuperStack
