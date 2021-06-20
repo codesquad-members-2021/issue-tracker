@@ -1,18 +1,39 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ButtonGroup, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { TextIssueList } from '../../../../util/reference';
+import { IIssuesPageData } from '../../../../util/types';
 import { IconLabel, IconMileStone } from '../../../Common/Icons';
+import { useEffect } from 'react';
 
-const Tabs = () => {
+const Tabs = ({ milestones, labels }: IIssuesPageData) => {
   const { tabs } = TextIssueList;
+
+  const [milestoneCount, setMilestoneCount] = useState(0);
+  const [labelsCount, setLabelCount] = useState(0);
+
+  useEffect(() => {
+    if (!milestones) return;
+    const arrMilestones = milestones.milestones;
+    setMilestoneCount(arrMilestones.length);
+  }, [milestones]);
+
+  useEffect(() => {
+    if (!labels) return;
+    const arrLabels = labels.labels;
+    setLabelCount(arrLabels.length);
+  }, [labels]);
 
   // render 관련
   const renderTabButtons = () =>
     tabs.map(({ name, value }, idx) => (
-      <TabButton name={name} key={idx}>
-        <span>{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
-        <span>{value}</span>
-        <span>(3)</span>
+      <TabButton  key={idx} name={name}>
+        <Link to={name === 'label' ? '/labels' : '/milestones'}>
+          <span>{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
+          <span>{value}</span>
+          <span>({name === 'label' ? labelsCount : milestoneCount})</span>
+        </Link>
       </TabButton>
     ));
 
@@ -44,6 +65,16 @@ const TabButton = styled(Button)`
     border-left: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   }
 
-  span { display: flex; align-items: center; }
-  span + span { margin-left: 0.4rem; }
+  a {
+    display: flex;
+    text-decoration: none;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+  span + span {
+    margin-left: 0.4rem;
+  }
 `;

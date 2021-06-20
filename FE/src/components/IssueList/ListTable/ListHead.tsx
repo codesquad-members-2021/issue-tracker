@@ -3,20 +3,36 @@ import React, { MouseEventHandler, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { filterVisibleAtom, TFilterVisibleAtomTypes } from '../../../util/store/issueListAtoms';
 
-import { IIssueList } from '..';
+import { IIssueListChildren } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import ListModal, { testData } from '../../Common/ListModal';
-import { TextIssueList } from '../../../util/reference';
+import ListModal from '../../Common/ListModal';
+import { TextIssueList, TextIssueListFilterMock } from '../../../util/reference';
+import { useEffect } from 'react';
 
-const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
+const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren) => {
   // 1. 일반 (Recoil 등)
   const { table: {header: {left, right}} } = TextIssueList;
   const [leftTabsState, setLeftTabsState] = useState(0);
   const [filterVisibleState, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
-  // 2. events
+  const [issueOpenOrClose, setIssueOpenOrClose] = useState({open: 0, close: 0});
+
+  // 2. useEffect
+  useEffect(() => {
+    if (!data || !data.issues) return;
+    const arrIssues = data.issues.issues;
+    const openCnt = arrIssues.reduce((result, issue) => (result += Number(issue.isOpen)), 0);
+    setIssueOpenOrClose({
+      ...issueOpenOrClose,
+      open: openCnt,
+      close: arrIssues.length-openCnt,
+    })
+
+  },[data?.issues]);
+
+  // 3. events
   const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
   const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
     setFilterVisibleState((filterVisibleState) => ({
@@ -30,7 +46,7 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
     handleFilterModalClick(name);
   }
 
-  // 3-1. render
+  // 4-1. render
   const renderLeftTabItems = () =>
     left.map(({ name, value: label }, idx) => (
       <LeftTab
@@ -39,12 +55,12 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
           <IconBlock>
             {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
             {label}
-            {'(3)'}
+            ({name === 'open' ? issueOpenOrClose.open : issueOpenOrClose.close})
           </IconBlock>
         }
       />
     ));
-  // 3-2. render (already rendered)
+  // 4-2. render (already rendered)
     // rightButtonItems는 함수 형식으로 render하면 recoil 관련값들이 전부 작동안함..
   const rightButtonItems = right.map(
     ({ name, value }, idx) => (
@@ -63,10 +79,7 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
           <RightRow>
             <ListModal
               rightPos="0"
-              data={{
-                title: '테스트',
-                items: testData,
-              }}
+              data={TextIssueListFilterMock[name]}
             />
           </RightRow>
         )}

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { IIssueList } from '..';
+import { IIssueListChildren } from '..';
 import ListHead from './ListHead';
 import ListBody from './ListBody';
 
-const ListTable = ({ handleFilterModalClick, ...props } : IIssueList) => {
+const ListTable = ({ data, handleFilterModalClick, ...props } : IIssueListChildren) => {
   return (
     <ListTableLayout {...props}>
-      <ListHead handleFilterModalClick={handleFilterModalClick} />
-      <ListBody />
+      <ListHead {...{data, handleFilterModalClick}} />
+      <ListBody {...{data}} />
     </ListTableLayout>
   );
 };

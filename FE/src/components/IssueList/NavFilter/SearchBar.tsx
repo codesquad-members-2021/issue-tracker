@@ -2,19 +2,15 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { filterVisibleAtom } from '../../../util/store/issueListAtoms';
 
-import { IIssueList } from '..';
+import { IIssueListChildren } from '..';
 import { Input, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import ListModal from '../../Common/ListModal';
-import { TextIssueList } from '../../../util/reference';
+import { TextIssueList, TextIssueListFilterMock } from '../../../util/reference';
 
-const SearchBar = ({ handleFilterModalClick } : IIssueList) => {
-  const { filter: { caption, placeHolder, filterHeader: title, filterList } } = TextIssueList;
-
-  const data = {
-    title,
-    items: filterList.map(({ name, value: text }) => ({ name, text })),
-  };
+const SearchBar = ({ handleFilterModalClick } : IIssueListChildren) => {
+  const { filter: { caption, placeHolder } } = TextIssueList;
+  const { search: searchData } = TextIssueListFilterMock;
 
   const [filterVisibleState] = useRecoilState(filterVisibleAtom);
 
@@ -30,7 +26,7 @@ const SearchBar = ({ handleFilterModalClick } : IIssueList) => {
 
       {filterVisibleState.search && (
         <SearchBarRow>
-          <ListModal data={data} />
+          <ListModal data={searchData} />
         </SearchBarRow>
       )}
     </SearchBarLayout>
