@@ -23,7 +23,7 @@ public class MilestoneService {
     }
 
     public Milestone findOne(Long id) {
-        Milestone milestone = milestoneRepository.findByIdAndIsDeletedFalse(id).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
         return milestone;
     }
 
@@ -39,7 +39,7 @@ public class MilestoneService {
     }
 
     public List<MilestoneResponse> getAllMilestones() {
-        return milestoneRepository.findByIsDeletedFalse().stream()
+        return milestoneRepository.findAll().stream()
                 .map(MilestoneResponse::new)
                 .collect(Collectors.toList());
     }
@@ -61,13 +61,15 @@ public class MilestoneService {
     }
 
     public void modifyMilestone(Long milestoneId, MilestoneRequest milestoneRequest) {
-        Milestone milestone = milestoneRepository.findByIdAndIsDeletedFalse(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
         milestone.edit(milestoneRequest);
         milestoneRepository.save(milestone);
     }
 
     public void deleteMilestone(Long milestoneId) {
-        Milestone milestone = milestoneRepository.findByIdAndIsDeletedFalse(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
+
+        // Todo: 수정 해야함
         milestone.delete();
         milestoneRepository.save(milestone);
 

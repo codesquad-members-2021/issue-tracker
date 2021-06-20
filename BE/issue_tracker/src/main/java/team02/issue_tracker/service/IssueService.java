@@ -32,7 +32,7 @@ public class IssueService {
      * deleted = false 인 issue들만 반환
      */
     public List<IssueResponse> getAllIssueResponses() {
-        List<IssueResponse> issueResponses = issueRepository.findByIsDeletedFalse().stream()
+        List<IssueResponse> issueResponses = issueRepository.findAll().stream()
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
 
@@ -40,7 +40,7 @@ public class IssueService {
     }
 
     public DetailIssueResponse getDetailIssueResponse(Long issueId) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         return new DetailIssueResponse(issue);
     }
 
@@ -63,7 +63,7 @@ public class IssueService {
     public void closeIssues(IssueIdsRequest issueIdsRequest) {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
-                    Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+                    Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
                     issue.close();
                     return issue;
                 }).collect(Collectors.toList());
@@ -74,7 +74,7 @@ public class IssueService {
     public void openIssues(IssueIdsRequest issueIdsRequest) {
         List<Issue> issues = issueIdsRequest.getIssueIds().stream()
                 .map(issueId -> {
-                    Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+                    Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
                     issue.open();
                     return issue;
                 }).collect(Collectors.toList());
@@ -83,34 +83,34 @@ public class IssueService {
     }
 
     public void modifyTitle(Long issueId, IssueTitleRequest issueRequest) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         issue.editTitle(issueRequest.getTitle());
         issueRepository.save(issue);
     }
 
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
         issue.editIssueAssignees(issueAssignees);
         issueRepository.save(issue);
     }
 
     public void modifyLabels(Long issueId, IssueLabelIdsRequest issueLabelIdsRequest) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         List<IssueLabel> issueLabels = labelService.modifyIssueLabels(issue, issueLabelIdsRequest);
         issue.editIssueLabels(issueLabels);
         issueRepository.save(issue);
     }
 
     public void modifyMilestone(Long issueId, IssueMilestoneRequest issueMilestoneRequest) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         Milestone milestone = milestoneService.getMilestone(issueMilestoneRequest.getMilestoneId());
         issue.editMilestone(milestone);
         issueRepository.save(issue);
     }
 
     public void addComment(Long issueId, Long userId, CommentRequest commentRequest) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
         User writer = userService.findOne(userId);
 
         Comment comment = commentRequest.toComment(writer);
@@ -122,9 +122,11 @@ public class IssueService {
      * Issue 삭제시 Comment도 삭제됨
      */
     public void deleteIssue(Long issueId) {
-        Issue issue = issueRepository.findByIdAndIsDeletedFalse(issueId).orElseThrow(IssueNotFoundException::new);
-        issue.delete();
-        issueRepository.save(issue);
+        Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
+        userService.deleteIssueAssignees(issue);
+        labelService.deleteIssueLabels(issue);
+
+        issueRepository.delete(issue);
 
         List<Comment> comments = issue.getComments().stream()
                 .map(comment -> {
@@ -145,10 +147,10 @@ public class IssueService {
     }
 
     public Long getOpenIssueCount() {
-        return issueRepository.countByIsOpenTrueAndIsDeletedFalse();
+        return issueRepository.countByIsOpenTrue();
     }
 
     public Long getClosedIssueCount() {
-        return issueRepository.countByIsOpenFalseAndIsDeletedFalse();
+        return issueRepository.countByIsOpenFalse();
     }
 }

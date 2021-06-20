@@ -30,10 +30,12 @@ public class LabelService {
     public List<IssueLabel> makeIssueLabels(Issue issue, List<Long> labelIds) {
         List<IssueLabel> issueLabels = new ArrayList<>();
 
-        labelIds.forEach(labelId -> {
-            Label label = labelRepository.findByIdAndIsDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
-            issueLabels.add(new IssueLabel(issue, label));
-        });
+        return labelIds.stream()
+                .map(labelId -> {
+                    Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+                    return new IssueLabel(issue, label);
+                }).collect(Collectors.toList());
+    }
 
         return issueLabelRepository.saveAll(issueLabels);
     }
@@ -49,7 +51,7 @@ public class LabelService {
     }
 
     public List<LabelResponse> getAllLabelResponses() {
-        return labelRepository.findByIsDeletedFalse().stream()
+        return labelRepository.findAll().stream()
                 .map(LabelResponse::new)
                 .collect(Collectors.toList());
     }
@@ -63,7 +65,7 @@ public class LabelService {
     }
 
     public void modifyLabel(Long labelId, LabelRequest labelRequest) {
-        Label label = labelRepository.findByIdAndIsDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
         label.edit(labelRequest);
         labelRepository.save(label);
     }
@@ -74,9 +76,8 @@ public class LabelService {
     }
 
     public void deleteLabel(Long labelId) {
-        Label label = labelRepository.findByIdAndIsDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
-        label.delete();
-        labelRepository.save(label);
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+        labelRepository.delete(label);
         deleteIssueLabels(labelId);
     }
 
