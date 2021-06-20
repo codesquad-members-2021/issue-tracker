@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 //컴포넌트 명 수정 예정
-
+export const DisplayFlex = styled.div`
+	display: flex;
+`;
 export const CenterJcAi = styled.div`
 	display: flex;
 	justify-content: center;

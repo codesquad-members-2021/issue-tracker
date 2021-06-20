@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import fetchData from "util/fetchData";
 
 const useFetch = (url, method, callback, reqData = null) => {
@@ -22,6 +23,7 @@ const useFetch = (url, method, callback, reqData = null) => {
 					},
 					body: JSON.stringify(reqData),
 			  };
+
 
 	const fetchData = async () => {
 		console.log("fetchData func initiated");
@@ -47,6 +49,7 @@ const useFetch = (url, method, callback, reqData = null) => {
 	}, [url]);
 
 	return { status, fetchData };
+
 };
 
 export default useFetch;

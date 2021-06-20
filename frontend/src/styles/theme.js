@@ -20,6 +20,7 @@ const buttonHeights = {
 };
 
 const fontSizes = {
+	xxs: calcRem(12),
 	xs: calcRem(13),
 	small: calcRem(14),
 	base: calcRem(16),
