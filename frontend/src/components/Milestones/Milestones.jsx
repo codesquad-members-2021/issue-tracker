@@ -6,20 +6,21 @@ import { milestoneAddButtonFlagState } from "RecoilStore/Atoms";
 import { useRecoilValue } from "recoil";
 import useFetch from "hooks/useFetch";
 import API from "util/API";
+import fetchData from "util/fetchData";
 
 const Milestones = () => {
 	const milestoneAddBtn = useRecoilValue(milestoneAddButtonFlagState);
 	const [milestone, setMilestone] = useState();
-	const { status, fetchData, data } = useFetch(API.milestones(), "GET");
-	const { res, st } = fetchData();
-	setMilestone(res);
 
-	console.log("in component: ", res, st);
-	console.log("in component: ", data, status, milestone);
+	const fetchMilestones = async () => {
+		const { milestones } = await fetchData(API.milestones(), "GET");
+		console.log(milestones);
+		setMilestone(milestones);
+	};
 
-	const milestoneList = data.milestones.map((milestone, i) => (
-		<MilestoneCard key={i} data={milestone} />
-	));
+	useEffect(() => {
+		fetchMilestones();
+	}, []);
 
 	return (
 		<>
@@ -31,7 +32,10 @@ const Milestones = () => {
 			) : (
 				<></>
 			)}
-			{data && milestoneList}
+			{milestone &&
+				milestone.map((milestone, i) => (
+					<MilestoneCard key={i} data={milestone} />
+				))}
 		</>
 	);
 };

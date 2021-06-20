@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import fetchData from "util/fetchData";
 
-const useFetch = (url, method, reqData = null) => {
-	const [data, setData] = useState();
+const useFetch = (url, method, callback, reqData = null) => {
 	const [status, setStatus] = useState("대기 중");
+	const [error, setError] = useState(null);
 	console.log("useFetch initiated");
 
-	const fetchContent =
+	const option =
 		method === "GET"
 			? {
 					headers: {
@@ -26,17 +27,18 @@ const useFetch = (url, method, reqData = null) => {
 		console.log("fetchData func initiated");
 		try {
 			setStatus(`fetch start from ${url}`);
-			const res = await fetch(url, fetchContent);
+			const res = await fetch(url, option);
+			const resData = await res.json();
 			if (!res.ok) throw new Error(res.status);
 			else {
-				const resData = await res.json();
 				console.log("in useFetch:", resData);
-				setData(resData);
+				callback(resData);
 				setStatus(`fetch complete from ${url}`);
 				return { resData, status };
 			}
 		} catch (error) {
 			setStatus(`fetch failed from ${url} due to ${error}`);
+			setError(error);
 		}
 	};
 
@@ -44,8 +46,7 @@ const useFetch = (url, method, reqData = null) => {
 		fetchData();
 	}, []);
 
-	// fetchData();
-	return { status, fetchData, data };
+	return { status, fetchData };
 };
 
 export default useFetch;
