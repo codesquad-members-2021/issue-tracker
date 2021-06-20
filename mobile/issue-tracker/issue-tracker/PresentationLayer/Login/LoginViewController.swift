@@ -26,13 +26,14 @@ final class LoginViewController: UIViewController {
         loginViewModel.fetchErrorMessage()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] message in
-                self?.present(Alert.create(title: message), animated: true)
+                let alertController = UIAlertController(title: message)
+                self?.present(alertController, animated: true)
             }.store(in: &cancellable)
 
         loginViewModel.AuthorizeCompltion()
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.dismiss(animated: false, completion: nil)
+            .sink { [weak self] _ in
+                self?.dismiss(animated: false, completion: nil)
             }.store(in: &cancellable)
     }
 }
