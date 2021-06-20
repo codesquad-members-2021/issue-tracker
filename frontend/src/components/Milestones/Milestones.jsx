@@ -2,13 +2,20 @@ import { useState, useEffect } from "react";
 import MilestonesHeader from "./MilestonesHeader";
 import MilestoneCard from "./MilestoneCard";
 import MilestoneInput from "./MilestoneInput";
-import { milestoneAddButtonFlagState } from "RecoilStore/Atoms";
-import { useRecoilValue } from "recoil";
+import {
+	milestoneAddButtonFlagState,
+	milestoneUpdateState,
+} from "RecoilStore/Atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
 import API from "util/API";
 import fetchData from "util/fetchData";
 
 const Milestones = () => {
-	const milestoneAddBtn = useRecoilValue(milestoneAddButtonFlagState);
+	const [milestoneAddBtn, setMilestoneAddBtn] = useRecoilState(
+		milestoneAddButtonFlagState
+	);
+	const [_, update] = useRecoilState(milestoneUpdateState);
+
 	const [milestone, setMilestone] = useState();
 
 	const fetchMilestones = async () => {
@@ -21,6 +28,10 @@ const Milestones = () => {
 		fetchMilestones();
 	}, [milestoneAddBtn]);
 
+	useEffect(() => {
+		fetchMilestones();
+	}, []);
+
 	return (
 		<>
 			{milestoneAddBtn ? (
@@ -32,9 +43,9 @@ const Milestones = () => {
 				<></>
 			)}
 			{milestone &&
-				milestone
-					.map((milestone, i) => <MilestoneCard key={i} data={milestone} />)
-					.reverse()}
+				milestone.map((milestone, i) => (
+					<MilestoneCard key={i} data={milestone} />
+				))}
 		</>
 	);
 };

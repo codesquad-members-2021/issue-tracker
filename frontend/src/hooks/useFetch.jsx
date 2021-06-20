@@ -44,7 +44,7 @@ const useFetch = (url, method, callback, reqData = null) => {
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [url]);
 
 	return { status, fetchData };
 };

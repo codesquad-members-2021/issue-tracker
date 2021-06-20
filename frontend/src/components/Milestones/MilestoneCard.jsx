@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { StyledFlexCard } from "styles/StyledCards";
 import { ReactComponent as Milestone } from "images/milestone.svg";
@@ -6,9 +7,34 @@ import { ReactComponent as Trash } from "images/trash.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import getPercent from "util/getPercent";
 import theme from "styles/theme";
+import useFetch from "hooks/useFetch";
+import API from "util/API";
+import fetchData from "util/fetchData";
+import {
+	milestoneAddButtonFlagState,
+	milestoneUpdateState,
+} from "RecoilStore/Atoms";
+import { useRecoilState } from "recoil";
 
 const MilestoneCard = ({ data }) => {
 	const { id, title, description, dueDate, openIssues, closedIssues } = data;
+	const [_, update] = useRecoilState(milestoneUpdateState);
+	const [milestoneAddBtn, setMilestoneAddBtn] = useRecoilState(
+		milestoneAddButtonFlagState
+	);
+	const deleteMilestone = async () => {
+		await fetchData(API.milestonesId(id), "DELETE");
+		setMilestoneAddBtn(false);
+	};
+
+	const handleClose = () => {};
+
+	const handleEdit = () => {};
+
+	const handleDelete = () => {
+		deleteMilestone();
+		update(!_);
+	};
 
 	return (
 		<StyledFlexCard>
@@ -25,15 +51,24 @@ const MilestoneCard = ({ data }) => {
 				</Info>
 				<Edit>
 					<EditBlock>
-						<EditBtn _color={({ theme }) => theme.grayScale.label}>
+						<EditBtn
+							_color={({ theme }) => theme.grayScale.label}
+							onClick={handleClose}
+						>
 							<Archive />
 							닫기
 						</EditBtn>
-						<EditBtn _color={({ theme }) => theme.grayScale.label}>
+						<EditBtn
+							_color={({ theme }) => theme.grayScale.label}
+							onClick={handleEdit}
+						>
 							<EditIcon stroke={theme.grayScale.label} />
 							편집
 						</EditBtn>
-						<EditBtn _color={({ theme }) => theme.colors.red}>
+						<EditBtn
+							_color={({ theme }) => theme.colors.red}
+							onClick={handleDelete}
+						>
 							<Trash stroke={theme.colors.red} />
 							삭제
 						</EditBtn>
@@ -120,11 +155,15 @@ const ProgressWrapper = styled.div`
 	/* margin-left: 30px; */
 `;
 
-const EditBtn = styled.div`
+const EditBtn = styled.button`
 	padding: 0 ${({ theme }) => theme.fontSizes.xl};
 	color: ${props => props._color};
 	:last-child {
 		padding-right: 0;
 		padding-left: ${({ theme }) => theme.fontSizes.xl};
+	}
+	background-color: ${({ theme }) => theme.grayScale.off_white};
+	:hover {
+		background-color: ${({ theme }) => theme.grayScale.background};
 	}
 `;
