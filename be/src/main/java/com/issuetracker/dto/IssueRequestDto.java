@@ -1,9 +1,7 @@
 package com.issuetracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.issuetracker.domain.Label;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class IssueRequestDto {
@@ -16,6 +14,9 @@ public class IssueRequestDto {
 
     @JsonProperty("label_ids")
     private List<Long> labelIds;
+
+    private boolean closed;
+    private boolean deleted;
 
     public String getTitle() {
         return title;
@@ -35,5 +36,13 @@ public class IssueRequestDto {
 
     public List<Long> getLabelIds() {
         return labelIds;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 }

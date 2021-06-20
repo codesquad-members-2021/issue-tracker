@@ -146,9 +146,15 @@ public class IssueRepository {
             }
         }
 
-        if(request.getMilestoneId() != null) {
+        if (request.getMilestoneId() != null) {
             query = "update issue set milestone_id = ? where id = ?";
-            jdbcTemplate.update(query, request.getMilestoneId());
+            jdbcTemplate.update(query, request.getMilestoneId(), id);
         }
+
+        query = "update issue set closed = ? where id = ?";
+        jdbcTemplate.update(query, request.isClosed(), id);
+
+        query = "update issue set deleted = ? where id = ?";
+        jdbcTemplate.update(query, request.isDeleted(), id);
     }
 }
