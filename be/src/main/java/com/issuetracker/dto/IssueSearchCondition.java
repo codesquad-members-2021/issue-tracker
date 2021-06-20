@@ -1,7 +1,5 @@
 package com.issuetracker.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class IssueSearchCondition {
     private Boolean closed;
     private Long author;
