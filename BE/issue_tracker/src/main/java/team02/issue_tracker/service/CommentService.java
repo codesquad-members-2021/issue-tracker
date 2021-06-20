@@ -31,7 +31,7 @@ public class CommentService {
     public Comment makeComment(IssueRequest issueRequest, User writer, Issue issue) {
         Comment comment = issueRequest.toComment(writer);
         comment.addIssue(issue);
-        return commentRepository.save(comment);
+        return comment;
     }
 
     public Comment save(Comment comment) {

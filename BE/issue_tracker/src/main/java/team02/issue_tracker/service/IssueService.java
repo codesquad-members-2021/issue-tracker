@@ -28,9 +28,6 @@ public class IssueService {
         this.labelService = labelService;
     }
 
-    /**
-     * deleted = false 인 issue들만 반환
-     */
     public List<IssueResponse> getAllIssueResponses() {
         List<IssueResponse> issueResponses = issueRepository.findAll().stream()
                 .map(IssueResponse::new)
@@ -55,6 +52,7 @@ public class IssueService {
 
     private Issue makeIssue(IssueRequest issueRequest, User writer) {
         Issue issue = issueRequest.toIssue(writer);
+
         Milestone milestone = milestoneService.getMilestone(issueRequest.getMilestoneId());
         issue.addMilestone(milestone);
         return issueRepository.save(issue);

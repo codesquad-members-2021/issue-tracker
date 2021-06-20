@@ -37,14 +37,12 @@ public class UserService {
     }
 
     public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
-        List<IssueAssignee> issueAssignees = new ArrayList<>();
 
-        assigneeIds.forEach(assigneeId -> {
-            User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
-            issueAssignees.add(new IssueAssignee(issue, assignee));
-        });
-
-        return issueAssigneeRepository.saveAll(issueAssignees);
+        return assigneeIds.stream()
+                .map(assigneeId -> {
+                    User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
+                    return new IssueAssignee(issue, assignee);
+                }).collect(Collectors.toList());
     }
 
     public List<IssueAssignee> modifyIssueAssignees(Issue issue, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {

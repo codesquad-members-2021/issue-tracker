@@ -12,7 +12,6 @@ import team02.issue_tracker.exception.LabelNotFoundException;
 import team02.issue_tracker.repository.IssueLabelRepository;
 import team02.issue_tracker.repository.LabelRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,6 @@ public class LabelService {
     }
 
     public List<IssueLabel> makeIssueLabels(Issue issue, List<Long> labelIds) {
-        List<IssueLabel> issueLabels = new ArrayList<>();
 
         return labelIds.stream()
                 .map(labelId -> {
@@ -37,7 +35,8 @@ public class LabelService {
                 }).collect(Collectors.toList());
     }
 
-        return issueLabelRepository.saveAll(issueLabels);
+    public Label findOne(Long labelId) {
+        return labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
     }
 
     public List<IssueLabel> modifyIssueLabels(Issue issue, IssueLabelIdsRequest issueLabelIdsRequest) {
