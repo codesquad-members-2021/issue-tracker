@@ -14,7 +14,7 @@ const LabelCard = () => {
 					<LabelBadge
 						text={"모닝알고리즘"}
 						fontColor={"white"}
-						bgColor={"#004de3"}
+						backgroundColor={"#004de3"}
 					></LabelBadge>
 				</CenterJcAi>
 				<CenterAi>

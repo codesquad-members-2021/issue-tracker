@@ -1,65 +1,72 @@
 import styled from "styled-components";
-import { DisplayFlex, CenterAi, CenterJcAi } from "styles/StyledLayout ";
+import { DisplayFlex, CenterAi } from "styles/StyledLayout ";
 import { ReactComponent as RefreshIcon } from "images/refresh-ccw.svg";
 import { ReactComponent as XIcon } from "images/x-square.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import { ReactComponent as PlusIcon } from "images/plus.svg";
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
 import useDebounce from "hooks/useDebounce";
 const LabelInput = ({ isEditor }) => {
-	//🔥아래 상태 한번에 관리할까 말까 고민중⭐️
-	const initLabelState = {
-		name: null,
-		description: null,
-		bgColor: null,
-		textColor: null,
-	};
-	const [input, setInput] = useState("");
-	const [textColor, setTextColor] = useState(false);
-	const [backGroundColor, setBackGroundColor] = useState(
-		theme.grayScale.input_background
-	);
-	const [labelName, setLabelName] = useState("레이블 이름");
-	const [labelDescription, setLabelDescription] = useState("");
 	const {
 		creatorTitle,
 		editorTitle,
 		inputTitles,
-		bgColorTitles,
+		backgroundColorTitle,
 		textColorTitles,
 		buttons,
 	} = labelData;
-	console.log(textColor);
+
+	const initLabelState = {
+		name: "레이블 이름",
+		description: null,
+		backgroundColor: theme.grayScale.input_background,
+		textColor: false,
+	};
+	const reducer = (state, { type, payload }) => {
+		switch (type) {
+			case "name":
+				return { ...state, name: payload };
+			case "description":
+				return { ...state, description: payload };
+			case "backgroundColor":
+				return { ...state, backgroundColor: payload };
+			case "textColor":
+				return { ...state, textColor: payload };
+		}
+	};
+	const [labelState, dispatch] = useReducer(reducer, initLabelState);
 
 	const handleClickRadioButton = event => {
-		const value = event.target.value;
-		setTextColor(value);
+		dispatch({ type: "textColor", payload: event.target.value });
 	};
+	const handleChangeColor = event => {
+		//디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
+		dispatch({ type: "backgroundColor", payload: event.target.value });
+	};
+	const test = useDebounce(labelState.description, 1000);
 
-	const test = useDebounce(input, 1000); //커스텀 훅은 컴포넌트 안에서 호출되어야 하는 부분 고려!
-	console.log(test);
-	console.log(backGroundColor);
 	const handleTypingName = event => {
 		if (event.target.id === "0") {
-			const textInput = event.target.value;
-			setLabelName(textInput);
+			dispatch({ type: "name", payload: event.target.value });
 		} else {
-			//🔥description 해결중 : 작성 후 1초 뒤에 set되면서 리렌더링 되도록 하고 싶음(디바운스)
-			setInput(event.target.value);
-			setLabelDescription(input);
+			// 디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
+			dispatch({ type: "description", payload: event.target.value });
 		}
 	};
 	const getFontColor = () => {
-		return textColor === "light"
+		return labelState.textColor === "light"
 			? theme.grayScale.off_white
 			: theme.grayScale.black;
 	};
 	const changeColor = () => {
 		const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-		setBackGroundColor(`#${randomColor}`);
+		dispatch({
+			type: "backgroundColor",
+			payload: `#${randomColor}`,
+		});
 	};
 
 	return (
@@ -68,9 +75,9 @@ const LabelInput = ({ isEditor }) => {
 			<MainLayout>
 				<PreviewContainer>
 					<LabelBadge
-						text={labelName}
+						text={labelState.name}
 						fontColor={getFontColor()}
-						bgColor={backGroundColor}
+						backgroundColor={labelState.backgroundColor}
 					/>
 				</PreviewContainer>
 
@@ -87,8 +94,11 @@ const LabelInput = ({ isEditor }) => {
 					))}
 					<DisplayFlex>
 						<TextInputContainer _width={"20%"}>
-							<SubTitle>{bgColorTitles}</SubTitle>
-							<TextInput defaultValue={backGroundColor} />
+							<SubTitle>{backgroundColorTitle}</SubTitle>
+							<TextInput
+								value={labelState.backgroundColor}
+								onChange={handleChangeColor}
+							/>
 							<Icon onClick={changeColor} />
 						</TextInputContainer>
 						<TextInputContainer _width={"40%"}>
@@ -100,7 +110,7 @@ const LabelInput = ({ isEditor }) => {
 											<RadioButton
 												type="radio"
 												value={button.value}
-												checked={textColor === button.value}
+												checked={button.value === labelState.textColor}
 												onChange={handleClickRadioButton}
 												key={`radio-${idx}`}
 											/>

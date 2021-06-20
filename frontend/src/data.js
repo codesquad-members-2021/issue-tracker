@@ -38,7 +38,7 @@ export const labelData = {
 	creatorTitle: "새로운 레이블 추가",
 	editorTitle: "레이블 편집",
 	inputTitles: ["레이블 이름", "설명(선택)"],
-	bgColorTitles: "배경 색상",
+	backgroundColorTitle: "배경 색상",
 	textColorTitles: "텍스트 색상",
 	buttons: {
 		cancel: "취소",
