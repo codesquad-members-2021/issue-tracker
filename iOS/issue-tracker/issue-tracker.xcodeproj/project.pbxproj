@@ -38,7 +38,6 @@
 		E43912DC2678A737003CD344 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DB2678A737003CD344 /* JWT.swift */; };
 		E43912DE2678A76D003CD344 /* RequestKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DD2678A76D003CD344 /* RequestKeys.swift */; };
 		E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */; };
-		E43912E22678AEB3003CD344 /* LabelTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */; };
 		E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */; };
 		E43912EA267A2351003CD344 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912E9267A2351003CD344 /* NetworkError.swift */; };
 		E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */; };
@@ -56,7 +55,6 @@
 		FA431FFD267F61150010EA91 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA431FFC267F61150010EA91 /* String.swift */; };
 		FA733A2E267C3D77005A40C8 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A2D267C3D77005A40C8 /* Milestone.swift */; };
 		FA733A30267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A2F267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift */; };
-		FA733A32267C3EAA005A40C8 /* MileStoneTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA733A31267C3EAA005A40C8 /* MileStoneTableDelegate.swift */; };
 		FAB2C36A26789D41009F879C /* MileStoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2C36926789D40009F879C /* MileStoneTableViewCell.swift */; };
 		FAB2C36C2679F6CC009F879C /* MileStoneLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2C36B2679F6CC009F879C /* MileStoneLabelView.swift */; };
 		FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */; };
@@ -65,6 +63,7 @@
 		FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */; };
 		FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FAEB30B02670B74000C17BE9 /* Alamofire */; };
 		FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30B32670B76200C17BE9 /* NetworkManager.swift */; };
+		FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +100,6 @@
 		E43912DB2678A737003CD344 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		E43912DD2678A76D003CD344 /* RequestKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestKeys.swift; sourceTree = "<group>"; };
 		E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewDatasource.swift; sourceTree = "<group>"; };
-		E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableDelegate.swift; sourceTree = "<group>"; };
 		E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLabelDTO.swift; sourceTree = "<group>"; };
 		E43912E9267A2351003CD344 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E43912EB267B1A4E003CD344 /* LoginInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfoDTO.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 		FA431FFC267F61150010EA91 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FA733A2D267C3D77005A40C8 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		FA733A2F267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewDataSource.swift; sourceTree = "<group>"; };
-		FA733A31267C3EAA005A40C8 /* MileStoneTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableDelegate.swift; sourceTree = "<group>"; };
 		FAB2C36926789D40009F879C /* MileStoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneTableViewCell.swift; sourceTree = "<group>"; };
 		FAB2C36B2679F6CC009F879C /* MileStoneLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileStoneLabelView.swift; sourceTree = "<group>"; };
 		FAC6D88A2671D5A100A9E5F9 /* GithubAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAuthorizationManager.swift; sourceTree = "<group>"; };
@@ -127,6 +124,7 @@
 		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FAEB30B32670B76200C17BE9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +298,7 @@
 			children = (
 				E43912C926776DA0003CD344 /* View */,
 				E43912ED267C3C0E003CD344 /* CellAction.swift */,
+				FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -328,7 +327,6 @@
 			children = (
 				E42AD11F267093430071B436 /* LabelViewController.swift */,
 				E43912DF2678AD0A003CD344 /* LabelTableViewDatasource.swift */,
-				E43912E12678AEB3003CD344 /* LabelTableDelegate.swift */,
 				E43912EF267C3EED003CD344 /* LabelControlViewController.swift */,
 			);
 			path = Controller;
@@ -377,7 +375,6 @@
 			children = (
 				E42AD121267093590071B436 /* MileStoneViewController.swift */,
 				FA733A2F267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift */,
-				FA733A31267C3EAA005A40C8 /* MileStoneTableDelegate.swift */,
 				FA431FF8267F36FA0010EA91 /* MileStoneControlViewController.swift */,
 			);
 			path = Controller;
@@ -484,6 +481,7 @@
 			files = (
 				FAB2C36A26789D41009F879C /* MileStoneTableViewCell.swift in Sources */,
 				E426DAD126730DC50069E77D /* OAuthResponseDTO.swift in Sources */,
+				FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */,
 				E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */,
 				FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */,
 				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
@@ -500,7 +498,6 @@
 				E42AD124267093700071B436 /* MyAccountViewController.swift in Sources */,
 				FAEB30AC266F5E9700C17BE9 /* Colors.swift in Sources */,
 				E43912C726776D8F003CD344 /* LabelView.swift in Sources */,
-				FA733A32267C3EAA005A40C8 /* MileStoneTableDelegate.swift in Sources */,
 				E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */,
 				FA431FF9267F36FA0010EA91 /* MileStoneControlViewController.swift in Sources */,
 				E43912EA267A2351003CD344 /* NetworkError.swift in Sources */,
@@ -529,7 +526,6 @@
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */,
 				E43912DC2678A737003CD344 /* JWT.swift in Sources */,
-				E43912E22678AEB3003CD344 /* LabelTableDelegate.swift in Sources */,
 				E426DABA2670EC2D0069E77D /* AppleAuthorizationManager.swift in Sources */,
 				FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */,
 				E42AD12626709C010071B436 /* UIViewControllerExtension.swift in Sources */,

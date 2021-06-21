@@ -38,7 +38,7 @@ class MileStoneViewController: UIViewController {
     
     private var networkManager: NetworkManagerOperations?
     private var mileStoneTableDatasource: MilestoneTableViewDataSource?
-    private var mileStoneTableDelegate: MileStoneTableDelegate?
+    private var mileStoneTableDelegate: CommonTableDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class MileStoneViewController: UIViewController {
         mileStoneTableDatasource = MilestoneTableViewDataSource()
         mileStoneTableView.dataSource = mileStoneTableDatasource
         
-        mileStoneTableDelegate = MileStoneTableDelegate(cellActionHandler: swipeActionHandler)
+        mileStoneTableDelegate = CommonTableDelegate(cellActionHandler: swipeActionHandler, cellHeight: 198)
         mileStoneTableView.delegate = mileStoneTableDelegate
     }
     
