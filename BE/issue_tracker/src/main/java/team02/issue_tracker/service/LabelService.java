@@ -35,10 +35,6 @@ public class LabelService {
                 }).collect(Collectors.toList());
     }
 
-    public Label findOne(Long labelId) {
-        return labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
-    }
-
     public List<IssueLabel> modifyIssueLabels(Issue issue, IssueLabelIdsRequest issueLabelIdsRequest) {
         deleteIssueLabels(issue);
         List<IssueLabel> issueLabels = makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
@@ -78,11 +74,5 @@ public class LabelService {
     public void deleteLabel(Long labelId) {
         Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
         labelRepository.delete(label);
-        deleteIssueLabels(labelId);
-    }
-
-    private void deleteIssueLabels(Long labelId) {
-        List<IssueLabel> issueLabels = issueLabelRepository.findByLabelId(labelId);
-        issueLabelRepository.deleteAll(issueLabels);
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 public class Label {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -27,7 +27,7 @@ public class Label {
     private String color;
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "label", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "label", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     public Label(String title, String content, String color) {
