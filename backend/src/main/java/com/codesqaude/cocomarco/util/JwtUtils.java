@@ -1,11 +1,15 @@
 package com.codesqaude.cocomarco.util;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 import java.util.UUID;
 
 public class JwtUtils {
+
+    @Value("${jwt_key}")
+    public static String JWT_KEY;
 
     public static final String HEADER_TYPE = "Authorization";
     private static final long TOKEN_VALID_TIME = 6 * 60 * 60 * 1000L;
@@ -26,7 +30,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public static Jws<Claims> parser(String jwt, String key) {
+    public static Jws<Claims> parser(String jwt) {
         Jws<Claims> claimsJws = null;
         String[] tokens = jwt.split(BLANK);
         String tokenType = tokens[0];
@@ -34,7 +38,7 @@ public class JwtUtils {
 
         try {
             claimsJws = Jwts.parser()
-                    .setSigningKey(key)
+                    .setSigningKey(JWT_KEY)
                     .parseClaimsJws(jwtToken);
         } catch (ExpiredJwtException e) {
             //todo 예외?발생?
@@ -42,8 +46,8 @@ public class JwtUtils {
         return claimsJws;
     }
 
-    public static Object getId(String jwt, String key) {
-        Jws<Claims> claims = parser(jwt, key);
+    public static Object getId(String jwt) {
+        Jws<Claims> claims = parser(jwt);
         return claims.getBody().get(ID);
     }
 }

@@ -15,8 +15,6 @@ import static com.codesqaude.cocomarco.util.JwtUtils.HEADER_TYPE;
 @RequiredArgsConstructor
 public class UserIdHandlerMethodResolver implements HandlerMethodArgumentResolver {
 
-    private final JwtKey jwtKey;
-
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         UserId userId = parameter.getParameterAnnotation(UserId.class);
@@ -27,7 +25,7 @@ public class UserIdHandlerMethodResolver implements HandlerMethodArgumentResolve
     public UUID resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         String jwt = webRequest.getHeader(HEADER_TYPE);
 
-        Object infoFromJwt = JwtUtils.getId(jwt, jwtKey.getKey());
+        Object infoFromJwt = JwtUtils.getId(jwt);
         return UUID.fromString(String.valueOf(infoFromJwt));
     }
 }
