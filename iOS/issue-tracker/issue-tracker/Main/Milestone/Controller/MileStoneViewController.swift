@@ -152,7 +152,7 @@ extension MileStoneViewController {
     
     private func postNewMileStone(_ newMileStone: MileStone) {
         let newMileStoneEndpoint = EndPoint.milestone.path()
-        let requestBody = NewMileStoneDTO(title: newMileStone.title, description: newMileStone.description ?? "", due_date: newMileStone.due_date ?? "")
+        let requestBody = NewMileStoneDTO(title: newMileStone.title, description: newMileStone.description ?? "", due_date: newMileStone.dueDate ?? "")
         
         networkManager?.post(endpoint: newMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
@@ -167,7 +167,7 @@ extension MileStoneViewController {
     private func putEditedMileStone(_ editedMileStone: MileStone) {
         let mileStoneId = editedMileStone.id
         let editMileStoneEndpoint = EndPoint.milestone.path(with: mileStoneId)
-        let requestBody = NewMileStoneDTO(title: editedMileStone.title, description: editedMileStone.description ?? "", due_date: editedMileStone.due_date ?? "")
+        let requestBody = NewMileStoneDTO(title: editedMileStone.title, description: editedMileStone.description ?? "", due_date: editedMileStone.dueDate ?? "")
 
         networkManager?.put(endpoint: editMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {

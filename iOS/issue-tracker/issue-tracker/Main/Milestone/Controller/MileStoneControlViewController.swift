@@ -141,7 +141,7 @@ class MileStoneControlViewController: UIViewController {
         guard let currentMileStone = currentMileStone else { return }
         titleTextfield.text = currentMileStone.title
         descriptionTextfield.text = currentMileStone.description
-        completeDateTextField.text = currentMileStone.due_date
+        completeDateTextField.text = currentMileStone.dueDate
     }
     
     func setSaveOperation(_ operation: @escaping (MileStone) -> Void) {
@@ -157,7 +157,7 @@ class MileStoneControlViewController: UIViewController {
               let completeDtae = completeDateTextField.text,
               let saveOperation = saveOperation else { return }
         
-        let mileStone = MileStone(id: currentMileStone?.id ?? -1, title: mileStoneTitle, description: descriptionTextfield.text ?? "", due_date: completeDtae)
+        let mileStone = MileStone(id: currentMileStone?.id ?? -1, title: mileStoneTitle, description: descriptionTextfield.text ?? "", dueDate: completeDtae)
         saveOperation(mileStone)
         dismiss(animated: true, completion: nil)
     }
