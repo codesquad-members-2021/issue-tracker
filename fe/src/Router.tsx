@@ -11,14 +11,14 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={['/', '/issues']} exact>
+        <Route path="/" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/issues">
           <IssuesPage />
         </Route>
         <Route path={'/issues/new-issue'} exact>
           <NewIssuePage />
-        </Route>
-        <Route path="/login" exact>
-          <LoginPage />
         </Route>
         <Route path="/api/login">
           <OAuthPage />
