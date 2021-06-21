@@ -35,11 +35,7 @@ public class CommentController {
 
     @GetMapping("/{issueId}")
     public ApiResponse getComments(@PathVariable Long issueId) {
-        return ApiResponse.ok(
-                commentService.getComments(issueId).stream()
-                        .map(comment -> CommentResponse.create(comment))
-                        .collect(Collectors.toList())
-        );
+        return ApiResponse.ok(commentService.getComments(issueId));
     }
 
     @PutMapping("/{commentId}")

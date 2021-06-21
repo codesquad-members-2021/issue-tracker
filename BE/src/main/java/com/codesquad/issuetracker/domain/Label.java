@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.domain;
 
 import com.codesquad.issuetracker.request.LabelRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Label {
     private String content;
     private String color;
 
+    @JsonIgnore
     @OneToMany(mappedBy="label")
     private List<IssueLabel> issueLabels = new ArrayList<>();
 

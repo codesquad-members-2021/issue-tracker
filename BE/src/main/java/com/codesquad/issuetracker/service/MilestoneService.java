@@ -26,9 +26,9 @@ public class MilestoneService {
     }
 
     @Transactional
-    public Milestone create(MilestoneRequest milestoneRequest) {
+    public MilestoneResponse create(MilestoneRequest milestoneRequest) {
         Milestone milestone = milestoneRequest.create();
-        return milestoneRepository.save(milestone);
+        return MilestoneResponse.create(milestoneRepository.save(milestone));
     }
 
     public List<MilestoneResponse> getList(int page) {
@@ -36,7 +36,6 @@ public class MilestoneService {
                 .map(milestone -> MilestoneResponse.create(milestone))
                 .collect(Collectors.toList());
     }
-
 
     public MilestoneResponse getOne(Long id) {
         Milestone milestone = milestoneRepository.findById(id)
