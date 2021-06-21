@@ -33,13 +33,19 @@ class MyAccountViewController: UIViewController {
     private var userName = "unknown"
     private let spacing: CGFloat = 16
     
-    override func viewDidLoad() {        
+    override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "내 계정"
         updateWelcomeLabel()
         addWelcomeLabel()
         addLogoutButton()
+    }
+    
+    private func updateWelcomeLabel() {
+        let loginInfo = LoginInfo.shared
+        guard let userName = loginInfo.name else { return }
+        self.userName = userName
     }
     
     private func addWelcomeLabel() {
@@ -84,11 +90,4 @@ class MyAccountViewController: UIViewController {
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
     }
-    
-    private func updateWelcomeLabel() {
-        let loginInfo = LoginInfo.shared
-        guard let userName = loginInfo.name else { return }
-        self.userName = userName
-    }
-    
 }

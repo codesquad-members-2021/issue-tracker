@@ -10,7 +10,6 @@ import UIKit
 final class IssueTrackerTabBarCreator {
     
     private let childInfos: [TabBarChildInfo]
-//    private var loginInfo: LoginInfo
     
     enum Title {
         static let issue = "이슈"
@@ -28,7 +27,6 @@ final class IssueTrackerTabBarCreator {
     
     init(childInfos: [TabBarChildInfo]) {
         self.childInfos = childInfos
-//        self.loginInfo = loginInfo
     }
     
     convenience init() {
@@ -54,7 +52,7 @@ final class IssueTrackerTabBarCreator {
 
 extension IssueTrackerTabBarCreator {
     func create() -> IssueTrackerTabBarController {
-        let issueTrackerTabBarController = IssueTrackerTabBarController()                
+        let issueTrackerTabBarController = IssueTrackerTabBarController()
         let childs = childInfos.map{ generateChild(with: $0) }
         issueTrackerTabBarController.setViewControllers(childs, animated: true)
         return issueTrackerTabBarController

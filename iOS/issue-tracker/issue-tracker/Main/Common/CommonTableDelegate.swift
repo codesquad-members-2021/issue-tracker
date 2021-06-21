@@ -34,7 +34,7 @@ final class CommonTableDelegate: NSObject, UITableViewDelegate {
             self?.cellActionHandler(indexPath.row, .edit)
         }
         editAction.image = UIImage(systemName: "pencil")
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
 }

@@ -41,7 +41,7 @@ final class LabelViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
+        loadLabels()
     }
     
     private func configureViews() {
@@ -80,21 +80,6 @@ final class LabelViewController: UIViewController {
         guard let jwt = loginInfo.jwt else { return }
         let headers = [Header.authorization.key(): jwt.description]
         networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
-    }
-    
-    private func loadData() {
-        let labelListEndpoint = EndPoint.label.path()
-        networkManager?.get(endpoint: labelListEndpoint, queryParameters: nil,
-                            completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
-            switch result {
-            case .success(let result):
-                guard let labels = result.data else { return }
-                self?.labelTableDatasource?.update(labels: labels)
-                self?.reloadTableView()
-            case .failure(let error):
-                self?.presentAlert(with: error.description)
-            }
-        })
     }
     
     private func reloadTableView() {
@@ -148,12 +133,27 @@ final class LabelViewController: UIViewController {
 
 //MARK: - Network Methods
 extension LabelViewController {
+    private func loadLabels() {
+        let labelListEndpoint = EndPoint.label.path()
+        networkManager?.get(endpoint: labelListEndpoint, queryParameters: nil,
+                            completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
+            switch result {
+            case .success(let result):
+                guard let labels = result.data else { return }
+                self?.labelTableDatasource?.update(labels: labels)
+                self?.reloadTableView()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
     private func deleteLabel(for id: Int) {
         let deleteLabelEndpoint = EndPoint.label.path(with: id)
         networkManager?.delete(endpoint: deleteLabelEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadLabels()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
@@ -167,7 +167,7 @@ extension LabelViewController {
         networkManager?.post(endpoint: newLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadLabels()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
@@ -182,7 +182,7 @@ extension LabelViewController {
         networkManager?.put(endpoint: editLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadLabels()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
