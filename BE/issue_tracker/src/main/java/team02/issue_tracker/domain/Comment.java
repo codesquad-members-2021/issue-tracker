@@ -34,7 +34,7 @@ public class Comment {
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_comment_user1"))
     private User writer;
 
-    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CommentEmoji> commentEmojis = new ArrayList<>();
 
     public Comment(String content, String file, User writer) {

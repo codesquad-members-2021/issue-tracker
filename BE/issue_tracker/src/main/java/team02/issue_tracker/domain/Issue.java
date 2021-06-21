@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -25,7 +24,7 @@ public class Issue {
 
     private String title;
 
-    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private LocalDateTime createdTime;
@@ -40,10 +39,10 @@ public class Issue {
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone1"))
     private Milestone milestone;
 
-    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IssueAssignee> issueAssignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public Issue(String title, User writer, boolean open) {
@@ -87,25 +86,7 @@ public class Issue {
         this.milestone = milestone;
     }
 
-    public List<Comment> getComments() {
-        return comments.stream()
-                .filter(comment -> !comment.isDeleted())
-                .collect(Collectors.toList());
-    }
-
     public void deleteMilestone() {
         milestone = null;
-    }
-
-    public void addIssueLabels(List<IssueLabel> issueLabels) {
-        this.issueLabels = issueLabels;
-    }
-
-    public void addIssueAssignees(List<IssueAssignee> issueAssignees) {
-        this.issueAssignees = issueAssignees;
-    }
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
     }
 }

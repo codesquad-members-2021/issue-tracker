@@ -44,7 +44,6 @@ public class IssueService {
 
     public void addIssue(IssueRequest issueRequest, Long userId) {
         User writer = userService.findOne(userId);
-
         Issue issue = makeIssue(issueRequest, writer);
         commentService.makeComment(issueRequest, writer, issue);
         labelService.makeIssueLabels(issue, issueRequest.getLabelIds());
@@ -53,7 +52,6 @@ public class IssueService {
 
     private Issue makeIssue(IssueRequest issueRequest, User writer) {
         Issue issue = issueRequest.toIssue(writer);
-
         Milestone milestone = milestoneService.getMilestone(issueRequest.getMilestoneId());
         issue.addMilestone(milestone);
         return issueRepository.save(issue);
@@ -117,26 +115,9 @@ public class IssueService {
         commentService.save(comment);
     }
 
-    /**
-     * Issue 삭제시 Comment도 삭제됨
-     */
     public void deleteIssue(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        userService.deleteIssueAssignees(issue);
-        labelService.deleteIssueLabels(issue);
-
         issueRepository.delete(issue);
-
-        List<Comment> comments = issue.getComments().stream()
-                .map(comment -> {
-                    comment.delete();
-                    commentService.deleteCommentEmojis(comment.getId());
-                    return comment;
-                }).collect(Collectors.toList());
-        commentService.saveAll(comments);
-
-        userService.deleteIssueAssignees(issue);
-        labelService.deleteIssueLabels(issue);
     }
 
     public IssueCountResponse getIssueCount() {
