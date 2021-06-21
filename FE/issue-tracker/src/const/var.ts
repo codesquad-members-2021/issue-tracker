@@ -5,7 +5,7 @@ export const issueListErrorMsg = '이슈 목록을 불러오는 데 실패했습
 
 const clientID = process.env.REACT_APP_CLIENT_ID;
 
-const baseURL = 'http://15.164.68.136/api';
+export const baseURL = 'http://15.164.68.136/api';
 const localURL = 'http://localhost:3000/api';
 
 export const LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=${clientID}&redirect_uri=${localURL}/login/callback&scope=user`;
