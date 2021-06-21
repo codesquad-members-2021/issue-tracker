@@ -11,11 +11,11 @@ struct NewMileStoneDTO: Encodable {
     
     let title: String
     let description: String
-    let due_date: String
+    let dueDate: String
     
     enum CodingKeys: String, CodingKey {
         case title
         case description
-        case due_date
+        case dueDate = "due_date"
     }
 }

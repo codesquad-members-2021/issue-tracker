@@ -153,14 +153,14 @@ class MileStoneTableViewCell: UITableViewCell {
      
     }
     
-    func configure(title: String, description: String, due_date: String) {
+    func configure(title: String, description: String, dueDate: String) {
         titleLabel.text = title
         descriptionLabel.text = description        
-        dueDateConfigure(due_date: due_date)
+        dueDateConfigure(dueDate: dueDate)
     }
     
-    private func dueDateConfigure(due_date: String) {
-        let dateText = due_date != "" ? due_date :"완료일(생략가능)"
+    private func dueDateConfigure(dueDate: String) {
+        let dateText = dueDate != "" ? dueDate :"완료일(생략가능)"
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "calendar")
