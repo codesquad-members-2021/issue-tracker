@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class LabelCountResponse {
 
-    private Long labels;
+    private Long labelCount;
 
-    public LabelCountResponse(Long labels) {
-        this.labels = labels;
+    public LabelCountResponse(Long labelCount) {
+        this.labelCount = labelCount;
     }
 }
