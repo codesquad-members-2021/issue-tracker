@@ -9,7 +9,7 @@ export const fetchWithAuth = async (
   options = {}
 ) => {
   const token = localStorage.getItem('oauth_login');
-  const requestHeader: any = {
+  const requestHeader = {
     Authorization: `bearer ${token}`,
   };
   const optionWithHeaders = { ...options, headers: requestHeader };
