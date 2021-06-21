@@ -42,6 +42,19 @@ public class IssueDto {
         this.milestoneTitle = milestoneTitle;
     }
 
+    public IssueDto(Long id, String title, String description, boolean closed, User assignee, User author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.closed = closed;
+        this.assignee = assignee;
+        this.author = author;
+        this.labelList = labelList;
+        this.issueNumber = issueNumber;
+        this.createdTime = createdTime;
+        this.milestoneTitle = null;
+    }
+
     public IssueDto(Issue issue, String milestoneTitle, User author, User assignee) {
         this.id = issue.getId();
         this.title = issue.getTitle();
@@ -65,6 +78,20 @@ public class IssueDto {
                 issue.getNumber(),
                 issue.getCreatedTime(),
                 milestoneTitle
+        );
+    }
+
+    public static IssueDto of(Issue issue, List<Label> labels, User author, User assignee) {
+        return new IssueDto(
+                issue.getId(),
+                issue.getTitle(),
+                issue.getDescription(),
+                issue.isClosed(),
+                assignee,
+                author,
+                labels,
+                issue.getNumber(),
+                issue.getCreatedTime()
         );
     }
 

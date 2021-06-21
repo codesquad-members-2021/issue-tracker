@@ -9,6 +9,7 @@ import com.issuetracker.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,9 +53,11 @@ public class IssueService {
     }
 
     public List<IssueDto> searchIssuesByConditions(IssueSearchCondition searchCondition) {
+
+
         return issueRepository.findIssuesByConditions(searchCondition).stream()
-                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
-                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
+                .map(issue -> IssueDto.of(issue, findMilestoneTitleByIssue(issue), issueRepository.findAllLabelsByIssueId(issue.getId()),
+                        findUserByIssue(issue.getAuthorUserId()), findUserByIssue(issue.getAssignee())))
                 .collect(Collectors.toList());
 
     }
@@ -72,7 +75,7 @@ public class IssueService {
                 issueRepository.countClosedIssuesByMilestoneId(issue.getMilestoneId())
         );
         List<LabelForIssueDetailDto> labelListDto = issueRepository.findAllLabelsByIssueId(id).stream()
-                .map(label -> LabelForIssueDetailDto.of(label))
+                .map(LabelForIssueDetailDto::of)
                 .collect(Collectors.toList());
 
         return IssueDetailDto.of(issue, milestoneDto, labelListDto);
@@ -81,5 +84,34 @@ public class IssueService {
     public IssueCountDto searchNumberOfIssuesClosedAndOpened() {
         return new IssueCountDto(issueRepository.countAllOpenedIssues(), issueRepository.countAllClosedIssues());
     }
+
+    private String findMilestoneTitleByIssue(Issue issue) {
+        if (verifyMileStoneInIssue(issue)) {
+            return issueRepository.findMilestoneTitleByIssueId(issue.getId());
+        }
+
+        return null;
+    }
+
+    private boolean verifyMileStoneInIssue(Issue issue) {
+        logger.info("milestoneId : {}, ", issue.getMilestoneId());
+
+        return issue.getMilestoneId() != 0;
+    }
+
+    private User findUserByIssue(Long userId) {
+        if (verifyUserInIssue(userId)) {
+            return userRepository.findOneById(userId);
+        }
+
+        return null;
+    }
+
+    private boolean verifyUserInIssue(Long userId) {
+        logger.info("userId : {}, ", userId);
+
+        return userId != 0;
+    }
+
 }
 
