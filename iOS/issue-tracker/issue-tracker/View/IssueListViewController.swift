@@ -29,6 +29,7 @@ final class IssueListViewController: UIViewController {
 
     private var issueListViewModel = IssueListViewModel(networkManager: NetworkManager())
     private let bag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
@@ -38,6 +39,8 @@ final class IssueListViewController: UIViewController {
         bindTableViewDataSource()
         bindTableViewDelegate()
         bindButton()
+        bindSelectMode()
+        issueListViewModel.fetchIssueList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,11 +106,25 @@ final class IssueListViewController: UIViewController {
             })
             .disposed(by: bag)
     }
+
+    func bindSelectMode() {
+        issueListViewModel.selectMode
+            .subscribe { [weak self] event in
+                if let element = event.element, element {
+                    self?.selectButtonTapped()
+                } else {
+                    self?.cancelButtonTapped()
+                }
+            }
+            .disposed(by: bag)
+    }
+
+    private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
     }
 
-    @objc private  func selectButtonTapped() {
+    private  func selectButtonTapped() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.title = "이슈 선택"
@@ -117,12 +134,12 @@ final class IssueListViewController: UIViewController {
         setupToolbarAutoulayout()
     }
 
-    @objc private func addIssueButtonTapped() {
+   private func addIssueButtonTapped() {
         let controller = NewIssueViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    @objc private func cancelButtonTapped() {
+    private func cancelButtonTapped() {
         setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
