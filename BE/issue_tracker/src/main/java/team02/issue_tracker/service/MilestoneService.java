@@ -1,6 +1,7 @@
 package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
+import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.dto.MilestoneCountResponse;
 import team02.issue_tracker.dto.MilestoneRequest;
@@ -26,8 +27,7 @@ public class MilestoneService {
     }
 
     public Milestone findOne(Long id) {
-        Milestone milestone = milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
-        return milestone;
+        return milestoneRepository.findById(id).orElseThrow(MilestoneNotFoundException::new);
     }
 
     public Milestone getMilestone(Long milestoneId) {
@@ -73,11 +73,15 @@ public class MilestoneService {
         milestoneRepository.save(milestone);
     }
 
+    /**
+     * 마일스톤 제거시 해당 마일스톤을 참조하는 이슈들의 마일스톤 값 null로 변경
+     */
     public void deleteMilestone(Long milestoneId) {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
-
-        // Todo: 수정 해야함
-        milestone.delete();
-        milestoneRepository.save(milestone);
+        List<Issue> issues = issueRepository.findByMilestoneId(milestoneId).stream()
+                .map(issue -> issue.removeMilestone())
+                .collect(Collectors.toList());
+        issueRepository.saveAll(issues);
+        milestoneRepository.delete(milestone);
     }
 }

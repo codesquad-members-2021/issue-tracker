@@ -25,4 +25,6 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
     Long countByMilestoneIdAndIsOpenFalse(Long milestoneId);
 
     Long countByMilestoneId(Long milestoneId);
+
+    List<Issue> findByMilestoneId(Long milestoneId);
 }

@@ -20,7 +20,7 @@ import java.util.List;
 public class Milestone {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -45,11 +45,5 @@ public class Milestone {
         this.title = milestoneRequest.getTitle();
         this.content = milestoneRequest.getContent();
         this.dueDate = milestoneRequest.getDueDate();
-    }
-
-    public void delete() {
-        isDeleted = true;
-        issues.stream()
-                .forEach(issue -> issue.deleteMilestone());
     }
 }

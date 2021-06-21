@@ -87,7 +87,8 @@ public class Issue {
         this.milestone = milestone;
     }
 
-    public void deleteMilestone() {
+    public Issue removeMilestone() {
         milestone = null;
+        return this;
     }
 }
