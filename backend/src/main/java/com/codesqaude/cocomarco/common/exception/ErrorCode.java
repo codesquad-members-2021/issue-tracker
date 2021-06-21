@@ -20,6 +20,11 @@ public enum ErrorCode {
     NO_PERMISSION_USER(403, "해당 권한이 없습니다."),
     NOT_LOGGED_IN(401, "로그인 되어있지 않습니다."),
 
+    /**
+     * JWT 시간 오류
+     */
+    JWT_TIME_OVER(401, "JWT 시간 만료"),
+
 
     INTERNAL_SERVER_ERROR(500, "서버에러 입니다.");
 

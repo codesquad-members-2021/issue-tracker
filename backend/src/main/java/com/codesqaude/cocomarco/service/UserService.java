@@ -1,6 +1,5 @@
 package com.codesqaude.cocomarco.service;
 
-import com.codesqaude.cocomarco.common.auth.JwtKey;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
 import com.codesqaude.cocomarco.domain.oauth.GitOAuth;
 import com.codesqaude.cocomarco.domain.oauth.GitUserInfo;
@@ -29,7 +28,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final GitOAuth oauth;
-    private final JwtKey jwtKey;
 
     public User findById(UUID userId) {
         return userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
@@ -39,7 +37,7 @@ public class UserService {
     public JwtResponse login(String code) {
         AccessToken accessToken = oauth.accessToken(code);
         GitUserInfo userInfo = oauth.userInfo(accessToken);
-        return new JwtResponse(JwtUtils.create(insertUser(userInfo), jwtKey.getKey()));
+        return new JwtResponse(JwtUtils.create(insertUser(userInfo)));
     }
 
     public UUID insertUser(GitUserInfo userInfo) {
