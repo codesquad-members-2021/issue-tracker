@@ -25,13 +25,14 @@ function Issue({ info }: Props) {
     id,
     title,
     description,
-    author_avatar_url,
+    author,
     label_list,
     issue_number,
     created_time,
     milestone_title,
   } = info;
   const defaultAvatarPosition = '32px';
+  const { user_id, name, avatar_url } = author;
 
   const currentTime = new Date().getTime();
   const noticeTimePassed = pipe(
@@ -44,7 +45,7 @@ function Issue({ info }: Props) {
   )(created_time);
 
   return (
-    <IssueWrap>
+    <IssueWrap data-id={id}>
       <IssueContainer>
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
@@ -62,7 +63,9 @@ function Issue({ info }: Props) {
         </StyledDiv>
         <Description>
           <span>#{issue_number}</span>
-          <span>작성자 및 {noticeTimePassed}</span>
+          <span>
+            {name} 및 {noticeTimePassed}
+          </span>
           <div>
             <MilestoneIcon />
             <span>{milestone_title}</span>

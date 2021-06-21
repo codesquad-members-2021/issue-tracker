@@ -17,6 +17,7 @@ function IssueList() {
       return <NoIssue isSearched={false} />;
     }
   };
+  console.log(contents);
   pushState(query);
   return (
     <>
@@ -37,7 +38,7 @@ export type IssueInfo = {
   id: number;
   title: string;
   description: string;
-  author_avatar_url: string;
+  author: Author;
   label_list: Label[];
   issue_number: number;
   created_time: string;
@@ -48,4 +49,10 @@ type Label = {
   id: number;
   title: string;
   color_code: string;
+};
+
+type Author = {
+  user_id: number;
+  name: string;
+  avatar_url: string;
 };
