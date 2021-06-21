@@ -5,34 +5,52 @@ import { ReactComponent as EditIcon } from "images/edit.svg";
 import { ReactComponent as TrashIcon } from "images/trash.svg";
 import theme from "styles/theme";
 import { CenterJcAi, CenterAi } from "styles/StyledLayout ";
+import { labelInitialData, labelEditButtonFlagState } from "RecoilStore/Atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
-const LabelCard = ({ name, description, colors }) => {
-	// const { backgroundColor, textColor } = colors;
+const LabelCard = ({ initialData }) => {
+	const { name, description, colors } = initialData;
+	const { backgroundColor, textColor } = colors;
+
+	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const handleEditButton = () => {
+		setLabelEditBtnFlag(x => !x);
+	};
+	const handleDeleteButton = () => {};
+
 	return (
-		<>
-			<StyledGridCard gridRate={[0.5, 1.5, 0.5]}>
-				<CenterJcAi>
-					<LabelBadge
-						text={"모닝알고리즘"}
-						fontColor={"white"}
-						backgroundColor={"#004de3"}
-					></LabelBadge>
-				</CenterJcAi>
-				<CenterAi>
-					<LabelDescription>
-						구디의 모닝 알고리즘 100,000,000일차 ☀️
-					</LabelDescription>
-				</CenterAi>
-				<CenterJcAi>
-					<EditIcon stroke={theme.grayScale.label} />
-					<ButtonText _color={({ theme }) => theme.grayScale.label}>
-						편집
-					</ButtonText>
-					<TrashIcon stroke={theme.colors.red} />
-					<ButtonText _color={({ theme }) => theme.colors.red}>삭제</ButtonText>
-				</CenterJcAi>
-			</StyledGridCard>
-		</>
+		initialData && (
+			<>
+				<StyledGridCard gridRate={[0.5, 1.5, 0.5]}>
+					<CenterJcAi>
+						<LabelBadge
+							text={name}
+							fontColor={textColor}
+							backgroundColor={backgroundColor}
+						></LabelBadge>
+					</CenterJcAi>
+					<CenterAi>
+						<LabelDescription>{description}</LabelDescription>
+					</CenterAi>
+					<CenterJcAi>
+						<EditIcon stroke={theme.grayScale.label} />
+						<ButtonText
+							_color={({ theme }) => theme.grayScale.label}
+							onClick={handleEditButton}
+						>
+							편집
+						</ButtonText>
+						<TrashIcon stroke={theme.colors.red} />
+						<ButtonText
+							_color={({ theme }) => theme.colors.red}
+							onClick={handleDeleteButton}
+						>
+							삭제
+						</ButtonText>
+					</CenterJcAi>
+				</StyledGridCard>
+			</>
+		)
 	);
 };
 

@@ -23,8 +23,8 @@ export const filterBarInputState = atom({
 });
 
 export const labelButtonFlagState = atom({
-	key: "labelButtonFlag",
-	default: false,
+	key: "labelButtonFlagState",
+	default: true,
 });
 
 export const milestoneButtonFlagState = atom({
@@ -39,5 +39,24 @@ export const milestoneAddButtonFlagState = atom({
 
 export const milestoneUpdateState = atom({
 	key: "milestoneAddButtonFlagState",
+	default: false,
+});
+
+export const labelInitialData = atom({
+	key: "labelInitialData",
+	default: null,
+});
+export const labelAddButtonFlagState = atom({
+	key: "labelAddButtonFlagState",
+	default: false,
+});
+
+export const labelEditButtonFlagState = atom({
+	key: "labelEditButtonFlagState",
+	default: false,
+});
+
+export const navigatorAddButtonFlagState = atom({
+	key: "navigatorAddButtonFlagState",
 	default: false,
 });

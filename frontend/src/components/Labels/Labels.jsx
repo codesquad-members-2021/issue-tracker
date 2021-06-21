@@ -2,18 +2,24 @@ import styled from "styled-components";
 import LabelCard from "./LabelCard";
 import LabelInput from "./LabelInput";
 import { StyledGridTitleCard } from "styles/StyledCards";
-import useFetch from "hooks/useFetch";
 import { useState, useEffect } from "react";
 import API from "util/API";
 import fetchData from "util/fetchData";
+import {
+	labelInitialData,
+	labelAddButtonFlagState,
+	labelEditButtonFlagState,
+} from "RecoilStore/Atoms";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 
 const Labels = () => {
-	const [LabelData, setLabelData] = useState();
-	// const status = useFetch(API.labels(), "GET", setLabelData);
-	// console.log(LabelData, "status", status);
+	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
+	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
+	const labelEditBtnFlag = useRecoilValue(labelEditButtonFlagState);
+
 	const getLabelData = async () => {
-		const data = await fetchData(API.labels(), "GET");
-		setLabelData(data);
+		const { labels } = await fetchData(API.labels(), "GET");
+		setLabelInitialData(labels);
 	};
 
 	useEffect(() => {
@@ -22,12 +28,18 @@ const Labels = () => {
 
 	return (
 		<>
-			<LabelInput isEditor={false} />
+			{labelAddBtnFlag ? <LabelInput isEditor={false} /> : null}
 			<StyledGridTitleCard gridRate={[1]}>
 				<HeaderTitle>N개의 레이블</HeaderTitle>
 			</StyledGridTitleCard>
-			<LabelCard id={"apiID"} />
-			<LabelInput isEditor={true} />
+			{labelEditBtnFlag ? (
+				<LabelInput isEditor={true} />
+			) : (
+				initialData &&
+				initialData.map(data => (
+					<LabelCard id={data.id} key={data.id} initialData={data} />
+				))
+			)}
 		</>
 	);
 };
