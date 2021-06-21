@@ -173,45 +173,21 @@ final class IssueListViewController: UIViewController {
     private func setupIssueTableView() {
         issueTableView.register(IssueTableViewCell.self, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.allowsMultipleSelection = true
-        issueTableView.dataSource = self
         issueTableView.delegate = self
         issueTableView.tableFooterView = IssueTableFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
     }
 }
 
-extension IssueListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-        cell.setupIssueCell(title: "제목", description: "이슈에 대한 설명", milestoneTitle: "마일스톤 이름", color: "#DFCD85")
-        return cell
-    }
-}
-
 extension IssueListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
-        cell.selectionStyle = .none
-        cell.check()
-
-        let controller = IssueDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
-        cell.uncheck()
-    }
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, success in
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            guard let self = self else { return }
+            self.issueListViewModel.deleteIssue(id: self.issueListViewModel.issueList.value[indexPath.row].id!)
             success(true)
         }
 
         let shareAction = UIContextualAction(style: .normal, title: "닫기") { _, _, success in
+            
             success(true)
         }
 
