@@ -37,6 +37,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (!authorizationHeader.startsWith("Bearer")) {
             throw new RuntimeException("토큰 타입 이상");
         }
-        return authorizationHeader.substring("Bearer".length()).trim();
+
+        return authorizationHeader.replaceFirst("Bearer", "").trim();
     }
 }
