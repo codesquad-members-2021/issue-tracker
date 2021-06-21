@@ -18,8 +18,8 @@ public class MilestoneController {
     }
 
     @GetMapping
-    public List<MilestoneDto> viewAllMilestones() {
-        return milestoneService.searchAllMilestones();
+    public List<MilestoneDto> viewAllMilestones(@RequestParam(required = false) String closed) {
+        return milestoneService.searchAllMilestones(closed);
     }
 
     @DeleteMapping("/{id}")
