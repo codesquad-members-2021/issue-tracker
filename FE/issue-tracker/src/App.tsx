@@ -18,14 +18,14 @@ function App() {
         <Background>
           <BrowserRouter>
             <Switch>
-              <Route path="/issues">
-                <Issues />
-              </Route>
-              <Route path="/new-issue">
+              <Route path="/issues/new">
                 <NewIssue />
               </Route>
-              <Route path="/issue-detail">
+              <Route path="/issues/detail">
                 <IssueDetail />
+              </Route>
+              <Route path="/issues">
+                <Issues />
               </Route>
               <Route path="/labels">
                 <Labels />

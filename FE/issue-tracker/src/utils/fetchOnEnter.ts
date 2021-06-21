@@ -1,28 +1,38 @@
 import { hostAPI } from '@const/var';
-import { SetterOrUpdater } from 'recoil';
+import { fetchWithAuth } from './fetchWithAuth';
 
 type FetchOnEnter = {
   query: string;
-  data: never[];
+  data: any[];
   cachingTime: number;
+  errorMsg: string | null;
 };
 
-type State = SetterOrUpdater<FetchOnEnter>;
-
 export const fetchOnMouseEnter = async (
-  { query, cachingTime }: FetchOnEnter,
-  setState: State
+  targetList: FetchOnEnter,
+  setState: any
 ) => {
+  const { query, cachingTime } = targetList;
   const ONE_MINUTE = 60;
   const NOW = Date.now();
   const shouldNotFetch = (NOW - cachingTime) / 1000 < ONE_MINUTE;
   if (shouldNotFetch) return;
 
-  const res = await fetch(`${hostAPI}/${query}`);
-  const fetchedData = await res.json();
-  setState({
-    query: query,
-    data: fetchedData,
-    cachingTime: NOW,
-  });
+  try {
+    const url = `${hostAPI}/${query}`;
+    const res = await fetchWithAuth(url, 'Fetch Error', {});
+    const fetchedData = await res.json();
+
+    setState({
+      query: query,
+      data: fetchedData,
+      cachingTime: NOW,
+      errorMsg: null,
+    });
+  } catch (err) {
+    setState({
+      ...targetList,
+      errorMsg: err,
+    });
+  }
 };

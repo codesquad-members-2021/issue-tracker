@@ -19,8 +19,7 @@ import MenuTitle from '@components/common/MenuTitle';
 
 function AssigneeFilter() {
   const [assigneeList, setAssigneeList] = useRecoilState(assigneeFilterList);
-  const { data } = assigneeList;
-
+  const { data, errorMsg } = assigneeList;
   return (
     <div onMouseEnter={() => fetchOnMouseEnter(assigneeList, setAssigneeList)}>
       <Menu>
@@ -34,14 +33,18 @@ function AssigneeFilter() {
         </MenuButton>
         <MenuList>
           <MenuTitle>담당자 필터</MenuTitle>
-          {data.map(({ user_id, name, vatar_url }) => {
-            return (
-              <MenuItem key={user_id} {...menuItemStyle}>
-                {name}
-                <Checkbox {...checkBoxStyle} />
-              </MenuItem>
-            );
-          })}
+          {data.length > 0 ? (
+            data.map(({ user_id, name, avatar_url }) => {
+              return (
+                <MenuItem key={user_id} data-id={user_id} {...menuItemStyle}>
+                  {name}
+                  <Checkbox {...checkBoxStyle} />
+                </MenuItem>
+              );
+            })
+          ) : (
+            <MenuItem>{errorMsg}</MenuItem>
+          )}
         </MenuList>
       </Menu>
     </div>
