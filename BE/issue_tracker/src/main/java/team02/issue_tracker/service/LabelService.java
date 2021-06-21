@@ -41,7 +41,7 @@ public class LabelService {
         return issueLabelRepository.saveAll(issueLabels);
     }
 
-    public void deleteIssueLabels(Issue issue) {
+    private void deleteIssueLabels(Issue issue) {
         List<IssueLabel> issueLabels = issueLabelRepository.findByIssueId(issue.getId());
         issueLabelRepository.deleteAll(issueLabels);
     }
