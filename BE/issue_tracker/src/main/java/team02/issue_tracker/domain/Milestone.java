@@ -46,4 +46,9 @@ public class Milestone {
         this.content = milestoneRequest.getContent();
         this.dueDate = milestoneRequest.getDueDate();
     }
+
+    public void deleteIssues() {
+        issues.stream()
+                .forEach(issue -> issue.deleteMilestone());
+    }
 }

@@ -1,7 +1,6 @@
 package team02.issue_tracker.service;
 
 import org.springframework.stereotype.Service;
-import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.Milestone;
 import team02.issue_tracker.dto.MilestoneCountResponse;
 import team02.issue_tracker.dto.MilestoneRequest;
@@ -78,10 +77,7 @@ public class MilestoneService {
      */
     public void deleteMilestone(Long milestoneId) {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
-        List<Issue> issues = issueRepository.findByMilestoneId(milestoneId).stream()
-                .map(issue -> issue.removeMilestone())
-                .collect(Collectors.toList());
-        issueRepository.saveAll(issues);
+        milestone.deleteIssues();
         milestoneRepository.delete(milestone);
     }
 }
