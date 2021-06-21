@@ -8,8 +8,8 @@ import { controlLoginState } from 'store/loginStore';
 import { getIssueTrigger, lableMilestoneCtrl } from 'store/issueInfoStore';
 
 export default function MainPage() {
-  const resetLableMilestoneClick = useResetRecoilState(lableMilestoneCtrl)
-  resetLableMilestoneClick()
+  const resetLableMilestoneClick = useResetRecoilState(lableMilestoneCtrl);
+  resetLableMilestoneClick();
 
   const setLogin = useSetRecoilState(controlLoginState);
   const [issueTrigger, setIssueTrigger] = useRecoilState(getIssueTrigger);
@@ -20,13 +20,14 @@ export default function MainPage() {
     setLoginData(loginCode);
     setIssueTrigger(false);
   }, []);
+
   const setLoginData = async (loginCode: string) => {
     try {
       const loginData = await fetchLogin(loginCode);
       setLogin(loginData);
-      // localStorage.setItem('token', loginData.token);
+      localStorage.setItem('token', loginData.token);
     } catch (err) {
-      console.log('로그인 패치', err);
+      throw err;
     }
   };
 
