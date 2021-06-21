@@ -1,25 +1,18 @@
 package com.codesquad.issuetracker.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AssigneeRequest {
-
-    @JsonProperty("issue_id")
-    private Long issueId;
 
     @JsonProperty("user_id")
     private Long userId;
 
-    public AssigneeRequest(Long issueId, Long userId) {
-        this.issueId = issueId;
-        this.userId = userId;
-    }
-
-    public Long getIssueId() {
-        return issueId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
 }

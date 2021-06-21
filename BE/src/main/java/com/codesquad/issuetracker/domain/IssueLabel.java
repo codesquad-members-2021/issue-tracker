@@ -1,10 +1,16 @@
 package com.codesquad.issuetracker.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "issue_label")
+@Getter
+@Setter
+
 public class IssueLabel {
 
     @Id
@@ -19,7 +25,7 @@ public class IssueLabel {
     @JoinColumn(name = "label_id")
     private Label label;
 
-    private IssueLabel(Issue issue, Label label) {
+    public IssueLabel(Issue issue, Label label) {
         this.issue = issue;
         this.label = label;
     }
@@ -31,30 +37,6 @@ public class IssueLabel {
 
     public IssueLabel() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Issue getIssue() {
-        return issue;
-    }
-
-    public void setIssue(Issue issue) {
-        this.issue = issue;
-    }
-
-    public Label getLabel() {
-        return label;
-    }
-
-    public void setLabel(Label label) {
-        this.label = label;
     }
 
     public static IssueLabel issueToIssueLabel(Issue issue, Label label) {
