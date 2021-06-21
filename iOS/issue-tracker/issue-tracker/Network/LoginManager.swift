@@ -22,4 +22,5 @@ class LoginManager {
         let loginURLString = "http://13.125.35.62/api/login/github/ios?code=\(code)"
         return URL(string: loginURLString)
     }
+    
 }

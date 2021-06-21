@@ -26,7 +26,7 @@ class IssueListViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-    func configureTableViewFooterView() {
+    private func configureTableViewFooterView() {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 100))
         footerView.backgroundColor = UIColor.clear
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 20))
@@ -45,7 +45,7 @@ class IssueListViewController: UIViewController {
         self.issueTableView.tableFooterView = nil
     }
 
-    func configureNavigationItem() {
+    private func configureNavigationItem() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "이슈"
@@ -55,7 +55,7 @@ class IssueListViewController: UIViewController {
         searchController.searchBar.showsBookmarkButton = true
     }
     
-    func configureFilterButton() {
+    private func configureFilterButton() {
         let buttonImage = UIImage(systemName: "line.horizontal.3.decrease")
         let button = UIButton(type: .system)
         button.setImage(buttonImage, for: .normal)
@@ -65,7 +65,7 @@ class IssueListViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = filterButton
     }
     
-    func configureSelectButton() {
+    private func configureSelectButton() {
         let buttonImage = UIImage(systemName: "checkmark.circle")
         let button = UIButton(type: .system)
         button.setImage(buttonImage, for: .normal)
@@ -91,7 +91,7 @@ class IssueListViewController: UIViewController {
     }
     
     //MARK: - TableView Cell Swipe Action Method
-    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+    private func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "삭제", handler: { (_, _, success) in
             
             self.issueTableView.deleteRows(at: [indexPath], with: .automatic)
@@ -102,7 +102,7 @@ class IssueListViewController: UIViewController {
         return action
     }
     
-    func closeAction(at indexPath: IndexPath) -> UIContextualAction {
+    private func closeAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, success) in
             success(true)
         })
@@ -115,6 +115,7 @@ class IssueListViewController: UIViewController {
 }
 
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 임시 값
         return 2
@@ -124,7 +125,6 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else {
             return UITableViewCell()            
         }
-        
         return cell
     }
     
@@ -133,4 +133,5 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
         let closeAction = closeAction(at: indexPath)
         return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
     }
+    
 }

@@ -11,13 +11,13 @@ class LabelViewController: UIViewController {
         labelTableView.register(LabelTableViewCell.nib, forCellReuseIdentifier: LabelTableViewCell.identifier)
     }
     
-    func configureNavigationTitle() {
+    private func configureNavigationTitle() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "레이블"
     }
     
-    func configureAddButton() {
+    private func configureAddButton() {
         let buttonImage = UIImage(systemName: "plus")
         let button = UIButton(type: .system)
         button.setImage(buttonImage, for: .normal)
@@ -31,9 +31,11 @@ class LabelViewController: UIViewController {
     @objc func showNewLabelView() {
         // 레이블 추가 화면으로 전환하기
     }
+    
 }
 
 extension LabelViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -44,4 +46,5 @@ extension LabelViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
+    
 }

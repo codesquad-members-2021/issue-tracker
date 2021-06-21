@@ -1,11 +1,14 @@
 import Foundation
 
 struct UserInfoResponDTO: Decodable {
+    
     let data: UserInfoDTO?
     let error: String?
+    
 }
 
 struct UserInfoDTO: Decodable {
+    
     let id: Int
     let oauthResource: String
     let email: String?
@@ -19,4 +22,5 @@ struct UserInfoDTO: Decodable {
         case profileImage = "profile_image"
         case username
     }
+    
 }

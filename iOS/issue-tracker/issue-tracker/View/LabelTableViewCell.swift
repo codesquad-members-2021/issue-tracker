@@ -7,4 +7,5 @@ class LabelTableViewCell: UITableViewCell {
     }
     
     static let identifier = "LabelTableViewCell"
+    
 }

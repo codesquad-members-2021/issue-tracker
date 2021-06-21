@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
         return self.view.window ?? ASPresentationAnchor()
     }
     
-    func configureWebAuthSession() {
+    private func configureWebAuthSession() {
         let githubLoginURL = loginUseCase.getGitHubLoginURL()
         let url = githubLoginURL.0
         let callbackURLScheme = githubLoginURL.1
@@ -44,4 +44,5 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     @IBAction func pressedGithubLogin(_ sender: UIButton) {
         webAuthSession?.start()
     }
+    
 }

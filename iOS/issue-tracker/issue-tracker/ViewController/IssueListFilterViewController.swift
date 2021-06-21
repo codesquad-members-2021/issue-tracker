@@ -26,7 +26,7 @@ class IssueListFilterViewController: UIViewController {
         filterTableView.tableFooterView = UIView()
     }
     
-    func configureHeaderView(section: Int) -> UIView {
+    private func configureHeaderView(section: Int) -> UIView {
         let headerView = UIView(frame: .zero)
         headerView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
         let label = UILabel(frame: .zero)
@@ -42,6 +42,7 @@ class IssueListFilterViewController: UIViewController {
     @IBAction func pressedCancelButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension IssueListFilterViewController: UITableViewDataSource, UITableViewDelegate {
@@ -83,4 +84,5 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
         let heightForRowAt: CGFloat = 44
         return heightForRowAt
     }
+    
 }

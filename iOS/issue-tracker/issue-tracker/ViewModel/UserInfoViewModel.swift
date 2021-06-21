@@ -2,8 +2,9 @@ import Foundation
 import Combine
 
 class UserInfoViewModel {
+    
     @Published private var thumbnailImage: String
-    private var fetchUserInfoUseCase: FetchUserInfoUseCase
+    private let fetchUserInfoUseCase: FetchUserInfoUseCase
     private var subscriptions: Set<AnyCancellable>
 
     init() {
@@ -25,4 +26,5 @@ class UserInfoViewModel {
                 completion(value)
             }.store(in: &subscriptions)
     }
+    
 }

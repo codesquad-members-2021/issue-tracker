@@ -30,4 +30,5 @@ class FetchUserInfoUseCase {
                 completion(data.profileImage)
             }.store(in: &subscriptions)
     }
+    
 }
