@@ -1,6 +1,18 @@
 import { FilterItemType } from './filterType';
 import { LabelItemType } from './issueType';
 
+export type IssueDataType = {
+  id: number;
+  title: string;
+  description: string;
+  assignee: UserDataType[];
+  author: UserDataType;
+  label_list: LabelDataType[];
+  issue_number: number;
+  created_time: string;
+  milestone_title: string;
+};
+
 export type LabelDataType = {
   id: number;
   title: string;

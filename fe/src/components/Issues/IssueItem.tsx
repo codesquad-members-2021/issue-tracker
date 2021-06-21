@@ -4,7 +4,7 @@ import AuthorAvatar from 'components/common/AuthorAvatar';
 import IssueItemLeft from './IssueItemLeft';
 
 const IssueItem = ({
-  isOpen,
+  id,
   title,
   labeList,
   issueNumber,
@@ -15,7 +15,7 @@ const IssueItem = ({
   return (
     <StyledIssueItem>
       <IssueItemLeft
-        {...{ title, labeList, issueNumber, createdTime, milestoneTitle }}
+        {...{  title, labeList, issueNumber, createdTime, milestoneTitle }}
       />
       <IssueItemRight>
         <AuthorAvatar
@@ -24,7 +24,7 @@ const IssueItem = ({
           size="S"
         />
       </IssueItemRight>
-    </StyledIssueItem>
+    </StyledIssueItem> 
   );
 };
 

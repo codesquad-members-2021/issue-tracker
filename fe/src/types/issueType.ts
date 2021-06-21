@@ -9,9 +9,11 @@ export type IssueItemLeftPropsType = {
 };
 
 export interface IssueItemType extends IssueItemLeftPropsType {
-  isOpen: boolean;
+  id: number;
   author: authorType;
 }
+
+export type IssuesCountType = { open: number | null; close: number | null };
 
 export type LabelItemType = {
   id: number;

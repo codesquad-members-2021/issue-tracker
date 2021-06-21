@@ -3,19 +3,29 @@ import { Button, Checkbox } from '@material-ui/core';
 import { ReactComponent as Open } from 'icons/openIssue.svg';
 import { ReactComponent as Close } from 'icons/closeIssue.svg';
 import Filter from 'components/common/Filter';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { issuesStateAtom, totalCountOfIssue } from 'store';
+import { MouseEvent } from 'react';
 
 const IssuesHeader = () => {
-
+  const IssueCount = useRecoilValue(totalCountOfIssue);
+  const [issuesState, setIssuesState] = useRecoilState(issuesStateAtom);
+  const clickOpenHandler = (e: MouseEvent) => {
+    setIssuesState(false);
+  };
+  const clickCloseHandler = (e: MouseEvent) => {
+    setIssuesState(true);
+  };
   return (
     <StyledIssuesHeader>
       <IssuesHeaderLeft>
         <Checkbox color="primary" />
-        <IssuesButton>
-          <OpenSvg /> 열린 이슈(2)
+        <IssuesButton aria-checked={!issuesState} onClick={clickOpenHandler}>
+          <OpenSvg /> 열린 이슈({IssueCount.open})
         </IssuesButton>
-        <IssuesButton>
+        <IssuesButton aria-checked={issuesState} onClick={clickCloseHandler}>
           <CloseSvg />
-          닫힌 이슈(0)
+          닫힌 이슈({IssueCount.close})
         </IssuesButton>
       </IssuesHeaderLeft>
       <IssuesHeaderRight>
@@ -31,9 +41,14 @@ const IssuesHeader = () => {
 export default IssuesHeader;
 
 const IssuesButton = styled(Button)`
-  color: ${({ theme }) => theme.color.grayscale.titleActive};
-  stroke: ${({ theme }) => theme.color.grayscale.titleActive};
-  font-weight: 700;
+  color: ${({ theme }) => theme.color.grayscale.label};
+  stroke: ${({ theme }) => theme.color.grayscale.label};
+
+  &[aria-checked='true'] { 
+    font-weight: 700;
+    stroke: ${({ theme }) => theme.color.grayscale.titleActive};
+    color: ${({ theme }) => theme.color.grayscale.titleActive};
+  }
 `;
 
 const StyledIssuesHeader = styled.div`
