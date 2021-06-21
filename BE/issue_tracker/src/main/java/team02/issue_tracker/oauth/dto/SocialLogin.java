@@ -4,5 +4,6 @@ public enum SocialLogin {
     GITHUB,
     GITHUB_WEB,
     GITHUB_IOS,
-    GOOGLE
+    GOOGLE,
+    KAKAO
 }

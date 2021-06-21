@@ -22,7 +22,7 @@ public class GithubAccessToken implements AccessToken {
     private String tokenType;
 
     @Override
-    public String accessToken() {
+    public String value() {
         return this.accessToken;
     }
 

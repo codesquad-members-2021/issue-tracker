@@ -41,6 +41,12 @@ public class OAuthController {
         return ApiResult.success(loginService.loginGoogle(code));
     }
 
+    @LogExecutionTime
+    @GetMapping("/login/kakao")
+    public ApiResult<JwtResponse> loginKakao(@RequestParam("code") String code) {
+        return ApiResult.success(loginService.loginKakao(code));
+    }
+
     // jwt interceptor 테스트 목적 (임시)
     @LoginRequired
     @GetMapping("/jwt")

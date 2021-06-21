@@ -26,7 +26,7 @@ public class AopConfig {
         this.stopWatch = stopWatch;
     }
 
-    @Pointcut("execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))")
+    @Pointcut("execution(* team02.issue_tracker.oauth.controller.OAuthController.*login*(..))")
     private void login() {}
 
     /**

@@ -13,17 +13,12 @@ import team02.issue_tracker.oauth.dto.google.GoogleAccessToken;
 import team02.issue_tracker.oauth.dto.google.GoogleAccessTokenRequest;
 import team02.issue_tracker.oauth.dto.google.GoogleUserProfile;
 import team02.issue_tracker.oauth.dto.SocialProfile;
-import team02.issue_tracker.oauth.exception.InvalidGithubAccessTokenRequestException;
+import team02.issue_tracker.oauth.exception.InvalidAccessTokenRequestException;
+import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
 public class GoogleLoginService implements OAuthService {
-
-    @Value("${oauth.google.web.client_id}")
-    private String clientId;
-
-    @Value("${oauth.google.web.client_secret}")
-    private String clientSecret;
 
     private final String ACCESS_TOKEN_URI = "https://oauth2.googleapis.com/token";
     private final String REDIRECT_URI = "http://localhost:8080/api/login/google";
@@ -31,6 +26,13 @@ public class GoogleLoginService implements OAuthService {
     private final String USER_INFO_URI = "https://www.googleapis.com/oauth2/v1/userinfo";
 
     private final WebClient webClient;
+
+    @Value("${oauth.google.web.client_id}")
+    private String clientId;
+
+    @Value("${oauth.google.web.client_secret}")
+    private String clientSecret;
+
 
     public GoogleLoginService(WebClient webClient) {
         this.webClient = webClient;
@@ -53,7 +55,7 @@ public class GoogleLoginService implements OAuthService {
                 .retrieve()
                 .bodyToMono(GoogleAccessToken.class)
                 .blockOptional()
-                .orElseThrow(InvalidGithubAccessTokenRequestException::new);
+                .orElseThrow(InvalidAccessTokenRequestException::new);
         log.info("access token from: {}", googleAccessTokenResponse.toString());
         return googleAccessTokenResponse;
     }
@@ -69,11 +71,11 @@ public class GoogleLoginService implements OAuthService {
         GoogleUserProfile googleUserProfile = webClient.get()
                 .uri(userInfoUri)
                 .header(HttpHeaders.AUTHORIZATION,
-                        "Bearer " + accessToken.accessToken())
+                        "Bearer " + accessToken.value())
                 .retrieve()
                 .bodyToMono(GoogleUserProfile.class)
                 .blockOptional()
-                .orElseThrow(IllegalStateException::new);
+                .orElseThrow(InvalidUserRequestException::new);
         log.info("Google user : {}", googleUserProfile);
         return googleUserProfile;
     }

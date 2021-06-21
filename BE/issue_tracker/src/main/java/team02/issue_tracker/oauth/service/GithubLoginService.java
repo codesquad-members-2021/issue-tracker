@@ -10,11 +10,19 @@ import team02.issue_tracker.oauth.dto.*;
 import team02.issue_tracker.oauth.dto.github.GithubAccessTokenRequest;
 import team02.issue_tracker.oauth.dto.github.GithubAccessToken;
 import team02.issue_tracker.oauth.dto.github.GithubUserProfile;
-import team02.issue_tracker.oauth.exception.InvalidGithubUserRequestException;
+import team02.issue_tracker.oauth.exception.InvalidAccessTokenRequestException;
+import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
 public class GithubLoginService implements OAuthService {
+
+    private final String GITHUB_WEB_REDIRECT_URI = "http://localhost:3000/login/github";
+    private final String GITHUB_IOS_REDIRECT_URI = "issueTracker://login";
+    private final String GITHUB_ACCESS_TOKEN_URI = "https://github.com/login/oauth/access_token";
+    private final String GITHUB_USER_INFO_URI = "https://api.github.com/user";
+
+    private final WebClient webClient;
 
     @Value("${oauth.github.web.client_id}")
     private String githubWebClientId;
@@ -27,13 +35,6 @@ public class GithubLoginService implements OAuthService {
 
     @Value("${oauth.github.ios.client_secret}")
     private String githubIosClientSecret;
-
-    private final String GITHUB_WEB_REDIRECT_URI = "http://localhost:3000/login/github";
-    private final String GITHUB_IOS_REDIRECT_URI = "issueTracker://login";
-    private final String GITHUB_ACCESS_TOKEN_URI = "https://github.com/login/oauth/access_token";
-    private final String GITHUB_USER_INFO_URI = "https://api.github.com/user";
-
-    private final WebClient webClient;
 
     public GithubLoginService(WebClient webClient) {
         this.webClient = webClient;
@@ -62,7 +63,7 @@ public class GithubLoginService implements OAuthService {
                 .retrieve()
                 .bodyToMono(GithubAccessToken.class)
                 .blockOptional()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(InvalidAccessTokenRequestException::new);
         log.info("access token from GitHub : {}", accessToken.toString());
         return accessToken;
     }
@@ -77,11 +78,11 @@ public class GithubLoginService implements OAuthService {
         GithubUserProfile githubUserProfile = webClient.get()
                 .uri(userInfoUri)
                 .header(HttpHeaders.AUTHORIZATION
-                        , "token " + accessToken.accessToken())
+                        , "token " + accessToken.value())
                 .retrieve()
                 .bodyToMono(GithubUserProfile.class)
                 .blockOptional()
-                .orElseThrow(InvalidGithubUserRequestException::new);
+                .orElseThrow(InvalidUserRequestException::new);
         log.info("github user profile : {}", githubUserProfile.toString());
         return githubUserProfile;
     }

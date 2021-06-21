@@ -14,14 +14,18 @@ public class LoginService {
 
     private final OAuthService githubLoginService;
     private final OAuthService googleLoginService;
+    private final OAuthService kakaoLoginService;
 
     private final UserService userService;
     private final JwtFactory jwtFactory;
 
-    public LoginService(GithubLoginService githubLoginService, GoogleLoginService googleLoginService
-            , UserService userService, JwtFactory jwtFactory) {
+    public LoginService(GithubLoginService githubLoginService,
+                        GoogleLoginService googleLoginService,
+                        KakaoLoginService kakaoLoginService,
+                        UserService userService, JwtFactory jwtFactory) {
         this.githubLoginService = githubLoginService;
         this.googleLoginService = googleLoginService;
+        this.kakaoLoginService = kakaoLoginService;
         this.userService = userService;
         this.jwtFactory = jwtFactory;
     }
@@ -44,6 +48,13 @@ public class LoginService {
         AccessToken accessToken = googleLoginService.accessToken(code, SocialLogin.GOOGLE);
         SocialProfile googleUserProfile = googleLoginService.userProfile(accessToken);
         User user = userFrom(googleUserProfile);
+        return jwtFactory.codeUserToJwt(user);
+    }
+
+    public JwtResponse loginKakao(final String code) {
+        AccessToken accessToken = kakaoLoginService.accessToken(code, SocialLogin.KAKAO);
+        SocialProfile kakaoUserProfile = kakaoLoginService.userProfile(accessToken);
+        User user = userFrom(kakaoUserProfile);
         return jwtFactory.codeUserToJwt(user);
     }
 

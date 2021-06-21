@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team02.issue_tracker.dto.ApiResult;
 import team02.issue_tracker.exception.IllegalStatusException;
 import team02.issue_tracker.exception.NotFoundException;
-import team02.issue_tracker.oauth.exception.InvalidGithubAccessTokenRequestException;
-import team02.issue_tracker.oauth.exception.InvalidGithubUserRequestException;
+import team02.issue_tracker.oauth.exception.InvalidAccessTokenRequestException;
+import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 
@@ -39,15 +39,15 @@ public class GlobalExceptionHanlder {
         return ApiResult.fail(e);
     }
 
-    @ExceptionHandler(InvalidGithubUserRequestException.class)
+    @ExceptionHandler(InvalidUserRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult invalidGithubUserRequest(InvalidGithubUserRequestException e) {
+    public ApiResult invalidGithubUserRequest(InvalidUserRequestException e) {
         return ApiResult.fail(e);
     }
 
-    @ExceptionHandler(InvalidGithubAccessTokenRequestException.class)
+    @ExceptionHandler(InvalidAccessTokenRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult invalidGithubAccessTokenRequestException(InvalidGithubAccessTokenRequestException e) {
+    public ApiResult invalidGithubAccessTokenRequestException(InvalidAccessTokenRequestException e) {
         return ApiResult.fail(e);
     }
 }

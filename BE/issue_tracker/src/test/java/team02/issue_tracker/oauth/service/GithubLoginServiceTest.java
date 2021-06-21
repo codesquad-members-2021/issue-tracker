@@ -155,7 +155,7 @@ class GithubLoginServiceTest {
         expectRequest(request -> {
             assertThat(request.getPath()).isEqualTo("/mock/userInfo");
             assertThat(request.getHeader(HttpHeaders.AUTHORIZATION))
-                    .isEqualTo("token " + mockAccessToken.accessToken());
+                    .isEqualTo("token " + mockAccessToken.value());
         });
     }
 
