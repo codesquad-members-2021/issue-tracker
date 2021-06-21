@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
 
+    private static final Long EMPTY = 0L;
+
     private final IssueRepository issueRepository;
     private final UserService userService;
     private final CommentService commentService;
@@ -39,7 +41,25 @@ public class IssueService {
 
     public DetailIssueResponse getDetailIssueResponse(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        return new DetailIssueResponse(issue);
+
+        Long totalIssueCountInMilestone = getTotalIssueCountInMilestone(issue.getMilestone());
+        Long openIssueCountInMilestone = getOpenIssueCountInMilestone(issue.getMilestone());
+
+        return new DetailIssueResponse(issue, totalIssueCountInMilestone, openIssueCountInMilestone);
+    }
+
+    private Long getTotalIssueCountInMilestone(Milestone milestone) {
+        if (milestone == null) {
+            return EMPTY;
+        }
+        return issueRepository.countByMilestoneId(milestone.getId());
+    }
+
+    private Long getOpenIssueCountInMilestone(Milestone milestone) {
+        if (milestone == null) {
+            return EMPTY;
+        }
+        return issueRepository.countByMilestoneIdAndIsOpenTrue(milestone.getId());
     }
 
     public void addIssue(IssueRequest issueRequest, Long userId) {

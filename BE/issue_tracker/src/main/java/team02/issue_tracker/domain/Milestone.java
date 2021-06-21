@@ -41,26 +41,6 @@ public class Milestone {
         this.isOpen = true;
     }
 
-    public int getTotalIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .count();
-    }
-
-    public int getOpenIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .filter(Issue::isOpen)
-                .count();
-    }
-
-    public int getClosedIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .filter(issue -> !issue.isOpen())
-                .count();
-    }
-
     public void edit(MilestoneRequest milestoneRequest) {
         this.title = milestoneRequest.getTitle();
         this.content = milestoneRequest.getContent();
