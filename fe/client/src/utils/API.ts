@@ -7,6 +7,9 @@ const API: any = {
     issues: async () => {
       return (await fetch(`/issues`)).json();
     },
+    issueDetail: async (id: string | number) => {
+      return (await fetch(`/issues/${id}`)).json();
+    },
     users: async () => {
       return (await fetch(`/users`)).json();
     },

@@ -4,18 +4,26 @@ import InputField from '@components/common/InputField';
 import IconButton from '@components/common/IconButton';
 import CloseOrOpenLabel from '@components/common/CloseOrOpenLabel';
 import useToggle from '@/utils/hook/useToggle';
+import useInput from '@/utils/hook/useInput';
 
-const HeadContent = () => {
+type HeadContentType = {
+  issueNumber: number;
+  id: number;
+  title: string;
+}
+
+const HeadContent = ({ issueNumber, id, title }: HeadContentType) => {
   const [isEditTitle, setEditTitle] = useToggle(false);
+  const issueTitleState = useInput('title');
 
   return (
     <>
       <HeadTitleWrapper>
         {isEditTitle
-          ? <InputField />
+          ? <InputField {...issueTitleState} />
           : <IssueTitle>
-            FE 이슈트래커 디자인 시스템
-            <IssueNumberSpan>#2</IssueNumberSpan>
+            {title}
+            <IssueNumberSpan>#{issueNumber}</IssueNumberSpan>
           </IssueTitle>}
         {isEditTitle
           ? <>
@@ -40,7 +48,8 @@ const HeadContent = () => {
       </HeadTitleWrapper>
       <HeadDescWrapper>
         <CloseOrOpenLabel isOpen />
-        <DescSpan>이 이슈가 1분전에 닫혓습니다</DescSpan>
+        <DescSpan>이 이슈가 1분전에 닫혓습니다 · 코멘트 1개</DescSpan> 
+
       </HeadDescWrapper>
       <Hr />
     </>

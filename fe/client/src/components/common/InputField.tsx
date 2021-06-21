@@ -17,8 +17,8 @@ const InputField = ({ defaultValue, label, width, endAdornment, ...props }: Inpu
       variant="filled"
       className={classes.title}
       style={{ marginBottom: '16px', width }}
-      defaultValue={defaultValue}
       {...props}
+      defaultValue={defaultValue}
       InputProps={{
         disableUnderline: true,
         endAdornment: endAdornment
