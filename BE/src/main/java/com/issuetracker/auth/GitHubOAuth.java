@@ -35,10 +35,10 @@ public class GitHubOAuth implements OAuth {
     }
 
     @Override
-    public AccessTokenResponseDTO getToken(String code, String host) {
+    public AccessTokenResponseDTO getToken(String code, String userAgent) {
         AccessTokenRequestDTO accessTokenRequest = AccessTokenRequestDTO.builder()
-                .clientId(gitHubService.getClientId(host))
-                .clientSecret(gitHubService.getClientSecret(host))
+                .clientId(gitHubService.getClientId(userAgent))
+                .clientSecret(gitHubService.getClientSecret(userAgent))
                 .code(code)
                 .build();
 
