@@ -26,7 +26,7 @@ class IssueListFilterViewController: UIViewController {
         filterTableView.tableFooterView = UIView()
     }
     
-    private func configureHeaderView(section: Int) -> UIView {
+    private func makeHeaderView(section: Int) -> UIView {
         let headerView = UIView(frame: .zero)
         headerView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
         let label = UILabel(frame: .zero)
@@ -77,7 +77,7 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return configureHeaderView(section: section)
+        return makeHeaderView(section: section)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

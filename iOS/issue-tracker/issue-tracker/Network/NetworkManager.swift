@@ -9,7 +9,7 @@ struct NetworkManager {
         self.jwtManager = JWTManager()
     }
     
-    func setAuthorizationRequest(url: URL) -> URLRequest {
+    func makeAuthorizationRequest(url: URL) -> URLRequest {
         guard let jwt = jwtManager.get() else {
             return URLRequest(url: url)
         }
@@ -28,7 +28,7 @@ struct NetworkManager {
             return Fail(error: error).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: self.setAuthorizationRequest(url: url))
+        return URLSession.shared.dataTaskPublisher(for: self.makeAuthorizationRequest(url: url))
             .mapError { _ in NetworkError.networkConnection(desciption: "Network Error") }
             .flatMap { data, response -> AnyPublisher<T, NetworkError> in
                 guard let httpResponse = response as? HTTPURLResponse else {

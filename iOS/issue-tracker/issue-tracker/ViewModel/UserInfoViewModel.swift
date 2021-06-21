@@ -13,7 +13,7 @@ class UserInfoViewModel {
         self.subscriptions = Set<AnyCancellable>()
     }
     
-    func configureThumbnailImage() {
+    func fetchThumbnailImage() {
         fetchUserInfoUseCase.executeFetchingUserInfo { imageURL in
             self.thumbnailImage = imageURL
         }

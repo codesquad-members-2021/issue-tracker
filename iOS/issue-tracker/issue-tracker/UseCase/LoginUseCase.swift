@@ -15,13 +15,17 @@ class LoginUseCase {
         self.subscriptions = Set<AnyCancellable>()
     }
 
-    func getGitHubLoginURL() -> (URL, String) {
-        return loginManager.requestGitHubAuthorization()
+    func gitHubLoginURL() -> URL? {
+        return loginManager.getGitHubLoginURL()
+    }
+    
+    func callbackURLscheme() -> String {
+        return loginManager.getCallbackURLscheme()
     }
     
     func convertToGitHubLogInURL(from callbackURL: URL) -> URL? {
-        let code = self.loginManager.extractAuthorizationCode(from: callbackURL)
-        return self.loginManager.convertToURL(with: code)
+        let code = self.loginManager.extractedAuthorizationCode(from: callbackURL)
+        return self.loginManager.convertedToURL(with: code)
     }
     
     func executeGitHubLogIn(url: URL?, completion: @escaping (Bool) -> Void) {

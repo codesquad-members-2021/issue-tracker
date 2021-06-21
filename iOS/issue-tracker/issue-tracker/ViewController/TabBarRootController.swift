@@ -11,7 +11,6 @@ class TabBarRootController: UITabBarController {
     }
     
     private func bind() {
-        userInfoViewModel.configureThumbnailImage()
         userInfoViewModel.didUpdateThumbnailImage { [weak self] url in
             guard let imageURL = URL(string: url) else { return }
             let imageData = try? Data(contentsOf: imageURL)
@@ -30,6 +29,7 @@ class TabBarRootController: UITabBarController {
             self?.tabBar.items?.last?.image = nil
             self?.tabBar.subviews.last?.addSubview(imageView)
         }
+        userInfoViewModel.fetchThumbnailImage()
     }
     
 }

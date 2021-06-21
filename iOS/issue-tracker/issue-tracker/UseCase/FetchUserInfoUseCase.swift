@@ -8,13 +8,13 @@ class FetchUserInfoUseCase {
     private var subscriptions: Set<AnyCancellable>
     
     init() {
-        self.endPoint = EndPoint()
+        self.endPoint = EndPoint(scheme: Scheme.http.rawValue, host: Host.base.rawValue, path: Path.api.rawValue + Path.user.rawValue)
         self.networkManager = NetworkManager()
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func executeFetchingUserInfo(completion: @escaping (String) -> Void) {
-        let url = endPoint.makeUserInfoURL()
+        let url = endPoint.makeURL()
         networkManager.get(with: url, type: UserInfoResponDTO.self)
             .sink { result in
                 switch result {

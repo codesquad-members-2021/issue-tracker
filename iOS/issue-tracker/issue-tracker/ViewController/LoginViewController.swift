@@ -17,11 +17,10 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
     
     private func configureWebAuthSession() {
-        let githubLoginURL = loginUseCase.getGitHubLoginURL()
-        let url = githubLoginURL.0
-        let callbackURLScheme = githubLoginURL.1
+        guard let githubLoginURL = loginUseCase.gitHubLoginURL() else { return }
+        let callbackURLScheme = loginUseCase.callbackURLscheme()
         
-        self.webAuthSession = ASWebAuthenticationSession.init(url: url, callbackURLScheme: callbackURLScheme, completionHandler: { [weak self] callBack, error in
+        self.webAuthSession = ASWebAuthenticationSession.init(url: githubLoginURL, callbackURLScheme: callbackURLScheme, completionHandler: { [weak self] callBack, error in
             guard error == nil, let callBack = callBack else {
                 return
             }
