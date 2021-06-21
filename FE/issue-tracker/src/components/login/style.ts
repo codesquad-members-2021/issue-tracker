@@ -22,6 +22,7 @@ const activeLoginStyle = {
 const inactiveLoginStyle = {
   ...activeLoginStyle,
   opacity: '.4',
+  isDisabled: true,
 };
 
 const inputStyle = {

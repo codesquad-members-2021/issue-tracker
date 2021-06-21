@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import SelectAssignee from './SelectAssignee';
-import SelectLabel from './SelectLabel';
-import SelectMilestone from './SelectMilestone';
+import SelectAssignee from './select/SelectAssignee';
+import SelectLabel from './select/SelectLabel';
+import SelectMilestone from './select/SelectMilestone';
 
 function SelectBox() {
   return (
