@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';

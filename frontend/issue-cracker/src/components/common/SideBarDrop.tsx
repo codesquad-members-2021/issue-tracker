@@ -25,12 +25,7 @@ const SideBarDrop = (): JSX.Element => {
 };
 
 export default SideBarDrop;
-const SideBarDropStyle = styled.div`
-  position: absolute;
-  left: -7px;
-  top: 30px;
-  z-index: 10;
-`;
+const SideBarDropStyle = styled.div``;
 const DropDownTitle = styled(S.IssueTableHeader)`
   display: flex;
   align-items: center;

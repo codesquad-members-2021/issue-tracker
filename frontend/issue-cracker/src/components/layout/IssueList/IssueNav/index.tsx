@@ -61,9 +61,3 @@ const TabBox = styled.div`
   display: flex;
   align-items: baseline;
 `;
-
-const ButtonBox = styled.div`
-  padding-left: 10px;
-  display: flex;
-  align-items: flex-end;
-`;

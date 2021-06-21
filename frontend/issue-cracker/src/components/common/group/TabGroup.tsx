@@ -69,13 +69,6 @@ const TabGroup = (): JSX.Element => {
 
 export default TabGroup;
 
-const TabButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-`;
-
 const CustomTabGroup = styled(ButtonGroup)`
   a {
     border: 1px solid ${({ theme }) => `${theme.colors.gray3}`};

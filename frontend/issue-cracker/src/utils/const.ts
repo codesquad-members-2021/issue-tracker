@@ -4,7 +4,7 @@ export const LOGO_TITLE = 'Issue Cracker..🍪';
 export const URL = {
   AUTH: 'http://localhost:8080/api/web/auth',
   LOGIN:
-    'https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user&redirect_uri=http://localhost:3000/authentication',
+    'https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user,user:email&redirect_uri=http://localhost:3000/authentication',
 };
 //path
 export const PATH = {
