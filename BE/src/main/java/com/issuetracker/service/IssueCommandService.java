@@ -6,7 +6,6 @@ import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.CommentNotFoundException;
-import com.issuetracker.exception.ElementNotFoundException;
 import com.issuetracker.web.dto.reqeust.*;
 import com.issuetracker.web.dto.response.CommentDTO;
 import com.issuetracker.web.dto.response.IssueNumberResponseDTO;

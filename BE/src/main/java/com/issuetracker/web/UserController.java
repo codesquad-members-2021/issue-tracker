@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping("/login")
     public UserResponseDTO login(@RequestHeader(name = "User-Agent") UserAgentDTO userAgentDTO, @RequestParam String code) {
         logger.debug("로그인 요청");
-        logger.info("호스트 헤더 확인: {}", userAgentDTO.getUserAgent());
+        logger.info("에이전트 헤더 확인: {}", userAgentDTO.getUserAgent());
         return userService.login(code, userAgentDTO);
     }
 
