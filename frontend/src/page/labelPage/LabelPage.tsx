@@ -1,24 +1,22 @@
 import { useState } from 'react';
 import LabelMilestoneTab from 'components/common/LabelMilestoneTab';
-import PrimaryButton from 'components/atom/PrimaryButton';
 import PrimaryOutlinedButton from 'components/atom/PrimaryOutlinedButton';
-import MilestoneAdd from 'page/milestonePage/MilestoneAdd';
+import PrimaryButton from 'components/atom/PrimaryButton';
 import styled from 'styled-components';
 import { labelMilestoneClickedState } from 'store/labelMilestoneStore';
 import { useSetRecoilState } from 'recoil';
-import MilestoneIcon from 'components/atom/MilestoneIcon';
-import MilestoneItem from 'page/milestonePage/MilestoneItem';
-import { ReactComponent as CloseIcon } from 'assets/icon/CloseIcon.svg';
-export default function MilestonePage() {
+import LabelItem from 'page/labelPage/LabelItem';
+
+export default function LabelPage() {
   const setLabelMilestoneState = useSetRecoilState(labelMilestoneClickedState);
-  setLabelMilestoneState({ label: false, milestone: true });
+  setLabelMilestoneState({ label: true, milestone: false });
 
   const [addClick, setAddClick] = useState(false);
   const handleClick = () => {
     setAddClick(!addClick);
   };
   return (
-    <MilestoneBlock>
+    <LabelBlock>
       <div className='tab__option__header'>
         <LabelMilestoneTab />
         {!addClick ? (
@@ -27,27 +25,17 @@ export default function MilestonePage() {
           <PrimaryOutlinedButton value={'× 닫기'} onClick={handleClick} />
         )}
       </div>
-      {addClick && <MilestoneAdd />}
       <div className='tab__table'>
         <div className='tab__table__header'>
-          <div>
-            <div>
-              <MilestoneIcon />
-              열린 마일스톤(2)
-            </div>
-            <div>
-              <CloseIcon />
-              &nbsp;&nbsp;닫힌 마일스톤(2)
-            </div>
-          </div>
+          <div>&nbsp;&nbsp;3개의 레이블</div>
         </div>
-        <MilestoneItem />
+        <LabelItem />
       </div>
-    </MilestoneBlock>
+    </LabelBlock>
   );
 }
 
-const MilestoneBlock = styled.div`
+const LabelBlock = styled.div`
   padding: 50px 80px;
   .tab__option__header {
     display: flex;
@@ -65,13 +53,7 @@ const MilestoneBlock = styled.div`
     padding: 10px;
     background-color: ${({ theme }) => theme.color.bgGrey};
     border-radius: 16px 16px 0 0;
-    div {
-      display: flex;
-      width: 300px;
-      div {
-        display: flex;
-        align-items: center;
-      }
-    }
+    font-weight: ${({ theme }) => theme.weight.bold};
+    color: ${({ theme }) => theme.color.fontGrey};
   }
 `;

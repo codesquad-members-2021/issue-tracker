@@ -4,42 +4,53 @@ import { useRecoilValue } from 'recoil';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import MilestoneIcon from 'components/atom/MilestoneIcon';
 import { getIssuesInfoState } from 'store/issueInfoStore';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { labelMilestoneClickedState } from 'store/labelMilestoneStore';
+
+interface Props {
+  lableState?: boolean;
+  milestoneState?: boolean;
+}
 export default function LabelMilestoneTab(): ReactElement {
+  const labelMilestoneClick = useRecoilValue(labelMilestoneClickedState);
 
   const IssuesInfoData = useRecoilValue(getIssuesInfoState);
 
   return (
     <LabelMilestoneTabBlock>
-      
-      <Link to='/lable'>
-        <div>
+      <Link to='/label'>
+        <LableBlock lableState={labelMilestoneClick.label}>
           <LoyaltyIcon fontSize='small' />
           &nbsp;레이블 ({IssuesInfoData?.count?.label})
-        </div>
+        </LableBlock>
       </Link>
-      
-      
       <Link to='/milestone'>
-        <div>
+        <MilestoneBlock milestoneState={labelMilestoneClick.milestone}>
           <MilestoneIcon sizeType={14} />
           마일스톤 ({IssuesInfoData?.count?.milestone})
-        </div>
+        </MilestoneBlock>
       </Link>
-      
     </LabelMilestoneTabBlock>
   );
 }
-
+const MilestoneBlock = styled.div<Props>`
+  border-radius: 0 11px 11px 0;
+  background-color: ${({ milestoneState, theme }) =>
+    milestoneState ? theme.color.bgGrey : theme.color.white};
+`;
+const LableBlock = styled.div<Props>`
+  border-radius: 11px 0 0 11px;
+  background-color: ${({ lableState, theme }) =>
+    lableState ? theme.color.bgGrey : theme.color.white};
+`;
 const LabelMilestoneTabBlock = styled.div`
   display: flex;
   border: 1px solid ${({ theme }) => theme.color.lineGrey};
   border-radius: 11px;
-  a{
+  a {
     color: ${({ theme }) => theme.color.fontGrey};
-    text-decoration:none;
+    text-decoration: none;
     div {
-  
       width: 160px;
       height: 40px;
       display: flex;

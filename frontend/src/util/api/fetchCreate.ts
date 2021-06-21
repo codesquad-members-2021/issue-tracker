@@ -8,7 +8,7 @@ type inputsType = {
   milestone: number | null; //일단이렇게
 };
 
-export default async function fetchData(issueInputs: inputsType) {
+export default async function fetchCreate(issueInputs: inputsType) {
   try {
     const response = await fetch(API.createIssue, {
       method: 'POST',
@@ -19,6 +19,7 @@ export default async function fetchData(issueInputs: inputsType) {
       },
       body: JSON.stringify(issueInputs),
     });
+    console.log('try')
     if (response.status !== 200) throw new Error('잘못된 요청입니다.');
     const issueID = response.json();
     return issueID;

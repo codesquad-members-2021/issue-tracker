@@ -9,6 +9,7 @@ import { resetSelectedTab } from 'store/issueInfoStore';
 
 export default function OptionTable(): ReactElement {
   const resetSelectTab = useSetRecoilState(resetSelectedTab);
+
   const handleCreateClick = () => {
     resetSelectTab(null);
   };

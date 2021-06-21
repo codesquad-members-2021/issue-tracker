@@ -5,9 +5,8 @@ import SocialLoginBtn from 'page/loginPage/socialLoginBtn/SocialLoginBtn';
 import LoginForm from 'page/loginPage/loginForm/LoginForm';
 import Copyright from 'components/common/Copyright';
 
-interface Props {}
 
-export default function LoginPage({}: Props) {
+export default function LoginPage() {
   return (
     <LoginPageBlock>
       <div className='social-login'>

@@ -5,14 +5,13 @@ import Button from '@material-ui/core/Button';
 interface PrimaryButtonType {
   value: string;
   className?: string;
-  // onClick?: () => Promise<JSX.Element | void>;
   onClick?: () => void;
 }
 
-export default function PrimaryButton({ value, className, onClick }: PrimaryButtonType) {
+export default function PrimaryOutlinedButton({ value, className, onClick }: PrimaryButtonType) {
   return (
     <PrimaryButtonBlock onClick={onClick}>
-      <Button variant='contained' size='medium' color='primary' className={className}>
+      <Button variant='outlined' size='medium' color='primary' className={className}>
         {value}
       </Button>
     </PrimaryButtonBlock>
