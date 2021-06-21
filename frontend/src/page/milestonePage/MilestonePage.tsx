@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import LabelMilestoneTab from 'components/common/LabelMilestoneTab'
 import PrimaryButton from 'components/atom/PrimaryButton'
+import PrimaryOutlinedButton from 'components/atom/PrimaryOutlinedButton'
+import MilestoneAdd from 'page/milestonePage/MilestoneAdd'
 import styled from 'styled-components'
 import { lableClick , milestoneClick } from 'store/issueInfoStore'
 import { useSetRecoilState } from 'recoil'
@@ -12,9 +15,17 @@ export default function MilestonePage(){
   setLableState(false)
   setMilestoneState(true)
 
+  const [addClick, setAddClick] = useState(false)
+  const handleClick = () => {
+    setAddClick(!addClick)
+  }
   return (
     <MilestoneBlock>
-      <div className='tab__option__header'><LabelMilestoneTab/><PrimaryButton value={'+ 추가'}/></div>
+      <div className='tab__option__header'>
+        <LabelMilestoneTab/> 
+        {!addClick?<PrimaryButton value={'+ 추가'} onClick={handleClick}/>:<PrimaryOutlinedButton value={'× 닫기'} onClick={handleClick}/>}
+      </div>
+      {addClick && <MilestoneAdd/>}
       <div className='tab__table'>
         <div className='tab__table__header'>
           <div>           

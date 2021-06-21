@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import LabelMilestoneTab from 'components/common/LabelMilestoneTab'
+import PrimaryOutlinedButton from 'components/atom/PrimaryOutlinedButton'
 import PrimaryButton from 'components/atom/PrimaryButton'
 import styled from 'styled-components'
 import { lableClick , milestoneClick } from 'store/issueInfoStore'
@@ -11,9 +13,17 @@ export default function LabelPage(){
   setLableState(true)
   setMilestoneState(false)
 
+  
+  const [addClick, setAddClick] = useState(false)
+  const handleClick = () => {
+    setAddClick(!addClick)
+  }
   return (
     <LabelBlock>
-      <div className='tab__option__header'><LabelMilestoneTab/><PrimaryButton value={'+ 추가'}/></div>
+      <div className='tab__option__header'>
+        <LabelMilestoneTab/>
+        {!addClick?<PrimaryButton value={'+ 추가'} onClick={handleClick}/>:<PrimaryOutlinedButton value={'× 닫기'} onClick={handleClick}/>}
+      </div>
       <div className='tab__table'>
         <div className='tab__table__header'>         
           <div>&nbsp;&nbsp;3개의 레이블</div>
