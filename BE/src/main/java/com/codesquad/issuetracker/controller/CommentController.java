@@ -26,11 +26,11 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
+    public ApiResponse createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User user) {
 
         log.debug("Comment Request from User : {}", commentRequest);
 
-        commentService.create(commentRequest.create(user));
+        return ApiResponse.ok(commentService.create(commentRequest.create(user)));
     }
 
     @GetMapping("/{issueId}")

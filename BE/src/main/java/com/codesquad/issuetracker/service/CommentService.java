@@ -19,8 +19,8 @@ public class CommentService {
     }
 
     @Transactional
-    public void create(Comment comment) {
-        commentRepository.save(comment);
+    public Comment create(Comment comment) {
+        return commentRepository.save(comment);
     }
 
     public List<Comment> getComments(Long issueId) {
