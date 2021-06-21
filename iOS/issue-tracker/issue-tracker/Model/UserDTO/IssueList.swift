@@ -21,8 +21,8 @@ struct IssueDetail: Codable {
 struct Issue: Codable {
     let id: Int?
     let title: String
-    let issueNumber: Int
-    let isOpen: Bool
+    let number: Int
+    let open: Bool
     let createdTime: String
     let author: Author
     let label: [IssueLabel]
@@ -33,8 +33,8 @@ struct Issue: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case issueNumber = "issue_number"
-        case isOpen
+        case number
+        case open = "is_open"
         case createdTime = "created_time"
         case author, label, assignee, milestone, comment
     }
