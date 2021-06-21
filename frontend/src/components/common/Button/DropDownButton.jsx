@@ -12,7 +12,6 @@ const DropDownButton = ({ text, clickEvent, width, border, radius }) => {
 				_radius={radius}
 			>
 				<ButtonText>{text}</ButtonText>
-				{/* <ArrowIcon stroke={({ theme }) => theme.grayScale.label} /> 적용 안 됨*/}
 				<ArrowIcon stroke={theme.grayScale.label} />
 			</TabButton>
 		</>

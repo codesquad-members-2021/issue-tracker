@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useCallback } from "react";
-import AddButton from "components/common/Button/AddButton";
+import AddButton from "components/common/Button/BlueButtons";
 import useFetch from "hooks/useFetch";
 import API from "util/API";
 import { useSetRecoilState, useRecoilState } from "recoil";
@@ -98,6 +98,8 @@ const MilestoneInput = ({
 			<BtnWrapper>
 				<AddButton
 					text="완료"
+					icon="plus"
+					size="m"
 					clickEvent={editMode ? handleEdit : handleSubmit}
 				/>
 			</BtnWrapper>

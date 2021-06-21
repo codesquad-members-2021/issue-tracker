@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import NewIssueInput from "./NewIssueInput";
 import IssueCategoryList from "components/common/IssueCategoryList";
-import SubmitButton from "components/common/Button/SubmitButton";
-import CancelButton from "components/common/Button/CancelButton";
 
 const NewIssueForm = () => {
 	return (
@@ -12,8 +10,9 @@ const NewIssueForm = () => {
 				<IssueCategoryList />
 			</Wrapper>
 			<ButtonWrapper>
-				<CancelButton>x 작성 취소</CancelButton>
-				<SubmitButton>완료</SubmitButton>
+				{/* 스타일 코드 작성시 이부분 button 컴포넌트 적용 필요 */}
+				<button>x 작성 취소</button>
+				<button>완료</button>
 			</ButtonWrapper>
 		</>
 	);
