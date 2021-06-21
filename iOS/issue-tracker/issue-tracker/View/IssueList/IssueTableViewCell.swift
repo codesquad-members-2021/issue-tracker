@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class IssueTableViewCell: UITableViewCell {
 
     static var identifier = "IssueTableViewCell"
 
-    private var fakeData = [IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
+    private var bag = DisposeBag()
 
     private var largeTitle: UILabel = {
         var label = UILabel()
@@ -44,7 +46,6 @@ final class IssueTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        labelsCollectionView.dataSource = self
         addSubviews()
         setupAutolayout()
         checkBoxImageView.isHidden = true
@@ -52,7 +53,6 @@ final class IssueTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        labelsCollectionView.dataSource = self
         addSubviews()
         setupAutolayout()
         checkBoxImageView.isHidden = true
@@ -98,10 +98,19 @@ final class IssueTableViewCell: UITableViewCell {
         }
     }
 
-    func setupIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
+    func setupIssueCell(title: String, description: String, milestoneTitle: String, relay: BehaviorRelay<[IssueLabel]>) {
         self.largeTitle.text = title
         self.labelDescription.text = description
         self.milestoneView.setMilestoneTitle(title: milestoneTitle)
+        self.bindLabelCollectionView(relay: relay)
+    }
+
+    func bindLabelCollectionView(relay: BehaviorRelay<[IssueLabel]>) {
+        relay.bind(to: labelsCollectionView.rx.items(cellIdentifier: LabelsCollectionViewCell.identifiers)) { index, model, cell in
+            guard let cell = UICollectionViewCell() as? LabelsCollectionViewCell else { return }
+            cell.configure(title: model.title, color: model.color)
+        }
+        .disposed(by: bag)
     }
 
     func check() {
@@ -111,21 +120,4 @@ final class IssueTableViewCell: UITableViewCell {
     func uncheck() {
         checkBoxImageView.isHidden = true
     }
-}
-
-extension IssueTableViewCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fakeData.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: indexPath) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(title: fakeData[indexPath.item].title, color: fakeData[indexPath.item].color)
-        return cell
-    }
-}
-
-struct IssueLabels {
-    var title: String
-    var color: String
 }
