@@ -13,11 +13,14 @@ struct Endpoint {
     let port: Int = 8080
     var path: Path
 
-    func url(queryItems: [URLQueryItem] = []) -> URL? {
+    func url(queryItems: [URLQueryItem] = [], id: Int? = nil) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
         urlComponents.path = path.pathString
+        if let id = id {
+            urlComponents.path = path.pathString + "/" + String(id)
+        }
         urlComponents.queryItems = queryItems
         return urlComponents.url
     }
@@ -25,6 +28,7 @@ struct Endpoint {
     enum Path: String {
         case login = "/login"
         case label = "/label"
+        case issue = "/issue"
 
         var pathString: String {
             return self.rawValue
