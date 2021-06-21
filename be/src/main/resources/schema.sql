@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`issue`
     `created_time`   DATETIME     NOT NULL,
     `closed`         TINYINT      NOT NULL DEFAULT 0,
     `deleted`        TINYINT      NOT NULL DEFAULT 0,
-    `milestone_id`   INT          NOT NULL,
+    `milestone_id`   INT          NULL,
     `author_user_id` INT          NOT NULL,
     `number`         INT          NOT NULL,
     PRIMARY KEY (`id`),

@@ -8,18 +8,16 @@ public class Milestone {
     private String description;
     private LocalDate dueDate;
     private boolean closed;
-    private boolean opened;
 
     public Milestone() {
     }
 
-    public Milestone(Long id, String title, String description, LocalDate dueDate, boolean closed, boolean opened) {
+    public Milestone(Long id, String title, String description, LocalDate dueDate, boolean closed) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.closed = closed;
-        this.opened = opened;
     }
 
     public Long getId() {
@@ -60,13 +58,5 @@ public class Milestone {
 
     public void setClosed(boolean closed) {
         this.closed = closed;
-    }
-
-    public boolean isOpened() {
-        return opened;
-    }
-
-    public void setOpened(boolean opened) {
-        this.opened = opened;
     }
 }
