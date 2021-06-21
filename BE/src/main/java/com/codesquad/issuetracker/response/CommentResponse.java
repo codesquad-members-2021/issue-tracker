@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.response;
 
 import com.codesquad.issuetracker.domain.Comment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class CommentResponse {
     private String content;
 
     @JsonProperty("created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private final LocalDateTime createdAt;
 
     private UserResponse author;
