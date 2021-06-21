@@ -32,4 +32,9 @@ public class IssueController {
     public ResponseStatusDto create(@RequestBody IssueRequestDto issue, @RequestAttribute User user){
         return issueService.saveIssue(issue, user);
     }
+
+    @GetMapping("/{id}")
+    public IssueDetailDto viewIssueDetail(@PathVariable Long id) {
+        return issueService.searchIssueDetailByIssueId(id);
+    }
 }

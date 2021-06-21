@@ -157,4 +157,19 @@ public class IssueRepository {
         query = "update issue set deleted = ? where id = ?";
         jdbcTemplate.update(query, request.isDeleted(), id);
     }
+
+    public Issue findIssueByIssueId(Long id) {
+        String query = "select issue.* from issue where id = ?";
+        return jdbcTemplate.queryForObject(query, ISSUE_ROW_MAPPER, id);
+    }
+
+    public Integer countOpenedIssuesByMilestoneId(Long id) {
+       String query = "select count(closed) from issue where milestone_id = ? AND closed = false";
+        return jdbcTemplate.queryForObject(query, Integer.class, id);
+    }
+
+    public Integer countClosedIssuesByMilestoneId(Long id) {
+        String query = "select count(closed) from issue where milestone_id = ? AND closed = true";
+        return jdbcTemplate.queryForObject(query, Integer.class, id);
+    }
 }
