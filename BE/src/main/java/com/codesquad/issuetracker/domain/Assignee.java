@@ -19,7 +19,7 @@ public class Assignee {
     public Assignee() {
     }
 
-    private Assignee(Long issueId, Long userId) {
+    public Assignee(Long issueId, Long userId) {
         this.issueId = issueId;
         this.userId = userId;
     }
@@ -45,7 +45,7 @@ public class Assignee {
         return userId;
     }
 
-    public static Assignee assigneeRequestToassignee(AssigneeRequest assigneeRequest) {
-        return new Assignee(assigneeRequest.getIssueId(), assigneeRequest.getUserId());
+    public static Assignee assigneeRequestToassignee(Long issueId, AssigneeRequest assigneeRequest) {
+        return new Assignee(issueId, assigneeRequest.getUserId());
     }
 }

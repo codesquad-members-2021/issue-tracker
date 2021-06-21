@@ -1,8 +1,7 @@
 package com.codesquad.issuetracker.controller;
 
-import com.codesquad.issuetracker.domain.Issue;
-import com.codesquad.issuetracker.response.*;
 import com.codesquad.issuetracker.request.IssueRequest;
+import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class IssueController {
 
     @PostMapping
     public ApiResponse createIssue(@RequestBody IssueRequest issueRequest) {
-        return ApiResponse.ok(issueService.addIssue(Issue.issueRequestToIssue(issueRequest)));
+        return ApiResponse.ok(issueService.addIssue(issueRequest));
     }
 
     @PutMapping("/{issueId}/title")

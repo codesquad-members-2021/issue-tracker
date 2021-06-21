@@ -40,7 +40,6 @@ public class Issue {
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @OneToMany
-    // @JoinColumn(name = "issue_id")
     private List<Assignee> assignees = new ArrayList<>();
 
     @OneToMany
@@ -50,23 +49,23 @@ public class Issue {
     }
 
     public Issue(Long id, String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
-        this(title, content, status, createdAt, milestoneId, user);
+        this(title, content, status, createdAt, user, milestoneId);
         this.id = id;
 
     }
 
-    public Issue(String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
+    public Issue(String title, String content, boolean status, LocalDateTime createdAt, User user, Long milestoneId) {
         this.title = title;
         this.content = content;
         this.status = status;
         this.createdAt = createdAt;
-        this.milestoneId = milestoneId;
         this.user = user;
+        this.milestoneId = milestoneId;
     }
 
     public static Issue issueRequestToIssue(IssueRequest issueRequest) {
-        return new Issue(issueRequest.getTitle(), issueRequest.getContent(), true, issueRequest.getCreatedAt(),
-                issueRequest.getMilestoneId(), issueRequest.getUser());
+        return new Issue(issueRequest.getTitle(), issueRequest.getContent(), true,
+                issueRequest.getCreatedAt(), issueRequest.getUser(), issueRequest.getMilestoneId());
     }
 
 }
