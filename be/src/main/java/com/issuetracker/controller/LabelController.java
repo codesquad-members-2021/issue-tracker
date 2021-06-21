@@ -31,5 +31,10 @@ public class LabelController {
         return labelService.edit(id, labelDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseStatusDto delete(@PathVariable Long id) {
+        return labelService.delete(id);
+    }
+
 }
 

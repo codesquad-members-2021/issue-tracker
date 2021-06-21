@@ -40,4 +40,9 @@ public class LabelRepository {
                 labelDto.isFontLight(),
                 id);
     }
+
+    public void delete(Long id) {
+        String query = "delete from label where id = ?";
+        jdbcTemplate.update(query, id);
+    }
 }
