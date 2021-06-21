@@ -16,13 +16,13 @@ import static com.codesqaude.cocomarco.domain.oauth.GitOauthUri.ACCESS_TOKEN_URI
 import static com.codesqaude.cocomarco.domain.oauth.GitOauthUri.USER_INFO_URI;
 
 @Component
-public class GitOauth implements Oauth {
+public class GitOAuth implements OAuth {
 
     private final String clientId;
     private final String clientSecret;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public GitOauth(@Value("${github.desktop.client.id}") String clientId, @Value("${github.desktop.secret}") String clientSecret) {
+    public GitOAuth(@Value("${github.desktop.client.id}") String clientId, @Value("${github.desktop.secret}") String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
