@@ -8,32 +8,31 @@ import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import API from '@/utils/API';
 import useRecoilInput from '@/utils/hook/useRecoilInput';
 
-type FilteredIdType = {
-  info: {
-    id: number;
+
+type SendButtonType = {
+  commentInputState: {
+    value: string;
+    onChange: any;
   }
 }
 
-const SendButton = () => {
+const SendButton = ({ commentInputState }: SendButtonType) => {
   const classes = inputStyles();
   const history = useHistory();
   const [checkedItems] = useRecoilState(filterCheckboxListAtom);
   const { value: titleInputValue } = useRecoilInput(issueTitleInputAtom);
-  const { value: commentInputValue } = useRecoilInput(issueCommentInputAtom);
 
   const handleClickSendData = async () => {
     const data = {
       title: titleInputValue,
-      mainCommentContents: commentInputValue,
+      mainCommentContents: commentInputState.value,
       authorId: 3, //수정필요 
       assigneeIds: checkedItems.manager.map(getCheckedItemId),
       labelIds: checkedItems.label.map(getCheckedItemId),
       milestoneId: checkedItems.milestone.length && checkedItems.milestone[0].id
     };
-    console.log(data)
 
     const responseData = await API.post.issues(data);
-    console.log(responseData);
 
     return history.push('/issueList');
   }
@@ -46,6 +45,12 @@ const SendButton = () => {
       완료
     </Button>
   )
+}
+
+type FilteredIdType = {
+  info: {
+    id: number;
+  }
 }
 
 const getCheckedItemId = ({ info: { id } }: FilteredIdType) => id;

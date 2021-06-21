@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import FilterTab from '@components/common/FilterTab';
 import ProgressBar from '@components/common/ProgressBar';
@@ -14,11 +14,31 @@ const filterNames: { [key: string]: { apiName: string; name: string } } = {
   milestone: { apiName: 'milestones', name: '마일스톤' },
 }
 
-const FilterItem = ({ header }: { header: string }) => {
+const FilterItem = ({ header, checkedData }: { header: string, checkedData?: any }) => {
   const { apiName } = filterNames[header];
   const [issueList] = useFetch(API.get[apiName]);
   const { data }: AsyncState<any, any> = issueList;
-  const [checkedItems] = useRecoilState(filterCheckboxListAtom);
+  const [checkedItems, setCheckedItems] = useRecoilState(filterCheckboxListAtom);
+
+  useEffect(() => {
+    if (!checkedData) return;
+    const { assignees, labels, milestone } = checkedData;
+    const assigneesArray = getFormatCheckedItem(assignees, 'id', 'email', 'profileImage');
+    const labelsArray = getFormatCheckedItem(labels, 'id', 'color', 'description');
+    const milestoneArray = [{
+      name: milestone.name,
+      info: {
+        closedIssueCount: milestone.closedIssueCount,
+        openedIssueCount: milestone.openedIssueCount
+      }
+    }];
+    
+    setCheckedItems({
+      manager: assigneesArray,
+      label: labelsArray,
+      milestone: milestoneArray
+    })
+  }, [checkedData]);
 
   return (
     <>
@@ -60,7 +80,15 @@ const FilterItem = ({ header }: { header: string }) => {
     </>
   )
 }
-
+const getFormatCheckedItem = (data: any, ...props: any) => {
+  return data.map((item: any) => ({
+    name: item.name,
+    info: props.reduce(((acc: any, cur: any) => {
+      acc[cur] = item[cur];
+      return acc;
+    }), {})
+  }))
+}
 const CheckedItemWrapper = styled.div`
   display: flex;
   margin: 0 32px 16px 32px;

@@ -1,41 +1,54 @@
 import React from 'react'
 import styled from 'styled-components';
 import { ListWrapper } from '@components/common/baseStyle/baseStyle';
+import { CommentsType } from '@components/common/types/IssueDetailType';
+import IconButton from '@components/common/IconButton';
+import { getTimeTaken } from '@/utils/serviceUtils';
+import { ReactComponent as EmojiIcon } from '@/Icons/Emoji.svg';
+type CommentItemType = {
+  comments: CommentsType;
+  isWriter: boolean;
+  setToggleEdit: any;
+}
+const CommentItem = ({ comments, isWriter, setToggleEdit }: CommentItemType) => {
+  const { author, contents, createDateTime } = comments;
 
-const CommentItem = () => {
   return (
-      <CommentItemWrapper>
-        <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" />
-        <div>
-          <ListWrapper wrapWidth="100%">
-            <ListHeader>
-              <div>프레디 11분전</div>
-              <div>작성자 편집 임티</div>
-            </ListHeader>
-            <div>내용!~</div>
-          </ListWrapper>
-        </div>
-      </CommentItemWrapper>
+    <ListWrapper wrapWidth="100%">
+      <ListHeader>
+        <div>{author.name} &nbsp; {getTimeTaken(createDateTime)} 전</div>
+        <ListHeaderRightSpan>
+          {isWriter &&
+            <>
+              <WriterLabel>작성자</WriterLabel>
+              <IconButton icon='edit' onClick={setToggleEdit}>
+                편집 
+              </IconButton>
+            </>}
+          <EmojiIcon />
+        </ListHeaderRightSpan>
+      </ListHeader>
+      <div>{contents}</div>
+    </ListWrapper>
   )
 }
-
-const CommentItemWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  > div{
-    width: 100%;
-  }
-`;
-
-const ImageTag = styled.img`
-  width: 44px;
-  height:44px;
-  margin-right: 16px;
-  border-radius:50%;
-`;
 
 const ListHeader = styled.div`
   display:flex;
   justify-content: space-between;
+`;
+
+const ListHeaderRightSpan = styled.div`
+  display: flex;
+  place-items: center;
+`;
+
+const WriterLabel = styled.span`
+  padding: 2px 8px;
+  border: 1px solid  #b4b5ca;
+  font-size: 12px;
+  font-weight:700;
+  border-radius: 20px;
+  color:#6E7191;
 `;
 export default CommentItem;

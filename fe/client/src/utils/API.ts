@@ -83,6 +83,18 @@ const API: any = {
       });
       return response;
     }
+  },
+  patch: {
+    issues: async (patchData: Array<{ id: number, closed: boolean }>) => {
+      const response = await fetch(`/issues`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(patchData)
+      });
+      return response
+    }
   }
 };
 

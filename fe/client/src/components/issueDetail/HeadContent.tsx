@@ -5,16 +5,25 @@ import IconButton from '@components/common/IconButton';
 import CloseOrOpenLabel from '@components/common/CloseOrOpenLabel';
 import useToggle from '@/utils/hook/useToggle';
 import useInput from '@/utils/hook/useInput';
+import API from '@/utils/API';
 
 type HeadContentType = {
   issueNumber: number;
   id: number;
   title: string;
+  closed: boolean;
 }
 
-const HeadContent = ({ issueNumber, id, title }: HeadContentType) => {
+const HeadContent = ({ issueNumber, id, title, closed }: HeadContentType) => {
   const [isEditTitle, setEditTitle] = useToggle(false);
   const issueTitleState = useInput('title');
+
+  const handleClickIssueClose = async () => {
+    const patchData = [{
+      id, closed: !closed
+    }]
+    const responseData = await API.patch.issues(patchData)
+  }
 
   return (
     <>
@@ -41,14 +50,14 @@ const HeadContent = ({ issueNumber, id, title }: HeadContentType) => {
             <ButtonText>제목 편집</ButtonText>
           </IconButton>
             <IconButton icon="closeBox" variant="outlined" color="primary" minwidth="130px"
-              margin='0 0 0 10px' >
+              margin='0 0 0 10px' onClick={handleClickIssueClose}>
               <ButtonText>이슈 닫기</ButtonText>
             </IconButton></>
         }
       </HeadTitleWrapper>
       <HeadDescWrapper>
-        <CloseOrOpenLabel isOpen />
-        <DescSpan>이 이슈가 1분전에 닫혓습니다 · 코멘트 1개</DescSpan> 
+        <CloseOrOpenLabel isOpen={!closed} />
+        <DescSpan>이 이슈가 1분전에 닫혓습니다 · 코멘트 1개</DescSpan>
 
       </HeadDescWrapper>
       <Hr />
