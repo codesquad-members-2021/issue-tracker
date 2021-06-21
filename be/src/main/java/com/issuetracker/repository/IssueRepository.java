@@ -4,6 +4,7 @@ import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
 import com.issuetracker.dto.IssueRequestDto;
 import com.issuetracker.dto.IssueSearchCondition;
+import com.issuetracker.service.LabelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -185,6 +186,11 @@ public class IssueRepository {
 
     public void setMilestoneNullFromIssueByMilestoneId(Long id) {
         String query = "update issue set milestone_id = null where milestone_id = ?";
+        jdbcTemplate.update(query, id);
+    }
+
+    public void deleteIssueIdsConnectedByLabelId(Long id) {
+        String query = "delete from issue_has_label where label_id = ?";
         jdbcTemplate.update(query, id);
     }
 }

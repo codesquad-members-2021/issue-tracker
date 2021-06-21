@@ -93,8 +93,7 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`label`
     `description` VARCHAR(255) NULL,
     `color_code`  VARCHAR(10)  NOT NULL,
     `font_light`  TINYINT(1)  NOT NULL DEFAULT 1,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `color_code_UNIQUE` (`color_code` ASC)
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
