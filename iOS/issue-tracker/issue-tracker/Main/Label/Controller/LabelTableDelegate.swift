@@ -32,6 +32,6 @@ final class LabelTableDelegate: NSObject, UITableViewDelegate {
             self?.cellActionHandler(indexPath.row, .edit)
         }
         editAction.image = UIImage(systemName: "pencil")
-        return UISwipeActionsConfiguration(actions: [editAction, deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
 }
