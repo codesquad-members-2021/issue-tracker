@@ -50,12 +50,7 @@ public class JwtProvider {
     }
 
     public User getUser(String token) {
-        Claims claims = getClaims(token);
-        Long id = (Long) claims.get("id");
-        String name = (String) claims.get("name");
-        String loginId = (String) claims.get("login_id");
-        User user = new User(id, name, loginId);
-        return user;
+        return (User) getClaims(token).get(USER_CLAIM_KEY);
     }
 
     public boolean validateToken(String token) {
