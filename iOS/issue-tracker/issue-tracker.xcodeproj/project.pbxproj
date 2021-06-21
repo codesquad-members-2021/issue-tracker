@@ -68,6 +68,8 @@
 		D0ADB6D5266F4F3D00E0762C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D4266F4F3D00E0762C /* RxSwift */; };
 		D0ADB6D7266F4F4700E0762C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D0ADB6D6266F4F4700E0762C /* SnapKit */; };
 		D0ADB6F8266F5BBE00E0762C /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */; };
+		D0DAAE28268071F00075E794 /* NewIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */; };
+		D0DAAE2A2680A8DE0075E794 /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */; };
 		D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
 		D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */; };
 		D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */; };
@@ -159,6 +161,8 @@
 		D0ADB693266F0A5000E0762C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D0ADB698266F0C1300E0762C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
+		D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewModel.swift; sourceTree = "<group>"; };
+		D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
 		D0FD50DB2671AA04008C6031 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				B3A5CB57267840290060DC85 /* LabelListViewModel.swift */,
 				B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */,
 				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
+				D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */,
 				D03AF8F32677253C001C2CBF /* IssueFilterViewController.swift */,
 				D0103BDD267B897E0079FC3D /* AddMilestoneViewController.swift */,
+				D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -676,6 +682,7 @@
 				49903DAB266F558300D2A6DD /* LoginView.swift in Sources */,
 				D0FD50F72671B156008C6031 /* LabelTableViewCell.swift in Sources */,
 				D04C6956267B2C560056DD79 /* ToolBarTextField.swift in Sources */,
+				D0DAAE28268071F00075E794 /* NewIssueViewModel.swift in Sources */,
 				B32FEACE267260E400BF37A1 /* AddIssueButton.swift in Sources */,
 				B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
@@ -705,6 +712,7 @@
 				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
 				B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */,
 				B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */,
+				D0DAAE2A2680A8DE0075E794 /* AdditionalInfoViewController.swift in Sources */,
 				D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */,
 				D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */,
 				D03AF8F826774909001C2CBF /* MilestoneList.swift in Sources */,

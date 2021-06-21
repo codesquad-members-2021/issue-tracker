@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct NewIssue {
-    let title: String
+struct NewIssue: Codable {
+    var title: String
     let comment: String
-    let labelsID: [Int]
-    let milestoneID: Int
-    let assigneeID: [Int]
+    let labelID: [Int] = []
+    let milestoneID: Int? = nil
+    let assigneeID: [Int] = []
 
     enum CodingKeys: String, CodingKey {
         case title, comment
-        case labelsID = "labels_ids"
+        case labelID = "label_ids"
         case milestoneID = "milestone_id"
         case assigneeID = "assignee_id"
     }
