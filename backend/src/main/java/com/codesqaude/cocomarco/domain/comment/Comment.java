@@ -42,10 +42,11 @@ public class Comment {
         this.text = text;
     }
 
-    public void isSameWriter(UUID writerId) {
+    public boolean isSameWriter(UUID writerId) {
         if (!writer.sameUser(writerId)) {
             throw new NoPermissionUserException();
         }
+        return true;
     }
 
     @Override

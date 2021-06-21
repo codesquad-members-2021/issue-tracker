@@ -38,7 +38,7 @@ public class IssueModifyService {
 
     public void modifyTitle(Long issueId, UUID userId, IssueRequest issueRequest) {
         Issue issue = findById(issueId);
-        issue.sameWriter(findUserById(userId));
+        issue.isSameWriter(findUserById(userId));
         issue.changeTitle(issueRequest.getTitle());
     }
 

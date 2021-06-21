@@ -40,14 +40,14 @@ public class CommentService {
 
     @Transactional
     public void modify(UUID writerId, CommentRequest commentRequest, Long commentId) {
-        Comment comment = show(commentId);
+        Comment comment = findById(commentId);
         comment.isSameWriter(writerId);
         comment.modify(commentRequest.getText());
     }
 
     @Transactional
     public void delete(UUID writerId, Long commentId) {
-        Comment comment = show(commentId);
+        Comment comment = findById(commentId);
         comment.isSameWriter(writerId);
         commentRepository.delete(comment);
     }
@@ -60,9 +60,8 @@ public class CommentService {
         return new CommentResponseWrapper(commentResponses);
     }
 
-    public Comment show(Long id) {
+    private Comment findById(Long id) {
         return commentRepository.findById(id).orElseThrow(NotFoundCommentException::new);
     }
-
 
 }

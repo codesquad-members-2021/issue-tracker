@@ -105,10 +105,11 @@ public class Issue {
         return issue;
     }
 
-    public void sameWriter(User user) {
+    public boolean isSameWriter(User user) {
         if (!this.writer.sameUser(user.getId())) {
             throw new NoPermissionUserException();
         }
+        return true;
     }
 
     @Override
