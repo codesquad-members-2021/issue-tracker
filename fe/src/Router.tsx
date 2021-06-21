@@ -20,7 +20,7 @@ const Router = () => {
         <Route path="/login" exact>
           <LoginPage />
         </Route>
-        <Route path="/login/oauth">
+        <Route path="/api/login">
           <OAuthPage />
         </Route>
         <Route path="/labels" exact>

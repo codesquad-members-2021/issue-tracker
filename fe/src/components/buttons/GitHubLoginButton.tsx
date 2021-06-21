@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const GitHubLoginButton = () => {
   return (
-    <a href="https://github.com/login/oauth/authorize?client_id=a1689d4a012d841d152a&redirect_uri=http://localhost:3000/login/oauth&scope=user">
+    <a href="https://github.com/login/oauth/authorize?client_id=a27a9d4023b6ebb6e829&redirect_uri=http://localhost:3000/api/login/callback&scope=user">
       <StyledCreateButton variant="contained" size="large">
         GitHub 계정으로 로그인
       </StyledCreateButton>
@@ -12,7 +12,6 @@ const GitHubLoginButton = () => {
 };
 
 export default GitHubLoginButton;
-
 
 const StyledCreateButton = styled(Button)`
   background-color: ${({ theme }) => theme.color.grayscale.body};
@@ -26,4 +25,4 @@ const StyledCreateButton = styled(Button)`
   &:hover {
     background-color: ${({ theme }) => theme.color.grayscale.label};
   }
-`; 
+`;

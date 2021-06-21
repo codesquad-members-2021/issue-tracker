@@ -19,8 +19,14 @@ export const totalCountOfLabels = selector<number>({
 export const labelQuery = selector<LabelItemType[]>({
   key: 'labelQuery',
   get: async () => {
+    const token = localStorage.getItem('jwt');
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/labels`
+      `${process.env.REACT_APP_API_URL}/api/labels`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     return data.map((labelItem: LabelDataType) => ({
@@ -43,9 +49,16 @@ export const totalCountOfMilestone = selector<number>({
 export const milestoneQuery = selector<FilterItemType[]>({
   key: 'milestoneQuery',
   get: async () => {
+    const token = localStorage.getItem('jwt');
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/milestones`
+      `${process.env.REACT_APP_API_URL}/api/milestones`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
+
     return data.map((milestoneItem: MilestoneDataType) => ({
       id: milestoneItem.id,
       description: milestoneItem.title,
@@ -56,29 +69,50 @@ export const milestoneQuery = selector<FilterItemType[]>({
 export const authorQuery = selector({
   key: 'authorQuery',
   get: async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/authors`
-    );
+    try {
+      const token = localStorage.getItem('jwt');
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/authors`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    return data.map((user: UserDataType) => ({
-      id: user.user_id,
-      description: user.name,
-      imgurl: user.avatar_url,
-    }));
+      return data.map((user: UserDataType) => ({
+        id: user.user_id,
+        description: user.name,
+        imgurl: user.avatar_url,
+      }));
+    } catch (error) {
+      console.error(error, 'author 에러');
+    }
   },
 });
 
 export const assigneeQuery = selector({
   key: 'assigneeQuery',
   get: async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/assignees`
-    );
-    return data.map((user: UserDataType) => ({
-      id: user.user_id,
-      description: user.name,
-      imgurl: user.avatar_url,
-    }));
+    try {
+      const token = localStorage.getItem('jwt');
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/assignees`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return data.map((user: UserDataType) => ({
+        id: user.user_id,
+        description: user.name,
+        imgurl: user.avatar_url,
+      }));
+    } catch (error) {
+      console.error(error, 'assignee 에러');
+    }
   },
 });
 
