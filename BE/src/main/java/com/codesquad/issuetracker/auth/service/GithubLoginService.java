@@ -10,8 +10,6 @@ import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import com.codesquad.issuetracker.auth.dto.JwtResponse;
 import com.codesquad.issuetracker.user.domain.User;
 import com.codesquad.issuetracker.user.infra.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -26,22 +24,22 @@ public class GithubLoginService {
     private final GitHubOauthValues gitHubOauthWebValues;
     private final GitHubOauthValues gitHubOauthIosValues;
 
-    private final String ACCESS_TOKEN_URI;
-    private final String USER_URI;
+    private final String accessTokenUri;
+    private final String userUri;
 
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
 
     public GithubLoginService(GitHubOauthWebValues gitHubOauthWebValues,
                               GitHubOauthIosValues gitHubOauthIosValues,
-                              @Value("${auth.github.accessTokenUri}") String ACCESS_TOKEN_URI,
-                              @Value("${auth.github.userUri}") String USER_URI,
+                              @Value("${auth.github.accessTokenUri}") String accessTokenUri,
+                              @Value("${auth.github.userUri}") String userUri,
                               JwtUtils jwtUtils,
                               UserRepository userRepository) {
         this.gitHubOauthWebValues = gitHubOauthWebValues;
         this.gitHubOauthIosValues = gitHubOauthIosValues;
-        this.ACCESS_TOKEN_URI = ACCESS_TOKEN_URI;
-        this.USER_URI = USER_URI;
+        this.accessTokenUri = accessTokenUri;
+        this.userUri = userUri;
         this.jwtUtils = jwtUtils;
         this.userRepository = userRepository;
     }
@@ -71,7 +69,7 @@ public class GithubLoginService {
     private Optional<AccessTokenResponse> getAccessToken(String code, GitHubOauthValues gitHubOauthValues,
                                                          RestTemplate restTemplate) {
         RequestEntity<AccessTokenRequest> request = RequestEntity
-                .post(ACCESS_TOKEN_URI)
+                .post(accessTokenUri)
                 .header("Accept", "application/json")
                 .body(new AccessTokenRequest(gitHubOauthValues.getClientId(),
                         gitHubOauthValues.getClientSecret(),
@@ -86,7 +84,7 @@ public class GithubLoginService {
 
     private Optional<GitHubUser> getUserFromOauth(AccessTokenResponse accessToken, RestTemplate gitHubRequest) {
         RequestEntity<Void> request = RequestEntity
-                .get(USER_URI)
+                .get(userUri)
                 .header("Accept", "application/json")
                 .header("Authorization", "token " + accessToken.getAccessToken())
                 .build();
