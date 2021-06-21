@@ -1,11 +1,9 @@
 package team02.issue_tracker.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.Comment;
 import team02.issue_tracker.domain.User;
 
-@NoArgsConstructor
 @Getter
 public class CommentRequest {
 

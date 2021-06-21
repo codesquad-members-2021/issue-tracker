@@ -1,9 +1,7 @@
 package team02.issue_tracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 public class CountResponse {
 
@@ -12,4 +10,12 @@ public class CountResponse {
     private Long labels;
     private Long openMilestones;
     private Long closedMilestones;
+
+    public CountResponse(Long openIssues, Long closedIssues, Long labels, Long openMilestones, Long closedMilestones) {
+        this.openIssues = openIssues;
+        this.closedIssues = closedIssues;
+        this.labels = labels;
+        this.openMilestones = openMilestones;
+        this.closedMilestones = closedMilestones;
+    }
 }

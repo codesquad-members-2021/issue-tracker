@@ -1,10 +1,8 @@
 package team02.issue_tracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.User;
 
-@AllArgsConstructor
 @Getter
 public class UserResponse {
 
@@ -13,6 +11,8 @@ public class UserResponse {
     private String profileImage;
 
     public UserResponse(User user) {
-        this(user.getId(), user.getUsername(), user.getProfileImage());
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.profileImage = user.getProfileImage();
     }
 }
