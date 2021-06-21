@@ -47,6 +47,7 @@
 		B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B626730B9A0006E5E6 /* IssueToolbar.swift */; };
 		B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FBA7B8267335C30006E5E6 /* CancelButton.swift */; };
 		D0103BDE267B897E0079FC3D /* AddMilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0103BDD267B897E0079FC3D /* AddMilestoneViewController.swift */; };
+		D0103BE0268066A80079FC3D /* AddMilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0103BDF268066A80079FC3D /* AddMilestoneTableViewCell.swift */; };
 		D03AF8F226771FA3001C2CBF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03AF8F126771FA3001C2CBF /* Login.storyboard */; };
 		D03AF8F42677253C001C2CBF /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F32677253C001C2CBF /* IssueFilterViewController.swift */; };
 		D03AF8F626774707001C2CBF /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F526774707001C2CBF /* UserList.swift */; };
@@ -141,6 +142,7 @@
 		B3FBA7B8267335C30006E5E6 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		CCF0F131FB8BE0BC0EF7FE4E /* Pods-issue-tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.release.xcconfig"; sourceTree = "<group>"; };
 		D0103BDD267B897E0079FC3D /* AddMilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMilestoneViewController.swift; sourceTree = "<group>"; };
+		D0103BDF268066A80079FC3D /* AddMilestoneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMilestoneTableViewCell.swift; sourceTree = "<group>"; };
 		D03AF8F126771FA3001C2CBF /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D03AF8F32677253C001C2CBF /* IssueFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		D03AF8F526774707001C2CBF /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		D0FD50ED2671B0E8008C6031 /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
+				D0103BDF268066A80079FC3D /* AddMilestoneTableViewCell.swift */,
 				D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */,
 			);
 			path = Milestone;
@@ -677,6 +680,7 @@
 				B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */,
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
+				D0103BE0268066A80079FC3D /* AddMilestoneTableViewCell.swift in Sources */,
 				B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */,
 				D03AF8F626774707001C2CBF /* UserList.swift in Sources */,
 				B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */,

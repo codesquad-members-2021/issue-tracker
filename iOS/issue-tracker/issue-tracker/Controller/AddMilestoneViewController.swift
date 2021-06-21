@@ -14,7 +14,7 @@ class AddMilestoneViewController: UIViewController {
     private let viewModel: MilestoneViewModel! = MilestoneViewModel()
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(AddTableViewCell.self, forCellReuseIdentifier: AddTableViewCell.reuseIdentifier)
+        tableView.register(AddMilestoneTableViewCell.self, forCellReuseIdentifier: AddMilestoneTableViewCell.reuseIdentifier)
         return tableView
     }()
 
@@ -49,7 +49,7 @@ extension AddMilestoneViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddTableViewCell.reuseIdentifier, for: indexPath) as? AddTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddMilestoneTableViewCell.reuseIdentifier, for: indexPath) as? AddMilestoneTableViewCell else {
             fatalError()
         }
         if indexPath.row == 0 {
