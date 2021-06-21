@@ -3,7 +3,7 @@ import { Card, CardContent, makeStyles, Link, Chip } from "@material-ui/core";
 import CheckBox from "./styles/CheckBox";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { selectionState } from "utils/states";
+import { refFileterState } from "utils/states";
 
 interface IssueTableType {
   issueListItems: IssueType[];
@@ -12,16 +12,22 @@ interface IssueTableType {
 export default function IssueTable({ issueListItems }: IssueTableType) {
   const classes = useStyles();
 
-  const selectState = useRecoilValue(selectionState);
+  const refState = useRecoilValue(refFileterState);
 
-  // console.log(issueListItems);
+
+  // TODO: TS를 적용하여 Object.entries, for of 문을 잘 사용하는 방법 좀 더 공부하기
+  // let filteredIssueListItems = [...issueListItems];
+  // for (let [key, value] of Object.entries(refState)) {
+  //   // filteredIssueListItems = filteredIssueListItems.filter((item) => );
+  // }
+  // // console.log(issueListItems);
 
   return (
     <div>
       {issueListItems.map((item) => (
         <Card className={classes.root} variant="outlined">
           <CardContent className={classes.card}>
-            <CheckBox />
+            <CheckBox id={item.id} />
             <CardContentInfo>
               <CardHeader>
                 <Link href={`/${item.id}`} className={classes.title}>
@@ -50,12 +56,6 @@ export default function IssueTable({ issueListItems }: IssueTableType) {
     </div>
   );
 }
-
-const Badge = styled.span`
-  border: 1px solid ${({ color }) => `#${color}`};
-  padding: 2px;
-  border-radius: 5px;
-`;
 
 // function getFilteredListItems(issueListItems: IssueType[], selectState: IssueRefStateType) {
 //   const { assignee, author, milestone, label } = selectState;

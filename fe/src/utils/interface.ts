@@ -51,6 +51,10 @@ export interface IssueRefMenuProps {
 }
 
 export interface SimpleAppBarProps {
-  openedIssue: IssueType[];
-  closedIssue: IssueType[];
+  openIssues: IssueType[];
+  closeIssues: IssueType[];
+}
+
+export interface EditorRefsType {
+  [key: string]: any;
 }

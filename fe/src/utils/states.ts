@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { IssueType } from "utils/interface";
 
 export const openState = atom({
   key: "openState",
@@ -20,7 +21,7 @@ export const selectIssueAll = atom({
   default: false,
 });
 
-export const selectionState = atom({
+export const refFileterState = atom({
   key: "selectState",
   default: {
     assignee: "",
@@ -28,4 +29,19 @@ export const selectionState = atom({
     milestone: "",
     label: "",
   },
+});
+
+export const selectedIssuesState = atom({
+  key: "selectedIssuesState",
+  default: new Set(),
+});
+
+export const openedIssues = atom({
+  key: "openedIssues",
+  default: [] as IssueType[],
+});
+
+export const closedIssues = atom({
+  key: "closedIssues",
+  default: [] as IssueType[],
 });

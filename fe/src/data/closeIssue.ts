@@ -1,6 +1,6 @@
 import { IssueType } from "utils/interface";
 
-export const closedIssue: IssueType[] = [
+export const mock_closedIssue: IssueType[] = [
   {
     id: 1,
     title: "test close title1",

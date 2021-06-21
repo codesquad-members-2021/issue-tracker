@@ -4,15 +4,15 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { IssueRefMenuProps, UsefulObjectType } from "utils/interface";
-import {  MenuItem } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 
 interface IssueRefMenuPresenterProps extends IssueRefMenuProps {
   handleChange: (event: React.ChangeEvent<{}>) => void;
-  selectState: UsefulObjectType;
+  refState: UsefulObjectType;
 }
 
 function IssueRefMenuPresenter(props: IssueRefMenuPresenterProps) {
-  const { buttonTitle, listItems, handleChange, selectState } = props;
+  const { buttonTitle, listItems, handleChange, refState } = props;
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ function IssueRefMenuPresenter(props: IssueRefMenuPresenterProps) {
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel className={classes.whiteColor}>{buttonTitle}</InputLabel>
         <Select
-          value={selectState[buttonTitle]}
+          value={refState[buttonTitle]}
           onChange={handleChange}
           label={buttonTitle}
           name={buttonTitle}

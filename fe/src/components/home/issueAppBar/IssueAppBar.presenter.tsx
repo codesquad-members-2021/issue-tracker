@@ -1,9 +1,9 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
+import { AppBar, Toolbar, Tabs, Tab, Typography } from "@material-ui/core";
 import { IssueRefMenuProps } from "utils/interface";
 import IssueRefMenuContainer from "../issueRefMenu/IssueRefMenu.container";
 import { selector, useRecoilValue } from "recoil";
-import { openState } from "utils/states";
+import { closedIssues, openedIssues, openState, selectedIssuesState } from "utils/states";
 import { SimpleAppBarProps } from "utils/interface";
 import IssueTable from "../IssueTable";
 import CheckBoxAppBar from "../styles/CheckBox.AppBar";
@@ -14,33 +14,31 @@ interface IssueAppBarPresenterProps extends SimpleAppBarProps {
   issueRefArray: IssueRefMenuProps[];
 }
 
-const currentIssueState = selector({
-  key: "issueState",
-  get: ({ get }) => {
-    return get(openState);
-  },
-});
-
 export default function IssueAppBarPresenter(props: IssueAppBarPresenterProps) {
   const classes = useStyles();
-  const { openedIssue, closedIssue, showOpenIssue, showCloseIssue, issueRefArray } = props;
-  const currOpenState = useRecoilValue(currentIssueState);
+  const { openIssues, closeIssues, showOpenIssue, showCloseIssue, issueRefArray } = props;
+  const isOpenState = useRecoilValue(openState);
+  const selectedIssues = useRecoilValue(selectedIssuesState);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <CheckBoxAppBar />
-          <Tabs className={classes.title}>
-            <Tab onClick={showOpenIssue} label={`열린 이슈(${openedIssue.length})`} />
-            <Tab onClick={showCloseIssue} label={`닫힌 이슈(${closedIssue.length})`} />
-          </Tabs>
+          {selectedIssues.size > 0 ? (
+            <Typography className={classes.title}>{selectedIssues.size}개 이슈 선택</Typography>
+          ) : (
+            <Tabs className={classes.title}>
+              <Tab onClick={showOpenIssue} label={`열린 이슈(${openIssues.length})`} />
+              <Tab onClick={showCloseIssue} label={`닫힌 이슈(${closeIssues.length})`} />
+            </Tabs>
+          )}
           {issueRefArray.map(({ buttonTitle, listItems }) => (
             <IssueRefMenuContainer {...{ buttonTitle, listItems }} />
           ))}
         </Toolbar>
       </AppBar>
-      <IssueTable issueListItems={currOpenState ? openedIssue : closedIssue} />
+      <IssueTable issueListItems={isOpenState ? openIssues : closeIssues} />
     </div>
   );
 }

@@ -1,14 +1,21 @@
 import { IssueRefMenuProps, SimpleAppBarProps } from "utils/interface";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import IssueAppBarPresenter from "./IssueAppBar.presenter";
-import { openState, closeState } from "utils/states";
+import {
+  openState,
+  closeState,
+  openedIssues,
+  closedIssues,
+  selectedIssuesState,
+} from "utils/states";
 import { milestones } from "data/milestone";
 import { labels } from "data/label";
 
-export default function IssueAppBarContainer(props: SimpleAppBarProps) {
-  const { openedIssue, closedIssue } = props;
-  const [, setOpen] = useRecoilState(openState);
-  const [, setClose] = useRecoilState(closeState);
+export default function IssueAppBarContainer() {
+  const openIssues = useRecoilValue(openedIssues);
+  const closeIssues = useRecoilValue(closedIssues);
+  const setOpen = useSetRecoilState(openState);
+  const setClose = useSetRecoilState(closeState);
 
   const showOpenIssue = () => {
     setClose(false);
@@ -53,7 +60,7 @@ export default function IssueAppBarContainer(props: SimpleAppBarProps) {
 
   return (
     <IssueAppBarPresenter
-      {...{ openedIssue, closedIssue, showCloseIssue, showOpenIssue, issueRefArray }}
+      {...{ openIssues, closeIssues, showCloseIssue, showOpenIssue, issueRefArray }}
     />
   );
 }
