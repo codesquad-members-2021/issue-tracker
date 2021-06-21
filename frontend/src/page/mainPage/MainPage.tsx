@@ -5,16 +5,17 @@ import OptionTable from 'page/mainPage/optionTable/OptionTable';
 import { fetchLogin } from 'util/api/fetchLogin';
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { controlLoginState } from 'store/loginStore';
-import { getIssueTrigger, lableMilestoneCtrl } from 'store/issueInfoStore';
+import { getIssueTrigger } from 'store/issueInfoStore';
+import { resetTabClickedState } from 'store/labelMilestoneStore';
 
 export default function MainPage() {
-  const resetLableMilestoneClick = useResetRecoilState(lableMilestoneCtrl);
-  resetLableMilestoneClick();
-
+  const resetTabClicked = useResetRecoilState(resetTabClickedState);
+  resetTabClicked();
   const setLogin = useSetRecoilState(controlLoginState);
   const [issueTrigger, setIssueTrigger] = useRecoilState(getIssueTrigger);
 
   useEffect(() => {
+    if (isLogin()) return;
     const query = window.location.search;
     const loginCode = query.split('=')[1];
     setLoginData(loginCode);
@@ -30,6 +31,8 @@ export default function MainPage() {
       throw err;
     }
   };
+
+  const isLogin = () => !!localStorage.getItem('token');
 
   return (
     <MainPageBlock>

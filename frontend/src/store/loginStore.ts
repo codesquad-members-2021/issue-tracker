@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
 
+//로그인이 됐냐 안됐냐
 export const isLoginState = atom({
   key: 'isLoginState',
   default: false,
@@ -11,8 +12,9 @@ interface loginStateType {
   token: string;
 }
 
-export const loginState = atom<loginStateType | null>({
-  key: 'loginState',
+//로그인 정보
+export const loginDataState = atom<loginStateType | null>({
+  key: 'loginDataState',
   default: null,
 });
 
@@ -23,11 +25,13 @@ export const loginState = atom<loginStateType | null>({
 export const controlLoginState = selector<loginStateType | null>({
   key: 'controlLoginState',
   get: ({ get }) => {
-    return null;
+    const loginData = get(loginDataState);
+    return loginData;
   },
   set: ({ set }, loginData) => {
-    set(loginState, loginData);
-    if (loginData) set(isLoginState, true);
-    else set(isLoginState, false);
+    set(loginDataState, loginData);
+    if (loginData) {
+      set(isLoginState, true);
+    } else set(isLoginState, false);
   },
 });
