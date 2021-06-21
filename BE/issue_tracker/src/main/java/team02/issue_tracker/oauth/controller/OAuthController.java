@@ -35,6 +35,7 @@ public class OAuthController {
         return ApiResult.success(loginService.loginGithubIos(code));
     }
 
+    @LogExecutionTime
     @GetMapping("/login/google")
     public ApiResult<JwtResponse> loginGoogle(@RequestParam("code") String code) {
         return ApiResult.success(loginService.loginGoogle(code));

@@ -39,7 +39,7 @@ public class AopConfig {
     }
 
     /**
-     * target 메소드의 동작 시간을 출력한다.
+     * LogExecutionTime 어노테이션이 달린 메소드의 동작 시간을 출력한다.
      * @param proceedingJoinPoint
      * @return Object
      * @throws Throwable
