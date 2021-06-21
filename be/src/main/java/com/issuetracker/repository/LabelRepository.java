@@ -19,7 +19,7 @@ public class LabelRepository {
     }
 
     public List<Label> findAll() {
-        String query = "select id, title, description, color_code, text_color from label";
+        String query = "select id, title, description, color_code, font_light from label";
         return jdbcTemplate.query(query, LABEL_ROW_MAPPER);
     }
 }

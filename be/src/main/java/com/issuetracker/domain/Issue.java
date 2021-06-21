@@ -1,7 +1,12 @@
 package com.issuetracker.domain;
 
+import com.issuetracker.dto.IssueRequestDto;
+import com.issuetracker.oauth.User;
+
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Issue {
@@ -9,11 +14,11 @@ public class Issue {
     private String title;
     private String description;
     private Long assignee;
+    private Long authorUserId;
     private LocalDateTime createdTime;
     private boolean closed;
     private boolean deleted;
     private Long milestoneId;
-    private Long authorUserId;
     private Long number;
     private List<Label> labels;
 
@@ -33,6 +38,19 @@ public class Issue {
         this.authorUserId = authorUserId;
         this.number = number;
         this.labels = labels;
+    }
+
+    public void setIssueFromDto(IssueRequestDto requestDto, User author, Long lastNumOfIssue) {
+        this.title = requestDto.getTitle();
+        this.description = requestDto.getDescription();
+        this.assignee = requestDto.getAssignee();
+        this.createdTime = LocalDateTime.now();
+        this.closed = false;
+        this.deleted = false;
+        this.milestoneId = requestDto.getMilestoneId();
+        this.authorUserId = author.getId();
+        //TODO: 추후 변경
+        this.number = lastNumOfIssue + 1;
     }
 
     public Long getId() {
@@ -121,5 +139,20 @@ public class Issue {
 
     public void setLabels(List<Label> labels) {
         this.labels = labels;
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> values = new HashMap<>();
+        values.put("title", title);
+        values.put("description", description);
+        values.put("assignee", assignee);
+        values.put("created_time", createdTime);
+        values.put("closed", closed);
+        values.put("deleted", deleted);
+        values.put("milestone_id", milestoneId);
+        values.put("author_user_id", authorUserId);
+        values.put("number", number);
+
+        return values;
     }
 }

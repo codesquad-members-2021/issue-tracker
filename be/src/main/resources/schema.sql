@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`label`
     `title`       VARCHAR(20)  NOT NULL,
     `description` VARCHAR(255) NULL,
     `color_code`  VARCHAR(10)  NOT NULL,
-    `text_color`  VARCHAR(45)  NOT NULL DEFAULT 'black',
+    `font_light`  TINYINT(1)  NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `color_code_UNIQUE` (`color_code` ASC)
 )

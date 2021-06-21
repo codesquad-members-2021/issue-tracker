@@ -3,6 +3,7 @@ package com.issuetracker.util;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
 import com.issuetracker.domain.Milestone;
+import com.issuetracker.oauth.User;
 import org.springframework.jdbc.core.RowMapper;
 
 public class RowMappers {
@@ -30,7 +31,7 @@ public class RowMappers {
         label.setTitle(rs.getString("title"));
         label.setDescription(rs.getString("description"));
         label.setColorCode(rs.getString("color_code"));
-        label.setTextColor(rs.getString("text_color"));
+        label.setFontLight(rs.getBoolean("font_light"));
 
         return label;
     };
@@ -46,6 +47,16 @@ public class RowMappers {
         milestone.setClosed(rs.getBoolean("closed"));
 
         return milestone;
+    };
+
+    public static final RowMapper<User> USER_ROW_MAPPER = (rs, rowNum) -> {
+        User user = new User();
+
+        user.setId(rs.getLong("id"));
+        user.setLogin(rs.getString("name"));
+        user.setAvatar_url(rs.getString("avatar_url"));
+
+        return user;
     };
 
     public static final RowMapper<String> MILESTONE_TITLE_ROW_MAPPER = (rs, rowNum) -> rs.getString("title");

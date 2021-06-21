@@ -3,6 +3,7 @@ package com.issuetracker.config;
 import com.issuetracker.oauth.OauthInterceptor;
 import com.issuetracker.util.Oauth;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,6 +21,5 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(new OauthInterceptor(oauthUtil))
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/login/**");
-//                .excludePathPatterns("/api/accommodations/**");
     }
 }

@@ -10,18 +10,18 @@ public class Label {
     @JsonProperty("color_code")
     private String colorCode;
 
-    @JsonProperty("text_color")
-    private String textColor;
+    @JsonProperty("font_light")
+    private boolean fontLight;
 
     public Label() {
     }
 
-    public Label(Long id, String title, String description, String colorCode, String textColor) {
+    public Label(Long id, String title, String description, String colorCode, boolean fontLight) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.colorCode = colorCode;
-        this.textColor = textColor;
+        this.fontLight = fontLight;
     }
 
     public Long getId() {
@@ -56,11 +56,11 @@ public class Label {
         this.colorCode = colorCode;
     }
 
-    public String getTextColor() {
-        return textColor;
+    public boolean isFontLight() {
+        return fontLight;
     }
 
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
+    public void setFontLight(boolean fontLight) {
+        this.fontLight = fontLight;
     }
 }
