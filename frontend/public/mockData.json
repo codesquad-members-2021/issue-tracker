@@ -1,0 +1,33 @@
+{
+  "/add/issue": {
+    "AssigneeFilterInfo": {
+      "name": "담당자",
+      "header": "담당자 추가",
+      "elements": [
+        {"contents": "빰빰", "value": "PPAMPPAM"},
+        {"contents": "Dico", "value": "DICO"}
+      ]
+    },
+    
+    "LabelFilterInfo": {
+      "name": "레이블",
+      "header": "레이블 추가",
+      "elements": [
+        {"contents": "documentation", "value": "DOCUMENTATION"},
+        {"contents": "frontend", "value": "FRONTEND"},
+        {"contents": "backend", "value": "BACKEND"},
+        {"contents": "ios", "value": "IOS"}
+      ]
+    },
+  
+    "MilestoneFilterInfo" : {
+      "name": "마일스톤",
+      "header": "마일스톤 추가",
+      "elements": [
+        {"contents": "마스터즈 코스", "value": "MASTERS_COURSE"},
+        {"contents": "이슈 트래커", "value": "ISSUE_TRACKER"}
+      ]
+    }
+  }  
+}
+
