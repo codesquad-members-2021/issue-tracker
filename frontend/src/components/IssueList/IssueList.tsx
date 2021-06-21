@@ -2,64 +2,16 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import DropDown from 'components/common/DropDown';
-import ArrowIcon from 'components/common/icons/ArrowIcon';
+// import ArrowIcon from 'components/common/icons/ArrowIcon';
+
 import Label from 'components/common/Label';
 
 import API from 'lib/API/API';
 
-const IssueManagerFilterInfo = {
-  name: "담당자",
-  header: "담당자 필터",
-  alignment: "reverse",
-  icon: ArrowIcon,
-  elements: [
-    {contents: "담당자가 없는 이슈", value: 0, options:{}},
-    // {} 동적 생성
-  ]
-}
-
-const IssueLabelFilterInfo = {
-  name: "레이블",
-  header: "레이블 필터",
-  alignment: "reverse",
-  icon: ArrowIcon,
-  elements: [
-    {contents: "레이블이 없는 이슈", value: 0, options:{}},
-    {contents: "bug", value: 1, options:{color: "red"}},
-    {contents: "documentation", value: 2, options:{color: "blue"}},
-    // {} 동적 생성
-  ]
-}
-
-const IssueMilestoneFilterInfo = {
-  name: "마일스톤",
-  header: "마일스톤 필터",
-  alignment: "reverse",
-  icon: ArrowIcon,
-  elements: [
-    {contents: "마일스톤이 없는 이슈", value: 0, options:{}},
-    {contents: "마스터즈 코스", value: 1, options:{}},
-    
-    // {} 동적 생성
-  ]
-}
-
-const IssueAuthorFilterInfo = {
-  name: "작성자",
-  header: "작성자 필터",
-  alignment: "reverse",
-  icon: ArrowIcon,
-  elements: [
-    {contents: "테스트 계정", value: 0, options:{}},
-    // {contents: "마스터즈 코스", value: 1, options:{}},
-    
-    // {} 동적 생성
-  ]
-}
-
 const IssueList = () => {
   const [issues, setIssues] = useState<any>([]);
-  
+  const [filterInfo, setFilterInfo] = useState<any>({});
+
   useEffect(() => {
     const fetchIssues = async () => {
       const result = await API.get.issues("is open");
@@ -67,9 +19,18 @@ const IssueList = () => {
       setIssues(result.issueList);
     }
     fetchIssues();
+
+
+    const fetchFilterMockData = async () => {
+      const response = await fetch('/mockData.json');
+      const result = await response.json();
+      setFilterInfo(result[window.location.pathname]);
+    }
+    fetchFilterMockData();
+    
   }, [])
 
-  if (issues.length === 0) {return <></>}
+  if (issues.length === 0 || Object.keys(filterInfo).length === 0) return <></>;
   return (
     <IssueListLayout>
       <IssueListHeader>
@@ -81,16 +42,17 @@ const IssueList = () => {
           <button> 닫힌 이슈 </button>
         </IssueListButtonGroupLayer>
         <IssueListFilterGroupLayer>
-          <DropDown info={IssueManagerFilterInfo} />
-          <DropDown info={IssueLabelFilterInfo} />
-          <DropDown info={IssueMilestoneFilterInfo} />
-          <DropDown info={IssueAuthorFilterInfo} />
+          <DropDown info={filterInfo["IssueManagerFilterInfo"]} />
+          <DropDown info={filterInfo["IssueLabelFilterInfo"]} />
+          <DropDown info={filterInfo["IssueMilestoneFilterInfo"]} />
+          <DropDown info={filterInfo["IssueAuthorFilterInfo"]} />
         </IssueListFilterGroupLayer>
       </IssueListHeader>
 
-      {Array(3).fill(true).map((each) => {
+      {/* for test */}
+      {Array(3).fill(true).map((_, i) => {
         return (
-          <IssueListContents>
+          <IssueListContents key={`test-${i}`}>
             <IssueListCheckBoxLayer>
               <input type="checkbox" />
             </IssueListCheckBoxLayer>
@@ -108,9 +70,9 @@ const IssueList = () => {
         )
       })}
       {
-        issues.map((issue) => {
+        issues.map((issue, i) => {
           return (
-            <IssueListContents>
+            <IssueListContents key={`issue-${i}`}>
             <IssueListCheckBoxLayer>
               <input type="checkbox" />
             </IssueListCheckBoxLayer>

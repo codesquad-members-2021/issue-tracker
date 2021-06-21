@@ -10,45 +10,27 @@ import DropDown from 'components/common/DropDown';
 const AddIssuePage = () => {
   const [lastPressedKey, setLastPressedKey] = useState<any>();
   const [accumulateLetters, setAccumulateLetters] = useState<any>([]);
-  const [textBlock, setTextBlock] = useState<any>({});
+  
+  const [filterInfo, setFilterInfo] = useState<any>({});
   const $OutputTextBox = useRef<any>()
-  const AssigneeFilterInfo = {
-    name: "담당자",
-    header: "담당자 추가",
-    elements: [
-      {contents: "빰빰", value: "PPAMPPAM"},
-      {contents: "Dico", value: "DICO"}
-    ]
-  }
-  const LabelFilterInfo = {
-    name: "레이블",
-    header: "레이블 추가",
-    elements: [
-      {contents: "documentation", value: "DOCUMENTATION"},
-      {contents: "frontend", value: "FRONTEND"},
-      {contents: "backend", value: "BACKEND"},
-      {contents: "ios", value: "IOS"}
-    ]
-  }
-  const MilestoneFilterInfo = {
-    name: "마일스톤",
-    header: "마일스톤 추가",
-    elements: [
-      {contents: "마스터즈 코스", value: "MASTERS_COURSE"},
-      {contents: "이슈 트래커", value: "ISSUE_TRACKER"}
-    ]
-  }
 
   useEffect(() => {
-    console.log("textBlock", textBlock);
-  })
+    const fetchFilterMockData = async () => {
+      const response = await fetch('/mockData.json');
+      const result = await response.json();
+      setFilterInfo(result[window.location.pathname]);
+    }
+    fetchFilterMockData();
+  }, []);
 
   useEffect(() => {
-    $OutputTextBox.current.innerHTML = "";
-    accumulateLetters.forEach((block) => {
-      $OutputTextBox.current.insertAdjacentHTML("beforeend", block.tag);
-    });
-    console.log("accumulateLetters",accumulateLetters)
+    if ($OutputTextBox.current) {
+      $OutputTextBox.current.innerHTML = "";
+      accumulateLetters.forEach((block) => {
+        $OutputTextBox.current.insertAdjacentHTML("beforeend", block.tag);
+      });
+      console.log("accumulateLetters",accumulateLetters);
+    }
   }, [accumulateLetters?.slice(-1)[0]]) //제일 최근에 추가된 요소(마지막 요소)의 tag만 비교한다.
 
   const inspectLastPressedKey = (curKey) => {
@@ -111,6 +93,7 @@ const AddIssuePage = () => {
     setLastPressedKey(pressedKey);
   }
 
+  if (Object.keys(filterInfo).length === 0) return <></>;
   return (
     <AddIssueLayout>
       <TitleBlock>
@@ -138,15 +121,15 @@ const AddIssuePage = () => {
         </InputLayer>
         <OptionBlock>
           <OptionLayer>
-            <DropDown info={AssigneeFilterInfo}/>
+            <DropDown info={filterInfo["AssigneeFilterInfo"]}/>
             <button><Plus/></button>
           </OptionLayer>
           <OptionLayer>
-            <DropDown info={LabelFilterInfo}/>
+            <DropDown info={filterInfo["LabelFilterInfo"]}/>
             <button><Plus/></button>
           </OptionLayer>
           <OptionLayer>
-            <DropDown info={MilestoneFilterInfo}/>
+            <DropDown info={filterInfo["MilestoneFilterInfo"]}/>
             <button><Plus/></button>
           </OptionLayer>
         </OptionBlock>

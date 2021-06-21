@@ -1,0 +1,77 @@
+{
+  "/add/issue": {
+    "AssigneeFilterInfo": {
+      "name": "담당자",
+      "header": "담당자 추가",
+      "elements": [
+        {"contents": "빰빰", "value": "PPAMPPAM"},
+        {"contents": "Dico", "value": "DICO"}
+      ]
+    },
+    
+    "LabelFilterInfo": {
+      "name": "레이블",
+      "header": "레이블 추가",
+      "elements": [
+        {"contents": "documentation", "value": "DOCUMENTATION"},
+        {"contents": "frontend", "value": "FRONTEND"},
+        {"contents": "backend", "value": "BACKEND"},
+        {"contents": "ios", "value": "IOS"}
+      ]
+    },
+  
+    "MilestoneFilterInfo" : {
+      "name": "마일스톤",
+      "header": "마일스톤 추가",
+      "elements": [
+        {"contents": "마스터즈 코스", "value": "MASTERS_COURSE"},
+        {"contents": "이슈 트래커", "value": "ISSUE_TRACKER"}
+      ]
+    }
+  },
+  
+  "/issues": {
+    "IssueManagerFilterInfo": {
+      "name": "담당자",
+      "header": "담당자 필터",
+      "alignment": "reverse",
+      "icon": "ArrowIcon",
+      "elements": [
+        {"contents": "담당자가 없는 이슈", "value": 0, "options":{}}
+      ]
+    },
+    "IssueLabelFilterInfo": {
+      "name": "레이블",
+      "header": "레이블 필터",
+      "alignment": "reverse",
+      "icon": "ArrowIcon",
+      "elements": [
+        {"contents": "레이블이 없는 이슈", "value": 0, "options":{}},
+        {"contents": "bug", "value": 1, "options":{"color": "red"}},
+        {"contents": "documentation", "value": 2, "options":{"color": "blue"}}
+      ]
+    },
+    
+    "IssueMilestoneFilterInfo": {
+      "name": "마일스톤",
+      "header": "마일스톤 필터",
+      "alignment": "reverse",
+      "icon": "ArrowIcon",
+      "elements": [
+        {"contents": "마일스톤이 없는 이슈", "value": 0, "options":{}},
+        {"contents": "마스터즈 코스", "value": 1, "options":{}}
+      ]
+    },
+    
+    "IssueAuthorFilterInfo": {
+      "name": "작성자",
+      "header": "작성자 필터",
+      "alignment": "reverse",
+      "icon": "ArrowIcon",
+      "elements": [
+        {"contents": "테스트 계정", "value": 0, "options":{}}
+      ]
+    }
+  }
+}
+
