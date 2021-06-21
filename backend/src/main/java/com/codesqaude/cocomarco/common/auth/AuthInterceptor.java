@@ -4,6 +4,7 @@ import com.codesqaude.cocomarco.common.exception.auth.NotLoggedInException;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 import static com.codesqaude.cocomarco.util.JwtUtils.HEADER_TYPE;
 
+@Component
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
 
