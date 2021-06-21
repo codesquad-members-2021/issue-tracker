@@ -38,15 +38,6 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public void saveAll(List<Comment> comments) {
-        commentRepository.saveAll(comments);
-    }
-
-    public void deleteCommentEmojis(Long commentId) {
-        List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(commentId);
-        commentEmojiRepository.deleteAll(commentEmojis);
-    }
-
     public void addEmoji(Long commentId, CommentEmojiRequest commentEmojiRequest) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
         Emoji emoji = emojiRepository.findById(commentEmojiRequest.getEmojiId()).orElseThrow(EmojiNotFoundException::new);

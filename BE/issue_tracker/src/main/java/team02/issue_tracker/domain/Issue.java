@@ -18,6 +18,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE issue SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted = false")
 public class Issue {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
