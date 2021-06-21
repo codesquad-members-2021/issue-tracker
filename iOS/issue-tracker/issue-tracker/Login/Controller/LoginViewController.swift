@@ -186,8 +186,8 @@ class LoginViewController: UIViewController {
             githubLoginButton.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor, constant: -spacing * 0.8),
             githubLoginButton.heightAnchor.constraint(equalToConstant: buttonHeight)
         ])
-    }
-    
+    }  
+
     private func presentIssueViewController() {
         DispatchQueue.main.async {
             let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
@@ -198,8 +198,9 @@ class LoginViewController: UIViewController {
     }
     
     private func presentAlert(with errorMessage: String) {
+        let alert = AlertFactory.create(body: errorMessage)
+        
         DispatchQueue.main.async {
-            let alert = AlertFactory.create(body: errorMessage)
             self.present(alert, animated: true, completion: nil)
         }
     }
