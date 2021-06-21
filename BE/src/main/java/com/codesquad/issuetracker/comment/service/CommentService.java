@@ -24,6 +24,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
+    @Transactional
     public CommentWrapper createComment(CommentRequest commentRequest, User author) {
         Comment comment = commentRequest.toEntity(author);
         Comment savedComment = commentRepository.save(comment);
