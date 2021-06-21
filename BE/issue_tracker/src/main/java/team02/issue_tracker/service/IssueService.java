@@ -32,11 +32,9 @@ public class IssueService {
     }
 
     public List<IssueResponse> getAllIssueResponses() {
-        List<IssueResponse> issueResponses = issueRepository.findAll().stream()
+        return issueRepository.findAll().stream()
                 .map(IssueResponse::new)
                 .collect(Collectors.toList());
-
-        return issueResponses;
     }
 
     public DetailIssueResponse getDetailIssueResponse(Long issueId) {
