@@ -24,7 +24,7 @@ function TableHeadLeft() {
       <input type="checkbox" name="" id="" />
       <IssueTab>
         <IssueOpenTab
-          isClosed={closed}
+          closed={closed}
           data-state="open"
           onClick={handleClickTab}
         >
@@ -33,7 +33,7 @@ function TableHeadLeft() {
           {state === 'hasError' && `열린 이슈 (??)`}
         </IssueOpenTab>
         <IssueCloseTab
-          isClosed={closed}
+          closed={closed}
           data-state="close"
           onClick={handleClickTab}
         >
@@ -49,7 +49,7 @@ function TableHeadLeft() {
 export default TableHeadLeft;
 
 type issueTab = {
-  isClosed: string | undefined;
+  closed: string | null | undefined;
 };
 
 const HeaderLeft = styled.div`
@@ -70,18 +70,18 @@ const IssueTab = styled.ul`
 const IssueTabList = styled.li<issueTab>`
   ${({ theme }) => theme.flexCenter}
   margin-left: 24px;
-  width: 100px;
+  width: 120px;
   height: 28px;
   cursor: pointer;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
 
 const IssueOpenTab = styled(IssueTabList)`
-  color: ${({ theme, isClosed }) =>
-    isClosed === 'true' ? theme.colors.gr_label : theme.colors.gr_titleActive};
+  color: ${({ theme, closed }) =>
+    closed === 'true' ? theme.colors.gr_label : theme.colors.gr_titleActive};
 `;
 
 const IssueCloseTab = styled(IssueTabList)`
-  color: ${({ theme, isClosed }) =>
-    isClosed === 'true' ? theme.colors.gr_titleActive : theme.colors.gr_label};
+  color: ${({ theme, closed }) =>
+    closed === 'true' ? theme.colors.gr_titleActive : theme.colors.gr_label};
 `;
