@@ -41,4 +41,9 @@ public class MilestoneService {
         milestoneRepository.editMilestoneById(id, requestDto);
         return new ResponseStatusDto("success");
     }
+
+    public ResponseStatusDto create(MilestoneRequestDto requestDto) {
+        milestoneRepository.create(requestDto);
+        return new ResponseStatusDto("success");
+    }
 }

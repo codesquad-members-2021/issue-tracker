@@ -31,4 +31,9 @@ public class MilestoneController {
     public ResponseStatusDto edit(@PathVariable Long id, @RequestBody MilestoneRequestDto requestDto) {
         return milestoneService.edit(id, requestDto);
     }
+
+    @PostMapping
+    public ResponseStatusDto create(@RequestBody MilestoneRequestDto requestDto) {
+        return milestoneService.create(requestDto);
+    }
 }

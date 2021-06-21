@@ -43,4 +43,11 @@ public class MilestoneRepository {
                 requestDto.getDueDate(),
                 id);
     }
+
+    public void create(MilestoneRequestDto requestDto) {
+       String query = "insert into milestone (title, description, due_date) values (?, ?, ?)";
+       jdbcTemplate.update(query, requestDto.getTitle(),
+               requestDto.getDescription(),
+               requestDto.getDueDate());
+    }
 }
