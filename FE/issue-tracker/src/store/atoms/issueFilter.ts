@@ -6,6 +6,7 @@ const milestoneFilterList = atom({
     query: 'milestones',
     data: [],
     cachingTime: 0,
+    errorMsg: null,
   },
 });
 
@@ -15,6 +16,7 @@ const labelFilterList = atom({
     query: 'labels',
     data: [],
     cachingTime: 0,
+    errorMsg: null,
   },
 });
 
@@ -24,6 +26,7 @@ const assigneeFilterList = atom({
     query: 'assignees',
     data: [],
     cachingTime: 0,
+    errorMsg: null,
   },
 });
 
@@ -33,6 +36,7 @@ const authorFilterList = atom({
     query: 'authors',
     data: [],
     cachingTime: 0,
+    errorMsg: null,
   },
 });
 
