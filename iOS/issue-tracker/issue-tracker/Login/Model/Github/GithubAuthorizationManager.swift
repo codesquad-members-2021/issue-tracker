@@ -51,24 +51,29 @@ extension GithubAuthorizationManager: SocialLoginManagable {
             
             guard error == nil, let successURL = callbackURL else { return }
             
+            let codeKey = Parameter.code.key()
+            
             guard let code = NSURLComponents(string: (successURL.absoluteString))?
-                    .queryItems?.filter({$0.name == "code"})
+                    .queryItems?.filter({$0.name == codeKey})
                     .first?
                     .value else { return }
 
-            let networkmanager = NetworkManager()
+            let parameter = [codeKey: code]
+            let networkmanager = NetworkManager(baseAddress: EndPoint.baseAddress)
+            let OAuthEndpoint = EndPoint.OAuth.path()
             
-            networkmanager.setInfoGithub(with: code) { [weak self] (result: Result<OAuthResponseDTO, Error>) in
+            networkmanager.get(endpoint: OAuthEndpoint, queryParameters: parameter) { [weak self] (result: Result<OAuthResponseDTO, NetworkError>) in
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    let loginInfo = LoginInfo(userID: nil,
-                                              jwt: response.jwt.jwt,
+                    let loginInfoDTO = LoginInfoDTO(userID: nil,
+                                              jwt: response.jwt,
                                               avatarURL: response.avatarUrl,
                                               name: response.loginId)
                     
-                    if self.keyChainSaver.save(loginInfo) {
-                        self.delegate?.didSocialLoginSuccess(with: loginInfo)
+                    if self.keyChainSaver.save(loginInfoDTO) {
+                        self.delegate?.didSocialLoginSuccess(with: loginInfoDTO)
+
                     } else {
                         let saveError = LoginError.keyChainSave
                         self.delegate?.didSocialLoginFail(with: saveError)

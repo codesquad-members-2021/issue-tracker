@@ -16,8 +16,8 @@ final class LoginKeyChainManager {
         self.loginService = loginService.description
     }
     
-    func save(_ loginInfo: LoginInfo) -> Bool {
-        guard let loginInfo = try? JSONEncoder().encode(loginInfo) else { return false }
+    func save(_ loginInfoDTO: LoginInfoDTO) -> Bool {
+        guard let loginInfo = try? JSONEncoder().encode(loginInfoDTO) else { return false }
         
         let saveQuery: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                           kSecAttrService: loginService,
@@ -26,7 +26,7 @@ final class LoginKeyChainManager {
         return SecItemAdd(saveQuery as CFDictionary, nil) == errSecSuccess
     }
     
-    func read() -> LoginInfo? {
+    func read() -> LoginInfoDTO? {
         let readQuery: [CFString: Any] = [kSecClass: kSecClassGenericPassword,
                                           kSecAttrService: loginService,
                                           kSecMatchLimit: kSecMatchLimitOne,
@@ -38,9 +38,9 @@ final class LoginKeyChainManager {
         guard SecItemCopyMatching(readQuery as CFDictionary, &item) == errSecSuccess,
               let existingItem = item as? [String: Any],
               let data = existingItem[kSecAttrGeneric as String] as? Data,
-              let loginInfo = try? JSONDecoder().decode(LoginInfo.self, from: data) else { return nil }
+              let loginInfoDTO = try? JSONDecoder().decode(LoginInfoDTO.self, from: data) else { return nil }
 
-        return loginInfo
+        return loginInfoDTO
     }
     
     func delete() -> Bool {
