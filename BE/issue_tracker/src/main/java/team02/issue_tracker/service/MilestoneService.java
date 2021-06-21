@@ -6,6 +6,7 @@ import team02.issue_tracker.dto.MilestoneCountResponse;
 import team02.issue_tracker.dto.MilestoneRequest;
 import team02.issue_tracker.dto.MilestoneResponse;
 import team02.issue_tracker.exception.MilestoneNotFoundException;
+import team02.issue_tracker.repository.IssueRepository;
 import team02.issue_tracker.repository.MilestoneRepository;
 
 import java.util.List;
@@ -17,9 +18,11 @@ public class MilestoneService {
     private static final Long EMPTY = 0L;
 
     private final MilestoneRepository milestoneRepository;
+    private final IssueRepository issueRepository;
 
-    public MilestoneService(MilestoneRepository milestoneRepository) {
+    public MilestoneService(MilestoneRepository milestoneRepository, IssueRepository issueRepository) {
         this.milestoneRepository = milestoneRepository;
+        this.issueRepository = issueRepository;
     }
 
     public Milestone findOne(Long id) {
@@ -40,7 +43,11 @@ public class MilestoneService {
 
     public List<MilestoneResponse> getAllMilestones() {
         return milestoneRepository.findAll().stream()
-                .map(MilestoneResponse::new)
+                .map(milestone -> {
+                    Long openIssueCount = issueRepository.countByMilestoneIdAndIsOpenTrue(milestone.getId());
+                    Long closedIssueCount = issueRepository.countByMilestoneIdAndIsOpenFalse(milestone.getId());
+                    return new MilestoneResponse(milestone, openIssueCount, closedIssueCount);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -49,11 +56,11 @@ public class MilestoneService {
     }
 
     public Long getOpenMilestoneCount() {
-        return milestoneRepository.countByIsOpenTrueAndIsDeletedFalse();
+        return milestoneRepository.countByIsOpenTrue();
     }
 
     public Long getClosedMilestoneCount() {
-        return milestoneRepository.countByIsOpenFalseAndIsDeletedFalse();
+        return milestoneRepository.countByIsOpenFalse();
     }
 
     public void addMilestone(MilestoneRequest milestoneRequest) {
@@ -72,6 +79,5 @@ public class MilestoneService {
         // Todo: 수정 해야함
         milestone.delete();
         milestoneRepository.save(milestone);
-
     }
 }

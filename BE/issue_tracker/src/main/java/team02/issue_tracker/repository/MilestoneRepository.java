@@ -16,7 +16,7 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
     @Override
     List<Milestone> findAll();
 
-    Long countByIsOpenTrueAndIsDeletedFalse();
+    Long countByIsOpenTrue();
 
-    Long countByIsOpenFalseAndIsDeletedFalse();
+    Long countByIsOpenFalse();
 }
