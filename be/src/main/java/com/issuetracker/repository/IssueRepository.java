@@ -172,4 +172,14 @@ public class IssueRepository {
         String query = "select count(closed) from issue where milestone_id = ? AND closed = true";
         return jdbcTemplate.queryForObject(query, Integer.class, id);
     }
+
+    public Integer countAllOpenedIssues() {
+        String query = "select count(closed) from issue where closed = false";
+        return jdbcTemplate.queryForObject(query, Integer.class);
+    }
+
+    public Integer countAllClosedIssues() {
+        String query = "select count(closed) from issue where closed = true";
+        return jdbcTemplate.queryForObject(query, Integer.class);
+    }
 }

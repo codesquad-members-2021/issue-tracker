@@ -37,4 +37,9 @@ public class IssueController {
     public IssueDetailDto viewIssueDetail(@PathVariable Long id) {
         return issueService.searchIssueDetailByIssueId(id);
     }
+
+    @GetMapping("/count")
+    public IssueCountDto viewNumberOfIssuesClosedAndOpened() {
+        return issueService.searchNumberOfIssuesClosedAndOpened();
+    }
 }
