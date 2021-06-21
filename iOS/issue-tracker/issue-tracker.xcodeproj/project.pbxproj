@@ -207,7 +207,6 @@
 				D0FD50F12671B108008C6031 /* Label */,
 				D0FD50ED2671B0E8008C6031 /* Milestone */,
 				B3F5274F26709614002B0812 /* Login */,
-				D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,6 +225,7 @@
 				B32FEAC72671F65F00BF37A1 /* FilterBarButton.swift */,
 				B3FBA7B8267335C30006E5E6 /* CancelButton.swift */,
 				B32FEAC92671FD1600BF37A1 /* SelectBarButton.swift */,
+				D0A88E082674F888005877F6 /* IssueDetailTableViewCell.swift */,
 			);
 			path = IssueList;
 			sourceTree = "<group>";
