@@ -53,7 +53,6 @@
 		D03AF8F826774909001C2CBF /* MilestoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F726774909001C2CBF /* MilestoneList.swift */; };
 		D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AF8F92677494F001C2CBF /* Comment.swift */; };
 		D04C694E267A35960056DD79 /* MilestoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C694D267A35960056DD79 /* MilestoneViewModel.swift */; };
-		D04C6950267A389D0056DD79 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C694F267A389D0056DD79 /* AddTableViewCell.swift */; };
 		D04C6956267B2C560056DD79 /* ToolBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C6955267B2C560056DD79 /* ToolBarTextField.swift */; };
 		D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E0126732D21005877F6 /* NewIssueViewController.swift */; };
 		D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */; };
@@ -132,7 +131,6 @@
 		B3D7D0C3267735CC000F02F4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		B3D7D0C826773AEA000F02F4 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
 		B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLabelViewModel.swift; sourceTree = "<group>"; };
-		B3E01197267A29E8001155D4 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelButton.swift; sourceTree = "<group>"; };
 		B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionView.swift; sourceTree = "<group>"; };
 		B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -149,7 +147,6 @@
 		D03AF8F726774909001C2CBF /* MilestoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneList.swift; sourceTree = "<group>"; };
 		D03AF8F92677494F001C2CBF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		D04C694D267A35960056DD79 /* MilestoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewModel.swift; sourceTree = "<group>"; };
-		D04C694F267A389D0056DD79 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		D04C6955267B2C560056DD79 /* ToolBarTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarTextField.swift; sourceTree = "<group>"; };
 		D0A88E0126732D21005877F6 /* NewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewController.swift; sourceTree = "<group>"; };
 		D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
@@ -384,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */,
-				D04C694F267A389D0056DD79 /* AddTableViewCell.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -395,7 +391,6 @@
 				D0FD50F62671B156008C6031 /* LabelTableViewCell.swift */,
 				B3EADABD2675EFED0007C4B6 /* AddLabelButton.swift */,
 				B3F5275B2670C0EF002B0812 /* PaddingLabel.swift */,
-				B3E01197267A29E8001155D4 /* AddTableViewCell.swift */,
 				B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */,
 				B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */,
 			);
@@ -683,7 +678,6 @@
 				49903DAE266F588B00D2A6DD /* IDPasswordTextField.swift in Sources */,
 				B349997D266F8D0B0091A44A /* GitHubLoginButton.swift in Sources */,
 				B3F527552670A0CD002B0812 /* UIColor+HexInit.swift in Sources */,
-				D04C6950267A389D0056DD79 /* AddTableViewCell.swift in Sources */,
 				D03AF8F626774707001C2CBF /* UserList.swift in Sources */,
 				B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */,
 				D0A88E04267334A6005877F6 /* IssueDetailViewController.swift in Sources */,
