@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class MilestoneTest {
 
     @Autowired
-    MilestoneRepository milestoneRepository;
+    private MilestoneRepository milestoneRepository;
 
     @AfterEach
     public void cleanup() {
