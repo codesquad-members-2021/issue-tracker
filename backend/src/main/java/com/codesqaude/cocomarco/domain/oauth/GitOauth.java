@@ -12,12 +12,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
+import static com.codesqaude.cocomarco.domain.oauth.GitOauthUri.ACCESS_TOKEN_URI;
+import static com.codesqaude.cocomarco.domain.oauth.GitOauthUri.USER_INFO_URI;
+
 @Component
 public class GitOauth implements Oauth {
 
-    private String clientId;
-    private String clientSecret;
-    private RestTemplate restTemplate = new RestTemplate();
+    private final String clientId;
+    private final String clientSecret;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public GitOauth(@Value("${github.desktop.client.id}") String clientId, @Value("${github.desktop.secret}") String clientSecret) {
         this.clientId = clientId;
@@ -29,7 +32,7 @@ public class GitOauth implements Oauth {
         HttpHeaders httpHeaders = httpHeadersTypeJson();
         HttpEntity<AccessTokenRequest> httpEntity =
                 new HttpEntity<>(new AccessTokenRequest(clientId, clientSecret, code), httpHeaders);
-        return restTemplate.exchange("https://github.com/login/oauth/access_token", HttpMethod.POST, httpEntity, AccessToken.class).getBody();
+        return restTemplate.exchange(ACCESS_TOKEN_URI.getUri(), HttpMethod.POST, httpEntity, AccessToken.class).getBody();
     }
 
     @Override
@@ -37,7 +40,7 @@ public class GitOauth implements Oauth {
         HttpHeaders httpHeaders = httpHeadersTypeJson();
         httpHeaders.setBearerAuth(accessToken.getAccessToken());
         HttpEntity<?> userInfo = new HttpEntity<>(httpHeaders);
-        return restTemplate.exchange("https://api.github.com/user", HttpMethod.GET, userInfo, GitUserInfo.class).getBody();
+        return restTemplate.exchange(USER_INFO_URI.getUri(), HttpMethod.GET, userInfo, GitUserInfo.class).getBody();
     }
 
     public HttpHeaders httpHeadersTypeJson() {
