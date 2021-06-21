@@ -37,7 +37,6 @@ public class UserService {
     }
 
     public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
-
         return assigneeIds.stream()
                 .map(assigneeId -> {
                     User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
