@@ -1,6 +1,5 @@
 package com.codesqaude.cocomarco.domain.issue.model;
 
-import com.codesqaude.cocomarco.common.exception.auth.NoPermissionUserException;
 import com.codesqaude.cocomarco.domain.comment.Comment;
 import com.codesqaude.cocomarco.domain.milestone.Milestone;
 import com.codesqaude.cocomarco.domain.user.User;
@@ -105,10 +104,8 @@ public class Issue {
         return issue;
     }
 
-    public void sameWriter(User user) {
-        if (!this.writer.sameUser(user.getId())) {
-            throw new NoPermissionUserException();
-        }
+    public boolean isSameWriter(User user) {
+        return this.writer.sameUser(user.getId());
     }
 
     @Override

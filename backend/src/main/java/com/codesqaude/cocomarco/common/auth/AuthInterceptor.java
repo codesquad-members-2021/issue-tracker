@@ -4,6 +4,7 @@ import com.codesqaude.cocomarco.common.exception.auth.NotLoggedInException;
 import com.codesqaude.cocomarco.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -13,10 +14,9 @@ import java.util.Objects;
 
 import static com.codesqaude.cocomarco.util.JwtUtils.HEADER_TYPE;
 
+@Component
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
-
-    private final JwtKey jwtKey;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -29,16 +29,16 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (Objects.isNull(auth)) {
             return true;
         }
-        JwtUtils.parser(hetJwt(request), jwtKey.getKey());
+        JwtUtils.parser(getAuthorization(request));
         return true;
     }
 
-    private String hetJwt(HttpServletRequest request) {
-        String jwt = request.getHeader(HEADER_TYPE);
-        if (Objects.isNull(jwt)) {
+    private String getAuthorization(HttpServletRequest request) {
+        String authorization = request.getHeader(HEADER_TYPE);
+        if (Objects.isNull(authorization)) {
             throw new NotLoggedInException();
         }
 
-        return jwt;
+        return authorization;
     }
 }

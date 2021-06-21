@@ -67,6 +67,4 @@ public class IssueService {
     public Issue findById(Long issueId) {
         return issueRepository.findById(issueId).orElseThrow(NotFoundIssueException::new);
     }
-
-
 }

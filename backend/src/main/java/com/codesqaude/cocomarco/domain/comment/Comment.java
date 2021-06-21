@@ -1,6 +1,5 @@
 package com.codesqaude.cocomarco.domain.comment;
 
-import com.codesqaude.cocomarco.common.exception.auth.NoPermissionUserException;
 import com.codesqaude.cocomarco.domain.issue.model.Issue;
 import com.codesqaude.cocomarco.domain.user.User;
 import lombok.AccessLevel;
@@ -42,10 +41,8 @@ public class Comment {
         this.text = text;
     }
 
-    public void isSameWriter(UUID writerId) {
-        if (!writer.sameUser(writerId)) {
-            throw new NoPermissionUserException();
-        }
+    public boolean isSameWriter(UUID writerId) {
+        return writer.sameUser(writerId);
     }
 
     @Override

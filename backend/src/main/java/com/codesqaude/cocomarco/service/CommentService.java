@@ -1,5 +1,6 @@
 package com.codesqaude.cocomarco.service;
 
+import com.codesqaude.cocomarco.common.exception.auth.NoPermissionUserException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundCommentException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
@@ -40,15 +41,19 @@ public class CommentService {
 
     @Transactional
     public void modify(UUID writerId, CommentRequest commentRequest, Long commentId) {
-        Comment comment = show(commentId);
-        comment.isSameWriter(writerId);
+        Comment comment = findById(commentId);
+        if (comment.isSameWriter(writerId)) {
+            throw new NoPermissionUserException();
+        }
         comment.modify(commentRequest.getText());
     }
 
     @Transactional
     public void delete(UUID writerId, Long commentId) {
-        Comment comment = show(commentId);
-        comment.isSameWriter(writerId);
+        Comment comment = findById(commentId);
+        if (comment.isSameWriter(writerId)) {
+            throw new NoPermissionUserException();
+        }
         commentRepository.delete(comment);
     }
 
@@ -60,9 +65,8 @@ public class CommentService {
         return new CommentResponseWrapper(commentResponses);
     }
 
-    public Comment show(Long id) {
+    private Comment findById(Long id) {
         return commentRepository.findById(id).orElseThrow(NotFoundCommentException::new);
     }
-
 
 }

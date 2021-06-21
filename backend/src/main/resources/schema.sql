@@ -13,10 +13,10 @@ drop TABLE IF EXISTS milestone;
 create table users
 (
     id           BINARY(16) primary key,
-    github_id bigint,
+    github_id    bigint,
     name         varchar(45),
-    email         varchar(100),
-    avatar_image varchar(45)
+    email        varchar(100),
+    avatar_image varchar(300)
 );
 
 create table milestone
