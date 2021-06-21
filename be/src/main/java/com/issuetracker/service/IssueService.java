@@ -1,10 +1,7 @@
 package com.issuetracker.service;
 
 import com.issuetracker.domain.Issue;
-import com.issuetracker.dto.IssueDto;
-import com.issuetracker.dto.IssueRequestDto;
-import com.issuetracker.dto.IssueSearchCondition;
-import com.issuetracker.dto.ResponseStatusDto;
+import com.issuetracker.dto.*;
 import com.issuetracker.oauth.User;
 import com.issuetracker.repository.IssueRepository;
 import com.issuetracker.repository.UserRepository;
@@ -57,6 +54,11 @@ public class IssueService {
                         userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
                 .collect(Collectors.toList());
 
+    }
+
+    public ResponseStatusDto editIssueByIssueId(Long id, IssueRequestDto issue) {
+        issueRepository.editIssueByIssueId(id, issue);
+        return new ResponseStatusDto("success");
     }
 }
 
