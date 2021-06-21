@@ -1,5 +1,6 @@
 package com.codesqaude.cocomarco.service;
 
+import com.codesqaude.cocomarco.common.exception.auth.NoPermissionUserException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundIssueException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundMilestoneException;
 import com.codesqaude.cocomarco.common.exception.notfound.NotFoundUserException;
@@ -38,7 +39,9 @@ public class IssueModifyService {
 
     public void modifyTitle(Long issueId, UUID userId, IssueRequest issueRequest) {
         Issue issue = findById(issueId);
-        issue.isSameWriter(findUserById(userId));
+        if (issue.isSameWriter(findUserById(userId))) {
+            throw new NoPermissionUserException();
+        }
         issue.changeTitle(issueRequest.getTitle());
     }
 
