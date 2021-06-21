@@ -11,7 +11,7 @@ const MilestonesItemRight = ({
   closedIssueCount,
 }: MilestoneBarProps) => {
   const percent =
-    (openedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
+    (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
   return (
     <StyledDiv>
       <StyledButtons>

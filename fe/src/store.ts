@@ -1,5 +1,6 @@
 import { TestType } from './types/storeTypes';
 import axios from 'axios';
+import { milestoneQuery } from 'stores/milestoneStore';
 import { selector, atom } from 'recoil';
 import { FilterItemType } from 'types/filterType';
 import { LabelItemType, IssueItemType, IssuesCountType } from 'types/issueType';
@@ -99,33 +100,6 @@ export const labelQuery = selector<LabelItemType[]>({
     );
 
     return data.map(parsedLabelData);
-  },
-});
-
-export const totalCountOfMilestone = selector<number>({
-  key: 'totalCountOfMilestone',
-  get: ({ get }) => {
-    return get(milestoneQuery).length;
-  },
-});
-
-export const milestoneQuery = selector<FilterItemType[]>({
-  key: 'milestoneQuery',
-  get: async () => {
-    const token = localStorage.getItem('jwt');
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/milestones`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    return data.map((milestoneItem: MilestoneDataType) => ({
-      id: milestoneItem.id,
-      description: milestoneItem.title,
-    }));
   },
 });
 

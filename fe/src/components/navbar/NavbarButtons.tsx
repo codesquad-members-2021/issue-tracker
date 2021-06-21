@@ -6,9 +6,10 @@ import { NavType } from 'types/issueType';
 import styled from 'styled-components';
 import { getNavButtonTitle } from 'utils/util';
 import { useRecoilValue } from 'recoil';
-import { totalCountOfLabels, totalCountOfMilestone } from 'store';
+import { totalCountOfLabels } from 'store';
 import { Link, useHistory } from 'react-router-dom';
 import { MouseEvent } from 'react';
+import { totalCountOfMilestone } from 'stores/milestoneStore';
 
 const NavbarButtons = ({ type }: { type: NavType }) => {
   const MilestoneCnt = useRecoilValue(totalCountOfMilestone);
