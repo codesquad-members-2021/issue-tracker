@@ -1,5 +1,6 @@
 const menuBtnStyle = {
-  marginBottom: '16px',
+  padding: '5px 0',
+  marginBottom: '6px',
   display: 'flex',
   width: '100%',
   height: '100%',
