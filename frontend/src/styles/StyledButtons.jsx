@@ -23,21 +23,8 @@ export const TabButton = styled(Button)`
 		theme.grayScale.background}; //str넣었는데 str넣으라고 오류뜸 */
 `;
 
-export const AddBtn = styled(Button)`
-	width: 160px;
-	height: ${({ theme }) => theme.buttonHeights.base};
-	font-size: ${({ theme }) => theme.fontSizes.xs};
-	font-weight: bold;
-	background-color: ${({ theme }) => theme.colors.blue};
-	color: ${({ theme }) => theme.grayScale.off_white};
-	border-radius: 11px;
-	&:hover {
-		background-color: ${({ theme }) => theme.colors.dark_blue};
-	}
-`;
-
 export const StyledLoginButton = styled(Button)`
-	width: 340px;
+	width: ${({ theme }) => theme.buttonWidths.xl};
 	height: ${({ theme }) => theme.buttonHeights.lg};
 	font-size: ${({ theme }) => theme.fontSizes.base};
 	background-color: ${({ theme }) => theme.grayScale.title_active};
@@ -46,19 +33,4 @@ export const StyledLoginButton = styled(Button)`
 	&:hover {
 		background-color: ${({ theme }) => theme.grayScale.body};
 	}
-`;
-
-export const StyledWhiteButton = styled(Button)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0px 16px;
-	margin: 0 3px;
-	width: 120px;
-	height: 40px;
-	color: ${({ theme }) => theme.colors.blue};
-	background: ${({ theme }) => theme.colors.off_white};
-	border: 2px solid ${({ theme }) => theme.colors.blue};
-	border-radius: 11px;
-	cursor: pointer;
 `;
