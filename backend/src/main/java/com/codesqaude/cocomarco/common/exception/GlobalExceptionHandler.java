@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorReason> auth(BusinessException e) {
+    public ResponseEntity<ErrorReason> business(BusinessException e) {
         ErrorCode errorCode = e.getErrorCode();
         ErrorReason errorReason = ErrorReason.of(errorCode);
         return new ResponseEntity<>(errorReason, HttpStatus.valueOf(errorCode.getHttpStatus()));
