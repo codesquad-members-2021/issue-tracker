@@ -47,6 +47,8 @@
 		E43912F6267CAE01003CD344 /* TopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F5267CAE01003CD344 /* TopMenuView.swift */; };
 		E43912F8267CB3D7003CD344 /* MultipleLineInputStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */; };
 		E46E11242677391B005375A1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E11232677391B005375A1 /* LabelTableViewCell.swift */; };
+		E49695672680B0B7001AEB89 /* IssueControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695662680B0B7001AEB89 /* IssueControlViewController.swift */; };
+		E49695692680B3FB001AEB89 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695682680B3FB001AEB89 /* Issue.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
@@ -109,6 +111,8 @@
 		E43912F5267CAE01003CD344 /* TopMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuView.swift; sourceTree = "<group>"; };
 		E43912F7267CB3D7003CD344 /* MultipleLineInputStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLineInputStackView.swift; sourceTree = "<group>"; };
 		E46E11232677391B005375A1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		E49695662680B0B7001AEB89 /* IssueControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueControlViewController.swift; sourceTree = "<group>"; };
+		E49695682680B3FB001AEB89 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarCreator.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		E42AD11926708EBA0071B436 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				E496956B2680B40D001AEB89 /* Model */,
+				E496956A2680B3FE001AEB89 /* Controller */,
 				E42AD11D267093320071B436 /* IssueViewController.swift */,
 			);
 			path = Issue;
@@ -340,6 +346,22 @@
 				E43912D1267878F4003CD344 /* HexColorCode.swift */,
 				E43912D926789E16003CD344 /* Label.swift */,
 				E43912E7267A1FE5003CD344 /* NewLabelDTO.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E496956A2680B3FE001AEB89 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E49695662680B0B7001AEB89 /* IssueControlViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E496956B2680B40D001AEB89 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E49695682680B3FB001AEB89 /* Issue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -485,6 +507,7 @@
 				E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */,
 				FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */,
 				E426DABC2670EC5E0069E77D /* LoginInfo.swift in Sources */,
+				E49695672680B0B7001AEB89 /* IssueControlViewController.swift in Sources */,
 				E43912CE26777310003CD344 /* HexColorConverter.swift in Sources */,
 				FA431FFB267F3B680010EA91 /* NewMileStoneDTO.swift in Sources */,
 				E42AD1182670886F0071B436 /* IssueTrackerTabBarController.swift in Sources */,
@@ -523,6 +546,7 @@
 				E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */,
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */,
+				E49695692680B3FB001AEB89 /* Issue.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */,
 				E43912DC2678A737003CD344 /* JWT.swift in Sources */,
