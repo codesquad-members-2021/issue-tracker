@@ -23,7 +23,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         String token = getJwt(request);
-        request.setAttribute("author", jwtUtils.getUserFromJwt(token));
+        request.setAttribute("authUser", jwtUtils.getUserFromJwt(token));
         return true;
     }
 

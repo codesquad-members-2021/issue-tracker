@@ -29,8 +29,8 @@ public class IssueController {
     }
 
     @PostMapping
-    public IssueWrapper createIssue(@RequestBody IssueCreateRequest issueCreateRequest, @RequestAttribute User author) {
-        return issueService.createIssue(issueCreateRequest, author);
+    public IssueWrapper createIssue(@RequestBody IssueCreateRequest issueCreateRequest, @RequestAttribute User authUser) {
+        return issueService.createIssue(issueCreateRequest, authUser);
     }
 
     @PutMapping("/{id}")
