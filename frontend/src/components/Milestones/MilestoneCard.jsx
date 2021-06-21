@@ -7,7 +7,6 @@ import { ReactComponent as Trash } from "images/trash.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import getPercent from "util/getPercent";
 import theme from "styles/theme";
-import useFetch from "hooks/useFetch";
 import API from "util/API";
 import fetchData from "util/fetchData";
 import {

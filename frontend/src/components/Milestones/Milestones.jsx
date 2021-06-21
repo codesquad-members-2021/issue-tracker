@@ -15,23 +15,16 @@ const Milestones = () => {
 		milestoneAddButtonFlagState
 	);
 	const [_, update] = useRecoilState(milestoneUpdateState);
-
 	const [milestone, setMilestone] = useState();
 
 	const fetchMilestones = async () => {
 		const { milestones } = await fetchData(API.milestones(), "GET");
-		console.log(milestones);
 		setMilestone(milestones);
 	};
 
 	useEffect(() => {
 		fetchMilestones();
 	}, [milestoneAddBtn]);
-
-	useEffect(() => {
-		fetchMilestones();
-		setMilestoneAddBtn(false);
-	}, []);
 
 	return (
 		<>

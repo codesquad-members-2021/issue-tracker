@@ -16,14 +16,17 @@ const fetchData = async (url, method, reqData) => {
 					body: JSON.stringify(reqData),
 			  };
 
-	console.log("fetchData func initiated");
+	// console.log("fetchData func initiated");
 	try {
+		console.log("reqData:", reqData);
+		// console.log("option:", option);
 		const res = await fetch(url, option);
 		const resData = await res.json();
+		// console.log("in useFetch :", resData);
 		if (!res.ok) throw new Error(res.status);
 		else {
-			console.log("in useFetch:", resData);
-			return resData;
+			// console.log("in useFetch:", resData);
+			return await resData;
 		}
 	} catch (error) {
 		console.error("error occured");
