@@ -1,6 +1,7 @@
 package com.issuetracker.repository;
 
 import com.issuetracker.domain.Label;
+import com.issuetracker.dto.LabelDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +22,13 @@ public class LabelRepository {
     public List<Label> findAll() {
         String query = "select id, title, description, color_code, font_light from label";
         return jdbcTemplate.query(query, LABEL_ROW_MAPPER);
+    }
+
+    public void create(LabelDto labelDto) {
+        String query = "insert into label (title, description, color_code, font_light) values (?, ?, ?, ?)";
+        jdbcTemplate.update(query, labelDto.getTitle(),
+                labelDto.getDescription(),
+                labelDto.getColorCode(),
+                labelDto.isFontLight());
     }
 }

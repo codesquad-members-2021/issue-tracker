@@ -1,11 +1,9 @@
 package com.issuetracker.controller;
 
 import com.issuetracker.dto.LabelDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.service.LabelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,11 @@ public class LabelController {
     public List<LabelDto> viewAllLabels() {
         return labelService.searchAllLabels();
     }
+
+    @PostMapping
+    public ResponseStatusDto create(@RequestBody LabelDto labelDto) {
+        return labelService.create(labelDto);
+    }
+
 }
 
