@@ -36,7 +36,7 @@ final class NetworkManager: NetworkManagerOperations {
                     let error = self?.networkError(for: statusCode) ?? NetworkError.unknown
                     completion(.failure(error))
                 }
-        }
+        }                
     }
     
     func delete(endpoint: String, queryParameters: [String: Any]?, completion: @escaping (Result<Void, NetworkError>) -> Void) {

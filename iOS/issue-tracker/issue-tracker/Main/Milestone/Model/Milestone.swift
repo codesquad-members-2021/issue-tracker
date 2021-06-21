@@ -22,13 +22,13 @@ struct MileStone: Decodable {
     let id: Int
     let title: String
     let description: String?
-    let due_date: String?
+    let dueDate: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case description
-        case due_date
+        case dueDate = "due_date"
     }
     
 }

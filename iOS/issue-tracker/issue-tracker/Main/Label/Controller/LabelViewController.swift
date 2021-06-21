@@ -119,7 +119,7 @@ final class LabelViewController: UIViewController {
     private func presentEditLabelViewController(for targetLabel: Label) {
         let editLabelViewController = LabelControlViewController()
         editLabelViewController.configure(withTitle: "레이블 수정하기", currentLabel: targetLabel)
-        editLabelViewController.setSaveOperation(putEditedLabel)
+        editLabelViewController.setSaveOperation(putEditedLabel)        
         editLabelViewController.modalPresentationStyle = .formSheet
         
         DispatchQueue.main.async {

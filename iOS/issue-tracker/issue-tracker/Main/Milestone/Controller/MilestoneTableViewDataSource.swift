@@ -23,9 +23,9 @@ class MilestoneTableViewDataSource: NSObject, UITableViewDataSource {
         let cellID = MileStoneTableViewCell.reuseID
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? MileStoneTableViewCell ?? MileStoneTableViewCell()
         
-        let milesonte = milestones[indexPath.row]
+        let milestone = milestones[indexPath.row]
         
-        cell.configure(title: milesonte.title, description: milesonte.description ?? "", due_date: milesonte.due_date ?? "")
+        cell.configure(title: milestone.title, description: milestone.description ?? "", due_date: milestone.due_date ?? "")
         return cell
     }
 }
