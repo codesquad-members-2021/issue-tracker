@@ -11,6 +11,11 @@ function App() {
   const LabelPage = lazy(() => import('./page/labelPage/LabelPage'));
   const MilestonePage = lazy(() => import('./page/milestonePage/MilestonePage'));
 
+  /*
+  token이 있으면 jwt api 요청후 setting
+  -> redirect까지
+  */
+
   return (
     <div className='App'>
       <Router>
