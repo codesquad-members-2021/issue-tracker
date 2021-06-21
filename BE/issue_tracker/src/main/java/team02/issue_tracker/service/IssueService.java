@@ -60,19 +60,22 @@ public class IssueService {
         return issueRepository.countByMilestoneIdAndIsOpenTrue(milestone.getId());
     }
 
+    @Transactional
     public void addIssue(IssueRequest issueRequest, Long userId) {
         User writer = userService.findOne(userId);
-        Issue issue = makeIssue(issueRequest, writer);
-        commentService.makeComment(issueRequest, writer, issue);
-        labelService.makeIssueLabels(issue, issueRequest.getLabelIds());
-        userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds());
-    }
-
-    private Issue makeIssue(IssueRequest issueRequest, User writer) {
         Issue issue = issueRequest.toIssue(writer);
+
         Milestone milestone = milestoneService.getMilestone(issueRequest.getMilestoneId());
         issue.addMilestone(milestone);
-        return issueRepository.save(issue);
+
+        issue.addIssueLabels(labelService.makeIssueLabels(issue, issueRequest.getLabelIds()));
+
+        issue.addIssueAssignees(userService.makeIssueAssignees(issue, issueRequest.getAssigneeIds()));
+
+        Comment comment = commentService.makeComment(issueRequest, writer, issue);
+        issue.addComment(comment);
+
+        issueRepository.save(issue);
     }
 
     public void closeIssues(IssueIdsRequest issueIdsRequest) {

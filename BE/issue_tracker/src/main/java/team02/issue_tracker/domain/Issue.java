@@ -90,4 +90,16 @@ public class Issue {
     public void deleteMilestone() {
         milestone = null;
     }
+
+    public void addIssueLabels(List<IssueLabel> issueLabels) {
+        this.issueLabels = issueLabels;
+    }
+
+    public void addIssueAssignees(List<IssueAssignee> issueAssignees) {
+        this.issueAssignees = issueAssignees;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }
