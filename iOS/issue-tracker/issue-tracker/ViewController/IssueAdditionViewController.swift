@@ -15,3 +15,5 @@ class IssueAdditionViewController: UIViewController {
     }
     
 }
+
+extension IssueAdditionViewController: Identifying { }

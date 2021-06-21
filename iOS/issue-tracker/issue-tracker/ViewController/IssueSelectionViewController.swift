@@ -52,3 +52,5 @@ extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelega
     }
     
 }
+
+extension IssueSelectionViewController: Identifying { }

@@ -1,11 +1,9 @@
 import UIKit
 
-class LabelTableViewCell: UITableViewCell {
+class LabelTableViewCell: UITableViewCell, Identifying {
     
     static var nib: UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    static let identifier = "LabelTableViewCell"
     
 }

@@ -4,7 +4,7 @@ class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
     
-    private lazy var searchController: UISearchController = {
+    private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search"
         searchController.hidesNavigationBarDuringPresentation = false
@@ -15,6 +15,7 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
+        
         configureNavigationItem()
         configureTableViewFooterView()
     }
@@ -77,14 +78,14 @@ class IssueListViewController: UIViewController {
     }
  
     @objc func showIssueListFilterView(sender: UIBarButtonItem) {
-        guard let filterViewController = self.storyboard?.instantiateViewController(identifier: "IssueListFilterViewController") as? IssueListFilterViewController else {
+        guard let filterViewController = self.storyboard?.instantiateViewController(identifier: IssueListFilterViewController.identifier) as? IssueListFilterViewController else {
             return
         }
         self.present(filterViewController, animated: true, completion: nil)
     }
     
     @objc func showIssueSelectionView(sender: UIBarButtonItem) {
-        guard let issueSelectionViewController = self.storyboard?.instantiateViewController(identifier: "IssueSelectionViewController") as? IssueSelectionViewController else {
+        guard let issueSelectionViewController = self.storyboard?.instantiateViewController(identifier: IssueSelectionViewController.identifier) as? IssueSelectionViewController else {
             return
         }
         self.navigationController?.pushViewController(issueSelectionViewController, animated: false)
@@ -135,3 +136,5 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+extension IssueListViewController: Identifying { }

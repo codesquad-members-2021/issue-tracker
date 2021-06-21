@@ -86,3 +86,5 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
     }
     
 }
+
+extension IssueListFilterViewController: Identifying { }

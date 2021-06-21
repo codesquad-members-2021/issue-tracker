@@ -33,3 +33,5 @@ class TabBarRootController: UITabBarController {
     }
     
 }
+
+extension TabBarRootController: Identifying { }
