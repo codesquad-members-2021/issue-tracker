@@ -18,22 +18,35 @@ const MilestoneInput = ({
 	editMode,
 	setEditMode,
 }) => {
-	const [inputData, setInputData] = useState({});
+	const [inputData, setInputData] = useState({
+		title: title,
+		dueDate: dueDate,
+		description: description,
+	});
 	const [milestoneData, setMilestoneData] = useState();
 	const setMilestoneAddButtonFlag = useSetRecoilState(
 		milestoneAddButtonFlagState
 	);
 	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
 
+	const [titleInput, setTitleInput] = useState(title);
+	const [dateInput, setDateInput] = useState(dueDate);
+	const [descInput, setDescInput] = useState(description);
+
 	const putMilestone = async () => {
 		await fetchData(API.milestonesId(id), "PUT", inputData);
+		setMilestoneAddButtonFlag(false);
+		setEditMode(false);
+		forceUpdate();
 	};
 
 	const postMilestone = async () => {
-		await fetchData(API.milestonesId(id), "POST", inputData);
+		await fetchData(API.milestones(), "POST", inputData);
+		setMilestoneAddButtonFlag(false);
 	};
 
 	const handleTitleChange = e => {
+		setTitleInput(e.target.value);
 		setInputData({
 			...inputData,
 			title: e.target.value,
@@ -41,6 +54,7 @@ const MilestoneInput = ({
 	};
 
 	const handleDateChange = e => {
+		setDateInput(e.target.value);
 		setInputData({
 			...inputData,
 			dueDate: e.target.value,
@@ -48,6 +62,7 @@ const MilestoneInput = ({
 	};
 
 	const handleDescChange = e => {
+		setDescInput(e.target.value);
 		setInputData({
 			...inputData,
 			description: e.target.value,
@@ -55,17 +70,8 @@ const MilestoneInput = ({
 	};
 
 	const handleSubmit = () => {
-		console.log("submit clicked");
 		postMilestone();
 		setMilestoneAddButtonFlag(false);
-		// forceUpdate(!update);
-	};
-
-	const handleEdit = () => {
-		console.log("edit clicked");
-		putMilestone();
-		setMilestoneAddButtonFlag(false);
-		// setEditMode(false);
 		// forceUpdate(!update);
 	};
 
@@ -80,6 +86,7 @@ const MilestoneInput = ({
 						type="text"
 						placeholder={title ? title : "마일스톤 이름"}
 						onChange={handleTitleChange}
+						value={title && titleInput}
 					/>
 				</InputHalf>
 				<InputHalf>
@@ -87,6 +94,7 @@ const MilestoneInput = ({
 						type="date"
 						placeholder={dueDate ? dueDate : "완료일(선택) ex. YYYY-MM-DD"}
 						onChange={handleDateChange}
+						value={dueDate && dateInput}
 					/>
 				</InputHalf>
 			</InputWrapper>
@@ -94,13 +102,18 @@ const MilestoneInput = ({
 				type="text"
 				placeholder={description ? description : "설명(선택)"}
 				onChange={handleDescChange}
+				value={description && descInput}
 			/>
 			<BtnWrapper>
 				<AddButton
 					text="완료"
+
+					clickEvent={editMode ? putMilestone : handleSubmit}
+
 					icon="plus"
 					size="m"
-					clickEvent={editMode ? handleEdit : handleSubmit}
+					
+
 				/>
 			</BtnWrapper>
 		</CardWrapper>
