@@ -1,12 +1,12 @@
 package team02.issue_tracker.dto.issue;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import team02.issue_tracker.domain.*;
+import team02.issue_tracker.domain.Comment;
+import team02.issue_tracker.domain.Issue;
+import team02.issue_tracker.domain.User;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Getter
 public class IssueRequest {
 
