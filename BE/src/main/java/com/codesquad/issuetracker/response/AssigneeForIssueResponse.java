@@ -1,9 +1,11 @@
 package com.codesquad.issuetracker.response;
 
 import com.codesquad.issuetracker.domain.Assignee;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AssigneeForIssueResponse {
 
+    @JsonIgnore
     private Long id;
     private Long userId;
 

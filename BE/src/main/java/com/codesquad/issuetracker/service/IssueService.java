@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.request.IssueRequest;
 import com.codesquad.issuetracker.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -76,12 +77,11 @@ public class IssueService {
         issueRepository.save(updateIssue);
     }
 
+    @Transactional
     public void updateAssignee(Long issueId, IssueRequest issueRequest) {
-        Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
-        ArrayList<AssigneeRequest> assigneeRequestList = issueRequest.getAssigneeList();
-        List<Assignee> assigneesToSet = new ArrayList<>();
-        for (AssigneeRequest assigneeRequest : assigneeRequestList) {
-            assigneesToSet.add(Assignee.assigneeRequestToassignee(issueId, assigneeRequest));
+        assigneeRepository.deleteAssigneesByIssueId(issueId);
+        ArrayList<AssigneeRequest> assigneeList = issueRequest.getAssigneeList();
+        for(AssigneeRequest assigneeRequest : assigneeList) {
             assigneeRepository.save(Assignee.assigneeRequestToassignee(issueId, assigneeRequest));
         }
     }
@@ -98,6 +98,7 @@ public class IssueService {
         issueRepository.save(updateIssue);
     }
 
+    @Transactional
     public void updateLabel(Long issueId, IssueRequest issueRequest) {
         // IssueLabel을 Issue의 ID 기준으로 찾아 온 다음 더하거나(INSERT) 삭제(DELETE)한다
         List<Long> labelIdsBeEdited = issueLabelRepository.findIssueLabelsLabelIdByIssueId(issueId); // 원본
@@ -112,7 +113,7 @@ public class IssueService {
                 issueLabelRepository.save(issueLabel);
             }
         }
-        for (int i = 0; i < labelIdsBeEdited.size(); i++) {
+        for (int i = 0; i < labelIdsBeEdited.size(); i++) { // 수정 항목 중 원본에만 있는 것은 삭제함
             if (!labelIdsToEdit.contains(labelIdsBeEdited.get(i))) {
                 issueLabelRepository.deleteIssueLabelByIssueIdAndLabelId(issueId, labelIdsBeEdited.get(i));
             }
