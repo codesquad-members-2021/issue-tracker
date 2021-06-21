@@ -43,12 +43,15 @@ public class MilestoneService {
         return MilestoneResponse.create(milestone);
     }
 
+    @Transactional
     public void edit(Long milestoneId, EditedMilestone editedMilestone) {
-        Milestone milestone = milestoneRepository.getById(milestoneId);
+        Milestone milestone = milestoneRepository.findById(milestoneId)
+                .orElseThrow(IllegalArgumentException::new);
         milestone.update(editedMilestone);
         milestoneRepository.save(milestone);
     }
 
+    @Transactional
     public void delete(Long milestoneId) {
         milestoneRepository.deleteById(milestoneId);
     }
