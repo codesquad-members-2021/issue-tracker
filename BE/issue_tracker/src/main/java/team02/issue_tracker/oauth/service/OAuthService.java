@@ -9,4 +9,5 @@ public interface OAuthService {
     AccessToken accessToken(final String code, final SocialLogin oauthResource);
 
     SocialProfile userProfile(final AccessToken accessToken);
+
 }

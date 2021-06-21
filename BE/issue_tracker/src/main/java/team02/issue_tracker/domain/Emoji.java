@@ -16,6 +16,7 @@ public class Emoji {
     private Long id;
 
     private String name;
+    private boolean deleted;
 
     @OneToMany(mappedBy = "emoji")
     private List<CommentEmoji> commentEmojis = new ArrayList<>();

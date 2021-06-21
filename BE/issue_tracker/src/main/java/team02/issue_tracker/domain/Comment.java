@@ -1,6 +1,7 @@
 package team02.issue_tracker.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,13 +10,16 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Comment {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String content;
     private String file;
     private LocalDateTime createdTime;
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_comment_issue"))
@@ -27,4 +31,25 @@ public class Comment {
 
     @OneToMany(mappedBy = "comment")
     private List<CommentEmoji> commentEmojis = new ArrayList<>();
+
+    public Comment(String content, String file, User writer) {
+        this.content = content;
+        this.file = file;
+        this.writer = writer;
+        this.createdTime = LocalDateTime.now();
+        this.deleted = false;
+    }
+
+    public void addIssue(Issue issue) {
+        this.issue = issue;
+    }
+
+    public void delete() {
+        deleted = true;
+    }
+
+    public void edit(String content, String file) {
+        this.content = content;
+        this.file = file;
+    }
 }

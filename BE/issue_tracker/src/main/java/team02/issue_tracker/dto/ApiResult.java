@@ -16,11 +16,11 @@ public class ApiResult<T>{
         return new ApiResult<>(data, null);
     }
 
-    public static ApiResult<?> fail(String errorMessage) {
+    public static ApiResult<Void> fail(String errorMessage) {
         return new ApiResult<>(null, errorMessage);
     }
 
-    public static ApiResult<?> fail(Throwable cause) {
+    public static ApiResult<Void> fail(Throwable cause) {
         return fail(cause.getMessage());
     }
 

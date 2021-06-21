@@ -1,4 +1,4 @@
--- user
+-- -- user
 -- insert into `user`(id, email, oauth_resource, profile_image, username)
 -- values (1, null, "GITHUB", "https://avatars.githubusercontent.com/u/65011131?v=4", "kimnayeon0108");
 -- insert into `user`(id, email, oauth_resource, profile_image, username)
@@ -35,18 +35,17 @@
 --        (2, "nice", "file url", CURRENT_TIMESTAMP, 1, 2, true);
 
 -- emoji
-insert
-into emoji(id, `name`)
-values (1, ":happy_face");
---        (2, ":surprise_face", false),
---        (3, ":heart", false),
---        (4, ":sun", false),
---        (5, ":cloud", false),
---        (6, ":gold_medal", false),
---        (7, ":honux", false),
---        (8, ":tears", false),
---        (9, ":thumb_up", false),
---        (10, ":fire", false);
+insert into emoji(id, `name`, deleted)
+values (1, ":happy_face", false),
+       (2, ":surprise_face", false),
+       (3, ":heart", false),
+       (4, ":sun", false),
+       (5, ":cloud", false),
+       (6, ":gold_medal", false),
+       (7, ":honux", false),
+       (8, ":tears", false),
+       (9, ":thumb_up", false),
+       (10, ":fire", false);
 
 -- -- comment_emoji
 -- insert into comment_emoji(comment_id, emoji_id)

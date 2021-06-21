@@ -1,6 +1,5 @@
 package team02.issue_tracker.oauth.interceptor;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -8,7 +7,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
-import team02.issue_tracker.oauth.utils.JwtUtils;
+import team02.issue_tracker.oauth.jwt.JwtDecoder;
+import team02.issue_tracker.oauth.jwt.JwtFinder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 
-    private final int JWT = 1;
+    private final JwtFinder jwtFinder;
+    private final JwtDecoder jwtDecoder;
 
-    private final JwtUtils jwtUtils;
-
-    public JwtInterceptor(JwtUtils jwtUtils) {
-        this.jwtUtils = jwtUtils;
+    public JwtInterceptor(JwtFinder jwtFinder, JwtDecoder jwtDecoder) {
+        this.jwtFinder = jwtFinder;
+        this.jwtDecoder = jwtDecoder;
     }
 
     @Override
@@ -39,29 +39,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     }
 
     private void setUserIdOn(HttpServletRequest request) {
-        String jwt = extractJwtFromHeader(request);
-        Long userId = decodeJwtToUserId(jwt);
-        request.setAttribute("user_id", userId);
-    }
-
-    private String extractJwtFromHeader(HttpServletRequest request) {
         String authorizationInHeader = request.getHeader("Authorization");
-        verify(authorizationInHeader);
-        String[] tokenTypeAndJwt = authorizationInHeader.split(" ");
-        return tokenTypeAndJwt[JWT];
-    }
-
-    private void verify(String authorizationInHeader) {
-        if (authorizationInHeader == null || authorizationInHeader.isEmpty()) {
-            throw new JwtNotFoundException();
-        }
-        if (!authorizationInHeader.startsWith("Bearer")) {
-            throw new InvalidTokenTypeException();
-        }
-    }
-
-    private Long decodeJwtToUserId(String jwt) {
-        DecodedJWT decodedJwt = jwtUtils.decode(jwt);
-        return decodedJwt.getClaim("user_id").asLong();
+        String jwt = jwtFinder.extractJwtFromHeader(authorizationInHeader);
+        Long userId = jwtDecoder.decodeJwtToUserId(jwt);
+        request.setAttribute("user_id", userId);
     }
 }

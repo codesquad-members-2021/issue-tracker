@@ -6,7 +6,7 @@ import team02.issue_tracker.oauth.dto.AccessToken;
 import team02.issue_tracker.oauth.dto.JwtResponse;
 import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.dto.SocialProfile;
-import team02.issue_tracker.oauth.utils.JwtUtils;
+import team02.issue_tracker.oauth.jwt.JwtFactory;
 import team02.issue_tracker.service.UserService;
 
 @Service
@@ -16,35 +16,35 @@ public class LoginService {
     private final OAuthService googleLoginService;
 
     private final UserService userService;
-    private final JwtUtils jwtUtils;
+    private final JwtFactory jwtFactory;
 
     public LoginService(GithubLoginService githubLoginService, GoogleLoginService googleLoginService
-            , UserService userService, JwtUtils jwtUtils) {
+            , UserService userService, JwtFactory jwtFactory) {
         this.githubLoginService = githubLoginService;
         this.googleLoginService = googleLoginService;
         this.userService = userService;
-        this.jwtUtils = jwtUtils;
+        this.jwtFactory = jwtFactory;
     }
 
     public JwtResponse loginGithubWeb(final String code) {
         AccessToken accessToken = githubLoginService.accessToken(code, SocialLogin.GITHUB_WEB);
         SocialProfile githubUserProfile = githubLoginService.userProfile(accessToken);
         User user = userFrom(githubUserProfile);
-        return jwtUtils.codeUserToJwt(user);
+        return jwtFactory.codeUserToJwt(user);
     }
 
     public JwtResponse loginGithubIos(final String code) {
         AccessToken accessToken = githubLoginService.accessToken(code, SocialLogin.GITHUB_IOS);
         SocialProfile githubUserProfile = githubLoginService.userProfile(accessToken);
         User user = userFrom(githubUserProfile);
-        return jwtUtils.codeUserToJwt(user);
+        return jwtFactory.codeUserToJwt(user);
     }
 
     public JwtResponse loginGoogle(final String code) {
         AccessToken accessToken = googleLoginService.accessToken(code, SocialLogin.GOOGLE);
         SocialProfile googleUserProfile = googleLoginService.userProfile(accessToken);
         User user = userFrom(googleUserProfile);
-        return jwtUtils.codeUserToJwt(user);
+        return jwtFactory.codeUserToJwt(user);
     }
 
     private User userFrom(final SocialProfile socialProfile) {

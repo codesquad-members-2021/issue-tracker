@@ -1,18 +1,20 @@
 package team02.issue_tracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Label;
 
-@AllArgsConstructor
 @Getter
 public class LabelResponse {
 
     private Long id;
     private String title;
+    private String content;
     private String color;
 
     public LabelResponse(Label label) {
-        this(label.getId(), label.getTitle(), label.getColor());
+        this.id = label.getId();
+        this.title = label.getTitle();
+        this.content = label.getContent();
+        this.color = label.getColor();
     }
 }
