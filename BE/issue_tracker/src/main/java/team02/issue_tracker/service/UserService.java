@@ -9,8 +9,8 @@ import team02.issue_tracker.exception.UserNotFoundException;
 import team02.issue_tracker.repository.IssueAssigneeRepository;
 import team02.issue_tracker.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -37,19 +37,17 @@ public class UserService {
     }
 
     public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
-        List<IssueAssignee> issueAssignees = new ArrayList<>();
-
-        assigneeIds.forEach(assigneeId -> {
+        return assigneeIds.stream()
+                .map(assigneeId -> {
                     User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
-                    issueAssignees.add(new IssueAssignee(issue, assignee));
-                });
-
-        return issueAssigneeRepository.saveAll(issueAssignees);
+                    return new IssueAssignee(issue, assignee);
+                }).collect(Collectors.toList());
     }
 
     public List<IssueAssignee> modifyIssueAssignees(Issue issue, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         deleteIssueAssignees(issue);
-        return makeIssueAssignees(issue, issueAssigneeIdsRequest.getAssigneeIds());
+        List<IssueAssignee> issueAssignees = makeIssueAssignees(issue, issueAssigneeIdsRequest.getAssigneeIds());
+        return issueAssigneeRepository.saveAll(issueAssignees);
     }
 
     public void deleteIssueAssignees(Issue issue) {

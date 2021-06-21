@@ -1,10 +1,8 @@
 package team02.issue_tracker.dto.issue;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Label;
 
-@AllArgsConstructor
 @Getter
 public class IssueLabelResponse {
 
@@ -13,6 +11,8 @@ public class IssueLabelResponse {
     private String color;
 
     public IssueLabelResponse(Label label) {
-        this(label.getId(), label.getTitle(), label.getColor());
+        this.id = label.getId();
+        this.title = label.getTitle();
+        this.color = label.getColor();
     }
 }

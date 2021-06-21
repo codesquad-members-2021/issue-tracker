@@ -10,12 +10,21 @@ import java.util.Optional;
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
 
-    List<Issue> findByDeletedFalse();
+    @Override
+    List<Issue> findAll();
 
-    Optional<Issue> findByIdAndDeletedFalse(Long id);
+    @Override
+    Optional<Issue> findById(Long id);
 
-    List<Issue> findByOpenTrueAndDeletedFalse();
+    Long countByIsOpenTrue();
 
-    List<Issue> findByOpenFalseAndDeletedFalse();
+    Long countByIsOpenFalse();
 
+    Long countByMilestoneIdAndIsOpenTrue(Long milestoneId);
+
+    Long countByMilestoneIdAndIsOpenFalse(Long milestoneId);
+
+    Long countByMilestoneId(Long milestoneId);
+
+    List<Issue> findByMilestoneId(Long milestoneId);
 }

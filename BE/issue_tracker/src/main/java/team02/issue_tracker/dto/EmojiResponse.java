@@ -1,10 +1,8 @@
 package team02.issue_tracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Emoji;
 
-@AllArgsConstructor
 @Getter
 public class EmojiResponse {
 
@@ -12,6 +10,7 @@ public class EmojiResponse {
     private String name;
 
     public EmojiResponse(Emoji emoji) {
-        this(emoji.getId(), emoji.getName());
+        this.id = emoji.getId();
+        this.name = emoji.getName();
     }
 }

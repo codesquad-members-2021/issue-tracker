@@ -1,11 +1,13 @@
 package team02.issue_tracker.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 public class LabelCountResponse {
 
-    private int labels;
+    private Long labelCount;
+
+    public LabelCountResponse(Long labelCount) {
+        this.labelCount = labelCount;
+    }
 }

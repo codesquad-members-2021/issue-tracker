@@ -1,7 +1,6 @@
 package team02.issue_tracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Comment;
 import team02.issue_tracker.domain.CommentEmoji;
@@ -10,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Getter
 public class CommentResponse {
 

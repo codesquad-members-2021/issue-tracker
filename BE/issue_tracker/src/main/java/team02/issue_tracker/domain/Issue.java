@@ -1,52 +1,56 @@
 package team02.issue_tracker.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import team02.issue_tracker.exception.IllegalStatusException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE issue SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Issue {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private LocalDateTime createdTime;
-    private boolean open;
-    private boolean deleted;
+    private boolean isOpen;
+    private boolean isDeleted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_user1"))
     private User writer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_issue_milestone1"))
     private Milestone milestone;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IssueAssignee> issueAssignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public Issue(String title, User writer, boolean open) {
         this.title = title;
         this.writer = writer;
-        this.open = open;
+        this.isOpen = open;
         this.createdTime = LocalDateTime.now();
-        this.deleted = false;
     }
 
     public void addMilestone(Milestone milestone) {
@@ -54,17 +58,17 @@ public class Issue {
     }
 
     public void close() {
-        if (!open) {
+        if (!isOpen) {
             throw new IllegalStatusException("열린 이슈가 아닙니다.");
         }
-        open = false;
+        isOpen = false;
     }
 
     public void open() {
-        if (open) {
+        if (isOpen) {
             throw new IllegalStatusException("닫힌 이슈가 아닙니다.");
         }
-        open = true;
+        isOpen = true;
     }
 
     public void editTitle(String title) {
@@ -83,17 +87,19 @@ public class Issue {
         this.milestone = milestone;
     }
 
-    public void delete() {
-        deleted = true;
-    }
-
-    public List<Comment> getComments() {
-        return comments.stream()
-                .filter(comment -> !comment.isDeleted())
-                .collect(Collectors.toList());
-    }
-
     public void deleteMilestone() {
         milestone = null;
+    }
+
+    public void addIssueLabels(List<IssueLabel> issueLabels) {
+        this.issueLabels = issueLabels;
+    }
+
+    public void addIssueAssignees(List<IssueAssignee> issueAssignees) {
+        this.issueAssignees = issueAssignees;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

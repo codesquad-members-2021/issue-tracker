@@ -1,33 +1,36 @@
 package team02.issue_tracker.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import team02.issue_tracker.dto.MilestoneRequest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE milestone SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class Milestone {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String content;
     private LocalDate createdDate;
     private LocalDate dueDate;
-    private boolean open;
-    private boolean deleted;
+    private boolean isOpen;
+    private boolean isDeleted;
 
-    @OneToMany(mappedBy = "milestone")
+    @OneToMany(mappedBy = "milestone", fetch = FetchType.LAZY)
     private List<Issue> issues = new ArrayList<>();
 
     public Milestone(String title, String content, LocalDate dueDate) {
@@ -35,27 +38,7 @@ public class Milestone {
         this.content = content;
         this.dueDate = dueDate;
         this.createdDate = LocalDate.now();
-        this.open = true;
-    }
-
-    public int getTotalIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .count();
-    }
-
-    public int getOpenIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .filter(Issue::isOpen)
-                .count();
-    }
-
-    public int getClosedIssueCount() {
-        return (int) issues.stream()
-                .filter(issue -> !issue.isDeleted())
-                .filter(issue -> !issue.isOpen())
-                .count();
+        this.isOpen = true;
     }
 
     public void edit(MilestoneRequest milestoneRequest) {
@@ -64,8 +47,7 @@ public class Milestone {
         this.dueDate = milestoneRequest.getDueDate();
     }
 
-    public void delete() {
-        deleted = true;
+    public void deleteIssues() {
         issues.stream()
                 .forEach(issue -> issue.deleteMilestone());
     }

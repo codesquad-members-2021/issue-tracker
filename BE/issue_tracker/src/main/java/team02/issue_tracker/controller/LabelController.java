@@ -26,7 +26,7 @@ public class LabelController {
 
     @GetMapping("/count")
     public ApiResult<LabelCountResponse> showLabelCount() {
-        return ApiResult.success(labelService.getLabelCount());
+        return ApiResult.success(labelService.getLabelCountResponse());
     }
 
     @PutMapping("/{labelId}")
