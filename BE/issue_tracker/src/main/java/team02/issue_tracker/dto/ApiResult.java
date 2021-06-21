@@ -3,7 +3,7 @@ package team02.issue_tracker.dto;
 import lombok.Getter;
 
 @Getter
-public class ApiResult<T>{
+public class ApiResult<T> {
     private T data;
     private String error;
 
