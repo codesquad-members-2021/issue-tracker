@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ButtonGroup from "./Button/ButtonGroup";
-import AddButton from "./Button/AddButton";
+import AddButton from "./Button/BlueButtons";
+import CancelButton from "components/common/Button/WhiteButtons";
 import { useRecoilState } from "recoil";
 import {
 	labelButtonFlagState,
@@ -8,6 +9,7 @@ import {
 	milestoneAddButtonFlagState,
 } from "RecoilStore/Atoms";
 import { useState } from "react";
+
 const Navigator = () => {
 	const [isAddButton, setIsAddButton] = useState(true);
 	const [milestoneFlag, setMilestoneFlag] = useRecoilState(
@@ -30,6 +32,7 @@ const Navigator = () => {
 	const handelAddClick = () => {
 		if (milestoneFlag) setMilestoneAddBtnFlag(!milestoneAddBtnFlag);
 		else if (!milestoneFlag) setMilestoneAddBtnFlag(false);
+		setIsAddButton(x => !x);
 	};
 
 	return (
@@ -41,10 +44,22 @@ const Navigator = () => {
 				labelClickEvent={handleLabelClick}
 				isMainPage={false}
 			/>
-			<AddButton
-				text={isAddButton ? "추가" : "닫기"}
-				clickEvent={handelAddClick}
-			/>
+
+			{isAddButton ? (
+				<AddButton
+					text="추가"
+					icon="plus"
+					size="m"
+					clickHandler={handelAddClick}
+				/>
+			) : (
+				<CancelButton
+					text="취소"
+					icon="cancel"
+					size="m"
+					clickHandler={() => setIsAddButton(x => !x)}
+				/>
+			)}
 		</NavigatorLayout>
 	);
 };
