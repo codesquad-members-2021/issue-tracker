@@ -24,7 +24,7 @@ public class User {
     private UUID id;
 
     @Column(name = "USER_NICK_NAME")
-    private String nickName;
+    private String nickname;
 
     @NonNull
     @Column(name = "USER_IMAGE_URL")
@@ -36,14 +36,14 @@ public class User {
     @Column(name = "USER_APPLE_ID")
     private String appleId;
 
-    private User(String nickName, String imageUrl, String gitHubId) {
-        this.nickName = nickName;
+    private User(String nickname, String imageUrl, String gitHubId) {
+        this.nickname = nickname;
         this.imageUrl = imageUrl;
         this.gitHubId = gitHubId;
     }
 
-    public static User instanceOf(UUID id, String nickName, String imageUrl, String gitHubId, String appleId) {
-        return new User(id, nickName, imageUrl, gitHubId, appleId);
+    public static User instanceOf(UUID id, String nickname, String imageUrl, String gitHubId, String appleId) {
+        return new User(id, nickname, imageUrl, gitHubId, appleId);
     }
 
     public static User fromGitHubUser(GitHubUser gitHubUser) {

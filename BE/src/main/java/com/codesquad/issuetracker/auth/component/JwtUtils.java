@@ -18,7 +18,7 @@ public class JwtUtils {
 
     private static final String ISSUER = "issue-tracker";
     private static final String ID = "id";
-    private static final String NICKNAME = "nickName";
+    private static final String NICKNAME = "nickname";
     private static final String IMAGE_URL = "imageUrl";
     private static final String GITHUB_ID = "gitHubId";
     private static final String APPLE_ID = "appleId";
@@ -37,7 +37,7 @@ public class JwtUtils {
     public String getJwt(User user) {
         return JWT.create()
                 .withClaim(ID, user.getId().toString())
-                .withClaim(NICKNAME, user.getNickName())
+                .withClaim(NICKNAME, user.getNickname())
                 .withClaim(IMAGE_URL, user.getImageUrl())
                 .withClaim(GITHUB_ID, user.getGitHubId())
                 .withClaim(APPLE_ID, user.getAppleId())
