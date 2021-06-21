@@ -30,7 +30,7 @@ final class LabelViewController: UIViewController {
     private let colorConverter: HexColorConvertable = HexColorConverter()
     private var networkManager: NetworkManagerOperations?
     private var labelTableDatasource: LabelTableViewDatasource?
-    private var labelTableDelegate: LabelTableDelegate?
+    private var labelTableDelegate: CommonTableDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ final class LabelViewController: UIViewController {
         labelTableDatasource = LabelTableViewDatasource()
         labelTableView.dataSource = labelTableDatasource
         
-        labelTableDelegate = LabelTableDelegate(cellActionHandler: swipeActionHandler)
+        labelTableDelegate = CommonTableDelegate(cellActionHandler: swipeActionHandler, cellHeight: 118)
         labelTableView.delegate = labelTableDelegate
     }
     

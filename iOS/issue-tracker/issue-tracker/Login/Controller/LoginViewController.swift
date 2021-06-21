@@ -81,7 +81,6 @@ class LoginViewController: UIViewController {
         let button = socialLoginButton(with: image, title)
         button.addTarget(self, action: #selector(loginWithGithubTouched), for: .touchUpInside)
         return button
-        
     }()
     
     private lazy var appleLoginButton: UIButton = {
@@ -192,6 +191,7 @@ class LoginViewController: UIViewController {
         let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
         let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
         issueTrackerTabBarController.modalPresentationStyle = .fullScreen
+        
         DispatchQueue.main.async {
             self.present(issueTrackerTabBarController, animated: true, completion: nil)
         }
@@ -233,9 +233,9 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: SocialLoginManagerDelegate {
-    func didSocialLoginSuccess(with loginInfoDTO: LoginInfoDTO) {        
+    func didSocialLoginSuccess(with loginInfoDTO: LoginInfoDTO) {
         let loginInfo = LoginInfo.shared
-        loginInfo.store(loginInfoDTO: loginInfoDTO)        
+        loginInfo.store(loginInfoDTO: loginInfoDTO)
         presentIssueViewController()
     }
     
@@ -243,4 +243,5 @@ extension LoginViewController: SocialLoginManagerDelegate {
         let errorText = error.description
         presentAlert(with: errorText)
     }
+    
 }

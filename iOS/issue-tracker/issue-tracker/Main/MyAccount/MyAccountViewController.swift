@@ -90,5 +90,4 @@ class MyAccountViewController: UIViewController {
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
     }
-    
 }

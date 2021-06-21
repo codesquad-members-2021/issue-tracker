@@ -21,7 +21,12 @@ final class MultipleLineInputStackView: UIStackView {
     private lazy var elementSpacing: CGFloat = {
         return lineHeight / 2
     }()
-    
+       
+    private var lastItemLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+        
     private var items: [InputLineItem]?
     private let borderColor = Colors.border.cgColor
     private let borderWidth: CGFloat = 1
@@ -46,12 +51,20 @@ final class MultipleLineInputStackView: UIStackView {
     func configure(with items: [InputLineItem]) {
         self.items = items
         
-        items.forEach { inputLineItem in
+        items.enumerated().forEach { index, inputLineItem in
             let containerFrame = CGRect(x: 0, y: 0, width: frame.width, height: lineHeight)
             let container = UIView(frame: containerFrame)
             
             let category = inputLineItem.category
-            let titleLabel = UILabel()
+            
+            var titleLabel: UILabel
+            
+            if index == 2 {
+                titleLabel = lastItemLabel
+            }else {
+                titleLabel = UILabel()
+            }
+            
             titleLabel.text = category
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             
@@ -73,6 +86,14 @@ final class MultipleLineInputStackView: UIStackView {
             addArrangedSubview(container)
         }
         addDivisionLines()
+    }
+        
+    func setLabelColor(correct: Bool) {
+        if correct {
+            lastItemLabel.textColor = Colors.mainGrape
+        }else {
+            lastItemLabel.textColor = UIColor.red
+        }
     }
     
     private func addDivisionLines() {

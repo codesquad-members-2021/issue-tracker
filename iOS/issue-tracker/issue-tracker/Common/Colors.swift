@@ -14,4 +14,10 @@ enum Colors {
     static let deleteSunnyside = UIColor(named: "DeleteSunnyside") ?? UIColor.yellow
     static let openBrocoli = UIColor(named: "OpenBrocoli") ?? UIColor.purple
     static let mainGrape = UIColor(named: "MainGrape") ?? UIColor.purple
+    static let mileStoneSuceess = UIColor(named: "MileStoneSuccess") ?? UIColor.green
+    static let description = UIColor(named: "Description") ?? UIColor.systemGray2
+    static let openMileStoneTint = UIColor(named: "OpenMileStoneTint") ?? UIColor.black
+    static let openMileStoneBG = UIColor(named: "OpenMileStoneBG") ?? UIColor.purple
+    static let closeMileStoneTint = UIColor(named: "CloseMileStoneTint") ?? UIColor.black
+    static let closeMileStoneBG = UIColor(named: "CloseMileStoneBG") ?? UIColor.blue    
 }
