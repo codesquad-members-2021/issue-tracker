@@ -182,4 +182,9 @@ public class IssueRepository {
         String query = "select count(closed) from issue where closed = true";
         return jdbcTemplate.queryForObject(query, Integer.class);
     }
+
+    public void setMilestoneNullFromIssueByMilestoneId(Long id) {
+        String query = "update issue set milestone_id = null where milestone_id = ?";
+        jdbcTemplate.update(query, id);
+    }
 }

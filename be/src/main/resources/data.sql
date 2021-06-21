@@ -3,7 +3,7 @@
 -- -----------------------------------------------------
 insert into user (`id`, `name`, `avatar_url`) values (1, 'MJ', 'https://avatars.githubusercontent.com/u/16694346?v=4');
 insert into user (`id`, `name`, `avatar_url`) values (2, 'Kyu', 'https://avatars.githubusercontent.com/u/59721293?v=4');
---insert into user (`id`, `name`, `avatar_url`) values (16694346, 'MJbae', 'https://avatars.githubusercontent.com/u/16694346?v=4');
+insert into user (`id`, `name`, `avatar_url`) values (16694346, 'MJbae', 'https://avatars.githubusercontent.com/u/16694346?v=4');
 
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`milestone`
@@ -36,7 +36,8 @@ insert into issue (id, title, description, assignee, created_time, closed, delet
 values (8, '[BE] 자동 배포 시스템 구축', '자동배포 스크립트 + 슬랙 알람', 2, CURRENT_TIMESTAMP, false, false, 3, 2, 8);
 insert into issue (id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number`)
 values (9, '[BE] CI/CD 구축', 'GitHub Action 활용하여 CI/CD 구현', 2, CURRENT_TIMESTAMP, false, false, 3, 2, 9);
-
+insert into issue (id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number`)
+values (10, '마일스톤,담당자가 연결되어 있지 않은 이슈', '내용 없음', null, CURRENT_TIMESTAMP, false, false, null, 2, 10);
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`label`
 -- -----------------------------------------------------

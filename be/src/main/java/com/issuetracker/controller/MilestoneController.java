@@ -1,10 +1,9 @@
 package com.issuetracker.controller;
 
 import com.issuetracker.dto.MilestoneDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.service.MilestoneService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,10 @@ public class MilestoneController {
     @GetMapping
     public List<MilestoneDto> viewAllMilestones() {
         return milestoneService.searchAllMilestones();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseStatusDto delete(@PathVariable Long id) {
+        return milestoneService.delete(id);
     }
 }

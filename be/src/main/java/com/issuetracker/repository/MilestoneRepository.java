@@ -2,6 +2,7 @@ package com.issuetracker.repository;
 
 import com.issuetracker.domain.Milestone;
 import com.issuetracker.dto.MilestoneDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +31,10 @@ public class MilestoneRepository {
     public List<Milestone> findAll() {
         String query = "select id, title, description, due_date, closed from milestone";
         return jdbcTemplate.query(query, MILESTONE_ROW_MAPPER);
+    }
+
+    public void deleteMilestoneById(Long id) {
+        String query = "delete from milestone where id = ?";
+        jdbcTemplate.update(query, id);
     }
 }
