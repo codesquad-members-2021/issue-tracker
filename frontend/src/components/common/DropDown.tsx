@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import * as Icons from 'components/common/icons';
+
 const DropDown = ({ info }) => {
   
   const [isClicked, setIsClicked] = useState(false);
@@ -13,7 +15,7 @@ const DropDown = ({ info }) => {
   return (
     <DropdownLayout alignment={info.alignment}>
       <DropdownButton onClick={handleDropDownButtonClick}> 
-        {info.icon && info.icon()}<DropdownButtonText>{info.name}</DropdownButtonText>
+        {Icons[info.icon] && Icons[info.icon]()}<DropdownButtonText>{info.name}</DropdownButtonText>
       </DropdownButton>
       {isClicked && 
       
