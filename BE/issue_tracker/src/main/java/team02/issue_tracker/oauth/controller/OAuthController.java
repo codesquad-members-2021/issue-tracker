@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.dto.ApiResult;
-import team02.issue_tracker.oauth.dto.SocialProfile;
-import team02.issue_tracker.oauth.dto.github.GithubUserProfile;
-import team02.issue_tracker.oauth.service.GithubLoginService;
-import team02.issue_tracker.oauth.service.GoogleLoginService;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
 import team02.issue_tracker.oauth.annotation.UserId;
 import team02.issue_tracker.oauth.dto.JwtResponse;
@@ -21,11 +17,9 @@ import team02.issue_tracker.oauth.service.LoginService;
 public class OAuthController {
 
     private final LoginService loginService;
-    private final GithubLoginService githubLoginService;
 
-    public OAuthController(LoginService loginService, GithubLoginService githubLoginService) {
+    public OAuthController(LoginService loginService) {
         this.loginService = loginService;
-        this.githubLoginService = githubLoginService;
     }
 
     @GetMapping("/login/github/web")
