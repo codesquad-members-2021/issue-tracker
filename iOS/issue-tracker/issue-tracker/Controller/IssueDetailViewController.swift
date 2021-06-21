@@ -7,10 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class IssueDetailViewController: UIViewController {
     private let cellReuseIdentifier = "IssueDetailCell"
-    private let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    private var viewModel = IssueDetailViewModel()
+    private let disposeBag = DisposeBag()
+    private var comment: [Comment] = []
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -38,7 +42,6 @@ class IssueDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showIssueDetailInfo))
-        navigationItem.title = "테스트 이슈 #2"
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -49,6 +52,8 @@ class IssueDetailViewController: UIViewController {
         view.addSubview(toolbar)
 
         setupAutolayout()
+        fetch()
+        bind()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +80,7 @@ class IssueDetailViewController: UIViewController {
     @objc
     private func scrollToNext() {
         guard let indexPath = tableView.indexPathForSelectedRow,
-              indexPath.row + 1 < data.count else { return }
+              indexPath.row + 1 < comment.count else { return }
         tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
                             animated: true, scrollPosition: .bottom)
     }
@@ -89,14 +94,32 @@ class IssueDetailViewController: UIViewController {
     }
 }
 
+private extension IssueDetailViewController {
+    func fetch() {
+        viewModel.fetch()
+    }
+
+    func bind() {
+        viewModel.subject.bind { detail in
+            self.navigationItem.title = detail?.data.title
+            guard let comment = detail?.data.comment else { return }
+            self.comment = comment
+            self.tableView.reloadData()
+        }
+        .disposed(by: disposeBag)
+    }
+}
 extension IssueDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return comment.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? IssueDetailTableViewCell else {
+            return UITableViewCell()
+        }
         cell.accessoryView = UIImageView(image: UIImage(systemName: "ellipsis"))
+        cell.configure(model: comment[indexPath.row])
         return cell
     }
 }

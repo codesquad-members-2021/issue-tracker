@@ -70,6 +70,7 @@
 		D0ADB6F8266F5BBE00E0762C /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */; };
 		D0DAAE28268071F00075E794 /* NewIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */; };
 		D0DAAE2A2680A8DE0075E794 /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */; };
+		D0DAAE2C2680E2E20075E794 /* IssueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DAAE2B2680E2E20075E794 /* IssueDetailViewModel.swift */; };
 		D0FD509E26708DDE008C6031 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E4266E095E00901C55 /* LoginViewController.swift */; };
 		D0FD50AA267096C0008C6031 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */; };
 		D0FD50BB26709F8B008C6031 /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */; };
@@ -163,6 +164,7 @@
 		D0ADB6F7266F5BBE00E0762C /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueViewModel.swift; sourceTree = "<group>"; };
 		D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
+		D0DAAE2B2680E2E20075E794 /* IssueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewModel.swift; sourceTree = "<group>"; };
 		D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		D0FD50BA26709F8B008C6031 /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
 		D0FD50DB2671AA04008C6031 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */,
 				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
 				D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */,
+				D0DAAE2B2680E2E20075E794 /* IssueDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				B3B559E3266E095E00901C55 /* SceneDelegate.swift in Sources */,
 				B3E01193267A0B44001155D4 /* AddLabelViewModel.swift in Sources */,
 				B32FEAC62671DDA600BF37A1 /* MilestoneView.swift in Sources */,
+				D0DAAE2C2680E2E20075E794 /* IssueDetailViewModel.swift in Sources */,
 				B3EADAC0267628FB0007C4B6 /* LabelsCollectionView.swift in Sources */,
 				B3EADAC2267629190007C4B6 /* LabelsCollectionViewCell.swift in Sources */,
 				D0DAAE2A2680A8DE0075E794 /* AdditionalInfoViewController.swift in Sources */,
