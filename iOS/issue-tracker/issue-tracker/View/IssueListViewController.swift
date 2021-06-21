@@ -18,6 +18,7 @@ final class IssueListViewController: UIViewController {
     private let filterBarButton = FilterBarButton()
     private let selectBarButton = SelectBarButton()
     private let cancelButton = CancelButton()
+    private let addIssueTapGesture = UITapGestureRecognizer()
     private let issueToolbar = IssueToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     private let searchController: UISearchController = {
         var searchController = UISearchController(searchResultsController: nil)
@@ -33,10 +34,10 @@ final class IssueListViewController: UIViewController {
         setupNavigationItem()
         setupIssueTableView()
         setupAddIssueButtonAutolayout()
-        filterBarButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        addIssueButton.addGestureRecognizer(addIssueTapGesture)
         bindTableViewDataSource()
         bindTableViewDelegate()
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        bindButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +77,30 @@ final class IssueListViewController: UIViewController {
                     cell.uncheck()
                 }
             }
+            .disposed(by: bag)
+    }
+
+    func bindButton() {
+        selectBarButton.rx.tap
+            .map { true }
+            .bind(to: issueListViewModel.selectMode)
+            .disposed(by: bag)
+
+        cancelButton.rx.tap
+            .map { false }
+            .bind(to: issueListViewModel.selectMode)
+            .disposed(by: bag)
+
+        filterBarButton.rx.tap
+            .bind { [weak self] _ in
+                self?.filterButtonTapped()
+            }
+            .disposed(by: bag)
+
+        addIssueTapGesture.rx.event
+            .bind(onNext: { [weak self] _ in
+                self?.addIssueButtonTapped()
+            })
             .disposed(by: bag)
     }
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
