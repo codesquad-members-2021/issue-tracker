@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OAuthResponseDTO: Codable {
+struct OAuthResponseDTO: Decodable {
     let jwt: JWT
     let avatarUrl: String
     let loginId: String

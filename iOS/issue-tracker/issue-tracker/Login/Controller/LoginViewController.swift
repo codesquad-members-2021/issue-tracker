@@ -189,17 +189,18 @@ class LoginViewController: UIViewController {
     }
     
     private func presentIssueViewController() {
+        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
+        let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
+        issueTrackerTabBarController.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
-            let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
-            let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
-            issueTrackerTabBarController.modalPresentationStyle = .fullScreen
             self.present(issueTrackerTabBarController, animated: true, completion: nil)
         }
     }
     
     private func presentAlert(with errorMessage: String) {
+        let alert = AlertFactory.create(body: errorMessage)
+        
         DispatchQueue.main.async {
-            let alert = AlertFactory.create(body: errorMessage)
             self.present(alert, animated: true, completion: nil)
         }
     }

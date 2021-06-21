@@ -73,6 +73,7 @@ extension GithubAuthorizationManager: SocialLoginManagable {
                     
                     if self.keyChainSaver.save(loginInfoDTO) {
                         self.delegate?.didSocialLoginSuccess(with: loginInfoDTO)
+
                     } else {
                         let saveError = LoginError.keyChainSave
                         self.delegate?.didSocialLoginFail(with: saveError)
