@@ -1,6 +1,7 @@
 package com.issuetracker.repository;
 
 import com.issuetracker.domain.Milestone;
+import com.issuetracker.dto.MilestoneDto;
 import com.issuetracker.dto.MilestoneRequestDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -49,5 +50,10 @@ public class MilestoneRepository {
        jdbcTemplate.update(query, requestDto.getTitle(),
                requestDto.getDescription(),
                requestDto.getDueDate());
+    }
+
+    public List<Milestone> findAllByClosed(boolean closed) {
+        String query = "select id, title, description, due_date, closed from milestone where closed = ?";
+        return jdbcTemplate.query(query, MILESTONE_ROW_MAPPER, closed);
     }
 }

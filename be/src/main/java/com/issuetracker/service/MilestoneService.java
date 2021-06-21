@@ -21,13 +21,27 @@ public class MilestoneService {
         this.issueRepository = issueRepository;
     }
 
-    public List<MilestoneDto> searchAllMilestones() {
-        return milestoneRepository.findAll().stream()
-                .map(milestone -> MilestoneDto.of(
-                        milestone,
-                        issueRepository.countOpenedIssuesByMilestoneId(milestone.getId()),
-                        issueRepository.countClosedIssuesByMilestoneId(milestone.getId())))
-                .collect(Collectors.toList());
+    public List<MilestoneDto> searchAllMilestones(String closed) {
+        if (closed == null) {
+            return milestoneRepository.findAll().stream()
+                    .map(milestone -> MilestoneDto.of(
+                            milestone,
+                            issueRepository.countOpenedIssuesByMilestoneId(milestone.getId()),
+                            issueRepository.countClosedIssuesByMilestoneId(milestone.getId())))
+                    .collect(Collectors.toList());
+        } else {
+            if (closed.equals("true") || closed.equals("false")) {
+                return milestoneRepository.findAllByClosed(Boolean.valueOf(closed)).stream()
+                        .map(milestone -> MilestoneDto.of(
+                                milestone,
+                                issueRepository.countOpenedIssuesByMilestoneId(milestone.getId()),
+                                issueRepository.countClosedIssuesByMilestoneId(milestone.getId())
+                        ))
+                        .collect(Collectors.toList());
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     @Transactional
