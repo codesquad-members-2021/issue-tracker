@@ -9,6 +9,7 @@ const StyledSpaceBetween = css`
 
 const buttonWidths = {
 	small: "100px",
+	baseS: "120px",
 	base: "128px",
 	lg: "160px",
 	xl: "340px",

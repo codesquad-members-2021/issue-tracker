@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { DisplayFlex, CenterAi } from "styles/StyledLayout ";
 import { ReactComponent as RefreshIcon } from "images/refresh-ccw.svg";
-import { ReactComponent as XIcon } from "images/x-square.svg";
-import { ReactComponent as EditIcon } from "images/edit.svg";
-import { ReactComponent as PlusIcon } from "images/plus.svg";
 import { useEffect, useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
 import useDebounce from "hooks/useDebounce";
+import API from "util/API";
+import fetchData from "util/fetchData";
+import CancelButton from "components/common/Button/WhiteButtons";
+import SubmitButton from "components/common/Button/BlueButtons";
 const LabelInput = ({ isEditor }) => {
 	const {
 		creatorTitle,
@@ -25,6 +26,7 @@ const LabelInput = ({ isEditor }) => {
 		backgroundColor: theme.grayScale.input_background,
 		textColor: false,
 	};
+
 	const reducer = (state, { type, payload }) => {
 		switch (type) {
 			case "name":
@@ -54,6 +56,21 @@ const LabelInput = ({ isEditor }) => {
 		} else {
 			// 디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
 			dispatch({ type: "description", payload: event.target.value });
+		}
+	};
+	const handleSubmit = async () => {
+		const testData = {
+			name: "feature",
+			description: "새 기능",
+			colors: {
+				backgroundColor: "#000000",
+				textColor: "#FFFFFF",
+			},
+		};
+		if (isEditor) {
+			const res = await fetchData(API.labels(), "POST", testData);
+		} else {
+			const res = await fetchData(API.labels(), "POST", testData);
 		}
 	};
 	const getFontColor = () => {
@@ -123,19 +140,23 @@ const LabelInput = ({ isEditor }) => {
 					</DisplayFlex>
 					<ButtonContainer>
 						{isEditor && (
-							<CancelButton>
-								<XIcon stroke={theme.colors.blue} />
-								{buttons.cancel}
-							</CancelButton>
+							<CancelButton text={buttons.cancel} icon="cancel" size="m" />
 						)}
-						<SubmitButton>
-							{isEditor ? (
-								<EditIcon stroke={theme.grayScale.off_white} />
-							) : (
-								<PlusIcon stroke={theme.grayScale.off_white} />
-							)}
-							{buttons.submit}
-						</SubmitButton>
+						{isEditor ? (
+							<SubmitButton
+								text={buttons.submit}
+								icon="edit"
+								size="m"
+								clickHandler={handleSubmit}
+							/>
+						) : (
+							<SubmitButton
+								text={buttons.submit}
+								icon="plus"
+								size="m"
+								clickHandler={handleSubmit}
+							/>
+						)}
 					</ButtonContainer>
 				</SettingContainer>
 			</MainLayout>
@@ -184,36 +205,6 @@ const TextInputContainer = styled(CenterAi)`
 	height: 40px;
 	border: none;
 	color: ${({ theme }) => theme.grayScale.title_active};
-`;
-
-const CancelButton = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0px 16px;
-	margin: 0 3px;
-	width: 120px;
-	height: 40px;
-	color: ${theme.colors.blue};
-	background: ${theme.colors.off_white};
-	border: 2px solid ${theme.colors.blue};
-	border-radius: 11px;
-	cursor: pointer;
-`;
-
-const SubmitButton = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	padding: 0px 16px;
-	margin: 0 3px;
-	width: 120px;
-	height: 40px;
-	background: ${theme.colors.blue};
-	color: ${theme.grayScale.off_white};
-	border-radius: 11px;
-	cursor: pointer;
 `;
 
 const RadioButton = styled.input`
