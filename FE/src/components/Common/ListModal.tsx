@@ -18,11 +18,11 @@ interface IListItem extends IListItemImgType {
 
 interface IListModal {
   rightPos?: string;
-  data: TIssueListFilterType;
+  data?: TIssueListFilterType;
 }
 
 const ListModal = ({ rightPos, data, ...props }: IListModal) => {
-  const { title, items } = data;
+  const { title, items } = data!;
 
   const renderItems = useCallback(
     () =>
@@ -32,7 +32,7 @@ const ListModal = ({ rightPos, data, ...props }: IListModal) => {
             {imgType !== 'text' && (color || imgUrl) && (
               <MenuImageBlock imgType={imgType} color={color} imgUrl={imgUrl} />
             )}
-            {text}
+            {text || name}
           </MenuTextBlock>
           {imgType !== 'text' && <CircleCheckBox color="default" name={name} />}
         </MenuLabelTag>
@@ -117,17 +117,18 @@ const MenuTextBlock = styled.span`
   align-items: center;
   column-gap: 0.2rem;
   user-select: none;
+  font-size: 0.9rem;
 `;
 
 const MenuImageBlock = styled.div<IListItemImgType>`
   border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
 
   ${({ imgType, imgUrl }) =>
     imgType === 'image' &&
     css`
       min-width: 1.2rem;
       min-height: 1.2rem;
-      border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
       background-position: center center;
       background-size: contain;
       background-repeat: no-repeat;

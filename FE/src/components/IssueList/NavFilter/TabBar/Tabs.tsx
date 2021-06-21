@@ -29,9 +29,9 @@ const Tabs = ({ milestones, labels }: IAllGetRequestDatas) => {
     tabs.map(({ name, value }, idx) => (
       <TabButton  key={idx} name={name}>
         <Link to={name === 'label' ? '/labels' : '/milestones'}>
-          <span>{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
+          <span className="icon">{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
           <span>{value}</span>
-          <span>({name === 'label' ? labelsCount : milestoneCount})</span>
+          <span className="count">({name === 'label' ? labelsCount : milestoneCount})</span>
         </Link>
       </TabButton>
     ));
@@ -56,10 +56,9 @@ const TabsLayout = styled.div`
 const TabButton = styled(Button)`
   display: flex;
   align-items: center;
-
   border: none;
   border: 1px solid ${({ theme }) => theme.colors.grayScale.line};
-  padding: 0.4rem 1.4rem;
+  padding: 0;
   & + & {
     border-left: 1px solid ${({ theme }) => theme.colors.grayScale.line};
   }
@@ -67,13 +66,12 @@ const TabButton = styled(Button)`
   a {
     display: flex;
     text-decoration: none;
+    padding: 0.4rem 1.4rem;
   }
 
   span {
     display: flex;
     align-items: center;
   }
-  span + span {
-    margin-left: 0.4rem;
-  }
+  span.icon + span { margin-left: 0.2rem };
 `;

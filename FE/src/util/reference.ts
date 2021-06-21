@@ -8,7 +8,7 @@ const TextHeader: ITextHeader = {
 };
 
 // 2. IssueList
-export type TNameValue = {
+type TNameValue = {
   name: string;
   value: string;
 };
@@ -34,19 +34,20 @@ interface ITextIssueList {
   };
 }
 
-export type TIssueListFilterType = {
+type TIssueListFilterItem = {
+  name: string;
+  text?: string;
+  imgType?: TFilterItemType;
+  imgUrl?: string;
+  color?: string;
+};
+type TIssueListFilterType = {
   title: string;
-  items: {
-    name: string;
-    text?: string;
-    imgType?: TFilterItemType;
-    imgUrl?: string;
-    color?: string;
-  }[];
+  items: TIssueListFilterItem[];
 };
 
 type TTextIssueListFilterItems = {
-  [filterType in TFilterModal]: TIssueListFilterType;
+  [filterType in TFilterModal]?: TIssueListFilterType;
 };
 
 interface ITextLogin {
@@ -119,8 +120,13 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
     title: '레이블 필터',
     items: [
       { name: 'noLabel', text: '레이블이 없는 이슈' },
-      { name: 'bug', text: 'bug', color: 'red', imgType: 'color', },
-      { name: 'documentation', text: 'documentation', color: 'blue', imgType: 'color', },
+      { name: 'bug', text: 'bug', color: 'red', imgType: 'color' },
+      {
+        name: 'documentation',
+        text: 'documentation',
+        color: 'blue',
+        imgType: 'color',
+      },
     ],
   },
   milestone: {
@@ -162,5 +168,13 @@ const TextLogin: ITextLogin = {
   register: '회원가입',
 };
 
-export type { ITextHeader, ITextIssueList, ITextLogin };
+export type {
+  TIssueListFilterItem,
+  TIssueListFilterType,
+  TNameValue,
+  ITextHeader,
+  ITextIssueList,
+  ITextLogin,
+  TTextIssueListFilterItems,
+};
 export { TextHeader, TextIssueList, TextLogin, TextIssueListFilterMock };

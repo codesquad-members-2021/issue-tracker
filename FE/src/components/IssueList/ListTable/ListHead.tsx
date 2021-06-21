@@ -8,17 +8,22 @@ import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ListModal from '../../Common/ListModal';
-import { TextIssueList, TextIssueListFilterMock } from 'util/reference';
+import { TextIssueList, TIssueListFilterItem, TTextIssueListFilterItems } from 'util/reference';
 
 const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren) => {
   // 1. 일반 (Recoil 등)
   const { table: {header: {left, right}} } = TextIssueList;
+
   const [leftTabsState, setLeftTabsState] = useState(0);
   const [filterVisibleState, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
   const [issueOpenOrClose, setIssueOpenOrClose] = useState({open: 0, close: 0});
+  const [issueListFilterData, setIssueListFilterData] = useState<TTextIssueListFilterItems>();
+  
+  // =========
 
   // 2. useEffect
+  // 1) 이슈 데이터 갯수 정보
   useEffect(() => {
     if (!data || !data.issues) return;
     const arrIssues = data.issues.issues;
@@ -28,9 +33,48 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
       open: openCnt,
       close: arrIssues.length-openCnt,
     })
-
   },[data?.issues]);
 
+  // 2) 필터 (ListModal)에 들어가는 데이터 생성
+  useEffect(() => {
+    if (!data) return;
+    // assignee(담당자) & writer(작성자) ==> users 데이터
+    const { milestones, labels, users } = data;
+    if (!milestones || !labels || !users) return;
+
+    const usersFilterItems: TIssueListFilterItem[] = users.users.map(
+      ({ userName, profileImage }) => ({ name: userName, imgUrl: profileImage, imgType: 'image'}));
+    const milestonesFilterItems: TIssueListFilterItem[] =
+      milestones.milestones.map(({ title }) => ({ name: title }));
+    const labelsFilterItems : TIssueListFilterItem[] = 
+      labels.labels.map(({title, bgColor }) => ({ name: title, color: bgColor, imgType: "color"}));
+
+    const fitlerData : TTextIssueListFilterItems = {
+      assignee: {
+        title: '담당자 필터',
+        items: usersFilterItems,
+      },
+      writer: {
+        title: '작성자 필터',
+        items: usersFilterItems,
+      },
+      milestone: {
+        title: '마일스톤 필터',
+        items: milestonesFilterItems,
+      },
+      label: {
+        title: '레이블 필터',
+        items: labelsFilterItems,
+      }
+    };
+
+    setIssueListFilterData(fitlerData);
+
+  }, [data?.milestones, data?.labels, data?.users]);
+
+
+  // =========
+  
   // 3. events
   const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
   const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
@@ -44,6 +88,8 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
     }));
     handleFilterModalClick(name);
   }
+
+  // =========
 
   // 4-1. render
   const renderLeftTabItems = () =>
@@ -74,18 +120,19 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
             <MdKeyboardArrowDown />
           </RightButton>
         </RightRow>
-        {filterVisibleState[name] && (
+        {filterVisibleState[name] && issueListFilterData && (
           <RightRow>
             <ListModal
               rightPos="0"
-              data={TextIssueListFilterMock[name]}
+              data={issueListFilterData[name]}
             />
           </RightRow>
         )}
       </RightLayout>
     ),
   );
-  // ====
+
+  // =========
 
   return (
     <ListHeadLayout {...props}>
