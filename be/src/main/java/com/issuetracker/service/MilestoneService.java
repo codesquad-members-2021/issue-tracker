@@ -1,6 +1,7 @@
 package com.issuetracker.service;
 
 import com.issuetracker.dto.MilestoneDto;
+import com.issuetracker.dto.MilestoneRequestDto;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.repository.IssueRepository;
 import com.issuetracker.repository.MilestoneRepository;
@@ -33,6 +34,11 @@ public class MilestoneService {
     public ResponseStatusDto delete(Long id) {
         issueRepository.setMilestoneNullFromIssueByMilestoneId(id);
         milestoneRepository.deleteMilestoneById(id);
+        return new ResponseStatusDto("success");
+    }
+
+    public ResponseStatusDto edit(Long id, MilestoneRequestDto requestDto) {
+        milestoneRepository.editMilestoneById(id, requestDto);
         return new ResponseStatusDto("success");
     }
 }

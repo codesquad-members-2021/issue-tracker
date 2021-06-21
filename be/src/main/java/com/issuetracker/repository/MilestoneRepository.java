@@ -1,13 +1,11 @@
 package com.issuetracker.repository;
 
 import com.issuetracker.domain.Milestone;
-import com.issuetracker.dto.MilestoneDto;
-import com.issuetracker.dto.ResponseStatusDto;
+import com.issuetracker.dto.MilestoneRequestDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-
 import java.util.List;
 
 import static com.issuetracker.util.RowMappers.MILESTONE_ROW_MAPPER;
@@ -36,5 +34,13 @@ public class MilestoneRepository {
     public void deleteMilestoneById(Long id) {
         String query = "delete from milestone where id = ?";
         jdbcTemplate.update(query, id);
+    }
+
+    public void editMilestoneById(Long id, MilestoneRequestDto requestDto) {
+        String query = "update milestone set title = ?, description = ?, due_date = ? where id = ?";
+        jdbcTemplate.update(query, requestDto.getTitle(),
+                requestDto.getDescription(),
+                requestDto.getDueDate(),
+                id);
     }
 }

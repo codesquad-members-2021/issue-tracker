@@ -9,7 +9,10 @@ public class MilestoneDto {
     private Long id;
     private String title;
     private String description;
+
+    @JsonProperty("due_date")
     private LocalDate dueDate;
+
     private boolean closed;
 
     @JsonProperty("opened_issue_count")
