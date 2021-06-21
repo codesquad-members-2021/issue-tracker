@@ -16,7 +16,6 @@ const LabelEditItem = ({ id, name, color, description, setToggleLabel }: LabelIt
       color: labelColorState.value
     }
     const responseData = await API.put.labels(id, putData);
-    console.log(responseData)
   }
 
   return (

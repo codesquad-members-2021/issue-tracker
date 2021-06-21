@@ -2,23 +2,18 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import InputField from '@/components/common/InputField';
-import { issueCommentInputAtom, issueTitleInputAtom } from '@components/common/atoms/issueInputAtom';
 import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import API from '@/utils/API';
 import useDebounceTyping from '@/utils/hook/useDebounce';
 import ClipIcon from '@/Icons/Clip.svg';
-import useRecoilInput from '@/utils/hook/useRecoilInput';
 
-const TitleInput = () => {
+const CommentInput = ({ commentInputState: { value, onChange } }: any) => {
   const classes = inputStyles();
   const [debouncedCount, setDebounceCount] = useDebounceTyping<number>(0, { start: 500, end: 2000 });
-  const titleInputState = useRecoilInput(issueTitleInputAtom);
-  const { value: commentInputValue, onChange: commentOnChange } = useRecoilInput(issueCommentInputAtom);
 
   const handleChangeTyping = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setDebounceCount(event.target.value.length);
-    commentOnChange(event)
+    onChange(event)
   }, []);
 
   const handleChangeFile = async (event: React.ChangeEvent<any>) => {
@@ -28,15 +23,13 @@ const TitleInput = () => {
     try {
       const data = await API.post.files(formData);
       const fileAddData = `\n[${data.name}](${data.path})`;
-      commentOnChange(event, fileAddData);
+      onChange(event, fileAddData);
     } catch (e) {
       console.log(e);
     }
   }
-
   return (
-    <InputWrapper>
-      <InputField {...titleInputState} />
+    <>
       <TextAreaWrapper>
         <TextField
           label="코멘트를 입력하세요"
@@ -45,7 +38,7 @@ const TitleInput = () => {
           className={classes.desc}
           variant="filled"
           onChange={handleChangeTyping}
-          value={commentInputValue}
+          value={value}
           InputProps={{
             disableUnderline: true
           }}
@@ -70,13 +63,9 @@ const TitleInput = () => {
           파일 첨부하기
         </Button>
       </label>
-    </InputWrapper>
+    </>
   )
 }
-
-const InputWrapper = styled.div`
-  width:100%;
-`;
 
 const ClipImageTag = styled.img`
   margin-right:10px;
@@ -97,4 +86,4 @@ const TypingCountWrapper = styled.div`
   font-size: 12px;
   color:#6E7191;
 `;
-export default TitleInput;
+export default CommentInput;

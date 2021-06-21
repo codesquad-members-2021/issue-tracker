@@ -7,6 +7,9 @@ const API: any = {
     issues: async () => {
       return (await fetch(`/issues`)).json();
     },
+    issueDetail: async (id: string | number) => {
+      return (await fetch(`/issues/${id}`)).json();
+    },
     users: async () => {
       return (await fetch(`/users`)).json();
     },
@@ -79,6 +82,18 @@ const API: any = {
         body: JSON.stringify(data)
       });
       return response;
+    }
+  },
+  patch: {
+    issues: async (patchData: Array<{ id: number, closed: boolean }>) => {
+      const response = await fetch(`/issues`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(patchData)
+      });
+      return response
     }
   }
 };

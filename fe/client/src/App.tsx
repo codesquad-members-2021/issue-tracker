@@ -16,7 +16,7 @@ const Page404Lazy = React.lazy(() => import('@/Pages/Page404'));
 const routeArray = [
   { path: '/issueList', component: IssueListLazy },
   { path: '/createIssue', component: CreateIssueLazy },
-  { path: '/issueDetail', component: IssueDetailLazy },
+  { path: '/issueDetail/:id', component: IssueDetailLazy },
   { path: '/labelList', component: LabelListLazy },
   { path: '/milestoneList', component: MilestoneLazy }
 ];
@@ -29,14 +29,33 @@ function App() {
       <GlobalStyle />
       <Suspense fallback="loading...">
         <HeaderLazy {...{ routePaths }} />
-        <Switch>
-          <Route exact path="/" component={LoginLazy} />
-          {routeArray.map(({ path, component }) => {
-            return <Route exact {...{ path, component }} key={path} />
-          })}
-          <Route component={Page404Lazy} />
-        </Switch >
       </Suspense>
+      <Switch>
+
+        <Route exact path="/" >
+          <Suspense fallback="loading...">
+            <LoginLazy />
+          </Suspense>
+        </Route>
+
+        {routeArray.map(({ path, component: Component }) => {
+          return (
+            <Route exact {...{ path }} key={path} >
+              <Suspense fallback="loading...">
+                <Component />
+              </Suspense>
+            </Route>
+          )
+        })}
+
+        <Route>
+          <Suspense fallback="loading...">
+            <Page404Lazy />
+          </Suspense>
+        </Route>
+
+      </Switch >
+
     </RecoilRoot>
   );
 }

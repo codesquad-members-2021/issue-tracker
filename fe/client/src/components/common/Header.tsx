@@ -6,7 +6,7 @@ import LogoIcon from '@/Icons/MediumLogo.svg';
 const Header = ({ routePaths }: { routePaths: string[] }) => {
   const location = useLocation();
 
-  if (routePaths.indexOf(location.pathname) < 0) return null;
+  if (routePaths.indexOf(location.pathname.replace(/[\d]+$/g , ':id')) < 0) return null;
   return (
     <HeaderWrapper>
       <img src={LogoIcon} alt="" />
@@ -27,4 +27,5 @@ const UserIcon = styled.img`
   height: 44px;
   border-radius: 50%;
 `;
+
 export default Header;

@@ -2,18 +2,21 @@ import HeadContent from '@components/createIssue/HeadContent';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Tabs from '@components/createIssue/Tabs';
-import TitleInput from '@components/createIssue/TitleInput';
+import CreateInputs from '@components/createIssue/CreateInputs';
 import SendButton from '@components/createIssue/SendButton';
 import IconButton from '@components/common/IconButton';
+import useInput from '@/utils/hook/useInput';
 
 const CreateIssuePage = () => {
+  const commentInputState = useInput('');
+
   return (
     <>
       <HeadContent />
       <Hr />
       <ContentsWrapper>
         <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" />
-        <TitleInput />
+        <CreateInputs {...{ commentInputState }} />
         <Tabs />
       </ContentsWrapper>
       <Hr />
@@ -23,7 +26,7 @@ const CreateIssuePage = () => {
             <FontBold>작성취소</FontBold>
           </IconButton>
         </Link>
-        <SendButton />
+        <SendButton {...{ commentInputState }} />
       </BottomContents>
     </>
   )

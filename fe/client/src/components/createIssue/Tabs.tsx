@@ -11,7 +11,7 @@ const tabItems = [
   { name: '마일스톤', title: 'milestone' }
 ];
 
-const Tabs = () => {
+const Tabs = ({ checkedData }: { checkedData?: any}) => {
   const [, setFilterModalState] = useRecoilState(filterModalAtom);
   const handleClickShowFilterModal = useCallback((title: string) => () => {
     setFilterModalState((filterModalState: FilterBooleanType) => ({ ...filterModalState, [title]: true }));
@@ -26,7 +26,7 @@ const Tabs = () => {
               <span>{name}</span>
               <img src={PlusIcon} alt="" />
             </TabContents>
-            <FilterItem header={title} />
+            <FilterItem header={title} {...{checkedData}}/>
           </TabItems>
         )
       })}

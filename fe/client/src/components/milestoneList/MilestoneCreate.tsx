@@ -18,7 +18,6 @@ const MilestoneCreate = () => {
       closed: false
     }
     const responseData = await API.post.milestones(postData)
-    console.log(responseData);
   }
 
   return (

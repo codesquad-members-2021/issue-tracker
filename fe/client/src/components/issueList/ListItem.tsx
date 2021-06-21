@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import IssueDesc from './IssueDesc';
 import Label from '@components/common/Label';
@@ -6,6 +6,7 @@ import { IssueListItemType } from '@components/common/types/APIType';
 import { issueCheckedItemAtom, CheckBoxItemType, issueCheckedAllItemAtom } from '@components/common/atoms/checkBoxAtom';
 import { useRecoilState } from '@/utils/myRecoil/useRecoilState';
 import AlertCircleIcon from '@/Icons/AlertCircle.svg';
+import { Link } from 'react-router-dom';
 
 type ListItemType = {
   issueItem: IssueListItemType
@@ -32,27 +33,35 @@ const ListItem = ({ issueItem }: ListItemType) => {
 
   return (
     <ListItemWrapper>
-      <LeftWrapper>
-        <CheckBox type="checkbox" checked={checkedState} onChange={handleCheckChange({ id: issueItem.id })} />
-        <div>
-          <IssueTitleWrapper>
-            <img src={AlertCircleIcon} alt="" />
-            <IssueTitle>{issueItem.title}</IssueTitle>
-            {issueItem.labels.length && issueItem.labels.map(({ name, id, color }) => {
-              return <Label {...{ name, color }} key={id} />
-            })}
-          </IssueTitleWrapper>
-          <IssueDesc {...{ issueItem }} />
-        </div>
-      </LeftWrapper>
-      <RightWrapper>
-        <WriterImage src='https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png' alt="" />
-      </RightWrapper>
+      <LinkTag to={`/issueDetail/${issueItem.id}`} style={{ textDecoration: 'none' }}>
+        <LeftWrapper>
+          <CheckBox type="checkbox" checked={checkedState} onChange={handleCheckChange({ id: issueItem.id })} />
+          <div>
+            <IssueTitleWrapper>
+              <img src={AlertCircleIcon} alt="" />
+              <IssueTitle>{issueItem.title}</IssueTitle>
+              {issueItem.labels.length && issueItem.labels.map(({ name, id, color }) => {
+                return <Label {...{ name, color }} key={id} />
+              })}
+            </IssueTitleWrapper>
+            <IssueDesc {...{ issueItem }} />
+          </div>
+        </LeftWrapper>
+        <RightWrapper>
+          <WriterImage src='https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png' alt="" />
+        </RightWrapper>
+      </LinkTag>
     </ListItemWrapper>
   )
 }
 
 const ListItemWrapper = styled.div`
+  display:flex;
+  justify-content: space-between;
+`;
+
+const LinkTag = styled(Link)`
+  width: 100%;
   display:flex;
   justify-content: space-between;
 `;

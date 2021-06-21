@@ -18,7 +18,6 @@ const LabelCreate = () => {
       color: labelColorState.value
     }
     const responseData = await API.post.labels(postData);
-    console.log(responseData)
   }
 
   return (
