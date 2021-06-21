@@ -27,16 +27,16 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (Objects.isNull(auth)) {
             return true;
         }
-        JwtUtils.parser(hetJwt(request));
+        JwtUtils.parser(getAuthorization(request));
         return true;
     }
 
-    private String hetJwt(HttpServletRequest request) {
-        String jwt = request.getHeader(HEADER_TYPE);
-        if (Objects.isNull(jwt)) {
+    private String getAuthorization(HttpServletRequest request) {
+        String authorization = request.getHeader(HEADER_TYPE);
+        if (Objects.isNull(authorization)) {
             throw new NotLoggedInException();
         }
 
-        return jwt;
+        return authorization;
     }
 }
