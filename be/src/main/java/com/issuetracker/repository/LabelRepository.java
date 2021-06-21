@@ -31,4 +31,13 @@ public class LabelRepository {
                 labelDto.getColorCode(),
                 labelDto.isFontLight());
     }
+
+    public void edit(Long id, LabelDto labelDto) {
+        String query = "update label set title = ?, description = ?, color_code = ?, font_light = ? where id = ?";
+        jdbcTemplate.update(query, labelDto.getTitle(),
+                labelDto.getDescription(),
+                labelDto.getColorCode(),
+                labelDto.isFontLight(),
+                id);
+    }
 }

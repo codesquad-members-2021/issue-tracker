@@ -26,5 +26,10 @@ public class LabelController {
         return labelService.create(labelDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseStatusDto edit(@PathVariable Long id, @RequestBody LabelDto labelDto) {
+        return labelService.edit(id, labelDto);
+    }
+
 }
 

@@ -27,4 +27,9 @@ public class LabelService {
         labelRepository.create(labelDto);
         return new ResponseStatusDto("success");
     }
+
+    public ResponseStatusDto edit(Long id, LabelDto labelDto) {
+        labelRepository.edit(id, labelDto);
+        return new ResponseStatusDto("success");
+    }
 }
