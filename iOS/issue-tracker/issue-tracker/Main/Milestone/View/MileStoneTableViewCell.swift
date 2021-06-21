@@ -10,9 +10,8 @@ import UIKit
 class MileStoneTableViewCell: UITableViewCell {
     
     private let spacing: CGFloat = 16
-    
     private lazy var mileStoneStackView: UIStackView = {
-        let superStackView = UIStackView() //커다란 SuperStack
+        let superStackView = UIStackView()
         superStackView.axis = .vertical
         superStackView.distribution = .fillProportionally
         superStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,9 +19,6 @@ class MileStoneTableViewCell: UITableViewCell {
         return superStackView
     }()
     
-    //MARK: 1 : sub스택
-    //       -1 Title 라벨
-    //       -2 몇 %인지 보이는 두개의 라벨
     private lazy var firstSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -46,7 +42,6 @@ class MileStoneTableViewCell: UITableViewCell {
         return label
     }()
     
-    //MARK: 2 : 마일스톤에 대한 설명 라벨
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.description
@@ -55,15 +50,11 @@ class MileStoneTableViewCell: UITableViewCell {
         return label
     }()
     
-    //MARK: 3 : 데이트 라벨
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    //MARK:    4 : sub스택
-    //       -1 열린 이슈 라벨
-    //       -2 닫힌 이슈 라벨
     private lazy var milestoneLabelSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -97,7 +88,11 @@ class MileStoneTableViewCell: UITableViewCell {
     }
     
     private func setViews() {
-        addMileStoneStackView()        
+        addMileStoneStackView()
+        addMileStoneFirstStackView()
+        addMileStoneSecondStackView()
+        addMileStoneThirdStackView()
+        addMileStoneFourthStackView()
     }
     
     private func addMileStoneStackView() {
@@ -107,12 +102,10 @@ class MileStoneTableViewCell: UITableViewCell {
             mileStoneStackView.topAnchor.constraint(equalTo: topAnchor, constant: 24),
             mileStoneStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             mileStoneStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
-        ])
-        
-        //MARK: 1 : sub스택
-        //   -1 Title 라벨
-        //   -2 몇 %인지 보이는 두개의 라벨
-
+        ])        
+    }
+    
+    func addMileStoneFirstStackView() {
         mileStoneStackView.addArrangedSubview(firstSubStackView)
         
         NSLayoutConstraint.activate([
@@ -133,17 +126,17 @@ class MileStoneTableViewCell: UITableViewCell {
             completenessLabel.widthAnchor.constraint(equalTo: firstSubStackView.widthAnchor, multiplier: 0.2)
         ])
         
-        
-        //MARK: 2 : 마일스톤에 대한 설명 라벨
+    }
+    
+    func addMileStoneSecondStackView() {
         mileStoneStackView.addArrangedSubview(descriptionLabel)
-        
-        //MARK: 3 : 완료일 스택 or Label with Img
+    }
+    
+    func addMileStoneThirdStackView() {
         mileStoneStackView.addArrangedSubview(dateLabel)
-        
-        //MARK: 4 : sub스택
-        //-1 열린 이슈 라벨
-        //-2 닫힌 이슈 라벨
-        
+    }
+    
+    func addMileStoneFourthStackView() {
         mileStoneStackView.addArrangedSubview(milestoneLabelSubStackView)
         
         NSLayoutConstraint.activate([
@@ -158,13 +151,6 @@ class MileStoneTableViewCell: UITableViewCell {
         
         milestoneLabelSubStackView.spacing = 4
      
-        //스택fill 이슈
-//        NSLayoutConstraint.activate([
-//            openMilestoneLabelView.widthAnchor
-//            .constraint(lessThanOrEqualTo: milestoneLabelSubStackView.widthAnchor, multiplier: 0.329),
-//            closeMilestoneLabelView.widthAnchor
-//            .constraint(lessThanOrEqualTo: milestoneLabelSubStackView.widthAnchor, multiplier: 0.329)
-//        ])
     }
     
     func configure(title: String, description: String, due_date: String) {

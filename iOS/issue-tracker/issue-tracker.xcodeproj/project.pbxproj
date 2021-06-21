@@ -307,7 +307,6 @@
 		E43912C926776DA0003CD344 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FAB2C36D2679FB74009F879C /* MileStoneLabelView */,
 				E43912D326788CC3003CD344 /* ImageBarButton.swift */,
 				E43912C626776D8F003CD344 /* LabelView.swift */,
 				E43912F5267CAE01003CD344 /* TopMenuView.swift */,
@@ -360,6 +359,7 @@
 			children = (
 				FA733A2D267C3D77005A40C8 /* Milestone.swift */,
 				FA431FFA267F3B680010EA91 /* NewMileStoneDTO.swift */,
+				FAB2C36B2679F6CC009F879C /* MileStoneLabelView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -381,14 +381,6 @@
 				FA431FF8267F36FA0010EA91 /* MileStoneControlViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		FAB2C36D2679FB74009F879C /* MileStoneLabelView */ = {
-			isa = PBXGroup;
-			children = (
-				FAB2C36B2679F6CC009F879C /* MileStoneLabelView.swift */,
-			);
-			path = MileStoneLabelView;
 			sourceTree = "<group>";
 		};
 		FAC6D8922671E1A800A9E5F9 /* Github */ = {

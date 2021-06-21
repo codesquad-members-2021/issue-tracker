@@ -20,8 +20,7 @@ class MileStoneViewController: UIViewController {
         let tableView = UITableView()
         let cellID = MileStoneTableViewCell.reuseID
         tableView.register(MileStoneTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.backgroundColor = Colors.background
-        tableView.allowsSelection = true // 테스트
+        tableView.backgroundColor = Colors.background        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

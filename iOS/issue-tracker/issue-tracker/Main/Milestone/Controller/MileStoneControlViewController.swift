@@ -44,7 +44,7 @@ class MileStoneControlViewController: UIViewController {
         let descriptionInputItem = InputLineItem(category: "설명", inputView: descriptionTextfield)
         let completeDateInputItem = InputLineItem(category: "완료일", inputView: completeDateTextField)
         stackView.configure(with: [titleInputItem, descriptionInputItem, completeDateInputItem])
-                
+        
         return stackView
     }()
     
@@ -104,7 +104,7 @@ class MileStoneControlViewController: UIViewController {
         addTopMenu()
         addEditStackView()
     }
-        
+    
     private func addTopMenu() {
         view.addSubview(topMenuView)
         

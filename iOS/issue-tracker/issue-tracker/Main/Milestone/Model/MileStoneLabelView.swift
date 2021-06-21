@@ -55,40 +55,29 @@ final class MileStoneLabelView: UIView {
     }
     
     required init(text: String, fontColor: UIColor, bgColor: UIColor, imgName: String, issueCount: Int) {
-        
-        //init을 무엇을 줘도 상관이 없는듯.
         super.init(frame: .zero)
         self.text = text
         self.fontColor = fontColor
         self.bgColor = bgColor
         self.imgName = imgName
         self.issueCount = issueCount
-
         configure()
     }
     
     private func configure() {
-        
         layer.cornerRadius = labelHeight * 0.5
         translatesAutoresizingMaskIntoConstraints = false
-        
         addLabelTitle()
         backgroundColor = bgColor
     }
     
     private func addLabelTitle() {
-        
         addSubview(labelTitle)
-        
-        //예이!!!!!!!
         NSLayoutConstraint.activate([
             labelTitle.centerXAnchor.constraint(equalTo: centerXAnchor),
             labelTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
             widthAnchor.constraint(equalTo: widthAnchor),
             heightAnchor.constraint(equalToConstant: labelHeight)
         ])
-    }
-    func updateIssueCount(_ issueCount: Int) { //후에 issuecount를 변경
-        self.issueCount = issueCount
     }
 }
