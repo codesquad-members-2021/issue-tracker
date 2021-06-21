@@ -18,4 +18,11 @@ const checkBoxStyle = {
   borderColor: 'gr_label',
 };
 
-export { checkBoxStyle, menuItemStyle, menuBtnStyle };
+const filterBarMenuBtn = {
+  background: 'gr_background',
+  width: '128px',
+  borderRadius: '11px 0px 0px 11px',
+  border: '1px solid gr_inputBackground',
+};
+
+export { checkBoxStyle, menuItemStyle, menuBtnStyle, filterBarMenuBtn };
