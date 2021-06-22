@@ -15,7 +15,6 @@ const Milestones = () => {
 	const [milestoneAddBtn, setMilestoneAddBtn] = useRecoilState(
 		milestoneAddButtonFlagState
 	);
-	const [_, update] = useRecoilState(milestoneUpdateState);
 	const [milestone, setMilestone] = useState();
 	const [milestoneCount, setMilestoneCount] =
 		useRecoilState(milestoneCountState);
