@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import IssueCategoryList from "components/common/IssueCategoryList";
 import CommentInput from "components/common/CommentInput";
+import SubmitBtn from "components/common/Button/BlueButtons";
 
 const NewIssueForm = () => {
 	const handleSubmit = () => {
@@ -22,9 +23,9 @@ const NewIssueForm = () => {
 			<ButtonWrapper>
 				{/* 스타일 코드 작성시 이부분 button 컴포넌트 적용 필요 */}
 				<Link to="/main">
-					<button>x 작성 취소</button>
+					<CancelBtn>x 작성 취소</CancelBtn>
 				</Link>
-				<button onClick={handleSubmit}>완료</button>
+				<SubmitBtn text="완료" size="l" clickHandler={handleSubmit} />
 			</ButtonWrapper>
 		</>
 	);
@@ -63,3 +64,5 @@ const Input = styled.input`
 	width: 100%;
 	background-color: ${({ theme }) => theme.grayScale.input_background};
 `;
+
+const CancelBtn = styled.button``;
