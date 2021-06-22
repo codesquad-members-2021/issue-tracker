@@ -23,6 +23,7 @@ export interface MilestoneType {
   dueDate: string;
   openedIssueCount: number;
   closedIssueCount: number;
+  checked?: boolean;
 }
 
 export interface CommentType {
