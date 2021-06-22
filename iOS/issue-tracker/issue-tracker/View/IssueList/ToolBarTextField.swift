@@ -20,8 +20,9 @@ final class ToolBarTextField: UITextField {
         self.placeholder = "코멘트를 입력하세요"
         self.rightView = sendButton
         self.rightViewMode = .always
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 15
         self.layer.masksToBounds = true
+        self.backgroundColor = .systemGroupedBackground
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 

@@ -10,11 +10,12 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class IssueDetailViewController: UIViewController {
+final class IssueDetailViewController: UIViewController {
     private let cellReuseIdentifier = "IssueDetailCell"
-    private var viewModel = IssueDetailViewModel()
+    var viewModel: IssueDetailViewModel!
     private let disposeBag = DisposeBag()
     private var comment: [Comment] = []
+    private var constaint: NSLayoutConstraint?
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -23,18 +24,11 @@ class IssueDetailViewController: UIViewController {
         return tableView
     }()
 
-    private let toolbar: UIToolbar = {
-        let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
-        let textField = ToolBarTextField(frame: toolbar.bounds)
-        let upButton = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"),
-                                         style: .plain, target: self, action: #selector(scrollToBefore))
-        let downButton = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
-                                           style: .plain, target: self, action: #selector(scrollToNext))
-        let comment = UIBarButtonItem(customView: textField)
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: comment, action: nil)
-        toolbar.setItems([upButton, downButton, space, comment], animated: false)
-        return toolbar
-    }()
+    private let textField = ToolBarTextField()
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +43,14 @@ class IssueDetailViewController: UIViewController {
         tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
 
         view.addSubview(tableView)
-        view.addSubview(toolbar)
+        view.addSubview(textField)
 
         setupAutolayout()
-        fetch()
+        setupKeyboardNotification()
+        fetchData()
         bind()
+
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,28 +58,34 @@ class IssueDetailViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
     }
 
-    private func setupAutolayout() {
-        toolbar.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview()
-            maker.bottom.equalTo(view.safeAreaLayoutGuide)
-            maker.height.equalTo(44)
+    private func setupKeyboardNotification() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] noti in
+            guard let strongSelf = self else { return }
+            if let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                strongSelf.constaint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
+                print(keyboardFrame.cgRectValue.height)
+            }
+        }
+        center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.constaint?.constant = 0
         }
     }
 
-    @objc
-    private func scrollToBefore() {
-        guard let indexPath = tableView.indexPathForSelectedRow,
-              indexPath.row != 0 else { return }
-        tableView.selectRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section),
-                            animated: true, scrollPosition: .top)
+    private func setupAutolayout() {
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            textField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        constaint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        constaint?.isActive = true
     }
 
     @objc
-    private func scrollToNext() {
-        guard let indexPath = tableView.indexPathForSelectedRow,
-              indexPath.row + 1 < comment.count else { return }
-        tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
-                            animated: true, scrollPosition: .bottom)
+    func handleTapGesture(recognizer: UITapGestureRecognizer) {
+        textField.resignFirstResponder()
     }
 
     @objc
@@ -95,7 +98,7 @@ class IssueDetailViewController: UIViewController {
 }
 
 private extension IssueDetailViewController {
-    func fetch() {
+    func fetchData() {
         viewModel.fetch()
     }
 
