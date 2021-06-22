@@ -4,7 +4,7 @@ export const LOGO_TITLE = 'Issue Cracker..🍪';
 export const URL = {
   AUTH: 'http://localhost:8080/api/web/auth',
   LOGIN:
-    'https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user&redirect_uri=http://localhost:3000/authentication',
+    'https://github.com/login/oauth/authorize?client_id=2a42dd1b1e2aad1238e9&scope=read:user,user:email&redirect_uri=http://localhost:3000/authentication',
 };
 //path
 export const PATH = {
@@ -16,6 +16,7 @@ export const PATH = {
   ISSUE_ADD: '/main/issue-add',
   ISSUE_DETAIL: '/main/issue-detail/:id',
   ISSUE_LABELLIST: '/main/label-list',
+  ISSUE_MILESTONE: '/main/milestone',
 };
 
 // LogIn
@@ -53,6 +54,8 @@ export const TEXT = {
   LABEL: '레이블',
   MILESTONE: '마일스톤',
   WRITER: '작성자',
+  OPEN_MILESTONE: '열린 마일스톤',
+  CLOSED_MILESTONE: '닫힌 마일스톤',
 };
 
 // Filter
@@ -75,6 +78,13 @@ export const LABEL = {
   DESC: '설명(선택)',
   BACKGROUND_COLOR: '배경색상',
   TEXT_COLOR: '텍스트 색상',
+};
+
+export const MILESTONE = {
+  ADD: '새로운 마일스톤 추가',
+  NAME: '마일스톤 이름',
+  DESC: '설명(선택)',
+  DUE: '완료일(선택) ex. YYYY-MM-DD',
 };
 
 export const TYPE = {

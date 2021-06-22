@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';
@@ -10,6 +10,7 @@ import IssueList from './components/layout/IssueList';
 import IssueAdd from './components/layout/IssueAdd';
 import IssueDetail from './components/layout/IssueDetail';
 import LabelList from './components/layout/LabelList';
+import Milestone from './components/layout/Milestone';
 import { PATH as P } from './utils/const';
 
 function App(): JSX.Element {
@@ -43,6 +44,9 @@ function App(): JSX.Element {
           </Route>
           <Route exact path={P.ISSUE_LABELLIST}>
             <LabelList />
+          </Route>
+          <Route exact path={P.ISSUE_MILESTONE}>
+            <Milestone />
           </Route>
         </AppStyle>
       </ThemeProvider>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface IssueHeaderButtonProps {
   icon: JSX.Element;
   text: JSX.Element;
-  count: JSX.Element;
+  count?: JSX.Element;
 }
 
 const IssueHeaderButton = ({
