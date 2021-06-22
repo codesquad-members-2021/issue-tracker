@@ -12,7 +12,7 @@ public class HttpExceptionHandler {
 
     @ExceptionHandler(HttpException.class)
     public ResponseEntity<HttpExceptionResponse> handle(HttpException httpException) {
-        return new ResponseEntity<HttpExceptionResponse>(
+        return new ResponseEntity<>(
                 HttpExceptionResponse.of(httpException.getMessage()),
                 httpException.getHttpStatus()
         );
