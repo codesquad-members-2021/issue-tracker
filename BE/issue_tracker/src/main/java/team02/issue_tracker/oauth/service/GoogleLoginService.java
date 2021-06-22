@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import team02.issue_tracker.oauth.dto.AccessToken;
-import team02.issue_tracker.oauth.dto.AccessTokenRequest;
 import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.dto.google.GoogleAccessToken;
-import team02.issue_tracker.oauth.dto.google.GoogleAccessTokenRequest;
 import team02.issue_tracker.oauth.dto.google.GoogleUserProfile;
 import team02.issue_tracker.oauth.dto.SocialProfile;
 import team02.issue_tracker.oauth.exception.InvalidAccessTokenRequestException;
@@ -33,25 +33,23 @@ public class GoogleLoginService implements OAuthService {
     @Value("${oauth.google.web.client_secret}")
     private String clientSecret;
 
-
     public GoogleLoginService(WebClient webClient) {
         this.webClient = webClient;
     }
 
     @Override
     public AccessToken accessToken(final String code, final SocialLogin oauthResource) {
-        AccessTokenRequest request =
-                accessTokenRequest(clientId, clientSecret, REDIRECT_URI, GRANT_TYPE, code);
-        return accessToken(request, ACCESS_TOKEN_URI);
-    }
+        MultiValueMap<String, String> fieldsForRequest = new LinkedMultiValueMap<>();
+        fieldsForRequest.add("client_id", clientId);
+        fieldsForRequest.add("client_secret", clientSecret);
+        fieldsForRequest.add("redirect_uri", REDIRECT_URI);
+        fieldsForRequest.add("code", code);
+        fieldsForRequest.add("grant_type", GRANT_TYPE);
 
-    // Overloading
-    public AccessToken accessToken(
-            final AccessTokenRequest request, final String accessTokenUri) {
         GoogleAccessToken googleAccessTokenResponse = webClient.post()
-                .uri(accessTokenUri)
-                .accept(MediaType.APPLICATION_JSON)
-                .bodyValue(request)
+                .uri(ACCESS_TOKEN_URI)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .bodyValue(fieldsForRequest)
                 .retrieve()
                 .bodyToMono(GoogleAccessToken.class)
                 .blockOptional()
@@ -62,14 +60,8 @@ public class GoogleLoginService implements OAuthService {
 
     @Override
     public SocialProfile userProfile(final AccessToken accessToken) {
-        return userProfile(accessToken, USER_INFO_URI);
-    }
-
-    // Overloading
-    public SocialProfile userProfile(
-            final AccessToken accessToken, final String userInfoUri) {
         GoogleUserProfile googleUserProfile = webClient.get()
-                .uri(userInfoUri)
+                .uri(USER_INFO_URI)
                 .header(HttpHeaders.AUTHORIZATION,
                         "Bearer " + accessToken.value())
                 .retrieve()
@@ -78,17 +70,5 @@ public class GoogleLoginService implements OAuthService {
                 .orElseThrow(InvalidUserRequestException::new);
         log.info("Google user : {}", googleUserProfile);
         return googleUserProfile;
-    }
-
-    private GoogleAccessTokenRequest accessTokenRequest(
-            final String clientId, final String clientSecret,
-            final String redirectUri, final String grantType, final String code) {
-        return GoogleAccessTokenRequest.builder()
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .redirectUri(redirectUri)
-                .grantType(grantType)
-                .code(code)
-                .build();
     }
 }

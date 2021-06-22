@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import team02.issue_tracker.oauth.annotation.LoginRequired;
-import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
-import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 import team02.issue_tracker.oauth.jwt.JwtDecoder;
 import team02.issue_tracker.oauth.jwt.JwtFinder;
 

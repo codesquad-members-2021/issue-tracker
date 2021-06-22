@@ -39,17 +39,17 @@ public class KakaoLoginService implements OAuthService {
 
     @Override
     public AccessToken accessToken(String code, SocialLogin oauthResource) {
-        MultiValueMap<String, String> request = new LinkedMultiValueMap<>();
-        request.add("grant_type", GRANT_TYPE);
-        request.add("client_id", clientId);
-        request.add("redirect_uri", REDIRECT_URI);
-        request.add("client_secret", clientSecret);
-        request.add("code", code);
+        MultiValueMap<String, String> parametersForRequest = new LinkedMultiValueMap<>();
+        parametersForRequest.add("grant_type", GRANT_TYPE);
+        parametersForRequest.add("client_id", clientId);
+        parametersForRequest.add("redirect_uri", REDIRECT_URI);
+        parametersForRequest.add("client_secret", clientSecret);
+        parametersForRequest.add("code", code);
 
         KakaoAccessToken kakaoAccessToken = webClient.post()
                 .uri(ACCESS_TOKEN_URI)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .bodyValue(request)
+                .bodyValue(parametersForRequest)
                 .retrieve()
                 .bodyToMono(KakaoAccessToken.class)
                 .blockOptional()

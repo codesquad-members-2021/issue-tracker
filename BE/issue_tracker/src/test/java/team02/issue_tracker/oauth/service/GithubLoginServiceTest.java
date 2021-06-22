@@ -36,7 +36,7 @@ class GithubLoginServiceTest {
     private ClientHttpConnector connector;
     private ObjectMapper objectMapper;
 
-    private GithubLoginService oauthService;
+    private GithubLoginService githubLoginService;
 
     @AfterEach
     void shutdown() throws IOException {
@@ -58,7 +58,7 @@ class GithubLoginServiceTest {
     void requestGithubAccessToken() {
         startServer();
 
-        oauthService = new GithubLoginService(webClient);
+        githubLoginService = new GithubLoginService(webClient);
 
         // mock 응답 바디 데이터 설정
         GithubAccessToken expectedMockResponse = GithubAccessToken
@@ -90,7 +90,7 @@ class GithubLoginServiceTest {
 
         // mock 요청을 mock 서버에 보내서 가져온 응답
         AccessToken receivedResponse =
-                oauthService.accessToken(mockAccessTokenRequest, "/mock/access_token");
+                githubLoginService.accessToken(mockAccessTokenRequest, "/mock/access_token");
 
         // 반환된 응답이 설정한 mock 응답과 일치하는지 검증
         StepVerifier.create(Mono.just(receivedResponse))
@@ -120,7 +120,7 @@ class GithubLoginServiceTest {
     void requestGithubUser() {
         startServer();
 
-        oauthService = new GithubLoginService(webClient);
+        githubLoginService = new GithubLoginService(webClient);
 
         GithubUserProfile expectedResponse = GithubUserProfile.builder()
                 .id(-1L)
@@ -145,7 +145,7 @@ class GithubLoginServiceTest {
                 .build();
 
         SocialProfile receivedResponse =
-                oauthService.userProfile(mockAccessToken, "/mock/userInfo");
+                githubLoginService.userProfile(mockAccessToken, "/mock/userInfo");
 
         StepVerifier.create(Mono.just(receivedResponse))
                 .consumeNextWith(body -> assertThat(body).usingRecursiveComparison()
