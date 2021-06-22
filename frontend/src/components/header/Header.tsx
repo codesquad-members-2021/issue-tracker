@@ -63,7 +63,7 @@ function Header() {
               )}
             </IconButton>
             <Menu id='menu-appbar' anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <MenuItem onClick={handleClose}>{loginData?.userName}</MenuItem>
+              <MenuItem onClick={handleClose}>{loginData?.name}</MenuItem>
               <MenuItem onClick={handleClose} className={classes.modalStyles + ' header__modal'}>
                 My account
               </MenuItem>

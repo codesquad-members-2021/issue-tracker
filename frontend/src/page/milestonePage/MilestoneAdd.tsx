@@ -33,6 +33,7 @@ border: 1px solid ${({ theme }) => theme.color.lineGrey};
   input{
     display: block;
     width: 50%;
+    height: 56px;
     padding: 0 24px;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -40,12 +41,11 @@ border: 1px solid ${({ theme }) => theme.color.lineGrey};
     background-color: ${({ theme }) => theme.color.inputBg};
     font-size: ${({ theme }) => theme.size.md}px;
     border-radius: 11px;
-    height: 56px;
     &:focus {
     text-decoration: none;
     background-color: ${({ theme }) => theme.color.white};
     }
-    &:last-child{
+    .milestone__due-date{
       margin: 0 0 24px 0;
       width: 100%;
     }

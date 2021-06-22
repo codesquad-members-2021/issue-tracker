@@ -13,13 +13,8 @@ export default function LoginPage() {
   const setLoginData = useSetRecoilState(controlLoginState);
 
   const query = window.location.search; 
-  const isLogin = () => !!localStorage.getItem('token');
-  useEffect(()=>{
-    if (isLogin()) return history.push('/main');
-  },[]) //app에서 구현 후 삭제하기
-
   useEffect(() => {
-    if (query==='') return;
+    if (!query) return;
     const loginCode = query.split('=')[1];
     getLoginUserData(loginCode);
   }, [query]);
@@ -27,7 +22,8 @@ export default function LoginPage() {
   const getLoginUserData = async (loginCode: string) => {
     try {
       const loginData = await fetchLogin(loginCode);
-      setLoginData({isLogin: true, loginData: loginData});
+      const loginUserData = {avatarUrl:loginData.avatarUrl,name:loginData.name}
+      setLoginData({isLogin: true, loginData:loginUserData});
       localStorage.setItem('token', loginData.token);
       history.push('/main');
     } catch (err) {

@@ -3,9 +3,9 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/header/Header';
 import LoginPage from 'page/loginPage/LoginPage';
-
 import { useSetRecoilState } from 'recoil';
 import { controlLoginState } from 'store/loginStore';
+import API from 'util/api/api';
 
 function App() {
   const MainPage = lazy(() => import('./page/mainPage/MainPage'));
@@ -14,14 +14,31 @@ function App() {
   const LabelPage = lazy(() => import('./page/labelPage/LabelPage'));
   const MilestonePage = lazy(() => import('./page/milestonePage/MilestonePage'));
   const setLoginData = useSetRecoilState(controlLoginState);
-  const isLogin = () => !!localStorage.getItem('token');
+  const token = localStorage.getItem('token');
+  const isLogin = () => !!token
   useEffect(() => {
-    if (isLogin()) setLoginData({ isLogin: true, loginData: null });
+    if (isLogin()) {
+      getUserInfoUsingJWT()
+    }
   }, []);
-  /*
-  token유무로 로그인상태 확인=> jwt api 요청=> setLoginData => redirect(/main)
-  : loginPage에서 token값확인하는 부분 삭제하기.
-  */
+
+  const getUserInfoUsingJWT = async() =>{
+    
+    const headerInfo = {
+      headers: {
+        Authorization : `Bearer ${token}`
+        }
+      }
+    
+    try {
+      const response = await fetch(API.getUserInfo, headerInfo)
+      const userData = await response.json()
+      const loginData = {avatarUrl: userData.avatarUrl, name: userData.name}
+      setLoginData({ isLogin: true, loginData });
+    } catch(err){
+       console.log(err)
+    }
+  }
 
   return (
     <div className='App'>
