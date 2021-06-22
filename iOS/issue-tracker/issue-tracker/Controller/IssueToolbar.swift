@@ -9,19 +9,19 @@ import UIKit
 
 final class IssueToolbar: UIToolbar {
 
-    private let checkBoxBarButtonItem: UIBarButtonItem = {
+    private(set) var checkBoxBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.image = UIImage(systemName: "checkmark.circle")
         return item
     }()
 
-    private let closeIssueBarButtonItem: UIBarButtonItem = {
+    private(set) var closeIssueBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.image = UIImage(systemName: "archivebox")
         return item
     }()
 
-    private let labelBarButtonItem: UIBarButtonItem = {
+    private(set) var labelBarButtonItem: UIBarButtonItem = {
         var item = UIBarButtonItem()
         item.title = "이슈를 선택하세요"
         item.isEnabled = false
