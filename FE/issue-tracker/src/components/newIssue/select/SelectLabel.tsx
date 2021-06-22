@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { Menu, MenuButton, Button } from '@chakra-ui/react';
 
 import { ReactComponent as PlusIcon } from '@assets/plus.svg';
@@ -7,20 +8,19 @@ import Label from '@components/common/Label';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import LabelModal from './LabelModal';
 import { fetchModal } from '@utils/fetchModal';
+import { checkedLabelsState } from '@store/atoms/checkedThings';
 
 function SelectLabel() {
   const [labels, setLabels] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('No Error');
+  const checkedLabels = useRecoilValue(checkedLabelsState);
 
   const handleClickLabels = () => {
-    const fetchLabels = async () => {
-      try {
-        await fetchModal({ path: 'labels', setState: setLabels });
-      } catch (errorTxt) {
-        setErrorMsg(errorTxt);
-      }
-    };
-    fetchLabels();
+    fetchModal({
+      path: 'labels',
+      setState: setLabels,
+      setErrorMsg: setErrorMsg,
+    });
   };
 
   return (
@@ -39,9 +39,17 @@ function SelectLabel() {
         <LabelModal labels={labels} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        <li>
-          <Label name="documentation" colorCode="#0025E7" fontLight={true} />
-        </li>
+        {checkedLabels.map(({ title, color_code, font_light }) => {
+          return (
+            <li key={title}>
+              <Label
+                name={title}
+                colorCode={color_code}
+                fontLight={font_light}
+              />
+            </li>
+          );
+        })}
       </AddList>
     </Wrap>
   );
@@ -56,4 +64,7 @@ const Wrap = styled.div`
 
 const AddList = styled.ul`
   padding: 8px 0;
+  li {
+    padding: 0.3rem;
+  }
 `;
