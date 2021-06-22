@@ -5,6 +5,8 @@ import com.codesquad.issuetracker.comment.dto.CommentRequest;
 import com.codesquad.issuetracker.comment.dto.CommentResponse;
 import com.codesquad.issuetracker.comment.dto.CommentWrapper;
 import com.codesquad.issuetracker.comment.infra.CommentRepository;
+import com.codesquad.issuetracker.exception.CommentNotFoundException;
+import com.codesquad.issuetracker.exception.NotFoundException;
 import com.codesquad.issuetracker.user.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +36,7 @@ public class CommentService {
     @Transactional
     public CommentWrapper updateComment(CommentRequest commentRequest, UUID id) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(CommentNotFoundException::new);
         comment.updateContent(commentRequest);
         return CommentWrapper.wrap(CommentResponse.fromEntity(comment));
     }

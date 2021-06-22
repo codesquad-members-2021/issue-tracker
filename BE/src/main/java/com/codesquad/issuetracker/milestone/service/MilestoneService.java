@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.milestone.service;
 
+import com.codesquad.issuetracker.exception.MilestoneNotFoundException;
+import com.codesquad.issuetracker.exception.NotFoundException;
 import com.codesquad.issuetracker.milestone.domain.Milestone;
 import com.codesquad.issuetracker.milestone.dto.MilestoneRequestDto;
 import com.codesquad.issuetracker.milestone.dto.MilestoneResponseDto;
@@ -44,7 +46,8 @@ public class MilestoneService {
     }
 
     public MilestoneWrapper updateMilestone(UUID id, MilestoneRequestDto milestoneRequest) {
-        Milestone milestone = milestoneRepository.findById(id).orElseThrow(RuntimeException::new);
+        Milestone milestone = milestoneRepository.findById(id)
+                .orElseThrow(MilestoneNotFoundException::new);
         milestone.update(milestoneRequest);
         Milestone updatedMilestone = milestoneRepository.save(milestone);
 

@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.image.component;
 
+import com.codesquad.issuetracker.exception.S3UploadFailException;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -30,7 +31,7 @@ public class S3Uploader {
             s3.putObject(putObjectRequest, RequestBody.fromInputStream(multipartFile.getInputStream(), multipartFile.getSize()));
 
         } catch (IOException ioException) {
-            throw new RuntimeException("Image Upload Error", ioException);
+            throw new S3UploadFailException("이미지 업로드를 실패했습니다.", ioException);
         }
 
         return bucketUrl + objectKey;

@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.label.service;
 
+import com.codesquad.issuetracker.exception.LabelNotFoundException;
 import com.codesquad.issuetracker.label.domain.Label;
 import com.codesquad.issuetracker.label.dto.LabelDto;
 import com.codesquad.issuetracker.label.dto.LabelRequestDto;
@@ -34,8 +35,7 @@ public class LabelService {
     @Transactional
     public LabelWrapper updateLabel(UUID id, LabelRequestDto updatingLabelInfo) {
         Label updatingLabel = labelRepository.findById(id)
-                //TODO: Exception
-                .orElseThrow(() -> new RuntimeException("Not Found"));
+                .orElseThrow(LabelNotFoundException::new);
         updatingLabel.update(updatingLabelInfo.toEntity());
 
         return LabelWrapper.wrap(LabelDto.fromEntity(updatingLabel));
@@ -43,8 +43,7 @@ public class LabelService {
 
     public void deleteLabel(UUID id) {
         Label deletingLabel = labelRepository.findById(id)
-                //TODO: Exception
-                .orElseThrow(() -> new RuntimeException("Not Found"));
+                .orElseThrow(LabelNotFoundException::new);
         labelRepository.delete(deletingLabel);
     }
 }

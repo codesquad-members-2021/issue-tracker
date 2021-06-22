@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.issue.service;
 
 import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.comment.infra.CommentRepository;
+import com.codesquad.issuetracker.exception.*;
 import com.codesquad.issuetracker.issue.domain.Issue;
 import com.codesquad.issuetracker.issue.dto.*;
 import com.codesquad.issuetracker.issue.infra.IssueRepository;
@@ -45,16 +46,18 @@ public class IssueService {
         Issue issue = issueCreateRequest.createIssue(author);
 
         for (UUID assigneeId : issueCreateRequest.getAssigneeIds()) {
-            issue.addAssignee(userRepository.findById(assigneeId).orElseThrow(RuntimeException::new));
+            issue.addAssignee(userRepository.findById(assigneeId)
+                    .orElseThrow(UserNotFoundException::new));
         }
 
         for (UUID labelId : issueCreateRequest.getLabelIds()) {
-            issue.addLabel(labelRepository.findById(labelId).orElseThrow(RuntimeException::new));
+            issue.addLabel(labelRepository.findById(labelId)
+                    .orElseThrow(LabelNotFoundException::new));
         }
 
         if (issueCreateRequest.hasMilestoneId()) {
             issue.setMilestone(milestoneRepository.findById(issueCreateRequest.getMilestoneId())
-                    .orElseThrow(RuntimeException::new));
+                    .orElseThrow(MilestoneNotFoundException::new));
         }
 
         issue = issueRepository.save(issue);
@@ -65,14 +68,14 @@ public class IssueService {
     }
 
     public IssueWrapper readIssueById(Long id) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
         List<Comment> comments = commentRepository.findAllByIssueId(id);
         return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
     }
 
     @Transactional
     public IssueWrapper updateIssue (IssueRequest issueRequest, Long id) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
         List<Comment> comments = commentRepository.findAllByIssueId(id);
         issue.updateIssue(issueRequest);
         return IssueWrapper.wrap(IssueResponse.fromEntity(issue, comments));
@@ -80,43 +83,44 @@ public class IssueService {
 
     @Transactional
     public void addLabel(Long id, LabelIdRequest labelIdRequest) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
-        Label label = labelRepository.findById(labelIdRequest.getLabelId()).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
+        Label label = labelRepository.findById(labelIdRequest.getLabelId()).orElseThrow(LabelNotFoundException::new);
         issue.addLabel(label);
     }
 
     @Transactional
     public void removeLabel(Long id, UUID labelId) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
-        Label label = labelRepository.findById(labelId).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
         issue.removeLabel(label);
     }
 
     @Transactional
     public void addAssignee(Long id, AssigneeIdRequest assigneeIdRequest) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
-        User assignee = userRepository.findById(assigneeIdRequest.getAssigneeId()).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
+        User assignee = userRepository.findById(assigneeIdRequest.getAssigneeId())
+                .orElseThrow(UserNotFoundException::new);
         issue.addAssignee(assignee);
     }
 
     @Transactional
     public void removeAssignee(Long id, UUID assigneeId) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
-        User assignee = userRepository.findById(assigneeId).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
+        User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
         issue.removeAssignee(assignee);
     }
 
     @Transactional
     public void setMilestone(Long id, MilestoneIdRequest milestoneIdRequest) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
         Milestone milestone = milestoneRepository.findById(milestoneIdRequest.getMilestoneId())
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(MilestoneNotFoundException::new);
         issue.setMilestone(milestone);
     }
 
     @Transactional
     public void removeMilestone(Long id) {
-        Issue issue = issueRepository.findById(id).orElseThrow(RuntimeException::new);
+        Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
         issue.removeMilestone();
     }
 
