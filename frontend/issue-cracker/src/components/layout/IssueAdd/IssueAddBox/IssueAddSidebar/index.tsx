@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideBar from '../../../../common/SideBar';
+import SideBar from '../../../../common/sideBar/SideBar';
 
 const IssueAddSidebar = (): JSX.Element => {
   return (

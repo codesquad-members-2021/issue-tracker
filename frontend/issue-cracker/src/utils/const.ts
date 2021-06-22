@@ -57,6 +57,11 @@ export const TEXT = {
   OPEN_MILESTONE: '열린 마일스톤',
   CLOSED_MILESTONE: '닫힌 마일스톤',
 };
+export const SIDEBAR_TYPE = {
+  ASIGNEE: '담당자',
+  LABEL: '레이블',
+  MILESTONE: '마일스톤',
+};
 
 // Filter
 export const FILTER = {

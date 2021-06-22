@@ -1,29 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ProfileImg as S, Text as T } from '../styles/CommonStyles';
+import { ProfileImg as S, Text as T } from '../../styles/CommonStyles';
 import { useRecoilValue } from 'recoil';
-import { decodedToken } from '../../store/Recoil';
-import CheckOffIcon from '../styles/svg/CheckOffIcon';
+import { decodedToken } from '../../../store/Recoil';
+import CheckOffIcon from '../../styles/svg/CheckOffIcon';
 
-const SideBarDropAsignee = (): JSX.Element => {
+interface SideBarDropAssigneeProps {
+  data: {
+    id: string;
+    name: string;
+    profile_image_url: string;
+    emails: string[];
+  };
+}
+const SideBarDropAssignee = ({
+  data,
+}: SideBarDropAssigneeProps): JSX.Element => {
   const decoded = decodedToken && useRecoilValue(decodedToken);
   const profileURL = decoded && decoded.profileImageUrl;
-  const profileName = decoded && decoded.name;
+  // const profileName = decoded && decoded.name;
+
   return (
-    <SideBarDropAsigneeStyle>
+    <SideBarDropAssigneeStyle>
       <DropLeft>
         <S.ProfileImgSmall src={profileURL}></S.ProfileImgSmall>
-        <ProfileName>{profileName}</ProfileName>
+        <ProfileName>{data.name}</ProfileName>
       </DropLeft>
       <DropRight>
         <CheckOffIcon />
       </DropRight>
-    </SideBarDropAsigneeStyle>
+    </SideBarDropAssigneeStyle>
   );
 };
-export default SideBarDropAsignee;
+export default SideBarDropAssignee;
 
-const SideBarDropAsigneeStyle = styled.div`
+const SideBarDropAssigneeStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

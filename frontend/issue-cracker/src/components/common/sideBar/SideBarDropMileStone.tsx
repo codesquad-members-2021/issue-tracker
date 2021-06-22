@@ -1,13 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import CheckOffIcon from '../styles/svg/CheckOffIcon';
-import { Text as S } from '../styles/CommonStyles';
+import CheckOffIcon from '../../styles/svg/CheckOffIcon';
+import { Text as S } from '../../styles/CommonStyles';
 
-const SideBarDropLabel = (): JSX.Element => {
+interface SideBarDropMilestoneProps {
+  data: {
+    id: number;
+    title: string;
+    description: string;
+    due_date: string;
+  };
+}
+const SideBarDropMilestone = ({
+  data,
+}: SideBarDropMilestoneProps): JSX.Element => {
   return (
     <SideBarDropMileStoneStyle>
       <DropLeft>
-        <MileStoneName>이슈트래커 2주차</MileStoneName>
+        <MileStoneName>{data.title}</MileStoneName>
       </DropLeft>
       <DropRight>
         <CheckOffIcon />
@@ -16,7 +26,7 @@ const SideBarDropLabel = (): JSX.Element => {
   );
 };
 
-export default SideBarDropLabel;
+export default SideBarDropMilestone;
 
 const SideBarDropMileStoneStyle = styled.div`
   display: flex;
