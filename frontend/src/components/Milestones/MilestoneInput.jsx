@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import AddButton from "components/common/Button/BlueButtons";
-import useFetch from "hooks/useFetch";
 import API from "util/API";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import {
@@ -23,7 +22,6 @@ const MilestoneInput = ({
 		dueDate: dueDate,
 		description: description,
 	});
-	const [milestoneData, setMilestoneData] = useState();
 	const setMilestoneAddButtonFlag = useSetRecoilState(
 		milestoneAddButtonFlagState
 	);
@@ -45,7 +43,7 @@ const MilestoneInput = ({
 		setMilestoneAddButtonFlag(false);
 	};
 
-	const handleTitleChange = e => {
+	const handleTitleChange = (e) => {
 		setTitleInput(e.target.value);
 		setInputData({
 			...inputData,
@@ -53,7 +51,7 @@ const MilestoneInput = ({
 		});
 	};
 
-	const handleDateChange = e => {
+	const handleDateChange = (e) => {
 		setDateInput(e.target.value);
 		setInputData({
 			...inputData,
@@ -61,18 +59,12 @@ const MilestoneInput = ({
 		});
 	};
 
-	const handleDescChange = e => {
+	const handleDescChange = (e) => {
 		setDescInput(e.target.value);
 		setInputData({
 			...inputData,
 			description: e.target.value,
 		});
-	};
-
-	const handleSubmit = () => {
-		postMilestone();
-		setMilestoneAddButtonFlag(false);
-		// forceUpdate(!update);
 	};
 
 	console.log(editMode);
@@ -107,13 +99,9 @@ const MilestoneInput = ({
 			<BtnWrapper>
 				<AddButton
 					text="완료"
-
-					clickEvent={editMode ? putMilestone : handleSubmit}
-
+					clickHandler={editMode ? putMilestone : postMilestone}
 					icon="plus"
 					size="m"
-					
-
 				/>
 			</BtnWrapper>
 		</CardWrapper>
