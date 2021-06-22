@@ -32,7 +32,7 @@ const Navigator = () => {
 	const handelAddClick = () => {
 		if (milestoneFlag) setMilestoneAddBtnFlag(!milestoneAddBtnFlag);
 		else if (!milestoneFlag) setMilestoneAddBtnFlag(false);
-		setIsAddButton(x => !x);
+		setIsAddButton((x) => !x);
 	};
 
 	return (
@@ -57,7 +57,7 @@ const Navigator = () => {
 					text="취소"
 					icon="cancel"
 					size="m"
-					clickHandler={() => setIsAddButton(x => !x)}
+					clickHandler={handelAddClick}
 				/>
 			)}
 		</NavigatorLayout>
