@@ -78,9 +78,7 @@ public class Issue {
 
         if(this.open) {
             this.milestone.countOpenIssuesUp();
-        }
-
-        if(!this.open) {
+        }else if(!this.open) {
             this.milestone.countClosedIssuesUp();
         }
     }
@@ -92,9 +90,7 @@ public class Issue {
 
         if(this.open) {
             this.milestone.countOpenIssuesDown();
-        }
-
-        if(!this.open) {
+        }else if(!this.open) {
             this.milestone.countClosedIssuesDown();
         }
 
@@ -107,9 +103,7 @@ public class Issue {
         if(this.open !=  isIssueOpenRequest && milestone != null) {
             if (isIssueOpenRequest) {
                 this.milestone.openIssue();
-            }
-
-            if (!isIssueOpenRequest) {
+            }else if (!isIssueOpenRequest) {
                 this.milestone.closeIssue();
             }
         }

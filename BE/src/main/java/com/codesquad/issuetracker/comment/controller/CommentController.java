@@ -19,8 +19,8 @@ public class CommentController {
     }
 
     @PostMapping
-    public CommentWrapper createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User author) {
-        return commentService.createComment(commentRequest, author);
+    public CommentWrapper createComment(@RequestBody CommentRequest commentRequest, @RequestAttribute User authUser) {
+        return commentService.createComment(commentRequest, authUser);
     }
 
     @PutMapping("/{id}")
