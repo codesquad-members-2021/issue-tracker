@@ -15,6 +15,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/assignee")
+    public ApiResponse getAllAssignee() {
+        return ApiResponse.ok(userService.getAllAssignee());
+    }
+
+    @GetMapping("/author")
+    public ApiResponse getAllAuthor() {
+        return ApiResponse.ok(userService.getAllAuthor());
+    }
+
     @GetMapping("/author/open")
     public ApiResponse getAllOpenIssueAuthor() {
         return ApiResponse.ok(userService.getAllOpenIssueAuthor());

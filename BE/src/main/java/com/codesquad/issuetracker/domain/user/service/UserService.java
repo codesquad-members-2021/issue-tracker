@@ -15,8 +15,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepositoryl) {
-        this.userRepository = userRepositoryl;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public List<UserResponse> getAllOpenIssueAuthor() {
@@ -29,6 +29,18 @@ public class UserService {
 
     private List<UserResponse> getAllAuthor(boolean isOpen) {
         return userRepository.findAllAuthor(isOpen).stream()
+                .map(user -> UserResponse.create(user))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserResponse> getAllAuthor() {
+        return userRepository.findAllAuthor().stream()
+                .map(user -> UserResponse.create(user))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserResponse> getAllAssignee(){
+        return userRepository.findAllAssignee().stream()
                 .map(user -> UserResponse.create(user))
                 .collect(Collectors.toList());
     }

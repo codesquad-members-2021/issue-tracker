@@ -27,4 +27,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE i.status=:isOpen")
     Set<User> findAllAuthor(@Param("isOpen") boolean isOpen);
 
+    @Query("SELECT DISTINCT new User(u.id, u.name, u.loginId) " +
+            "FROM Issue i " +
+            "INNER JOIN User u ON i.user.id = u.id")
+    Set<User> findAllAuthor();
+
+    @Query("SELECT DISTINCT new User(u.id, u.name, u.loginId) " +
+            "FROM Assignee a " +
+            "INNER JOIN User u ON a.userId = u.id")
+    Set<User> findAllAssignee();
+
 }
