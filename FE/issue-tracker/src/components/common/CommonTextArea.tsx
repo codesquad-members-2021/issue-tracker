@@ -4,7 +4,7 @@ import { Textarea } from '@chakra-ui/textarea';
 import { contentsInput } from '@components/newIssue/style';
 import { ReactComponent as FileIcon } from '@assets/file.svg';
 
-function TextArea() {
+function CommonTextArea() {
   return (
     <Description>
       <Textarea {...contentsInput} />
@@ -17,7 +17,7 @@ function TextArea() {
   );
 }
 
-export default TextArea;
+export default CommonTextArea;
 
 const Description = styled.div`
   position: relative;
