@@ -1,32 +1,70 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import { Avatar } from '@chakra-ui/react';
-import EditMiniButton from '@components/common/EditMiniButton';
 import { ReactComponent as SmileIcon } from '@assets/smile.svg';
 
-function Comment() {
-  const author = 'Eve';
-  const time = '28분 전';
-  const content =
-    '처음부터 전부 구현하려고 하지 말고 필수적인 기능부터 만든 후, 차근차근 완성도를 높여보세요.';
+import {
+  checkIfDayPassedFromCreation,
+  getCreatedTime,
+  getRenderingText,
+  getTime,
+  getTimeGapFromCreation,
+  getTotalMinutesBetweenGap,
+} from '@utils/renderTimeText';
+import pipe from '@utils/pipe';
+
+import type { Comments } from './CommentBox';
+
+import EditMiniButton from '@components/common/EditMiniButton';
+import TextArea from './TextArea';
+
+type Props = {
+  commentData: Comments;
+};
+
+function Comment({ commentData }: Props) {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const { id, author, created_time, description } = commentData;
+  const { user_id, name, avatar_url } = author;
+
+  const currentTime = new Date().getTime();
+  const time = pipe(
+    getCreatedTime,
+    getTimeGapFromCreation(currentTime),
+    getTotalMinutesBetweenGap,
+    checkIfDayPassedFromCreation,
+    getTime,
+    getRenderingText
+  )(created_time);
+
   return (
     <CommentContainer>
       <AvatarBox>
-        <Avatar src="./janmang.jpeg" />
+        <Avatar src={avatar_url} />
       </AvatarBox>
-
       <CommentBox>
         <CommentHeader>
           <div className="comment_left">
-            <span className="author">{author}</span>
+            <span className="author">{name}</span>
             <span className="time">{time}</span>
           </div>
           <div className="comment_right">
             <div className="is_author_badge">작성자</div>
-            <EditMiniButton margin="0 20px">편집</EditMiniButton>
+            <EditMiniButton margin="0 20px" setState={setIsDisabled}>
+              편집
+            </EditMiniButton>
             <SmileIcon className="smile_icon" />
           </div>
         </CommentHeader>
-        <CommentContent>{content}</CommentContent>
+        {isDisabled ? (
+          <CommentContent
+            value={description}
+            disabled={isDisabled}
+          ></CommentContent>
+        ) : (
+          <TextArea commentID={id} value={description} />
+        )}
       </CommentBox>
     </CommentContainer>
   );
@@ -35,6 +73,7 @@ function Comment() {
 export default Comment;
 
 const CommentContainer = styled.div`
+  margin-right: 24px;
   display: flex;
 `;
 
@@ -82,11 +121,14 @@ const CommentHeader = styled.div`
     }
   }
 `;
-const CommentContent = styled.div`
+const CommentContent = styled.textarea`
+  margin-bottom: 24px;
+  padding: 24px 24px 0 24px;
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.gr_offWhite};
   border: 1px solid ${({ theme }) => theme.colors.gr_line};
   border-top: none;
   border-radius: 0 0 16px 16px;
-  padding: 16px 24px;
-  margin-bottom: 24px;
+  outline: 0;
+  resize: none;
 `;
