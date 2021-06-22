@@ -15,7 +15,7 @@ final class IssueDetailViewController: UIViewController {
     var viewModel: IssueDetailViewModel!
     private let disposeBag = DisposeBag()
     private var comment: [Comment] = []
-    private var constaint: NSLayoutConstraint?
+    private var textFieldHeightConstraint: NSLayoutConstraint?
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -63,24 +63,24 @@ final class IssueDetailViewController: UIViewController {
         center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] noti in
             guard let strongSelf = self else { return }
             if let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                strongSelf.constaint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
+                strongSelf.textFieldHeightConstraint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
                 print(keyboardFrame.cgRectValue.height)
             }
         }
         center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
             guard let strongSelf = self else { return }
-            strongSelf.constaint?.constant = 0
+            strongSelf.textFieldHeightConstraint?.constant = 0
         }
     }
 
     private func setupAutolayout() {
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             textField.heightAnchor.constraint(equalToConstant: 44)
         ])
-        constaint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        constaint?.isActive = true
+        textFieldHeightConstraint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        textFieldHeightConstraint?.isActive = true
     }
 
     @objc
