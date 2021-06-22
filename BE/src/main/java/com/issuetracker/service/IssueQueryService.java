@@ -51,6 +51,7 @@ public class IssueQueryService {
         User loginUser = userService.findUserById(userId);
         return IssueDetailPageResponseDTO.of(
                 issue,
+                UserResponseDTO.of(issue.getAuthor()),
                 commentsToCommentDTOs(loginUser, issue),
                 userService.getCheckedAssignees(issue),
                 labelService.getCheckedLabels(issue),

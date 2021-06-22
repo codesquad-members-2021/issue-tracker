@@ -44,6 +44,10 @@ public class Comment extends BaseTimeEntity {
         return author.getUserName();
     }
 
+    public String getAuthorAvatarUrl() {
+        return author.getAvatarUrl();
+    }
+
     public boolean matchAuthor(User user) {
         return author.equals(user);
     }

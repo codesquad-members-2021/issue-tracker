@@ -20,6 +20,7 @@ public class CommentDTO {
     private final String userName;
     private final String comment;
     private final LocalDateTime createdDateTime;
+    private final String avatarUrl;
     private final boolean isOwner;
     private final boolean isAuthor;
 
@@ -29,6 +30,7 @@ public class CommentDTO {
                 .userName(comment.getAuthorName())
                 .comment(comment.getComment())
                 .createdDateTime(comment.getCreatedDateTime())
+                .avatarUrl(comment.getAuthorAvatarUrl())
                 .isOwner(comment.matchAuthor(issue.getAuthor()))
                 .isAuthor(comment.matchAuthor(loginUser))
                 .build();
