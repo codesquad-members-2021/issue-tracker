@@ -7,7 +7,7 @@ export default function SocialLoginBtn(): ReactElement {
   return (
     <SocialLoginBtnBlock>
       <a
-        href={`https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=${process.env.REACT_APP_MAIN_URL}`}
+        href={`https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=${process.env.REACT_APP_BASIC_URL}`}
       >
         <div>
           <GitHubIcon />
