@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -21,8 +22,10 @@ function App() {
               <Route path="/issues/new">
                 <NewIssue />
               </Route>
-              <Route path="/issues/detail">
-                <IssueDetail />
+              <Route path="/issues/detail/:id">
+                <Suspense fallback={<div>이슈를 불러오는 중 입니다.</div>}>
+                  <IssueDetail />
+                </Suspense>
               </Route>
               <Route path="/issues">
                 <Issues />

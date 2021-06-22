@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/avatar';
@@ -44,13 +45,18 @@ function Issue({ info }: Props) {
     getRenderingText
   )(created_time);
 
+  const linkPath = {
+    pathname: `/issues/detail/${id}`,
+  };
   return (
     <IssueWrap data-id={id}>
       <IssueContainer>
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
           <IssueTitle>
-            <h2>{title}</h2>
+            <Link to={linkPath}>
+              <h2>{title}</h2>
+            </Link>
             {label_list.map(({ id, title, color_code }) => (
               <Label
                 key={id}
