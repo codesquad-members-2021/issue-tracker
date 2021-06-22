@@ -6,7 +6,7 @@ import { titleInput } from './style';
 
 import { isInputtedTitleState } from '@store/atoms/newIssue';
 
-import TextArea from '@components/common/TextArea';
+import CommonTextArea from '@components/common/CommonTextArea';
 
 function TextBox() {
   const [isInputtedTitle, setIsInputtedTitle] =
@@ -22,7 +22,7 @@ function TextBox() {
   return (
     <TextBoxWrap>
       <Input {...titleInput} onChange={handleChangeTitle} />
-      <TextArea />
+      <CommonTextArea />
     </TextBoxWrap>
   );
 }

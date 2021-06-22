@@ -20,6 +20,7 @@ function CommonTextArea() {
 export default CommonTextArea;
 
 const Description = styled.div`
+  width: 880px;
   position: relative;
   background: ${({ theme }) => theme.colors.gr_inputBackground};
   border-radius: ${({ theme }) => theme.radii['2xl']};
