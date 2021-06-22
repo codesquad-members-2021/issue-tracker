@@ -19,6 +19,12 @@ final class ImageBarButton: UIButton {
         configure()
     }
     
+    override var isEnabled: Bool {
+        didSet {
+            self.tintColor = self.isEnabled ? Colors.mainGrape : UIColor.lightGray
+        }
+    }
+    
     private func configure() {
         tintColor = Colors.mainGrape
         setTitleColor(Colors.mainGrape, for: .normal)
