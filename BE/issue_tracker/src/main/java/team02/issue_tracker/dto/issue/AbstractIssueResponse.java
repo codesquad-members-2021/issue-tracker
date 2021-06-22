@@ -9,6 +9,7 @@ import team02.issue_tracker.dto.UserResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -36,7 +37,7 @@ public abstract class AbstractIssueResponse {
         this.labels = toLabelResponses(issue.getIssueLabels());
     }
 
-    private List<UserResponse> toAssigneeResponses(List<IssueAssignee> issueAssignees) {
+    private List<UserResponse> toAssigneeResponses(Set<IssueAssignee> issueAssignees) {
         return issueAssignees.stream()
                 .map(IssueAssignee::getAssignee)
                 .map(UserResponse::new)
