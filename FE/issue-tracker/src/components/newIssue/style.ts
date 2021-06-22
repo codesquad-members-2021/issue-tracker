@@ -14,10 +14,9 @@ const contentsInput = {
   size: 'md',
   height: '291px',
   padding: '16px 24px',
-  background: 'gr_inputBackground',
+  background: 'gr_offWhite',
   placeholder: '코멘트를 입력하세요',
-  variant: 'filled',
-  borderRadius: '16px',
+  variant: 'unstyled',
 };
 
 const progressBar = {
