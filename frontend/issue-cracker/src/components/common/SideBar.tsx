@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Issue as S } from '../styles/CommonStyles';
 import { TYPE as T } from '../../utils/const';
@@ -8,8 +8,8 @@ import TextGroup from '../common/group/TextGroup';
 import AddIcon from '@material-ui/icons/Add';
 import LabelSmallGroup from './group/LabelSmallGroup';
 import jwtDecode from 'jwt-decode';
-import { useSetRecoilState } from 'recoil';
-import { decodedToken } from '../../store/Recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { decodedToken, dropAsigneeState } from '../../store/Recoil';
 import { ProfileImg as P } from '../styles/CommonStyles';
 import ProgressBar from './ProgressBar';
 import SideBarDrop from './SideBarDrop';
@@ -22,6 +22,12 @@ const SideBar = (): JSX.Element => {
   const token = localStorage.getItem('token');
   const decoded = token && jwtDecode<TokenProps>(token);
   const setDecodedToken = useSetRecoilState(decodedToken);
+  const [isDropAsignee, setIsDropAsignee] = useRecoilState(dropAsigneeState);
+  const dropDownElement = useRef<HTMLDivElement>(null);
+
+  const dropAsigneeHandler = () => {
+    setIsDropAsignee(!isDropAsignee);
+  };
 
   useEffect(() => {
     decoded &&
@@ -29,18 +35,36 @@ const SideBar = (): JSX.Element => {
         name: decoded.name,
         profileImageUrl: decoded.profileImageUrl,
       });
+
+    const dropCloseHandler = (e: MouseEvent): void => {
+      if (
+        dropDownElement.current &&
+        !dropDownElement.current.contains(e.target as Node)
+      ) {
+        setIsDropAsignee(false);
+      }
+    };
+    document.addEventListener('mousedown', dropCloseHandler);
+    return () => {
+      document.removeEventListener('mousedown', dropCloseHandler);
+    };
+
+    // document.addEventListener('mousedown', ((event: CustomEvent) => {
+    //   dropDownElement && dropCloseHandler(event.target);
+    // }) as EventListener);
   }, []);
 
   const profileURL = decoded && decoded.profileImageUrl;
   const profileName = decoded && decoded.name;
-
   return (
     <SideBarStyle>
       <SideBarCell>
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'담당자'} color="#6E7191" />
-          <CustomAddIcon />
-          <SideBarDrop />
+          <CustomAddIcon onClick={() => dropAsigneeHandler()} />
+          <SideBarDropDiv ref={dropDownElement}>
+            {isDropAsignee && <SideBarDrop />}
+          </SideBarDropDiv>
         </SideBarTitle>
         <SideBarContent>
           <div>
@@ -57,7 +81,9 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'레이블'} color="#6E7191" />
           <CustomAddIcon />
+          <SideBarDrop />
         </SideBarTitle>
+
         <SideBarContent>
           <LabelSmallGroup
             color={'#fff'}
@@ -75,6 +101,7 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'마일스톤'} color="#6E7191" />
           <CustomAddIcon />
+          <SideBarDrop />
         </SideBarTitle>
         <SideBarContent>
           <ProgressBar />
@@ -132,4 +159,11 @@ const SideBarContent = styled.div`
     margin-top: 4px;
     margin-bottom: 4px;
   }
+`;
+
+const SideBarDropDiv = styled.div`
+  position: absolute;
+  left: -7px;
+  top: 30px;
+  z-index: 10;
 `;

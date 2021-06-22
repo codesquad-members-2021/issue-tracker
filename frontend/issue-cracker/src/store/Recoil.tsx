@@ -9,12 +9,18 @@ export const token = atom({
   key: 'token',
   default: null,
 });
+
 export const decodedToken = atom({
   key: 'decodedToken',
   default: {
     name: '',
     profileImageUrl: '',
   },
+});
+
+export const dropAsigneeState = atom({
+  key: 'dropAsigneeState',
+  default: false,
 });
 
 // export const DecodedToken = selector({
