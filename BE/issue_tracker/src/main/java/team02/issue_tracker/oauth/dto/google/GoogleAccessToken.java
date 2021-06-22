@@ -1,5 +1,6 @@
 package team02.issue_tracker.oauth.dto.google;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.ToString;
 import team02.issue_tracker.oauth.dto.AccessToken;
@@ -7,19 +8,19 @@ import team02.issue_tracker.oauth.dto.AccessToken;
 @ToString
 public class GoogleAccessToken implements AccessToken {
 
-    @JsonSetter("access_token")
+    @JsonProperty("access_token")
     private String accessToken;
 
-    @JsonSetter("expires_in")
+    @JsonProperty("expires_in")
     private int expiresIn;
 
-    @JsonSetter("token_type")
+    @JsonProperty("token_type")
     private String tokenType;
 
-    @JsonSetter("scope")
+    @JsonProperty("scope")
     private String scope;
 
-    @JsonSetter("refresh_token")
+    @JsonProperty("refresh_token")
     private String refreshToken;
 
     @Override
