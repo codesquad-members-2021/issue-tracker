@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
 import com.issuetracker.oauth.User;
+import com.issuetracker.oauth.UserDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,8 +15,8 @@ public class IssueDto {
     private String description;
     private boolean closed;
 
-    private User assignee;
-    private User author;
+    private UserDto assignee;
+    private UserDto author;
 
     @JsonProperty("label_list")
     private List<Label> labelList;
@@ -29,7 +30,7 @@ public class IssueDto {
     @JsonProperty("milestone_title")
     private String milestoneTitle;
 
-    public IssueDto(Long id, String title, String description, boolean closed, User assignee, User author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignee, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -42,7 +43,7 @@ public class IssueDto {
         this.milestoneTitle = milestoneTitle;
     }
 
-    public IssueDto(Long id, String title, String description, boolean closed, User assignee, User author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignee, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -55,7 +56,7 @@ public class IssueDto {
         this.milestoneTitle = null;
     }
 
-    public IssueDto(Issue issue, String milestoneTitle, User author, User assignee) {
+    public IssueDto(Issue issue, String milestoneTitle, UserDto author, UserDto assignee) {
         this.id = issue.getId();
         this.title = issue.getTitle();
         this.description = issue.getDescription();
@@ -66,7 +67,7 @@ public class IssueDto {
         this.milestoneTitle = milestoneTitle;
     }
 
-    public static IssueDto of(Issue issue, String milestoneTitle, List<Label> labels, User author, User assignee) {
+    public static IssueDto of(Issue issue, String milestoneTitle, List<Label> labels, UserDto author, UserDto assignee) {
         return new IssueDto(
                 issue.getId(),
                 issue.getTitle(),
@@ -81,7 +82,7 @@ public class IssueDto {
         );
     }
 
-    public static IssueDto of(Issue issue, List<Label> labels, User author, User assignee) {
+    public static IssueDto of(Issue issue, List<Label> labels, UserDto author, UserDto assignee) {
         return new IssueDto(
                 issue.getId(),
                 issue.getTitle(),
@@ -111,11 +112,11 @@ public class IssueDto {
         return closed;
     }
 
-    public User getAssignee() {
+    public UserDto getAssignee() {
         return assignee;
     }
 
-    public User getAuthor() {
+    public UserDto getAuthor() {
         return author;
     }
 

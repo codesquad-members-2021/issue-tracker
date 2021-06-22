@@ -60,6 +60,7 @@ public class LoginController {
 
         ResponseEntity<User> user = githubRequest.exchange(request, User.class);
 
+        logger.info("check user1: {}", user.getBody().toString());
         // 로그인한 유저가 유저 테이블에 없다면 테이블에 저장
         User loginUser = user.getBody();
         if (loginUser != null && loginUser.getId() != null) {
@@ -69,6 +70,7 @@ public class LoginController {
             }
         }
 
+        logger.info("check user2: {}", user.getBody().toString());
         Algorithm algorithm = Algorithm.HMAC256(oauthUtil.getAlgorithmSecret());
 
         String jwt = JWT.create()

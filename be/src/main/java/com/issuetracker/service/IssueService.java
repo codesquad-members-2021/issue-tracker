@@ -3,6 +3,7 @@ package com.issuetracker.service;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.*;
 import com.issuetracker.oauth.User;
+import com.issuetracker.oauth.UserDto;
 import com.issuetracker.repository.IssueRepository;
 import com.issuetracker.repository.MilestoneRepository;
 import com.issuetracker.repository.UserRepository;
@@ -29,12 +30,12 @@ public class IssueService {
         this.milestoneRepository = milestoneRepository;
     }
 
-    public List<IssueDto> getAllIssues() {
-        return issueRepository.findAllIssues().stream()
-                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
-                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
-                .collect(Collectors.toList());
-    }
+//    public List<IssueDto> getAllIssues() {
+//        return issueRepository.findAllIssues().stream()
+//                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
+//                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
+//                .collect(Collectors.toList());
+//    }
 
     public ResponseStatusDto saveIssue(IssueRequestDto requestDto, User author) {
         int lastNumOfIssues = issueRepository.findAllIssues().size();
@@ -99,9 +100,9 @@ public class IssueService {
         return issue.getMilestoneId() != 0;
     }
 
-    private User findUserByIssue(Long userId) {
+    private UserDto findUserByIssue(Long userId) {
         if (verifyUserInIssue(userId)) {
-            return userRepository.findOneById(userId);
+            return new UserDto(userRepository.findOneById(userId));
         }
 
         return null;
