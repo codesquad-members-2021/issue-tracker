@@ -1,11 +1,6 @@
 import Foundation
 import Security
 
-protocol JWTManageable {
-    func get() -> String?
-    func set(jwt: String) -> Bool
-}
-
 struct JWTManager: JWTManageable {
     
     func get() -> String? {

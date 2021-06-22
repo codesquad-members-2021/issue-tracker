@@ -45,5 +45,3 @@ class LoginViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
     
 }
-
-extension LoginViewController: Identifying { }

@@ -136,5 +136,3 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
-extension IssueListViewController: Identifying { }

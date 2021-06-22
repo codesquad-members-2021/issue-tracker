@@ -48,5 +48,3 @@ extension LabelViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
-extension LabelViewController: Identifying { }

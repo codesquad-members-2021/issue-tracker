@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		8FCD6816A54EFB8450019F3C /* Pods_issue_trackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B04F5C007A8FFC9B064EE3 /* Pods_issue_trackerTests.framework */; };
 		ABB6BF9FC07F4E0AC0353B02 /* Pods_issue_tracker_issue_trackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B617A2F324571A87045F3DA /* Pods_issue_tracker_issue_trackerUITests.framework */; };
+		BD0814692681C5C100C3D6D7 /* Identyfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0814682681C5C100C3D6D7 /* Identyfying.swift */; };
+		BD08146B2681C76F00C3D6D7 /* JWTManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08146A2681C76F00C3D6D7 /* JWTManageable.swift */; };
+		BD08146D2681C79E00C3D6D7 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08146C2681C79E00C3D6D7 /* URLSessionProtocol.swift */; };
+		BD08146E2681C80500C3D6D7 /* JWTManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08146A2681C76F00C3D6D7 /* JWTManageable.swift */; };
+		BD08146F2681C80900C3D6D7 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08146C2681C79E00C3D6D7 /* URLSessionProtocol.swift */; };
+		BD0814722681C85800C3D6D7 /* URLSessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0814712681C85800C3D6D7 /* URLSessionStub.swift */; };
+		BD0814742681C8B600C3D6D7 /* JWTManagerStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0814732681C8B600C3D6D7 /* JWTManagerStub.swift */; };
+		BD0814762681C8DF00C3D6D7 /* TestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0814752681C8DF00C3D6D7 /* TestDTO.swift */; };
 		BD1D36F5266E428700B51184 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F4266E428700B51184 /* AppDelegate.swift */; };
 		BD1D36F7266E428700B51184 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F6266E428700B51184 /* SceneDelegate.swift */; };
 		BD1D36F9266E428700B51184 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D36F8266E428700B51184 /* LoginViewController.swift */; };
@@ -70,6 +78,12 @@
 		732F1E4DBB6AF01AFA22DAC1 /* Pods-issue-trackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-trackerTests.release.xcconfig"; path = "Target Support Files/Pods-issue-trackerTests/Pods-issue-trackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0B04F5C007A8FFC9B064EE3 /* Pods_issue_trackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_issue_trackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A62B9B8D18798821EF8B7DE8 /* Pods-issue-tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker/Pods-issue-tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		BD0814682681C5C100C3D6D7 /* Identyfying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identyfying.swift; sourceTree = "<group>"; };
+		BD08146A2681C76F00C3D6D7 /* JWTManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManageable.swift; sourceTree = "<group>"; };
+		BD08146C2681C79E00C3D6D7 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		BD0814712681C85800C3D6D7 /* URLSessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionStub.swift; sourceTree = "<group>"; };
+		BD0814732681C8B600C3D6D7 /* JWTManagerStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManagerStub.swift; sourceTree = "<group>"; };
+		BD0814752681C8DF00C3D6D7 /* TestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDTO.swift; sourceTree = "<group>"; };
 		BD1D36F1266E428700B51184 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1D36F4266E428700B51184 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD1D36F6266E428700B51184 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +176,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BD0814672681C59C00C3D6D7 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				BD0814682681C5C100C3D6D7 /* Identyfying.swift */,
+				BD08146A2681C76F00C3D6D7 /* JWTManageable.swift */,
+				BD08146C2681C79E00C3D6D7 /* URLSessionProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		BD0814702681C83B00C3D6D7 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				BD0814712681C85800C3D6D7 /* URLSessionStub.swift */,
+				BD0814732681C8B600C3D6D7 /* JWTManagerStub.swift */,
+				BD0814752681C8DF00C3D6D7 /* TestDTO.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		BD1D36E8266E428700B51184 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +223,7 @@
 		BD1D36F3266E428700B51184 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				BD0814672681C59C00C3D6D7 /* Protocol */,
 				BD1D3736266F5DA200B51184 /* View */,
 				BD1D3726266F121000B51184 /* ViewController */,
 				CEA84DFE267B86250006CC2E /* ViewModel */,
@@ -205,6 +240,7 @@
 		BD1D370A266E428800B51184 /* issue-trackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				BD0814702681C83B00C3D6D7 /* Mock */,
 				BD1D370B266E428800B51184 /* issue_trackerTests.swift */,
 				CEBF141326788D910009BB75 /* JWTManagerTest.swift */,
 				CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */,
@@ -522,12 +558,15 @@
 				BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */,
 				CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */,
 				CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */,
+				BD08146B2681C76F00C3D6D7 /* JWTManageable.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
 				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
 				CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */,
+				BD0814692681C5C100C3D6D7 /* Identyfying.swift in Sources */,
+				BD08146D2681C79E00C3D6D7 /* URLSessionProtocol.swift in Sources */,
 				CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */,
 				CEA84DEF267B07390006CC2E /* JWTResponseDTO.swift in Sources */,
 				BDCEAF6726733F8F005EE147 /* LabelTableViewCell.swift in Sources */,
@@ -546,8 +585,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD08146F2681C80900C3D6D7 /* URLSessionProtocol.swift in Sources */,
 				CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */,
 				BD1D370C266E428800B51184 /* issue_trackerTests.swift in Sources */,
+				BD08146E2681C80500C3D6D7 /* JWTManageable.swift in Sources */,
+				BD0814742681C8B600C3D6D7 /* JWTManagerStub.swift in Sources */,
+				BD0814762681C8DF00C3D6D7 /* TestDTO.swift in Sources */,
+				BD0814722681C85800C3D6D7 /* URLSessionStub.swift in Sources */,
 				CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */,
 				CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */,
 				CEBF1412267887550009BB75 /* JWTManager.swift in Sources */,

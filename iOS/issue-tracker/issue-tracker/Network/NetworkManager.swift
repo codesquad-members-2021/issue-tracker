@@ -1,12 +1,6 @@
 import Foundation
 import Combine
 
-protocol URLSessionProtocol {
-    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
-}
-
-extension URLSession: URLSessionProtocol { }
-
 struct NetworkManager {
     
     private let jwtManager: JWTManageable

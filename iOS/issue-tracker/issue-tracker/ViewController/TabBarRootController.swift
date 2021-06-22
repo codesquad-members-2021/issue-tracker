@@ -6,7 +6,6 @@ class TabBarRootController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bind()
     }
     
@@ -33,5 +32,3 @@ class TabBarRootController: UITabBarController {
     }
     
 }
-
-extension TabBarRootController: Identifying { }
