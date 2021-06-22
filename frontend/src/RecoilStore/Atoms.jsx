@@ -59,4 +59,9 @@ export const labelEditButtonFlagState = atom({
 export const navigatorAddButtonFlagState = atom({
 	key: "navigatorAddButtonFlagState",
 	default: false,
+
+export const milestoneCountState = atom({
+	key: "milestoneCountState",
+	default: 0,
+
 });

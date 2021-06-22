@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ButtonGroup from "./Button/ButtonGroup";
 import AddButton from "./Button/BlueButtons";
 import CancelButton from "components/common/Button/WhiteButtons";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
 	labelButtonFlagState,
 	milestoneButtonFlagState,
@@ -11,6 +11,7 @@ import {
 	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
 import { useState } from "react";
+import { milestoneCountState } from "RecoilStore/Atoms";
 
 const Navigator = () => {
 	// const [isAddButton, setIsAddButton] = useState(true);
@@ -28,6 +29,10 @@ const Navigator = () => {
 		labelAddButtonFlagState
 	);
 	//밑에 하나로 묶어도 될 것 같음
+
+	const milestoneCountValue = useRecoilValue(milestoneCountState);
+
+
 	const handleMilestoneClick = () => {
 		setMilestoneFlag(true);
 		setLabelFlag(false);
@@ -36,22 +41,21 @@ const Navigator = () => {
 		setMilestoneFlag(false);
 		setLabelFlag(true);
 	};
-
 	//Refactoring
 	//리렌더 2번 일어남
 	const handleClick = () => {
 		milestoneFlag
 			? setMilestoneAddBtnFlag(!milestoneAddBtnFlag)
 			: setLabelAddBtnFlag(!labelAddBtnFlag);
-
 		setAddButtonFlag(!addButtonFlag);
+
 	};
 
 	return (
 		<NavigatorLayout>
 			{/* 버튼 그룹 카운트 자리에 데이터 길이 넣어주기 */}
 			<ButtonGroup
-				milestoneCount={"N"}
+				milestoneCount={milestoneCountValue}
 				milestoneClickEvent={handleMilestoneClick}
 				labelCount={"N"}
 				labelClickEvent={handleLabelClick}
