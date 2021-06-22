@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-final class MockRepository: Requesting {
+final class MockRepository: NetworkEngine {
 
     var error: NetworkError?
 
-    func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
+    func requestUserAuth(to code: Data) -> AnyPublisher<[String: String], NetworkError> {
         if let error = error {
             return Fail<[String: String], NetworkError>(error: error).eraseToAnyPublisher()
         } else {

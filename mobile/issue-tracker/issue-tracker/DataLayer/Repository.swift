@@ -9,24 +9,25 @@ import Foundation
 import Combine
 import AuthenticationServices
 
-protocol Requesting {
-    func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError>
+protocol NetworkEngine {
+    func requestUserAuth(to code: Data) -> AnyPublisher<[String: String], NetworkError>
 }
 
-final class Repository: Requesting {
+final class Repository: NetworkEngine {
 
     private let session: URLSession
-
+    private let endpoint: EndPointGenerator
     private let callbackURLScheme = "issue-tracker"
     private var cancell: AnyCancellable?
 
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared, endpoint: EndPointGenerator = EndPoint()) {
         self.session = session
+        self.endpoint = endpoint
     }
 
-    func requestUserAuth(to code: Encodable) -> AnyPublisher<[String: String], NetworkError> {
+    func requestUserAuth(to httpBody: Data) -> AnyPublisher<[String: String], NetworkError> {
 
-        guard let url = EndPoint().authURLRequest(to: code, method: .post) else {
+        guard let url = endpoint.urlRequest(router: .auth, method: .post, body: httpBody) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
 
@@ -52,7 +53,7 @@ final class Repository: Requesting {
     }
 
     func fetchGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
-        guard let url = GithubConfiguration().url() else {
+        guard let url = endpoint.url(router: .github) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
         return ASWebAuthenticationSession.publisher(url: url, sheme: callbackURLScheme, context: viewController).eraseToAnyPublisher()

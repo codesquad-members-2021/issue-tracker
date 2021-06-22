@@ -26,8 +26,8 @@ final class LoginService {
         return repository.fetchGithubLoginCode(from: viewController)
     }
 
-    func fetchToken(to code: Encodable) -> AnyPublisher<Void, NetworkError> {
-        return repository.requestUserAuth(to: code)
+    func fetchToken(to httpBody: Data) -> AnyPublisher<Void, NetworkError> {
+        return repository.requestUserAuth(to: httpBody)
             .catch { error in
                 return Fail(error: error).eraseToAnyPublisher()
             }

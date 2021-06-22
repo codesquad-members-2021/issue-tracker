@@ -27,12 +27,12 @@ final class LoginViewModel {
                 self?.message = error.description
             }
         } receiveValue: { [weak self] code in
-            self?.authorizeUser(to: Auth(code: code))
+            self?.authorizeUser(to: Auth(code: code).encode())
         }.store(in: &cancellable)
     }
 
-    func authorizeUser(to code: Encodable) {
-        loginService.fetchToken(to: code).sink { [weak self] fail in
+    func authorizeUser(to httpBody: Data) {
+        loginService.fetchToken(to: httpBody).sink { [weak self] fail in
             if case .failure(let error) = fail {
                 self?.message = error.description
             }

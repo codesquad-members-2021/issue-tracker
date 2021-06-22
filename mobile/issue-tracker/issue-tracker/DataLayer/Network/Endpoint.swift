@@ -7,53 +7,52 @@
 
 import Foundation
 
-enum URLRouter {
-    case auth
-    case issues
-
-    var path: String {
-        switch self {
-        case .auth:
-            return "auth"
-        case .issues:
-            return "issues"
-        }
-    }
+protocol EndPointGenerator {
+    func url(router: URLRouter) -> URL?
+    func urlRequest(router: URLRouter, method: Method, body: Data?) -> URLRequest?
 }
 
-struct EndPoint {
-    private let scheme = "http"
-    private let host = "localhost"
-    private let port = 8080
-    private let basePath = "/api/ios/"
-    private let headers = ["Content-Type": "application/json"]
+struct EndPoint: EndPointGenerator {
 
-    private func url(router: URLRouter) -> URL? {
-        var component = URLComponents()
-        component.scheme = scheme
-        component.host = host
-        component.port = port
-        component.path = basePath + router.path
-        return component.url
+    func url(router: URLRouter) -> URL? {
+        switch router {
+        case .auth:
+            return baseURL(path: router.path)
+        case .issues:
+            return baseURL(path: router.path)
+        case .github:
+            return githubAuthURL()
+        }
     }
 
-    private func url2(router: URLRouter) -> URL? {
+    private func baseURL(path: String) -> URL? {
         var component = URLComponents()
         component.scheme = "http"
         component.host = "localhost"
         component.port = 8080
-        component.path = "/api/ios/" + router.path
+        component.path = "/api/ios/" + path
         return component.url
     }
 
-    func authURLRequest(to code: Encodable, method: Method) -> URLRequest? {
-        guard let url = url(router: .auth) else {
+    private func githubAuthURL() -> URL? {
+        var component = URLComponents()
+        component.scheme = "https"
+        component.host = "github.com"
+        component.path = "/login/oauth/authorize"
+        component.queryItems = [URLQueryItem(name: "client_id", value: "6cd127b711edc7a10a5c"),
+                                URLQueryItem(name: "scope", value: "user")]
+        return component.url
+    }
+
+    func urlRequest(router: URLRouter, method: Method = .get, body: Data? = nil) -> URLRequest? {
+        guard let url = url(router: router) else {
             return nil
         }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.description
-        urlRequest.httpBody = code.encode()
-        urlRequest.allHTTPHeaderFields = headers
+        urlRequest.httpBody = body
+        urlRequest.allHTTPHeaderFields = ["Content-Type": "application/json"]
         return urlRequest
     }
+
 }
