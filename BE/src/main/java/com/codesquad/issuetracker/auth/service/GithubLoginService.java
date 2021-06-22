@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.auth.dto.AccessTokenRequest;
 import com.codesquad.issuetracker.auth.dto.AccessTokenResponse;
 import com.codesquad.issuetracker.auth.dto.GitHubUser;
 import com.codesquad.issuetracker.auth.dto.JwtResponse;
+import com.codesquad.issuetracker.exception.BadRequestException;
 import com.codesquad.issuetracker.user.domain.User;
 import com.codesquad.issuetracker.user.infra.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,10 +48,10 @@ public class GithubLoginService {
     public JwtResponse issueToken(String code, GitHubOauthValues gitHubOauthValues) {
         RestTemplate request = new RestTemplate();
         AccessTokenResponse accessToken = getAccessToken(code, gitHubOauthValues, request)
-                .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
+                .orElseThrow(() -> new BadRequestException("access token을 발급받지 못했습니다."));
 
         GitHubUser githubUser = getUserFromOauth(accessToken, request)
-                .orElseThrow(() -> new RuntimeException("요청 바디 없음"));
+                .orElseThrow(() -> new BadRequestException("github user를 받지 못했습니다."));
 
         User user = userRepository.findByGitHubId(githubUser.getLogin())
                 .orElseGet(() -> userRepository.save(User.fromGitHubUser(githubUser)));

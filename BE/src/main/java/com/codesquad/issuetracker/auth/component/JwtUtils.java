@@ -2,8 +2,10 @@ package com.codesquad.issuetracker.auth.component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import com.codesquad.issuetracker.exception.BadRequestException;
 import com.codesquad.issuetracker.user.domain.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -46,13 +48,17 @@ public class JwtUtils {
     }
 
     public User getUserFromJwt(String token) {
-        DecodedJWT jwt = jwtVerifier.verify(token);
-        return User.instanceOf(
-                UUID.fromString(jwt.getClaim(ID).asString()),
-                jwt.getClaim(NICKNAME).asString(),
-                jwt.getClaim(IMAGE_URL).asString(),
-                jwt.getClaim(GITHUB_ID).asString(),
-                jwt.getClaim(APPLE_ID).asString()
-        );
+        try {
+            DecodedJWT jwt = jwtVerifier.verify(token);
+            return User.instanceOf(
+                    UUID.fromString(jwt.getClaim(ID).asString()),
+                    jwt.getClaim(NICKNAME).asString(),
+                    jwt.getClaim(IMAGE_URL).asString(),
+                    jwt.getClaim(GITHUB_ID).asString(),
+                    jwt.getClaim(APPLE_ID).asString()
+            );
+        } catch (JWTVerificationException jwtVerificationException) {
+            throw new BadRequestException("토큰 확인이 필요합니다.");
+        }
     }
 }
