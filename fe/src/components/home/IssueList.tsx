@@ -18,18 +18,32 @@ function IssueList() {
   const [closeIssues, setCloseIssues] = useRecoilState(closedIssues);
 
   useEffect(() => {
+    const openIssuesData = sessionStorage.getItem("openIssues");
+    if (openIssuesData) {
+      const newOpenIssues = JSON.parse(openIssuesData);
+      setOpenIssues([...newOpenIssues]);
+      return;
+    }
+    // if (!sessionStorage.getItem("openIssues")) {
     const request = async () => {
-      const response = await fetch(URL.issue("open"));
+      const response = await fetch(URL.endPoint("issue/open"));
       const json = await response.json();
       setOpenIssues([...json.data]);
       sessionStorage.setItem("openIssues", JSON.stringify([...json.data]));
     };
     request();
+    // }
   }, []);
 
   useEffect(() => {
+    const closeIssuesData = sessionStorage.getItem("closeIssues");
+    if (closeIssuesData) {
+      const newCloseIssues = JSON.parse(closeIssuesData);
+      setCloseIssues([...newCloseIssues]);
+      return;
+    }
     const request = async () => {
-      const response = await fetch(URL.issue("close"));
+      const response = await fetch(URL.endPoint("issue/close"));
       const json = await response.json();
       setCloseIssues([...json.data]);
       sessionStorage.setItem("closeIssues", JSON.stringify([...json.data]));

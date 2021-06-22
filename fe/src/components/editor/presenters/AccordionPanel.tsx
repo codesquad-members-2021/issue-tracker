@@ -62,7 +62,7 @@ function AccordionPanel(props: AccordionPanelProps) {
       <AccordionDetails className={classes.accordionDetail}>
         {temporalArray.map((item) => (
           <List onClick={handleClickToSelect(item.id, item.title, keyName)}>
-            <ListItem>{item.id}</ListItem>
+            <ListItem>({item.id})</ListItem>
             <ListItem>{item.title}</ListItem>
           </List>
         ))}

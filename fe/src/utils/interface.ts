@@ -4,7 +4,6 @@ export interface ListItemsType {
 }
 
 interface LabelType extends ListItemsType {
-  content: string | null;
   color: string;
 }
 
@@ -61,6 +60,6 @@ export interface EditorRefsType {
 
 export interface TemporalRefStateType {
   assignees: ListItemsType[];
-  labels: ListItemsType[];
+  labels: LabelType[];
   milestones: ListItemsType[];
 }

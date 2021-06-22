@@ -8,8 +8,8 @@ export const mock_closedIssue: IssueType[] = [
     status: false,
     created_at: "2021-06-08 15:00:00",
     label_list: [
-      { id: 10, title: "BE", content: null, color: "#f59342" },
-      { id: 12, title: "Feature", content: null, color: "#1ed469" },
+      { id: 10, title: "BE", color: "#f59342" },
+      { id: 12, title: "Feature", color: "#1ed469" },
     ],
     author: {
       name: "bibi",
@@ -33,8 +33,8 @@ export const mock_closedIssue: IssueType[] = [
     status: false,
     created_at: "2021-06-08 15:00:00",
     label_list: [
-      { id: 10, title: "BE", content: null, color: "#f59342" },
-      { id: 12, title: "Feature", content: null, color: "#1ed469" },
+      { id: 10, title: "BE", color: "#f59342" },
+      { id: 12, title: "Feature", color: "#1ed469" },
     ],
     author: {
       name: "bibi",
