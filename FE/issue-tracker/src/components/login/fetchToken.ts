@@ -1,4 +1,3 @@
-import React from 'react';
 import jwt_decode from 'jwt-decode';
 import { TOKEN_URL } from '@const/var';
 import { loginInfoType } from '@store/atoms/login';
