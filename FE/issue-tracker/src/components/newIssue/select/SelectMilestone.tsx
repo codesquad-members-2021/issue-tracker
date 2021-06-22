@@ -22,8 +22,6 @@ function SelectMilestone() {
   const [progressValue, setProgressValue] =
     useState<progressValueType | null>(null);
 
-  console.log(checkedMilestones);
-
   useEffect(() => {
     if (checkedMilestones == null) setProgressValue(null);
     else {
