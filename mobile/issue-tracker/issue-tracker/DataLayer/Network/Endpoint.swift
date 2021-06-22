@@ -11,7 +11,7 @@ enum URLRouter {
     case auth
     case issues
 
-    func path(url: Self) -> String {
+    var path: String {
         switch self {
         case .auth:
             return "auth"
@@ -33,12 +33,21 @@ struct EndPoint {
         component.scheme = scheme
         component.host = host
         component.port = port
-        component.path = basePath + router.path(url: .auth)
+        component.path = basePath + router.path
+        return component.url
+    }
+
+    private func url2(router: URLRouter) -> URL? {
+        var component = URLComponents()
+        component.scheme = "http"
+        component.host = "localhost"
+        component.port = 8080
+        component.path = "/api/ios/" + router.path
         return component.url
     }
 
     func authURLRequest(to code: Encodable, method: Method) -> URLRequest? {
-        guard let url = EndPoint().url(router: .auth) else {
+        guard let url = url(router: .auth) else {
             return nil
         }
         var urlRequest = URLRequest(url: url)

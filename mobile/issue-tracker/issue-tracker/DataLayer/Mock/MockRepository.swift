@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class MockRepository: Repositorable {
+final class MockRepository: Requesting {
 
     var error: NetworkError?
 
