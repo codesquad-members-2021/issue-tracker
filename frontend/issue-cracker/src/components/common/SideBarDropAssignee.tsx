@@ -5,16 +5,18 @@ import { useRecoilValue } from 'recoil';
 import { decodedToken } from '../../store/Recoil';
 import CheckOffIcon from '../styles/svg/CheckOffIcon';
 
-interface SideBarDropAsigneeProps {
+interface SideBarDropAssigneeProps {
   data: { email: string; name: string; avatar_url: string };
 }
-const SideBarDropAsignee = ({ data }: SideBarDropAsigneeProps): JSX.Element => {
+const SideBarDropAssignee = ({
+  data,
+}: SideBarDropAssigneeProps): JSX.Element => {
   const decoded = decodedToken && useRecoilValue(decodedToken);
   const profileURL = decoded && decoded.profileImageUrl;
   // const profileName = decoded && decoded.name;
 
   return (
-    <SideBarDropAsigneeStyle>
+    <SideBarDropAssigneeStyle>
       <DropLeft>
         <S.ProfileImgSmall src={profileURL}></S.ProfileImgSmall>
         <ProfileName>{data.name}</ProfileName>
@@ -22,12 +24,12 @@ const SideBarDropAsignee = ({ data }: SideBarDropAsigneeProps): JSX.Element => {
       <DropRight>
         <CheckOffIcon />
       </DropRight>
-    </SideBarDropAsigneeStyle>
+    </SideBarDropAssigneeStyle>
   );
 };
-export default SideBarDropAsignee;
+export default SideBarDropAssignee;
 
-const SideBarDropAsigneeStyle = styled.div`
+const SideBarDropAssigneeStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

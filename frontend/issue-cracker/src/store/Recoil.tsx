@@ -22,6 +22,14 @@ export const dropAsigneeState = atom({
   key: 'dropAsigneeState',
   default: false,
 });
+export const dropLabelState = atom({
+  key: 'dropLabelState',
+  default: false,
+});
+export const dropMilestoneState = atom({
+  key: 'dropMilestoneState',
+  default: false,
+});
 
 // export const DecodedToken = selector({
 //   key: 'setToken',

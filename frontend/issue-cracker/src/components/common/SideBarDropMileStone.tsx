@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import CheckOffIcon from '../styles/svg/CheckOffIcon';
 import { Text as S } from '../styles/CommonStyles';
-
-const SideBarDropLabel = (): JSX.Element => {
+interface SideBarDropLabelProps {
+  data: {
+    id: number;
+    milestone_info: any;
+  };
+}
+const SideBarDropLabel = ({ data }: SideBarDropLabelProps): JSX.Element => {
   return (
     <SideBarDropMileStoneStyle>
       <DropLeft>

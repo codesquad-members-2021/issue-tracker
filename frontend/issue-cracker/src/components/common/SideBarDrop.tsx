@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Issue as S } from '../styles/CommonStyles';
 import { v4 as uuidv4 } from 'uuid';
 
-import SideBarDropAsignee from './SideBarDropAsignee';
+import SideBarDropAssignee from './SideBarDropAssignee';
 import SideBarDropLabel from './SideBarDropLabel';
 import SideBarDropMileStone from './SideBarDropMileStone';
 
@@ -13,19 +13,65 @@ import SideBarDropMileStone from './SideBarDropMileStone';
 //   avatar_url: string;
 // }
 interface SideBarDropProps {
-  data: { email: string; name: string; avatar_url: string }[];
+  type: string;
+  assigneeData?: {
+    email: string;
+    name: string;
+    avatar_url: string;
+  }[];
+  labelData?: {
+    id: number;
+    title: string;
+    description: string;
+    background_color_hexa: string;
+    text_color_hexa: string;
+  }[];
+  milestoneData?: {
+    id: number;
+    milestone_info: any;
+  }[];
 }
-const SideBarDrop = ({ data }: SideBarDropProps): JSX.Element => {
-  return (
-    <SideBarDropStyle>
-      <DropDownTitle>담당자 추가</DropDownTitle>
-      {data.map((user) => (
-        <DropDownContent key={uuidv4()}>
-          <SideBarDropAsignee data={user} />
-        </DropDownContent>
-      ))}
-    </SideBarDropStyle>
-  );
+
+const SideBarDrop = ({
+  type,
+  assigneeData,
+  labelData,
+  milestoneData,
+}: SideBarDropProps): JSX.Element => {
+  if (type === '담당자') {
+    return (
+      <SideBarDropStyle>
+        <DropDownTitle>{type} 추가</DropDownTitle>
+        {assigneeData?.map((user) => (
+          <DropDownContent key={uuidv4()}>
+            <SideBarDropAssignee data={user} />
+          </DropDownContent>
+        ))}
+      </SideBarDropStyle>
+    );
+  } else if (type === '레이블') {
+    return (
+      <SideBarDropStyle>
+        <DropDownTitle>{type} 추가</DropDownTitle>
+        {labelData?.map((label) => (
+          <DropDownContent key={uuidv4()}>
+            <SideBarDropLabel data={label} />
+          </DropDownContent>
+        ))}
+      </SideBarDropStyle>
+    );
+  } else {
+    return (
+      <SideBarDropStyle>
+        <DropDownTitle>{type} 추가</DropDownTitle>
+        {milestoneData?.map((milestone) => (
+          <DropDownContent key={uuidv4()}>
+            <SideBarDropMileStone data={milestone} />
+          </DropDownContent>
+        ))}
+      </SideBarDropStyle>
+    );
+  }
 };
 
 export default SideBarDrop;
