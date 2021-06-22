@@ -22,9 +22,10 @@ class IssueCoordinator: NSObject, Coordinator {
         }
         
         self.navigationController = UINavigationController(rootViewController: issueListVC)
-        navigationController.tabBarItem = UITabBarItem(title: "이슈",
-                                                       image: UIImage.init(systemName: "exclamationmark.circle"),
-                                                       tag: 0)
+        let issueBarItem = UITabBarItem(title: "이슈",
+                                       image: UIImage.init(systemName: "exclamationmark.circle"),
+                                       tag: 0)
+        navigationController.tabBarItem = issueBarItem
         issueListVC.coordinator = self
     }
     

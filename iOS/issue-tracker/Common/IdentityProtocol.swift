@@ -18,7 +18,7 @@ extension NibIdentity {
 }
 
 protocol ReuseIdentity {
-    static var reuseIdentifier: String {  get }
+    static var reuseIdentifier: String { get }
 }
 
 extension ReuseIdentity {
