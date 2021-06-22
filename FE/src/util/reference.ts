@@ -44,6 +44,7 @@ type TIssueListFilterItem = {
 type TIssueListFilterType = {
   title: string;
   items: TIssueListFilterItem[];
+  type: TFilterModal;
 };
 
 type TTextIssueListFilterItems = {
@@ -97,6 +98,7 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
       { name: 'comment', text: '내가 댓글을 남긴 이슈' },
       { name: 'close', text: '닫힌 이슈' },
     ],
+    type: 'search',
   },
   assignee: {
     title: '담당자 필터',
@@ -115,6 +117,7 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
         imgType: 'image',
       },
     ],
+    type: 'assignee',
   },
   label: {
     title: '레이블 필터',
@@ -128,6 +131,7 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
         imgType: 'color',
       },
     ],
+    type: 'label',
   },
   milestone: {
     title: '마일스톤 필터',
@@ -135,6 +139,7 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
       { name: 'noMilestone', text: '마일스톤이 없는 필터' },
       { name: 'masters', text: '마스터즈 코스' },
     ],
+    type: 'milestone',
   },
   writer: {
     title: '작성자 필터',
@@ -152,6 +157,7 @@ const TextIssueListFilterMock: TTextIssueListFilterItems = {
         imgType: 'image',
       },
     ],
+    type: 'writer',
   },
 };
 

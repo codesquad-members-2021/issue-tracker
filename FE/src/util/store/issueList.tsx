@@ -1,8 +1,9 @@
 // issueList (IssuePage)
 import { atom } from 'recoil';
-import { ILabelsInfo, IMilestonesInfo, IUsersInfo, IIssuesInfo } from 'util/types';
+import { ILabelsInfo, IMilestonesInfo, IUsersInfo, IIssuesInfo, TFilterTypes } from 'util/types';
 
 // 1. Modal 관련
+// 1) ListModal(Filter 모달) Visible 상태
 interface IFilterVisibleAtom {
   search: boolean;
   assignee: boolean;
@@ -10,13 +11,6 @@ interface IFilterVisibleAtom {
   milestone: boolean;
   writer: boolean;
 }
-
-type TFilterVisibleAtomTypes =
-  | 'search'
-  | 'assignee'
-  | 'label'
-  | 'milestone'
-  | 'writer';
 
 const filterVisibleAtom = atom<IFilterVisibleAtom>({
   key: 'filterVisibleAtom',
@@ -29,10 +23,27 @@ const filterVisibleAtom = atom<IFilterVisibleAtom>({
   },
 });
 
+// 2) 필터 옵션 선택 상태
+type TFilterSelection = {
+  [filterType in TFilterTypes]: string[];
+};
+const filterSelectionAtom = atom<TFilterSelection>({
+  key: 'filterSelectionAtom',
+  default: {
+    assignee: [],
+    search: [],
+    label: [],
+    milestone: [],
+    writer: [],
+  }
+});
+
+// ===========
+
 // 2. API 관련
 
 // IssuePage 데이터 (IssuePage 컴포넌트에서 최초로 불러옴)
-type TissuePageData = {
+type TIssuePageData = {
   isLoading: boolean;
   data: {
     labels?: ILabelsInfo,
@@ -42,7 +53,7 @@ type TissuePageData = {
   };
 };
 
-const issuePageDataAtom = atom<TissuePageData>({
+const issuePageDataAtom = atom<TIssuePageData>({
   key: 'issuePageDataAtom',
   default: {
     isLoading: true,
@@ -54,7 +65,7 @@ const issuePageDataAtom = atom<TissuePageData>({
   }
 });
 
-// =====
 
-export { filterVisibleAtom, issuePageDataAtom };
-export type { IFilterVisibleAtom, TFilterVisibleAtomTypes };
+
+export { filterVisibleAtom, issuePageDataAtom, filterSelectionAtom };
+export type { IFilterVisibleAtom };

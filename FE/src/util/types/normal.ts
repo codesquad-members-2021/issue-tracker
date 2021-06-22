@@ -12,5 +12,6 @@ type TChildren =
 // --
 
 type TMouseEvent = (e: React.MouseEvent<HTMLElement>) => void;
+type TFilterTypes = 'search' | 'assignee' | 'label' | 'milestone' | 'writer';
 
-export type { TChildren, TMouseEvent };
+export type { TChildren, TMouseEvent, TFilterTypes };
