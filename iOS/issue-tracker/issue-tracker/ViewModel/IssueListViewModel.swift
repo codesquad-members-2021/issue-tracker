@@ -7,12 +7,14 @@
 
 import Foundation
 import RxCocoa
+import RxSwift
 
 class IssueListViewModel {
 
     let issueList = BehaviorRelay<[Issue]>(value: [])
     let networkManager: Networkable
     var selectMode = BehaviorRelay<Bool>(value: false)
+    var selectedCell = BehaviorRelay<[Issue]>(value: [])
 
     init(networkManager: Networkable) {
         self.networkManager = networkManager
@@ -27,6 +29,13 @@ class IssueListViewModel {
     func deleteIssue(id: Int) {
         networkManager.deleteRequest(url: Endpoint(path: .issue).url(id: 1)!) {
             print("success")
+        }
+    }
+    
+    func patchIssue(issues: [Issue]) {
+        let encodableObject = PatchIssue(issueNumber: issues.map { $0.id! }, isOpen: false)
+        networkManager.patchRequest(url: Endpoint(path: .issue).url()!, encodable: encodableObject) {
+            print("success patchIssue")
         }
     }
 }
