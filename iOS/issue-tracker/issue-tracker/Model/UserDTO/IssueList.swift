@@ -18,14 +18,18 @@ struct IssueDetail: Codable {
 }
 
 // MARK: - Issue
-struct Issue: Codable {
+struct Issue: Codable, Equatable {
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        return lhs.id == rhs.id
+    }
+
     let id: Int?
     let title: String
     let number: Int
     let open: Bool
     let createdTime: String
     let author: Author
-    let label: [IssueLabel]
+    let labels: [IssueLabel]
     let assignee: [Author]?
     let milestone: Milestone
     let comment: [Comment]?
@@ -34,9 +38,9 @@ struct Issue: Codable {
         case id
         case title
         case number
-        case open = "is_open"
+        case open
         case createdTime = "created_time"
-        case author, label, assignee, milestone, comment
+        case author, labels, assignee, milestone, comment
     }
 }
 
