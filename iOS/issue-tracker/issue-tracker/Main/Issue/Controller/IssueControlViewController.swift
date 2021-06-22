@@ -58,6 +58,54 @@ final class IssueControlViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var titleInputView: UIView = {
+        let container = UIView(frame: .zero)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "제목"
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        container.addSubview(titleLabel)
+    
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
+            titleLabel.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
+        container.addSubview(titleTextField)
+
+        NSLayoutConstraint.activate([
+            titleTextField.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 5),
+            titleTextField.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
+            titleTextField.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
+        let line = CALayer()
+        let borderWidth: CGFloat = 1
+        let size = CGSize(width: view.frame.width - spacing, height: borderWidth)
+        let origin = CGPoint(x: spacing, y: lineHeight - borderWidth)
+        line.frame = CGRect(origin: origin, size: size)
+        line.backgroundColor = Colors.border.cgColor
+        container.layer.addSublayer(line)
+        return container
+    }()
+    
+    private lazy var titleTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "(필수 입력)"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private lazy var lineHeight: CGFloat = {
+        return view.frame.height * 0.05
+    }()
+    
+    private lazy var spacing: CGFloat = {
+        return lineHeight * 0.5
+    }()
+    
     private var currentIssue: Issue?
     private var saveOperation: ((Issue) -> Void)?
     
@@ -67,14 +115,27 @@ final class IssueControlViewController: UIViewController {
     }
     
     private func configureViews() {
+        navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
         addNavigationItems()
+        addTitleInputView()
     }
 
     private func addNavigationItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         navigationItem.titleView = markdownSegmentedControl
+    }
+    
+    private func addTitleInputView() {
+        view.addSubview(titleInputView)
+        
+        NSLayoutConstraint.activate([
+            titleInputView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing * 0.3),
+            titleInputView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            titleInputView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            titleInputView.heightAnchor.constraint(equalToConstant: lineHeight)
+        ])
     }
     
     func setSaveOperation(_ operation: @escaping (Issue) -> Void) {
