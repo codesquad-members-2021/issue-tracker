@@ -2,6 +2,7 @@ package com.issuetracker.repository;
 
 import com.issuetracker.domain.Comment;
 import com.issuetracker.domain.Issue;
+import com.issuetracker.dto.CommentDto;
 import com.issuetracker.dto.IssueSearchCondition;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -28,4 +29,10 @@ public class CommentRepository {
         return jdbcTemplate.query(query, COMMENT_ROW_MAPPER, issueId);
     }
 
+    public List<Comment> findCommentsByUserId(Long userId) {
+        String query = "select id, description, created_time, user_id, issue_id " +
+                "from comment " +
+                "where user_id = ? ";
+        return jdbcTemplate.query(query, COMMENT_ROW_MAPPER, userId);
+    }
 }

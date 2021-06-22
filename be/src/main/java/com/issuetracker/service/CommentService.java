@@ -27,8 +27,15 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    public List<CommentDto> findCommentsByUserId(Long userId) {
+        return commentRepository.findCommentsByUserId(userId).stream()
+                .map(comment -> new CommentDto(comment, findUserByComment(comment)))
+                .collect(Collectors.toList());
+    }
+
     private UserDto findUserByComment(Comment comment){
         return new UserDto(userRepository.findOneById(comment.getUserId()));
     }
+
 
 }

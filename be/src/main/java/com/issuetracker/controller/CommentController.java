@@ -5,10 +5,7 @@ import com.issuetracker.dto.IssueDto;
 import com.issuetracker.dto.IssueSearchCondition;
 import com.issuetracker.service.CommentService;
 import com.issuetracker.service.IssueService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class CommentController {
     @GetMapping("/issues/{issueId}/comments")
     public List<CommentDto> viewCommentsByIssueId(@PathVariable Long issueId) {
         return commentService.findCommentsByIssueId(issueId);
+    }
+
+    @GetMapping("/comments")
+    public List<CommentDto> viewCommentsByUserId(@RequestParam(name = "user_id") Long userId) {
+        return commentService.findCommentsByUserId(userId);
     }
 }
