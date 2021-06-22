@@ -1,34 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
-import CheckOffIcon from '../styles/svg/CheckOffIcon';
-import { Text as S } from '../styles/CommonStyles';
+import CheckOffIcon from '../../styles/svg/CheckOffIcon';
+import LabelColorIcon from '../../styles/svg/LabelColorIcon';
+import { Text as S } from '../../styles/CommonStyles';
+
 interface SideBarDropLabelProps {
   data: {
     id: number;
-    milestone_info: any;
+    title: string;
+    description: string;
+    background_color_hexa: string;
+    text_color_hexa: string;
   };
 }
 const SideBarDropLabel = ({ data }: SideBarDropLabelProps): JSX.Element => {
   return (
-    <SideBarDropMileStoneStyle>
+    <SideBarDropLabelStyle>
       <DropLeft>
-        <MileStoneName>이슈트래커 2주차</MileStoneName>
+        <LabelColorIcon color="#DDA94B" />
+        <LabelName>{data.title}</LabelName>
       </DropLeft>
       <DropRight>
         <CheckOffIcon />
       </DropRight>
-    </SideBarDropMileStoneStyle>
+    </SideBarDropLabelStyle>
   );
 };
 
 export default SideBarDropLabel;
 
-const SideBarDropMileStoneStyle = styled.div`
+const SideBarDropLabelStyle = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
 `;
-const MileStoneName = styled(S.TextSmall)`
+const LabelName = styled(S.TextSmall)`
   margin-left: 8px;
 `;
 const DropLeft = styled.div`

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Issue as S } from '../styles/CommonStyles';
-import { TYPE as T, SIDEBAR_TYPE as ST } from '../../utils/const';
-import { SIDEBAR_MENU } from '../../utils/const';
-import { v4 as uuidv4 } from 'uuid';
-import TextGroup from '../common/group/TextGroup';
+import { Issue as S } from '../../styles/CommonStyles';
+import { TYPE as T } from '../../../utils/const';
+
+import TextGroup from '../group/TextGroup';
 import AddIcon from '@material-ui/icons/Add';
-import LabelSmallGroup from './group/LabelSmallGroup';
 import jwtDecode from 'jwt-decode';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import {
@@ -14,11 +12,17 @@ import {
   dropAsigneeState,
   dropLabelState,
   dropMilestoneState,
-} from '../../store/Recoil';
-import { ProfileImg as P } from '../styles/CommonStyles';
-import ProgressBar from './ProgressBar';
+} from '../../../store/Recoil';
 import SideBarDrop from './SideBarDrop';
-import { userData } from '../../utils/mock/userData';
+import { userData } from '../../../utils/mock/userData';
+import AssigneeData from './data/AssigneeData';
+import LabelData from './data/LabelData';
+import MilestoneData from './data/MilestoneData';
+
+import AssigneeContent from './content/AssigneeContent';
+import LabelContent from './content/LabelContent';
+import MilestoneContent from './content/MilestoneContent';
+
 interface TokenProps {
   name: string;
   profileImageUrl: string;
@@ -32,7 +36,10 @@ const SideBar = (): JSX.Element => {
   const [isDropLabel, setIsDropLabel] = useRecoilState(dropLabelState);
   const [isDropMilestone, setIsDropMilestone] =
     useRecoilState(dropMilestoneState);
-  const dropDownElement = useRef<HTMLDivElement>(null);
+
+  const dropAssigneeElement = useRef<HTMLDivElement>(null);
+  const dropLabelElement = useRef<HTMLDivElement>(null);
+  const dropMilestoneElement = useRef<HTMLDivElement>(null);
 
   const dropAsigneeHandler = () => {
     setIsDropAsignee(!isDropAsignee);
@@ -52,14 +59,24 @@ const SideBar = (): JSX.Element => {
       });
 
     const dropCloseHandler = (e: MouseEvent): void => {
-      if (
-        dropDownElement.current &&
-        !dropDownElement.current.contains(e.target as Node)
-      ) {
-        setIsDropAsignee(false);
+      if (dropAssigneeElement.current?.contains(e.target as Node)) {
         setIsDropLabel(false);
         setIsDropMilestone(false);
+        return;
       }
+      if (dropLabelElement.current?.contains(e.target as Node)) {
+        setIsDropAsignee(false);
+        setIsDropMilestone(false);
+        return;
+      }
+      if (dropMilestoneElement.current?.contains(e.target as Node)) {
+        setIsDropAsignee(false);
+        setIsDropLabel(false);
+        return;
+      }
+      setIsDropAsignee(false);
+      setIsDropLabel(false);
+      setIsDropMilestone(false);
     };
     document.addEventListener('mousedown', dropCloseHandler);
     return () => {
@@ -69,11 +86,10 @@ const SideBar = (): JSX.Element => {
 
   const profileURL = decoded && decoded.profileImageUrl;
   const profileName = decoded && decoded.name;
-  // const userList = userData[0].assignees.users;
 
   const [userList, labelList, milestoneList] = [
-    userData.assignees.users,
-    userData.labels.labels,
+    userData.assignees,
+    userData.labels,
     userData.milestones,
   ];
 
@@ -83,44 +99,56 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'담당자'} color="#6E7191" />
           <CustomAddIcon onClick={() => dropAsigneeHandler()} />
-          <SideBarDropDiv ref={dropDownElement}>
+          <SideBarDropDiv ref={dropAssigneeElement}>
             {isDropAsignee && (
-              <SideBarDrop type={'담당자'} assigneeData={userList} />
+              <SideBarDrop
+                type={'담당자'}
+                dataComponent={<AssigneeData {...{ userList }} />}
+              />
             )}
           </SideBarDropDiv>
         </SideBarTitle>
         <SideBarContent>
-          <div>
-            {profileURL && <P.ProfileImgLarge src={profileURL} />}
-            <AccountName>{profileName}</AccountName>
-          </div>
-          <div>
-            {profileURL && <P.ProfileImgLarge src={profileURL} />}
-            <AccountName>{profileName}</AccountName>
-          </div>
+          <AssigneeContent
+            userList={[
+              {
+                email: 'tami@naver.com',
+                name: 'tami',
+                avatar_url: 'url',
+              },
+              {
+                email: 'tami@naver.com',
+                name: 'tami',
+                avatar_url: 'url',
+              },
+            ]}
+          />
         </SideBarContent>
       </SideBarCell>
       <SideBarCell>
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'레이블'} color="#6E7191" />
           <CustomAddIcon onClick={() => dropLabelHandler()} />
-          <SideBarDropDiv ref={dropDownElement}>
+          <SideBarDropDiv ref={dropLabelElement}>
             {isDropLabel && (
-              <SideBarDrop type={'레이블'} labelData={labelList} />
+              <SideBarDrop
+                type={'레이블'}
+                dataComponent={<LabelData {...{ labelList }} />}
+              />
             )}
           </SideBarDropDiv>
         </SideBarTitle>
 
         <SideBarContent>
-          <LabelSmallGroup
-            color={'#fff'}
-            backgroundColor={'#DDA94B'}
-            label="라벨 생성"
-          />
-          <LabelSmallGroup
-            color={'#fff'}
-            backgroundColor={'#DDA94B'}
-            label="라벨 하이"
+          <LabelContent
+            labelList={[
+              {
+                id: 1,
+                title: '밥먹기',
+                background_color_hexa: '#DDA94B',
+                text_color_hexa: '#fff',
+              },
+            ]}
           />
         </SideBarContent>
       </SideBarCell>
@@ -128,14 +156,33 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'마일스톤'} color="#6E7191" />
           <CustomAddIcon onClick={() => dropMilestoneHandler()} />
-          <SideBarDropDiv ref={dropDownElement}>
+          <SideBarDropDiv ref={dropMilestoneElement}>
             {isDropMilestone && (
-              <SideBarDrop type={'마일스톤'} milestoneData={milestoneList} />
+              <SideBarDrop
+                type={'마일스톤'}
+                dataComponent={<MilestoneData {...{ milestoneList }} />}
+              />
             )}
           </SideBarDropDiv>
         </SideBarTitle>
         <SideBarContent>
-          <ProgressBar />
+          <MilestoneContent
+            milestoneList={[
+              {
+                id: 1,
+
+                title: '1',
+                description: 'tami',
+                due_date: '2021-06-22',
+              },
+              {
+                id: 2,
+                title: '2',
+                description: 'raccoon',
+                due_date: '2021-06-22',
+              },
+            ]}
+          />
         </SideBarContent>
       </SideBarCell>
     </SideBarStyle>

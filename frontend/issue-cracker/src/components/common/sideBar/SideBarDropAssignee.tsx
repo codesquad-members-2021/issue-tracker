@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ProfileImg as S, Text as T } from '../styles/CommonStyles';
+import { ProfileImg as S, Text as T } from '../../styles/CommonStyles';
 import { useRecoilValue } from 'recoil';
-import { decodedToken } from '../../store/Recoil';
-import CheckOffIcon from '../styles/svg/CheckOffIcon';
+import { decodedToken } from '../../../store/Recoil';
+import CheckOffIcon from '../../styles/svg/CheckOffIcon';
 
 interface SideBarDropAssigneeProps {
-  data: { email: string; name: string; avatar_url: string };
+  data: {
+    id: string;
+    name: string;
+    profile_image_url: string;
+    emails: string[];
+  };
 }
 const SideBarDropAssignee = ({
   data,
