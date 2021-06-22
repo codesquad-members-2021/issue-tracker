@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { MenuList, MenuItem, Checkbox } from '@chakra-ui/react';
@@ -9,11 +8,6 @@ import {
   milestoneType,
   checkedMilestoneState,
 } from '@store/atoms/checkedThings';
-import { isCheckedType } from '../../../utils/isChecked_type';
-import {
-  getCheckedId,
-  setIsCheckedAndCheckedItem,
-} from '@utils/onClickMenuItem';
 
 type Props = {
   milestones: milestoneType[] | null;
@@ -24,22 +18,22 @@ function MilestoneModal({ milestones, errorMsg }: Props) {
   const [checkedMilestones, setCheckedMilestones] = useRecoilState(
     checkedMilestoneState
   );
-  const [isChecked, setIsChecked] = useState<isCheckedType>({});
   const modalTitle = errorMsg == 'No Error' ? '마일스톤 추가' : errorMsg;
 
   const handleClickMenuItem = (e: React.MouseEvent) => {
     const target = e.target as HTMLInputElement;
-    const checkedId = getCheckedId({ target: target, menuData: milestones });
-    if (checkedId == null) return;
-    setIsCheckedAndCheckedItem({
-      menu: 'milestone',
-      menuData: milestones,
-      checkedId: checkedId,
-      isChecked: isChecked,
-      setIsChecked: setIsChecked,
-      checkedMenus: checkedMilestones,
-      setCheckedMenus: setCheckedMilestones,
-    });
+    const itemEl = target.closest('.checkbox') as HTMLInputElement;
+    if (target.tagName !== 'INPUT' || milestones == null) return;
+
+    const itemId = itemEl.dataset.id;
+    if (itemId == null) return;
+
+    const clickedItem = milestones.find((item) => item.id === +itemId);
+    if (clickedItem == null) return;
+    const isChecked = checkedMilestones == clickedItem ? false : true;
+
+    if (isChecked) setCheckedMilestones(clickedItem);
+    else setCheckedMilestones(null);
   };
 
   return (
@@ -54,7 +48,7 @@ function MilestoneModal({ milestones, errorMsg }: Props) {
                 width="100%"
                 className="checkbox"
                 data-id={id}
-                checked={isChecked[id] === true}
+                isChecked={id === checkedMilestones?.id}
               >
                 <ItemWrap>
                   <span className="title">{title}</span>
