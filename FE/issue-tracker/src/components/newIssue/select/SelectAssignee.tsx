@@ -10,17 +10,14 @@ import { fetchModal } from '@utils/fetchModal';
 
 function SelectAssignee() {
   const [assignees, setAssignees] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('No Error');
 
   const handleClickAssignee = () => {
-    const fetchAssignees = async () => {
-      try {
-        await fetchModal({ path: 'assignees', setState: setAssignees });
-      } catch (errorTxt) {
-        setErrorMsg(errorTxt);
-      }
-    };
-    fetchAssignees();
+    fetchModal({
+      path: 'assignees',
+      setState: setAssignees,
+      setErrorMsg: setErrorMsg,
+    });
   };
 
   return (
