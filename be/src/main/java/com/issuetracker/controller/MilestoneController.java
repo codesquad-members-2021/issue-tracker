@@ -1,5 +1,6 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.dto.MilestoneCountDto;
 import com.issuetracker.dto.MilestoneDto;
 import com.issuetracker.dto.MilestoneRequestDto;
 import com.issuetracker.dto.ResponseStatusDto;
@@ -35,5 +36,10 @@ public class MilestoneController {
     @PostMapping
     public ResponseStatusDto create(@RequestBody MilestoneRequestDto requestDto) {
         return milestoneService.create(requestDto);
+    }
+
+    @GetMapping("/count")
+    public MilestoneCountDto count() {
+        return milestoneService.count();
     }
 }

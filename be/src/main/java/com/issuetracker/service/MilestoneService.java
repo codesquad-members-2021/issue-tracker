@@ -1,5 +1,6 @@
 package com.issuetracker.service;
 
+import com.issuetracker.dto.MilestoneCountDto;
 import com.issuetracker.dto.MilestoneDto;
 import com.issuetracker.dto.MilestoneRequestDto;
 import com.issuetracker.dto.ResponseStatusDto;
@@ -59,5 +60,9 @@ public class MilestoneService {
     public ResponseStatusDto create(MilestoneRequestDto requestDto) {
         milestoneRepository.create(requestDto);
         return new ResponseStatusDto("success");
+    }
+
+    public MilestoneCountDto count() {
+        return new MilestoneCountDto(milestoneRepository.countAllOpenedMilestone(), milestoneRepository.countAllClosedMilestone());
     }
 }
