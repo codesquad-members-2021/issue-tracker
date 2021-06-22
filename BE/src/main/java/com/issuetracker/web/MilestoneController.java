@@ -1,6 +1,7 @@
 package com.issuetracker.web;
 
 import com.issuetracker.service.MilestoneService;
+import com.issuetracker.web.dto.reqeust.MilestoneNumbersRequestDTO;
 import com.issuetracker.web.dto.response.MilestoneDTO;
 import com.issuetracker.web.dto.response.MilestonesResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class MilestoneController {
     private final Logger logger = LoggerFactory.getLogger(MilestoneService.class);
 
     @GetMapping
-    public MilestonesResponseDTO read() {
+    public MilestonesResponseDTO read(@RequestParam String status) {
         logger.debug("모든 마일스톤 조회");
-        return milestoneService.read();
+        return milestoneService.read(status);
     }
 
     @PostMapping
@@ -27,6 +28,12 @@ public class MilestoneController {
         logger.debug("마일스톤 생성");
         logger.debug("마일스톤 생성 요청 확인: {}", milestone.toString());
         milestoneService.create(milestone);
+    }
+
+    @PatchMapping
+    public void close(@RequestBody MilestoneNumbersRequestDTO milestoneNumbersRequestDTO, @RequestParam String status) {
+        logger.debug("마일스톤 닫기 or 열기");
+        milestoneService.changeMilestoneStatus(milestoneNumbersRequestDTO, status);
     }
 
     @PatchMapping("/{milestoneId}")
