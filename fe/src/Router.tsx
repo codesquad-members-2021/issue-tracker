@@ -14,11 +14,14 @@ const Router = () => {
         <Route path="/" exact>
           <LoginPage />
         </Route>
+        <Route path={'/issues/new-issue'}>
+          <NewIssuePage />
+        </Route>
+        <Route path="/issues/:id">
+          <IssueDetailPage />
+        </Route>
         <Route path="/issues">
           <IssuesPage />
-        </Route>
-        <Route path={'/issues/new-issue'} exact>
-          <NewIssuePage />
         </Route>
         <Route path="/api/login">
           <OAuthPage />
@@ -28,9 +31,6 @@ const Router = () => {
         </Route>
         <Route path="/milestones" exact>
           <MilestoneListPage />
-        </Route>
-        <Route path="/issues/detail">
-          <IssueDetailPage />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,6 +1,7 @@
 export type NavType = 'All' | 'Milestone' | 'Label';
 
 export type IssueItemLeftPropsType = {
+  id: number;
   title: string;
   labeList: LabelItemType[];
   issueNumber: number;
@@ -9,7 +10,6 @@ export type IssueItemLeftPropsType = {
 };
 
 export interface IssueItemType extends IssueItemLeftPropsType {
-  id: number;
   author: authorType;
 }
 

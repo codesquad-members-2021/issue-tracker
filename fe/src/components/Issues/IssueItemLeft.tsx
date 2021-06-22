@@ -5,22 +5,31 @@ import { ReactComponent as Open } from 'icons/openIssue.svg';
 import { ReactComponent as Milestone } from 'icons/openMilestone.svg';
 import { Checkbox } from '@material-ui/core';
 import Label from 'components/common/Label';
+import { useHistory } from 'react-router-dom';
 
 const IssueItemLeft = ({
+  id,
   title,
   issueNumber,
   createdTime,
   milestoneTitle,
   labeList,
 }: IssueItemLeftPropsType) => {
+  const history = useHistory();
+
+  const routeToIssueDetailPage = () => {
+    history.push(`/issues/${id}`);
+  };
+
   return (
     <StyledIssueItemLeft>
       <IssueTitle>
         <Checkbox color="primary" />
-        <span>
-          <OpenSvg />
+        <OpenSvg />
+        <span className="title" onClick={routeToIssueDetailPage}>
           {title}
         </span>
+        <Spacer />
         <SelectedLables>
           {labeList.length &&
             labeList.map((label, idx) => <Label key={idx} {...{ ...label }} />)}
@@ -41,6 +50,14 @@ const StyledIssueItemLeft = styled.div`
 
 const IssueTitle = styled.div`
   ${({ theme }) => theme.style.flexAlignItemsCenter};
+
+  .title {
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+  }
+  .title:hover {
+    color: ${({ theme }) => theme.color.darkBlue};
+    cursor: pointer;
+  }
 `;
 
 const OpenSvg = styled(Open)`
@@ -49,6 +66,10 @@ const OpenSvg = styled(Open)`
     fill: ${({ theme }) => theme.color.lightBlue};
   }
   margin-right: 0.2rem;
+`;
+
+const Spacer = styled.div`
+  width: 0.5rem;
 `;
 
 const SelectedLables = styled.div`

@@ -15,7 +15,7 @@ const IssueItem = ({
   return (
     <StyledIssueItem>
       <IssueItemLeft
-        {...{  title, labeList, issueNumber, createdTime, milestoneTitle }}
+        {...{ id, title, labeList, issueNumber, createdTime, milestoneTitle }}
       />
       <IssueItemRight>
         <AuthorAvatar
@@ -24,7 +24,7 @@ const IssueItem = ({
           size="S"
         />
       </IssueItemRight>
-    </StyledIssueItem> 
+    </StyledIssueItem>
   );
 };
 

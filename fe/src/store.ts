@@ -23,6 +23,31 @@ export const issuesStateAtom = atom<boolean>({
   default: false,
 });
 
+export const clickedIssueIdAtom = atom<number | null>({
+  key: 'clickedIssueIdAtom',
+  default: null,
+});
+
+export const issueDetailQuery = selector({
+  key: 'issueDetailQuery',
+  get: async ({ get }) => {
+    const token = localStorage.getItem('jwt');
+    const clickedIssueId = get(clickedIssueIdAtom);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return {
+      title: data.title,
+      description: data.description,
+    };
+  },
+});
+
 export const totalCountOfIssue = selector<IssuesCountType>({
   key: 'totalCountOfIssue',
   get: async () => {
@@ -48,7 +73,9 @@ export const issuesQuery = selector<IssueItemType[]>({
   get: async ({ get }) => {
     const token = localStorage.getItem('jwt');
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/issues?closed=${get(issuesStateAtom)}`,
+      `${process.env.REACT_APP_API_URL}/api/issues?closed=${get(
+        issuesStateAtom
+      )}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
