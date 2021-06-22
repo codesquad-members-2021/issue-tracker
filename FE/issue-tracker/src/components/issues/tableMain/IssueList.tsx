@@ -1,12 +1,12 @@
 import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 import { queryString, wholeIssueLists } from '@store/atoms/issueList';
+import { pushState } from '@utils/query';
 
 import { IssueSkeleton } from '@components/common/Skeleton';
 import Issue from './Issue';
 import ErrorIssueList from './ErrorIssueList';
 import NoIssue from './NoIssue';
-import { pushState } from '@utils/query';
 
 function IssueList() {
   const query = useRecoilValue(queryString);
@@ -17,7 +17,6 @@ function IssueList() {
       return <NoIssue isSearched={false} />;
     }
   };
-  console.log(contents);
   pushState(query);
   return (
     <>

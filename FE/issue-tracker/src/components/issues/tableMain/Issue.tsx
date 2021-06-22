@@ -25,7 +25,6 @@ function Issue({ info }: Props) {
   const {
     id,
     title,
-    description,
     author,
     label_list,
     issue_number,
@@ -80,7 +79,7 @@ function Issue({ info }: Props) {
       </IssueContainer>
       <AvatarContainer>
         <AvatarBox>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
+          <Avatar className="avatar" size="sm" src={avatar_url} />
         </AvatarBox>
       </AvatarContainer>
     </IssueWrap>
