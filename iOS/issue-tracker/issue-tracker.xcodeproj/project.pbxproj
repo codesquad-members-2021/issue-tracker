@@ -66,6 +66,7 @@
 		FAF927A92680DAFB0017F8DE /* IssueTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */; };
 		FAF927AB2680DB1C0017F8DE /* IssueTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */; };
 		FAF927AD2680DCCA0017F8DE /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */; };
+		FAF927AF2681DA810017F8DE /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AE2681DA810017F8DE /* Issue.swift */; };
 		FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,7 @@
 		FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueTableViewDelegate.swift; path = ../../../../../../../../../../../Applications/IssueTableViewDelegate.swift; sourceTree = "<group>"; };
 		FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewDataSource.swift; sourceTree = "<group>"; };
 		FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		FAF927AE2681DA810017F8DE /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -414,6 +416,7 @@
 		FAF927A52680D9560017F8DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAF927AE2681DA810017F8DE /* Issue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				E426DABE2670EC830069E77D /* SocialLoginManagerDelegate.swift in Sources */,
 				FA733A30267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
+				FAF927AF2681DA810017F8DE /* Issue.swift in Sources */,
 				E43912EE267C3C0E003CD344 /* CellAction.swift in Sources */,
 				E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */,
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,

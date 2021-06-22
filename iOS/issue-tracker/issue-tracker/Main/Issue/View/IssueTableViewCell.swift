@@ -26,15 +26,6 @@ class IssueTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = Colors.description
-        label.text = "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)"
-        label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 17)
-        return label
-    }()
-    
     private lazy var labelsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -77,10 +68,8 @@ class IssueTableViewCell: UITableViewCell {
         
         addIssueStackView()
         addIssueTitleView()
-        addDescriptionLabel()
         addMileStoneLabel()
         addlabelsStackView()
-        
     }
     
     func addIssueStackView() {
@@ -97,19 +86,15 @@ class IssueTableViewCell: UITableViewCell {
         issueStackView.addArrangedSubview(titleLabel)
     }
     
-    func addDescriptionLabel() {
-        issueStackView.addArrangedSubview(descriptionLabel)
-    }
-    
     func addMileStoneLabel() {
         issueStackView.addArrangedSubview(mileStoneLabel)
     }
     
     //여기서 인자 값으로 GET으로 라벨의 갯수와 라벨 배열을 가져와야 할 것같다.
+//    func addlabelsStackView(_ labels: [Label])
     func addlabelsStackView() {
         
         issueStackView.addArrangedSubview(labelsStackView)
-
         labelsStackView.spacing = 4
         
         NSLayoutConstraint.activate([
