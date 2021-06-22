@@ -34,7 +34,7 @@ class NewIssueViewController: UIViewController {
         let tableView = UITableView()
         tableView.rowHeight = 44.0
         tableView.isScrollEnabled = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "NewIssueViewCell")
+        tableView.register(DetailTextStyleTableViewCell.self, forCellReuseIdentifier: "NewIssueViewCell")
         return tableView
     }()
 
@@ -156,7 +156,12 @@ extension NewIssueViewController: UITableViewDataSource {
 extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = AdditionalInfoViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        vc.setupSelectedData = { data in
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.detailTextLabel?.text = data
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
