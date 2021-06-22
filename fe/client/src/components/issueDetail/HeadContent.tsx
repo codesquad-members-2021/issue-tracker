@@ -12,9 +12,10 @@ type HeadContentType = {
   id: number;
   title: string;
   closed: boolean;
+  handleClickTitleChange: any;
 }
 
-const HeadContent = ({ issueNumber, id, title, closed }: HeadContentType) => {
+const HeadContent = ({ issueNumber, id, title, closed, handleClickTitleChange }: HeadContentType) => {
   const [isEditTitle, setEditTitle] = useToggle(false);
   const issueTitleState = useInput('title');
 
@@ -22,7 +23,7 @@ const HeadContent = ({ issueNumber, id, title, closed }: HeadContentType) => {
     const patchData = [{
       id, closed: !closed
     }]
-    const responseData = await API.patch.issues(patchData)
+    const responseData = await API.patch.issues(patchData);
   }
 
   return (
@@ -41,7 +42,8 @@ const HeadContent = ({ issueNumber, id, title, closed }: HeadContentType) => {
               <ButtonText>편집 취소</ButtonText>
             </IconButton>
             <IconButton icon="edit" variant="contained" color="primary" minwidth="130px"
-              margin='0 0 0 10px' background="#007AFF">
+              margin='0 0 0 10px' background="#007AFF"
+              onClick={handleClickTitleChange({ title: issueTitleState.value })} >
               <ButtonText>편집 완료</ButtonText>
             </IconButton>
           </>

@@ -63,6 +63,16 @@ const API: any = {
     },
   },
   put: {
+    issues: async (issueId : number, data: IssueCreateType) => {
+      const response = await fetch(`/issues/${issueId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      return response;
+    },
     labels: async (labelId: number, data: LabelSendType) => {
       const response = await fetch(`/labels/${labelId}`, {
         method: 'PUT',
