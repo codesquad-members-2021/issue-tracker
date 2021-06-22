@@ -1,0 +1,8 @@
+disabled_rules:
+- line_length
+- trailing_whitespace
+- comment_spacing
+- mark
+- identifier_name
+included:
+excluded:
