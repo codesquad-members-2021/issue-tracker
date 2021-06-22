@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import HeadContent from '@components/issueDetail/HeadContent';
@@ -14,6 +14,20 @@ const IssueDetailPage = () => {
   const [issueDetailItem] = useFetch(API.get.issueDetail, false, params.id);
   const { data, loading, error }: AsyncState<any, any> = issueDetailItem;
 
+  const handleClickTitleChange = useCallback(({
+    title = data.title,
+    mainCommentContents = data.mainCommentContents,
+    authorId = data.author.id,
+    assigneeIds = data.assignees.map(({ id }: { id: number }) => id),
+    labelIds = data.labels.map(({ id }: { id: number }) => id),
+    milestoneId = data.milestone.id
+  }) => async () => {
+    const putData = {
+      title, mainCommentContents, authorId, assigneeIds, labelIds, milestoneId
+    }
+    const responseData = await API.put.issues(data.id, putData)
+  }, [data])
+
   return (
     <>
       {data && <>
@@ -21,14 +35,15 @@ const IssueDetailPage = () => {
           issueNumber={data.number}
           id={data.id}
           title={data.title}
-          closed={data.closed} />
+          closed={data.closed}
+          {...{ handleClickTitleChange }} />
         <FlexWrapper>
           <CommentListWrapper>
 
             <CommentSwitch comments={data.mainComment} isWriter />
-            <CommentSwitch comments={data.mainComment} isWriter/>
+            <CommentSwitch comments={data.mainComment} isWriter />
             {data.comment && data.comment.map((comments: any) => {
-              return <CommentSwitch {...{ comments }} isWriter/>
+              return <CommentSwitch {...{ comments }} isWriter />
             })}
             <CommentCreate />
           </CommentListWrapper>

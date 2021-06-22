@@ -43,8 +43,8 @@ export type IssueCreateType = {
   title: string;
   mainCommentContents: string;
   authorId: number;
-  assigneeIds: Array<string>;
-  labelIds: Array<string>;
+  assigneeIds: Array<number>;
+  labelIds: Array<number>;
   milestoneId: number;
 }
 

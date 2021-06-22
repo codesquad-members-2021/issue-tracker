@@ -22,7 +22,7 @@ const CommentInput = ({ commentInputState: { value, onChange } }: any) => {
     formData.append("fileName", event.target.files[0].name);
     try {
       const data = await API.post.files(formData);
-      const fileAddData = `\n[${data.name}](${data.path})`;
+      const fileAddData = `\n![${data.name}](${data.path})`;
       onChange(event, fileAddData);
     } catch (e) {
       console.log(e);

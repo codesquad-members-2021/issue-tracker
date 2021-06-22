@@ -14,7 +14,7 @@ const CommentCreate = () => {
         <CommentInput {...{commentInputState}}/>
         <IconButton variant="contained" color="primary"
           icon='plus' height="40px" margin='16px 0 0 0' background="#007AFF"
-          style={{ float: 'right' }}>
+          style={{ float: 'right' }} disabled={!commentInputState.value}>
           코멘트 작성
         </IconButton>
       </div>
