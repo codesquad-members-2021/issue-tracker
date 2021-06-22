@@ -21,6 +21,7 @@ final class IssueControlViewController: UIViewController {
         let button = ImageBarButton()
         button.configure(with: "plus", "저장")
         button.addTarget(self, action: #selector(saveButtonTouched), for: .touchUpInside)
+        changeSaveButtonEnableStatus(baseOn: titleTextField)
         return button
     }()
     
@@ -76,7 +77,7 @@ final class IssueControlViewController: UIViewController {
         container.addSubview(titleTextField)
 
         NSLayoutConstraint.activate([
-            titleTextField.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 5),
+            titleTextField.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 3),
             titleTextField.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
             titleTextField.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
         ])
@@ -95,8 +96,21 @@ final class IssueControlViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "(필수 입력)"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         return textField
     }()
+    
+    private lazy var bodyTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = bodyPlaceholder
+        textView.font = .systemFont(ofSize: 17)
+        textView.textColor = .lightGray
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.delegate = self
+        return textView
+    }()
+    
+    private let bodyPlaceholder = "이곳에 내용을 입력하세요"
     
     private lazy var lineHeight: CGFloat = {
         return view.frame.height * 0.05
@@ -115,10 +129,13 @@ final class IssueControlViewController: UIViewController {
     }
     
     private func configureViews() {
-        navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.rightBarButtonItem?.isEnabled = saveButton.isEnabled
+        
         addNavigationItems()
         addTitleInputView()
+        addBodyTextView()
     }
 
     private func addNavigationItems() {
@@ -138,8 +155,23 @@ final class IssueControlViewController: UIViewController {
         ])
     }
     
+    private func addBodyTextView() {
+        view.addSubview(bodyTextView)
+        
+        NSLayoutConstraint.activate([
+            bodyTextView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.3),
+            bodyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
+            bodyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
+            bodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     func setSaveOperation(_ operation: @escaping (Issue) -> Void) {
         self.saveOperation = operation
+    }
+    
+    private func changeSaveButtonEnableStatus(to status: Bool) {
+        saveButton.isEnabled = status
     }
     
     @objc private func cancelButtonTouched(_ sender: UIButton) {
@@ -162,6 +194,33 @@ final class IssueControlViewController: UIViewController {
             print("프리뷰 내놔")
         default:
             assert(false)
+        }
+    }
+}
+
+extension IssueControlViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        changeSaveButtonEnableStatus(baseOn: textField)
+    }
+    
+    private func changeSaveButtonEnableStatus(baseOn textField: UITextField) {
+        DispatchQueue.main.async {
+            self.saveButton.isEnabled = !textField.isEmpty()
+        }
+    }
+}
+
+extension IssueControlViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.textColor = .black
+        textView.text = nil
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.textColor = .lightGray
+            textView.text = bodyPlaceholder
+            changeSaveButtonEnableStatus(to: false)
         }
     }
 }
