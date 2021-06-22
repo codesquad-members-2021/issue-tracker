@@ -11,7 +11,6 @@ const OAuthPage = () => {
   const res = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-
   const url = getUrl.LOGIN(res.code);
   const { isSuccess, data } = useAxios(true, url, 'get');
 

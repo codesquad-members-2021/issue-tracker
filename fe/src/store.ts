@@ -1,4 +1,4 @@
-import { TestType } from './types/storeTypes';
+import { DecodedUserDataType, TestType } from './types/storeTypes';
 import axios from 'axios';
 import { milestoneQuery } from 'stores/milestoneStore';
 import { selector, atom } from 'recoil';
@@ -19,6 +19,11 @@ export const issuesStateAtom = atom<boolean>({
 
 export const clickedIssueIdAtom = atom<number | null>({
   key: 'clickedIssueIdAtom',
+  default: null,
+});
+
+export const decodedUserDataAtom = atom<DecodedUserDataType | null>({
+  key: 'decodedUserDataAtom',
   default: null,
 });
 
@@ -66,36 +71,41 @@ export const issuesQuery = selector<IssueItemType[]>({
   key: 'issuesQuery',
   get: async ({ get }) => {
     const token = localStorage.getItem('jwt');
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/issues?closed=${get(
-        issuesStateAtom
-      )}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/issues?closed=${get(
+          issuesStateAtom
+        )}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    return data.map(
-      ({
-        id,
-        title,
-        label_list,
-        issue_number,
-        created_time,
-        milestone_title,
-        author,
-      }: IssueDataType) => ({
-        id: id,
-        title: title,
-        labeList: label_list.map(parsedLabelData),
-        issueNumber: issue_number,
-        createdTime: created_time,
-        milestoneTitle: milestone_title,
-        author: parsedAuthorData(author),
-      })
-    );
+      return data.map(
+        ({
+          id,
+          title,
+          label_list,
+          issue_number,
+          created_time,
+          milestone_title,
+          author,
+        }: IssueDataType) => ({
+          id: id,
+          title: title,
+          labeList: label_list.map(parsedLabelData),
+          issueNumber: issue_number,
+          createdTime: created_time,
+          milestoneTitle: milestone_title,
+          author: parsedAuthorData(author),
+        })
+      );
+    } catch (error) {
+      console.error('close 조건에 따른 이슈 검색', error);
+      return [];
+    }
   },
 });
 
@@ -111,16 +121,21 @@ export const labelQuery = selector<LabelItemType[]>({
   key: 'labelQuery',
   get: async () => {
     const token = localStorage.getItem('jwt');
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/labels`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/labels`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    return data.map(parsedLabelData);
+      return data.map(parsedLabelData);
+    } catch (error) {
+      console.error('labelQuery 에러', error);
+      return [];
+    }
   },
 });
 
@@ -132,8 +147,8 @@ const parsedAuthorData = (user: UserDataType) => ({
 export const authorQuery = selector({
   key: 'authorQuery',
   get: async () => {
+    const token = localStorage.getItem('jwt');
     try {
-      const token = localStorage.getItem('jwt');
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/authors`,
         {
@@ -150,6 +165,7 @@ export const authorQuery = selector({
       }));
     } catch (error) {
       console.error(error, 'author 에러');
+      return [];
     }
   },
 });
@@ -175,6 +191,7 @@ export const assigneeQuery = selector({
       }));
     } catch (error) {
       console.error(error, 'assignee 에러');
+      return [];
     }
   },
 });

@@ -1,6 +1,12 @@
 import { FilterItemType } from './filterType';
 import { LabelItemType } from './issueType';
 
+export type DecodedUserDataType = {
+  avatar_url: string;
+  name: string;
+  id: number;
+};
+
 export type IssueDataType = {
   id: number;
   title: string;

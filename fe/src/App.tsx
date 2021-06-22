@@ -1,10 +1,8 @@
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'style/GlobalStyle';
 import { theme } from 'style/theme';
-
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { unstable_createMuiStrictModeTheme } from '@material-ui/core/styles';
-import Header from 'components/header/Header';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
 
@@ -18,7 +16,6 @@ function App() {
         <MuiThemeProvider theme={MuiTheme}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Header />
             <Router />
           </ThemeProvider>
         </MuiThemeProvider>

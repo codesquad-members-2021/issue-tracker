@@ -6,6 +6,7 @@ import NewIssuePage from 'pages/NewIssuePage';
 import LabelPage from 'pages/LabelPage';
 import MilestoneListPage from 'pages/MilestoneListPage';
 import IssueDetailPage from 'pages/IssueDetailPage';
+import Header from 'components/header/Header';
 
 const Router = () => {
   return (
@@ -14,6 +15,13 @@ const Router = () => {
         <Route path="/" exact>
           <LoginPage />
         </Route>
+        <Route path="/api/login">
+          <OAuthPage />
+        </Route>
+        <Header />
+      </Switch>
+
+      <Switch>
         <Route path={'/issues/new-issue'}>
           <NewIssuePage />
         </Route>
@@ -22,9 +30,6 @@ const Router = () => {
         </Route>
         <Route path="/issues">
           <IssuesPage />
-        </Route>
-        <Route path="/api/login">
-          <OAuthPage />
         </Route>
         <Route path="/labels" exact>
           <LabelPage />

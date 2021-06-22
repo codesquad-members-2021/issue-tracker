@@ -1,12 +1,22 @@
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Logo from 'components/common/Logo';
+import { useRecoilValue } from 'recoil';
+import { decodedUserDataAtom } from 'store';
 import styled from 'styled-components';
+import { DecodedUserDataType } from 'types/storeTypes';
 
 const Header = () => {
+  const decodedUserData =
+    useRecoilValue<DecodedUserDataType | null>(decodedUserDataAtom);
+
   return (
     <StyledHeader>
       <Logo />
-      <AuthorAvatar name="eamon" size="L" />
+      <AuthorAvatar
+        name={decodedUserData ? decodedUserData.name : 'Anonymous'}
+        profileImg={decodedUserData?.avatar_url}
+        size="L"
+      />
     </StyledHeader>
   );
 };
