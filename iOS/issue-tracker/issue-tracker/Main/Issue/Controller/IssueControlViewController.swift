@@ -60,7 +60,7 @@ final class IssueControlViewController: UIViewController {
     }()
     
     private lazy var titleInputView: UIView = {
-        let container = UIView(frame: .zero)
+        let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         
         let titleLabel = UILabel()
@@ -110,6 +110,38 @@ final class IssueControlViewController: UIViewController {
         return textView
     }()
     
+    private lazy var additionalInfoView: MultipleLineInputStackView = {
+        let viewWidth = view.frame.width
+        let stackViewFrame = CGRect(x: 0, y: 0, width: viewWidth, height: lineHeight * 3)
+        let stackView = MultipleLineInputStackView(frame: stackViewFrame)
+        
+        let labelInfoItem = InputLineItem(category: "레이블", inputView: labelInfoControl)
+        let milestoneInfoItem = InputLineItem(category: "마일스톤", inputView: milestoneInfoControl)
+        let assigneeInfoItem = InputLineItem(category: "담당자", inputView: assigneeInfoControl)
+        stackView.configure(with: [labelInfoItem, milestoneInfoItem, assigneeInfoItem])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var labelInfoControl: IssueInfoControl = {
+        let infoControl = IssueInfoControl()
+        infoControl.addTarget(self, action: #selector(labelInfoTouched), for: .touchUpInside)
+        return infoControl
+    }()
+    
+    private lazy var milestoneInfoControl: IssueInfoControl = {
+        let infoControl = IssueInfoControl()
+        infoControl.addTarget(self, action: #selector(milestoneInfoTouched), for: .touchUpInside)
+        return infoControl
+    }()
+    
+    private lazy var assigneeInfoControl: IssueInfoControl = {
+        let infoControl = IssueInfoControl()
+        infoControl.addTarget(self, action: #selector(assigneeInfoTouched), for: .touchUpInside)
+        return infoControl
+    }()
+
     private let bodyPlaceholder = "이곳에 내용을 입력하세요"
     
     private lazy var lineHeight: CGFloat = {
@@ -135,6 +167,7 @@ final class IssueControlViewController: UIViewController {
         
         addNavigationItems()
         addTitleInputView()
+        addAdditionalInfoView()
         addBodyTextView()
     }
 
@@ -155,6 +188,17 @@ final class IssueControlViewController: UIViewController {
         ])
     }
     
+    private func addAdditionalInfoView() {
+        view.addSubview(additionalInfoView)
+        
+        NSLayoutConstraint.activate([
+            additionalInfoView.heightAnchor.constraint(equalToConstant: lineHeight * 3),
+            additionalInfoView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            additionalInfoView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            additionalInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     private func addBodyTextView() {
         view.addSubview(bodyTextView)
         
@@ -162,7 +206,7 @@ final class IssueControlViewController: UIViewController {
             bodyTextView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.3),
             bodyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
             bodyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
-            bodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            bodyTextView.bottomAnchor.constraint(equalTo: additionalInfoView.topAnchor)
         ])
     }
     
@@ -195,6 +239,18 @@ final class IssueControlViewController: UIViewController {
         default:
             assert(false)
         }
+    }
+    
+    @objc private func labelInfoTouched(_ sender: UIButton) {
+        print("레이블 내놔!")
+    }
+    
+    @objc private func milestoneInfoTouched(_ sender: UIButton) {
+        print("마일스톤 내놔!")
+    }
+    
+    @objc private func assigneeInfoTouched(_ sender: UIButton) {
+        print("담당자 내놔!")
     }
 }
 

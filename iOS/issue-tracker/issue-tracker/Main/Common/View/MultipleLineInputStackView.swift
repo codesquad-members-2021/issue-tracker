@@ -81,7 +81,8 @@ final class MultipleLineInputStackView: UIStackView {
             NSLayoutConstraint.activate([
                 inputView.leadingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.leadingAnchor, constant: elementSpacing * 5),
                 inputView.trailingAnchor.constraint(equalTo: container.safeAreaLayoutGuide.trailingAnchor, constant: -elementSpacing),
-                inputView.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor)
+                inputView.centerYAnchor.constraint(equalTo: container.safeAreaLayoutGuide.centerYAnchor),
+                inputView.topAnchor.constraint(equalTo: container.safeAreaLayoutGuide.topAnchor)
             ])
             addArrangedSubview(container)
         }
@@ -103,7 +104,7 @@ final class MultipleLineInputStackView: UIStackView {
         
         for i in 1...itemCount-1 {
             let line = CALayer()
-            let origin = CGPoint(x: spacing, y: lineHeight * CGFloat(i) - borderWidth)
+            let origin = CGPoint(x: elementSpacing, y: lineHeight * CGFloat(i) - borderWidth)
             line.frame = CGRect(origin: origin, size: size)
             line.backgroundColor = borderColor
             layer.addSublayer(line)
