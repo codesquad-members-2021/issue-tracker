@@ -14,7 +14,7 @@ const contentsInput = {
   size: 'md',
   height: '291px',
   padding: '16px 24px',
-  background: 'gr_offWhite',
+  background: 'gr_inputBackground',
   placeholder: '코멘트를 입력하세요',
   variant: 'unstyled',
 };
