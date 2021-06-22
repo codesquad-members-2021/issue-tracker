@@ -19,10 +19,10 @@ export interface IssueType {
     name: string;
     user_id: string;
   };
-  assignee: {
+  assignees: {
     name: string;
     user_id: string;
-  };
+  }[];
   milestone: {
     milestone_id: number;
     title: string;
@@ -57,4 +57,10 @@ export interface SimpleAppBarProps {
 
 export interface EditorRefsType {
   [key: string]: any;
+}
+
+export interface TemporalRefStateType {
+  assignees: ListItemsType[];
+  labels: ListItemsType[];
+  milestones: ListItemsType[];
 }

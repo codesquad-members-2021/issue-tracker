@@ -15,10 +15,12 @@ export const mock_openedIssue: IssueType[] = [
       name: "bibi",
       user_id: "bibi6666667",
     },
-    assignee: {
-      name: "bibi",
-      user_id: "bibi6666667",
-    },
+    assignees: [
+      {
+        name: "bibi",
+        user_id: "bibi6666667",
+      },
+    ],
     milestone: {
       milestone_id: 1,
       title: "[BE] API구현",
@@ -38,10 +40,12 @@ export const mock_openedIssue: IssueType[] = [
       name: "bibi",
       user_id: "bibi6666667",
     },
-    assignee: {
-      name: "bibi",
-      user_id: "bibi6666667",
-    },
+    assignees: [
+      {
+        name: "bibi",
+        user_id: "bibi6666667",
+      },
+    ],
     milestone: {
       milestone_id: 1,
       title: "[BE] API구현",

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IssueType } from "utils/interface";
+import { IssueType, ListItemsType } from "utils/interface";
 
 export const openState = atom({
   key: "openState",
@@ -44,4 +44,13 @@ export const openedIssues = atom({
 export const closedIssues = atom({
   key: "closedIssues",
   default: [] as IssueType[],
+});
+
+export const temporalRefState = atom({
+  key: "temporalRefState",
+  default: {
+    assignees: [] as ListItemsType[],
+    milestones: [] as ListItemsType[],
+    labels: [] as ListItemsType[],
+  },
 });
