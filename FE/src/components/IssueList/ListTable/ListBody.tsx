@@ -1,41 +1,62 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { IIssueList } from '..';
+import { IIssuesInfo } from 'util/types';
 import { Checkbox } from '@material-ui/core';
 import { IconAlertCircle, IconMileStone } from '../../Common/Icons';
 import { FaHashtag } from 'react-icons/fa';
 import Label from '../../Common/Label';
 
-const ListBody = ({ ...props }) => {
+const ListBody = ({ data, ...props }: IIssueList) => {
+  const [issues, setIssues] = useState<IIssuesInfo>();
+  useEffect(() => {
+    if (!data || !data.issues) return;
+    const issuesData = data?.issues;
+    setIssues(issuesData);
+  }, [data?.issues]);
+
   return (
     <ListBodyLayout {...props}>
-      <ListBodyRow>
-        {/* 좌측 */}
-        <ListBodyBlock>
-          <Checkbox color="primary" />
-          <TitleInfoBlock>
-            <TitleBlock>
-              <span className="icon">
-                <IconAlertCircle />
-              </span>
-              <span className="subject">이슈 제목</span>
-              <Label>레이블 이름</Label>
-            </TitleBlock>
-            <InfoBlock>
-              <span><FaHashtag/>이슈번호 </span>
-              <span>작성자 및 타임스탬프 정보</span>
-              <span><IconMileStone/>마일스톤</span>
-            </InfoBlock>
-          </TitleInfoBlock>
-        </ListBodyBlock>
+      {issues &&
+        issues.issues.map((issue) => (
+          <ListBodyRow key={issue.issueId}>
+            {/* 좌측 */}
+            <ListBodyBlock>
+              <Checkbox color="primary" />
+              <TitleInfoBlock>
+                <TitleBlock>
+                  <span className="icon">
+                    <IconAlertCircle />
+                  </span>
+                  <span className="subject">{issue.title}</span>
+                  {issue.labels.map(({ color, bgColor, title, labelId }) => (
+                    <Label key={labelId} color={color} bgColor={bgColor}>
+                      {title}
+                    </Label>
+                  ))}
+                </TitleBlock>
+                <InfoBlock>
+                  <span className="issue__id">
+                    <FaHashtag />{issue.issueId}
+                  </span>
+                  {/* 이 이슈가 8분 전, Oni님에 의해 작성되었습니다 */}
+                  <span>이 이슈가 {'몇 초/분 전'}, {issue.history.userName}에 의해 작성되었습니다.</span>
+                  <span>
+                    <IconMileStone />
+                    {issue.milestone.title}
+                  </span>
+                </InfoBlock>
+              </TitleInfoBlock>
+            </ListBodyBlock>
 
-        {/* 우측 */}
-        <ListBodyBlock>
-          <AssigneeProfileBlock>
-            <IconAlertCircle />
-          </AssigneeProfileBlock>
-        </ListBodyBlock>
-
-      </ListBodyRow>
-
+            {/* 우측 */}
+            <ListBodyBlock>
+              <AssigneeProfileBlock>
+                <IconAlertCircle /> {/* 유저 이미지 어디갔어.. */}
+              </AssigneeProfileBlock>
+            </ListBodyBlock>
+          </ListBodyRow>
+        ))}
     </ListBodyLayout>
   );
 };
@@ -99,6 +120,8 @@ const InfoBlock = styled.div`
     display: flex;
     align-items: center;
     column-gap: 0.4rem;
+
+    &.issue__id { column-gap: 0.1rem };
 
     svg {
       fill: currentColor;

@@ -1,24 +1,89 @@
 import styled, { css } from 'styled-components';
-import React, { MouseEventHandler, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom, TFilterVisibleAtomTypes } from '../../../util/store/issueListAtoms';
+import { filterVisibleAtom } from 'util/store';
+import { TFilterTypes } from 'util/types';
 
-import { IIssueList } from '..';
+import { IIssueListChildren } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
 import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import ListModal, { testData } from '../../Common/ListModal';
-import { TextIssueList } from '../../../util/reference';
+import ListModal from '../../Common/ListModal';
+import { TextIssueList, TIssueListFilterItem, TTextIssueListFilterItems } from 'util/reference';
 
-const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
+
+const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren) => {
   // 1. 일반 (Recoil 등)
   const { table: {header: {left, right}} } = TextIssueList;
+
   const [leftTabsState, setLeftTabsState] = useState(0);
   const [filterVisibleState, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
-  // 2. events
+  const [issueOpenOrClose, setIssueOpenOrClose] = useState({open: 0, close: 0});
+  const [issueListFilterData, setIssueListFilterData] = useState<TTextIssueListFilterItems>();
+
+  // =========
+
+  // 2. useEffect
+  // 1) 이슈 데이터 갯수 정보
+  useEffect(() => {
+    if (!data || !data.issues) return;
+    const arrIssues = data.issues.issues;
+    const openCnt = arrIssues.reduce((result, issue) => (result += Number(issue.isOpen)), 0);
+    setIssueOpenOrClose({
+      ...issueOpenOrClose,
+      open: openCnt,
+      close: arrIssues.length-openCnt,
+    })
+  },[data?.issues]);
+
+  // 2) 필터 (ListModal)에 들어가는 데이터 생성
+  useEffect(() => {
+    if (!data) return;
+    // assignee(담당자) & writer(작성자) ==> users 데이터
+    const { milestones, labels, users } = data;
+    if (!milestones || !labels || !users) return;
+
+    const usersFilterItems: TIssueListFilterItem[] = users.users.map(
+      ({ userName, profileImage }) => ({ name: userName, imgUrl: profileImage, imgType: 'image'}));
+    const milestonesFilterItems: TIssueListFilterItem[] =
+      milestones.milestones.map(({ title }) => ({ name: title }));
+    const labelsFilterItems : TIssueListFilterItem[] = 
+      labels.labels.map(({title, bgColor }) => ({ name: title, color: bgColor, imgType: "color"}));
+
+    const fitlerData : TTextIssueListFilterItems = {
+      assignee: {
+        title: '담당자 필터',
+        items: [{ name: 'noAssignee', text: '담당자가 없는 이슈' }, ...usersFilterItems],
+        type: 'assignee',
+      },
+      writer: {
+        title: '작성자 필터',
+        items: usersFilterItems,
+        type: 'writer',
+      },
+      milestone: {
+        title: '마일스톤 필터',
+        items: [{ name: 'noMilestone', text: '마일스톤이 없는 필터' }, ...milestonesFilterItems],
+        type: 'milestone',
+      },
+      label: {
+        title: '레이블 필터',
+        items: [{ name: 'noLabel', text: '레이블이 없는 이슈' }, ...labelsFilterItems],
+        type: 'label',
+      }
+    };
+
+    setIssueListFilterData(fitlerData);
+
+  }, [data?.milestones, data?.labels, data?.users]);
+
+
+  // =========
+
+  // 3. events
   const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
-  const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
+  const handleRightBtnsClick = (name : TFilterTypes) => {
     setFilterVisibleState((filterVisibleState) => ({
       ...filterVisibleState,
       assignee: false,
@@ -30,7 +95,9 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
     handleFilterModalClick(name);
   }
 
-  // 3-1. render
+  // =========
+
+  // 4-1. render
   const renderLeftTabItems = () =>
     left.map(({ name, value: label }, idx) => (
       <LeftTab
@@ -39,12 +106,12 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
           <IconBlock>
             {name === 'open' ? <IconAlertCircle /> : <IconArchive />}
             {label}
-            {'(3)'}
+            ({name === 'open' ? issueOpenOrClose.open : issueOpenOrClose.close})
           </IconBlock>
         }
       />
     ));
-  // 3-2. render (already rendered)
+  // 4-2. render (already rendered)
     // rightButtonItems는 함수 형식으로 render하면 recoil 관련값들이 전부 작동안함..
   const rightButtonItems = right.map(
     ({ name, value }, idx) => (
@@ -59,21 +126,19 @@ const ListHead = ({ handleFilterModalClick, ...props }: IIssueList) => {
             <MdKeyboardArrowDown />
           </RightButton>
         </RightRow>
-        {filterVisibleState[name] && (
+        {filterVisibleState[name] && issueListFilterData && (
           <RightRow>
             <ListModal
               rightPos="0"
-              data={{
-                title: '테스트',
-                items: testData,
-              }}
+              data={issueListFilterData[name]}
             />
           </RightRow>
         )}
       </RightLayout>
     ),
   );
-  // ====
+
+  // =========
 
   return (
     <ListHeadLayout {...props}>

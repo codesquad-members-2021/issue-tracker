@@ -1,16 +1,11 @@
 import styled from 'styled-components';
-
+import { IHeaderUser } from '.';
 import { cssDefault, cssImageAuto } from '../../util/styles/CommonStyledCSS';
 
-interface IUserMenu {
-  profile?: string;
-  username?: string;
-}
-
-const UserMenu = ({ username, profile, ...props }: IUserMenu) => {
+const UserMenu = ({ username, profileImage, ...props }: IHeaderUser) => {
   return (
     <UserMenuButton {...props}>
-      <img src={profile || './image/profile.png'} alt={username || ''} />
+      <img src={profileImage || './image/profile.png'} alt={username || ''} />
     </UserMenuButton>
   );
 };

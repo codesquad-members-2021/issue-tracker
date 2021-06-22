@@ -4,17 +4,20 @@ import { useRecoilState } from 'recoil';
 import {
   filterVisibleAtom,
   IFilterVisibleAtom,
-  TFilterVisibleAtomTypes,
-} from '../../util/store/issueListAtoms';
+} from 'util/store';
 
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';
+import { IAllGetRequestDatas, TFilterTypes } from 'util/types';
 
-export interface IIssueList {
-  handleFilterModalClick: (strType: TFilterVisibleAtomTypes) => void;
+export interface IIssueList { data?: IAllGetRequestDatas }
+
+// IssueList를 구성하는 다른 부품에서 쓰임.
+export interface IIssueListChildren extends IIssueList { 
+  handleFilterModalClick: (strType: TFilterTypes) => void;
 }
 
-const IssueList = () => {
+const IssueList = ( { data } : IIssueList) => {
   // 1) 일반 (recoil 등)
   const [, setFilterVisibleState] = useRecoilState(filterVisibleAtom);
 
@@ -45,7 +48,7 @@ const IssueList = () => {
 
   // issueList의 모든 modal
   const handleFilterModalClick = useCallback(
-    (strType: TFilterVisibleAtomTypes) => {
+    (strType: TFilterTypes) => {
       setFilterVisibleState((filterVisibleState: IFilterVisibleAtom) => ({
         ...filterVisibleState,
         [strType]: !filterVisibleState[strType],
@@ -56,8 +59,8 @@ const IssueList = () => {
 
   return (
     <IssueListLayout>
-      <NavFilter handleFilterModalClick={handleFilterModalClick} />
-      <ListTable handleFilterModalClick={handleFilterModalClick} />
+      <NavFilter {...{data, handleFilterModalClick}} />
+      <ListTable {...{data, handleFilterModalClick}} />
     </IssueListLayout>
   );
 };
