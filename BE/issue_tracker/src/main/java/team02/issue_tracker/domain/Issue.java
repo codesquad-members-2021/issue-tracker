@@ -10,7 +10,9 @@ import team02.issue_tracker.exception.IllegalStatusException;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -41,10 +43,10 @@ public class Issue {
     private Milestone milestone;
 
     @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<IssueAssignee> issueAssignees = new ArrayList<>();
+    private Set<IssueAssignee> issueAssignees = new HashSet<>();
 
     @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Comment> comments = new HashSet<>();
 
     public Issue(String title, User writer, boolean open) {
         this.title = title;
@@ -75,7 +77,7 @@ public class Issue {
         this.title = title;
     }
 
-    public void editIssueAssignees(List<IssueAssignee> issueAssignees) {
+    public void editIssueAssignees(Set<IssueAssignee> issueAssignees) {
         this.issueAssignees = issueAssignees;
     }
 
@@ -95,7 +97,7 @@ public class Issue {
         this.issueLabels = issueLabels;
     }
 
-    public void addIssueAssignees(List<IssueAssignee> issueAssignees) {
+    public void addIssueAssignees(Set<IssueAssignee> issueAssignees) {
         this.issueAssignees = issueAssignees;
     }
 
