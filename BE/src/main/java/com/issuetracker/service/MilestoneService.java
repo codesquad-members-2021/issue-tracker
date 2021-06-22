@@ -3,12 +3,16 @@ package com.issuetracker.service;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.milestone.MilestoneRepository;
 import com.issuetracker.exception.MilestoneNotFoundException;
+import com.issuetracker.web.dto.reqeust.MilestoneNumbersRequestDTO;
 import com.issuetracker.web.dto.response.MilestoneDTO;
 import com.issuetracker.domain.label.LabelRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.web.dto.response.MilestonesResponseDTO;
+import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,11 +23,19 @@ public class MilestoneService {
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
 
-    public MilestonesResponseDTO read() {
-        List<MilestoneDTO> milestoneDTOs = milestoneRepository.findAll().stream()
+    public MilestonesResponseDTO read(String status) {
+        boolean newStatus = Status.statusToBoolean(status);
+        List<MilestoneDTO> milestoneDTOs = milestoneRepository.findAllByIsOpen(newStatus).stream()
                 .map(milestone -> MilestoneDTO.of(milestone, false))
                 .collect(Collectors.toList());
-        return MilestonesResponseDTO.of(labelRepository.count(), count(), milestoneDTOs);
+        return MilestonesResponseDTO.of(labelRepository.count(), countByIsOpen(true), countByIsOpen(false), milestoneDTOs);
+    }
+
+    @Transactional
+    public void changeMilestoneStatus(MilestoneNumbersRequestDTO requestDTO, String status) {
+        boolean newStatus = !Status.statusToBoolean(status);
+        System.out.println(requestDTO.getMilestoneNumbers());
+        milestoneRepository.updateStatusBy(newStatus, requestDTO.getMilestoneNumbers());
     }
 
     public void create(MilestoneDTO milestone) {
@@ -80,7 +92,7 @@ public class MilestoneService {
         return MilestoneDTO.of(issue.getMilestone(), true);
     }
 
-    public long count() {
-        return milestoneRepository.count();
+    public long countByIsOpen(boolean isOpen) {
+        return milestoneRepository.countByIsOpen(isOpen);
     }
 }

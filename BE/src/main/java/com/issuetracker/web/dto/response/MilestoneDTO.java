@@ -22,6 +22,7 @@ public class MilestoneDTO {
     private final LocalDate dueDate;
     private final Long openedIssueCount;
     private final Long closedIssueCount;
+    private final boolean isOpen;
     private final boolean isChecked;
 
     public static MilestoneDTO of(Milestone milestone, boolean isChecked) {
@@ -33,6 +34,7 @@ public class MilestoneDTO {
                 .dueDate(milestone.getDueDate())
                 .openedIssueCount(milestone.countOpenedIssues())
                 .closedIssueCount(milestone.countClosedIssues())
+                .isOpen(milestone.isOpen())
                 .isChecked(isChecked)
                 .build();
     }

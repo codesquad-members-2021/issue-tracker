@@ -28,7 +28,7 @@ public class IssueQueryService {
     public IssuesResponseDTO getIssues(SearchRequestDTO searchRequestDTO) {
         Count count = Count.builder()
                 .label((int) labelService.count())
-                .milestone((int) milestoneService.count())
+                .milestone((int) milestoneService.countByIsOpen(true))
                 .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), searchRequestDTO))
                 .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), searchRequestDTO))
                 .build();

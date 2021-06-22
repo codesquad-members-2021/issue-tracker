@@ -25,6 +25,7 @@ public class Milestone extends BaseTimeEntity {
     private String title;
     private String description;
     private LocalDate dueDate;
+    private boolean isOpen;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues;
@@ -35,14 +36,14 @@ public class Milestone extends BaseTimeEntity {
                 .title(milestoneDTO.getTitle())
                 .description(milestoneDTO.getDescription())
                 .dueDate(milestoneDTO.getDueDate())
+                .isOpen(true)
                 .build();
     }
 
-    public Milestone update(MilestoneDTO milestoneDTO) {
+    public void update(MilestoneDTO milestoneDTO) {
         this.title = milestoneDTO.getTitle();
         this.dueDate = milestoneDTO.getDueDate();
         this.description = milestoneDTO.getDescription();
-        return this;
     }
 
     public Long countOpenedIssues() {
