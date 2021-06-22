@@ -9,7 +9,7 @@ class FetchUserInfoUseCase {
     
     init() {
         self.endPoint = EndPoint(scheme: Scheme.http.rawValue, host: Host.base.rawValue, path: Path.api.rawValue + Path.user.rawValue)
-        self.networkManager = NetworkManager()
+        self.networkManager = NetworkManager(jwtManager: JWTManager(), session: URLSession.shared)
         self.subscriptions = Set<AnyCancellable>()
     }
     

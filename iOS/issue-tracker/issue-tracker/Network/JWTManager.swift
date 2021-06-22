@@ -1,7 +1,12 @@
 import Foundation
 import Security
 
-struct JWTManager {
+protocol JWTManageable {
+    func get() -> String?
+    func set(jwt: String) -> Bool
+}
+
+struct JWTManager: JWTManageable {
     
     func get() -> String? {
         let keyChainQuery: NSDictionary = [
@@ -13,7 +18,7 @@ struct JWTManager {
         var dataTypeRef: AnyObject?
         let status = SecItemCopyMatching(keyChainQuery, &dataTypeRef)
         
-        guard status != errSecSuccess, let retrievedData = dataTypeRef as? Data else { return nil }
+        guard status == errSecSuccess, let retrievedData = dataTypeRef as? Data else { return nil }
         let value = String(data: retrievedData, encoding: String.Encoding.utf8)
         return value
     }

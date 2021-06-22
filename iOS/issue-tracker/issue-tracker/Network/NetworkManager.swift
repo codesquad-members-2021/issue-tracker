@@ -1,12 +1,20 @@
 import Foundation
 import Combine
 
+protocol URLSessionProtocol {
+    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
+}
+
+extension URLSession: URLSessionProtocol { }
+
 struct NetworkManager {
     
-    private let jwtManager: JWTManager
+    private let jwtManager: JWTManageable
+    private let session: URLSessionProtocol
     
-    init() {
-        self.jwtManager = JWTManager()
+    init(jwtManager: JWTManageable, session: URLSessionProtocol) {
+        self.jwtManager = jwtManager
+        self.session = session
     }
     
     func makeAuthorizationRequest(url: URL) -> URLRequest {
@@ -28,7 +36,7 @@ struct NetworkManager {
             return Fail(error: error).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: self.makeAuthorizationRequest(url: url))
+        return session.dataTaskPublisher(for: self.makeAuthorizationRequest(url: url))
             .mapError { _ in NetworkError.networkConnection(desciption: "Network Error") }
             .flatMap { data, response -> AnyPublisher<T, NetworkError> in
                 guard let httpResponse = response as? HTTPURLResponse else {

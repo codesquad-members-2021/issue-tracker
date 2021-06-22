@@ -26,6 +26,8 @@
 		BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF6326733EEC005EE147 /* LabelViewController.swift */; };
 		BDCEAF6726733F8F005EE147 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF6526733F8F005EE147 /* LabelTableViewCell.swift */; };
 		BDCEAF6826733F8F005EE147 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDCEAF6626733F8F005EE147 /* LabelTableViewCell.xib */; };
+		CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */; };
+		CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
 		CEA84DEF267B07390006CC2E /* JWTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */; };
@@ -93,6 +95,7 @@
 		BDCEAF6626733F8F005EE147 /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
 		BE8239AFCA4C0E7723B72656 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTResponseDTO.swift; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 			children = (
 				BD1D370B266E428800B51184 /* issue_trackerTests.swift */,
 				CEBF141326788D910009BB75 /* JWTManagerTest.swift */,
+				CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */,
 				BD1D370D266E428800B51184 /* Info.plist */,
 			);
 			path = "issue-trackerTests";
@@ -542,7 +546,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */,
 				BD1D370C266E428800B51184 /* issue_trackerTests.swift in Sources */,
+				CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */,
 				CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */,
 				CEBF1412267887550009BB75 /* JWTManager.swift in Sources */,
 			);
