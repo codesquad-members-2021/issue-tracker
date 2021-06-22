@@ -10,10 +10,6 @@ import Combine
 import KeychainSwift
 import AuthenticationServices
 
-enum TokenState {
-    case success
-}
-
 final class LoginService {
 
     private let keychain: KeychainSwift
@@ -26,18 +22,11 @@ final class LoginService {
         self.repository = repository
     }
 
-    func fetchGithubCode(viewController: ASWebAuthenticationPresentationContextProviding, completionHandler: @escaping (String?, NetworkError?) -> Void) {
-        repository.fetchGithubLoginCode(from: viewController) { result in
-            switch result {
-            case .failure(let error):
-                completionHandler(nil, error)
-            case .success(let code):
-                completionHandler(code, nil)
-            }
-        }
+    func fetchGithubCode(viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
+        return repository.fetchGithubLoginCode(from: viewController)
     }
 
-    func fetchToken(to code: Encodable) -> AnyPublisher<TokenState, NetworkError> {
+    func fetchToken(to code: Encodable) -> AnyPublisher<Void, NetworkError> {
         return repository.requestUserAuth(to: code)
             .catch { error in
                 return Fail(error: error).eraseToAnyPublisher()
@@ -45,7 +34,6 @@ final class LoginService {
             .map { [weak self] value in
                 self?.keychain.set(value[self?.token ?? ""] ?? "",
                                   forKey: self?.token ?? "")
-                return .success
             }.eraseToAnyPublisher()
     }
 }

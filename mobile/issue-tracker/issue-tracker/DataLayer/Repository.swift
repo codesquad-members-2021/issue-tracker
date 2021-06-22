@@ -16,9 +16,9 @@ protocol Repositorable {
 final class Repository: Repositorable {
 
     private let session: URLSession
-    private var webAuthSession: ASWebAuthenticationSession?
 
     private let callbackURLScheme = "issue-tracker"
+    private var cancell: AnyCancellable?
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -51,27 +51,10 @@ final class Repository: Repositorable {
             }.eraseToAnyPublisher()
     }
 
-    func fetchGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding, completion: @escaping (Result<String, NetworkError>) -> Void) {
+    func fetchGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
         guard let url = GithubConfiguration().url() else {
-            completion(.failure(NetworkError.invalidURL))
-            return
+            return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
-
-        webAuthSession = .init(url: url, callbackURLScheme: callbackURLScheme) { (callback: URL?, error: Error?) in
-            guard error == nil, let successURL = callback else {
-                completion(.failure(NetworkError.failedAuthentication))
-                return
-            }
-
-            let queryItems = URLComponents(string: successURL.absoluteString)?.queryItems
-            let code = queryItems?.filter { $0.name == "code" }.first?.value ?? ""
-            completion(.success(code))
-        }
-        configureWebAuthSession(from: viewController)
-    }
-
-    private func configureWebAuthSession(from content: ASWebAuthenticationPresentationContextProviding) {
-        webAuthSession?.presentationContextProvider = content
-        webAuthSession?.start()
+        return ASWebAuthenticationSession.publisher(url: url, sheme: callbackURLScheme, context: viewController).eraseToAnyPublisher()
     }
 }

@@ -18,7 +18,8 @@ struct GithubConfiguration {
         component.scheme = scheme
         component.host = host
         component.path = path
-        component.queryItems = [URLQueryItem(name: "client_id", value: query)]
+        component.queryItems = [URLQueryItem(name: "client_id", value: query),
+                                URLQueryItem(name: "scope", value: "user")]
         return component.url
     }
 }
