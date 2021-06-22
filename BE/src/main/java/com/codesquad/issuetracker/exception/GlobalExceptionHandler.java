@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.exception;
 
+import com.codesquad.issuetracker.auth.exception.TokenEmptyException;
+import com.codesquad.issuetracker.s3.exception.ImageUploadException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

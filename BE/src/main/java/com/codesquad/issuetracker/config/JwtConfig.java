@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.config;
 
-import com.codesquad.issuetracker.jwt.BearerAuthInterceptor;
+import com.codesquad.issuetracker.auth.BearerAuthInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
