@@ -26,6 +26,10 @@ public class UserDto {
         this.avatar_url = user.getAvatar_url();
     }
 
+    public static UserDto of(User user) {
+        return new UserDto(user);
+    }
+
     public String getLogin() {
         return login;
     }
