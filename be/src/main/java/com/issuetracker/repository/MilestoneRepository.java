@@ -56,4 +56,14 @@ public class MilestoneRepository {
         String query = "select id, title, description, due_date, closed from milestone where closed = ?";
         return jdbcTemplate.query(query, MILESTONE_ROW_MAPPER, closed);
     }
+
+    public Integer countAllOpenedMilestone() {
+        String query = "select count(closed) from milestone where closed = false";
+        return jdbcTemplate.queryForObject(query, Integer.class);
+    }
+
+    public Integer countAllClosedMilestone() {
+        String query = "select count(closed) from milestone where closed = true";
+        return jdbcTemplate.queryForObject(query, Integer.class);
+    }
 }

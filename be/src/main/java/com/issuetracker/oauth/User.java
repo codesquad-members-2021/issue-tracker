@@ -1,7 +1,5 @@
 package com.issuetracker.oauth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class User {
     private Long id;
 

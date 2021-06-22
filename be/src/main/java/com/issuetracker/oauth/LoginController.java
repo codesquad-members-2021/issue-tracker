@@ -32,7 +32,7 @@ public class LoginController {
         RequestEntity<GithubAccessTokenRequestDto> requestDto = null;
 
         // TODO: iOS 파트 추가//
-          if(client.equals("ios")){
+        if (client.equals("ios")) {
             requestDto = RequestEntity
                     .post(accessTokenUri)
                     .header("Accept", "application/json")
@@ -41,7 +41,7 @@ public class LoginController {
                     ));
         }
 
-        if (client.equals("web")){
+        if (client.equals("web")) {
             requestDto = RequestEntity
                     .post(accessTokenUri)
                     .header("Accept", "application/json")
@@ -60,17 +60,11 @@ public class LoginController {
 
         ResponseEntity<User> user = githubRequest.exchange(request, User.class);
 
-        logger.info("check user1: {}", user.getBody().toString());
-        // 로그인한 유저가 유저 테이블에 없다면 테이블에 저장
         User loginUser = user.getBody();
-        if (loginUser != null && loginUser.getId() != null) {
-            if (userRepository.findOneById(loginUser.getId()) == null) {
-                userRepository.save(loginUser);
-                logger.info("check loginUser: {}", loginUser.getId());
-            }
+        if (!userRepository.hasSameUserId(loginUser.getId())) {
+            userRepository.save(loginUser);
         }
 
-        logger.info("check user2: {}", user.getBody().toString());
         Algorithm algorithm = Algorithm.HMAC256(oauthUtil.getAlgorithmSecret());
 
         String jwt = JWT.create()
@@ -81,11 +75,6 @@ public class LoginController {
                 .sign(algorithm);
 
         return new JwtDto(jwt);
-    }
-
-    @GetMapping("/hello")
-    public void hell(@RequestAttribute User user) {
-        System.out.println(user);
     }
 }
 
