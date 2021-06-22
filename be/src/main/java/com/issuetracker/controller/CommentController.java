@@ -30,6 +30,14 @@ public class CommentController {
         return commentService.saveComment(requestDto.getDescription(), issueId, user.getId());
     }
 
+    @PatchMapping("/issues/{issueId}/comments/{commentId}")
+    public ResponseStatusDto editComment(@PathVariable Long issueId,
+                                           @PathVariable Long commentId,
+                                           @RequestBody CommentRequestDto requestDto,
+                                           @RequestAttribute User user) {
+        return commentService.editComment(requestDto.getDescription(), issueId, user.getId(), commentId);
+    }
+
     @GetMapping("/comments")
     public List<CommentDto> viewCommentsByUserId(@RequestParam(name = "user_id") Long userId) {
         return commentService.findCommentsByUserId(userId);

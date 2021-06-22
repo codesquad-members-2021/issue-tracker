@@ -41,4 +41,10 @@ public class CommentRepository {
         String query = "insert into comment (description, created_time, issue_id, user_id) values (?, ?, ?, ?)";
         jdbcTemplate.update(query, description, LocalDateTime.now(), issueId, userId);
     }
+
+    public void edit(String description, Long commentId) {
+        String query = "update comment set description = ? where id = ?";
+        jdbcTemplate.update(query, description, commentId);
+
+    }
 }

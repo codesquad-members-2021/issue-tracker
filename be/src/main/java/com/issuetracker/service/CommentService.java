@@ -44,4 +44,10 @@ public class CommentService {
 
         return new ResponseStatusDto("success");
     }
+
+    public ResponseStatusDto editComment(String description, Long issueId, Long userId, Long commentId) {
+        commentRepository.edit(description, commentId);
+
+        return new ResponseStatusDto("success");
+    }
 }
