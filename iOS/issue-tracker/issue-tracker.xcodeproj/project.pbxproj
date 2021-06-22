@@ -50,6 +50,7 @@
 		E49695672680B0B7001AEB89 /* IssueControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695662680B0B7001AEB89 /* IssueControlViewController.swift */; };
 		E49695692680B3FB001AEB89 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695682680B3FB001AEB89 /* Issue.swift */; };
 		E496956E2681905A001AEB89 /* IssueInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496956D2681905A001AEB89 /* IssueInfoView.swift */; };
+		E49695712681D5E5001AEB89 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = E49695702681D5E5001AEB89 /* SwiftyMarkdown */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
@@ -139,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */,
+				E49695712681D5E5001AEB89 /* SwiftyMarkdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +456,7 @@
 			name = "issue-tracker";
 			packageProductDependencies = (
 				FAEB30B02670B74000C17BE9 /* Alamofire */,
+				E49695702681D5E5001AEB89 /* SwiftyMarkdown */,
 			);
 			productName = "issue-tracker";
 			productReference = E42AD0FA266E52FB0071B436 /* issue-tracker.app */;
@@ -484,6 +487,7 @@
 			mainGroup = E42AD0F1266E52FB0071B436;
 			packageReferences = (
 				FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E496956F2681D5E5001AEB89 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 			);
 			productRefGroup = E42AD0FB266E52FB0071B436 /* Products */;
 			projectDirPath = "";
@@ -773,6 +777,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E496956F2681D5E5001AEB89 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
+			};
+		};
 		FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -784,6 +796,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E49695702681D5E5001AEB89 /* SwiftyMarkdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E496956F2681D5E5001AEB89 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
+			productName = SwiftyMarkdown;
+		};
 		FAEB30B02670B74000C17BE9 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAEB30AF2670B74000C17BE9 /* XCRemoteSwiftPackageReference "Alamofire" */;
