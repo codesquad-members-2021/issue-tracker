@@ -1,28 +1,70 @@
+import { useRecoilValue } from 'recoil';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { Button } from '@chakra-ui/react';
 import { ReactComponent as EditIcon } from '@assets/edit.svg';
 import { ReactComponent as CloseIcon } from '@assets/archive.svg';
 import { ReactComponent as AlertIcon } from '@assets/alert.svg';
 
+import { issueDetailComment, issueDetailList } from '@store/atoms/issueDetail';
+import pipe from '@utils/pipe';
+import {
+  checkIfDayPassedFromCreation,
+  getCreatedTime,
+  getRenderingText,
+  getTime,
+  getTimeGapFromCreation,
+  getTotalMinutesBetweenGap,
+} from '@utils/renderTimeText';
+
+import type { Param } from '@pages/IssueDetail';
+
 function IssueHeader() {
-  const issueTitle = 'FE 이슈트래커 디자인 시스템 구현';
-  const issueNumber = '#2';
-  const issueInfo = '이 이슈가 20분 전에 Oni님에 의해 열렸습니다 • 코멘트 1개';
+  const { id }: Param = useParams();
+  const issueData = useRecoilValue(issueDetailList(id));
+
+  const {
+    assignee,
+    author_user_id,
+    closed,
+    created_time,
+    description,
+    issue_number,
+    label_list,
+    milestone,
+    title,
+  } = issueData;
+
+  const currentTime = new Date().getTime();
+  const timePassed = pipe(
+    getCreatedTime,
+    getTimeGapFromCreation(currentTime),
+    getTotalMinutesBetweenGap,
+    checkIfDayPassedFromCreation,
+    getTime,
+    getRenderingText
+  )(created_time);
+
+  const issueInfo = `이 이슈가 ${timePassed}에 ${''}님에 의해 열렸습니다 • 코멘트 1개`;
 
   return (
     <Header>
       <HeaderLeft>
         <TitleBox>
-          <h1>{issueTitle}</h1>
-          <span>{issueNumber}</span>
+          <h1>{title}</h1>
+          <span>#{issue_number}</span>
         </TitleBox>
         <IssueInfo>
-          <OpenIssueTag>
-            <AlertIcon className="icon alert_icon" /> 열린 이슈
-          </OpenIssueTag>
-          <CloseIssueTag>
-            <CloseIcon className="icon close_icon" /> 닫힌 이슈
-          </CloseIssueTag>
+          {closed ? (
+            <CloseIssueTag>
+              <CloseIcon className="icon close_icon" /> 닫힌 이슈
+            </CloseIssueTag>
+          ) : (
+            <OpenIssueTag>
+              <AlertIcon className="icon alert_icon" /> 열린 이슈
+            </OpenIssueTag>
+          )}
           <IssueInfoText>{issueInfo}</IssueInfoText>
         </IssueInfo>
       </HeaderLeft>
