@@ -105,6 +105,7 @@ final class IssueControlViewController: UIViewController {
         textView.text = bodyPlaceholder
         textView.font = .systemFont(ofSize: 17)
         textView.textColor = .lightGray
+        textView.dataDetectorTypes = UIDataDetectorTypes.all
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.delegate = self
         return textView
@@ -143,6 +144,7 @@ final class IssueControlViewController: UIViewController {
     }()
 
     private let bodyPlaceholder = "이곳에 내용을 입력하세요"
+    private var markdownConverter = MarkdownConverter(customBullet: "✔️")
     
     private lazy var lineHeight: CGFloat = {
         return view.frame.height * 0.05
@@ -181,7 +183,7 @@ final class IssueControlViewController: UIViewController {
         view.addSubview(titleInputView)
         
         NSLayoutConstraint.activate([
-            titleInputView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing * 0.3),
+            titleInputView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: spacing * 0.7),
             titleInputView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             titleInputView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             titleInputView.heightAnchor.constraint(equalToConstant: lineHeight)
@@ -203,9 +205,9 @@ final class IssueControlViewController: UIViewController {
         view.addSubview(bodyTextView)
         
         NSLayoutConstraint.activate([
-            bodyTextView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.3),
-            bodyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
-            bodyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
+            bodyTextView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.7),
+            bodyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 0.8),
+            bodyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing * 0.8),
             bodyTextView.bottomAnchor.constraint(equalTo: additionalInfoView.topAnchor)
         ])
     }
@@ -233,12 +235,39 @@ final class IssueControlViewController: UIViewController {
     
         switch currentIndex {
         case Segment.markdown.rawValue:
-            print("마크다운 내놔")
+            previewToMarkDown()
         case Segment.preview.rawValue:
-            print("프리뷰 내놔")
+            markdownToPreview()
         default:
             assert(false)
         }
+    }
+    
+    private func previewToMarkDown() {
+        bodyTextView.attributedText = nil
+        bodyTextView.text = markdownConverter.rawText
+        
+        changeTextViewEditable(to: true)
+        changeToplainTextView()
+    }
+    
+    private func markdownToPreview() {
+        guard let rawText = bodyTextView.text else { return }
+        let preview = markdownConverter.preview(rawText: rawText)
+        markdownConverter.rawText = rawText
+        bodyTextView.text = nil
+        bodyTextView.attributedText = preview
+        
+        changeTextViewEditable(to: false)
+    }
+    
+    private func changeTextViewEditable(to status: Bool) {
+        bodyTextView.isEditable = status
+    }
+    
+    private func changeToplainTextView() {
+        bodyTextView.font = .systemFont(ofSize: 17)
+        bodyTextView.textColor = .black
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
@@ -268,8 +297,10 @@ extension IssueControlViewController: UITextFieldDelegate {
 
 extension IssueControlViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.textColor = .black
-        textView.text = nil
+        if textView.textColor == .lightGray {
+            textView.textColor = .black
+            textView.text = nil
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

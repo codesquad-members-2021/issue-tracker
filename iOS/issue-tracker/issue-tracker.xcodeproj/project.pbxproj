@@ -51,6 +51,7 @@
 		E49695692680B3FB001AEB89 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695682680B3FB001AEB89 /* Issue.swift */; };
 		E496956E2681905A001AEB89 /* IssueInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496956D2681905A001AEB89 /* IssueInfoView.swift */; };
 		E49695712681D5E5001AEB89 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = E49695702681D5E5001AEB89 /* SwiftyMarkdown */; };
+		E49695732681DA29001AEB89 /* MarkdownConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695722681DA29001AEB89 /* MarkdownConverter.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
@@ -116,6 +117,7 @@
 		E49695662680B0B7001AEB89 /* IssueControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueControlViewController.swift; sourceTree = "<group>"; };
 		E49695682680B3FB001AEB89 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		E496956D2681905A001AEB89 /* IssueInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueInfoView.swift; sourceTree = "<group>"; };
+		E49695722681DA29001AEB89 /* MarkdownConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownConverter.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarCreator.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				E426DAC82671F7760069E77D /* AlertFactory.swift */,
 				E43912F3267CAA8D003CD344 /* UITextFieldExtension.swift */,
 				FA431FFC267F61150010EA91 /* String.swift */,
+				E49695722681DA29001AEB89 /* MarkdownConverter.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				FA733A2E267C3D77005A40C8 /* Milestone.swift in Sources */,
 				E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */,
 				E43912EC267B1A4E003CD344 /* LoginInfoDTO.swift in Sources */,
+				E49695732681DA29001AEB89 /* MarkdownConverter.swift in Sources */,
 				E426DAC22671B1C60069E77D /* LoginKeyChainManager.swift in Sources */,
 				E43912D426788CC3003CD344 /* ImageBarButton.swift in Sources */,
 				E43912D2267878F4003CD344 /* HexColorCode.swift in Sources */,
