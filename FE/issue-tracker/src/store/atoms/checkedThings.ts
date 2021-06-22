@@ -1,5 +1,11 @@
 import { atom } from 'recoil';
 
+export type assigneeType = {
+  user_id: number;
+  name: string;
+  avatar_url: string;
+};
+
 export type labelType = {
   id: number;
   title: string;
@@ -17,7 +23,7 @@ export type milestoneType = {
   closed_issue_count: number;
 };
 
-export const checkedAssigneesState = atom({
+export const checkedAssigneesState = atom<assigneeType[]>({
   key: 'checkedAssignees',
   default: [],
 });
