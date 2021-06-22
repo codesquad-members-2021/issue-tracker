@@ -77,7 +77,6 @@ export const getIssuesInfoState = selector<IssuesInfoStateType | null>({
     if (!isFilterSetting) return null;
     try {
       const response = await fetch(API.getIssue + issueType);
-      console.log(response)
       const issuesData = await response.json();
       const issuesInfoState = { issues: issuesData.issues, count: issuesData.count };
       return issuesInfoState;
