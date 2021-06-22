@@ -29,7 +29,7 @@ struct JWTManager: JWTManageable {
         ]
         
         SecItemDelete(keyChainQuery)
-        
+        print(jwt)
         let status: OSStatus = SecItemAdd(keyChainQuery, nil)
         return status == noErr
     }

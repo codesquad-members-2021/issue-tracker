@@ -1,9 +1,12 @@
 import UIKit
+import Combine
 
 class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
-    
+    private let issueListViewModel = IssueListViewModel()
+    private var subscriptions = Set<AnyCancellable>()
+
     private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search"
@@ -16,6 +19,7 @@ class IssueListViewController: UIViewController {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
         
+        bind()
         configureNavigationItem()
         configureTableViewFooterView()
     }
@@ -25,6 +29,14 @@ class IssueListViewController: UIViewController {
         configureSelectButton()
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    private func bind() {
+        issueListViewModel.didUpdateIssueList()
+            .sink { [weak self] issueList in
+                self?.issueTableView.reloadData()
+            }.store(in: &subscriptions)
+        issueListViewModel.fetchIssueList()
     }
     
     private func configureTableViewFooterView() {
@@ -118,14 +130,14 @@ class IssueListViewController: UIViewController {
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 임시 값
-        return 2
+        return issueListViewModel.getIssueCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else {
             return UITableViewCell()            
         }
+        cell.configure(issue: issueListViewModel.getIssue(indexPath: indexPath))
         return cell
     }
     

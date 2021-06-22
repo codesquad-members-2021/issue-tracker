@@ -101,6 +101,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="content" destination="5gT-3I-aPM" id="eDy-tP-p13"/>
+                <outlet property="label" destination="GeO-05-zJU" id="NgY-xt-YXb"/>
+                <outlet property="milestone" destination="GIi-ua-HME" id="NCq-8I-ru0"/>
+                <outlet property="title" destination="Qpf-ep-Gd6" id="FGh-Ap-6hq"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="123.88392857142857"/>
         </tableViewCell>
     </objects>

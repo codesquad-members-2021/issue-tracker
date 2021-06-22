@@ -38,6 +38,8 @@
 		CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
+		CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A5DF268242D100D71888 /* IssueListViewModel.swift */; };
+		CE81A5E326824A8700D71888 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A5E226824A8700D71888 /* UIColor.swift */; };
 		CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE976389268208760025CEC3 /* IssueListResponseDTO.swift */; };
 		CE97638C26820BC70025CEC3 /* FetchIssueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97638B26820BC70025CEC3 /* FetchIssueListUseCase.swift */; };
 		CE976391268213A60025CEC3 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE976390268213A60025CEC3 /* IssueList.swift */; };
@@ -115,6 +117,8 @@
 		CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		CE81A5DF268242D100D71888 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
+		CE81A5E226824A8700D71888 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CE976389268208760025CEC3 /* IssueListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListResponseDTO.swift; sourceTree = "<group>"; };
 		CE97638B26820BC70025CEC3 /* FetchIssueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchIssueListUseCase.swift; sourceTree = "<group>"; };
 		CE976390268213A60025CEC3 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		BD1D36F3266E428700B51184 /* issue-tracker */ = {
 			isa = PBXGroup;
 			children = (
+				CE81A5E126824A3C00D71888 /* Utils */,
 				BD0814672681C59C00C3D6D7 /* Protocol */,
 				BD1D3736266F5DA200B51184 /* View */,
 				BD1D3726266F121000B51184 /* ViewController */,
@@ -300,6 +305,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CE81A5E126824A3C00D71888 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE81A5E226824A8700D71888 /* UIColor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		CE97638F268212550025CEC3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */,
+				CE81A5DF268242D100D71888 /* IssueListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -575,6 +589,7 @@
 				BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */,
 				CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */,
 				CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */,
+				CE81A5E326824A8700D71888 /* UIColor.swift in Sources */,
 				CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */,
 				BD08146B2681C76F00C3D6D7 /* JWTManageable.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
@@ -583,6 +598,7 @@
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
 				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
 				CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */,
+				CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */,
 				CE976391268213A60025CEC3 /* IssueList.swift in Sources */,
 				BD0814692681C5C100C3D6D7 /* Identyfying.swift in Sources */,
 				BD08146D2681C79E00C3D6D7 /* URLSessionProtocol.swift in Sources */,
