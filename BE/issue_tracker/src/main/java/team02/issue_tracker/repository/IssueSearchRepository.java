@@ -5,7 +5,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import team02.issue_tracker.domain.Issue;
-import team02.issue_tracker.domain.User;
 
 import java.util.List;
 
