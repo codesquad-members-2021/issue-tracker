@@ -17,8 +17,7 @@ class IssueCoordinator: NSObject, Coordinator {
     }
     
     private func createIssueListVC() {
-        guard let issueListVC = UIStoryboard(name: StoryBoardName.IssueList.description, bundle: nil)
-                .instantiateViewController(withIdentifier: IssueListViewController.reuseIdentifier) as? IssueListViewController else {
+        guard let issueListVC = IssueListViewController.instantiate(name: StoryBoardName.IssueList.description) else {
             return
         }
         
@@ -30,8 +29,7 @@ class IssueCoordinator: NSObject, Coordinator {
     }
     
     func pushEditView() {
-        guard let issueEditVC = UIStoryboard(name: StoryBoardName.IssueEdit.description, bundle: nil)
-                .instantiateViewController(withIdentifier: IssueEditViewController.reuseIdentifier) as? IssueEditViewController else {
+        guard let issueEditVC = IssueEditViewController.instantiate(name: StoryBoardName.IssueEdit.description) else {
             return
         }
         issueEditVC.coordinator = self

@@ -9,11 +9,14 @@ import UIKit
 
 extension UIViewController {
 
-    static func instantiate(name: String, bundle: Bundle? = nil) -> Self {
+    static func instantiate(name: String, bundle: Bundle? = nil) -> Self? {
         let fullName = NSStringFromClass(self)
+        if fullName.components(separatedBy: ".").count < 1 {
+            return nil
+        }
         let className = fullName.components(separatedBy: ".")[1]
         let storyboard = UIStoryboard(name: name, bundle: bundle)
-        return storyboard.instantiateViewController(withIdentifier: className) as! Self
+        return storyboard.instantiateViewController(withIdentifier: className) as? Self
     }
     
 }
