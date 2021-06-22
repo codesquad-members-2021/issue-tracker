@@ -4,18 +4,17 @@ import { useRecoilState } from 'recoil';
 import {
   filterVisibleAtom,
   IFilterVisibleAtom,
-  TFilterVisibleAtomTypes,
 } from 'util/store';
 
 import ListTable from './ListTable';
 import NavFilter from './NavFilter';
-import { IAllGetRequestDatas } from 'util/types/api';
+import { IAllGetRequestDatas, TFilterTypes } from 'util/types';
 
 export interface IIssueList { data?: IAllGetRequestDatas }
 
 // IssueList를 구성하는 다른 부품에서 쓰임.
 export interface IIssueListChildren extends IIssueList { 
-  handleFilterModalClick: (strType: TFilterVisibleAtomTypes) => void;
+  handleFilterModalClick: (strType: TFilterTypes) => void;
 }
 
 const IssueList = ( { data } : IIssueList) => {
@@ -49,7 +48,7 @@ const IssueList = ( { data } : IIssueList) => {
 
   // issueList의 모든 modal
   const handleFilterModalClick = useCallback(
-    (strType: TFilterVisibleAtomTypes) => {
+    (strType: TFilterTypes) => {
       setFilterVisibleState((filterVisibleState: IFilterVisibleAtom) => ({
         ...filterVisibleState,
         [strType]: !filterVisibleState[strType],

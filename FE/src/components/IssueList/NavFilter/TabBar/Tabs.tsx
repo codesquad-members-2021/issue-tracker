@@ -27,7 +27,7 @@ const Tabs = ({ milestones, labels }: IAllGetRequestDatas) => {
   // render 관련
   const renderTabButtons = () =>
     tabs.map(({ name, value }, idx) => (
-      <TabButton  key={idx} name={name}>
+      <TabButton key={idx} name={name}>
         <Link to={name === 'label' ? '/labels' : '/milestones'}>
           <span className="icon">{name === 'label' ? <IconLabel /> : <IconMileStone />}</span>
           <span>{value}</span>
@@ -67,11 +67,11 @@ const TabButton = styled(Button)`
     display: flex;
     text-decoration: none;
     padding: 0.4rem 1.4rem;
+    column-gap: .4rem;
   }
 
   span {
     display: flex;
     align-items: center;
   }
-  span.icon + span { margin-left: 0.2rem };
 `;

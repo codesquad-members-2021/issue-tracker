@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { filterVisibleAtom, TFilterVisibleAtomTypes } from 'util/store';
+import { filterVisibleAtom } from 'util/store';
+import { TFilterTypes } from 'util/types';
 
 import { IIssueListChildren } from '..';
 import { Checkbox, Tabs, Tab, Button } from '@material-ui/core';
@@ -9,6 +10,7 @@ import { IconAlertCircle, IconArchive } from '../../Common/Icons';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ListModal from '../../Common/ListModal';
 import { TextIssueList, TIssueListFilterItem, TTextIssueListFilterItems } from 'util/reference';
+
 
 const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren) => {
   // 1. 일반 (Recoil 등)
@@ -19,7 +21,7 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
 
   const [issueOpenOrClose, setIssueOpenOrClose] = useState({open: 0, close: 0});
   const [issueListFilterData, setIssueListFilterData] = useState<TTextIssueListFilterItems>();
-  
+
   // =========
 
   // 2. useEffect
@@ -52,19 +54,23 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
     const fitlerData : TTextIssueListFilterItems = {
       assignee: {
         title: '담당자 필터',
-        items: usersFilterItems,
+        items: [{ name: 'noAssignee', text: '담당자가 없는 이슈' }, ...usersFilterItems],
+        type: 'assignee',
       },
       writer: {
         title: '작성자 필터',
         items: usersFilterItems,
+        type: 'writer',
       },
       milestone: {
         title: '마일스톤 필터',
-        items: milestonesFilterItems,
+        items: [{ name: 'noMilestone', text: '마일스톤이 없는 필터' }, ...milestonesFilterItems],
+        type: 'milestone',
       },
       label: {
         title: '레이블 필터',
-        items: labelsFilterItems,
+        items: [{ name: 'noLabel', text: '레이블이 없는 이슈' }, ...labelsFilterItems],
+        type: 'label',
       }
     };
 
@@ -74,10 +80,10 @@ const ListHead = ({ data, handleFilterModalClick, ...props }: IIssueListChildren
 
 
   // =========
-  
+
   // 3. events
   const handleLeftTabsState = (e: React.ChangeEvent<{}>, value: number) => setLeftTabsState(value);
-  const handleRightBtnsClick = (name : TFilterVisibleAtomTypes) => {
+  const handleRightBtnsClick = (name : TFilterTypes) => {
     setFilterVisibleState((filterVisibleState) => ({
       ...filterVisibleState,
       assignee: false,

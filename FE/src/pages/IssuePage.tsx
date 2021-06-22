@@ -13,9 +13,8 @@ import { issuePageDataAtom } from 'util/store';
 const IssuePage = () => {
   const [issuePageDataState, setIssuePageDataState] = useRecoilState(issuePageDataAtom);
 
-  // useFecth는 Recoil: issuePageDataAtom의 모든 data 값들이 없어야 실행 가능함 (보류)
+  // useFecth는 Recoil: issuePageDataAtom의 모든 data 값들이 없어야 실행 가능하게 해야하나? (보류)
   // const checkBeforeFetchExecute = () => (Object.values(issuePageDataState.data).every((value) => !value));
-
 
   const { result: labelsResult, fetchState: { isLoading: labelsIsLoading } } = useFetch<ILabelsInfo>({ url: createGetRequestAddress('labels') });
   const { result: milestonesResult, fetchState: { isLoading: milestonesIsLoading } } = useFetch<IMilestonesInfo>({ url: createGetRequestAddress('milestones') });
@@ -25,7 +24,7 @@ const IssuePage = () => {
   useEffect(() => {
     const arrLoading = [issuesIsLoading, milestonesIsLoading, labelsIsLoading, usersIsLoading];
     if (arrLoading.some((loading) => loading)) return;
-  
+
     setIssuePageDataState({
       isLoading: false,
       data: {
