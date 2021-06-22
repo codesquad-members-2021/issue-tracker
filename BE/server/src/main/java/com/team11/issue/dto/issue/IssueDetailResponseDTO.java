@@ -1,6 +1,7 @@
 package com.team11.issue.dto.issue;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.team11.issue.domain.*;
 import com.team11.issue.dto.comment.CommentResponseDTO;
@@ -12,15 +13,17 @@ import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
 import com.team11.issue.dto.user.UserResponseDTO;
 import com.team11.issue.dto.user.UsersResponseDTO;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@JsonPropertyOrder({"issueId", "history", "isOpen", "title", "contents", "author", "assignee", "milestone", "labels", "comments"})
+@JsonPropertyOrder({"issueId", "history", "isOpen", "title", "contents", "author", "assignees", "milestone", "labels", "comments"})
 @RequiredArgsConstructor
 @Builder
 @Getter
@@ -44,6 +47,11 @@ public class IssueDetailResponseDTO {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final List<CommentResponseDTO> comments;
+
+
+    public boolean getIsOpen() {
+        return isOpen;
+    }
 
     private static List<LabelResponseDTO> convertLabels(List<IssueHasLabel> issueHasLabels){
         return issueHasLabels.stream()

@@ -30,6 +30,10 @@ public class IssueResponseDTO {
     private final MilestoneResponseDTO milestone;
     private final List<LabelResponseDTO> labels;
 
+    public boolean getIsOpen() {
+        return isOpen;
+    }
+
     private static List<LabelResponseDTO> convertLabels(List<IssueHasLabel> issueHasLabels){
         return issueHasLabels.stream()
                 .map(issueHasLabel -> LabelResponseDTO.from(issueHasLabel.getLabel()))
