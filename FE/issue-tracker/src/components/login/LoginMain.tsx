@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import queryString from 'query-string';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Button } from '@chakra-ui/button';
 import { Stack } from '@chakra-ui/layout';
@@ -10,7 +11,8 @@ import { LinkBox, LinkOverlay } from '@chakra-ui/react';
 
 import { ReactComponent as LogoLarge } from '@assets/LogotypeLarge.svg';
 import { LOGIN_URL } from '@const/var';
-import fetchToken from './getAccessToken';
+import fetchToken from './fetchToken';
+import { isLoginState, loginInfoState } from '@store/atoms/login';
 import {
   gitLoginStyle,
   activeLoginStyle,
@@ -22,8 +24,10 @@ function LoginMain() {
   const [isLoginActive, setIsActiveLogin] = useState(false);
   const [isInputtedID, setIsInputtedID] = useState(false);
   const [isInputtedPW, setIsInputtedPW] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const setLoginInfo = useSetRecoilState(loginInfoState);
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleChangeID = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
@@ -46,8 +50,8 @@ function LoginMain() {
   useEffect(() => {
     const { code } = queryString.parse(window.location.search);
     if (!code) return;
-    else if (typeof code === 'string') {
-      fetchToken({ isLogin, setIsLogin, code });
+    else if (typeof code === 'string' && !isLogin) {
+      fetchToken({ setIsLogin, setLoginInfo, code, history });
     }
   }, []);
 
