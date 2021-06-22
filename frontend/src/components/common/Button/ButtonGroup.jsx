@@ -16,7 +16,6 @@ const ButtonGroup = ({
 	labelCount,
 	labelClickEvent,
 	isMainPage,
-	handleTabClick,
 }) => {
 	const milestoneFlag = useRecoilValue(milestoneButtonFlagState);
 	const labelFlag = useRecoilValue(labelButtonFlagState);

@@ -41,3 +41,8 @@ export const milestoneUpdateState = atom({
 	key: "milestoneAddButtonFlagState",
 	default: false,
 });
+
+export const milestoneCountState = atom({
+	key: "milestoneCountState",
+	default: 0,
+});

@@ -5,6 +5,7 @@ import MilestoneInput from "./MilestoneInput";
 import {
 	milestoneAddButtonFlagState,
 	milestoneUpdateState,
+	milestoneCountState,
 } from "RecoilStore/Atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 import API from "util/API";
@@ -16,10 +17,13 @@ const Milestones = () => {
 	);
 	const [_, update] = useRecoilState(milestoneUpdateState);
 	const [milestone, setMilestone] = useState();
+	const [milestoneCount, setMilestoneCount] =
+		useRecoilState(milestoneCountState);
 
 	const fetchMilestones = async () => {
 		const { milestones } = await fetchData(API.milestones(), "GET");
 		setMilestone(milestones);
+		setMilestoneCount(milestones.length);
 	};
 
 	useEffect(() => {
