@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+
 import Label from '@components/common/Label';
 import EditMiniButton from '@components/common/EditMiniButton';
 import DeleteMiniButton from '@components/common/DeleteMiniButton';
@@ -8,6 +10,8 @@ interface Props {
 }
 
 function LabelCell({ isLastItemStyle }: Props) {
+  const [isDisabled, setIsDisabled] = useState(true);
+
   return (
     <LabelWrap isLastItemStyle={isLastItemStyle}>
       <StyledDiv>
@@ -18,7 +22,7 @@ function LabelCell({ isLastItemStyle }: Props) {
       </StyledDiv>
 
       <LabelButtons>
-        <EditMiniButton>편집</EditMiniButton>
+        <EditMiniButton setState={setIsDisabled}>편집</EditMiniButton>
         <DeleteMiniButton>삭제</DeleteMiniButton>
       </LabelButtons>
     </LabelWrap>
