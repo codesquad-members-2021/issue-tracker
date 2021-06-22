@@ -11,11 +11,6 @@ import team02.issue_tracker.oauth.dto.SocialProfile;
 @Getter
 public class KakaoUserProfile implements SocialProfile {
 
-    private Integer id;
-
-    @JsonProperty(value = "connected_at")
-    private String connectedAt;
-
     private Properties properties;
 
     @JsonProperty(value = "kakao_account")
@@ -28,47 +23,12 @@ public class KakaoUserProfile implements SocialProfile {
 
         @JsonProperty(value = "thumbnail_image")
         private String thumbnailImage;
-
-        @JsonProperty(value = "profile_image")
-        private String profileImage;
     }
 
     @ToString
     @Getter
     public class KakaoAccount {
-        @JsonProperty(value = "profile_needs_agreement")
-        private Boolean profileNeedsAgreement;
-
-        private Profile profile;
-
-        @JsonProperty(value = "has_email")
-        private Boolean hasEmail;
-
-        @JsonProperty(value = "email_needs_agreement")
-        private Boolean emailNeedsAgreement;
-
-        @JsonProperty(value = "is_email_valid")
-        private Boolean isEmailValid;
-
-        @JsonProperty(value = "is_email_verified")
-        private Boolean isEmailVerified;
-
         private String email;
-
-        @ToString
-        @Getter
-        public class Profile {
-            private String nickname;
-
-            @JsonProperty(value = "thumbnail_image_url")
-            private String thumbnailImageUrl;
-
-            @JsonProperty(value = "profile_image_url")
-            private String profileImageUrl;
-
-            @JsonProperty(value = "is_default_image")
-            private Boolean isDefaultImage;
-        }
     }
 
     @Override

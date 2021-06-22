@@ -13,8 +13,7 @@ import team02.issue_tracker.oauth.dto.SocialProfile;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class GithubUserProfile implements SocialProfile {
-    private Long id;
-    private String name;
+
     private String email;
     private String login;
 
