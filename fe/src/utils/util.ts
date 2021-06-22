@@ -1,13 +1,13 @@
 import { ParsedQs } from 'qs';
 import { NavType } from 'types/issueType';
-import { titleType } from 'types/newIssueType';
+import { TitleType } from 'types/issueType';
 
 export const getUrl = {
   LOGIN: (code: string | ParsedQs | string[] | ParsedQs[] | undefined) =>
     `http://15.164.68.136/api/login/auth?client=web&code=${code}`,
 };
 
-export const getTitle = (type: titleType) =>
+export const getTitle = (type: TitleType) =>
   ({
     milestoneList: '마일스톤',
     labelList: '레이블',

@@ -2,14 +2,8 @@ import { TestType } from './types/storeTypes';
 import axios from 'axios';
 import { milestoneQuery } from 'stores/milestoneStore';
 import { selector, atom } from 'recoil';
-import { FilterItemType } from 'types/filterType';
 import { LabelItemType, IssueItemType, IssuesCountType } from 'types/issueType';
-import {
-  LabelDataType,
-  MilestoneDataType,
-  UserDataType,
-  IssueDataType,
-} from 'types/storeTypes';
+import { LabelDataType, UserDataType, IssueDataType } from 'types/storeTypes';
 
 export const totalCountOfLabels = selector<number>({
   key: 'totalCountOfLabels',
@@ -110,7 +104,7 @@ const parsedLabelData = (labelItem: LabelDataType) => ({
   title: labelItem.title,
   description: labelItem.description,
   labelColor: labelItem.color_code,
-  textColor: labelItem.text_color,
+  textColor: labelItem.font_light ? 'light' : 'dark',
 });
 
 export const labelQuery = selector<LabelItemType[]>({

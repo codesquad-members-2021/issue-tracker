@@ -18,7 +18,7 @@ export type LabelDataType = {
   title: string;
   description: string;
   color_code: string;
-  text_color: string;
+  font_light: boolean;
 };
 
 export type MilestoneDataType = {

@@ -21,11 +21,11 @@ const StyledLabel = styled.div<{ backgroundColor: string }>`
   padding: 0 1rem;
   font-weight: 600;
 
-  &[aria-controls='white'] {
+  &[aria-controls='light'] {
     color: ${({ theme }) => theme.color.grayscale.offWhite};
   }
 
-  &[aria-controls='black'] {
+  &[aria-controls='dark'] {
     color: ${({ theme }) => theme.color.grayscale.titleActive};
   }
 `;

@@ -1,9 +1,9 @@
 import Filter from 'components/common/Filter';
 import styled from 'styled-components';
-import { SidebarListProps } from 'types/newIssueType';
+import { SidebarListType } from 'types/issueType';
 import { getTitle } from 'utils/util';
 
-const SidebarList = ({ type }: SidebarListProps) => {
+const SidebarList = ({ type }: { type: SidebarListType }) => {
   return (
     <StyledSidebarList>
       <span>{getTitle(type)}</span>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LabelsItemProps } from 'types/issueType';
+import { LabelItemType } from 'types/issueType';
 import LabelsItemLeft from './LabelsItemLeft';
 import LabelsItemRight from './LabelsItemRight';
 
@@ -9,7 +9,7 @@ const LabelsItem = ({
   title,
   textColor,
   labelColor,
-}: LabelsItemProps) => {
+}: LabelItemType) => {
   return (
     <StyledLabelsItem>
       <LabelsItemLeft {...{ id, description, title, labelColor, textColor }} />

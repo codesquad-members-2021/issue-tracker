@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { MilestoneBarProps } from 'types/issueType';
+import { MilestoneBarType } from 'types/issueType';
 
 const MilestoneBar = ({
   openedIssueCount,
   closedIssueCount,
-}: MilestoneBarProps) => {
+}: MilestoneBarType) => {
   const percent =
     (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
   return (

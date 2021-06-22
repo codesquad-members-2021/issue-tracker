@@ -1,4 +1,4 @@
-import { LabelsItemLeftProps } from 'types/issueType';
+import { LabelItemType } from 'types/issueType';
 import Label from 'components/common/Label';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ const LabelsItemLeft = ({
   title,
   labelColor,
   textColor,
-}: LabelsItemLeftProps) => {
+}: LabelItemType) => {
   return (
     <StyledLabelsItemLeft>
       <LabelPreviewArea>

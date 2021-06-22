@@ -3,13 +3,13 @@ import { Button } from '@material-ui/core';
 import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
 import { ReactComponent as CloseIssue } from 'icons/closeIssue.svg';
-import { MilestoneBarProps } from 'types/issueType';
 import MilestoneBar from './MilestoneBar';
+import { MilestoneBarType } from 'types/issueType';
 
 const MilestonesItemRight = ({
   openedIssueCount,
   closedIssueCount,
-}: MilestoneBarProps) => {
+}: MilestoneBarType) => {
   const percent =
     (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
   return (
