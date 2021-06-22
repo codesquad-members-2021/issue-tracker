@@ -50,4 +50,9 @@ public class CommentService {
 
         return new ResponseStatusDto("success");
     }
+
+    public void deleteComment(Long issueId, Long id, Long commentId) {
+        commentRepository.delete(commentId);
+
+    }
 }

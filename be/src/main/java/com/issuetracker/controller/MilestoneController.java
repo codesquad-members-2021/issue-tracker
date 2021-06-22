@@ -4,6 +4,7 @@ import com.issuetracker.dto.MilestoneDto;
 import com.issuetracker.dto.MilestoneRequestDto;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.service.MilestoneService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class MilestoneController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseStatusDto delete(@PathVariable Long id) {
         return milestoneService.delete(id);
     }

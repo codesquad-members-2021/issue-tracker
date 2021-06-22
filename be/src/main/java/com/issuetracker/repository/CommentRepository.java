@@ -47,4 +47,9 @@ public class CommentRepository {
         jdbcTemplate.update(query, description, commentId);
 
     }
+
+    public void delete(Long commentId) {
+        String query = "delete from comment where id = ?";
+        jdbcTemplate.update(query, commentId);
+    }
 }

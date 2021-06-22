@@ -4,6 +4,7 @@ import com.issuetracker.dto.*;
 import com.issuetracker.oauth.User;
 import com.issuetracker.service.CommentService;
 import com.issuetracker.service.IssueService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,10 +33,19 @@ public class CommentController {
 
     @PatchMapping("/issues/{issueId}/comments/{commentId}")
     public ResponseStatusDto editComment(@PathVariable Long issueId,
-                                           @PathVariable Long commentId,
-                                           @RequestBody CommentRequestDto requestDto,
-                                           @RequestAttribute User user) {
+                                         @PathVariable Long commentId,
+                                         @RequestBody CommentRequestDto requestDto,
+                                         @RequestAttribute User user) {
         return commentService.editComment(requestDto.getDescription(), issueId, user.getId(), commentId);
+    }
+
+    @DeleteMapping("/issues/{issueId}/comments/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long issueId,
+                              @PathVariable Long commentId,
+                              @RequestAttribute User user) {
+
+        commentService.deleteComment(issueId, user.getId(), commentId);
     }
 
     @GetMapping("/comments")
