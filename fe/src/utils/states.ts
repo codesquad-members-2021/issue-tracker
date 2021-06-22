@@ -54,3 +54,8 @@ export const temporalRefState = atom({
     labels: [] as ListItemsType[],
   },
 });
+
+export const currDetailState = atom({
+  key: "currDetailState",
+  default: -1,
+});

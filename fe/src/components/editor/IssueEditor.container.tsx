@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import IssueEditorPresenter from "./IssueEditor.presenter";
+import { URL } from "utils/urls";
+import { temporalRefState } from "utils/states";
 
 const issueDetailContentState = atom({
   key: "issueDetailContent",
@@ -17,7 +19,8 @@ const issueDetailContentState = atom({
 
 function IssueEditorContainer() {
   const [issueDetailContent, setIssueDetailContent] = useRecoilState(issueDetailContentState);
-
+  const temporalState = useRecoilValue(temporalRefState);
+  const { assignees, labels, milestones } = temporalState;
   const editorRef = useRef<any>(null);
   const titleRef = useRef<any>(null);
   const assigneesRef = useRef<any>(null);
@@ -29,6 +32,22 @@ function IssueEditorContainer() {
     const content_md = editorInstance.getMarkdown();
     const content_html = editorInstance.getHTML();
     const title = titleRef.current.value;
+    const body = JSON.stringify({
+      title,
+      content: content_html,
+      created_at: new Date(),
+      user: {
+        id: 1,
+        name: "adela",
+        login_id: "adelakim5",
+      },
+    });
+    fetch(URL.issue("issue"), {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     // setIssueDetailContent({
     //   title,
     //   content_md,

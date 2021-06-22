@@ -2,8 +2,8 @@ import { IssueRefStateType, IssueType, UsefulObjectType } from "utils/interface"
 import { Card, CardContent, makeStyles, Link, Chip } from "@material-ui/core";
 import CheckBox from "./styles/CheckBox";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { refFileterState } from "utils/states";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currDetailState, refFileterState } from "utils/states";
 
 interface IssueTableType {
   issueListItems: IssueType[];
@@ -13,7 +13,7 @@ export default function IssueTable({ issueListItems }: IssueTableType) {
   const classes = useStyles();
 
   const refState = useRecoilValue(refFileterState);
-
+  const [currDetail, setCurrDetail] = useRecoilState(currDetailState);
 
   // TODO: TS를 적용하여 Object.entries, for of 문을 잘 사용하는 방법 좀 더 공부하기
   // let filteredIssueListItems = [...issueListItems];
@@ -30,7 +30,11 @@ export default function IssueTable({ issueListItems }: IssueTableType) {
             <CheckBox id={item.id} />
             <CardContentInfo>
               <CardHeader>
-                <Link href={`/${item.id}`} className={classes.title}>
+                <Link
+                  href={`/detail/${item.id}`}
+                  onClick={() => setCurrDetail(item.id)}
+                  className={classes.title}
+                >
                   {item.title}
                 </Link>
                 {item.label_list.map((label) => (

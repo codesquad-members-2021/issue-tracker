@@ -2,7 +2,7 @@ import React from "react";
 import { Chip, Typography, Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 import { useStyles } from "../styles/useStyles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { temporalRefState } from "utils/states";
 import { ListItemsType, TemporalRefStateType } from "utils/interface";
 import { List, ListItem } from "../styles/Editor.style";
@@ -29,7 +29,7 @@ const TITLE = {
 
 function AccordionPanel(props: AccordionPanelProps) {
   const classes = useStyles();
-  const [temporalState, setTemporalState] = useRecoilState(temporalRefState);
+  const temporalState = useRecoilValue(temporalRefState);
   const {
     expandedValue,
     expanded,

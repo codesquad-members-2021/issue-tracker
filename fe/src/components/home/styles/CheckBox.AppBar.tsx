@@ -20,8 +20,6 @@ export default function CheckBoxAppBar() {
   const [closeIssues, setCloseIssues] = useRecoilState(closedIssues);
   const [selectedIssues, setSelectedIssues] = useRecoilState(selectedIssuesState);
 
-  console.log(selectedIssues);
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.checked) setSelectedIssues(new Set());
     else {

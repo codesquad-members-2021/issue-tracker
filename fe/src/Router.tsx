@@ -11,7 +11,7 @@ function Router() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/editor" component={IssueEditorContainer} />
-        <Route exact path="/detail" component={Detail} />
+        <Route path="/detail" component={Detail} />
       </Switch>
     </BrowserRouter>
   );

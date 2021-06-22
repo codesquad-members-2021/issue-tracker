@@ -1,7 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { currDetailState } from "utils/states";
 
 function Detail() {
-  return <div>hello this is detail</div>;
+  const currDetail = useRecoilValue(currDetailState);
+
+  return <div>detailPage: {currDetail}</div>;
 }
 
 export default Detail;
