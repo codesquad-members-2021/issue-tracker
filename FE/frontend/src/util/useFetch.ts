@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-const url = ' http://13.125.35.62/api';
+const url = 'http://52.78.35.48/api';
 
 interface Props {
   id?: string;
@@ -49,5 +49,5 @@ const getData = async (type: string, action: string, filter?: Props) => {
 };
 
 export default function useFetch(type: string, action: string, filter?: Props) {
-  return useQuery([type, action, filter], () => getData(type, action, filter));
+  return useQuery([type, action], () => getData(type, action, filter));
 }

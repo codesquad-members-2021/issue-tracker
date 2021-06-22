@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useFetch from '../../../util/useFetch';
 import Modal from '../../../styles/molcules/Modal';
+import axios from 'axios';
 
 const ListFilters = () => {
-  const assignees = ['담당자가 없는 이슈'];
-  const labels = ['레이블이 없는 이슈'];
-  const milestones = ['마일스톤이 없는 이슈'];
-  const author = ['작성자가 없는 이슈'];
+  // const { data: issueData } = useFetch('issue', 'getAllData');
+  // const { data: labelData } = useFetch('label', 'getAllData');
+  // const { data: milestoneData } = useFetch('milestone', 'getAllData');
+
+  const assignees = new Set(['담당자가 없는 이슈']);
+  const labels = new Set(['레이블이 없는 이슈']);
+  const milestones = new Set(['마일스톤이 없는 이슈']);
+  const author = new Set(['작성자가 없는 이슈']);
+
+  // useEffect(() => {
+
+  // }, [issueData, labelData, milestoneData]);
 
   return (
     <FilterContainer>

@@ -5,7 +5,7 @@ import Typo from '../atoms/Typos';
 import { ReactComponent as Downward } from '../../icons/downward.svg';
 interface Props {
   label: string;
-  options: string[];
+  options: Set<string>;
   exceptedDiv: string;
   type: string;
   innerTitle: string;
@@ -14,13 +14,23 @@ interface Props {
 const Modal = (props: Props) => {
   const [isShown, setIsShown] = useState<boolean>(false);
   const [options, setOptions] = useState(
-    props.options.map(val => {
+    [...props.options].map(val => {
       return { name: val, isSelected: false };
     })
   );
 
   const toggle = (): void => {
     setIsShown(!isShown);
+  };
+
+  const setChecked = (option: { name: string; isSelected: boolean }): void => {
+    setOptions(
+      options.map(item =>
+        item.name === option.name
+          ? { ...item, isSelected: true }
+          : { ...item, isSelected: false }
+      )
+    );
   };
 
   return (
@@ -35,11 +45,10 @@ const Modal = (props: Props) => {
       {isShown && (
         <DropDownWrapper>
           <DropDown
-            isShown={isShown}
             toggle={toggle}
             exceptedDiv={props.exceptedDiv}
+            setChecked={setChecked}
             options={options}
-            setOptions={setOptions}
             type={props.type}
             title={props.innerTitle}
           />

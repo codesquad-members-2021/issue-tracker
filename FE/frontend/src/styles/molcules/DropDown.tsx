@@ -5,31 +5,15 @@ import { ReactComponent as CheckOffCircle } from '../../icons/checkOffCircle.svg
 import { ReactComponent as CheckOnCircle } from '../../icons/checkOnCircle.svg';
 
 interface Props {
-  isShown: boolean;
   toggle: () => void;
   exceptedDiv: string;
   options: { image?: string; name: string; isSelected: boolean }[];
-  setOptions: Dispatch<SetStateAction<any>>;
+  setChecked: (option: { name: string; isSelected: boolean }) => void;
   type: string;
   title: string;
 }
 
 const DropDown = (props: Props): JSX.Element => {
-  console.log(props.options);
-  const setChecked = (
-    option: { name: string; isSelected: boolean },
-    options: { name: string; isSelected: boolean }[],
-    setOptions: Dispatch<SetStateAction<any>>
-  ) => {
-    setOptions(
-      options.map(item =>
-        item.name === option.name
-          ? { ...item, isSelected: true }
-          : { ...item, isSelected: false }
-      )
-    );
-  };
-
   const onClickOutside = (event: React.MouseEvent<any> | Event) => {
     const target = event.target as HTMLElement;
     if (target.classList.contains(props.exceptedDiv)) {
@@ -55,9 +39,10 @@ const DropDown = (props: Props): JSX.Element => {
             <FilterOption
               sm
               onMouseDown={(event: React.MouseEvent<HTMLInputElement>) => {
-                setChecked(option, props.options, props.setOptions);
+                props.setChecked(option);
                 onClickOutside(event);
               }}>
+              {/* {option.image&&} */}
               {option.name}
               {props.type === 'text' && (
                 <CheckBoxWrapper>

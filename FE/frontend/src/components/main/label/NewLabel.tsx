@@ -1,77 +1,67 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useMutation } from 'react-query';
 import Label from '../../../styles/atoms/Label';
 import Typos from '../../../styles/atoms/Typos';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Refresh } from '../../../icons/refresh.svg';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
-import { ReactComponent as CheckOffCircle } from '../../../icons/checkOffCircle.svg';
-import { ReactComponent as CheckOnCircle } from '../../../icons/checkOnCircle.svg';
 
 const NewLabel = () => {
-  const [backgroundColor, setBackgroundColor] = useState(
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`
-  );
-  const [textColor, setTextColor] = useState({
-    darkColor: true,
-    brightColor: false,
+  const [input, setInput] = useState({
+    title: '',
+    content: '',
+    color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   });
 
-  const changeBackgroundColor = () => {
-    setBackgroundColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
   };
+
+  const registerNewLabel = () => {
+    axios.post(`http://52.78.35.48/api/labels`, input, axiosConfig);
+  };
+
   return (
     <NewLabelContainer>
       <Typos lg>새로운 레이블 추가</Typos>
       <MainContainer>
         <LabelWrapper>
-          <Label background={backgroundColor} color={textColor} />
+          <Label background={input.color} />
         </LabelWrapper>
         <InputContainer>
-          <TextInput type="text" placeholder="레이블 이름" />
-          <TextInput type="text" placeholder="설명(선택)" />
+          <TextInput
+            type="text"
+            placeholder="레이블 이름"
+            onChange={e => setInput({ ...input, title: e.target.value })}
+          />
+          <TextInput
+            type="text"
+            placeholder="설명(선택)"
+            onChange={e => setInput({ ...input, content: e.target.value })}
+          />
           <ColorOptionContainer>
             <BackgroundColorPicker>
               <Typos xs>배경 색상</Typos>
-              <Typos sm> {backgroundColor}</Typos>
-              <RefreshWrapper onClick={changeBackgroundColor}>
+              <Typos sm> {input.color}</Typos>
+              <RefreshWrapper
+                onClick={e =>
+                  setInput({
+                    ...input,
+                    color: `#${Math.floor(Math.random() * 16777215).toString(
+                      16
+                    )}`,
+                  })
+                }>
                 <Refresh />
               </RefreshWrapper>
             </BackgroundColorPicker>
-            <TextColorPicker>
-              <Typos xs>텍스트 색상</Typos>
-              <div>
-                <CheckBoxWrapper
-                  onClick={() => {
-                    setTextColor({
-                      ...textColor,
-                      darkColor: true,
-                      brightColor: false,
-                    });
-                  }}>
-                  {!textColor.darkColor && <CheckOffCircle />}
-                  {textColor.darkColor && <CheckOnCircle />}
-                  <Typos sm>어두운 색</Typos>
-                </CheckBoxWrapper>
-              </div>
-              <div>
-                <CheckBoxWrapper
-                  onClick={() => {
-                    setTextColor({
-                      ...textColor,
-                      darkColor: false,
-                      brightColor: true,
-                    });
-                  }}>
-                  {!textColor.brightColor && <CheckOffCircle />}
-                  {textColor.brightColor && <CheckOnCircle />}
-                  <Typos sm>밝은 색</Typos>
-                </CheckBoxWrapper>
-              </div>
-            </TextColorPicker>
           </ColorOptionContainer>
-          <ButtonWrapper>
-            <Buttons disabled small>
+          <ButtonWrapper onClick={registerNewLabel}>
+            <Buttons initial small>
               <PlusWrapper>
                 <Plus />
               </PlusWrapper>
@@ -157,25 +147,9 @@ const PlusWrapper = styled.div`
   }
 `;
 
-const TextColorPicker = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 352px;
-  background: ${props => props.theme.greyscale.inputBackground};
-  border-radius: 11px;
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
-const CheckBoxWrapper = styled.div`
-  cursor: pointer;
-  display: flex;
-  div {
-    padding: 0 5px;
-  }
-`;
 export default NewLabel;

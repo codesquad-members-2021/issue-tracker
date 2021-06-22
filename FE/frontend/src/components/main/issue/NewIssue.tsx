@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import useMutate from '../../../util/useMutate';
 import Typos from '../../../styles/atoms/Typos';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
@@ -11,6 +13,15 @@ const AddIssue = () => {
   const [inputCount, setInputCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [initial, setInitial] = useState(false);
+  const [input, setInput] = useState({
+    title: '',
+    comment: '',
+    file: '',
+    label_ids: [],
+    milestine_id: null,
+    assignee_ids: [],
+  });
+
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,8 +40,13 @@ const AddIssue = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     clearTimeout(debounceTimeoutId);
-    debounceTimeoutId = setTimeout(() => countInput(e), 500);
+    debounceTimeoutId = setTimeout(() => {
+      countInput(e);
+      setInput({ ...input, comment: e.target.value });
+    }, 500);
   };
+
+  const registerNewIssue = () => {};
 
   return (
     <AddIssueContainer>
@@ -41,7 +57,11 @@ const AddIssue = () => {
       <MainContainer>
         <User />
         <InputContainer>
-          <TitleInput placeholder="제목"></TitleInput>
+          <TitleInput
+            placeholder="제목"
+            onChange={e => {
+              setInput({ ...input, title: e.target.value });
+            }}></TitleInput>
           <CommentInput
             onChange={onChange}
             placeholder="코멘트를 입력하세요"></CommentInput>
@@ -64,7 +84,11 @@ const AddIssue = () => {
             작성 취소
           </Typos>
         </CancelButtonContainer>
-        <Buttons disabled={disabled} initial={initial} medium>
+        <Buttons
+          disabled={disabled}
+          initial={initial}
+          medium
+          onClick={registerNewIssue}>
           완료
         </Buttons>
       </BottomContainer>
@@ -103,7 +127,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   position: relative;
   width: 880px;
   font-size: 16px;
@@ -169,11 +193,14 @@ const Assignees = styled.div`
   margin: 1px 0px;
 `;
 
-const BottomContainer = styled.div`
+const BottomContainer = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 0px 60px;
+  border: none;
+  background: none;
+
   svg {
     stroke: ${props => props.theme.greyscale.label};
   }
