@@ -15,6 +15,7 @@ public class LoginService {
     private final OAuthService githubLoginService;
     private final OAuthService googleLoginService;
     private final OAuthService kakaoLoginService;
+    private final OAuthService naverLoginService;
 
     private final UserService userService;
     private final JwtFactory jwtFactory;
@@ -22,10 +23,12 @@ public class LoginService {
     public LoginService(GithubLoginService githubLoginService,
                         GoogleLoginService googleLoginService,
                         KakaoLoginService kakaoLoginService,
+                        NaverLoginService naverLoginService,
                         UserService userService, JwtFactory jwtFactory) {
         this.githubLoginService = githubLoginService;
         this.googleLoginService = googleLoginService;
         this.kakaoLoginService = kakaoLoginService;
+        this.naverLoginService = naverLoginService;
         this.userService = userService;
         this.jwtFactory = jwtFactory;
     }
@@ -55,6 +58,13 @@ public class LoginService {
         AccessToken accessToken = kakaoLoginService.accessToken(code, SocialLogin.KAKAO);
         SocialProfile kakaoUserProfile = kakaoLoginService.userProfile(accessToken);
         User user = userFrom(kakaoUserProfile);
+        return jwtFactory.codeUserToJwt(user);
+    }
+
+    public JwtResponse loginNaver(final String code) {
+        AccessToken accessToken = naverLoginService.accessToken(code, SocialLogin.NAVER);
+        SocialProfile naverUserProfile = naverLoginService.userProfile(accessToken);
+        User user = userFrom(naverUserProfile);
         return jwtFactory.codeUserToJwt(user);
     }
 

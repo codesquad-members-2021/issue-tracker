@@ -1,7 +1,6 @@
 package team02.issue_tracker.oauth.dto.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 import team02.issue_tracker.domain.User;

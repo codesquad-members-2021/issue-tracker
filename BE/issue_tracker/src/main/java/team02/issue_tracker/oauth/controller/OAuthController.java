@@ -31,7 +31,7 @@ public class OAuthController {
 
     @LogExecutionTime
     @GetMapping("/login/github/ios")
-    public ApiResult<JwtResponse> loginGithubWebIos(@RequestParam("code") String code) {
+    public ApiResult<JwtResponse> loginGithubIos(@RequestParam("code") String code) {
         return ApiResult.success(loginService.loginGithubIos(code));
     }
 
@@ -45,6 +45,12 @@ public class OAuthController {
     @GetMapping("/login/kakao")
     public ApiResult<JwtResponse> loginKakao(@RequestParam("code") String code) {
         return ApiResult.success(loginService.loginKakao(code));
+    }
+
+    @LogExecutionTime
+    @GetMapping("/login/naver")
+    public ApiResult<JwtResponse> loginNaver(@RequestParam("code") String code) {
+        return ApiResult.success(loginService.loginNaver(code));
     }
 
     // jwt interceptor 테스트 목적 (임시)
