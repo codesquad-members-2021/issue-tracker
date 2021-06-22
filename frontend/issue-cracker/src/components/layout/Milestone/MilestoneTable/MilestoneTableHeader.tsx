@@ -2,12 +2,10 @@ import React from 'react';
 import { Issue as S } from '../../../styles/CommonStyles';
 import TextGroup from '../../../common/group/TextGroup';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 import IssueHeaderButton from '../../../common/IssueHeaderButton';
 import ClosedIconGroup from '../../../common/group/ClosedIconGroup';
 import CountGroup from '../../../common/group/CountGroup';
 import { TEXT as TT, TYPE as T } from '../../../../utils/const';
-import FlagIcon from '@material-ui/icons/Flag';
 import FlagTwoToneIcon from '@material-ui/icons/FlagTwoTone';
 
 const MilestoneTableHeader = (): JSX.Element => {
