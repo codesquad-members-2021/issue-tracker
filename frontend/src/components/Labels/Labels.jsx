@@ -32,14 +32,18 @@ const Labels = () => {
 			<StyledGridTitleCard gridRate={[1]}>
 				<HeaderTitle>N개의 레이블</HeaderTitle>
 			</StyledGridTitleCard>
-			{labelEditBtnFlag ? (
-				<LabelInput isEditor={true} />
-			) : (
-				initialData &&
-				initialData.map(data => (
-					<LabelCard id={data.id} key={data.id} initialData={data} />
-				))
-			)}
+			{initialData &&
+				initialData.map(data =>
+					labelEditBtnFlag ? (
+						<LabelInput
+							key={`input-${data.id}`}
+							initialData={data}
+							isEditor={true}
+						/>
+					) : (
+						<LabelCard key={`card-${data.id}`} initialData={data} />
+					)
+				)}
 		</>
 	);
 };

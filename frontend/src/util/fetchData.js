@@ -1,6 +1,6 @@
 const fetchData = async (url, method, reqData) => {
 	const option =
-		method === "GET"
+		(method === "GET") | "DELETE"
 			? {
 					headers: {
 						"Content-Type": "application/json",

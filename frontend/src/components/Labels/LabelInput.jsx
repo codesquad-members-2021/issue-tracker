@@ -16,14 +16,10 @@ import {
 	labelAddButtonFlagState,
 	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-const LabelInput = ({ isEditor }) => {
-	const initialData = useRecoilValue(labelInitialData);
+import { useSetRecoilState, useRecoilState } from "recoil";
 
-	// 	const { name, description, colors } = initialData;
-	//🔥애초에 여기서 가져올 수 없음. 이 값이 initial data가 되어야 함!! 제일 먼저 할일
-	// 편집 클릭했을 때 보여지는 값이랑 추가 눌렀을 때 보여지는 값 달라야함
-	// const { backgroundColor, textColor } = colors;
+const LabelInput = ({ initialData, isEditor }) => {
+	const setLabelInitialData = useSetRecoilState(labelInitialData);
 	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
 	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
 	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
@@ -35,12 +31,15 @@ const LabelInput = ({ isEditor }) => {
 		textColorTitles,
 		buttons,
 	} = labelData;
+	const { id, name, description, colors } = initialData;
+	const { backgroundColor, textColor } = colors;
+	console.log("input", initialData.id);
 
 	const initLabelState = {
-		name: "레이블 이름",
-		description: null,
+		name: name,
+		description: description,
 		backgroundColor: theme.grayScale.input_background,
-		textColor: "dark",
+		textColor: "#000000",
 	};
 
 	const reducer = (state, { type, payload }) => {
@@ -59,7 +58,9 @@ const LabelInput = ({ isEditor }) => {
 
 	//dispatch모아서 처리하게끔 refactoring 필요
 	const handleClickRadioButton = event => {
-		dispatch({ type: "textColor", payload: event.target.value });
+		const currentTextColor =
+			event.target.value ===
+			dispatch({ type: "textColor", payload: event.target.value });
 	};
 	const handleChangeColor = event => {
 		//디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
@@ -79,8 +80,9 @@ const LabelInput = ({ isEditor }) => {
 	const handleClose = () => {
 		setLabelEditBtnFlag(x => !x);
 	};
+
 	const handleSubmit = async () => {
-		const { name, description, backgroundColor, textColor } = labelState;
+		const { id, name, description, backgroundColor, textColor } = labelState;
 
 		const requestBody = {
 			name: name,
@@ -97,13 +99,9 @@ const LabelInput = ({ isEditor }) => {
 			const res = await fetchData(API.labels(), "POST", requestBody);
 			setLabelAddBtnFlag(x => !x);
 			setNavigatorAddBtnFlag(x => !x);
+			const { labels } = await fetchData(API.labels(), "GET");
+			setLabelInitialData(labels);
 		}
-	};
-
-	const getFontColor = () => {
-		return labelState.textColor === "light"
-			? theme.grayScale.off_white
-			: theme.grayScale.black;
 	};
 
 	const changeColor = () => {
@@ -113,30 +111,43 @@ const LabelInput = ({ isEditor }) => {
 			payload: `#${randomColor}`,
 		});
 	};
-
+	console.log("name", name);
 	return (
 		<LabelInputLayout isEditor={isEditor}>
 			<Title>{isEditor ? editorTitle : creatorTitle}</Title>
 			<MainLayout>
 				<PreviewContainer>
-					<LabelBadge
-						text={labelState.name}
-						fontColor={getFontColor()}
-						backgroundColor={labelState.backgroundColor}
-					/>
+					{
+						<LabelBadge
+							text={isEditor ? name : labelState.name}
+							fontColor={isEditor ? textColor : labelState.textColor}
+							backgroundColor={
+								isEditor ? backgroundColor : labelState.backgroundColor
+							}
+						/>
+					}
 				</PreviewContainer>
 
 				<SettingContainer>
-					{inputTitles.map((title, idx) => (
-						<TextInputContainer _width={"100%"} key={`title-${idx}`}>
-							<SubTitle>{title}</SubTitle>
-							<TextInput
-								id={idx}
-								onChange={handleTypingName}
-								autocomplete="off"
-							/>
-						</TextInputContainer>
-					))}
+					{/* 타이틀 부분 나눠서 디스크립션 부분은 온 체인지 풀기 */}
+
+					<TextInputContainer _width={"100%"}>
+						<SubTitle>{inputTitles[0]}</SubTitle>
+						<TextInput
+							onChange={handleTypingName}
+							autocomplete="off"
+							value={isEditor && labelState.name}
+						/>
+					</TextInputContainer>
+					<TextInputContainer _width={"100%"}>
+						<SubTitle>{inputTitles[1]}</SubTitle>
+						<TextInput
+							onChange={handleTypingName}
+							autocomplete="off"
+							value={isEditor && labelState.description}
+						/>
+					</TextInputContainer>
+
 					<DisplayFlex>
 						<TextInputContainer _width={"25%"}>
 							<SubTitle>{backgroundColorTitle}</SubTitle>

@@ -7,16 +7,24 @@ import theme from "styles/theme";
 import { CenterJcAi, CenterAi } from "styles/StyledLayout ";
 import { labelInitialData, labelEditButtonFlagState } from "RecoilStore/Atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-
+import API from "util/API";
+import fetchData from "util/fetchData";
 const LabelCard = ({ initialData }) => {
-	const { name, description, colors } = initialData;
+	const { id, name, description, colors } = initialData;
 	const { backgroundColor, textColor } = colors;
 
 	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const setLabelInitialData = useSetRecoilState(labelInitialData);
 	const handleEditButton = () => {
 		setLabelEditBtnFlag(x => !x);
 	};
-	const handleDeleteButton = () => {};
+	const handleDeleteButton = async () => {
+		console.log("delete");
+		console.log("id!!", id);
+		await fetchData(API.labelsId(id), "DELETE");
+		const { labels } = await fetchData(API.labels(), "GET");
+		setLabelInitialData(labels);
+	};
 
 	return (
 		initialData && (
