@@ -20,7 +20,6 @@ type Props = {
 };
 
 function LabelModal({ labels, errorMsg }: Props) {
-  console.log(errorMsg);
   const [checkedLabels, setCheckedLabels] = useRecoilState(checkedLabelsState);
   const modalTitle = errorMsg == null ? '레이블 추가' : errorMsg;
 
