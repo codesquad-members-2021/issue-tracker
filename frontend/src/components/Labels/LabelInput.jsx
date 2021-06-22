@@ -29,7 +29,8 @@ const LabelInput = ({ initialData }) => {
 	const {
 		creatorTitle,
 		editorTitle,
-		inputTitles,
+		nameTitle,
+		descriptionTitle,
 		backgroundColorTitle,
 		textColorTitles,
 		buttons,
@@ -41,8 +42,8 @@ const LabelInput = ({ initialData }) => {
 	const textColor = "#000";
 
 	const initLabelState = {
-		name: "test",
-		description: "tst",
+		name: "",
+		description: "",
 		backgroundColor: theme.grayScale.input_background,
 		textColor: "#000000",
 	};
@@ -73,21 +74,19 @@ const LabelInput = ({ initialData }) => {
 		dispatch({ type: "backgroundColor", payload: event.target.value });
 	};
 
-	const handleTypingName = event => {
-		if (event.target.id === "0") {
-			dispatch({ type: "name", payload: event.target.value });
-		} else {
-			// 디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
-			dispatch({ type: "description", payload: event.target.value });
-		}
+	const handleChangeName = event => {
+		dispatch({ type: "name", payload: event.target.value });
 	};
 
+	const handleChangeDescription = event => {
+		dispatch({ type: "description", payload: event.target.value });
+	};
 	const handleClose = () => {
 		setLabelEditBtnFlag(x => !x);
 	};
 
-	const handleSubmit = async () => {
-		const { id, name, description, backgroundColor, textColor } = labelState;
+	const handleAdd = async () => {
+		const { name, description, backgroundColor, textColor } = labelState;
 
 		const requestBody = {
 			name: name,
@@ -97,16 +96,30 @@ const LabelInput = ({ initialData }) => {
 				textColor: textColor,
 			},
 		};
-		if (editBtnFlag) {
-			//const res = await fetchData(API.labels(), "POST", requestBody); //PUT요청, body수정 필요
-			setLabelEditBtnFlag(x => !x);
-		} else {
-			const res = await fetchData(API.labels(), "POST", requestBody);
-			setLabelAddBtnFlag(x => !x);
-			setNavigatorAddBtnFlag(x => !x);
-			const { labels } = await fetchData(API.labels(), "GET");
-			setLabelInitialData(labels);
-		}
+
+		await fetchData(API.labels(), "POST", requestBody);
+		setLabelAddBtnFlag(x => !x);
+		setNavigatorAddBtnFlag(x => !x);
+		const { labels } = await fetchData(API.labels(), "GET");
+		setLabelInitialData(labels);
+	};
+
+	const handleEdit = async () => {
+		//현재 내가 클릭한 카드의 데이터, id를 보여줘야 함 how?
+
+		const { name, description, backgroundColor, textColor } = labelState;
+		const requestBody = {
+			name: name,
+			description: description,
+			colors: {
+				backgroundColor: backgroundColor,
+				textColor: textColor,
+			},
+		};
+
+		const { labels } = await fetchData(API.labelsId("id"), "PUT", requestBody); //PUT요청, body수정 필요
+		setLabelEditBtnFlag(x => !x);
+		setLabelInitialData(labels); //상태바뀐걸로 리렌더
 	};
 
 	const changeColor = () => {
@@ -135,17 +148,18 @@ const LabelInput = ({ initialData }) => {
 					{/* 타이틀 부분 나눠서 디스크립션 부분은 온 체인지 풀기 */}
 
 					<TextInputContainer _width={"100%"}>
-						<SubTitle>{inputTitles[0]}</SubTitle>
+						<SubTitle>{nameTitle}</SubTitle>
 						<TextInput
-							onChange={handleTypingName}
+							onChange={handleChangeName}
 							autocomplete="off"
 							value={labelState.name}
 						/>
 					</TextInputContainer>
+
 					<TextInputContainer _width={"100%"}>
-						<SubTitle>{inputTitles[1]}</SubTitle>
+						<SubTitle>{descriptionTitle}</SubTitle>
 						<TextInput
-							onChange={handleTypingName}
+							onChange={handleChangeDescription}
 							autocomplete="off"
 							value={labelState.description}
 						/>
@@ -195,14 +209,14 @@ const LabelInput = ({ initialData }) => {
 								text={buttons.submit}
 								icon="edit"
 								size="m"
-								clickHandler={handleSubmit}
+								clickHandler={handleEdit}
 							/>
 						) : (
 							<SubmitButton
 								text={buttons.submit}
 								icon="plus"
 								size="m"
-								clickHandler={handleSubmit}
+								clickHandler={handleAdd}
 							/>
 						)}
 					</ButtonContainer>
