@@ -5,7 +5,6 @@ import { useEffect, useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
-import useDebounce from "hooks/useDebounce";
 import API from "util/API";
 import fetchData from "util/fetchData";
 import CancelButton from "components/common/Button/WhiteButtons";
@@ -16,13 +15,17 @@ import {
 	labelAddButtonFlagState,
 	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
-import { useSetRecoilState, useRecoilState } from "recoil";
 
-const LabelInput = ({ initialData, isEditor }) => {
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+
+const LabelInput = ({ initialData }) => {
 	const setLabelInitialData = useSetRecoilState(labelInitialData);
-	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const [editBtnFlag, setLabelEditBtnFlag] = useRecoilState(
+		labelEditButtonFlagState
+	);
 	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
 	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
+
 	const {
 		creatorTitle,
 		editorTitle,
@@ -31,13 +34,15 @@ const LabelInput = ({ initialData, isEditor }) => {
 		textColorTitles,
 		buttons,
 	} = labelData;
+
 	const { id, name, description, colors } = initialData;
-	const { backgroundColor, textColor } = colors;
-	console.log("input", initialData.id);
+	// const { backgroundColor, textColor } = colors;
+	const backgroundColor = "#000";
+	const textColor = "#000";
 
 	const initLabelState = {
-		name: name,
-		description: description,
+		name: "test",
+		description: "tst",
 		backgroundColor: theme.grayScale.input_background,
 		textColor: "#000000",
 	};
@@ -92,7 +97,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 				textColor: textColor,
 			},
 		};
-		if (isEditor) {
+		if (editBtnFlag) {
 			//const res = await fetchData(API.labels(), "POST", requestBody); //PUT요청, body수정 필요
 			setLabelEditBtnFlag(x => !x);
 		} else {
@@ -111,19 +116,17 @@ const LabelInput = ({ initialData, isEditor }) => {
 			payload: `#${randomColor}`,
 		});
 	};
-	console.log("name", name);
+
 	return (
-		<LabelInputLayout isEditor={isEditor}>
-			<Title>{isEditor ? editorTitle : creatorTitle}</Title>
+		<LabelInputLayout editBtnFlag={editBtnFlag}>
+			<Title>{editBtnFlag ? editorTitle : creatorTitle}</Title>
 			<MainLayout>
 				<PreviewContainer>
 					{
 						<LabelBadge
-							text={isEditor ? name : labelState.name}
-							fontColor={isEditor ? textColor : labelState.textColor}
-							backgroundColor={
-								isEditor ? backgroundColor : labelState.backgroundColor
-							}
+							text={labelState.name}
+							fontColor={labelState.textColor}
+							backgroundColor={labelState.backgroundColor}
 						/>
 					}
 				</PreviewContainer>
@@ -136,7 +139,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 						<TextInput
 							onChange={handleTypingName}
 							autocomplete="off"
-							value={isEditor && labelState.name}
+							value={labelState.name}
 						/>
 					</TextInputContainer>
 					<TextInputContainer _width={"100%"}>
@@ -144,7 +147,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 						<TextInput
 							onChange={handleTypingName}
 							autocomplete="off"
-							value={isEditor && labelState.description}
+							value={labelState.description}
 						/>
 					</TextInputContainer>
 
@@ -179,7 +182,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 						</TextInputContainer>
 					</DisplayFlex>
 					<ButtonContainer>
-						{isEditor && (
+						{editBtnFlag && (
 							<CancelButton
 								text={buttons.cancel}
 								icon="cancel"
@@ -187,7 +190,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 								clickHandler={handleClose}
 							/>
 						)}
-						{isEditor ? (
+						{editBtnFlag ? (
 							<SubmitButton
 								text={buttons.submit}
 								icon="edit"
@@ -213,8 +216,8 @@ const LabelInputLayout = styled.div`
 	height: 345px;
 	background-color: ${({ theme }) => theme.grayScale.off_white};
 	border: 1px solid ${({ theme }) => theme.grayScale.line};
-	border-radius: ${props => (props.isEditor ? "none" : "16px")};
-	margin-bottom: ${props => (props.isEditor ? 0 : "2%")};
+	border-radius: ${props => (props.editBtnFlag ? "none" : "16px")};
+	margin-bottom: ${props => (props.editBtnFlag ? 0 : "2%")};
 `;
 
 const MainLayout = styled.div`

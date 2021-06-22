@@ -6,14 +6,17 @@ import { ReactComponent as TrashIcon } from "images/trash.svg";
 import theme from "styles/theme";
 import { CenterJcAi, CenterAi } from "styles/StyledLayout ";
 import { labelInitialData, labelEditButtonFlagState } from "RecoilStore/Atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import API from "util/API";
 import fetchData from "util/fetchData";
+import LabelInput from "./LabelInput";
 const LabelCard = ({ initialData }) => {
 	const { id, name, description, colors } = initialData;
 	const { backgroundColor, textColor } = colors;
 
-	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const [editBtnFlag, setLabelEditBtnFlag] = useRecoilState(
+		labelEditButtonFlagState
+	);
 	const setLabelInitialData = useSetRecoilState(labelInitialData);
 	const handleEditButton = () => {
 		setLabelEditBtnFlag(x => !x);
@@ -27,8 +30,10 @@ const LabelCard = ({ initialData }) => {
 	};
 
 	return (
-		initialData && (
-			<>
+		<>
+			{editBtnFlag ? (
+				<LabelInput initialData={initialData}></LabelInput>
+			) : (
 				<StyledGridCard gridRate={[0.5, 1.5, 0.5]}>
 					<CenterJcAi>
 						<LabelBadge
@@ -57,8 +62,8 @@ const LabelCard = ({ initialData }) => {
 						</ButtonText>
 					</CenterJcAi>
 				</StyledGridCard>
-			</>
-		)
+			)}
+		</>
 	);
 };
 
