@@ -1,7 +1,12 @@
-import { selector, selectorFamily } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 import { hostAPI, issueAPI } from '@const/var';
 import { fetchWithAuth } from '@utils/fetchWithAuth';
+
+const titleTextContent = atom({
+  key: 'titleTextContent',
+  default: '',
+});
 
 const issueDetailList = selectorFamily({
   key: 'issueDetailList',
@@ -43,4 +48,4 @@ const authorName = selectorFamily({
   },
 });
 
-export { issueDetailList, issueDetailComment, authorName };
+export { issueDetailList, issueDetailComment, authorName, titleTextContent };

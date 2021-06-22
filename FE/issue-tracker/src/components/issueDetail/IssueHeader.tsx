@@ -1,4 +1,5 @@
-import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ import { ReactComponent as EditIcon } from '@assets/edit.svg';
 import { ReactComponent as CloseIcon } from '@assets/archive.svg';
 import { ReactComponent as AlertIcon } from '@assets/alert.svg';
 
-import { issueDetailComment, issueDetailList } from '@store/atoms/issueDetail';
+import { issueDetailList, titleTextContent } from '@store/atoms/issueDetail';
 import pipe from '@utils/pipe';
 import {
   checkIfDayPassedFromCreation,
@@ -19,13 +20,18 @@ import {
 } from '@utils/renderTimeText';
 
 import type { Param } from '@pages/IssueDetail';
+import { issueAPI } from '@const/var';
+import { fetchWithAuth } from '@utils/fetchWithAuth';
+import IssueDetailTitle from './IssueDetailTitle';
 
 function IssueHeader() {
   const { id }: Param = useParams();
+  const [isEditting, setIsEditting] = useState(false);
+  const [titleContents, setTitleContents] = useState<string | null>(null);
   const issueData = useRecoilValue(issueDetailList(id));
 
   const {
-    assignee,
+    assignees,
     author_user_id,
     closed,
     created_time,
@@ -34,6 +40,7 @@ function IssueHeader() {
     label_list,
     milestone,
     title,
+    num_of_comments,
   } = issueData;
 
   const currentTime = new Date().getTime();
@@ -46,15 +53,49 @@ function IssueHeader() {
     getRenderingText
   )(created_time);
 
-  const issueInfo = `이 이슈가 ${timePassed}에 ${''}님에 의해 열렸습니다 • 코멘트 1개`;
+  const handleClickIssueClose = () => {
+    const closeIssue = async () => {
+      const url = `${issueAPI}/${id}`;
+      await fetchWithAuth(url, '이슈 상태 변경 오류', {
+        method: 'PATCH',
+        'Content-Type': 'application/json',
+        body: { close: true },
+      });
+    };
+    closeIssue();
+  };
+
+  const handleClickEditTitle = () => {
+    const patchTitle = async () => {
+      const url = `${issueAPI}/${id}`;
+      await fetchWithAuth(url, '이슈 제목 수정 오류', {
+        method: 'PATCH',
+        'Content-Type': 'application/json',
+        body: { title: `${titleContents}` },
+      });
+    };
+
+    setIsEditting((state) => !state);
+    if (isEditting) patchTitle();
+  };
+
+  const issueInfo = `이 이슈가 ${timePassed}에 ${''}님에 의해 열렸습니다 • 코멘트 ${num_of_comments}개`;
+
+  useEffect(() => {
+    if (titleContents === null) {
+      setTitleContents(title);
+    }
+  }, [issueData, title, titleContents]);
 
   return (
     <Header>
       <HeaderLeft>
-        <TitleBox>
-          <h1>{title}</h1>
-          <span>#{issue_number}</span>
-        </TitleBox>
+        <IssueDetailTitle
+          title={titleContents}
+          setTitleContents={setTitleContents}
+          issueNumber={issue_number}
+          isEditting={isEditting}
+        />
         <IssueInfo>
           {closed ? (
             <CloseIssueTag>
@@ -69,11 +110,15 @@ function IssueHeader() {
         </IssueInfo>
       </HeaderLeft>
       <HeaderRight>
-        <Button {...whiteButton} marginRight="8px">
+        <Button
+          onClick={handleClickEditTitle}
+          {...whiteButton}
+          marginRight="8px"
+        >
           <EditIcon className="icon edit_icon" />
           제목 편집
         </Button>
-        <Button {...whiteButton}>
+        <Button onClick={handleClickIssueClose} {...whiteButton}>
           <CloseIcon className="icon close_icon" />
           이슈 닫기
         </Button>
@@ -100,28 +145,17 @@ const Header = styled.section`
   justify-content: space-between;
 `;
 
-const HeaderLeft = styled.div``;
+const HeaderLeft = styled.div`
+  width: 100%;
+`;
 const HeaderRight = styled.div`
+  display: flex;
+  justify-content: flex-end;
   .icon {
     margin-right: 5px;
     path {
       stroke: ${({ theme }) => theme.colors.bl_initial};
     }
-  }
-`;
-
-const TitleBox = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 32px;
-  line-height: 48px;
-  margin-bottom: 16px;
-  h1 {
-    color: ${({ theme }) => theme.colors.gr_titleActive};
-    margin-right: 16px;
-  }
-  span {
-    color: ${({ theme }) => theme.colors.gr_label};
   }
 `;
 
