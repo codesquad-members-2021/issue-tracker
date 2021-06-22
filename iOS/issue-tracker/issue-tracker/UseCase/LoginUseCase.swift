@@ -35,11 +35,13 @@ class LoginUseCase {
                 case .failure(_):
                     completion(false)
                 case .finished:
-                    completion(true)
+                    break
                 }
             } receiveValue: { [weak self] jwtResponseDTO in
                 if self?.jwtManager.set(jwt: jwtResponseDTO.data.jwt) == false {
                     completion(false)
+                } else {
+                    completion(true)
                 }
             }.store(in: &subscriptions)
     }
