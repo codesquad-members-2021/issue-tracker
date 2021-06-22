@@ -40,6 +40,8 @@ final class IssueListViewController: UIViewController {
         bindTableViewDelegate()
         bindButton()
         bindSelectMode()
+        bindIssueToolBar()
+        bindSearchController()
         issueListViewModel.fetchIssueList()
     }
 
@@ -52,7 +54,7 @@ final class IssueListViewController: UIViewController {
         issueListViewModel.issueList
             .bind(to: issueTableView.rx.items) { tableView, _, issue in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-            cell.setupIssueCell(title: issue.title, description: "구현이 더 필요함", milestoneTitle: issue.milestone.title, relay: BehaviorRelay<[IssueLabel]>(value: issue.label))
+            cell.setupIssueCell(title: issue.title, description: "구현이 더 필요함", milestoneTitle: issue.milestone.title, relay: BehaviorRelay<[IssueLabel]>(value: issue.labels))
             return cell
         }
         .disposed(by: bag)
@@ -63,6 +65,8 @@ final class IssueListViewController: UIViewController {
             .bind { [weak self] indexPath in
                 guard let self = self, let cell = self.issueTableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
                 if self.issueListViewModel.selectMode.value {
+                    let issue = self.issueListViewModel.issueList.value[indexPath.row]
+                    self.issueListViewModel.selectedCell.accept(self.issueListViewModel.selectedCell.value + [issue])
                     cell.selectionStyle = .none
                     cell.check()
                 } else {
@@ -77,6 +81,12 @@ final class IssueListViewController: UIViewController {
             .bind { [weak self] indexPath in
                 guard let self = self, let cell = self.issueTableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
                 if self.issueListViewModel.selectMode.value {
+                    let deselectedIssue = self.issueListViewModel.issueList.value[indexPath.row]
+                    var selectedIssue = self.issueListViewModel.selectedCell.value
+                    if let index = selectedIssue.firstIndex(where: { $0 == deselectedIssue }) {
+                        selectedIssue.remove(at: index)
+                        self.issueListViewModel.selectedCell.accept(selectedIssue)
+                    }
                     cell.uncheck()
                 }
             }
@@ -119,6 +129,56 @@ final class IssueListViewController: UIViewController {
             .disposed(by: bag)
     }
 
+    func bindIssueToolBar() {
+        issueListViewModel.selectedCell
+            .bind { [weak self] issues in
+                if issues.count == 0 {
+                    self?.issueToolbar.labelBarButtonItem.title = "이슈를 선택하세요"
+                    self?.issueToolbar.closeIssueBarButtonItem.isEnabled = false
+                } else {
+                    self?.issueToolbar.labelBarButtonItem.title = "\(issues.count)개의 이슈가 선택됨"
+                    self?.issueToolbar.closeIssueBarButtonItem.isEnabled = true
+                }
+            }
+            .disposed(by: bag)
+
+        issueToolbar.checkBoxBarButtonItem.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                let rows = self.issueTableView.numberOfRows(inSection: 0)
+                for row in 0..<rows {
+                    self.issueTableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+                    let cell = self.issueTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? IssueTableViewCell
+                    cell?.check()
+                }
+                self.issueListViewModel.selectedCell.accept(self.issueListViewModel.issueList.value)
+            }
+            .disposed(by: bag)
+
+        issueToolbar.closeIssueBarButtonItem.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                self.issueListViewModel.patchIssue(issues: self.issueListViewModel.selectedCell.value)
+            }
+            .disposed(by: bag)
+    }
+
+    private func bindSearchController() {
+        searchController.searchBar.searchTextField.rx.text
+            .bind { [weak self] text in
+                guard let text = text?.lowercased(), let self = self else { return }
+                let filteredArr = self.issueListViewModel.issueList.value.filter { $0.title.localizedCaseInsensitiveContains(text) }
+                self.issueListViewModel.issueList.accept(filteredArr)
+            }
+            .disposed(by: bag)
+
+        searchController.rx.didDismiss
+            .subscribe { [weak self] _ in
+                self?.issueListViewModel.fetchIssueList()
+            }
+            .disposed(by: bag)
+    }
+
     private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
@@ -140,6 +200,14 @@ final class IssueListViewController: UIViewController {
     }
 
     private func cancelButtonTapped() {
+        issueListViewModel.selectedCell.accept([])
+        guard let indexPath = issueTableView.indexPathsForSelectedRows else { return }
+        for i in indexPath {
+            issueTableView.deselectRow(at: i, animated: false)
+            if let cell = issueTableView.cellForRow(at: i) as? IssueTableViewCell {
+                cell.uncheck()
+            }
+        }
         setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
@@ -187,7 +255,7 @@ extension IssueListViewController: UITableViewDelegate {
         }
 
         let shareAction = UIContextualAction(style: .normal, title: "닫기") { _, _, success in
-            
+
             success(true)
         }
 
