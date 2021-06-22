@@ -12,7 +12,15 @@ const handleError = (status: number) => {
 
 export const fetchModal = async ({ path, setState }: fetchModalType) => {
   try {
-    const res = await fetch(`${baseURL}/${path}`);
+    const token = localStorage.getItem('oauth_login');
+    const requestHeader = {
+      Authorization: `bearer ${token}`,
+    };
+    const res = await fetch(`${baseURL}/${path}`, {
+      method: 'GET',
+      headers: requestHeader,
+    });
+
     handleError(res.status);
     const json = await res.json();
     setState(json);
