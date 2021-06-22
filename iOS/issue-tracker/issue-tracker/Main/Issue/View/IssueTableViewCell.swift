@@ -30,14 +30,15 @@ class IssueTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = Colors.description
         label.text = "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)"
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 17)
         return label
     }()
     
-    private lazy var labelsSubStackView: UIStackView = {
+    private lazy var labelsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -54,10 +55,10 @@ class IssueTableViewCell: UITableViewCell {
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         attributedString.append(mileStoneName)
         label.attributedText = attributedString
-                
+        
         return label
     }()
-        
+    
     static var reuseID: String {
         return String(describing: self)
     }
@@ -73,11 +74,12 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     private func setViews() {
-    
+        
         addIssueStackView()
         addIssueTitleView()
         addDescriptionLabel()
         addMileStoneLabel()
+        addlabelsStackView()
         
     }
     
@@ -103,8 +105,61 @@ class IssueTableViewCell: UITableViewCell {
         issueStackView.addArrangedSubview(mileStoneLabel)
     }
     
-    func addLabelsSubStackView() {
+    //여기서 인자 값으로 GET으로 라벨의 갯수와 라벨 배열을 가져와야 할 것같다.
+    func addlabelsStackView() {
         
+        issueStackView.addArrangedSubview(labelsStackView)
+
+        labelsStackView.spacing = 4
+        
+        NSLayoutConstraint.activate([
+            labelsStackView.leadingAnchor.constraint(equalTo: issueStackView.leadingAnchor),
+            labelsStackView.trailingAnchor.constraint(equalTo: issueStackView.trailingAnchor)
+        ])
+        
+        
+        let labelView1 = LabelView()
+        let colorText1 = "#34e6b1"
+        let hex1 = HexColorCode(from: colorText1)
+        let titleText1 = "feat"
+        labelView1.configure(with: hex1, titleText1)
+        labelView1.translatesAutoresizingMaskIntoConstraints = false
+        
+        let labelView2 = LabelView()
+        let colorText2 = "#1af6c5"
+        let hex2 = HexColorCode(from: colorText2)
+        let titleText2 = "하이하이하이하이"
+        labelView2.configure(with: hex2, titleText2)
+        labelView2.translatesAutoresizingMaskIntoConstraints = false
+        
+        let labelView3 = LabelView()
+        let colorText3 = "#3af6c5"
+        let hex3 = HexColorCode(from: colorText3)
+        let titleText3 = "iOSafafa"
+        labelView3.configure(with: hex3, titleText3)
+        labelView3.translatesAutoresizingMaskIntoConstraints = false
+        
+        let labelView4 = LabelView()
+        let colorText4 = "#fbfbcc"
+        let hex4 = HexColorCode(from: colorText4)
+        let titleText4 = "abdfsfwasdfsafafasdfas"
+        labelView4.configure(with: hex4, titleText4)
+        labelView4.translatesAutoresizingMaskIntoConstraints = false
+        
+        let labelView5 = LabelView()
+        let colorText5 = "#fbfbcc"
+        let hex5 = HexColorCode(from: colorText5)
+        let titleText5 = "abdfsfwasdfsafafasdfas"
+        labelView5.configure(with: hex5, titleText5)
+        labelView5.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        labelsStackView.addArrangedSubview(labelView1)
+        labelsStackView.addArrangedSubview(labelView2)
+        labelsStackView.addArrangedSubview(labelView3)
+//        labelsStackView.addArrangedSubview(labelView4)
+//        labelsStackView.addArrangedSubview(labelView5)
+                
     }
     
 }

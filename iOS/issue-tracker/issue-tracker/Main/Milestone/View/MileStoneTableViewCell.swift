@@ -46,6 +46,7 @@ class MileStoneTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = Colors.description
         label.text = "마일스톤에 대한 설명(한 줄만 보여짐, 생략 가능)"
+        label.numberOfLines = 1
         label.font = .systemFont(ofSize: 17)
         return label
     }()
