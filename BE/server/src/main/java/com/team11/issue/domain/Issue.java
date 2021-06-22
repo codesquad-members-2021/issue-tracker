@@ -1,5 +1,6 @@
 package com.team11.issue.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team11.issue.dto.issue.IssueRequestDTO;
 import lombok.*;
 
@@ -19,12 +20,14 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition="tinyint(1) default 1")
     private boolean isOpen;
 
     private String title;
 
     private String contents;
 
+    @Column(columnDefinition="tinyint(1) default 0")
     private boolean isDelete;
 
     @OneToOne
