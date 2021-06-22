@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
-interface Props {}
-
-export default function SocialLoginBtn({}: Props): ReactElement {
+export default function SocialLoginBtn(): ReactElement {
   return (
     <SocialLoginBtnBlock>
-      <a href='https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=http://localhost:3000'>
+      <a
+        href={`https://github.com/login/oauth/authorize?client_id=619d8e37e985e7ab3be6&scope=user&redirect_uri=${process.env.REACT_APP_BASIC_URL}`}
+      >
         <div>
           <GitHubIcon />
           &nbsp;GitHub 으로 로그인

@@ -5,10 +5,7 @@ import AdjustRoundedIcon from '@material-ui/icons/AdjustRounded';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getIssuesInfoState, issueTypeState } from 'store/issueInfoStore';
-
-interface Props {}
-
-export default function IssueListHeaderLeft({}: Props): ReactElement {
+export default function IssueListHeaderLeft(): ReactElement {
   const setIssueType = useSetRecoilState(issueTypeState);
   // const {
   //   count: { openedIssue, closedIssue },

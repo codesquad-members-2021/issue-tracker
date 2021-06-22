@@ -17,6 +17,7 @@ interface StyledProps {
 const LabelBadgeBlock = styled.div<StyledProps>`
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: 10px;
   padding: 0 5px;
   height: 20px;
@@ -25,8 +26,8 @@ const LabelBadgeBlock = styled.div<StyledProps>`
   text-align: center;
   border-radius: 30px;
   font-size: ${({ theme }) => theme.size.sm}px;
-  color: ${({ labelColor }) => labelColor.backgroundColorCode};
-  background-color: ${({ labelColor }) => labelColor.textColorCode};
+  color: ${({ labelColor }) => labelColor.textColorCode};
+  background-color: ${({ labelColor }) => labelColor.backgroundColorCode};
 `;
 
 export default LabelBadge;

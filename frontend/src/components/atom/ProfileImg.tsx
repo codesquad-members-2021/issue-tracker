@@ -4,11 +4,12 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 
 interface Props {
-  avatarURL?: string;
+  avatarURL?: string | null;
   isSmall?: boolean;
+  className?: string;
 }
 
-export default function ProfileImg({ avatarURL, isSmall = false }: Props): ReactElement {
+export default function ProfileImg({ avatarURL, isSmall = false, className }: Props): ReactElement {
   const classes = useStyles();
   const avatarSize = isSmall ? classes.small : classes.large;
   avatarURL = avatarURL
@@ -16,7 +17,11 @@ export default function ProfileImg({ avatarURL, isSmall = false }: Props): React
     : 'https://images.velog.io/images/proshy/post/ec1766b5-f4f7-4a37-949c-a771b55f32f6/KakaoTalk_20210614_171732005.jpg';
   return (
     <ProfileImgBlock>
-      <Avatar alt='avatarImg' src={avatarURL} className={`${avatarSize} avatar__img`} />
+      <Avatar
+        alt='avatarImg'
+        src={avatarURL}
+        className={`${avatarSize} avatar__img ${className}`}
+      />
     </ProfileImgBlock>
   );
 }
@@ -40,8 +45,8 @@ const useStyles = makeStyles((theme: Theme) =>
       height: theme.spacing(3),
     },
     large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
+      width: theme.spacing(9),
+      height: theme.spacing(9),
     },
   })
 );

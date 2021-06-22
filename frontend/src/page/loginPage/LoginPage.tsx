@@ -1,13 +1,36 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import React, { ReactElement } from 'react';
 import LoginLogo from 'page/loginPage/loginLogo/LoginLogo';
 import SocialLoginBtn from 'page/loginPage/socialLoginBtn/SocialLoginBtn';
 import LoginForm from 'page/loginPage/loginForm/LoginForm';
 import Copyright from 'components/common/Copyright';
+import { useSetRecoilState } from 'recoil';
+import { controlLoginState } from 'store/loginStore';
+import { fetchLogin } from 'util/api/fetchLogin';
+import { useHistory } from 'react-router-dom'
+export default function LoginPage() {
+  const history = useHistory()
+  const setLoginData = useSetRecoilState(controlLoginState);
 
-interface Props {}
+  const query = window.location.search; 
+  useEffect(() => {
+    if (!query) return;
+    const loginCode = query.split('=')[1];
+    getLoginUserData(loginCode);
+  }, [query]);
 
-export default function LoginPage({}: Props): ReactElement {
+  const getLoginUserData = async (loginCode: string) => {
+    try {
+      const loginData = await fetchLogin(loginCode);
+      const loginUserData = {avatarUrl:loginData.avatarUrl,name:loginData.name}
+      setLoginData({isLogin: true, loginData:loginUserData});
+      localStorage.setItem('token', loginData.token);
+      history.push('/main');
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <LoginPageBlock>
       <div className='social-login'>
