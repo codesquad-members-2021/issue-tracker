@@ -69,3 +69,13 @@ insert into issue_has_label (issue_id, label_id) VALUES (9, 1);
 insert into issue_has_label (issue_id, label_id) VALUES (4, 2);
 insert into issue_has_label (issue_id, label_id) VALUES (5, 2);
 insert into issue_has_label (issue_id, label_id) VALUES (6, 2);
+
+-- -----------------------------------------------------
+-- 데이터 `issue_tracker_db`.`comment`
+-- -----------------------------------------------------
+insert into comment (description, created_time, issue_id, user_id)
+values ('초기 개발 시 조회 조건을 1개씩만 받아서 처리하고 추후 다중 조건을 처리하도록 구현합시다', CURRENT_TIMESTAMP, 1, 1);
+insert into comment (description, created_time, issue_id, user_id)
+values ('동의합니다.', CURRENT_TIMESTAMP, 1, 2);
+insert into comment (description, created_time, issue_id, user_id)
+values ('야호.', CURRENT_TIMESTAMP, 1, 1);

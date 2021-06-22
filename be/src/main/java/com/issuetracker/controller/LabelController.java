@@ -3,6 +3,7 @@ package com.issuetracker.controller;
 import com.issuetracker.dto.LabelDto;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.service.LabelService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class LabelController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseStatusDto delete(@PathVariable Long id) {
         return labelService.delete(id);
     }

@@ -1,5 +1,6 @@
 package com.issuetracker.util;
 
+import com.issuetracker.domain.Comment;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
 import com.issuetracker.domain.Milestone;
@@ -60,4 +61,16 @@ public class RowMappers {
     };
 
     public static final RowMapper<String> MILESTONE_TITLE_ROW_MAPPER = (rs, rowNum) -> rs.getString("title");
+
+    public static final RowMapper<Comment> COMMENT_ROW_MAPPER = (rs, rowNum) -> {
+        Comment comment = new Comment();
+
+        comment.setId(rs.getLong("id"));
+        comment.setDescription(rs.getString("description"));
+        comment.setCreatedTime(rs.getTimestamp("created_time").toLocalDateTime());
+        comment.setIssueId(rs.getLong("issue_id"));
+        comment.setUserId(rs.getLong("user_id"));
+
+        return comment;
+    };
 }
