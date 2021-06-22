@@ -13,6 +13,7 @@ import { decodedToken, dropAsigneeState } from '../../store/Recoil';
 import { ProfileImg as P } from '../styles/CommonStyles';
 import ProgressBar from './ProgressBar';
 import SideBarDrop from './SideBarDrop';
+import { userData } from '../../utils/mock/userData';
 interface TokenProps {
   name: string;
   profileImageUrl: string;
@@ -56,6 +57,8 @@ const SideBar = (): JSX.Element => {
 
   const profileURL = decoded && decoded.profileImageUrl;
   const profileName = decoded && decoded.name;
+  const userList = userData[0].assignees.users;
+
   return (
     <SideBarStyle>
       <SideBarCell>
@@ -63,7 +66,7 @@ const SideBar = (): JSX.Element => {
           <TextGroup type={T.SMALL} content={'담당자'} color="#6E7191" />
           <CustomAddIcon onClick={() => dropAsigneeHandler()} />
           <SideBarDropDiv ref={dropDownElement}>
-            {isDropAsignee && <SideBarDrop />}
+            {isDropAsignee && <SideBarDrop data={userList} />}
           </SideBarDropDiv>
         </SideBarTitle>
         <SideBarContent>
@@ -81,7 +84,7 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'레이블'} color="#6E7191" />
           <CustomAddIcon />
-          <SideBarDrop />
+          {/* <SideBarDrop /> */}
         </SideBarTitle>
 
         <SideBarContent>
@@ -101,7 +104,7 @@ const SideBar = (): JSX.Element => {
         <SideBarTitle>
           <TextGroup type={T.SMALL} content={'마일스톤'} color="#6E7191" />
           <CustomAddIcon />
-          <SideBarDrop />
+          {/* <SideBarDrop /> */}
         </SideBarTitle>
         <SideBarContent>
           <ProgressBar />

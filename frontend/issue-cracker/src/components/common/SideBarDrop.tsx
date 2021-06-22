@@ -1,25 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Issue as S } from '../styles/CommonStyles';
+import { v4 as uuidv4 } from 'uuid';
+
 import SideBarDropAsignee from './SideBarDropAsignee';
 import SideBarDropLabel from './SideBarDropLabel';
 import SideBarDropMileStone from './SideBarDropMileStone';
-const SideBarDrop = (): JSX.Element => {
+
+// interface userProps {
+//   email: string;
+//   name: string;
+//   avatar_url: string;
+// }
+interface SideBarDropProps {
+  data: { email: string; name: string; avatar_url: string }[];
+}
+const SideBarDrop = ({ data }: SideBarDropProps): JSX.Element => {
   return (
     <SideBarDropStyle>
       <DropDownTitle>담당자 추가</DropDownTitle>
-      <DropDownContent>
-        <SideBarDropAsignee />
-      </DropDownContent>
-      <DropDownContent>
-        <SideBarDropAsignee />
-      </DropDownContent>
-      <DropDownContent>
-        <SideBarDropLabel />
-      </DropDownContent>
-      <DropDownContent>
-        <SideBarDropMileStone />
-      </DropDownContent>
+      {data.map((user) => (
+        <DropDownContent key={uuidv4()}>
+          <SideBarDropAsignee data={user} />
+        </DropDownContent>
+      ))}
     </SideBarDropStyle>
   );
 };

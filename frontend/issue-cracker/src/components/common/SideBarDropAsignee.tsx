@@ -5,15 +5,19 @@ import { useRecoilValue } from 'recoil';
 import { decodedToken } from '../../store/Recoil';
 import CheckOffIcon from '../styles/svg/CheckOffIcon';
 
-const SideBarDropAsignee = (): JSX.Element => {
+interface SideBarDropAsigneeProps {
+  data: { email: string; name: string; avatar_url: string };
+}
+const SideBarDropAsignee = ({ data }: SideBarDropAsigneeProps): JSX.Element => {
   const decoded = decodedToken && useRecoilValue(decodedToken);
   const profileURL = decoded && decoded.profileImageUrl;
-  const profileName = decoded && decoded.name;
+  // const profileName = decoded && decoded.name;
+
   return (
     <SideBarDropAsigneeStyle>
       <DropLeft>
         <S.ProfileImgSmall src={profileURL}></S.ProfileImgSmall>
-        <ProfileName>{profileName}</ProfileName>
+        <ProfileName>{data.name}</ProfileName>
       </DropLeft>
       <DropRight>
         <CheckOffIcon />
