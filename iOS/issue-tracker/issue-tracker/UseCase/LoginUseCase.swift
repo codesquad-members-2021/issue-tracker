@@ -4,13 +4,13 @@ import Combine
 class LoginUseCase {
     
     private let jwtManager: JWTManageable
-    private let loginManager: LoginManager
+    private let loginManager: LoginHelper
     private let networkManager: NetworkManager
     private var subscriptions: Set<AnyCancellable>
     
     init() {
         self.jwtManager = JWTManager()
-        self.loginManager = LoginManager()
+        self.loginManager = LoginHelper()
         self.networkManager = NetworkManager(jwtManager: jwtManager, session: URLSession.shared)
         self.subscriptions = Set<AnyCancellable>()
     }

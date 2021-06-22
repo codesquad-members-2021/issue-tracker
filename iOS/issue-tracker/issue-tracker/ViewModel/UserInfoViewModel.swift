@@ -14,17 +14,20 @@ class UserInfoViewModel {
     }
     
     func fetchThumbnailImage() {
-        fetchUserInfoUseCase.executeFetchingUserInfo { imageURL in
-            self.thumbnailImage = imageURL
+        fetchUserInfoUseCase.executeFetchingUserInfo { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let imageURL):
+                self.thumbnailImage = imageURL
+            }
         }
     }
     
-    func didUpdateThumbnailImage(completion: @escaping (String) -> Void) {
-        $thumbnailImage
+    func didUpdateThumbnailImage() -> AnyPublisher<String, Never> {
+        return $thumbnailImage
             .receive(on: DispatchQueue.main)
-            .sink { value in
-                completion(value)
-            }.store(in: &subscriptions)
+            .eraseToAnyPublisher()
     }
     
 }

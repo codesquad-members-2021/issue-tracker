@@ -46,7 +46,7 @@
 		CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */; };
 		CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */; };
 		CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */; };
-		CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140C26787CF00009BB75 /* LoginManager.swift */; };
+		CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140C26787CF00009BB75 /* LoginHelper.swift */; };
 		CEBF140F267883500009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
 		CEBF1412267887550009BB75 /* JWTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF140E267883500009BB75 /* JWTManager.swift */; };
 		CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF141326788D910009BB75 /* JWTManagerTest.swift */; };
@@ -120,7 +120,7 @@
 		CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserInfoUseCase.swift; sourceTree = "<group>"; };
 		CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
-		CEBF140C26787CF00009BB75 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		CEBF140C26787CF00009BB75 /* LoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHelper.swift; sourceTree = "<group>"; };
 		CEBF140E267883500009BB75 /* JWTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManager.swift; sourceTree = "<group>"; };
 		CEBF141326788D910009BB75 /* JWTManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTManagerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,7 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA84DED267B06FD0006CC2E /* DTO */,
-				CEBF140C26787CF00009BB75 /* LoginManager.swift */,
+				CEBF140C26787CF00009BB75 /* LoginHelper.swift */,
 				CEBF140E267883500009BB75 /* JWTManager.swift */,
 				CEA84DF0267B079C0006CC2E /* NetworkManager.swift */,
 				CEA84DF2267B0D350006CC2E /* EndPoint.swift */,
@@ -564,7 +564,7 @@
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
 				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
-				CEBF140D26787CF00009BB75 /* LoginManager.swift in Sources */,
+				CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */,
 				BD0814692681C5C100C3D6D7 /* Identyfying.swift in Sources */,
 				BD08146D2681C79E00C3D6D7 /* URLSessionProtocol.swift in Sources */,
 				CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */,

@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class LoginManager {
+class LoginHelper {
     
     private let callbackURLScheme = "issueTracker"
     private let gitHubLoginUrlString = "https://github.com/login/oauth/authorize?client_id=04fb3475fc652d5304a3"
@@ -22,7 +22,7 @@ class LoginManager {
     }
     
     func convertedToURL(with code: String) -> URL? {
-        let loginURLString = "http://13.125.35.62/api/login/github/ios?code=\(code)"
+        let loginURLString = "http://52.78.35.48/api/login/github/ios?code=\(code)"
         return URL(string: loginURLString)
     }
     

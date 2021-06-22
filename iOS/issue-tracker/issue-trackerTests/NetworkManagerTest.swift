@@ -2,13 +2,13 @@ import XCTest
 
 class NetworkManagerTest: XCTestCase {
 
-    func test_JWT_존재할_경우() throws {
+    func test_JWT_존재하지_않을_경우() throws {
         // given
         let urlSessionStub = URLSessionStub()
         let jwtManagerStub = JWTManagerStub()
         let networkManager = NetworkManager(jwtManager: jwtManagerStub, session: urlSessionStub)
         
-        let expectedAddress = "http://13.125.35.62/api"
+        let expectedAddress = "http://52.78.35.48/api"
         let url = URL(string: expectedAddress)
         
         // when
@@ -18,13 +18,13 @@ class NetworkManagerTest: XCTestCase {
         XCTAssertEqual(urlSessionStub.request?.url?.absoluteString, expectedAddress)
     }
 
-    func test_JWT_존재하지_않을_경우() throws {
+    func test_JWT_존재할_경우() throws {
         // given
         let urlSessionStub = URLSessionStub()
         let jwtManagerStub = JWTManagerStub()
         let networkManager = NetworkManager(jwtManager: jwtManagerStub, session: urlSessionStub)
         
-        let expectedAddress = "http://13.125.35.62/api"
+        let expectedAddress = "http://52.78.35.48/api"
         let url = URL(string: expectedAddress)
         
         let expectedHeaderValue = "Bearer jwt"

@@ -13,13 +13,13 @@ class FetchUserInfoUseCase {
         self.subscriptions = Set<AnyCancellable>()
     }
     
-    func executeFetchingUserInfo(completion: @escaping (String) -> Void) {
+    func executeFetchingUserInfo(completion: @escaping (Result<String, NetworkError>) -> Void) {
         let url = endPoint.makeURL()
         networkManager.get(with: url, type: UserInfoResponDTO.self)
             .sink { result in
                 switch result {
-                case .failure(_):
-                    completion("Network Fail")
+                case .failure(let error):
+                    completion(.failure(error))
                 case .finished:
                     break
                 }
@@ -27,7 +27,7 @@ class FetchUserInfoUseCase {
                 guard let data = userInfoResponDTO.data else {
                     return
                 }
-                completion(data.profileImage)
+                completion(.success(data.profileImage))
             }.store(in: &subscriptions)
     }
     
