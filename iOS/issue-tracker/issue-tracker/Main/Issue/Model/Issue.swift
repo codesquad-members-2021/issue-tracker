@@ -18,7 +18,7 @@ struct IssueDTO: Decodable {
     }
 }
 
-class Author: Decodable {
+struct Author: Decodable {
     private(set) var id: Int
     private(set) var name: String
     private(set) var imageUrl: String
@@ -30,7 +30,7 @@ class Author: Decodable {
     }
 }
 
-class Assignee: Decodable {
+struct Assignee: Decodable {
     private(set) var id: Int
     private(set) var name: String
     private(set) var imageUrl: String
@@ -41,26 +41,38 @@ class Assignee: Decodable {
         case imageUrl
     }
 }
-class Issue: Decodable {
-    private(set) var issueNumber: Int
+
+struct IssueLabel: Decodable {
+    private(set) var id: Int
+    private(set) var name: String
+    private(set) var colorCode: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case colorCode = "color_code"
+    }
+}
+
+struct IssueMileStone: Decodable {
+    private(set) var id: Int
     private(set) var title: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+    }
+}
+
+struct Issue: Decodable {
+    private(set) var issueNumber: Int
+    private(set) var title: String?
     private(set) var status: Bool
     private(set) var author: Author
-    private(set) var assignees: [Assignee]
-    private(set) var labels: [Label]
-    private(set) var milestone: MileStone
-    private(set) var created_date: String
-    
-    init(issueNumber: Int, title: String, status: Bool, author: Author, assignees: [Assignee], labels: [Label], milestone: MileStone, created_date: String) {
-        self.issueNumber = issueNumber
-        self.title = title
-        self.status = status
-        self.author = author
-        self.assignees = assignees
-        self.labels = labels
-        self.milestone = milestone
-        self.created_date = created_date
-    }
+    private(set) var assignees: [Assignee]?
+    private(set) var labels: [IssueLabel]?
+    private(set) var milestone: IssueMileStone?
+    private(set) var createdDate: String
     
     enum CodingKeys: String, CodingKey {
         case issueNumber
@@ -70,6 +82,6 @@ class Issue: Decodable {
         case assignees
         case labels
         case milestone
-        case created_date = "createdDate"
+        case createdDate = "created_date"
     }
 }

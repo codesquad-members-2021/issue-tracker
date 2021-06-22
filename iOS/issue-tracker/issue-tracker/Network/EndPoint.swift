@@ -21,7 +21,7 @@ enum EndPoint {
         case .OAuth:
             return "/login/ios"
         case .issue:
-            return "/login/issues"
+            return "/issues"
         case .label:
             return "/labels"
         case .milestone:

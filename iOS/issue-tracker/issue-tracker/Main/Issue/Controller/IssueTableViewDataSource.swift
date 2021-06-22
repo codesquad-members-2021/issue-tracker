@@ -10,8 +10,14 @@ import UIKit
 
 class IssueTableViewDataSource: NSObject, UITableViewDataSource {
     
+    private(set) var issues = [Issue]()
+    
+    func update(issues: [Issue]) {
+        self.issues = issues
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        return issues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

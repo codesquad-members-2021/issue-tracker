@@ -37,6 +37,7 @@ class IssueTableViewCell: UITableViewCell {
     private lazy var mileStoneLabel: UILabel = {
         let label = UILabel()
         
+        //추후에 지울 것들.
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.systemGray]
@@ -91,7 +92,7 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     //여기서 인자 값으로 GET으로 라벨의 갯수와 라벨 배열을 가져와야 할 것같다.
-//    func addlabelsStackView(_ labels: [Label])
+//    func addlabelsStackView(_ labels: [Label]){
     func addlabelsStackView() {
         
         issueStackView.addArrangedSubview(labelsStackView)
@@ -145,6 +146,25 @@ class IssueTableViewCell: UITableViewCell {
 //        labelsStackView.addArrangedSubview(labelView4)
 //        labelsStackView.addArrangedSubview(labelView5)
                 
+    }
+    
+    func configure(title: String, mileStoneName: String, labels: [Label]) {
+        titleLabel.text = title
+        mileStoneTitleConfigure(mileStoneName: mileStoneName)
+    }
+    
+    private func mileStoneTitleConfigure(mileStoneName: String) {
+        let mileStoneText = mileStoneName != "" ? mileStoneName :"마일스톤 이름"
+        let attributedString = NSMutableAttributedString(string: "")
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "signpost.right")
+        
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor : Colors.description]
+        let dateString = NSMutableAttributedString(string:mileStoneText, attributes:attrs)
+        
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        attributedString.append(dateString)
+        mileStoneLabel.attributedText = attributedString
     }
     
 }

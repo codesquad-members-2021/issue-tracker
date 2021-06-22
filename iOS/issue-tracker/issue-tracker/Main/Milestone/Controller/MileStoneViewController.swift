@@ -52,7 +52,7 @@ class MileStoneViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
+        loadMileStones()
     }
     
     private func addNavigationButton() {
@@ -84,21 +84,7 @@ class MileStoneViewController: UIViewController {
         let headers = [Header.authorization.key(): jwt.description]
         networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
-    
-    func loadData() {
-        let mileStoneListEndpoint =
-            EndPoint.milestone.path()
-        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
-            switch result {
-            case .success(let result):
-                guard let mileStone = result.data else { return }
-                self?.mileStoneTableDatasource?.update(milestones: mileStone)
-                self?.reloadTableView()
-            case .failure(let error):
-                self?.presentAlert(with: error.description)
-            }
-        })
-    }
+        
     private func presentAlert(with errorMessage: String) {
         DispatchQueue.main.async {
             let alert = AlertFactory.create(body: errorMessage)
@@ -138,12 +124,28 @@ class MileStoneViewController: UIViewController {
 
 //MARK: - Network Methods
 extension MileStoneViewController {
+    
+    private func loadMileStones() {
+        let mileStoneListEndpoint =
+            EndPoint.milestone.path()
+        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
+            switch result {
+            case .success(let result):
+                guard let mileStone = result.data else { return }
+                self?.mileStoneTableDatasource?.update(milestones: mileStone)
+                self?.reloadTableView()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
     private func deleteMileStone(for id: Int) {
         let deleteMileStoneEndpoint = EndPoint.milestone.path(with: id)
         networkManager?.delete(endpoint: deleteMileStoneEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadMileStones()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
@@ -157,7 +159,7 @@ extension MileStoneViewController {
         networkManager?.post(endpoint: newMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadMileStones()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
@@ -172,7 +174,7 @@ extension MileStoneViewController {
         networkManager?.put(endpoint: editMileStoneEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
             case .success(_):
-                self?.loadData()
+                self?.loadMileStones()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }
