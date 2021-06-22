@@ -38,6 +38,7 @@
 		CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
+		CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE976389268208760025CEC3 /* IssueListResponseDTO.swift */; };
 		CEA84DEF267B07390006CC2E /* JWTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */; };
 		CEA84DF1267B079C0006CC2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CEA84DF3267B0D350006CC2E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF2267B0D350006CC2E /* EndPoint.swift */; };
@@ -112,6 +113,7 @@
 		CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		CE976389268208760025CEC3 /* IssueListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListResponseDTO.swift; sourceTree = "<group>"; };
 		CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTResponseDTO.swift; sourceTree = "<group>"; };
 		CEA84DF0267B079C0006CC2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEA84DF2267B0D350006CC2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */,
 				CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */,
+				CE976389268208760025CEC3 /* IssueListResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */,
 				CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */,
 				CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */,
+				CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */,
 				BD08146B2681C76F00C3D6D7 /* JWTManageable.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
