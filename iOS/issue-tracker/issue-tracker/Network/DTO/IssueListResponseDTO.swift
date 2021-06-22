@@ -1,10 +1,17 @@
 import Foundation
 
 struct IssueListResponseDTO: Decodable {
+    
     let data: [IssueDTO]
+    
+}
+
+extension IssueListResponseDTO {
+    
 }
 
 struct IssueDTO: Decodable {
+    
     let id: Int
     let title: String
     let createdTime: String
@@ -20,9 +27,11 @@ struct IssueDTO: Decodable {
         case isOpen = "is_open"
         case writer, assignees, milestone, labels
     }
+    
 }
 
 struct WriterDTO: Decodable {
+    
     let id: Int
     let username: String
     let profileImage: String
@@ -31,15 +40,20 @@ struct WriterDTO: Decodable {
         case id, username
         case profileImage = "profile_image"
     }
+    
 }
 
 struct MilestoneDTO: Decodable {
+    
     let id: Int
     let title: String
+    
 }
 
 struct LabelDTO: Decodable {
+    
     let id: Int
     let title: String
     let color: String
+    
 }

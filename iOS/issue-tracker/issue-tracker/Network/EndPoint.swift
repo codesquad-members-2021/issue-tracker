@@ -11,6 +11,7 @@ enum Host: String {
 enum Path: String {
     case api = "/api"
     case user = "/user"
+    case issues = "/issues"
 }
 
 struct EndPoint {
