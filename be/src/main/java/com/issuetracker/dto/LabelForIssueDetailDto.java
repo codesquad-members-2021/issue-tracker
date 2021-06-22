@@ -9,10 +9,14 @@ public class LabelForIssueDetailDto {
     @JsonProperty("color_code")
     private String colorCode;
 
+    @JsonProperty("font_light")
+    private boolean fontLight;
 
-    public LabelForIssueDetailDto(String title, String colorCode) {
+
+    public LabelForIssueDetailDto(String title, String colorCode, boolean fontLight) {
         this.title = title;
         this.colorCode = colorCode;
+        this.fontLight = fontLight;
     }
 
     public String getTitle() {
@@ -23,10 +27,15 @@ public class LabelForIssueDetailDto {
         return colorCode;
     }
 
+    public boolean isFontLight() {
+        return fontLight;
+    }
+
     public static LabelForIssueDetailDto of(Label label) {
         return new LabelForIssueDetailDto(
                 label.getTitle(),
-                label.getColorCode()
+                label.getColorCode(),
+                label.isFontLight()
         );
     }
 }

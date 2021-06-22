@@ -4,6 +4,7 @@ import com.issuetracker.domain.Issue;
 import com.issuetracker.dto.*;
 import com.issuetracker.oauth.User;
 import com.issuetracker.oauth.UserDto;
+import com.issuetracker.repository.CommentRepository;
 import com.issuetracker.repository.IssueRepository;
 import com.issuetracker.repository.MilestoneRepository;
 import com.issuetracker.repository.UserRepository;
@@ -23,14 +24,16 @@ public class IssueService {
     private final IssueRepository issueRepository;
     private final UserRepository userRepository;
     private final MilestoneRepository milestoneRepository;
+    private final CommentRepository commentRepository;
 
-    public IssueService(IssueRepository issueRepository, UserRepository userRepository, MilestoneRepository milestoneRepository) {
+    public IssueService(IssueRepository issueRepository, UserRepository userRepository, MilestoneRepository milestoneRepository, CommentRepository commentRepository) {
         this.issueRepository = issueRepository;
         this.userRepository = userRepository;
         this.milestoneRepository = milestoneRepository;
+        this.commentRepository = commentRepository;
     }
 
-//    public List<IssueDto> getAllIssues() {
+    //    public List<IssueDto> getAllIssues() {
 //        return issueRepository.findAllIssues().stream()
 //                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
 //                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
@@ -70,16 +73,32 @@ public class IssueService {
 
     public IssueDetailDto searchIssueDetailByIssueId(Long id) {
         Issue issue = issueRepository.findIssueByIssueId(id);
-        MilestoneForIssueDetailDto milestoneDto = MilestoneForIssueDetailDto.of(
-                milestoneRepository.findMilestoneByMilestoneId(issue.getMilestoneId()),
-                issueRepository.countOpenedIssuesByMilestoneId(issue.getMilestoneId()),
-                issueRepository.countClosedIssuesByMilestoneId(issue.getMilestoneId())
-        );
+
+        MilestoneForIssueDetailDto milestoneDto = null;
+        logger.info("마일스톤아이디: {}", issue.getMilestoneId());
+        if (issue.getMilestoneId() != 0) {
+            milestoneDto = MilestoneForIssueDetailDto.of(
+                    milestoneRepository.findMilestoneByMilestoneId(issue.getMilestoneId()),
+                    issueRepository.countOpenedIssuesByMilestoneId(issue.getMilestoneId()),
+                    issueRepository.countClosedIssuesByMilestoneId(issue.getMilestoneId())
+            );
+        }
+
+
         List<LabelForIssueDetailDto> labelListDto = issueRepository.findAllLabelsByIssueId(id).stream()
                 .map(LabelForIssueDetailDto::of)
                 .collect(Collectors.toList());
 
-        return IssueDetailDto.of(issue, milestoneDto, labelListDto);
+        UserDto userDto = null;
+        if (issue.getAssignee() != 0) {
+            UserDto.of(userRepository.findOneById(issue.getAssignee()));
+        }
+
+        if (userDto == null) {
+            return IssueDetailDto.of(issue, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
+        }
+
+        return IssueDetailDto.of(issue, userDto, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
     }
 
     public IssueCountDto searchNumberOfIssuesClosedAndOpened() {

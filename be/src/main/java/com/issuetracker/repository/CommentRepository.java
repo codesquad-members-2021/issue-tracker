@@ -52,4 +52,9 @@ public class CommentRepository {
         String query = "delete from comment where id = ?";
         jdbcTemplate.update(query, commentId);
     }
+
+    public Integer count(Long issueId) {
+        String query = "select count(*) from comment where issue_id = ?";
+        return jdbcTemplate.queryForObject(query, Integer.class, issueId);
+    }
 }

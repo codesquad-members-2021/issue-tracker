@@ -3,10 +3,10 @@ package com.issuetracker.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
-import com.issuetracker.oauth.User;
 import com.issuetracker.oauth.UserDto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IssueDto {
@@ -15,7 +15,7 @@ public class IssueDto {
     private String description;
     private boolean closed;
 
-    private UserDto assignee;
+    private List<UserDto> assignees = new ArrayList<>();
     private UserDto author;
 
     @JsonProperty("label_list")
@@ -30,12 +30,12 @@ public class IssueDto {
     @JsonProperty("milestone_title")
     private String milestoneTitle;
 
-    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignee, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignees, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.closed = closed;
-        this.assignee = assignee;
+        this.assignees.add(assignees);
         this.author = author;
         this.labelList = labelList;
         this.issueNumber = issueNumber;
@@ -43,12 +43,12 @@ public class IssueDto {
         this.milestoneTitle = milestoneTitle;
     }
 
-    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignee, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignees, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.closed = closed;
-        this.assignee = assignee;
+        this.assignees.add(assignees);
         this.author = author;
         this.labelList = labelList;
         this.issueNumber = issueNumber;
@@ -56,11 +56,11 @@ public class IssueDto {
         this.milestoneTitle = null;
     }
 
-    public IssueDto(Issue issue, String milestoneTitle, UserDto author, UserDto assignee) {
+    public IssueDto(Issue issue, String milestoneTitle, UserDto author, UserDto assignees) {
         this.id = issue.getId();
         this.title = issue.getTitle();
         this.description = issue.getDescription();
-        this.assignee = assignee;
+        this.assignees.add(assignees);
         this.author = author;
         this.issueNumber = issue.getNumber();
         this.createdTime = issue.getCreatedTime();
@@ -112,8 +112,8 @@ public class IssueDto {
         return closed;
     }
 
-    public UserDto getAssignee() {
-        return assignee;
+    public List<UserDto> getAssignees() {
+        return assignees;
     }
 
     public UserDto getAuthor() {

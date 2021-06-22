@@ -2,14 +2,16 @@ package com.issuetracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issuetracker.domain.Issue;
+import com.issuetracker.oauth.UserDto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IssueDetailDto {
     private String title;
     private String description;
-    private Long assignee;
+    private List<UserDto> assignees = new ArrayList<>();
 
     @JsonProperty("created_time")
     private LocalDateTime createdTime;
@@ -26,29 +28,60 @@ public class IssueDetailDto {
     @JsonProperty("label_list")
     private List<LabelForIssueDetailDto> labelList;
 
-    public IssueDetailDto(String title, String description, Long assignee, LocalDateTime createdTime, boolean closed, MilestoneForIssueDetailDto milestone, Long authorUserId, Long issueNumber, List<LabelForIssueDetailDto> labelList) {
+    @JsonProperty("num_of_comments")
+    private Integer numOfComments;
+
+    public IssueDetailDto(String title, String description, UserDto assignees, LocalDateTime createdTime, boolean closed, MilestoneForIssueDetailDto milestone, Long authorUserId, Long issueNumber, List<LabelForIssueDetailDto> labelList, Integer numOfComments) {
         this.title = title;
         this.description = description;
-        this.assignee = assignee;
+        this.assignees.add(assignees);
         this.createdTime = createdTime;
         this.closed = closed;
         this.milestone = milestone;
         this.authorUserId = authorUserId;
         this.issueNumber = issueNumber;
         this.labelList = labelList;
+        this.numOfComments = numOfComments;
     }
 
-    public static IssueDetailDto of(Issue issue, MilestoneForIssueDetailDto milestone, List<LabelForIssueDetailDto> labelList) {
+    public IssueDetailDto(String title, String description, LocalDateTime createdTime, boolean closed, MilestoneForIssueDetailDto milestone, Long authorUserId, Long issueNumber, List<LabelForIssueDetailDto> labelList, Integer numOfComments) {
+        this.title = title;
+        this.description = description;
+        this.createdTime = createdTime;
+        this.closed = closed;
+        this.milestone = milestone;
+        this.authorUserId = authorUserId;
+        this.issueNumber = issueNumber;
+        this.labelList = labelList;
+        this.numOfComments = numOfComments;
+    }
+
+    public static IssueDetailDto of(Issue issue, UserDto assignee, MilestoneForIssueDetailDto milestone, List<LabelForIssueDetailDto> labelList, Integer numOfComments) {
         return new IssueDetailDto(
                 issue.getTitle(),
                 issue.getDescription(),
-                issue.getAssignee(),
+                assignee,
                 issue.getCreatedTime(),
                 issue.isClosed(),
                 milestone,
                 issue.getAuthorUserId(),
                 issue.getNumber(),
-                labelList
+                labelList,
+                numOfComments
+        );
+    }
+
+    public static IssueDetailDto of(Issue issue, MilestoneForIssueDetailDto milestone, List<LabelForIssueDetailDto> labelList, Integer numOfComments) {
+        return new IssueDetailDto(
+                issue.getTitle(),
+                issue.getDescription(),
+                issue.getCreatedTime(),
+                issue.isClosed(),
+                milestone,
+                issue.getAuthorUserId(),
+                issue.getNumber(),
+                labelList,
+                numOfComments
         );
     }
 
@@ -60,8 +93,8 @@ public class IssueDetailDto {
         return description;
     }
 
-    public Long getAssignee() {
-        return assignee;
+    public List<UserDto> getAssignees() {
+        return assignees;
     }
 
     public LocalDateTime getCreatedTime() {
@@ -86,5 +119,9 @@ public class IssueDetailDto {
 
     public List<LabelForIssueDetailDto> getLabelList() {
         return labelList;
+    }
+
+    public Integer getNumOfComments() {
+        return numOfComments;
     }
 }
