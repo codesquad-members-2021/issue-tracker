@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.issuetracker.util.RowMappers.COMMENT_ROW_MAPPER;
@@ -34,5 +35,10 @@ public class CommentRepository {
                 "from comment " +
                 "where user_id = ? ";
         return jdbcTemplate.query(query, COMMENT_ROW_MAPPER, userId);
+    }
+
+    public void save(String description, Long issueId, Long userId) {
+        String query = "insert into comment (description, created_time, issue_id, user_id) values (?, ?, ?, ?)";
+        jdbcTemplate.update(query, description, LocalDateTime.now(), issueId, userId);
     }
 }

@@ -1,8 +1,7 @@
 package com.issuetracker.controller;
 
-import com.issuetracker.dto.CommentDto;
-import com.issuetracker.dto.IssueDto;
-import com.issuetracker.dto.IssueSearchCondition;
+import com.issuetracker.dto.*;
+import com.issuetracker.oauth.User;
 import com.issuetracker.service.CommentService;
 import com.issuetracker.service.IssueService;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,13 @@ public class CommentController {
     @GetMapping("/issues/{issueId}/comments")
     public List<CommentDto> viewCommentsByIssueId(@PathVariable Long issueId) {
         return commentService.findCommentsByIssueId(issueId);
+    }
+
+    @PostMapping("/issues/{issueId}/comments")
+    public ResponseStatusDto createComment(@PathVariable Long issueId,
+                                           @RequestBody CommentRequestDto requestDto,
+                                           @RequestAttribute User user) {
+        return commentService.saveComment(requestDto.getDescription(), issueId, user.getId());
     }
 
     @GetMapping("/comments")

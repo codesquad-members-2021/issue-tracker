@@ -2,6 +2,7 @@ package com.issuetracker.service;
 
 import com.issuetracker.domain.Comment;
 import com.issuetracker.dto.CommentDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.oauth.UserDto;
 import com.issuetracker.repository.CommentRepository;
 import com.issuetracker.repository.UserRepository;
@@ -38,4 +39,9 @@ public class CommentService {
     }
 
 
+    public ResponseStatusDto saveComment(String description, Long issueId, Long authorId) {
+        commentRepository.save(description, issueId, authorId);
+
+        return new ResponseStatusDto("success");
+    }
 }
