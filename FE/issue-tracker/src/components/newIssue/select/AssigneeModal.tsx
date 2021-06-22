@@ -5,11 +5,11 @@ import { modalStyle, modalTitleStyle, modalListStyle } from '../style';
 
 type Props = {
   assignees: { user_id: number; name: string; avatar_url: string }[] | null;
-  errorMsg: string | null;
+  errorMsg: string;
 };
 
 function AssigneeModal({ assignees, errorMsg }: Props) {
-  const modalTitle = errorMsg == null ? '담당자 추가' : errorMsg;
+  const modalTitle = errorMsg == 'No Error' ? '담당자 추가' : errorMsg;
 
   return (
     <MenuList {...modalStyle}>
