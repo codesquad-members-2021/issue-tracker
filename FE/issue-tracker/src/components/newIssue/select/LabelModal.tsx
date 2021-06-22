@@ -1,65 +1,55 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { MenuList, MenuOptionGroup, MenuItemOption } from '@chakra-ui/react';
+import { MenuList, MenuItem, Checkbox } from '@chakra-ui/react';
 import Label from '@components/common/Label';
-import { modalStyle, modalTitleStyle, modalListStyle } from '../style';
-import { checkedLabelsState } from '@store/atoms/checkedThings';
+import MenuTitle from '@components/common/MenuTitle';
+import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
+import { modalStyle } from '../style';
+import { labelType, checkedLabelsState } from '@store/atoms/checkedThings';
+import { isCheckedType } from '../../../utils/isChecked_type';
+import {
+  getCheckedId,
+  setIsCheckedAndCheckedItem,
+} from '@utils/onClickMenuItem';
 
 type Props = {
-  labels:
-    | {
-        id: number;
-        title: string;
-        description: string;
-        color_code: string;
-        font_light: boolean;
-      }[]
-    | null;
-  errorMsg: string | null;
+  labels: labelType[] | null;
+  errorMsg: string;
 };
 
 function LabelModal({ labels, errorMsg }: Props) {
-  console.log(errorMsg);
   const [checkedLabels, setCheckedLabels] = useRecoilState(checkedLabelsState);
-  const modalTitle = errorMsg == null ? '레이블 추가' : errorMsg;
+  const [isChecked, setIsChecked] = useState<isCheckedType>({});
+  const modalTitle = errorMsg == 'No Error' ? '레이블 추가' : errorMsg;
 
-  const handleClickLabel = (e: React.MouseEvent) => {
-    const target = e.target as HTMLButtonElement;
-    const menuItem: HTMLButtonElement | null = target.closest('.label_item');
-    if (menuItem == null) return;
-
-    const isChecked = menuItem.getAttribute('aria-checked') === 'false';
-    if (isChecked) {
-      const labelData = JSON.parse(JSON.stringify(menuItem.dataset));
-      setCheckedLabels([...checkedLabels, labelData]);
-    } else {
-      setCheckedLabels((prev) =>
-        prev.filter((label) => label.id !== menuItem.dataset.id)
-      );
-    }
+  const handleClickMenuItem = (e: React.MouseEvent) => {
+    const target = e.target as HTMLInputElement;
+    const checkedId = getCheckedId({ target: target, menuData: labels });
+    if (checkedId == null) return;
+    setIsCheckedAndCheckedItem({
+      menu: 'label',
+      menuData: labels,
+      checkedId: checkedId,
+      isChecked: isChecked,
+      setIsChecked: setIsChecked,
+      checkedMenus: checkedLabels,
+      setCheckedMenus: setCheckedLabels,
+    });
   };
 
   return (
-    <MenuList {...modalStyle}>
-      <MenuOptionGroup
-        {...modalTitleStyle}
-        type="checkbox"
-        title={modalTitle}
-        onClick={handleClickLabel}
-      >
-        {labels &&
-          labels.map(({ id, title, color_code, font_light }) => {
-            return (
-              <MenuItemOption
-                {...modalListStyle}
-                key={id}
-                value={id.toString()}
-                className="label_item"
+    <MenuList {...modalStyle} onClick={handleClickMenuItem}>
+      <MenuTitle>{modalTitle}</MenuTitle>
+      {labels &&
+        labels.map(({ id, title, color_code, font_light }) => {
+          return (
+            <MenuItem key={id} padding="0 0 0 10px" {...menuItemStyle}>
+              <Checkbox
+                {...checkBoxStyle}
+                width="100%"
+                className="checkbox"
                 data-id={id}
-                data-title={title}
-                data-color_code={color_code}
-                data-font_light={font_light}
               >
                 <ItemWrap>
                   <Label
@@ -68,10 +58,10 @@ function LabelModal({ labels, errorMsg }: Props) {
                     fontLight={font_light}
                   />
                 </ItemWrap>
-              </MenuItemOption>
-            );
-          })}
-      </MenuOptionGroup>
+              </Checkbox>
+            </MenuItem>
+          );
+        })}
     </MenuList>
   );
 }
@@ -81,4 +71,5 @@ export default LabelModal;
 const ItemWrap = styled.div`
   display: flex;
   align-items: center;
+  padding: 0.4rem;
 `;
