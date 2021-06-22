@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Down
 
 final class IssueControlViewController: UIViewController {
 
@@ -100,6 +101,14 @@ final class IssueControlViewController: UIViewController {
         return textField
     }()
     
+    private lazy var markdownStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [bodyTextView, markdownView])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var bodyTextView: UITextView = {
         let textView = UITextView()
         textView.text = bodyPlaceholder
@@ -109,6 +118,13 @@ final class IssueControlViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.delegate = self
         return textView
+    }()
+    
+    private lazy var markdownView: DownView = {
+        let downView = try! DownView(frame: .zero, markdownString: "")
+        downView.pageZoom = 1.5
+        downView.isHidden = true
+        return downView
     }()
     
     private lazy var additionalInfoView: MultipleLineInputStackView = {
@@ -144,7 +160,6 @@ final class IssueControlViewController: UIViewController {
     }()
 
     private let bodyPlaceholder = "이곳에 내용을 입력하세요"
-    private var markdownConverter = MarkdownConverter(customBullet: "✔️")
     
     private lazy var lineHeight: CGFloat = {
         return view.frame.height * 0.05
@@ -202,13 +217,13 @@ final class IssueControlViewController: UIViewController {
     }
     
     private func addBodyTextView() {
-        view.addSubview(bodyTextView)
+        view.addSubview(markdownStackView)
         
         NSLayoutConstraint.activate([
-            bodyTextView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.7),
-            bodyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 0.8),
-            bodyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing * 0.8),
-            bodyTextView.bottomAnchor.constraint(equalTo: additionalInfoView.topAnchor)
+            markdownStackView.topAnchor.constraint(equalTo: titleInputView.bottomAnchor, constant: spacing * 0.7),
+            markdownStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing * 0.8),
+            markdownStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing * 0.8),
+            markdownStackView.bottomAnchor.constraint(equalTo: additionalInfoView.topAnchor)
         ])
     }
     
@@ -244,30 +259,15 @@ final class IssueControlViewController: UIViewController {
     }
     
     private func previewToMarkDown() {
-        bodyTextView.attributedText = nil
-        bodyTextView.text = markdownConverter.rawText
-        
-        changeTextViewEditable(to: true)
-        changeToplainTextView()
+        markdownView.isHidden = true
+        bodyTextView.isHidden = false
     }
     
     private func markdownToPreview() {
         guard let rawText = bodyTextView.text else { return }
-        let preview = markdownConverter.preview(rawText: rawText)
-        markdownConverter.rawText = rawText
-        bodyTextView.text = nil
-        bodyTextView.attributedText = preview
-        
-        changeTextViewEditable(to: false)
-    }
-    
-    private func changeTextViewEditable(to status: Bool) {
-        bodyTextView.isEditable = status
-    }
-    
-    private func changeToplainTextView() {
-        bodyTextView.font = .systemFont(ofSize: 17)
-        bodyTextView.textColor = .black
+        try? markdownView.update(markdownString: rawText)
+        markdownView.isHidden = false
+        bodyTextView.isHidden = true
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
