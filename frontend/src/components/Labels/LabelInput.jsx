@@ -10,7 +10,19 @@ import API from "util/API";
 import fetchData from "util/fetchData";
 import CancelButton from "components/common/Button/WhiteButtons";
 import SubmitButton from "components/common/Button/BlueButtons";
-const LabelInput = ({ isEditor }) => {
+import {
+	labelInitialData,
+	labelEditButtonFlagState,
+	labelAddButtonFlagState,
+	navigatorAddButtonFlagState,
+} from "RecoilStore/Atoms";
+import { useSetRecoilState, useRecoilState } from "recoil";
+
+const LabelInput = ({ initialData, isEditor }) => {
+	const setLabelInitialData = useSetRecoilState(labelInitialData);
+	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
+	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
 	const {
 		creatorTitle,
 		editorTitle,
@@ -19,12 +31,15 @@ const LabelInput = ({ isEditor }) => {
 		textColorTitles,
 		buttons,
 	} = labelData;
+	const { id, name, description, colors } = initialData;
+	const { backgroundColor, textColor } = colors;
+	console.log("input", initialData.id);
 
 	const initLabelState = {
-		name: "레이블 이름",
-		description: null,
+		name: name,
+		description: description,
 		backgroundColor: theme.grayScale.input_background,
-		textColor: false,
+		textColor: "#000000",
 	};
 
 	const reducer = (state, { type, payload }) => {
@@ -41,14 +56,17 @@ const LabelInput = ({ isEditor }) => {
 	};
 	const [labelState, dispatch] = useReducer(reducer, initLabelState);
 
+	//dispatch모아서 처리하게끔 refactoring 필요
 	const handleClickRadioButton = event => {
-		dispatch({ type: "textColor", payload: event.target.value });
+		const currentTextColor =
+			event.target.value ===
+			dispatch({ type: "textColor", payload: event.target.value });
 	};
 	const handleChangeColor = event => {
 		//디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
+		//const test = useDebounce(labelState.description, 1000);
 		dispatch({ type: "backgroundColor", payload: event.target.value });
 	};
-	const test = useDebounce(labelState.description, 1000);
 
 	const handleTypingName = event => {
 		if (event.target.id === "0") {
@@ -58,26 +76,34 @@ const LabelInput = ({ isEditor }) => {
 			dispatch({ type: "description", payload: event.target.value });
 		}
 	};
+
+	const handleClose = () => {
+		setLabelEditBtnFlag(x => !x);
+	};
+
 	const handleSubmit = async () => {
-		const testData = {
-			name: "feature",
-			description: "새 기능",
+		const { id, name, description, backgroundColor, textColor } = labelState;
+
+		const requestBody = {
+			name: name,
+			description: description,
 			colors: {
-				backgroundColor: "#000000",
-				textColor: "#FFFFFF",
+				backgroundColor: backgroundColor,
+				textColor: textColor,
 			},
 		};
 		if (isEditor) {
-			const res = await fetchData(API.labels(), "POST", testData);
+			//const res = await fetchData(API.labels(), "POST", requestBody); //PUT요청, body수정 필요
+			setLabelEditBtnFlag(x => !x);
 		} else {
-			const res = await fetchData(API.labels(), "POST", testData);
+			const res = await fetchData(API.labels(), "POST", requestBody);
+			setLabelAddBtnFlag(x => !x);
+			setNavigatorAddBtnFlag(x => !x);
+			const { labels } = await fetchData(API.labels(), "GET");
+			setLabelInitialData(labels);
 		}
 	};
-	const getFontColor = () => {
-		return labelState.textColor === "light"
-			? theme.grayScale.off_white
-			: theme.grayScale.black;
-	};
+
 	const changeColor = () => {
 		const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 		dispatch({
@@ -85,36 +111,50 @@ const LabelInput = ({ isEditor }) => {
 			payload: `#${randomColor}`,
 		});
 	};
-
+	console.log("name", name);
 	return (
 		<LabelInputLayout isEditor={isEditor}>
 			<Title>{isEditor ? editorTitle : creatorTitle}</Title>
 			<MainLayout>
 				<PreviewContainer>
-					<LabelBadge
-						text={labelState.name}
-						fontColor={getFontColor()}
-						backgroundColor={labelState.backgroundColor}
-					/>
+					{
+						<LabelBadge
+							text={isEditor ? name : labelState.name}
+							fontColor={isEditor ? textColor : labelState.textColor}
+							backgroundColor={
+								isEditor ? backgroundColor : labelState.backgroundColor
+							}
+						/>
+					}
 				</PreviewContainer>
 
 				<SettingContainer>
-					{inputTitles.map((title, idx) => (
-						<TextInputContainer _width={"100%"} key={`title-${idx}`}>
-							<SubTitle>{title}</SubTitle>
-							<TextInput
-								id={idx}
-								onChange={handleTypingName}
-								autocomplete="off"
-							/>
-						</TextInputContainer>
-					))}
+					{/* 타이틀 부분 나눠서 디스크립션 부분은 온 체인지 풀기 */}
+
+					<TextInputContainer _width={"100%"}>
+						<SubTitle>{inputTitles[0]}</SubTitle>
+						<TextInput
+							onChange={handleTypingName}
+							autocomplete="off"
+							value={isEditor && labelState.name}
+						/>
+					</TextInputContainer>
+					<TextInputContainer _width={"100%"}>
+						<SubTitle>{inputTitles[1]}</SubTitle>
+						<TextInput
+							onChange={handleTypingName}
+							autocomplete="off"
+							value={isEditor && labelState.description}
+						/>
+					</TextInputContainer>
+
 					<DisplayFlex>
-						<TextInputContainer _width={"20%"}>
+						<TextInputContainer _width={"25%"}>
 							<SubTitle>{backgroundColorTitle}</SubTitle>
 							<TextInput
 								value={labelState.backgroundColor}
 								onChange={handleChangeColor}
+								autocomplete="off"
 							/>
 							<Icon onClick={changeColor} />
 						</TextInputContainer>
@@ -140,7 +180,12 @@ const LabelInput = ({ isEditor }) => {
 					</DisplayFlex>
 					<ButtonContainer>
 						{isEditor && (
-							<CancelButton text={buttons.cancel} icon="cancel" size="m" />
+							<CancelButton
+								text={buttons.cancel}
+								icon="cancel"
+								size="m"
+								clickHandler={handleClose}
+							/>
 						)}
 						{isEditor ? (
 							<SubmitButton

@@ -7,12 +7,17 @@ import {
 	labelButtonFlagState,
 	milestoneButtonFlagState,
 	milestoneAddButtonFlagState,
+	labelAddButtonFlagState,
+	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
 import { useState } from "react";
 import { milestoneCountState } from "RecoilStore/Atoms";
 
 const Navigator = () => {
-	const [isAddButton, setIsAddButton] = useState(true);
+	// const [isAddButton, setIsAddButton] = useState(true);
+	const [addButtonFlag, setAddButtonFlag] = useRecoilState(
+		navigatorAddButtonFlagState
+	);
 	const [milestoneFlag, setMilestoneFlag] = useRecoilState(
 		milestoneButtonFlagState
 	);
@@ -20,7 +25,13 @@ const Navigator = () => {
 	const [milestoneAddBtnFlag, setMilestoneAddBtnFlag] = useRecoilState(
 		milestoneAddButtonFlagState
 	);
+	const [labelAddBtnFlag, setLabelAddBtnFlag] = useRecoilState(
+		labelAddButtonFlagState
+	);
+	//밑에 하나로 묶어도 될 것 같음
+
 	const milestoneCountValue = useRecoilValue(milestoneCountState);
+
 
 	const handleMilestoneClick = () => {
 		setMilestoneFlag(true);
@@ -30,15 +41,19 @@ const Navigator = () => {
 		setMilestoneFlag(false);
 		setLabelFlag(true);
 	};
+	//Refactoring
+	//리렌더 2번 일어남
+	const handleClick = () => {
+		milestoneFlag
+			? setMilestoneAddBtnFlag(!milestoneAddBtnFlag)
+			: setLabelAddBtnFlag(!labelAddBtnFlag);
+		setAddButtonFlag(!addButtonFlag);
 
-	const handelAddClick = () => {
-		if (milestoneFlag) setMilestoneAddBtnFlag(!milestoneAddBtnFlag);
-		else if (!milestoneFlag) setMilestoneAddBtnFlag(false);
-		setIsAddButton((x) => !x);
 	};
 
 	return (
 		<NavigatorLayout>
+			{/* 버튼 그룹 카운트 자리에 데이터 길이 넣어주기 */}
 			<ButtonGroup
 				milestoneCount={milestoneCountValue}
 				milestoneClickEvent={handleMilestoneClick}
@@ -47,19 +62,19 @@ const Navigator = () => {
 				isMainPage={false}
 			/>
 
-			{isAddButton ? (
-				<AddButton
-					text="추가"
-					icon="plus"
-					size="m"
-					clickHandler={handelAddClick}
-				/>
-			) : (
+			{addButtonFlag ? (
 				<CancelButton
 					text="취소"
 					icon="cancel"
 					size="m"
-					clickHandler={() => setIsAddButton((x) => !x)}
+					clickHandler={handleClick}
+				/>
+			) : (
+				<AddButton
+					text="추가"
+					icon="plus"
+					size="m"
+					clickHandler={handleClick}
 				/>
 			)}
 		</NavigatorLayout>

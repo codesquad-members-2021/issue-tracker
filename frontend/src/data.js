@@ -44,8 +44,8 @@ export const labelData = {
 		cancel: "취소",
 		submit: "완료",
 		radio: [
-			{ value: "light", text: "밝은 색" },
-			{ value: "dark", text: "어두운 색" },
+			{ value: "#FEFEFE", text: "밝은 색" },
+			{ value: "#000000", text: "어두운 색" },
 		],
 	},
 };
