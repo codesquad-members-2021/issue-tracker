@@ -25,7 +25,11 @@ function MilestoneModal({ milestones, errorMsg }: Props) {
         {milestones &&
           milestones.map(({ id, title, due_date }) => {
             return (
-              <MenuItemOption {...modalListStyle} value={id.toString()}>
+              <MenuItemOption
+                {...modalListStyle}
+                key={id}
+                value={id.toString()}
+              >
                 <ItemWrap>
                   <span className="title">{title}</span>
                   <span className="due_date">{due_date}</span>
