@@ -24,6 +24,7 @@
 		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
 		B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */; };
 		B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */; };
+		B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3926D6A2681B59800F72CEE /* PatchIssue.swift */; };
 		B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB57267840290060DC85 /* LabelListViewModel.swift */; };
 		B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB5A26784AA50060DC85 /* LabelList.swift */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
@@ -113,6 +114,7 @@
 		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedLabelView.swift; sourceTree = "<group>"; };
 		B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelTableViewCell.swift; sourceTree = "<group>"; };
+		B3926D6A2681B59800F72CEE /* PatchIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchIssue.swift; sourceTree = "<group>"; };
 		B3A5CB57267840290060DC85 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		B3A5CB5A26784AA50060DC85 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				B3D7D0C3267735CC000F02F4 /* IssueList.swift */,
+				B3926D6A2681B59800F72CEE /* PatchIssue.swift */,
 				B3A5CB5A26784AA50060DC85 /* LabelList.swift */,
 				D03AF8F92677494F001C2CBF /* Comment.swift */,
 				D03AF8F726774909001C2CBF /* MilestoneList.swift */,
@@ -697,6 +700,7 @@
 				D0103BDE267B897E0079FC3D /* AddMilestoneViewController.swift in Sources */,
 				D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */,
 				B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */,
+				B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */,
