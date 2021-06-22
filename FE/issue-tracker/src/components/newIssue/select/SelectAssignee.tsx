@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { Menu, MenuButton, Button } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/avatar';
 
@@ -7,10 +8,12 @@ import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import AssigneeModal from './AssigneeModal';
 import { fetchModal } from '@utils/fetchModal';
+import { checkedAssigneesState } from '@store/atoms/checkedThings';
 
 function SelectAssignee() {
   const [assignees, setAssignees] = useState(null);
   const [errorMsg, setErrorMsg] = useState('No Error');
+  const checkedAssignees = useRecoilValue(checkedAssigneesState);
 
   const handleClickAssignee = () => {
     fetchModal({
@@ -35,12 +38,15 @@ function SelectAssignee() {
         </MenuButton>
         <AssigneeModal assignees={assignees} errorMsg={errorMsg} />
       </Menu>
-      {/* ----사용자가 선택한 것들을 렌더링---- */}
       <AddList>
-        <li>
-          <Avatar size="sm" src="./janmang.jpeg" />
-          <Text>Oni</Text>
-        </li>
+        {checkedAssignees.map(({ user_id, name, avatar_url }) => {
+          return (
+            <li key={user_id}>
+              <Avatar size="sm" src={avatar_url} />
+              <Text>{name}</Text>
+            </li>
+          );
+        })}
       </AddList>
     </Wrap>
   );
@@ -60,4 +66,7 @@ const Text = styled.span`
 
 const AddList = styled.ul`
   padding: 8px 0;
+  li {
+    padding: 0.3rem;
+  }
 `;
