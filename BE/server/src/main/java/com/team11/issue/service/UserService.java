@@ -7,6 +7,7 @@ import com.team11.issue.dto.user.LoginResponseDTO;
 import com.team11.issue.dto.user.UserResponseDTO;
 import com.team11.issue.dto.user.UsersResponseDTO;
 import com.team11.issue.exception.AccessTokenNotFoundException;
+import com.team11.issue.exception.UserNotFoundException;
 import com.team11.issue.oauth.GitHubOauth;
 import com.team11.issue.repository.UserRepository;
 import com.team11.issue.util.JwtUtil;
@@ -35,8 +36,7 @@ public class UserService {
     }
 
     private User findByName(String name) {
-        /*TODO: Exception 처리*/
-        return userRepository.findByName(name).orElseThrow(() -> new RuntimeException());
+        return userRepository.findByName(name).orElseThrow(UserNotFoundException::new);
     }
 
     private String createJwtToken(String userName) {
