@@ -173,7 +173,7 @@ final class IssueControlViewController: UIViewController {
     private var selectedLabels: [Label]?
     private var selectedMilestone: [MileStone]?
     private var selectedAssignees: [User]?
-    private var saveOperation: ((Issue) -> Void)?
+    private var saveOperation: ((NewIssue) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -230,7 +230,7 @@ final class IssueControlViewController: UIViewController {
         ])
     }
     
-    func setSaveOperation(_ operation: @escaping (Issue) -> Void) {
+    func setSaveOperation(_ operation: @escaping (NewIssue) -> Void) {
         self.saveOperation = operation
     }
     
@@ -243,8 +243,14 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func saveButtonTouched(_ sender: UIButton) {
-        guard let saveOperation = saveOperation else { return }
-        //saveOperation(tempIssue)
+        guard let saveOperation = saveOperation,
+              let title = titleTextField.text else { return }
+        let newIssue = NewIssue(title: title,
+                                comment: bodyTextView.text,
+                                assigneeIds: selectedAssignees?.map{ $0.id },
+                                labelIds: selectedLabels?.map{ $0.id },
+                                milestoneId: selectedMilestone?.first?.id)
+        saveOperation(newIssue)
         popCurrentViewController()
     }
     

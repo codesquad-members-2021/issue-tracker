@@ -167,8 +167,16 @@ extension IssueViewController {
         })
     }
     
-    private func postIssue(_ issue: Issue) {
-        
+    private func postIssue(_ newIssue: NewIssue) {
+        let postIssueEndpoint = EndPoint.issue.path()
+        networkManager?.post(endpoint: postIssueEndpoint, requestBody: newIssue, completion: { [weak self] (result: Result<Void, NetworkError>) in
+            switch result {
+            case .success(_):
+                self?.loadIssues()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
     }
 }
     

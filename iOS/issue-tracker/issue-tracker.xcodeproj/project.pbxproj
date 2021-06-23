@@ -64,6 +64,7 @@
 		E4969592268318A4001AEB89 /* SimpleAssigneeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4969591268318A4001AEB89 /* SimpleAssigneeTableViewCell.swift */; };
 		E496959426831AE7001AEB89 /* SimpleAssigneeTableDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496959326831AE7001AEB89 /* SimpleAssigneeTableDatasource.swift */; };
 		E496959726832693001AEB89 /* IssueTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496959626832693001AEB89 /* IssueTableViewDelegate.swift */; };
+		E496959926832B5A001AEB89 /* NewIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496959826832B5A001AEB89 /* NewIssue.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
@@ -146,6 +147,7 @@
 		E4969591268318A4001AEB89 /* SimpleAssigneeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAssigneeTableViewCell.swift; sourceTree = "<group>"; };
 		E496959326831AE7001AEB89 /* SimpleAssigneeTableDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAssigneeTableDatasource.swift; sourceTree = "<group>"; };
 		E496959626832693001AEB89 /* IssueTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewDelegate.swift; sourceTree = "<group>"; };
+		E496959826832B5A001AEB89 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarCreator.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				FAF927AE2681DA810017F8DE /* Issue.swift */,
+				E496959826832B5A001AEB89 /* NewIssue.swift */,
 				E496958F268317C1001AEB89 /* User.swift */,
 			);
 			path = Model;
@@ -504,11 +507,11 @@
 		FAF927A72680D9630017F8DE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E496956A2680B3FE001AEB89 /* IssueEditing */,
 				E42AD11D267093320071B436 /* IssueViewController.swift */,
 				E496959626832693001AEB89 /* IssueTableViewDelegate.swift */,
 				FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */,
 				FAF927B026831A570017F8DE /* IssueDetailViewController.swift */,
+				E496956A2680B3FE001AEB89 /* IssueEditing */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E496959926832B5A001AEB89 /* NewIssue.swift in Sources */,
 				FAB2C36A26789D41009F879C /* MileStoneTableViewCell.swift in Sources */,
 				FAF927AB2680DB1C0017F8DE /* IssueTableViewDataSource.swift in Sources */,
 				E426DAD126730DC50069E77D /* OAuthResponseDTO.swift in Sources */,
