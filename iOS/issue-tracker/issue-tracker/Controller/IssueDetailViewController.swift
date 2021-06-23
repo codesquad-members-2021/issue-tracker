@@ -79,7 +79,6 @@ final class IssueDetailViewController: UIViewController {
 
         setupAutolayout()
         setupKeyboardNotification()
-        fetchData()
         bind()
 
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
@@ -102,18 +101,18 @@ final class IssueDetailViewController: UIViewController {
         controller.modalPresentationStyle = .custom
         present(controller, animated: true, completion: nil)
     }
+
+    func fetchData(id: Int) {
+        viewModel.fetch(id: id)
+    }
 }
 
 private extension IssueDetailViewController {
-    func fetchData() {
-        viewModel.fetch()
-    }
-
     func bind() {
         viewModel.subject.bind { [weak self] detail in
             guard let detail = detail?.data else { return }
             self?.navigationItem.title = detail.title
-            self?.isOpened.text = detail.isOpen ? "Open" : "Closed"
+            self?.isOpened.text = detail.open ? "Open" : "Closed"
             self?.authorLabel.text = "\(detail.author.name)님이 작성했습니다."
             guard let comment = detail.comment else { return }
             self?.comment = comment

@@ -64,14 +64,16 @@ final class IssueListViewController: UIViewController {
         issueTableView.rx.itemSelected
             .bind { [weak self] indexPath in
                 guard let self = self, let cell = self.issueTableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
+                let issue = self.issueListViewModel.issueList.value[indexPath.row]
                 if self.issueListViewModel.selectMode.value {
-                    let issue = self.issueListViewModel.issueList.value[indexPath.row]
                     self.issueListViewModel.selectedCell.accept(self.issueListViewModel.selectedCell.value + [issue])
                     cell.selectionStyle = .none
                     cell.check()
                 } else {
+                    guard let id = issue.id else { return }
                     cell.selectionStyle = .none
                     let controller = IssueDetailViewController()
+                    controller.fetchData(id: id)
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             }

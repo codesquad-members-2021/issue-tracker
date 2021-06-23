@@ -56,7 +56,7 @@ class NetworkManager: Networkable {
                 }
             }
     }
-    
+
     func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void) {
         AF.request(url, method: .patch, parameters: encodable, encoder: JSONParameterEncoder.default)
             .validate(statusCode: 200..<300)

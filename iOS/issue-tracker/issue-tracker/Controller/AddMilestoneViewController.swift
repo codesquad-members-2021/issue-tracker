@@ -65,7 +65,7 @@ extension AddMilestoneViewController: UITableViewDataSource {
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .subscribe(onNext: { text in
                     let key = textLabel[indexPath.row]
-                    self.viewModel.model[key] = text
+                    self.viewModel.milestone[key] = text
                 })
                 .disposed(by: disposeBag)
         }

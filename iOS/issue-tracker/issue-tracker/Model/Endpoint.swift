@@ -30,6 +30,7 @@ struct Endpoint {
         case login = "/login"
         case label = "/label"
         case issue = "/issue"
+        case milestone = "/milestone"
 
         var pathString: String {
             return self.rawValue
