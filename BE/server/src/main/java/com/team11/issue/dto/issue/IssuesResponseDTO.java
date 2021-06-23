@@ -11,10 +11,10 @@ import java.util.List;
 @Getter
 public class IssuesResponseDTO {
 
-    private final List<IssueResponseDTO> issues;
+    private final List<IssueDetailResponseDTO> issues;
 
 
-    public static IssuesResponseDTO from(List<IssueResponseDTO> issues) {
+    public static IssuesResponseDTO from(List<IssueDetailResponseDTO> issues) {
         return IssuesResponseDTO.builder()
                 .issues(issues)
                 .build();

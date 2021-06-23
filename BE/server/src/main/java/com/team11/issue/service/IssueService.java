@@ -213,10 +213,10 @@ public class IssueService {
 
 
     public IssuesResponseDTO showAllIssue() {
-        List<IssueResponseDTO> issueResponseDTOS = findAllIssue().stream()
-                .map(issue -> IssueResponseDTO.from(issue, findHistory(issue.getId()), getMilestoneResponseDTO(issue), findIssueHasLabel(issue.getId())))
+        List<IssueDetailResponseDTO> issueDetailResponseDTOS = findAllIssue().stream()
+                .map(issue -> showIssue(issue.getId()))
                 .collect(Collectors.toList());
-        return IssuesResponseDTO.from(issueResponseDTOS);
+        return IssuesResponseDTO.from(issueDetailResponseDTOS);
     }
 
 
