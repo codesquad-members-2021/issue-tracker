@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import {
   Menu,
@@ -34,7 +35,6 @@ function MilestoneFilter() {
     if (toggleBoolean)
       setQuery({
         ...query,
-        closed: null,
         milestone: Number(checkNumber),
       });
 
@@ -61,14 +61,18 @@ function MilestoneFilter() {
           <MenuTitle>마일스톤 필터</MenuTitle>
           {data.map(({ id, title }) => {
             return (
-              <MenuItem
-                key={id}
-                onClick={handleClickCheckBox}
-                {...menuItemStyle}
-              >
-                {title}
-                <Checkbox id={id} checked={isChecked[id]} {...checkBoxStyle} />
-              </MenuItem>
+              <ModalWrap key={id} onClick={handleClickCheckBox} id={id}>
+                <Checkbox
+                  className="checkBox"
+                  id={id}
+                  checked={isChecked[id]}
+                  {...checkBoxStyle}
+                >
+                  <MenuItem {...menuItemStyle} pointerEvents="none">
+                    {title}
+                  </MenuItem>
+                </Checkbox>
+              </ModalWrap>
             );
           })}
         </MenuList>
@@ -82,3 +86,12 @@ export default MilestoneFilter;
 export type CheckBoxs = {
   [id: string]: boolean;
 };
+
+const ModalWrap = styled.div`
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gr_inputBackground};
+  }
+`;
