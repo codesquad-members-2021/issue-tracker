@@ -295,9 +295,9 @@
 		E42AD11926708EBA0071B436 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				E496956B2680B40D001AEB89 /* Model */,
-				E496956C26819042001AEB89 /* View */,
-				E496956A2680B3FE001AEB89 /* Controller */,
+				E496956B2680B40D001AEB89 /* Model2 */,
+				E496956C26819042001AEB89 /* View2 */,
+				E496956A2680B3FE001AEB89 /* Controller2 */,
 				E42AD11D267093320071B436 /* IssueViewController.swift */,
 			);
 			path = Issue;
@@ -383,7 +383,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E496956A2680B3FE001AEB89 /* Controller */ = {
+		E496956A2680B3FE001AEB89 /* Controller2 */ = {
 			isa = PBXGroup;
 			children = (
 				E49695662680B0B7001AEB89 /* IssueControlViewController.swift */,
@@ -394,19 +394,19 @@
 				E496959326831AE7001AEB89 /* SimpleAssigneeTableDatasource.swift */,
 				E49695872682FDC9001AEB89 /* CellSelectionTableDelegate.swift */,
 			);
-			path = Controller;
+			path = Controller2;
 			sourceTree = "<group>";
 		};
-		E496956B2680B40D001AEB89 /* Model */ = {
+		E496956B2680B40D001AEB89 /* Model2 */ = {
 			isa = PBXGroup;
 			children = (
 				E49695682680B3FB001AEB89 /* Issue.swift */,
 				E496958F268317C1001AEB89 /* User.swift */,
 			);
-			path = Model;
+			path = Model2;
 			sourceTree = "<group>";
 		};
-		E496956C26819042001AEB89 /* View */ = {
+		E496956C26819042001AEB89 /* View2 */ = {
 			isa = PBXGroup;
 			children = (
 				E496956D2681905A001AEB89 /* IssueInfoView.swift */,
@@ -414,7 +414,7 @@
 				E496958B26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift */,
 				E4969591268318A4001AEB89 /* SimpleAssigneeTableViewCell.swift */,
 			);
-			path = View;
+			path = View2;
 			sourceTree = "<group>";
 		};
 		E496958A26830B81001AEB89 /* Protocol */ = {
