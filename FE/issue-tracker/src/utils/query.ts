@@ -1,4 +1,5 @@
-import type { QuerySet, QueryReduce } from '@store/atoms/issueList';
+import { QuerySet, QueryReduce, formerDataKey } from '@store/atoms/issueList';
+import { useSetRecoilState } from 'recoil';
 
 const getQueryWhichHasValue = (queryObj: QuerySet) => {
   return Object.entries(queryObj)
@@ -23,4 +24,14 @@ const pushState = (query: string) => {
   window.history.pushState({ query }, query, `?${query}`);
 };
 
-export { getQueryWhichHasValue, getQueryStringified, pushState };
+const useReRender = (query: string) => {
+  const setReRenderKeyUpdate = useSetRecoilState(formerDataKey);
+  const currentQuery = window.location.search;
+  if (`?${query}` === currentQuery) return;
+
+  window.history.pushState({ query }, query, `?${query}`);
+  setReRenderKeyUpdate((num) => num + 1);
+  return null;
+};
+
+export { getQueryWhichHasValue, getQueryStringified, pushState, useReRender };
