@@ -6,8 +6,6 @@ import com.team11.issue.domain.Issue;
 import com.team11.issue.domain.IssueHasLabel;
 import com.team11.issue.dto.history.HistoryResponseDTO;
 import com.team11.issue.dto.label.LabelResponseDTO;
-import com.team11.issue.dto.label.LabelsResponseDTO;
-import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +32,7 @@ public class IssueResponseDTO {
         return isOpen;
     }
 
-    private static List<LabelResponseDTO> convertLabels(List<IssueHasLabel> issueHasLabels){
+    private static List<LabelResponseDTO> convertLabels(List<IssueHasLabel> issueHasLabels) {
         return issueHasLabels.stream()
                 .map(issueHasLabel -> LabelResponseDTO.from(issueHasLabel.getLabel()))
                 .collect(Collectors.toList());

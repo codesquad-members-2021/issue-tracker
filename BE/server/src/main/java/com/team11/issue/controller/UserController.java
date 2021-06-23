@@ -1,8 +1,6 @@
 package com.team11.issue.controller;
 
-import com.team11.issue.domain.Issue;
 import com.team11.issue.dto.ResponseDTO;
-import com.team11.issue.dto.issue.IssueResponseDTO;
 import com.team11.issue.dto.user.LoginRequestDTO;
 import com.team11.issue.dto.user.LoginResponseDTO;
 import com.team11.issue.dto.user.UsersResponseDTO;
@@ -39,7 +37,7 @@ public class UserController {
 
     @PutMapping("/user/logout")
     @ApiOperation(value = "로그아웃", notes = "jwt token을 가지고 로그아웃을 합니다.")
-    public ResponseEntity<ResponseDTO> logout(@ApiParam(hidden=true) @RequestAttribute String userName) {
+    public ResponseEntity<ResponseDTO> logout(@ApiParam(hidden = true) @RequestAttribute String userName) {
         logger.info("로그아웃 요청");
         userService.logout(userName);
         return ResponseEntity.ok().body(new ResponseDTO("logout"));
@@ -48,6 +46,7 @@ public class UserController {
     @GetMapping("/users")
     @ApiOperation(value = "User 전체 목록 조회", notes = "유저 전체 목록을 조회합니다.")
     public ResponseEntity<UsersResponseDTO> userList() {
+        logger.info("User 전체 목록 조회 요청");
         return ResponseEntity.ok().body(userService.userList());
     }
 

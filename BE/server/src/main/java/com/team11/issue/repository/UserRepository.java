@@ -1,7 +1,6 @@
 package com.team11.issue.repository;
 
 import com.team11.issue.domain.User;
-import com.team11.issue.dto.user.UsersResponseDTO;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -36,7 +36,7 @@ public class GitHubOauthUtil {
 
 
     public void setGitHubOauthInfo(String type) {
-        if(type == null){
+        if (type == null) {
             throw new OauthException("잘못된 헤더의 요청을 보내셨습니다.");
         }
 

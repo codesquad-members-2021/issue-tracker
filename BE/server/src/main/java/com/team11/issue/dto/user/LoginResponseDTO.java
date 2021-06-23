@@ -6,7 +6,7 @@ import com.team11.issue.domain.User;
 import lombok.Getter;
 
 @Getter
-@JsonPropertyOrder({"userId","userName","email","profileImage","jwtToken"})
+@JsonPropertyOrder({"userId", "userName", "email", "profileImage", "jwtToken"})
 public class LoginResponseDTO {
 
     @JsonProperty("userId")

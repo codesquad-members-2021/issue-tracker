@@ -19,22 +19,22 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
         String token = getJwtToken(request);
         String userName = JwtUtil.getUserIdFromJwtToken(token);
-        request.setAttribute("userName",userName);
+        request.setAttribute("userName", userName);
         return true;
 
     }
 
     /*
-    * TODO: 사용자 정의 exception 처리
-    * */
+     * TODO: 사용자 정의 exception 처리
+     * */
     private String getJwtToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
 
-        if (authorizationHeader == null){
+        if (authorizationHeader == null) {
             throw new RuntimeException("토큰이 없습니다.");
         }
 
-        if (!authorizationHeader.startsWith("Bearer ")){
+        if (!authorizationHeader.startsWith("Bearer ")) {
             throw new RuntimeException("토큰 타입이 이상합니다.");
         }
 

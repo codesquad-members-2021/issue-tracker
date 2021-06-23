@@ -1,11 +1,9 @@
 package com.team11.issue.dto.milestone;
 
-import com.team11.issue.domain.Milestone;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter

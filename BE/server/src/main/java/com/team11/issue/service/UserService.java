@@ -27,7 +27,7 @@ public class UserService {
     }
 
     private String getAccessToken(String userAgent, LoginRequestDTO loginRequestDTO) {
-        return gitHubOauth.getAccessToken(userAgent,loginRequestDTO).orElseThrow(() -> new AccessTokenNotFoundException());
+        return gitHubOauth.getAccessToken(userAgent, loginRequestDTO).orElseThrow(() -> new AccessTokenNotFoundException());
     }
 
     private UserInfoDTO getUserInfoFromGitHub(String accessToken) {
@@ -67,6 +67,7 @@ public class UserService {
         return new LoginResponseDTO(user, createJwtToken(user.getName()));
 
     }
+
     public void logout(String userName) {
         User user = findByName(userName);
         user.removeAccessToken();
@@ -76,8 +77,8 @@ public class UserService {
 
     public UsersResponseDTO userList() {
         List<UserResponseDTO> userResponseDTOS = userRepository.findAll().stream()
-        .map(user -> UserResponseDTO.from(user))
-        .collect(Collectors.toList());
+                .map(user -> UserResponseDTO.from(user))
+                .collect(Collectors.toList());
         return UsersResponseDTO.from(userResponseDTOS);
     }
 }
