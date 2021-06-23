@@ -23,6 +23,8 @@ class IssueTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellID = IssueTableViewCell.reuseID
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? IssueTableViewCell ?? IssueTableViewCell()
+        let issue = issues[indexPath.row]
+        cell.configure(title: issue.title ?? "", mileStoneName: issue.milestone?.title ?? "", labels: issue.labels ?? [])
         return cell
     }
     

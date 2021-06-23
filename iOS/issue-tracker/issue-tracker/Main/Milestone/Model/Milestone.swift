@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct MileStoneDTO: Decodable {
     let data: [MileStone]?
     let message: String?
