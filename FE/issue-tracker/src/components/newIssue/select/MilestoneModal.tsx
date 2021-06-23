@@ -37,6 +37,7 @@ function MilestoneModal({ milestones, errorMsg }: Props) {
   };
 
   return (
+
     <MenuList {...modalStyle} onClick={handleClickMenuItem}>
       <MenuTitle>{modalTitle}</MenuTitle>
       {milestones &&

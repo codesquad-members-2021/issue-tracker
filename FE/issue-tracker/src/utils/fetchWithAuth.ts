@@ -8,11 +8,15 @@ export const fetchWithAuth = async (
   errorMsg: string,
   options = {}
 ) => {
-  const token = localStorage.getItem('oauth_login');
+  const token = localStorage.getItem('oauth_login_token');
   const requestHeader = {
     Authorization: `bearer ${token}`,
+    'Content-Type': 'application/json',
   };
-  const optionWithHeaders = { ...options, headers: requestHeader };
+  const optionWithHeaders = {
+    ...options,
+    headers: { ...requestHeader },
+  };
   try {
     const res = await fetch(url, optionWithHeaders);
     handleError(res.status, errorMsg);

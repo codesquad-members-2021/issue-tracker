@@ -10,11 +10,22 @@ const menuBtnStyle = {
 };
 
 const menuItemStyle = {
+  width: '100%',
+  height: '100%',
   display: 'flex',
   justifyContent: 'space-between',
+  background: 'none',
+  _hover: {
+    bg: 'none',
+  },
+  _focus: {
+    bg: 'none',
+  },
 };
 
 const checkBoxStyle = {
+  width: '100%',
+  height: '100%',
   colorScheme: 'cyan',
   borderColor: 'gr_label',
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Avatar } from '@chakra-ui/react';
 import TextBox from '@components/newIssue/TextBox';
 
