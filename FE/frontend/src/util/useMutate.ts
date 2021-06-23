@@ -61,6 +61,16 @@ const useMutate =
         switch (action) {
         }
         return;
+      case 'comment':
+        switch (action) {
+          case 'add':
+            return axios.post(
+              `${url}/issues/${id}/comments`,
+              data,
+              axiosConfig
+            );
+        }
+        return;
       case 'common':
         switch (action) {
         }

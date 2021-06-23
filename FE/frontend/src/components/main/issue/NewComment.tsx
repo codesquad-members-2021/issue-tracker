@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import useMutate from '../../../util/useMutate';
 import Typos from '../../../styles/atoms/Typos';
 import User from '../../../styles/atoms/User';
@@ -10,23 +9,28 @@ import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as Paperclip } from '../../../icons/paperclip.svg';
 import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
-const AddIssue = () => {
+interface Props {
+  issueId: number;
+}
+
+const NewComment = (props: Props) => {
+  const userData = localStorage.getItem('userData');
+  const foo = userData && JSON.parse(userData);
+
   const [inputCount, setInputCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [initial, setInitial] = useState(false);
   const [input, setInput] = useState({
-    assignee_ids: [],
-    comment: '',
+    user_id: foo.id,
+    content: '',
     file: '',
-    label_ids: [],
-    milestone_id: 0,
-    title: '',
   });
 
+  const queryClient = useQueryClient();
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
   let history = useHistory();
 
-  const { mutateAsync, isSuccess } = useMutation(useMutate('issue', 'add'));
+  const { mutateAsync, isSuccess } = useMutation(useMutate('comment', 'add'));
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const valueCount = e.target.value.length;
@@ -59,33 +63,21 @@ const AddIssue = () => {
   };
 
   const registerNewIssue = () => {
-    mutateAsync({ data: input });
-    if (isSuccess) {
-      history.push('/main');
-    }
+    mutateAsync({ data: input, id: props.issueId });
+    // if (isSuccess) {
+    //   queryClient.invalidateQueries(['issue', 'detail'], props.issueId);
+    // }
   };
 
   return (
     <AddIssueContainer>
-      <TopContainer>
-        <Title>새로운 이슈 작성</Title>
-      </TopContainer>
-      <Line />
       <MainContainer>
         <User />
         <InputContainer>
-          <TitleInput
-            placeholder="제목"
-            onChange={e => {
-              setInput({ ...input, title: e.target.value });
-              debounce(e, () => {
-                setButtonStatus(e);
-              });
-            }}></TitleInput>
           <CommentInput
-            value={input.comment}
+            value={input.content}
             onChange={e => {
-              setInput({ ...input, comment: e.target.value });
+              setInput({ ...input, content: e.target.value });
               debounce(e, () => {
                 setButtonStatus(e);
                 countInput(e);
@@ -105,7 +97,7 @@ const AddIssue = () => {
                 files &&
                   setInput({
                     ...input,
-                    comment: `${input.comment}\n![${files[0].name}]`,
+                    content: `${input.content}\n![${files[0].name}]`,
                   });
               }}
               //서버 업로드 및 pile-pathname 추가 필요
@@ -116,22 +108,16 @@ const AddIssue = () => {
             </LabelContainer>
           </FileSection>
         </InputContainer>
-        <Assignees></Assignees>
       </MainContainer>
-      <Line />
       <BottomContainer>
-        <CancelButtonContainer to={`/main`}>
-          <Typos sm>
-            <XSquare />
-            작성 취소
-          </Typos>
-        </CancelButtonContainer>
         <Buttons
           disabled={disabled}
           initial={initial}
-          medium
-          onClick={registerNewIssue}>
-          완료
+          small
+          onClick={(e: Event) => {
+            registerNewIssue();
+          }}>
+          코멘트 작성
         </Buttons>
       </BottomContainer>
     </AddIssueContainer>
@@ -141,23 +127,6 @@ const AddIssue = () => {
 const AddIssueContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const TopContainer = styled.div`
-  padding: 0px 48px;
-`;
-
-const Title = styled.div`
-  font-size: 32px;
-  line-height: 48px;
-  color: ${props => props.theme.greyscale.titleActive};
-`;
-
-const Line = styled.div`
-  height: 1px;
-  margin-top: 32px;
-  margin: 24px 48px;
-  background: ${props => props.theme.greyscale.line};
 `;
 
 const MainContainer = styled.div`
@@ -173,20 +142,6 @@ const InputContainer = styled.form`
   position: relative;
   width: 880px;
   font-size: 16px;
-`;
-
-const TitleInput = styled.input`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 24px;
-  margin-bottom: 16px;
-  width: 880px;
-  height: 56px;
-  font-size: 16px;
-  background: ${props => props.theme.greyscale.inputBackground};
-  border-radius: 14px;
 `;
 
 const CommentInput = styled.textarea`
@@ -224,22 +179,11 @@ const LabelContainer = styled.label`
   display: flex;
 `;
 
-const Assignees = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 32px;
-  width: 308px;
-  background: ${props => props.theme.greyscale.offWhite};
-  border-radius: 16px 16px 0px 0px;
-  margin: 1px 0px;
-`;
-
 const BottomContainer = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0px 60px;
+  padding: 20px 0px;
   border: none;
   background: none;
 
@@ -248,12 +192,4 @@ const BottomContainer = styled.button`
   }
 `;
 
-const CancelButtonContainer = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  & > div {
-    padding: 0 24px;
-  }
-`;
-
-export default AddIssue;
+export default NewComment;

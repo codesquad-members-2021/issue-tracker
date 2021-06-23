@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useMutation, useQueryClient } from 'react-query';
+import NewComment from './NewComment';
 import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
@@ -18,9 +19,13 @@ const IssueDetail = () => {
   const { isLoading, data, error } = useFetch('issue', 'detail', {
     id: location.pathname,
   });
-  const { mutateAsync, isError, isSuccess } = useMutation(
+
+  const { mutateAsync: MutateTitle, isSuccess: isEditSuccess } = useMutation(
     useMutate('issue', 'editTitle')
   );
+
+  const { mutateAsync: MutateIntoClosed, isSuccess: isCloseSuccess } =
+    useMutation(useMutate('issue', 'close'));
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editedTitle, setEditedTitle] = useState(data?.title);
@@ -29,9 +34,9 @@ const IssueDetail = () => {
   };
 
   const editTitle = async (id: number) => {
-    await mutateAsync({ data: editedTitle, id: id });
+    await MutateTitle({ data: editedTitle, id: id });
 
-    if (isSuccess) {
+    if (isEditSuccess) {
       queryClient.invalidateQueries(['issue', 'detail']);
       setEditOpen();
     }
@@ -83,6 +88,9 @@ const IssueDetail = () => {
                     <Buttons small detail>
                       이슈 닫기
                     </Buttons>
+                    <Buttons small detail>
+                      이슈 열기
+                    </Buttons>
                   </>
                 )}
                 {isEditOpen && (
@@ -126,6 +134,7 @@ const IssueDetail = () => {
                   </SingleComment>
                 );
               })}
+              <NewComment issueId={data.id} />
             </CommentsContainer>
             <Assignees></Assignees>
           </MainContainer>
