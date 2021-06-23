@@ -21,6 +21,8 @@ final class AddLabelViewController: UIViewController {
     private var estimatedLabelView = EstimatedLabelView()
     private var bag = DisposeBag()
     private var saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
+    private var cancelButton = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
+    var reloadDataHandler: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,7 @@ final class AddLabelViewController: UIViewController {
         self.addLabelViewModel = AddLabelViewModel(networkManager: NetworkManager())
 
         navigationItem.title = "새로운 레이블"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로",
-                                                                style: .plain,
-                                                                target: self,
-                                                                action: nil)
+        self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = saveButton
 
         tableView.dataSource = self
@@ -39,6 +38,7 @@ final class AddLabelViewController: UIViewController {
         view.addSubview(estimatedLabelView)
         configureAutolayout()
         binding()
+        bindButton()
     }
 
     private func binding() {
@@ -46,12 +46,20 @@ final class AddLabelViewController: UIViewController {
             .map { UIColor.hexStringToUIColor(hex: $0)}
             .bind(to: estimatedLabelView.getLabel().rx.backgroundColor)
             .disposed(by: bag)
+    }
 
+    func bindButton() {
         saveButton.rx.tap
             .subscribe { [weak self] _ in
                 self?.addLabelViewModel.postAddedLabel(completion: {
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.dismiss(animated: true, completion: self?.reloadDataHandler)
                 })
+            }
+            .disposed(by: bag)
+
+        cancelButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
             }
             .disposed(by: bag)
     }
