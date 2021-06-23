@@ -65,3 +65,8 @@ export const milestoneCountState = atom({
 	key: "milestoneCountState",
 	default: 0,
 });
+
+export const labelCountState = atom({
+	key: "labelCountState",
+	default: 0,
+});

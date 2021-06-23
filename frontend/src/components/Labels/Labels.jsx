@@ -9,16 +9,19 @@ import {
 	labelInitialData,
 	labelAddButtonFlagState,
 	labelEditButtonFlagState,
+	labelCountState,
 } from "RecoilStore/Atoms";
 import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 
 const Labels = () => {
 	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
 	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
+	const [labelCount, setLabelCount] = useRecoilState(labelCountState);
 
 	const getLabelData = async () => {
 		const { labels } = await fetchData(API.labels(), "GET");
 		setLabelInitialData(labels);
+		setLabelCount(labels.length);
 	};
 
 	useEffect(() => {
@@ -29,7 +32,7 @@ const Labels = () => {
 		<>
 			{labelAddBtnFlag ? <LabelInput initialData={initialData} /> : <></>}
 			<StyledGridTitleCard gridRate={[1]}>
-				<HeaderTitle>N개의 레이블</HeaderTitle>
+				<HeaderTitle>{labelCount}개의 레이블</HeaderTitle>
 			</StyledGridTitleCard>
 			{initialData &&
 				initialData.map(data => (

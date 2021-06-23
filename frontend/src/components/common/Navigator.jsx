@@ -9,6 +9,7 @@ import {
 	milestoneAddButtonFlagState,
 	labelAddButtonFlagState,
 	navigatorAddButtonFlagState,
+	labelCountState,
 } from "RecoilStore/Atoms";
 import { useState } from "react";
 import { milestoneCountState } from "RecoilStore/Atoms";
@@ -28,10 +29,8 @@ const Navigator = () => {
 	const [labelAddBtnFlag, setLabelAddBtnFlag] = useRecoilState(
 		labelAddButtonFlagState
 	);
-	//밑에 하나로 묶어도 될 것 같음
-
+	const labelCount = useRecoilValue(labelCountState);
 	const milestoneCountValue = useRecoilValue(milestoneCountState);
-
 
 	const handleMilestoneClick = () => {
 		setMilestoneFlag(true);
@@ -48,7 +47,6 @@ const Navigator = () => {
 			? setMilestoneAddBtnFlag(!milestoneAddBtnFlag)
 			: setLabelAddBtnFlag(!labelAddBtnFlag);
 		setAddButtonFlag(!addButtonFlag);
-
 	};
 
 	return (
@@ -57,7 +55,7 @@ const Navigator = () => {
 			<ButtonGroup
 				milestoneCount={milestoneCountValue}
 				milestoneClickEvent={handleMilestoneClick}
-				labelCount={"N"}
+				labelCount={labelCount}
 				labelClickEvent={handleLabelClick}
 				isMainPage={false}
 			/>
