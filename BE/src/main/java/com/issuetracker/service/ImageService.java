@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.issuetracker.domain.image.Image;
 import com.issuetracker.domain.image.ImageRepository;
+import com.issuetracker.web.dto.response.ImageResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +37,7 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public String upload(MultipartFile multipartFile) throws IOException {
+    public ImageResponseDTO upload(MultipartFile multipartFile) throws IOException {
         ObjectMetadata data = new ObjectMetadata();
         data.setContentType(multipartFile.getContentType());
         data.setContentLength(multipartFile.getSize());
@@ -50,7 +51,7 @@ public class ImageService {
         String imageName = getImageName(multipartFile);
         s3client.putObject(bucket, imageName, multipartFile.getInputStream(), data);
         Image image = saveImageUrl(defaultUrl + "/" + imageName);
-        return image.getImageUrl();
+        return new ImageResponseDTO(image.getImageUrl());
     }
 
     private String getImageName(MultipartFile multipartFile) {

@@ -1,6 +1,7 @@
 package com.issuetracker.web;
 
 import com.issuetracker.service.ImageService;
+import com.issuetracker.web.dto.response.ImageResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,7 @@ public class ImageController {
     private final ImageService imageService;
 
     @PostMapping("/api/images")
-    public String upload(@RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public ImageResponseDTO upload(@RequestParam("image") MultipartFile multipartFile) throws IOException {
         return imageService.upload(multipartFile);
     }
 }
