@@ -39,7 +39,7 @@ public class UserController {
 
     @PutMapping("/user/logout")
     @ApiOperation(value = "로그아웃", notes = "jwt token을 가지고 로그아웃을 합니다.")
-    public ResponseEntity<ResponseDTO> logout(@RequestAttribute String userName) {
+    public ResponseEntity<ResponseDTO> logout(@ApiParam(hidden=true) @RequestAttribute String userName) {
         logger.info("로그아웃 요청");
         userService.logout(userName);
         return ResponseEntity.ok().body(new ResponseDTO("logout"));
