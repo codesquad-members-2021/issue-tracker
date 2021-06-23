@@ -20,3 +20,15 @@ export const IssueHeader = styled.div`
 	padding: ${({ theme }) => `${theme.fontSizes.titleSize} 0px`};
 	font-size: ${({ theme }) => theme.fontSizes.titleSize};
 `;
+
+export const ImgWrapper = styled.div`
+	width: 44px;
+	height: 44px;
+	border: 1px solid ${({ theme }) => theme.grayScale.line};
+	border-radius: 50%;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+`;

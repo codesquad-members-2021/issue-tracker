@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DisplayFlex, CenterAi } from "styles/StyledLayout ";
+import { DisplayFlex, CenterAi } from "styles/StyledLayout";
 import { ReactComponent as RefreshIcon } from "images/refresh-ccw.svg";
 import { useEffect, useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
