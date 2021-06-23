@@ -5,6 +5,7 @@ import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneRequestDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
 import com.team11.issue.dto.milestone.MilestonesResponseDTO;
+import com.team11.issue.exception.MilestoneNotFoundException;
 import com.team11.issue.repository.IssueRepository;
 import com.team11.issue.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class MilestoneService {
     private final IssueRepository issueRepository;
 
     private Milestone findMilestone(Long milestoneId) {
-        return milestoneRepository.findById(milestoneId).orElseThrow(RuntimeException::new);
+        return milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
     }
 
     private IssueCountResponseDTO getIssueCountResponseDTO(Long milestoneId) {
