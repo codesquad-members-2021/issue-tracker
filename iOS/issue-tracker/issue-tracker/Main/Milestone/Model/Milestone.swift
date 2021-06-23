@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MileStone: Decodable {
+struct MileStone: Decodable, Identifiable {
     let id: Int
     let title: String
     let description: String?
@@ -18,5 +18,9 @@ struct MileStone: Decodable {
         case title
         case description
         case dueDate = "due_date"
+    }
+    
+    func identifier() -> Int {
+        return id
     }
 }

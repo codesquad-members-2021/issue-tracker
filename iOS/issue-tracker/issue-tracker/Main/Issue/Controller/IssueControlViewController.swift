@@ -171,6 +171,7 @@ final class IssueControlViewController: UIViewController {
     
     private var currentIssue: Issue?
     private var selectedLabels: [Label]?
+    private var selectedMilestone: [MileStone]?
     private var saveOperation: ((Issue) -> Void)?
     
     override func viewDidLoad() {
@@ -296,7 +297,24 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func milestoneInfoTouched(_ sender: UIButton) {
+        let milestoneViewController = AdditionalInfoViewController<SimpleMilestoneTableViewCell, MileStone>()
+        let tableDatasource = SimpleMilestoneTableDatasource()
+        milestoneViewController.configure(withTitle: "마일스톤 선택",
+                                          preSelectedInfos: selectedMilestone ?? [],
+                                          tableDatasource: tableDatasource,
+                                          isMultiselectionAllowed: false,
+                                          endpoint: EndPoint.milestone)
+        milestoneViewController.setSaveOperation(updateMilestoneSelection)
         
+        DispatchQueue.main.async {
+            self.present(milestoneViewController, animated: true, completion: nil)
+        }
+    }
+    
+    private func updateMilestoneSelection(milestones: [MileStone]) {
+        guard let firstMilestone = milestones.first else { return }
+        self.selectedMilestone = milestones
+        milestoneInfoControl.changeInfoLabelText(to: firstMilestone.title)
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {

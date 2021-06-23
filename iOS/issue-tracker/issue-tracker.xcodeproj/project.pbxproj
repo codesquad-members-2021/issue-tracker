@@ -59,6 +59,8 @@
 		E49695842682DDAE001AEB89 /* SimpleLabelTableDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695832682DDAE001AEB89 /* SimpleLabelTableDatasource.swift */; };
 		E49695862682FD95001AEB89 /* SimpleInfoTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695852682FD95001AEB89 /* SimpleInfoTableDelegate.swift */; };
 		E49695882682FDC9001AEB89 /* CellSelectionTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49695872682FDC9001AEB89 /* CellSelectionTableDelegate.swift */; };
+		E496958C26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496958B26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift */; };
+		E496958E26830F28001AEB89 /* SimpleMilestoneTableDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E496958D26830F28001AEB89 /* SimpleMilestoneTableDatasource.swift */; };
 		E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */; };
 		E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */; };
 		E4F7E8EC26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */; };
@@ -132,6 +134,8 @@
 		E49695832682DDAE001AEB89 /* SimpleLabelTableDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLabelTableDatasource.swift; sourceTree = "<group>"; };
 		E49695852682FD95001AEB89 /* SimpleInfoTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInfoTableDelegate.swift; sourceTree = "<group>"; };
 		E49695872682FDC9001AEB89 /* CellSelectionTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectionTableDelegate.swift; sourceTree = "<group>"; };
+		E496958B26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMilestoneTableViewCell.swift; sourceTree = "<group>"; };
+		E496958D26830F28001AEB89 /* SimpleMilestoneTableDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMilestoneTableDatasource.swift; sourceTree = "<group>"; };
 		E4F7E8E726732B6300CE51C2 /* TabBarChildInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildInfo.swift; sourceTree = "<group>"; };
 		E4F7E8E92673394300CE51C2 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		E4F7E8EB26733A9700CE51C2 /* IssueTrackerTabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTabBarCreator.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 				E49695772682C4B0001AEB89 /* AdditionalInfoViewController.swift */,
 				E496958A26830B81001AEB89 /* Protocol */,
 				E49695832682DDAE001AEB89 /* SimpleLabelTableDatasource.swift */,
+				E496958D26830F28001AEB89 /* SimpleMilestoneTableDatasource.swift */,
 				E49695872682FDC9001AEB89 /* CellSelectionTableDelegate.swift */,
 			);
 			path = Controller;
@@ -398,6 +403,7 @@
 			children = (
 				E496956D2681905A001AEB89 /* IssueInfoView.swift */,
 				E496957D2682D8D1001AEB89 /* SimpleLabelTableViewCell.swift */,
+				E496958B26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -586,12 +592,14 @@
 				FA431FFD267F61150010EA91 /* String.swift in Sources */,
 				FAB2C36C2679F6CC009F879C /* MileStoneLabelView.swift in Sources */,
 				E426DAC72671F6A00069E77D /* LoginError.swift in Sources */,
+				E496958E26830F28001AEB89 /* SimpleMilestoneTableDatasource.swift in Sources */,
 				E43912D626789812003CD344 /* RequestManager.swift in Sources */,
 				E426DAC42671D95D0069E77D /* LoginService.swift in Sources */,
 				E42AD120267093430071B436 /* LabelViewController.swift in Sources */,
 				E43912D826789A83003CD344 /* EndPoint.swift in Sources */,
 				E49695842682DDAE001AEB89 /* SimpleLabelTableDatasource.swift in Sources */,
 				E426DABE2670EC830069E77D /* SocialLoginManagerDelegate.swift in Sources */,
+				E496958C26830DCE001AEB89 /* SimpleMilestoneTableViewCell.swift in Sources */,
 				FA733A30267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift in Sources */,
 				E49695782682C4B0001AEB89 /* AdditionalInfoViewController.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
