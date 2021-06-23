@@ -74,10 +74,6 @@ class MileStoneTableViewCell: UITableViewCell {
         return milestoneLabelView
     }()
     
-    static var reuseID: String {
-        return String(describing: self)
-    }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setViews()

@@ -14,6 +14,7 @@ enum EndPoint {
     case issue
     case label
     case milestone
+    case user
     case none
     
     func path() -> String {
@@ -26,6 +27,8 @@ enum EndPoint {
             return "/labels"
         case .milestone:
             return "/milestones"
+        case .user:
+            return "/users"
         case .none:
             return ""        
         }

@@ -51,10 +51,6 @@ class IssueTableViewCell: UITableViewCell {
         return label
     }()
     
-    static var reuseID: String {
-        return String(describing: self)
-    }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setViews()

@@ -84,7 +84,7 @@ class MileStoneViewController: UIViewController {
         let headers = [Header.authorization.key(): jwt.description]
         networkManager = NetworkManager(baseAddress: EndPoint.baseAddress, headers: headers)
     }
-        
+
     private func presentAlert(with errorMessage: String) {
         DispatchQueue.main.async {
             let alert = AlertFactory.create(body: errorMessage)
@@ -124,11 +124,10 @@ class MileStoneViewController: UIViewController {
 
 //MARK: - Network Methods
 extension MileStoneViewController {
-    
     private func loadMileStones() {
         let mileStoneListEndpoint =
             EndPoint.milestone.path()
-        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
+        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<CommonDTO<MileStone>, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let mileStone = result.data else { return }

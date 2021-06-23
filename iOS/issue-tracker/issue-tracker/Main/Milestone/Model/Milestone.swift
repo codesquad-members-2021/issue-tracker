@@ -7,17 +7,7 @@
 
 import Foundation
 
-struct MileStoneDTO: Decodable {
-    let data: [MileStone]?
-    let message: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case data
-        case message = "msg"
-    }
-}
-
-struct MileStone: Decodable {
+struct MileStone: Decodable, Identifiable {
     let id: Int
     let title: String
     let description: String?
@@ -30,4 +20,7 @@ struct MileStone: Decodable {
         case dueDate = "due_date"
     }
     
+    func identifier() -> Int {
+        return id
+    }
 }
