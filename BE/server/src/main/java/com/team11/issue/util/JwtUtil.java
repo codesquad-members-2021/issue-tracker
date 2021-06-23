@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.fasterxml.jackson.databind.node.TextNode;
+import com.team11.issue.exception.JWTTokenException;
 
 import java.util.Date;
 
@@ -29,15 +30,16 @@ public class JwtUtil {
         return decodedJWT.getClaims().get(CLAIM_KEY).as(TextNode.class).asText();
     }
 
-    // TODO: 사용자 정의 이셉션 적용(만료기한이 지났습니다)
     private static DecodedJWT verifyToken(String token) {
         try {
             JWTVerifier verifier = JWT.require(algorithmHS)
                     .acceptExpiresAt(10800)
                     .build();
             return verifier.verify(token);
-        } catch (JWTDecodeException | TokenExpiredException e) {
-            throw new RuntimeException();
+        } catch (TokenExpiredException e) {
+            throw new JWTTokenException("토큰 만료기한이 지났습니다. 다시 발급해주세요.");
+        } catch (JWTDecodeException e) {
+            throw new JWTTokenException("유효하지 않은 토큰입니다. 다시 발급해주세요.");
         }
     }
 }

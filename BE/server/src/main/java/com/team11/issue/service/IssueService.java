@@ -4,6 +4,7 @@ import com.team11.issue.domain.*;
 import com.team11.issue.dto.issue.*;
 import com.team11.issue.dto.milestone.IssueCountResponseDTO;
 import com.team11.issue.dto.milestone.MilestoneResponseDTO;
+import com.team11.issue.exception.*;
 import com.team11.issue.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,15 +27,15 @@ public class IssueService {
     private final CommentRepository commentRepository;
 
     private User findUser(Long userId) {
-        return userRepository.findById(userId).orElseThrow(RuntimeException::new);
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
     private User findUser(String userName) {
-        return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
+        return userRepository.findByName(userName).orElseThrow(UserNotFoundException::new);
     }
 
     private Issue findIssue(Long issueId) {
-        return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
+        return issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
     }
 
     private List<Issue> findAllIssue() {
@@ -42,11 +43,11 @@ public class IssueService {
     }
 
     private Label findLabel(Long labelId) {
-        return labelRepository.findById(labelId).orElseThrow(RuntimeException::new);
+        return labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
     }
 
     private Milestone findMilestone(Long milestoneId) {
-        return milestoneRepository.findById(milestoneId).orElseThrow(RuntimeException::new);
+        return milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
     }
 
     private Milestone findMilestone(IssueRequestDTO issueRequestDTO) {
@@ -81,6 +82,12 @@ public class IssueService {
                 .collect(Collectors.toList());
 
         return !assignees.isEmpty();
+    }
+
+    private void confirmAssignees(String userName, Issue issue, String errorMessage) {
+        if (!verifyAssignees(userName, issue)) {
+            throw new AssigneeIllegalException(errorMessage);
+        }
     }
 
     private void saveAssignees(IssueRequestDTO issueRequestDTO, Issue issue) {
@@ -168,9 +175,7 @@ public class IssueService {
     public void updateIssue(Long issueId, IssueRequestDTO issueRequestDTO, String userName) {
         Issue issue = findIssue(issueId);
 
-        if (!verifyAssignees(userName, issue)) {
-            throw new RuntimeException("assignees에 포함이 안되어있습니다.");
-        }
+        confirmAssignees(userName, issue, "로그인한 유저는 이슈 수정 권한이 없습니다.");
 
         Milestone milestone = findMilestone(issueRequestDTO);
         issue.updateIssue(issueRequestDTO, milestone);
@@ -188,9 +193,7 @@ public class IssueService {
     public void deleteIssue(Long issueId, String userName) {
         Issue issue = findIssue(issueId);
 
-        if (!verifyAssignees(userName, issue)) {
-            throw new RuntimeException("assignees에 포함이 안되어있습니다.");
-        }
+        confirmAssignees(userName, issue, "로그인한 유저는 이슈 삭제 권한이 없습니다.");
 
         issue.deleteIssue();
         issueRepository.save(issue);
