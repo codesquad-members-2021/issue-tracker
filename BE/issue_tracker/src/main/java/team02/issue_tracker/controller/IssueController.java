@@ -1,6 +1,7 @@
 package team02.issue_tracker.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
@@ -97,9 +98,9 @@ public class IssueController {
 
     @LoginRequired
     @GetMapping(params = {"is_open", "filter", "assignee", "label", "milestone", "writer"})
-    public ApiResult<List<IssueResponse>> searchIssues(@UserId Long userId, @RequestParam("is_open") Boolean isOpen, String filter,
-                                                       @RequestParam("assignee") Long assigneeId, @RequestParam("label") Long labelId,
-                                                       @RequestParam("milestone") Long milestoneId, @RequestParam("writer") Long writerId) {
+    public ApiResult<List<IssueResponse>> searchIssues(@UserId Long userId, @RequestParam("is_open") @Nullable Boolean isOpen, @Nullable String filter,
+                                                       @RequestParam("assignee") @Nullable Long assigneeId, @RequestParam("label") @Nullable Long labelId,
+                                                       @RequestParam("milestone") @Nullable Long milestoneId, @RequestParam("writer") @Nullable Long writerId) {
 
         List<IssueResponse> issueResponses = issueService.getFilteredIssues(userId, isOpen, filter, assigneeId, labelId, milestoneId, writerId);
         return ApiResult.success(issueResponses);
