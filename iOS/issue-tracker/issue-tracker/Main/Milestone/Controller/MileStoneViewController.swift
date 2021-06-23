@@ -88,7 +88,7 @@ class MileStoneViewController: UIViewController {
     func loadData() {
         let mileStoneListEndpoint =
             EndPoint.milestone.path()
-        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<MileStoneDTO, NetworkError>) in
+        networkManager?.get(endpoint: mileStoneListEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<CommonDTO<MileStone>, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let mileStone = result.data else { return }

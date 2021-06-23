@@ -7,17 +7,7 @@
 
 import Foundation
 
-struct LabelDTO: Decodable {
-    let data: [Label]?
-    let message: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case data
-        case message = "msg"
-    }
-}
-
-class Label: Decodable {
+struct Label: Decodable {
     private(set) var id: Int
     private(set) var title: String
     private(set) var body: String

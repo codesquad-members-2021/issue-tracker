@@ -136,7 +136,7 @@ extension LabelViewController {
     private func loadLabels() {
         let labelListEndpoint = EndPoint.label.path()
         networkManager?.get(endpoint: labelListEndpoint, queryParameters: nil,
-                            completion: { [weak self] (result: Result<LabelDTO, NetworkError>) in
+                            completion: { [weak self] (result: Result<CommonDTO<Label>, NetworkError>) in
             switch result {
             case .success(let result):
                 guard let labels = result.data else { return }

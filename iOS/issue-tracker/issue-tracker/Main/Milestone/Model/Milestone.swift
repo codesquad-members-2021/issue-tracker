@@ -7,17 +7,6 @@
 
 import Foundation
 
-
-struct MileStoneDTO: Decodable {
-    let data: [MileStone]?
-    let message: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case data
-        case message = "msg"
-    }
-}
-
 struct MileStone: Decodable {
     let id: Int
     let title: String
@@ -30,5 +19,4 @@ struct MileStone: Decodable {
         case description
         case dueDate = "due_date"
     }
-    
 }
