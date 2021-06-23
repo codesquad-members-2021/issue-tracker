@@ -24,6 +24,7 @@
 		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
 		B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */; };
 		B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */; };
+		B366CA41268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3926D6A2681B59800F72CEE /* PatchIssue.swift */; };
 		B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB57267840290060DC85 /* LabelListViewModel.swift */; };
 		B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB5A26784AA50060DC85 /* LabelList.swift */; };
@@ -114,6 +115,7 @@
 		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedLabelView.swift; sourceTree = "<group>"; };
 		B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelTableViewCell.swift; sourceTree = "<group>"; };
+		B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B3926D6A2681B59800F72CEE /* PatchIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchIssue.swift; sourceTree = "<group>"; };
 		B3A5CB57267840290060DC85 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		B3A5CB5A26784AA50060DC85 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		B32FEAC42671DCD200BF37A1 /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
+				B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				D04C6955267B2C560056DD79 /* ToolBarTextField.swift */,
 				B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */,
 				B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */,
@@ -677,6 +680,7 @@
 				B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */,
 				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
 				D0A88E0F26765325005877F6 /* UIKit+Extension.swift in Sources */,
+				B366CA41268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
 				B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */,
 				B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */,

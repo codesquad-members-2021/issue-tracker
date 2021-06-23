@@ -9,8 +9,8 @@ import UIKit
 
 final class LabelsCollectionView: UICollectionView {
 
-    private var labelsLayout: UICollectionViewFlowLayout = {
-        var layout = UICollectionViewFlowLayout()
+    private var labelsLayout: LeftAlignedCollectionViewFlowLayout = {
+        var layout = LeftAlignedCollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = CGSize(width: 60, height: 20)
         layout.minimumLineSpacing = 10
