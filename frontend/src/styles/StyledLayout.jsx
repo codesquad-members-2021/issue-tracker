@@ -22,10 +22,11 @@ export const IssueHeader = styled.div`
 `;
 
 export const ImgWrapper = styled.div`
-	width: 44px;
-	height: 44px;
+	width: ${props => props.size};
+	height: ${props => props.size};
 	border: 1px solid ${({ theme }) => theme.grayScale.line};
 	border-radius: 50%;
+	margin-right: 2%;
 	overflow: hidden;
 	img {
 		width: 100%;

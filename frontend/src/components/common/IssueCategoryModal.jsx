@@ -1,29 +1,29 @@
 import styled from "styled-components";
-
+import { ImgWrapper } from "styles/StyledLayout";
 const IssueCategoryModal = ({ type }) => {
 	return (
 		<ModalContainer>
 			<Title>담당자 추가</Title>
 			<Row>
 				<Contents>
-					<ImgContainer>
+					<ImgWrapper size="22px">
 						<img
 							src="https://avatars.githubusercontent.com/u/56783350?v=4"
 							alt="유저이름"
 						/>
-					</ImgContainer>
+					</ImgWrapper>
 					<ContentsText>유저이름</ContentsText>
 				</Contents>
 				<RadioButton type="checkbox"></RadioButton>
 			</Row>
 			<Row>
 				<Contents>
-					<ImgContainer>
+					<ImgWrapper size="22px">
 						<img
 							src="https://avatars.githubusercontent.com/u/56783350?v=4"
 							alt="유저이름"
 						/>
-					</ImgContainer>
+					</ImgWrapper>
 					<ContentsText>유저이름</ContentsText>
 				</Contents>
 				<RadioButton type="checkbox"></RadioButton>

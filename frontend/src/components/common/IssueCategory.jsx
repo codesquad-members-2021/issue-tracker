@@ -3,6 +3,7 @@ import { ReactComponent as PlusIcon } from "images/plus.svg";
 import theme from "styles/theme";
 import LabelBadge from "components/common/LabelBadge";
 import IssueCategoryModal from "./IssueCategoryModal";
+import { ImgWrapper } from "styles/StyledLayout";
 const IssueCategory = ({ category }) => {
 	const initialCategory = {
 		assignee: null,
@@ -35,12 +36,12 @@ const IssueCategory = ({ category }) => {
 			{category === "assignee" && (
 				<>
 					<ContentsContainer>
-						<ImgContainer>
+						<ImgWrapper size="44px">
 							<img
 								src="https://avatars.githubusercontent.com/u/56783350?v=4"
 								alt="유저이름"
 							/>
-						</ImgContainer>
+						</ImgWrapper>
 						<ContentsText>유저이름</ContentsText>
 					</ContentsContainer>
 					{/* <IssueCategoryModal /> */}
@@ -90,18 +91,7 @@ const ContentsContainer = styled.div`
 	display: flex;
 	padding: 9px 0;
 `;
-const ImgContainer = styled.div`
-	width: 44px;
-	height: 44px;
-	border: 1px solid ${({ theme }) => theme.grayScale.line};
-	margin-right: 3%;
-	border-radius: 50%;
-	overflow: hidden;
-	img {
-		width: 100%;
-		height: 100%;
-	}
-`;
+
 const Icon = styled(PlusIcon)`
 	cursor: pointer;
 `;

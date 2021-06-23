@@ -6,7 +6,12 @@ import theme from "styles/theme";
 const IssueDetailCommentCard = ({ data }) => {
 	return (
 		<Wrapper>
-			<ImgWrapper></ImgWrapper>
+			<ImgWrapper size="44px">
+				<img
+					src="https://avatars.githubusercontent.com/u/56783350?v=4"
+					alt="유저이름"
+				/>
+			</ImgWrapper>
 			<CardWrapper>
 				<CardHeader>
 					<div>
@@ -22,7 +27,7 @@ const IssueDetailCommentCard = ({ data }) => {
 						<span className="smile">😀</span>
 					</div>
 				</CardHeader>
-				<CardBody>처음부터 전부 구현하려고 하지 마</CardBody>
+				<CardBody>처음부터 전부 구현하려고 하지 마 (시러!)</CardBody>
 			</CardWrapper>
 		</Wrapper>
 	);
@@ -63,7 +68,7 @@ const CardHeader = styled.div`
 		font-size: ${({ theme }) => theme.fontSizes.xxs};
 		color: ${({ theme }) => theme.grayScale.label};
 		font-weight: 500;
-		padding: 0 1rem;
+		padding: 0.3rem 1rem;
 		border: 1px solid ${({ theme }) => theme.grayScale.line};
 		border-radius: 16px;
 	}
