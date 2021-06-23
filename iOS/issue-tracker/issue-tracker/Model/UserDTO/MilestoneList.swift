@@ -8,7 +8,7 @@
 import Foundation
 
 struct MilestoneList: Codable {
-    let milestone: [Milestone]
+    let data: [Milestone]
 }
 
 // MARK: - Milestone
@@ -21,7 +21,9 @@ struct Milestone: Codable {
     let closedIssueCount, openedIssueCount: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id, title, description, closedIssueCount, openedIssueCount
+        case id, title, description
+        case closedIssueCount = "closed_issue_count"
+        case openedIssueCount = "opened_issue_count"
         case createdTime = "created_time"
         case dueDate = "due_date"
     }
