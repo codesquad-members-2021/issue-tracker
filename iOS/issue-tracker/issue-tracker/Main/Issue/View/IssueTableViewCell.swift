@@ -116,8 +116,6 @@ class IssueTableViewCell: UITableViewCell {
             labelView.translatesAutoresizingMaskIntoConstraints = false
             labelsStackView.addArrangedSubview(labelView)
         }
-
-                
     }
     
     func configure(title: String, mileStoneName: String, labels: [IssueLabel]) {

@@ -90,7 +90,7 @@ class IssueViewController: UIViewController {
     
     private func setTableViewSupporters() {
         issueTableDatasource = IssueTableViewDataSource()
-        issueTableDelegate = IssueTableViewDelegate()
+        issueTableDelegate = IssueTableViewDelegate(cellActionHandler: swipeActionHandler, cellHeight: 198)
         
         issueTableView.delegate = issueTableDelegate
         issueTableView.dataSource = issueTableDatasource
@@ -107,6 +107,20 @@ class IssueViewController: UIViewController {
     private func reloadTableView() {
         DispatchQueue.main.async {
             self.issueTableView.reloadData()
+        }
+    }
+    
+    private func swipeActionHandler(_ index: Int, _ action: CellAction) {
+        guard let targetIssue = issueTableDatasource?.issues[index] else { return }
+        
+        switch action {
+        case .delete:
+            deleteIssue(for: targetIssue.issueNumber)
+        case .close:
+            print("close 되어랏")
+//            presentEditLabelViewController(for: targetLabel)
+        default:
+            assert(false)
         }
     }
     
@@ -133,6 +147,18 @@ extension IssueViewController {
                 guard let issues = result.data else { return }
                 self?.issueTableDatasource?.update(issues: issues)
                 self?.reloadTableView()
+            case .failure(let error):
+                self?.presentAlert(with: error.description)
+            }
+        })
+    }
+    
+    private func deleteIssue(for id: Int) {
+        let deleteIssueEndpoint = EndPoint.issue.path(with: id)
+        networkManager?.delete(endpoint: deleteIssueEndpoint, queryParameters: nil, completion: { [weak self] (result: Result<Void, NetworkError>) in
+            switch result {
+            case .success(_):
+                self?.loadIssues()
             case .failure(let error):
                 self?.presentAlert(with: error.description)
             }

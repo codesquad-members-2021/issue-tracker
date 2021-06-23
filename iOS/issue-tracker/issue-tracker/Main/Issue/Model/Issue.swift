@@ -71,7 +71,8 @@ struct Issue: Decodable {
     private(set) var author: Author
     private(set) var assignees: [Assignee]?
     private(set) var labels: [IssueLabel]?
-    private(set) var milestone: IssueMileStone?
+//    private(set) var milestone: IssueMileStone?
+    private(set) var milestone: MileStone?
     private(set) var createdDate: String
     
     enum CodingKeys: String, CodingKey {
