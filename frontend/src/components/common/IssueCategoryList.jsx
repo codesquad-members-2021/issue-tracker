@@ -1,5 +1,23 @@
+import styled from "styled-components";
+import IssueCategory from "./IssueCategory";
+
 const IssueCategoryList = () => {
-	return <div>이슈 카테고리 리스트</div>;
+	return (
+		<>
+			<Layout>
+				<IssueCategory category={"assignee"}></IssueCategory>
+				<IssueCategory category={"label"} />
+				<IssueCategory category={"milestone"} />
+			</Layout>
+		</>
+	);
 };
+const Layout = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	color: #d9dbe9;
+`;
 
 export default IssueCategoryList;

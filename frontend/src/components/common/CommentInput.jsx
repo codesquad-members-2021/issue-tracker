@@ -67,4 +67,5 @@ const TextArea = styled.textarea`
 	background-color: ${({ theme }) => theme.grayScale.input_background};
 	resize: vertical;
 	width: 100%;
+	height: 400px; //고정으로 바꿨슴다~
 `;
