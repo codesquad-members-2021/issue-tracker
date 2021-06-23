@@ -23,11 +23,6 @@ public class IssueController {
         return issueService.readIssueById(id);
     }
 
-    @GetMapping
-    public IssuesWrapper readAllIssues() {
-        return issueService.readAllIssues();
-    }
-
     @PostMapping
     public IssueWrapper createIssue(@RequestBody IssueCreateRequest issueCreateRequest, @RequestAttribute User authUser) {
         return issueService.createIssue(issueCreateRequest, authUser);
