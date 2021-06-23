@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { ChangeEvent, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Textarea } from '@chakra-ui/react';
@@ -13,15 +13,16 @@ import { issueAPI } from '@const/var';
 type Prop = {
   commentID: number;
   value: string;
+  toggleState: Dispatch<SetStateAction<boolean>>;
+  setCommentValue: Dispatch<SetStateAction<string>>;
 };
 
-function TextArea({ value, commentID }: Prop) {
+function TextArea({ value, commentID, toggleState, setCommentValue }: Prop) {
   const { id }: Param = useParams();
-  const [commentValue, SetCommentValue] = useState(value);
 
   const handleOnChangeText = (e: ChangeEvent) => {
     const target = e.target as HTMLTextAreaElement;
-    SetCommentValue(target.value);
+    setCommentValue(target.value);
   };
 
   const handleClickEditComplete = () => {
@@ -29,22 +30,25 @@ function TextArea({ value, commentID }: Prop) {
       const url = `${issueAPI}/${id}/comments/${commentID}`;
       await fetchWithAuth(url, '이슈 내용 수정 오류', {
         method: 'PATCH',
-        'Content-Type': 'application/json',
-        body: { description: `${commentValue}` },
+        body: JSON.stringify({ description: `${value}` }),
       });
     };
     finishEdit();
+    toggleState((state) => !state);
   };
+
+  const handleClickEditCancel = () => toggleState((state) => !state);
 
   return (
     <>
       <Description>
         <Textarea
-          value={commentValue}
+          value={value}
           onChange={handleOnChangeText}
           {...contentsInput}
+          background="gr_offWhite"
         />
-        <Span>띄어쓰기 포함 {commentValue.length}자</Span>
+        <Span>띄어쓰기 포함 {value.length}자</Span>
         <ImageUploadWrap>
           <FileIcon />
           <span>파일 첨부하기</span>
@@ -54,7 +58,9 @@ function TextArea({ value, commentID }: Prop) {
         <Button onClick={handleClickEditComplete} {...completeButton}>
           편집 완료
         </Button>
-        <Button {...deleteButton}>편집 취소</Button>
+        <Button onClick={handleClickEditCancel} {...deleteButton}>
+          편집 취소
+        </Button>
       </ButtonBox>
     </>
   );

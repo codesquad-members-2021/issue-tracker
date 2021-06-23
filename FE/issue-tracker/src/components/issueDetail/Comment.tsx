@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/react';
@@ -24,8 +24,9 @@ type Props = {
 };
 
 function Comment({ commentData }: Props) {
-  const [isDisabled, setIsDisabled] = useState(true);
   const { id, author, created_time, description } = commentData;
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [commentValue, setCommentValue] = useState(description);
   const { user_id, name, avatar_url } = author;
 
   const currentTime = new Date().getTime();
@@ -59,11 +60,16 @@ function Comment({ commentData }: Props) {
         </CommentHeader>
         {isDisabled ? (
           <CommentContent
-            value={description}
+            value={commentValue}
             disabled={isDisabled}
           ></CommentContent>
         ) : (
-          <TextArea commentID={id} value={description} />
+          <TextArea
+            commentID={id}
+            value={commentValue}
+            toggleState={setIsDisabled}
+            setCommentValue={setCommentValue}
+          />
         )}
       </CommentBox>
     </CommentContainer>
