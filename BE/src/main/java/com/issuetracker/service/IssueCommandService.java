@@ -2,6 +2,8 @@ package com.issuetracker.service;
 
 import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.issue.Issue;
+import com.issuetracker.domain.elasticsearch.IssueDocument;
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class IssueCommandService {
 
     private final IssueRepository issueRepository;
+    private final IssueDocumentRepository issueELKRepository;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
     private final UserService userService;
@@ -43,7 +46,9 @@ public class IssueCommandService {
                 userService.findAssignees(issueRequestDTO.getAssignees()),
                 milestoneService.findMilestoneById(issueRequestDTO.getMilestone())
         );
-        return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
+        Issue savedIssue = issueRepository.save(issue);
+        issueELKRepository.save(IssueDocument.of(savedIssue));
+        return new IssueNumberResponseDTO(savedIssue.getId());
     }
 
     public IssueTitleDTO updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
