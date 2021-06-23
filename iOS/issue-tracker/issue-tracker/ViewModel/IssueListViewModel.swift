@@ -4,12 +4,12 @@ import Combine
 class IssueListViewModel {
     
     @Published private var issueList: IssueList
-    private let fetchIssueListUseCase: FetchIssueListUseCase
+    private let fetchIssueListUseCase: IssueListUseCase
     private var subscriptions: Set<AnyCancellable>
 
     init() {
         self.issueList = IssueList(issues: [])
-        self.fetchIssueListUseCase = FetchIssueListUseCase()
+        self.fetchIssueListUseCase = IssueListUseCase()
         self.subscriptions = Set<AnyCancellable>()
     }
     
@@ -24,6 +24,7 @@ class IssueListViewModel {
         }
     }
     
+    // issueList를 넘기는 부분 수정하기
     func didUpdateIssueList() -> AnyPublisher<IssueList, Never> {
         return $issueList
             .receive(on: DispatchQueue.main)
@@ -55,5 +56,3 @@ class IssueListViewModel {
     }
     
 }
-
-

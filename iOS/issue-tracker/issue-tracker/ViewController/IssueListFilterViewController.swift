@@ -28,10 +28,14 @@ class IssueListFilterViewController: UIViewController {
     
     private func makeHeaderView(section: Int) -> UIView {
         let headerView = UIView(frame: .zero)
-        headerView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        let customGray = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        headerView.backgroundColor = customGray
+        
         let label = UILabel(frame: .zero)
-        label.textColor = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        let customDarkGray = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        label.textColor = customDarkGray
         headerView.addSubview(label)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true

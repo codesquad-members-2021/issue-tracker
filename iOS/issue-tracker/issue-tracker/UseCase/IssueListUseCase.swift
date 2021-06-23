@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class FetchIssueListUseCase {
+class IssueListUseCase {
     
     private let endPoint: EndPoint
     private let networkManager: NetworkManager

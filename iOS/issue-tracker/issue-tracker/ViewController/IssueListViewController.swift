@@ -33,7 +33,7 @@ class IssueListViewController: UIViewController {
     
     private func bind() {
         issueListViewModel.didUpdateIssueList()
-            .sink { [weak self] issueList in
+            .sink { [weak self] _ in
                 self?.issueTableView.reloadData()
             }.store(in: &subscriptions)
         issueListViewModel.fetchIssueList()
@@ -43,13 +43,15 @@ class IssueListViewController: UIViewController {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 100))
         footerView.backgroundColor = UIColor.clear
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: issueTableView.contentSize.width, height: 20))
+        let customDarkGray = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+
         footerView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
         label.textAlignment = .center
         label.text = "아래로 당기면 검색바가 보여요!👁"
-        label.textColor = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        label.textColor = customDarkGray
         
         self.issueTableView.tableFooterView = footerView
     }
@@ -110,8 +112,13 @@ class IssueListViewController: UIViewController {
             self.issueTableView.deleteRows(at: [indexPath], with: .automatic)
             success(true)
         })
-        action.image = UIImage(systemName: "trash")
-        action.backgroundColor = UIColor(red: 1, green: 59/255, blue: 48/255, alpha: 1)
+        
+        let trashCanImage = UIImage(systemName: "trash")
+        action.image = trashCanImage
+        
+        let customRed = UIColor(red: 1, green: 59/255, blue: 48/255, alpha: 1)
+        action.backgroundColor = customRed
+        
         return action
     }
     
@@ -119,9 +126,13 @@ class IssueListViewController: UIViewController {
         let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, success) in
             success(true)
         })
-        action.image = UIImage(systemName: "archivebox")
         
-        action.backgroundColor = UIColor(red: 204/255, green: 212/255, blue: 1, alpha: 1)
+        let archiveBoxImage = UIImage(systemName: "archivebox")
+        action.image = archiveBoxImage
+        
+        let customBlue = UIColor(red: 204/255, green: 212/255, blue: 1, alpha: 1)
+        action.backgroundColor = customBlue
+        
         return action
     }
 
