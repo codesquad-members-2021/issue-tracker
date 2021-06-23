@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol ToolBarTextFieldDelegate: AnyObject {
+    func register()
+}
+
 final class ToolBarTextField: UITextField {
+
+    weak var textFieldDelegate: ToolBarTextFieldDelegate?
 
     private let sendButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(didTapSend), for: .touchUpInside)
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         return button
     }()
@@ -28,5 +35,10 @@ final class ToolBarTextField: UITextField {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    @objc
+    func didTapSend() {
+        textFieldDelegate?.register()
     }
 }

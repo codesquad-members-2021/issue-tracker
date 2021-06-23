@@ -59,15 +59,14 @@ final class IssueDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .magenta
 
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showIssueDetailInfo))
 
         textField.textFieldDelegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.frame = view.bounds
         tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
 
         headerStackView.addArrangedSubview(isOpened)
@@ -91,34 +90,8 @@ final class IssueDetailViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
     }
 
-    private func setupKeyboardNotification() {
-        let center = NotificationCenter.default
-        center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] noti in
-            guard let strongSelf = self else { return }
-            if let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                strongSelf.textFieldHeightConstraint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
-                print(keyboardFrame.cgRectValue.height)
-            }
-        }
-        center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
-            guard let strongSelf = self else { return }
-            strongSelf.textFieldHeightConstraint?.constant = 0
-        }
-    }
-
-    private func setupAutolayout() {
-        headerStackView.snp.makeConstraints { $0.leading.trailing.top.bottom.equalToSuperview().inset(20) }
-        NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            textField.heightAnchor.constraint(equalToConstant: 44)
-        ])
-        textFieldHeightConstraint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        textFieldHeightConstraint?.isActive = true
-    }
-
     @objc
-    func handleTapGesture(recognizer: UITapGestureRecognizer) {
+    private func handleTapGesture(recognizer: UITapGestureRecognizer) {
         textField.resignFirstResponder()
     }
 
@@ -140,7 +113,7 @@ private extension IssueDetailViewController {
         viewModel.subject.bind { [weak self] detail in
             guard let detail = detail?.data else { return }
             self?.navigationItem.title = detail.title
-            self?.isOpened.text = detail.isOpen ? "열림" : "닫힘"
+            self?.isOpened.text = detail.isOpen ? "Open" : "Closed"
             self?.authorLabel.text = "\(detail.author.name)님이 작성했습니다."
             guard let comment = detail.comment else { return }
             self?.comment = comment
@@ -148,7 +121,35 @@ private extension IssueDetailViewController {
         }
         .disposed(by: disposeBag)
     }
+
+    func setupKeyboardNotification() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] noti in
+            guard let strongSelf = self else { return }
+            if let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                strongSelf.textFieldHeightConstraint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
+            }
+        }
+        center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.textFieldHeightConstraint?.constant = 0
+        }
+    }
+
+    func setupAutolayout() {
+        headerStackView.snp.makeConstraints { $0.leading.trailing.top.bottom.equalToSuperview().inset(20) }
+        tableView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide) }
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            textField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        textFieldHeightConstraint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        textFieldHeightConstraint?.isActive = true
+    }
 }
+
 extension IssueDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comment.count
@@ -156,7 +157,9 @@ extension IssueDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? IssueDetailTableViewCell else {
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "아직 코멘트가 없습니다..."
+            return cell
         }
         cell.accessoryView = UIImageView(image: UIImage(systemName: "ellipsis"))
         cell.configure(model: comment[indexPath.row])
