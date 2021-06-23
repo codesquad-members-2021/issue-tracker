@@ -1,6 +1,6 @@
 import theme from '@styles/theme.js';
 
-const titleInput = {
+const titleInputStyle = {
   marginBottom: '16px',
   padding: '16px',
   height: '56px',
@@ -10,7 +10,7 @@ const titleInput = {
   borderRadius: '14px',
 };
 
-const contentsInput = {
+const contentsInputStyle = {
   size: 'md',
   height: '291px',
   padding: '16px 24px',
@@ -43,8 +43,8 @@ const modalListStyle = {
 };
 
 export {
-  titleInput,
-  contentsInput,
+  titleInputStyle,
+  contentsInputStyle,
   progressBar,
   modalStyle,
   modalTitleStyle,
