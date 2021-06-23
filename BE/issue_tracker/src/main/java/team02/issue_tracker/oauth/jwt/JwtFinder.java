@@ -1,7 +1,7 @@
 package team02.issue_tracker.oauth.jwt;
 
 import org.springframework.stereotype.Component;
-import team02.issue_tracker.oauth.exception.IncorrectTokenTypeException;
+import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 
 /**
@@ -24,7 +24,7 @@ public class JwtFinder {
             throw new JwtNotFoundException();
         }
         if (!authorizationInHeader.startsWith(JWT_PREFIX)) {
-            throw new IncorrectTokenTypeException();
+            throw new InvalidTokenTypeException();
         }
     }
 }

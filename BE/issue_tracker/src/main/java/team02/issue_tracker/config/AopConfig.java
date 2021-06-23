@@ -8,8 +8,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import team02.issue_tracker.dto.ApiResult;
-import team02.issue_tracker.oauth.dto.AuthJwt;
-
+import team02.issue_tracker.oauth.dto.JwtResponse;
 
 /**
  * @date 2021.06.18
@@ -27,7 +26,7 @@ public class AopConfig {
         this.stopWatch = stopWatch;
     }
 
-    @Pointcut("execution(* team02.issue_tracker.oauth.controller.OAuthController.*issue*(..))")
+    @Pointcut("execution(* team02.issue_tracker.oauth.controller.OAuthController.*login*(..))")
     private void login() {}
 
     /**
@@ -40,7 +39,7 @@ public class AopConfig {
     }
 
     /**
-     * target 메소드의 동작 시간을 출력한다.
+     * LogExecutionTime 어노테이션이 달린 메소드의 동작 시간을 출력한다.
      * @param proceedingJoinPoint
      * @return Object
      * @throws Throwable
@@ -61,10 +60,10 @@ public class AopConfig {
     /**
      * 발행한 jwt를 출력한다.
      * @param joinPoint
-     * @param authJwt
+     * @param jwtResponse
      */
-    @AfterReturning(pointcut = "login()", returning = "authJwt")
-    public void jwtLog(JoinPoint joinPoint, ApiResult<AuthJwt> authJwt) {
-        log.info("jwt : {}", authJwt.getData().getJwt());
+    @AfterReturning(pointcut = "login()", returning = "jwtResponse")
+    public void jwtLog(JoinPoint joinPoint, ApiResult<JwtResponse> jwtResponse) {
+        log.info("jwt : {}", jwtResponse.getData().getJwt());
     }
 }

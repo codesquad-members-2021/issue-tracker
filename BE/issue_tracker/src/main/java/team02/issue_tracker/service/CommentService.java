@@ -55,4 +55,8 @@ public class CommentService {
                 .map(EmojiResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public List<Comment> findByIssueId(Long issueId) {
+        return commentRepository.findByIssueId(issueId);
+    }
 }

@@ -39,11 +39,14 @@ values (1, 2),
 
 -- comment
 insert into comment(id, content, file, created_time, issue_id, writer_id, is_deleted)
-values (1, "good", "file url", CURRENT_TIMESTAMP, 1, 1, false),
-       (2, "nice", "file url", CURRENT_TIMESTAMP, 1, 1, false),
-       (3, "nice", "file url", CURRENT_TIMESTAMP, 3, 1, false),
-       (4, "nice", "file url", CURRENT_TIMESTAMP, 2, 1, false),
-       (5, "nice", "file url", CURRENT_TIMESTAMP, 4, 1, true);
+values (1, "코멘트1", "file url", CURRENT_TIMESTAMP, 1, 1, false),
+       (2, "코멘트2", "file url", CURRENT_TIMESTAMP, 1, 1, false),
+       (3, "코멘트3", "file url", CURRENT_TIMESTAMP, 3, 1, false),
+       (4, "코멘트4", "file url", CURRENT_TIMESTAMP, 2, 1, false),
+       (5, "코멘트5", "file url", CURRENT_TIMESTAMP, 4, 1, false),
+       (6, "코멘트6", "file url", CURRENT_TIMESTAMP, 2, 1, false),
+       (7, "코멘트7", "file url", CURRENT_TIMESTAMP, 3, 1, false);
+
 
 -- emoji
 insert into emoji(id, `name`, is_deleted)
