@@ -5,7 +5,6 @@ import { useEffect, useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
-import useDebounce from "hooks/useDebounce";
 import API from "util/API";
 import fetchData from "util/fetchData";
 import CancelButton from "components/common/Button/WhiteButtons";
@@ -16,28 +15,35 @@ import {
 	labelAddButtonFlagState,
 	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
-import { useSetRecoilState, useRecoilState } from "recoil";
 
-const LabelInput = ({ initialData, isEditor }) => {
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+
+const LabelInput = ({ initialData }) => {
 	const setLabelInitialData = useSetRecoilState(labelInitialData);
-	const setLabelEditBtnFlag = useSetRecoilState(labelEditButtonFlagState);
+	const [editBtnFlag, setLabelEditBtnFlag] = useRecoilState(
+		labelEditButtonFlagState
+	);
 	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
 	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
+
 	const {
 		creatorTitle,
 		editorTitle,
-		inputTitles,
+		nameTitle,
+		descriptionTitle,
 		backgroundColorTitle,
 		textColorTitles,
 		buttons,
 	} = labelData;
+
 	const { id, name, description, colors } = initialData;
-	const { backgroundColor, textColor } = colors;
-	console.log("input", initialData.id);
+	// const { backgroundColor, textColor } = colors;
+	const backgroundColor = "#000";
+	const textColor = "#000";
 
 	const initLabelState = {
-		name: name,
-		description: description,
+		name: "",
+		description: "",
 		backgroundColor: theme.grayScale.input_background,
 		textColor: "#000000",
 	};
@@ -68,21 +74,19 @@ const LabelInput = ({ initialData, isEditor }) => {
 		dispatch({ type: "backgroundColor", payload: event.target.value });
 	};
 
-	const handleTypingName = event => {
-		if (event.target.id === "0") {
-			dispatch({ type: "name", payload: event.target.value });
-		} else {
-			// 디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
-			dispatch({ type: "description", payload: event.target.value });
-		}
+	const handleChangeName = event => {
+		dispatch({ type: "name", payload: event.target.value });
 	};
 
+	const handleChangeDescription = event => {
+		dispatch({ type: "description", payload: event.target.value });
+	};
 	const handleClose = () => {
-		setLabelEditBtnFlag(x => !x);
+		setLabelEditBtnFlag(!editBtnFlag);
 	};
 
-	const handleSubmit = async () => {
-		const { id, name, description, backgroundColor, textColor } = labelState;
+	const handleAdd = async () => {
+		const { name, description, backgroundColor, textColor } = labelState;
 
 		const requestBody = {
 			name: name,
@@ -92,16 +96,30 @@ const LabelInput = ({ initialData, isEditor }) => {
 				textColor: textColor,
 			},
 		};
-		if (isEditor) {
-			//const res = await fetchData(API.labels(), "POST", requestBody); //PUT요청, body수정 필요
-			setLabelEditBtnFlag(x => !x);
-		} else {
-			const res = await fetchData(API.labels(), "POST", requestBody);
-			setLabelAddBtnFlag(x => !x);
-			setNavigatorAddBtnFlag(x => !x);
-			const { labels } = await fetchData(API.labels(), "GET");
-			setLabelInitialData(labels);
-		}
+
+		await fetchData(API.labels(), "POST", requestBody);
+		setLabelAddBtnFlag(x => !x);
+		setNavigatorAddBtnFlag(x => !x);
+		const { labels } = await fetchData(API.labels(), "GET");
+		setLabelInitialData(labels);
+	};
+
+	const handleEdit = async () => {
+		//현재 내가 클릭한 카드의 데이터, id를 보여줘야 함 how?
+
+		const { name, description, backgroundColor, textColor } = labelState;
+		const requestBody = {
+			name: name,
+			description: description,
+			colors: {
+				backgroundColor: backgroundColor,
+				textColor: textColor,
+			},
+		};
+
+		const { labels } = await fetchData(API.labelsId("id"), "PUT", requestBody); //PUT요청, body수정 필요
+		setLabelEditBtnFlag(!editBtnFlag);
+		setLabelInitialData(labels); //상태바뀐걸로 리렌더
 	};
 
 	const changeColor = () => {
@@ -111,19 +129,17 @@ const LabelInput = ({ initialData, isEditor }) => {
 			payload: `#${randomColor}`,
 		});
 	};
-	console.log("name", name);
+
 	return (
-		<LabelInputLayout isEditor={isEditor}>
-			<Title>{isEditor ? editorTitle : creatorTitle}</Title>
+		<LabelInputLayout editBtnFlag={editBtnFlag}>
+			<Title>{editBtnFlag ? editorTitle : creatorTitle}</Title>
 			<MainLayout>
 				<PreviewContainer>
 					{
 						<LabelBadge
-							text={isEditor ? name : labelState.name}
-							fontColor={isEditor ? textColor : labelState.textColor}
-							backgroundColor={
-								isEditor ? backgroundColor : labelState.backgroundColor
-							}
+							text={labelState.name}
+							fontColor={labelState.textColor}
+							backgroundColor={labelState.backgroundColor}
 						/>
 					}
 				</PreviewContainer>
@@ -132,19 +148,20 @@ const LabelInput = ({ initialData, isEditor }) => {
 					{/* 타이틀 부분 나눠서 디스크립션 부분은 온 체인지 풀기 */}
 
 					<TextInputContainer _width={"100%"}>
-						<SubTitle>{inputTitles[0]}</SubTitle>
+						<SubTitle>{nameTitle}</SubTitle>
 						<TextInput
-							onChange={handleTypingName}
+							onChange={handleChangeName}
 							autocomplete="off"
-							value={isEditor && labelState.name}
+							value={labelState.name}
 						/>
 					</TextInputContainer>
+
 					<TextInputContainer _width={"100%"}>
-						<SubTitle>{inputTitles[1]}</SubTitle>
+						<SubTitle>{descriptionTitle}</SubTitle>
 						<TextInput
-							onChange={handleTypingName}
+							onChange={handleChangeDescription}
 							autocomplete="off"
-							value={isEditor && labelState.description}
+							value={labelState.description}
 						/>
 					</TextInputContainer>
 
@@ -179,7 +196,7 @@ const LabelInput = ({ initialData, isEditor }) => {
 						</TextInputContainer>
 					</DisplayFlex>
 					<ButtonContainer>
-						{isEditor && (
+						{editBtnFlag && (
 							<CancelButton
 								text={buttons.cancel}
 								icon="cancel"
@@ -187,19 +204,19 @@ const LabelInput = ({ initialData, isEditor }) => {
 								clickHandler={handleClose}
 							/>
 						)}
-						{isEditor ? (
+						{editBtnFlag ? (
 							<SubmitButton
 								text={buttons.submit}
 								icon="edit"
 								size="m"
-								clickHandler={handleSubmit}
+								clickHandler={handleEdit}
 							/>
 						) : (
 							<SubmitButton
 								text={buttons.submit}
 								icon="plus"
 								size="m"
-								clickHandler={handleSubmit}
+								clickHandler={handleAdd}
 							/>
 						)}
 					</ButtonContainer>
@@ -213,8 +230,8 @@ const LabelInputLayout = styled.div`
 	height: 345px;
 	background-color: ${({ theme }) => theme.grayScale.off_white};
 	border: 1px solid ${({ theme }) => theme.grayScale.line};
-	border-radius: ${props => (props.isEditor ? "none" : "16px")};
-	margin-bottom: ${props => (props.isEditor ? 0 : "2%")};
+	border-radius: ${props => (props.editBtnFlag ? "none" : "16px")};
+	margin-bottom: ${props => (props.editBtnFlag ? 0 : "2%")};
 `;
 
 const MainLayout = styled.div`

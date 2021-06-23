@@ -15,7 +15,6 @@ import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 const Labels = () => {
 	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
 	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
-	const labelEditBtnFlag = useRecoilValue(labelEditButtonFlagState);
 
 	const getLabelData = async () => {
 		const { labels } = await fetchData(API.labels(), "GET");
@@ -28,22 +27,14 @@ const Labels = () => {
 
 	return (
 		<>
-			{labelAddBtnFlag ? <LabelInput isEditor={false} /> : null}
+			{labelAddBtnFlag ? <LabelInput initialData={initialData} /> : <></>}
 			<StyledGridTitleCard gridRate={[1]}>
 				<HeaderTitle>N개의 레이블</HeaderTitle>
 			</StyledGridTitleCard>
 			{initialData &&
-				initialData.map(data =>
-					labelEditBtnFlag ? (
-						<LabelInput
-							key={`input-${data.id}`}
-							initialData={data}
-							isEditor={true}
-						/>
-					) : (
-						<LabelCard key={`card-${data.id}`} initialData={data} />
-					)
-				)}
+				initialData.map(data => (
+					<LabelCard key={`card-${data.id}`} initialData={data} />
+				))}
 		</>
 	);
 };
