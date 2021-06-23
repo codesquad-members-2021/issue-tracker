@@ -11,6 +11,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
@@ -37,6 +38,7 @@ public class Issue extends BaseTimeEntity {
     private List<User> assignees;
 
     @ManyToMany
+    @JoinColumn(name = "label_id")
     private List<Label> labels;
 
     @JoinColumn
@@ -76,8 +78,18 @@ public class Issue extends BaseTimeEntity {
         this.labels = labels;
     }
 
+    public void deleteLabel(Label targetLabel) {
+        this.labels = this.labels.stream()
+                .filter(label -> !label.equals(targetLabel))
+                .collect(Collectors.toList());
+    }
+
     public void updateMilestone(Milestone milestone) {
         this.milestone = milestone;
+    }
+
+    public void deleteMilestone() {
+        this.milestone = null;
     }
 
     public String getMilestoneTitle() {

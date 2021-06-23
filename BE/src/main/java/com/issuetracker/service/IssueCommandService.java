@@ -46,9 +46,9 @@ public class IssueCommandService {
         return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
     }
 
-    public void updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
+    public IssueTitleDTO updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
         Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO);
-        issueRepository.save(updatedIssue);
+        return IssueTitleDTO.of(issueRepository.save(updatedIssue));
     }
 
     public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO assigneesToUpdateRequestDTO) {
@@ -71,9 +71,10 @@ public class IssueCommandService {
         issueRepository.save(issue);
     }
 
-    public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestone) {
+    public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestoneDTO) {
         Issue issue = findIssueById(issueId);
-        issue.updateMilestone(Milestone.create(milestone.getMilestone()));
+        Milestone milestone = milestoneDTO.checkMilestoneId() ? Milestone.create(milestoneDTO.getMilestone()) : null;
+        issue.updateMilestone(milestone);
         issueRepository.save(issue);
     }
 

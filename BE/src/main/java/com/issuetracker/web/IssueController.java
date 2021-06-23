@@ -55,10 +55,10 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/title")
-    public void updateTitle(@PathVariable Long issueId, @RequestBody IssueTitleDTO issueTitleDTO) {
+    public IssueTitleDTO updateTitle(@PathVariable Long issueId, @RequestBody IssueTitleDTO issueTitleDTO) {
         logger.debug("이슈 제목 수정");
         logger.debug("issue 제목 수정 요청 확인: {}", issueTitleDTO.toString());
-        issueCommandService.updateIssueTitle(issueId, issueTitleDTO);
+        return issueCommandService.updateIssueTitle(issueId, issueTitleDTO);
     }
 
     @GetMapping("/{issueId}/assignees")

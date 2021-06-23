@@ -6,7 +6,6 @@ import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.label.LabelRepository;
 import com.issuetracker.domain.milestone.MilestoneRepository;
-import com.issuetracker.exception.ElementNotFoundException;
 import com.issuetracker.web.dto.response.LabelsResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,8 @@ public class LabelService {
     }
 
     public void delete(Long labelId) {
-        labelRepository.deleteById(labelId);
+        Label label = findLabelById(labelId);
+        labelRepository.delete(label);
     }
 
     public List<LabelDTO> findAllLabelDTOs() {

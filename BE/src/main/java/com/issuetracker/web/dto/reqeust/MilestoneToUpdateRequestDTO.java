@@ -13,6 +13,10 @@ import lombok.ToString;
 public class MilestoneToUpdateRequestDTO {
 
     private MilestoneDTO milestone;
+
+    public boolean checkMilestoneId() {
+        return milestone.getId() != null;
+    }
 }
 
 

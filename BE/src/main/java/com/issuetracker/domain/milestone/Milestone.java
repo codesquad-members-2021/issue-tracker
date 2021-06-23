@@ -46,6 +46,11 @@ public class Milestone extends BaseTimeEntity {
         this.description = milestoneDTO.getDescription();
     }
 
+    @PreRemove
+    public void delete() {
+        issues.forEach(Issue::deleteMilestone);
+    }
+
     public Long countOpenedIssues() {
         return issues.stream()
                 .filter(Issue::isOpen)
