@@ -26,13 +26,14 @@ function Issue({ info }: Props) {
     id,
     title,
     author,
+    assignees,
     label_list,
     issue_number,
     created_time,
     milestone_title,
   } = info;
   const defaultAvatarPosition = '32px';
-  const { user_id, name, avatar_url } = author;
+  const { user_id, name } = author;
 
   const currentTime = new Date().getTime();
   const noticeTimePassed = pipe(
@@ -78,9 +79,15 @@ function Issue({ info }: Props) {
         </Description>
       </IssueContainer>
       <AvatarContainer>
-        <AvatarBox>
-          <Avatar className="avatar" size="sm" src={avatar_url} />
-        </AvatarBox>
+        {assignees.map((assignee) => {
+          if (assignee === null) return null;
+          const { user_id, avatar_url } = assignee;
+          return (
+            <AvatarBox key={user_id}>
+              <Avatar className="avatar" size="sm" src={avatar_url} />
+            </AvatarBox>
+          );
+        })}
       </AvatarContainer>
     </IssueWrap>
   );
