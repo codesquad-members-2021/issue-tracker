@@ -162,7 +162,7 @@ extension LabelViewController {
     
     private func postNewLabel(_ newLabel: Label) {
         let newLabelEndpoint = EndPoint.label.path()
-        let requestBody = NewLabelDTO(name: newLabel.title, content: newLabel.body, colorCode: newLabel.hexColorCode)
+        let requestBody = NewLabelDTO(name: newLabel.title, content: newLabel.body ?? "", colorCode: newLabel.hexColorCode)
         
         networkManager?.post(endpoint: newLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {
@@ -177,7 +177,7 @@ extension LabelViewController {
     private func putEditedLabel(_ editedLabel: Label) {
         let labelId = editedLabel.id
         let editLabelEndpoint = EndPoint.label.path(with: labelId)
-        let requestBody = NewLabelDTO(name: editedLabel.title, content: editedLabel.body, colorCode: editedLabel.hexColorCode)
+        let requestBody = NewLabelDTO(name: editedLabel.title, content: editedLabel.body ?? "", colorCode: editedLabel.hexColorCode)
         
         networkManager?.put(endpoint: editLabelEndpoint, requestBody: requestBody, completion: { [weak self] result in
             switch result {

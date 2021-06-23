@@ -46,6 +46,7 @@ class MileStoneTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = Colors.description
         label.text = "마일스톤에 대한 설명(한 줄만 보여짐, 생략 가능)"
+        label.numberOfLines = 1
         label.font = .systemFont(ofSize: 17)
         return label
     }()
@@ -149,14 +150,14 @@ class MileStoneTableViewCell: UITableViewCell {
      
     }
     
-    func configure(title: String, description: String, due_date: String) {
+    func configure(title: String, description: String, dueDate: String) {
         titleLabel.text = title
         descriptionLabel.text = description        
-        dueDateConfigure(due_date: due_date)
+        dueDateConfigure(dueDate: dueDate)
     }
     
-    private func dueDateConfigure(due_date: String) {
-        let dateText = due_date != "" ? due_date :"완료일(생략가능)"
+    private func dueDateConfigure(dueDate: String) {
+        let dateText = dueDate != "" ? dueDate :"완료일(생략가능)"
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = UIImage(systemName: "calendar")

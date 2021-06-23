@@ -244,8 +244,7 @@ final class IssueControlViewController: UIViewController {
     
     @objc private func saveButtonTouched(_ sender: UIButton) {
         guard let saveOperation = saveOperation else { return }
-        let tempIssue = Issue()
-        saveOperation(tempIssue)
+        //saveOperation(tempIssue)
     }
     
     @objc private func markdownSegmentChanged(_ sender: UISegmentedControl) {

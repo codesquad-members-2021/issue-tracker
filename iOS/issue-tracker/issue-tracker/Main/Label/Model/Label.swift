@@ -14,7 +14,7 @@ protocol Identifiable {
 struct Label: Decodable, Identifiable {
     private(set) var id: Int
     private(set) var title: String
-    private(set) var body: String
+    private(set) var body: String?
     private(set) var hexColorCode: String
 
     enum CodingKeys: String, CodingKey {
