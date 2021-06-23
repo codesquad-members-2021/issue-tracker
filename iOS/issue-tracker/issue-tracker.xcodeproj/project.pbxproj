@@ -37,6 +37,7 @@
 		CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */; };
 		CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CE6DEF82268345BC00D6121C /* ResponseBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */; };
+		CE6DEF8426834F7A00D6121C /* RequestBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
 		CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A5DF268242D100D71888 /* IssueListViewModel.swift */; };
@@ -118,6 +119,7 @@
 		C98CDF1DA60B74180A2F7B96 /* Pods-issue-tracker-issue-trackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBodyDTO.swift; sourceTree = "<group>"; };
+		CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBodyDTO.swift; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		CE81A5DF268242D100D71888 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */,
 				CE976389268208760025CEC3 /* IssueListResponseDTO.swift */,
 				CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */,
+				CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
 				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
+				CE6DEF8426834F7A00D6121C /* RequestBodyDTO.swift in Sources */,
 				CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */,
 				CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */,
 				CE976391268213A60025CEC3 /* IssueList.swift in Sources */,

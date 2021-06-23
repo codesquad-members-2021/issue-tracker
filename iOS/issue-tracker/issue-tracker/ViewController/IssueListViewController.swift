@@ -125,8 +125,12 @@ class IssueListViewController: UIViewController {
     }
     
     private func closeAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, _) in
-            
+        let action = UIContextualAction(style: .normal, title: "닫기", handler: { [weak self] (_, _, _) in
+            self?.issueListViewModel.close(indexPath: indexPath) { result in
+                if result {
+                    self?.issueListViewModel.fetchIssueList()
+                }
+            }
         })
         
         let archiveBoxImage = UIImage(systemName: "archivebox")

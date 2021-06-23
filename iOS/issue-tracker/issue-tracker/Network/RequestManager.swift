@@ -18,6 +18,7 @@ class RequestManager {
         let headerField = "Authorization"
         
         request.setValue(requestValue, forHTTPHeaderField: headerField)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }
     

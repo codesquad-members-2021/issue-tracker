@@ -11,7 +11,7 @@ struct NetworkManager {
         self.session = session
     }
     
-    func sendRequest<T>(with url: URL?, method: HttpMethod, type: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
+    func sendRequest<T: Decodable>(with url: URL?, method: HttpMethod, type: T.Type) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
             let error = NetworkError.url(description: "The URL is not appropriate")
             return Fail(error: error).eraseToAnyPublisher()
@@ -21,13 +21,7 @@ struct NetworkManager {
         return session.dataTaskPublisher(for: urlRequest)
             .mapError { _ in NetworkError.networkConnection(desciption: "Network Error")
             }
-            .flatMap { data, response -> AnyPublisher<T, NetworkError> in
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    return Fail(error: NetworkError.networkConnection(desciption: "Response Error")).eraseToAnyPublisher()
-                }
-                guard 200..<300 ~= httpResponse.statusCode else {
-                    return Fail(error: NetworkError.networkConnection(desciption: "Status Error")).eraseToAnyPublisher()
-                }
+            .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                 let decodeData = Just(data)
                     .decode(type: type.self, decoder: JSONDecoder())
                     .mapError { _ in NetworkError.decoding(description: "Decode Error") }
@@ -37,7 +31,11 @@ struct NetworkManager {
             .eraseToAnyPublisher()
     }
     
-    func sendRequest<T>(with url: URL, method: HttpMethod, type: T.Type, body: T) -> AnyPublisher<T, NetworkError> where T: Codable {
+    func sendRequest<T: Decodable, D: Encodable>(with url: URL?, method: HttpMethod, type: T.Type, body: D) -> AnyPublisher<T, NetworkError> {
+        guard let url = url else {
+            let error = NetworkError.url(description: "The URL is not appropriate")
+            return Fail(error: error).eraseToAnyPublisher()
+        }
         
         return Just(body).encode(encoder: JSONEncoder())
             .mapError { _ in
@@ -51,13 +49,7 @@ struct NetworkManager {
                 session.dataTaskPublisher(for: urlRequest)
                     .mapError { _ in NetworkError.networkConnection(desciption: "Network Error")
                     }
-                    .flatMap { data, response -> AnyPublisher<T, NetworkError> in
-                        guard let httpResponse = response as? HTTPURLResponse else {
-                            return Fail(error: NetworkError.networkConnection(desciption: "Response Error")).eraseToAnyPublisher()
-                        }
-                        guard 200..<300 ~= httpResponse.statusCode else {
-                            return Fail(error: NetworkError.networkConnection(desciption: "Status Error")).eraseToAnyPublisher()
-                        }
+                    .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                         let decodeData = Just(data)
                             .decode(type: type.self, decoder: JSONDecoder())
                             .mapError { _ in NetworkError.decoding(description: "Decode Error") }

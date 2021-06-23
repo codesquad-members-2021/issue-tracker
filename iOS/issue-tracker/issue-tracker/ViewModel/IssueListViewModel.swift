@@ -45,4 +45,11 @@ class IssueListViewModel {
             completion(result)
         }
     }
+    
+    func close(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
+        let issueIDs: [Int] = [issueList.issues[indexPath.row].id]
+        issueListUseCase.executeCloseIssue(issueIDs: issueIDs) { result in
+            completion(result)
+        }
+    }
 }

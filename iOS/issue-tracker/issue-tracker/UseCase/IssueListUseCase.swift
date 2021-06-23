@@ -49,4 +49,26 @@ class IssueListUseCase {
                 }
             }.store(in: &subscriptions)
     }
+    
+    func executeCloseIssue(issueIDs: [Int], completion: @escaping (Bool) -> Void) {
+        let path = "/close"
+        let url = endPoint.makeURL(with: path)
+        networkManager.sendRequest(with: url, method: .post, type: ResponseBodyDTO.self, body: IssueIDsDTO(issueIds: issueIDs))
+            .sink { result in
+                switch result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completion(false)
+                case .finished:
+                    break
+                }
+            } receiveValue: { response in
+                if let error = response.error {
+                    print(error)
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }.store(in: &subscriptions)
+    }
 }
