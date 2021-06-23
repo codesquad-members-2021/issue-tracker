@@ -281,17 +281,20 @@ final class IssueControlViewController: UIViewController {
                                           isMultiselectionAllowed: true,
                                           endpoint: EndPoint.label)
         labelInfoViewController.setSaveOperation(updateLabelSelection)
-        
+        present(labelInfoViewController)
+    }
+    
+    private func present(_ viewController: UIViewController) {
         DispatchQueue.main.async {
-            self.present(labelInfoViewController, animated: true, completion: nil)
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     
     private func updateLabelSelection(labels: [Label]) {
         guard let firstLabel = labels.first else { return }
         self.selectedLabels = labels
-        let count = labels.count
-        let tail = count-1 > 0 ? " 외 \(count-1)개" : ""
+        let extraCount = labels.count - 1
+        let tail = extraCount > 0 ? " 외 \(extraCount)개" : ""
         let labelInfo = "\(firstLabel.title)" + tail
         labelInfoControl.changeInfoLabelText(to: labelInfo)
     }
@@ -305,10 +308,7 @@ final class IssueControlViewController: UIViewController {
                                           isMultiselectionAllowed: false,
                                           endpoint: EndPoint.milestone)
         milestoneViewController.setSaveOperation(updateMilestoneSelection)
-        
-        DispatchQueue.main.async {
-            self.present(milestoneViewController, animated: true, completion: nil)
-        }
+        present(milestoneViewController)
     }
     
     private func updateMilestoneSelection(milestones: [MileStone]) {

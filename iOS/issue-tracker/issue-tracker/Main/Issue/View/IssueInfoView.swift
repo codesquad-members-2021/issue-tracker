@@ -13,7 +13,6 @@ final class IssueInfoControl: UIControl {
         let label = UILabel()
         label.textColor = .lightGray
         label.textAlignment = .right
-        label.text = "info"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
