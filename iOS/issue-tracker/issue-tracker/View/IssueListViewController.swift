@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class IssueListViewController: UIViewController {
 
@@ -16,6 +18,7 @@ final class IssueListViewController: UIViewController {
     private let filterBarButton = FilterBarButton()
     private let selectBarButton = SelectBarButton()
     private let cancelButton = CancelButton()
+    private let addIssueTapGesture = UITapGestureRecognizer()
     private let issueToolbar = IssueToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     private let searchController: UISearchController = {
         var searchController = UISearchController(searchResultsController: nil)
@@ -24,15 +27,22 @@ final class IssueListViewController: UIViewController {
         return searchController
     }()
 
+    private var issueListViewModel = IssueListViewModel(networkManager: NetworkManager())
+    private let bag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
         setupIssueTableView()
         setupAddIssueButtonAutolayout()
-        filterBarButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        selectBarButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-        addIssueButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addIssueButtonTapped)))
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        addIssueButton.addGestureRecognizer(addIssueTapGesture)
+        bindTableViewDataSource()
+        bindTableViewDelegate()
+        bindButton()
+        bindSelectMode()
+        bindIssueToolBar()
+        bindSearchController()
+        issueListViewModel.fetchIssueList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,12 +50,141 @@ final class IssueListViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    @objc private func filterButtonTapped() {
+    private func bindTableViewDataSource() {
+        issueListViewModel.issueList
+            .bind(to: issueTableView.rx.items) { tableView, _, issue in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
+                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, relay: Observable<BehaviorRelay<[IssueLabel]>>.just(BehaviorRelay(value: issue.labels)))
+            return cell
+        }
+        .disposed(by: bag)
+    }
+
+    func bindTableViewDelegate() {
+        issueTableView.rx.itemSelected
+            .bind { [weak self] indexPath in
+                guard let self = self, let cell = self.issueTableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
+                if self.issueListViewModel.selectMode.value {
+                    let issue = self.issueListViewModel.issueList.value[indexPath.row]
+                    self.issueListViewModel.selectedCell.accept(self.issueListViewModel.selectedCell.value + [issue])
+                    cell.selectionStyle = .none
+                    cell.check()
+                } else {
+                    cell.selectionStyle = .none
+                    let controller = IssueDetailViewController()
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+            .disposed(by: bag)
+
+        issueTableView.rx.itemDeselected
+            .bind { [weak self] indexPath in
+                guard let self = self, let cell = self.issueTableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
+                if self.issueListViewModel.selectMode.value {
+                    let deselectedIssue = self.issueListViewModel.issueList.value[indexPath.row]
+                    var selectedIssue = self.issueListViewModel.selectedCell.value
+                    if let index = selectedIssue.firstIndex(where: { $0 == deselectedIssue }) {
+                        selectedIssue.remove(at: index)
+                        self.issueListViewModel.selectedCell.accept(selectedIssue)
+                    }
+                    cell.uncheck()
+                }
+            }
+            .disposed(by: bag)
+    }
+
+    func bindButton() {
+        selectBarButton.rx.tap
+            .map { true }
+            .bind(to: issueListViewModel.selectMode)
+            .disposed(by: bag)
+
+        cancelButton.rx.tap
+            .map { false }
+            .bind(to: issueListViewModel.selectMode)
+            .disposed(by: bag)
+
+        filterBarButton.rx.tap
+            .bind { [weak self] _ in
+                self?.filterButtonTapped()
+            }
+            .disposed(by: bag)
+
+        addIssueTapGesture.rx.event
+            .bind(onNext: { [weak self] _ in
+                self?.addIssueButtonTapped()
+            })
+            .disposed(by: bag)
+    }
+
+    func bindSelectMode() {
+        issueListViewModel.selectMode
+            .subscribe { [weak self] event in
+                if let element = event.element, element {
+                    self?.selectButtonTapped()
+                } else {
+                    self?.cancelButtonTapped()
+                }
+            }
+            .disposed(by: bag)
+    }
+
+    func bindIssueToolBar() {
+        issueListViewModel.selectedCell
+            .bind { [weak self] issues in
+                if issues.count == 0 {
+                    self?.issueToolbar.labelBarButtonItem.title = "이슈를 선택하세요"
+                    self?.issueToolbar.closeIssueBarButtonItem.isEnabled = false
+                } else {
+                    self?.issueToolbar.labelBarButtonItem.title = "\(issues.count)개의 이슈가 선택됨"
+                    self?.issueToolbar.closeIssueBarButtonItem.isEnabled = true
+                }
+            }
+            .disposed(by: bag)
+
+        issueToolbar.checkBoxBarButtonItem.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                let rows = self.issueTableView.numberOfRows(inSection: 0)
+                for row in 0..<rows {
+                    self.issueTableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+                    let cell = self.issueTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? IssueTableViewCell
+                    cell?.check()
+                }
+                self.issueListViewModel.selectedCell.accept(self.issueListViewModel.issueList.value)
+            }
+            .disposed(by: bag)
+
+        issueToolbar.closeIssueBarButtonItem.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                self.issueListViewModel.patchIssue(issues: self.issueListViewModel.selectedCell.value)
+            }
+            .disposed(by: bag)
+    }
+
+    private func bindSearchController() {
+        searchController.searchBar.searchTextField.rx.text
+            .bind { [weak self] text in
+                guard let text = text?.lowercased(), let self = self else { return }
+                let filteredArr = self.issueListViewModel.issueList.value.filter { $0.title.localizedCaseInsensitiveContains(text) }
+                self.issueListViewModel.issueList.accept(filteredArr)
+            }
+            .disposed(by: bag)
+
+        searchController.rx.didDismiss
+            .subscribe { [weak self] _ in
+//                self?.issueListViewModel.fetchIssueList()
+            }
+            .disposed(by: bag)
+    }
+
+    private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
     }
 
-    @objc private  func selectButtonTapped() {
+    private  func selectButtonTapped() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         navigationItem.title = "이슈 선택"
@@ -55,12 +194,20 @@ final class IssueListViewController: UIViewController {
         setupToolbarAutoulayout()
     }
 
-    @objc private func addIssueButtonTapped() {
+   private func addIssueButtonTapped() {
         let controller = NewIssueViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    @objc private func cancelButtonTapped() {
+    private func cancelButtonTapped() {
+        issueListViewModel.selectedCell.accept([])
+        guard let indexPath = issueTableView.indexPathsForSelectedRows else { return }
+        for i in indexPath {
+            issueTableView.deselectRow(at: i, animated: false)
+            if let cell = issueTableView.cellForRow(at: i) as? IssueTableViewCell {
+                cell.uncheck()
+            }
+        }
         setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
@@ -94,45 +241,21 @@ final class IssueListViewController: UIViewController {
     private func setupIssueTableView() {
         issueTableView.register(IssueTableViewCell.self, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.allowsMultipleSelection = true
-        issueTableView.dataSource = self
         issueTableView.delegate = self
         issueTableView.tableFooterView = IssueTableFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
     }
 }
 
-extension IssueListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-        cell.setupIssueCell(title: "제목", description: "이슈에 대한 설명", milestoneTitle: "마일스톤 이름", color: "#DFCD85")
-        return cell
-    }
-}
-
 extension IssueListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
-        cell.selectionStyle = .none
-        cell.check()
-
-        let controller = IssueDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell else { return }
-        cell.uncheck()
-    }
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, success in
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            guard let self = self else { return }
+            self.issueListViewModel.deleteIssue(id: self.issueListViewModel.issueList.value[indexPath.row].id!)
             success(true)
         }
 
         let shareAction = UIContextualAction(style: .normal, title: "닫기") { _, _, success in
+
             success(true)
         }
 

@@ -24,6 +24,8 @@
 		B349997F266F90710091A44A /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B349997E266F90710091A44A /* AppleLoginButton.swift */; };
 		B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */; };
 		B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */; };
+		B366CA41268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3926D6A2681B59800F72CEE /* PatchIssue.swift */; };
 		B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB57267840290060DC85 /* LabelListViewModel.swift */; };
 		B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB5A26784AA50060DC85 /* LabelList.swift */; };
 		B3B559E1266E095E00901C55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559E0266E095E00901C55 /* AppDelegate.swift */; };
@@ -33,6 +35,7 @@
 		B3B559ED266E096000901C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B559EB266E096000901C55 /* LaunchScreen.storyboard */; };
 		B3B559F8266E096000901C55 /* issue_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B559F7266E096000901C55 /* issue_trackerTests.swift */; };
 		B3B55A03266E096000901C55 /* issue_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B55A02266E096000901C55 /* issue_trackerUITests.swift */; };
+		B3BA329A2680686E0009FE72 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA32992680686E0009FE72 /* IssueListViewModel.swift */; };
 		B3CBD19B267C359500F8D733 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B3CBD19A267C359500F8D733 /* .swiftlint.yml */; };
 		B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C3267735CC000F02F4 /* IssueList.swift */; };
 		B3D7D0C926773AEA000F02F4 /* NewIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7D0C826773AEA000F02F4 /* NewIssue.swift */; };
@@ -115,6 +118,8 @@
 		B349997E266F90710091A44A /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedLabelView.swift; sourceTree = "<group>"; };
 		B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelTableViewCell.swift; sourceTree = "<group>"; };
+		B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		B3926D6A2681B59800F72CEE /* PatchIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchIssue.swift; sourceTree = "<group>"; };
 		B3A5CB57267840290060DC85 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		B3A5CB5A26784AA50060DC85 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
 		B3B559DD266E095E00901C55 /* issue-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "issue-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +136,7 @@
 		B3B559FE266E096000901C55 /* issue-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "issue-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B55A02266E096000901C55 /* issue_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = issue_trackerUITests.swift; sourceTree = "<group>"; };
 		B3B55A04266E096000901C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3BA32992680686E0009FE72 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
 		B3CBD19A267C359500F8D733 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B3D7D0C3267735CC000F02F4 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
 		B3D7D0C826773AEA000F02F4 /* NewIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssue.swift; sourceTree = "<group>"; };
@@ -220,6 +226,7 @@
 		B32FEAC42671DCD200BF37A1 /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
+				B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				D04C6955267B2C560056DD79 /* ToolBarTextField.swift */,
 				B3EADAC1267629190007C4B6 /* LabelsCollectionViewCell.swift */,
 				B3EADABF267628FB0007C4B6 /* LabelsCollectionView.swift */,
@@ -248,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A5CB57267840290060DC85 /* LabelListViewModel.swift */,
+				B3BA32992680686E0009FE72 /* IssueListViewModel.swift */,
 				B3E01192267A0B44001155D4 /* AddLabelViewModel.swift */,
 				D04C694D267A35960056DD79 /* MilestoneViewModel.swift */,
 				D0DAAE27268071F00075E794 /* NewIssueViewModel.swift */,
@@ -319,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				B3D7D0C3267735CC000F02F4 /* IssueList.swift */,
+				B3926D6A2681B59800F72CEE /* PatchIssue.swift */,
 				B3A5CB5A26784AA50060DC85 /* LabelList.swift */,
 				D03AF8F92677494F001C2CBF /* Comment.swift */,
 				D03AF8F726774909001C2CBF /* MilestoneList.swift */,
@@ -676,9 +685,11 @@
 				B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */,
 				B3EADABE2675EFED0007C4B6 /* AddLabelButton.swift in Sources */,
 				491F08942679E5420081C5C5 /* AddLabelViewController.swift in Sources */,
+				B3BA329A2680686E0009FE72 /* IssueListViewModel.swift in Sources */,
 				B32FEAC12671D9F600BF37A1 /* IssueListViewController.swift in Sources */,
 				B32FEACA2671FD1600BF37A1 /* SelectBarButton.swift in Sources */,
 				D0A88E0F26765325005877F6 /* UIKit+Extension.swift in Sources */,
+				B366CA41268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				B3F5275C2670C0EF002B0812 /* PaddingLabel.swift in Sources */,
 				B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */,
 				B32FEAC32671DCB100BF37A1 /* IssueTableViewCell.swift in Sources */,
@@ -703,6 +714,7 @@
 				D0103BDE267B897E0079FC3D /* AddMilestoneViewController.swift in Sources */,
 				D0A88E092674F888005877F6 /* IssueDetailTableViewCell.swift in Sources */,
 				B3D7D0C4267735CC000F02F4 /* IssueList.swift in Sources */,
+				B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */,
 				D0ADB699266F0C1300E0762C /* NetworkManager.swift in Sources */,
 				B3FBA7B9267335C30006E5E6 /* CancelButton.swift in Sources */,
 				D03AF8FA2677494F001C2CBF /* Comment.swift in Sources */,

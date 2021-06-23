@@ -8,16 +8,20 @@
 import Foundation
 
 struct Endpoint {
-    let scheme: String = "https"
-    let host: String = "77b8f295-a324-4645-9ff3-3d93eaf7b630.mock.pstmn.io"
+    let scheme: String = "http"
+    let host: String = "3.37.161.3"
     let port: Int = 8080
     var path: Path
 
-    func url(queryItems: [URLQueryItem] = []) -> URL? {
+    func url(queryItems: [URLQueryItem] = [], id: Int? = nil) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme
         urlComponents.host = host
+        urlComponents.port = port
         urlComponents.path = path.pathString
+        if let id = id {
+            urlComponents.path = path.pathString + "/" + String(id)
+        }
         urlComponents.queryItems = queryItems
         return urlComponents.url
     }
@@ -25,6 +29,7 @@ struct Endpoint {
     enum Path: String {
         case login = "/login"
         case label = "/label"
+        case issue = "/issue"
 
         var pathString: String {
             return self.rawValue
