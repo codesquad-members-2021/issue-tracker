@@ -84,21 +84,23 @@ public class IssueService {
             );
         }
 
+        UserDto author = new UserDto(userRepository.findOneById(issue.getAuthorUserId()));
+
 
         List<LabelForIssueDetailDto> labelListDto = issueRepository.findAllLabelsByIssueId(id).stream()
                 .map(LabelForIssueDetailDto::of)
                 .collect(Collectors.toList());
 
-        UserDto userDto = null;
+        UserDto assignee = null;
         if (issue.getAssignee() != 0) {
             UserDto.of(userRepository.findOneById(issue.getAssignee()));
         }
 
-        if (userDto == null) {
-            return IssueDetailDto.of(issue, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
+        if (assignee == null) {
+            return IssueDetailDto.of(issue, author, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
         }
 
-        return IssueDetailDto.of(issue, userDto, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
+        return IssueDetailDto.of(issue, author, assignee, milestoneDto, labelListDto, commentRepository.count(issue.getId()));
     }
 
     public IssueCountDto searchNumberOfIssuesClosedAndOpened() {
