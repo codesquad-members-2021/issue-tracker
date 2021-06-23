@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import IssueNav from '../IssueList/IssueNav';
-import IssueTable from '../IssueList/IssueTable';
+import IssueNav from './IssueNav';
+import IssueTable from './IssueTable';
 
 const IssueList = (): JSX.Element => {
   return (

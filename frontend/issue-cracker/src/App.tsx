@@ -1,46 +1,57 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../src/components/styles/theme';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 import LogIn from './components/layout/LogIn';
-import Callback from './components/Callback';
+import Authentication from './components/Authentication';
 import Header from './components/layout/Header';
 import IssueList from './components/layout/IssueList';
+import IssueAdd from './components/layout/IssueAdd';
+import IssueDetail from './components/layout/IssueDetail';
+import LabelList from './components/layout/LabelList';
+import Milestone from './components/layout/Milestone';
+import { PATH as P } from './utils/const';
 
 function App(): JSX.Element {
+  const token = localStorage.getItem('token');
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <AppStyle>
-          <Route exact path="/login" component={LogIn} />
-          <Route exact path="/callback" component={Callback} />
-          <Route path="/main" component={Header} />
-          <Route exact path="/main/issue-list" component={IssueList} />
-          {/* <Route exact path="/iss ue-add" component={Header} /> */}
-          {/* <Route exact path="/main/add" component={AddList} /> */}
+          <Route exact path={P.ROOT}>
+            {token ? <Redirect to={P.ISSUE_LIST} /> : <Redirect to={P.LOGIN} />}
+          </Route>
+          <Route exact path={P.LOGIN}>
+            <LogIn />
+          </Route>
+          <Route exact path={P.AUTH}>
+            <Authentication />
+          </Route>
+          <Route path={P.MAIN}>
+            <Header />
+          </Route>
+          <Route exact path={P.ISSUE_LIST}>
+            <IssueList />
+          </Route>
+          <Route exact path={P.ISSUE_ADD}>
+            <IssueAdd />
+          </Route>
+          <Route exact path={P.ISSUE_DETAIL}>
+            <IssueDetail />
+          </Route>
+          <Route exact path={P.ISSUE_LABELLIST}>
+            <LabelList />
+          </Route>
+          <Route exact path={P.ISSUE_MILESTONE}>
+            <Milestone />
+          </Route>
         </AppStyle>
       </ThemeProvider>
     </BrowserRouter>
   );
-  // return (
-  //   <Router>
-  //     <Switch>
-  //       <ThemeProvider theme={theme}>
-  //         <GlobalStyle />
-  //         <Route exact path="/" component={Home} />
-  //         <Route
-  //           //http://3.35.226.74/airbnb/?location=seoul&checkin=2021-05-28&checkout=2021-06-02&adults=2&children=1&infants=1
-
-  //           path="/reservation/:location/:checkIn/:checkOut/:adults/:children/:infants/:minPrice/:maxPrice"
-  //           component={Reservation}
-  //         />
-  //         <Route path="/callback" component={Callback} />
-  //       </ThemeProvider>
-  //     </Switch>
-  //   </Router>
-  // );
 }
 
 export default App;
