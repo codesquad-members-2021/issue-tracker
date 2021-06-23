@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import { ReactComponent as XIcon } from "images/x-square.svg";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import { ReactComponent as PaperIcon } from "images/paperclip.svg";
+import { ReactComponent as Archive } from "images/archive.svg";
 import styled from "styled-components";
 import theme from "styles/theme";
 
@@ -16,6 +17,9 @@ const WhiteButtons = ({ text, icon, size, clickHandler }) => {
 			}
 			case "paper": {
 				return <PaperIcon stroke={theme.colors.blue} />;
+			}
+			case "archive": {
+				return <Archive stroke={theme.colors.blue} />;
 			}
 			case "none": {
 				return <></>;
