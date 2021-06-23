@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useMutation } from 'react-query';
+import useMutate from '../../../util/useMutate';
 import Label from '../../../styles/atoms/Label';
 import Typos from '../../../styles/atoms/Typos';
 import Buttons from '../../../styles/atoms/Buttons';
@@ -15,15 +16,12 @@ const NewLabel = () => {
     color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   });
 
-  const axiosConfig = {
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
-  };
+  const { mutateAsync, isLoading: isMutating } = useMutation(
+    useMutate('label', 'add')
+  );
 
-  const registerNewLabel = () => {
-    axios.post(`http://52.78.35.48/api/labels`, input, axiosConfig);
+  const registerNewLabel = async () => {
+    await mutateAsync(input);
   };
 
   return (
@@ -31,7 +29,7 @@ const NewLabel = () => {
       <Typos lg>새로운 레이블 추가</Typos>
       <MainContainer>
         <LabelWrapper>
-          <Label background={input.color} />
+          <Label background={input.color} title={input.title} />
         </LabelWrapper>
         <InputContainer>
           <TextInput

@@ -1,8 +1,7 @@
-import { useMutation } from 'react-query';
 import axios from 'axios';
 const url = 'http://52.78.35.48/api';
 
-const mutateData = async (type: string, action: string, data?: any) => {
+const useMutate = (type: string, action: string) => async (data: unknown) => {
   const axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -33,6 +32,4 @@ const mutateData = async (type: string, action: string, data?: any) => {
   }
 };
 
-export default function useMutate(type: string, action: string, data?: any) {
-  return useMutation([type, action], () => mutateData(type, action, data));
-}
+export default useMutate;

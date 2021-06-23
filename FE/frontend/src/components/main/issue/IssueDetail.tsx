@@ -6,7 +6,6 @@ import 'moment/locale/ko';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
-import Typos from '../../../styles/atoms/Typos';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 
 const IssueDetail = () => {

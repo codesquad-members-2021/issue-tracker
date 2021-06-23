@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useMutate from '../../../util/useMutate';
 import Typos from '../../../styles/atoms/Typos';
@@ -23,6 +23,7 @@ const AddIssue = () => {
   });
 
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
+  let history = useHistory();
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const valueCount = e.target.value.length;
@@ -63,6 +64,7 @@ const AddIssue = () => {
 
   const registerNewIssue = () => {
     axios.post(`http://52.78.35.48/api/issues`, input, axiosConfig);
+    history.push('/main');
   };
 
   return (

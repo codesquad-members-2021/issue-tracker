@@ -4,6 +4,8 @@ const url = 'http://52.78.35.48/api';
 
 interface Props {
   id?: string;
+  isOpen?: boolean;
+  specialFilter?: string;
   assignee?: string;
   label?: string;
   milstone?: string;
@@ -36,6 +38,11 @@ const getData = async (type: string, action: string, filter?: Props) => {
         case 'detail':
           const detail = await axios.get(`${url}${filter?.id}`);
           return detail.data.data;
+        case 'filter':
+          const filteredData = await axios.get(
+            `${url}/issues?is_open=${filter?.isOpen}&filter=${filter?.specialFilter}&assignee=${filter?.assignee}&label=${filter?.label}&milestone=${filter?.milstone}&writer=${filter?.writer}`
+          );
+          return filteredData.data.data;
       }
       return;
     case 'label':
