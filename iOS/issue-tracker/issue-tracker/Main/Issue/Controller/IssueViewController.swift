@@ -18,6 +18,26 @@ class IssueViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var addNewIssueButton: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = Colors.mainGrape
+        button.addTarget(self, action: #selector(addNewIssue), for: .touchUpInside)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 32
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var plusImageView: UIImageView = {
+        let image = UIImage(systemName: "plus")
+        let resizeImg = image?.resizedImage(size: CGSize(width: 32, height: 34))?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: resizeImg)
+        imageView.tintColor = UIColor.white
+        imageView.backgroundColor = Colors.mainGrape
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private var networkManager: NetworkManagerOperations?
     private var issueTableDatasource: IssueTableViewDataSource?
     private var issueTableDelegate: IssueTableViewDelegate?
@@ -28,13 +48,14 @@ class IssueViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         addTableView()
+        addButton()
         setTableViewSupporters()
         setNetworkManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadIssues()        
+        loadIssues()
     }
     
     private func addTableView() {
@@ -48,6 +69,25 @@ class IssueViewController: UIViewController {
         ])
     }
     
+    private func addButton() {
+        view.addSubview(addNewIssueButton)
+        
+        NSLayoutConstraint.activate([
+            addNewIssueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            addNewIssueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
+            addNewIssueButton.widthAnchor.constraint(equalToConstant: 64),
+            addNewIssueButton.heightAnchor.constraint(equalToConstant: 64)
+        ])
+                
+        
+        addNewIssueButton.addSubview(plusImageView)
+        
+        NSLayoutConstraint.activate([
+            plusImageView.centerXAnchor.constraint(equalTo: addNewIssueButton.centerXAnchor),
+            plusImageView.centerYAnchor.constraint(equalTo: addNewIssueButton.centerYAnchor)
+        ])
+    }
+    
     private func setTableViewSupporters() {
         issueTableDatasource = IssueTableViewDataSource()
         issueTableDelegate = IssueTableViewDelegate()
@@ -56,6 +96,7 @@ class IssueViewController: UIViewController {
         issueTableView.dataSource = issueTableDatasource
     }
 
+    
     private func setNetworkManager() {
         let loginInfo = LoginInfo.shared
         guard let jwt = loginInfo.jwt else { return }
@@ -74,6 +115,10 @@ class IssueViewController: UIViewController {
             let alert = AlertFactory.create(body: errorMessage)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    @objc func addNewIssue(_ sender: UIButton) {
+        print("야호~")
     }
 }
 
