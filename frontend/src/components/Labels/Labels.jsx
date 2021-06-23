@@ -15,7 +15,6 @@ import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 const Labels = () => {
 	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
 	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
-	const labelEditBtnFlag = useRecoilValue(labelEditButtonFlagState);
 
 	const getLabelData = async () => {
 		const { labels } = await fetchData(API.labels(), "GET");

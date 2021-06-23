@@ -10,8 +10,9 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import API from "util/API";
 import fetchData from "util/fetchData";
 import LabelInput from "./LabelInput";
+import { useEffect } from "react";
 const LabelCard = ({ initialData }) => {
-	const { id, name, description, colors } = initialData;
+	const { id, name, description, colors } = initialData; //최초로 겟해온 데이터
 	const { backgroundColor, textColor } = colors;
 
 	const [editBtnFlag, setLabelEditBtnFlag] = useRecoilState(
@@ -19,11 +20,9 @@ const LabelCard = ({ initialData }) => {
 	);
 	const setLabelInitialData = useSetRecoilState(labelInitialData);
 	const handleEditButton = () => {
-		setLabelEditBtnFlag(x => !x);
+		setLabelEditBtnFlag(true);
 	};
 	const handleDeleteButton = async () => {
-		console.log("delete");
-		console.log("id!!", id);
 		await fetchData(API.labelsId(id), "DELETE");
 		const { labels } = await fetchData(API.labels(), "GET");
 		setLabelInitialData(labels);
@@ -32,7 +31,7 @@ const LabelCard = ({ initialData }) => {
 	return (
 		<>
 			{editBtnFlag ? (
-				<LabelInput initialData={initialData}></LabelInput>
+				<LabelInput initialData={initialData} />
 			) : (
 				<StyledGridCard gridRate={[0.5, 1.5, 0.5]}>
 					<CenterJcAi>

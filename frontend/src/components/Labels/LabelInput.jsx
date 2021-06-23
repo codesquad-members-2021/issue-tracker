@@ -82,7 +82,7 @@ const LabelInput = ({ initialData }) => {
 		dispatch({ type: "description", payload: event.target.value });
 	};
 	const handleClose = () => {
-		setLabelEditBtnFlag(x => !x);
+		setLabelEditBtnFlag(!editBtnFlag);
 	};
 
 	const handleAdd = async () => {
@@ -118,7 +118,7 @@ const LabelInput = ({ initialData }) => {
 		};
 
 		const { labels } = await fetchData(API.labelsId("id"), "PUT", requestBody); //PUT요청, body수정 필요
-		setLabelEditBtnFlag(x => !x);
+		setLabelEditBtnFlag(!editBtnFlag);
 		setLabelInitialData(labels); //상태바뀐걸로 리렌더
 	};
 
