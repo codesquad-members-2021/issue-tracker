@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from '@chakra-ui/react';
@@ -26,6 +26,7 @@ import IssueDetailTitle from './IssueDetailTitle';
 
 function IssueHeader() {
   const { id }: Param = useParams();
+  const history = useHistory();
   const [isEditting, setIsEditting] = useState(false);
   const [titleContents, setTitleContents] = useState<string | null>(null);
   const issueData = useRecoilValue(issueDetailList(id));
@@ -58,11 +59,11 @@ function IssueHeader() {
       const url = `${issueAPI}/${id}`;
       await fetchWithAuth(url, '이슈 상태 변경 오류', {
         method: 'PATCH',
-        'Content-Type': 'application/json',
-        body: { close: true },
+        body: JSON.stringify({ closed: true }),
       });
     };
     closeIssue();
+    history.push('/issues');
   };
 
   const handleClickEditTitle = () => {
@@ -70,8 +71,7 @@ function IssueHeader() {
       const url = `${issueAPI}/${id}`;
       await fetchWithAuth(url, '이슈 제목 수정 오류', {
         method: 'PATCH',
-        'Content-Type': 'application/json',
-        body: { title: `${titleContents}` },
+        body: JSON.stringify({ title: `${titleContents}` }),
       });
     };
 
