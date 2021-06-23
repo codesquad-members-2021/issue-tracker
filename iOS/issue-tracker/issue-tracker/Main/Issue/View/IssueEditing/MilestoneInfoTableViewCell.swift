@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SimpleMilestoneTableViewCell: UITableViewCell {
+final class MilestoneInfoTableViewCell: UITableViewCell {
 
     private lazy var titleLabel = UILabel()
     private let spacing: CGFloat = 15
@@ -43,8 +43,10 @@ class SimpleMilestoneTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with title: String) {
-        titleLabel.text = title
+    static func update(cell: MilestoneInfoTableViewCell, with milestone: MileStone) -> MilestoneInfoTableViewCell {
+        let title = milestone.title
+        cell.titleLabel.text = title
+        return cell
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

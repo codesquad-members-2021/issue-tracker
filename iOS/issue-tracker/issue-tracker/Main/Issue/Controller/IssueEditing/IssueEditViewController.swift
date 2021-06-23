@@ -8,7 +8,7 @@
 import UIKit
 import Down
 
-final class IssueControlViewController: UIViewController {
+final class IssueEditViewController: UIViewController {
 
     private lazy var cancelButton: ImageBarButton = {
         let button = ImageBarButton()
@@ -173,7 +173,7 @@ final class IssueControlViewController: UIViewController {
     private var selectedLabels: [Label]?
     private var selectedMilestone: [MileStone]?
     private var selectedAssignees: [User]?
-    private var saveOperation: ((Issue) -> Void)?
+    private var saveOperation: ((NewIssue) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -230,7 +230,7 @@ final class IssueControlViewController: UIViewController {
         ])
     }
     
-    func setSaveOperation(_ operation: @escaping (Issue) -> Void) {
+    func setSaveOperation(_ operation: @escaping (NewIssue) -> Void) {
         self.saveOperation = operation
     }
     
@@ -239,12 +239,24 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func cancelButtonTouched(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        popCurrentViewController()
     }
     
     @objc private func saveButtonTouched(_ sender: UIButton) {
-        guard let saveOperation = saveOperation else { return }
-        //saveOperation(tempIssue)
+        guard let saveOperation = saveOperation,
+              let title = titleTextField.text else { return }
+        let newIssue = NewIssue(title: title,
+                                comment: bodyTextView.text,
+                                assigneeIds: selectedAssignees?.map{ $0.id },
+                                labelIds: selectedLabels?.map{ $0.id },
+                                milestoneId: selectedMilestone?.first?.id)
+        saveOperation(newIssue)
+        popCurrentViewController()
+    }
+    
+    private func popCurrentViewController() {
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc private func markdownSegmentChanged(_ sender: UISegmentedControl) {
@@ -273,14 +285,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
-        let labelInfoViewController = AdditionalInfoViewController<SimpleLabelTableViewCell, Label>()
-        let tableDatasource = SimpleLabelTableDatasource()
+        let tableDatasource = CommonInfoTableDatasource<LabelInfoTableViewCell, Label>()
+        tableDatasource.setCellUpdator(LabelInfoTableViewCell.update)
+        
+        let labelInfoViewController = AdditionalInfoViewController<LabelInfoTableViewCell, Label>()
         labelInfoViewController.configure(withTitle: "레이블 선택",
                                           preSelectedInfos: selectedLabels ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: true,
                                           endpoint: EndPoint.label)
         labelInfoViewController.setSaveOperation(updateLabelSelection)
+        
         present(labelInfoViewController)
     }
     
@@ -300,14 +315,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func milestoneInfoTouched(_ sender: UIButton) {
-        let milestoneViewController = AdditionalInfoViewController<SimpleMilestoneTableViewCell, MileStone>()
-        let tableDatasource = SimpleMilestoneTableDatasource()
+        let tableDatasource = CommonInfoTableDatasource<MilestoneInfoTableViewCell, MileStone>()
+        tableDatasource.setCellUpdator(MilestoneInfoTableViewCell.update)
+        
+        let milestoneViewController = AdditionalInfoViewController<MilestoneInfoTableViewCell, MileStone>()
         milestoneViewController.configure(withTitle: "마일스톤 선택",
                                           preSelectedInfos: selectedMilestone ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: false,
                                           endpoint: EndPoint.milestone)
         milestoneViewController.setSaveOperation(updateMilestoneSelection)
+        
         present(milestoneViewController)
     }
     
@@ -318,14 +336,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {
-        let assigneeViewController = AdditionalInfoViewController<SimpleAssigneeTableViewCell, User>()
-        let tableDatasource = SimpleAssigneeTableDatasource()
+        let tableDatasource = CommonInfoTableDatasource<AssigneeInfoTableViewCell, User>()
+        tableDatasource.setCellUpdator(AssigneeInfoTableViewCell.update)
+        
+        let assigneeViewController = AdditionalInfoViewController<AssigneeInfoTableViewCell, User>()
         assigneeViewController.configure(withTitle: "담당자 선택",
                                           preSelectedInfos: selectedAssignees ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: true,
                                           endpoint: EndPoint.user)
         assigneeViewController.setSaveOperation(updateAssigneeSelection)
+        
         present(assigneeViewController)
     }
     
@@ -339,7 +360,7 @@ final class IssueControlViewController: UIViewController {
     }
 }
 
-extension IssueControlViewController: UITextFieldDelegate {
+extension IssueEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         changeSaveButtonEnableStatus(baseOn: textField)
     }
@@ -351,7 +372,7 @@ extension IssueControlViewController: UITextFieldDelegate {
     }
 }
 
-extension IssueControlViewController: UITextViewDelegate {
+extension IssueEditViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {
             textView.textColor = .black

@@ -55,8 +55,8 @@ final class AdditionalInfoViewController<InfoCell: UITableViewCell,
     
     private var sceneTitle: String?
     private var infoCell: InfoCell?
-    private var tableDatasource: SimpleInfoTableDatasource?
-    private var tableDelegate: SimpleInfoTableDelegate?
+    private var tableDatasource: CommonInfoTableDatasource<InfoCell, Info>?
+    private var tableDelegate: AdditionalInfoTableDelegate?
     
     private var selectedInfo = [Info]()
     private var saveOperation: (([Info]) -> Void)?
@@ -98,7 +98,7 @@ final class AdditionalInfoViewController<InfoCell: UITableViewCell,
         ])
     }
     
-    func configure(withTitle sceneTitle: String, preSelectedInfos: [Info], tableDatasource: SimpleInfoTableDatasource, isMultiselectionAllowed: Bool, endpoint: EndPoint) {
+    func configure(withTitle sceneTitle: String, preSelectedInfos: [Info], tableDatasource: CommonInfoTableDatasource<InfoCell, Info>, isMultiselectionAllowed: Bool, endpoint: EndPoint) {
         self.sceneTitle = sceneTitle
         self.selectedInfo = preSelectedInfos
         self.tableDatasource = tableDatasource
@@ -120,7 +120,7 @@ final class AdditionalInfoViewController<InfoCell: UITableViewCell,
     
     private func updateSelection(index: Int, selectionStatus: CellSelection) {
         guard let tableDatasource = tableDatasource,
-              let targetInfo = tableDatasource.info(for: index) as? Info else { return }
+              let targetInfo = tableDatasource.info(for: index) else { return }
         
         switch selectionStatus {
         case .selected:

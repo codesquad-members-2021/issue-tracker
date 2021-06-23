@@ -12,7 +12,7 @@ enum CellSelection {
     case deSelected
 }
 
-protocol SimpleInfoTableDelegate: UITableViewDelegate {
+protocol AdditionalInfoTableDelegate: UITableViewDelegate {
     typealias CellSelectionHandler = ((Int, CellSelection) -> Void)
     func setCellSelectionHandler(_ handler: @escaping CellSelectionHandler)
 }
