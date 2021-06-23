@@ -4,17 +4,17 @@ import Combine
 class IssueListViewModel {
     
     @Published private var issueList: IssueList
-    private let fetchIssueListUseCase: IssueListUseCase
+    private let issueListUseCase: IssueListUseCase
     private var subscriptions: Set<AnyCancellable>
 
     init() {
         self.issueList = IssueList(issues: [])
-        self.fetchIssueListUseCase = IssueListUseCase()
+        self.issueListUseCase = IssueListUseCase()
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchIssueList() {
-        fetchIssueListUseCase.executeFetchingIssueList { result in
+        issueListUseCase.executeFetchingIssueList { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -39,4 +39,10 @@ class IssueListViewModel {
         return issueList.issues[indexPath.row]
     }
     
+    func delete(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
+        let issueID = issueList.issues[indexPath.row].id
+        issueListUseCase.executeDeleteIssue(issueID: issueID) { result in
+            completion(result)
+        }
+    }
 }

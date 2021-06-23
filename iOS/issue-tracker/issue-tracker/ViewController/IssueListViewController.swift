@@ -107,10 +107,12 @@ class IssueListViewController: UIViewController {
     
     //MARK: - TableView Cell Swipe Action Method
     private func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "삭제", handler: { (_, _, success) in
-            
-            self.issueTableView.deleteRows(at: [indexPath], with: .automatic)
-            success(true)
+        let action = UIContextualAction(style: .normal, title: "삭제", handler: { [weak self] (_, _, _) in
+            self?.issueListViewModel.delete(indexPath: indexPath) { result in
+                if result {
+                    self?.issueListViewModel.fetchIssueList()
+                }
+            }
         })
         
         let trashCanImage = UIImage(systemName: "trash")
@@ -123,8 +125,8 @@ class IssueListViewController: UIViewController {
     }
     
     private func closeAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, success) in
-            success(true)
+        let action = UIContextualAction(style: .normal, title: "닫기", handler: { (_, _, _) in
+            
         })
         
         let archiveBoxImage = UIImage(systemName: "archivebox")
