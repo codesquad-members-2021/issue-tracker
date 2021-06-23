@@ -45,7 +45,7 @@ const StyledInput = styled.div`
     width: 100%;
     border-radius: ${({ theme }) => theme.border.radius.S};
     background-color: ${({ theme }) => theme.color.grayscale.line};
-    width: 85%;
+   
     padding-left: 7rem;
     border: none;
     font-size: ${({ theme }) => theme.fontSize.M};

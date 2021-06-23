@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   }
   ul{
     padding: 0;
-    margin: 0.5rem 0;
+    margin: 0;
   }
   button{
     display: flex;

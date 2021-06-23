@@ -5,18 +5,19 @@ import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
 import { ReactComponent as CloseIssue } from 'icons/closeIssue.svg';
 import MilestoneBar from './MilestoneBar';
 import { MilestoneBarType } from 'types/issueType';
-
+import { MouseEvent } from 'react';
 const MilestonesItemRight = ({
+  editClickHandler,
   openedIssueCount,
   closedIssueCount,
-}: MilestoneBarType) => {
+}: MilestoneBarType & { editClickHandler: (e: MouseEvent) => void }) => {
   const percent =
     (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
   return (
     <StyledDiv>
       <StyledButtons>
         <Button startIcon={<CloseIcon />}>닫기</Button>
-        <Button startIcon={<EditIcon />}>편집</Button>
+        <Button onClick={editClickHandler} startIcon={<EditIcon />}>편집</Button>
         <Button color="secondary" startIcon={<DeleteIcon />}>
           삭제
         </Button>
