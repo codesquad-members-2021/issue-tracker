@@ -11,7 +11,7 @@ class LoginUseCase {
     init() {
         self.jwtManager = JWTManager()
         self.loginManager = LoginHelper()
-        self.networkManager = NetworkManager(jwtManager: jwtManager, session: URLSession.shared)
+        self.networkManager = NetworkManager(requestManager: RequestManager(jwtManager: jwtManager), session: URLSession.shared)
         self.subscriptions = Set<AnyCancellable>()
     }
 
@@ -29,7 +29,7 @@ class LoginUseCase {
     }
     
     func executeGitHubLogIn(url: URL?, completion: @escaping (Bool) -> Void) {
-        self.networkManager.get(with: url, type: JWTResponseDTO.self)
+        self.networkManager.sendRequest(with: url, method: .get, type: JWTResponseDTO.self)
             .sink { result in
                 switch result {
                 case .failure(_):

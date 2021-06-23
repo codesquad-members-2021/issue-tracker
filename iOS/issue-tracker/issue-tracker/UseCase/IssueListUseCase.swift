@@ -9,13 +9,13 @@ class IssueListUseCase {
 
     init() {
         self.endPoint = EndPoint(scheme: Scheme.http.rawValue, host: Host.base.rawValue, path: Path.api.rawValue + Path.issues.rawValue)
-        self.networkManager = NetworkManager(jwtManager: JWTManager(), session: URLSession.shared)
+        self.networkManager = NetworkManager(requestManager: RequestManager(jwtManager: JWTManager()), session: URLSession.shared)
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func executeFetchingIssueList(completion: @escaping (Result<IssueList, NetworkError>) -> Void) {
         let url = endPoint.makeURL()
-        networkManager.get(with: url, type: IssueListResponseDTO.self)
+        networkManager.sendRequest(with: url, method: .get, type: IssueListResponseDTO.self)
             .sink { result in
                 switch result {
                 case .failure(let error):

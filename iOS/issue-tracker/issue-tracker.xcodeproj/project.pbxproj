@@ -43,6 +43,7 @@
 		CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE976389268208760025CEC3 /* IssueListResponseDTO.swift */; };
 		CE97638C26820BC70025CEC3 /* IssueListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97638B26820BC70025CEC3 /* IssueListUseCase.swift */; };
 		CE976391268213A60025CEC3 /* IssueList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE976390268213A60025CEC3 /* IssueList.swift */; };
+		CEA520BD26831E8100EB6E0E /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA520BC26831E8100EB6E0E /* RequestManager.swift */; };
 		CEA84DEF267B07390006CC2E /* JWTResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */; };
 		CEA84DF1267B079C0006CC2E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CEA84DF3267B0D350006CC2E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF2267B0D350006CC2E /* EndPoint.swift */; };
@@ -122,6 +123,7 @@
 		CE976389268208760025CEC3 /* IssueListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListResponseDTO.swift; sourceTree = "<group>"; };
 		CE97638B26820BC70025CEC3 /* IssueListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListUseCase.swift; sourceTree = "<group>"; };
 		CE976390268213A60025CEC3 /* IssueList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueList.swift; sourceTree = "<group>"; };
+		CEA520BC26831E8100EB6E0E /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		CEA84DEE267B07390006CC2E /* JWTResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTResponseDTO.swift; sourceTree = "<group>"; };
 		CEA84DF0267B079C0006CC2E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEA84DF2267B0D350006CC2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				CEBF140C26787CF00009BB75 /* LoginHelper.swift */,
 				CEBF140E267883500009BB75 /* JWTManager.swift */,
 				CEA84DF0267B079C0006CC2E /* NetworkManager.swift */,
+				CEA520BC26831E8100EB6E0E /* RequestManager.swift */,
 				CEA84DF2267B0D350006CC2E /* EndPoint.swift */,
 			);
 			path = Network;
@@ -600,6 +603,7 @@
 				CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */,
 				CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */,
 				CE976391268213A60025CEC3 /* IssueList.swift in Sources */,
+				CEA520BD26831E8100EB6E0E /* RequestManager.swift in Sources */,
 				BD0814692681C5C100C3D6D7 /* Identyfying.swift in Sources */,
 				BD08146D2681C79E00C3D6D7 /* URLSessionProtocol.swift in Sources */,
 				CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */,

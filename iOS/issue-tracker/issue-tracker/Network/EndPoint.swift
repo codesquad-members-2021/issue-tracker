@@ -12,6 +12,7 @@ enum Path: String {
     case api = "/api"
     case user = "/user"
     case issues = "/issues"
+    case close = "/close"
 }
 
 struct EndPoint {
@@ -26,11 +27,11 @@ struct EndPoint {
         self.path = path
     }
     
-    func makeURL() -> URL? {
+    func makeURL(with path: String = "") -> URL? {
         var component = URLComponents()
         component.scheme = scheme
         component.host = host
-        component.path = path
+        component.path = self.path + path
         return component.url
     }
     

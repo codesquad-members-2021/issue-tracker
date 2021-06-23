@@ -39,20 +39,4 @@ class IssueListViewModel {
         return issueList.issues[indexPath.row]
     }
     
-    func getIssueTitle(indexPath: IndexPath) -> String {
-        return issueList.issues[indexPath.row].title
-    }
-    
-    func getMilestoneTitle(indexPath: IndexPath) -> String {
-        return issueList.issues[indexPath.row].milestone
-    }
-    
-    func getLabelTitle(indexPath: IndexPath) -> String {
-        return issueList.issues[indexPath.row].labels.first?.title ?? ""
-    }
-    
-    func getLabelColor(indexPath: IndexPath) -> String {
-        return issueList.issues[indexPath.row].labels.first?.color ?? "#000000"
-    }
-    
 }

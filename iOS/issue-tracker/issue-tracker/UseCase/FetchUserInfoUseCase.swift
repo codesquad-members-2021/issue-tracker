@@ -9,13 +9,13 @@ class FetchUserInfoUseCase {
     
     init() {
         self.endPoint = EndPoint(scheme: Scheme.http.rawValue, host: Host.base.rawValue, path: Path.api.rawValue + Path.user.rawValue)
-        self.networkManager = NetworkManager(jwtManager: JWTManager(), session: URLSession.shared)
+        self.networkManager = NetworkManager(requestManager: RequestManager(jwtManager: JWTManager()), session: URLSession.shared)
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func executeFetchingUserInfo(completion: @escaping (Result<String, NetworkError>) -> Void) {
         let url = endPoint.makeURL()
-        networkManager.get(with: url, type: UserInfoResponDTO.self)
+        networkManager.sendRequest(with: url, method: .get, type: UserInfoResponDTO.self)
             .sink { result in
                 switch result {
                 case .failure(let error):
