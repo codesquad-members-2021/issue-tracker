@@ -72,5 +72,11 @@ public class Oauth {
                 + getClientId() + "&client_secret=" + getClientSecret()
                 + "&code=" + code;
     }
+
+    public String getUriForAccesTokenIos(String code) {
+        return environment.getProperty(TOKEN_URI) + "?client_id="
+                + getClientIdIos() + "&client_secret=" + getClientSecretIos()
+                + "&code=" + code;
+    }
 }
 

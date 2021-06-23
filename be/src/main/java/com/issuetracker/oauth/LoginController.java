@@ -28,27 +28,34 @@ public class LoginController {
     @GetMapping("/auth")
     public JwtDto login(@RequestParam String client, @RequestParam String code) {
         RestTemplate githubRequest = new RestTemplate();
-        String accessTokenUri = oauthUtil.getUriForAccesToken(code);
-        RequestEntity<GithubAccessTokenRequestDto> requestDto = null;
+        String accessTokenUri = null;
+        String clientId = null;
+        String secretId = null;
+        String redirectUri = null;
 
         // TODO: iOS 파트 추가//
         if (client.equals("ios")) {
-            requestDto = RequestEntity
-                    .post(accessTokenUri)
-                    .header("Accept", "application/json")
-                    .body(new GithubAccessTokenRequestDto(
-                            oauthUtil.getClientIdIos(), oauthUtil.getClientSecretIos(), code, oauthUtil.getRedirectUriIos()
-                    ));
+            accessTokenUri = oauthUtil.getUriForAccesTokenIos(code);
+            clientId = oauthUtil.getClientIdIos();
+            secretId = oauthUtil.getClientSecretIos();
+            redirectUri = oauthUtil.getRedirectUriIos();
         }
 
         if (client.equals("web")) {
-            requestDto = RequestEntity
-                    .post(accessTokenUri)
-                    .header("Accept", "application/json")
-                    .body(new GithubAccessTokenRequestDto(
-                            oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
-                    ));
+            accessTokenUri = oauthUtil.getUriForAccesToken(code);
+            clientId = oauthUtil.getClientId();
+            secretId = oauthUtil.getClientSecret();
+            redirectUri = oauthUtil.getRedirectUri();
         }
+
+        RequestEntity<GithubAccessTokenRequestDto> requestDto = RequestEntity
+                .post(accessTokenUri)
+                .header("Accept", "application/json")
+                .body(new GithubAccessTokenRequestDto(
+                        clientId, secretId, code, redirectUri
+                ));
+
+        logger.info("requestDto: {} ", requestDto);
 
         ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
 
