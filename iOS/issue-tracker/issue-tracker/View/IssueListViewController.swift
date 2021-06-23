@@ -54,7 +54,7 @@ final class IssueListViewController: UIViewController {
         issueListViewModel.issueList
             .bind(to: issueTableView.rx.items) { tableView, _, issue in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-            cell.setupIssueCell(title: issue.title, description: "구현이 더 필요함", milestoneTitle: issue.milestone.title, relay: BehaviorRelay<[IssueLabel]>(value: issue.labels))
+                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, relay: Observable<BehaviorRelay<[IssueLabel]>>.just(BehaviorRelay(value: issue.labels)))
             return cell
         }
         .disposed(by: bag)
@@ -174,7 +174,7 @@ final class IssueListViewController: UIViewController {
 
         searchController.rx.didDismiss
             .subscribe { [weak self] _ in
-                self?.issueListViewModel.fetchIssueList()
+//                self?.issueListViewModel.fetchIssueList()
             }
             .disposed(by: bag)
     }

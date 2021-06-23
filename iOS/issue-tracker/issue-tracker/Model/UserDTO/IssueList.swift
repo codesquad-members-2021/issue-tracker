@@ -31,7 +31,7 @@ struct Issue: Codable, Equatable {
     let author: Author
     let labels: [IssueLabel]
     let assignee: [Author]?
-    let milestone: Milestone
+    let milestone: Milestone?
     let comment: [Comment]?
 
     enum CodingKeys: String, CodingKey {

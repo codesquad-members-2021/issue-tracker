@@ -20,7 +20,7 @@ class AddLabelViewModel {
     }
 
     func postAddedLabel(completion: @escaping () -> Void) {
-        let encodableLabel = IssueLabel(id: nil, title: title.value, color: color.value, fontColor: fontColor, description: description.value)
+        let encodableLabel = IssueLabel(id: nil, title: title.value, color: color.value, fontColor: nil, description: description.value)
         networkManager.postRequest(url: Endpoint(path: .label).url()!, encodable: encodableLabel, completion: completion)
     }
 }
