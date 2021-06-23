@@ -29,6 +29,7 @@ import java.util.*;
 public class IssueService {
 
     private final IssueRepository issueRepository;
+    private final IssueRepositorySupport issueRepositorySupport;
     private final LabelRepository labelRepository;
     private final IssueLabelRepository issueLabelRepository;
     private final MilestoneRepository milestoneRepository;
@@ -36,10 +37,12 @@ public class IssueService {
     private final CommentRepository commentRepository;
 
     @Autowired
-    public IssueService(IssueRepository issueRepository, LabelRepository labelRepository,
+    public IssueService(IssueRepository issueRepository, IssueRepositorySupport issueRepositorySupport,
+                        LabelRepository labelRepository,
                         IssueLabelRepository issueLabelRepository, MilestoneRepository milestoneRepository,
                         AssigneeRepository assigneeRepository, CommentRepository commentRepository) {
         this.issueRepository = issueRepository;
+        this.issueRepositorySupport = issueRepositorySupport;
         this.labelRepository = labelRepository;
         this.issueLabelRepository = issueLabelRepository;
         this.milestoneRepository = milestoneRepository;
@@ -49,7 +52,7 @@ public class IssueService {
 
     public List<IssueResponse> getOpenedIssues() {
         List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepository.getIssuesByStatusTrue();
+        List<Issue> issues = issueRepositorySupport.findByStatusTrue();
         for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }
@@ -58,7 +61,43 @@ public class IssueService {
 
     public List<IssueResponse> getClosedIssues() {
         List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepository.getIssuesByStatusFalse();
+        List<Issue> issues = issueRepositorySupport.findByStatusFalse();
+        for (Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
+    }
+
+    public List<IssueResponse> getIssuesByTitle(String title) {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepositorySupport.findByTitle(title);
+        for (Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
+    }
+
+    public List<IssueResponse> getIssuesByAuthor(Long authorId) {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepositorySupport.findByAuthor(authorId);
+        for (Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
+    }
+
+    public List<IssueResponse> getIssuesByAssignee(Long userId) {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepository.getIssuesByAssigneeUserId(userId);
+        for (Issue issue : issues) {
+            result.add(issueToIssueResponse(issue));
+        }
+        return result;
+    }
+
+    public List<IssueResponse> getIssuesByComment(Long userId) {
+        List<IssueResponse> result = new ArrayList<>();
+        List<Issue> issues = issueRepository.getIssuesByCommentUserId(userId);
         for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }

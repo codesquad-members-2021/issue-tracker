@@ -25,6 +25,26 @@ public class IssueController {
         return ApiResponse.ok(issueService.getClosedIssues());
     }
 
+    @GetMapping("/title")
+    public ApiResponse getIssueByTitle(@RequestParam String title) {
+        return ApiResponse.ok(issueService.getIssuesByTitle(title));
+    }
+
+    @GetMapping("/author")
+    public ApiResponse getIssueByAuthor(@RequestParam Long authorId) {
+        return ApiResponse.ok(issueService.getIssuesByAuthor(authorId));
+    }
+
+    @GetMapping("/assignee")
+    public ApiResponse getIssueByAssignee(@RequestParam Long assigneeId) {
+        return ApiResponse.ok(issueService.getIssuesByAssignee(assigneeId));
+    }
+
+    @GetMapping("/comment")
+    public ApiResponse getIssueByComment(@RequestParam Long commentAuthorId) {
+        return  ApiResponse.ok(issueService.getIssuesByComment(commentAuthorId));
+    }
+
     @GetMapping("/{issueId}")
     public ApiResponse getIssue(@PathVariable Long issueId) {
         return ApiResponse.ok(issueService.getIssue(issueId));
@@ -55,8 +75,8 @@ public class IssueController {
 
     @PutMapping("/{issueId}/milestone")
     public ApiResponse editMilestone(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
-            issueService.updateMilestone(issueId, issueRequest);
-            return ApiResponse.ok();
+        issueService.updateMilestone(issueId, issueRequest);
+        return ApiResponse.ok();
     }
 
     @PutMapping("/{issueId}/label")
@@ -69,7 +89,7 @@ public class IssueController {
     public ApiResponse editAssignee(@PathVariable Long issueId, @RequestBody IssueRequest issueRequest) {
         issueService.updateAssignee(issueId, issueRequest);
         return ApiResponse.ok();
-   }
+    }
 
     @DeleteMapping("/{issueId}")
     public ApiResponse deleteIssue(@PathVariable Long issueId) {
