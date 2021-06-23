@@ -8,12 +8,16 @@ import Label from '@components/common/Label';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import LabelModal from './LabelModal';
 import { fetchModal } from '@utils/fetchModal';
-import { checkedLabelsState } from '@store/atoms/checkedThings';
+import { labelType, checkedLabelsAtom } from '@store/atoms/checkedThings';
 
 function SelectLabel() {
-  const [labels, setLabels] = useState(null);
+  const [labels, setLabels] = useState<labelType[] | null>(null);
   const [errorMsg, setErrorMsg] = useState('No Error');
-  const checkedLabels = useRecoilValue(checkedLabelsState);
+  const checkedLabels = useRecoilValue(checkedLabelsAtom);
+
+  const checkedLabelsInfo = checkedLabels.map((id) => {
+    if (labels !== null) return labels.find((label) => label.id === id);
+  }) as labelType[];
 
   const handleClickLabels = () => {
     fetchModal({
@@ -39,17 +43,18 @@ function SelectLabel() {
         <LabelModal labels={labels} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        {checkedLabels.map(({ title, color_code, font_light }) => {
-          return (
-            <li key={title}>
-              <Label
-                name={title}
-                colorCode={color_code}
-                fontLight={font_light}
-              />
-            </li>
-          );
-        })}
+        {checkedLabelsInfo &&
+          checkedLabelsInfo.map(({ title, color_code, font_light }) => {
+            return (
+              <li key={title}>
+                <Label
+                  name={title}
+                  colorCode={color_code}
+                  fontLight={font_light}
+                />
+              </li>
+            );
+          })}
       </AddList>
     </Wrap>
   );

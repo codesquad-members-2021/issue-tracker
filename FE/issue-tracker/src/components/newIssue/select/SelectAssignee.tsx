@@ -8,12 +8,17 @@ import { ReactComponent as PlusIcon } from '@assets/plus.svg';
 import { menuBtnStyle } from '@styles/chakraStyle';
 import AssigneeModal from './AssigneeModal';
 import { fetchModal } from '@utils/fetchModal';
-import { checkedAssigneesState } from '@store/atoms/checkedThings';
+import { assigneeType, checkedAssigneesAtom } from '@store/atoms/checkedThings';
 
 function SelectAssignee() {
-  const [assignees, setAssignees] = useState(null);
+  const [assignees, setAssignees] = useState<assigneeType[] | null>(null);
   const [errorMsg, setErrorMsg] = useState('No Error');
-  const checkedAssignees = useRecoilValue(checkedAssigneesState);
+  const checkedAssignees = useRecoilValue(checkedAssigneesAtom);
+
+  const checkedAssigneesInfo = checkedAssignees.map((id) => {
+    if (assignees !== null)
+      return assignees.find((assignee) => assignee.user_id === id);
+  }) as assigneeType[];
 
   const handleClickAssignee = () => {
     fetchModal({
@@ -39,14 +44,15 @@ function SelectAssignee() {
         <AssigneeModal assignees={assignees} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        {checkedAssignees.map(({ user_id, name, avatar_url }) => {
-          return (
-            <li key={user_id}>
-              <Avatar size="sm" src={avatar_url} />
-              <Text>{name}</Text>
-            </li>
-          );
-        })}
+        {checkedAssigneesInfo &&
+          checkedAssigneesInfo.map(({ user_id, name, avatar_url }) => {
+            return (
+              <li key={user_id}>
+                <Avatar size="sm" src={avatar_url} />
+                <Text>{name}</Text>
+              </li>
+            );
+          })}
       </AddList>
     </Wrap>
   );
