@@ -239,12 +239,18 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func cancelButtonTouched(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        popCurrentViewController()
     }
     
     @objc private func saveButtonTouched(_ sender: UIButton) {
         guard let saveOperation = saveOperation else { return }
         //saveOperation(tempIssue)
+        popCurrentViewController()
+    }
+    
+    private func popCurrentViewController() {
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc private func markdownSegmentChanged(_ sender: UISegmentedControl) {
