@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class MilestoneViewController: UIViewController {
-    private let viewModel = MilestoneViewModel()
+    private let viewModel = MilestoneViewModel.shared
     private let disposeBag = DisposeBag()
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -44,7 +44,7 @@ class MilestoneViewController: UIViewController {
 private extension MilestoneViewController {
     func setupObserver() {
         viewModel
-            .subject.asObservable()
+            .subject
             .subscribe(onNext: { [unowned self] _ in
                 self.tableView.reloadData()
             })

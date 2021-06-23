@@ -6,12 +6,14 @@
 //
 
 import Foundation
-import RxSwift
+import RxCocoa
 
 class MilestoneViewModel {
+    static let shared = MilestoneViewModel()
     private let networkManager = NetworkManager()
-    var subject: Observable<[Milestone]> = Observable.just([])
+    var subject: BehaviorRelay<[Milestone]> = BehaviorRelay<[Milestone]>(value: [])
     var milestone: [String: String] = [:]
+    var completion: (() -> Void)?
     private var url: URL! {
         return Endpoint(path: .milestone).url()!
     }
@@ -20,9 +22,10 @@ class MilestoneViewModel {
         fetch()
     }
 
-    private func fetch() {
+    private func fetch(completion: (() -> Void)? = nil) {
         networkManager.request(url: url, decodableType: MilestoneList.self) { [weak self] data in
-            self?.subject = Observable.just(data.data)
+            self?.subject.accept(data.data)
+            completion?()
         }
     }
 
@@ -38,8 +41,7 @@ class MilestoneViewModel {
         let dueDate = milestone["dueDate"]
         let mile = Milestone(id: 1, title: title, description: description, createdTime: nil, dueDate: dueDate, closedIssueCount: nil, openedIssueCount: nil)
         networkManager.postRequest(url: url, encodable: mile) { [weak self] in
-            // completion handler table view reload
-            self?.fetch()
+            self?.fetch(completion: self?.completion)
         }
     }
 }
