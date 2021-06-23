@@ -8,7 +8,7 @@ import { menuBtnStyle } from '@styles/chakraStyle';
 import { progressBar } from '../style';
 import MilestoneModal from './MilestoneModal';
 import { fetchModal } from '@utils/fetchModal';
-import { checkedMilestoneState } from '@store/atoms/checkedThings';
+import { checkedMilestoneAtom } from '@store/atoms/checkedThings';
 
 type progressValueType = {
   progress: number;
@@ -18,7 +18,7 @@ type progressValueType = {
 function SelectMilestone() {
   const [milestones, setMilestones] = useState(null);
   const [errorMsg, setErrorMsg] = useState('No Error');
-  const checkedMilestones = useRecoilValue(checkedMilestoneState);
+  const checkedMilestones = useRecoilValue(checkedMilestoneAtom);
   const [progressValue, setProgressValue] =
     useState<progressValueType | null>(null);
 
