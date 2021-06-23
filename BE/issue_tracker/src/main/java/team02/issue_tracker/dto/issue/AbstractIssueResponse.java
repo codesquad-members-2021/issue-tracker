@@ -1,7 +1,6 @@
 package team02.issue_tracker.dto.issue;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team02.issue_tracker.domain.Issue;
 import team02.issue_tracker.domain.IssueAssignee;
@@ -10,9 +9,9 @@ import team02.issue_tracker.dto.UserResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Getter
 public abstract class AbstractIssueResponse {
 
@@ -28,7 +27,7 @@ public abstract class AbstractIssueResponse {
     private List<UserResponse> assignees;
     private List<IssueLabelResponse> labels;
 
-    public AbstractIssueResponse(Issue issue) {
+    protected AbstractIssueResponse(Issue issue) {
         this.id = issue.getId();
         this.title = issue.getTitle();
         this.createdTime = issue.getCreatedTime();
@@ -38,7 +37,7 @@ public abstract class AbstractIssueResponse {
         this.labels = toLabelResponses(issue.getIssueLabels());
     }
 
-    private List<UserResponse> toAssigneeResponses(List<IssueAssignee> issueAssignees) {
+    private List<UserResponse> toAssigneeResponses(Set<IssueAssignee> issueAssignees) {
         return issueAssignees.stream()
                 .map(IssueAssignee::getAssignee)
                 .map(UserResponse::new)

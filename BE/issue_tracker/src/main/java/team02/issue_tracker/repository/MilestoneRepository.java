@@ -10,11 +10,13 @@ import java.util.Optional;
 @Repository
 public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 
-    Optional<Milestone> findByIdAndDeletedFalse(Long id);
+    @Override
+    Optional<Milestone> findById(Long id);
 
-    List<Milestone> findByDeletedFalse();
+    @Override
+    List<Milestone> findAll();
 
-    List<Milestone> findByOpenTrueAndDeletedFalse();
+    Long countByIsOpenTrue();
 
-    List<Milestone> findByOpenFalseAndDeletedFalse();
+    Long countByIsOpenFalse();
 }

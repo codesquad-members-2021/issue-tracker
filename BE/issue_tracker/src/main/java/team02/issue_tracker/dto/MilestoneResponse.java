@@ -1,12 +1,10 @@
 package team02.issue_tracker.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import team02.issue_tracker.domain.Milestone;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
 @Getter
 public class MilestoneResponse {
 
@@ -17,12 +15,12 @@ public class MilestoneResponse {
     private int openIssue;
     private int closedIssue;
 
-    public MilestoneResponse(Milestone milestone) {
+    public MilestoneResponse(Milestone milestone, Long openIssue, Long closedIssue) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
         this.content = milestone.getContent();
         this.dueDate = milestone.getDueDate();
-        this.openIssue = milestone.getOpenIssueCount();
-        this.closedIssue = milestone.getClosedIssueCount();
+        this.openIssue = Math.toIntExact(openIssue);
+        this.closedIssue = Math.toIntExact(closedIssue);
     }
 }

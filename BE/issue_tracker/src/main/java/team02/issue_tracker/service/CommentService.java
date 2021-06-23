@@ -31,36 +31,27 @@ public class CommentService {
     public Comment makeComment(IssueRequest issueRequest, User writer, Issue issue) {
         Comment comment = issueRequest.toComment(writer);
         comment.addIssue(issue);
-        return commentRepository.save(comment);
+        return comment;
     }
 
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 
-    public void saveAll(List<Comment> comments) {
-        commentRepository.saveAll(comments);
-    }
-
-    public void deleteCommentEmojis(Long commentId) {
-        List<CommentEmoji> commentEmojis = commentEmojiRepository.findByCommentId(commentId);
-        commentEmojiRepository.deleteAll(commentEmojis);
-    }
-
     public void addEmoji(Long commentId, CommentEmojiRequest commentEmojiRequest) {
-        Comment comment = commentRepository.findByIdAndDeletedFalse(commentId).orElseThrow(CommentNotFoundException::new);
-        Emoji emoji = emojiRepository.findByIdAndDeletedFalse(commentEmojiRequest.getEmojiId()).orElseThrow(EmojiNotFoundException::new);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+        Emoji emoji = emojiRepository.findById(commentEmojiRequest.getEmojiId()).orElseThrow(EmojiNotFoundException::new);
         commentEmojiRepository.save(new CommentEmoji(comment, emoji));
     }
 
     public void modifyComment(Long commentId, CommentRequest commentRequest) {
-        Comment comment = commentRepository.findByIdAndDeletedFalse(commentId).orElseThrow(CommentNotFoundException::new);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
         comment.edit(commentRequest.getContent(), commentRequest.getFile());
         commentRepository.save(comment);
     }
 
     public List<EmojiResponse> getAllEmojiResponses() {
-        return emojiRepository.findByDeletedFalse().stream()
+        return emojiRepository.findAll().stream()
                 .map(EmojiResponse::new)
                 .collect(Collectors.toList());
     }

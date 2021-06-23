@@ -12,7 +12,6 @@ import team02.issue_tracker.exception.LabelNotFoundException;
 import team02.issue_tracker.repository.IssueLabelRepository;
 import team02.issue_tracker.repository.LabelRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,39 +27,41 @@ public class LabelService {
     }
 
     public List<IssueLabel> makeIssueLabels(Issue issue, List<Long> labelIds) {
-        List<IssueLabel> issueLabels = new ArrayList<>();
 
-        labelIds.forEach(labelId -> {
-            Label label = labelRepository.findByIdAndDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
-            issueLabels.add(new IssueLabel(issue, label));
-        });
-
-        return issueLabelRepository.saveAll(issueLabels);
+        return labelIds.stream()
+                .map(labelId -> {
+                    Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+                    return new IssueLabel(issue, label);
+                }).collect(Collectors.toList());
     }
 
     public List<IssueLabel> modifyIssueLabels(Issue issue, IssueLabelIdsRequest issueLabelIdsRequest) {
         deleteIssueLabels(issue);
-        return makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
+        List<IssueLabel> issueLabels = makeIssueLabels(issue, issueLabelIdsRequest.getLabelIds());
+        return issueLabelRepository.saveAll(issueLabels);
     }
 
-    public void deleteIssueLabels(Issue issue) {
+    private void deleteIssueLabels(Issue issue) {
         List<IssueLabel> issueLabels = issueLabelRepository.findByIssueId(issue.getId());
         issueLabelRepository.deleteAll(issueLabels);
     }
 
     public List<LabelResponse> getAllLabelResponses() {
-        return labelRepository.findByDeletedFalse().stream()
+        return labelRepository.findAll().stream()
                 .map(LabelResponse::new)
                 .collect(Collectors.toList());
     }
 
-    public LabelCountResponse getLabelCount() {
-        int labelCount = labelRepository.findByDeletedFalse().size();
-        return new LabelCountResponse(labelCount);
+    public LabelCountResponse getLabelCountResponse() {
+        return new LabelCountResponse(getLabelCount());
+    }
+
+    public Long getLabelCount() {
+        return labelRepository.countByIsDeletedFalse();
     }
 
     public void modifyLabel(Long labelId, LabelRequest labelRequest) {
-        Label label = labelRepository.findByIdAndDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
         label.edit(labelRequest);
         labelRepository.save(label);
     }
@@ -71,14 +72,7 @@ public class LabelService {
     }
 
     public void deleteLabel(Long labelId) {
-        Label label = labelRepository.findByIdAndDeletedFalse(labelId).orElseThrow(LabelNotFoundException::new);
-        label.delete();
-        labelRepository.save(label);
-        deleteIssueLabels(labelId);
-    }
-
-    private void deleteIssueLabels(Long labelId) {
-        List<IssueLabel> issueLabels = issueLabelRepository.findByLabelId(labelId);
-        issueLabelRepository.deleteAll(issueLabels);
+        Label label = labelRepository.findById(labelId).orElseThrow(LabelNotFoundException::new);
+        labelRepository.delete(label);
     }
 }
