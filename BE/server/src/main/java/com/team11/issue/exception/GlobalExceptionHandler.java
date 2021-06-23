@@ -1,5 +1,6 @@
 package com.team11.issue.exception;
 
+import com.auth0.jwt.JWT;
 import com.team11.issue.dto.ExceptionResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler({OauthException.class, AccessTokenNotFoundException.class})
+    @ExceptionHandler({OauthException.class, AccessTokenNotFoundException.class, JWTTokenException.class, UserNotFoundException.class})
     protected ResponseEntity handleException(Exception e) {
         logger.error(e.getMessage());
         return new ResponseEntity(new ExceptionResponseDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
