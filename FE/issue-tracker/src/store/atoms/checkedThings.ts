@@ -23,17 +23,17 @@ export type milestoneType = {
   closed_issue_count: number;
 };
 
-export const checkedAssigneesState = atom<assigneeType[]>({
+export const checkedAssigneesAtom = atom<number[]>({
   key: 'checkedAssignees',
   default: [],
 });
 
-export const checkedLabelsState = atom<labelType[]>({
+export const checkedLabelsAtom = atom<number[]>({
   key: 'checkedLabels',
   default: [],
 });
 
-export const checkedMilestoneState = atom<milestoneType | null>({
+export const checkedMilestoneAtom = atom<milestoneType | null>({
   key: 'checkedMilestone',
   default: null,
 });
