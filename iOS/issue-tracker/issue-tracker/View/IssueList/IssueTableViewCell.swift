@@ -78,16 +78,16 @@ final class IssueTableViewCell: UITableViewCell {
     private func setupAutolayout() {
         stackView.snp.makeConstraints { view in
             view.top.equalToSuperview().inset(24)
-            view.leading.trailing.equalToSuperview().inset(16)
+            view.leading.equalToSuperview().inset(16)
+            view.trailing.equalToSuperview().inset(200)
         }
     }
 
     func setUpCollectionView(view: UICollectionView) {
-        self.contentView.addSubview(view)
+        self.stackView.addArrangedSubview(view)
         view.snp.makeConstraints { view in
-            view.top.equalTo(stackView.snp.bottom).offset(10)
-            view.leading.trailing.equalToSuperview().inset(16)
-            view.bottom.equalToSuperview()
+            view.width.equalToSuperview()
+            view.height.equalTo(25)
         }
     }
 
@@ -123,6 +123,7 @@ final class IssueTableViewCell: UITableViewCell {
                 return cell
             }
         } onCompleted: {
+            self.layoutIfNeeded()
         }
         .disposed(by: bag)
     }
