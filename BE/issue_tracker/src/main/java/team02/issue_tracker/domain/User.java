@@ -26,11 +26,11 @@ public class User {
     private String profileImage;
 
     @OneToMany(mappedBy = "assignee")
-    private List<IssueAssignee> issueAssignees = new ArrayList<>();
+    private final List<IssueAssignee> issueAssignees = new ArrayList<>();
 
     @OneToMany(mappedBy = "writer")
-    private List<Issue> issues = new ArrayList<>();
+    private final List<Issue> issues = new ArrayList<>();
 
     @OneToMany(mappedBy = "writer")
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 }

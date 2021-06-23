@@ -7,11 +7,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Getter
-public class AuthJwt {
+public class JwtResponse {
 
     private String jwt;
 
-    public AuthJwt(String jwt) {
+    public JwtResponse(String jwt) {
         this.jwt = jwt;
     }
 }
