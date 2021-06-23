@@ -34,8 +34,8 @@ class LoginView: UIView {
         return button
     }()
 
-    let appleLoginButton = AppleLoginButton()
-    let githubLoginButton = GitHubLoginButton()
+//    let appleLoginButton = AppleLoginButton()
+//    let githubLoginButton = GitHubLoginButton()
     let textField = IDPasswordTextField()
 
     override init(frame: CGRect) {
@@ -54,8 +54,8 @@ class LoginView: UIView {
 
     func addSubViews() {
         addSubview(titleLabel)
-        addSubview(appleLoginButton)
-        addSubview(githubLoginButton)
+//        addSubview(appleLoginButton)
+//        addSubview(githubLoginButton)
         addSubview(textField)
         addSubview(login)
         addSubview(signUp)
@@ -88,16 +88,16 @@ class LoginView: UIView {
             signUp.height.equalTo(21)
         }
 
-        githubLoginButton.snp.makeConstraints { button in
-            button.top.equalTo(login.snp.bottom).offset(175)
-            button.leading.trailing.equalTo(self).inset(16)
-            button.height.equalTo(56)
-        }
-
-        appleLoginButton.snp.makeConstraints { button in
-            button.top.equalTo(githubLoginButton.snp.bottom).offset(14)
-            button.leading.trailing.equalTo(self).inset(16)
-            button.height.equalTo(56)
-        }
+//        githubLoginButton.snp.makeConstraints { button in
+//            button.top.equalTo(login.snp.bottom).offset(175)
+//            button.leading.trailing.equalTo(self).inset(16)
+//            button.height.equalTo(56)
+//        }
+//
+//        appleLoginButton.snp.makeConstraints { button in
+//            button.top.equalTo(githubLoginButton.snp.bottom).offset(14)
+//            button.leading.trailing.equalTo(self).inset(16)
+//            button.height.equalTo(56)
+//        }
     }
 }
