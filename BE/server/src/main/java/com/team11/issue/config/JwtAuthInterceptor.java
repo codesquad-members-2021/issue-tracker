@@ -1,5 +1,6 @@
 package com.team11.issue.config;
 
+import com.team11.issue.exception.JWTTokenException;
 import com.team11.issue.util.JwtUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,18 +25,15 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     }
 
-    /*
-     * TODO: 사용자 정의 exception 처리
-     * */
     private String getJwtToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader == null) {
-            throw new RuntimeException("토큰이 없습니다.");
+            throw new JWTTokenException("토큰이 없습니다.");
         }
 
         if (!authorizationHeader.startsWith("Bearer ")) {
-            throw new RuntimeException("토큰 타입이 이상합니다.");
+            throw new JWTTokenException("토큰 타입이 이상합니다.");
         }
 
         return authorizationHeader.substring(7);
