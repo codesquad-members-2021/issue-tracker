@@ -18,12 +18,18 @@ const Input = ({
 export default Input;
 
 const StyledInput = styled.div`
-  width: 100%;
-  background-color: ${({ theme }) => theme.color.grayscale.line};
   display: flex;
-  border-radius: ${({ theme }) => theme.border.radius.S};
+  width: 100%;
   margin: 0.5rem 0;
+  border-radius: ${({ theme }) => theme.border.radius.S};
+  border: none;
+  position: relative;
+  &:focus {
+    border: 2px solid ${({ theme }) => theme.color.grayscale.line};
+    background-color: ${({ theme }) => theme.color.grayscale.offWhite};
+  }
   label {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,10 +39,19 @@ const StyledInput = styled.div`
     font-size: ${({ theme }) => theme.fontSize.S};
   }
   input {
+    box-sizing: border-box;
+    height: 2.7rem;
     outline: none;
-    width: 85%;
+    width: 100%;
+    border-radius: ${({ theme }) => theme.border.radius.S};
     background-color: ${({ theme }) => theme.color.grayscale.line};
+    width: 85%;
+    padding-left: 7rem;
     border: none;
     font-size: ${({ theme }) => theme.fontSize.M};
+    &:focus {
+      border: 2px solid ${({ theme }) => theme.color.grayscale.line};
+      background-color: ${({ theme }) => theme.color.grayscale.offWhite};
+    }
   }
 `;
