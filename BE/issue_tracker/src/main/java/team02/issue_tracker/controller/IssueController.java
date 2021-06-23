@@ -1,5 +1,7 @@
 package team02.issue_tracker.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import team02.issue_tracker.dto.CommentRequest;
@@ -11,6 +13,7 @@ import team02.issue_tracker.service.IssueService;
 
 import java.util.List;
 
+@Api(tags = {"이슈 관련 API"}, description = "이슈 등록, 조회 등 가능합니다.")
 @Slf4j
 @RestController
 @RequestMapping("/api/issues")
@@ -22,6 +25,7 @@ public class IssueController {
         this.issueService = issueService;
     }
 
+    @ApiOperation(value = "전체 이슈 조회", notes = "등록된 모든 이슈를 조회합니다.")
     @GetMapping
     public ApiResult<List<IssueResponse>> showAllIssues() {
         return ApiResult.success(issueService.getAllIssueResponses());
