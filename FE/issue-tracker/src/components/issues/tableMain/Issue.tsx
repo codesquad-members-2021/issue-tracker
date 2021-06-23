@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/avatar';
@@ -24,15 +25,15 @@ function Issue({ info }: Props) {
   const {
     id,
     title,
-    description,
     author,
+    assignees,
     label_list,
     issue_number,
     created_time,
     milestone_title,
   } = info;
   const defaultAvatarPosition = '32px';
-  const { user_id, name, avatar_url } = author;
+  const { user_id, name } = author;
 
   const currentTime = new Date().getTime();
   const noticeTimePassed = pipe(
@@ -44,13 +45,18 @@ function Issue({ info }: Props) {
     getRenderingText
   )(created_time);
 
+  const linkPath = {
+    pathname: `/issues/detail/${id}`,
+  };
   return (
     <IssueWrap data-id={id}>
       <IssueContainer>
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
           <IssueTitle>
-            <h2>{title}</h2>
+            <Link to={linkPath}>
+              <h2>{title}</h2>
+            </Link>
             {label_list.map(({ id, title, color_code }) => (
               <Label
                 key={id}
@@ -73,9 +79,15 @@ function Issue({ info }: Props) {
         </Description>
       </IssueContainer>
       <AvatarContainer>
-        <AvatarBox>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
+        {assignees.map((assignee) => {
+          if (assignee === null) return null;
+          const { user_id, avatar_url } = assignee;
+          return (
+            <AvatarBox key={user_id}>
+              <Avatar className="avatar" size="sm" src={avatar_url} />
+            </AvatarBox>
+          );
+        })}
       </AvatarContainer>
     </IssueWrap>
   );

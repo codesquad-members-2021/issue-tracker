@@ -1,24 +1,23 @@
 import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 import { queryString, wholeIssueLists } from '@store/atoms/issueList';
+import { useReRender } from '@utils/query';
 
 import { IssueSkeleton } from '@components/common/Skeleton';
 import Issue from './Issue';
 import ErrorIssueList from './ErrorIssueList';
 import NoIssue from './NoIssue';
-import { pushState } from '@utils/query';
 
 function IssueList() {
   const query = useRecoilValue(queryString);
   const { state, contents } = useRecoilValueLoadable(wholeIssueLists);
-
   const renderNoIssue = (contents: any): JSX.Element | undefined => {
     if (typeof contents === 'string' || contents.length === 0) {
       return <NoIssue isSearched={false} />;
     }
   };
-  console.log(contents);
-  pushState(query);
+  useReRender(query);
+
   return (
     <>
       {state === 'hasError' && <ErrorIssueList>{contents}</ErrorIssueList>}
@@ -38,7 +37,8 @@ export type IssueInfo = {
   id: number;
   title: string;
   description: string;
-  author: Author;
+  author: Person;
+  assignees: Person[];
   label_list: Label[];
   issue_number: number;
   created_time: string;
@@ -51,7 +51,7 @@ type Label = {
   color_code: string;
 };
 
-type Author = {
+type Person = {
   user_id: number;
   name: string;
   avatar_url: string;

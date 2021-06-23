@@ -11,6 +11,11 @@ const filterTextContent = atom({
   default: `is:open`,
 });
 
+const formerDataKey = atom({
+  key: 'formerDataKey',
+  default: 0,
+});
+
 const querySet = atom<QuerySet>({
   key: 'querySet',
   default: {
@@ -37,6 +42,7 @@ const queryString = selector({
 const wholeIssueLists = selector({
   key: 'wholeIssueLists',
   get: async ({ get }) => {
+    get(formerDataKey);
     try {
       const query = get(queryString);
       const url = `${issueAPI}?${query}`;
@@ -52,7 +58,8 @@ const wholeIssueLists = selector({
 
 const issueCounts = selector({
   key: 'issueCounts',
-  get: async () => {
+  get: async ({ get }) => {
+    get(formerDataKey);
     try {
       const url = `${issueAPI}/count`;
       const res = await fetchWithAuth(url, '개수를 가져오는데 실패', {});
@@ -69,16 +76,19 @@ const issueCounts = selector({
 
 const filterList = selectorFamily({
   key: 'filterList',
-  get: (query: Param) => async () => {
-    try {
-      const res = await fetch(`${hostAPI}/${query}`);
-      handleError(res.status, '불러오기에 실패했습니다.');
-      const data = res.json();
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
+  get:
+    (query: Param) =>
+    async ({ get }) => {
+      get(formerDataKey);
+      try {
+        const res = await fetch(`${hostAPI}/${query}`);
+        handleError(res.status, '불러오기에 실패했습니다.');
+        const data = res.json();
+        return data;
+      } catch (error) {
+        throw error;
+      }
+    },
 });
 
 export {
@@ -88,6 +98,7 @@ export {
   querySet,
   queryString,
   filterTextContent,
+  formerDataKey,
 };
 
 export type QuerySet = {

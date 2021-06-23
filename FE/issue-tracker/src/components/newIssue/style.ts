@@ -16,8 +16,7 @@ const contentsInputStyle = {
   padding: '16px 24px',
   background: 'gr_inputBackground',
   placeholder: '코멘트를 입력하세요',
-  variant: 'filled',
-  borderRadius: '16px',
+  variant: 'unstyled',
 };
 
 const progressBar = {

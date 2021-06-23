@@ -26,6 +26,14 @@ export const fetchModal = async ({
   setErrorMsg,
 }: fetchModalType) => {
   try {
+//     const token = localStorage.getItem('oauth_login');
+//     const requestHeader = {
+//       Authorization: `bearer ${token}`,
+//     };
+//     const res = await fetch(`${baseURL}/${path}`, {
+//       method: 'GET',
+//       headers: requestHeader,
+//     });
     const res = await fetch(`${baseURL}/${path}`, getHeaders());
     handleError(res.status);
     const json = await res.json();
