@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -26,6 +27,8 @@ public class IssueDocument {
     private boolean isOpen;
     private String title;
     private List<CommentDocument> comments;
+    private LocalDateTime createdDateTime;
+    private LocalDateTime modifiedDateTime;
 
     public static IssueDocument of(Issue issue) {
         return IssueDocument.builder()
@@ -37,6 +40,23 @@ public class IssueDocument {
                 .isOpen(issue.isOpen())
                 .title(issue.getTitle())
                 .comments(CommentDocument.commentsToCommentDocuments(issue.getComments()))
+                .createdDateTime(issue.getCreatedDateTime())
+                .modifiedDateTime(issue.getModifiedDateTime())
                 .build();
+    }
+
+    public String getFirstComment() {
+        return comments.get(0).getComment();
+    }
+
+    public int getCommentNumber() {
+        return comments.size();
+    }
+
+    public String getMilestoneTitle() {
+        if (milestone == null) {
+            return null;
+        }
+        return milestone.getTitle();
     }
 }

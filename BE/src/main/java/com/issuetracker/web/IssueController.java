@@ -21,9 +21,15 @@ public class IssueController {
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
     @GetMapping
-    public IssuesResponseDTO view(SearchRequestDTO requestDTO) {
+    public IssuesResponseDTO search(SearchRequestDTO searchRequest) {
+        logger.debug("검색어에 따른 이슈 조회");
+        return issueQueryService.searchIssues(searchRequest);
+    }
+
+    @GetMapping
+    public IssuesResponseDTO view(FilterRequestDTO filterRequest) {
         logger.debug("모든 이슈 조회");
-        return issueQueryService.getIssues(requestDTO);
+        return issueQueryService.filterIssues(filterRequest);
     }
 
     @PatchMapping

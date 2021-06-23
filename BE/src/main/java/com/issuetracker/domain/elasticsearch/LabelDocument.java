@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class LabelDocument {
 
+    @Id
+    private Long id;
     private String name;
     private Color color;
     private String description;

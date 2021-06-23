@@ -5,6 +5,7 @@ import com.issuetracker.auth.dto.AccessTokenResponseDTO;
 import com.issuetracker.auth.dto.OAuthUserResponseDTO;
 import com.issuetracker.auth.dto.UserAgentDTO;
 import com.issuetracker.auth.service.JwtService;
+import com.issuetracker.domain.elasticsearch.IssueDocument;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
 import com.issuetracker.exception.InvalidSearchRequestException;
@@ -58,6 +59,12 @@ public class UserService {
     public List<Assignee> usersToAssignees(Issue issue) {
         return userRepository.findAll().stream()
                 .map(user -> Assignee.of(user, checkAssignees(user, issue)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Assignee> userDocumentsToAssignees(IssueDocument issueDocument) {
+        return issueDocument.getAssignees().stream()
+                .map(Assignee::of)
                 .collect(Collectors.toList());
     }
 

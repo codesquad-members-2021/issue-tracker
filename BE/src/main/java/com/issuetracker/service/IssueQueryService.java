@@ -1,9 +1,11 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.IssueNotFoundException;
+import com.issuetracker.web.dto.reqeust.FilterRequestDTO;
 import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
 import com.issuetracker.web.dto.response.*;
 import com.issuetracker.web.dto.vo.Count;
@@ -20,19 +22,33 @@ import static com.issuetracker.web.dto.vo.Status.OPEN;
 @RequiredArgsConstructor
 public class IssueQueryService {
 
+    private final IssueDocumentRepository issueDocumentRepository;
     private final IssueRepository issueRepository;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
     private final UserService userService;
 
-    public IssuesResponseDTO getIssues(SearchRequestDTO searchRequestDTO) {
+    public IssuesResponseDTO searchIssues(SearchRequestDTO searchRequestDTO) {
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.countByIsOpen(true))
-                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), searchRequestDTO))
-                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), searchRequestDTO))
+                .openedIssue((int) issueDocumentRepository.countIssueDocumentByIsOpen(searchRequestDTO.getSearchTerm(), true))
+                .closedIssue((int) issueDocumentRepository.countIssueDocumentByIsOpen(searchRequestDTO.getSearchTerm(), false))
                 .build();
-        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(searchRequestDTO).stream()
+        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitle(searchRequestDTO.getSearchTerm()).stream()
+                .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
+                .collect(Collectors.toList());
+        return IssuesResponseDTO.of(count, issues);
+    }
+
+    public IssuesResponseDTO filterIssues(FilterRequestDTO filterRequest) {
+        Count count = Count.builder()
+                .label((int) labelService.count())
+                .milestone((int) milestoneService.countByIsOpen(true))
+                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), filterRequest))
+                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), filterRequest))
+                .build();
+        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);

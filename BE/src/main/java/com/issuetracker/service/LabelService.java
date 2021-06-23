@@ -1,5 +1,6 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
 import com.issuetracker.exception.LabelNotFoundException;
 import com.issuetracker.web.dto.response.LabelDTO;
 import com.issuetracker.domain.issue.Issue;
@@ -60,6 +61,12 @@ public class LabelService {
     public List<LabelDTO> labelsToLabelDTOs(Issue issue) {
         return labelRepository.findAll().stream()
                 .map(label -> LabelDTO.of(label, checkLabels(label, issue)))
+                .collect(Collectors.toList());
+    }
+
+    public List<LabelDTO> labelDocumentsToLabelDTOs(IssueDocument issueDocument) {
+        return issueDocument.getLabels().stream()
+                .map(LabelDTO::of)
                 .collect(Collectors.toList());
     }
 

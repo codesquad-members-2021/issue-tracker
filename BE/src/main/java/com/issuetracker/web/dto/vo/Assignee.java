@@ -1,5 +1,6 @@
 package com.issuetracker.web.dto.vo;
 
+import com.issuetracker.domain.elasticsearch.UserDocument;
 import com.issuetracker.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,15 @@ public class Assignee {
                 .image(user.getAvatarUrl())
                 .userName(user.getUserName())
                 .isAssigned(isAssigned)
+                .build();
+    }
+
+    public static Assignee of(UserDocument userDocument) {
+        return Assignee.builder()
+                .id(userDocument.getId())
+                .image(userDocument.getAvatarUrl())
+                .userName(userDocument.getUserName())
+                .isAssigned(true)
                 .build();
     }
 }

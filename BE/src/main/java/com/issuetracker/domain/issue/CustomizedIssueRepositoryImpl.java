@@ -2,7 +2,7 @@ package com.issuetracker.domain.issue;
 
 import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.user.User;
-import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
+import com.issuetracker.web.dto.reqeust.FilterRequestDTO;
 import com.issuetracker.web.dto.vo.Status;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -23,19 +23,19 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Issue> findAllIssuesFilteredBySearchRequest(SearchRequestDTO searchRequest) {
+    public List<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest) {
         return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest);
     }
 
-    private List<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
+    private List<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
         return findIssuesByStatusAndSearchRequest(status, searchRequest).limit(100).fetch();
     }
 
-    public long countIssueFilteredByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
+    public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
         return findIssuesByStatusAndSearchRequest(status, searchRequest).fetchCount();
     }
 
-    private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, SearchRequestDTO searchRequest) {
+    private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
         return queryFactory
                 .select(issue)
                 .distinct()

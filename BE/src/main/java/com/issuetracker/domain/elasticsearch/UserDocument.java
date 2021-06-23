@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserDocument {
 
+    @Id
+    private Long id;
     private String name;
     private String email;
     private String userName;
@@ -23,6 +26,7 @@ public class UserDocument {
 
     public static UserDocument of(User user) {
         return UserDocument.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .userName(user.getUserName())
