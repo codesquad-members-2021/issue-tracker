@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NewIssueForm from "components/NewIssues/NewIssueForm";
-import { IssueHeader } from "styles/StyledLayout ";
+import { IssueHeader } from "styles/StyledLayout";
 
 function NewIssue() {
 	return (

@@ -22,7 +22,7 @@ const NewIssueForm = () => {
 					<InputTitleWrapper>
 						<Input type="text" placeholder="제목" />
 					</InputTitleWrapper>
-					<CommentInput />
+					<CommentInput isNewIssueMode={true} />
 				</ContentsWrapper>
 				<IssueCategoryList />
 			</Wrapper>

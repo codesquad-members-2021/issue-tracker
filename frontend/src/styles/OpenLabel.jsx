@@ -7,10 +7,10 @@ const OpenLabel = ({ text, icon, strokeColor, bgColor }) => {
 	const getIcon = () => {
 		switch (icon) {
 			case "alert": {
-				return <Alert stroke={theme.colors[strokeColor]} />;
+				return <Alert stroke={theme.colors.blue} />;
 			}
 			case "archive": {
-				return <Archive stroke={theme.colors[strokeColor]} />;
+				return <Archive stroke={theme.colors.purple} />;
 			}
 			case "none": {
 				return <></>;
@@ -31,6 +31,9 @@ const OpenLabel = ({ text, icon, strokeColor, bgColor }) => {
 export default OpenLabel;
 
 const LabelWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 100px;
 	height: 40px;
 	border-radius: ${({ theme }) => theme.border_radius.xxl};
@@ -41,4 +44,5 @@ const LabelWrapper = styled.div`
 const ButtonText = styled.div`
 	padding: 0 4%;
 	color: ${props => props._color};
+	font-size: ${({ theme }) => theme.fontSizes.xxs};
 `;

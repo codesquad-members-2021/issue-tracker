@@ -4,7 +4,7 @@ import LabelBadge from "components/common/LabelBadge";
 import { ReactComponent as EditIcon } from "images/edit.svg";
 import { ReactComponent as TrashIcon } from "images/trash.svg";
 import theme from "styles/theme";
-import { CenterJcAi, CenterAi } from "styles/StyledLayout ";
+import { CenterJcAi, CenterAi } from "styles/StyledLayout";
 import { labelInitialData, labelEditButtonFlagState } from "RecoilStore/Atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import API from "util/API";
