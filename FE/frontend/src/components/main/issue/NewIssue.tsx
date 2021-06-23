@@ -16,7 +16,7 @@ const AddIssue = () => {
   const [input, setInput] = useState({
     assignee_ids: [],
     comment: '',
-    file: '',
+    file: new FormData(),
     label_ids: [],
     milestone_id: 0,
     title: '',
@@ -83,9 +83,10 @@ const AddIssue = () => {
               });
             }}></TitleInput>
           <CommentInput
+            value={input.comment}
             onChange={e => {
+              setInput({ ...input, comment: e.target.value });
               debounce(e, () => {
-                setInput({ ...input, comment: e.target.value });
                 setButtonStatus(e);
                 countInput(e);
               });
@@ -93,7 +94,22 @@ const AddIssue = () => {
             placeholder="코멘트를 입력하세요"></CommentInput>
           <Count xs>띄어쓰기 포함 {inputCount}자</Count>
           <FileSection>
-            <input type="file" id="BtnBrowseHidden" hidden />
+            <input
+              type="file"
+              id="BtnBrowseHidden"
+              hidden
+              onChange={e => {
+                let files = e.target.files;
+                files && input.file.append('key1', files[0]);
+
+                files &&
+                  setInput({
+                    ...input,
+                    comment: `${input.comment}\n![${files[0].name}]`,
+                  });
+              }}
+              //서버 업로드 및 pile-pathname 추가 필요
+            />
             <LabelContainer htmlFor="BtnBrowseHidden">
               <Paperclip />
               <Typos sm>파일을 추가하세요</Typos>

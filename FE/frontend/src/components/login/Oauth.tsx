@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import qs from 'qs';
 import axios from 'axios';
-import useFetch from '../../util/useFetch';
 import Main from '../main/Main';
 import { RouteComponentProps } from 'react-router-dom';
 
