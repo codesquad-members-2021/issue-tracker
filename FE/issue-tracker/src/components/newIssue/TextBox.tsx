@@ -1,55 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-
-import { Input } from '@chakra-ui/input';
-import { Textarea } from '@chakra-ui/textarea';
 
 import { ReactComponent as FileIcon } from '@assets/file.svg';
-import { contentsInputStyle, titleInputStyle } from './style';
-import {
-  isInputtedTitleAtom,
-  isClickedCompleteBtnAtom,
-  newIssueContentsAtom,
-} from '@store/atoms/newIssue';
-import React from 'react';
+import TitleInput from './TitleInput';
+import ContentsTextArea from './ContentsTextArea';
 
 function TextBox() {
-  const [isInputtedTitle, setIsInputtedTitle] =
-    useRecoilState(isInputtedTitleAtom);
-  const isClickedCompleteBtn = useRecoilValue(isClickedCompleteBtnAtom);
-  const setNewIssueContents = useSetRecoilState(newIssueContentsAtom);
-  const [numOfChars, setNumOfChars] = useState(0);
-
-  const titleInput = useRef<HTMLInputElement>(null);
-  const contentsInput = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    if (
-      isClickedCompleteBtn &&
-      titleInput.current != null &&
-      contentsInput.current != null
-    )
-      setNewIssueContents({
-        title: titleInput.current.value,
-        description: contentsInput.current.value,
-      });
-  }, [isClickedCompleteBtn]);
-
-  const handleChangeTitle = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    if (!isInputtedTitle && target.value.length > 0) setIsInputtedTitle(true);
-    else if (isInputtedTitle && target.value.length === 0)
-      setIsInputtedTitle(false);
-  };
-
-  const handleChangeTextArea = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    const length = target.value.length;
-    if (numOfChars === length) return;
-    setNumOfChars(length);
-  };
-
   // 아직 서버 구현이 안 돼있어 추후에 구현 예정
   const handleChangeFile = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
@@ -61,18 +17,9 @@ function TextBox() {
 
   return (
     <TextBoxWrap>
-      <Input
-        {...titleInputStyle}
-        ref={titleInput}
-        onChange={handleChangeTitle}
-      />
+      <TitleInput />
       <Description>
-        <Textarea
-          {...contentsInputStyle}
-          ref={contentsInput}
-          onChange={handleChangeTextArea}
-        />
-        <Span>띄어쓰기 포함 {numOfChars} 자</Span>
+        <ContentsTextArea />
         <ImageUploadWrap>
           <label htmlFor="input_file">
             <FileIcon />
@@ -101,15 +48,6 @@ const Description = styled.div`
   position: relative;
   background: ${({ theme }) => theme.colors.gr_inputBackground};
   border-radius: ${({ theme }) => theme.radii['2xl']};
-`;
-
-const Span = styled.div`
-  right: 30px;
-  bottom: 72px;
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.label};
-  position: absolute;
 `;
 
 const ImageUploadWrap = styled.div`
