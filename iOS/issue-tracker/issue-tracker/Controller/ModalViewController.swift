@@ -42,6 +42,10 @@ private extension ModalViewController {
 }
 
 extension ModalViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "이슈 상세 정보"
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return labelText.count
     }

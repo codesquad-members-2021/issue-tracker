@@ -29,7 +29,6 @@ class IssueDetailTableViewCell: UITableViewCell {
 
     private let profile: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "bell")
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.frame.width / 2
@@ -81,6 +80,21 @@ class IssueDetailTableViewCell: UITableViewCell {
         }
         horizenStackView.snp.makeConstraints { maker in
             maker.leading.trailing.top.bottom.equalToSuperview().inset(20)
+        }
+    }
+
+    func configure(model: Comment) {
+        setupProfile(url: model.author.imageURL)
+        author.text = model.author.name
+        comment.text = model.content
+    }
+
+    private func setupProfile(url: String) {
+        DispatchQueue.global().sync {
+            guard let imageData = try? Data(contentsOf: URL(string: url)!) else { return }
+            DispatchQueue.main.async {
+                self.profile.image = UIImage(data: imageData)
+            }
         }
     }
 }
