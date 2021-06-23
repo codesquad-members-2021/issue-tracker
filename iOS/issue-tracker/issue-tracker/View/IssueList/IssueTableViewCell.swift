@@ -21,7 +21,7 @@ final class IssueTableViewCell: UITableViewCell {
         stackView.alignment = .leading
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = 16
+        stackView.spacing = 10
         return stackView
     }()
 
@@ -42,6 +42,8 @@ final class IssueTableViewCell: UITableViewCell {
         return milestone
     }()
 
+    var labelsCollectionView = LabelsCollectionView()
+
     private var checkBoxImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "checkmark.circle.fill")
@@ -56,6 +58,13 @@ final class IssueTableViewCell: UITableViewCell {
         checkBoxImageView.isHidden = true
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 2))
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 2
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUpStackView()
@@ -67,24 +76,29 @@ final class IssueTableViewCell: UITableViewCell {
     private func addSubviews() {
         contentView.addSubview(stackView)
         contentView.addSubview(checkBoxImageView)
+        contentView.backgroundColor = .systemYellow
     }
 
     private func setUpStackView() {
         stackView.addArrangedSubview(largeTitle)
         stackView.addArrangedSubview(labelDescription)
         stackView.addArrangedSubview(milestoneView)
+        stackView.addArrangedSubview(labelsCollectionView)
     }
 
     private func setupAutolayout() {
         stackView.snp.makeConstraints { view in
-            view.top.equalToSuperview().inset(24)
-            view.leading.equalToSuperview().inset(16)
-            view.trailing.equalToSuperview().inset(200)
+            view.edges.equalToSuperview().inset(10)
+        }
+
+        checkBoxImageView.snp.makeConstraints { image in
+            image.top.equalToSuperview().inset(24)
+            image.trailing.equalToSuperview().inset(16)
+            image.width.height.equalTo(30)
         }
     }
 
-    func setUpCollectionView(view: UICollectionView) {
-        self.stackView.addArrangedSubview(view)
+    func setUpCollectionViewAutoLayout(view: UICollectionView) {
         view.snp.makeConstraints { view in
             view.width.equalToSuperview()
             view.height.equalTo(25)
@@ -114,16 +128,15 @@ final class IssueTableViewCell: UITableViewCell {
     }
 
     func bindLabelCollectionView(relay: Observable<BehaviorRelay<[IssueLabel]>>) {
-        let labelsCollectionView = LabelsCollectionView(frame: CGRect(x: 0, y: 0, width: contentView.frame.width, height: 100))
-        self.setUpCollectionView(view: labelsCollectionView)
+        labelsCollectionView.dataSource = nil
+        self.setUpCollectionViewAutoLayout(view: labelsCollectionView)
         relay.subscribe { behaviorRelay in
-            behaviorRelay.bind(to: labelsCollectionView.rx.items) { collectionView, int, issueLabel in
+            behaviorRelay.bind(to: self.labelsCollectionView.rx.items) { collectionView, int, issueLabel in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: IndexPath(row: int, section: 0  )) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
                 cell.configure(title: issueLabel.title, color: issueLabel.color)
                 return cell
             }
         } onCompleted: {
-            self.layoutIfNeeded()
         }
         .disposed(by: bag)
     }

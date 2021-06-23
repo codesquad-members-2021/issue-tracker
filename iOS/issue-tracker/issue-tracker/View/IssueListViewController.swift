@@ -41,7 +41,6 @@ final class IssueListViewController: UIViewController {
         bindButton()
         bindSelectMode()
         bindIssueToolBar()
-        bindSearchController()
         issueListViewModel.fetchIssueList()
     }
 
@@ -165,22 +164,6 @@ final class IssueListViewController: UIViewController {
             .disposed(by: bag)
     }
 
-    private func bindSearchController() {
-        searchController.searchBar.searchTextField.rx.text
-            .bind { [weak self] text in
-                guard let text = text?.lowercased(), let self = self else { return }
-                let filteredArr = self.issueListViewModel.issueList.value.filter { $0.title.localizedCaseInsensitiveContains(text) }
-                self.issueListViewModel.issueList.accept(filteredArr)
-            }
-            .disposed(by: bag)
-
-        searchController.rx.didDismiss
-            .subscribe { [weak self] _ in
-//                self?.issueListViewModel.fetchIssueList()
-            }
-            .disposed(by: bag)
-    }
-
     private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
@@ -245,6 +228,7 @@ final class IssueListViewController: UIViewController {
         issueTableView.allowsMultipleSelection = true
         issueTableView.delegate = self
         issueTableView.tableFooterView = IssueTableFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+        issueTableView.separatorStyle = .none
     }
 }
 
