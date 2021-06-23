@@ -17,18 +17,11 @@ struct LabelDTO: Decodable {
     }
 }
 
-class Label: Decodable {
+struct Label: Decodable {
     private(set) var id: Int
     private(set) var title: String
-    private(set) var body: String
+    private(set) var body: String?
     private(set) var hexColorCode: String
-    
-    init(id: Int, title: String, body: String, hexColorCode: String) {
-        self.id = id
-        self.title = title
-        self.body = body
-        self.hexColorCode = hexColorCode
-    }
     
     enum CodingKeys: String, CodingKey {
         case id

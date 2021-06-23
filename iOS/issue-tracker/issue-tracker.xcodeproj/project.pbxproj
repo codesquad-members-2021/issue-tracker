@@ -63,6 +63,11 @@
 		FAEB30AE266F6A7800C17BE9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */; };
 		FAEB30B12670B74000C17BE9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FAEB30B02670B74000C17BE9 /* Alamofire */; };
 		FAEB30B42670B76200C17BE9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB30B32670B76200C17BE9 /* NetworkManager.swift */; };
+		FAF927A92680DAFB0017F8DE /* IssueTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */; };
+		FAF927AB2680DB1C0017F8DE /* IssueTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */; };
+		FAF927AD2680DCCA0017F8DE /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */; };
+		FAF927AF2681DA810017F8DE /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AE2681DA810017F8DE /* Issue.swift */; };
+		FAF927B126831A570017F8DE /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927B026831A570017F8DE /* IssueDetailViewController.swift */; };
 		FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +129,11 @@
 		FAEB30AB266F5E9700C17BE9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FAEB30AD266F6A7800C17BE9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		FAEB30B32670B76200C17BE9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IssueTableViewDelegate.swift; path = ../../../../../../../../../../../Applications/IssueTableViewDelegate.swift; sourceTree = "<group>"; };
+		FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewDataSource.swift; sourceTree = "<group>"; };
+		FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		FAF927AE2681DA810017F8DE /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		FAF927B026831A570017F8DE /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -260,7 +270,9 @@
 		E42AD11926708EBA0071B436 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				E42AD11D267093320071B436 /* IssueViewController.swift */,
+				FAF927A72680D9630017F8DE /* Controller */,
+				FAF927A62680D95B0017F8DE /* View */,
+				FAF927A52680D9560017F8DE /* Model */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -403,6 +415,33 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		FAF927A52680D9560017F8DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAF927AE2681DA810017F8DE /* Issue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAF927A62680D95B0017F8DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FAF927A72680D9630017F8DE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E42AD11D267093320071B436 /* IssueViewController.swift */,
+				FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */,
+				FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */,
+				FAF927B026831A570017F8DE /* IssueDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -480,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB2C36A26789D41009F879C /* MileStoneTableViewCell.swift in Sources */,
+				FAF927AB2680DB1C0017F8DE /* IssueTableViewDataSource.swift in Sources */,
 				E426DAD126730DC50069E77D /* OAuthResponseDTO.swift in Sources */,
 				FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */,
 				E43912E8267A1FE5003CD344 /* NewLabelDTO.swift in Sources */,
@@ -501,6 +541,7 @@
 				E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */,
 				FA431FF9267F36FA0010EA91 /* MileStoneControlViewController.swift in Sources */,
 				E43912EA267A2351003CD344 /* NetworkError.swift in Sources */,
+				FAF927B126831A570017F8DE /* IssueDetailViewController.swift in Sources */,
 				E43912F6267CAE01003CD344 /* TopMenuView.swift in Sources */,
 				E42AD122267093590071B436 /* MileStoneViewController.swift in Sources */,
 				FA733A2E267C3D77005A40C8 /* Milestone.swift in Sources */,
@@ -519,10 +560,12 @@
 				E426DABE2670EC830069E77D /* SocialLoginManagerDelegate.swift in Sources */,
 				FA733A30267C3E9E005A40C8 /* MilestoneTableViewDataSource.swift in Sources */,
 				E42AD0FE266E52FB0071B436 /* AppDelegate.swift in Sources */,
+				FAF927AF2681DA810017F8DE /* Issue.swift in Sources */,
 				E43912EE267C3C0E003CD344 /* CellAction.swift in Sources */,
 				E4F7E8E826732B6300CE51C2 /* TabBarChildInfo.swift in Sources */,
 				FAC6D88B2671D5A100A9E5F9 /* GithubAuthorizationManager.swift in Sources */,
 				E4F7E8EA2673394300CE51C2 /* ImageLoadManager.swift in Sources */,
+				FAF927A92680DAFB0017F8DE /* IssueTableViewDelegate.swift in Sources */,
 				E42AD11E267093320071B436 /* IssueViewController.swift in Sources */,
 				E43912F4267CAA8D003CD344 /* UITextFieldExtension.swift in Sources */,
 				E43912DC2678A737003CD344 /* JWT.swift in Sources */,
@@ -532,6 +575,7 @@
 				E42AD100266E52FB0071B436 /* SceneDelegate.swift in Sources */,
 				E43912DA26789E16003CD344 /* Label.swift in Sources */,
 				E426DAC92671F7760069E77D /* AlertFactory.swift in Sources */,
+				FAF927AD2680DCCA0017F8DE /* IssueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

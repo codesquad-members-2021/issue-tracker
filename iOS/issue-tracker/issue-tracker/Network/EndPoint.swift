@@ -11,6 +11,7 @@ enum EndPoint {
     static let baseAddress = "http://3.34.122.67/api"
     
     case OAuth
+    case issue
     case label
     case milestone
     case none
@@ -19,12 +20,14 @@ enum EndPoint {
         switch self {
         case .OAuth:
             return "/login/ios"
+        case .issue:
+            return "/issues"
         case .label:
             return "/labels"
         case .milestone:
             return "/milestones"
         case .none:
-            return ""
+            return ""        
         }
     }
     
