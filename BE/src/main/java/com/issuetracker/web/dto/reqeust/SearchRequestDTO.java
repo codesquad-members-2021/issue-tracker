@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class SearchRequestDTO {
 
-    private String searchTerm;
+    private String status;
+    private String query;
 }

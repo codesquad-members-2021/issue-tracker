@@ -20,9 +20,9 @@ public class IssueController {
     private final IssueCommandService issueCommandService;
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
-    @GetMapping
+    @GetMapping("/search")
     public IssuesResponseDTO search(SearchRequestDTO searchRequest) {
-        logger.debug("검색어에 따른 이슈 조회");
+        logger.debug("검색어와 상태에 따른 이슈 조회");
         return issueQueryService.searchIssues(searchRequest);
     }
 

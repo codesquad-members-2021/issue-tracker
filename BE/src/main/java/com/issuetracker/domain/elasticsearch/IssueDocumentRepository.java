@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface IssueDocumentRepository extends ElasticsearchRepository<IssueDocument, Long> {
 
-    @CountQuery("{\"match\": {\"title\": \"?0\"}}")
-    long countIssueDocumentByIsOpen(String title, boolean isOpen);
+    @CountQuery("{\"bool\": {\"must\": [{\"match\": {\"title\": \"?0\"}},{\"match\": {\"isOpen\": \"?1\"}}]}}")
+    long countIssueDocumentByTitleAndIsOpen(String title, boolean isOpen);
 
-    @Query("{\"match\": {\"title\": \"?0\"}}")
-    List<IssueDocument> findAllByTitle(String title);
+    @Query("{\"bool\": {\"must\": [{\"match\": {\"title\": \"?0\"}},{\"match\": {\"isOpen\": \"?1\"}}]}}")
+    List<IssueDocument> findAllByTitleAndIsOpen(String title, boolean isOpen);
 }

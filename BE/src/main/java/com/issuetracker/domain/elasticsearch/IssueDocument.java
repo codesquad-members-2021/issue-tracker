@@ -1,12 +1,12 @@
 package com.issuetracker.domain.elasticsearch;
 
 import com.issuetracker.domain.issue.Issue;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @Document(indexName = "issue")
+@ToString
 public class IssueDocument {
 
     @Id
@@ -24,10 +25,13 @@ public class IssueDocument {
     private List<UserDocument> assignees;
     private List<LabelDocument> labels;
     private MilestoneDocument milestone;
+    @Field(type = FieldType.Boolean)
     private boolean isOpen;
     private String title;
     private List<CommentDocument> comments;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis)
     private LocalDateTime createdDateTime;
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis)
     private LocalDateTime modifiedDateTime;
 
     public static IssueDocument of(Issue issue) {

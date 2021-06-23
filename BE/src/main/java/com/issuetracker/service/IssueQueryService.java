@@ -9,6 +9,7 @@ import com.issuetracker.web.dto.reqeust.FilterRequestDTO;
 import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
 import com.issuetracker.web.dto.response.*;
 import com.issuetracker.web.dto.vo.Count;
+import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +30,14 @@ public class IssueQueryService {
     private final UserService userService;
 
     public IssuesResponseDTO searchIssues(SearchRequestDTO searchRequestDTO) {
+        System.out.println(searchRequestDTO.getQuery());
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.countByIsOpen(true))
-                .openedIssue((int) issueDocumentRepository.countIssueDocumentByIsOpen(searchRequestDTO.getSearchTerm(), true))
-                .closedIssue((int) issueDocumentRepository.countIssueDocumentByIsOpen(searchRequestDTO.getSearchTerm(), false))
+                .openedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), true))
+                .closedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), false))
                 .build();
-        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitle(searchRequestDTO.getSearchTerm()).stream()
+        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus())).stream()
                 .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);

@@ -24,8 +24,9 @@ public class LabelDocument {
     private String description;
 
     public static LabelDocument of(Label label) {
-        return LabelDocument.builder().
-                name(label.getName())
+        return LabelDocument.builder()
+                .id(label.getId())
+                .name(label.getName())
                 .color(label.getColor())
                 .description(label.getDescription())
                 .build();

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDate;
 
@@ -17,6 +20,7 @@ public class MilestoneDocument {
     private Long id;
     private String title;
     private String description;
+    @Field(type = FieldType.Date, format = DateFormat.date)
     private LocalDate dueDate;
     private boolean isOpen;
 
