@@ -7,8 +7,10 @@ import team02.issue_tracker.dto.CommentRequest;
 import team02.issue_tracker.dto.issue.*;
 import team02.issue_tracker.exception.IssueNotFoundException;
 import team02.issue_tracker.repository.IssueRepository;
+import team02.issue_tracker.repository.IssueSearchRepository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,14 +19,16 @@ public class IssueService {
     private static final Long EMPTY = 0L;
 
     private final IssueRepository issueRepository;
+    private final IssueSearchRepository issueSearchRepository;
     private final UserService userService;
     private final CommentService commentService;
     private final MilestoneService milestoneService;
     private final LabelService labelService;
 
-    public IssueService(IssueRepository issueRepository, UserService userService,
+    public IssueService(IssueRepository issueRepository, IssueSearchRepository issueSearchRepository, UserService userService,
                         CommentService commentService, MilestoneService milestoneService, LabelService labelService) {
         this.issueRepository = issueRepository;
+        this.issueSearchRepository = issueSearchRepository;
         this.userService = userService;
         this.commentService = commentService;
         this.milestoneService = milestoneService;
@@ -109,7 +113,7 @@ public class IssueService {
     @Transactional
     public void modifyAssignees(Long issueId, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
-        List<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
+        Set<IssueAssignee> issueAssignees = userService.modifyIssueAssignees(issue, issueAssigneeIdsRequest);
         issue.editIssueAssignees(issueAssignees);
     }
 
@@ -153,5 +157,11 @@ public class IssueService {
 
     public Long getClosedIssueCount() {
         return issueRepository.countByIsOpenFalse();
+    }
+
+    public List<IssueResponse> getFilteredIssues(Long userId, Boolean isOpen, String filter, Long assigneeId, Long labelId, Long milestoneId, Long writerId) {
+        return issueSearchRepository.findIssuesFilteredBy(userId, isOpen, filter, assigneeId, labelId, milestoneId, writerId).stream()
+                .map(IssueResponse::new)
+                .collect(Collectors.toList());
     }
 }
