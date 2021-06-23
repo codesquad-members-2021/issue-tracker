@@ -11,7 +11,7 @@ function CompleteBtn() {
 
 export default CompleteBtn;
 
-const completeButton = {
+export const completeButton = {
   width: '120px',
   fontSize: 'xs',
   background: 'bl_initial',
