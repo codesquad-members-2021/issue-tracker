@@ -20,6 +20,7 @@ const fetchData = async (url, method, reqData) => {
 		console.log("reqData:", reqData);
 		const res = await fetch(url, option);
 		const resData = await res.json();
+		console.log(resData);
 		if (!res.ok) throw new Error(res.status);
 		else {
 			return await resData;
