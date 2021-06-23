@@ -25,14 +25,8 @@ public class IssueService {
     private final HistoryRepository historyRepository;
     private final CommentRepository commentRepository;
 
-    private boolean verifyAssignees(String userName, Issue issue) {
-        User user = findUser(userName);
-
-        List<Assignees> assignees = assigneeRepository.findAllByIssueId(issue.getId()).stream()
-                .filter(assignee -> assignee.getUser().getId() == user.getId())
-                .collect(Collectors.toList());
-
-        return !assignees.isEmpty();
+    private User findUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(RuntimeException::new);
     }
 
     private User findUser(String userName) {
@@ -43,33 +37,68 @@ public class IssueService {
         return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
     }
 
+    private List<Issue> findAllIssue() {
+        return issueRepository.findAllByIsDeleteFalse();
+    }
+
+    private Label findLabel(Long labelId) {
+        return labelRepository.findById(labelId).orElseThrow(RuntimeException::new);
+    }
+
+    private Milestone findMilestone(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId).orElseThrow(RuntimeException::new);
+    }
+
     private Milestone findMilestone(IssueRequestDTO issueRequestDTO) {
         Milestone milestone = null;
-        if(issueRequestDTO.getMilestone() != null) {
-            milestone = milestoneRepository.findById(issueRequestDTO.getMilestone()).orElseThrow(RuntimeException::new);
+        if (issueRequestDTO.getMilestone() != null) {
+            milestone = findMilestone(issueRequestDTO.getMilestone());
         }
         return milestone;
     }
 
-    private void saveIssueHasLabels(IssueRequestDTO issueRequestDTO, Issue issue) {
-        if(issueRequestDTO.getLabels() != null) {
-            List<IssueHasLabel> issueHasLabels = issueRequestDTO.getLabels().stream()
-                    .map(labelId -> IssueHasLabel.createIssueHasLabel(issue, labelRepository.findById(labelId).orElseThrow(RuntimeException::new)))
+    private History findHistory(Long issueId) {
+        return historyRepository.findFirstByIssueIdOrderByHistoryDateTimeDesc(issueId);
+    }
+
+    private List<Assignees> findAssignees(Long issueId) {
+        return assigneeRepository.findAllByIssueId(issueId);
+    }
+
+    private List<IssueHasLabel> findIssueHasLabel(Long issueId) {
+        return issueHasLabelRepository.findAllByIssueId(issueId);
+    }
+
+    private List<Comment> findComments(Long issueId) {
+        return commentRepository.findAllByIssueId(issueId);
+    }
+
+    private boolean verifyAssignees(String userName, Issue issue) {
+        User user = findUser(userName);
+
+        List<Assignees> assignees = findAssignees(issue.getId()).stream()
+                .filter(assignee -> assignee.getUser().getId() == user.getId())
+                .collect(Collectors.toList());
+
+        return !assignees.isEmpty();
+    }
+
+    private void saveAssignees(IssueRequestDTO issueRequestDTO, Issue issue) {
+        if (issueRequestDTO.getAssignees() != null) {
+            List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
+                    .map(userId -> Assignees.createAssignees(issue, findUser(userId)))
                     .collect(Collectors.toList());
-            issueHasLabelRepository.saveAll(issueHasLabels);
+            assigneeRepository.saveAll(assignees);
         }
     }
 
-    private void deleteIssueHasLabels(Issue issue) {
-        issueHasLabelRepository.deleteAllByIssueId(issue.getId());
-    }
-
-    private void createHistorysByStatus(IssueChangeStatusRequestDTO issueChangeStatusRequestDTO, String userName, String flag) {
-        User user = findUser(userName);
-        List<History> historys = issueChangeStatusRequestDTO.getIssueIds().stream()
-                .map(issueId -> History.createHistory(user, findIssue(issueId), flag))
-                .collect(Collectors.toList());
-        historyRepository.saveAll(historys);
+    private void saveIssueHasLabels(IssueRequestDTO issueRequestDTO, Issue issue) {
+        if (issueRequestDTO.getLabels() != null) {
+            List<IssueHasLabel> issueHasLabels = issueRequestDTO.getLabels().stream()
+                    .map(labelId -> IssueHasLabel.createIssueHasLabel(issue, findLabel(labelId)))
+                    .collect(Collectors.toList());
+            issueHasLabelRepository.saveAll(issueHasLabels);
+        }
     }
 
     private void createHistory(User user, Issue issue, String flag) {
@@ -77,17 +106,28 @@ public class IssueService {
         historyRepository.save(history);
     }
 
-    private void saveAssignees(IssueRequestDTO issueRequestDTO, Issue issue) {
-        if(issueRequestDTO.getAssignees() != null) {
-            List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
-                    .map(userId -> Assignees.createAssignees(issue, userRepository.findById(userId).orElseThrow(RuntimeException::new)))
-                    .collect(Collectors.toList());
-            assigneeRepository.saveAll(assignees);
-        }
+    private void createHistoriesByStatus(IssueChangeStatusRequestDTO issueChangeStatusRequestDTO, String userName, String flag) {
+        User user = findUser(userName);
+        List<History> histories = issueChangeStatusRequestDTO.getIssueIds().stream()
+                .map(issueId -> History.createHistory(user, findIssue(issueId), flag))
+                .collect(Collectors.toList());
+        historyRepository.saveAll(histories);
+    }
+
+    private void deleteIssueHasLabels(Issue issue) {
+        issueHasLabelRepository.deleteAllByIssueId(issue.getId());
     }
 
     private void deleteAssignees(Issue issue) {
         assigneeRepository.deleteAllByIssueId(issue.getId());
+    }
+
+    private MilestoneResponseDTO getMilestoneResponseDTO(Issue issue) {
+        if (issue.getMilestone() == null) {
+            return null;
+        }
+        Milestone milestone = findMilestone(issue.getMilestone().getId());
+        return MilestoneResponseDTO.from(milestone, getIssueCountResponseDTO(milestone.getId()));
     }
 
     private IssueCountResponseDTO getIssueCountResponseDTO(Long milestoneId) {
@@ -104,9 +144,9 @@ public class IssueService {
 
         saveIssueHasLabels(issueRequestDTO, issue);
 
-        if(issueRequestDTO.getAssignees() != null) {
+        if (issueRequestDTO.getAssignees() != null) {
             List<Assignees> assignees = issueRequestDTO.getAssignees().stream()
-                    .map(userId -> Assignees.createAssignees(issue, userRepository.findById(userId).orElseThrow(RuntimeException::new)))
+                    .map(userId -> Assignees.createAssignees(issue, findUser(userId)))
                     .collect(Collectors.toList());
             assigneeRepository.saveAll(assignees);
         }
@@ -121,14 +161,14 @@ public class IssueService {
                 .collect(Collectors.toList());
         issueRepository.saveAll(issues);
 
-        createHistorysByStatus(issueChangeStatusRequestDTO, userName, status);
+        createHistoriesByStatus(issueChangeStatusRequestDTO, userName, status);
     }
 
     @Transactional
     public void updateIssue(Long issueId, IssueRequestDTO issueRequestDTO, String userName) {
         Issue issue = findIssue(issueId);
 
-        if(!verifyAssignees(userName, issue)) {
+        if (!verifyAssignees(userName, issue)) {
             throw new RuntimeException("assignees에 포함이 안되어있습니다.");
         }
 
@@ -148,7 +188,7 @@ public class IssueService {
     public void deleteIssue(Long issueId, String userName) {
         Issue issue = findIssue(issueId);
 
-        if(!verifyAssignees(userName, issue)) {
+        if (!verifyAssignees(userName, issue)) {
             throw new RuntimeException("assignees에 포함이 안되어있습니다.");
         }
 
@@ -158,37 +198,23 @@ public class IssueService {
         createHistory(findUser(userName), issue, "delete");
     }
 
-    public IssueDetailResponseDTO showIssue(Long issueId, String userName) {
-
+    public IssueDetailResponseDTO showIssue(Long issueId) {
         Issue issue = findIssue(issueId);
-
-        History history = historyRepository.findFirstByIssueIdOrderByHistoryDateTimeDesc(issueId);
-
-        User user = userRepository.findById(issue.getUser().getId()).orElseThrow(RuntimeException::new);
-
-        List<Assignees> assignees = assigneeRepository.findAllByIssueId(issueId);
-
-        List<IssueHasLabel> issueHasLabels = issueHasLabelRepository.findAllByIssueId(issueId);
-
-        List<Comment> comments =  commentRepository.findAllByIssueId(issueId);
-
-        return IssueDetailResponseDTO.from(issue,history, user, assignees, findMilestone(issue),issueHasLabels, comments);
-    }
-
-    private MilestoneResponseDTO findMilestone(Issue issue){
-        if(issue.getMilestone() == null){
-            return null;
-        }
-        Milestone milestone = milestoneRepository.findById(issue.getMilestone().getId()).orElseThrow(RuntimeException::new);
-        return MilestoneResponseDTO.from(milestone, getIssueCountResponseDTO(milestone.getId()));
+        History history = findHistory(issueId);
+        User user = findUser(issue.getUser().getId());
+        List<Assignees> assignees = findAssignees(issueId);
+        List<IssueHasLabel> issueHasLabels = findIssueHasLabel(issueId);
+        List<Comment> comments = findComments(issueId);
+        return IssueDetailResponseDTO.from(issue, history, user, assignees, getMilestoneResponseDTO(issue), issueHasLabels, comments);
     }
 
 
     public IssuesResponseDTO showAllIssue() {
-        List<IssueResponseDTO> issueResponseDTOS = issueRepository.findAllByIsDeleteFalse().stream()
-                .map(issue -> IssueResponseDTO.from(issue, historyRepository.findFirstByIssueIdOrderByHistoryDateTimeDesc(issue.getId()), findMilestone(issue),issueHasLabelRepository.findAllByIssueId(issue.getId())))
+        List<IssueResponseDTO> issueResponseDTOS = findAllIssue().stream()
+                .map(issue -> IssueResponseDTO.from(issue, findHistory(issue.getId()), getMilestoneResponseDTO(issue), findIssueHasLabel(issue.getId())))
                 .collect(Collectors.toList());
-
         return IssuesResponseDTO.from(issueResponseDTOS);
     }
+
+
 }

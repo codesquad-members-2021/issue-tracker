@@ -1,6 +1,5 @@
 package com.team11.issue.oauth;
 
-import com.team11.issue.exception.OauthException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

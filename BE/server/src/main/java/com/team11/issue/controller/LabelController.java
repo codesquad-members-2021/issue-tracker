@@ -21,16 +21,19 @@ public class LabelController {
 
     @GetMapping("/labels")
     public ResponseEntity<LabelsResponseDTO> showAllLabel() {
+        logger.info("라벨 전체목록 조회 요청");
         return ResponseEntity.ok().body(labelService.showAllLabel());
     }
 
     @GetMapping("/label/{labelId}")
     public ResponseEntity<LabelResponseDTO> showLabel(@PathVariable Long labelId) {
+        logger.info("라벨 상세조회 요청");
         return ResponseEntity.ok().body(labelService.showLabel(labelId));
     }
 
     @PostMapping("/label")
     public ResponseEntity<ResponseDTO> createLabel(@RequestBody LabelRequestDTO labelRequestDTO) {
+        logger.info("라벨 등록 요청");
         labelService.createLabel(labelRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
@@ -38,12 +41,14 @@ public class LabelController {
     @PutMapping("/label/{labelId}")
     public ResponseEntity<ResponseDTO> updateLabel(@PathVariable Long labelId,
                                                    @RequestBody LabelRequestDTO labelRequestDTO) {
+        logger.info("라벨 수정 요청");
         labelService.updateLabel(labelId, labelRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
 
     @DeleteMapping("/label/{labelId}")
     public ResponseEntity<ResponseDTO> deleteLabel(@PathVariable Long labelId) {
+        logger.info("라벨 삭제 요청");
         labelService.deleteLabel(labelId);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }

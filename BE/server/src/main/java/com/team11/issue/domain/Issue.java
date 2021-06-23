@@ -1,8 +1,10 @@
 package com.team11.issue.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team11.issue.dto.issue.IssueRequestDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,14 +22,14 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition="tinyint(1) default 1")
+    @Column(columnDefinition = "tinyint(1) default 1")
     private boolean isOpen;
 
     private String title;
 
     private String contents;
 
-    @Column(columnDefinition="tinyint(1) default 0")
+    @Column(columnDefinition = "tinyint(1) default 0")
     private boolean isDelete;
 
     @OneToOne
@@ -55,11 +57,11 @@ public class Issue {
     }
 
     public Issue updateStatus(String status) {
-        if(status.equals("open")) {
+        if (status.equals("open")) {
             this.isOpen = true;
         }
 
-        if(status.equals("closed")) {
+        if (status.equals("closed")) {
             this.isOpen = false;
         }
         return this;

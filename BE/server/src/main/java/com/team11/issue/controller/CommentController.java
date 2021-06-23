@@ -20,8 +20,9 @@ public class CommentController {
 
     @PostMapping("/issue/{issueId}/comment")
     public ResponseEntity<ResponseDTO> createComment(@PathVariable Long issueId,
-                                                     @ApiParam(hidden=true) @RequestAttribute String userName,
+                                                     @ApiParam(hidden = true) @RequestAttribute String userName,
                                                      @RequestBody CommentRequestDTO commentRequestDTO) {
+        logger.info("코멘트 등록 요청");
         commentService.createComment(issueId, userName, commentRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
@@ -29,8 +30,9 @@ public class CommentController {
     @PutMapping("/issue/{issueId}/comment/{commentId}")
     public ResponseEntity<ResponseDTO> updateComment(@PathVariable Long issueId,
                                                      @PathVariable Long commentId,
-                                                     @ApiParam(hidden=true) @RequestAttribute String userName,
+                                                     @ApiParam(hidden = true) @RequestAttribute String userName,
                                                      @RequestBody CommentRequestDTO commentRequestDTO) {
+        logger.info("코멘트 수정 요청");
         commentService.updateComment(issueId, commentId, userName, commentRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
@@ -38,7 +40,8 @@ public class CommentController {
     @DeleteMapping("/issue/{issueId}/comment/{commentId}")
     public ResponseEntity<ResponseDTO> deleteComment(@PathVariable Long issueId,
                                                      @PathVariable Long commentId,
-                                                     @ApiParam(hidden=true) @RequestAttribute String userName) {
+                                                     @ApiParam(hidden = true) @RequestAttribute String userName) {
+        logger.info("코멘트 삭제 요청");
         commentService.deleteComment(issueId, commentId, userName);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }

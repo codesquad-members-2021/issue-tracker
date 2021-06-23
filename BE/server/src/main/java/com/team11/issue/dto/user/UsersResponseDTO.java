@@ -14,7 +14,7 @@ public class UsersResponseDTO {
     private final List<UserResponseDTO> users;
 
     public static UsersResponseDTO from(List<UserResponseDTO> userResponseDTOS) {
-        return  UsersResponseDTO.builder()
+        return UsersResponseDTO.builder()
                 .users(userResponseDTOS)
                 .build();
     }
