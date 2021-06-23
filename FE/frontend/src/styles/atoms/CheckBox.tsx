@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 const CheckBox = () => {
+  const foo = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked);
+  };
+
   return (
-    <>
-      <Box type="checkbox" />
-    </>
+    <div>
+      <Box type="checkbox" onChange={foo} />
+    </div>
   );
 };
 

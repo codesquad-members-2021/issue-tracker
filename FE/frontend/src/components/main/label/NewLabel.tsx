@@ -18,7 +18,7 @@ const NewLabel = () => {
   const { mutateAsync, isError } = useMutation(useMutate('label', 'add'));
 
   const registerNewLabel = async () => {
-    await mutateAsync(input);
+    await mutateAsync({ data: input });
   };
 
   return (

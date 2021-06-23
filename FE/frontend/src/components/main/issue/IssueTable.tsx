@@ -12,6 +12,7 @@ import User from '../../../styles/atoms/User';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as Archive } from '../../../icons/archive.svg';
 import { ReactComponent as MilestoneIcon } from '../../../icons/milestone.svg';
+import { ChangeEvent } from 'react';
 
 const IssueTable = () => {
   const { isLoading, data, error } = useFetch('issue', 'getAllData');

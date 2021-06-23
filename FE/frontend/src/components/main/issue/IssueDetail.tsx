@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
+import { useMutation, useQueryClient } from 'react-query';
+import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
+import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
+import { ReactComponent as Edit } from '../../../icons/edit.svg';
 
 const IssueDetail = () => {
+  const queryClient = useQueryClient();
   const location = useLocation();
   const { isLoading, data, error } = useFetch('issue', 'detail', {
     id: location.pathname,
   });
+  const { mutateAsync, isError, isSuccess } = useMutation(
+    useMutate('issue', 'editTitle')
+  );
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(data?.title);
+  const setEditOpen = () => {
+    setIsEditOpen(!isEditOpen);
+  };
+
+  const editTitle = async (id: number) => {
+    await mutateAsync({ data: editedTitle, id: id });
+
+    if (isSuccess) {
+      queryClient.invalidateQueries(['issue', 'detail']);
+      setEditOpen();
+    }
+  };
 
   return (
     <>
@@ -20,9 +43,24 @@ const IssueDetail = () => {
         <LabelListContainer>
           <TopContainer>
             <InfoContainer>
-              <div>
-                <Title>{data.title}</Title> <Id>#{data.id}</Id>
-              </div>
+              <TitleContainer>
+                {!isEditOpen && (
+                  <>
+                    <Title>{data.title}</Title> <Id>#{data.id}</Id>
+                  </>
+                )}
+                {isEditOpen && (
+                  <>
+                    <label htmlFor="editTitle">제목</label>
+                    <EditTitle
+                      id="editTitle"
+                      value={editedTitle}
+                      onChange={e => {
+                        setEditedTitle(e.target.value);
+                      }}></EditTitle>
+                  </>
+                )}
+              </TitleContainer>
               <LowerTitleContainer>
                 <IssueStatus>
                   <AlertCircle />
@@ -36,12 +74,39 @@ const IssueDetail = () => {
               </LowerTitleContainer>
             </InfoContainer>
             <ButtonContainer>
-              <Buttons small detail>
-                제목 편집
-              </Buttons>
-              <Buttons small detail>
-                이슈 닫기
-              </Buttons>
+              <div>
+                {!isEditOpen && (
+                  <>
+                    <Buttons small detail onClick={setEditOpen}>
+                      제목 편집
+                    </Buttons>
+                    <Buttons small detail>
+                      이슈 닫기
+                    </Buttons>
+                  </>
+                )}
+                {isEditOpen && (
+                  <>
+                    <Buttons small detail onClick={setEditOpen}>
+                      <XSquareWrapper>
+                        <XSquare />
+                      </XSquareWrapper>
+                      편집 취소
+                    </Buttons>
+                    <Buttons
+                      small
+                      initial
+                      onClick={(e: Event) => {
+                        editTitle(data.id);
+                      }}>
+                      <EditWrapper>
+                        <Edit />
+                      </EditWrapper>
+                      편집 완료
+                    </Buttons>
+                  </>
+                )}
+              </div>
             </ButtonContainer>
           </TopContainer>
           <Line />
@@ -82,12 +147,34 @@ const Line = styled.div`
 
 const InfoContainer = styled.div``;
 
+const TitleContainer = styled.div`
+  position: relative;
+  & > label {
+    color: ${props => props.theme.greyscale.label};
+    position: absolute;
+    left: 3%;
+    top: 30%;
+  }
+`;
+
 const Title = styled.span`
   font-size: 32px;
   padding-right: 20px;
   pointer-events: none;
   background: inherit;
   color: ${props => props.theme.greyscale.titleActive};
+`;
+
+const EditTitle = styled.input`
+  display: flex;
+  align-items: center;
+  padding-left: 12%;
+  font-size: ${props => props.theme.fontSize.sm};
+  color: ${props => props.theme.greyscale.titleActive};
+  width: 940px;
+  height: 40px;
+  background: ${props => props.theme.greyscale.inputBackground};
+  border-radius: 11px;
 `;
 
 const Id = styled.span`
@@ -127,7 +214,25 @@ const TopContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   & > div {
+    display: flex;
     margin-left: 10px;
+    & > div {
+      margin-left: 10px;
+    }
+  }
+`;
+
+const XSquareWrapper = styled.div`
+  padding-right: 8px;
+  svg {
+    stroke: ${props => props.theme.colors.primary};
+  }
+`;
+
+const EditWrapper = styled.div`
+  padding-right: 8px;
+  svg {
+    stroke: ${props => props.theme.greyscale.offWhite};
   }
 `;
 
