@@ -41,7 +41,7 @@ public class JpaIssueFilterRepository implements IssueFilterRepository {
         }
 
         if (issueFilter.getAuthor() != null) {
-            query.innerJoin(issue.author, user).on(user.id.eq(issueFilter.getAssignee()));
+            query.innerJoin(issue.author, user).on(user.id.eq(issueFilter.getAuthor()));
         }
 
         if (issueFilter.getAssignee() != null) {
