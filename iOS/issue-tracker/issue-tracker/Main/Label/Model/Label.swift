@@ -7,23 +7,24 @@
 
 import Foundation
 
-struct Label: Decodable {
+protocol Identifiable {
+    func identifier() -> Int
+}
+
+struct Label: Decodable, Identifiable {
     private(set) var id: Int
     private(set) var title: String
     private(set) var body: String
     private(set) var hexColorCode: String
-    
-    init(id: Int, title: String, body: String, hexColorCode: String) {
-        self.id = id
-        self.title = title
-        self.body = body
-        self.hexColorCode = hexColorCode
-    }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case title = "name"
         case body = "content"
         case hexColorCode = "color_code"
+    }
+    
+    func identifier() -> Int {
+        return id
     }
 }

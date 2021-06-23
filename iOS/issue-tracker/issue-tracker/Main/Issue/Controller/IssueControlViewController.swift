@@ -170,6 +170,7 @@ final class IssueControlViewController: UIViewController {
     }()
     
     private var currentIssue: Issue?
+    private var selectedLabels: [Label]?
     private var saveOperation: ((Issue) -> Void)?
     
     override func viewDidLoad() {
@@ -271,11 +272,31 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
-        print("레이블 내놔!")
+        let labelInfoViewController = AdditionalInfoViewController<SimpleLabelTableViewCell, Label>()
+        let tableDatasource = SimpleLabelTableDatasource()
+        labelInfoViewController.configure(withTitle: "레이블 선택",
+                                          preSelectedInfos: selectedLabels ?? [],
+                                          tableDatasource: tableDatasource,
+                                          isMultiselectionAllowed: true,
+                                          endpoint: EndPoint.label)
+        labelInfoViewController.setSaveOperation(updateLabelSelection)
+        
+        DispatchQueue.main.async {
+            self.present(labelInfoViewController, animated: true, completion: nil)
+        }
+    }
+    
+    private func updateLabelSelection(labels: [Label]) {
+        guard let firstLabel = labels.first else { return }
+        self.selectedLabels = labels
+        let count = labels.count
+        let tail = count-1 > 0 ? " 외 \(count-1)개" : ""
+        let labelInfo = "\(firstLabel.title)" + tail
+        labelInfoControl.changeInfoLabelText(to: labelInfo)
     }
     
     @objc private func milestoneInfoTouched(_ sender: UIButton) {
-        print("마일스톤 내놔!")
+        
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {
