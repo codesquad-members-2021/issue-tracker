@@ -27,6 +27,4 @@ class IssueTableViewDataSource: NSObject, UITableViewDataSource {
         cell.configure(title: issue.title ?? "", mileStoneName: issue.milestone?.title ?? "", labels: issue.labels ?? [])
         return cell
     }
-    
-    
 }

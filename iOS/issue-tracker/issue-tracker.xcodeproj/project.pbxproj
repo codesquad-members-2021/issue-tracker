@@ -67,6 +67,7 @@
 		FAF927AB2680DB1C0017F8DE /* IssueTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */; };
 		FAF927AD2680DCCA0017F8DE /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */; };
 		FAF927AF2681DA810017F8DE /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927AE2681DA810017F8DE /* Issue.swift */; };
+		FAF927B126831A570017F8DE /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF927B026831A570017F8DE /* IssueDetailViewController.swift */; };
 		FAFD11B1268078F80064AED4 /* CommonTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,7 @@
 		FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewDataSource.swift; sourceTree = "<group>"; };
 		FAF927AC2680DCCA0017F8DE /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		FAF927AE2681DA810017F8DE /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		FAF927B026831A570017F8DE /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		FAFD11B0268078F80064AED4 /* CommonTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -435,6 +437,7 @@
 				E42AD11D267093320071B436 /* IssueViewController.swift */,
 				FAF927A82680DAFB0017F8DE /* IssueTableViewDelegate.swift */,
 				FAF927AA2680DB1C0017F8DE /* IssueTableViewDataSource.swift */,
+				FAF927B026831A570017F8DE /* IssueDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				E43912E02678AD0A003CD344 /* LabelTableViewDatasource.swift in Sources */,
 				FA431FF9267F36FA0010EA91 /* MileStoneControlViewController.swift in Sources */,
 				E43912EA267A2351003CD344 /* NetworkError.swift in Sources */,
+				FAF927B126831A570017F8DE /* IssueDetailViewController.swift in Sources */,
 				E43912F6267CAE01003CD344 /* TopMenuView.swift in Sources */,
 				E42AD122267093590071B436 /* MileStoneViewController.swift in Sources */,
 				FA733A2E267C3D77005A40C8 /* Milestone.swift in Sources */,

@@ -66,11 +66,9 @@ class IssueTableViewCell: UITableViewCell {
     }
     
     private func setViews() {
-        
         addIssueStackView()
         addIssueTitleView()
         addMileStoneLabel()
-//        addlabelsStackView()
     }
     
     func addIssueStackView() {
@@ -95,10 +93,7 @@ class IssueTableViewCell: UITableViewCell {
         labelsStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func addlabelsStackView(_ labels: [IssueLabel]) {
-        //Cell의 재사용으로 계속 이 함수가 불린다. 계속 라벨이 추가되는 이슈를 막기 위해서 불릴 때마다 reset하기
-        
-        
+    func addlabelsStackView(_ labels: [Label]) {
         issueStackView.addArrangedSubview(labelsStackView)
         labelsStackView.spacing = 4
         
@@ -109,16 +104,16 @@ class IssueTableViewCell: UITableViewCell {
         
         labels.forEach { label in
             let labelView = LabelView()
-            let colorText = label.colorCode
+            let colorText = label.hexColorCode
             let hex = HexColorCode(from: colorText)
-            let titleText = label.name
+            let titleText = label.title
             labelView.configure(with: hex, titleText)
             labelView.translatesAutoresizingMaskIntoConstraints = false
             labelsStackView.addArrangedSubview(labelView)
         }
     }
     
-    func configure(title: String, mileStoneName: String, labels: [IssueLabel]) {
+    func configure(title: String, mileStoneName: String, labels: [Label]) {
         titleLabel.text = title
         mileStoneTitleConfigure(mileStoneName: mileStoneName)
         clearLabelStackView()

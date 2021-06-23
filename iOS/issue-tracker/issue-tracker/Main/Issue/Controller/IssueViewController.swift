@@ -118,7 +118,6 @@ class IssueViewController: UIViewController {
             deleteIssue(for: targetIssue.issueNumber)
         case .close:
             print("close 되어랏")
-//            presentEditLabelViewController(for: targetLabel)
         default:
             assert(false)
         }
@@ -146,6 +145,7 @@ extension IssueViewController {
             case .success(let result):
                 guard let issues = result.data else { return }
                 self?.issueTableDatasource?.update(issues: issues)
+                self?.issueTableDelegate?.update(issues: issues)
                 self?.reloadTableView()
             case .failure(let error):
                 self?.presentAlert(with: error.description)

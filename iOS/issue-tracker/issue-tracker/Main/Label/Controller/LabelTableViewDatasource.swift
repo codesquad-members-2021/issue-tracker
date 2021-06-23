@@ -27,7 +27,7 @@ final class LabelTableViewDatasource: NSObject, UITableViewDataSource {
         let hex = HexColorCode(from: label.hexColorCode)
         let backgroundColor = colorConverter.convertHex(hex)
         let titleColor = colorConverter.isColorDark(hex: hex) ? UIColor.white : UIColor.black
-        cell.configure(with: backgroundColor, titleColor, label.title, label.body)
+        cell.configure(with: backgroundColor, titleColor, label.title, label.body ?? "")
         return cell
     }
 }

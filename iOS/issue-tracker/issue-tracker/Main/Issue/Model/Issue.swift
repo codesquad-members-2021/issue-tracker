@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct IssueDTO: Decodable {
     let data: [Issue]?
     let message: String?
@@ -42,36 +41,13 @@ struct Assignee: Decodable {
     }
 }
 
-struct IssueLabel: Decodable {
-    private(set) var id: Int
-    private(set) var name: String
-    private(set) var colorCode: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case colorCode = "color_code"
-    }
-}
-
-struct IssueMileStone: Decodable {
-    private(set) var id: Int
-    private(set) var title: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-    }
-}
-
 struct Issue: Decodable {
     private(set) var issueNumber: Int
     private(set) var title: String?
     private(set) var status: Bool
     private(set) var author: Author
     private(set) var assignees: [Assignee]?
-    private(set) var labels: [IssueLabel]?
-//    private(set) var milestone: IssueMileStone?
+    private(set) var labels: [Label]?
     private(set) var milestone: MileStone?
     private(set) var createdDate: String
     
