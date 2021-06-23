@@ -70,9 +70,11 @@ const IssueTable = () => {
                     이 이슈가 {moment(issue.created_time).fromNow()},{' '}
                     {issue.writer.username}님에 의해 작성되었습니다.
                   </div>
-                  <div>
-                    <MilestoneIcon /> {issue.milestone.title}
-                  </div>
+                  {issue.milestone && (
+                    <div>
+                      <MilestoneIcon /> {issue.milestone.title}
+                    </div>
+                  )}
                 </LowerCell>
               </TextCell>
               <User imageURL={issue.writer.profile_image} />

@@ -6,6 +6,7 @@ import 'moment/locale/ko';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
+import Typos from '../../../styles/atoms/Typos';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 
 const IssueDetail = () => {
@@ -49,8 +50,8 @@ const IssueDetail = () => {
             <CommentsContainer>
               {data.comments.map((comment: any, index: number) => {
                 return (
-                  <>
-                    <User />
+                  <SingleComment>
+                    <User imageURL={comment.writer.profile_image} />
                     <CommentContainer>
                       <CommentTab>
                         <span>{comment.writer.username}</span>
@@ -58,7 +59,7 @@ const IssueDetail = () => {
                       </CommentTab>
                       <Comment>{comment.content}</Comment>
                     </CommentContainer>
-                  </>
+                  </SingleComment>
                 );
               })}
             </CommentsContainer>
@@ -84,6 +85,7 @@ const InfoContainer = styled.div``;
 
 const Title = styled.span`
   font-size: 32px;
+  padding-right: 20px;
   pointer-events: none;
   background: inherit;
   color: ${props => props.theme.greyscale.titleActive};
@@ -140,14 +142,25 @@ const MainContainer = styled.div`
   }
 `;
 
+const SingleComment = styled.div`
+  display: flex;
+  padding-bottom: 20px;
+`;
+
 const CommentsContainer = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const CommentContainer = styled.div`
   width: 880px;
   font-size: 16px;
   margin-left: 24px;
+  & > div {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
 `;
 
 const CommentTab = styled.div`
@@ -155,6 +168,9 @@ const CommentTab = styled.div`
   background: ${props => props.theme.greyscale.background};
   border: ${props => `1px solid ${props.theme.greyscale.line}`};
   border-radius: 16px 16px 0px 0px;
+  & > span {
+    padding-right: 20px;
+  }
 `;
 
 const Comment = styled.div`

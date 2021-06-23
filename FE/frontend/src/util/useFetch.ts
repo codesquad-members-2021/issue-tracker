@@ -11,7 +11,20 @@ interface Props {
 }
 
 const getData = async (type: string, action: string, filter?: Props) => {
+  const axiosConfig = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  };
+
   switch (type) {
+    case 'user':
+      switch (action) {
+        case 'image':
+          const userData = await axios.get(`${url}/user`, axiosConfig);
+          return userData.data.data;
+      }
+      return;
     case 'issue':
       switch (action) {
         case 'getAllData':

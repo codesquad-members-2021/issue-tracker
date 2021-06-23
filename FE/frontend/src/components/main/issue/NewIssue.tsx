@@ -14,17 +14,24 @@ const AddIssue = () => {
   const [disabled, setDisabled] = useState(true);
   const [initial, setInitial] = useState(false);
   const [input, setInput] = useState({
-    title: '',
+    assignee_ids: [],
     comment: '',
     file: '',
     label_ids: [],
-    milestine_id: null,
-    assignee_ids: [],
+    milestone_id: 0,
+    title: '',
   });
 
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const valueCount = e.target.value.length;
+    setInputCount(valueCount);
+  };
+
+  const setButtonStatus = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     const valueCount = e.target.value.length;
 
     if (valueCount) {
@@ -34,19 +41,29 @@ const AddIssue = () => {
       setDisabled(true);
       setInitial(false);
     }
-
-    setInputCount(valueCount);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const debounce = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    callback: any,
+    milliseconds: number = 500
+  ) => {
     clearTimeout(debounceTimeoutId);
     debounceTimeoutId = setTimeout(() => {
-      countInput(e);
-      setInput({ ...input, comment: e.target.value });
-    }, 500);
+      callback();
+    }, milliseconds);
   };
 
-  const registerNewIssue = () => {};
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  };
+
+  const registerNewIssue = () => {
+    axios.post(`http://52.78.35.48/api/issues`, input, axiosConfig);
+  };
 
   return (
     <AddIssueContainer>
@@ -60,10 +77,19 @@ const AddIssue = () => {
           <TitleInput
             placeholder="제목"
             onChange={e => {
-              setInput({ ...input, title: e.target.value });
+              debounce(e, () => {
+                setInput({ ...input, title: e.target.value });
+                setButtonStatus(e);
+              });
             }}></TitleInput>
           <CommentInput
-            onChange={onChange}
+            onChange={e => {
+              debounce(e, () => {
+                setInput({ ...input, comment: e.target.value });
+                setButtonStatus(e);
+                countInput(e);
+              });
+            }}
             placeholder="코멘트를 입력하세요"></CommentInput>
           <Count xs>띄어쓰기 포함 {inputCount}자</Count>
           <FileSection>

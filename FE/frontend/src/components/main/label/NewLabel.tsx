@@ -18,6 +18,7 @@ const NewLabel = () => {
   const axiosConfig = {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   };
 
