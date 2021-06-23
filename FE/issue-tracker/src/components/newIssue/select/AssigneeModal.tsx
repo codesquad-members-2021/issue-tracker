@@ -5,38 +5,28 @@ import { Avatar } from '@chakra-ui/avatar';
 import MenuTitle from '@components/common/MenuTitle';
 import { checkBoxStyle, menuItemStyle } from '@styles/chakraStyle';
 import { modalStyle } from '../style';
-import {
-  assigneeType,
-  checkedAssigneesState,
-} from '@store/atoms/checkedThings';
+import { assigneeType, checkedAssigneesAtom } from '@store/atoms/checkedThings';
 
 type Props = {
-  assignees: { user_id: number; name: string; avatar_url: string }[] | null;
+  assignees: assigneeType[] | null;
   errorMsg: string;
 };
 
 function AssigneeModal({ assignees, errorMsg }: Props) {
-  const [checkedAssignees, setCheckedAssignees] = useRecoilState<
-    assigneeType[]
-  >(checkedAssigneesState);
+  const [checkedAssignees, setCheckedAssignees] =
+    useRecoilState(checkedAssigneesAtom);
   const modalTitle = errorMsg == 'No Error' ? '담당자 추가' : errorMsg;
 
   const handleClickMenuItem = (e: React.MouseEvent) => {
     const target = e.target as HTMLInputElement;
     const itemEl = target.closest('.checkbox') as HTMLInputElement;
-    const itemId = itemEl.dataset.id;
+    const itemId = Number(itemEl.dataset.id);
     if (target.tagName !== 'INPUT' || assignees == null || itemId == null)
       return;
 
-    const clickedItem = assignees.find((item) => item.user_id === +itemId);
-    if (clickedItem == null) return;
-    const isChecked = checkedAssignees.includes(clickedItem) ? false : true;
-
-    if (isChecked) setCheckedAssignees([...checkedAssignees, clickedItem]);
-    else
-      setCheckedAssignees(
-        checkedAssignees.filter((item) => item.user_id !== clickedItem.user_id)
-      );
+    const isChecked = checkedAssignees.includes(itemId) ? false : true;
+    if (isChecked) setCheckedAssignees([...checkedAssignees, itemId]);
+    else setCheckedAssignees(checkedAssignees.filter((id) => id !== itemId));
   };
 
   return (

@@ -1,8 +1,19 @@
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import Header from '@components/common/Header';
 import NewIssueContainer from '@components/newIssue/NewIssueContainer';
 import styled from 'styled-components';
+import { isClickedCompleteBtnAtom } from '@store/atoms/newIssue';
 
 function NewIssue() {
+  const [isClickedCompleteBtn, setIsClickedCompleteBtn] = useRecoilState(
+    isClickedCompleteBtnAtom
+  );
+
+  useEffect(() => {
+    if (isClickedCompleteBtn) setIsClickedCompleteBtn(false);
+  }, []);
+
   return (
     <NewIssueWrap>
       <Header />

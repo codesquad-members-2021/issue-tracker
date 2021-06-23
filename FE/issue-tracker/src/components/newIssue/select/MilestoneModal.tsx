@@ -6,7 +6,7 @@ import MenuTitle from '@components/common/MenuTitle';
 import { checkBoxStyle } from '@styles/chakraStyle';
 import {
   milestoneType,
-  checkedMilestoneState,
+  checkedMilestoneAtom,
 } from '@store/atoms/checkedThings';
 
 type Props = {
@@ -15,9 +15,8 @@ type Props = {
 };
 
 function MilestoneModal({ milestones, errorMsg }: Props) {
-  const [checkedMilestones, setCheckedMilestones] = useRecoilState(
-    checkedMilestoneState
-  );
+  const [checkedMilestones, setCheckedMilestones] =
+    useRecoilState(checkedMilestoneAtom);
   const modalTitle = errorMsg == 'No Error' ? '마일스톤 추가' : errorMsg;
 
   const handleClickMenuItem = (e: React.MouseEvent) => {
