@@ -14,6 +14,7 @@ import static com.codesquad.issuetracker.issue.domain.QIssue.issue;
 import static com.codesquad.issuetracker.label.domain.QLabel.label;
 import static com.codesquad.issuetracker.milestone.domain.QMilestone.milestone;
 import static com.codesquad.issuetracker.user.domain.QUser.user;
+import static com.codesquad.issuetracker.comment.domain.QComment.comment;
 
 @Repository
 public class JpaIssueFilterRepository implements IssueFilterRepository {
@@ -32,19 +33,23 @@ public class JpaIssueFilterRepository implements IssueFilterRepository {
                 .from(issue);
 
         if (issueFilter.getLabel() != null && issueFilter.getLabel().length() > 0) {
-            query = query.innerJoin(issue.labels, label).on(label.name.contains(issueFilter.getLabel()));
+            query.innerJoin(issue.labels, label).on(label.name.contains(issueFilter.getLabel()));
         }
 
         if (issueFilter.getMilestone() != null && issueFilter.getMilestone().length() > 0) {
-            query = query.innerJoin(issue.milestone, milestone).on(milestone.title.contains(issueFilter.getMilestone()));
+            query.innerJoin(issue.milestone, milestone).on(milestone.title.contains(issueFilter.getMilestone()));
         }
 
         if (issueFilter.getAuthor() != null) {
-            query = query.innerJoin(issue.author, user).on(user.id.eq(issueFilter.getAssignee()));
+            query.innerJoin(issue.author, user).on(user.id.eq(issueFilter.getAssignee()));
         }
 
         if (issueFilter.getAssignee() != null) {
-            query = query.innerJoin(issue.assignees, user).on(user.id.eq(issueFilter.getAssignee()));
+            query.innerJoin(issue.assignees, user).on(user.id.eq(issueFilter.getAssignee()));
+        }
+
+        if (issueFilter.getCommentAuthor() != null) {
+            query.innerJoin(comment).on(issue.id.eq(comment.issueId), comment.author.id.eq(issueFilter.getCommentAuthor()));
         }
 
         return query.where(

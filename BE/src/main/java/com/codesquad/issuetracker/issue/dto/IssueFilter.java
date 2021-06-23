@@ -13,4 +13,5 @@ public class IssueFilter {
     private String label;
     private String milestone;
     private Boolean open;
+    private UUID commentAuthor;
 }
