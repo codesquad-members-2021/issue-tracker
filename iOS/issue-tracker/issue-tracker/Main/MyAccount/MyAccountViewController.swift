@@ -32,15 +32,20 @@ class MyAccountViewController: UIViewController {
     
     private var userName = "unknown"
     private let spacing: CGFloat = 16
-    private var loginInfo: LoginInfo?
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "내 계정"
+        updateWelcomeLabel()
         addWelcomeLabel()
         addLogoutButton()
+    }
+    
+    private func updateWelcomeLabel() {
+        let loginInfo = LoginInfo.shared
+        guard let userName = loginInfo.name else { return }
+        self.userName = userName
     }
     
     private func addWelcomeLabel() {
@@ -72,35 +77,17 @@ class MyAccountViewController: UIViewController {
     }
     
     @objc private func didLogoutTouched(_ sender: UIButton) {
-        var loginManager: LoginKeyChainManager?
-        for loginService in LoginService.allCases {
-            loginManager = LoginKeyChainManager(loginService: loginService)
-            loginInfo = loginManager?.read()
-            if loginInfo != nil {
-                break
-            }
+        let loginInfo = LoginInfo.shared
+        guard let service = loginInfo.service else { return }
+        let loginManager = LoginKeyChainManager(loginService: service)
+        guard loginManager.delete() else {
+            let logoutError = LoginError.logout
+            presentAlert(with: logoutError.description)
+            return
         }
-        guard let loginManager = loginManager else { return }
-        let _ = loginManager.delete()
-
+        loginInfo.clear()
         let loginViewController = LoginViewController()
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
-        
     }
-    
-}
-
-extension MyAccountViewController: LoginInfoContainer {
-    
-    func setup(loginInfo: LoginInfo) {
-        self.loginInfo = loginInfo
-        updateWelcomeLabel()
-    }
-    
-    private func updateWelcomeLabel() {
-        guard let userName = loginInfo?.name else { return }
-        self.userName = userName
-    }
-    
 }

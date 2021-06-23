@@ -7,17 +7,7 @@
 
 import Foundation
 
-struct JWT: Decodable {
-    let jwt: String
-    let tokenType: String
-
-    enum CodingKeys: String, CodingKey {
-        case jwt
-        case tokenType
-    }
-}
-
-struct OAuthResponseDTO: Decodable {
+struct OAuthResponseDTO: Codable {
     let jwt: JWT
     let avatarUrl: String
     let loginId: String

@@ -81,7 +81,6 @@ class LoginViewController: UIViewController {
         let button = socialLoginButton(with: image, title)
         button.addTarget(self, action: #selector(loginWithGithubTouched), for: .touchUpInside)
         return button
-        
     }()
     
     private lazy var appleLoginButton: UIButton = {
@@ -96,6 +95,7 @@ class LoginViewController: UIViewController {
     private let borderWidth: CGFloat = 1
 
     private var socialLoginManager: SocialLoginManagable?
+    private let loginInfo = LoginInfo.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,8 +187,8 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    private func presentIssueViewController(with loginInfo: LoginInfo) {
-        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator(loginInfo: loginInfo)
+    private func presentIssueViewController() {
+        let issueTrackerTabBarControllerCreator = IssueTrackerTabBarCreator()
         let issueTrackerTabBarController = issueTrackerTabBarControllerCreator.create()
         issueTrackerTabBarController.modalPresentationStyle = .fullScreen
         
@@ -206,32 +206,42 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginWithGithubTouched(_ sender: UIButton) {
-        configureLoginManager(type: .github)
+        configureLoginManager(service: .github)
         socialLoginManager?.login()
     }
     
     @objc private func loginWithAppleTouched(_ sender: UIButton) {
-        configureLoginManager(type: .apple)
+        configureLoginManager(service: .apple)
         socialLoginManager?.login()
     }
     
-    private func configureLoginManager(type: LoginService) {
-        let keyChainManager = LoginKeyChainManager(loginService: type)
-        let loginManager = GithubAuthorizationManager(viewController: self,
-                                                      delegate: self,
-                                                      keyChainSaver: keyChainManager)
-        self.socialLoginManager = loginManager
+    private func configureLoginManager(service: LoginService) {
+        let keyChainManager = LoginKeyChainManager(loginService: service)
+        loginInfo.service = service
+        
+        switch service {
+        case .github:
+            socialLoginManager = GithubAuthorizationManager(viewController: self,
+                                                                 delegate: self,
+                                                                 keyChainSaver: keyChainManager)
+        case .apple:
+            socialLoginManager = AppleAuthorizationManager(viewController: self,
+                                                           delegate: self,
+                                                           keyChainSaver: keyChainManager)
+        }
     }
-    
 }
 
 extension LoginViewController: SocialLoginManagerDelegate {
-    func didSocialLoginSuccess(with loginInfo: LoginInfo) {
-        presentIssueViewController(with: loginInfo)
+    func didSocialLoginSuccess(with loginInfoDTO: LoginInfoDTO) {
+        let loginInfo = LoginInfo.shared
+        loginInfo.store(loginInfoDTO: loginInfoDTO)
+        presentIssueViewController()
     }
     
     func didSocialLoginFail(with error: LoginError) {
         let errorText = error.description
         presentAlert(with: errorText)
     }
+    
 }

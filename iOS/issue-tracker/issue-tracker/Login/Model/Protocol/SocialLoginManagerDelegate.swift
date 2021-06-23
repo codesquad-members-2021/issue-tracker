@@ -8,6 +8,6 @@
 import Foundation
 
 protocol SocialLoginManagerDelegate: AnyObject {
-    func didSocialLoginSuccess(with loginInfo: LoginInfo)
+    func didSocialLoginSuccess(with loginInfo: LoginInfoDTO)
     func didSocialLoginFail(with error: LoginError)
 }
