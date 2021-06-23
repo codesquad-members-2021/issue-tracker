@@ -10,36 +10,29 @@ import KeychainSwift
 
 class IntialViewController: UIViewController {
 
-    private var viewController: UIViewController?
-    private var tokenState: Bool {
-        return KeychainSwift().get("token") == nil
+    private var viewHandler: ((UIViewController) -> Void)?
+    private var selectViewController: UIViewController {
+        KeychainSwift().get("token") == nil ?
+            UIStoryboard().create(name: "Login", type: LoginViewController.self) :
+            UIStoryboard().create(name: "Main", type: UITabBarController.self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewController = moveViewController()
+        bind { [weak self] viewController in
+            viewController.modalPresentationStyle = .fullScreen
+            self?.present(viewController, animated: true)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.present(viewController ?? .init(),
-                     animated: true)
+        viewHandler?(selectViewController)
     }
 
-    func moveViewController() -> UIViewController? {
-        if tokenState {
-            viewController = UIStoryboard().create(name: "Login",
-                                                   type: LoginViewController.self)
-        } else {
-            viewController = UIStoryboard().create(name: "Main",
-                                                   type: UITabBarController.self)
-        }
-        viewController?.modalPresentationStyle = .fullScreen
-        return viewController
+    private func bind(viewController: @escaping ((UIViewController) -> Void)) {
+        self.viewHandler = viewController
     }
 }
