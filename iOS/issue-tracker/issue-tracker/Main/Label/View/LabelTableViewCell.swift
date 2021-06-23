@@ -26,10 +26,6 @@ final class LabelTableViewCell: UITableViewCell {
     
     private let placeholder = "No description provided"
     
-    static var reuseID: String {
-        return String(describing: self)
-    }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setViews()
