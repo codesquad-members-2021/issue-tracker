@@ -9,24 +9,36 @@ import NewLabel from './NewLabel';
 import { ReactComponent as Plus } from '../../../icons/plus.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 import { ReactComponent as Trash } from '../../../icons/trash.svg';
+import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 const LabelList = () => {
   const { isLoading, data, error } = useFetch('label', 'getAllData');
   const [isNewLabelOpened, setIsNewLabelOpened] = useState(false);
-  const addLabel = () => {
-    setIsNewLabelOpened(true);
+
+  const setAddLabel = () => {
+    setIsNewLabelOpened(!isNewLabelOpened);
   };
 
   return (
     <LabelListContainer>
       <LabelTab>
         <Tabs />
-        <Buttons initial small onClick={addLabel}>
-          <IconWrapper>
-            <Plus />
-          </IconWrapper>
-          추가
-        </Buttons>
+        {!isNewLabelOpened && (
+          <Buttons initial small onClick={setAddLabel}>
+            <IconWrapper>
+              <Plus />
+            </IconWrapper>
+            추가
+          </Buttons>
+        )}
+        {isNewLabelOpened && (
+          <Buttons detail small onClick={setAddLabel}>
+            <IconWrapper className="xSquare">
+              <XSquare />
+            </IconWrapper>
+            닫기
+          </Buttons>
+        )}
       </LabelTab>
 
       <LabelTableContainer>
@@ -76,6 +88,11 @@ const LabelTab = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 24px 48px;
+  .xSquare {
+    svg {
+      stroke: ${props => props.theme.colors.primary};
+    }
+  }
 `;
 
 const LabelTableContainer = styled.div`

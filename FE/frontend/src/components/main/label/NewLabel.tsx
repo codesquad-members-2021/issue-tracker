@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useMutation } from 'react-query';
 import useMutate from '../../../util/useMutate';
 import Label from '../../../styles/atoms/Label';
@@ -16,9 +15,7 @@ const NewLabel = () => {
     color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   });
 
-  const { mutateAsync, isLoading: isMutating } = useMutation(
-    useMutate('label', 'add')
-  );
+  const { mutateAsync, isError } = useMutation(useMutate('label', 'add'));
 
   const registerNewLabel = async () => {
     await mutateAsync(input);
