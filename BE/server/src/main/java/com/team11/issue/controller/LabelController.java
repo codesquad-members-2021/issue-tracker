@@ -36,7 +36,8 @@ public class LabelController {
     }
 
     @PutMapping("/label/{labelId}")
-    public ResponseEntity<ResponseDTO> updateLabel(@PathVariable Long labelId, @RequestBody LabelRequestDTO labelRequestDTO) {
+    public ResponseEntity<ResponseDTO> updateLabel(@PathVariable Long labelId,
+                                                   @RequestBody LabelRequestDTO labelRequestDTO) {
         labelService.updateLabel(labelId, labelRequestDTO);
         return ResponseEntity.ok().body(new ResponseDTO("OK"));
     }
