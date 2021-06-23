@@ -34,7 +34,11 @@ const flexAlignItemsCenter = css`
   display: flex;
   align-items: center;
 `;
-
+const flexCenter =css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const flexColumn = css`
   display: flex;
   flex-direction: column;
@@ -101,6 +105,8 @@ const theme: DefaultTheme = {
     lowerWrapper: `${lowerWrapper}`,
     flexSpaceBetween: `${flexSpaceBetween}`,
     flexAlignItemsCenter: `${flexAlignItemsCenter}`,
+    flexCenter: `${flexCenter}`,
+  
   },
 };
 

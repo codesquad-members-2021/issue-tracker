@@ -1,18 +1,25 @@
 import { Button } from '@material-ui/core';
-import { ReactComponent as PlusIconSvg } from 'icons/plus.svg';
 import { MouseEvent } from 'react';
-import { ReactChild } from 'react';
+import { ReactChild, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const CreateButton = ({
   children,
   onClick,
+  icon,
+  white,
 }: {
   children: ReactChild;
   onClick: (event: MouseEvent) => void;
+  icon: ReactNode;
+  white?: boolean;
 }) => {
   return (
-    <StyledCreateButton onClick={onClick} startIcon={<PlusIcon />}>
+    <StyledCreateButton
+      background={Boolean(white)}
+      onClick={onClick}
+      startIcon={icon}
+    >
       {children}
     </StyledCreateButton>
   );
@@ -20,21 +27,23 @@ const CreateButton = ({
 
 export default CreateButton;
 
-const StyledCreateButton = styled(Button)`
-  background-color: ${({ theme }) => theme.color.blue};
-  color: ${({ theme }) => theme.color.grayscale.offWhite};
-  font-weight: ${({ theme }) => theme.fontWeight.bold2};
+const StyledCreateButton = styled(Button)<{ background: boolean }>`
+  border: 3px solid ${({ theme }) => theme.color.blue};
+  stroke: ${({ theme, background }) =>
+    background ? theme.color.blue : theme.color.grayscale.offWhite};
+  background-color: ${({ theme, background }) =>
+    background ? theme.color.grayscale.offWhite : theme.color.blue};
+  color: ${({ theme, background }) =>
+    background ? theme.color.blue : theme.color.grayscale.offWhite};
+  font-weight: ${({ theme }) => theme.fontWeight.bold1};
   width: 7.5rem;
   height: 2.5rem;
   border-radius: ${({ theme }) => theme.border.radius.S};
   margin-left: 1rem;
   &:hover {
-    background-color: ${({ theme }) => theme.color.darkBlue};
-  }
-`;
-
-const PlusIcon = styled(PlusIconSvg)`
-  path {
-    stroke: ${({ theme }) => theme.color.grayscale.offWhite};
-  }
+    ${({ theme, background }) => {
+      if (background) return `stroke: ${theme.color.darkBlue}; color: ${theme.color.darkBlue};`;
+      else return `background-color: ${theme.color.darkBlue};`;
+    }}
+    border: 3px solid ${({ theme }) => theme.color.darkBlue};
 `;

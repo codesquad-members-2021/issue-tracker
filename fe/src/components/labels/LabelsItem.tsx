@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { LabelItemType } from 'types/issueType';
 import LabelsItemLeft from './LabelsItemLeft';
 import LabelsItemRight from './LabelsItemRight';
+import { MouseEvent } from 'react';
+import LabelsItemEdit from './LabelsItemEdit';
 
 const LabelsItem = ({
   id,
@@ -10,11 +13,25 @@ const LabelsItem = ({
   textColor,
   labelColor,
 }: LabelItemType) => {
+  const [popup, setPopup] = useState(false);
+
+  const clickHandler = (e: MouseEvent) => {
+    setPopup(!popup);
+  };
   return (
-    <StyledLabelsItem>
-      <LabelsItemLeft {...{ id, description, title, labelColor, textColor }} />
-      <LabelsItemRight />
-    </StyledLabelsItem>
+    <>
+      <StyledLabelsItem>
+        <LabelsItemLeft
+          {...{ id, description, title, labelColor, textColor }}
+        />
+        <LabelsItemRight {...{ clickHandler }} />
+      </StyledLabelsItem>
+      {popup && (
+        <LabelsItemEdit
+          {...{ id, description, title, labelColor, textColor }}
+        />
+      )}
+    </>
   );
 };
 
