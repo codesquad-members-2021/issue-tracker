@@ -4,6 +4,7 @@ import com.team11.issue.domain.Comment;
 import com.team11.issue.domain.Issue;
 import com.team11.issue.domain.User;
 import com.team11.issue.dto.comment.CommentRequestDTO;
+import com.team11.issue.exception.*;
 import com.team11.issue.repository.CommentRepository;
 import com.team11.issue.repository.IssueRepository;
 import com.team11.issue.repository.UserRepository;
@@ -18,19 +19,16 @@ public class CommentService {
     private final UserRepository userRepository;
     private final IssueRepository issueRepository;
 
-    /*
-     TODO : 사용자 예외처리
-     */
     private User findUser(String userName) {
-        return userRepository.findByName(userName).orElseThrow(RuntimeException::new);
+        return userRepository.findByName(userName).orElseThrow(UserNotFoundException::new);
     }
 
     private Issue findIssue(Long issueId) {
-        return issueRepository.findById(issueId).orElseThrow(RuntimeException::new);
+        return issueRepository.findById(issueId).orElseThrow(IssueNotFoundException::new);
     }
 
     private Comment findComment(Long commentId) {
-        return commentRepository.findById(commentId).orElseThrow(RuntimeException::new);
+        return commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
     }
 
     private boolean verifyUser(String userName, Comment comment) {
@@ -40,30 +38,30 @@ public class CommentService {
         return false;
     }
 
+    private void confirmCommenter(String userName, Comment comment, String errorMessage) {
+        if (!verifyUser(userName, comment)) {
+            throw new UserIllegalException(errorMessage);
+        }
+    }
+
     public void createComment(Long issueId, String userName, CommentRequestDTO commentRequestDTO) {
         commentRepository.save(Comment.createComment(findUser(userName), findIssue(issueId), commentRequestDTO));
     }
 
-    /*
-     TODO : jpa AND 조건 / JPQL등을 학습해서 issueId를 where절로 추가할 방법 확인
-     */
     public void updateComment(Long issueId, Long commentId, String userName, CommentRequestDTO commentRequestDTO) {
         Comment comment = findComment(commentId);
-        if (!verifyUser(userName, comment)) {
-            throw new RuntimeException("작성자만 글을 수정하실 수 있습니다");
-        }
+
+        confirmCommenter(userName, comment, "코멘트 작성자만 글을 수정할 수 있습니다.");
+
         comment.updateComment(commentRequestDTO.getContents());
         commentRepository.save(comment);
     }
 
     public void deleteComment(Long issueId, Long commentId, String userName) {
         Comment comment = findComment(commentId);
-        /*
-        TODO : 사용자 정의 예외 처리
-         */
-        if (!verifyUser(userName, comment)) {
-            throw new RuntimeException("작성자만 글을 삭제하실 수 있습니다");
-        }
+
+        confirmCommenter(userName, comment, "코멘트 작성자만 글을 삭제할 수 있습니다.");
+
         commentRepository.delete(comment);
     }
 }

@@ -86,7 +86,7 @@ public class IssueService {
 
     private void confirmAssignees(String userName, Issue issue, String errorMessage) {
         if (!verifyAssignees(userName, issue)) {
-            throw new AssigneeillegalException(errorMessage);
+            throw new AssigneeIllegalException(errorMessage);
         }
     }
 

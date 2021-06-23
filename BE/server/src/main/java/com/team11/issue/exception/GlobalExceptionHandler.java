@@ -17,7 +17,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({OauthException.class, AccessTokenNotFoundException.class,
             JWTTokenException.class, UserNotFoundException.class,
             MilestoneNotFoundException.class, LabelNotFoundException.class,
-            IssueNotFoundException.class, AssigneeillegalException.class})
+            IssueNotFoundException.class, AssigneeIllegalException.class,
+            CommentNotFoundException.class, UserIllegalException.class})
     protected ResponseEntity handleException(Exception e) {
         logger.error(e.getMessage());
         return new ResponseEntity(new ExceptionResponseDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
