@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SimpleAssigneeTableViewCell: UITableViewCell {
+final class SimpleAssigneeTableViewCell: UITableViewCell {
 
     private lazy var titleLabel = UILabel()
     
@@ -19,7 +19,7 @@ class SimpleAssigneeTableViewCell: UITableViewCell {
     }()
     
     private let spacing: CGFloat = 15
-    private let imageManager = ImageLoadManager()
+    static let imageManager = ImageLoadManager()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -64,11 +64,15 @@ class SimpleAssigneeTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with title: String, imageUrl: String) {
-        titleLabel.text = title
-        imageManager.load(from: imageUrl) { [weak self] cachePath in
-            self?.profileImageView.image = UIImage(contentsOfFile: cachePath)
+    static func update(cell: SimpleAssigneeTableViewCell, with user: User) -> SimpleAssigneeTableViewCell {
+        let title = user.name
+        cell.titleLabel.text = title
+        
+        let imageUrl = user.imageUrl
+        imageManager.load(from: imageUrl) { cachePath in
+            cell.profileImageView.image = UIImage(contentsOfFile: cachePath)
         }
+        return cell
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

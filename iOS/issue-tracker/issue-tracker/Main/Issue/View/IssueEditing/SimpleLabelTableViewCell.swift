@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SimpleLabelTableViewCell: UITableViewCell {
+final class SimpleLabelTableViewCell: UITableViewCell {
 
     private lazy var labelView = LabelView()
     private let spacing: CGFloat = 15
@@ -41,8 +41,11 @@ class SimpleLabelTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with hexColorCode: HexColorCode, title: String) {
-        labelView.configure(with: hexColorCode, title)
+    static func update(cell: SimpleLabelTableViewCell, with label: Label) -> SimpleLabelTableViewCell {
+        let hexColorCode = HexColorCode(from: label.hexColorCode)
+        let title = label.title
+        cell.labelView.configure(with: hexColorCode, title)
+        return cell
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

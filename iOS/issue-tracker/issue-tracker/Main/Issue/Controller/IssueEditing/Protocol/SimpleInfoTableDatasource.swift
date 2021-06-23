@@ -8,7 +8,11 @@
 import UIKit
 
 protocol SimpleInfoTableDatasource: UITableViewDataSource {
-    func update(with infos: [Identifiable])
-    func info(for index: Int) -> Identifiable?
-    func index(for info: Identifiable) -> Int?
+    associatedtype Info
+    associatedtype InfoCell
+    typealias CellUpdator = (InfoCell, Info) -> InfoCell
+    func update(with infos: [Info])
+    func info(for index: Int) -> Info?
+    func index(for info: Info) -> Int?
+    func setCellUpdator(_ updator: @escaping CellUpdator)
 }

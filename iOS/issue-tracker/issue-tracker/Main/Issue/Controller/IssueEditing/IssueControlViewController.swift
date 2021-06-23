@@ -285,14 +285,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
+        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleLabelTableViewCell, Label>()
+        tableDatasource.setCellUpdator(SimpleLabelTableViewCell.update)
+        
         let labelInfoViewController = AdditionalInfoViewController<SimpleLabelTableViewCell, Label>()
-        let tableDatasource = SimpleLabelTableDatasource()
         labelInfoViewController.configure(withTitle: "레이블 선택",
                                           preSelectedInfos: selectedLabels ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: true,
                                           endpoint: EndPoint.label)
         labelInfoViewController.setSaveOperation(updateLabelSelection)
+        
         present(labelInfoViewController)
     }
     
@@ -312,14 +315,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func milestoneInfoTouched(_ sender: UIButton) {
+        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleMilestoneTableViewCell, MileStone>()
+        tableDatasource.setCellUpdator(SimpleMilestoneTableViewCell.update)
+        
         let milestoneViewController = AdditionalInfoViewController<SimpleMilestoneTableViewCell, MileStone>()
-        let tableDatasource = SimpleMilestoneTableDatasource()
         milestoneViewController.configure(withTitle: "마일스톤 선택",
                                           preSelectedInfos: selectedMilestone ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: false,
                                           endpoint: EndPoint.milestone)
         milestoneViewController.setSaveOperation(updateMilestoneSelection)
+        
         present(milestoneViewController)
     }
     
@@ -330,14 +336,17 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {
+        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleAssigneeTableViewCell, User>()
+        tableDatasource.setCellUpdator(SimpleAssigneeTableViewCell.update)
+        
         let assigneeViewController = AdditionalInfoViewController<SimpleAssigneeTableViewCell, User>()
-        let tableDatasource = SimpleAssigneeTableDatasource()
         assigneeViewController.configure(withTitle: "담당자 선택",
                                           preSelectedInfos: selectedAssignees ?? [],
                                           tableDatasource: tableDatasource,
                                           isMultiselectionAllowed: true,
                                           endpoint: EndPoint.user)
         assigneeViewController.setSaveOperation(updateAssigneeSelection)
+        
         present(assigneeViewController)
     }
     
