@@ -172,6 +172,7 @@ final class IssueControlViewController: UIViewController {
     private var currentIssue: Issue?
     private var selectedLabels: [Label]?
     private var selectedMilestone: [MileStone]?
+    private var selectedAssignees: [User]?
     private var saveOperation: ((Issue) -> Void)?
     
     override func viewDidLoad() {
@@ -318,7 +319,24 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {
-        print("담당자 내놔!")
+        let assigneeViewController = AdditionalInfoViewController<SimpleAssigneeTableViewCell, User>()
+        let tableDatasource = SimpleAssigneeTableDatasource()
+        assigneeViewController.configure(withTitle: "담당자 선택",
+                                          preSelectedInfos: selectedAssignees ?? [],
+                                          tableDatasource: tableDatasource,
+                                          isMultiselectionAllowed: true,
+                                          endpoint: EndPoint.user)
+        assigneeViewController.setSaveOperation(updateAssigneeSelection)
+        present(assigneeViewController)
+    }
+    
+    private func updateAssigneeSelection(assignees: [User]) {
+        guard let firstAssignee = assignees.first else { return }
+        self.selectedAssignees = assignees
+        let extraCount = assignees.count - 1
+        let tail = extraCount > 0 ? " 외 \(extraCount)명" : ""
+        let assigneeInfo = "\(firstAssignee.name)" + tail
+        assigneeInfoControl.changeInfoLabelText(to: assigneeInfo)
     }
 }
 
