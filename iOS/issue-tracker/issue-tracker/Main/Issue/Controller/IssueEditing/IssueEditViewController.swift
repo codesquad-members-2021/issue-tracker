@@ -8,7 +8,7 @@
 import UIKit
 import Down
 
-final class IssueControlViewController: UIViewController {
+final class IssueEditViewController: UIViewController {
 
     private lazy var cancelButton: ImageBarButton = {
         let button = ImageBarButton()
@@ -285,10 +285,10 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func labelInfoTouched(_ sender: UIButton) {
-        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleLabelTableViewCell, Label>()
-        tableDatasource.setCellUpdator(SimpleLabelTableViewCell.update)
+        let tableDatasource = CommonInfoTableDatasource<LabelInfoTableViewCell, Label>()
+        tableDatasource.setCellUpdator(LabelInfoTableViewCell.update)
         
-        let labelInfoViewController = AdditionalInfoViewController<SimpleLabelTableViewCell, Label>()
+        let labelInfoViewController = AdditionalInfoViewController<LabelInfoTableViewCell, Label>()
         labelInfoViewController.configure(withTitle: "레이블 선택",
                                           preSelectedInfos: selectedLabels ?? [],
                                           tableDatasource: tableDatasource,
@@ -315,10 +315,10 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func milestoneInfoTouched(_ sender: UIButton) {
-        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleMilestoneTableViewCell, MileStone>()
-        tableDatasource.setCellUpdator(SimpleMilestoneTableViewCell.update)
+        let tableDatasource = CommonInfoTableDatasource<MilestoneInfoTableViewCell, MileStone>()
+        tableDatasource.setCellUpdator(MilestoneInfoTableViewCell.update)
         
-        let milestoneViewController = AdditionalInfoViewController<SimpleMilestoneTableViewCell, MileStone>()
+        let milestoneViewController = AdditionalInfoViewController<MilestoneInfoTableViewCell, MileStone>()
         milestoneViewController.configure(withTitle: "마일스톤 선택",
                                           preSelectedInfos: selectedMilestone ?? [],
                                           tableDatasource: tableDatasource,
@@ -336,10 +336,10 @@ final class IssueControlViewController: UIViewController {
     }
     
     @objc private func assigneeInfoTouched(_ sender: UIButton) {
-        let tableDatasource = CommonSimpleInfoTableDatasource<SimpleAssigneeTableViewCell, User>()
-        tableDatasource.setCellUpdator(SimpleAssigneeTableViewCell.update)
+        let tableDatasource = CommonInfoTableDatasource<AssigneeInfoTableViewCell, User>()
+        tableDatasource.setCellUpdator(AssigneeInfoTableViewCell.update)
         
-        let assigneeViewController = AdditionalInfoViewController<SimpleAssigneeTableViewCell, User>()
+        let assigneeViewController = AdditionalInfoViewController<AssigneeInfoTableViewCell, User>()
         assigneeViewController.configure(withTitle: "담당자 선택",
                                           preSelectedInfos: selectedAssignees ?? [],
                                           tableDatasource: tableDatasource,
@@ -360,7 +360,7 @@ final class IssueControlViewController: UIViewController {
     }
 }
 
-extension IssueControlViewController: UITextFieldDelegate {
+extension IssueEditViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         changeSaveButtonEnableStatus(baseOn: textField)
     }
@@ -372,7 +372,7 @@ extension IssueControlViewController: UITextFieldDelegate {
     }
 }
 
-extension IssueControlViewController: UITextViewDelegate {
+extension IssueEditViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {
             textView.textColor = .black

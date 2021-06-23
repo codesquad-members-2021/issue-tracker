@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CellSelectionTableDelegate: NSObject, SimpleInfoTableDelegate {
+final class CellSelectionTableDelegate: NSObject, AdditionalInfoTableDelegate {
     
     private var cellSelectionHandler: CellSelectionHandler?
     

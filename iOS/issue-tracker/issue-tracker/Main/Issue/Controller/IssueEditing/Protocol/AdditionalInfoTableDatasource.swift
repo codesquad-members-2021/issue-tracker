@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SimpleInfoTableDatasource: UITableViewDataSource {
+protocol AdditionalInfoTableDatasource: UITableViewDataSource {
     associatedtype Info
     associatedtype InfoCell
     typealias CellUpdator = (InfoCell, Info) -> InfoCell

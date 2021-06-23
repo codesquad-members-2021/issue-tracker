@@ -1,5 +1,5 @@
 //
-//  SimpleLabelTableViewCell.swift
+//  SimpleMilestoneTableViewCell.swift
 //  issue-tracker
 //
 //  Created by Song on 2021/06/23.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class SimpleLabelTableViewCell: UITableViewCell {
+final class MilestoneInfoTableViewCell: UITableViewCell {
 
-    private lazy var labelView = LabelView()
+    private lazy var titleLabel = UILabel()
     private let spacing: CGFloat = 15
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,18 +33,19 @@ final class SimpleLabelTableViewCell: UITableViewCell {
     }
 
     private func addLabelView() {
-        addSubview(labelView)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false 
+        addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            labelView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            labelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing)
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing * 2)
         ])
     }
     
-    static func update(cell: SimpleLabelTableViewCell, with label: Label) -> SimpleLabelTableViewCell {
-        let hexColorCode = HexColorCode(from: label.hexColorCode)
-        let title = label.title
-        cell.labelView.configure(with: hexColorCode, title)
+    static func update(cell: MilestoneInfoTableViewCell, with milestone: MileStone) -> MilestoneInfoTableViewCell {
+        let title = milestone.title
+        cell.titleLabel.text = title
         return cell
     }
     

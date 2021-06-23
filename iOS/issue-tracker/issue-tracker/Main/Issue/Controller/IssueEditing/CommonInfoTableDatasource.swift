@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class CommonSimpleInfoTableDatasource<InfoCell: UITableViewCell,
-                                            Info: Identifiable>: NSObject, SimpleInfoTableDatasource {
+final class CommonInfoTableDatasource<InfoCell: UITableViewCell,
+                                      Info: Identifiable>: NSObject, AdditionalInfoTableDatasource {
     
     private var infos = [Info]()
     private var cellUpdator: CellUpdator?

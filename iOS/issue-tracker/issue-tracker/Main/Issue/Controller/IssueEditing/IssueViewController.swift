@@ -131,7 +131,7 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func addNewIssue(_ sender: UIButton) {
-        let nextViewController = IssueControlViewController()
+        let nextViewController = IssueEditViewController()
         nextViewController.setSaveOperation(postIssue)
         navigationController?.pushViewController(nextViewController, animated: false)
     }

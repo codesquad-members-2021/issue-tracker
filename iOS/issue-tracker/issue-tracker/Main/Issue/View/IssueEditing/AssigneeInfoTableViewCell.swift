@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SimpleAssigneeTableViewCell: UITableViewCell {
+final class AssigneeInfoTableViewCell: UITableViewCell {
 
     private lazy var titleLabel = UILabel()
     
@@ -64,7 +64,7 @@ final class SimpleAssigneeTableViewCell: UITableViewCell {
         ])
     }
     
-    static func update(cell: SimpleAssigneeTableViewCell, with user: User) -> SimpleAssigneeTableViewCell {
+    static func update(cell: AssigneeInfoTableViewCell, with user: User) -> AssigneeInfoTableViewCell {
         let title = user.name
         cell.titleLabel.text = title
         
