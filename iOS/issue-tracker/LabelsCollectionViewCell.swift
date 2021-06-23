@@ -16,7 +16,7 @@ final class LabelsCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = .white
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 15
+        label.layer.cornerRadius = 10
         return label
     }()
 
@@ -41,5 +41,6 @@ final class LabelsCollectionViewCell: UICollectionViewCell {
     func configure(title: String, color: String) {
         label.text = title
         label.backgroundColor = UIColor.hexStringToUIColor(hex: color)
+        label.sizeToFit()
     }
 }
