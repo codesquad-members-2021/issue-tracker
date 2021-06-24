@@ -35,8 +35,11 @@ const IssueItemLeft = ({
         </span>
         <Spacer />
         <SelectedLables>
-          {labeList.length &&
-            labeList.map((label, idx) => <Label key={idx} {...{ ...label }} />)}
+          {labeList.length
+            ? labeList.map((label, idx) => (
+                <Label key={idx} {...{ ...label }} />
+              ))
+            : null}
         </SelectedLables>
       </IssueTitle>
       <IssueSubtitle>

@@ -8,11 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { decodedUserDataAtom } from 'store';
 import { detailIssueAuthorIdAtom } from 'stores/detailIssueStore';
 
-interface CommentPropsType {
-  commentData: CommentType;
-}
-
-const Comment = ({ commentData }: CommentPropsType) => {
+const Comment = ({ commentData }: { commentData: CommentType }) => {
   const { id, description, createdTime, author } = commentData;
   const issueAuthorId = useRecoilValue(detailIssueAuthorIdAtom);
   const loginUser = useRecoilValue(decodedUserDataAtom);

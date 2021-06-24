@@ -91,7 +91,11 @@ export const commentsQuery = selector({
             id: item.id,
             description: item.description,
             createdTime: item.created_time,
-            author: item.author,
+            author: {
+              id: item.author.user_id,
+              name: item.author.name,
+              profileImg: item.author.avatar_url,
+            },
           }))
         : [];
     } catch (error) {
