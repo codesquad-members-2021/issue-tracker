@@ -6,7 +6,7 @@ import { Button, Textarea } from '@chakra-ui/react';
 import { ReactComponent as FileIcon } from '@assets/file.svg';
 
 import type { Param } from '@pages/IssueDetail';
-import { contentsInput } from '@components/newIssue/style';
+import { contentsInputStyle } from '@components/newIssue/style';
 import { fetchWithAuth } from '@utils/fetchWithAuth';
 import { issueAPI } from '@const/var';
 
@@ -45,7 +45,7 @@ function TextArea({ value, commentID, toggleState, setCommentValue }: Prop) {
         <Textarea
           value={value}
           onChange={handleOnChangeText}
-          {...contentsInput}
+          {...contentsInputStyle}
           background="gr_offWhite"
         />
         <Span>띄어쓰기 포함 {value.length}자</Span>
@@ -72,8 +72,8 @@ const Description = styled.div`
   margin-bottom: 12px;
   position: relative;
   background: ${({ theme }) => theme.colors.gr_offWhite};
-  border-radius: 0 0 ${({ theme }) => theme.radii['2xl']}
-    ${({ theme }) => theme.radii['2xl']};
+  border-radius: 0 0 ${({ theme }) => theme.radii['2xl']};
+  ${({ theme }) => theme.radii['2xl']};
   border: 1px solid ${({ theme }) => theme.colors.gr_line};
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.bl_initial};

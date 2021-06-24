@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 import { Textarea } from '@chakra-ui/textarea';
-import { contentsInput } from '@components/newIssue/style';
+import { contentsInputStyle } from '@components/newIssue/style';
 import { ReactComponent as FileIcon } from '@assets/file.svg';
 
 function CommonTextArea() {
   return (
     <Description>
-      <Textarea {...contentsInput} />
+      <Textarea {...contentsInputStyle} />
       <Span>띄어쓰기 포함 \d\d 자</Span>
       <ImageUploadWrap>
         <FileIcon />
