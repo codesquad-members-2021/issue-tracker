@@ -52,12 +52,4 @@ public class OAuthController {
     public ApiResult<JwtResponse> loginNaver(@RequestParam("code") String code) {
         return ApiResult.success(loginService.loginNaver(code));
     }
-
-    // jwt interceptor 테스트 목적 (임시)
-    @LoginRequired
-    @GetMapping("/jwt")
-    public String jwtChecking(@UserId Long userId) {
-        log.info("user id from jwt : {}", userId);
-        return userId.toString();
-    }
 }

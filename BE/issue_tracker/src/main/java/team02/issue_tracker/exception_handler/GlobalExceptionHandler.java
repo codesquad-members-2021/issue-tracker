@@ -1,5 +1,6 @@
 package team02.issue_tracker.exception_handler;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,7 +14,7 @@ import team02.issue_tracker.oauth.exception.InvalidTokenTypeException;
 import team02.issue_tracker.oauth.exception.JwtNotFoundException;
 
 @RestControllerAdvice
-public class GlobalExceptionHanlder {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidTokenTypeException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -41,13 +42,19 @@ public class GlobalExceptionHanlder {
 
     @ExceptionHandler(InvalidUserRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult invalidGithubUserRequest(InvalidUserRequestException e) {
+    public ApiResult<Void> invalidGithubUserRequest(InvalidUserRequestException e) {
         return ApiResult.fail(e);
     }
 
     @ExceptionHandler(InvalidAccessTokenRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult invalidGithubAccessTokenRequestException(InvalidAccessTokenRequestException e) {
+    public ApiResult<Void> invalidGithubAccessTokenRequestException(InvalidAccessTokenRequestException e) {
+        return ApiResult.fail(e);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ApiResult<Void> tokenExpiredException(TokenExpiredException e) {
         return ApiResult.fail(e);
     }
 }
