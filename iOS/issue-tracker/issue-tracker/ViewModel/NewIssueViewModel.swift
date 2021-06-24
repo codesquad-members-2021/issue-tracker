@@ -12,7 +12,7 @@ class NewIssueViewModel {
     var content: String?
 
     func post(completion: @escaping () -> Void) {
-        guard let url = Endpoint(path: .label).url() else {
+        guard let url = Endpoint(path: .issue).url() else {
             return
         }
         guard let title = title, let content = content, !content.isEmpty else {
