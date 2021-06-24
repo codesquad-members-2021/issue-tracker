@@ -28,7 +28,6 @@ public class MilestoneController {
     @PostMapping
     public void create(@RequestBody MilestoneDTO milestone) {
         logger.debug("마일스톤 생성");
-        logger.debug("마일스톤 생성 요청 확인: {}", milestone.toString());
         milestoneService.create(milestone);
     }
 
@@ -43,7 +42,6 @@ public class MilestoneController {
     @PatchMapping("/{milestoneId}")
     public void update(@PathVariable Long milestoneId, @RequestBody MilestoneDTO milestone) {
         logger.debug("마일스톤 수정");
-        logger.debug("마일스톤 생성 요청 확인: {}", milestone.toString());
         milestoneService.update(milestoneId, milestone);
     }
 

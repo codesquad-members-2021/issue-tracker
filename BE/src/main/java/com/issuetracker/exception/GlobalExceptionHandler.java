@@ -13,11 +13,11 @@ public class GlobalExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public void defaultExceptionHandler(Exception e) {
-//        logger.error(e.toString());
-//    }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void defaultExceptionHandler(Exception e) {
+        logger.error(e.toString());
+    }
 
     @ExceptionHandler(SdkClientException.class)
     public void handleSdkClientException(SdkClientException e) {

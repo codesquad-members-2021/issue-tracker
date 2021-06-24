@@ -36,7 +36,6 @@ public class IssueController {
     @PatchMapping
     public void changeStatus(@RequestBody IssueNumbersRequestDTO issueNumbersRequestDTO, @RequestParam String status) {
         logger.debug("이슈 닫기 or 열기");
-        logger.debug("issue 상태 변경 확인: {}", issueNumbersRequestDTO.toString());
         issueCommandService.changeIssueStatus(issueNumbersRequestDTO, status);
     }
 
@@ -51,7 +50,6 @@ public class IssueController {
     @PostMapping("/form")
     public IssueNumberResponseDTO create(@UserId Long userId, @RequestBody IssueRequestDTO issueRequestDTO) {
         logger.debug("이슈 생성");
-        logger.debug("issue 요청 확인: {}", issueRequestDTO.toString());
         return issueCommandService.createIssue(issueRequestDTO, userId);
     }
 
@@ -66,7 +64,6 @@ public class IssueController {
     @PatchMapping("/{issueId}/title")
     public IssueTitleDTO updateTitle(@PathVariable Long issueId, @RequestBody IssueTitleDTO issueTitleDTO) {
         logger.debug("이슈 제목 수정");
-        logger.debug("issue 제목 수정 요청 확인: {}", issueTitleDTO.toString());
         return issueCommandService.updateIssueTitle(issueId, issueTitleDTO);
     }
 
@@ -81,7 +78,6 @@ public class IssueController {
     @PatchMapping("/{issueId}/assignees")
     public void updateAssignees(@PathVariable Long issueId, @RequestBody AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
         logger.debug("이슈의 담당자 편집");
-        logger.debug("이슈의 담당자 편집 요청 확인: {}", updateAssigneesRequestDTO.toString());
         issueCommandService.updateAssignees(issueId, updateAssigneesRequestDTO);
     }
 
@@ -96,7 +92,6 @@ public class IssueController {
     @PatchMapping("/{issueId}/labels")
     public void updateLabels(@PathVariable Long issueId, @RequestBody LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
         logger.debug("이슈의 레이블 편집");
-        logger.debug("이슈의 레이블 편집 요청 확인: {}", labelsToUpdateRequestDTO.toString());
         issueCommandService.updateLabels(issueId, labelsToUpdateRequestDTO);
     }
 
@@ -111,7 +106,6 @@ public class IssueController {
     @PatchMapping("/{issueId}/milestones")
     public void updateMilestone(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
         logger.debug("이슈의 마일스톤 편집");
-        logger.debug("이슈의 마일스톤 편집 요청 확인: {}", milestonesToUpdateRequestDTO.toString());
         issueCommandService.updateMilestone(issueId, milestonesToUpdateRequestDTO);
     }
 

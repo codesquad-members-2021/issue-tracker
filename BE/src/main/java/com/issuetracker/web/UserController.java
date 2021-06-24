@@ -23,7 +23,6 @@ public class UserController {
     @PostMapping("/login")
     public UserResponseDTO login(@RequestHeader(name = "User-Agent") UserAgentDTO userAgentDTO, @RequestParam String code) {
         logger.debug("로그인 요청");
-        logger.info("에이전트 헤더 확인: {}", userAgentDTO.getUserAgent());
         return userService.login(code, userAgentDTO);
     }
 
@@ -49,6 +48,7 @@ public class UserController {
     @LoginRequired
     @GetMapping("/userInfo")
     public UserResponseDTO getUserInfo(@UserId Long userId) {
+        logger.debug("유저 정보 요청");
         return userService.getUserInfo(userId);
     }
 }

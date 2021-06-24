@@ -27,7 +27,6 @@ public class LabelController {
     @PostMapping
     public void create(@RequestBody LabelDTO label) {
         logger.debug("라벨 생성");
-        logger.debug("라벨 생성 요청 확인: {}", label.toString());
         labelService.create(label);
     }
 
@@ -35,7 +34,6 @@ public class LabelController {
     @PatchMapping("/{labelId}")
     public void update(@PathVariable Long labelId, @RequestBody LabelDTO label) {
         logger.debug("라벨 편집");
-        logger.debug("라벨 편집 요청 확인: {}", label);
         labelService.update(labelId, label);
     }
 
