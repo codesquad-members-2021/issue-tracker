@@ -1,21 +1,25 @@
 import styled from "styled-components";
-import Assignee from "./Assignee";
-import Label from "./Label";
-import { ReactComponent as PlusIcon } from "images/plus.svg";
-import theme from "styles/theme";
+import { useReducer, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import {
 	assigneeCategoryState,
 	labelCategoryState,
 	milestoneCategoryState,
 } from "RecoilStore/Atoms";
 import IssueCategoryModal from "./IssueCategoryModal";
-import { ImgWrapper } from "styles/StyledLayout";
-import { useReducer, useState } from "react";
-import fetchData from "util/fetchData";
+import Assignee from "./Assignee";
+import Label from "./Label";
+import { ReactComponent as PlusIcon } from "images/plus.svg";
+import theme from "styles/theme";
 import API from "util/API";
-import { useSetRecoilState } from "recoil";
+import fetchData from "util/fetchData";
+import getCategoryText from "util/getCategoryText.js";
+import { CATEGORY } from "data";
+
 const IssueCategory = ({ category }) => {
-	const setAssignee = useSetRecoilState(assigneeCategoryState); //여기서 부터 하면 됨 넘 졸려
+	const setAssignee = useSetRecoilState(assigneeCategoryState);
+	const setLabelState = useSetRecoilState(labelCategoryState);
+	const setMilestoneState = useSetRecoilState(milestoneCategoryState);
 	const initialFlagState = {
 		assignee: false,
 		label: false,
@@ -24,72 +28,64 @@ const IssueCategory = ({ category }) => {
 
 	const flagReducer = (state, { type }) => {
 		switch (type) {
-			case "assignee":
+			case CATEGORY.ASSIGNEE:
 				return { ...initialFlagState, assignee: !state.assignee };
-			case "label":
+			case CATEGORY.LABEL:
 				return { ...initialFlagState, label: !state.label };
-			case "milestone":
+			case CATEGORY.MILESTONE:
 				return { ...initialFlagState, milestone: !state.milestone };
 		}
 	};
 	const [flagState, flagDispatch] = useReducer(flagReducer, initialFlagState);
 	const [currentModalData, setCurrentModalData] = useState();
 
-	const getTitleText = () => {
-		switch (category) {
-			case "assignee":
-				return "담당자";
-			case "label":
-				return "라벨";
-			case "milestone":
-				return "마일스톤";
-			default:
-				console.error("unhandled TitleText type!!");
-		}
-	};
 	const handleAddFilter = async () => {
 		await flagDispatch({ type: category });
 		console.log("teat", flagState[`${category}`]);
-		if (category === "assignee") {
+
+		if (category === CATEGORY.ASSIGNEE) {
 			const { users } = await fetchData(API.users());
 			setCurrentModalData(users);
-			console.log(users);
-		} else if (category === "label") {
+		} else if (category === CATEGORY.LABEL) {
 			const { labels } = await fetchData(API.labels());
 			setCurrentModalData(labels);
-			console.log(labels);
-		} else if (category === "milestone") {
+		} else if (category === CATEGORY.MILESTONE) {
 			const { milestones } = await fetchData(API.milestones());
-			console.log(milestones);
+			setCurrentModalData(milestones);
 		}
-
-		//카테고리에 맞는 get을한다
+		//카테고리에 맞는 get을한다 완료
 		//카테고리에 맞는 key를 찾아 그 상태에 저장한다. 리듀서
 	};
 
 	return (
 		<Layout>
 			<HeaderContainer>
-				<TitleText>{getTitleText(category)}</TitleText>
+				<TitleText>{getCategoryText(category)}</TitleText>
 				<Icon stroke={theme.grayScale.label} onClick={handleAddFilter} />
 			</HeaderContainer>
-			{category === "assignee" && (
+			{category === CATEGORY.ASSIGNEE && (
 				<>
 					<Assignee />
-					{flagState.assignee && <IssueCategoryModal data={currentModalData} />}
+					{flagState.assignee && (
+						<IssueCategoryModal category={category} data={currentModalData} />
+					)}
 				</>
 			)}
-			{category === "label" && (
+			{category === CATEGORY.LABEL && (
 				<>
 					<Label data={currentModalData} />
-					{flagState.label && <IssueCategoryModal />}
+					{flagState.label && (
+						<IssueCategoryModal category={category} data={currentModalData} />
+					)}
 				</>
 			)}
-			{category === "milestone" && (
+			{category === CATEGORY.MILESTONE && (
 				<>
 					<MilestoneTotalProgressBar />
-					<ContentsText>마스터즈 코스 수료</ContentsText>
-					{flagState.milestone && <IssueCategoryModal />}
+					<ContentsText>선택된 마일스톤 타이틀 넣기</ContentsText>
+					{flagState.milestone && (
+						<IssueCategoryModal category={category} data={currentModalData} />
+					)}
 				</>
 			)}
 		</Layout>
@@ -114,11 +110,6 @@ const HeaderContainer = styled.div`
 	width: 100%;
 	padding-bottom: 18px;
 `;
-const ContentsContainer = styled.div`
-	display: flex;
-	padding: 9px 0;
-`;
-
 const Icon = styled(PlusIcon)`
 	cursor: pointer;
 `;

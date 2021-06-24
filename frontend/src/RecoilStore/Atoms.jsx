@@ -1,5 +1,5 @@
-import { atom } from "recoil";
-
+import { atom, selector } from "recoil";
+import { CATEGORY } from "data";
 export const selectedIssueCntState = atom({
 	key: "selectedIssueCntState",
 	default: 0,
@@ -73,15 +73,56 @@ export const labelCountState = atom({
 
 export const assigneeCategoryState = atom({
 	key: "assigneeCategoryState",
-	default: "",
+	default: [],
 });
 
 export const labelCategoryState = atom({
 	key: "labelCategoryState",
-	default: "",
+	default: [],
 });
 
 export const milestoneCategoryState = atom({
 	key: "milestoneCategoryState",
-	default: "",
+	default: [],
+});
+
+export const categorySelector = selector({
+	key: "categorySelector",
+	get: ({ get }) => {
+		// const labelCategoryState = get(labelCategoryState);
+		return get(assigneeCategoryState);
+	},
+	set: ({ set }, { category, payload }) => {
+		switch (category) {
+			case CATEGORY.ASSIGNEE:
+				set(assigneeCategoryState, prevState => [
+					...prevState,
+					{
+						id: payload.id,
+						githubId: payload.githubId,
+						imageUrl: payload.imageUrl,
+					},
+				]);
+			case CATEGORY.LABEL:
+				set(labelCategoryState, prevState => [
+					...prevState,
+					{
+						id: payload.id,
+						name: payload.name,
+						//오류 뜸..
+						// textColor: payload.colors.textColor,
+						// backgroundColor: payload.colors.backgroundColor,
+					},
+				]);
+			case CATEGORY.MILESTONE:
+				set(milestoneCategoryState, prevState => [
+					...prevState,
+					{
+						id: payload.id,
+						title: payload.title,
+						dueDate: payload.dueDate,
+					},
+				]);
+		}
+	},
 });

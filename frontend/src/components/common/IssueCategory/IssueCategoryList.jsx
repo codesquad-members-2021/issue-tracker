@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import IssueCategory from "./IssueCategory";
-
+import { CATEGORY } from "data";
 const IssueCategoryList = () => {
 	return (
 		<>
 			<Layout>
-				<IssueCategory category={"assignee"} />
-				<IssueCategory category={"label"} />
-				<IssueCategory category={"milestone"} />
+				<IssueCategory category={CATEGORY.ASSIGNEE} />
+				<IssueCategory category={CATEGORY.LABEL} />
+				<IssueCategory category={CATEGORY.MILESTONE} />
 			</Layout>
 		</>
 	);

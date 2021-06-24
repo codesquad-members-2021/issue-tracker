@@ -35,7 +35,12 @@ const NewIssueForm = () => {
 						</CancelBtn>
 					</Link>
 				</CancelBtn>
-				<SubmitBtn text="완료" size="l" clickHandler={handleSubmit} />
+				<SubmitBtn
+					text="완료"
+					size="l"
+					icon={"none"}
+					clickHandler={handleSubmit}
+				/>
 			</ButtonWrapper>
 		</>
 	);
