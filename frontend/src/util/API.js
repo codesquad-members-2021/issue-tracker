@@ -23,5 +23,14 @@ const API = {
 	users() {
 		return `${this.default()}/users`;
 	},
+	comment() {
+		return `${this.default()}/comments`;
+	},
+	commentId(id) {
+		return `${this.default()}/comments/${id}`;
+	},
+	image() {
+		return `${this.default()}/images`;
+	},
 };
 export default API;

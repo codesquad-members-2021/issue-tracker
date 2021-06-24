@@ -3,10 +3,40 @@ import { ReactComponent as Clip } from "images/paperclip.svg";
 import AddCommentButton from "components/common/Button/BlueButtons";
 import { ImgWrapper } from "styles/StyledLayout";
 import getUserInfo from "util/getUserInfo";
+import MDEditor from "@uiw/react-md-editor";
+import { useState } from "react";
+import API from "util/API";
+import fetchImage from "util/fetchImage";
 
 const CommentInput = ({ isNewIssueMode }) => {
-	const userInfo = getUserInfo();
-	// const { nickName, imageUrl, gitHubId, iss, id, exp }
+	const userInfo = getUserInfo(); // const { nickName, imageUrl, gitHubId, iss, id, exp }
+	const [input, setInput] = useState("");
+
+	const handleInput = text => {
+		setInput(text);
+		console.log(text);
+	};
+
+	const submitComment = () => {
+		// input 을 서버로 POST
+	};
+
+	const handleInputFileChange = e => {
+		const files = e.target.files;
+		console.log(files);
+	};
+
+	const handleOnSubmit = async e => {
+		e.preventDefault();
+		console.log("img submitted");
+		const imgFile = await document.querySelector(".img_file");
+		const formData = await new FormData();
+		await formData.append("image", imgFile.files[0]);
+		const response = await fetchImage(API.image(), "POST", formData);
+		setInput(input + `![${response.image.url}](${response.image.url})`);
+		console.log(response.image.url);
+	};
+
 	return (
 		<Container>
 			{!isNewIssueMode && (
@@ -16,13 +46,25 @@ const CommentInput = ({ isNewIssueMode }) => {
 			)}
 			<MainContainer>
 				<Wrapper>
-					<TextAreaWrapper>
-						<TextArea placeholder="이슈 코멘트 입력" />
-					</TextAreaWrapper>
-					<div>
+					<CommentInputWrapper>
+						<CommentInputMD
+							height={400}
+							placeholder="이슈 코멘트 입력"
+							onChange={handleInput}
+							value={input}
+						/>
+					</CommentInputWrapper>
+					<form className="img_form" onSubmit={handleOnSubmit}>
 						<Clip />
-						<input type="file" name="image" accept="image/*" />
-					</div>
+						<input
+							className="img_file"
+							type="file"
+							name="image"
+							accept="image/*"
+							onChange={handleInputFileChange}
+						/>
+						<button type="submit">Submit Img</button>
+					</form>
 				</Wrapper>
 				{isNewIssueMode ? (
 					<></>
@@ -31,7 +73,7 @@ const CommentInput = ({ isNewIssueMode }) => {
 						text="코멘트 작성"
 						icon="plus"
 						size="m"
-						clickHandler={() => {}}
+						clickHandler={submitComment}
 					/>
 				)}
 			</MainContainer>
@@ -60,13 +102,21 @@ const Wrapper = styled.div`
 	margin-bottom: 2%;
 `;
 
-const TextAreaWrapper = styled.div``;
+const CommentInputWrapper = styled.div`
+	height: 400px;
+`;
 
-const TextArea = styled.textarea`
+const CommentInputMD = styled(MDEditor)`
 	border: none;
 	border-bottom: 1px dashed ${({ theme }) => theme.grayScale.line};
 	background-color: ${({ theme }) => theme.grayScale.input_background};
 	resize: vertical;
 	width: 100%;
-	height: 400px; //데이지: 고정값으로 바꿨슴다~
+	.w-md-editor-toolbar {
+		display: none;
+	}
+`;
+
+const ImgForm = styled.form`
+	display: flex;
 `;
