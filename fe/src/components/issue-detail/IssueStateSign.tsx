@@ -3,12 +3,12 @@ import { ReactComponent as Open } from 'icons/openIssue.svg';
 import { ReactComponent as Close } from 'icons/closeIssue.svg';
 
 type IssueStateSignPropsType = {
-  isOpen: boolean;
+  isOpened: boolean;
 };
 
-const IssueStateSign = ({ isOpen }: IssueStateSignPropsType) => (
-  <Div isOpen={isOpen}>
-    {isOpen ? (
+const IssueStateSign = ({ isOpened }: IssueStateSignPropsType) => (
+  <Div isOpened={isOpened}>
+    {isOpened ? (
       <>
         <OpenSvg />
         <span>열린 이슈</span>
@@ -31,11 +31,12 @@ const Div = styled.div<IssueStateSignPropsType>`
   height: 2.5rem;
   border-radius: ${({ theme }) => theme.border.radius.XL};
   border: 1px solid
-    ${({ isOpen, theme }) => (isOpen ? theme.color.blue : theme.color.purple)};
-  color: ${({ isOpen, theme }) =>
-    isOpen ? theme.color.blue : theme.color.purple};
-  background-color: ${({ isOpen, theme }) =>
-    isOpen ? theme.color.lightBlue : theme.color.lightPurple};
+    ${({ isOpened, theme }) =>
+      isOpened ? theme.color.blue : theme.color.purple};
+  color: ${({ isOpened, theme }) =>
+    isOpened ? theme.color.blue : theme.color.purple};
+  background-color: ${({ isOpened, theme }) =>
+    isOpened ? theme.color.lightBlue : theme.color.lightPurple};
 
   span {
     margin-left: 0.2rem;

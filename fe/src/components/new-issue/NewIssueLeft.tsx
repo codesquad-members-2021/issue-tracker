@@ -7,7 +7,7 @@ const NewIssueLeft = () => {
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>
-        <AuthorAvatar size="L" name="eamon" />
+        <AuthorAvatar size="L" />
         <IssueTitleInput />
       </NewIssueTitle>
       <StyledCommentInput>

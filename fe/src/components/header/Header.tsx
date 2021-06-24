@@ -6,17 +6,14 @@ import styled from 'styled-components';
 import { DecodedUserDataType } from 'types/storeTypes';
 
 const Header = () => {
-  const decodedUserData =
-    useRecoilValue<DecodedUserDataType | null>(decodedUserDataAtom);
+  const decodedUserData = useRecoilValue<DecodedUserDataType | null>(
+    decodedUserDataAtom
+  );
 
   return (
     <StyledHeader>
       <Logo />
-      <AuthorAvatar
-        name={decodedUserData ? decodedUserData.name : 'Anonymous'}
-        profileImg={decodedUserData?.avatar_url}
-        size="L"
-      />
+      <AuthorAvatar profileImg={decodedUserData?.avatar_url} size="L" />
     </StyledHeader>
   );
 };

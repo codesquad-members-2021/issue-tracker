@@ -4,54 +4,57 @@ import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as CloseSvg } from 'icons/closeIssue.svg';
 import { ReactComponent as OpenSvg } from 'icons/openIssue.svg';
 import { Button } from '@material-ui/core';
+import { issueDetailQuery } from 'store';
+import { useRecoilValue } from 'recoil';
 
-const temp = {
-  issueNumber: 2,
-  isOpen: false,
-  author: 'Eamon',
+const IssueDetailHeader = () => {
+  const issueDetailData = useRecoilValue(issueDetailQuery);
+
+  return (
+    issueDetailData && (
+      <Header>
+        <IssueDetailHeaderLeft>
+          <Title>
+            <div className="title">{issueDetailData.title}</div>
+            <div className="issue-number">#{issueDetailData.issueNumber}</div>
+          </Title>
+          <Caption>
+            <IssueStateSign isOpened={issueDetailData.isOpened} />
+
+            <div className="issue-description">
+              {issueDetailData.isOpened
+                ? `이 이슈가 ${issueDetailData.createdTime}에 ${issueDetailData.author.name}님에 의해 열렸습니다`
+                : `이 이슈가 20분 전에 ${issueDetailData.author.name}님에 의해 닫혔습니다`}
+            </div>
+            <div className="divider">•</div>
+            <div className="comment-count">
+              코멘트 {issueDetailData.commentsCount}개
+            </div>
+          </Caption>
+        </IssueDetailHeaderLeft>
+
+        <IssueDetailHeaderRight>
+          <EditButton>
+            <EditIcon />
+            <span>제목 편집</span>
+          </EditButton>
+
+          {issueDetailData.isOpened ? (
+            <IssueOpenCloseButton>
+              <CloseIcon />
+              <span>이슈 닫기</span>
+            </IssueOpenCloseButton>
+          ) : (
+            <IssueOpenCloseButton>
+              <OpenIcon />
+              <span>다시 열기</span>
+            </IssueOpenCloseButton>
+          )}
+        </IssueDetailHeaderRight>
+      </Header>
+    )
+  );
 };
-const { issueNumber, isOpen, author } = temp;
-
-const IssueDetailHeader = () => (
-  <Header>
-    <IssueDetailHeaderLeft>
-      <Title>
-        <div className="title">FE 이슈트래커 디자인 시스템 구현</div>
-        <div className="issue-number">#{issueNumber}</div>
-      </Title>
-      <Caption>
-        <IssueStateSign isOpen={isOpen} />
-
-        <div className="issue-description">
-          {isOpen
-            ? `이 이슈가 20분 전에 ${author}님에 의해 열렸습니다`
-            : `이 이슈가 20분 전에 ${author}님에 의해 닫혔습니다`}
-        </div>
-        <div className="divider">•</div>
-        <div className="comment-count">코멘트 1개</div>
-      </Caption>
-    </IssueDetailHeaderLeft>
-
-    <IssueDetailHeaderRight>
-      <EditButton>
-        <EditIcon />
-        <span>제목 편집</span>
-      </EditButton>
-
-      {isOpen ? (
-        <IssueOpenCloseButton>
-          <CloseIcon />
-          <span>이슈 닫기</span>
-        </IssueOpenCloseButton>
-      ) : (
-        <IssueOpenCloseButton>
-          <OpenIcon />
-          <span>다시 열기</span>
-        </IssueOpenCloseButton>
-      )}
-    </IssueDetailHeaderRight>
-  </Header>
-);
 
 const Header = styled.header`
   display: flex;

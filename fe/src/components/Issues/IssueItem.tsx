@@ -18,11 +18,7 @@ const IssueItem = ({
         {...{ id, title, labeList, issueNumber, createdTime, milestoneTitle }}
       />
       <IssueItemRight>
-        <AuthorAvatar
-          name={author.name}
-          profileImg={author.profileImg}
-          size="S"
-        />
+        <AuthorAvatar profileImg={author.profileImg} size="S" />
       </IssueItemRight>
     </StyledIssueItem>
   );

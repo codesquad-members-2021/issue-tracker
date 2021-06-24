@@ -3,29 +3,58 @@ import AuthorAvatar from 'components/common/AuthorAvatar';
 import Comment from 'components/issue-detail/Comment';
 import styled from 'styled-components';
 import CommentTextarea from 'components/common/CommentTextarea';
+import { useRecoilValue } from 'recoil';
+import {
+  commentsQuery,
+  decodedUserDataAtom,
+  detailIssueAuthorIdAtom,
+  issueDetailQuery,
+} from 'store';
+import { CommentType } from 'types/issueType';
 
-const IssueDetailBody = () => (
-  <Box display="flex">
-    <CommentArea>
-      <IssueDescription>
-        {/* 이슈 작성할 때 본문 부분 - 없으면 생략 가능 */}
-        <Comment />
-      </IssueDescription>
-      <Comments>
-        {/* 배열 map 돌려서 Comment 생성하기 */}
-        <Comment />
-        <Comment />
-        <Comment />
-      </Comments>
-      <NewCommentWrapper display="flex">
-        <AuthorAvatar size="L" name="eamon" />
-        <Spacer />
-        <CommentTextarea />
-      </NewCommentWrapper>
-    </CommentArea>
-    <AssignArea></AssignArea>
-  </Box>
-);
+const IssueDetailBody = () => {
+  const issueDetailData = useRecoilValue(issueDetailQuery);
+  const commentsList = useRecoilValue(commentsQuery); // 코멘트 데이터
+  const issueAuthorId = useRecoilValue(detailIssueAuthorIdAtom);
+  const loginUser = useRecoilValue(decodedUserDataAtom);
+
+  const issueDescription = {
+    // 코멘트처럼 생겼지만 사실 이슈의 본문
+    id: issueAuthorId,
+    author: {
+      name: issueDetailData.author.name,
+      profileImg: issueDetailData.author.avatar_url,
+      id: issueDetailData.author.user_id,
+    },
+    description: issueDetailData.description,
+    createdTime: issueDetailData.createdTime,
+  };
+
+  return (
+    <Box display="flex">
+      <CommentArea>
+        <IssueDescription>
+          {/* 이슈 작성할 때 본문 부분 - 없으면 생략 가능 */}
+          {issueDetailData.description && (
+            <Comment commentData={issueDescription} />
+          )}
+        </IssueDescription>
+        <Comments>
+          {commentsList &&
+            commentsList.map((commentData: CommentType) => (
+              <Comment key={commentData.id} commentData={commentData} />
+            ))}
+        </Comments>
+        <NewCommentWrapper display="flex">
+          <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
+          <Spacer />
+          <CommentTextarea />
+        </NewCommentWrapper>
+      </CommentArea>
+      <AssignArea></AssignArea>
+    </Box>
+  );
+};
 
 const CommentArea = styled.section`
   width: 70%;
