@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team02.issue_tracker.annotation.LogExecutionTime;
 import team02.issue_tracker.dto.ApiResult;
-import team02.issue_tracker.oauth.annotation.LoginRequired;
-import team02.issue_tracker.oauth.annotation.UserId;
 import team02.issue_tracker.oauth.dto.JwtResponse;
+import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.service.LoginService;
 
 @Slf4j
@@ -26,38 +25,30 @@ public class OAuthController {
     @LogExecutionTime
     @GetMapping("/login/github/web")
     public ApiResult<JwtResponse> loginGithubWeb(@RequestParam("code") String code) {
-        return ApiResult.success(loginService.loginGithubWeb(code));
+        return ApiResult.success(loginService.login(code, SocialLogin.GITHUB_WEB));
     }
 
     @LogExecutionTime
     @GetMapping("/login/github/ios")
     public ApiResult<JwtResponse> loginGithubIos(@RequestParam("code") String code) {
-        return ApiResult.success(loginService.loginGithubIos(code));
+        return ApiResult.success(loginService.login(code, SocialLogin.GITHUB_IOS));
     }
 
     @LogExecutionTime
     @GetMapping("/login/google")
     public ApiResult<JwtResponse> loginGoogle(@RequestParam("code") String code) {
-        return ApiResult.success(loginService.loginGoogle(code));
+        return ApiResult.success(loginService.login(code, SocialLogin.GOOGLE));
     }
 
     @LogExecutionTime
     @GetMapping("/login/kakao")
     public ApiResult<JwtResponse> loginKakao(@RequestParam("code") String code) {
-        return ApiResult.success(loginService.loginKakao(code));
+        return ApiResult.success(loginService.login(code, SocialLogin.KAKAO));
     }
 
     @LogExecutionTime
     @GetMapping("/login/naver")
     public ApiResult<JwtResponse> loginNaver(@RequestParam("code") String code) {
-        return ApiResult.success(loginService.loginNaver(code));
-    }
-
-    // jwt interceptor 테스트 목적 (임시)
-    @LoginRequired
-    @GetMapping("/jwt")
-    public String jwtChecking(@UserId Long userId) {
-        log.info("user id from jwt : {}", userId);
-        return userId.toString();
+        return ApiResult.success(loginService.login(code, SocialLogin.NAVER));
     }
 }

@@ -12,10 +12,10 @@ import team02.issue_tracker.service.UserService;
 @Service
 public class LoginService {
 
-    private final OAuthService githubLoginService;
-    private final OAuthService googleLoginService;
-    private final OAuthService kakaoLoginService;
-    private final OAuthService naverLoginService;
+    private final GithubLoginService githubLoginService;
+    private final GoogleLoginService googleLoginService;
+    private final KakaoLoginService kakaoLoginService;
+    private final NaverLoginService naverLoginService;
 
     private final UserService userService;
     private final JwtFactory jwtFactory;
@@ -33,38 +33,23 @@ public class LoginService {
         this.jwtFactory = jwtFactory;
     }
 
-    public JwtResponse loginGithubWeb(final String code) {
-        AccessToken accessToken = githubLoginService.accessToken(code, SocialLogin.GITHUB_WEB);
-        SocialProfile githubUserProfile = githubLoginService.userProfile(accessToken);
-        User user = userFrom(githubUserProfile);
-        return jwtFactory.codeUserToJwt(user);
-    }
-
-    public JwtResponse loginGithubIos(final String code) {
-        AccessToken accessToken = githubLoginService.accessToken(code, SocialLogin.GITHUB_IOS);
-        SocialProfile githubUserProfile = githubLoginService.userProfile(accessToken);
-        User user = userFrom(githubUserProfile);
-        return jwtFactory.codeUserToJwt(user);
-    }
-
-    public JwtResponse loginGoogle(final String code) {
-        AccessToken accessToken = googleLoginService.accessToken(code, SocialLogin.GOOGLE);
-        SocialProfile googleUserProfile = googleLoginService.userProfile(accessToken);
-        User user = userFrom(googleUserProfile);
-        return jwtFactory.codeUserToJwt(user);
-    }
-
-    public JwtResponse loginKakao(final String code) {
-        AccessToken accessToken = kakaoLoginService.accessToken(code, SocialLogin.KAKAO);
-        SocialProfile kakaoUserProfile = kakaoLoginService.userProfile(accessToken);
-        User user = userFrom(kakaoUserProfile);
-        return jwtFactory.codeUserToJwt(user);
-    }
-
-    public JwtResponse loginNaver(final String code) {
-        AccessToken accessToken = naverLoginService.accessToken(code, SocialLogin.NAVER);
-        SocialProfile naverUserProfile = naverLoginService.userProfile(accessToken);
-        User user = userFrom(naverUserProfile);
+    public JwtResponse login(final String code, final SocialLogin oauthResource) {
+        SocialProfile socialProfile;
+        switch(oauthResource) {
+            case GITHUB_WEB:
+                socialProfile = githubLoginService.requestUserProfileWeb(code); break;
+            case GITHUB_IOS:
+                socialProfile = githubLoginService.requestUserProfileIos(code); break;
+            case GOOGLE:
+                socialProfile = googleLoginService.requestUserProfile(code); break;
+            case KAKAO:
+                socialProfile = kakaoLoginService.requestUserProfile(code); break;
+            case NAVER:
+                socialProfile = naverLoginService.requestUserProfile(code); break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + oauthResource);
+        }
+        User user = userFrom(socialProfile);
         return jwtFactory.codeUserToJwt(user);
     }
 

@@ -90,7 +90,7 @@ class GithubLoginServiceTest {
 
         // mock 요청을 mock 서버에 보내서 가져온 응답
         AccessToken receivedResponse =
-                githubLoginService.accessToken(mockAccessTokenRequest, "/mock/access_token");
+                githubLoginService.getAccessToken(mockAccessTokenRequest, "/mock/access_token");
 
         // 반환된 응답이 설정한 mock 응답과 일치하는지 검증
         StepVerifier.create(Mono.just(receivedResponse))
@@ -123,8 +123,6 @@ class GithubLoginServiceTest {
         githubLoginService = new GithubLoginService(webClient);
 
         GithubUserProfile expectedResponse = GithubUserProfile.builder()
-                .id(-1L)
-                .name("mock name")
                 .email("mock email")
                 .login("mock login")
                 .avatarUrl("mock url")
@@ -145,7 +143,7 @@ class GithubLoginServiceTest {
                 .build();
 
         SocialProfile receivedResponse =
-                githubLoginService.userProfile(mockAccessToken, "/mock/userInfo");
+                githubLoginService.getUserProfile(mockAccessToken, "/mock/userInfo");
 
         StepVerifier.create(Mono.just(receivedResponse))
                 .consumeNextWith(body -> assertThat(body).usingRecursiveComparison()
