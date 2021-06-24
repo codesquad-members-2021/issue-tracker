@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import { useReducer, useState } from "react";
-import { useSetRecoilState } from "recoil";
-import {
-	assigneeCategoryState,
-	labelCategoryState,
-	milestoneCategoryState,
-} from "RecoilStore/Atoms";
 import IssueCategoryModal from "./IssueCategoryModal";
 import Assignee from "./Assignee";
 import Label from "./Label";
+import Milestone from "./Milestone";
 import { ReactComponent as PlusIcon } from "images/plus.svg";
 import theme from "styles/theme";
 import API from "util/API";
@@ -17,9 +12,6 @@ import getCategoryText from "util/getCategoryText.js";
 import { CATEGORY } from "data";
 
 const IssueCategory = ({ category }) => {
-	const setAssignee = useSetRecoilState(assigneeCategoryState);
-	const setLabelState = useSetRecoilState(labelCategoryState);
-	const setMilestoneState = useSetRecoilState(milestoneCategoryState);
 	const initialFlagState = {
 		assignee: false,
 		label: false,
@@ -41,7 +33,6 @@ const IssueCategory = ({ category }) => {
 
 	const handleAddFilter = async () => {
 		await flagDispatch({ type: category });
-		console.log("teat", flagState[`${category}`]);
 
 		if (category === CATEGORY.ASSIGNEE) {
 			const { users } = await fetchData(API.users());
@@ -53,8 +44,6 @@ const IssueCategory = ({ category }) => {
 			const { milestones } = await fetchData(API.milestones());
 			setCurrentModalData(milestones);
 		}
-		//카테고리에 맞는 get을한다 완료
-		//카테고리에 맞는 key를 찾아 그 상태에 저장한다. 리듀서
 	};
 
 	return (
@@ -73,7 +62,7 @@ const IssueCategory = ({ category }) => {
 			)}
 			{category === CATEGORY.LABEL && (
 				<>
-					<Label data={currentModalData} />
+					<Label />
 					{flagState.label && (
 						<IssueCategoryModal category={category} data={currentModalData} />
 					)}
@@ -81,8 +70,7 @@ const IssueCategory = ({ category }) => {
 			)}
 			{category === CATEGORY.MILESTONE && (
 				<>
-					<MilestoneTotalProgressBar />
-					<ContentsText>선택된 마일스톤 타이틀 넣기</ContentsText>
+					<Milestone />
 					{flagState.milestone && (
 						<IssueCategoryModal category={category} data={currentModalData} />
 					)}
@@ -116,24 +104,5 @@ const Icon = styled(PlusIcon)`
 const TitleText = styled.div`
 	color: ${({ theme }) => theme.grayScale.label};
 	font-weight: bold;
-`;
-const ContentsText = styled.div`
-	display: flex;
-	align-items: center;
-	color: ${({ theme }) => theme.grayScale.label};
-	height: 44px;
-`;
-const MilestoneTotalProgressBar = styled.div`
-	width: 100%;
-	height: 8px;
-	border-radius: 10px;
-	//이부분 진행률로 수정 바랍니다~
-	background: linear-gradient(
-		90deg,
-		#007aff 0%,
-		#007aff 50.11%,
-		#f7f7fc 50.12%,
-		#f7f7fc 100%
-	);
 `;
 export default IssueCategory;

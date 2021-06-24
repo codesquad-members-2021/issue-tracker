@@ -4,14 +4,12 @@ import getCategoryText from "util/getCategoryText.js";
 import LabelBadge from "../LabelBadge.jsx";
 import { CATEGORY } from "data";
 import {
-	categorySelector,
 	assigneeCategoryState,
 	labelCategoryState,
 	milestoneCategoryState,
 } from "RecoilStore/Atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 const IssueCategoryModal = ({ category, data }) => {
-	const [categoryState, setCategorySelector] = useRecoilState(categorySelector);
 	const [assigneeCategory, setAssigneeCategory] = useRecoilState(
 		assigneeCategoryState
 	);
@@ -19,7 +17,8 @@ const IssueCategoryModal = ({ category, data }) => {
 	const [milestoneCategory, setMilestoneCategory] = useRecoilState(
 		milestoneCategoryState
 	);
-	//아래 코드는 Set + recoil selector 조합으로 리팩토링 필요!!!-----중복코드
+
+	//아래 코드는 리팩토링 예정!!!-----중복코드---------------------------
 	const handleCheckAssignee = e => {
 		const targetId = e.target.value;
 		const targetData = data.filter(item => item.id === targetId)[0];
@@ -31,10 +30,14 @@ const IssueCategoryModal = ({ category, data }) => {
 			setAssigneeCategory(newAssigneeCategory);
 		}
 		if (assigneeCategory.every(x => x.id !== targetId)) {
-			setCategorySelector({
-				category: category,
-				payload: targetData,
-			});
+			setAssigneeCategory([
+				...assigneeCategory,
+				{
+					id: targetData.id,
+					githubId: targetData.githubId,
+					imageUrl: targetData.imageUrl,
+				},
+			]);
 		}
 	};
 
@@ -47,10 +50,15 @@ const IssueCategoryModal = ({ category, data }) => {
 			setLabelCategory(newLabelCategory);
 		}
 		if (labelCategory.every(x => x.id !== targetId)) {
-			setCategorySelector({
-				category: category,
-				payload: targetData,
-			});
+			setLabelCategory([
+				...labelCategory,
+				{
+					id: targetData.id,
+					name: targetData.name,
+					textColor: targetData.colors.textColor,
+					backgroundColor: targetData.colors.backgroundColor,
+				},
+			]);
 		}
 	};
 	const handleCheckMilestone = e => {
@@ -64,10 +72,14 @@ const IssueCategoryModal = ({ category, data }) => {
 			setMilestoneCategory(newMilestoneCategory);
 		}
 		if (milestoneCategory.every(x => x.id !== targetId)) {
-			setCategorySelector({
-				category: category,
-				payload: targetData,
-			});
+			setMilestoneCategory([
+				milestoneCategory,
+				{
+					id: targetData.id,
+					title: targetData.title,
+					dueDate: targetData.dueDate,
+				},
+			]);
 		}
 	};
 	//------------------------여기까지 중복 코드--------------
