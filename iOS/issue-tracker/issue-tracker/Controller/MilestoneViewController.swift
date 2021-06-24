@@ -16,6 +16,7 @@ class MilestoneViewController: UIViewController {
         let tableView = UITableView()
         tableView.rowHeight = 150
         tableView.register(MilestoneTableViewCell.self, forCellReuseIdentifier: MilestoneTableViewCell.reuseId)
+        tableView.separatorStyle = .none
         return tableView
     }()
 
@@ -59,6 +60,7 @@ private extension MilestoneViewController {
                 .items(cellIdentifier: MilestoneTableViewCell.reuseId,
                         cellType: MilestoneTableViewCell.self)) { _, milestone, cell in
                 cell.configure(with: milestone)
+                cell.contentView.backgroundColor = .systemYellow
             }
             .disposed(by: disposeBag)
     }

@@ -83,7 +83,7 @@ class MilestoneTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(dueDateLabel)
         verticalStackView.addArrangedSubview(issueLabelStackView)
 
-        addSubview(verticalStackView)
+        contentView.addSubview(verticalStackView)
     }
 
     required init?(coder: NSCoder) {
@@ -96,7 +96,7 @@ class MilestoneTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(dueDateLabel)
         verticalStackView.addArrangedSubview(issueLabelStackView)
 
-        addSubview(verticalStackView)
+        contentView.addSubview(verticalStackView)
     }
 
     override func layoutSubviews() {
@@ -104,6 +104,9 @@ class MilestoneTableViewCell: UITableViewCell {
         verticalStackView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(20)
         }
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 2))
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 2
     }
 
     func configure(with milestone: Milestone) {
