@@ -11,6 +11,8 @@ import getTimeStamp from "util/getTimeStamp";
 import { selectedIssueCntState } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
 import { StyledGridCard } from "styles/StyledCards";
+import LabelBadge from "components/common/LabelBadge";
+import { ImgWrapper } from "styles/StyledLayout";
 
 const IssueCard = ({
 	issue,
@@ -24,7 +26,17 @@ const IssueCard = ({
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntState
 	);
-	const { title, id, labelId, milestoneId, author, createdAt } = issue;
+	const {
+		title,
+		id,
+		labels,
+		milestone,
+		author,
+		createdAt,
+		open,
+		assignees,
+	} = issue;
+	console.log("labels", labels);
 	const handleCheck = () => {
 		setIsChecked(!isChecked);
 		if (isChecked) {
@@ -36,8 +48,7 @@ const IssueCard = ({
 			setSelectedCards(selectedCards.add(id));
 		}
 	};
-	// console.log(selectedCards);
-	// console.log(selectedIssues);
+
 	useEffect(() => {
 		isChecked ? setIsAnyIssueSelected(true) : setIsAnyIssueSelected(false);
 	}, [isChecked]);
@@ -62,31 +73,36 @@ const IssueCard = ({
 			<Contents>
 				<TextTagDivider>
 					<span>
-						<Alert /> <Link to={`/main/${id}`}>{title}</Link>
+						<Alert stroke={theme.colors.blue} />
+						<Link to={`/main/${id}`}>{title}</Link>
 					</span>
-					<Padder>
-						라벨 위치
-						{/* labelId 로 라벨 정보 fetch 해와서 title, 라벨 렌더링 */}
-					</Padder>
+					<LabelContainer>
+						{labels.length > 0
+							? labels.map((label, idx) => (
+									<LabelBadge
+										text={label.name}
+										fontColor={"#000"}
+										backgroundColor={"#fcaffced"}
+									/>
+							  ))
+							: ""}
+					</LabelContainer>
 				</TextTagDivider>
 				<TextTagDivider>
 					<span>#{id} </span>
-					<Padder>
-						이 이슈가 {getTimeStamp(createdAt)}, {author}님에 의해
+					<TextContainer>
+						이 이슈가 {getTimeStamp(createdAt)}, {author.githubId}님에 의해
 						작성되었습니다
-					</Padder>
-					<Padder>
-						<Milestone fill={theme.grayScale.label} />
-					</Padder>
-					<Padder>
-						마일스톤 이름
-						{/* milestoneId 로 마일스톤 정보 fetch 해와서 title만 뿌리기 */}
-					</Padder>
+					</TextContainer>
+					<TextContainer>
+						{milestone && <Milestone fill={theme.grayScale.label} />}
+					</TextContainer>
+					<TextContainer>{milestone ? milestone.title : ""}</TextContainer>
 				</TextTagDivider>
 			</Contents>
-			<UserIcon>
-				<UserImageSmall />
-			</UserIcon>
+			<UserImgContainer>
+				<img src={author.imageUrl} alt={author.gitHubId} />
+			</UserImgContainer>
 		</StyledGridCard>
 	);
 };
@@ -114,6 +130,25 @@ const Contents = styled.div`
 
 const TextTagDivider = styled.div``;
 
-const Padder = styled.span`
+const TextContainer = styled.span`
 	padding: 0 5px;
+`;
+
+const LabelContainer = styled.div`
+	display: flex;
+	width: 10%;
+`;
+
+const UserImgContainer = styled.div`
+	display: flex;
+	align-self: center;
+	width: 20px;
+	height: 20px;
+	border: 1px solid ${({ theme }) => theme.grayScale.line};
+	border-radius: 50%;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+	}
 `;

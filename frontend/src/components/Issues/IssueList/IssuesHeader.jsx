@@ -83,10 +83,10 @@ const IssuesHeader = ({
 			) : (
 				<FilterOpenClose>
 					<TextIconDivider>
-						<Alert /> 열린 이슈(n)
+						<Alert stroke={theme.grayScale.title_active} /> 열린 이슈(n)
 					</TextIconDivider>
 					<TextIconDivider>
-						<Archive /> 닫힌 이슈(n)
+						<Archive stroke={theme.grayScale.label} /> 닫힌 이슈(n)
 					</TextIconDivider>
 				</FilterOpenClose>
 			)}
@@ -162,5 +162,6 @@ export const CheckBox = styled.div`
 `;
 
 const TextIconDivider = styled.div`
+	width: 100%;
 	/* position: relative; */
 `;

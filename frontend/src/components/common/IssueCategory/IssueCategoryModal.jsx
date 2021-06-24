@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
 import getCategoryText from "util/getCategoryText.js";
@@ -8,7 +9,9 @@ import {
 	labelCategoryState,
 	milestoneCategoryState,
 } from "RecoilStore/Atoms";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import fetchData from "util/fetchData";
+import API from "util/API";
 const IssueCategoryModal = ({ category, data }) => {
 	const [assigneeCategory, setAssigneeCategory] = useRecoilState(
 		assigneeCategoryState
@@ -17,6 +20,8 @@ const IssueCategoryModal = ({ category, data }) => {
 	const [milestoneCategory, setMilestoneCategory] = useRecoilState(
 		milestoneCategoryState
 	);
+
+	// 초기 화면 렌더링 시 카테고리 모달 상태 초기화
 
 	//아래 코드는 리팩토링 예정!!!-----중복코드---------------------------
 	const handleCheckAssignee = e => {
@@ -61,6 +66,20 @@ const IssueCategoryModal = ({ category, data }) => {
 			]);
 		}
 	};
+	// [	{
+	// 	id: targetData.id,
+	// 	name: targetData.name,
+	// 	textColor: targetData.colors.textColor,
+	// 	backgroundColor: targetData.colors.backgroundColor,
+	// },	{
+	// 	id: targetData.id,
+	// 	name: targetData.name,
+	// 	textColor: targetData.colors.textColor,
+	// 	backgroundColor: targetData.colors.backgroundColor,
+	// },].map(x => x.id)
+
+	// [id,id]
+
 	const handleCheckMilestone = e => {
 		const targetId = e.target.value;
 		const targetData = data.filter(item => item.id === targetId)[0];
@@ -71,15 +90,12 @@ const IssueCategoryModal = ({ category, data }) => {
 			);
 			setMilestoneCategory(newMilestoneCategory);
 		}
-		if (milestoneCategory.every(x => x.id !== targetId)) {
-			setMilestoneCategory([
-				milestoneCategory,
-				{
-					id: targetData.id,
-					title: targetData.title,
-					dueDate: targetData.dueDate,
-				},
-			]);
+		if (milestoneCategory.id !== targetId) {
+			setMilestoneCategory({
+				id: targetData.id,
+				title: targetData.title,
+				dueDate: targetData.dueDate,
+			});
 		}
 	};
 	//------------------------여기까지 중복 코드--------------

@@ -8,6 +8,12 @@ const API = {
 	gitHubOAuth() {
 		return "https://github.com/login/oauth/authorize?client_id=c39689919134be7915cf&redirect_uri=http://localhost:3000/login";
 	},
+	issues() {
+		return `${this.default()}/issues`;
+	},
+	issue(id) {
+		return `${this.default()}/issues/${id}`;
+	},
 	labels() {
 		return `${this.default()}/labels`;
 	},

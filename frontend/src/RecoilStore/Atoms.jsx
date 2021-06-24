@@ -83,7 +83,7 @@ export const labelCategoryState = atom({
 
 export const milestoneCategoryState = atom({
 	key: "milestoneCategoryState",
-	default: [],
+	default: {},
 });
 
 export const commentInputState = atom({
@@ -91,6 +91,21 @@ export const commentInputState = atom({
 	default: {
 		issueId: null,
 		content: "",
+	},
+});
+
+export const categoryIdSelectorState = selector({
+	key: "categoryIdSelectorState",
+	get: ({ get }) => {
+		const assignee = get(assigneeCategoryState).map(el => el.id);
+		const label = get(labelCategoryState).map(el => el.id);
+		const milestone = get(milestoneCategoryState).id;
+
+		return {
+			assignee: assignee,
+			label: label,
+			milestone: milestone,
+		};
 	},
 });
 
