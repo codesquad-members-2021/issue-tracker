@@ -116,7 +116,6 @@ export const categorySelector = selector({
 				]);
 			case CATEGORY.MILESTONE:
 				set(milestoneCategoryState, prevState => [
-					...prevState,
 					{
 						id: payload.id,
 						title: payload.title,

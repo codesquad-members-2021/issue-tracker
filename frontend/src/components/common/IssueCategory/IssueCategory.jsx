@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useReducer, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
 	assigneeCategoryState,
 	labelCategoryState,
@@ -9,6 +9,7 @@ import {
 import IssueCategoryModal from "./IssueCategoryModal";
 import Assignee from "./Assignee";
 import Label from "./Label";
+import Milestone from "./Milestone";
 import { ReactComponent as PlusIcon } from "images/plus.svg";
 import theme from "styles/theme";
 import API from "util/API";
@@ -19,7 +20,7 @@ import { CATEGORY } from "data";
 const IssueCategory = ({ category }) => {
 	const setAssignee = useSetRecoilState(assigneeCategoryState);
 	const setLabelState = useSetRecoilState(labelCategoryState);
-	const setMilestoneState = useSetRecoilState(milestoneCategoryState);
+
 	const initialFlagState = {
 		assignee: false,
 		label: false,
@@ -73,7 +74,7 @@ const IssueCategory = ({ category }) => {
 			)}
 			{category === CATEGORY.LABEL && (
 				<>
-					<Label data={currentModalData} />
+					<Label />
 					{flagState.label && (
 						<IssueCategoryModal category={category} data={currentModalData} />
 					)}
@@ -81,8 +82,7 @@ const IssueCategory = ({ category }) => {
 			)}
 			{category === CATEGORY.MILESTONE && (
 				<>
-					<MilestoneTotalProgressBar />
-					<ContentsText>선택된 마일스톤 타이틀 넣기</ContentsText>
+					<Milestone />
 					{flagState.milestone && (
 						<IssueCategoryModal category={category} data={currentModalData} />
 					)}
