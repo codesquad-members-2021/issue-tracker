@@ -90,33 +90,39 @@ public class IssueRepository {
         if (searchCondition.getClosed() != null) {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
-                    "where closed = ? ";
+                    "where closed = ? " +
+                    "and deleted = false ";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getClosed());
         }
 
         if (searchCondition.getAuthor() != null) {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
-                    "where author_user_id = ? ";
+                    "where author_user_id = ? " +
+                    "and deleted = false ";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAuthor());
         }
 
         if (searchCondition.getMilestone() != null) {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
-                    "where milestone_id = ? ";
+                    "where milestone_id = ? " +
+                    "and deleted = false ";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getMilestone());
         }
 
         if (searchCondition.getAssignee() != null) {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
-                    "where assignee = ? ";
+                    "where assignee = ? " +
+                    "and deleted = false ";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAssignee());
         }
 
         logger.info("not matching anything");
-        String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` from issue";
+        String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
+                "from issue " +
+                "where deleted = false ";
         return jdbcTemplate.query(query, ISSUE_ROW_MAPPER);
     }
 
