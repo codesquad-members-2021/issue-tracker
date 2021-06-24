@@ -6,13 +6,13 @@ import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import { ReactComponent as Downward } from '../../../icons/downward.svg';
 
 const SearchFilter = () => {
-  const mainFilterOptions = new Set([
-    '열린 이슈',
-    '내가 작성한 이슈',
-    '나에게 할당된 이슈',
-    '내가 댓글을 남긴 이슈',
-    '닫힌 이슈',
-  ]);
+  const mainFilterOptions = [
+    { optionName: '열린 이슈' },
+    { optionName: '내가 작성한 이슈' },
+    { optionName: '나에게 할당된 이슈' },
+    { optionName: '내가 댓글을 남긴 이슈' },
+    { optionName: '닫힌 이슈' },
+  ];
 
   return (
     <>

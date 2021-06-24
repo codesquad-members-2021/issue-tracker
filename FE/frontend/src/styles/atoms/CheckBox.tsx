@@ -2,9 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 const CheckBox = () => {
-  const foo = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
-  };
+  const foo = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
     <div>

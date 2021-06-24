@@ -66,6 +66,8 @@ const NewComment = (props: Props) => {
   const registerNewIssue = () => {
     mutateAsync({ data: input, id: props.issueId });
     if (isSuccess) {
+      setInput({ ...input, content: '' });
+
       props.refetch();
     }
   };

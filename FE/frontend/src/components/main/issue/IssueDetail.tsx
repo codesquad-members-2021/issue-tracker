@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import NewComment from './NewComment';
 import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
@@ -15,7 +15,6 @@ import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 
 const IssueDetail = () => {
-  const queryClient = useQueryClient();
   const location = useLocation();
   const { isLoading, data, error, refetch } = useFetch('issue', 'detail', {
     id: location.pathname,
@@ -127,7 +126,7 @@ const IssueDetail = () => {
                 .reverse()
                 .map((comment: any, index: number) => {
                   return (
-                    <SingleComment>
+                    <SingleComment key={index}>
                       <User imageURL={comment.writer.profile_image} />
                       <CommentContainer>
                         <CommentTab>

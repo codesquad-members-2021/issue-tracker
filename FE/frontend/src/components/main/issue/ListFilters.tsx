@@ -1,23 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useFetch from '../../../util/useFetch';
 import AssigneeFilter from './AssigneeFilter';
+import LabelFilter from './LabelFilter';
+import MilestoneFilter from './MilestoneFilter';
+import AuthorFilter from './AuthorFilter';
 
 const ListFilters = () => {
-  // const { data: issueData } = useFetch('issue', 'getAllData');
-  // const { data: labelData } = useFetch('label', 'getAllData');
-  // const { data: milestoneData } = useFetch('milestone', 'getAllData');
+  const { data } = useFetch('issue', 'getAllData');
 
-  const labels = new Set(['레이블이 없는 이슈']);
-  const milestones = new Set(['마일스톤이 없는 이슈']);
-  const author = new Set(['작성자가 없는 이슈']);
+  const assignees = data
+    ?.flatMap(({ assignees }: any) => {
+      return assignees;
+    })
+    .filter(
+      (v: any, i: number, a: any) =>
+        a.findIndex((t: any) => t.username === v.username) === i
+    )
+    .map((val: any) => {
+      return { optionName: val.username, image: val.profile_image };
+    });
 
-  // useEffect(() => {
+  const labels = data
+    ?.flatMap(({ labels }: any) => {
+      return labels;
+    })
+    .filter(
+      (v: any, i: number, a: any) =>
+        a.findIndex((t: any) => t.title === v.title) === i
+    )
+    .map((val: any) => {
+      return { optionName: val.title, color: val.color };
+    });
 
-  // }, [issueData, labelData, milestoneData]);
+  const milestone = data
+    ?.map(({ milestone }: any) => {
+      return milestone;
+    })
+    .filter(
+      (v: any, i: number, a: any) =>
+        a.findIndex((t: any) => t.title === v.title) === i
+    )
+    .map((val: any) => {
+      return { optionName: val.title };
+    });
+
+  const author = data
+    ?.map(({ writer }: any) => {
+      return writer;
+    })
+    .filter(
+      (v: any, i: number, a: any) =>
+        a.findIndex((t: any) => t.username === v.username) === i
+    )
+    .map((val: any) => {
+      return { optionName: val.username, image: val.profile_image };
+    });
 
   return (
-    <FilterContainer className="whew">
-      <AssigneeFilter />
+    <FilterContainer>
+      {assignees && <AssigneeFilter filteredAssignee={assignees} />}
+      {labels && <LabelFilter filteredLabels={labels} />}
+      {milestone && <MilestoneFilter filteredMilestone={milestone} />}
+      {author && <AuthorFilter filteredAuthor={author} />}
       {/* <Modal
         label="담당자"
         options={assignees}

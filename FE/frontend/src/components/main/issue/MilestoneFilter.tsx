@@ -4,17 +4,17 @@ import Modal from '../../../styles/molcules/Modal';
 import Typos from '../../../styles/atoms/Typos';
 import { ReactComponent as Downward } from '../../../icons/downward.svg';
 
-const AssigneeFilter = ({ filteredAssignee }: any) => {
-  const defaultAssignees = [{ optionName: '담당자가 없는 이슈' }];
+const MilestoneFilter = ({ filteredMilestone }: any) => {
+  const defaultMilestones = [{ optionName: '마일스톤이 없는 이슈' }];
   return (
     <div>
       <Modal
-        options={[...defaultAssignees, ...filteredAssignee]}
+        options={[...defaultMilestones, ...filteredMilestone]}
         exceptedDiv="filterTitle"
-        type="image"
-        innerTitle="담당자 필터">
+        type="text"
+        innerTitle="마일스톤 필터">
         <Text link sm>
-          담당자
+          마일스톤
           <Downward />
         </Text>
       </Modal>
@@ -29,4 +29,4 @@ const Text = styled(Typos)`
   }
 `;
 
-export default AssigneeFilter;
+export default MilestoneFilter;

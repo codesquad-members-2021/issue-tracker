@@ -5,7 +5,7 @@ import Typo from '../atoms/Typos';
 
 interface Props {
   children: JSX.Element;
-  options: Set<string>;
+  options: any[];
   exceptedDiv: string;
   type: string;
   innerTitle: string;
@@ -14,8 +14,13 @@ interface Props {
 const Modal = (props: Props) => {
   const [isShown, setIsShown] = useState<boolean>(false);
   const [options, setOptions] = useState(
-    [...props.options].map(val => {
-      return { name: val, isSelected: false };
+    props.options.map(val => {
+      return {
+        name: val.optionName,
+        image: val.image,
+        color: val.color,
+        isSelected: false,
+      };
     })
   );
 
