@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
 import { ReactComponent as Edit } from "images/edit.svg";
 import theme from "styles/theme";
+import MarkdownRenderer from "components/common/MarkdownRenderer";
 
 const IssueDetailCommentCard = ({ data }) => {
 	return (
@@ -27,7 +28,9 @@ const IssueDetailCommentCard = ({ data }) => {
 						<span className="smile">😀</span>
 					</div>
 				</CardHeader>
-				<CardBody>처음부터 전부 구현하려고 하지 마 (시러!)</CardBody>
+				<CardBody>
+					<MarkdownRenderer />
+				</CardBody>
 			</CardWrapper>
 		</Wrapper>
 	);
