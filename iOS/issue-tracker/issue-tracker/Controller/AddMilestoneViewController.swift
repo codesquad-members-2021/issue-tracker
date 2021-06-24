@@ -11,7 +11,7 @@ import RxSwift
 class AddMilestoneViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
-    private let viewModel: MilestoneViewModel! = MilestoneViewModel()
+    private let viewModel: MilestoneViewModel! = MilestoneViewModel.shared
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(AddMilestoneTableViewCell.self, forCellReuseIdentifier: AddMilestoneTableViewCell.reuseIdentifier)
@@ -25,7 +25,7 @@ class AddMilestoneViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로",
                                                                 style: .plain,
                                                                 target: self,
-                                                                action: nil)
+                                                                action: #selector(didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                                  style: .plain,
                                                                  target: self,
@@ -35,11 +35,19 @@ class AddMilestoneViewController: UIViewController {
         tableView.frame = view.bounds
 
         view.addSubview(tableView)
+        viewModel.completion = {
+            self.dismiss(animated: true)
+        }
     }
 
     @objc
     private func didTapSave() {
-
+        viewModel.post()
+    }
+    
+    @objc
+    private func didTapCancel() {
+        dismiss(animated: true)
     }
 }
 
@@ -56,6 +64,7 @@ extension AddMilestoneViewController: UITableViewDataSource {
             cell.becomeFirstResponder()
         }
         let textLabel = ["제목", "설명", "완료일"]
+        let keys = ["title", "description", "dueDate"]
         cell.textLabel?.text = textLabel[indexPath.row]
         cell.bind { textField in
             textField.rx.text
@@ -64,7 +73,7 @@ extension AddMilestoneViewController: UITableViewDataSource {
                 .distinctUntilChanged()
                 .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
                 .subscribe(onNext: { text in
-                    let key = textLabel[indexPath.row]
+                    let key = keys[indexPath.row]
                     self.viewModel.milestone[key] = text
                 })
                 .disposed(by: disposeBag)

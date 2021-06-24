@@ -8,7 +8,8 @@
 import UIKit
 import SnapKit
 
-class GitHubLoginButton: UIView {
+@IBDesignable
+class GitHubLoginButton: UIButton {
 
     var stackView: UIStackView = {
         var stackView = UIStackView()

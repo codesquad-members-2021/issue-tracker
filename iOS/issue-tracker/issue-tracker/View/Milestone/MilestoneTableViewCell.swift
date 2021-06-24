@@ -14,18 +14,10 @@ class MilestoneTableViewCell: UITableViewCell {
 
     private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        return stackView
-    }()
-
-    private let horizenStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .top
-        stackView.distribution = .fill
         return stackView
     }()
 
@@ -45,13 +37,6 @@ class MilestoneTableViewCell: UITableViewCell {
         return label
     }()
 
-    private let achievementLabel: UILabel = {
-        let label = UILabel()
-        label.text = "50%"
-        label.textAlignment = .right
-        return label
-    }()
-
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
@@ -61,7 +46,7 @@ class MilestoneTableViewCell: UITableViewCell {
 
     private let dueDateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = .systemGray
         return label
     }()
@@ -70,19 +55,21 @@ class MilestoneTableViewCell: UITableViewCell {
         let label = PaddingLabel(withInsets: 5, 5, 10, 10)
         label.textAlignment = .center
         label.textColor = .white
+        label.font = .systemFont(ofSize: 14)
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 15
-        label.backgroundColor = UIColor.hexStringToUIColor(hex: "#B1CAE5")
+        label.layer.cornerRadius = 8
+        label.backgroundColor = .systemGreen
         return label
     }()
 
     private let closedIssue: PaddingLabel = {
-        let label = PaddingLabel(withInsets: 5, 5, 10, 10)
+        let label = PaddingLabel(withInsets: 10, 10, 10, 10)
         label.textAlignment = .center
         label.textColor = .white
+        label.font = .systemFont(ofSize: 14)
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 15
-        label.backgroundColor = UIColor.hexStringToUIColor(hex: "#DFCD85")
+        label.layer.cornerRadius = 8
+        label.backgroundColor = .systemRed
         return label
     }()
 
@@ -96,9 +83,7 @@ class MilestoneTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(dueDateLabel)
         verticalStackView.addArrangedSubview(issueLabelStackView)
 
-        horizenStackView.addArrangedSubview(verticalStackView)
-        horizenStackView.addArrangedSubview(achievementLabel)
-        addSubview(horizenStackView)
+        addSubview(verticalStackView)
     }
 
     required init?(coder: NSCoder) {
@@ -111,14 +96,12 @@ class MilestoneTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(dueDateLabel)
         verticalStackView.addArrangedSubview(issueLabelStackView)
 
-        horizenStackView.addArrangedSubview(verticalStackView)
-        horizenStackView.addArrangedSubview(achievementLabel)
-        addSubview(horizenStackView)
+        addSubview(verticalStackView)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        horizenStackView.snp.makeConstraints { (maker) in
+        verticalStackView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview().inset(20)
         }
     }
