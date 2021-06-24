@@ -8,10 +8,6 @@
 import Foundation
 
 struct PatchIssue: Encodable {
-    let data: PatchData
-}
-
-struct PatchData: Encodable {
     let issueNumber: [Int]
     let isOpen: Bool
 

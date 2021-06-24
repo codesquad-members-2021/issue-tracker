@@ -46,7 +46,7 @@ class MilestoneViewModel {
                 CustomAlertView.shared.setUpAlertView(title: "성공", message: "마일스톤이 등록되었습니다.", buttonTitle: "확인", alertType: .success, buttonHandler: { self.fetch() })
             case .failure:
                 CustomAlertView.shared.setUpAlertView(title: "실패", message: "서버가 불안정합니다. 다시 시도해주세요.", buttonTitle: "확인", alertType: .failure, buttonHandler: nil)
-            }   
+            }
         }
     }
 }

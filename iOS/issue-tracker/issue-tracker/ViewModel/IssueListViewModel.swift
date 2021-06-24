@@ -40,7 +40,7 @@ class IssueListViewModel {
     }
 
     func patchIssue(issues: [Issue]) {
-        let encodableObject = PatchIssue(data: PatchData(issueNumber: issues.map { $0.id! }, isOpen: false))
+        let encodableObject = PatchIssue(issueNumber: issues.map { $0.id! }, isOpen: false)
         networkManager.patchRequest(url: Endpoint(path: .issue).url()!, encodable: encodableObject) { result in
             switch result {
             case .success:

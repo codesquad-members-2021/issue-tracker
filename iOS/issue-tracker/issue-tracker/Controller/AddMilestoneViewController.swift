@@ -44,7 +44,7 @@ class AddMilestoneViewController: UIViewController {
     private func didTapSave() {
         viewModel.post()
     }
-    
+
     @objc
     private func didTapCancel() {
         dismiss(animated: true)

@@ -37,7 +37,7 @@ final class LabelTableViewCell: UITableViewCell {
         addSubviews()
         setupAutolayout()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 2))
