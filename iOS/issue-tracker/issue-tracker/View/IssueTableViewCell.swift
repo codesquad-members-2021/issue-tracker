@@ -13,7 +13,7 @@ class IssueTableViewCell: UITableViewCell, Identifying {
     
     func configure(issue: Issue) {
         title.text = issue.title
-        content.text = "안녕하세요"
+        content.text = issue.comment
         milestone.text = issue.milestone
         label.text = issue.labels.first?.title
         label.backgroundColor = UIColor(hex: issue.labels.first?.color ?? "#FFFFFF")

@@ -12,7 +12,6 @@ struct JWTManager: JWTManageable {
         
         var dataTypeRef: AnyObject?
         let status = SecItemCopyMatching(keyChainQuery, &dataTypeRef)
-        
         guard status == errSecSuccess, let retrievedData = dataTypeRef as? Data else { return nil }
         let value = String(data: retrievedData, encoding: String.Encoding.utf8)
         return value
@@ -29,7 +28,6 @@ struct JWTManager: JWTManageable {
         ]
         
         SecItemDelete(keyChainQuery)
-        print(jwt)
         let status: OSStatus = SecItemAdd(keyChainQuery, nil)
         return status == noErr
     }

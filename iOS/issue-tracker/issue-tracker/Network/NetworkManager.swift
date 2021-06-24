@@ -13,13 +13,14 @@ struct NetworkManager {
     
     func sendRequest<T: Decodable>(with url: URL?, method: HttpMethod, type: T.Type) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
-            let error = NetworkError.url(description: "The URL is not appropriate")
+            let error = NetworkError.url(description: "URL does not exist")
             return Fail(error: error).eraseToAnyPublisher()
         }
         
         let urlRequest = requestManager.makeRequest(url: url, method: method)
         return session.dataTaskPublisher(for: urlRequest)
-            .mapError { _ in NetworkError.networkConnection(desciption: "Network Error")
+            .mapError { _  in
+                NetworkError.networkConnection(desciption: "Network Error")
             }
             .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                 let decodeData = Just(data)
@@ -33,13 +34,13 @@ struct NetworkManager {
     
     func sendRequest<T: Decodable, D: Encodable>(with url: URL?, method: HttpMethod, type: T.Type, body: D) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
-            let error = NetworkError.url(description: "The URL is not appropriate")
+            let error = NetworkError.url(description: "URL does not exist")
             return Fail(error: error).eraseToAnyPublisher()
         }
         
         return Just(body).encode(encoder: JSONEncoder())
             .mapError { _ in
-                return .encoding(description: "Encode Error")
+                return .encoding(description: "It has not been encoded")
             }
             .map { data -> URLRequest in
                 let urlRequest = requestManager.makeRequest(url: url, method: method, body: data)
@@ -47,7 +48,7 @@ struct NetworkManager {
             }
             .flatMap { urlRequest in
                 session.dataTaskPublisher(for: urlRequest)
-                    .mapError { _ in NetworkError.networkConnection(desciption: "Network Error")
+                    .mapError { _ in NetworkError.networkConnection(desciption: "URL Error")
                     }
                     .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                         let decodeData = Just(data)

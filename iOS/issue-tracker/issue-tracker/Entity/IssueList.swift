@@ -10,6 +10,7 @@ struct Issue {
     
     let id: Int
     let title: String
+    let comment: String
     let milestone: String
     let labels: [Label]
     

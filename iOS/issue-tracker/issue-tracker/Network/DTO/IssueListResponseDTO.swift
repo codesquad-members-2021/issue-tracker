@@ -9,7 +9,7 @@ struct IssueListResponseDTO: Decodable {
 extension IssueListResponseDTO {
     
     func toDomain() -> IssueList {
-        return IssueList(issues: data.map { return Issue(id: $0.id, title: $0.title, milestone: $0.milestone?.title ?? "", labels: $0.labels.map { $0.toDomain() }) })
+        return IssueList(issues: data.map { return Issue(id: $0.id, title: $0.title, comment: $0.firstComment.content, milestone: $0.milestone?.title ?? "", labels: $0.labels.map { $0.toDomain() }) })
     }
     
 }
@@ -24,12 +24,14 @@ struct IssueDTO: Decodable {
     let assignees: [WriterDTO]
     let milestone: MilestoneDTO?
     let labels: [LabelDTO]
+    let firstComment: CommentDTO
     
     enum CodingKeys: String, CodingKey {
         case id, title
         case createdTime = "created_time"
         case isOpen = "is_open"
         case writer, assignees, milestone, labels
+        case firstComment = "first_comment"
     }
     
 }
@@ -63,4 +65,10 @@ struct LabelDTO: Decodable {
     func toDomain() -> Label {
         return .init(title: title, color: color)
     }
+}
+
+struct CommentDTO: Decodable {
+    
+    let content: String
+    
 }
