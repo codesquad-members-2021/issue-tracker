@@ -31,7 +31,6 @@ function AuthorFilter() {
     const target = e.target as HTMLInputElement;
     const checkNumber = target.id;
     if (checkNumber === '') return;
-    console.log('hi');
 
     const toggleBoolean = isChecked[checkNumber] === true ? false : true;
     if (toggleBoolean)

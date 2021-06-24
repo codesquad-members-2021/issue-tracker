@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { Input } from '@chakra-ui/input';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 
 import {
   isInputtedTitleAtom,
   isClickedCompleteBtnAtom,
-  newIssueContentsAtom,
+  newIssueTitleAtom,
 } from '@store/atoms/newIssue';
 import { titleInputStyle } from './style';
 
@@ -13,16 +13,12 @@ function TitleInput() {
   const [isInputtedTitle, setIsInputtedTitle] =
     useRecoilState(isInputtedTitleAtom);
   const isClickedCompleteBtn = useRecoilValue(isClickedCompleteBtnAtom);
-  const [newIssueContents, setNewIssueContents] =
-    useRecoilState(newIssueContentsAtom);
+  const setNewIssueTitle = useSetRecoilState(newIssueTitleAtom);
   const titleInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isClickedCompleteBtn && titleInput.current != null)
-      setNewIssueContents({
-        ...newIssueContents,
-        title: titleInput.current.value,
-      });
+      setNewIssueTitle(titleInput.current.value);
   }, [isClickedCompleteBtn]);
 
   const handleChangeTitle = (e: React.ChangeEvent) => {

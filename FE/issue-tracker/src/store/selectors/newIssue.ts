@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { newIssueContentsAtom } from '../atoms/newIssue';
+import { newIssueTitleAtom, newIssueContentsAtom } from '../atoms/newIssue';
 import {
   checkedAssigneesAtom,
   checkedLabelsAtom,
@@ -12,7 +12,8 @@ export const getNewIssueBody = selector({
     const header = {
       method: 'POST',
       body: JSON.stringify({
-        ...get(newIssueContentsAtom),
+        title: get(newIssueTitleAtom),
+        description: get(newIssueContentsAtom),
         assignee: get(checkedAssigneesAtom)[0],
         label_ids: get(checkedLabelsAtom),
         milestone_id: get(checkedMilestoneAtom)?.id,

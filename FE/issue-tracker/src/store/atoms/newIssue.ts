@@ -10,10 +10,12 @@ export const isClickedCompleteBtnAtom = atom({
   default: false,
 });
 
+export const newIssueTitleAtom = atom({
+  key: 'newIssueTitleAtom',
+  default: '',
+});
+
 export const newIssueContentsAtom = atom({
-  key: 'newIssueContentsState',
-  default: {
-    title: '',
-    description: '',
-  },
+  key: 'newIssueContentsAtom',
+  default: '',
 });

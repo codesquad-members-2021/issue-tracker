@@ -24,8 +24,6 @@ function LoginMain() {
   const [isLoginActive, setIsActiveLogin] = useState(false);
   const [isInputtedID, setIsInputtedID] = useState(false);
   const [isInputtedPW, setIsInputtedPW] = useState(false);
-  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-  const setLoginInfo = useSetRecoilState(loginInfoState);
   const [password, setPassword] = useState('');
   const history = useHistory();
 
@@ -50,8 +48,8 @@ function LoginMain() {
   useEffect(() => {
     const { code } = queryString.parse(window.location.search);
     if (!code) return;
-    else if (typeof code === 'string' && !isLogin) {
-      fetchToken({ setIsLogin, setLoginInfo, code, history });
+    else if (typeof code === 'string') {
+      fetchToken({ code, history });
     }
   }, []);
 

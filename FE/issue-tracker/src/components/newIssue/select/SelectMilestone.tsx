@@ -57,7 +57,7 @@ function SelectMilestone() {
         <MilestoneModal milestones={milestones} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        {progressValue !== null && (
+        {progressValue != null && (
           <li>
             <Progress {...progressBar} value={progressValue.progress} />
             <span>{progressValue.title}</span>

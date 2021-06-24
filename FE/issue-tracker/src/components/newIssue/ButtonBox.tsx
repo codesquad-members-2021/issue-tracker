@@ -11,13 +11,13 @@ import { fetchWithAuth } from '@utils/fetchWithAuth';
 import {
   isInputtedTitleAtom,
   isClickedCompleteBtnAtom,
-  newIssueContentsAtom,
+  newIssueTitleAtom,
 } from '@store/atoms/newIssue';
 import { getNewIssueBody } from '@store/selectors/newIssue';
 
 function ButtonBox() {
   const isInputtedTitle = useRecoilValue(isInputtedTitleAtom);
-  const newIssueContents = useRecoilValue(newIssueContentsAtom);
+  const newIssueTitle = useRecoilValue(newIssueTitleAtom);
   const newIssueHeaderBody = useRecoilValue(getNewIssueBody);
   const [isClickedCompleteBtn, setIsClickedCompleteBtn] = useRecoilState(
     isClickedCompleteBtnAtom
@@ -32,18 +32,18 @@ function ButtonBox() {
     const postIssue = async () => {
       try {
         await fetchWithAuth(`${baseURL}/issues`, '🤯이슈 생성 에러', header);
-        history.push('/issues');
         setIsClickedCompleteBtn(false);
+        history.push('/issues');
       } catch (error) {
         console.error(error);
       }
     };
     postIssue();
-  }, [newIssueContents]);
+  }, [newIssueTitle]);
 
   return (
     <ButtonBoxWrap>
-      <Link to="issues">
+      <Link to="/issues">
         <CancelBtn>
           <CancelIcon className="cancel_icon" />
           <span>작성취소</span>

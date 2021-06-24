@@ -1,6 +1,5 @@
 import jwt_decode from 'jwt-decode';
 import { TOKEN_URL } from '@const/var';
-import { loginInfoType } from '@store/atoms/login';
 
 type decodedType = {
   avatar_url: string;
@@ -20,20 +19,17 @@ const getDecodedOauthToken = (jwt: string) => {
 };
 
 type Arg = {
-  setIsLogin: (state: boolean) => void;
-  setLoginInfo: (state: loginInfoType) => void;
   code: string;
   history: any;
 };
 
-const fetchToken = async ({ setIsLogin, setLoginInfo, code, history }: Arg) => {
+const fetchToken = async ({ code, history }: Arg) => {
   try {
     const response = await fetch(TOKEN_URL + code);
     const { jwt } = await response.json();
     const decodedOauthToken = getDecodedOauthToken(jwt);
     localStorage.setItem('oauth_login_token', jwt);
-    setLoginInfo(decodedOauthToken);
-    setIsLogin(true);
+    localStorage.setItem('login_info', JSON.stringify(decodedOauthToken));
     history.push('/issues');
   } catch (error) {
     console.error('getAccessToken Error');
