@@ -30,3 +30,16 @@ export const labelParser = (str: string | null) => {
       return 'TextColor';
   }
 };
+
+
+
+export const milestoneParser = (str: string | null) => {
+  switch (str) {
+    case '제목':
+      return 'Title';
+    case '설명(선택)':
+      return 'Description';
+    default:
+      return 'DueDate';
+  }
+};
