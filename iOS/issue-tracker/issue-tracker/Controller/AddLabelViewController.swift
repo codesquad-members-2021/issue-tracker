@@ -10,6 +10,10 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
+protocol AddLabelViewControllerDelegate: AnyObject {
+    func fetchData()
+}
+
 final class AddLabelViewController: UIViewController {
     private var addLabelViewModel: AddLabelViewModel!
     private lazy var tableView: UITableView = {
@@ -23,6 +27,7 @@ final class AddLabelViewController: UIViewController {
     private var saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
     private var cancelButton = UIBarButtonItem(title: "뒤로", style: .plain, target: nil, action: nil)
     var reloadDataHandler: (() -> Void)?
+    weak var delegate: AddLabelViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,7 @@ final class AddLabelViewController: UIViewController {
                 } else {
                     viewModel.postAddedLabel {
                         self?.dismiss(animated: true, completion: nil)
+                        self?.delegate?.fetchData()
                     }
                 }
             }

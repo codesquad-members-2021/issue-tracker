@@ -44,7 +44,7 @@ class IssueFilterViewController: UIViewController {
     private func cancelButtonTapped() {
         dismiss(animated: true)
     }
-    
+
     @objc
     private func saveButtonTapped() {
         dismiss(animated: true)
