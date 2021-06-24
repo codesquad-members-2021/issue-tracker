@@ -1,17 +1,26 @@
 import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
+import { assigneeCategoryState } from "RecoilStore/Atoms";
+import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
 const Assignee = () => {
+	const assigneeData = useRecoilValue(assigneeCategoryState);
+	console.log(assigneeData);
 	//리코일(선택된 유저)
+	//객체형태로, 유저의 id, name, img를 저장한 뒤 map을 돌린다.
+	// useEffect(() => {}, [assigneeData]);
 	return (
-		<ContentsContainer>
-			<ImgWrapper size="44px">
-				<img
-					src="https://avatars.githubusercontent.com/u/56783350?v=4"
-					alt="유저이름"
-				/>
-			</ImgWrapper>
-			<ContentsText>선택된 유저이름 넣기</ContentsText>
-		</ContentsContainer>
+		<>
+			{assigneeData &&
+				assigneeData.map((assignee, idx) => (
+					<ContentsContainer key={`assignee=${idx}`}>
+						<ImgWrapper size="44px">
+							<img src={assignee.imageUrl} alt={assignee.githubId} />
+						</ImgWrapper>
+						<ContentsText>{assignee.githubId}</ContentsText>
+					</ContentsContainer>
+				))}
+		</>
 	);
 };
 

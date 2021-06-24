@@ -3,11 +3,75 @@ import { ImgWrapper } from "styles/StyledLayout";
 import getCategoryText from "util/getCategoryText.js";
 import LabelBadge from "../LabelBadge.jsx";
 import { CATEGORY } from "data";
+import {
+	categorySelector,
+	assigneeCategoryState,
+	labelCategoryState,
+	milestoneCategoryState,
+} from "RecoilStore/Atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
 const IssueCategoryModal = ({ category, data }) => {
-	const handleChecked = e => {
-		console.log(e.target.value);
-		console.log(e.target.checked);
+	const [categoryState, setCategorySelector] = useRecoilState(categorySelector);
+	const [assigneeCategory, setAssigneeCategory] = useRecoilState(
+		assigneeCategoryState
+	);
+	const [labelCategory, setLabelCategory] = useRecoilState(labelCategoryState);
+	const [milestoneCategory, setMilestoneCategory] = useRecoilState(
+		milestoneCategoryState
+	);
+	//아래 코드는 Set + recoil selector 조합으로 리팩토링 필요!!!-----중복코드
+	const handleCheckAssignee = e => {
+		const targetId = e.target.value;
+		const targetData = data.filter(item => item.id === targetId)[0];
+
+		if (!e.target.checked) {
+			const newAssigneeCategory = assigneeCategory.filter(
+				x => x.id !== targetId
+			);
+			setAssigneeCategory(newAssigneeCategory);
+		}
+		if (assigneeCategory.every(x => x.id !== targetId)) {
+			setCategorySelector({
+				category: category,
+				payload: targetData,
+			});
+		}
 	};
+
+	const handleCheckLabel = e => {
+		const targetId = e.target.value;
+		const targetData = data.filter(item => item.id === targetId)[0];
+
+		if (!e.target.checked) {
+			const newLabelCategory = labelCategory.filter(x => x.id !== targetId);
+			setLabelCategory(newLabelCategory);
+		}
+		if (labelCategory.every(x => x.id !== targetId)) {
+			setCategorySelector({
+				category: category,
+				payload: targetData,
+			});
+		}
+	};
+	const handleCheckMilestone = e => {
+		const targetId = e.target.value;
+		const targetData = data.filter(item => item.id === targetId)[0];
+
+		if (!e.target.checked) {
+			const newMilestoneCategory = milestoneCategory.filter(
+				x => x.id !== targetId
+			);
+			setMilestoneCategory(newMilestoneCategory);
+		}
+		if (milestoneCategory.every(x => x.id !== targetId)) {
+			setCategorySelector({
+				category: category,
+				payload: targetData,
+			});
+		}
+	};
+	//------------------------여기까지 중복 코드--------------
+
 	const getModalContents = () => {
 		switch (category) {
 			case CATEGORY.ASSIGNEE:
@@ -22,8 +86,8 @@ const IssueCategoryModal = ({ category, data }) => {
 						<input
 							type="checkbox"
 							value={user.id}
-							onChange={handleChecked}
-						></input>
+							onChange={handleCheckAssignee}
+						/>
 					</Row>
 				));
 				return assigneeComponent;
@@ -37,7 +101,11 @@ const IssueCategoryModal = ({ category, data }) => {
 								backgroundColor={label.colors.backgroundColor}
 							/>
 						</Contents>
-						<input type="checkbox" value={label.id}></input>
+						<input
+							type="checkbox"
+							value={label.id}
+							onChange={handleCheckLabel}
+						/>
 					</Row>
 				));
 				return labelComponent;
@@ -46,7 +114,11 @@ const IssueCategoryModal = ({ category, data }) => {
 				const milestoneComponent = data.map((milestone, idx) => (
 					<Row key={`${CATEGORY.MILESTONE}-${idx}`}>
 						<Contents>{milestone.title}</Contents>
-						<input type="checkbox" value={milestone.id}></input>
+						<input
+							type="checkbox"
+							value={milestone.id}
+							onChange={handleCheckMilestone}
+						/>
 					</Row>
 				));
 				return milestoneComponent;

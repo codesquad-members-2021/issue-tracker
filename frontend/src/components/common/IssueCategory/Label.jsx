@@ -1,15 +1,24 @@
 import styled from "styled-components";
 import LabelBadge from "components/common/LabelBadge";
-const Label = ({}) => {
+import { labelCategoryState } from "RecoilStore/Atoms";
+import { useRecoilValue } from "recoil";
+const Label = () => {
 	//리코일(선택된 라벨)
+	const labelData = useRecoilValue(labelCategoryState);
+	console.log("labelData", labelData);
 	return (
-		<ContentsContainer>
-			<LabelBadge
-				text={"label.name"}
-				fontColor={"white"}
-				backgroundColor={"black"}
-			/>
-		</ContentsContainer>
+		<>
+			{labelData &&
+				labelData.map((label, idx) => (
+					<ContentsContainer key={`label-${idx}`}>
+						<LabelBadge
+							text={label.name}
+							fontColor={"white"}
+							backgroundColor={"black"}
+						/>
+					</ContentsContainer>
+				))}
+		</>
 	);
 };
 
