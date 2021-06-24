@@ -31,6 +31,5 @@ export const useFetch = (url: string, options: any) => {
     };
     fetchData();
   }, [query]);
-  console.log(response);
   return { response, error };
 };
