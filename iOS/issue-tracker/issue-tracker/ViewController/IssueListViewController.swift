@@ -15,6 +15,13 @@ class IssueListViewController: UIViewController {
         return searchController
     }()
     
+    private var isFiltering: Bool {
+        let searchController = self.navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
@@ -68,6 +75,7 @@ class IssueListViewController: UIViewController {
         let micImage = UIImage(systemName: "mic.fill")
         searchController.searchBar.setImage(micImage, for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
+        searchController.searchResultsUpdater = self
     }
     
     private func configureFilterButton() {
@@ -147,14 +155,15 @@ class IssueListViewController: UIViewController {
 extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return issueListViewModel.getIssueCount()
+        return issueListViewModel.getIssueCount(isFiltering: isFiltering)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier, for: indexPath) as? IssueTableViewCell else {
             return UITableViewCell()            
         }
-        cell.configure(issue: issueListViewModel.getIssue(indexPath: indexPath))
+        
+        cell.configure(issue: issueListViewModel.getIssue(indexPath: indexPath, isFiltering: isFiltering))
         return cell
     }
     
@@ -162,6 +171,18 @@ extension IssueListViewController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = deleteAction(at: indexPath)
         let closeAction = closeAction(at: indexPath)
         return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
+    }
+    
+}
+
+extension IssueListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        issueListViewModel.filterIssueList(with: text)
+        issueTableView.reloadData()
     }
     
 }

@@ -4,11 +4,13 @@ import Combine
 class IssueListViewModel {
     
     @Published private var issueList: IssueList
+    private var filteredIssueList: IssueList
     private let issueListUseCase: IssueListUseCase
     private var subscriptions: Set<AnyCancellable>
 
     init() {
         self.issueList = IssueList(issues: [])
+        self.filteredIssueList = IssueList(issues: [])
         self.issueListUseCase = IssueListUseCase()
         self.subscriptions = Set<AnyCancellable>()
     }
@@ -24,19 +26,22 @@ class IssueListViewModel {
         }
     }
     
-    // issueList를 넘기는 부분 수정하기
     func didUpdateIssueList() -> AnyPublisher<IssueList, Never> {
         return $issueList
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
-    func getIssueCount() -> Int {
-        return issueList.issues.count
+    func getIssueCount(isFiltering: Bool) -> Int {
+        return isFiltering ? filteredIssueList.issues.count : issueList.issues.count
     }
     
-    func getIssue(indexPath: IndexPath) -> Issue {
-        return issueList.issues[indexPath.row]
+    func getIssue(indexPath: IndexPath, isFiltering: Bool) -> Issue {
+        return isFiltering ? filteredIssueList.issues[indexPath.row] : issueList.issues[indexPath.row]
+    }
+    
+    func getFilteredIssue(indexPath: IndexPath) -> Issue {
+        return filteredIssueList.issues[indexPath.row]
     }
     
     func delete(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
@@ -52,4 +57,9 @@ class IssueListViewModel {
             completion(result)
         }
     }
+    
+    func filterIssueList(with title: String) {
+        self.filteredIssueList.issues = self.issueList.issues.filter({ $0.title.localizedCaseInsensitiveContains(title) })
+    }
+    
 }
