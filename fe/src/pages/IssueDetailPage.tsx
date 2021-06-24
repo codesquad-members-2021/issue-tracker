@@ -2,7 +2,11 @@ import { Divider } from '@material-ui/core';
 import IssueDetailBody from 'components/issue-detail/IssueDetailBody';
 import IssueDetailHeader from 'components/issue-detail/IssueDetailHeader';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { detailIssueAuthorIdAtom, issueDetailQuery } from 'store';
+import {
+  detailIssueAuthorIdAtom,
+  issueDetailQuery,
+} from 'stores/detailIssueStore';
+
 import styled from 'styled-components';
 
 const IssueDetailPage = () => {

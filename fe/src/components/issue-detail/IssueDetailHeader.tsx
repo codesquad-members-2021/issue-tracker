@@ -4,7 +4,7 @@ import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as CloseSvg } from 'icons/closeIssue.svg';
 import { ReactComponent as OpenSvg } from 'icons/openIssue.svg';
 import { Button } from '@material-ui/core';
-import { issueDetailQuery } from 'store';
+import { issueDetailQuery } from 'stores/detailIssueStore';
 import { useRecoilValue } from 'recoil';
 
 const IssueDetailHeader = () => {

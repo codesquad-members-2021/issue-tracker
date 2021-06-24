@@ -42,8 +42,10 @@ const StyledCreateButton = styled(Button)<{ background: boolean }>`
   margin-left: 1rem;
   &:hover {
     ${({ theme, background }) => {
-      if (background) return `stroke: ${theme.color.darkBlue}; color: ${theme.color.darkBlue};`;
+      if (background)
+        return `stroke: ${theme.color.darkBlue}; color: ${theme.color.darkBlue};`;
       else return `background-color: ${theme.color.darkBlue};`;
     }}
     border: 3px solid ${({ theme }) => theme.color.darkBlue};
+  }
 `;

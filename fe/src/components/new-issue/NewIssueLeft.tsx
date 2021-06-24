@@ -1,9 +1,15 @@
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CommentTextarea from 'components/common/CommentTextarea';
 import IssueTitleInput from 'components/common/IssueTitleInput';
+import { useRecoilState } from 'recoil';
+import { newIssueDescriptionAtom } from 'store';
 import styled from 'styled-components';
 
 const NewIssueLeft = () => {
+  const [newIssueDescription, setNewIssueDescription] = useRecoilState(
+    newIssueDescriptionAtom
+  );
+
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>
@@ -11,7 +17,10 @@ const NewIssueLeft = () => {
         <IssueTitleInput />
       </NewIssueTitle>
       <StyledCommentInput>
-        <CommentTextarea />
+        <CommentTextarea
+          description={newIssueDescription}
+          setDescription={setNewIssueDescription}
+        />
       </StyledCommentInput>
     </StyledNewIssueLeft>
   );

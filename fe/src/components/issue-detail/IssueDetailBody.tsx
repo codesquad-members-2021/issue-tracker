@@ -3,20 +3,28 @@ import AuthorAvatar from 'components/common/AuthorAvatar';
 import Comment from 'components/issue-detail/Comment';
 import styled from 'styled-components';
 import CommentTextarea from 'components/common/CommentTextarea';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { clickedIssueIdAtom, decodedUserDataAtom } from 'store';
+import { CommentType } from 'types/issueType';
+import CreateButton from 'components/buttons/CreateButton';
+import { ReactComponent as PlusSvg } from 'icons/plus.svg';
 import {
+  commentDesctiptionAtom,
   commentsQuery,
-  decodedUserDataAtom,
   detailIssueAuthorIdAtom,
   issueDetailQuery,
-} from 'store';
-import { CommentType } from 'types/issueType';
+} from 'stores/detailIssueStore';
+import axios from 'axios';
 
 const IssueDetailBody = () => {
+  const clickedIssueId = useRecoilValue(clickedIssueIdAtom);
   const issueDetailData = useRecoilValue(issueDetailQuery);
   const commentsList = useRecoilValue(commentsQuery); // 코멘트 데이터
   const issueAuthorId = useRecoilValue(detailIssueAuthorIdAtom);
   const loginUser = useRecoilValue(decodedUserDataAtom);
+  const [commentDesctiption, setCommentDesctiption] = useRecoilState(
+    commentDesctiptionAtom
+  );
 
   const issueDescription = {
     // 코멘트처럼 생겼지만 사실 이슈의 본문
@@ -28,6 +36,23 @@ const IssueDetailBody = () => {
     },
     description: issueDetailData.description,
     createdTime: issueDetailData.createdTime,
+  };
+
+  const newCommentHandler = () => {
+    const token = localStorage.getItem('jwt');
+    (async function () {
+      axios.post(
+        `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}/comments`,
+        {
+          description: commentDesctiption,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    })();
   };
 
   return (
@@ -45,12 +70,25 @@ const IssueDetailBody = () => {
               <Comment key={commentData.id} commentData={commentData} />
             ))}
         </Comments>
+
         <NewCommentWrapper display="flex">
-          <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
-          <Spacer />
-          <CommentTextarea />
+          <NewCommentInputArea>
+            <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
+            <Spacer />
+            <CommentTextarea
+              description={commentDesctiption}
+              setDescription={setCommentDesctiption}
+            />
+          </NewCommentInputArea>
+
+          <NewCommentButtonArea>
+            <CreateButton onClick={newCommentHandler} icon={<PlusIcon />}>
+              코멘트 작성
+            </CreateButton>
+          </NewCommentButtonArea>
         </NewCommentWrapper>
       </CommentArea>
+
       <AssignArea></AssignArea>
     </Box>
   );
@@ -72,16 +110,35 @@ const Comments = styled.ul`
 
 const NewCommentWrapper = styled(Box)`
   margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Spacer = styled.div`
   width: 1rem;
 `;
 
+const NewCommentInputArea = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+`;
+
+const NewCommentButtonArea = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const AssignArea = styled.section`
   width: 30%;
   height: 400px;
   margin-left: 2rem;
-  background-color: red;
+  background-color: #b1b1b1;
 `;
+
+const PlusIcon = styled(PlusSvg)`
+  path {
+    stroke: ${({ theme }) => theme.color.grayscale.offWhite};
+  }
+`;
+
 export default IssueDetailBody;

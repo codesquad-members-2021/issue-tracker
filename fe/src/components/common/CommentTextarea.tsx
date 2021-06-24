@@ -1,20 +1,45 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
+import { Box } from '@material-ui/core';
+import { ReactComponent as FileUploadIconSvg } from 'icons/file-upload.svg';
+import { SetterOrUpdater } from 'recoil';
 
-const CommentTextarea = () => {
-  const [text, setText] = useState('');
+interface CommentTextareaProps {
+  description: string;
+  setDescription: SetterOrUpdater<string>;
+}
+
+const CommentTextarea = ({
+  description,
+  setDescription,
+}: CommentTextareaProps) => {
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setText(e.target.value);
+    setDescription(e.target.value);
 
   return (
-    <StyledCommentTextarea>
-      <CustomTextField onChange={handleChange} />
-      <Label aria-checked={Boolean(text)}>코멘트를 입력하세요</Label>
-    </StyledCommentTextarea>
+    <Wrapper>
+      <StyledCommentTextarea>
+        <CustomTextField onChange={handleChange} />
+        <Label aria-checked={Boolean(description)}>코멘트를 입력하세요</Label>
+      </StyledCommentTextarea>
+      <FileUploadArea>
+        <Box display="flex" alignItems="center">
+          <FileUploadIconSvg />
+          <span>파일 첨부하기</span>
+        </Box>
+      </FileUploadArea>
+    </Wrapper>
   );
 };
 
 export default CommentTextarea;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 const StyledCommentTextarea = styled.div`
   width: 100%;
   position: relative;
@@ -38,13 +63,14 @@ const CustomTextField = styled.textarea`
   box-sizing: border-box;
   width: 100%;
   height: 18rem;
-  background-color: rgba(0, 0, 0, 0.09);
+  background-color: ${({ theme }) => theme.color.grayscale.inputBG};
   transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
   padding: 2rem 2rem;
   outline-style: none;
   border: transparent;
+  border-bottom: 1px dashed ${({ theme }) => theme.color.grayscale.line};
   resize: vertical;
   &:focus {
     background-color: ${({ theme }) => theme.color.grayscale.offWhite};
@@ -52,5 +78,25 @@ const CustomTextField = styled.textarea`
   }
   &:focus + label {
     transform: translate(-28px, -20px) scale(0.6);
+  }
+`;
+
+const FileUploadArea = styled.div`
+  display: flex;
+  height: 3.25rem;
+  background-color: ${({ theme }) => theme.color.grayscale.inputBG};
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding-left: 2rem;
+
+  span {
+    margin-left: 0.5rem;
+    font-size: ${({ theme }) => theme.fontSize.S};
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+    color: ${({ theme }) => theme.color.grayscale.label};
+  }
+  span:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.grayscale.body};
   }
 `;
