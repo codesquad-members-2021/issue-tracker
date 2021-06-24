@@ -11,13 +11,13 @@ import { fetchWithAuth } from '@utils/fetchWithAuth';
 import {
   isInputtedTitleAtom,
   isClickedCompleteBtnAtom,
-  newIssueContentsAtom,
+  newIssueTitleAtom,
 } from '@store/atoms/newIssue';
 import { getNewIssueBody } from '@store/selectors/newIssue';
 
 function ButtonBox() {
   const isInputtedTitle = useRecoilValue(isInputtedTitleAtom);
-  const newIssueContents = useRecoilValue(newIssueContentsAtom);
+  const newIssueTitle = useRecoilValue(newIssueTitleAtom);
   const newIssueHeaderBody = useRecoilValue(getNewIssueBody);
   const [isClickedCompleteBtn, setIsClickedCompleteBtn] = useRecoilState(
     isClickedCompleteBtnAtom
@@ -39,7 +39,7 @@ function ButtonBox() {
       }
     };
     postIssue();
-  }, [newIssueContents]);
+  }, [newIssueTitle]);
 
   return (
     <ButtonBoxWrap>
