@@ -32,7 +32,7 @@ const Comment = ({ commentData }: { commentData: CommentType }) => {
                 <span>작성자</span>
               </IssueAuthorLabel>
             )}
-            {loginUser && loginUser.id === id && (
+            {loginUser && loginUser.id === author.id && (
               <Button startIcon={<EditIcon />}>편집</Button>
             )}
             <EmojiButton>
