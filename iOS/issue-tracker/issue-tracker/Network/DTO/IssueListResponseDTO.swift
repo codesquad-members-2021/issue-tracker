@@ -60,6 +60,7 @@ struct LabelDTO: Decodable {
     
     let id: Int
     let title: String
+    let content: String?
     let color: String
     
     func toDomain() -> Label {

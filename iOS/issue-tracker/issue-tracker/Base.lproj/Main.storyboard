@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="80" y="108"/>
         </scene>
-        <!--Label View Controller-->
+        <!--Label List View Controller-->
         <scene sceneID="exm-7W-pat">
             <objects>
-                <viewController storyboardIdentifier="LabelViewController" id="T0A-ww-OXq" customClass="LabelViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LabelListViewController" id="T0A-ww-OXq" customClass="LabelListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3U8-HH-buH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

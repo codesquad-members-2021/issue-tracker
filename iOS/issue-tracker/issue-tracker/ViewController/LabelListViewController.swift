@@ -1,14 +1,26 @@
 import UIKit
+import Combine
 
-class LabelViewController: UIViewController {
+class LabelListViewController: UIViewController {
 
     @IBOutlet weak var labelTableView: UITableView!
+    private let labelListViewModel = LabelListViewModel()
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationTitle()
         configureAddButton()
         labelTableView.register(LabelTableViewCell.nib, forCellReuseIdentifier: LabelTableViewCell.identifier)
+        bind()
+    }
+    
+    private func bind() {
+        labelListViewModel.didUpdateIssueList()
+            .sink { [weak self] _ in
+                self?.labelTableView.reloadData()
+            }.store(in: &subscriptions)
+        labelListViewModel.fetchLabelList()
     }
     
     private func configureNavigationTitle() {
@@ -34,16 +46,18 @@ class LabelViewController: UIViewController {
     
 }
 
-extension LabelViewController: UITableViewDataSource, UITableViewDelegate {
+extension LabelListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return labelListViewModel.getDetailLabelCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier, for: indexPath) as? LabelTableViewCell else {
             return UITableViewCell()
         }
+        
+        cell.configure(detailLabel: labelListViewModel.getDetailLabel(indexPath: indexPath))
         return cell
     }
     

@@ -28,10 +28,14 @@
 		BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3730266F539400B51184 /* IssueListViewController.swift */; };
 		BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */; };
 		BD1D3735266F5D9800B51184 /* IssueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */; };
+		BD1F86F62684C424005A6FA8 /* LabelListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1F86F52684C424005A6FA8 /* LabelListResponseDTO.swift */; };
+		BD1F86F82684C56E005A6FA8 /* LabelListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1F86F72684C56E005A6FA8 /* LabelListUseCase.swift */; };
+		BD1F86FA2684C6D5005A6FA8 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1F86F92684C6D5005A6FA8 /* LabelList.swift */; };
+		BD1F86FC2684C87E005A6FA8 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1F86FB2684C87E005A6FA8 /* LabelListViewModel.swift */; };
 		BD6AF8C7266F64D200ADBCDE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */; };
 		BD920F122672583600EDD555 /* IssueSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD920F112672583600EDD555 /* IssueSelectionViewController.swift */; };
 		BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF61267315C9005EE147 /* IssueAdditionViewController.swift */; };
-		BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF6326733EEC005EE147 /* LabelViewController.swift */; };
+		BDCEAF6426733EEC005EE147 /* LabelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF6326733EEC005EE147 /* LabelListViewController.swift */; };
 		BDCEAF6726733F8F005EE147 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCEAF6526733F8F005EE147 /* LabelTableViewCell.swift */; };
 		BDCEAF6826733F8F005EE147 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDCEAF6626733F8F005EE147 /* LabelTableViewCell.xib */; };
 		CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */; };
@@ -109,10 +113,14 @@
 		BD1D3730266F539400B51184 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		BD1D3732266F5D9800B51184 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		BD1D3733266F5D9800B51184 /* IssueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueTableViewCell.xib; sourceTree = "<group>"; };
+		BD1F86F52684C424005A6FA8 /* LabelListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListResponseDTO.swift; sourceTree = "<group>"; };
+		BD1F86F72684C56E005A6FA8 /* LabelListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListUseCase.swift; sourceTree = "<group>"; };
+		BD1F86F92684C6D5005A6FA8 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
+		BD1F86FB2684C87E005A6FA8 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		BD6AF8C6266F64D200ADBCDE /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BD920F112672583600EDD555 /* IssueSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueSelectionViewController.swift; sourceTree = "<group>"; };
 		BDCEAF61267315C9005EE147 /* IssueAdditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAdditionViewController.swift; sourceTree = "<group>"; };
-		BDCEAF6326733EEC005EE147 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		BDCEAF6326733EEC005EE147 /* LabelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewController.swift; sourceTree = "<group>"; };
 		BDCEAF6526733F8F005EE147 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		BDCEAF6626733F8F005EE147 /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
 		BE8239AFCA4C0E7723B72656 /* Pods-issue-tracker-issue-trackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-issue-tracker-issue-trackerUITests/Pods-issue-tracker-issue-trackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -284,7 +292,7 @@
 				CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */,
 				BD920F112672583600EDD555 /* IssueSelectionViewController.swift */,
 				BDCEAF61267315C9005EE147 /* IssueAdditionViewController.swift */,
-				BDCEAF6326733EEC005EE147 /* LabelViewController.swift */,
+				BDCEAF6326733EEC005EE147 /* LabelListViewController.swift */,
 				CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */,
 			);
 			path = ViewController;
@@ -323,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				CE976390268213A60025CEC3 /* IssueList.swift */,
+				BD1F86F92684C6D5005A6FA8 /* LabelList.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 				CE976389268208760025CEC3 /* IssueListResponseDTO.swift */,
 				CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */,
 				CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */,
+				BD1F86F52684C424005A6FA8 /* LabelListResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -345,6 +355,7 @@
 				CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */,
 				CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */,
 				CE97638B26820BC70025CEC3 /* IssueListUseCase.swift */,
+				BD1F86F72684C56E005A6FA8 /* LabelListUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -367,6 +378,7 @@
 			children = (
 				CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */,
 				CE81A5DF268242D100D71888 /* IssueListViewModel.swift */,
+				BD1F86FB2684C87E005A6FA8 /* LabelListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -595,14 +607,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */,
-				BDCEAF6426733EEC005EE147 /* LabelViewController.swift in Sources */,
+				BDCEAF6426733EEC005EE147 /* LabelListViewController.swift in Sources */,
+				BD1F86F62684C424005A6FA8 /* LabelListResponseDTO.swift in Sources */,
 				CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */,
 				CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */,
 				CE81A5E326824A8700D71888 /* UIColor.swift in Sources */,
 				CE97638A268208760025CEC3 /* IssueListResponseDTO.swift in Sources */,
 				CE6DEF82268345BC00D6121C /* ResponseBodyDTO.swift in Sources */,
+				BD1F86FA2684C6D5005A6FA8 /* LabelList.swift in Sources */,
 				BD08146B2681C76F00C3D6D7 /* JWTManageable.swift in Sources */,
 				BD1D3734266F5D9800B51184 /* IssueTableViewCell.swift in Sources */,
+				BD1F86FC2684C87E005A6FA8 /* LabelListViewModel.swift in Sources */,
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
@@ -625,6 +640,7 @@
 				CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */,
 				CEA84DF1267B079C0006CC2E /* NetworkManager.swift in Sources */,
 				BD1D36F7266E428700B51184 /* SceneDelegate.swift in Sources */,
+				BD1F86F82684C56E005A6FA8 /* LabelListUseCase.swift in Sources */,
 				BD920F122672583600EDD555 /* IssueSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

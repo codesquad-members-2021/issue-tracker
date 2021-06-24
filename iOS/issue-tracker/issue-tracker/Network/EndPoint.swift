@@ -13,6 +13,7 @@ enum Path: String {
     case user = "/user"
     case issues = "/issues"
     case close = "/close"
+    case label = "/labels"
 }
 
 struct EndPoint {
