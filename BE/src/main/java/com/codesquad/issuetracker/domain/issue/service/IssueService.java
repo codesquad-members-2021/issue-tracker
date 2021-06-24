@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
@@ -51,58 +53,33 @@ public class IssueService {
     }
 
     public List<IssueResponse> getOpenedIssues() {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByStatusTrue();
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByStatusTrue());
     }
 
     public List<IssueResponse> getClosedIssues() {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByStatusFalse();
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByStatusFalse());
     }
 
     public List<IssueResponse> getIssuesByTitle(String title) {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByTitle(title);
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByTitle(title));
     }
 
     public List<IssueResponse> getIssuesByAuthor(Long authorId) {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByAuthor(authorId);
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByAuthor(authorId));
     }
 
     public List<IssueResponse> getIssuesByAssignee(Long userId) {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByAssignee(userId);
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByAssignee(userId));
     }
 
     public List<IssueResponse> getIssuesByComment(Long userId) {
-        List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepositorySupport.findByCommentUserId(userId);
-        for (Issue issue : issues) {
-            result.add(issueToIssueResponse(issue));
-        }
-        return result;
+        return convertToResponse.apply(issueRepositorySupport.findByCommentUserId(userId));
     }
+
+    private Function<List<Issue>, List<IssueResponse>> convertToResponse =
+            issues -> issues.stream()
+                    .map(this::issueToIssueResponse)
+                    .collect(Collectors.toList());
 
     public IssueResponse getIssue(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
