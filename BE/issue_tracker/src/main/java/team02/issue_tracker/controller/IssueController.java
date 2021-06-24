@@ -121,14 +121,4 @@ public class IssueController {
         issueService.addComment(issueId, userId, commentRequest);
         return ApiResult.ok();
     }
-
-    @LoginRequired
-    @GetMapping(params = {"is_open", "filter", "assignee", "label", "milestone", "writer"})
-    public ApiResult<List<IssueResponse>> searchIssues(@UserId Long userId, @Nullable @RequestParam("is_open") Boolean isOpen, @Nullable String filter,
-                                                       @Nullable @RequestParam("assignee") Long assigneeId, @Nullable @RequestParam("label") Long labelId,
-                                                       @Nullable @RequestParam("milestone") Long milestoneId, @Nullable @RequestParam("writer") Long writerId) {
-
-        List<IssueResponse> issueResponses = issueService.getFilteredIssues(userId, isOpen, filter, assigneeId, labelId, milestoneId, writerId);
-        return ApiResult.success(issueResponses);
-    }
 }

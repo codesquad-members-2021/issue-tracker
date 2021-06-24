@@ -20,7 +20,7 @@ import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 public class GoogleLoginService {
 
     private final String ACCESS_TOKEN_URI = "https://oauth2.googleapis.com/token";
-    private final String REDIRECT_URI = "http://localhost:8080/api/login/google";
+    private final String REDIRECT_URI = "http://localhost:3000/login/google";
     private final String GRANT_TYPE = "authorization_code";
     private final String USER_INFO_URI = "https://www.googleapis.com/oauth2/v1/userinfo";
 
