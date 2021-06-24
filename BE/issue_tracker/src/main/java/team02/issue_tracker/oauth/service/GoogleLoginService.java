@@ -9,7 +9,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import team02.issue_tracker.oauth.dto.AccessToken;
-import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.dto.google.GoogleAccessToken;
 import team02.issue_tracker.oauth.dto.google.GoogleUserProfile;
 import team02.issue_tracker.oauth.dto.SocialProfile;
@@ -18,7 +17,7 @@ import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
-public class GoogleLoginService implements OAuthService {
+public class GoogleLoginService {
 
     private final String ACCESS_TOKEN_URI = "https://oauth2.googleapis.com/token";
     private final String REDIRECT_URI = "http://localhost:8080/api/login/google";
@@ -37,8 +36,12 @@ public class GoogleLoginService implements OAuthService {
         this.webClient = webClient;
     }
 
-    @Override
-    public AccessToken accessToken(final String code, final SocialLogin oauthResource) {
+    public SocialProfile requestUserProfile(final String code) {
+        AccessToken accessToken = getAccessToken(code);
+        return getUserProfile(accessToken);
+    }
+
+    private AccessToken getAccessToken(final String code) {
         MultiValueMap<String, String> fieldsForRequest = new LinkedMultiValueMap<>();
         fieldsForRequest.add("client_id", clientId);
         fieldsForRequest.add("client_secret", clientSecret);
@@ -58,8 +61,7 @@ public class GoogleLoginService implements OAuthService {
         return googleAccessTokenResponse;
     }
 
-    @Override
-    public SocialProfile userProfile(final AccessToken accessToken) {
+    private SocialProfile getUserProfile(final AccessToken accessToken) {
         GoogleUserProfile googleUserProfile = webClient.get()
                 .uri(USER_INFO_URI)
                 .header(HttpHeaders.AUTHORIZATION,

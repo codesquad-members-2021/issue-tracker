@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriBuilder;
 import team02.issue_tracker.oauth.dto.AccessToken;
-import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.dto.SocialProfile;
 import team02.issue_tracker.oauth.dto.naver.NaverAccessToken;
 import team02.issue_tracker.oauth.dto.naver.NaverUserProfile;
@@ -16,7 +14,7 @@ import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
-public class NaverLoginService implements OAuthService {
+public class NaverLoginService {
 
     private final String USER_INFO_URI = "https://openapi.naver.com/v1/nid/me";
     private final String REDIRECT_URI = "http://localhost:8080/api/login/naver";
@@ -34,8 +32,12 @@ public class NaverLoginService implements OAuthService {
         this.webClient = webClient;
     }
 
-    @Override
-    public AccessToken accessToken(String code, SocialLogin oauthResource) {
+    public SocialProfile requestUserProfile(final String code) {
+        AccessToken accessToken = getAccessToken(code);
+        return getUserProfile(accessToken);
+    }
+
+    private AccessToken getAccessToken(String code) {
         NaverAccessToken naverAccessToken = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("https")
@@ -56,8 +58,7 @@ public class NaverLoginService implements OAuthService {
         return naverAccessToken;
     }
 
-    @Override
-    public SocialProfile userProfile(AccessToken accessToken) {
+    private SocialProfile getUserProfile(AccessToken accessToken) {
         NaverUserProfile naverUserProfile = webClient.get()
                 .uri(USER_INFO_URI)
                 .header("Authorization", "Bearer " + accessToken.value())

@@ -15,7 +15,7 @@ import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
-public class GithubLoginService implements OAuthService {
+public class GithubLoginService {
 
     private final String GITHUB_WEB_REDIRECT_URI = "http://localhost:3000/login/github";
     private final String GITHUB_IOS_REDIRECT_URI = "issueTracker://login";
@@ -40,21 +40,21 @@ public class GithubLoginService implements OAuthService {
         this.webClient = webClient;
     }
 
-    @Override
-    public AccessToken accessToken(final String code, final SocialLogin oauthResource) {
-        GithubAccessTokenRequest request = null;
-        if (oauthResource == SocialLogin.GITHUB_WEB) {
-            request = accessTokenRequest(
-                    githubWebClientId, githubWebClientSecret, GITHUB_WEB_REDIRECT_URI, code);
-        } else if (oauthResource == SocialLogin.GITHUB_IOS) {
-            request = accessTokenRequest(
-                    githubIosClientId, githubIosClientSecret, GITHUB_IOS_REDIRECT_URI, code);
-        }
-        return accessToken(request, GITHUB_ACCESS_TOKEN_URI);
+    public SocialProfile requestUserProfileWeb(final String code) {
+        GithubAccessTokenRequest request = accessTokenRequest(
+                githubWebClientId, githubWebClientSecret, GITHUB_WEB_REDIRECT_URI, code);
+        AccessToken accessToken = getAccessToken(request, GITHUB_ACCESS_TOKEN_URI);
+        return getUserProfile(accessToken);
     }
 
-    // Overloading
-    public AccessToken accessToken(
+    public SocialProfile requestUserProfileIos(final String code) {
+        GithubAccessTokenRequest request = accessTokenRequest(
+                githubIosClientId, githubIosClientSecret, GITHUB_IOS_REDIRECT_URI, code);
+        AccessToken accessToken = getAccessToken(request, GITHUB_ACCESS_TOKEN_URI);
+        return getUserProfile(accessToken);
+    }
+
+    public AccessToken getAccessToken(
             final AccessTokenRequest accessTokenRequest, final String accessTokenUri) {
         GithubAccessToken accessToken = webClient.post()
                 .uri(accessTokenUri)
@@ -68,13 +68,12 @@ public class GithubLoginService implements OAuthService {
         return accessToken;
     }
 
-    @Override
-    public SocialProfile userProfile(final AccessToken accessToken) {
-        return userProfile(accessToken, GITHUB_USER_INFO_URI);
+    public SocialProfile getUserProfile(final AccessToken accessToken) {
+        return getUserProfile(accessToken, GITHUB_USER_INFO_URI);
     }
 
     // Overloading
-    public SocialProfile userProfile(final AccessToken accessToken, final String userInfoUri) {
+    public SocialProfile getUserProfile(final AccessToken accessToken, final String userInfoUri) {
         GithubUserProfile githubUserProfile = webClient.get()
                 .uri(userInfoUri)
                 .header(HttpHeaders.AUTHORIZATION

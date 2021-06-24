@@ -9,7 +9,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import team02.issue_tracker.oauth.dto.AccessToken;
-import team02.issue_tracker.oauth.dto.SocialLogin;
 import team02.issue_tracker.oauth.dto.SocialProfile;
 import team02.issue_tracker.oauth.dto.kakao.KakaoAccessToken;
 import team02.issue_tracker.oauth.dto.kakao.KakaoUserProfile;
@@ -18,7 +17,7 @@ import team02.issue_tracker.oauth.exception.InvalidUserRequestException;
 
 @Slf4j
 @Service
-public class KakaoLoginService implements OAuthService {
+public class KakaoLoginService {
 
     private final String REDIRECT_URI = "http://localhost:8080/api/login/kakao";
     private final String ACCESS_TOKEN_URI = "https://kauth.kakao.com/oauth/token";
@@ -37,8 +36,12 @@ public class KakaoLoginService implements OAuthService {
         this.webClient = webClient;
     }
 
-    @Override
-    public AccessToken accessToken(String code, SocialLogin oauthResource) {
+    public SocialProfile requestUserProfile(final String code) {
+        AccessToken accessToken = getAccessToken(code);
+        return getUserProfile(accessToken);
+    }
+
+    private AccessToken getAccessToken(String code) {
         MultiValueMap<String, String> parametersForRequest = new LinkedMultiValueMap<>();
         parametersForRequest.add("grant_type", GRANT_TYPE);
         parametersForRequest.add("client_id", clientId);
@@ -58,8 +61,7 @@ public class KakaoLoginService implements OAuthService {
         return kakaoAccessToken;
     }
 
-    @Override
-    public SocialProfile userProfile(AccessToken accessToken) {
+    private SocialProfile getUserProfile(AccessToken accessToken) {
         KakaoUserProfile kakaoUserProfile = webClient.post()
                 .uri(USER_INFO_URI)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
