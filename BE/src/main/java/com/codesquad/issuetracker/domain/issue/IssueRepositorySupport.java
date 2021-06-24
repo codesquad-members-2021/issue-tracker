@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.domain.issue;
 
+import com.querydsl.core.types.Predicate;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,37 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
     public IssueRepositorySupport(JPAQueryFactory queryFactory) {
         super(Issue.class);
         this.queryFactory = queryFactory;
+    }
+
+    public List<Issue> getFilteredIssues(IssueFilter issueFilter) {
+        JPAQuery query = queryFactory
+                .selectFrom(issue)
+                .where(getPredicate(issueFilter));
+
+        Long userId = issueFilter.getAssignee();
+        if (userId != null) {
+            query.innerJoin(assignee)
+                    .on(assignee.issueId.eq(issue.id))
+                    .where(assignee.userId.eq(userId));
+        }
+
+        userId = issueFilter.getCommenter();
+        if (userId != null) {
+            query.innerJoin(comment)
+                    .on(comment.issueId.eq(issue.id))
+                    .where(comment.user.id.eq(userId));
+        }
+
+        return query.fetch();
+
+    }
+
+    public Predicate getPredicate(IssueFilter filter) {
+        return new PredicateBuilder(issue.isNotNull())
+                .containsAnd(issue.title, filter.getTitle())
+                .isBooleanAnd(issue.status, filter.getStatus())
+                .isLongEqualAnd(issue.user.id, filter.getAuthor())
+                .build();
     }
 
     public List<Issue> findByTitle(String title) {
@@ -65,4 +98,5 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
                 .where(comment.user.id.eq(userId))
                 .fetch();
     }
+
 }
