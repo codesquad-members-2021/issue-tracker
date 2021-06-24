@@ -11,12 +11,19 @@ import { Link, useHistory } from 'react-router-dom';
 import { MouseEvent } from 'react';
 import { totalCountOfMilestone } from 'stores/milestoneStore';
 import { ReactComponent as PlusIconSvg } from 'icons/plus.svg';
-const NavbarButtons = ({ type }: { type: NavType }) => {
+const NavbarButtons = ({
+  type,
+  setPopup,
+}: {
+  type: NavType;
+  setPopup?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const MilestoneCnt = useRecoilValue(totalCountOfMilestone);
   const LabelCnt = useRecoilValue(totalCountOfLabels);
   const history = useHistory();
   const clickHandler = (event: MouseEvent) => {
     if (type === 'All') history.push('/issues/new-issue');
+    if (setPopup && type !== 'All') setPopup((popup) => !popup);
   };
   return (
     <StyledNavbarButtons>
@@ -35,22 +42,20 @@ const NavbarButtons = ({ type }: { type: NavType }) => {
           </MilestoneButton>
         </Link>
       </LabelAndMilestone>
-      <CreateButton icon={<PlusIcon/>} onClick={clickHandler}>
+      <CreateButton icon={<PlusIcon />} onClick={clickHandler}>
         {getNavButtonTitle(type)}
       </CreateButton>
     </StyledNavbarButtons>
   );
 };
 
-export default NavbarButtons; 
+export default NavbarButtons;
 
 const PlusIcon = styled(PlusIconSvg)`
   path {
     stroke: ${({ theme }) => theme.color.grayscale.offWhite};
   }
 `;
-
-
 
 const StyledNavbarButtons = styled.div`
   ${({ theme }) => theme.style.flexSpaceBetween};

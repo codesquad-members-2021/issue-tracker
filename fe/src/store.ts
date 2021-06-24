@@ -5,7 +5,7 @@ import {
   TestType,
 } from './types/storeTypes';
 import axios from 'axios';
-import { milestoneQuery } from 'stores/milestoneStore';
+import { milestoneQuery, milestoneUpdateAtom } from 'stores/milestoneStore';
 import { selector, atom } from 'recoil';
 import { LabelItemType, IssueItemType, IssuesCountType } from 'types/issueType';
 import { LabelDataType, UserDataType, IssueDataType } from 'types/storeTypes';
@@ -118,6 +118,8 @@ export const totalCountOfIssue = selector<IssuesCountType>({
 export const issuesQuery = selector<IssueItemType[]>({
   key: 'issuesQuery',
   get: async ({ get }) => {
+    get(labelUpdateAtom);
+    get(milestoneUpdateAtom);
     const token = localStorage.getItem('jwt');
     try {
       const { data } = await axios.get(

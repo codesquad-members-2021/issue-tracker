@@ -17,3 +17,16 @@ export const getTitle = (type: TitleType) =>
 
 export const getNavButtonTitle = (type: NavType) =>
   type === 'All' ? '이슈 작성' : '추가';
+
+export const labelParser = (str: string | null) => {
+  switch (str) {
+    case '레이블 이름':
+      return 'Title';
+    case '설명(선택)':
+      return 'Description';
+    case '배경색상':
+      return 'LabelColor';
+    default:
+      return 'TextColor';
+  }
+};
