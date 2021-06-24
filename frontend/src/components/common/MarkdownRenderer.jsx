@@ -1,6 +1,3 @@
-// import styled from "styled-components";
-// import ReactMarkdown from "react-markdown";
-// import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 
 const markdown = `
@@ -18,18 +15,11 @@ const markdown = `
 `;
 
 const MarkdownRenderer = ({}) => {
-	// const [value, setValue] = useState(markdown);
 	return (
 		<>
-			{/* <MDEditor value={value} onChange={setValue} /> */}
 			<MDEditor.Markdown source={markdown} />
 		</>
 	);
 };
 
 export default MarkdownRenderer;
-
-// const MarkDownStyle = styled.div`
-// 	font-size: 1rem;
-// 	line-height: 2.5rem;
-// `;
