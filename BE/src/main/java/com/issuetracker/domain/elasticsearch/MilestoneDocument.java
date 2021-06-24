@@ -25,6 +25,9 @@ public class MilestoneDocument {
     private boolean isOpen;
 
     public static MilestoneDocument of(Milestone milestone) {
+        if (milestone == null) {
+            return null;
+        }
         return MilestoneDocument.builder()
                 .id(milestone.getId())
                 .title(milestone.getTitle())

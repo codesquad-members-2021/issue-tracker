@@ -1,5 +1,7 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.milestone.MilestoneRepository;
 import com.issuetracker.exception.MilestoneNotFoundException;
@@ -22,6 +24,7 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
+    private final IssueDocumentRepository issueDocumentRepository;
 
     public MilestonesResponseDTO read(String status) {
         boolean newStatus = Status.statusToBoolean(status);
@@ -45,11 +48,15 @@ public class MilestoneService {
     public void update(Long milestoneId, MilestoneDTO newMilestoneInfo) {
         Milestone milestone = findMilestoneById(milestoneId);
         milestone.update(newMilestoneInfo);
-        milestoneRepository.save(milestone);
+        Milestone updatedMilestone = milestoneRepository.save(milestone);
+        updatedMilestone.getIssues().forEach(this::synchronizeIssue);
     }
 
     public void delete(Long milestoneId) {
         Milestone milestone = findMilestoneById(milestoneId);
+        milestone.getIssues().stream()
+                .map(Issue::deleteMilestone)
+                .forEach(this::synchronizeIssue);
         milestoneRepository.delete(milestone);
     }
 
@@ -95,5 +102,9 @@ public class MilestoneService {
 
     public long countByIsOpen(boolean isOpen) {
         return milestoneRepository.countByIsOpen(isOpen);
+    }
+
+    private void synchronizeIssue(Issue issue) {
+        issueDocumentRepository.save(IssueDocument.of(issue));
     }
 }
