@@ -10,6 +10,7 @@ import team02.issue_tracker.repository.IssueAssigneeRepository;
 import team02.issue_tracker.repository.UserRepository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,18 +37,19 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
-    public List<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
+    public Set<IssueAssignee> makeIssueAssignees(Issue issue, List<Long> assigneeIds) {
         return assigneeIds.stream()
                 .map(assigneeId -> {
                     User assignee = userRepository.findById(assigneeId).orElseThrow(UserNotFoundException::new);
                     return new IssueAssignee(issue, assignee);
-                }).collect(Collectors.toList());
+                }).collect(Collectors.toSet());
     }
 
-    public List<IssueAssignee> modifyIssueAssignees(Issue issue, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
+    public Set<IssueAssignee> modifyIssueAssignees(Issue issue, IssueAssigneeIdsRequest issueAssigneeIdsRequest) {
         deleteIssueAssignees(issue);
-        List<IssueAssignee> issueAssignees = makeIssueAssignees(issue, issueAssigneeIdsRequest.getAssigneeIds());
-        return issueAssigneeRepository.saveAll(issueAssignees);
+        Set<IssueAssignee> issueAssignees = makeIssueAssignees(issue, issueAssigneeIdsRequest.getAssigneeIds());
+        issueAssigneeRepository.saveAll(issueAssignees);
+        return issueAssignees;
     }
 
     public void deleteIssueAssignees(Issue issue) {

@@ -12,8 +12,11 @@ values (1, "백엔드 1주차 마일스톤 내용", "2021-06-01", "2021-06-15", 
 
 -- issue
 insert into issue(id, created_time, is_open, title, writer_id, milestone_id, is_deleted)
-values (1, CURRENT_TIMESTAMP, false, "이슈 제목1", 1, 1, false),
-       (2, CURRENT_TIMESTAMP, true, "이슈 제목2", 2, 1, false);
+values (1, CURRENT_TIMESTAMP, true, "이슈 제목1", 1, 1, false),
+       (2, CURRENT_TIMESTAMP, true, "이슈 제목2", 1, 1, false),
+       (3, CURRENT_TIMESTAMP, true, "이슈 제목2", 1, 2, false),
+       (4, CURRENT_TIMESTAMP, false, "이슈 제목2", 2, 2, false),
+       (5, CURRENT_TIMESTAMP, false, "이슈 제목2", 2, 3, true);
 
 -- label
 insert into label(id, title, content, color, is_deleted)
@@ -23,16 +26,27 @@ values (1, "BE", "백엔드 라벨", "#3DDCFF", false),
 
 -- issue_label
 insert into issue_label(issue_id, label_id)
-values (1, 1);
+values (1, 1),
+       (2, 1);
 
 -- issue_assignee
 insert into issue_assignee(issue_id, user_id)
-values (1, 1);
+values (1, 2),
+       (1, 1),
+       (3, 2),
+       (4, 2),
+       (5, 2);
 
 -- comment
 insert into comment(id, content, file, created_time, issue_id, writer_id, is_deleted)
-values (1, "good", "file url", CURRENT_TIMESTAMP, 1, 1, false),
-       (2, "nice", "file url", CURRENT_TIMESTAMP, 1, 2, true);
+values (1, "코멘트1", "file url", CURRENT_TIMESTAMP, 1, 1, false),
+       (2, "코멘트2", "file url", CURRENT_TIMESTAMP, 1, 1, false),
+       (3, "코멘트3", "file url", CURRENT_TIMESTAMP, 3, 1, false),
+       (4, "코멘트4", "file url", CURRENT_TIMESTAMP, 2, 1, false),
+       (5, "코멘트5", "file url", CURRENT_TIMESTAMP, 4, 1, false),
+       (6, "코멘트6", "file url", CURRENT_TIMESTAMP, 2, 1, false),
+       (7, "코멘트7", "file url", CURRENT_TIMESTAMP, 3, 1, false);
+
 
 -- emoji
 insert into emoji(id, `name`, is_deleted)

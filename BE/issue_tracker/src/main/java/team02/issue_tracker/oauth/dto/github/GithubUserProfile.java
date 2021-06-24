@@ -1,15 +1,19 @@
-package team02.issue_tracker.oauth.dto;
+package team02.issue_tracker.oauth.dto.github;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import team02.issue_tracker.domain.User;
+import team02.issue_tracker.oauth.dto.SocialLogin;
+import team02.issue_tracker.oauth.dto.SocialProfile;
 
 @ToString
+@Builder
 @Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class GithubUserProfile implements SocialProfile {
-    private Long id;
-    private String name;
+
     private String email;
     private String login;
 
@@ -24,5 +28,10 @@ public class GithubUserProfile implements SocialProfile {
                 .email(this.email)
                 .profileImage(this.avatarUrl)
                 .build();
+    }
+
+    @JsonProperty("avatar_url")
+    public String getAvatarUrl() {
+        return this.avatarUrl;
     }
 }
