@@ -25,7 +25,7 @@ class AddMilestoneViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로",
                                                                 style: .plain,
                                                                 target: self,
-                                                                action: nil)
+                                                                action: #selector(didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                                  style: .plain,
                                                                  target: self,
@@ -43,6 +43,11 @@ class AddMilestoneViewController: UIViewController {
     @objc
     private func didTapSave() {
         viewModel.post()
+    }
+    
+    @objc
+    private func didTapCancel() {
+        dismiss(animated: true)
     }
 }
 
