@@ -15,10 +15,6 @@ function SelectLabel() {
   const [errorMsg, setErrorMsg] = useState('No Error');
   const checkedLabels = useRecoilValue(checkedLabelsAtom);
 
-  const checkedLabelsInfo = checkedLabels.map((id) => {
-    if (labels !== null) return labels.find((label) => label.id === id);
-  }) as labelType[];
-
   const handleClickLabels = () => {
     fetchModal({
       path: 'labels',
@@ -26,6 +22,13 @@ function SelectLabel() {
       setErrorMsg: setErrorMsg,
     });
   };
+
+  const checkedLabelsInfo =
+    labels == null
+      ? []
+      : (checkedLabels.map((id) =>
+          labels.find((label) => label.id === id)
+        ) as labelType[]);
 
   return (
     <Wrap>
@@ -43,7 +46,7 @@ function SelectLabel() {
         <LabelModal labels={labels} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        {checkedLabelsInfo &&
+        {checkedLabelsInfo.length > 0 &&
           checkedLabelsInfo.map(({ title, color_code, font_light }) => {
             return (
               <li key={title}>
