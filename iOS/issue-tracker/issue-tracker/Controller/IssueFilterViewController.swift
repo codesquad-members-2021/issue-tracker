@@ -32,7 +32,7 @@ class IssueFilterViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                                  style: .plain,
                                                                  target: self,
-                                                                 action: nil)
+                                                                 action: #selector(saveButtonTapped))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
@@ -42,6 +42,11 @@ class IssueFilterViewController: UIViewController {
 
     @objc
     private func cancelButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    @objc
+    private func saveButtonTapped() {
         dismiss(animated: true)
     }
 }

@@ -42,6 +42,7 @@ final class IssueListViewController: UIViewController {
         bindSelectMode()
         bindIssueToolBar()
         issueListViewModel.fetchIssueList()
+        view.backgroundColor = .systemGroupedBackground
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +55,7 @@ final class IssueListViewController: UIViewController {
             .bind(to: issueTableView.rx.items) { tableView, _, issue in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
                 cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, issueLabels: issue.labels)
+                cell.backgroundColor = .systemGroupedBackground
             return cell
         }
         .disposed(by: bag)
@@ -175,6 +177,7 @@ final class IssueListViewController: UIViewController {
         navigationItem.title = "이슈 선택"
         navigationItem.searchController = nil
         tabBarController?.tabBar.isHidden = true
+        issueTableView.tableFooterView?.isHidden = true
         view.addSubview(issueToolbar)
         setupToolbarAutoulayout()
     }
@@ -189,6 +192,7 @@ final class IssueListViewController: UIViewController {
         setupNavigationItem()
         tabBarController?.tabBar.isHidden = false
         issueToolbar.removeFromSuperview()
+        issueTableView.tableFooterView?.isHidden = false
         guard let indexPath = issueTableView.indexPathsForSelectedRows else { return }
         for i in indexPath {
             issueTableView.deselectRow(at: i, animated: false)
@@ -224,6 +228,7 @@ final class IssueListViewController: UIViewController {
     }
 
     private func setupIssueTableView() {
+        issueTableView.backgroundColor = .systemGroupedBackground
         issueTableView.register(IssueTableViewCell.self, forCellReuseIdentifier: IssueTableViewCell.identifier)
         issueTableView.allowsMultipleSelection = true
         issueTableView.delegate = self

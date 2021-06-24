@@ -27,7 +27,7 @@ class IssueListViewModel {
     }
 
     func deleteIssue(id: Int) {
-        networkManager.deleteRequest(url: Endpoint(path: .issue).url(id: 1)!) { result in
+        networkManager.deleteRequest(url: Endpoint(path: .issue).url(id: id)!) { result in
             switch result {
             case .success:
                 CustomAlertView.shared.setUpAlertView(title: "성공", message: "이슈가 성공적으로 삭제되었습니다.", buttonTitle: "확인", alertType: .success, buttonHandler: {
