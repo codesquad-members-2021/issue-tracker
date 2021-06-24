@@ -32,8 +32,8 @@ function ButtonBox() {
     const postIssue = async () => {
       try {
         await fetchWithAuth(`${baseURL}/issues`, '🤯이슈 생성 에러', header);
-        history.push('/issues');
         setIsClickedCompleteBtn(false);
+        history.push('/issues');
       } catch (error) {
         console.error(error);
       }
@@ -43,7 +43,7 @@ function ButtonBox() {
 
   return (
     <ButtonBoxWrap>
-      <Link to="issues">
+      <Link to="/issues">
         <CancelBtn>
           <CancelIcon className="cancel_icon" />
           <span>작성취소</span>
