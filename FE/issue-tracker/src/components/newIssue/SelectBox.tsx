@@ -1,10 +1,24 @@
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 
 import SelectAssignee from './select/SelectAssignee';
 import SelectLabel from './select/SelectLabel';
 import SelectMilestone from './select/SelectMilestone';
+import {
+  checkedAssigneesAtom,
+  checkedLabelsAtom,
+  checkedMilestoneAtom,
+} from '@store/atoms/checkedThings';
 
 function SelectBox() {
+  const setCheckedAssignees = useSetRecoilState(checkedAssigneesAtom);
+  const setCheckedLabels = useSetRecoilState(checkedLabelsAtom);
+  const setCheckedMilestone = useSetRecoilState(checkedMilestoneAtom);
+
+  setCheckedAssignees([]);
+  setCheckedLabels([]);
+  setCheckedMilestone(null);
+
   return (
     <SelectBoxWrap>
       <SelectAssignee />
