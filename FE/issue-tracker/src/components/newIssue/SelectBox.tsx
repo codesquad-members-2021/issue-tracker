@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import SelectAssignee from './select/SelectAssignee';
 import SelectLabel from './select/SelectLabel';
@@ -9,15 +10,26 @@ import {
   checkedLabelsAtom,
   checkedMilestoneAtom,
 } from '@store/atoms/checkedThings';
+import { isClickedCompleteBtnAtom } from '@store/atoms/newIssue';
 
 function SelectBox() {
   const setCheckedAssignees = useSetRecoilState(checkedAssigneesAtom);
   const setCheckedLabels = useSetRecoilState(checkedLabelsAtom);
   const setCheckedMilestone = useSetRecoilState(checkedMilestoneAtom);
+  const isClickedCompleteBtn = useRecoilValue(isClickedCompleteBtnAtom);
 
-  setCheckedAssignees([]);
-  setCheckedLabels([]);
-  setCheckedMilestone(null);
+  useEffect(() => {
+    if (!isClickedCompleteBtn) {
+      setCheckedAssignees([]);
+      setCheckedLabels([]);
+      setCheckedMilestone(null);
+    }
+  }, [
+    isClickedCompleteBtn,
+    setCheckedAssignees,
+    setCheckedLabels,
+    setCheckedMilestone,
+  ]);
 
   return (
     <SelectBoxWrap>
