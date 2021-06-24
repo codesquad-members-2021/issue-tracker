@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
 import axios from 'axios';
+import URL from '../../util/url';
 import Main from '../main/Main';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -15,11 +16,11 @@ const Oauth: React.FC<Props> = ({ history, location }) => {
 
       try {
         const response = await axios.get(
-          `http://52.78.35.48/api/login/github/web?code=${code}`
+          `${URL}/login/github/web?code=${code}`
         );
         localStorage.setItem('token', response.data.data.jwt);
 
-        axios.get('http://52.78.35.48/api/jwt', {
+        axios.get(`${URL}/jwt`, {
           headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
         });
         history.push('/main');

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://52.78.35.48/api';
+import URL from './url';
 
 interface Props {
   data: unknown;
@@ -20,16 +20,16 @@ const useMutate =
       case 'issue':
         switch (action) {
           case 'add':
-            return axios.post(`${url}/issues`, data, axiosConfig);
+            return axios.post(`${URL}/issues`, data, axiosConfig);
           case 'close':
-            return axios.post(`${url}/issues/close`, data, axiosConfig);
+            return axios.post(`${URL}/issues/close`, data, axiosConfig);
           case 'open':
-            return axios.post(`${url}/issues/open`, data, axiosConfig);
+            return axios.post(`${URL}/issues/open`, data, axiosConfig);
           case 'delete':
-            return axios.delete(`${url}/issues/${id}`, axiosConfig);
+            return axios.delete(`${URL}/issues/${id}`, axiosConfig);
           case 'editTitle':
             return axios.patch(
-              `${url}/issues/${id}/title`,
+              `${URL}/issues/${id}/title`,
               {
                 title: data,
               },
@@ -37,15 +37,15 @@ const useMutate =
             );
           case 'editAssignees':
             return axios.patch(
-              `${url}/issues/${id}/assignees`,
+              `${URL}/issues/${id}/assignees`,
               data,
               axiosConfig
             );
           case 'editLabels':
-            return axios.patch(`${url}/issues/${id}/labels`, data, axiosConfig);
+            return axios.patch(`${URL}/issues/${id}/labels`, data, axiosConfig);
           case 'editMilestones':
             return axios.patch(
-              `${url}/issues/${id}/milestones`,
+              `${URL}/issues/${id}/milestones`,
               data,
               axiosConfig
             );
@@ -54,7 +54,7 @@ const useMutate =
       case 'label':
         switch (action) {
           case 'add':
-            return axios.post(`${url}/labels`, data, axiosConfig);
+            return axios.post(`${URL}/labels`, data, axiosConfig);
         }
         return;
       case 'milestone':
@@ -65,7 +65,7 @@ const useMutate =
         switch (action) {
           case 'add':
             return axios.post(
-              `${url}/issues/${id}/comments`,
+              `${URL}/issues/${id}/comments`,
               data,
               axiosConfig
             );

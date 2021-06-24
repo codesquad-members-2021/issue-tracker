@@ -13,6 +13,7 @@ const Login = () => {
       <a href={url}>
         <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
       </a>
+      <GoogleLogin large>Google 계정으로 로그인</GoogleLogin>
       <TextInBetween sm>or</TextInBetween>
       <ManualLogin large>아이디</ManualLogin>
       <ManualLogin large>비밀번호</ManualLogin>
@@ -41,6 +42,10 @@ const LoginContainer = styled.div`
 const GitHubLogin = styled(Buttons)`
   margin-top: 50px;
   background-color: ${props => props.theme.greyscale.titleActive};
+`;
+
+const GoogleLogin = styled(Buttons)`
+  background-color: #4285f4;
 `;
 
 const TextInBetween = styled(Typos)`
