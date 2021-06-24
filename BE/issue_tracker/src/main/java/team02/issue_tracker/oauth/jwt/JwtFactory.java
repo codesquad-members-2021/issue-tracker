@@ -22,6 +22,7 @@ public class JwtFactory {
                 .withIssuer("shion")
                 .withExpiresAt(Date.valueOf(LocalDate.now().plusDays(2)))
                 .sign(Algorithm.HMAC256(SECRET));
+
         return new JwtResponse(jwt);
     }
 }
