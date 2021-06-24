@@ -27,7 +27,7 @@ struct Endpoint {
     }
 
     enum Path: String {
-        case login = "/login"
+        case login = "/user/login/oauth/githubios"
         case label = "/label"
         case issue = "/issue"
         case milestone = "/milestone"

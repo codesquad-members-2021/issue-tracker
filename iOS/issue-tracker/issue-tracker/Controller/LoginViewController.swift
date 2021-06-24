@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     @objc func requestToken() {
         authManager.requestJWTToken(completion: {
             let st = UIStoryboard(name: "Main", bundle: nil)
-            let vc = st.instantiateViewController(withIdentifier: "tab")
+            let vc = st.instantiateViewController(withIdentifier: "main")
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         })
