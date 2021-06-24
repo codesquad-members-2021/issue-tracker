@@ -1,25 +1,26 @@
 import { useState, useEffect, useReducer } from 'react';
-import axios, { Method } from 'axios';
+import axios, { Method, AxiosRequestConfig } from 'axios';
 
 type Action =
   | { type: 'FETCH_INIT'; payload: null }
   | { type: 'FETCH_SUCCESS'; payload: any }
   | { type: 'FETCH_FAILURE'; payload: null };
 
-
 interface OptionData {
-  [key: string]: string;
+  [key: string]: any;
 }
-
+const token = localStorage.getItem('jwt');
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+if (token) axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-const createFetchOptions = (bodyData?: OptionData) => {
-  if (bodyData) return;
-  return {
+const createFetchOptions = (Method: Method, bodyData?: OptionData) => {
+  let config: AxiosRequestConfig = {
+    method: Method,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(bodyData),
   };
+  if (bodyData) config.data = bodyData;
+  console.log(config);
+  return config;
 };
 function useAxios(
   Props: boolean,
@@ -41,12 +42,13 @@ function useAxios(
       dispatch({ type: 'FETCH_INIT', payload: null });
       try {
         if (!url) throw new Error(`Error: URL IS NULL`);
-        await axios(url, createFetchOptions(bodyData)).then((result) =>
+        await axios(url, createFetchOptions(methods, bodyData)).then((result) =>
           dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
         );
       } catch (error) {
-        console.error(error)
-        if(error.response.status === 401) console.error("Unauthorized Request");
+        console.error(error);
+        if (error.response.status === 401)
+          console.error('Unauthorized Request');
 
         dispatch({ type: 'FETCH_FAILURE', payload: null });
       }
@@ -58,7 +60,6 @@ function useAxios(
 
   return { ...state };
 }
-
 
 function requestReducer(
   state: {

@@ -3,24 +3,34 @@ import { Button, Checkbox } from '@material-ui/core';
 import styled from 'styled-components';
 import { ReactComponent as CheckOff } from 'icons/check-off-circle.svg';
 import { ReactComponent as CheckOn } from 'icons/check-on-circle.svg';
-
-const LabelTextColorInput = () => {
+import { MouseEvent } from 'react';
+const LabelTextColorInput = ({
+  value,
+  clickHandler,
+}: {
+  clickHandler: (e: MouseEvent<HTMLButtonElement>) => void;
+  value: 'dark' | 'light';
+}) => {
   return (
     <StyledInput>
       <label>텍스트 색상</label>
-      <Button>
+      <Button id="dark" onClick={clickHandler}>
         <>
           <Checkbox
-            checked={true}
+            checked={value === 'dark'}
             icon={<CheckOff />}
             checkedIcon={<CheckOn />}
           />
           어두운색
         </>
       </Button>
-      <Button>
+      <Button id="light" onClick={clickHandler}>
         <>
-          <Checkbox icon={<CheckOff />} checkedIcon={<CheckOn />} />
+          <Checkbox
+            checked={value === 'light'}
+            icon={<CheckOff />}
+            checkedIcon={<CheckOn />}
+          />
           밝은색
         </>
       </Button>

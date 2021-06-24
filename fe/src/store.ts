@@ -117,10 +117,17 @@ const parsedLabelData = (labelItem: LabelDataType) => ({
   textColor: labelItem.font_light ? 'light' : 'dark',
 });
 
+export const labelUpdateAtom = atom<number>({
+  key: 'labelUpdateAtom',
+  default: 0,
+});
+
 export const labelQuery = selector<LabelItemType[]>({
   key: 'labelQuery',
-  get: async () => {
+  get: async ({ get }) => {
+    get(labelUpdateAtom);
     const token = localStorage.getItem('jwt');
+    console.log('dd', labelUpdateAtom);
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/labels`,
@@ -130,13 +137,13 @@ export const labelQuery = selector<LabelItemType[]>({
           },
         }
       );
-
       return data.map(parsedLabelData);
     } catch (error) {
       console.error('labelQuery 에러', error);
       return [];
     }
   },
+  //  set: ({set}, newValue) => set(myAtom, newValue),
 });
 
 const parsedAuthorData = (user: UserDataType) => ({

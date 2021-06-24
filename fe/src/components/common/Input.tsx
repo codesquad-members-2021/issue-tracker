@@ -3,14 +3,20 @@ import styled from 'styled-components';
 const Input = ({
   onChange,
   label,
+  value,
 }: {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
+  value?: string;
 }) => {
   return (
     <StyledInput>
       <label>{label}</label>
-      <input onChange={onChange} />
+      <input
+        aria-label={label}
+        onChange={onChange}
+        value={value}
+      />
     </StyledInput>
   );
 };
@@ -45,7 +51,7 @@ const StyledInput = styled.div`
     width: 100%;
     border-radius: ${({ theme }) => theme.border.radius.S};
     background-color: ${({ theme }) => theme.color.grayscale.line};
-   
+
     padding-left: 7rem;
     border: none;
     font-size: ${({ theme }) => theme.fontSize.M};

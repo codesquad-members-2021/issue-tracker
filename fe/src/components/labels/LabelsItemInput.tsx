@@ -3,38 +3,142 @@ import Label from 'components/common/Label';
 import CreateButton from 'components/buttons/CreateButton';
 import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as XSvg } from 'icons/Xicon.svg';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 import LabelTextColorInput from './LabelTextColorInput';
 import LabelColorInput from './LabelColorInput';
+import { LabelItemType } from 'types/issueType';
+import { useReducer } from 'react';
+import useAxios from 'hook/useAxios';
+import { labelUpdateAtom } from 'store';
+import { useSetRecoilState } from 'recoil';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-const LabelsItemInput = () => {
-  const title = 'document';
-  const labelColor = '#007AFF';
-  const textColor = 'light';
-  const clickHandler = (e: React.MouseEvent) => {};
-  const [text, setText] = useState('');
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setText(e.target.value);
+type Action =
+  | { type: 'Title'; payload: string }
+  | { type: 'Description'; payload: string }
+  | { type: 'LabelColor'; payload: string }
+  | { type: 'TextColor'; payload: 'dark' | 'light' };
+
+function labelReducer(state: LabelItemType, action: Action): LabelItemType {
+  switch (action.type) {
+    case 'Title':
+      return {
+        ...state,
+        title: action.payload,
+      };
+    case 'Description':
+      return {
+        ...state,
+        description: action.payload,
+      };
+    case 'LabelColor':
+      return {
+        ...state,
+        labelColor: action.payload,
+      };
+    case 'TextColor':
+      return {
+        ...state,
+        textColor: action.payload,
+      };
+  }
+}
+
+const labelParser = (str: string | null) => {
+  switch (str) {
+    case '레이블 이름':
+      return 'Title';
+    case '설명(선택)':
+      return 'Description';
+    case '배경색상':
+      return 'LabelColor';
+    default:
+      return 'TextColor';
+  }
+};
+
+const LabelsItemInput = ({
+  id,
+  title,
+  description,
+  labelColor,
+  textColor,
+  clickHandler,
+}: LabelItemType & { clickHandler: (e: React.MouseEvent) => void }) => {
+  const [labelState, setLabelState] = useReducer(labelReducer, {
+    id,
+    title,
+    description,
+    labelColor,
+    textColor,
+  });
+
+  const textColorClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const type = 'TextColor';
+    const payload = e.currentTarget.id === 'dark' ? 'dark' : 'light';
+    setLabelState({ type, payload });
+  };
+  const setLabelUpdate = useSetRecoilState(labelUpdateAtom);
+
+  const editClickHandler = (e: React.MouseEvent) => {
+    (async function () {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/labels/${id}`, {
+        title: labelState.title,
+        description: labelState.description,
+        color_code: labelState.labelColor,
+        font_light: labelState.textColor === 'light',
+      });
+      setLabelUpdate((cur) => ++cur);
+      clickHandler(e);
+    })();
+  };
+
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const type = labelParser(e.target.getAttribute('aria-label'));
+    const payload = e.target.value;
+
+    if (type !== 'TextColor') {
+      setLabelState({ type, payload });
+    }
+  };
 
   return (
     <StyledLabelsItemInput>
       <LabelsInputDisplay>
-        <Label {...{ title, labelColor, textColor }} />
+        <Label
+          title={labelState.title}
+          labelColor={labelState.labelColor}
+          textColor={labelState.textColor}
+        />
       </LabelsInputDisplay>
       <LabelsInputs>
-        <Input label="레이블 이름" onChange={handleChange} />
-        <Input label="설명(선택)" onChange={handleChange} />
+        <Input
+          label="레이블 이름"
+          onChange={changeHandler}
+          value={labelState.title}
+        />
+        <Input
+          label="설명(선택)"
+          onChange={changeHandler}
+          value={labelState.description}
+        />
         <LabelColorSection>
-          <LabelColorInput onChange={handleChange} />
-          <LabelTextColorInput />
+          <LabelColorInput
+            onChange={changeHandler}
+            value={labelState.labelColor}
+          />
+          <LabelTextColorInput
+            clickHandler={textColorClickHandler}
+            value={labelState.textColor}
+          />
         </LabelColorSection>
         <EditButtons>
           <CreateButton white onClick={clickHandler} icon={<CancelIcon />}>
             취소
           </CreateButton>
-          <CreateButton onClick={clickHandler} icon={<EditIcon />}>
+          <CreateButton onClick={editClickHandler} icon={<EditIcon />}>
             완료
           </CreateButton>
         </EditButtons>
