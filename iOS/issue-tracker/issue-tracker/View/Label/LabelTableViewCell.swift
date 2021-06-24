@@ -37,10 +37,17 @@ final class LabelTableViewCell: UITableViewCell {
         addSubviews()
         setupAutolayout()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 2))
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 2
+    }
 
     private func addSubviews() {
-        addSubview(labelView)
-        addSubview(labelDescription)
+        contentView.addSubview(labelView)
+        contentView.addSubview(labelDescription)
     }
 
     private func setupAutolayout() {

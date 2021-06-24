@@ -21,6 +21,7 @@ final class LabelViewController: UIViewController {
         super.viewDidLoad()
         seuptNavigationBar()
         labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
+        labelTableView.separatorStyle = .none
         addLabelButton.addTarget(self, action: #selector(addLabelButtonTapped), for: .touchUpInside)
         fetchLabel()
         bindTableView()
@@ -34,6 +35,7 @@ final class LabelViewController: UIViewController {
         labelListViewModel.labelList.bind(to: labelTableView.rx.items) { tableView, _, element in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelTableViewCell.identifier) as? LabelTableViewCell else { return UITableViewCell()}
             cell.setupLabelCell(title: element.title, description: element.description!, color: element.color)
+            cell.contentView.backgroundColor = .systemYellow
             return cell
         }
         .disposed(by: bag)

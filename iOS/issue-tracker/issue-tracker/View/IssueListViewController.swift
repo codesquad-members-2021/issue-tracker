@@ -54,8 +54,8 @@ final class IssueListViewController: UIViewController {
         issueListViewModel.issueList
             .bind(to: issueTableView.rx.items) { tableView, _, issue in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, issueLabels: issue.labels)
                 cell.backgroundColor = .systemGroupedBackground
+                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, issueLabels: issue.labels, isOpen: issue.open)
             return cell
         }
         .disposed(by: bag)
@@ -245,15 +245,16 @@ extension IssueListViewController: UITableViewDelegate {
             success(true)
         }
 
-        let shareAction = UIContextualAction(style: .normal, title: "닫기") { _, _, success in
-
+        let closeAction = UIContextualAction(style: .normal, title: "닫기") { [weak self] _, _, success in
+            guard let self = self else { return }
+            self.issueListViewModel.patchIssue(issues: [self.issueListViewModel.issueList.value[indexPath.row]])
             success(true)
         }
 
         deleteAction.image = UIImage(systemName: "trash")
-        shareAction.image = UIImage(systemName: "archivebox")
-        shareAction.backgroundColor = #colorLiteral(red: 0.7988751531, green: 0.8300203681, blue: 0.9990373254, alpha: 1)
+        closeAction.image = UIImage(systemName: "archivebox")
+        closeAction.backgroundColor = #colorLiteral(red: 0.7988751531, green: 0.8300203681, blue: 0.9990373254, alpha: 1)
 
-        return UISwipeActionsConfiguration(actions: [shareAction, deleteAction])
+        return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
     }
 }

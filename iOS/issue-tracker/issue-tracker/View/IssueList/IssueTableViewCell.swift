@@ -105,7 +105,7 @@ final class IssueTableViewCell: UITableViewCell {
         }
     }
 
-    func setupIssueCell(title: String?, description: String?, milestoneTitle: String?, issueLabels: [IssueLabel]?) {
+    func setupIssueCell(title: String?, description: String?, milestoneTitle: String?, issueLabels: [IssueLabel]?, isOpen: Bool) {
         if let title = title {
             self.largeTitle.text = title
             largeTitle.sizeToFit()
@@ -123,6 +123,10 @@ final class IssueTableViewCell: UITableViewCell {
             milestoneView.sizeToFit()
         } else {
             milestoneView.isHidden = true
+        }
+
+        if !isOpen {
+            contentView.backgroundColor = #colorLiteral(red: 0.649335742, green: 0.109275572, blue: 0.1304466426, alpha: 1)
         }
         self.bindLabelCollectionView(issueLabels: issueLabels)
     }
