@@ -51,9 +51,14 @@ final class AddLabelViewController: UIViewController {
     func bindButton() {
         saveButton.rx.tap
             .subscribe { [weak self] _ in
-                self?.addLabelViewModel.postAddedLabel(completion: {
-                    self?.dismiss(animated: true, completion: self?.reloadDataHandler)
-                })
+                guard let viewModel = self?.addLabelViewModel else { return }
+                if viewModel.title.value == "" || viewModel.description.value == "" {
+                    CustomAlertView.shared.setUpAlertView(title: "실패", message: "필수 입력란이 비었습니다. 다시 한번 확인해주세요.", buttonTitle: "확인", alertType: .failure, buttonHandler: nil)
+                } else {
+                    viewModel.postAddedLabel {
+                        self?.dismiss(animated: true, completion: nil)
+                    }
+                }
             }
             .disposed(by: bag)
 
