@@ -27,7 +27,8 @@ public class IssueRepository {
     }
 
     public List<Issue> findAllIssues() {
-        String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` from issue";
+        String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number`\n" +
+                "from issue order by created_time DESC";
         return jdbcTemplate.query(query, ISSUE_ROW_MAPPER);
     }
 
@@ -91,7 +92,8 @@ public class IssueRepository {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where closed = ? " +
-                    "and deleted = false ";
+                    "and deleted = false " +
+                    "order by created_time DESC";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getClosed());
         }
 
@@ -99,7 +101,8 @@ public class IssueRepository {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where author_user_id = ? " +
-                    "and deleted = false ";
+                    "and deleted = false " +
+                    "order by created_time DESC";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAuthor());
         }
 
@@ -107,7 +110,8 @@ public class IssueRepository {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where milestone_id = ? " +
-                    "and deleted = false ";
+                    "and deleted = false " +
+                    "order by created_time DESC";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getMilestone());
         }
 
@@ -115,14 +119,16 @@ public class IssueRepository {
             String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                     "from issue " +
                     "where assignee = ? " +
-                    "and deleted = false ";
+                    "and deleted = false " +
+                    "order by created_time DESC";
             return jdbcTemplate.query(query, ISSUE_ROW_MAPPER, searchCondition.getAssignee());
         }
 
         logger.info("not matching anything");
         String query = "select id, title, description, assignee, created_time, closed, deleted, milestone_id, author_user_id, `number` " +
                 "from issue " +
-                "where deleted = false ";
+                "where deleted = false " +
+                "order by created_time DESC";
         return jdbcTemplate.query(query, ISSUE_ROW_MAPPER);
     }
 
