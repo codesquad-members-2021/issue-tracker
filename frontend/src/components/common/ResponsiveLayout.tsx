@@ -11,5 +11,8 @@ const ResponsiveLayout = ({children, ...rest}) => {
 
 const ResponsiveLayer = styled.div`
   max-width: 1440px;
+  font-size: 16px;
+  padding: 0 80px;
+  box-sizing: border-box;
 `
-export default ResponsiveLayout
+export default ResponsiveLayout;

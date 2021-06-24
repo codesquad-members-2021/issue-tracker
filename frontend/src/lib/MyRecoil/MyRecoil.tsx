@@ -1,14 +1,22 @@
-import React, {useState, useEffect, useRef } from 'react';
+import React, {useState, useRef} from 'react';
+
+// const RecoilDispatchContext = React.createContext();
 
 export const RecoilRoot = ({ children }, ...rest) => {
+  {/* <RecoilDispatchContext.Provider value={}> */}  
+  {/* </RecoilDispatchContext.Provider> */}
+  
   return (
     <React.Fragment {...rest}>
       {children}
     </React.Fragment>
+    
+    
+    
   )
 }
 
-//받은 걸 상태로 "전환"해주는 함수
+// 받은 걸 상태로 "전환"해주는 함수
 interface IAtom<T>{
   key: string,
   default: T
@@ -20,8 +28,6 @@ export function Atom<UT>(atomObject:IAtom<UT>) {
   const initialState = useRef(atomObject);
   return initialState;
 }
-
-
 
 export const useRecoilState = (atom) => {
   const [,setRerender] = useState<object>()
