@@ -29,7 +29,7 @@ struct Issue: Codable, Equatable {
     let open: Bool
     let createdTime: String
     let author: Author
-    let labels: [IssueLabel]
+    let labels: [IssueLabel]?
     let assignee: [Author]?
     let milestone: Milestone?
     let comment: [Comment]?

@@ -105,7 +105,7 @@ final class IssueTableViewCell: UITableViewCell {
         }
     }
 
-    func setupIssueCell(title: String?, description: String?, milestoneTitle: String?, relay: Observable<BehaviorRelay<[IssueLabel]>>) {
+    func setupIssueCell(title: String?, description: String?, milestoneTitle: String?, issueLabels: [IssueLabel]?) {
         if let title = title {
             self.largeTitle.text = title
             largeTitle.sizeToFit()
@@ -124,19 +124,17 @@ final class IssueTableViewCell: UITableViewCell {
         } else {
             milestoneView.isHidden = true
         }
-        self.bindLabelCollectionView(relay: relay)
+        self.bindLabelCollectionView(issueLabels: issueLabels)
     }
 
-    func bindLabelCollectionView(relay: Observable<BehaviorRelay<[IssueLabel]>>) {
+    func bindLabelCollectionView(issueLabels: [IssueLabel]?) {
+        guard let labels = issueLabels else { return }
         labelsCollectionView.dataSource = nil
         self.setUpCollectionViewAutoLayout(view: labelsCollectionView)
-        relay.subscribe { behaviorRelay in
-            behaviorRelay.bind(to: self.labelsCollectionView.rx.items) { collectionView, int, issueLabel in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: IndexPath(row: int, section: 0  )) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
-                cell.configure(title: issueLabel.title, color: issueLabel.color)
-                return cell
-            }
-        } onCompleted: {
+        Observable.just(labels).bind(to: self.labelsCollectionView.rx.items) { collectionView, int, issueLabel in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: IndexPath(row: int, section: 0  )) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
+            cell.configure(title: issueLabel.title, color: issueLabel.color)
+            return cell
         }
         .disposed(by: bag)
     }
