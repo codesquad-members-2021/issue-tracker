@@ -94,6 +94,21 @@ export const commentInputState = atom({
 	},
 });
 
+export const categoryIdSelectorState = selector({
+	key: "categoryIdSelectorState",
+	get: ({ get }) => {
+		const assignee = get(assigneeCategoryState).map(el => el.id);
+		const label = get(labelCategoryState).map(el => el.id);
+		const milestone = get(milestoneCategoryState).map(el => el.id);
+
+		return {
+			assignee: assignee,
+			label: label,
+			milestone: milestone,
+		};
+	},
+});
+
 //아래는 데이지 삽질 망한 결과입니다.---나중에 꼭 뜯어보리라..
 export const categorySelector = selector({
 	key: "categorySelector",

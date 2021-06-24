@@ -9,6 +9,7 @@ import {
 	milestoneCategoryState,
 } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
+import fetchData from "util/fetchData";
 const IssueCategoryModal = ({ category, data }) => {
 	const [assigneeCategory, setAssigneeCategory] = useRecoilState(
 		assigneeCategoryState
@@ -61,6 +62,20 @@ const IssueCategoryModal = ({ category, data }) => {
 			]);
 		}
 	};
+	// [	{
+	// 	id: targetData.id,
+	// 	name: targetData.name,
+	// 	textColor: targetData.colors.textColor,
+	// 	backgroundColor: targetData.colors.backgroundColor,
+	// },	{
+	// 	id: targetData.id,
+	// 	name: targetData.name,
+	// 	textColor: targetData.colors.textColor,
+	// 	backgroundColor: targetData.colors.backgroundColor,
+	// },].map(x => x.id)
+
+	// [id,id]
+
 	const handleCheckMilestone = e => {
 		const targetId = e.target.value;
 		const targetData = data.filter(item => item.id === targetId)[0];
@@ -73,7 +88,6 @@ const IssueCategoryModal = ({ category, data }) => {
 		}
 		if (milestoneCategory.every(x => x.id !== targetId)) {
 			setMilestoneCategory([
-				milestoneCategory,
 				{
 					id: targetData.id,
 					title: targetData.title,
