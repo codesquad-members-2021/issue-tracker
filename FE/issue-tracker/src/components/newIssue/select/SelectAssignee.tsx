@@ -15,11 +15,6 @@ function SelectAssignee() {
   const [errorMsg, setErrorMsg] = useState('No Error');
   const checkedAssignees = useRecoilValue(checkedAssigneesAtom);
 
-  const checkedAssigneesInfo = checkedAssignees.map((id) => {
-    if (assignees !== null)
-      return assignees.find((assignee) => assignee.user_id === id);
-  }) as assigneeType[];
-
   const handleClickAssignee = () => {
     fetchModal({
       path: 'assignees',
@@ -27,6 +22,13 @@ function SelectAssignee() {
       setErrorMsg: setErrorMsg,
     });
   };
+
+  const checkedAssigneesInfo =
+    assignees == null
+      ? []
+      : (checkedAssignees.map((id) =>
+          assignees.find((assignee) => assignee.user_id === id)
+        ) as assigneeType[]);
 
   return (
     <Wrap>
@@ -44,7 +46,7 @@ function SelectAssignee() {
         <AssigneeModal assignees={assignees} errorMsg={errorMsg} />
       </Menu>
       <AddList>
-        {checkedAssigneesInfo &&
+        {checkedAssigneesInfo.length > 0 &&
           checkedAssigneesInfo.map(({ user_id, name, avatar_url }) => {
             return (
               <li key={user_id}>
