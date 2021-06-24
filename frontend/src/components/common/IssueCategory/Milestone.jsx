@@ -3,7 +3,6 @@ import { milestoneCategoryState } from "RecoilStore/Atoms";
 import { useRecoilValue } from "recoil";
 const Milestone = () => {
 	const milestoneData = useRecoilValue(milestoneCategoryState);
-	console.log("milestoneData", milestoneData);
 	return (
 		<>
 			<MilestoneTotalProgressBar />

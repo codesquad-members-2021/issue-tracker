@@ -3,9 +3,7 @@ import LabelBadge from "components/common/LabelBadge";
 import { labelCategoryState } from "RecoilStore/Atoms";
 import { useRecoilValue } from "recoil";
 const Label = () => {
-	//리코일(선택된 라벨)
 	const labelData = useRecoilValue(labelCategoryState);
-	console.log("labelData", labelData);
 	return (
 		<>
 			{labelData &&
@@ -13,8 +11,8 @@ const Label = () => {
 					<ContentsContainer key={`label-${idx}`}>
 						<LabelBadge
 							text={label.name}
-							fontColor={"white"}
-							backgroundColor={"black"}
+							fontColor={label.textColor}
+							backgroundColor={label.backgroundColor}
 						/>
 					</ContentsContainer>
 				))}
