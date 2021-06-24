@@ -32,6 +32,7 @@ public class IssueController {
         return issueQueryService.filterIssues(filterRequest);
     }
 
+    @LoginRequired
     @PatchMapping
     public void changeStatus(@RequestBody IssueNumbersRequestDTO issueNumbersRequestDTO, @RequestParam String status) {
         logger.debug("이슈 닫기 or 열기");
@@ -39,6 +40,7 @@ public class IssueController {
         issueCommandService.changeIssueStatus(issueNumbersRequestDTO, status);
     }
 
+    @LoginRequired
     @GetMapping("/form")
     public IssueFormResponseDTO viewForm() {
         logger.debug("이슈 생성 페이지 요청");
@@ -47,7 +49,7 @@ public class IssueController {
 
     @LoginRequired
     @PostMapping("/form")
-    public IssueNumberResponseDTO create(@RequestBody IssueRequestDTO issueRequestDTO, @UserId Long userId) {
+    public IssueNumberResponseDTO create(@UserId Long userId, @RequestBody IssueRequestDTO issueRequestDTO) {
         logger.debug("이슈 생성");
         logger.debug("issue 요청 확인: {}", issueRequestDTO.toString());
         return issueCommandService.createIssue(issueRequestDTO, userId);
@@ -60,6 +62,7 @@ public class IssueController {
         return issueQueryService.getDetailPage(issueId, userId);
     }
 
+    @LoginRequired
     @PatchMapping("/{issueId}/title")
     public IssueTitleDTO updateTitle(@PathVariable Long issueId, @RequestBody IssueTitleDTO issueTitleDTO) {
         logger.debug("이슈 제목 수정");
@@ -67,12 +70,14 @@ public class IssueController {
         return issueCommandService.updateIssueTitle(issueId, issueTitleDTO);
     }
 
+    @LoginRequired
     @GetMapping("/{issueId}/assignees")
     public AssigneesResponseDTO viewAssignees(@PathVariable Long issueId) {
         logger.debug("이슈의 담당자 가져오기");
         return issueQueryService.getAssignees(issueId);
     }
 
+    @LoginRequired
     @PatchMapping("/{issueId}/assignees")
     public void updateAssignees(@PathVariable Long issueId, @RequestBody AssigneesToUpdateRequestDTO updateAssigneesRequestDTO) {
         logger.debug("이슈의 담당자 편집");
@@ -80,12 +85,14 @@ public class IssueController {
         issueCommandService.updateAssignees(issueId, updateAssigneesRequestDTO);
     }
 
+    @LoginRequired
     @GetMapping("/{issueId}/labels")
     public LabelsInIssueResponseDTO viewLabels(@PathVariable Long issueId) {
         logger.debug("이슈의 레이블 가져오기");
         return issueQueryService.getLabels(issueId);
     }
 
+    @LoginRequired
     @PatchMapping("/{issueId}/labels")
     public void updateLabels(@PathVariable Long issueId, @RequestBody LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
         logger.debug("이슈의 레이블 편집");
@@ -93,12 +100,14 @@ public class IssueController {
         issueCommandService.updateLabels(issueId, labelsToUpdateRequestDTO);
     }
 
+    @LoginRequired
     @GetMapping("/{issueId}/milestones")
     public MilestonesInIssueResponseDTO getMilestones(@PathVariable Long issueId) {
         logger.debug("이슈의 마일스톤 가져오기");
         return issueQueryService.getMilestones(issueId);
     }
 
+    @LoginRequired
     @PatchMapping("/{issueId}/milestones")
     public void updateMilestone(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
         logger.debug("이슈의 마일스톤 편집");

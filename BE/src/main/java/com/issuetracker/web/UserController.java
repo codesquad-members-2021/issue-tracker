@@ -27,8 +27,8 @@ public class UserController {
         return userService.login(code, userAgentDTO);
     }
 
-    @GetMapping("/logout")
     @LoginRequired
+    @GetMapping("/logout")
     public void logout(@UserId Long userId) {
         logger.debug("로그아웃 요청");
         userService.logout(userId);
@@ -46,8 +46,8 @@ public class UserController {
         return userService.getAuthors();
     }
 
-    @GetMapping("/userInfo")
     @LoginRequired
+    @GetMapping("/userInfo")
     public UserResponseDTO getUserInfo(@UserId Long userId) {
         return userService.getUserInfo(userId);
     }

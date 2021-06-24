@@ -99,3 +99,6 @@ generated
 
 # Application properties
 /src/main/resources/application-key.properties
+
+# Front
+/src/main/resources/static/

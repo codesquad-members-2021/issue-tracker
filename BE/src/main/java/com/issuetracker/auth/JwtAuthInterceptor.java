@@ -4,6 +4,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.issuetracker.auth.annotation.LoginRequired;
 import com.issuetracker.auth.exception.HttpHeaderFormatException;
 import com.issuetracker.auth.service.JwtService;
+import com.issuetracker.domain.user.UserRepository;
+import com.issuetracker.exception.IllegalUserAccessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -21,13 +23,20 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER = "Bearer";
     private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (loginRequired(handler)) {
             verifyJwt(request);
+            verifyUser(request);
         }
         return true;
+    }
+
+    private void verifyUser(HttpServletRequest request) {
+        Object userId = request.getAttribute(USER_ID);
+        userRepository.findById((Long) userId).orElseThrow(IllegalUserAccessException::new);
     }
 
     private boolean loginRequired(Object handler) {
