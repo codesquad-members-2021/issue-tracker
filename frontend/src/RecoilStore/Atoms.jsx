@@ -85,3 +85,11 @@ export const milestoneCategoryState = atom({
 	key: "milestoneCategoryState",
 	default: "",
 });
+
+export const commentInputState = atom({
+	key: "commentInputState",
+	default: {
+		issueId: null,
+		content: "",
+	},
+});

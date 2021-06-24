@@ -5,11 +5,22 @@ import CommentInput from "components/common/CommentInput";
 import SubmitBtn from "components/common/Button/BlueButtons";
 import { ReactComponent as Xsquare } from "images/x-square.svg";
 import getUserInfo from "util/getUserInfo";
+import { commentInputState } from "RecoilStore/Atoms";
+import { useRecoilValue } from "recoil";
+import { useState } from "react";
 
 const NewIssueForm = () => {
 	const userInfo = getUserInfo();
+	const [issueTitle, setIssueTitle] = useState("");
+	const commentValue = useRecoilValue(commentInputState);
+
+	const handleTitleInput = e => {
+		setIssueTitle(e.target.value);
+	};
+
 	const handleSubmit = () => {
-		console.log("작성완료");
+		// title : issueTitle
+		// comment : commentValue.content
 	};
 
 	return (
@@ -20,7 +31,12 @@ const NewIssueForm = () => {
 				</ImgWrapper>
 				<ContentsWrapper>
 					<InputTitleWrapper>
-						<Input type="text" placeholder="제목" />
+						<Input
+							type="text"
+							placeholder="제목"
+							value={issueTitle}
+							onChange={handleTitleInput}
+						/>
 					</InputTitleWrapper>
 					<CommentInput isNewIssueMode={true} />
 				</ContentsWrapper>
