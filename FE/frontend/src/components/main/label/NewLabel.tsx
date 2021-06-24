@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import useMutate from '../../../util/useMutate';
 import Label from '../../../styles/atoms/Label';
 import Typos from '../../../styles/atoms/Typos';
@@ -14,11 +14,12 @@ const NewLabel = () => {
     content: '',
     color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   });
-
+  const queryClient = useQueryClient();
   const { mutateAsync, isError } = useMutation(useMutate('label', 'add'));
 
   const registerNewLabel = async () => {
     await mutateAsync({ data: input });
+    queryClient.invalidateQueries(['label', 'getAllData']);
   };
 
   return (

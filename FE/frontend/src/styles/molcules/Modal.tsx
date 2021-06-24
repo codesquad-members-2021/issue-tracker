@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import DropDown from './DropDown';
 import Typo from '../atoms/Typos';
-import { ReactComponent as Downward } from '../../icons/downward.svg';
+
 interface Props {
-  label: string;
+  children: JSX.Element;
   options: Set<string>;
   exceptedDiv: string;
   type: string;
@@ -36,10 +36,7 @@ const Modal = (props: Props) => {
   return (
     <Div>
       <Button onClick={toggle} isShown={isShown}>
-        <Text link sm>
-          {props.label}
-        </Text>
-        <Downward />
+        {props.children}
       </Button>
 
       {isShown && (

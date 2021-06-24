@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Typos from '../../../styles/atoms/Typos';
 import Modal from '../../../styles/molcules/Modal';
 import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
+import { ReactComponent as Downward } from '../../../icons/downward.svg';
 
 const SearchFilter = () => {
   const mainFilterOptions = new Set([
@@ -16,12 +18,15 @@ const SearchFilter = () => {
     <>
       <FilterContainer>
         <Modal
-          label="필터"
           options={mainFilterOptions}
           exceptedDiv="filterTitle"
           type="text"
-          innerTitle="이슈 필터"
-        />
+          innerTitle="이슈 필터">
+          <Text link sm>
+            필터
+            <Downward />
+          </Text>
+        </Modal>
         <Search />
         <IconWrapper>
           <SearchIcon />
@@ -50,6 +55,13 @@ const Search = styled.input`
   background: ${props => props.theme.greyscale.inputBackgound};
   border-radius: 0px 11px 11px 0px;
   padding-left: 40px;
+`;
+
+const Text = styled(Typos)`
+  color: ${props => props.theme.greyscale.label};
+  svg {
+    margin: 2px 6px 0 6px;
+  }
 `;
 
 const IconWrapper = styled.div`

@@ -4,7 +4,7 @@ import URL from './url';
 
 interface Props {
   id?: string;
-  isOpen?: boolean;
+  isOpen?: boolean | string;
   specialFilter?: string;
   assignee?: string;
   label?: string;
@@ -40,7 +40,8 @@ const getData = async (type: string, action: string, filter?: Props) => {
           return detail.data.data;
         case 'filter':
           const filteredData = await axios.get(
-            `${URL}/issues?is_open=${filter?.isOpen}&filter=${filter?.specialFilter}&assignee=${filter?.assignee}&label=${filter?.label}&milestone=${filter?.milstone}&writer=${filter?.writer}`
+            `${URL}/issues?is_open=${filter?.isOpen}&filter=${filter?.specialFilter}&assignee=${filter?.assignee}&label=${filter?.label}&milestone=${filter?.milstone}&writer=${filter?.writer}`,
+            axiosConfig
           );
           return filteredData.data.data;
       }
@@ -62,7 +63,7 @@ const getData = async (type: string, action: string, filter?: Props) => {
     case 'common':
       switch (action) {
         case 'count':
-          const count = await axios.get(`${URL}/count`);
+          const count = await axios.get(`${URL}/common/count`);
           return count.data.data;
       }
   }

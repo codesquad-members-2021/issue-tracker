@@ -11,17 +11,18 @@ import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 interface Props {
   issueId: number;
+  refetch(): any;
 }
 
 const NewComment = (props: Props) => {
   const userData = localStorage.getItem('userData');
-  const foo = userData && JSON.parse(userData);
+  const parsedUserData = userData && JSON.parse(userData);
 
   const [inputCount, setInputCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [initial, setInitial] = useState(false);
   const [input, setInput] = useState({
-    user_id: foo.id,
+    user_id: parsedUserData.id,
     content: '',
     file: '',
   });
@@ -64,15 +65,15 @@ const NewComment = (props: Props) => {
 
   const registerNewIssue = () => {
     mutateAsync({ data: input, id: props.issueId });
-    // if (isSuccess) {
-    //   queryClient.invalidateQueries(['issue', 'detail'], props.issueId);
-    // }
+    if (isSuccess) {
+      props.refetch();
+    }
   };
 
   return (
     <AddIssueContainer>
       <MainContainer>
-        <User />
+        <User imageURL={parsedUserData?.profile_image} />
         <InputContainer>
           <CommentInput
             value={input.content}

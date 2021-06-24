@@ -14,8 +14,7 @@ const UserWrapper = styled.div<{ imageURL?: string | undefined }>`
   height: 44px;
   border-radius: 22px;
   background-image: ${props => {
-    if (props.imageURL)
-      return `url('https://avatars.githubusercontent.com/u/72348034?v=4')`;
+    if (props.imageURL) return `url(${props.imageURL})`;
   }};
   background-size: contain;
   border: ${props => `1px solid ${props.theme.greyscale.line}`};

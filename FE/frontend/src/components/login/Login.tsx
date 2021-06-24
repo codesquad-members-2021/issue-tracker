@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../../icons/logoLarge.svg';
 
 const Login = () => {
   const url = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://localhost:3000/login/github`;
+  const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=195028719127-a5r87r9182sidvd6vjs9akod785k5t94.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&flowName=GeneralOAuthFlow`;
 
   return (
     <LoginContainer>
@@ -13,7 +14,9 @@ const Login = () => {
       <a href={url}>
         <GitHubLogin large>GitHub 계정으로 로그인</GitHubLogin>
       </a>
-      <GoogleLogin large>Google 계정으로 로그인</GoogleLogin>
+      <a href={googleUrl}>
+        <GoogleLogin large>Google 계정으로 로그인</GoogleLogin>
+      </a>
       <TextInBetween sm>or</TextInBetween>
       <ManualLogin large>아이디</ManualLogin>
       <ManualLogin large>비밀번호</ManualLogin>

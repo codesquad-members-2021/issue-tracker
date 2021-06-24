@@ -11,6 +11,9 @@ import { ReactComponent as Paperclip } from '../../../icons/paperclip.svg';
 import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 const AddIssue = () => {
+  const userData = localStorage.getItem('userData');
+  const parsedUserData = userData && JSON.parse(userData);
+
   const [inputCount, setInputCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [initial, setInitial] = useState(false);
@@ -72,7 +75,7 @@ const AddIssue = () => {
       </TopContainer>
       <Line />
       <MainContainer>
-        <User />
+        <User imageURL={parsedUserData?.profile_image} />
         <InputContainer>
           <TitleInput
             placeholder="제목"

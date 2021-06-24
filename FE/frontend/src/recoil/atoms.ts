@@ -1,7 +1,7 @@
 import { atom, RecoilState } from 'recoil';
 
 interface Props {
-  [key: string]: boolean;
+  [key: string]: boolean | null | string;
 }
 const isSelectedAtom = atom<Props>({
   key: 'isSelected',
@@ -14,4 +14,16 @@ const isSelectedAtom = atom<Props>({
   },
 });
 
-export { isSelectedAtom };
+const filterAtom = atom<Props>({
+  key: 'filter',
+  default: {
+    isOpen: 'true',
+    specialFilter: '',
+    assignee: '',
+    label: '',
+    milstone: '',
+    writer: '',
+  },
+});
+
+export { isSelectedAtom, filterAtom };

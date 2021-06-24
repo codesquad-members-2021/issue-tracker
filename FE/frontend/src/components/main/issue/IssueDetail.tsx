@@ -9,6 +9,7 @@ import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
+import Typos from '../../../styles/atoms/Typos';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
@@ -16,7 +17,7 @@ import { ReactComponent as Edit } from '../../../icons/edit.svg';
 const IssueDetail = () => {
   const queryClient = useQueryClient();
   const location = useLocation();
-  const { isLoading, data, error } = useFetch('issue', 'detail', {
+  const { isLoading, data, error, refetch } = useFetch('issue', 'detail', {
     id: location.pathname,
   });
 
@@ -29,6 +30,7 @@ const IssueDetail = () => {
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editedTitle, setEditedTitle] = useState(data?.title);
+
   const setEditOpen = () => {
     setIsEditOpen(!isEditOpen);
   };
@@ -37,7 +39,7 @@ const IssueDetail = () => {
     await MutateTitle({ data: editedTitle, id: id });
 
     if (isEditSuccess) {
-      queryClient.invalidateQueries(['issue', 'detail']);
+      refetch();
       setEditOpen();
     }
   };
@@ -120,23 +122,27 @@ const IssueDetail = () => {
           <Line />
           <MainContainer>
             <CommentsContainer>
-              {data.comments.map((comment: any, index: number) => {
-                return (
-                  <SingleComment>
-                    <User imageURL={comment.writer.profile_image} />
-                    <CommentContainer>
-                      <CommentTab>
-                        <span>{comment.writer.username}</span>
-                        <span>{moment(comment.created_time).fromNow()}</span>
-                      </CommentTab>
-                      <Comment>{comment.content}</Comment>
-                    </CommentContainer>
-                  </SingleComment>
-                );
-              })}
-              <NewComment issueId={data.id} />
+              {data.comments
+                .sort((a: any, b: any) => a.id - b.id)
+                .reverse()
+                .map((comment: any, index: number) => {
+                  return (
+                    <SingleComment>
+                      <User imageURL={comment.writer.profile_image} />
+                      <CommentContainer>
+                        <CommentTab>
+                          <span>{comment.writer.username}</span>
+                          <span>{moment(comment.created_time).fromNow()}</span>
+                        </CommentTab>
+                        <Comment>{comment.content}</Comment>
+                      </CommentContainer>
+                    </SingleComment>
+                  );
+                })}
+              <NewComment issueId={data.id} refetch={refetch} />
             </CommentsContainer>
             <Assignees></Assignees>
+            <Typos xs>이슈 삭제</Typos>
           </MainContainer>
         </LabelListContainer>
       )}

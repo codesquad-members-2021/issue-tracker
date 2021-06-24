@@ -7,7 +7,8 @@ import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Login from './components/login/Login';
 import Main from './components/main/Main';
-import Oauth from './components/login/Oauth';
+import GoogleOauth from './components/login/GoogleOauth';
+import GitHubOauth from './components/login/GitHubOauth';
 
 const queryClient = new QueryClient();
 function App() {
@@ -26,7 +27,8 @@ function App() {
                     <Login />
                   )}
                 </Route>
-                <Route path="/login/github" component={Oauth} />
+                <Route path="/login/github" component={GitHubOauth} />
+                <Route path="/login/google" component={GoogleOauth} />
                 <Route path="/main" component={Main} />
               </Switch>
             </BrowserRouter>
