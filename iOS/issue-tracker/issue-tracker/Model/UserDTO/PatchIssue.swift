@@ -8,6 +8,15 @@
 import Foundation
 
 struct PatchIssue: Encodable {
+    let data: PatchData
+}
+
+struct PatchData: Encodable {
     let issueNumber: [Int]
     let isOpen: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case issueNumber = "issue_ids"
+        case isOpen = "is_open"
+    }
 }
