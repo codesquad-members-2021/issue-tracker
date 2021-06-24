@@ -10,7 +10,7 @@ const CommentInput = ({ isNewIssueMode }) => {
 	return (
 		<Container>
 			{!isNewIssueMode && (
-				<ImgWrapper>
+				<ImgWrapper size="44px">
 					<img src={userInfo.imageUrl} alt={userInfo.gitHubId} />
 				</ImgWrapper>
 			)}
@@ -57,6 +57,7 @@ const Wrapper = styled.div`
 	padding: 1%;
 	background-color: ${({ theme }) => theme.grayScale.input_background};
 	border-radius: 16px;
+	margin-bottom: 2%;
 `;
 
 const TextAreaWrapper = styled.div``;
@@ -67,4 +68,5 @@ const TextArea = styled.textarea`
 	background-color: ${({ theme }) => theme.grayScale.input_background};
 	resize: vertical;
 	width: 100%;
+	height: 400px; //데이지: 고정값으로 바꿨슴다~
 `;

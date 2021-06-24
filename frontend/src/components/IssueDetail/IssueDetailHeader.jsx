@@ -4,7 +4,7 @@ import theme from "styles/theme";
 import EditButton from "components/common/Button/WhiteButtons";
 import CloseButton from "components/common/Button/WhiteButtons";
 import OpenLabel from "styles/OpenLabel";
-const IssueDatailHeader = () => {
+const IssueDetailHeader = () => {
 	return (
 		<>
 			<IssueHeader>
@@ -20,7 +20,7 @@ const IssueDatailHeader = () => {
 								icon="edit"
 								size="m"
 								clickHandler={() => {}}
-							/>{" "}
+							/>
 						</ButtonWrapper>
 						<CloseButton
 							text="이슈 닫기"
@@ -47,7 +47,7 @@ const IssueDatailHeader = () => {
 	);
 };
 
-export default IssueDatailHeader;
+export default IssueDetailHeader;
 
 const Titles = styled.div`
 	display: flex;

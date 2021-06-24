@@ -9,7 +9,6 @@ const LabelBadge = ({ text, fontColor, backgroundColor }) => {
 };
 
 const LabelBadgeLayout = styled.div`
-	position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;

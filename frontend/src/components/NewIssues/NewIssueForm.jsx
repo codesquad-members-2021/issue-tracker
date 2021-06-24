@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import IssueCategoryList from "components/common/IssueCategoryList";
+import IssueCategoryList from "components/common/IssueCategory/IssueCategoryList";
 import CommentInput from "components/common/CommentInput";
 import SubmitBtn from "components/common/Button/BlueButtons";
 import { ReactComponent as Xsquare } from "images/x-square.svg";

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import IssueDetailHeader from "components/IssueDetail/IssueDatailHeader";
+import IssueDetailHeader from "components/IssueDetail/IssueDetailHeader";
 import IssueDetailComments from "components/IssueDetail/IssueDetailComments";
+import IssueCategoryList from "components/common/IssueCategory/IssueCategoryList";
 
 const IssueDetailPage = () => {
 	return (
@@ -8,7 +9,7 @@ const IssueDetailPage = () => {
 			<IssueDetailHeader />
 			<ContentsWrapper>
 				<IssueDetailComments />
-				<div>카테고리 리스트 넣어주셈요~~</div>
+				<IssueCategoryList />
 			</ContentsWrapper>
 		</IssueWrapper>
 	);

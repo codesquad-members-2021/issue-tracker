@@ -70,3 +70,18 @@ export const labelCountState = atom({
 	key: "labelCountState",
 	default: 0,
 });
+
+export const assigneeCategoryState = atom({
+	key: "assigneeCategoryState",
+	default: "",
+});
+
+export const labelCategoryState = atom({
+	key: "labelCategoryState",
+	default: "",
+});
+
+export const milestoneCategoryState = atom({
+	key: "milestoneCategoryState",
+	default: "",
+});
