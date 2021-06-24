@@ -11,10 +11,16 @@ import { useParams } from "react-router-dom";
 import fetchData from "util/fetchData";
 import { commentInputState } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
+import useDebounce from "hooks/useDebounce";
 
 const CommentInput = ({ isNewIssueMode }) => {
 	const userInfo = getUserInfo(); // const { nickName, imageUrl, gitHubId, iss, id, exp }
 	const issueId = useParams().id;
+	const [input, setInput] = useRecoilState(commentInputState);
+	const inputValue = useDebounce(
+		input.content ? input.content.length : 0,
+		1000
+	);
 
 	// 최초 렌더링 input 초기화
 	useEffect(() => {
@@ -23,8 +29,6 @@ const CommentInput = ({ isNewIssueMode }) => {
 			content: "",
 		});
 	}, []);
-
-	const [input, setInput] = useRecoilState(commentInputState);
 
 	const handleInput = text => {
 		setInput({
@@ -39,19 +43,18 @@ const CommentInput = ({ isNewIssueMode }) => {
 		console.log(response);
 	};
 
-	const handleOnSubmit = async e => {
+	const handleOnUpload = async e => {
 		e.preventDefault();
-		console.log("img submitted");
-		const imgFile = await document.querySelector(".img_file");
+		const imgFile = e.target;
 		const formData = await new FormData();
 		await formData.append("image", imgFile.files[0]);
 		const response = await fetchImage(API.image(), "POST", formData);
 		setInput({
 			...issueId,
-			content:
-				input.content + `![${response.image.url}](${response.image.url})`,
+			content: response
+				? input.content + `![${response.image.url}](${response.image.url})`
+				: input.content,
 		});
-		console.log(response.image.url);
 	};
 
 	return (
@@ -71,16 +74,15 @@ const CommentInput = ({ isNewIssueMode }) => {
 							value={input.content}
 						/>
 					</CommentInputWrapper>
-					<form className="img_form" onSubmit={handleOnSubmit}>
-						<Clip />
-						<input
-							className="img_file"
-							type="file"
-							name="image"
-							accept="image/*"
-						/>
-						<button type="submit">이미지 업로드</button>
-					</form>
+					<TextCounter>글자 수 : {inputValue}</TextCounter>
+					<Clip />
+					<input
+						className="img_file"
+						type="file"
+						name="image"
+						accept="image/*"
+						onChange={handleOnUpload}
+					/>
 				</Wrapper>
 				{isNewIssueMode ? (
 					<></>
@@ -131,4 +133,9 @@ const CommentInputMD = styled(MDEditor)`
 	.w-md-editor-toolbar {
 		display: none;
 	}
+`;
+
+const TextCounter = styled.div`
+	text-align: right;
+	color: ${({ theme }) => theme.grayScale.label};
 `;
