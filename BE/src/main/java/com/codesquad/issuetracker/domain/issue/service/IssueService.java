@@ -88,7 +88,7 @@ public class IssueService {
 
     public List<IssueResponse> getIssuesByAssignee(Long userId) {
         List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepository.getIssuesByAssigneeUserId(userId);
+        List<Issue> issues = issueRepositorySupport.findByAssignee(userId);
         for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }
@@ -97,7 +97,7 @@ public class IssueService {
 
     public List<IssueResponse> getIssuesByComment(Long userId) {
         List<IssueResponse> result = new ArrayList<>();
-        List<Issue> issues = issueRepository.getIssuesByCommentUserId(userId);
+        List<Issue> issues = issueRepositorySupport.findByCommentUserId(userId);
         for (Issue issue : issues) {
             result.add(issueToIssueResponse(issue));
         }
@@ -133,7 +133,7 @@ public class IssueService {
     public void updateAssignee(Long issueId, IssueRequest issueRequest) {
         assigneeRepository.deleteAssigneesByIssueId(issueId);
         ArrayList<AssigneeRequest> assigneeList = issueRequest.getAssigneeList();
-        for(AssigneeRequest assigneeRequest : assigneeList) {
+        for (AssigneeRequest assigneeRequest : assigneeList) {
             assigneeRepository.save(Assignee.assigneeRequestToassignee(issueId, assigneeRequest));
         }
     }

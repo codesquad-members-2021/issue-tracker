@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.codesquad.issuetracker.domain.assignee.QAssignee.assignee;
 import static com.codesquad.issuetracker.domain.issue.QIssue.issue;
+import static com.codesquad.issuetracker.domain.comment.QComment.comment;
 
 @Repository
 public class IssueRepositorySupport extends QuerydslRepositorySupport {
@@ -47,21 +48,21 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-//    // 이슈 중 내가 담당자로 포함된 이슈를 가져오기
-//    public List<Issue> findByAssignee(Long userId) {
-//        return queryFactory
-//                .selectFrom(issue)
-//                .leftJoin(issue.assignees, assignee)
-//                .on(assignee.userId.eq(userId))
-//                .fetch();
-//    }
+    public List<Issue> findByAssignee(Long userId) {
+        return queryFactory
+                .selectFrom(issue)
+                .innerJoin(assignee)
+                .on(assignee.issueId.eq(issue.id))
+                .where(assignee.userId.eq(userId))
+                .fetch();
+    }
 
-//    // 내가 댓글을 남긴
-//    public List<Issue> findByCommentUserId() {
-//        return queryFactory
-//                .selectFrom(issue)
-//                .where(issue.comments.)
-//    }
-
-
+    public List<Issue> findByCommentUserId(Long userId) {
+        return queryFactory
+                .selectFrom(issue)
+                .innerJoin(comment)
+                .on(comment.issueId.eq(issue.id))
+                .where(comment.user.id.eq(userId))
+                .fetch();
+    }
 }
