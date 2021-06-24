@@ -34,7 +34,9 @@ class LoginViewController: UIViewController {
             let st = UIStoryboard(name: "Main", bundle: nil)
             let vc = st.instantiateViewController(withIdentifier: "main")
             vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            DispatchQueue.main.async {
+                self.present(vc, animated: true)
+            }
         })
     }
 }
