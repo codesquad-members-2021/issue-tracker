@@ -14,7 +14,7 @@ class MilestoneViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 200
+        tableView.rowHeight = 150
         tableView.register(MilestoneTableViewCell.self, forCellReuseIdentifier: MilestoneTableViewCell.reuseId)
         return tableView
     }()

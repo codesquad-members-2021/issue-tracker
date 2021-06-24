@@ -59,7 +59,7 @@ final class IssueDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .magenta
+        view.backgroundColor = .systemBackground
 
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showIssueDetailInfo))
