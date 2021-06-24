@@ -2,6 +2,8 @@ package com.issuetracker.service;
 
 import com.issuetracker.domain.comment.Comment;
 import com.issuetracker.domain.issue.Issue;
+import com.issuetracker.domain.elasticsearch.IssueDocument;
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class IssueCommandService {
 
     private final IssueRepository issueRepository;
+    private final IssueDocumentRepository issueDocumentRepository;
     private final LabelService labelService;
     private final MilestoneService milestoneService;
     private final UserService userService;
@@ -32,6 +35,9 @@ public class IssueCommandService {
     public void changeIssueStatus(IssueNumbersRequestDTO requestDTO, String status) {
         boolean newStatus = !Status.statusToBoolean(status);
         issueRepository.updateStatusBy(newStatus, requestDTO.getIssueNumbers());
+        requestDTO.getIssueNumbers().stream()
+                .map(this::findIssueById)
+                .forEach(this::synchronizeIssue);
     }
 
     public IssueNumberResponseDTO createIssue(IssueRequestDTO issueRequestDTO, Long userId) {
@@ -43,12 +49,16 @@ public class IssueCommandService {
                 userService.findAssignees(issueRequestDTO.getAssignees()),
                 milestoneService.findMilestoneById(issueRequestDTO.getMilestone())
         );
-        return new IssueNumberResponseDTO(issueRepository.save(issue).getId());
+        Issue savedIssue = issueRepository.save(issue);
+        synchronizeIssue(savedIssue);
+        return new IssueNumberResponseDTO(savedIssue.getId());
     }
 
     public IssueTitleDTO updateIssueTitle(Long issueId, IssueTitleDTO issueTitleDTO) {
         Issue updatedIssue = findIssueById(issueId).update(issueTitleDTO);
-        return IssueTitleDTO.of(issueRepository.save(updatedIssue));
+        Issue savedIssue = issueRepository.save(updatedIssue);
+        synchronizeIssue(savedIssue);
+        return IssueTitleDTO.of(savedIssue);
     }
 
     public void updateAssignees(Long issueId, AssigneesToUpdateRequestDTO assigneesToUpdateRequestDTO) {
@@ -58,7 +68,7 @@ public class IssueCommandService {
                 .map(Assignee::getId)
                 .collect(Collectors.toList());
         issue.updateAssignees(userService.findAssignees(assigneeIds));
-        issueRepository.save(issue);
+        synchronizeIssue(issueRepository.save(issue));
     }
 
     public void updateLabels(Long issueId, LabelsToUpdateRequestDTO labelsToUpdateRequestDTO) {
@@ -68,20 +78,21 @@ public class IssueCommandService {
                 .map(LabelDTO::getId)
                 .collect(Collectors.toList());
         issue.updateLabels(labelService.findLabels(labelIds));
-        issueRepository.save(issue);
+        synchronizeIssue(issueRepository.save(issue));
     }
 
     public void updateMilestone(Long issueId, MilestoneToUpdateRequestDTO milestoneDTO) {
         Issue issue = findIssueById(issueId);
-        Milestone milestone = milestoneDTO.checkMilestoneId() ? Milestone.create(milestoneDTO.getMilestone()) : null;
+        Milestone milestone = milestoneDTO.checkMilestoneId() ? milestoneService.findMilestoneById(milestoneDTO.getMilestoneId()) : null;
         issue.updateMilestone(milestone);
-        issueRepository.save(issue);
+        synchronizeIssue(issueRepository.save(issue));
     }
 
     public CommentDTO createComment(Long userId, Long issueId, CommentDTO commentDTO) {
         User user = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Issue updatedIssue = issueRepository.save(issue.addComment(Comment.create(user, commentDTO.getComment())));
+        synchronizeIssue(updatedIssue);
         return CommentDTO.createCommentDTO(user, updatedIssue, updatedIssue.getLastComment());
     }
 
@@ -89,25 +100,29 @@ public class IssueCommandService {
         User user = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchCommentId(commentDTO.getId()) && comment.matchAuthor(user))
+                .filter(comment -> comment.matchCommentId(commentDTO.getId()) && comment.verifyAuthor(user))
                 .findFirst()
                 .orElseThrow(CommentNotFoundException::new);
         targetComment.update(commentDTO.getComment());
-        issueRepository.save(issue);
+        synchronizeIssue(issueRepository.save(issue));
     }
 
     public void deleteComment(Long userId, Long issueId, Long commentId) {
         User loginUser = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchCommentId(commentId) && comment.matchAuthor(loginUser))
+                .filter(comment -> comment.matchCommentId(commentId) && comment.verifyAuthor(loginUser))
                 .findFirst()
                 .orElseThrow(CommentNotFoundException::new);
         issue.deleteComment(targetComment);
-        issueRepository.save(issue);
+        synchronizeIssue(issueRepository.save(issue));
     }
 
     private Issue findIssueById(Long id) {
         return issueRepository.findById(id).orElseThrow(CommentNotFoundException::new);
+    }
+
+    private void synchronizeIssue(Issue issue) {
+        issueDocumentRepository.save(IssueDocument.of(issue));
     }
 }

@@ -20,10 +20,16 @@ public class IssueController {
     private final IssueCommandService issueCommandService;
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
+    @GetMapping("/search")
+    public IssuesResponseDTO search(SearchRequestDTO searchRequest) {
+        logger.debug("검색어와 상태에 따른 이슈 조회");
+        return issueQueryService.searchIssues(searchRequest);
+    }
+
     @GetMapping
-    public IssuesResponseDTO view(SearchRequestDTO requestDTO) {
+    public IssuesResponseDTO view(FilterRequestDTO filterRequest) {
         logger.debug("모든 이슈 조회");
-        return issueQueryService.getIssues(requestDTO);
+        return issueQueryService.filterIssues(filterRequest);
     }
 
     @PatchMapping
@@ -94,7 +100,7 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/milestones")
-    public void updateMilestones(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
+    public void updateMilestone(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
         logger.debug("이슈의 마일스톤 편집");
         logger.debug("이슈의 마일스톤 편집 요청 확인: {}", milestonesToUpdateRequestDTO.toString());
         issueCommandService.updateMilestone(issueId, milestonesToUpdateRequestDTO);

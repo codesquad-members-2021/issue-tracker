@@ -1,5 +1,7 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.exception.LabelNotFoundException;
 import com.issuetracker.web.dto.response.LabelDTO;
 import com.issuetracker.domain.issue.Issue;
@@ -19,6 +21,7 @@ public class LabelService {
 
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
+    private final IssueDocumentRepository issueDocumentRepository;
 
     public List<Label> findLabels(List<Long> labelIds) {
         return labelRepository.findAllById(labelIds);
@@ -39,11 +42,15 @@ public class LabelService {
     public void update(Long labelId, LabelDTO newLabelInfo) {
         Label label = findLabelById(labelId);
         label.update(newLabelInfo);
-        labelRepository.save(label);
+        Label updatedLabel = labelRepository.save(label);
+        updatedLabel.getIssues().forEach(this::synchronizeIssue);
     }
 
     public void delete(Long labelId) {
         Label label = findLabelById(labelId);
+        label.getIssues().stream()
+                .map(issue -> issue.deleteLabel(label))
+                .forEach(this::synchronizeIssue);
         labelRepository.delete(label);
     }
 
@@ -63,6 +70,12 @@ public class LabelService {
                 .collect(Collectors.toList());
     }
 
+    public List<LabelDTO> labelDocumentsToLabelDTOs(IssueDocument issueDocument) {
+        return issueDocument.getLabels().stream()
+                .map(LabelDTO::of)
+                .collect(Collectors.toList());
+    }
+
     public List<LabelDTO> getCheckedLabels(Issue issue) {
         return issue.getLabels().stream()
                 .map(label -> LabelDTO.of(label, true))
@@ -78,5 +91,9 @@ public class LabelService {
 
     public long count() {
         return labelRepository.count();
+    }
+
+    private void synchronizeIssue(Issue issue) {
+        issueDocumentRepository.save(IssueDocument.of(issue));
     }
 }

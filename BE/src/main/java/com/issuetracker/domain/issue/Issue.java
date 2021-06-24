@@ -78,18 +78,20 @@ public class Issue extends BaseTimeEntity {
         this.labels = labels;
     }
 
-    public void deleteLabel(Label targetLabel) {
+    public Issue deleteLabel(Label targetLabel) {
         this.labels = this.labels.stream()
                 .filter(label -> !label.equals(targetLabel))
                 .collect(Collectors.toList());
+        return this;
     }
 
     public void updateMilestone(Milestone milestone) {
         this.milestone = milestone;
     }
 
-    public void deleteMilestone() {
+    public Issue deleteMilestone() {
         this.milestone = null;
+        return this;
     }
 
     public String getMilestoneTitle() {

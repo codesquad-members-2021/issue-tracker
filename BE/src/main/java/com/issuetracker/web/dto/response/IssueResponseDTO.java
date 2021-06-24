@@ -1,5 +1,6 @@
 package com.issuetracker.web.dto.response;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
 import com.issuetracker.web.dto.vo.Assignee;
 import com.issuetracker.domain.issue.Issue;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,20 @@ public class IssueResponseDTO {
                 .assignees(assignees)
                 .labels(labels)
                 .milestone(issue.getMilestoneTitle())
+                .build();
+    }
+
+    public static IssueResponseDTO of(IssueDocument issueDocument, List<Assignee> assignees, List<LabelDTO> labels) {
+        return IssueResponseDTO.builder()
+                .id(issueDocument.getId())
+                .title(issueDocument.getTitle())
+                .comment(issueDocument.getFirstComment())
+                .authorAvatarUrl(issueDocument.getAuthor().getAvatarUrl())
+                .createdDateTime(issueDocument.getCreatedDateTime())
+                .commentNumber(issueDocument.getCommentNumber())
+                .assignees(assignees)
+                .labels(labels)
+                .milestone(issueDocument.getMilestoneTitle())
                 .build();
     }
 }

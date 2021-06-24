@@ -1,5 +1,6 @@
 package com.issuetracker.web.dto.response;
 
+import com.issuetracker.domain.elasticsearch.LabelDocument;
 import com.issuetracker.domain.label.Color;
 import com.issuetracker.domain.label.Label;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,16 @@ public class LabelDTO {
                 .color(label.getColor())
                 .description(label.getDescription())
                 .isChecked(isChecked)
+                .build();
+    }
+
+    public static LabelDTO of(LabelDocument labelDocument) {
+        return LabelDTO.builder()
+                .id(labelDocument.getId())
+                .name(labelDocument.getName())
+                .color(labelDocument.getColor())
+                .description(labelDocument.getDescription())
+                .isChecked(true)
                 .build();
     }
 }
