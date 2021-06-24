@@ -5,7 +5,7 @@ const IssueCategoryList = () => {
 	return (
 		<>
 			<Layout>
-				<IssueCategory category={"assignee"}></IssueCategory>
+				<IssueCategory category={"assignee"} />
 				<IssueCategory category={"label"} />
 				<IssueCategory category={"milestone"} />
 			</Layout>

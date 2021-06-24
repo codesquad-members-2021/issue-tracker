@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
-const IssueCategoryModal = ({ type }) => {
+const IssueCategoryModal = ({ data }) => {
 	return (
 		<ModalContainer>
-			<Title>담당자 추가</Title>
+			<Title>ooo 추가</Title>
 			<Row>
 				<Contents>
 					<ImgWrapper size="22px">

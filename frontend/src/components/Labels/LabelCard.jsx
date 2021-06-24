@@ -39,7 +39,7 @@ const LabelCard = ({ initialData }) => {
 							text={name}
 							fontColor={textColor}
 							backgroundColor={backgroundColor}
-						></LabelBadge>
+						/>
 					</CenterJcAi>
 					<CenterAi>
 						<LabelDescription>{description}</LabelDescription>

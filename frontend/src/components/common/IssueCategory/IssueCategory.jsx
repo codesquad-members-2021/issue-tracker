@@ -1,15 +1,40 @@
 import styled from "styled-components";
+import Assignee from "./Assignee";
+import Label from "./Label";
 import { ReactComponent as PlusIcon } from "images/plus.svg";
 import theme from "styles/theme";
-import LabelBadge from "components/common/LabelBadge";
+import {
+	assigneeCategoryState,
+	labelCategoryState,
+	milestoneCategoryState,
+} from "RecoilStore/Atoms";
 import IssueCategoryModal from "./IssueCategoryModal";
 import { ImgWrapper } from "styles/StyledLayout";
+import { useReducer, useState } from "react";
+import fetchData from "util/fetchData";
+import API from "util/API";
+import { useSetRecoilState } from "recoil";
 const IssueCategory = ({ category }) => {
-	const initialCategory = {
-		assignee: null,
-		label: null,
-		milestone: null,
+	const setAssignee = useSetRecoilState(assigneeCategoryState); //여기서 부터 하면 됨 넘 졸려
+	const initialFlagState = {
+		assignee: false,
+		label: false,
+		milestone: false,
 	};
+
+	const flagReducer = (state, { type }) => {
+		switch (type) {
+			case "assignee":
+				return { ...initialFlagState, assignee: !state.assignee };
+			case "label":
+				return { ...initialFlagState, label: !state.label };
+			case "milestone":
+				return { ...initialFlagState, milestone: !state.milestone };
+		}
+	};
+	const [flagState, flagDispatch] = useReducer(flagReducer, initialFlagState);
+	const [currentModalData, setCurrentModalData] = useState();
+
 	const getTitleText = () => {
 		switch (category) {
 			case "assignee":
@@ -22,8 +47,24 @@ const IssueCategory = ({ category }) => {
 				console.error("unhandled TitleText type!!");
 		}
 	};
-	const handleAddFilter = () => {
-		console.log("clicked");
+	const handleAddFilter = async () => {
+		await flagDispatch({ type: category });
+		console.log("teat", flagState[`${category}`]);
+		if (category === "assignee") {
+			const { users } = await fetchData(API.users());
+			setCurrentModalData(users);
+			console.log(users);
+		} else if (category === "label") {
+			const { labels } = await fetchData(API.labels());
+			setCurrentModalData(labels);
+			console.log(labels);
+		} else if (category === "milestone") {
+			const { milestones } = await fetchData(API.milestones());
+			console.log(milestones);
+		}
+
+		//카테고리에 맞는 get을한다
+		//카테고리에 맞는 key를 찾아 그 상태에 저장한다. 리듀서
 	};
 
 	return (
@@ -32,37 +73,23 @@ const IssueCategory = ({ category }) => {
 				<TitleText>{getTitleText(category)}</TitleText>
 				<Icon stroke={theme.grayScale.label} onClick={handleAddFilter} />
 			</HeaderContainer>
-
 			{category === "assignee" && (
 				<>
-					<ContentsContainer>
-						<ImgWrapper size="44px">
-							<img
-								src="https://avatars.githubusercontent.com/u/56783350?v=4"
-								alt="유저이름"
-							/>
-						</ImgWrapper>
-						<ContentsText>유저이름</ContentsText>
-					</ContentsContainer>
-					{/* <IssueCategoryModal /> */}
+					<Assignee />
+					{flagState.assignee && <IssueCategoryModal data={currentModalData} />}
 				</>
 			)}
 			{category === "label" && (
 				<>
-					<ContentsContainer>
-						<LabelBadge
-							text="hiGoody"
-							fontColor="#f5e1e1"
-							backgroundColor="#e04b4b"
-						/>
-					</ContentsContainer>
-					<IssueCategoryModal />
+					<Label data={currentModalData} />
+					{flagState.label && <IssueCategoryModal />}
 				</>
 			)}
 			{category === "milestone" && (
 				<>
 					<MilestoneTotalProgressBar />
 					<ContentsText>마스터즈 코스 수료</ContentsText>
+					{flagState.milestone && <IssueCategoryModal />}
 				</>
 			)}
 		</Layout>

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import IssueDetailHeader from "components/IssueDetail/IssueDetailHeader";
 import IssueDetailComments from "components/IssueDetail/IssueDetailComments";
-import IssueCategoryList from "components/common/IssueCategoryList";
+import IssueCategoryList from "components/common/IssueCategory/IssueCategoryList";
+
 const IssueDetailPage = () => {
 	return (
 		<IssueWrapper>
