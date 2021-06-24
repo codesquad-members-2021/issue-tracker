@@ -37,9 +37,13 @@ class MilestoneViewModel {
         let description = milestone["description"]
         let dueDate = milestone["dueDate"]
         let mile = Milestone(id: 1, title: title, description: description, createdTime: nil, dueDate: dueDate, closedIssueCount: nil, openedIssueCount: nil)
-        networkManager.postRequest(url: url, encodable: mile) { [weak self] in
-            // completion handler table view reload
-            self?.fetch()
+        networkManager.postRequest(url: url, encodable: mile) { result in
+            switch result {
+            case .success:
+                CustomAlertView.shared.setUpAlertView(title: "성공", message: "라벨이 등록되었습니다.", buttonTitle: "확인", alertType: .success, buttonHandler: { self.fetch() })
+            case .failure:
+                CustomAlertView.shared.setUpAlertView(title: "실패", message: "서버가 불안정합니다. 다시 시도해주세요.", buttonTitle: "확인", alertType: .failure, buttonHandler: nil)
+            }   
         }
     }
 }

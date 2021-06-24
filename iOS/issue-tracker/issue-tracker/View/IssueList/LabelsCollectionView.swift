@@ -22,7 +22,7 @@ final class LabelsCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: labelsLayout)
         register(LabelsCollectionViewCell.self, forCellWithReuseIdentifier: LabelsCollectionViewCell.identifiers)
         isScrollEnabled = false
-        backgroundColor = .white
+        backgroundColor = .systemYellow
     }
 
     required init?(coder: NSCoder) {

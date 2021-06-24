@@ -25,6 +25,7 @@
 		B34FF73E267AE9D8002D9C56 /* EstimatedLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */; };
 		B34FF741267B8800002D9C56 /* AddLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */; };
 		B366CA41268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		B366CA43268370BA00C97190 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B366CA42268370BA00C97190 /* CustomAlertView.swift */; };
 		B3926D6B2681B59800F72CEE /* PatchIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3926D6A2681B59800F72CEE /* PatchIssue.swift */; };
 		B3A5CB58267840290060DC85 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB57267840290060DC85 /* LabelListViewModel.swift */; };
 		B3A5CB5B26784AA50060DC85 /* LabelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5CB5A26784AA50060DC85 /* LabelList.swift */; };
@@ -119,6 +120,7 @@
 		B34FF73D267AE9D8002D9C56 /* EstimatedLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatedLabelView.swift; sourceTree = "<group>"; };
 		B34FF740267B8800002D9C56 /* AddLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelTableViewCell.swift; sourceTree = "<group>"; };
 		B366CA40268319AC00C97190 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		B366CA42268370BA00C97190 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		B3926D6A2681B59800F72CEE /* PatchIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchIssue.swift; sourceTree = "<group>"; };
 		B3A5CB57267840290060DC85 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		B3A5CB5A26784AA50060DC85 /* LabelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelList.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		49903DAC266F558700D2A6DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B366CA44268370C100C97190 /* Alert */,
 				B32FEAC42671DCD200BF37A1 /* IssueList */,
 				D0FD50F12671B108008C6031 /* Label */,
 				D0FD50ED2671B0E8008C6031 /* Milestone */,
@@ -249,6 +252,14 @@
 				D0FD50DB2671AA04008C6031 /* InputView.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B366CA44268370C100C97190 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				B366CA42268370BA00C97190 /* CustomAlertView.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		B3A5CB59267840310060DC85 /* ViewModel */ = {
@@ -677,6 +688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B366CA43268370BA00C97190 /* CustomAlertView.swift in Sources */,
 				B3F527512670968F002B0812 /* LabelViewController.swift in Sources */,
 				D0A88E0226732D21005877F6 /* NewIssueViewController.swift in Sources */,
 				B3FBA7B726730B9A0006E5E6 /* IssueToolbar.swift in Sources */,

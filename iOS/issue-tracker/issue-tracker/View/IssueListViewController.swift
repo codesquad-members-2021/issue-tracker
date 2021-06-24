@@ -41,7 +41,6 @@ final class IssueListViewController: UIViewController {
         bindButton()
         bindSelectMode()
         bindIssueToolBar()
-        bindSearchController()
         issueListViewModel.fetchIssueList()
     }
 
@@ -54,7 +53,7 @@ final class IssueListViewController: UIViewController {
         issueListViewModel.issueList
             .bind(to: issueTableView.rx.items) { tableView, _, issue in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: IssueTableViewCell.identifier) as? IssueTableViewCell else { return UITableViewCell() }
-                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, relay: Observable<BehaviorRelay<[IssueLabel]>>.just(BehaviorRelay(value: issue.labels)))
+                cell.setupIssueCell(title: issue.title, description: nil, milestoneTitle: issue.milestone?.title, issueLabels: issue.labels)
             return cell
         }
         .disposed(by: bag)
@@ -165,22 +164,6 @@ final class IssueListViewController: UIViewController {
             .disposed(by: bag)
     }
 
-    private func bindSearchController() {
-        searchController.searchBar.searchTextField.rx.text
-            .bind { [weak self] text in
-                guard let text = text?.lowercased(), let self = self else { return }
-                let filteredArr = self.issueListViewModel.issueList.value.filter { $0.title.localizedCaseInsensitiveContains(text) }
-                self.issueListViewModel.issueList.accept(filteredArr)
-            }
-            .disposed(by: bag)
-
-        searchController.rx.didDismiss
-            .subscribe { [weak self] _ in
-//                self?.issueListViewModel.fetchIssueList()
-            }
-            .disposed(by: bag)
-    }
-
     private func filterButtonTapped() {
         let controller = UINavigationController(rootViewController: IssueFilterViewController())
         present(controller, animated: true)
@@ -203,6 +186,9 @@ final class IssueListViewController: UIViewController {
 
     private func cancelButtonTapped() {
         issueListViewModel.selectedCell.accept([])
+        setupNavigationItem()
+        tabBarController?.tabBar.isHidden = false
+        issueToolbar.removeFromSuperview()
         guard let indexPath = issueTableView.indexPathsForSelectedRows else { return }
         for i in indexPath {
             issueTableView.deselectRow(at: i, animated: false)
@@ -210,9 +196,6 @@ final class IssueListViewController: UIViewController {
                 cell.uncheck()
             }
         }
-        setupNavigationItem()
-        tabBarController?.tabBar.isHidden = false
-        issueToolbar.removeFromSuperview()
     }
 
     private func setupAddIssueButtonAutolayout() {
@@ -245,6 +228,7 @@ final class IssueListViewController: UIViewController {
         issueTableView.allowsMultipleSelection = true
         issueTableView.delegate = self
         issueTableView.tableFooterView = IssueTableFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+        issueTableView.separatorStyle = .none
     }
 }
 

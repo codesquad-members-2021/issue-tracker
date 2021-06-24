@@ -42,6 +42,9 @@ final class LabelViewController: UIViewController {
     @objc private func addLabelButtonTapped() {
         let viewController = AddLabelViewController()
         let navigationViewController = UINavigationController(rootViewController: viewController)
+        viewController.reloadDataHandler = { [weak self] in
+            self?.labelListViewModel.fetchLabelList()
+        }
         present(navigationViewController, animated: true, completion: nil)
     }
 

@@ -10,9 +10,9 @@ import Alamofire
 
 protocol Networkable {
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void)
-    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void)
-    func deleteRequest(url: URL, completion: @escaping () -> Void)
-    func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void)
+    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping (Result<Data?, AFError>) -> Void)
+    func deleteRequest(url: URL, completion: @escaping (Result<Data?, AFError>) -> Void)
+    func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping (Result<Data?, AFError>) -> Void)
 }
 
 class NetworkManager: Networkable {
@@ -31,42 +31,27 @@ class NetworkManager: Networkable {
             }
     }
 
-    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void) {
+    func postRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping (Result<Data?, AFError>) -> Void) {
         AF.request(url, method: .post, parameters: encodable, encoder: JSONParameterEncoder.default, headers: httpHeaders)
             .validate(statusCode: 200..<300)
             .response { response in
-                switch response.result {
-                case .success :
-                    completion()
-                case .failure(let error):
-                    print(error)
-                }
+                completion(response.result)
             }
     }
 
-    func deleteRequest(url: URL, completion: @escaping () -> Void) {
+    func deleteRequest(url: URL, completion: @escaping (Result<Data?, AFError>) -> Void) {
         AF.request(url, method: .delete)
             .validate(statusCode: 200..<300)
             .response { response in
-                switch response.result {
-                case .success:
-                    completion()
-                case .failure(let error):
-                    print(error)
-                }
+                completion(response.result)
             }
     }
 
-    func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping () -> Void) {
+    func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping (Result<Data?, AFError>) -> Void) {
         AF.request(url, method: .patch, parameters: encodable, encoder: JSONParameterEncoder.default)
             .validate(statusCode: 200..<300)
             .response { response in
-                switch response.result {
-                case .success:
-                    completion()
-                case .failure(let error):
-                    print(error)
-                }
+                completion(response.result)
             }
     }
 }
