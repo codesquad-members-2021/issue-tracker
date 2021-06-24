@@ -100,7 +100,7 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}/milestones")
-    public void updateMilestones(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
+    public void updateMilestone(@PathVariable Long issueId, @RequestBody MilestoneToUpdateRequestDTO milestonesToUpdateRequestDTO) {
         logger.debug("이슈의 마일스톤 편집");
         logger.debug("이슈의 마일스톤 편집 요청 확인: {}", milestonesToUpdateRequestDTO.toString());
         issueCommandService.updateMilestone(issueId, milestonesToUpdateRequestDTO);

@@ -2,6 +2,7 @@ package com.issuetracker.domain.comment;
 
 import com.issuetracker.domain.BaseTimeEntity;
 import com.issuetracker.domain.user.User;
+import com.issuetracker.exception.IllegalUserAccessException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +51,13 @@ public class Comment extends BaseTimeEntity {
 
     public boolean matchAuthor(User user) {
         return author.equals(user);
+    }
+
+    public boolean verifyAuthor(User user) {
+        if (author.equals(user)) {
+            return true;
+        }
+        throw new IllegalUserAccessException();
     }
 
     public boolean matchCommentId(Long commentId) {

@@ -30,7 +30,6 @@ public class IssueQueryService {
     private final UserService userService;
 
     public IssuesResponseDTO searchIssues(SearchRequestDTO searchRequestDTO) {
-        System.out.println(searchRequestDTO.getQuery());
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.countByIsOpen(true))
