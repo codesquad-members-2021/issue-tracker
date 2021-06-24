@@ -126,3 +126,11 @@ export const categorySelector = selector({
 		}
 	},
 });
+
+export const commentInputState = atom({
+	key: "commentInputState",
+	default: {
+		issueId: null,
+		content: "",
+	},
+});

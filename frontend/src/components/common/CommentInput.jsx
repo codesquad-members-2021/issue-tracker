@@ -4,26 +4,39 @@ import AddCommentButton from "components/common/Button/BlueButtons";
 import { ImgWrapper } from "styles/StyledLayout";
 import getUserInfo from "util/getUserInfo";
 import MDEditor from "@uiw/react-md-editor";
-import { useState } from "react";
+import { useEffect } from "react";
 import API from "util/API";
 import fetchImage from "util/fetchImage";
+import { useParams } from "react-router-dom";
+import fetchData from "util/fetchData";
+import { commentInputState } from "RecoilStore/Atoms";
+import { useRecoilState } from "recoil";
 
 const CommentInput = ({ isNewIssueMode }) => {
 	const userInfo = getUserInfo(); // const { nickName, imageUrl, gitHubId, iss, id, exp }
-	const [input, setInput] = useState("");
+	const issueId = useParams().id;
+
+	// 최초 렌더링 input 초기화
+	useEffect(() => {
+		setInput({
+			...issueId,
+			content: "",
+		});
+	}, []);
+
+	const [input, setInput] = useRecoilState(commentInputState);
 
 	const handleInput = text => {
-		setInput(text);
-		console.log(text);
+		setInput({
+			...issueId,
+			content: text,
+		});
 	};
 
-	const submitComment = () => {
-		// input 을 서버로 POST
-	};
-
-	const handleInputFileChange = e => {
-		const files = e.target.files;
-		console.log(files);
+	const submitComment = async () => {
+		console.log("comment posted");
+		const response = await fetchData(API.comment(), "POST", input);
+		console.log(response);
 	};
 
 	const handleOnSubmit = async e => {
@@ -33,7 +46,11 @@ const CommentInput = ({ isNewIssueMode }) => {
 		const formData = await new FormData();
 		await formData.append("image", imgFile.files[0]);
 		const response = await fetchImage(API.image(), "POST", formData);
-		setInput(input + `![${response.image.url}](${response.image.url})`);
+		setInput({
+			...issueId,
+			content:
+				input.content + `![${response.image.url}](${response.image.url})`,
+		});
 		console.log(response.image.url);
 	};
 
@@ -51,7 +68,7 @@ const CommentInput = ({ isNewIssueMode }) => {
 							height={400}
 							placeholder="이슈 코멘트 입력"
 							onChange={handleInput}
-							value={input}
+							value={input.content}
 						/>
 					</CommentInputWrapper>
 					<form className="img_form" onSubmit={handleOnSubmit}>
@@ -61,9 +78,8 @@ const CommentInput = ({ isNewIssueMode }) => {
 							type="file"
 							name="image"
 							accept="image/*"
-							onChange={handleInputFileChange}
 						/>
-						<button type="submit">Submit Img</button>
+						<button type="submit">이미지 업로드</button>
 					</form>
 				</Wrapper>
 				{isNewIssueMode ? (
@@ -115,8 +131,4 @@ const CommentInputMD = styled(MDEditor)`
 	.w-md-editor-toolbar {
 		display: none;
 	}
-`;
-
-const ImgForm = styled.form`
-	display: flex;
 `;
