@@ -5,20 +5,45 @@ import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
 import { ReactComponent as CloseIssue } from 'icons/closeIssue.svg';
 import MilestoneBar from './MilestoneBar';
 import { MilestoneBarType } from 'types/issueType';
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import useAxios from 'hook/useAxios';
+import { milestoneUpdateAtom } from 'stores/milestoneStore';
 const MilestonesItemRight = ({
+  id,
   editClickHandler,
   openedIssueCount,
   closedIssueCount,
-}: MilestoneBarType & { editClickHandler: (e: MouseEvent) => void }) => {
+}: MilestoneBarType & {
+  id: number;
+  editClickHandler: (e: MouseEvent) => void;
+}) => {
   const percent =
     (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
+
+  const setMilestoneUpdate = useSetRecoilState(milestoneUpdateAtom);
+  const [toggle, setToggle] = useState(false);
+  const { isSuccess } = useAxios(toggle, `/api/milestones/${id}`, 'DELETE');
+  const deleteClickHandler = (e: MouseEvent) => {
+    setToggle(true);
+  };
+  useEffect(() => {
+    if (isSuccess) setMilestoneUpdate((cur) => ++cur);
+    setToggle(false);
+  }, [isSuccess, setMilestoneUpdate]);
+
   return (
     <StyledDiv>
       <StyledButtons>
         <Button startIcon={<CloseIcon />}>닫기</Button>
-        <Button onClick={editClickHandler} startIcon={<EditIcon />}>편집</Button>
-        <Button color="secondary" startIcon={<DeleteIcon />}>
+        <Button onClick={editClickHandler} startIcon={<EditIcon />}>
+          편집
+        </Button>
+        <Button
+          onClick={deleteClickHandler}
+          color="secondary"
+          startIcon={<DeleteIcon />}
+        >
           삭제
         </Button>
       </StyledButtons>

@@ -3,48 +3,16 @@ import Label from 'components/common/Label';
 import CreateButton from 'components/buttons/CreateButton';
 import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as XSvg } from 'icons/Xicon.svg';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import LabelTextColorInput from './LabelTextColorInput';
 import LabelColorInput from './LabelColorInput';
 import { LabelItemType } from 'types/issueType';
 import { useReducer } from 'react';
-import useAxios from 'hook/useAxios';
 import { labelUpdateAtom } from 'store';
 import { useSetRecoilState } from 'recoil';
-import { useEffect } from 'react';
 import axios from 'axios';
-
-type Action =
-  | { type: 'Title'; payload: string }
-  | { type: 'Description'; payload: string }
-  | { type: 'LabelColor'; payload: string }
-  | { type: 'TextColor'; payload: 'dark' | 'light' };
-
-function labelReducer(state: LabelItemType, action: Action): LabelItemType {
-  switch (action.type) {
-    case 'Title':
-      return {
-        ...state,
-        title: action.payload,
-      };
-    case 'Description':
-      return {
-        ...state,
-        description: action.payload,
-      };
-    case 'LabelColor':
-      return {
-        ...state,
-        labelColor: action.payload,
-      };
-    case 'TextColor':
-      return {
-        ...state,
-        textColor: action.payload,
-      };
-  }
-}
+import { labelReducer } from 'utils/reducer';
 
 const labelParser = (str: string | null) => {
   switch (str) {

@@ -25,10 +25,10 @@ const MilestonesItem = ({
       <StyledMilestonesItem>
         <MilestonesItemLeft {...{ title, description, dueDate }} />
         <MilestonesItemRight
-          {...{ editClickHandler, openedIssueCount, closedIssueCount }}
+          {...{ id,editClickHandler, openedIssueCount, closedIssueCount }}
         />
       </StyledMilestonesItem>
-      {popup && <MilestoneEdit />}
+      {popup && <MilestoneEdit {...{id, editClickHandler,title, description, dueDate }}/>}
     </>
   );
 };

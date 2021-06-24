@@ -1,6 +1,6 @@
 import { MilestonesItemProps } from './../types/issueType';
 import axios from 'axios';
-import { selector } from 'recoil';
+import { selector, atom } from 'recoil';
 import { MilestoneDataType } from 'types/storeTypes';
 
 export const milestoneQuery = selector<MilestonesItemProps[]>({
@@ -28,9 +28,16 @@ export const milestoneQuery = selector<MilestonesItemProps[]>({
   },
 });
 
+
+export const milestoneUpdateAtom = atom<number>({
+  key: 'milestoneUpdateAtom',
+  default: 0,
+});
+
 export const openedMilestoneQuery = selector<MilestonesItemProps[]>({
   key: 'openedMilestoneQuery',
-  get: async () => {
+  get: async ({get}) => {
+    get(milestoneUpdateAtom)
     const token = localStorage.getItem('jwt');
     try {
       const { data } = await axios.get(
@@ -59,7 +66,8 @@ export const openedMilestoneQuery = selector<MilestonesItemProps[]>({
 
 export const closedMilestoneQuery = selector<MilestonesItemProps[]>({
   key: 'closedMilestoneQuery',
-  get: async () => {
+  get: async ({get}) => {
+    get(milestoneUpdateAtom)
     const token = localStorage.getItem('jwt');
     try {
       const { data } = await axios.get(
