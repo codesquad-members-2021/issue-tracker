@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
 import getCategoryText from "util/getCategoryText.js";
@@ -8,7 +9,7 @@ import {
 	labelCategoryState,
 	milestoneCategoryState,
 } from "RecoilStore/Atoms";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import fetchData from "util/fetchData";
 import API from "util/API";
 const IssueCategoryModal = ({ category, data }) => {
@@ -19,6 +20,8 @@ const IssueCategoryModal = ({ category, data }) => {
 	const [milestoneCategory, setMilestoneCategory] = useRecoilState(
 		milestoneCategoryState
 	);
+
+	// 초기 화면 렌더링 시 카테고리 모달 상태 초기화
 
 	//아래 코드는 리팩토링 예정!!!-----중복코드---------------------------
 	const handleCheckAssignee = e => {

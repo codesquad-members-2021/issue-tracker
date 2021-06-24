@@ -5,14 +5,27 @@ import CommentInput from "components/common/CommentInput";
 import SubmitBtn from "components/common/Button/BlueButtons";
 import { ReactComponent as Xsquare } from "images/x-square.svg";
 import getUserInfo from "util/getUserInfo";
-import { commentInputState, categoryIdSelectorState } from "RecoilStore/Atoms";
-import { useRecoilValue } from "recoil";
+import {
+	commentInputState,
+	categoryIdSelectorState,
+	assigneeCategoryState,
+	labelCategoryState,
+	milestoneCategoryState,
+} from "RecoilStore/Atoms";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { useState } from "react";
 import fetchData from "util/fetchData";
 import API from "util/API";
 
 const NewIssueForm = () => {
 	const userInfo = getUserInfo();
+
+	const resetAssigneeCategoryState = useResetRecoilState(assigneeCategoryState);
+	const resetLabelCategoryState = useResetRecoilState(labelCategoryState);
+	const resetMilestoneCategoryState = useResetRecoilState(
+		milestoneCategoryState
+	);
+
 	const [issueTitle, setIssueTitle] = useState("");
 	const commentValue = useRecoilValue(commentInputState);
 	const categoryId = useRecoilValue(categoryIdSelectorState);
@@ -41,6 +54,11 @@ const NewIssueForm = () => {
 		};
 		const res = await fetchData(API.issues(), "POST", requestBody);
 		console.log(res);
+		resetAssigneeCategoryState();
+		resetLabelCategoryState();
+		resetMilestoneCategoryState();
+		//상태 리셋하기
+		// 이슈 상세페이지로 가기
 	};
 
 	return (
