@@ -13,7 +13,7 @@ class MilestoneViewModel {
     private let networkManager = NetworkManager()
     var subject: BehaviorRelay<[Milestone]> = BehaviorRelay<[Milestone]>(value: [])
     var milestone: [String: String] = [:]
-    var completion: (() -> Void)?
+    var dismissCompletion: (() -> Void)?
     private var url: URL! {
         return Endpoint(path: .milestone).url()!
     }
@@ -29,11 +29,11 @@ class MilestoneViewModel {
         }
     }
 
-    func checkInput() {
-        // 타이틀 입력과 완료일 형식을 체크한다.
-    }
-
     func post() {
+        guard checkInput() else {
+            CustomAlertView.shared.setUpAlertView(title: "실패", message: "제목을 반드시 입력해주세요!", buttonTitle: "확인", alertType: .failure, buttonHandler: nil)
+            return
+        }
         guard let title = milestone["title"] else {
             fatalError()
         }
@@ -43,10 +43,33 @@ class MilestoneViewModel {
         networkManager.postRequest(url: url, encodable: mile) { result in
             switch result {
             case .success:
-                CustomAlertView.shared.setUpAlertView(title: "성공", message: "마일스톤이 등록되었습니다.", buttonTitle: "확인", alertType: .success, buttonHandler: { self.fetch() })
+                CustomAlertView.shared.setUpAlertView(title: "성공",
+                                                      message: "마일스톤이 등록되었습니다.",
+                                                      buttonTitle: "확인",
+                                                      alertType: .success,
+                                                      buttonHandler: { [weak self] in
+                                                        self?.fetch()
+                                                        self?.dismissCompletion?()
+                })
             case .failure:
                 CustomAlertView.shared.setUpAlertView(title: "실패", message: "서버가 불안정합니다. 다시 시도해주세요.", buttonTitle: "확인", alertType: .failure, buttonHandler: nil)
             }
         }
+    }
+
+    func delete(id: Int) {
+        guard let url = Endpoint(path: .milestone).url(id: id) else { return }
+        networkManager.deleteRequest(url: url) { [weak self] _ in
+            self?.fetch()
+            self?.dismissCompletion?()
+        }
+    }
+
+    private func checkInput() -> Bool {
+        // 타이틀 입력 체크
+        guard let title = milestone["title"], !title.isEmpty, title != "" else {
+            return false
+        }
+        return true
     }
 }

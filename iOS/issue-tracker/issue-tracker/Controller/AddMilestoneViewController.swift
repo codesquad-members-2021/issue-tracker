@@ -35,7 +35,7 @@ class AddMilestoneViewController: UIViewController {
         tableView.frame = view.bounds
 
         view.addSubview(tableView)
-        viewModel.completion = {
+        viewModel.dismissCompletion = {
             self.dismiss(animated: true)
         }
     }

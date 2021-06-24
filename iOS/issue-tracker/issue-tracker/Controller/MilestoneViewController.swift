@@ -68,7 +68,9 @@ private extension MilestoneViewController {
 
 extension MilestoneViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "삭제", handler: { _, _, completion in
+        let delete = UIContextualAction(style: .destructive, title: "삭제", handler: { [unowned self] _, _, completion in
+            let id = viewModel.subject.value[indexPath.row].id
+            viewModel.delete(id: id)
             completion(true)
         })
         delete.image = UIImage(systemName: "trash")
