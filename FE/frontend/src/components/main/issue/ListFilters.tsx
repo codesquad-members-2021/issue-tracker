@@ -13,36 +13,36 @@ const ListFilters = () => {
     ?.flatMap(({ assignees }: any) => {
       return assignees;
     })
-    .filter(
+    ?.filter(
       (v: any, i: number, a: any) =>
         a.findIndex((t: any) => t.username === v.username) === i
     )
     .map((val: any) => {
-      return { optionName: val.username, image: val.profile_image };
+      return { id: val.id, optionName: val.username, image: val.profile_image };
     });
 
   const labels = data
     ?.flatMap(({ labels }: any) => {
       return labels;
     })
-    .filter(
+    ?.filter(
       (v: any, i: number, a: any) =>
         a.findIndex((t: any) => t.title === v.title) === i
     )
     .map((val: any) => {
-      return { optionName: val.title, color: val.color };
+      return { id: val.id, optionName: val.title, color: val.color };
     });
 
   const milestone = data
     ?.map(({ milestone }: any) => {
       return milestone;
     })
-    .filter(
+    ?.filter(
       (v: any, i: number, a: any) =>
-        a.findIndex((t: any) => t.title === v.title) === i
+        a?.findIndex((t: any) => t?.title === v?.title) === i
     )
-    .map((val: any) => {
-      return { optionName: val.title };
+    ?.map((val: any) => {
+      return { id: val?.id, optionName: val?.title };
     });
 
   const author = data
@@ -54,7 +54,7 @@ const ListFilters = () => {
         a.findIndex((t: any) => t.username === v.username) === i
     )
     .map((val: any) => {
-      return { optionName: val.username, image: val.profile_image };
+      return { id: val.id, optionName: val.username, image: val.profile_image };
     });
 
   return (
@@ -63,34 +63,6 @@ const ListFilters = () => {
       {labels && <LabelFilter filteredLabels={labels} />}
       {milestone && <MilestoneFilter filteredMilestone={milestone} />}
       {author && <AuthorFilter filteredAuthor={author} />}
-      {/* <Modal
-        label="담당자"
-        options={assignees}
-        exceptedDiv="filterTitle"
-        type="text"
-        innerTitle="담당자 필터"
-      />
-      <Modal
-        label="레이블"
-        options={labels}
-        exceptedDiv="filterTitle"
-        type="text"
-        innerTitle="레이블 필터"
-      />
-      <Modal
-        label="마일스톤"
-        options={milestones}
-        exceptedDiv="filterTitle"
-        type="text"
-        innerTitle="마일스톤 필터"
-      />
-      <Modal
-        label="작성자"
-        options={author}
-        exceptedDiv="filterTitle"
-        type="text"
-        innerTitle="작성자 필터"
-      /> */}
     </FilterContainer>
   );
 };

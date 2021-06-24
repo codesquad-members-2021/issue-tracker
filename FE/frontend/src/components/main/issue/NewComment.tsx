@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
@@ -11,7 +11,7 @@ import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 interface Props {
   issueId: number;
-  refetch(): any;
+  refetch(): void;
 }
 
 const NewComment = (props: Props) => {
@@ -27,11 +27,21 @@ const NewComment = (props: Props) => {
     file: '',
   });
 
+  // useEffect(() => {
+  // setInput({ ...input, content: '' });
+  // props.refetch();
+  // }, [input])
+
   const queryClient = useQueryClient();
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
   let history = useHistory();
 
-  const { mutateAsync, isSuccess } = useMutation(useMutate('comment', 'add'));
+  const { mutateAsync } = useMutation(useMutate('comment', 'add'), {
+    onSuccess: () => {
+      setInput({ ...input, content: '' });
+      props.refetch();
+    },
+  });
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const valueCount = e.target.value.length;
@@ -65,11 +75,6 @@ const NewComment = (props: Props) => {
 
   const registerNewIssue = () => {
     mutateAsync({ data: input, id: props.issueId });
-    if (isSuccess) {
-      setInput({ ...input, content: '' });
-
-      props.refetch();
-    }
   };
 
   return (
