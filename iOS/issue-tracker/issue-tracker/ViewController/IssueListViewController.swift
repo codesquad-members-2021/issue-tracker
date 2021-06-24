@@ -24,11 +24,10 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
         
         bind()
         configureNavigationItem()
-        configureTableViewFooterView()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +60,13 @@ class IssueListViewController: UIViewController {
         label.textColor = customDarkGray
         
         self.issueTableView.tableFooterView = footerView
+    }
+    
+    private func configureTableView() {
+        issueTableView.register(IssueTableViewCell.nib, forCellReuseIdentifier: IssueTableViewCell.identifier)
+        issueTableView.estimatedRowHeight = 200
+        issueTableView.rowHeight = UITableView.automaticDimension
+        configureTableViewFooterView()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
