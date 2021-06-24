@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ImgWrapper } from "styles/StyledLayout";
 const Assignee = () => {
+	//리코일(선택된 유저)
 	return (
 		<ContentsContainer>
 			<ImgWrapper size="44px">
@@ -9,7 +10,7 @@ const Assignee = () => {
 					alt="유저이름"
 				/>
 			</ImgWrapper>
-			<ContentsText>유저이름</ContentsText>
+			<ContentsText>선택된 유저이름 넣기</ContentsText>
 		</ContentsContainer>
 	);
 };

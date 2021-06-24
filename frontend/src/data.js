@@ -50,3 +50,9 @@ export const labelData = {
 		],
 	},
 };
+
+export const CATEGORY = {
+	ASSIGNEE: "assignee",
+	LABEL: "label",
+	MILESTONE: "milestone",
+};

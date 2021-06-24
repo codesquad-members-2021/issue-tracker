@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import LabelBadge from "components/common/LabelBadge";
 const Label = ({}) => {
+	//리코일(선택된 라벨)
 	return (
 		<ContentsContainer>
-			{/* <LabelBadge
-				text={name}
-				fontColor={textColor}
-				backgroundColor={backgroundColor}
-			/> */}
+			<LabelBadge
+				text={"label.name"}
+				fontColor={"white"}
+				backgroundColor={"black"}
+			/>
 		</ContentsContainer>
 	);
 };
