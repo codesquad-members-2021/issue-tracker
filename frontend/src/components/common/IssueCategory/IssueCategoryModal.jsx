@@ -10,6 +10,7 @@ import {
 } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
 import fetchData from "util/fetchData";
+import API from "util/API";
 const IssueCategoryModal = ({ category, data }) => {
 	const [assigneeCategory, setAssigneeCategory] = useRecoilState(
 		assigneeCategoryState
@@ -86,14 +87,12 @@ const IssueCategoryModal = ({ category, data }) => {
 			);
 			setMilestoneCategory(newMilestoneCategory);
 		}
-		if (milestoneCategory.every(x => x.id !== targetId)) {
-			setMilestoneCategory([
-				{
-					id: targetData.id,
-					title: targetData.title,
-					dueDate: targetData.dueDate,
-				},
-			]);
+		if (milestoneCategory.id !== targetId) {
+			setMilestoneCategory({
+				id: targetData.id,
+				title: targetData.title,
+				dueDate: targetData.dueDate,
+			});
 		}
 	};
 	//------------------------여기까지 중복 코드--------------

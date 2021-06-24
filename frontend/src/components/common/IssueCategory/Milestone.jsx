@@ -6,10 +6,7 @@ const Milestone = () => {
 	return (
 		<>
 			<MilestoneTotalProgressBar />
-			{milestoneData &&
-				milestoneData.map((milestone, idx) => (
-					<ContentsText key={idx}>{milestone.title}</ContentsText>
-				))}
+			{milestoneData && <ContentsText>{milestoneData.title}</ContentsText>}
 		</>
 	);
 };
