@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 import TableHeader from '../tableHeader/TableHeader';
-import Issue from './Issue';
+import IssueList from './IssueList';
 
 function IssueTable() {
   return (
     <IssueTableWrap>
       <TableHeader />
-      <Issue />
+      <IssueList />
     </IssueTableWrap>
   );
 }

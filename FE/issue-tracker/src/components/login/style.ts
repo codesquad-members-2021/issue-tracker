@@ -13,10 +13,16 @@ const gitLoginStyle = {
   colorScheme: 'blackAlpha',
 };
 
-const idLoginStyle = {
+const activeLoginStyle = {
   ...loginBtnStyle,
   background: 'bl_initial',
   colorScheme: 'blue',
+};
+
+const inactiveLoginStyle = {
+  ...activeLoginStyle,
+  opacity: '.4',
+  isDisabled: true,
 };
 
 const inputStyle = {
@@ -24,4 +30,4 @@ const inputStyle = {
   variant: 'filled',
 };
 
-export { gitLoginStyle, idLoginStyle, inputStyle };
+export { gitLoginStyle, activeLoginStyle, inactiveLoginStyle, inputStyle };

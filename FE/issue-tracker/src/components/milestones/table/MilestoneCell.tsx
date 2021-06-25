@@ -5,13 +5,16 @@ import { ReactComponent as CalendarIcon } from '@assets/calendar.svg';
 import EditMiniButton from '@components/common/EditMiniButton';
 import DeleteMiniButton from '@components/common/DeleteMiniButton';
 import CloseMiniButton from '@components/common/CloseMiniButton';
+import { useState } from 'react';
 
 interface Props {
   isLastItemStyle: boolean;
 }
 
 function MilestoneCell({ isLastItemStyle }: Props) {
+  const [isDisabled, setIsDisabled] = useState(true);
   let progressValue = 80;
+
   return (
     <MilestoneWrap isLastItemStyle={isLastItemStyle}>
       {/* 마일스톤 왼쪽 */}
@@ -34,7 +37,9 @@ function MilestoneCell({ isLastItemStyle }: Props) {
       <MilestoneRight>
         <ButtonBox>
           <CloseMiniButton margin="0 25px 0 0">닫기</CloseMiniButton>
-          <EditMiniButton margin="0 25px 0 0">편집</EditMiniButton>
+          <EditMiniButton margin="0 25px 0 0" setState={setIsDisabled}>
+            편집
+          </EditMiniButton>
           <DeleteMiniButton>삭제</DeleteMiniButton>
         </ButtonBox>
         <Progress

@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+
 import { ReactComponent as Edit } from '@assets/edit.svg';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   children: string;
   margin?: string;
+  setState: Dispatch<SetStateAction<boolean>>;
 }
 
-function EditMiniButton({ children, margin }: Props) {
+function EditMiniButton({ children, margin, setState }: Props) {
+  const handleClickEdit = (): void => setState((state) => !state);
+
   return (
-    <EditButton margin={margin}>
+    <EditButton margin={margin} onClick={handleClickEdit}>
       <Edit className="btn_edit" />
       <span>{children}</span>
     </EditButton>

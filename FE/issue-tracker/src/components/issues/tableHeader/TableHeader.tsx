@@ -4,23 +4,18 @@ import AssigneeFilter from './AssigneeFilter';
 import LabelFilter from './LabelFilter';
 import MilestoneFilter from './MilestoneFilter';
 import AuthorFilter from './AuthorFilter';
+import TableHeadLeft from './TableHeadLeft';
 
 function TableHeader() {
   return (
     <TableHeaderWrap>
-      <HeaderLeft>
-        <input type="checkbox" name="" id="" />
-        <IssueTab>
-          <li>열린 이슈(2)</li>
-          <li>닫힌 이슈(2)</li>
-        </IssueTab>
-      </HeaderLeft>
+      <TableHeadLeft />
       <HeaderRight>
         <FilterLists>
-          <AssigneeFilter />
+          <AuthorFilter />
           <LabelFilter />
           <MilestoneFilter />
-          <AuthorFilter />
+          <AssigneeFilter />
         </FilterLists>
       </HeaderRight>
     </TableHeaderWrap>
@@ -59,15 +54,4 @@ const HeaderRight = styled.div`
 
 const FilterLists = styled.div`
   display: flex;
-`;
-
-const IssueTab = styled.ul`
-  display: flex;
-
-  li {
-    ${({ theme }) => theme.flexCenter}
-    margin-left: 24px;
-    width: 100px;
-    height: 28px;
-  }
 `;

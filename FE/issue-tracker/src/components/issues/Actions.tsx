@@ -13,7 +13,7 @@ function Actions() {
         <FilterBar />
         <Tabs page="" />
       </SearchWrap>
-      <Link to="/new-issue">
+      <Link to="/issues/new">
         <Button
           width="120px"
           fontSize="xs"

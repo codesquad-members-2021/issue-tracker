@@ -1,43 +1,93 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Avatar } from '@chakra-ui/avatar';
+import { ReactComponent as MilestoneIcon } from '@assets/milestone.svg';
+
 import Label from '@components/common/Label';
+import type { IssueInfo } from './IssueList';
 
-function Issue() {
+import {
+  checkIfDayPassedFromCreation,
+  getCreatedTime,
+  getRenderingText,
+  getTimeGapFromCreation,
+  getTime,
+  getTotalMinutesBetweenGap,
+} from '@utils/renderTimeText';
+import pipe from '@utils/pipe';
+
+type Props = {
+  info: IssueInfo;
+};
+
+function Issue({ info }: Props) {
+  const {
+    id,
+    title,
+    author,
+    assignees,
+    label_list,
+    issue_number,
+    created_time,
+    milestone_title,
+  } = info;
   const defaultAvatarPosition = '32px';
+  const { user_id, name } = author;
 
+  const currentTime = new Date().getTime();
+  const noticeTimePassed = pipe(
+    getCreatedTime,
+    getTimeGapFromCreation(currentTime),
+    getTotalMinutesBetweenGap,
+    checkIfDayPassedFromCreation,
+    getTime,
+    getRenderingText
+  )(created_time);
+
+  const linkPath = {
+    pathname: `/issues/detail/${id}`,
+  };
   return (
-    <IssueWrap>
+    <IssueWrap data-id={id}>
       <IssueContainer>
         <StyledDiv>
           <CheckBox type="checkbox" name="issueCheckBox" />
           <IssueTitle>
-            <h2>이것은 제목입니다.</h2>
-            <Label name="documentaion" colorCode="#1a1818" fontLight={true} />
+            <Link to={linkPath}>
+              <h2>{title}</h2>
+            </Link>
+            {label_list.map(({ id, title, color_code }) => (
+              <Label
+                key={id}
+                name={title}
+                colorCode={color_code}
+                fontLight={true}
+              />
+            ))}
           </IssueTitle>
         </StyledDiv>
         <Description>
-          <span>#이슈번호</span>
-          <span>작성자 및 타임스탬프</span>
-          <span>마일스톤</span>
+          <span>#{issue_number}</span>
+          <span>
+            {name} 및 {noticeTimePassed}
+          </span>
+          <div>
+            <MilestoneIcon />
+            <span>{milestone_title}</span>
+          </div>
         </Description>
       </IssueContainer>
       <AvatarContainer>
-        <AvatarBox>
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="20px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="8px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="-4px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
-        <AvatarBox pos="-16px">
-          <Avatar className="avatar" size="sm" src="./janmang.jpeg" />
-        </AvatarBox>
+        {assignees.map((assignee) => {
+          if (assignee === null) return null;
+          const { user_id, avatar_url } = assignee;
+          return (
+            <AvatarBox key={user_id}>
+              <Avatar className="avatar" size="sm" src={avatar_url} />
+            </AvatarBox>
+          );
+        })}
       </AvatarContainer>
     </IssueWrap>
   );
@@ -108,9 +158,20 @@ const CheckBox = styled.input`
 const Description = styled.div`
   margin: 8px 0 0 40px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 
   span {
     padding-right: 16px;
     color: ${({ theme }) => theme.colors.gr_label};
+
+    &:last-child {
+      padding-left: 8px;
+    }
   }
 `;

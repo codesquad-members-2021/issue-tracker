@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+
 import Header from '@components/common/Header';
 import IssueHeader from '@components/issueDetail/IssueHeader';
 import IssueSidebar from '@components/issueDetail/IssueSidebar';
-import Comment from '@components/issueDetail/Comment';
-import NewComment from '@components/issueDetail/NewComment';
+import CommentBox from '@components/issueDetail/CommentBox';
+
+export type Param = {
+  id: string;
+};
 
 function IssueDetail() {
   return (
@@ -11,11 +15,7 @@ function IssueDetail() {
       <Header />
       <IssueHeader />
       <IssueDetailContent>
-        <CommentBox>
-          <Comment />
-          <Comment />
-          <NewComment />
-        </CommentBox>
+        <CommentBox />
         <IssueSidebar />
       </IssueDetailContent>
     </IssueDetailPage>
@@ -32,4 +32,3 @@ const IssueDetailContent = styled.div`
   display: flex;
   margin-top: 32px;
 `;
-const CommentBox = styled.div``;

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -18,23 +19,25 @@ function App() {
         <Background>
           <BrowserRouter>
             <Switch>
-              <Route path="/" exact>
-                <Login />
+              <Route path="/issues/new">
+                <NewIssue />
+              </Route>
+              <Route path="/issues/detail/:id">
+                <Suspense fallback={<div>이슈를 불러오는 중 입니다.</div>}>
+                  <IssueDetail />
+                </Suspense>
               </Route>
               <Route path="/issues">
                 <Issues />
-              </Route>
-              <Route path="/new-issue">
-                <NewIssue />
-              </Route>
-              <Route path="/issue-detail">
-                <IssueDetail />
               </Route>
               <Route path="/labels">
                 <Labels />
               </Route>
               <Route path="/milestones">
                 <Milestones />
+              </Route>
+              <Route path="/">
+                <Login />
               </Route>
             </Switch>
           </BrowserRouter>
