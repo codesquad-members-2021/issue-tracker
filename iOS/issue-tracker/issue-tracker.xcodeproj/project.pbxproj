@@ -395,13 +395,13 @@
 			children = (
 				D0A88E0C26762D51005877F6 /* ModalViewController.swift */,
 				B32FEAC02671D9F600BF37A1 /* IssueListViewController.swift */,
+				D03AF8F32677253C001C2CBF /* IssueFilterViewController.swift */,
 				B3B559E4266E095E00901C55 /* LoginViewController.swift */,
 				B3F527502670968F002B0812 /* LabelViewController.swift */,
 				D0FD50A9267096C0008C6031 /* MilestoneViewController.swift */,
 				491F08932679E5410081C5C5 /* AddLabelViewController.swift */,
 				D0A88E0126732D21005877F6 /* NewIssueViewController.swift */,
 				D0A88E03267334A6005877F6 /* IssueDetailViewController.swift */,
-				D03AF8F32677253C001C2CBF /* IssueFilterViewController.swift */,
 				D0103BDD267B897E0079FC3D /* AddMilestoneViewController.swift */,
 				D0DAAE292680A8DE0075E794 /* AdditionalInfoViewController.swift */,
 			);

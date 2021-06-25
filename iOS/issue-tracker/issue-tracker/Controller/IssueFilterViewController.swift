@@ -9,6 +9,7 @@ import UIKit
 
 class IssueFilterViewController: UIViewController {
 
+    var viewModel: IssueListViewModel!
     private let cellReuseIdentifier = "IssueFilterTableViewCell"
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -47,6 +48,13 @@ class IssueFilterViewController: UIViewController {
 
     @objc
     private func saveButtonTapped() {
+        let indexPath = tableView.indexPathForSelectedRow
+        if indexPath == [0, 0] {
+            viewModel.fetchIssueList(filterBy: "open")
+        }
+        if indexPath == [0, 4] {
+            viewModel.fetchIssueList(filterBy: "closed")
+        }
         dismiss(animated: true)
     }
 }

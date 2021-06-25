@@ -24,6 +24,7 @@ final class IssueListViewController: UIViewController {
         var searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.setImage(UIImage(systemName: "mic.fill"), for: .bookmark, state: .normal)
         searchController.searchBar.showsBookmarkButton = true
+        searchController.obscuresBackgroundDuringPresentation = false
         return searchController
     }()
 
@@ -167,8 +168,10 @@ final class IssueListViewController: UIViewController {
     }
 
     private func filterButtonTapped() {
-        let controller = UINavigationController(rootViewController: IssueFilterViewController())
-        present(controller, animated: true)
+        let controller = IssueFilterViewController()
+        controller.viewModel = issueListViewModel
+        let navigation = UINavigationController(rootViewController: controller)
+        present(navigation, animated: true)
     }
 
     private  func selectButtonTapped() {

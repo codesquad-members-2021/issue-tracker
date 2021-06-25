@@ -20,8 +20,9 @@ class IssueListViewModel {
         self.networkManager = networkManager
     }
 
-    func fetchIssueList() {
-        networkManager.request(url: Endpoint(path: .issue).url()!, decodableType: IssueList.self) { issueList in
+    func fetchIssueList(filterBy string: String? = nil) {
+        let query = URLQueryItem(name: "is", value: string)
+        networkManager.request(url: Endpoint(path: .issue).url(queryItems: [query])!, decodableType: IssueList.self) { issueList in
             self.issueList.accept(issueList.data)
         }
     }
