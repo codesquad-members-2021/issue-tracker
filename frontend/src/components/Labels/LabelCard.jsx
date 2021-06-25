@@ -11,6 +11,7 @@ import API from "util/API";
 import fetchData from "util/fetchData";
 import LabelInput from "./LabelInput";
 import { useState } from "react";
+
 const LabelCard = ({ initialData }) => {
 	const { id, name, description, colors } = initialData; //최초로 겟해온 데이터
 	const { backgroundColor, textColor } = colors;
