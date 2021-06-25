@@ -23,8 +23,8 @@ final class LabelViewController: UIViewController {
         labelTableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.identifier)
         labelTableView.separatorStyle = .none
         addLabelButton.addTarget(self, action: #selector(addLabelButtonTapped), for: .touchUpInside)
-        fetchLabel()
         bindTableView()
+        labelTableView.delegate = self
     }
 
     private func fetchLabel() {
@@ -43,6 +43,7 @@ final class LabelViewController: UIViewController {
 
     @objc private func addLabelButtonTapped() {
         let viewController = AddLabelViewController()
+        viewController.delegate = self
         let navigationViewController = UINavigationController(rootViewController: viewController)
         viewController.reloadDataHandler = { [weak self] in
             self?.labelListViewModel.fetchLabelList()
@@ -54,5 +55,32 @@ final class LabelViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "레이블"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addLabelButton)
+    }
+}
+
+extension LabelViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            guard let self = self else { return }
+            self.labelListViewModel.deleteLabel(id: self.labelListViewModel.labelList.value[indexPath.row].id!)
+            success(true)
+        }
+
+        let closeAction = UIContextualAction(style: .normal, title: "수정") { [weak self] _, _, success in
+
+            success(true)
+        }
+
+        deleteAction.image = UIImage(systemName: "trash")
+        closeAction.image = UIImage(systemName: "archivebox")
+        closeAction.backgroundColor = #colorLiteral(red: 0.7988751531, green: 0.8300203681, blue: 0.9990373254, alpha: 1)
+
+        return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
+    }
+}
+
+extension LabelViewController: AddLabelViewControllerDelegate {
+    func fetchData() {
+        fetchLabel()
     }
 }
