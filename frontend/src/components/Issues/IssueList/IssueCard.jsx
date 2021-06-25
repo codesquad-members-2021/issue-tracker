@@ -6,8 +6,6 @@ import { ReactComponent as UserImageSmall } from "images/UserImageSmall.svg";
 import { ReactComponent as Alert } from "images/alert-circle.svg";
 import { ReactComponent as Milestone } from "images/milestone.svg";
 import getTimeStamp from "util/getTimeStamp";
-// import { useRecoilState } from "MyRecoil";
-// import { selectedIssueCntState } from "MyRecoil/atom";
 import { selectedIssueCntState } from "RecoilStore/Atoms";
 import { useRecoilState } from "recoil";
 import { StyledGridCard } from "styles/StyledCards";
@@ -26,8 +24,16 @@ const IssueCard = ({
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntState
 	);
-	const { title, id, labels, milestone, author, createdAt, open, assignees } =
-		issue;
+	const {
+		title,
+		id,
+		labels,
+		milestone,
+		author,
+		createdAt,
+		open,
+		assignees,
+	} = issue;
 	console.log("labels", labels);
 	const handleCheck = () => {
 		setIsChecked(!isChecked);

@@ -42,6 +42,11 @@ export const milestoneUpdateState = atom({
 	default: false,
 });
 
+export const labelUpdateState = atom({
+	key: "labelUpdateState",
+	default: false,
+});
+
 export const labelInitialData = atom({
 	key: "labelInitialData",
 	default: null,

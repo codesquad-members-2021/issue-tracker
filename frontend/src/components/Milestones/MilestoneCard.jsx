@@ -13,22 +13,22 @@ import {
 	milestoneAddButtonFlagState,
 	milestoneUpdateState,
 } from "RecoilStore/Atoms";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import MilestoneInput from "./MilestoneInput";
 
 const MilestoneCard = ({ data }) => {
 	const { id, title, description, dueDate, openIssues, closedIssues } = data;
 	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
 	const [editMode, setEditMode] = useState(false);
-	const [milestoneAddBtn, setMilestoneAddBtn] = useRecoilState(
-		milestoneAddButtonFlagState
-	);
+	const setMilestoneAddBtn = useSetRecoilState(milestoneAddButtonFlagState);
 	const deleteMilestone = async () => {
 		await fetchData(API.milestonesId(id), "DELETE");
 		setMilestoneAddBtn(false);
 	};
 
-	const handleClose = () => {};
+	const handleClose = () => {
+		//milestone 닫기
+	};
 
 	const handleEdit = () => {
 		setEditMode(true);
@@ -99,7 +99,7 @@ const MilestoneCard = ({ data }) => {
 								<Detail>
 									<GrayFont>{getPercent(openIssues, closedIssues)}%</GrayFont>
 									<Block>
-										<IssueCnt>열린 이슈 {openIssues}</IssueCnt>{" "}
+										<IssueCnt>열린 이슈 {openIssues}</IssueCnt>
 										<IssueCnt>닫힌 이슈 {closedIssues}</IssueCnt>
 									</Block>
 								</Detail>

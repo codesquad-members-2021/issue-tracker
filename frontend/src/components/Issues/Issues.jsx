@@ -11,7 +11,6 @@ const Issues = () => {
 };
 
 const StyledIssues = styled.div`
-	/* display: flex; */
 	width: 100%;
 `;
 

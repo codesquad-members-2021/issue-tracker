@@ -8,9 +8,6 @@ import DropDownButton from "components/common/Button/DropDownButton";
 import FilterModal from "components/common/FilterModal";
 import { filter } from "data";
 import { StyledGridTitleCard } from "styles/StyledCards";
-
-// import { selectedIssueCntState, clickedFilterState } from "MyRecoil/atom";
-// import { useRecoilState } from "MyRecoil";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
 	selectedIssueCntState,
@@ -31,11 +28,10 @@ const IssuesHeader = ({
 	);
 	const buttonNames = ["담당자", "레이블", "마일스톤", "작성자"];
 	const setClickedFilterState = useSetRecoilState(clickedFilterState);
-	// const setFilterBarInputState = useSetRecoilState(filterBarInputState);
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback((e) => {
+	const handleClick = useCallback(e => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -52,7 +48,7 @@ const IssuesHeader = ({
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = (e) => {
+	const closeFilterModal = e => {
 		const target = e.target;
 		if (
 			isFilterClicked &&
@@ -118,11 +114,7 @@ const IssuesHeader = ({
 								></DropDownButton>
 							</TextIconDivider>
 						))}
-
 						{isFilterClicked && <FilterModal />}
-						{/* 클릭된게 어떤 필터인지를 modal이 알아야 함  useRecoilState 쓰려다 오류나서 state props로 내림 */}
-						{/* 🔥recoil로 수정 필요 */}
-						{/* 🔥회살표 클릭해도 필터 제대로 뜨도록 수정필요 */}
 					</FiltersWrapper>
 				)}
 			</FilterMain>
@@ -146,14 +138,12 @@ const OpenCloseEdit = styled.div`
 	display: flex;
 	width: 200px;
 	justify-content: center;
-	/* position: relative; */
 `;
 
 const FiltersWrapper = styled.div`
 	display: flex;
 	justify-content: space-around;
 	position: relative;
-	/* outline: red 1px solid; */
 `;
 
 export const CheckBox = styled.div`
@@ -163,5 +153,4 @@ export const CheckBox = styled.div`
 
 const TextIconDivider = styled.div`
 	width: 100%;
-	/* position: relative; */
 `;
