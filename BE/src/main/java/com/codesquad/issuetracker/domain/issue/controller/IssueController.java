@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.domain.issue.controller;
 
+import com.codesquad.issuetracker.domain.issue.IssueFilter;
 import com.codesquad.issuetracker.domain.issue.request.IssueRequest;
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.domain.issue.service.IssueService;
@@ -50,6 +51,11 @@ public class IssueController {
         return ApiResponse.ok(issueService.getIssue(issueId));
     }
 
+    @GetMapping("/filter")
+    public ApiResponse getFilteredIssues(IssueFilter issueFilter){
+        return ApiResponse.ok(issueService.getFilteredIssues(issueFilter));
+    }
+
     @PostMapping
     public ApiResponse createIssue(@RequestBody IssueRequest issueRequest) {
         return ApiResponse.ok(issueService.addIssue(issueRequest));
@@ -96,5 +102,7 @@ public class IssueController {
         issueService.deleteIssue(issueId);
         return ApiResponse.ok();
     }
+
+
 
 }

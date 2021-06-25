@@ -52,6 +52,11 @@ public class IssueService {
         this.commentRepository = commentRepository;
     }
 
+
+    public List<IssueResponse> getFilteredIssues(IssueFilter issueFilter) {
+        return convertToResponse.apply(issueRepositorySupport.getFilteredIssues(issueFilter));
+    }
+
     public List<IssueResponse> getOpenedIssues() {
         return convertToResponse.apply(issueRepositorySupport.findByStatusTrue());
     }
@@ -80,6 +85,7 @@ public class IssueService {
             issues -> issues.stream()
                     .map(this::issueToIssueResponse)
                     .collect(Collectors.toList());
+
 
     public IssueResponse getIssue(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
@@ -208,4 +214,5 @@ public class IssueService {
         }
         return result;
     }
+
 }
