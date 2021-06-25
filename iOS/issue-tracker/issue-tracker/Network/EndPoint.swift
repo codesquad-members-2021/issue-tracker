@@ -5,7 +5,7 @@ enum Scheme: String {
 }
 
 enum Host: String {
-    case base = "54.180.163.2"
+    case base = "52.78.93.9"
 }
 
 enum Path: String {
@@ -14,6 +14,7 @@ enum Path: String {
     case issues = "/issues"
     case close = "/close"
     case label = "/labels"
+    case milestone = "/milestones"
 }
 
 struct EndPoint {

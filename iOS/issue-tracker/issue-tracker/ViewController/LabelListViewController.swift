@@ -16,7 +16,7 @@ class LabelListViewController: UIViewController {
     }
     
     private func bind() {
-        labelListViewModel.didUpdateIssueList()
+        labelListViewModel.didUpdateLabelList()
             .sink { [weak self] _ in
                 self?.labelTableView.reloadData()
             }.store(in: &subscriptions)

@@ -24,7 +24,7 @@ class LabelListViewModel {
         }
     }
     
-    func didUpdateIssueList() -> AnyPublisher<LabelList, Never> {
+    func didUpdateLabelList() -> AnyPublisher<LabelList, Never> {
         return $labelList
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

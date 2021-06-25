@@ -53,6 +53,10 @@ struct MilestoneDTO: Decodable {
     
     let id: Int
     let title: String
+    let content: String?
+    let dueDate: String?
+    let openIssue: Int?
+    let closeIssue: Int?
     
 }
 

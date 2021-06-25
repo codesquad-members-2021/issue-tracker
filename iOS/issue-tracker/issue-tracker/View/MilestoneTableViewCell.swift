@@ -25,4 +25,13 @@ class MilestoneTableViewCell: UITableViewCell, Identifying {
         self.openIssueView.layer.borderColor = customPurpleColor.cgColor
     }
     
+    func configure(detailMilestone: DetailMilestone) {
+        title.text = detailMilestone.title
+        content.text = detailMilestone.content
+        dueDate.text = detailMilestone.dueDate
+        openIssueLabel.text = "열린 이슈 \(detailMilestone.openIssue)개"
+        closeIssueLabel.text = "닫힌 이슈 \(detailMilestone.closeIssue)개"
+        percentLabel.text = "\(detailMilestone.completePercent())%"
+    }
+    
 }

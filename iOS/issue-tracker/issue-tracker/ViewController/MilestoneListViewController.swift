@@ -4,12 +4,23 @@ import Combine
 class MilestoneListViewController: UIViewController {
 
     @IBOutlet weak var milestoneTabelView: UITableView!
+    private let milestoneListViewModel = MilestoneListViewModel()
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationTitle()
         configureAddButton()
         milestoneTabelView.register(MilestoneTableViewCell.nib, forCellReuseIdentifier: MilestoneTableViewCell.identifier)
+        bind()
+    }
+    
+    private func bind() {
+        milestoneListViewModel.didUpdateMilestoneList()
+            .sink { [weak self] _ in
+                self?.milestoneTabelView.reloadData()
+            }.store(in: &subscriptions)
+        milestoneListViewModel.fetchMilestoneList()
     }
     
     private func configureNavigationTitle() {
@@ -37,13 +48,14 @@ class MilestoneListViewController: UIViewController {
 extension MilestoneListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return milestoneListViewModel.getDetailMilestoneCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MilestoneTableViewCell.identifier, for: indexPath) as? MilestoneTableViewCell else {
             return UITableViewCell()
         }
+        cell.configure(detailMilestone: milestoneListViewModel.getDetailMilestone(indexPath: indexPath))
         return cell
     }
     
