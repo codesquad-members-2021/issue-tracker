@@ -2,21 +2,22 @@ import styled from "styled-components";
 import LabelCard from "./LabelCard";
 import LabelInput from "./LabelInput";
 import { StyledGridTitleCard } from "styles/StyledCards";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import API from "util/API";
 import fetchData from "util/fetchData";
 import {
 	labelInitialData,
 	labelAddButtonFlagState,
-	labelEditButtonFlagState,
 	labelCountState,
+	labelUpdateState,
 } from "RecoilStore/Atoms";
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 const Labels = () => {
 	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
 	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
 	const [labelCount, setLabelCount] = useRecoilState(labelCountState);
+	const forceUpdate = useRecoilValue(labelUpdateState);
 
 	const getLabelData = async () => {
 		const { labels } = await fetchData(API.labels(), "GET");
@@ -26,7 +27,7 @@ const Labels = () => {
 
 	useEffect(() => {
 		getLabelData();
-	}, []);
+	}, [forceUpdate]); //forceUpdate를 의존 배열에 넣음 대박!!
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DisplayFlex, CenterAi } from "styles/StyledLayout";
 import { ReactComponent as RefreshIcon } from "images/refresh-ccw.svg";
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import LabelBadge from "components/common/LabelBadge";
 import theme from "styles/theme";
 import { labelData } from "data";
@@ -11,18 +11,16 @@ import CancelButton from "components/common/Button/WhiteButtons";
 import SubmitButton from "components/common/Button/BlueButtons";
 import {
 	labelInitialData,
-	labelEditButtonFlagState,
 	labelAddButtonFlagState,
 	navigatorAddButtonFlagState,
+	labelUpdateState,
 } from "RecoilStore/Atoms";
 
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
-const LabelInput = ({ initialData }) => {
+const LabelInput = ({ initialData, editBtnFlag, setEditBtnFlag }) => {
 	const setLabelInitialData = useSetRecoilState(labelInitialData);
-	const [editBtnFlag, setLabelEditBtnFlag] = useRecoilState(
-		labelEditButtonFlagState
-	);
+	const forceUpdate = useSetRecoilState(labelUpdateState);
 	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
 	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
 
@@ -37,15 +35,15 @@ const LabelInput = ({ initialData }) => {
 	} = labelData;
 
 	const { id, name, description, colors } = initialData;
-	// const { backgroundColor, textColor } = colors;
-	const backgroundColor = "#000";
-	const textColor = "#000";
 
 	const initLabelState = {
-		name: "",
-		description: "",
-		backgroundColor: theme.grayScale.input_background,
-		textColor: "#000000",
+		id: editBtnFlag ? id : "",
+		name: editBtnFlag ? name : "",
+		description: editBtnFlag ? description : "설명",
+		backgroundColor: editBtnFlag
+			? colors.backgroundColor
+			: theme.grayScale.input_background,
+		textColor: editBtnFlag ? colors.textColor : theme.grayScale.title_active,
 	};
 
 	const reducer = (state, { type, payload }) => {
@@ -69,8 +67,6 @@ const LabelInput = ({ initialData }) => {
 			dispatch({ type: "textColor", payload: event.target.value });
 	};
 	const handleChangeColor = event => {
-		//디바운스 필요(유저가 입력하고 1초 뒤에 set 하도록)
-		//const test = useDebounce(labelState.description, 1000);
 		dispatch({ type: "backgroundColor", payload: event.target.value });
 	};
 
@@ -81,8 +77,9 @@ const LabelInput = ({ initialData }) => {
 	const handleChangeDescription = event => {
 		dispatch({ type: "description", payload: event.target.value });
 	};
+
 	const handleClose = () => {
-		setLabelEditBtnFlag(!editBtnFlag);
+		setEditBtnFlag(!editBtnFlag);
 	};
 
 	const handleAdd = async () => {
@@ -105,8 +102,6 @@ const LabelInput = ({ initialData }) => {
 	};
 
 	const handleEdit = async () => {
-		//현재 내가 클릭한 카드의 데이터, id를 보여줘야 함 how?
-
 		const { name, description, backgroundColor, textColor } = labelState;
 		const requestBody = {
 			name: name,
@@ -116,10 +111,9 @@ const LabelInput = ({ initialData }) => {
 				textColor: textColor,
 			},
 		};
-
-		const { labels } = await fetchData(API.labelsId("id"), "PUT", requestBody); //PUT요청, body수정 필요
-		setLabelEditBtnFlag(!editBtnFlag);
-		setLabelInitialData(labels); //상태바뀐걸로 리렌더
+		await fetchData(API.labelsId(id), "PUT", requestBody);
+		setEditBtnFlag(false);
+		forceUpdate(x => !x);
 	};
 
 	const changeColor = () => {
@@ -145,8 +139,6 @@ const LabelInput = ({ initialData }) => {
 				</PreviewContainer>
 
 				<SettingContainer>
-					{/* 타이틀 부분 나눠서 디스크립션 부분은 온 체인지 풀기 */}
-
 					<TextInputContainer _width={"100%"}>
 						<SubTitle>{nameTitle}</SubTitle>
 						<TextInput
