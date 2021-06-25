@@ -10,12 +10,17 @@ import SnapKit
 import MarkdownKit
 import RxSwift
 
+protocol NewIssueViewDelegate: AnyObject {
+    func refresh()
+}
+
 class NewIssueViewController: UIViewController {
     private let additionalInfo = ["레이블", "마일스톤", "담당자"]
     private let cellReuseIdentifier = "NewIssueViewCell"
     private let markdownParser = MarkdownParser()
     private var viewModel = NewIssueViewModel()
     private let disposeBag = DisposeBag()
+    weak var delegate: NewIssueViewDelegate?
 
     private let subject: UILabel = {
         let label = UILabel()
@@ -121,6 +126,7 @@ class NewIssueViewController: UIViewController {
             return
         }
         viewModel.post { [weak self] in
+            self?.delegate?.refresh()
             self?.navigationController?.popViewController(animated: true)
         }
     }

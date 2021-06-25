@@ -187,6 +187,7 @@ final class IssueListViewController: UIViewController {
 
    private func addIssueButtonTapped() {
         let controller = NewIssueViewController()
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 
@@ -259,5 +260,11 @@ extension IssueListViewController: UITableViewDelegate {
         closeAction.backgroundColor = #colorLiteral(red: 0.7988751531, green: 0.8300203681, blue: 0.9990373254, alpha: 1)
 
         return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
+    }
+}
+
+extension IssueListViewController: NewIssueViewDelegate {
+    func refresh() {
+        issueListViewModel.fetchIssueList()
     }
 }
