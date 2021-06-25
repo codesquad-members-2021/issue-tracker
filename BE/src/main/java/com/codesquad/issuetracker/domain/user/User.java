@@ -1,11 +1,13 @@
 package com.codesquad.issuetracker.domain.user;
 
 import com.codesquad.issuetracker.auth.domain.GitHubUser;
+import com.codesquad.issuetracker.exception.NotAuthorizedUserException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -37,5 +39,26 @@ public class User {
 
     public static User githubUserToUser(GitHubUser githubUser) {
         return new User(githubUser.getName(), githubUser.getLogin());
+    }
+
+    public boolean validateUser(User user) {
+        boolean isAuthorizedUser = this.equals(user);
+        if (!isAuthorizedUser) {
+            throw new NotAuthorizedUserException("Not Authorized User!");
+        }
+        return isAuthorizedUser;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

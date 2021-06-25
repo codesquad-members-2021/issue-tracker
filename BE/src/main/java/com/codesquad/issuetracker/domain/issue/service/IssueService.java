@@ -19,6 +19,7 @@ import com.codesquad.issuetracker.domain.user.User;
 import com.codesquad.issuetracker.domain.user.response.UserResponse;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
 import com.codesquad.issuetracker.domain.assignee.request.AssigneeRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class IssueService {
 
@@ -106,14 +108,19 @@ public class IssueService {
         return issueToIssueResponse(savedIssue);
     }
 
-    public void updateTitle(Long issueId, IssueRequest issueRequest) {
+    public void updateTitle(Long issueId, IssueRequest issueRequest, User loginUser) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         updateIssue.setTitle(issueRequest.getTitle());
         issueRepository.save(updateIssue);
     }
 
     @Transactional
-    public void updateAssignee(Long issueId, IssueRequest issueRequest) {
+    public void updateAssignee(Long issueId, IssueRequest issueRequest, User loginUser) {
+        Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         assigneeRepository.deleteAssigneesByIssueId(issueId);
         ArrayList<AssigneeRequest> assigneeList = issueRequest.getAssigneeList();
         for (AssigneeRequest assigneeRequest : assigneeList) {
@@ -121,21 +128,27 @@ public class IssueService {
         }
     }
 
-    public void updateContent(Long issueId, IssueRequest issueRequest) {
+    public void updateContent(Long issueId, IssueRequest issueRequest, User loginUser) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         updateIssue.setContent(issueRequest.getContent());
         issueRepository.save(updateIssue);
     }
 
-    public void updateStatus(Long issueId, IssueRequest issueRequest) {
+    public void updateStatus(Long issueId, IssueRequest issueRequest, User loginUser) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         updateIssue.setStatus(issueRequest.isStatus());
         issueRepository.save(updateIssue);
     }
 
     @Transactional
-    public void updateLabel(Long issueId, IssueRequest issueRequest) {
-        // IssueLabel을 Issue의 ID 기준으로 찾아 온 다음 더하거나(INSERT) 삭제(DELETE)한다
+    public void updateLabel(Long issueId, IssueRequest issueRequest, User loginUser) {
+        Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         List<Long> labelIdsBeEdited = issueLabelRepository.findIssueLabelsLabelIdByIssueId(issueId); // 원본
         ArrayList<Long> labelIdsToEdit = issueRequest.getLabelList(); // 요청 (수정할것)
         for (Long labelId : labelIdsToEdit) {
@@ -155,13 +168,18 @@ public class IssueService {
         }
     }
 
-    public void updateMilestone(Long issueId, IssueRequest issueRequest) {
+    public void updateMilestone(Long issueId, IssueRequest issueRequest, User loginUser) {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(updateIssue.getUser());
+
         updateIssue.setMilestoneId(issueRequest.getMilestoneId());
         issueRepository.save(updateIssue);
     }
 
-    public void deleteIssue(Long issueId) {
+    public void deleteIssue(Long issueId, User loginUser) {
+        Issue issueToDelete = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
+        loginUser.validateUser(issueToDelete.getUser());
+
         issueRepository.deleteById(issueId);
     }
 

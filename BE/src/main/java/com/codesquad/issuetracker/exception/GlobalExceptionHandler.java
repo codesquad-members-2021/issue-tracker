@@ -27,4 +27,10 @@ public class GlobalExceptionHandler {
         log.debug("ImageUploadException occurred!! : {} ", e.getMessage());
         return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NotAuthorizedUserException.class)
+    public ResponseEntity handleNotAuthorizedUserException(NotAuthorizedUserException e) {
+        log.debug("NotAuthorizedUserException occurred!! : {} ", e.getMessage());
+        return new ResponseEntity(e, HttpStatus.UNAUTHORIZED);
+    }
 }
