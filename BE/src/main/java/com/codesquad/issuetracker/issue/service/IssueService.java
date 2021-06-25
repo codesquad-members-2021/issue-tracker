@@ -2,7 +2,10 @@ package com.codesquad.issuetracker.issue.service;
 
 import com.codesquad.issuetracker.comment.domain.Comment;
 import com.codesquad.issuetracker.comment.infra.CommentRepository;
-import com.codesquad.issuetracker.exception.*;
+import com.codesquad.issuetracker.exception.IssueNotFoundException;
+import com.codesquad.issuetracker.exception.LabelNotFoundException;
+import com.codesquad.issuetracker.exception.MilestoneNotFoundException;
+import com.codesquad.issuetracker.exception.UserNotFoundException;
 import com.codesquad.issuetracker.issue.domain.Issue;
 import com.codesquad.issuetracker.issue.dto.*;
 import com.codesquad.issuetracker.issue.infra.IssueRepository;
@@ -18,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
@@ -74,7 +76,7 @@ public class IssueService {
     }
 
     @Transactional
-    public IssueWrapper updateIssue (IssueRequest issueRequest, Long id) {
+    public IssueWrapper updateIssue(IssueRequest issueRequest, Long id) {
         Issue issue = issueRepository.findById(id).orElseThrow(IssueNotFoundException::new);
         List<Comment> comments = commentRepository.findAllByIssueId(id);
         issue.updateIssue(issueRequest);
@@ -124,11 +126,4 @@ public class IssueService {
         issue.removeMilestone();
     }
 
-    public IssuesWrapper readAllIssues() {
-        return IssuesWrapper.wrap(
-                issueRepository.findAll().stream()
-                .map(IssueSummaryResponse::fromEntity)
-                .collect(Collectors.toList())
-        );
-    }
 }
