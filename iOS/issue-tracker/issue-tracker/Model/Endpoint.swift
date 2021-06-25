@@ -27,10 +27,11 @@ struct Endpoint {
     }
 
     enum Path: String {
-        case login = "/user/login/oauth/githubios"
-        case label = "/label"
-        case issue = "/issue"
-        case milestone = "/milestone"
+        case login = "/api/user/login/oauth/githubios"
+        case label = "/api/label"
+        case issue = "/api/issue"
+        case milestone = "/api/milestone"
+        case user = "/api/user"
 
         var pathString: String {
             return self.rawValue

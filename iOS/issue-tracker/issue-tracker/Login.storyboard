@@ -53,6 +53,11 @@
             <point key="canvasLocation" x="57" y="110"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="qmj-Ws-gJd">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

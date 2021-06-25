@@ -71,7 +71,7 @@
             </objects>
             <point key="canvasLocation" x="1109" y="1517"/>
         </scene>
-        <!--내게정-->
+        <!--내계정-->
         <scene sceneID="CPO-fU-AJO">
             <objects>
                 <viewController id="cxD-Kl-bEy" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                         <viewLayoutGuide key="safeArea" id="QuP-fM-FfB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="내게정" image="person" catalog="system" id="JZ5-aR-2TP"/>
+                    <tabBarItem key="tabBarItem" title="내계정" image="person" catalog="system" id="JZ5-aR-2TP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTy-kJ-ZF8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

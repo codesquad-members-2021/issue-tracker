@@ -16,7 +16,16 @@ protocol Networkable {
 }
 
 class NetworkManager: Networkable {
-    private let httpHeaders: HTTPHeaders = ["Content-Type": "application/json", "Accept": "application/json"]
+    private lazy var httpHeaders: HTTPHeaders = ["Content-Type": "application/json",
+                                            "Accept": "application/json",
+                                            "Authorization": getToken()]
+
+    func getToken() -> String {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            return ""
+        }
+        return token
+    }
 
     func request<T: Decodable>(url: URL, decodableType: T.Type, completion: @escaping (T) -> Void) {
         AF.request(url, method: .get, headers: httpHeaders)
@@ -40,7 +49,7 @@ class NetworkManager: Networkable {
     }
 
     func deleteRequest(url: URL, completion: @escaping (Result<Data?, AFError>) -> Void) {
-        AF.request(url, method: .delete)
+        AF.request(url, method: .delete, headers: httpHeaders)
             .validate(statusCode: 200..<300)
             .response { response in
                 completion(response.result)
@@ -48,7 +57,7 @@ class NetworkManager: Networkable {
     }
 
     func patchRequest<T: Encodable>(url: URL, encodable: T, completion: @escaping (Result<Data?, AFError>) -> Void) {
-        AF.request(url, method: .patch, parameters: encodable, encoder: JSONParameterEncoder.default)
+        AF.request(url, method: .patch, parameters: encodable, encoder: JSONParameterEncoder.default, headers: httpHeaders)
             .validate(statusCode: 200..<300)
             .response { response in
                 completion(response.result)

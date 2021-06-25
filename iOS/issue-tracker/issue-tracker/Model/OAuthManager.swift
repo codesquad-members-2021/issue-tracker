@@ -10,7 +10,7 @@ import AuthenticationServices
 
 class OAuthManager {
     private let cliendId = "4cccb9b4007d25b53a70"
-    private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)&scope=user:email")!
+    private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)")!
     private let callbackUrlScheme = "issue-tracker"
     private var code: String?
 
@@ -40,7 +40,9 @@ class OAuthManager {
         let endpoint = Endpoint(path: .login)
         guard let url = endpoint.url(queryItems: [query]) else { return }
         networkManager.request(url: url, decodableType: Token.self) { data in
-            print(data)
+            let token = data.data
+            print(token)
+            UserDefaults.standard.setValue(token, forKey: "token")
             completion()
         }
     }
