@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 import { useMutation } from 'react-query';
 import useMutate from '../../../util/useMutate';
 import Typos from '../../../styles/atoms/Typos';
@@ -29,7 +28,11 @@ const AddIssue = () => {
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
   let history = useHistory();
 
-  const { mutateAsync, isSuccess } = useMutation(useMutate('issue', 'add'));
+  const { mutateAsync } = useMutation(useMutate('issue', 'add'), {
+    onSuccess: () => {
+      history.push('/main');
+    },
+  });
 
   const countInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const valueCount = e.target.value.length;
@@ -63,9 +66,6 @@ const AddIssue = () => {
 
   const registerNewIssue = () => {
     mutateAsync({ data: input });
-    if (isSuccess) {
-      history.push('/main');
-    }
   };
 
   return (

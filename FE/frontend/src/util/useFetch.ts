@@ -70,5 +70,7 @@ const getData = async (type: string, action: string, filter?: Props) => {
 };
 
 export default function useFetch(type: string, action: string, filter?: Props) {
-  return useQuery([type, action], () => getData(type, action, filter));
+  return useQuery([type, action, filter?.id], () =>
+    getData(type, action, filter)
+  );
 }

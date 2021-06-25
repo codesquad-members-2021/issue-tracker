@@ -16,7 +16,7 @@ interface Props {
 
 const NewComment = (props: Props) => {
   const userData = localStorage.getItem('userData');
-  const parsedUserData = userData && JSON.parse(userData);
+  const parsedUserData = userData && JSON.parse(userData ? userData : '');
 
   const [inputCount, setInputCount] = useState(0);
   const [disabled, setDisabled] = useState(true);
@@ -27,12 +27,6 @@ const NewComment = (props: Props) => {
     file: '',
   });
 
-  // useEffect(() => {
-  // setInput({ ...input, content: '' });
-  // props.refetch();
-  // }, [input])
-
-  const queryClient = useQueryClient();
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
   let history = useHistory();
 
