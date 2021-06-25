@@ -5,10 +5,10 @@ import Buttons from '../../styles/atoms/Buttons';
 import { ReactComponent as Logo } from '../../icons/logoLarge.svg';
 
 const Login = () => {
-  const gitHuburl = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://localhost:3000/login/github`;
-  const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=195028719127-a5r87r9182sidvd6vjs9akod785k5t94.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&flowName=GeneralOAuthFlow`;
-  const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=9e5543492002f4b2a2853b92861bb134&redirect_uri=http://localhost:3000/login/kakao&response_type=code`;
-  const naverUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=DhAPofnVzIKvhXOtMvY_&state=200&redirect_uri=http://localhost:3000/login/naver`;
+  const gitHuburl = `https://github.com/login/oauth/authorize?client_id=8f053229e25de08ed09d&scope=user:email&redirect_uri=http://54.180.163.2/login/github`;
+  const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=195028719127-a5r87r9182sidvd6vjs9akod785k5t94.apps.googleusercontent.com&redirect_uri=http://54.180.163.2/login/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&flowName=GeneralOAuthFlow`;
+  const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=9e5543492002f4b2a2853b92861bb134&redirect_uri=http://54.180.163.2/login/kakao&response_type=code`;
+  const naverUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=DhAPofnVzIKvhXOtMvY_&state=200&redirect_uri=http://54.180.163.2/login/naver`;
 
   return (
     <LoginContainer>
