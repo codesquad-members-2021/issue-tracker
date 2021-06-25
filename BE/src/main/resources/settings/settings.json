@@ -1,6 +1,6 @@
 {
   "index": {
-    "max_ngram_diff": "9",
+    "max_ngram_diff": "8",
     "analysis": {
       "analyzer": {
         "word_analyzer": {
@@ -13,7 +13,7 @@
       "tokenizer": {
         "text_tokenizer": {
           "type": "ngram",
-          "min_gram": 1,
+          "min_gram": 2,
           "max_gram": 10,
           "token_chars": [
             "letter",
