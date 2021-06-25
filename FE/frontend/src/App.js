@@ -9,6 +9,8 @@ import Login from './components/login/Login';
 import Main from './components/main/Main';
 import GoogleOauth from './components/login/GoogleOauth';
 import GitHubOauth from './components/login/GitHubOauth';
+import KakaoOauth from './components/login/KakaoOauth';
+import NaverOauth from './components/login/NaverOauth';
 
 const queryClient = new QueryClient();
 function App() {
@@ -29,6 +31,8 @@ function App() {
                 </Route>
                 <Route path="/login/github" component={GitHubOauth} />
                 <Route path="/login/google" component={GoogleOauth} />
+                <Route path="/login/kakao" component={KakaoOauth} />
+                <Route path="/login/naver" component={NaverOauth} />
                 <Route path="/main" component={Main} />
               </Switch>
             </BrowserRouter>

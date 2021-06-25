@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import useMutate from '../../../util/useMutate';
 import Typos from '../../../styles/atoms/Typos';
 import User from '../../../styles/atoms/User';
@@ -28,7 +28,6 @@ const NewComment = (props: Props) => {
   });
 
   let debounceTimeoutId: ReturnType<typeof setTimeout>;
-  let history = useHistory();
 
   const { mutateAsync } = useMutation(useMutate('comment', 'add'), {
     onSuccess: () => {

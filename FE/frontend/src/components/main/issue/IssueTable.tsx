@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useQueryClient } from 'react-query';
 import useFetch from '../../../util/useFetch';
 import ListFilters from './ListFilters';
 import Issues from './Issues';

@@ -2,7 +2,7 @@ import axios from 'axios';
 import URL from './url';
 
 interface Props {
-  data: unknown;
+  data?: unknown;
   id?: number;
 }
 
@@ -55,6 +55,8 @@ const useMutate =
         switch (action) {
           case 'add':
             return axios.post(`${URL}/labels`, data, axiosConfig);
+          case 'delete':
+            return axios.delete(`${URL}/labels/${id}`, axiosConfig);
         }
         return;
       case 'milestone':

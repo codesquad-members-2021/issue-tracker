@@ -58,6 +58,12 @@ const Search = styled.input`
 `;
 
 const Text = styled(Typos)`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 128px;
+  background: ${props => props.theme.greyscale.background};
+  border-radius: 11px 0px 0px 11px;
   color: ${props => props.theme.greyscale.label};
   svg {
     margin: 2px 6px 0 6px;

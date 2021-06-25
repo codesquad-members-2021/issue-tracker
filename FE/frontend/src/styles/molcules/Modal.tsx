@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import DropDown from './DropDown';
-import Typo from '../atoms/Typos';
 import { filterAtom } from '../../recoil/atoms';
 
 interface Props {
@@ -160,20 +159,7 @@ const Div = styled.div`
   position: relative;
 `;
 
-const Text = styled(Typo)`
-  color: ${props => props.theme.greyscale.label};
-  svg {
-    margin: 2px 6px 0 6px;
-  }
-`;
-
 const Button = styled.div<{ isShown?: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 128px;
-  background: ${props => props.theme.greyscale.background};
-  border-radius: 11px 0px 0px 11px;
   pointer-events: ${props => (props.isShown ? 'none' : 'auto')};
   //not working
   &:hover span {

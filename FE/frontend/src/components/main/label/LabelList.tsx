@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useMutation } from 'react-query';
+import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
 import Tabs from '../../../styles/molcules/Tabs';
 import Buttons from '../../../styles/atoms/Buttons';
@@ -12,11 +14,27 @@ import { ReactComponent as Trash } from '../../../icons/trash.svg';
 import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 
 const LabelList = () => {
-  const { isLoading, data, error } = useFetch('label', 'getAllData');
+  const { isLoading, data, error, refetch } = useFetch('label', 'getAllData');
   const [isNewLabelOpened, setIsNewLabelOpened] = useState(false);
+  const { mutateAsync: DeleteAsync, isSuccess: isDeleteSuccess } = useMutation(
+    useMutate('label', 'delete'),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
 
   const setAddLabel = () => {
     setIsNewLabelOpened(!isNewLabelOpened);
+  };
+
+  const deleteLabel = async (id: number) => {
+    await DeleteAsync({ id: id });
+
+    if (isDeleteSuccess) {
+      refetch();
+    }
   };
 
   return (
@@ -64,7 +82,12 @@ const LabelList = () => {
                   <EditWrapper link sm>
                     <Edit /> 편집
                   </EditWrapper>
-                  <TrashWrapper link sm>
+                  <TrashWrapper
+                    link
+                    sm
+                    onClick={() => {
+                      deleteLabel(label.id);
+                    }}>
                     <Trash /> 삭제
                   </TrashWrapper>
                 </RightCellContainer>

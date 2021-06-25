@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, Dispatch, SetStateAction } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import styled from 'styled-components';
 import Typo from '../atoms/Typos';
 import { ReactComponent as CheckOffCircle } from '../../icons/checkOffCircle.svg';

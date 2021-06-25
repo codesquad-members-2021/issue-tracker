@@ -1,4 +1,4 @@
-import { atom, RecoilState } from 'recoil';
+import { atom } from 'recoil';
 
 interface Props {
   [key: string]: boolean | null | string;
@@ -16,4 +16,14 @@ const filterAtom = atom<Props>({
   },
 });
 
-export { filterAtom };
+const filterOptionAtom = atom<any>({
+  key: 'filterOption',
+  default: {
+    assignee: [],
+    label: [],
+    milstone: [],
+    writer: [],
+  },
+});
+
+export { filterAtom, filterOptionAtom };

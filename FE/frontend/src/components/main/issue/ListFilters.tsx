@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { filterOptionAtom } from '../../../recoil/atoms';
 import useFetch from '../../../util/useFetch';
 import AssigneeFilter from './AssigneeFilter';
 import LabelFilter from './LabelFilter';
@@ -8,6 +10,7 @@ import AuthorFilter from './AuthorFilter';
 
 const ListFilters = () => {
   const { data } = useFetch('issue', 'getAllData');
+  const [filterOption, setFilterOption] = useRecoilState<any>(filterOptionAtom);
 
   const assignees = data
     ?.flatMap(({ assignees }: any) => {
@@ -57,6 +60,8 @@ const ListFilters = () => {
       return { id: val.id, optionName: val.username, image: val.profile_image };
     });
 
+  useEffect(() => {}, [data]);
+
   return (
     <FilterContainer>
       {assignees && <AssigneeFilter filteredAssignee={assignees} />}
@@ -69,6 +74,14 @@ const ListFilters = () => {
 
 const FilterContainer = styled.div`
   display: flex;
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 128px;
+    background: ${props => props.theme.greyscale.background};
+    border-radius: 11px 0px 0px 11px;
+  }
 `;
 
 export default ListFilters;

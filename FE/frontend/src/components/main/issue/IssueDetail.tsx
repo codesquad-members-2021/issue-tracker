@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { filterOptionAtom } from '../../../recoil/atoms';
 import NewComment from './NewComment';
 import useMutate from '../../../util/useMutate';
 import useFetch from '../../../util/useFetch';
 import User from '../../../styles/atoms/User';
 import Buttons from '../../../styles/atoms/Buttons';
+import Modal from '../../../styles/molcules/Modal';
 import Typos from '../../../styles/atoms/Typos';
 import { ReactComponent as AlertCircle } from '../../../icons/alertCircle.svg';
 import { ReactComponent as XSquare } from '../../../icons/xSquare.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
+import { ReactComponent as Plus } from '../../../icons/plus.svg';
 
 const IssueDetail = () => {
-  const queryClient = useQueryClient();
   const location = useLocation();
   const { isLoading, data, error, refetch } = useFetch('issue', 'detail', {
     id: location.pathname,
   });
-
-  useEffect(() => {
-    console.log(data);
-    queryClient.setQueryData(['issue', 'detail', location.pathname], data);
-    // queryClient.invalidateQueries(['issue', 'detail', location.pathname]);
-    console.log(data);
-  }, [data]);
-
+  const filterOptions = useRecoilValue(filterOptionAtom);
   const { mutateAsync: MutateTitle, isSuccess: isEditSuccess } = useMutation(
     useMutate('issue', 'editTitle')
   );
@@ -148,7 +144,38 @@ const IssueDetail = () => {
                 })}
               <NewComment issueId={data.id} refetch={refetch} />
             </CommentsContainer>
-            <Assignees></Assignees>
+            <FilterContainer>
+              <Modal
+                options={filterOptions.assignee}
+                exceptedDiv="filterTitle"
+                type="image"
+                innerTitle="담당자 추가">
+                <Text link sm>
+                  담당자
+                  <Plus />
+                </Text>
+              </Modal>
+              <Modal
+                options={filterOptions.label}
+                exceptedDiv="filterTitle"
+                type="image"
+                innerTitle="레이블 추가">
+                <Text link sm>
+                  레이블
+                  <Plus />
+                </Text>
+              </Modal>
+              {/* <Modal
+                options={filterOptions.milestone}
+                exceptedDiv="filterTitle"
+                type="text"
+                innerTitle="마일스톤 추가">
+                <Text link sm>
+                  마일스톤
+                  <Plus />
+                </Text>
+              </Modal> */}
+            </FilterContainer>
             {/* <Typos xs>이슈 삭제</Typos> */}
           </MainContainer>
         </LabelListContainer>
@@ -306,14 +333,27 @@ const Comment = styled.div`
   border-radius: 0px 0px 16px 16px;
 `;
 
-const Assignees = styled.div`
+const FilterContainer = styled.div`
+  width: 308px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 32px;
-  width: 308px;
   background: ${props => props.theme.greyscale.offWhite};
   border-radius: 16px 16px 0px 0px;
   margin: 1px 0px;
+`;
+
+const Text = styled(Typos)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  width: 100%;
+  height: 96px;
+  background: ${props => props.theme.greyscale.offWhite};
+  color: ${props => props.theme.greyscale.label};
+  svg {
+    stroke: ${props => props.theme.greyscale.label};
+    margin: 2px 0 0 10px;
+  }
 `;
 export default IssueDetail;
