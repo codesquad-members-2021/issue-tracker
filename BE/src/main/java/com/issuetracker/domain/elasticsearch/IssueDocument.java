@@ -3,10 +3,7 @@ package com.issuetracker.domain.elasticsearch;
 import com.issuetracker.domain.issue.Issue;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Document(indexName = "issue")
 @ToString
+@Setting(settingPath = "/settings/settings.json")
 public class IssueDocument {
 
     @Id
@@ -27,10 +25,15 @@ public class IssueDocument {
     private MilestoneDocument milestone;
     @Field(type = FieldType.Boolean)
     private boolean isOpen;
+
+    @Field(type = FieldType.Text, analyzer = "word_analyzer")
     private String title;
+
     private List<CommentDocument> comments;
+
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis)
     private LocalDateTime createdDateTime;
+
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis)
     private LocalDateTime modifiedDateTime;
 
