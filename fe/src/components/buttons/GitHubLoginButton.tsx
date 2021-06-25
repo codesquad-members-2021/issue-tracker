@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const GitHubLoginButton = () => {
   return (
-    <a href="https://github.com/login/oauth/authorize?client_id=a27a9d4023b6ebb6e829&redirect_uri=http://localhost:3000/api/login/callback&scope=user">
+    <a href="https://github.com/login/oauth/authorize?client_id=a1689d4a012d841d152a&redirect_uri=http://3.35.48.70/api/login/callback&scope=user">
       <StyledCreateButton variant="contained" size="large">
         GitHub 계정으로 로그인
       </StyledCreateButton>
