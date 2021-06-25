@@ -1,8 +1,20 @@
 import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 
-const IssueTitleInput = () => {
-  return <CustomTextField label="제목" variant="filled" />;
+interface InputProps {
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const IssueTitleInput = ({ value, handleChange }: InputProps) => {
+  return (
+    <CustomTextField
+      onChange={handleChange}
+      label="제목"
+      variant="filled"
+      value={value}
+    />
+  );
 };
 
 export default IssueTitleInput;

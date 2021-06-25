@@ -4,6 +4,7 @@ import { milestoneQuery, milestoneUpdateAtom } from 'stores/milestoneStore';
 import { selector, atom } from 'recoil';
 import { LabelItemType, IssueItemType, IssuesCountType } from 'types/issueType';
 import { LabelDataType, UserDataType, IssueDataType } from 'types/storeTypes';
+import { assigneeQueryType } from 'types/filterType';
 
 export const totalCountOfLabels = selector<number>({
   key: 'totalCountOfLabels',
@@ -109,7 +110,7 @@ export const labelQuery = selector<LabelItemType[]>({
   get: async ({ get }) => {
     get(labelUpdateAtom);
     const token = localStorage.getItem('jwt');
-    console.log('dd', labelUpdateAtom);
+
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/labels`,
@@ -159,7 +160,7 @@ export const authorQuery = selector({
   },
 });
 
-export const assigneeQuery = selector({
+export const assigneeQuery = selector<assigneeQueryType[]>({
   key: 'assigneeQuery',
   get: async () => {
     try {
@@ -175,7 +176,7 @@ export const assigneeQuery = selector({
 
       return data.map((user: UserDataType) => ({
         id: user.user_id,
-        description: user.name,
+        title: user.name,
         imgurl: user.avatar_url,
       }));
     } catch (error) {
@@ -196,8 +197,15 @@ export const filterSelector = selector<TestType>({
     };
   },
 });
+export type NewIssuesContentType = {
+  title: string;
+  description: string;
+};
 
-export const newIssueDescriptionAtom = atom<string>({
-  key: 'newIssueDescriptionAton',
-  default: '',
+export const newIssuesContentAtom = atom<NewIssuesContentType>({
+  key: 'newIssuesContentAtom',
+  default: {
+    title: '',
+    description: '',
+  },
 });

@@ -4,20 +4,39 @@ import styled from 'styled-components';
 import { FilterItemPropsType } from '../../types/filterType';
 import { ReactComponent as CheckOff } from 'icons/check-off-circle.svg';
 import { ReactComponent as CheckOn } from 'icons/check-on-circle.svg';
-const FilterItem = ({ filterItem, isEnd }: FilterItemPropsType) => {
+import AuthorAvatar from './AuthorAvatar';
+const FilterItem = ({
+  filterItem,
+  isEnd,
+  value,
+  onClose,
+  setState,
+  clickHandler,
+}: FilterItemPropsType) => {
   const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-    console.log(filterItem.id);
+    console.log(e.currentTarget.id);
+    if (clickHandler) clickHandler(e);
+
+    onClose();
   };
+
   return (
     <>
-      <StyledFilterItem onClick={handleClick}>
+      <StyledFilterItem id={`${filterItem.id}`} onClick={handleClick}>
         <StyledSpan>
           {filterItem.labelColor ? (
             <StyledColor colorCode={filterItem.labelColor} />
           ) : null}
-          {filterItem.title}
+          {filterItem.imgurl ? (
+            <AuthorAvatar size="S" profileImg={filterItem.imgurl} />
+          ) : null}
+          <span>{filterItem.title || filterItem.description}</span>
         </StyledSpan>
-        <Checkbox icon={<CheckOff />} checkedIcon={<CheckOn />} />
+        <Checkbox
+          icon={<CheckOff />}
+          checkedIcon={<CheckOn />}
+          checked={value && value.indexOf(filterItem.id) !== -1}
+        />
       </StyledFilterItem>
       {isEnd ? null : <Divider />}
     </>
@@ -26,6 +45,9 @@ const FilterItem = ({ filterItem, isEnd }: FilterItemPropsType) => {
 const StyledSpan = styled.span`
   ${({ theme }) => theme.style.flexAlignItemsCenter}
   font-size: ${({ theme }) => theme.fontSize.S};
+  span {
+    margin-left: 0.5rem;
+  }
 `;
 const StyledFilterItem = styled(MenuItem)`
   ${({ theme }) => theme.style.flexSpaceBetween}
@@ -36,9 +58,8 @@ const StyledColor = styled.div<{ colorCode: string }>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: #00ffff;
+  background-color: ${({ colorCode }) => colorCode};
   border: 1px solid ${({ theme }) => theme.color.grayscale.line};
-  margin-right: 0.5rem;
 `;
 export default FilterItem;
 // ${({ colorCode }) => colorCode}

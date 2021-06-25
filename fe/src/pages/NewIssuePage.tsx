@@ -1,10 +1,43 @@
 import { Divider } from '@material-ui/core';
+import { instanceWithAuth } from 'api';
 import CustomButton from 'components/buttons/CustomButton';
 import NewIssueLeft from 'components/new-issue/NewIssueLeft';
 import NewIssueRight from 'components/new-issue/NewIssueRight';
-import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { newIssuesContentAtom } from 'store';
+import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
+import styled from 'styled-components';
 const NewIssuePage = () => {
+  const history = useHistory()
+  const IdReset = useResetRecoilState(NewIssuesIdQuery);
+  const contentReset = useResetRecoilState(newIssuesContentAtom);
+  const IssuesId = useRecoilValue(NewIssuesIdQuery);
+  const IssuesContent = useRecoilValue(newIssuesContentAtom);
+  console.log(IssuesId, IssuesContent);
+  const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    (async function () {
+      await instanceWithAuth.post(
+        `${process.env.REACT_APP_API_URL}/api/issues`,
+        {
+          title: IssuesContent.title,
+          description: IssuesContent.description,
+          assignee: IssuesId.assigneeList[0],
+          label_ids: IssuesId.labelList,
+          milestone_id: IssuesId.milestoneList[0],
+        } 
+      );
+    })();
+    history.push('/issues');
+  };
+  useEffect(() => {
+    return () => {
+      IdReset();
+      contentReset();
+    };
+  }, []);
   return (
     <>
       <NewIssueTitle>새로운 이슈 작성</NewIssueTitle>
@@ -15,7 +48,7 @@ const NewIssuePage = () => {
       </NewIssueContent>
       <Divider />
       <StyledDiv>
-        <CustomButton>완료</CustomButton>
+        <CustomButton onClick={clickHandler}>완료</CustomButton>
       </StyledDiv>
     </>
   );

@@ -43,7 +43,7 @@ export default function IssueFilter() {
         onClose={handleClose}
         ref={ref}
       >
-        <FilterList filterTitle="이슈" filterList={testArray} />
+        <FilterList onClose={handleClose}  filterTitle="이슈" filterList={testArray} />
       </CustomMenu>
     </>
   );

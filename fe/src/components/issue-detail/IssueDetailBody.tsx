@@ -54,6 +54,8 @@ const IssueDetailBody = () => {
       );
     })();
   };
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+  setCommentDesctiption(e.target.value);
 
   return (
     <Box display="flex">
@@ -76,8 +78,8 @@ const IssueDetailBody = () => {
             <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
             <Spacer />
             <CommentTextarea
-              description={commentDesctiption}
-              setDescription={setCommentDesctiption}
+              value={commentDesctiption}
+              handleChange={handleChange}
             />
           </NewCommentInputArea>
 

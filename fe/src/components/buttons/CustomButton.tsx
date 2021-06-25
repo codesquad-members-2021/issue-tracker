@@ -2,8 +2,8 @@ import { Button } from '@material-ui/core';
 import { ReactChild } from 'react';
 import styled from 'styled-components';
 
-const CustomButton = ({ children }: { children: ReactChild }) => {
-  return <StyledCreateButton size="large">{children}</StyledCreateButton>;
+const CustomButton = ({ children , onClick}: { children: ReactChild , onClick: React.MouseEventHandler<HTMLButtonElement>}) => {
+  return <StyledCreateButton onClick={onClick} size="large">{children}</StyledCreateButton>;
 };
 
 export default CustomButton;

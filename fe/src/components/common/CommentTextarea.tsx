@@ -5,22 +5,21 @@ import { ReactComponent as FileUploadIconSvg } from 'icons/file-upload.svg';
 import { SetterOrUpdater } from 'recoil';
 
 interface CommentTextareaProps {
-  description: string;
-  setDescription: SetterOrUpdater<string>;
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const CommentTextarea = ({
-  description,
-  setDescription,
+  value,
+  handleChange,
 }: CommentTextareaProps) => {
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setDescription(e.target.value);
+
 
   return (
     <Wrapper>
       <StyledCommentTextarea>
-        <CustomTextField onChange={handleChange} />
-        <Label aria-checked={Boolean(description)}>코멘트를 입력하세요</Label>
+        <CustomTextField onChange={handleChange} value={value} />
+        <Label aria-checked={Boolean(value)}>코멘트를 입력하세요</Label>
       </StyledCommentTextarea>
       <FileUploadArea>
         <Box display="flex" alignItems="center">

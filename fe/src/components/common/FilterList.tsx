@@ -2,8 +2,14 @@ import FilterItem from './FilterItem';
 import { FilterItemType, FilterListType } from '../../types/filterType';
 import styled from 'styled-components';
 
-
-const FilterList = ({ filterTitle, filterList }: FilterListType) => {
+const FilterList = ({
+  filterTitle,
+  filterList,
+  onClose,
+  value,
+  clickHandler,
+  setState,
+}: FilterListType) => {
   return (
     <>
       <MenuTitle>{filterTitle} 필터</MenuTitle>
@@ -12,7 +18,9 @@ const FilterList = ({ filterTitle, filterList }: FilterListType) => {
           <FilterItem
             key={idx}
             filterItem={filterItem}
+            setState={setState}
             isEnd={filterList.length - 1 === idx}
+            {...{ value, onClose, clickHandler }}
           />
         );
       })}

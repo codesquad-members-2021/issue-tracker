@@ -2,9 +2,12 @@ import { ParsedQs } from 'qs';
 import { NavType } from 'types/issueType';
 import { TitleType } from 'types/issueType';
 
+export const deepCopied = <T extends {}>(data: T) =>
+  JSON.parse(JSON.stringify(data));
+
 export const getUrl = {
   LOGIN: (code: string | ParsedQs | string[] | ParsedQs[] | undefined) =>
-    `http://15.164.68.136/api/login/auth?client=web&code=${code}`,
+    `${process.env.REACT_APP_API_URL}/api/login/auth?client=web&code=${code}`,
 };
 
 export const getTitle = (type: TitleType) =>
@@ -30,8 +33,6 @@ export const labelParser = (str: string | null) => {
       return 'TextColor';
   }
 };
-
-
 
 export const milestoneParser = (str: string | null) => {
   switch (str) {

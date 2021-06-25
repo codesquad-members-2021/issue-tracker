@@ -8,7 +8,7 @@ export type UserType = {
   id?: number;
 };
 
-export type SidebarListType = 'milestoneList' | 'labelList';
+export type SidebarListType = 'milestoneList' | 'labelList'  | 'assigneeList';
 
 export type TitleType =
   | 'milestoneList'

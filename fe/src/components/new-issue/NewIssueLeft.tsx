@@ -1,25 +1,39 @@
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CommentTextarea from 'components/common/CommentTextarea';
 import IssueTitleInput from 'components/common/IssueTitleInput';
+import React, { useReducer } from 'react';
 import { useRecoilState } from 'recoil';
-import { newIssueDescriptionAtom } from 'store';
+import { newIssuesContentAtom } from 'store';
 import styled from 'styled-components';
 
 const NewIssueLeft = () => {
-  const [newIssueDescription, setNewIssueDescription] = useRecoilState(
-    newIssueDescriptionAtom
-  );
-
+  const [newIssuesContent, setNewIssuesContent] =
+    useRecoilState(newIssuesContentAtom);
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewIssuesContent((state) => ({
+      ...state,
+      description: e.target.value,
+    }));
+  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewIssuesContent((state) => ({
+      ...state,
+      title: e.target.value,
+    }));
+  }; 
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>
         <AuthorAvatar size="L" />
-        <IssueTitleInput />
+        <IssueTitleInput
+          handleChange={handleInputChange}
+          value={newIssuesContent.title}
+        />
       </NewIssueTitle>
       <StyledCommentInput>
         <CommentTextarea
-          description={newIssueDescription}
-          setDescription={setNewIssueDescription}
+          value={newIssuesContent.description}
+          handleChange={handleChange}
         />
       </StyledCommentInput>
     </StyledNewIssueLeft>

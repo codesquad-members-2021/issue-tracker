@@ -7,7 +7,6 @@ import LabelsItem from './LabelsItem';
 const Labels = () => {
   const labelCount = useRecoilValue(totalCountOfLabels);
   const labelList = useRecoilValue(labelQuery);
-  console.log(labelList, "뿌려주는거");
   return (
     <Wrapper>
       <Upper>
