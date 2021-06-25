@@ -50,7 +50,7 @@ function asyncReducer<D, E>(
 
 type PromiseFn<T> = (...args: any) => Promise<T>;
 
-function useAsync<D, E, F extends PromiseFn<D>>(promiseFn: F, skip = false, ...params: Parameters<F>) {
+function useFetch<D, E, F extends PromiseFn<D>>(promiseFn: F, skip = false, ...params: Parameters<F>) {
   const [state, dispatch] = useReducer(asyncReducer, {
     loading: false,
     data: null,
@@ -84,4 +84,4 @@ function useAsync<D, E, F extends PromiseFn<D>>(promiseFn: F, skip = false, ...p
   return [state, fetchData] as const;
 }
 
-export default useAsync;
+export default useFetch;

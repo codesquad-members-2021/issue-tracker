@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import { getHexToRGB, getTextColor, pipe } from '@/utils/commonUtils';
+import { getHexToRGB, getTextColor } from '@/utils/serviceUtils';
+import { pipe } from '@/utils/functionalUtils';
 
 type LabelType = {
   name: string;

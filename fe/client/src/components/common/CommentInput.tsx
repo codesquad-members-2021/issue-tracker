@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components';
-import ClipIcon from '@/Icons/Clip.svg';
 import TextField from '@material-ui/core/TextField';
-import useDebounceTyping from '@/utils/hook/useDebounce';
-import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import Button from '@material-ui/core/Button';
-import TitleInput from '@components/common/TitleInput';
+import { inputStyles } from '@components/common/baseStyle/baseStyle';
 import API from '@/utils/API';
+import useDebounceTyping from '@/utils/hook/useDebounce';
+import ClipIcon from '@/Icons/Clip.svg';
 
-const InputField = () => {
+const CommentInput = ({ commentInputState: { value, onChange } }: any) => {
   const classes = inputStyles();
   const [debouncedCount, setDebounceCount] = useDebounceTyping<number>(0, { start: 500, end: 2000 });
+
   const handleChangeTyping = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setDebounceCount(event.target.value.length);
+    onChange(event)
   }, []);
 
   const handleChangeFile = async (event: React.ChangeEvent<any>) => {
@@ -21,15 +22,14 @@ const InputField = () => {
     formData.append("fileName", event.target.files[0].name);
     try {
       const data = await API.post.files(formData);
-      console.log(data)
+      const fileAddData = `\n![${data.name}](${data.path})`;
+      onChange(event, fileAddData);
     } catch (e) {
       console.log(e);
     }
   }
-
   return (
-    <InputWrapper>
-      <TitleInput />
+    <>
       <TextAreaWrapper>
         <TextField
           label="코멘트를 입력하세요"
@@ -38,6 +38,7 @@ const InputField = () => {
           className={classes.desc}
           variant="filled"
           onChange={handleChangeTyping}
+          value={value}
           InputProps={{
             disableUnderline: true
           }}
@@ -62,13 +63,9 @@ const InputField = () => {
           파일 첨부하기
         </Button>
       </label>
-    </InputWrapper>
+    </>
   )
 }
-
-const InputWrapper = styled.div`
-  width:100%;
-`;
 
 const ClipImageTag = styled.img`
   margin-right:10px;
@@ -89,4 +86,4 @@ const TypingCountWrapper = styled.div`
   font-size: 12px;
   color:#6E7191;
 `;
-export default InputField;
+export default CommentInput;

@@ -35,12 +35,16 @@ export const inputStyles = makeStyles({
     width: '100%',
     marginBottom: '16px',
     border: '1px solid #fff',
+    '& > div': {
+      borderRadius: '10px',
+    },
     '& input': {
       background: '#EFF0F6',
+      borderRadius: '10px',
       '&:focus': {
         background: '#FEFEFE',
         boxShadow: '0 0 0 1px #14142B',
-        borderRadius: '4px'
+        borderRadius: '10px'
       }
     }
   },
@@ -67,7 +71,7 @@ export const inputStyles = makeStyles({
     justifyContent: 'start',
     fontWeight: 700,
     color: '#6E7191',
-    fontSize: '12px'
+    fontSize: '12px',
   },
   displayNone: {
     display: 'none'

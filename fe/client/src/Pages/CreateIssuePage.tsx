@@ -1,14 +1,14 @@
 import HeadContent from '@components/createIssue/HeadContent';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Tabs from '@components/createIssue/Tabs';
-import Button from '@material-ui/core/Button';
+import CreateInputs from '@components/createIssue/CreateInputs';
+import SendButton from '@components/createIssue/SendButton';
 import IconButton from '@components/common/IconButton';
-import { inputStyles } from '@components/common/baseStyle/baseStyle';
-import InputField from '@components/createIssue/InputField';
-import { Link } from 'react-router-dom';
+import useInput from '@/utils/hook/useInput';
 
 const CreateIssuePage = () => {
-  const classes = inputStyles();
+  const commentInputState = useInput('');
 
   return (
     <>
@@ -16,7 +16,7 @@ const CreateIssuePage = () => {
       <Hr />
       <ContentsWrapper>
         <ImageTag src="https://user-images.githubusercontent.com/61257242/121417591-0d02b480-c9a5-11eb-9c7e-d926e8731bfb.png" />
-        <InputField />
+        <CreateInputs {...{ commentInputState }} />
         <Tabs />
       </ContentsWrapper>
       <Hr />
@@ -26,9 +26,7 @@ const CreateIssuePage = () => {
             <FontBold>작성취소</FontBold>
           </IconButton>
         </Link>
-        <Button color="primary"
-          variant="contained"
-          className={classes.button}>완료</Button>
+        <SendButton {...{ commentInputState }} />
       </BottomContents>
     </>
   )

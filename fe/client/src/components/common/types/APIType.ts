@@ -17,16 +17,14 @@ export type IssueListItemType = {
       name: string
     }
   ],
-  labels: {
-    labels: [
-      {
-        id: number,
-        name: string,
-        description: string,
-        color: string
-      }
-    ]
-  },
+  labels: [
+    {
+      id: number,
+      name: string,
+      description: string,
+      color: string
+    }
+  ],
   milestone: {
     id: number,
     name: string,
@@ -37,4 +35,29 @@ export type IssueListItemType = {
     closed: boolean
   },
   closed: boolean
+  [key: string]: any;
+};
+
+
+export type IssueCreateType = {
+  title: string;
+  mainCommentContents: string;
+  authorId: number;
+  assigneeIds: Array<number>;
+  labelIds: Array<number>;
+  milestoneId: number;
+}
+
+
+export type LabelSendType = {
+  name: string;
+  description: string;
+  color: string;
+}
+
+export type MilestoneSendType = {
+  name: string;
+  description: string;
+  dueDate: string;
+  closed: boolean;
 }

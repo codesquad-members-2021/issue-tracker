@@ -1,18 +1,18 @@
 import LabelMilestoneToggle from '@components/common/LabelMilestoneToggle';
-import styled from 'styled-components';
-import IconButton from '@components/common/IconButton';
-import { InputAdornment, InputBase } from '@material-ui/core';
-import SearchIcon from '@/Icons/Search.svg';
-import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
-import FilterTab from '@components/common/FilterTab';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { InputAdornment, InputBase } from '@material-ui/core';
+import FilterTab from '@components/common/FilterTab';
+import IconButton from '@components/common/IconButton';
+import ArrowBottomIcon from '@/Icons/ArrowBottom.svg';
+import SearchIcon from '@/Icons/Search.svg';
 
 const issueFilterList = [
-  '열린 이슈',
-  '내가 작성한 이슈',
-  '나에게 할당된 이슈',
-  '내가 댓글을 남긴 이슈',
-  '닫힌 이슈'
+  { name: '열린 이슈' },
+  { name: '내가 작성한 이슈' },
+  { name: '나에게 할당된 이슈' },
+  { name: '내가 댓글을 남긴 이슈' },
+  { name: '닫힌 이슈' },
 ];
 
 type HeadContentType = {
@@ -30,6 +30,7 @@ const HeadContent = ({ handleClickShowFilterModal }: HeadContentType) => {
               style={{ transform: 'translateY(3px)' }} />
           </div>
           <FilterTab
+            inputType='radio'
             header="issue"
             filterList={issueFilterList} />
         </FilterButton>

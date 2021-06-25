@@ -9,6 +9,7 @@ import CloseBoxIcon from '@/Icons/CloseBox.svg';
 import ClipIcon from '@/Icons/Clip.svg';
 import EditIcon from '@/Icons/Edit.svg';
 import TrashIcon from '@/Icons/Trash.svg';
+import MilestoneIcon from '@/Icons/Milestone.svg';
 
 const iconKinds: Record<string, any> = {
   whitePlus: WhitePlusIcon,
@@ -19,6 +20,7 @@ const iconKinds: Record<string, any> = {
   clip: ClipIcon,
   edit: EditIcon,
   trash: TrashIcon,
+  milestone: MilestoneIcon,
 }
 
 type IconButtonType = {
@@ -30,7 +32,8 @@ type IconButtonType = {
   margin?: string;
   height?: string;
   children?: React.ReactNode;
-  style?:any;
+  style?: any;
+  [key: string]: any;
 }
 
 const IconButton = ({ icon, children, ...props }: IconButtonType) => {
