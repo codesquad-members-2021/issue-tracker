@@ -35,7 +35,7 @@ const IssuesHeader = ({
 
 	//----------중복 코드from MeuFilter --------
 	const [isFilterClicked, setIsFilterClicked] = useState(false);
-	const handleClick = useCallback(e => {
+	const handleClick = useCallback((e) => {
 		isFilterClicked === false
 			? setIsFilterClicked(true)
 			: setIsFilterClicked(false);
@@ -52,7 +52,7 @@ const IssuesHeader = ({
 		};
 	}, [isFilterClicked]);
 
-	const closeFilterModal = e => {
+	const closeFilterModal = (e) => {
 		const target = e.target;
 		if (
 			isFilterClicked &&
@@ -74,7 +74,7 @@ const IssuesHeader = ({
 	}, [selectedIssues]);
 
 	return (
-		<StyledGridTitleCard gridRate={[0.5, 1.5, 8.3]}>
+		<StyledGridTitleCard gridRate={[0.5, 2, 8.3]}>
 			<CheckBox>
 				<input type="checkbox" onChange={checkAllIssue} />
 			</CheckBox>

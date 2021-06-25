@@ -29,7 +29,7 @@ const NewIssueForm = () => {
 	const [issueTitle, setIssueTitle] = useState("");
 	const commentValue = useRecoilValue(commentInputState);
 	const categoryId = useRecoilValue(categoryIdSelectorState);
-	const handleTitleInput = e => {
+	const handleTitleInput = (e) => {
 		setIssueTitle(e.target.value);
 	};
 
@@ -89,12 +89,14 @@ const NewIssueForm = () => {
 						</CancelBtn>
 					</Link>
 				</CancelBtn>
-				<SubmitBtn
-					text="완료"
-					size="l"
-					icon={"none"}
-					clickHandler={handleSubmit}
-				/>
+				<Link to="/main">
+					<SubmitBtn
+						text="완료"
+						size="l"
+						icon={"none"}
+						clickHandler={handleSubmit}
+					/>
+				</Link>
 			</ButtonWrapper>
 		</>
 	);

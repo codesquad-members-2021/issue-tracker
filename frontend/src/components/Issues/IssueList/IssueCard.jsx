@@ -26,16 +26,8 @@ const IssueCard = ({
 	const [selectedIssues, setSelectedIssues] = useRecoilState(
 		selectedIssueCntState
 	);
-	const {
-		title,
-		id,
-		labels,
-		milestone,
-		author,
-		createdAt,
-		open,
-		assignees,
-	} = issue;
+	const { title, id, labels, milestone, author, createdAt, open, assignees } =
+		issue;
 	console.log("labels", labels);
 	const handleCheck = () => {
 		setIsChecked(!isChecked);
@@ -72,21 +64,28 @@ const IssueCard = ({
 			</CheckBox>
 			<Contents>
 				<TextTagDivider>
-					<span>
-						<Alert stroke={theme.colors.blue} />
-						<Link to={`/main/${id}`}>{title}</Link>
-					</span>
-					<LabelContainer>
-						{labels.length > 0
-							? labels.map((label, idx) => (
-									<LabelBadge
-										text={label.name}
-										fontColor={"#000"}
-										backgroundColor={"#fcaffced"}
-									/>
-							  ))
-							: ""}
-					</LabelContainer>
+					<InfoWrapper>
+						<Margin>
+							<Alert stroke={theme.colors.blue} />
+						</Margin>
+						<Margin>
+							<Link to={`/main/${id}`}>{title}</Link>
+						</Margin>
+
+						<LabelContainer>
+							{labels.length > 0
+								? labels.map((label, idx) => (
+										<Margin>
+											<LabelBadge
+												text={label.name}
+												fontColor={label.colors.textColor}
+												backgroundColor={label.colors.backgroundColor}
+											/>
+										</Margin>
+								  ))
+								: ""}
+						</LabelContainer>
+					</InfoWrapper>
 				</TextTagDivider>
 				<TextTagDivider>
 					<span>#{id} </span>
@@ -134,9 +133,9 @@ const TextContainer = styled.span`
 	padding: 0 5px;
 `;
 
-const LabelContainer = styled.div`
+const LabelContainer = styled.span`
 	display: flex;
-	width: 10%;
+	/* width: 10%; */
 `;
 
 const UserImgContainer = styled.div`
@@ -151,4 +150,14 @@ const UserImgContainer = styled.div`
 		width: 100%;
 		height: 100%;
 	}
+`;
+
+const InfoWrapper = styled.div`
+	display: flex;
+
+	align-items: center;
+`;
+
+const Margin = styled.div`
+	margin-right: 0.5rem;
 `;
