@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import AuthenticationServices
 import Combine
 
 final class MockRepository: NetworkEngine {
+    func requestGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
+        return Just("testcode")
+            .setFailureType(to: NetworkError.self)
+            .eraseToAnyPublisher()
+    }
 
     var error: NetworkError?
 

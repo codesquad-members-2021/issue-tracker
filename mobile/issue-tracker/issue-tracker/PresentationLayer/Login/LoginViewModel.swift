@@ -11,43 +11,34 @@ import AuthenticationServices
 
 final class LoginViewModel {
 
-    private let loginService: LoginService
-    private var tokenState = PassthroughSubject<Void, Never>()
+    private let loginService: Service
     private var cancellable = Set<AnyCancellable>()
 
-    @Published private var message = ""
+    var errorHandler: ((NetworkError) -> Void)?
+    var onDismiss: (() -> Void)?
 
-    init(loginService: LoginService = .init()) {
+    init(loginService: Service = LoginService()) {
         self.loginService = loginService
     }
 
     func fetctGithubLogin(viewController: ASWebAuthenticationPresentationContextProviding) {
         loginService.fetchGithubCode(viewController: viewController).sink { [weak self] fail in
             if case .failure(let error) = fail {
-                self?.message = error.description
+                self?.errorHandler?(error)
             }
         } receiveValue: { [weak self] code in
             self?.authorizeUser(to: Auth(code: code).encode())
         }.store(in: &cancellable)
     }
 
-    func authorizeUser(to httpBody: Data) {
+    private func authorizeUser(to httpBody: Data) {
         loginService.fetchToken(to: httpBody).sink { [weak self] fail in
             if case .failure(let error) = fail {
-                self?.message = error.description
+                self?.errorHandler?(error)
             }
         } receiveValue: { [weak self] _ in
-            self?.tokenState.send()
+            self?.onDismiss?()
         }.store(in: &cancellable)
     }
 
-    func fetchErrorMessage() -> AnyPublisher<String, Never> {
-        return $message
-            .dropFirst()
-            .eraseToAnyPublisher()
-    }
-
-    func AuthorizeCompltion() -> AnyPublisher<Void, Never> {
-        return tokenState.eraseToAnyPublisher()
-    }
 }

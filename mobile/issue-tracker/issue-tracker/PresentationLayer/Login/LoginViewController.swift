@@ -6,35 +6,29 @@
 //
 
 import UIKit
-import Combine
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
 
-    private let loginViewModel = LoginViewModel()
-    private var cancellable = Set<AnyCancellable>()
+    var githubLoginHandler: ((ASWebAuthenticationPresentationContextProviding) -> Void)?
 
-    override func viewDidLoad() {
-        bind()
-    }
+    override func viewDidLoad() {}
 
     @IBAction func loginButtonTouched(_ sender: Any) {
-        loginViewModel.fetctGithubLogin(viewController: self)
+        githubLoginHandler?(self)
     }
 
-    private func bind() {
-        loginViewModel.fetchErrorMessage()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] message in
-                let alertController = UIAlertController(title: message)
-                self?.present(alertController, animated: true)
-            }.store(in: &cancellable)
+    func showError(from error: NetworkError) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: error.description)
+            self.present(alertController, animated: true)
+        }
+    }
 
-        loginViewModel.AuthorizeCompltion()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.dismiss(animated: false, completion: nil)
-            }.store(in: &cancellable)
+    func authorizeCompltion() {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

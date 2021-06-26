@@ -10,20 +10,25 @@ import Combine
 import KeychainSwift
 import AuthenticationServices
 
-final class LoginService {
+protocol Service {
+    func fetchGithubCode(viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError>
+    func fetchToken(to httpBody: Data) -> AnyPublisher<Void, NetworkError>
+}
+
+final class LoginService: Service {
 
     private let keychain: KeychainSwift
-    private let repository: Repository
+    private let repository: NetworkEngine
 
     private let token = "token"
 
-    init(keychain: KeychainSwift = KeychainSwift(), repository: Repository = .init()) {
+    init(keychain: KeychainSwift = KeychainSwift(), repository: NetworkEngine = Repository()) {
         self.keychain = keychain
         self.repository = repository
     }
 
     func fetchGithubCode(viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
-        return repository.fetchGithubLoginCode(from: viewController)
+        return repository.requestGithubLoginCode(from: viewController)
     }
 
     func fetchToken(to httpBody: Data) -> AnyPublisher<Void, NetworkError> {

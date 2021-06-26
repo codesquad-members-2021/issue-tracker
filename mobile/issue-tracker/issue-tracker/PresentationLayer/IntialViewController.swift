@@ -11,28 +11,33 @@ import KeychainSwift
 class IntialViewController: UIViewController {
 
     private var viewHandler: ((UIViewController) -> Void)?
-    private var selectViewController: UIViewController {
-        KeychainSwift().get("token") == nil ?
-            UIStoryboard().create(name: "Login", type: LoginViewController.self) :
-            UIStoryboard().create(name: "Main", type: UITabBarController.self)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
-        bind { [weak self] viewController in
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true)
-        }
+        viewHandler = onPresent(view:)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewHandler?(selectViewController)
+        viewHandler?(selectViewController())
     }
 
-    private func bind(viewController: @escaping ((UIViewController) -> Void)) {
-        self.viewHandler = viewController
+    private func selectViewController() -> UIViewController {
+        if KeychainSwift().get("token")?.isEmpty ?? true {
+            let loginViewController = UIStoryboard().create(name: "Login", type: LoginViewController.self)
+            let loginViewModel = LoginViewModel()
+            loginViewModel.errorHandler = loginViewController.showError(from:)
+            loginViewModel.onDismiss = loginViewController.authorizeCompltion
+            loginViewController.githubLoginHandler = loginViewModel.fetctGithubLogin(viewController:)
+            return loginViewController
+        }
+
+        return UIStoryboard().create(name: "Main", type: UITabBarController.self)
+    }
+
+    private func onPresent(view: UIViewController) {
+        view.modalPresentationStyle = .fullScreen
+        self.present(view, animated: true)
     }
 }

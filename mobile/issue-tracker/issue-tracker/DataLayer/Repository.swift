@@ -11,6 +11,7 @@ import AuthenticationServices
 
 protocol NetworkEngine {
     func requestUserAuth(to code: Data) -> AnyPublisher<[String: String], NetworkError>
+    func requestGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError>
 }
 
 final class Repository: NetworkEngine {
@@ -52,7 +53,7 @@ final class Repository: NetworkEngine {
             }.eraseToAnyPublisher()
     }
 
-    func fetchGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
+    func requestGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
         guard let url = endpoint.url(router: .github) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
