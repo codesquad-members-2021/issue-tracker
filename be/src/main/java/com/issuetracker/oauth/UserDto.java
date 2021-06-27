@@ -1,19 +1,33 @@
 package com.issuetracker.oauth;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class UserDto {
+    @JsonProperty("user_id")
     private Long id;
 
+    @JsonProperty("name")
     private String login;
 
     private String avatar_url;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String login, Long id, String avatar_url) {
+    public UserDto(String login, Long id, String avatar_url) {
         this.login = login;
         this.id = id;
         this.avatar_url = avatar_url;
+    }
+
+    public UserDto(User user) {
+        this.login = user.getLogin();
+        this.id = user.getId();
+        this.avatar_url = user.getAvatar_url();
+    }
+
+    public static UserDto of(User user) {
+        return new UserDto(user);
     }
 
     public String getLogin() {

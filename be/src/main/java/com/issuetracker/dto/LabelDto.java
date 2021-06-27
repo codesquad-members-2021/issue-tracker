@@ -1,8 +1,9 @@
-package com.issuetracker.domain;
+package com.issuetracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.issuetracker.domain.Label;
 
-public class Label {
+public class LabelDto {
     private Long id;
     private String title;
     private String description;
@@ -13,54 +14,41 @@ public class Label {
     @JsonProperty("font_light")
     private boolean fontLight;
 
-    public Label() {
-    }
-
-    public Label(Long id, String title, String description, String colorCode, boolean fontLight) {
+    public LabelDto(Long id, String title, String description, String colorCode, boolean fontLight) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.colorCode = colorCode;
         this.fontLight = fontLight;
+    }
+
+    public static LabelDto of(Label label) {
+        return new LabelDto(
+               label.getId(),
+                label.getTitle(),
+                label.getDescription(),
+                label.getColorCode(),
+                label.isFontLight()
+        );
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getColorCode() {
         return colorCode;
     }
 
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
-
     public boolean isFontLight() {
         return fontLight;
-    }
-
-    public void setFontLight(boolean fontLight) {
-        this.fontLight = fontLight;
     }
 }

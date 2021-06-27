@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`issue`
     `created_time`   DATETIME     NOT NULL,
     `closed`         TINYINT      NOT NULL DEFAULT 0,
     `deleted`        TINYINT      NOT NULL DEFAULT 0,
-    `milestone_id`   INT          NOT NULL,
+    `milestone_id`   INT          NULL,
     `author_user_id` INT          NOT NULL,
     `number`         INT          NOT NULL,
     PRIMARY KEY (`id`),
@@ -92,9 +92,8 @@ CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`label`
     `title`       VARCHAR(20)  NOT NULL,
     `description` VARCHAR(255) NULL,
     `color_code`  VARCHAR(10)  NOT NULL,
-    `text_color`  VARCHAR(45)  NOT NULL DEFAULT 'black',
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `color_code_UNIQUE` (`color_code` ASC)
+    `font_light`  TINYINT(1)  NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;

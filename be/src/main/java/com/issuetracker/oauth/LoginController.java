@@ -2,7 +2,10 @@ package com.issuetracker.oauth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.issuetracker.repository.UserRepository;
 import com.issuetracker.util.Oauth;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,23 +15,47 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/login")
 public class LoginController {
 
-    private Oauth oauthUtil;
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final Oauth oauthUtil;
+    // TODO: 추후 서비스 로직 분리 시 가져갈 것
+    private final UserRepository userRepository;
 
-    public LoginController(Oauth oauthUtil) {
+    public LoginController(Oauth oauthUtil, UserRepository userRepository) {
         this.oauthUtil = oauthUtil;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/auth")
     public JwtDto login(@RequestParam String client, @RequestParam String code) {
         RestTemplate githubRequest = new RestTemplate();
-        String accessTokenUri = oauthUtil.getUriForAccesToken(code);
+        String accessTokenUri = null;
+        String clientId = null;
+        String secretId = null;
+        String redirectUri = null;
+
+        // TODO: iOS 파트 추가//
+        if (client.equals("ios")) {
+            accessTokenUri = oauthUtil.getUriForAccesTokenIos(code);
+            clientId = oauthUtil.getClientIdIos();
+            secretId = oauthUtil.getClientSecretIos();
+            redirectUri = oauthUtil.getRedirectUriIos();
+        }
+
+        if (client.equals("web")) {
+            accessTokenUri = oauthUtil.getUriForAccesToken(code);
+            clientId = oauthUtil.getClientId();
+            secretId = oauthUtil.getClientSecret();
+            redirectUri = oauthUtil.getRedirectUri();
+        }
 
         RequestEntity<GithubAccessTokenRequestDto> requestDto = RequestEntity
                 .post(accessTokenUri)
                 .header("Accept", "application/json")
                 .body(new GithubAccessTokenRequestDto(
-                        oauthUtil.getClientId(), oauthUtil.getClientSecret(), code, oauthUtil.getRedirectUri()
+                        clientId, secretId, code, redirectUri
                 ));
+
+        logger.info("requestDto: {} ", requestDto);
 
         ResponseEntity<GithubAccessTokenResponseDto> responseDto = githubRequest.exchange(requestDto, GithubAccessTokenResponseDto.class);
 
@@ -40,6 +67,11 @@ public class LoginController {
 
         ResponseEntity<User> user = githubRequest.exchange(request, User.class);
 
+        User loginUser = user.getBody();
+        if (!userRepository.hasSameUserId(loginUser.getId())) {
+            userRepository.save(loginUser);
+        }
+
         Algorithm algorithm = Algorithm.HMAC256(oauthUtil.getAlgorithmSecret());
 
         String jwt = JWT.create()
@@ -50,11 +82,6 @@ public class LoginController {
                 .sign(algorithm);
 
         return new JwtDto(jwt);
-    }
-
-    @GetMapping("/hello")
-    public void hell(@RequestAttribute User user) {
-        System.out.println(user);
     }
 }
 

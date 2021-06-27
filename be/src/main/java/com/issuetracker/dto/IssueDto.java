@@ -3,18 +3,20 @@ package com.issuetracker.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issuetracker.domain.Issue;
 import com.issuetracker.domain.Label;
-import com.issuetracker.oauth.User;
+import com.issuetracker.oauth.UserDto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IssueDto {
     private Long id;
     private String title;
     private String description;
+    private boolean closed;
 
-    @JsonProperty("author_avatar_url")
-    private String authorAvatarUrl;
+    private List<UserDto> assignees = new ArrayList<>();
+    private UserDto author;
 
     @JsonProperty("label_list")
     private List<Label> labelList;
@@ -28,37 +30,69 @@ public class IssueDto {
     @JsonProperty("milestone_title")
     private String milestoneTitle;
 
-    public IssueDto(Long id, String title, String description, String authorAvatarUrl, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignees, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime, String milestoneTitle) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.authorAvatarUrl = authorAvatarUrl;
+        this.closed = closed;
+        this.assignees.add(assignees);
+        this.author = author;
         this.labelList = labelList;
         this.issueNumber = issueNumber;
         this.createdTime = createdTime;
         this.milestoneTitle = milestoneTitle;
     }
 
-    public IssueDto(Issue issue, String authorAvatarUrl, String milestoneTitle) {
+    public IssueDto(Long id, String title, String description, boolean closed, UserDto assignees, UserDto author, List<Label> labelList, Long issueNumber, LocalDateTime createdTime) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.closed = closed;
+        this.assignees.add(assignees);
+        this.author = author;
+        this.labelList = labelList;
+        this.issueNumber = issueNumber;
+        this.createdTime = createdTime;
+        this.milestoneTitle = null;
+    }
+
+    public IssueDto(Issue issue, String milestoneTitle, UserDto author, UserDto assignees) {
         this.id = issue.getId();
         this.title = issue.getTitle();
         this.description = issue.getDescription();
-        this.authorAvatarUrl = authorAvatarUrl;
+        this.assignees.add(assignees);
+        this.author = author;
         this.issueNumber = issue.getNumber();
         this.createdTime = issue.getCreatedTime();
         this.milestoneTitle = milestoneTitle;
     }
 
-    public static IssueDto of(Issue issue, User user, String milestoneTitle, List<Label> labels) {
+    public static IssueDto of(Issue issue, String milestoneTitle, List<Label> labels, UserDto author, UserDto assignee) {
         return new IssueDto(
                 issue.getId(),
                 issue.getTitle(),
                 issue.getDescription(),
-                user.getAvatar_url(),
+                issue.isClosed(),
+                assignee,
+                author,
                 labels,
                 issue.getNumber(),
                 issue.getCreatedTime(),
                 milestoneTitle
+        );
+    }
+
+    public static IssueDto of(Issue issue, List<Label> labels, UserDto author, UserDto assignee) {
+        return new IssueDto(
+                issue.getId(),
+                issue.getTitle(),
+                issue.getDescription(),
+                issue.isClosed(),
+                assignee,
+                author,
+                labels,
+                issue.getNumber(),
+                issue.getCreatedTime()
         );
     }
 
@@ -74,8 +108,16 @@ public class IssueDto {
         return description;
     }
 
-    public String getAuthorAvatarUrl() {
-        return authorAvatarUrl;
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public List<UserDto> getAssignees() {
+        return assignees;
+    }
+
+    public UserDto getAuthor() {
+        return author;
     }
 
     public Long getIssueNumber() {
@@ -94,15 +136,4 @@ public class IssueDto {
         return labelList;
     }
 
-    @Override
-    public String toString() {
-        return "IssueDto{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", authorAvatarUrl='" + authorAvatarUrl + '\'' +
-                ", issueNumber=" + issueNumber +
-                ", createdTime=" + createdTime +
-                '}';
-    }
 }

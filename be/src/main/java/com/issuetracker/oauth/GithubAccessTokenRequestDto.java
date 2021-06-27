@@ -13,6 +13,12 @@ public class GithubAccessTokenRequestDto {
         this.redirectUri = redirectUri;
     }
 
+    public GithubAccessTokenRequestDto(String clientId, String clientSecret, String code) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.code = code;
+    }
+
     public String getClientId() {
         return clientId;
     }
