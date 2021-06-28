@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="KGk-i7-Jjw" customClass="IssueCell" customModule="issueTrackerApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="159"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue TItle Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKN-Dc-NU9">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQV-EP-IPs">
+                        <rect key="frame" x="0.0" y="40" width="335" height="47.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemGray2Color"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Milestones Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-Jq-0Lh">
+                        <rect key="frame" x="0.0" y="87.5" width="335" height="32"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemGray2Color"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9h-AK-Uf8" customClass="TagStackView" customModule="issueTrackerApp" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="127" width="50" height="32"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-tP-7MN">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aKN-Dc-NU9" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.25" id="1JH-G5-JFj"/>
+                    <constraint firstItem="cfH-Jq-0Lh" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.2" id="9n3-2G-9PS"/>
+                    <constraint firstAttribute="trailing" secondItem="PQV-EP-IPs" secondAttribute="trailing" id="EUq-wD-AdT"/>
+                    <constraint firstItem="cfH-Jq-0Lh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Hgs-N5-vA8"/>
+                    <constraint firstAttribute="bottom" secondItem="j9h-AK-Uf8" secondAttribute="bottom" id="JOD-0f-z2v"/>
+                    <constraint firstItem="aKN-Dc-NU9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ka6-dl-SY4"/>
+                    <constraint firstItem="j9h-AK-Uf8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ph5-lT-sVg"/>
+                    <constraint firstItem="PQV-EP-IPs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UPM-2S-SuM"/>
+                    <constraint firstItem="cfH-Jq-0Lh" firstAttribute="top" secondItem="PQV-EP-IPs" secondAttribute="bottom" id="Vf6-i0-WQm"/>
+                    <constraint firstItem="aKN-Dc-NU9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VgN-7Q-1os"/>
+                    <constraint firstAttribute="trailing" secondItem="aKN-Dc-NU9" secondAttribute="trailing" id="Xgc-k6-yTE"/>
+                    <constraint firstItem="PQV-EP-IPs" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.3" id="dw0-r3-dJj"/>
+                    <constraint firstItem="j9h-AK-Uf8" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.2" id="fcc-EG-TXP"/>
+                    <constraint firstItem="PQV-EP-IPs" firstAttribute="top" secondItem="aKN-Dc-NU9" secondAttribute="bottom" id="gnD-Ok-2NE"/>
+                    <constraint firstAttribute="trailing" secondItem="cfH-Jq-0Lh" secondAttribute="trailing" id="ysX-AT-V2T"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="PQV-EP-IPs" id="SPi-9K-Ylf"/>
+                <outlet property="milestonesLabel" destination="cfH-Jq-0Lh" id="tcb-Zk-a3e"/>
+                <outlet property="tagStackView" destination="j9h-AK-Uf8" id="wKt-vR-32A"/>
+                <outlet property="titleLabel" destination="aKN-Dc-NU9" id="RMz-iP-CZp"/>
+            </connections>
+            <point key="canvasLocation" x="39.855072463768117" y="128.23660714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
