@@ -4,7 +4,7 @@ import { ReactComponent as Open } from 'icons/openIssue.svg';
 import { ReactComponent as Close } from 'icons/closeIssue.svg';
 import Filter from 'components/common/Filter';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { issuesStateAtom, totalCountOfIssue } from 'store';
+import { issuesStateAtom, totalCountOfIssue } from 'stores/issueStore';
 import { MouseEvent } from 'react';
 
 const IssuesHeader = () => {
@@ -44,7 +44,7 @@ const IssuesButton = styled(Button)`
   color: ${({ theme }) => theme.color.grayscale.label};
   stroke: ${({ theme }) => theme.color.grayscale.label};
 
-  &[aria-checked='true'] { 
+  &[aria-checked='true'] {
     font-weight: 700;
     stroke: ${({ theme }) => theme.color.grayscale.titleActive};
     color: ${({ theme }) => theme.color.grayscale.titleActive};

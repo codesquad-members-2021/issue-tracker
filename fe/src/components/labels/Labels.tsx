@@ -1,6 +1,6 @@
 import { Wrapper, Upper, Lower } from 'components/common/Table';
 import { useRecoilValue } from 'recoil';
-import { labelQuery, totalCountOfLabels } from 'store';
+import { labelQuery, totalCountOfLabels } from 'stores/labelStore';
 import styled from 'styled-components';
 import LabelsItem from './LabelsItem';
 

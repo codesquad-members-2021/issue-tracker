@@ -7,15 +7,20 @@ import { ReactComponent as PlusIconSvg } from 'icons/plus.svg';
 import Popover from '@material-ui/core/Popover';
 import { FilterPropsType } from 'types/filterType';
 import { useRecoilValue } from 'recoil';
-import { filterSelector } from 'store';
+import { filterSelector } from 'stores/filterStore';
 import { getTitle } from 'utils/util';
 
-export default function Filter({ isPlus, filterType,value,clickHandler,setState }: FilterPropsType) {
+export default function Filter({
+  isPlus,
+  filterType,
+  value,
+  clickHandler,
+  setState,
+}: FilterPropsType) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  
 
   const handleClose = () => {
     setAnchorEl(null);

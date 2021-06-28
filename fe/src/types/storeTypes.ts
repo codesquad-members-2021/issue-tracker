@@ -66,7 +66,7 @@ export type UserDataType = {
   avatar_url: string | undefined;
 };
 
-export type TestType = {
+export type filterSelectorType = {
   labelList: LabelItemType[];
   milestoneList: FilterItemType[];
   authorList: FilterItemType[];

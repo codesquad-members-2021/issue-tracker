@@ -1,6 +1,7 @@
 import { ParsedQs } from 'qs';
 import { NavType } from 'types/issueType';
 import { TitleType } from 'types/issueType';
+import { LabelDataType, UserDataType } from 'types/storeTypes';
 
 export const deepCopied = <T extends {}>(data: T) =>
   JSON.parse(JSON.stringify(data));
@@ -44,3 +45,16 @@ export const milestoneParser = (str: string | null) => {
       return 'DueDate';
   }
 };
+
+export const parsedAuthorData = (user: UserDataType) => ({
+  name: user.name,
+  profileImg: user.avatar_url,
+});
+
+export const parsedLabelData = (labelItem: LabelDataType) => ({
+  id: labelItem.id,
+  title: labelItem.title,
+  description: labelItem.description,
+  labelColor: labelItem.color_code,
+  textColor: labelItem.font_light ? 'light' : 'dark',
+});

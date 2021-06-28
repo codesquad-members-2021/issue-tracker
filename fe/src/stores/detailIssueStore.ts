@@ -1,8 +1,8 @@
-import { clickedIssueIdAtom } from 'store';
-import { IssueDetailType } from './../types/issueType';
-import { atom, selector } from 'recoil';
 import axios from 'axios';
+import { atom, selector } from 'recoil';
+import { IssueDetailType } from 'types/issueType';
 import { CommentDataType } from 'types/storeTypes';
+import { clickedIssueIdAtom } from 'stores/issueStore';
 
 export const detailIssueAuthorIdAtom = atom<number>({
   key: 'detailIssueAuthorIdAtom',

@@ -1,11 +1,11 @@
 import { useRecoilValue } from 'recoil';
-import { issuesQuery } from 'store';
+import { issuesQuery } from 'stores/issueStore';
 import styled from 'styled-components';
 import IssueItem from './IssueItem';
 
 export const IssueList = () => {
   const IssuesArray = useRecoilValue(issuesQuery);
-  
+
   return (
     <StyledIssueList>
       {IssuesArray.map((issue, idx) => (

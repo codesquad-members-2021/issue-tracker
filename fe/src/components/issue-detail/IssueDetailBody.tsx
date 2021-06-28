@@ -1,20 +1,23 @@
+import axios from 'axios';
 import { Box } from '@material-ui/core';
-import AuthorAvatar from 'components/common/AuthorAvatar';
-import Comment from 'components/issue-detail/Comment';
 import styled from 'styled-components';
-import CommentTextarea from 'components/common/CommentTextarea';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { clickedIssueIdAtom, decodedUserDataAtom } from 'store';
-import { CommentType } from 'types/issueType';
+
+import AuthorAvatar from 'components/common/AuthorAvatar';
 import CreateButton from 'components/buttons/CreateButton';
+import Comment from 'components/issue-detail/Comment';
 import { ReactComponent as PlusSvg } from 'icons/plus.svg';
+import CommentTextarea from 'components/common/CommentTextarea';
+
+import { clickedIssueIdAtom } from 'stores/issueStore';
+import { decodedUserDataAtom } from 'stores/userStore';
 import {
   commentDesctiptionAtom,
   commentsQuery,
   detailIssueAuthorIdAtom,
   issueDetailQuery,
 } from 'stores/detailIssueStore';
-import axios from 'axios';
+import { CommentType } from 'types/issueType';
 
 const IssueDetailBody = () => {
   const clickedIssueId = useRecoilValue(clickedIssueIdAtom);
@@ -55,7 +58,7 @@ const IssueDetailBody = () => {
     })();
   };
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-  setCommentDesctiption(e.target.value);
+    setCommentDesctiption(e.target.value);
 
   return (
     <Box display="flex">

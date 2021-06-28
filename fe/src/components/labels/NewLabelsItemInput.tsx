@@ -1,19 +1,18 @@
+import { useReducer, ChangeEvent } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
 import CreateButton from 'components/buttons/CreateButton';
-import { ReactComponent as PlusSvg } from 'icons/plus.svg';
-import { ReactComponent as XSvg } from 'icons/Xicon.svg';
-import { ChangeEvent } from 'react';
-import styled from 'styled-components';
 import LabelTextColorInput from './LabelTextColorInput';
 import LabelColorInput from './LabelColorInput';
-import { LabelItemType } from 'types/issueType';
-import { useReducer } from 'react';
-import { labelUpdateAtom } from 'store';
-import { useSetRecoilState } from 'recoil';
-import axios from 'axios';
+import { ReactComponent as PlusSvg } from 'icons/plus.svg';
+
 import { labelReducer } from 'utils/reducer';
 import { labelParser } from 'utils/util';
+import { labelUpdateAtom } from 'stores/labelStore';
 
 const NewLabelsItemInput = ({
   setPopup,

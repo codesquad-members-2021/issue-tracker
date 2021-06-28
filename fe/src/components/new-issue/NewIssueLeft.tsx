@@ -1,10 +1,12 @@
+import React from 'react';
+import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
+
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CommentTextarea from 'components/common/CommentTextarea';
 import IssueTitleInput from 'components/common/IssueTitleInput';
-import React, { useReducer } from 'react';
-import { useRecoilState } from 'recoil';
-import { newIssuesContentAtom } from 'store';
-import styled from 'styled-components';
+
+import { newIssuesContentAtom } from 'stores/issueStore';
 
 const NewIssueLeft = () => {
   const [newIssuesContent, setNewIssuesContent] =
@@ -20,7 +22,7 @@ const NewIssueLeft = () => {
       ...state,
       title: e.target.value,
     }));
-  }; 
+  };
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>

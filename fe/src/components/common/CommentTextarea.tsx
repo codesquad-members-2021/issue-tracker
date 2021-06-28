@@ -1,20 +1,13 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { ReactComponent as FileUploadIconSvg } from 'icons/file-upload.svg';
-import { SetterOrUpdater } from 'recoil';
 
 interface CommentTextareaProps {
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const CommentTextarea = ({
-  value,
-  handleChange,
-}: CommentTextareaProps) => {
-
-
+const CommentTextarea = ({ value, handleChange }: CommentTextareaProps) => {
   return (
     <Wrapper>
       <StyledCommentTextarea>

@@ -1,13 +1,16 @@
+import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 import { Divider } from '@material-ui/core';
+
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Label from 'components/common/Label';
 import MilestoneBar from 'components/milestones/MilestoneBar';
-import { useRecoilValue } from 'recoil';
-import { assigneeQuery, labelQuery } from 'store';
+import { labelQuery } from 'stores/labelStore';
+import SidebarList from 'components/new-issue/SidebarList';
+
 import { openedMilestoneQuery } from 'stores/milestoneStore';
 import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
-import styled from 'styled-components';
-import SidebarList from './SidebarList';
+import { assigneeQuery } from 'stores/userStore';
 
 const NewIssueRight = () => {
   const newIssueId = useRecoilValue(NewIssuesIdQuery);
@@ -53,9 +56,9 @@ const NewIssueRight = () => {
 export default NewIssueRight;
 const MileStoneSpan = styled.span`
   line-height: 3;
-  font-weight: 700; 
+  font-weight: 700;
   color: ${({ theme }) => theme.color.grayscale.label};
-`; 
+`;
 const StyledFlex = styled.div`
   display: flex;
   width: 100%;

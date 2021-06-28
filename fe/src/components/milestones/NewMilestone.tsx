@@ -1,15 +1,15 @@
-import Input from 'components/common/Input';
 import { ChangeEvent, useReducer } from 'react';
-import styled from 'styled-components';
-import CreateButton from 'components/buttons/CreateButton';
-import { ReactComponent as EditSvg } from 'icons/edit.svg';
-import { ReactComponent as XSvg } from 'icons/Xicon.svg';
-import { ReactComponent as PlusSvg } from 'icons/plus.svg';
-import { milestoneReducer } from 'utils/reducer';
-import { milestoneUpdateAtom } from 'stores/milestoneStore';
-import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import axios from 'axios';
+import styled from 'styled-components';
+
+import Input from 'components/common/Input';
+import CreateButton from 'components/buttons/CreateButton';
+import { ReactComponent as PlusSvg } from 'icons/plus.svg';
+
+import { milestoneReducer } from 'utils/reducer';
 import { milestoneParser } from 'utils/util';
+import { milestoneUpdateAtom } from 'stores/milestoneStore';
 
 const NewMilestone = ({
   setPopup,

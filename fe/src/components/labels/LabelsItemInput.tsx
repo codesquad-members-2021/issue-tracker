@@ -9,7 +9,7 @@ import LabelTextColorInput from './LabelTextColorInput';
 import LabelColorInput from './LabelColorInput';
 import { LabelItemType } from 'types/issueType';
 import { useReducer } from 'react';
-import { labelUpdateAtom } from 'store';
+import { labelUpdateAtom } from 'stores/labelStore';
 import { useSetRecoilState } from 'recoil';
 import axios from 'axios';
 import { labelReducer } from 'utils/reducer';

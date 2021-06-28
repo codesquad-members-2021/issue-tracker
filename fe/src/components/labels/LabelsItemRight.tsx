@@ -1,13 +1,13 @@
+import { useState, useEffect, MouseEvent } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
+
+import useAxios from 'hook/useAxios';
 import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
-import { MouseEvent } from 'react';
-import useAxios from 'hook/useAxios';
-import { useState, useEffect } from 'react';
-import { labelUpdateAtom } from 'store';
-import { useSetRecoilState } from 'recoil';
 
+import { labelUpdateAtom } from 'stores/labelStore';
 
 const LabelsItemRight = ({
   clickHandler,

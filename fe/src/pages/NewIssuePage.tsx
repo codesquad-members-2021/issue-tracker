@@ -1,17 +1,19 @@
+import { useEffect } from 'react';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { Divider } from '@material-ui/core';
 import { instanceWithAuth } from 'api';
+import { useHistory } from 'react-router-dom';
+
 import CustomButton from 'components/buttons/CustomButton';
 import NewIssueLeft from 'components/new-issue/NewIssueLeft';
 import NewIssueRight from 'components/new-issue/NewIssueRight';
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { newIssuesContentAtom } from 'store';
+import { newIssuesContentAtom } from 'stores/issueStore';
 import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
-import styled from 'styled-components';
+
 const NewIssuePage = () => {
-  const history = useHistory()
+  const history = useHistory();
   const IdReset = useResetRecoilState(NewIssuesIdQuery);
   const contentReset = useResetRecoilState(newIssuesContentAtom);
   const IssuesId = useRecoilValue(NewIssuesIdQuery);
@@ -27,7 +29,7 @@ const NewIssuePage = () => {
           assignee: IssuesId.assigneeList[0],
           label_ids: IssuesId.labelList,
           milestone_id: IssuesId.milestoneList[0],
-        } 
+        }
       );
     })();
     history.push('/issues');

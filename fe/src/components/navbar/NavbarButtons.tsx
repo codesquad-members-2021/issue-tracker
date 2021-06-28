@@ -6,7 +6,7 @@ import { NavType } from 'types/issueType';
 import styled from 'styled-components';
 import { getNavButtonTitle } from 'utils/util';
 import { useRecoilValue } from 'recoil';
-import { totalCountOfLabels } from 'store';
+import { totalCountOfLabels } from 'stores/labelStore';
 import { Link, useHistory } from 'react-router-dom';
 import { MouseEvent } from 'react';
 import { totalCountOfMilestone } from 'stores/milestoneStore';

@@ -5,7 +5,7 @@ import { ReactComponent as EditSvg } from 'icons/edit.svg';
 import { ReactComponent as EmojiSvg } from 'icons/emoji.svg';
 import { CommentType } from 'types/issueType';
 import { useRecoilValue } from 'recoil';
-import { decodedUserDataAtom } from 'store';
+import { decodedUserDataAtom } from 'stores/userStore';
 import { detailIssueAuthorIdAtom } from 'stores/detailIssueStore';
 
 const Comment = ({ commentData }: { commentData: CommentType }) => {

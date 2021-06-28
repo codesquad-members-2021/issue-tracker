@@ -1,7 +1,7 @@
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Logo from 'components/common/Logo';
 import { useRecoilValue } from 'recoil';
-import { decodedUserDataAtom } from 'store';
+import { decodedUserDataAtom } from 'stores/userStore';
 import styled from 'styled-components';
 import { DecodedUserDataType } from 'types/storeTypes';
 

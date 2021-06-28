@@ -2,7 +2,7 @@ import Wrapper from 'components/Issues/Issues';
 import Navbar from 'components/navbar/Navbar';
 import { useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
-import { decodedUserDataAtom } from 'store';
+import { decodedUserDataAtom } from 'stores/userStore';
 import decode from 'jwt-decode';
 import { DecodedUserDataType } from 'types/storeTypes';
 
