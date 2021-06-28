@@ -15,7 +15,7 @@ const Router = () => {
         <Route path="/" exact>
           <LoginPage />
         </Route>
-        <Route path="/api/login">
+        <Route path="/api/login/callback">
           <OAuthPage />
         </Route>
         <Header />
