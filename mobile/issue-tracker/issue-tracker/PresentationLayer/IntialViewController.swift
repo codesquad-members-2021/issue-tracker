@@ -15,7 +15,11 @@ class IntialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        viewHandler = onPresent(view:)
+
+        viewHandler = { viewController in
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -34,10 +38,5 @@ class IntialViewController: UIViewController {
         }
 
         return UIStoryboard().create(name: "Main", type: UITabBarController.self)
-    }
-
-    private func onPresent(view: UIViewController) {
-        view.modalPresentationStyle = .fullScreen
-        self.present(view, animated: true)
     }
 }
