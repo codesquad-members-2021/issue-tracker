@@ -28,6 +28,7 @@ class RequestManager {
         urlRequest.httpBody = body
         return urlRequest
     }
+    
 }
 
 enum HttpMethod: String {

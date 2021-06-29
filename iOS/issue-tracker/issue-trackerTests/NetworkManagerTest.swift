@@ -2,40 +2,36 @@ import XCTest
 
 class NetworkManagerTest: XCTestCase {
 
-    func test_JWT_존재하지_않을_경우() throws {
-        // given
-        let urlSessionStub = URLSessionStub()
+    var sampleURL: URL!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sampleURL = URL(string: "www.sample.com")
+    }
+    
+    func test_body가_없는_경우() throws {
         let jwtManagerStub = JWTManagerStub()
-        let networkManager = NetworkManager(jwtManager: jwtManagerStub, session: urlSessionStub)
+        let requestManager = RequestManager(jwtManager: jwtManagerStub)
+        let urlSessionStub = URLSessionStub()
+        let networkManager = NetworkManager(requestManager: requestManager, session: urlSessionStub)
         
-        let expectedAddress = "http://52.78.35.48/api"
-        let url = URL(string: expectedAddress)
+        _ = networkManager.sendRequest(with: sampleURL, method: .get, type: TestDecodableDTO.self)
         
-        // when
-        _ = networkManager.get(with: url, type: TestDTO.self)
-        
-        // then
-        XCTAssertEqual(urlSessionStub.request?.url?.absoluteString, expectedAddress)
+        XCTAssertEqual(urlSessionStub.request?.url, sampleURL)
+        XCTAssertEqual(urlSessionStub.request?.httpMethod, HttpMethod.get.rawValue)
     }
 
-    func test_JWT_존재할_경우() throws {
-        // given
-        let urlSessionStub = URLSessionStub()
+    func test_body가_있는_경우() throws {
         let jwtManagerStub = JWTManagerStub()
-        let networkManager = NetworkManager(jwtManager: jwtManagerStub, session: urlSessionStub)
+        let requestManager = RequestManager(jwtManager: jwtManagerStub)
+        let urlSessionStub = URLSessionStub()
+        let networkManager = NetworkManager(requestManager: requestManager, session: urlSessionStub)
+        let testEncodableObject = TestEncodableDTO(test: "test")
         
-        let expectedAddress = "http://52.78.35.48/api"
-        let url = URL(string: expectedAddress)
+        _ = networkManager.sendRequest(with: sampleURL, method: .post, type: TestDecodableDTO.self, body: testEncodableObject)
         
-        let expectedHeaderValue = "Bearer jwt"
-        jwtManagerStub.string = "jwt"
-        
-        // when
-        _ = networkManager.get(with: url, type: TestDTO.self)
-        
-        // then
-        XCTAssertEqual(urlSessionStub.request?.url?.absoluteString, expectedAddress)
-        XCTAssertEqual(urlSessionStub.request?.value(forHTTPHeaderField: "Authorization"), expectedHeaderValue)
+        XCTAssertEqual(urlSessionStub.request?.url, sampleURL)
+        XCTAssertEqual(urlSessionStub.request?.httpMethod, HttpMethod.get.rawValue)
     }
     
 }
