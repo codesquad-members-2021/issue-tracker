@@ -7,6 +7,8 @@ import com.issuetracker.domain.Milestone;
 import com.issuetracker.oauth.User;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.time.LocalDate;
+
 public class RowMappers {
     public static final RowMapper<Issue> ISSUE_ROW_MAPPER = (rs, rowNum) -> {
         Issue issue = new Issue();
@@ -44,7 +46,7 @@ public class RowMappers {
         milestone.setId(rs.getLong("id"));
         milestone.setTitle(rs.getString("title"));
         milestone.setDescription(rs.getString("description"));
-        milestone.setDueDate(rs.getTimestamp("due_date").toLocalDateTime().toLocalDate());
+        milestone.setDueDate(rs.getObject("due_date", LocalDate.class));
         milestone.setClosed(rs.getBoolean("closed"));
 
         return milestone;
