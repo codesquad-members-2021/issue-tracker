@@ -42,15 +42,15 @@ values (10, '마일스톤,담당자가 연결되어 있지 않은 이슈', '내�
 -- 데이터 `issue_tracker_db`.`label`
 -- -----------------------------------------------------
 insert into label (id, title, description, color_code)
-VALUES (1, 'BE', '백엔드 작업', '#FF0000');
+VALUES (1, 'BE', '백엔드 작업', '#FCD1D1');
 insert into label (id, title, description, color_code)
-VALUES (2, 'refactor', '리팩토링 필요', '#DC143C');
+VALUES (2, 'refactor', '리팩토링 필요', '#ECE2E1');
 insert into label (id, title, description, color_code)
-VALUES (3, 'FE', '웹 프런트 작업', '#800000');
+VALUES (3, 'FE', '웹 프런트 작업', '#D3E0DC');
 insert into label (id, title, description, color_code)
-VALUES (4, 'Bug', '버그 해결 필', '#B22222');
+VALUES (4, 'Bug', '버그 해결 필', '#AEE1E1');
 insert into label (id, title, description, color_code)
-VALUES (5, 'iOS', 'iOS 작업', '#8B0000');
+VALUES (5, 'iOS', 'iOS 작업', '#FCD1D1');
 
 -- -----------------------------------------------------
 -- 데이터 `issue_tracker_db`.`issue_has_label`
