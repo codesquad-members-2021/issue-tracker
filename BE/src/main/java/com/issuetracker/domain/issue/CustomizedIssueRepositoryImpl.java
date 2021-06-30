@@ -54,6 +54,7 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                 .from(issue)
                 .leftJoin(issue.author, user)
                 .leftJoin(issue.labels, label)
+                .leftJoin(issue.assignees, user)
                 .leftJoin(issue.milestone, milestone)
                 .leftJoin(issue.comments, comment1)
                 .where(
@@ -66,8 +67,6 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize());
-
-
     }
 
     private BooleanExpression statusEquals(String status) {
@@ -82,15 +81,21 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
         return hasText(milestoneTitle) ? milestone.title.eq(milestoneTitle) : null;
     }
 
-    private BooleanExpression assigneeEquals(String assignee) {
-        if (!hasText(assignee)) {
+    private BooleanExpression assigneeEquals(List<String> assignee) {
+        if (assignee == null) {
             return null;
         }
-        User user = findByUserName(assignee);
-        if (user == null) {
+        List<User> assigneeList = getAssignees(assignee);
+        if (assigneeList.isEmpty()) {
             return null;
         }
-        return issue.assignees.contains(user);
+        return user.in(assigneeList);
+    }
+
+    private List<User> getAssignees(List<String> assignees) {
+        return queryFactory.selectFrom(user)
+                .where(user.userName.in(assignees))
+                .fetch();
     }
 
     private BooleanExpression commenterEquals(String commenter) {
@@ -98,12 +103,6 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
             return null;
         }
         return comment1.author.userName.eq(commenter);
-    }
-
-    private User findByUserName(String userName) {
-        return queryFactory.selectFrom(user)
-                .where(user.userName.eq(userName))
-                .fetchFirst();
     }
 
     private BooleanExpression labelEquals(List<String> labels) {

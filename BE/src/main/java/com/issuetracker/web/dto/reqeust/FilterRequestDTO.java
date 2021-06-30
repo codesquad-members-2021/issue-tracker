@@ -13,7 +13,7 @@ public class FilterRequestDTO {
 
     private String status;
     private String author;
-    private String assignee;
+    private List<String> assignee;
     private String commenter;
     private List<String> label;
     private String milestone;
