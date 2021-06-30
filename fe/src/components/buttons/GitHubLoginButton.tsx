@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 const GitHubLoginButton = () => {
   return (
-    <a href="https://github.com/login/oauth/authorize?client_id=a1689d4a012d841d152a&redirect_uri=http://kyupig.com/login/callback&scope=user">
+    <a href={`https://github.com/login/oauth/authorize?client_id=a1689d4a012d841d152a&redirect_uri=${process.env.REACT_APP_OAUTH_REDIRECT_URL}/login/callback&scope=user`}>
       <StyledCreateButton variant="contained" size="large">
         GitHub 계정으로 로그인
       </StyledCreateButton>
     </a>
   );
-};
+}; 
 
 export default GitHubLoginButton;
 
