@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CreateButton from 'components/buttons/CreateButton';
@@ -14,6 +14,7 @@ import { decodedUserDataAtom } from 'stores/userStore';
 import {
   commentDesctiptionAtom,
   commentsQuery,
+  commentUpdateAtom,
   detailIssueAuthorIdAtom,
   issueDetailQuery,
 } from 'stores/detailIssueStore';
@@ -28,6 +29,7 @@ const IssueDetailBody = () => {
   const [commentDesctiption, setCommentDesctiption] = useRecoilState(
     commentDesctiptionAtom
   );
+  const setCommentUpdate = useSetRecoilState(commentUpdateAtom);
 
   const issueDescription = {
     // 코멘트처럼 생겼지만 사실 이슈의 본문
@@ -44,7 +46,7 @@ const IssueDetailBody = () => {
   const newCommentHandler = () => {
     const token = localStorage.getItem('jwt');
     (async function () {
-      axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}/comments`,
         {
           description: commentDesctiption,
@@ -55,6 +57,8 @@ const IssueDetailBody = () => {
           },
         }
       );
+      setCommentUpdate((cur) => ++cur);
+      setCommentDesctiption('');
     })();
   };
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>

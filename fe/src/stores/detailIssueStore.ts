@@ -14,6 +14,11 @@ export const commentDesctiptionAtom = atom<string>({
   default: '',
 });
 
+export const commentUpdateAtom = atom<number>({
+  key: 'commentUpdateAtom',
+  default: 0,
+});
+
 export const issueDetailQuery = selector<IssueDetailType>({
   key: 'issueDetailQuery',
   get: async ({ get }) => {
@@ -77,6 +82,8 @@ export const commentsQuery = selector({
   get: async ({ get }) => {
     const token = localStorage.getItem('jwt');
     const clickedIssueId = get(clickedIssueIdAtom);
+    get(commentUpdateAtom);
+
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}/comments`,

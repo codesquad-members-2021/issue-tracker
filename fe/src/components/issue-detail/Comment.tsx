@@ -1,17 +1,36 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Box, Button } from '@material-ui/core';
-import AuthorAvatar from 'components/common/AuthorAvatar';
 import styled from 'styled-components';
+
+import AuthorAvatar from 'components/common/AuthorAvatar';
 import { ReactComponent as EditSvg } from 'icons/edit.svg';
+import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
 import { ReactComponent as EmojiSvg } from 'icons/emoji.svg';
+import { instanceWithAuth } from 'api';
+
 import { CommentType } from 'types/issueType';
-import { useRecoilValue } from 'recoil';
 import { decodedUserDataAtom } from 'stores/userStore';
-import { detailIssueAuthorIdAtom } from 'stores/detailIssueStore';
+import { clickedIssueIdAtom } from 'stores/issueStore';
+import {
+  commentUpdateAtom,
+  detailIssueAuthorIdAtom,
+} from 'stores/detailIssueStore';
 
 const Comment = ({ commentData }: { commentData: CommentType }) => {
   const { id, description, createdTime, author } = commentData;
   const issueAuthorId = useRecoilValue(detailIssueAuthorIdAtom);
   const loginUser = useRecoilValue(decodedUserDataAtom);
+  const clickedIssueId = useRecoilValue(clickedIssueIdAtom);
+  const setCommentUpdate = useSetRecoilState(commentUpdateAtom);
+
+  const clickDeleteHandler = () => {
+    (async () => {
+      await instanceWithAuth.delete(
+        `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}/comments/${id}`
+      );
+      setCommentUpdate((cur) => ++cur);
+    })();
+  };
 
   return (
     <Box display="flex">
@@ -23,7 +42,7 @@ const Comment = ({ commentData }: { commentData: CommentType }) => {
             <div className="comment-created-time">{createdTime}분 전</div>
           </Box>
           <Box display="flex" alignItems="center">
-            {issueAuthorId === id && (
+            {issueAuthorId === author.id && (
               <IssueAuthorLabel
                 display="flex"
                 alignItems="center"
@@ -34,6 +53,15 @@ const Comment = ({ commentData }: { commentData: CommentType }) => {
             )}
             {loginUser && loginUser.id === author.id && (
               <Button startIcon={<EditIcon />}>편집</Button>
+            )}
+            {loginUser && loginUser.id === author.id && (
+              <Button
+                onClick={clickDeleteHandler}
+                startIcon={<DeleteIcon />}
+                color="secondary"
+              >
+                삭제
+              </Button>
             )}
             <EmojiButton>
               <EmojiSvg />
@@ -91,6 +119,8 @@ const IssueAuthorLabel = styled(Box)`
 `;
 
 const EditIcon = styled(EditSvg)``;
+
+const DeleteIcon = styled(DeleteSvg)``;
 
 const EmojiButton = styled.button`
   all: unset;
