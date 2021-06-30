@@ -79,3 +79,9 @@ insert into comment (description, created_time, issue_id, user_id)
 values ('동의합니다.', CURRENT_TIMESTAMP, 1, 2);
 insert into comment (description, created_time, issue_id, user_id)
 values ('야호.', CURRENT_TIMESTAMP, 1, 1);
+
+-- -----------------------------------------------------
+-- 데이터 `issue_tracker_db`.`selected_emoji`
+-- -----------------------------------------------------
+insert into selected_emoji (`id`, `:thumbs_up:`, `:heart_eyes:`, `issue_id`, `comment_id`, `user_id`)
+values (1, false, false, 1, null, 1);
