@@ -3,12 +3,17 @@ import Combine
 
 class TabBarRootController: UITabBarController {
 
-    private let userInfoViewModel = UserInfoViewModel()
+    private var userInfoViewModel: UserInfoViewModel!
     private var subscriptions = Set<AnyCancellable>()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewModel()
         bind()
+    }
+    
+    func configureViewModel() {
+        userInfoViewModel = UserInfoViewModel(userInfoUseCase: DefaultUserInfoUseCase())
     }
     
     private func bind() {
@@ -34,7 +39,6 @@ class TabBarRootController: UITabBarController {
                     }
                 }
             }.store(in: &subscriptions)
-        
         userInfoViewModel.fetchThumbnailImage()
     }
     

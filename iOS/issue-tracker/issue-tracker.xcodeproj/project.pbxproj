@@ -59,9 +59,14 @@
 		CEA84DF3267B0D350006CC2E /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF2267B0D350006CC2E /* EndPoint.swift */; };
 		CEA84DF5267B2E1B0006CC2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */; };
 		CEA84DF7267B760F0006CC2E /* TabBarRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */; };
-		CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */; };
+		CEA84DFB267B778A0006CC2E /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFA267B778A0006CC2E /* DefaultUserInfoUseCase.swift */; };
 		CEA84DFD267B7E7D0006CC2E /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */; };
 		CEA84E00267B863F0006CC2E /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */; };
+		CEAD45E5268C54500076D765 /* UserInfoUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD45E4268C54500076D765 /* UserInfoUseCaseTest.swift */; };
+		CEAD45E6268C54540076D765 /* DefaultUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFA267B778A0006CC2E /* DefaultUserInfoUseCase.swift */; };
+		CEAD45E7268C54590076D765 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */; };
+		CEAD45E8268C5C0E0076D765 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF2267B0D350006CC2E /* EndPoint.swift */; };
+		CEAD45E9268C5C190076D765 /* UserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */; };
 		CEB0B4132685A2AD00554D32 /* MilestoneListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0B4122685A2AD00554D32 /* MilestoneListUseCase.swift */; };
 		CEB0B4152685A33D00554D32 /* MilestoneListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0B4142685A33D00554D32 /* MilestoneListResponseDTO.swift */; };
 		CEB0B4172685A3E600554D32 /* MilestoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0B4162685A3E600554D32 /* MilestoneList.swift */; };
@@ -152,9 +157,10 @@
 		CEA84DF2267B0D350006CC2E /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		CEA84DF6267B760F0006CC2E /* TabBarRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRootController.swift; sourceTree = "<group>"; };
-		CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserInfoUseCase.swift; sourceTree = "<group>"; };
+		CEA84DFA267B778A0006CC2E /* DefaultUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoUseCase.swift; sourceTree = "<group>"; };
 		CEA84DFC267B7E7D0006CC2E /* UserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		CEA84DFF267B863F0006CC2E /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		CEAD45E4268C54500076D765 /* UserInfoUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCaseTest.swift; sourceTree = "<group>"; };
 		CEB0B4122685A2AD00554D32 /* MilestoneListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListUseCase.swift; sourceTree = "<group>"; };
 		CEB0B4142685A33D00554D32 /* MilestoneListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListResponseDTO.swift; sourceTree = "<group>"; };
 		CEB0B4162685A3E600554D32 /* MilestoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneList.swift; sourceTree = "<group>"; };
@@ -285,6 +291,7 @@
 				CEBF141326788D910009BB75 /* JWTManagerTest.swift */,
 				CE87A2E2268AEDA10050B267 /* RequestManagerTest.swift */,
 				CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */,
+				CEAD45E4268C54500076D765 /* UserInfoUseCaseTest.swift */,
 				BD1D370D266E428800B51184 /* Info.plist */,
 			);
 			path = "issue-trackerTests";
@@ -373,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA84DF4267B2E1B0006CC2E /* LoginUseCase.swift */,
-				CEA84DFA267B778A0006CC2E /* FetchUserInfoUseCase.swift */,
+				CEA84DFA267B778A0006CC2E /* DefaultUserInfoUseCase.swift */,
 				CE97638B26820BC70025CEC3 /* IssueListUseCase.swift */,
 				BD1F86F72684C56E005A6FA8 /* LabelListUseCase.swift */,
 				CEB0B4122685A2AD00554D32 /* MilestoneListUseCase.swift */,
@@ -647,7 +654,7 @@
 				BDCEAF62267315C9005EE147 /* IssueAdditionViewController.swift in Sources */,
 				BD1D3731266F539400B51184 /* IssueListViewController.swift in Sources */,
 				CEBF140F267883500009BB75 /* JWTManager.swift in Sources */,
-				CEA84DFB267B778A0006CC2E /* FetchUserInfoUseCase.swift in Sources */,
+				CEA84DFB267B778A0006CC2E /* DefaultUserInfoUseCase.swift in Sources */,
 				CE6DEF8426834F7A00D6121C /* RequestBodyDTO.swift in Sources */,
 				CEBF140D26787CF00009BB75 /* LoginHelper.swift in Sources */,
 				CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */,
@@ -678,15 +685,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAD45E5268C54500076D765 /* UserInfoUseCaseTest.swift in Sources */,
 				BD08146F2681C80900C3D6D7 /* URLSessionProtocol.swift in Sources */,
 				CE5910C12681B8E100AA7691 /* NetworkManagerTest.swift in Sources */,
 				BD08146E2681C80500C3D6D7 /* JWTManageable.swift in Sources */,
 				CE87A2E3268AEDA10050B267 /* RequestManagerTest.swift in Sources */,
+				CEAD45E9268C5C190076D765 /* UserInfoResponseDTO.swift in Sources */,
+				CEAD45E6268C54540076D765 /* DefaultUserInfoUseCase.swift in Sources */,
 				BD0814742681C8B600C3D6D7 /* JWTManagerStub.swift in Sources */,
 				BD0814762681C8DF00C3D6D7 /* TestDecodableDTO.swift in Sources */,
 				BD0814722681C85800C3D6D7 /* URLSessionStub.swift in Sources */,
+				CEAD45E7268C54590076D765 /* UserInfoViewModel.swift in Sources */,
 				CE87A2E1268AEC210050B267 /* RequestManager.swift in Sources */,
 				CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */,
+				CEAD45E8268C5C0E0076D765 /* EndPoint.swift in Sources */,
 				CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */,
 				CEBF1412267887550009BB75 /* JWTManager.swift in Sources */,
 			);

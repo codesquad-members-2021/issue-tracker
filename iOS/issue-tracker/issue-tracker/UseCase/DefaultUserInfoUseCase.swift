@@ -1,7 +1,13 @@
 import Foundation
 import Combine
 
-class FetchUserInfoUseCase {
+protocol UserInfoUseCase {
+    
+    func executeFetchingUserInfo(completion: @escaping (Result<String, NetworkError>) -> Void)
+    
+}
+
+class DefaultUserInfoUseCase: UserInfoUseCase {
     
     private let endPoint: EndPoint
     private let networkManager: NetworkManager

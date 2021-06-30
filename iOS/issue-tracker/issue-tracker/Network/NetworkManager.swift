@@ -61,10 +61,11 @@ struct NetworkManager {
             }
             .eraseToAnyPublisher()
     }
+    
 }
 
 enum NetworkError: Error {
-    
+
     case encoding(description: String)
     case decoding(description: String)
     case url(description: String)

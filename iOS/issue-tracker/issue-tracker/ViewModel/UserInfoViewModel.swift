@@ -4,20 +4,22 @@ import Combine
 class UserInfoViewModel {
     
     @Published private var thumbnailImage: String
-    private let fetchUserInfoUseCase: FetchUserInfoUseCase
+    @Published private var errorMessage: NetworkError?
+    private let defaultUserInfoUseCase: UserInfoUseCase
     private var subscriptions: Set<AnyCancellable>
 
-    init() {
+    init(userInfoUseCase: UserInfoUseCase) {
         self.thumbnailImage = ""
-        self.fetchUserInfoUseCase = FetchUserInfoUseCase()
+        self.errorMessage = nil
+        self.defaultUserInfoUseCase = userInfoUseCase
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchThumbnailImage() {
-        fetchUserInfoUseCase.executeFetchingUserInfo { result in
+        defaultUserInfoUseCase.executeFetchingUserInfo { result in
             switch result {
             case .failure(let error):
-                print(error)
+                self.errorMessage = error
             case .success(let imageURL):
                 self.thumbnailImage = imageURL
             }
@@ -26,6 +28,12 @@ class UserInfoViewModel {
     
     func didUpdateThumbnailImage() -> AnyPublisher<String, Never> {
         return $thumbnailImage
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func didUpdateErrorMessage() -> AnyPublisher<NetworkError?, Never> {
+        return $errorMessage
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
