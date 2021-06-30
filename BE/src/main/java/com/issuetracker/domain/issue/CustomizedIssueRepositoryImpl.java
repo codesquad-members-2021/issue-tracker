@@ -4,10 +4,15 @@ import com.issuetracker.domain.label.Label;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.web.dto.reqeust.FilterRequestDTO;
 import com.issuetracker.web.dto.vo.Status;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -23,19 +28,26 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest) {
-        return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest);
+    public List<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest, Pageable pageable) {
+        return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest, pageable);
     }
 
-    private List<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
-        return findIssuesByStatusAndSearchRequest(status, searchRequest).limit(100).fetch();
+    private List<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
+        JPAQuery<Issue> query = findIssuesByStatusAndSearchRequest(status, searchRequest, pageable);
+        for (Sort.Order o : pageable.getSort()) {
+            PathBuilder<Issue> pathBuilder = new PathBuilder<>(issue.getType(), issue.getMetadata());
+            query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC,
+                    pathBuilder.get(o.getProperty())));
+        }
+        return query.fetch();
     }
 
-    public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
-        return findIssuesByStatusAndSearchRequest(status, searchRequest).fetchCount();
+    public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
+        return findIssuesByStatusAndSearchRequest(status, searchRequest, pageable)
+                .fetchCount();
     }
 
-    private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest) {
+    private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
         return queryFactory
                 .select(issue)
                 .distinct()
@@ -51,7 +63,11 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
                         milestoneEquals(searchRequest.getMilestone()),
                         assigneeEquals(searchRequest.getAssignee()),
                         commenterEquals(searchRequest.getCommenter())
-                );
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize());
+
+
     }
 
     private BooleanExpression statusEquals(String status) {

@@ -9,6 +9,9 @@ import com.issuetracker.auth.annotation.UserId;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,15 +24,15 @@ public class IssueController {
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
     @GetMapping("/search")
-    public IssuesResponseDTO search(SearchRequestDTO searchRequest) {
+    public IssuesResponseDTO search(SearchRequestDTO searchRequest, @PageableDefault(size = 25, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
         logger.debug("검색어와 상태에 따른 이슈 조회");
-        return issueQueryService.searchIssues(searchRequest);
+        return issueQueryService.searchIssues(searchRequest, pageable);
     }
 
     @GetMapping
-    public IssuesResponseDTO view(FilterRequestDTO filterRequest) {
+    public IssuesResponseDTO view(FilterRequestDTO filterRequest, @PageableDefault(size = 25, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
         logger.debug("모든 이슈 조회");
-        return issueQueryService.filterIssues(filterRequest);
+        return issueQueryService.filterIssues(filterRequest, pageable);
     }
 
     @LoginRequired

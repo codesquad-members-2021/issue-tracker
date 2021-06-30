@@ -11,6 +11,7 @@ import com.issuetracker.web.dto.response.*;
 import com.issuetracker.web.dto.vo.Count;
 import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,27 +30,27 @@ public class IssueQueryService {
     private final MilestoneService milestoneService;
     private final UserService userService;
 
-    public IssuesResponseDTO searchIssues(SearchRequestDTO searchRequestDTO) {
+    public IssuesResponseDTO searchIssues(SearchRequestDTO searchRequestDTO, Pageable pageable) {
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.countByIsOpen(true))
                 .openedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), true))
                 .closedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), false))
                 .build();
-        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus())).stream()
+        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable).stream()
                 .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);
     }
 
-    public IssuesResponseDTO filterIssues(FilterRequestDTO filterRequest) {
+    public IssuesResponseDTO filterIssues(FilterRequestDTO filterRequest, Pageable pageable) {
         Count count = Count.builder()
                 .label((int) labelService.count())
                 .milestone((int) milestoneService.countByIsOpen(true))
-                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), filterRequest))
-                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), filterRequest))
+                .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), filterRequest, pageable))
+                .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), filterRequest, pageable))
                 .build();
-        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest).stream()
+        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest, pageable).stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
         return IssuesResponseDTO.of(count, issues);
