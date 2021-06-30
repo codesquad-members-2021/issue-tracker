@@ -1,9 +1,6 @@
 package com.issuetracker.util;
 
-import com.issuetracker.domain.Comment;
-import com.issuetracker.domain.Issue;
-import com.issuetracker.domain.Label;
-import com.issuetracker.domain.Milestone;
+import com.issuetracker.domain.*;
 import com.issuetracker.oauth.User;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -74,5 +71,27 @@ public class RowMappers {
         comment.setUserId(rs.getLong("user_id"));
 
         return comment;
+    };
+
+    public static final RowMapper<SelectedEmoji> EMOJI_ISSUE_ROW_MAPPER = (rs, rowNum) -> {
+        SelectedEmoji selectedEmoji = new SelectedEmoji();
+
+        selectedEmoji.setThumbsUp(rs.getBoolean(":thumbs_up:"));
+        selectedEmoji.setHeartEyes(rs.getBoolean(":heart_eyes:"));
+        selectedEmoji.setIssueId(rs.getLong("issue_id"));
+        selectedEmoji.setUserId(rs.getLong("user_id"));
+
+        return selectedEmoji;
+    };
+
+    public static final RowMapper<SelectedEmoji> EMOJI_COMMENT_ROW_MAPPER = (rs, rowNum) -> {
+        SelectedEmoji selectedEmoji = new SelectedEmoji();
+
+        selectedEmoji.setThumbsUp(rs.getBoolean(":thumbs_up:"));
+        selectedEmoji.setHeartEyes(rs.getBoolean(":heart_eyes:"));
+        selectedEmoji.setCommentId(rs.getLong("comment_id"));
+        selectedEmoji.setUserId(rs.getLong("user_id"));
+
+        return selectedEmoji;
     };
 }
