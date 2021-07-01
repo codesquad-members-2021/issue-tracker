@@ -19,6 +19,7 @@ const NewIssuePage = () => {
   const IssuesId = useRecoilValue(NewIssuesIdQuery);
   const IssuesContent = useRecoilValue(newIssuesContentAtom);
   console.log(IssuesId, IssuesContent);
+
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     (async function () {
       await instanceWithAuth.post(
@@ -35,10 +36,9 @@ const NewIssuePage = () => {
     history.push('/issues');
   };
   useEffect(() => {
-    return () => {
-      IdReset();
-      contentReset();
-    };
+    IdReset();
+    contentReset();
+    return function cleanup() {};
   }, []);
   return (
     <>

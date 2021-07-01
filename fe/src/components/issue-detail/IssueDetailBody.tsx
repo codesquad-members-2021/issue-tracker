@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
+import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
 import axios from 'axios';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-
+import NewIssueRight from 'components/new-issue/NewIssueRight';
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CreateButton from 'components/buttons/CreateButton';
 import Comment from 'components/issue-detail/Comment';
@@ -30,7 +32,7 @@ const IssueDetailBody = () => {
     commentDesctiptionAtom
   );
   const setCommentUpdate = useSetRecoilState(commentUpdateAtom);
-
+  const setId = useSetRecoilState(NewIssuesIdQuery);
   const issueDescription = {
     // 코멘트처럼 생겼지만 사실 이슈의 본문
     id: issueAuthorId,
@@ -42,7 +44,12 @@ const IssueDetailBody = () => {
     description: issueDetailData.description,
     createdTime: issueDetailData.createdTime,
   };
-
+  console.log(issueDescription.id);
+  setId({
+    labelList: [2],
+    assigneeList: [2],
+    milestoneList: [],
+  });
   const newCommentHandler = () => {
     const token = localStorage.getItem('jwt');
     (async function () {
@@ -63,7 +70,15 @@ const IssueDetailBody = () => {
   };
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setCommentDesctiption(e.target.value);
-
+  // useEffect(() => {
+  //   return () => {
+  //     setId({
+  //       labelList: [2],
+  //       assigneeList: [2],
+  //       milestoneList: [],
+  //     });
+  //   };
+  // }, []);
   return (
     <Box display="flex">
       <CommentArea>
@@ -98,7 +113,7 @@ const IssueDetailBody = () => {
         </NewCommentWrapper>
       </CommentArea>
 
-      <AssignArea></AssignArea>
+      <NewIssueRight />
     </Box>
   );
 };
