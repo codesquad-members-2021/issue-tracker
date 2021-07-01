@@ -7,125 +7,147 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class IssueTableViewCell: UITableViewCell {
-    
+final class IssueTableViewCell: UITableViewCell {
+
     static var identifier = "IssueTableViewCell"
-    
-    var fakeData = [IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfa", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85"), IssueLabels(title: "gdsfaewqeqwrqw2ewqweq", color: "#DFCD85")]
-    
-    var largeTitle: UILabel = {
+
+    private var bag = DisposeBag()
+
+    var stackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    private var largeTitle: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
-    
-    var labelDescription: UILabel = {
+
+    private var labelDescription: UILabel = {
         var label = UILabel()
         label.textColor = .lightGray
         return label
     }()
-    
-    var milestoneView: MilestoneView = {
+
+    private var milestoneView: MilestoneView = {
         var milestone = MilestoneView()
         return milestone
     }()
-    
-    var labelsCollectionView: LabelsCollectionView = {
-        var collectionView = LabelsCollectionView()
-        return collectionView
-    }()
-    
-    var checkBoxImageView: UIImageView = {
+
+    var labelsCollectionView = LabelsCollectionView()
+
+    private var checkBoxImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "checkmark.circle.fill")
         return imageView
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        labelsCollectionView.dataSource = self
+        setUpStackView()
         addSubviews()
         setupAutolayout()
         checkBoxImageView.isHidden = true
     }
-    
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 2))
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 2
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        labelsCollectionView.dataSource = self
+        setUpStackView()
         addSubviews()
         setupAutolayout()
         checkBoxImageView.isHidden = true
     }
-    
-    func addSubviews() {
-        addSubview(labelsCollectionView)
-        addSubview(labelDescription)
-        addSubview(milestoneView)
-        addSubview(largeTitle)
-        addSubview(checkBoxImageView)
+
+    private func addSubviews() {
+        contentView.addSubview(stackView)
+        contentView.addSubview(checkBoxImageView)
+        contentView.backgroundColor = .systemYellow
     }
-    
-    func setupAutolayout() {
-        largeTitle.snp.makeConstraints { title in
-            title.top.equalTo(24)
-            title.leading.trailing.equalTo(16)
-            title.height.equalTo(28)
+
+    private func setUpStackView() {
+        stackView.addArrangedSubview(largeTitle)
+        stackView.addArrangedSubview(labelDescription)
+        stackView.addArrangedSubview(milestoneView)
+        stackView.addArrangedSubview(labelsCollectionView)
+    }
+
+    private func setupAutolayout() {
+        stackView.snp.makeConstraints { view in
+            view.edges.equalToSuperview().inset(10)
         }
-        
-        labelDescription.snp.makeConstraints { label in
-            label.top.equalTo(largeTitle.snp.bottom).offset(16)
-            label.leading.trailing.equalToSuperview().offset(16)
-            label.height.equalTo(22)
-        }
-        
-        milestoneView.snp.makeConstraints { view in
-            view.top.equalTo(labelDescription.snp.bottom).offset(16)
-            view.leading.trailing.equalTo(16)
-            view.height.equalTo(22)
-        }
-        
-        labelsCollectionView.snp.makeConstraints { view in
-            view.top.equalTo(milestoneView.snp.bottom).offset(16)
-            view.leading.trailing.equalToSuperview().inset(16)
-            view.bottom.equalToSuperview()
-        }
-        
+
         checkBoxImageView.snp.makeConstraints { image in
             image.top.equalToSuperview().inset(24)
             image.trailing.equalToSuperview().inset(16)
             image.width.height.equalTo(30)
         }
     }
-    
-    func setupIssueCell(title: String, description: String, milestoneTitle: String, color: String) {
-        self.largeTitle.text = title
-        self.labelDescription.text = description
-        self.milestoneView.setMilestoneTitle(title: milestoneTitle)
+
+    func setUpCollectionViewAutoLayout(view: UICollectionView) {
+        view.snp.makeConstraints { view in
+            view.width.equalToSuperview()
+            view.height.equalTo(25)
+        }
     }
-    
+
+    func setupIssueCell(title: String?, description: String?, milestoneTitle: String?, issueLabels: [IssueLabel]?, isOpen: Bool) {
+        if let title = title {
+            self.largeTitle.text = title
+            largeTitle.sizeToFit()
+        } else {
+            largeTitle.isHidden = true
+        }
+        if let description = description {
+            self.labelDescription.text = description
+            labelDescription.sizeToFit()
+        } else {
+            labelDescription.isHidden = true
+        }
+        if let milestone = milestoneTitle {
+            self.milestoneView.setMilestoneTitle(title: milestone)
+            milestoneView.sizeToFit()
+        } else {
+            milestoneView.isHidden = true
+        }
+
+        if !isOpen {
+            contentView.backgroundColor = #colorLiteral(red: 0.649335742, green: 0.109275572, blue: 0.1304466426, alpha: 1)
+        }
+        self.bindLabelCollectionView(issueLabels: issueLabels)
+    }
+
+    func bindLabelCollectionView(issueLabels: [IssueLabel]?) {
+        guard let labels = issueLabels else { return }
+        labelsCollectionView.dataSource = nil
+        self.setUpCollectionViewAutoLayout(view: labelsCollectionView)
+        Observable.just(labels).bind(to: self.labelsCollectionView.rx.items) { collectionView, int, issueLabel in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: IndexPath(row: int, section: 0  )) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
+            cell.configure(title: issueLabel.title, color: issueLabel.color)
+            return cell
+        }
+        .disposed(by: bag)
+    }
+
     func check() {
         checkBoxImageView.isHidden = false
     }
-    
+
     func uncheck() {
         checkBoxImageView.isHidden = true
     }
-}
-
-extension IssueTableViewCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fakeData.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelsCollectionViewCell.identifiers, for: indexPath) as? LabelsCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(title: fakeData[indexPath.item].title, color: fakeData[indexPath.item].color)
-        return cell
-    }
-}
-
-struct IssueLabels {
-    var title: String
-    var color: String
 }

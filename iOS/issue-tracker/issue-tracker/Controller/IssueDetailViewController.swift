@@ -7,12 +7,43 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class IssueDetailViewController: UIViewController {
+final class IssueDetailViewController: UIViewController {
+
+    var viewModel: IssueDetailViewModel = IssueDetailViewModel()
 
     private let cellReuseIdentifier = "IssueDetailCell"
-    private let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    
+    private let disposeBag = DisposeBag()
+    private var comment: [Comment] = []
+    private var textFieldHeightConstraint: NSLayoutConstraint?
+
+    private let headerStackView: UIStackView = {
+        let stackView = UIStackView(frame: CGRect(origin: .zero, size: CGSize(width: 1, height: 44)))
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    private let isOpened: PaddingLabel = {
+        let label = PaddingLabel(withInsets: 0, 0, 10, 10)
+        label.textAlignment = .center
+        label.backgroundColor = .systemPink
+        label.textColor = .white
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 10
+        label.snp.makeConstraints { $0.width.greaterThanOrEqualTo(50) }
+        return label
+    }()
+
+    private let authorLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = 130
@@ -20,67 +51,49 @@ class IssueDetailViewController: UIViewController {
         return tableView
     }()
 
-    private let toolbar: UIToolbar = {
-        let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
-        let textField = ToolBarTextField(frame: toolbar.bounds)
-        let up = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"),
-                                         style: .plain, target: self, action: #selector(scrollToBefore))
-        let down = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
-                                           style: .plain, target: self, action: #selector(scrollToNext))
-        let comment = UIBarButtonItem(customView: textField)
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: comment, action: nil)
-        toolbar.setItems([up, down, space, comment], animated: false)
-        return toolbar
-    }()
-    
+    private let textField = ToolBarTextField()
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+
+        navigationItem.largeTitleDisplayMode = .always
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showIssueDetailInfo))
-        navigationItem.title = "테스트 이슈 #2"
-        
+
+        textField.textFieldDelegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.frame = view.bounds
         tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
-        
+
+        headerStackView.addArrangedSubview(isOpened)
+        headerStackView.addArrangedSubview(authorLabel)
+
+        tableView.tableHeaderView = headerStackView
+
         view.addSubview(tableView)
-        view.addSubview(toolbar)
-        
+        view.addSubview(textField)
+
         setupAutolayout()
+        setupKeyboardNotification()
+        bind()
+
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
 
-    private func setupAutolayout() {
-        toolbar.snp.makeConstraints { maker in
-            maker.leading.trailing.equalToSuperview()
-            maker.bottom.equalTo(view.safeAreaLayoutGuide)
-            maker.height.equalTo(44)
-        }
-    }
-    
     @objc
-    private func scrollToBefore() {
-        guard let indexPath = tableView.indexPathForSelectedRow,
-              indexPath.row != 0 else { return }
-        tableView.selectRow(at: IndexPath(row: indexPath.row - 1, section: indexPath.section),
-                            animated: true, scrollPosition: .top)
+    private func handleTapGesture(recognizer: UITapGestureRecognizer) {
+        textField.resignFirstResponder()
     }
-    
-    @objc
-    private func scrollToNext() {
-        guard let indexPath = tableView.indexPathForSelectedRow,
-              indexPath.row + 1 < data.count else { return }
-        tableView.selectRow(at: IndexPath(row: indexPath.row + 1, section: indexPath.section),
-                            animated: true, scrollPosition: .bottom)
-    }
-    
+
     @objc
     private func showIssueDetailInfo() {
         let storyboard = UIStoryboard(name: "Modal", bundle: nil)
@@ -88,16 +101,67 @@ class IssueDetailViewController: UIViewController {
         controller.modalPresentationStyle = .custom
         present(controller, animated: true, completion: nil)
     }
+
+    func fetchData(id: Int) {
+        viewModel.fetch(id: id)
+    }
+}
+
+private extension IssueDetailViewController {
+    func bind() {
+        viewModel.subject.bind { [weak self] detail in
+            guard let detail = detail?.data else { return }
+            self?.navigationItem.title = detail.title
+            self?.isOpened.text = detail.open ? "Open" : "Closed"
+            self?.authorLabel.text = "\(detail.author.name)님이 작성했습니다."
+            guard let comment = detail.comment else { return }
+            self?.comment = comment
+            self?.tableView.reloadData()
+        }
+        .disposed(by: disposeBag)
+    }
+
+    func setupKeyboardNotification() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] noti in
+            guard let strongSelf = self else { return }
+            if let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                strongSelf.textFieldHeightConstraint?.constant = -(keyboardFrame.cgRectValue.height - strongSelf.bottomSafeAreaHeight)
+            }
+        }
+        center.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.textFieldHeightConstraint?.constant = 0
+        }
+    }
+
+    func setupAutolayout() {
+        headerStackView.snp.makeConstraints { $0.leading.trailing.top.bottom.equalToSuperview().inset(20) }
+        tableView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide) }
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            textField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        textFieldHeightConstraint = textField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        textFieldHeightConstraint?.isActive = true
+    }
 }
 
 extension IssueDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return comment.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? IssueDetailTableViewCell else {
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "아직 코멘트가 없습니다..."
+            return cell
+        }
         cell.accessoryView = UIImageView(image: UIImage(systemName: "ellipsis"))
+        cell.configure(model: comment[indexPath.row])
         return cell
     }
 }
@@ -105,5 +169,14 @@ extension IssueDetailViewController: UITableViewDataSource {
 extension IssueDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         UIView()
+    }
+}
+
+extension IssueDetailViewController: ToolBarTextFieldDelegate {
+    func register() {
+        guard let comment = textField.text else {
+            return
+        }
+        viewModel.post(comment: comment)
     }
 }

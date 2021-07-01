@@ -12,31 +12,52 @@
         <!--Login View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="LoginViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Y6W-OH-hqX" customClass="LoginViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCI-l4-irZ" customClass="LoginView" customModule="issue_tracker" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5v-Nf-l47" customClass="LoginView" customModule="issue_tracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmj-Ws-gJd" customClass="GitHubLoginButton" customModule="issue_tracker" customModuleProvider="target">
+                                <rect key="frame" x="16" y="672" width="382" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="FCS-R2-3gt"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="didTapGithubLogin:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rAK-UL-bwt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hCI-l4-irZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="2qq-pR-mmR"/>
-                            <constraint firstItem="hCI-l4-irZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JRp-Bk-AAK"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hCI-l4-irZ" secondAttribute="trailing" id="R7C-QN-2uJ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hCI-l4-irZ" secondAttribute="bottom" id="i7j-l9-KMc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qmj-Ws-gJd" secondAttribute="trailing" constant="16" id="Tfx-w2-Wuh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I5v-Nf-l47" secondAttribute="trailing" id="TlH-Cb-bhC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="I5v-Nf-l47" secondAttribute="bottom" id="g8p-tj-F6t"/>
+                            <constraint firstItem="I5v-Nf-l47" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="jaa-z2-i6i"/>
+                            <constraint firstItem="qmj-Ws-gJd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="nMd-TM-EH0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qmj-Ws-gJd" secondAttribute="bottom" constant="134" id="qUh-6E-0in"/>
+                            <constraint firstItem="I5v-Nf-l47" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sBk-tG-jGN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contentView" destination="I5v-Nf-l47" id="Ogr-6r-wOm"/>
+                        <outlet property="githubLoginButton" destination="qmj-Ws-gJd" id="RoH-jh-v2j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="57" y="110"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="qmj-Ws-gJd">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

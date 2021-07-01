@@ -8,8 +8,9 @@
 import UIKit
 import SnapKit
 
-class GitHubLoginButton: UIView {
-    
+@IBDesignable
+class GitHubLoginButton: UIButton {
+
     var stackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .horizontal
@@ -18,14 +19,14 @@ class GitHubLoginButton: UIView {
         stackView.spacing = 8
         return stackView
     }()
-    
+
     var octocatImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage(named: "github")
         return imageView
     }()
-    
+
     var loginLabel: UILabel = {
         var label = UILabel()
         label.text = "GitHub 계정으로 로그인"
@@ -33,7 +34,7 @@ class GitHubLoginButton: UIView {
         label.textColor = .white
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setGitHubLoginButton()
@@ -41,7 +42,7 @@ class GitHubLoginButton: UIView {
         self.addSubview(stackView)
         setAutolayout()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setGitHubLoginButton()
@@ -49,23 +50,23 @@ class GitHubLoginButton: UIView {
         self.addSubview(stackView)
         setAutolayout()
     }
-    
+
     func setGitHubLoginButton() {
         self.backgroundColor = .black
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
     }
-    
+
     func setStackView() {
         stackView.addArrangedSubview(octocatImageView)
         stackView.addArrangedSubview(loginLabel)
     }
-    
+
     func setAutolayout() {
         octocatImageView.snp.makeConstraints { image in
             image.width.height.equalTo(30)
         }
-        
+
         stackView.snp.makeConstraints { stackView in
             stackView.centerX.centerY.equalToSuperview()
         }

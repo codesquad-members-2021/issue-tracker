@@ -9,12 +9,13 @@ import Foundation
 import AuthenticationServices
 
 class OAuthManager {
-    private let cliendId = ""
-    private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)&scope=user:email")!
-    private let callbackUrlScheme = "issueTracker"
-    
+    private let cliendId = "4cccb9b4007d25b53a70"
+    private lazy var authURL = URL(string: "https://github.com/login/oauth/authorize?client_id=\(cliendId)")!
+    private let callbackUrlScheme = "issue-tracker"
+    private var code: String?
+
     var networkManager: Networkable
-    
+
     init(networkManager: Networkable) {
         self.networkManager = networkManager
     }
@@ -28,19 +29,24 @@ class OAuthManager {
                 print("An error occurred when attempting to sign in.")
                 return
             }
-            print(code)
-            self.requestJWTToken(with: code)
+            self.code = code
+            NotificationCenter.default.post(name: Notification.Name.init("authorized"), object: self)
         })
         return authenticationSession
     }
-    
-    private func requestJWTToken(with code: String) {
+
+    func requestJWTToken(completion: @escaping () -> Void) {
         let query = URLQueryItem(name: "code", value: code)
         let endpoint = Endpoint(path: .login)
         guard let url = endpoint.url(queryItems: [query]) else { return }
-        networkManager.request(url: url, decodableType: [String: String].self) { (token) in
-            UserDefaults.standard.set(token, forKey: "token")
-            // 메인 이슈 화면으로
+        networkManager.request(url: url, decodableType: Token.self) { data in
+            let token = data.data
+            UserDefaults.standard.setValue(token, forKey: "token")
+            completion()
         }
     }
+}
+
+struct Token: Decodable {
+    let data: String
 }

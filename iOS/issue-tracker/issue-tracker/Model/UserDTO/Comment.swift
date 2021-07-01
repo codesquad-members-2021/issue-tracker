@@ -21,3 +21,8 @@ struct Comment: Codable {
         case content
     }
 }
+
+struct PostComment: Codable {
+    let writer: String
+    let comment: String
+}

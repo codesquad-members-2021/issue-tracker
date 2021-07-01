@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddIssueButton: UIView {
+final class AddIssueButton: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,10 +18,10 @@ class AddIssueButton: UIView {
         super.init(coder: coder)
         setupButton()
     }
-    
+
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()
-        
+
         path.move(to: CGPoint(x: self.bounds.width * 0.25, y: self.bounds.height * 0.5))
         path.addLine(to: CGPoint(x: self.bounds.width * 0.75, y: self.bounds.height * 0.5))
         path.move(to: CGPoint(x: self.bounds.width * 0.5, y: self.bounds.height * 0.25))
@@ -29,8 +29,8 @@ class AddIssueButton: UIView {
         UIColor.white.set()
         path.stroke()
     }
-    
-    func setupButton() {
+
+    private func setupButton() {
         clipsToBounds = true
         layer.cornerRadius = self.bounds.size.width * 0.5
         backgroundColor = .systemBlue

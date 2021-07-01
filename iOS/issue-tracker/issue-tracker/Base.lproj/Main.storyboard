@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oU9-yx-qTd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oU9-yx-qTd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -71,7 +71,7 @@
             </objects>
             <point key="canvasLocation" x="1109" y="1517"/>
         </scene>
-        <!--내게정-->
+        <!--내계정-->
         <scene sceneID="CPO-fU-AJO">
             <objects>
                 <viewController id="cxD-Kl-bEy" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                         <viewLayoutGuide key="safeArea" id="QuP-fM-FfB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="내게정" image="person" catalog="system" id="JZ5-aR-2TP"/>
+                    <tabBarItem key="tabBarItem" title="내계정" image="person" catalog="system" id="JZ5-aR-2TP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTy-kJ-ZF8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -106,7 +106,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="pYl-ZN-vsk">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ztH-lY-X3Y" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="main" automaticallyAdjustsScrollViewInsets="NO" id="ztH-lY-X3Y" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9hE-5W-2K0">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

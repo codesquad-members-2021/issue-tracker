@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLabelButton: UIButton {
+final class AddLabelButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setImage(UIImage(systemName: "plus"), for: .normal)
@@ -15,7 +15,7 @@ class AddLabelButton: UIButton {
         setTitleColor(.systemBlue, for: .normal)
         semanticContentAttribute = .forceRightToLeft
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setImage(UIImage(systemName: "plus"), for: .normal)

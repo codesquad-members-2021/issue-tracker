@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectBarButton: UIButton {
+final class SelectBarButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
@@ -15,7 +15,7 @@ class SelectBarButton: UIButton {
         setTitleColor(.systemBlue, for: .normal)
         semanticContentAttribute = .forceRightToLeft
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
