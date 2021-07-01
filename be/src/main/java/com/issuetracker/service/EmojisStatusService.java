@@ -1,7 +1,9 @@
 package com.issuetracker.service;
 
 import com.issuetracker.domain.SelectedEmoji;
+import com.issuetracker.dto.EmojiRequestDto;
 import com.issuetracker.dto.EmojisStatusDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.repository.EmojisStatusRepository;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,54 @@ public class EmojisStatusService {
             return list;
         }
 
+        return null;
+    }
+
+    public ResponseStatusDto changeEmojiStatus(EmojiRequestDto emojiRequestDto) {
+        boolean rowIsPresent = emojisStatusRepository.hasRowByCodeAndIssueId(emojiRequestDto);
+
+        if (emojiRequestDto.getIssueId() != null && emojiRequestDto.getCommentId() == null) {
+            return changeEmojiStatusWithIssueId(rowIsPresent, emojiRequestDto);
+        }
+
+        if (emojiRequestDto.getIssueId() == null && emojiRequestDto.getCommentId() != null) {
+            return changeEmojiStatusWithCommentId(rowIsPresent, emojiRequestDto);
+        }
 
         return null;
+    }
+
+    private ResponseStatusDto changeEmojiStatusWithCommentId(boolean rowIsPresent, EmojiRequestDto emojiRequestDto) {
+        if (rowIsPresent) {
+            if (emojiRequestDto.getSelected()) {
+                emojisStatusRepository.increaseCountByOneByCodeAndCommentId(emojiRequestDto);
+            }
+            if (!emojiRequestDto.getSelected()) {
+                emojisStatusRepository.decreaseCountByOneByCodeAndCommentId(emojiRequestDto);
+            }
+        }
+
+        if (!rowIsPresent) {
+            emojisStatusRepository.insertEmojiStatusByCodeAndCommentId(emojiRequestDto);
+            emojisStatusRepository.increaseCountByOneByCodeAndCommentId(emojiRequestDto);
+        }
+        return new ResponseStatusDto("success");
+    }
+
+    private ResponseStatusDto changeEmojiStatusWithIssueId(boolean rowIsPresent, EmojiRequestDto emojiRequestDto) {
+        if (rowIsPresent) {
+            if (emojiRequestDto.getSelected()) {
+                emojisStatusRepository.increaseCountByOneByCodeAndIssueId(emojiRequestDto);
+            }
+            if (!emojiRequestDto.getSelected()) {
+                emojisStatusRepository.decreaseCountByOneByCodeAndIssueId(emojiRequestDto);
+            }
+        }
+
+        if (!rowIsPresent) {
+            emojisStatusRepository.insertEmojiStatusByCodeAndIssueId(emojiRequestDto);
+            emojisStatusRepository.increaseCountByOneByCodeAndIssueId(emojiRequestDto);
+        }
+        return new ResponseStatusDto("success");
     }
 }
