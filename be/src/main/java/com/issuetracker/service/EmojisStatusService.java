@@ -18,8 +18,8 @@ public class EmojisStatusService {
 
     public List<EmojisStatusDto> findEmojisStatus(Long issueId, Long commentId, Long userId) {
         if (issueId != null && commentId == null) {
-            boolean row = emojisStatusRepository.hasRowByIssueIdAndUserId(issueId, userId);
-            if (!row) {
+            boolean rowIsPresent = emojisStatusRepository.hasRowByIssueIdAndUserId(issueId, userId);
+            if (!rowIsPresent) {
                 emojisStatusRepository.create(issueId, userId);
             }
             SelectedEmoji emojiStatus = emojisStatusRepository.findEmojisStatusByIssueIdAndUserId(issueId, userId);
@@ -32,8 +32,8 @@ public class EmojisStatusService {
         }
 
         if (issueId == null && commentId != null) {
-            boolean row = emojisStatusRepository.hasRowByCommentIdAndUserId(commentId, userId);
-            if (!row) {
+            boolean rowIsPresent = emojisStatusRepository.hasRowByCommentIdAndUserId(commentId, userId);
+            if (!rowIsPresent) {
                 emojisStatusRepository.create(issueId, userId);
             }
             SelectedEmoji emojiStatus = emojisStatusRepository.findEmojisStatusByCommentIdAndUserId(issueId, userId);
