@@ -4,7 +4,7 @@ import Combine
 class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
-    private let issueListViewModel = IssueListViewModel()
+    private var issueListViewModel: IssueListViewModel!
     private var subscriptions = Set<AnyCancellable>()
 
     private var searchController: UISearchController = {
@@ -24,10 +24,14 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureViewModel()
         bind()
         configureNavigationItem()
         configureTableView()
+    }
+    
+    func configureViewModel() {
+        issueListViewModel = IssueListViewModel(issueListUseCase: DefaultIssueListUseCase())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +46,17 @@ class IssueListViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.issueTableView.reloadData()
             }.store(in: &subscriptions)
+        
+        issueListViewModel.didUpdateErrorMessage()
+            .sink { _ in
+                // 알러트 띄우기
+            }.store(in: &subscriptions)
+        
+        issueListViewModel.didUpdateResultMessage()
+            .sink { _ in
+                // 알러트 띄우기
+            }.store(in: &subscriptions)
+        
         issueListViewModel.fetchIssueList()
     }
     
@@ -122,11 +137,8 @@ class IssueListViewController: UIViewController {
     //MARK: - TableView Cell Swipe Action Method
     private func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "삭제", handler: { [weak self] (_, _, _) in
-            self?.issueListViewModel.delete(indexPath: indexPath) { result in
-                if result {
-                    self?.issueListViewModel.fetchIssueList()
-                }
-            }
+            self?.issueListViewModel.delete(indexPath: indexPath)
+            self?.issueListViewModel.fetchIssueList()
         })
         
         let trashCanImage = UIImage(systemName: "trash")
@@ -140,11 +152,8 @@ class IssueListViewController: UIViewController {
     
     private func closeAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "닫기", handler: { [weak self] (_, _, _) in
-            self?.issueListViewModel.close(indexPath: indexPath) { result in
-                if result {
-                    self?.issueListViewModel.fetchIssueList()
-                }
-            }
+            self?.issueListViewModel.close(indexPath: indexPath)
+            self?.issueListViewModel.fetchIssueList()
         })
         
         let archiveBoxImage = UIImage(systemName: "archivebox")

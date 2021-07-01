@@ -13,19 +13,19 @@ struct NetworkManager {
     
     func sendRequest<T: Decodable>(with url: URL?, method: HttpMethod, type: T.Type) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
-            let error = NetworkError.url(description: "URL does not exist")
+            let error = NetworkError.url
             return Fail(error: error).eraseToAnyPublisher()
         }
         
         let urlRequest = requestManager.makeRequest(url: url, method: method)
         return session.dataTaskPublisher(for: urlRequest)
             .mapError { _  in
-                NetworkError.networkConnection(desciption: "Network Error")
+                NetworkError.networkConnection
             }
             .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                 let decodeData = Just(data)
                     .decode(type: type.self, decoder: JSONDecoder())
-                    .mapError { _ in NetworkError.decoding(description: "Decode Error") }
+                    .mapError { _ in NetworkError.decoding }
                     .eraseToAnyPublisher()
                 return decodeData
             }
@@ -34,13 +34,13 @@ struct NetworkManager {
     
     func sendRequest<T: Decodable, D: Encodable>(with url: URL?, method: HttpMethod, type: T.Type, body: D) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
-            let error = NetworkError.url(description: "URL does not exist")
+            let error = NetworkError.url
             return Fail(error: error).eraseToAnyPublisher()
         }
         
         return Just(body).encode(encoder: JSONEncoder())
             .mapError { _ in
-                return .encoding(description: "It has not been encoded")
+                return .encoding
             }
             .map { data -> URLRequest in
                 let urlRequest = requestManager.makeRequest(url: url, method: method, body: data)
@@ -48,12 +48,12 @@ struct NetworkManager {
             }
             .flatMap { urlRequest in
                 session.dataTaskPublisher(for: urlRequest)
-                    .mapError { _ in NetworkError.networkConnection(desciption: "URL Error")
+                    .mapError { _ in NetworkError.networkConnection
                     }
                     .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                         let decodeData = Just(data)
                             .decode(type: type.self, decoder: JSONDecoder())
-                            .mapError { _ in NetworkError.decoding(description: "Decode Error") }
+                            .mapError { _ in NetworkError.decoding }
                             .eraseToAnyPublisher()
                         return decodeData
                     }
@@ -64,11 +64,11 @@ struct NetworkManager {
     
 }
 
-enum NetworkError: Error {
+enum NetworkError: String, Error {
 
-    case encoding(description: String)
-    case decoding(description: String)
-    case url(description: String)
-    case networkConnection(desciption: String)
+    case encoding = "Encoding Error"
+    case decoding = "Decoding Error"
+    case url = "URL does not exist"
+    case networkConnection = "Network Error"
     
 }

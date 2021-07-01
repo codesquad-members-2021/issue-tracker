@@ -1,7 +1,15 @@
 import Foundation
 import Combine
 
-class IssueListUseCase {
+protocol IssueListUseCase {
+    
+    func executeFetchingIssueList(completion: @escaping (Result<IssueList, NetworkError>) -> Void)
+    func executeDeleteIssue(issueID: Int, completion: @escaping (Result<String, NetworkError>) -> Void)
+    func executeCloseIssue(issueIDs: [Int], completion: @escaping (Result<String, NetworkError>) -> Void)
+    
+}
+
+class DefaultIssueListUseCase: IssueListUseCase {
     
     private let endPoint: EndPoint
     private let networkManager: NetworkManager
@@ -28,46 +36,46 @@ class IssueListUseCase {
             }.store(in: &subscriptions)
     }
     
-    func executeDeleteIssue(issueID: Int, completion: @escaping (Bool) -> Void) {
+    func executeDeleteIssue(issueID: Int, completion: @escaping (Result<String, NetworkError>) -> Void) {
         let path = "/\(issueID)"
         let url = endPoint.makeURL(with: path)
         networkManager.sendRequest(with: url, method: .delete, type: ResponseBodyDTO.self)
             .sink { result in
                 switch result {
                 case .failure(let error):
-                    print(error.localizedDescription)
-                    completion(false)
+                    completion(.failure(error))
                 case .finished:
                     break
                 }
             } receiveValue: { response in
                 if let error = response.error {
-                    print(error)
-                    completion(false)
+                    completion(.success(error))
                 } else {
-                    completion(true)
+                    if let data = response.data {
+                        completion(.success(data))
+                    }
                 }
             }.store(in: &subscriptions)
     }
     
-    func executeCloseIssue(issueIDs: [Int], completion: @escaping (Bool) -> Void) {
+    func executeCloseIssue(issueIDs: [Int], completion: @escaping (Result<String, NetworkError>) -> Void) {
         let path = "/close"
         let url = endPoint.makeURL(with: path)
         networkManager.sendRequest(with: url, method: .post, type: ResponseBodyDTO.self, body: IssueIDsDTO(issueIds: issueIDs))
             .sink { result in
                 switch result {
                 case .failure(let error):
-                    print(error.localizedDescription)
-                    completion(false)
+                    completion(.failure(error))
                 case .finished:
                     break
                 }
             } receiveValue: { response in
                 if let error = response.error {
-                    print(error)
-                    completion(false)
+                    completion(.success(error))
                 } else {
-                    completion(true)
+                    if let data = response.data {
+                        completion(.success(data))
+                    }
                 }
             }.store(in: &subscriptions)
     }

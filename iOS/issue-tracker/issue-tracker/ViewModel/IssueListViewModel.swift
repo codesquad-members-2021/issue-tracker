@@ -4,22 +4,26 @@ import Combine
 class IssueListViewModel {
     
     @Published private var issueList: IssueList
+    @Published private var errorMessage: NetworkError?
+    @Published private var resultMessage: String?
     private var filteredIssueList: IssueList
-    private let issueListUseCase: IssueListUseCase
+    private let defaultIssueListUseCase: IssueListUseCase
     private var subscriptions: Set<AnyCancellable>
 
-    init() {
+    init(issueListUseCase: IssueListUseCase) {
         self.issueList = IssueList(issues: [])
+        self.errorMessage = nil
+        self.resultMessage = nil
         self.filteredIssueList = IssueList(issues: [])
-        self.issueListUseCase = IssueListUseCase()
+        self.defaultIssueListUseCase = issueListUseCase
         self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchIssueList() {
-        issueListUseCase.executeFetchingIssueList { result in
+        defaultIssueListUseCase.executeFetchingIssueList { result in
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
+                self.errorMessage = error
             case .success(let issueList):
                 self.issueList = issueList
             }
@@ -28,6 +32,18 @@ class IssueListViewModel {
     
     func didUpdateIssueList() -> AnyPublisher<IssueList, Never> {
         return $issueList
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func didUpdateErrorMessage() -> AnyPublisher<NetworkError?, Never> {
+        return $errorMessage
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func didUpdateResultMessage() -> AnyPublisher<String?, Never> {
+        return $resultMessage
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -44,17 +60,27 @@ class IssueListViewModel {
         return filteredIssueList.issues[indexPath.row]
     }
     
-    func delete(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
+    func delete(indexPath: IndexPath) {
         let issueID = issueList.issues[indexPath.row].id
-        issueListUseCase.executeDeleteIssue(issueID: issueID) { result in
-            completion(result)
+        defaultIssueListUseCase.executeDeleteIssue(issueID: issueID) { result in
+            switch result {
+            case .failure(let errorMessage):
+                self.errorMessage = errorMessage
+            case .success(let resultMessage):
+                self.resultMessage = resultMessage
+            }
         }
     }
     
-    func close(indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
+    func close(indexPath: IndexPath) {
         let issueIDs: [Int] = [issueList.issues[indexPath.row].id]
-        issueListUseCase.executeCloseIssue(issueIDs: issueIDs) { result in
-            completion(result)
+        defaultIssueListUseCase.executeCloseIssue(issueIDs: issueIDs) { result in
+            switch result {
+            case .failure(let errorMessage):
+                self.errorMessage = errorMessage
+            case .success(let resultMessage):
+                self.resultMessage = resultMessage
+            }
         }
     }
     

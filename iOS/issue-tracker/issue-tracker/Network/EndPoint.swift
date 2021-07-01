@@ -5,7 +5,7 @@ enum Scheme: String {
 }
 
 enum Host: String {
-    case base = "3.35.174.197"
+    case base = "3.37.234.113"
 }
 
 enum Path: String {
