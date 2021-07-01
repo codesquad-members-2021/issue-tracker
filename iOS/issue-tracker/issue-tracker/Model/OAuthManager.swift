@@ -41,7 +41,6 @@ class OAuthManager {
         guard let url = endpoint.url(queryItems: [query]) else { return }
         networkManager.request(url: url, decodableType: Token.self) { data in
             let token = data.data
-            print(token)
             UserDefaults.standard.setValue(token, forKey: "token")
             completion()
         }

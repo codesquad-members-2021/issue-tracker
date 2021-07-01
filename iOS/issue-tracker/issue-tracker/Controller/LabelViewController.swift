@@ -66,8 +66,7 @@ extension LabelViewController: UITableViewDelegate {
             success(true)
         }
 
-        let closeAction = UIContextualAction(style: .normal, title: "수정") { [weak self] _, _, success in
-
+        let closeAction = UIContextualAction(style: .normal, title: "수정") {_, _, success in
             success(true)
         }
 
