@@ -118,11 +118,12 @@ DROP TABLE IF EXISTS `issue_tracker_db`.`emoji`;
 
 CREATE TABLE IF NOT EXISTS `issue_tracker_db`.`emoji`
 (
-    `code`   VARCHAR(10) NOT NULL,
+    `id`         INT(11)     NOT NULL AUTO_INCREMENT,
+    `code`       VARCHAR(45) NOT NULL,
     `count`      INT(11)     NOT NULL DEFAULT '0',
     `comment_id` INT(11)     NULL     DEFAULT NULL,
     `issue_id`   INT(11)     NULL     DEFAULT NULL,
-    PRIMARY KEY (`code`),
+    PRIMARY KEY (`id`),
     INDEX `fk_emoji_comment1_idx` (`comment_id` ASC),
     INDEX `fk_emoji_issue1_idx` (`issue_id` ASC),
     CONSTRAINT `fk_emoji_comment1`

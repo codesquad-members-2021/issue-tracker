@@ -1,11 +1,10 @@
 package com.issuetracker.controller;
 
+import com.issuetracker.dto.EmojiRequestDto;
 import com.issuetracker.dto.EmojisStatusDto;
+import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.service.EmojisStatusService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,11 @@ public class EmojiController {
                                              @RequestParam(name = "comment_id", required = false) Long commentId,
                                              @RequestParam(name = "user_id") Long userId) {
         return emojisStatusService.findEmojisStatus(issueId, commentId, userId);
+    }
+
+    @PutMapping
+    public ResponseStatusDto changeEmojiStatus(@RequestBody EmojiRequestDto emojiRequestDto) {
+        return emojisStatusService.changeEmojiStatus(emojiRequestDto);
     }
 
 }
