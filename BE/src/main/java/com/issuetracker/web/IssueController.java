@@ -24,7 +24,7 @@ public class IssueController {
     private final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
     @GetMapping("/search")
-    public IssuesResponseDTO search(SearchRequestDTO searchRequest, @PageableDefault(size = 25, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
+    public IssuesResponseDTO search(SearchRequestDTO searchRequest, @PageableDefault(size = 2, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
         logger.debug("검색어와 상태에 따른 이슈 조회");
         return issueQueryService.searchIssues(searchRequest, pageable);
     }

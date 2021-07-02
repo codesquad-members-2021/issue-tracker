@@ -1,5 +1,6 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
 import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.issue.IssueRepository;
@@ -40,10 +41,11 @@ public class IssueQueryService {
                 .openedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), true))
                 .closedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), false))
                 .build();
+        Page<IssueDocument> page = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable);
         List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable).stream()
                 .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
                 .collect(Collectors.toList());
-        int totalPages = 1;
+        int totalPages = page.getTotalPages();
         return IssuesResponseDTO.of(count, issues, totalPages);
     }
 
