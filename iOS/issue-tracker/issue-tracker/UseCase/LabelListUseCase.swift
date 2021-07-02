@@ -27,4 +27,5 @@ class LabelListUseCase {
                 completion(.success(labelListResponseDTO.toDomain()))
             }.store(in: &subscriptions)
     }
+    
 }

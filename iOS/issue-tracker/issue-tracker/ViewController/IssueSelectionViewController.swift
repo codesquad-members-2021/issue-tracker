@@ -40,6 +40,7 @@ class IssueSelectionViewController: UIViewController {
 extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 임시값
         return 4
     }
     

@@ -1,20 +1,26 @@
 import Foundation
 
 enum Scheme: String {
+    
     case http = "http"
+    
 }
 
 enum Host: String {
+    
     case base = "3.37.234.113"
+    
 }
 
 enum Path: String {
+    
     case api = "/api"
     case user = "/user"
     case issues = "/issues"
     case close = "/close"
     case label = "/labels"
     case milestone = "/milestones"
+    
 }
 
 struct EndPoint {

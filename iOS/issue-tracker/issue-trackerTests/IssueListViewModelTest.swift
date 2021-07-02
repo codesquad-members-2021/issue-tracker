@@ -87,32 +87,13 @@ class IssueListViewModelTest: XCTestCase {
         XCTAssertEqual(expectedValue, "삭제할 수 없습니다.")
     }
     
-    func test_이슈삭제_네트워크_실패() throws {
-        let issueListUseCaseStub = IssueListUseCaseStub(success: false, response: ResponseBodyDTO(data: nil, error: nil))
-        let issueListViewModel = IssueListViewModel(issueListUseCase: issueListUseCaseStub)
-        let expectation = expectation(description: "didUpdateDeleteIssue")
-        expectation.assertForOverFulfill = false
-        var expectedValue: NetworkError?
-
-        issueListViewModel.fetchIssueList()
-        issueListViewModel.didUpdateErrorMessage()
-            .sink { value in
-                expectedValue = value
-                expectation.fulfill()
-            }.store(in: &subscriptions)
-        issueListViewModel.delete(indexPath: IndexPath(row: 0, section: 0))
-
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(expectedValue, NetworkError.networkConnection)
-    }
-    
     func test_이슈닫기_성공() throws {
         let issueListUseCaseStub = IssueListUseCaseStub(success: true, response: ResponseBodyDTO(data: "OK", error: nil))
         let issueListViewModel = IssueListViewModel(issueListUseCase: issueListUseCaseStub)
         let expectation = expectation(description: "didUpdateCloseIssue")
         expectation.assertForOverFulfill = false
         var expectedValue: String?
-
+        
         issueListViewModel.fetchIssueList()
         issueListViewModel.didUpdateResultMessage()
             .sink { value in
@@ -142,77 +123,6 @@ class IssueListViewModelTest: XCTestCase {
 
         wait(for: [expectation], timeout: 1)
         XCTAssertEqual(expectedValue, "이미 닫힌 이슈입니다.")
-    }
-    
-    func test_이슈닫기_네트워크_실패() throws {
-        let issueListUseCaseStub = IssueListUseCaseStub(success: false, response: ResponseBodyDTO(data: nil, error: nil))
-        let issueListViewModel = IssueListViewModel(issueListUseCase: issueListUseCaseStub)
-        let expectation = expectation(description: "didUpdateCloseIssue")
-        expectation.assertForOverFulfill = false
-        var expectedValue: NetworkError?
-
-        issueListViewModel.fetchIssueList()
-        issueListViewModel.didUpdateErrorMessage()
-            .sink { value in
-                expectedValue = value
-                expectation.fulfill()
-            }.store(in: &subscriptions)
-        issueListViewModel.close(indexPath: IndexPath(row: 0, section: 0))
-
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(expectedValue, NetworkError.networkConnection)
-    }
-}
-
-class IssueListUseCaseStub: IssueListUseCase {
-    
-    var success: Bool
-    var resultIssueList: IssueList
-    var response: ResponseBodyDTO
-    
-    init(success: Bool, response: ResponseBodyDTO) {
-        self.success = success
-        self.resultIssueList = IssueList(issues: [Issue(id: 1, title: "title", comment: "comment", milestone: "milestone", labels: [])])
-        self.response = response
-    }
-    
-    func executeFetchingIssueList(completion: @escaping (Result<IssueList, NetworkError>) -> Void) {
-        switch success {
-        case true:
-            completion(Result.success(self.resultIssueList))
-        case false:
-            completion(Result.failure(.networkConnection))
-        }
-    }
-    
-    func executeDeleteIssue(issueID: Int, completion: @escaping (Result<String, NetworkError>) -> Void) {
-        switch success {
-        case true:
-            if let error = response.error {
-                completion(.success(error))
-            } else {
-                if let data = response.data {
-                    completion(.success(data))
-                }
-            }
-        case false:
-            completion(Result.failure(.networkConnection))
-        }
-    }
-    
-    func executeCloseIssue(issueIDs: [Int], completion: @escaping (Result<String, NetworkError>) -> Void) {
-        switch success {
-        case true:
-            if let error = response.error {
-                completion(.success(error))
-            } else {
-                if let data = response.data {
-                    completion(.success(data))
-                }
-            }
-        case false:
-            completion(Result.failure(.networkConnection))
-        }
     }
     
 }

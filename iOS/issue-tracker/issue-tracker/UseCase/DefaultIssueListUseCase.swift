@@ -79,4 +79,5 @@ class DefaultIssueListUseCase: IssueListUseCase {
                 }
             }.store(in: &subscriptions)
     }
+    
 }

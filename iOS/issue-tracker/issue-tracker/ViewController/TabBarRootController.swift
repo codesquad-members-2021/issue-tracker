@@ -12,7 +12,7 @@ class TabBarRootController: UITabBarController {
         bind()
     }
     
-    func configureViewModel() {
+    private func configureViewModel() {
         userInfoViewModel = UserInfoViewModel(userInfoUseCase: DefaultUserInfoUseCase())
     }
     

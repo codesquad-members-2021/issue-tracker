@@ -44,6 +44,7 @@
 		CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84DF0267B079C0006CC2E /* NetworkManager.swift */; };
 		CE6DEF82268345BC00D6121C /* ResponseBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */; };
 		CE6DEF8426834F7A00D6121C /* RequestBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */; };
+		CE6F0CAC268DB83D00DE2E3D /* IssueListUseCaseStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F0CAB268DB83D00DE2E3D /* IssueListUseCaseStub.swift */; };
 		CE71835C2671E63C008B287F /* IssueListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */; };
 		CE71835E2671EB78008B287F /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71835D2671EB78008B287F /* FilterTableViewCell.swift */; };
 		CE81A5E0268242D100D71888 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE81A5DF268242D100D71888 /* IssueListViewModel.swift */; };
@@ -151,6 +152,7 @@
 		CE5910C02681B8E100AA7691 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		CE6DEF81268345BC00D6121C /* ResponseBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseBodyDTO.swift; sourceTree = "<group>"; };
 		CE6DEF8326834F7A00D6121C /* RequestBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBodyDTO.swift; sourceTree = "<group>"; };
+		CE6F0CAB268DB83D00DE2E3D /* IssueListUseCaseStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListUseCaseStub.swift; sourceTree = "<group>"; };
 		CE71835B2671E63C008B287F /* IssueListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFilterViewController.swift; sourceTree = "<group>"; };
 		CE71835D2671EB78008B287F /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		CE81A5DF268242D100D71888 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				BD0814732681C8B600C3D6D7 /* JWTManagerStub.swift */,
 				BD0814752681C8DF00C3D6D7 /* TestDecodableDTO.swift */,
 				CE988CB0268D8ECA00304E53 /* UserInfoUseCaseStub.swift */,
+				CE6F0CAB268DB83D00DE2E3D /* IssueListUseCaseStub.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				CE5910C22681B95700AA7691 /* NetworkManager.swift in Sources */,
 				CE988CB9268DA50000304E53 /* ResponseBodyDTO.swift in Sources */,
 				CE988CB1268D8ECA00304E53 /* UserInfoUseCaseStub.swift in Sources */,
+				CE6F0CAC268DB83D00DE2E3D /* IssueListUseCaseStub.swift in Sources */,
 				CEAD45E8268C5C0E0076D765 /* EndPoint.swift in Sources */,
 				CEBF141426788D910009BB75 /* JWTManagerTest.swift in Sources */,
 				CE988CB5268D903700304E53 /* IssueListViewModelTest.swift in Sources */,

@@ -30,7 +30,7 @@ class IssueListViewController: UIViewController {
         configureTableView()
     }
     
-    func configureViewModel() {
+    private func configureViewModel() {
         issueListViewModel = IssueListViewModel(issueListUseCase: DefaultIssueListUseCase())
     }
     
