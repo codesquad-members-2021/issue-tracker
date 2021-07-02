@@ -41,5 +41,8 @@ export type FilterPropsType = {
   value?: number[];
 };
 
-export type FilterSelectorType = 'milestoneList' | 'labelList' | 'assigneeList';
-//| 'authorList'| 'assigneeList';
+export type FilterSelectorType =
+  | 'milestoneList'
+  | 'labelList'
+  | 'assigneeList'
+  | 'authorList';

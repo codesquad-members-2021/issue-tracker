@@ -29,10 +29,10 @@ const IssuesHeader = () => {
         </IssuesButton>
       </IssuesHeaderLeft>
       <IssuesHeaderRight>
+        <Filter filterType="assigneeList" />
+        <Filter filterType="labelList" />
         <Filter filterType="milestoneList" />
-        <Filter filterType="labelList" />
-        <Filter filterType="labelList" />
-        <Filter filterType="labelList" />
+        <Filter filterType="authorList" />
       </IssuesHeaderRight>
     </StyledIssuesHeader>
   );

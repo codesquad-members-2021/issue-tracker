@@ -19,12 +19,11 @@ const Header = () => {
     history.push('/');
   };
 
-
   return (
     <StyledHeader>
       <Logo />
       <StyledFlex>
-        <LogoutBtn onClick={clickHandler}>로그 아웃</LogoutBtn>
+        <LogoutBtn onClick={clickHandler}>로그아웃</LogoutBtn>
         <AuthorAvatar profileImg={decodedUserData?.avatar_url} size="L" />
       </StyledFlex>
     </StyledHeader>
@@ -35,11 +34,26 @@ export default Header;
 
 const StyledFlex = styled.div`
   display: flex;
+  align-items: center;
   margin-right: 30px;
 `;
 
-const LogoutBtn = styled(Button)`
+const LogoutBtn = styled.button`
+  all: unset;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  color: ${({ theme }) => theme.color.grayscale.body};
+  background-color: ${({ theme }) => theme.color.grayscale.inputBG};
+  border-radius: 5px;
   margin-right: 30px;
+  font-size: 0.875rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.grayscale.titleActive};
+    background-color: ${({ theme }) => theme.color.grayscale.line};
+    cursor: pointer;
+  }
 `;
 
 const StyledHeader = styled.div`
