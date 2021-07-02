@@ -34,8 +34,12 @@ const flexAlignItemsCenter = css`
   display: flex;
   align-items: center;
 `;
-
-const flexColum = css`
+const flexCenter =css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const flexColumn = css`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -96,11 +100,13 @@ const theme: DefaultTheme = {
     },
   },
   style: {
-    flexColum: `${flexColum}`,
+    flexColumn: `${flexColumn}`,
     upperWrapper: `${upperWrapper}`,
     lowerWrapper: `${lowerWrapper}`,
     flexSpaceBetween: `${flexSpaceBetween}`,
     flexAlignItemsCenter: `${flexAlignItemsCenter}`,
+    flexCenter: `${flexCenter}`,
+  
   },
 };
 

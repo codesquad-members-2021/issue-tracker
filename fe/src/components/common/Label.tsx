@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { labelType } from 'types/issueType';
+import { LabelType } from 'types/issueType';
 
-const Label = ({ title, colorCode, textColor }: labelType) => {
+const Label = ({ title, labelColor, textColor }: LabelType) => {
   return (
-    <StyledLabel aria-controls={textColor} backgroundColor={colorCode}>
+    <StyledLabel aria-controls={textColor} backgroundColor={labelColor}>
       {title}
     </StyledLabel>
   );
@@ -12,13 +12,20 @@ const Label = ({ title, colorCode, textColor }: labelType) => {
 export default Label;
 
 const StyledLabel = styled.div<{ backgroundColor: string }>`
-  border-radius: 15px;
+  ${({ theme }) => theme.style.flexAlignItemsCenter}
+  width: fit-content;
+  height: 1.75rem;
+  border-radius: ${({ theme }) => theme.border.radius.XL};
   background-color: ${({ backgroundColor }) => backgroundColor};
-  font-size: 0.3rem;
-  margin-left: 1rem;
-  padding: 0.2rem 0.9rem;
+  font-size: ${({ theme }) => theme.fontSize.S};
+  padding: 0 1rem;
   font-weight: 600;
-  &[aria-controls='white'] {
-    color: white;
+
+  &[aria-controls='light'] {
+    color: ${({ theme }) => theme.color.grayscale.offWhite};
+  }
+
+  &[aria-controls='dark'] {
+    color: ${({ theme }) => theme.color.grayscale.titleActive};
   }
 `;

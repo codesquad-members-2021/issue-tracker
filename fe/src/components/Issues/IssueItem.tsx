@@ -1,14 +1,10 @@
-import { Checkbox } from '@material-ui/core';
-import { ReactComponent as Open } from 'icons/openIssue.svg';
-import { ReactComponent as Close } from 'icons/closeIssue.svg';
-import { ReactComponent as Milestone } from 'icons/openMilestone.svg';
 import styled from 'styled-components';
 import { IssueItemType } from 'types/issueType';
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import IssueItemLeft from './IssueItemLeft';
 
 const IssueItem = ({
-  isOpen,
+  id,
   title,
   labeList,
   issueNumber,
@@ -19,14 +15,10 @@ const IssueItem = ({
   return (
     <StyledIssueItem>
       <IssueItemLeft
-        {...{ title, labeList, issueNumber, createdTime, milestoneTitle }}
+        {...{ id, title, labeList, issueNumber, createdTime, milestoneTitle }}
       />
       <IssueItemRight>
-        <AuthorAvatar
-          name={author.name}
-          profileImg={author.profileImg}
-          size="S"
-        />
+        <AuthorAvatar profileImg={author.profileImg} size="S" />
       </IssueItemRight>
     </StyledIssueItem>
   );

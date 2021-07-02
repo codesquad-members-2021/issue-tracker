@@ -1,18 +1,48 @@
-import { TextField } from '@material-ui/core';
-import AuthorAvatar from 'components/common/AuthorAvatar';
-import CommentInput from 'components/common/CommentInput';
-import IssueTitleInput from 'components/common/IssueTitleInput';
+import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import AuthorAvatar from 'components/common/AuthorAvatar';
+import CommentTextarea from 'components/common/CommentTextarea';
+import IssueTitleInput from 'components/common/IssueTitleInput';
+import Markdown from 'components/common/Markdown';
+
+import { newIssuesContentAtom } from 'stores/issueStore';
+import { decodedUserDataAtom } from 'stores/userStore';
+
 const NewIssueLeft = () => {
+  const [newIssuesContent, setNewIssuesContent] =
+    useRecoilState(newIssuesContentAtom);
+  const loginUser = useRecoilValue(decodedUserDataAtom);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewIssuesContent((state) => ({
+      ...state,
+      description: e.target.value,
+    }));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewIssuesContent((state) => ({
+      ...state,
+      title: e.target.value,
+    }));
+  };
+
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>
-        <AuthorAvatar size="L" name="eamon" />
-        <IssueTitleInput />
+        <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
+        <IssueTitleInput
+          handleChange={handleInputChange}
+          value={newIssuesContent.title}
+        />
       </NewIssueTitle>
       <StyledCommentInput>
-        <CommentInput />
+        <CommentTextarea
+          value={newIssuesContent.description}
+          handleChange={handleChange}
+        />
       </StyledCommentInput>
     </StyledNewIssueLeft>
   );
@@ -25,7 +55,7 @@ const StyledCommentInput = styled.div`
   padding-left: 3.6rem;
 `;
 const StyledNewIssueLeft = styled.div`
-  ${({ theme }) => theme.style.flexColum}
+  ${({ theme }) => theme.style.flexColumn}
   width: 75%;
 `;
 

@@ -4,17 +4,11 @@ import styled from 'styled-components';
 const AuthorAvatar = ({
   size,
   profileImg,
-  name,
 }: {
   size: 'L' | 'S';
-  name: string;
   profileImg?: string | undefined;
 }) => {
-  return (
-    <CustomAvatar alt={name} aria-controls={size} src={profileImg}>
-      {profileImg ? null : name[0].toUpperCase()}
-    </CustomAvatar>
-  );
+  return <CustomAvatar aria-controls={size} src={profileImg} />;
 };
 
 export default AuthorAvatar;

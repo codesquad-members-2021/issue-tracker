@@ -1,14 +1,23 @@
 import { Button } from '@material-ui/core';
-import { createRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
+import { ReactComponent as PlusIconSvg } from 'icons/plus.svg';
 import Popover from '@material-ui/core/Popover';
 import { FilterPropsType } from 'types/filterType';
+import { useRecoilValue } from 'recoil';
+import { filterSelector } from 'stores/filterStore';
+import { getTitle } from 'utils/util';
 
-export default function Filter({ filterTitle, filterList }: FilterPropsType) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const ref = createRef();
+export default function Filter({
+  isPlus,
+  filterType,
+  value,
+  clickHandler,
+  setState,
+}: FilterPropsType) {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,10 +26,18 @@ export default function Filter({ filterTitle, filterList }: FilterPropsType) {
     setAnchorEl(null);
   };
 
+  const dataList = useRecoilValue(filterSelector);
   return (
     <>
       <FilterButton onClick={handleClick}>
-      {filterTitle} <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
+        {isPlus ? (
+          <PlusIcon />
+        ) : (
+          <>
+            {getTitle(filterType)}
+            <ArrowDownIcon aria-checked={Boolean(anchorEl)} />
+          </>
+        )}
       </FilterButton>
       <CustomMenu
         anchorOrigin={{
@@ -35,9 +52,15 @@ export default function Filter({ filterTitle, filterList }: FilterPropsType) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        ref={ref}
       >
-        <FilterList filterTitle={filterTitle} filterList={filterList} />
+        <FilterList
+          filterTitle={getTitle(filterType)}
+          filterList={dataList[filterType]}
+          value={value}
+          onClose={handleClose}
+          clickHandler={clickHandler}
+          setState={setState}
+        />
       </CustomMenu>
     </>
   );
@@ -50,7 +73,6 @@ const FilterButton = styled(Button)`
 `;
 
 const ArrowDownIcon = styled(ArrowDown)`
-
   &[aria-checked='true'] {
     transform: rotate(180deg);
   }
@@ -65,5 +87,11 @@ const CustomMenu = styled(Popover)`
   .MuiPaper-elevation8 {
     border-radius: 25px;
     background-color: ${({ theme }) => theme.color.grayscale.inputBG};
+  }
+`;
+
+const PlusIcon = styled(PlusIconSvg)`
+  path {
+    stroke: ${({ theme }) => theme.color.grayscale.label};
   }
 `;

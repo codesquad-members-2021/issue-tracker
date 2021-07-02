@@ -5,10 +5,11 @@ import FilterList from './FilterList';
 import { ReactComponent as ArrowDown } from 'icons/arrow-down.svg';
 import Popover from '@material-ui/core/Popover';
 const testArray = [
-  { description: '테스트필터1' },
-  { description: '테스트필터2' },
-  { description: '테스트필터3' },
-  { description: '테스트필터4' },
+  { id: 1, title: '열린 이슈' },
+  { id: 2, title: '내가 작성한 이슈' },
+  { id: 3, title: '나에게 할당된 이슈' },
+  { id: 4, title: '내가 댓글을 남긴 이슈' },
+  { id: 5, title: '닫힌 이슈' },
 ];
 
 export default function IssueFilter() {
@@ -42,7 +43,7 @@ export default function IssueFilter() {
         onClose={handleClose}
         ref={ref}
       >
-        <FilterList filterTitle="이슈" filterList={testArray} />
+        <FilterList onClose={handleClose}  filterTitle="이슈" filterList={testArray} />
       </CustomMenu>
     </>
   );
@@ -54,8 +55,12 @@ const FilterButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeight.bold2};
   border: 1px solid ${({ theme }) => theme.color.grayscale.line};
   box-shadow: none;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: ${({ theme }) => theme.border.radius.S};
+  border-bottom-left-radius: ${({ theme }) => theme.border.radius.S};
+  height: 2.5rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const ArrowDownIcon = styled(ArrowDown)`

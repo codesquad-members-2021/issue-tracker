@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
+import { CircularProgress } from '@material-ui/core';
 import qs from 'qs';
+
 import useAxios from 'hook/useAxios';
-import { useEffect } from 'react';
+import { getUrl } from 'utils/util';
 
 const OAuthPage = () => {
   const location = useLocation();
@@ -10,35 +13,35 @@ const OAuthPage = () => {
   const res = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const url = `${process.env.REACT_APP_API_URL}/api/login/auth?client=web&code=${res.code}`;
+  const url = getUrl.LOGIN(res.code);
   const { isSuccess, data } = useAxios(true, url, 'get');
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem('jwt', JSON.stringify(data));
+      localStorage.setItem('jwt', data.jwt);
       history.push('/issues');
     }
   });
 
   return (
     <Div>
-      {/* <CircularProgress /> */}
-      <span>로그인 중... 🤗</span>
+      <CircularProgress />
+      <div>로그인 중... 🤗</div>
     </Div>
   );
 };
 
 const Div = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  position: fixed;
+  padding-top: 20rem;
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   font-size: 3rem;
 
-  span {
-    margin-left: 1rem;
+  div {
+    margin-top: 2rem;
   }
 `;
 
