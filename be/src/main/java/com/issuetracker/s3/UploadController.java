@@ -18,7 +18,7 @@ public class UploadController {
 
     @PostMapping("/api/images")
     public String upload(@RequestParam("image") MultipartFile file) throws IOException {
-        return imageService.upload(file); // S3 bucket의 static/ 폴더를 지정한 것.
+        return imageService.upload(file);
     }
 
 
