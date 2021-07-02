@@ -61,6 +61,7 @@ export type MilestoneDataType = {
 
 export type UserDataType = {
   // 작성자, 담당자 공통
+  id?: number;
   user_id: number;
   name: string;
   avatar_url: string | undefined;

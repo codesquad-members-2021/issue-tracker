@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 import { ReactComponent as FileUploadIconSvg } from 'icons/file-upload.svg';
+import Markdown from './Markdown';
 
 interface CommentTextareaProps {
   value: string;
@@ -12,6 +13,10 @@ const CommentTextarea = ({ value, handleChange }: CommentTextareaProps) => {
     <Wrapper>
       <StyledCommentTextarea>
         <CustomTextField onChange={handleChange} value={value} />
+        <MarkDownPosition>
+          <Markdown string={value} />
+        </MarkDownPosition>
+
         <Label aria-checked={Boolean(value)}>코멘트를 입력하세요</Label>
       </StyledCommentTextarea>
       <FileUploadArea>
@@ -25,6 +30,19 @@ const CommentTextarea = ({ value, handleChange }: CommentTextareaProps) => {
 };
 
 export default CommentTextarea;
+const MarkDownPosition = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  overflow-y: scroll;
+  overflow-wrap: anywhere;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -64,6 +82,7 @@ const CustomTextField = styled.textarea`
   border: transparent;
   border-bottom: 1px dashed ${({ theme }) => theme.color.grayscale.line};
   resize: vertical;
+  padding-right: 50%;
   &:focus {
     background-color: ${({ theme }) => theme.color.grayscale.offWhite};
     border: 2px solid ${({ theme }) => theme.color.grayscale.line};

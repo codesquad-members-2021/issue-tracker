@@ -51,6 +51,7 @@ const NewIssuePage = () => {
       <Divider />
       <StyledDiv>
         <CustomButton onClick={clickHandler}>완료</CustomButton>
+        
       </StyledDiv>
     </>
   );

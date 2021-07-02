@@ -5,11 +5,11 @@ import { Divider } from '@material-ui/core';
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import Label from 'components/common/Label';
 import MilestoneBar from 'components/milestones/MilestoneBar';
-import { labelQuery } from 'stores/labelStore';
 import SidebarList from 'components/new-issue/SidebarList';
 
-import { openedMilestoneQuery } from 'stores/milestoneStore';
 import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
+import { openedMilestoneQuery } from 'stores/milestoneStore';
+import { labelQuery } from 'stores/labelStore';
 import { assigneeQuery } from 'stores/userStore';
 
 const NewIssueRight = () => {

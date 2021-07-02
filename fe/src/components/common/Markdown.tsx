@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 const Markdown = ({ string }: { string: string }) => {
+  const pipe =
+    (...fns: Function[]) =>
+    (value: any) =>
+      fns.reduce((acc, fn) => fn(acc), value);
   const checkHeader = (str: string) => {
     const check = str.match(/^[\#]+ |^[\>] /gi);
     if (check)
       return { key: check[0], str: str.replace(/^[\#]+ |^[\>] /gi, '') };
     else return { key: null, str: str };
   };
-  
+
   const headerParser = (key: string | null, str: string | JSX.Element) => {
     switch (key) {
       case '# ':
@@ -32,27 +36,30 @@ const Markdown = ({ string }: { string: string }) => {
   const emphasisParser = (str: string) => {
     const arr = str.match(/(\*{2,5})(.*?)\1/g);
     let res = [];
-    let temp;
     if (!arr) return str;
-    else {
-      temp = arr.map((str) => <b>{str.slice(2, -2)}</b>);
+    let sp = str.replace(/(\*{2,5})(.*?)\1/g, '\n').split('\n');
+    let j = 0;
+
+    for (let i = 0; i < sp.length; i++) {
+      if (!sp[i].length) {
+        res.push(<b>{arr[j]?.slice(2, -2)}</b>);
+        j++;
+      } else res.push(sp[i]);
     }
-    let sp  = str.replace(/(\*{2,5})(.*?)\1/g, '\n').split('\n');
-    let j =0;
-  for(let i =0; i<sp.length; i++) {
-    if(!sp[i].length){
-      res.push(temp[j])
-      j++
-    } else res.push(sp[i])
-  }
-    return <>{res.map((v) => v)}</>;
+    return <>{res}</>;
   };
 
+  // const checkHeader = (str: string) => [
+  //   str.match(/^[\#]+ |^[\>] /gi)?[0],
+  //   str.replace(/^[\#]+ |^[\>] /gi, ''),
+  // ];
   return (
     <>
       {string
         .split('\n')
-        .map((v) => headerParser(checkHeader(v).key, emphasisParser(checkHeader(v).str)))}
+        .map((v) =>
+          headerParser(checkHeader(v).key, emphasisParser(checkHeader(v).str))
+        )} 
     </>
   );
 };
@@ -65,3 +72,4 @@ const QuotationStyle = styled.div`
   width: 100%;
   padding: 1rem;
 `;
+
