@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddButton from "components/common/Button/BlueButtons";
 import API from "util/API";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import {
 	milestoneAddButtonFlagState,
 	milestoneUpdateState,
+	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
 import fetchData from "util/fetchData";
 
@@ -22,28 +23,29 @@ const MilestoneInput = ({
 		dueDate: dueDate,
 		description: description,
 	});
-	const setMilestoneAddButtonFlag = useSetRecoilState(
+	const [milestoneAddButtonFlag, setMilestoneAddButtonFlag] = useRecoilState(
 		milestoneAddButtonFlagState
 	);
+	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
 	const [update, forceUpdate] = useRecoilState(milestoneUpdateState);
-
 	const [titleInput, setTitleInput] = useState(title);
 	const [dateInput, setDateInput] = useState(dueDate);
 	const [descInput, setDescInput] = useState(description);
 
 	const putMilestone = async () => {
-		await fetchData(API.milestonesId(id), "PUT", inputData);
 		setMilestoneAddButtonFlag(false);
+		await fetchData(API.milestonesId(id), "PUT", inputData);
 		setEditMode(false);
 		forceUpdate();
 	};
 
 	const postMilestone = async () => {
-		await fetchData(API.milestones(), "POST", inputData);
 		setMilestoneAddButtonFlag(false);
+		setNavigatorAddBtnFlag(x => !x);
+		await fetchData(API.milestones(), "POST", inputData);
 	};
 
-	const handleTitleChange = (e) => {
+	const handleTitleChange = e => {
 		setTitleInput(e.target.value);
 		setInputData({
 			...inputData,
@@ -51,7 +53,7 @@ const MilestoneInput = ({
 		});
 	};
 
-	const handleDateChange = (e) => {
+	const handleDateChange = e => {
 		setDateInput(e.target.value);
 		setInputData({
 			...inputData,
@@ -59,15 +61,13 @@ const MilestoneInput = ({
 		});
 	};
 
-	const handleDescChange = (e) => {
+	const handleDescChange = e => {
 		setDescInput(e.target.value);
 		setInputData({
 			...inputData,
 			description: e.target.value,
 		});
 	};
-
-	console.log(editMode);
 
 	return (
 		<CardWrapper>

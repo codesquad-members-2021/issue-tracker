@@ -43,10 +43,15 @@ const Navigator = () => {
 	//Refactoring
 	//리렌더 2번 일어남
 	const handleClick = () => {
-		milestoneFlag
-			? setMilestoneAddBtnFlag(!milestoneAddBtnFlag)
-			: setLabelAddBtnFlag(!labelAddBtnFlag);
-		setAddButtonFlag(!addButtonFlag);
+		if (milestoneFlag) {
+			setMilestoneAddBtnFlag(!milestoneAddBtnFlag);
+			setLabelAddBtnFlag(false);
+			setAddButtonFlag(!addButtonFlag);
+		} else {
+			setLabelAddBtnFlag(!labelAddBtnFlag);
+			setMilestoneAddBtnFlag(false);
+			setAddButtonFlag(!addButtonFlag);
+		}
 	};
 
 	return (

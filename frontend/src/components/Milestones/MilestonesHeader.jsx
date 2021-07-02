@@ -33,7 +33,7 @@ export default MilestonesHeader;
 const Contents = styled.div`
 	display: flex;
 	justify-content: space-between;
-	width: 30%;
+	width: 20%;
 	align-items: center;
 `;
 

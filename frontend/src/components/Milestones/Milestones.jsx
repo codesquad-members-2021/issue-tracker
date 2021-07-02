@@ -5,14 +5,18 @@ import MilestoneInput from "./MilestoneInput";
 import {
 	milestoneAddButtonFlagState,
 	milestoneCountState,
+	labelAddButtonFlagState,
+	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import API from "util/API";
 import fetchData from "util/fetchData";
 
 const Milestones = () => {
-	const milestoneAddBtn = useRecoilValue(milestoneAddButtonFlagState);
 	const [milestone, setMilestone] = useState();
+	const milestoneAddBtn = useRecoilValue(milestoneAddButtonFlagState);
+	const setNavigatorAddBtn = useSetRecoilState(navigatorAddButtonFlagState);
+	const setLabelAddBtnFlag = useSetRecoilState(labelAddButtonFlagState);
 	const setMilestoneCount = useSetRecoilState(milestoneCountState);
 
 	const fetchMilestones = async () => {
@@ -20,6 +24,11 @@ const Milestones = () => {
 		setMilestone(milestones);
 		setMilestoneCount(milestones.length);
 	};
+
+	useEffect(() => {
+		setNavigatorAddBtn(false);
+		setLabelAddBtnFlag(false);
+	}, []);
 
 	useEffect(() => {
 		fetchMilestones();
@@ -30,11 +39,11 @@ const Milestones = () => {
 			{milestoneAddBtn ? (
 				<>
 					<MilestoneInput />
-					<MilestonesHeader />
 				</>
 			) : (
 				<></>
 			)}
+			<MilestonesHeader />
 			{milestone &&
 				milestone.map((milestone, i) => (
 					<MilestoneCard key={i} data={milestone} />

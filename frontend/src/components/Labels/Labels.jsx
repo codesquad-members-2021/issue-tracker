@@ -10,14 +10,23 @@ import {
 	labelAddButtonFlagState,
 	labelCountState,
 	labelUpdateState,
+	milestoneAddButtonFlagState,
+	navigatorAddButtonFlagState,
 } from "RecoilStore/Atoms";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 
 const Labels = () => {
 	const [initialData, setLabelInitialData] = useRecoilState(labelInitialData);
 	const labelAddBtnFlag = useRecoilValue(labelAddButtonFlagState);
 	const [labelCount, setLabelCount] = useRecoilState(labelCountState);
 	const forceUpdate = useRecoilValue(labelUpdateState);
+	const setMilestoneAddBtnFlag = useSetRecoilState(milestoneAddButtonFlagState);
+	const setNavigatorAddBtnFlag = useSetRecoilState(navigatorAddButtonFlagState);
+
+	useEffect(() => {
+		setNavigatorAddBtnFlag(false);
+		setMilestoneAddBtnFlag(false);
+	}, []);
 
 	const getLabelData = async () => {
 		const { labels } = await fetchData(API.labels(), "GET");
