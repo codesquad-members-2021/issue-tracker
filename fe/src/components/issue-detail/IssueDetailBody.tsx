@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { NewIssuesIdQuery } from 'stores/NewIssuesSideStore';
 import axios from 'axios';
-import { Box } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import NewIssueRight from 'components/new-issue/NewIssueRight';
@@ -9,9 +9,10 @@ import AuthorAvatar from 'components/common/AuthorAvatar';
 import CreateButton from 'components/buttons/CreateButton';
 import Comment from 'components/issue-detail/Comment';
 import { ReactComponent as PlusSvg } from 'icons/plus.svg';
+import { ReactComponent as DeleteSvg } from 'icons/delete.svg';
 import CommentTextarea from 'components/common/CommentTextarea';
 
-import { clickedIssueIdAtom } from 'stores/issueStore';
+import { clickedIssueIdAtom, issuesUpdateAtom } from 'stores/issueStore';
 import { decodedUserDataAtom } from 'stores/userStore';
 import {
   commentDesctiptionAtom,
@@ -21,6 +22,8 @@ import {
   issueDetailQuery,
 } from 'stores/detailIssueStore';
 import { CommentType } from 'types/issueType';
+import { instanceWithAuth } from 'api';
+import { useHistory } from 'react-router-dom';
 
 const IssueDetailBody = () => {
   const clickedIssueId = useRecoilValue(clickedIssueIdAtom);
@@ -32,7 +35,10 @@ const IssueDetailBody = () => {
     commentDesctiptionAtom
   );
   const setCommentUpdate = useSetRecoilState(commentUpdateAtom);
+  const setIssuesUpdate = useSetRecoilState(issuesUpdateAtom);
   const setId = useSetRecoilState(NewIssuesIdQuery);
+  const history = useHistory();
+
   const issueDescription = {
     // 코멘트처럼 생겼지만 사실 이슈의 본문
     id: issueAuthorId,
@@ -44,12 +50,15 @@ const IssueDetailBody = () => {
     description: issueDetailData.description,
     createdTime: issueDetailData.createdTime,
   };
+
   console.log(issueDescription.id);
+
   setId({
     labelList: [2],
     assigneeList: [2],
     milestoneList: [],
   });
+
   const newCommentHandler = () => {
     const token = localStorage.getItem('jwt');
     (async function () {
@@ -68,6 +77,7 @@ const IssueDetailBody = () => {
       setCommentDesctiption('');
     })();
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setCommentDesctiption(e.target.value);
   // useEffect(() => {
@@ -79,6 +89,24 @@ const IssueDetailBody = () => {
   //     });
   //   };
   // }, []);
+
+  const handleClickDeleteIssue = () => {
+    (async () => {
+      try {
+        await instanceWithAuth.patch(
+          `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}`,
+          {
+            deleted: true,
+          }
+        );
+        setIssuesUpdate((cur) => ++cur);
+        history.push('/issues');
+      } catch (error) {
+        console.error('이슈 삭제 요청 실패');
+      }
+    })();
+  };
+
   return (
     <Box display="flex">
       <CommentArea>
@@ -114,6 +142,14 @@ const IssueDetailBody = () => {
       </CommentArea>
 
       <NewIssueRight />
+      {/* NesIssueRight의 width가 25%로 되어 있어 양쪽파일의 수정이 필요 */}
+      <Button
+        startIcon={<DeleteIcon />}
+        color="secondary"
+        onClick={handleClickDeleteIssue}
+      >
+        이슈 삭제
+      </Button>
     </Box>
   );
 };
@@ -152,17 +188,12 @@ const NewCommentButtonArea = styled.div`
   justify-content: flex-end;
 `;
 
-const AssignArea = styled.section`
-  width: 30%;
-  height: 400px;
-  margin-left: 2rem;
-  background-color: #b1b1b1;
-`;
-
 const PlusIcon = styled(PlusSvg)`
   path {
     stroke: ${({ theme }) => theme.color.grayscale.offWhite};
   }
 `;
+
+const DeleteIcon = styled(DeleteSvg)``;
 
 export default IssueDetailBody;
