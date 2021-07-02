@@ -28,7 +28,7 @@ public class ImageService {
     @Value("${cloud.aws.s3.bucket.url}")
     private String defaultUrl;
 
-    public String upload(MultipartFile file)  throws IOException {
+    public ImageUrlResponseDto upload(MultipartFile file)  throws IOException {
         ObjectMetadata data = new ObjectMetadata();
         data.setContentType(file.getContentType());
         data.setContentLength(file.getSize());
@@ -44,7 +44,7 @@ public class ImageService {
         s3client.putObject(bucket, imageName, file.getInputStream(), data);
 
         String urlForMarkdown = defaultUrl + "/" + imageName;
-        return urlForMarkdown;
+        return new ImageUrlResponseDto(urlForMarkdown);
     }
 
     private String getImageName(MultipartFile file) {

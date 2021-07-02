@@ -32,7 +32,6 @@ public class LoginController {
         String secretId = null;
         String redirectUri = null;
 
-        // TODO: iOS 파트 추가//
         if (client.equals("ios")) {
             accessTokenUri = oauthUtil.getUriForAccesTokenIos(code);
             clientId = oauthUtil.getClientIdIos();

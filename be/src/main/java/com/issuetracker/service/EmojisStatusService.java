@@ -6,6 +6,7 @@ import com.issuetracker.dto.EmojisStatusDto;
 import com.issuetracker.dto.ResponseStatusDto;
 import com.issuetracker.repository.EmojisStatusRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

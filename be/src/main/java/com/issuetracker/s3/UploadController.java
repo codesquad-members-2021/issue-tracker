@@ -17,9 +17,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/images")
-    public String upload(@RequestParam("image") MultipartFile file) throws IOException {
+    public ImageUrlResponseDto upload(@RequestParam("image") MultipartFile file) throws IOException {
         return imageService.upload(file);
     }
-
-
 }
