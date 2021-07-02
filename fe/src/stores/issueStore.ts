@@ -36,9 +36,15 @@ export const totalCountOfIssue = selector<IssuesCountType>({
   },
 });
 
+export const issuesUpdateAtom = atom<number>({
+  key: 'issuesUpdateAtom',
+  default: 0,
+});
+
 export const issuesQuery = selector<IssueItemType[]>({
   key: 'issuesQuery',
   get: async ({ get }) => {
+    get(issuesUpdateAtom);
     get(labelUpdateAtom);
     get(milestoneUpdateAtom);
     const token = localStorage.getItem('jwt');
