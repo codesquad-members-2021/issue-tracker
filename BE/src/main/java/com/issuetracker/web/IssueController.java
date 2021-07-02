@@ -30,7 +30,7 @@ public class IssueController {
     }
 
     @GetMapping
-    public IssuesResponseDTO view(FilterRequestDTO filterRequest, @PageableDefault(size = 25, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
+    public IssuesResponseDTO view(FilterRequestDTO filterRequest, @PageableDefault(size = 2, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
         logger.debug("모든 이슈 조회");
         return issueQueryService.filterIssues(filterRequest, pageable);
     }

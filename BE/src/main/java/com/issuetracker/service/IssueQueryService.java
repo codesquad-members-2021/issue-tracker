@@ -10,7 +10,10 @@ import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
 import com.issuetracker.web.dto.response.*;
 import com.issuetracker.web.dto.vo.Count;
 import com.issuetracker.web.dto.vo.Status;
+import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +43,8 @@ public class IssueQueryService {
         List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable).stream()
                 .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
                 .collect(Collectors.toList());
-        return IssuesResponseDTO.of(count, issues);
+        int totalPages = 1;
+        return IssuesResponseDTO.of(count, issues, totalPages);
     }
 
     public IssuesResponseDTO filterIssues(FilterRequestDTO filterRequest, Pageable pageable) {
@@ -50,10 +54,13 @@ public class IssueQueryService {
                 .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), filterRequest, pageable))
                 .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), filterRequest, pageable))
                 .build();
-        List<IssueResponseDTO> issues = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest, pageable).stream()
+        QueryResults<Issue> issueQueryResults = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest, pageable);
+        Page<Issue> page = new PageImpl<>(issueQueryResults.getResults(), pageable, issueQueryResults.getTotal());
+        List<IssueResponseDTO> issues = issueQueryResults.getResults().stream()
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
                 .collect(Collectors.toList());
-        return IssuesResponseDTO.of(count, issues);
+        int totalPages = page.getTotalPages();
+        return IssuesResponseDTO.of(count, issues, totalPages);
     }
 
     public IssueFormResponseDTO getIssueForm() {

@@ -4,6 +4,7 @@ import com.issuetracker.web.dto.vo.Count;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,13 @@ public class IssuesResponseDTO {
 
     private final Count count;
     private final List<IssueResponseDTO> issues;
+    private final int totalPages;
 
-    public static IssuesResponseDTO of(Count count, List<IssueResponseDTO> issues) {
+    public static IssuesResponseDTO of(Count count, List<IssueResponseDTO> issues, int totalPages) {
         return IssuesResponseDTO.builder()
                 .count(count)
                 .issues(issues)
+                .totalPages(totalPages)
                 .build();
     }
 
