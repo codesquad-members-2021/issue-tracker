@@ -8,14 +8,6 @@ import java.util.List;
 
 public interface IssueRepository extends JpaRepository<Issue, Long>, CustomizedIssueRepository {
 
-    List<Issue> findAllByIsOpenTrue();
-
-    List<Issue> findAllByIsOpenFalse();
-
-    long countAllByIsOpenTrue();
-
-    long countAllByIsOpenFalse();
-
     @Modifying
     @Query("update Issue i set i.isOpen = :isOpen where i.id in (:idList)")
     void updateStatusBy(boolean isOpen, List<Long> idList);

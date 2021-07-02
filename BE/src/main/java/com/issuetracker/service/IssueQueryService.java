@@ -42,8 +42,9 @@ public class IssueQueryService {
                 .closedIssue((int) issueDocumentRepository.countIssueDocumentByTitleAndIsOpen(searchRequestDTO.getQuery(), false))
                 .build();
         Page<IssueDocument> page = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable);
-        List<IssueResponseDTO> issues = issueDocumentRepository.findAllByTitleAndIsOpen(searchRequestDTO.getQuery(), Status.statusToBoolean(searchRequestDTO.getStatus()), pageable).stream()
+        List<IssueResponseDTO> issues = page
                 .map(issueDocument -> IssueResponseDTO.of(issueDocument, userService.userDocumentsToAssignees(issueDocument), labelService.labelDocumentsToLabelDTOs(issueDocument)))
+                .stream()
                 .collect(Collectors.toList());
         int totalPages = page.getTotalPages();
         return IssuesResponseDTO.of(count, issues, totalPages);
@@ -56,10 +57,10 @@ public class IssueQueryService {
                 .openedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(OPEN.getName(), filterRequest, pageable))
                 .closedIssue((int) issueRepository.countIssueFilteredByStatusAndSearchRequest(CLOSE.getName(), filterRequest, pageable))
                 .build();
-        QueryResults<Issue> issueQueryResults = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest, pageable);
-        Page<Issue> page = new PageImpl<>(issueQueryResults.getResults(), pageable, issueQueryResults.getTotal());
-        List<IssueResponseDTO> issues = issueQueryResults.getResults().stream()
+        Page<Issue> page = issueRepository.findAllIssuesFilteredBySearchRequest(filterRequest, pageable);
+        List<IssueResponseDTO> issues = page
                 .map(issue -> IssueResponseDTO.of(issue, userService.usersToAssignees(issue), labelService.labelsToLabelDTOs(issue)))
+                .stream()
                 .collect(Collectors.toList());
         int totalPages = page.getTotalPages();
         return IssuesResponseDTO.of(count, issues, totalPages);

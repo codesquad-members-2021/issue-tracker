@@ -31,19 +31,19 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
 
     private final JPAQueryFactory queryFactory;
 
-    public QueryResults<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest, Pageable pageable) {
-         return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest, pageable);
+    public Page<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest, Pageable pageable) {
+        return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest, pageable);
     }
 
-    private QueryResults<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
+    private Page<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
         JPAQuery<Issue> query = findIssuesByStatusAndSearchRequest(status, searchRequest, pageable);
         for (Sort.Order o : pageable.getSort()) {
             PathBuilder<Issue> pathBuilder = new PathBuilder<>(issue.getType(), issue.getMetadata());
             query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC,
                     pathBuilder.get(o.getProperty())));
         }
-        return query.fetchResults();
-
+        QueryResults<Issue> issueQueryResults = query.fetchResults();
+        return new PageImpl<>(issueQueryResults.getResults(), pageable, issueQueryResults.getTotal());
     }
 
     public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
