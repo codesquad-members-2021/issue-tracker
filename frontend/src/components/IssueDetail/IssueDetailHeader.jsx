@@ -4,14 +4,16 @@ import theme from "styles/theme";
 import EditButton from "components/common/Button/WhiteButtons";
 import CloseButton from "components/common/Button/WhiteButtons";
 import OpenLabel from "styles/OpenLabel";
-const IssueDetailHeader = () => {
+import getTimeStamp from "util/getTimeStamp";
+
+const IssueDetailHeader = ({ issueData }) => {
 	return (
 		<>
 			<IssueHeader>
 				<Top>
 					<Titles>
-						<div>타이틀</div>
-						<div className="issue_num">이슈번호</div>
+						<div>{issueData.title}</div>
+						<div className="issue_num">{issueData.id}</div>
 					</Titles>
 					<Buttons>
 						<ButtonWrapper>
@@ -38,9 +40,12 @@ const IssueDetailHeader = () => {
 						bgColor={theme.colors.light_blue}
 					/>
 					<div className="bottom_detail">
-						이 이슈가 n분 전에 n님에 의해 열렸습니다
+						이 이슈가 {getTimeStamp(issueData.createdAt)}에{" "}
+						{issueData.author.githubId}님에 의해 열렸습니다
 					</div>
-					<div className="bottom_detail">- 코멘트 n개</div>
+					<div className="bottom_detail">
+						- 코멘트 {issueData.comments.length}개
+					</div>
 				</Bottom>
 			</IssueHeader>
 		</>

@@ -94,7 +94,7 @@ export const milestoneCategoryState = atom({
 export const commentInputState = atom({
 	key: "commentInputState",
 	default: {
-		issueId: null,
+		issueId: "",
 		content: "",
 	},
 });

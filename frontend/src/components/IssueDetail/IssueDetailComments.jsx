@@ -2,11 +2,18 @@ import styled from "styled-components";
 import CommentInput from "components/common/CommentInput";
 import IssueDetailCommentCard from "components/IssueDetail/IssueDetailCommentCard";
 
-const IssueDetailComments = () => {
+const IssueDetailComments = ({ issueData }) => {
+	const commentList = issueData.comments.map(comment => (
+		<IssueDetailCommentCard
+			issueData={issueData}
+			commentData={comment}
+			key={comment.id}
+		/>
+	));
+
 	return (
 		<Wrapper>
-			<IssueDetailCommentCard />
-			<IssueDetailCommentCard />
+			{commentList}
 			<CommentInput isNewIssueMode={false} />
 		</Wrapper>
 	);

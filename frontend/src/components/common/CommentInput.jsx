@@ -4,7 +4,7 @@ import AddCommentButton from "components/common/Button/BlueButtons";
 import { ImgWrapper } from "styles/StyledLayout";
 import getUserInfo from "util/getUserInfo";
 import MDEditor from "@uiw/react-md-editor";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import API from "util/API";
 import fetchImage from "util/fetchImage";
 import { useParams } from "react-router-dom";
@@ -14,33 +14,31 @@ import { useRecoilState } from "recoil";
 import useDebounce from "hooks/useDebounce";
 
 const CommentInput = ({ isNewIssueMode }) => {
-	const userInfo = getUserInfo(); // const { nickName, imageUrl, gitHubId, iss, id, exp }
+	const userInfo = getUserInfo();
 	const issueId = useParams().id;
 	const [input, setInput] = useRecoilState(commentInputState);
-	const inputValue = useDebounce(
+
+	const inputTextCount = useDebounce(
 		input.content ? input.content.length : 0,
 		1000
 	);
 
-	// 최초 렌더링 input 초기화
 	useEffect(() => {
 		setInput({
-			...issueId,
+			issueId,
 			content: "",
 		});
 	}, []);
 
-	const handleInput = text => {
-		setInput({
-			...issueId,
+	const handleOnChange = text => {
+		setInput(input => ({
+			...input,
 			content: text,
-		});
+		}));
 	};
 
 	const submitComment = async () => {
-		console.log("comment posted");
-		const response = await fetchData(API.comment(), "POST", input);
-		console.log(response);
+		await fetchData(API.comment(), "POST", input);
 	};
 
 	const handleOnUpload = async e => {
@@ -50,7 +48,7 @@ const CommentInput = ({ isNewIssueMode }) => {
 		await formData.append("image", imgFile.files[0]);
 		const response = await fetchImage(API.image(), "POST", formData);
 		setInput({
-			...issueId,
+			...input,
 			content: response
 				? input.content + `![${response.image.url}](${response.image.url})`
 				: input.content,
@@ -70,11 +68,11 @@ const CommentInput = ({ isNewIssueMode }) => {
 						<CommentInputMD
 							height={400}
 							placeholder="이슈 코멘트 입력"
-							onChange={handleInput}
+							onChange={handleOnChange}
 							value={input.content}
 						/>
 					</CommentInputWrapper>
-					<TextCounter>글자 수 : {inputValue}</TextCounter>
+					<TextCounter>글자 수 : {inputTextCount}</TextCounter>
 					<Clip />
 					<input
 						className="img_file"

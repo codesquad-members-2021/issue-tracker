@@ -3,24 +3,27 @@ import { ImgWrapper } from "styles/StyledLayout";
 import { ReactComponent as Edit } from "images/edit.svg";
 import theme from "styles/theme";
 import MarkdownRenderer from "components/common/MarkdownRenderer";
+import getTimeStamp from "util/getTimeStamp";
 
-const IssueDetailCommentCard = ({ data }) => {
+const IssueDetailCommentCard = ({ issueData, commentData }) => {
+	console.log(commentData);
 	return (
 		<Wrapper>
 			<ImgWrapper size="44px">
-				<img
-					src="https://avatars.githubusercontent.com/u/56783350?v=4"
-					alt="유저이름"
-				/>
+				<img src={commentData.author.imageUrl} alt="유저이름" />
 			</ImgWrapper>
 			<CardWrapper>
 				<CardHeader>
 					<div>
-						<span className="author">작성자</span>
-						<span className="created_at">n분 전</span>
+						<span className="author">{commentData.author.githubId}</span>
+						<span className="created_at">
+							{getTimeStamp(commentData.createdAt)}
+						</span>
 					</div>
 					<div>
-						<span className="author_issue">작성자</span>
+						{issueData.author.id === commentData.author.id && (
+							<span className="author_issue">작성자</span>
+						)}
 						<span className="edit">
 							<Edit stroke={theme.grayScale.label} />
 							편집
@@ -29,7 +32,7 @@ const IssueDetailCommentCard = ({ data }) => {
 					</div>
 				</CardHeader>
 				<CardBody>
-					<MarkdownRenderer />
+					<MarkdownRenderer content={commentData.content} />
 				</CardBody>
 			</CardWrapper>
 		</Wrapper>

@@ -14,10 +14,10 @@ const markdown = `
 > 인용문
 `;
 
-const MarkdownRenderer = ({}) => {
+const MarkdownRenderer = ({ content }) => {
 	return (
 		<>
-			<MDEditor.Markdown source={markdown} />
+			<MDEditor.Markdown source={content} />
 		</>
 	);
 };
