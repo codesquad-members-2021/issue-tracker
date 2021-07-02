@@ -9,7 +9,7 @@ import UIKit
 
 class IssueListViewController: UIViewController {
 
-    @IBOutlet weak var issueTable: UITableView!
+    @IBOutlet weak var issueTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -76,7 +76,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="issueTable" destination="p5k-Wn-cPB" id="gka-md-axz"/>
+                        <outlet property="issueTableView" destination="p5k-Wn-cPB" id="gka-md-axz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

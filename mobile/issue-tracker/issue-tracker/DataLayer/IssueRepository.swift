@@ -1,12 +1,15 @@
 import Foundation
 import Combine
 
-struct IssueRepository {
+protocol IssuesUseCase {
+    func requestIssues(url: URL?, session: URLSession) -> AnyPublisher<Issues, NetworkError>
+}
 
-    func requestIssues() -> AnyPublisher<[Issues], NetworkError> {
-        guard let url = EndPoint().url(router: .issues) else {
+struct IssueRepository: IssuesUseCase {
+    func requestIssues(url: URL?, session: URLSession) -> AnyPublisher<Issues, NetworkError> {
+        guard let url = url else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
-        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
+        return session.dataTaskPublisher(for: URLRequest(url: url))
     }
 }
