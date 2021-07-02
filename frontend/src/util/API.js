@@ -1,6 +1,6 @@
 const API = {
 	default() {
-		return "http://13.125.197.4/api";
+		return "http://3.36.131.167/api";
 	},
 	login(code) {
 		return `${this.default()}/login/github/web?code=${code}`;
