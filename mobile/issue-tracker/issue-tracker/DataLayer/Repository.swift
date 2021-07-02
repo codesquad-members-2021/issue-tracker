@@ -27,30 +27,10 @@ final class Repository: NetworkEngine {
     }
 
     func requestUserAuth(to httpBody: Data) -> AnyPublisher<[String: String], NetworkError> {
-
         guard let url = endpoint.urlRequest(router: .auth, method: .post, body: httpBody) else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
-
         return self.session.dataTaskPublisher(for: url)
-            .mapError { _ in
-                NetworkError.invalidRequest
-            }
-            .flatMap { (data, response) -> AnyPublisher<[String: String], NetworkError> in
-                guard let httpresponse = response as? HTTPURLResponse else {
-                    return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
-                }
-
-                guard 200..<300 ~= httpresponse.statusCode else {
-                    return Fail(error: NetworkError.invalidStatusCode(httpresponse.statusCode)).eraseToAnyPublisher()
-                }
-
-                return Just(data)
-                    .decode(type: [String: String].self, decoder: JSONDecoder())
-                    .mapError { _ in
-                        NetworkError.failParsing
-                    }.eraseToAnyPublisher()
-            }.eraseToAnyPublisher()
     }
 
     func requestGithubLoginCode(from viewController: ASWebAuthenticationPresentationContextProviding) -> AnyPublisher<String, NetworkError> {
@@ -60,3 +40,5 @@ final class Repository: NetworkEngine {
         return ASWebAuthenticationSession.publisher(url: url, sheme: callbackURLScheme, context: viewController).eraseToAnyPublisher()
     }
 }
+
+

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class IssueListViewController: UIViewController {
+
+    @IBOutlet weak var issueTable: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
