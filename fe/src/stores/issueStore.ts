@@ -18,8 +18,10 @@ export const clickedIssueIdAtom = atom<number | null>({
 
 export const totalCountOfIssue = selector<IssuesCountType>({
   key: 'totalCountOfIssue',
-  get: async () => {
+  get: async ({ get }) => {
     const token = localStorage.getItem('jwt');
+    get(issuesQuery);
+
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/issues/count`,

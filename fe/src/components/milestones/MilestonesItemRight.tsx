@@ -18,8 +18,10 @@ const MilestonesItemRight = ({
   id: number;
   editClickHandler: (e: MouseEvent) => void;
 }) => {
-  const percent =
-    (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
+  const totalIssueCount = openedIssueCount + closedIssueCount;
+  const percent = totalIssueCount
+    ? Math.round((closedIssueCount / totalIssueCount) * 100 * 100) / 100 // 소수점 아래 두자리까지
+    : 0;
 
   const setMilestoneUpdate = useSetRecoilState(milestoneUpdateAtom);
   const [toggle, setToggle] = useState(false);
@@ -51,7 +53,7 @@ const MilestonesItemRight = ({
       <MilestonesItemSubtitle>
         <span>{percent}%</span>
         <span>
-          열린 이슈 {openedIssueCount} 닫힌이슈 {closedIssueCount}
+          열린 이슈 {openedIssueCount} &nbsp;&nbsp; 닫힌이슈 {closedIssueCount}
         </span>
       </MilestonesItemSubtitle>
     </StyledDiv>

@@ -14,7 +14,6 @@ const FilterItem = ({
   clickHandler,
 }: FilterItemPropsType) => {
   const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-    console.log(e.currentTarget.id);
     if (clickHandler) clickHandler(e);
 
     onClose();

@@ -14,7 +14,7 @@ const SidebarList = ({ type }: { type: SidebarListType }) => {
   const [newIssuesId, setNewIssuesId] = useRecoilState(NewIssuesIdQuery);
   const clickedIssueId = useRecoilValue(clickedIssueIdAtom);
   const setDetailIssueUpdate = useSetRecoilState(detailIssueUpdateAtom);
-  // const [toggle, setToggle] = 
+  // const [toggle, setToggle] =
   const clickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
     setNewIssuesId((state) => {
       const copiedData = deepCopied<NewIssuesIdType>(state);
@@ -26,7 +26,7 @@ const SidebarList = ({ type }: { type: SidebarListType }) => {
       return copiedData;
     });
     // useEffect(() => {
-     
+
     // }, [toggle])
     if (location.pathname.split('/')[2] !== 'new-issue') {
       (async () => {
@@ -35,11 +35,11 @@ const SidebarList = ({ type }: { type: SidebarListType }) => {
           labelList: { label: newIssuesId.labelList },
           assigneeList: { assignee: newIssuesId.assigneeList[0] },
         };
-        console.log(data[type])
+        // console.log(data[type])
         // try {
         //   await instanceWithAuth.patch(
         //     `${process.env.REACT_APP_API_URL}/api/issues/${clickedIssueId}`,
-        //     data[type] 
+        //     data[type]
         //   );
         // } catch (error) {
         //   console.error('이슈 수정 요청 실패');

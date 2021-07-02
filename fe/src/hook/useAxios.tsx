@@ -19,7 +19,6 @@ const createFetchOptions = (Method: Method, bodyData?: OptionData) => {
     headers: { 'Content-Type': 'application/json' },
   };
   if (bodyData) config.data = bodyData;
-  console.log(config);
   return config;
 };
 function useAxios(

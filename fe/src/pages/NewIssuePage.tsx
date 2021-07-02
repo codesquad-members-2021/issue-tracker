@@ -18,7 +18,6 @@ const NewIssuePage = () => {
   const contentReset = useResetRecoilState(newIssuesContentAtom);
   const IssuesId = useRecoilValue(NewIssuesIdQuery);
   const IssuesContent = useRecoilValue(newIssuesContentAtom);
-  console.log(IssuesId, IssuesContent);
 
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     (async function () {
@@ -51,7 +50,6 @@ const NewIssuePage = () => {
       <Divider />
       <StyledDiv>
         <CustomButton onClick={clickHandler}>완료</CustomButton>
-        
       </StyledDiv>
     </>
   );
@@ -65,9 +63,11 @@ const StyledDiv = styled.div`
   justify-content: flex-end;
 `;
 
-const NewIssueTitle = styled.span`
+const NewIssueTitle = styled.div`
+  margin-top: 3.75rem;
+  margin-bottom: 2rem;
   font-size: ${({ theme }) => theme.fontSize.XXL};
-  margin: 2rem;
+  color: ${({ theme }) => theme.color.grayscale.titleActive};
 `;
 
 const NewIssueContent = styled.div`

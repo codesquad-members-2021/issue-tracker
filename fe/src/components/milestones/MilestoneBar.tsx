@@ -5,8 +5,11 @@ const MilestoneBar = ({
   openedIssueCount,
   closedIssueCount,
 }: MilestoneBarType) => {
-  const percent =
-    (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100;
+  const totalIssueCount = openedIssueCount + closedIssueCount;
+  const percent = totalIssueCount
+    ? (closedIssueCount / (openedIssueCount + closedIssueCount)) * 100
+    : 0;
+
   return (
     <StyledMilestoneBar>
       <DefaultBar />

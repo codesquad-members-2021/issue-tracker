@@ -1,33 +1,38 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import AuthorAvatar from 'components/common/AuthorAvatar';
 import CommentTextarea from 'components/common/CommentTextarea';
 import IssueTitleInput from 'components/common/IssueTitleInput';
+import Markdown from 'components/common/Markdown';
 
 import { newIssuesContentAtom } from 'stores/issueStore';
-import Markdown from 'components/common/Markdown';
+import { decodedUserDataAtom } from 'stores/userStore';
 
 const NewIssueLeft = () => {
   const [newIssuesContent, setNewIssuesContent] =
     useRecoilState(newIssuesContentAtom);
+  const loginUser = useRecoilValue(decodedUserDataAtom);
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewIssuesContent((state) => ({
       ...state,
       description: e.target.value,
     }));
   };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewIssuesContent((state) => ({
       ...state,
       title: e.target.value,
     }));
   };
+
   return (
     <StyledNewIssueLeft>
       <NewIssueTitle>
-        <AuthorAvatar size="L" />
+        <AuthorAvatar size="L" profileImg={loginUser?.avatar_url} />
         <IssueTitleInput
           handleChange={handleInputChange}
           value={newIssuesContent.title}

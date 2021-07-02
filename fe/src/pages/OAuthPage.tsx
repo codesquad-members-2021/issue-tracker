@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
+import { CircularProgress } from '@material-ui/core';
 import qs from 'qs';
+
 import useAxios from 'hook/useAxios';
-import { useEffect } from 'react';
 import { getUrl } from 'utils/util';
 
 const OAuthPage = () => {
@@ -23,26 +25,23 @@ const OAuthPage = () => {
 
   return (
     <Div>
-      {/* <CircularProgress /> */}
-      <span>로그인 중... 🤗</span>
+      <CircularProgress />
+      <div>로그인 중... 🤗</div>
     </Div>
   );
 };
 
 const Div = styled.div`
-  background-color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  position: fixed;
-  top: 0;
+  padding-top: 20rem;
   width: 100%;
   height: 100vh;
   font-size: 3rem;
 
-  span {
-    margin-top: 5rem;
-    margin-left: 1rem;
+  div {
+    margin-top: 2rem;
   }
 `;
 
