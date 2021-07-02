@@ -19,7 +19,6 @@ public class IssueController {
 
     @GetMapping
     public List<IssueDto> viewAllIssues(IssueSearchCondition searchCondition) {
-//        return issueService.getAllIssues();
         return issueService.searchIssuesByConditions(searchCondition);
     }
 
