@@ -15,7 +15,6 @@ import static com.issuetracker.util.RowMappers.USER_ROW_MAPPER;
 @Repository
 public class UserRepository {
 
-    Logger logger = LoggerFactory.getLogger(UserRepository.class);
     private final JdbcTemplate jdbcTemplate;
 
     public UserRepository(DataSource dataSource) {
@@ -28,7 +27,6 @@ public class UserRepository {
     }
 
     public User findOneById(Long userId) {
-        logger.info("User Id :{}", userId);
         String query = "select id, name, avatar_url\n" +
                 "from user\n" +
                 "where id = ?";
@@ -41,10 +39,8 @@ public class UserRepository {
     }
 
     public boolean hasSameUserId(Long userId) {
-        logger.info("User Id :{}", userId);
         String query = "select exists (select id from user where id = ?) as success";
         return jdbcTemplate.queryForObject(query, Boolean.class, userId);
-//        return null;
     }
 
     public List<User> findAllAuthors() {

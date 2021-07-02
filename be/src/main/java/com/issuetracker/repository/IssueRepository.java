@@ -44,13 +44,6 @@ public class IssueRepository {
                 issue.getMilestoneId(),
                 issue.getAuthorUserId(),
                 issue.getNumber());
-
-        // TODO: issue에 딸려있는 Label insert 로직 추
-//        String queryForLabel = "insert into label (id, title, description, color_code, text_code) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        jdbcTemplate.update(query, issue.getId(),
-//                issue.getTitle(),
-//                issue.getDescription(),
-//                issue.getAssignee()
     }
 
     public long simpleSave(Issue issue) {
@@ -62,7 +55,6 @@ public class IssueRepository {
 
 
     public List<Label> findAllLabelsByIssueId(Long issueId) {
-        System.out.println(issueId);
         String query = "select lbl.id, lbl.title, lbl.description, lbl.color_code, lbl.font_light\n" +
                 "from issue iss\n" +
                 "inner join issue_has_label\n" +
@@ -205,4 +197,10 @@ public class IssueRepository {
         String query = "delete from issue_has_label where label_id = ?";
         jdbcTemplate.update(query, id);
     }
+
+//    public Long findIssueIdByMilestoneId(Long milestoneId) {
+//        String query = "select id from issue where milestone_id = ?";
+//        System.out.println(milestoneId);
+//        return jdbcTemplate.queryForObject(query, Long.class, milestoneId);
+//    }
 }

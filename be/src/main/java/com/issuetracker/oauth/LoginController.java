@@ -17,7 +17,6 @@ public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     private final Oauth oauthUtil;
-    // TODO: 추후 서비스 로직 분리 시 가져갈 것
     private final UserRepository userRepository;
 
     public LoginController(Oauth oauthUtil, UserRepository userRepository) {
@@ -33,7 +32,6 @@ public class LoginController {
         String secretId = null;
         String redirectUri = null;
 
-        // TODO: iOS 파트 추가//
         if (client.equals("ios")) {
             accessTokenUri = oauthUtil.getUriForAccesTokenIos(code);
             clientId = oauthUtil.getClientIdIos();

@@ -33,13 +33,6 @@ public class IssueService {
         this.commentRepository = commentRepository;
     }
 
-    //    public List<IssueDto> getAllIssues() {
-//        return issueRepository.findAllIssues().stream()
-//                .map(issue -> IssueDto.of(issue, issueRepository.findMilestoneTitleByIssueId(issue.getId()), issueRepository.findAllLabelsByIssueId(issue.getId()),
-//                        userRepository.findOneById(issue.getAuthorUserId()), userRepository.findOneById(issue.getAssignee())))
-//                .collect(Collectors.toList());
-//    }
-
     public ResponseStatusDto saveIssue(IssueRequestDto requestDto, User author) {
         int lastNumOfIssues = issueRepository.findAllIssues().size();
 
@@ -75,9 +68,9 @@ public class IssueService {
         Issue issue = issueRepository.findIssueByIssueId(id);
 
         MilestoneForIssueDetailDto milestoneDto = null;
-        logger.info("마일스톤아이디: {}", issue.getMilestoneId());
         if (issue.getMilestoneId() != 0) {
             milestoneDto = MilestoneForIssueDetailDto.of(
+                    issue.getMilestoneId(),
                     milestoneRepository.findMilestoneByMilestoneId(issue.getMilestoneId()),
                     issueRepository.countOpenedIssuesByMilestoneId(issue.getMilestoneId()),
                     issueRepository.countClosedIssuesByMilestoneId(issue.getMilestoneId())
@@ -93,7 +86,7 @@ public class IssueService {
 
         UserDto assignee = null;
         if (issue.getAssignee() != 0) {
-            UserDto.of(userRepository.findOneById(issue.getAssignee()));
+            assignee = UserDto.of(userRepository.findOneById(issue.getAssignee()));
         }
 
         if (assignee == null) {

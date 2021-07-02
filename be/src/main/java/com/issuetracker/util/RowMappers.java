@@ -1,11 +1,10 @@
 package com.issuetracker.util;
 
-import com.issuetracker.domain.Comment;
-import com.issuetracker.domain.Issue;
-import com.issuetracker.domain.Label;
-import com.issuetracker.domain.Milestone;
+import com.issuetracker.domain.*;
 import com.issuetracker.oauth.User;
 import org.springframework.jdbc.core.RowMapper;
+
+import java.time.LocalDate;
 
 public class RowMappers {
     public static final RowMapper<Issue> ISSUE_ROW_MAPPER = (rs, rowNum) -> {
@@ -44,7 +43,7 @@ public class RowMappers {
         milestone.setId(rs.getLong("id"));
         milestone.setTitle(rs.getString("title"));
         milestone.setDescription(rs.getString("description"));
-        milestone.setDueDate(rs.getTimestamp("due_date").toLocalDateTime().toLocalDate());
+        milestone.setDueDate(rs.getObject("due_date", LocalDate.class));
         milestone.setClosed(rs.getBoolean("closed"));
 
         return milestone;
@@ -72,5 +71,27 @@ public class RowMappers {
         comment.setUserId(rs.getLong("user_id"));
 
         return comment;
+    };
+
+    public static final RowMapper<SelectedEmoji> EMOJI_ISSUE_ROW_MAPPER = (rs, rowNum) -> {
+        SelectedEmoji selectedEmoji = new SelectedEmoji();
+
+        selectedEmoji.setThumbsUp(rs.getBoolean(":thumbs_up:"));
+        selectedEmoji.setHeartEyes(rs.getBoolean(":heart_eyes:"));
+        selectedEmoji.setIssueId(rs.getLong("issue_id"));
+        selectedEmoji.setUserId(rs.getLong("user_id"));
+
+        return selectedEmoji;
+    };
+
+    public static final RowMapper<SelectedEmoji> EMOJI_COMMENT_ROW_MAPPER = (rs, rowNum) -> {
+        SelectedEmoji selectedEmoji = new SelectedEmoji();
+
+        selectedEmoji.setThumbsUp(rs.getBoolean(":thumbs_up:"));
+        selectedEmoji.setHeartEyes(rs.getBoolean(":heart_eyes:"));
+        selectedEmoji.setCommentId(rs.getLong("comment_id"));
+        selectedEmoji.setUserId(rs.getLong("user_id"));
+
+        return selectedEmoji;
     };
 }

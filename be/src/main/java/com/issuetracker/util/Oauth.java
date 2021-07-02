@@ -29,9 +29,6 @@ public class Oauth {
     public static final String ALGORITHM_SECRET = "jwt.algorithm.secret";
     public static final String ISSUER = "jwt.issuer";
 
-    private String access_token;
-
-
     public String getClientIdIos() {
         return environment.getProperty(CLIENT_ID_iOS);
     }
