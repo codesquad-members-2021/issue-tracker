@@ -21,7 +21,7 @@
 		BF370DB32676689800E6C090 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
 		BF370DB4267668A100E6C090 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */; };
 		BF370DB62677208400E6C090 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF370DB52677208400E6C090 /* RepositoryTests.swift */; };
-		BF370DB726772F0700E6C090 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
+		BF370DB726772F0700E6C090 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* LoginRepository.swift */; };
 		BF370DB82677308000E6C090 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D52671C015002C6D80 /* Error.swift */; };
 		BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */; };
 		BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */; };
@@ -33,7 +33,7 @@
 		BF8C7F4D267A6131005ABB38 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BF8C7F4C267A6131005ABB38 /* KeychainSwift */; };
 		BF8C7F51267A810A005ABB38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6BD7266F4EE5000F3BC5 /* SceneDelegate.swift */; };
 		BF8C7F59267A81A0005ABB38 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
-		BF8C7F5D267A81C3005ABB38 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
+		BF8C7F5D267A81C3005ABB38 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* LoginRepository.swift */; };
 		BF8C7F5E267A81C3005ABB38 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
 		BF8C7F5F267A81C3005ABB38 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */; };
 		BF8C7F63267A81DC005ABB38 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
@@ -45,7 +45,7 @@
 		BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
-		BFB399D22671BE6B002C6D80 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* Repository.swift */; };
+		BFB399D22671BE6B002C6D80 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* LoginRepository.swift */; };
 		BFB399D42671BFDF002C6D80 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
 		BFB399D62671C015002C6D80 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D52671C015002C6D80 /* Error.swift */; };
 		BFB399D92671D7C7002C6D80 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D82671D7C7002C6D80 /* Auth.swift */; };
@@ -54,6 +54,8 @@
 		BFB733A326766620007A300E /* EndPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB733A226766620007A300E /* EndPointTests.swift */; };
 		BFCAE94F26789AD30093BC10 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAE94D26789A920093BC10 /* MockRepository.swift */; };
 		BFD21986268EA44D00FEF16C /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD21985268EA44D00FEF16C /* URLSession+Extension.swift */; };
+		BFD2198E268EC02800FEF16C /* Issues.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD2198D268EC02800FEF16C /* Issues.swift */; };
+		BFD21993268ED96300FEF16C /* IssueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD21992268ED96300FEF16C /* IssueRepository.swift */; };
 		BFE6F52C26761E5100CEC53F /* GithubConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,7 +103,7 @@
 		BFB399CA2671B387002C6D80 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryBoard+Extension.swift"; sourceTree = "<group>"; };
 		BFB399CF2671BDCB002C6D80 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
-		BFB399D12671BE6B002C6D80 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		BFB399D12671BE6B002C6D80 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		BFB399D32671BFDF002C6D80 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		BFB399D52671C015002C6D80 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		BFB399D82671D7C7002C6D80 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
@@ -109,6 +111,8 @@
 		BFB733A226766620007A300E /* EndPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointTests.swift; sourceTree = "<group>"; };
 		BFCAE94D26789A920093BC10 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
 		BFD21985268EA44D00FEF16C /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		BFD2198D268EC02800FEF16C /* Issues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issues.swift; sourceTree = "<group>"; };
+		BFD21992268ED96300FEF16C /* IssueRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubConfigurationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,7 +235,8 @@
 			children = (
 				BFB399D72671D7BA002C6D80 /* Model */,
 				BF0A6C17266F67DB000F3BC5 /* Network */,
-				BFB399D12671BE6B002C6D80 /* Repository.swift */,
+				BFB399D12671BE6B002C6D80 /* LoginRepository.swift */,
+				BFD21992268ED96300FEF16C /* IssueRepository.swift */,
 				BFCAE9502678A4B90093BC10 /* Mock */,
 			);
 			path = DataLayer;
@@ -282,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				BFB399D82671D7C7002C6D80 /* Auth.swift */,
+				BFD2198D268EC02800FEF16C /* Issues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,15 +486,17 @@
 				BFB399D62671C015002C6D80 /* Error.swift in Sources */,
 				BF0A6BD6266F4EE5000F3BC5 /* AppDelegate.swift in Sources */,
 				BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */,
+				BFD21993268ED96300FEF16C /* IssueRepository.swift in Sources */,
 				BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */,
 				BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */,
 				BFB399D92671D7C7002C6D80 /* Auth.swift in Sources */,
-				BFB399D22671BE6B002C6D80 /* Repository.swift in Sources */,
+				BFB399D22671BE6B002C6D80 /* LoginRepository.swift in Sources */,
 				BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */,
 				BFD21986268EA44D00FEF16C /* URLSession+Extension.swift in Sources */,
 				BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,
+				BFD2198E268EC02800FEF16C /* Issues.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +512,7 @@
 				BFB733A326766620007A300E /* EndPointTests.swift in Sources */,
 				BF370DB22676688E00E6C090 /* Endpoint.swift in Sources */,
 				BF370DB82677308000E6C090 /* Error.swift in Sources */,
-				BF370DB726772F0700E6C090 /* Repository.swift in Sources */,
+				BF370DB726772F0700E6C090 /* LoginRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +530,7 @@
 				BF8C7F8B267B2C06005ABB38 /* LoginUITests2.swift in Sources */,
 				BF8C7F5F267A81C3005ABB38 /* LoginViewModel.swift in Sources */,
 				BF8C7F51267A810A005ABB38 /* SceneDelegate.swift in Sources */,
-				BF8C7F5D267A81C3005ABB38 /* Repository.swift in Sources */,
+				BF8C7F5D267A81C3005ABB38 /* LoginRepository.swift in Sources */,
 				BF8C7F5E267A81C3005ABB38 /* LoginService.swift in Sources */,
 				BF8C7F69267A81DF005ABB38 /* Auth.swift in Sources */,
 			);
