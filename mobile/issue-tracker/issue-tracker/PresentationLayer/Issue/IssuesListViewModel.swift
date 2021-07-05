@@ -30,8 +30,8 @@ final class IssuesListViewModel {
                 if case .failure(let error) = complete {
                     self?.errorHandler?(error)
                 }
-            } receiveValue: { [weak self] (issues) in
-                self?.issuesList?(issues.issue)
+            } receiveValue: { [weak self] (issueList) in
+                self?.issuesList?(issueList.issues)
             }.store(in: &cancellable)
     }
 }
