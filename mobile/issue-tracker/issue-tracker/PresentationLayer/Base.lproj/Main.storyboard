@@ -13,7 +13,7 @@
         <!--이슈-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueList" id="BYZ-38-t0r" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="2011.594202898551" y="-176.11607142857142"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="O0J-Nd-VF7">
             <objects>
-                <tabBarController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="KCr-td-q4i" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="KCr-td-q4i" customClass="TabBarViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3wk-1O-Fn5">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

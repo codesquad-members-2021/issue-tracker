@@ -10,12 +10,19 @@ import UIKit
 class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueTableView: UITableView!
-
-    var vm = IssuesListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.fetchIssuesList()
+    }
+
+    func showIssueList(issues: [Issue]) {
+    }
+
+    func showError(from error: NetworkError) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: error.description)
+            self.present(alertController, animated: true)
+        }
     }
 
     @IBAction func addIssue(_ sender: UIButton) {

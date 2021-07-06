@@ -15,7 +15,7 @@ final class IssuesListViewModel {
     private var cancellable = Set<AnyCancellable>()
 
     var errorHandler: ((NetworkError) -> Void)?
-    var issuesList: (([Issue]) -> Void)?
+    var issues: (([Issue]) -> Void)?
 
     init(issuesUseCase: IssuesUseCase = IssueRepository(),
          endpoint: EndPointGenerator = EndPoint()) {
@@ -23,7 +23,7 @@ final class IssuesListViewModel {
         self.endpoint = endpoint
     }
 
-    func fetchIssuesList() {
+    func fetchIssueList() {
         issuesUseCase.requestIssues(url: endpoint.url(router: .issues),
                                     session: .shared)
             .sink { [weak self] (complete) in
@@ -31,7 +31,7 @@ final class IssuesListViewModel {
                     self?.errorHandler?(error)
                 }
             } receiveValue: { [weak self] (issueList) in
-                self?.issuesList?(issueList.issues)
+                self?.issues?(issueList.issues)
             }.store(in: &cancellable)
     }
 }
