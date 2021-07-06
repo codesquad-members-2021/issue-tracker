@@ -20,7 +20,7 @@ public class ImageController {
     private final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
     @PostMapping("/api/images")
-    public ImageResponseDTO upload(@RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public ImageResponseDTO upload(@RequestParam("image") MultipartFile multipartFile) {
         logger.debug("이미지 업로드 요청");
         return imageService.upload(multipartFile);
     }

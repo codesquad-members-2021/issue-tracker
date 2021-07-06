@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.issuetracker.domain.image.Image;
 import com.issuetracker.domain.image.ImageRepository;
+import com.issuetracker.exception.InputStreamFormationException;
 import com.issuetracker.web.dto.response.ImageResponseDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public ImageResponseDTO upload(MultipartFile multipartFile) throws IOException {
+    public ImageResponseDTO upload(MultipartFile multipartFile) {
         ObjectMetadata data = new ObjectMetadata();
         data.setContentType(multipartFile.getContentType());
         data.setContentLength(multipartFile.getSize());
@@ -49,7 +50,11 @@ public class ImageService {
                 .build();
 
         String imageName = getImageName(multipartFile);
-        s3client.putObject(bucket, imageName, multipartFile.getInputStream(), data);
+        try {
+            s3client.putObject(bucket, imageName, multipartFile.getInputStream(), data);
+        } catch (IOException e) {
+            throw new InputStreamFormationException();
+        }
         Image image = saveImageUrl(defaultUrl + "/" + imageName);
         return new ImageResponseDTO(image.getImageUrl());
     }
