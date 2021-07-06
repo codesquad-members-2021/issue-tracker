@@ -56,7 +56,14 @@ struct MilestoneDTO: Decodable {
     let content: String?
     let dueDate: String?
     let openIssue: Int?
-    let closeIssue: Int?
+    let closedIssue: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, content
+        case dueDate = "due_date"
+        case openIssue = "open_issue"
+        case closedIssue = "closed_issue"
+    }
     
 }
 

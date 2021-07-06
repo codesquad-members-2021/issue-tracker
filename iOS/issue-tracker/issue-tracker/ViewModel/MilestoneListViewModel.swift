@@ -5,12 +5,10 @@ class MilestoneListViewModel {
     
     @Published private var milestoneList: MilestoneList
     private let milestoneListUseCase: MilestoneListUseCase
-    private var subscriptions: Set<AnyCancellable>
     
     init() {
         self.milestoneList = MilestoneList(Milestones: [])
         self.milestoneListUseCase = MilestoneListUseCase()
-        self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchMilestoneList() {
@@ -26,6 +24,7 @@ class MilestoneListViewModel {
     
     func didUpdateMilestoneList() -> AnyPublisher<MilestoneList, Never> {
         return $milestoneList
+            .print()
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

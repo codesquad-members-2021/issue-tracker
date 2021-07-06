@@ -8,7 +8,6 @@ class IssueListViewModel {
     @Published private var resultMessage: String?
     private var filteredIssueList: IssueList
     private let defaultIssueListUseCase: IssueListUseCase
-    private var subscriptions: Set<AnyCancellable>
 
     init(issueListUseCase: IssueListUseCase) {
         self.issueList = IssueList(issues: [])
@@ -16,7 +15,6 @@ class IssueListViewModel {
         self.resultMessage = nil
         self.filteredIssueList = IssueList(issues: [])
         self.defaultIssueListUseCase = issueListUseCase
-        self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchIssueList() {

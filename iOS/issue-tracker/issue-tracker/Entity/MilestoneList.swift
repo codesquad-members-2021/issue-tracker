@@ -13,11 +13,11 @@ struct DetailMilestone {
     let content: String
     let dueDate: String
     let openIssue: Int
-    let closeIssue: Int
+    let closedIssue: Int
     
     func completePercent() -> Int {
-        let total = openIssue + closeIssue
-        return total == 0 ? 0 : openIssue / (openIssue + closeIssue)
+        let total = openIssue + closedIssue
+        return total == 0 ? 0 : Int((Float(closedIssue) / Float(total)) * 100)
     }
     
 }

@@ -6,7 +6,7 @@ struct MilestoneListResponseDTO: Decodable {
     let error: String?
     
     func toDomain() -> MilestoneList {
-        return .init(Milestones: data.map { DetailMilestone(id: $0.id, title: $0.title, content: $0.content ?? EmptyCase.content.description, dueDate: $0.dueDate ?? EmptyCase.dueDate.description, openIssue: $0.openIssue ?? 0, closeIssue: $0.closeIssue ?? 0) })
+        return .init(Milestones: data.map { DetailMilestone(id: $0.id, title: $0.title, content: $0.content ?? EmptyCase.content.description, dueDate: $0.dueDate ?? EmptyCase.dueDate.description, openIssue: $0.openIssue ?? 0, closedIssue: $0.closedIssue ?? 0) })
     }
     
 }

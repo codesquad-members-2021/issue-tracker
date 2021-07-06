@@ -5,12 +5,10 @@ class LabelListViewModel {
     
     @Published private var labelList: LabelList
     private let labelListUseCase: LabelListUseCase
-    private var subscriptions: Set<AnyCancellable>
     
     init() {
         self.labelList = LabelList(labels: [])
         self.labelListUseCase = LabelListUseCase()
-        self.subscriptions = Set<AnyCancellable>()
     }
     
     func fetchLabelList() {

@@ -21,7 +21,7 @@ struct JWTManager: JWTManageable {
         if jwt == "" {
             return false
         }
-        
+        print(jwt)
         let keyChainQuery: NSDictionary = [
             kSecClass: kSecClassCertificate,
             kSecValueData: jwt.data(using: .utf8, allowLossyConversion: false) ?? ""

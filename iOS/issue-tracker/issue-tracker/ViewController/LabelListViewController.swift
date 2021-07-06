@@ -41,7 +41,8 @@ class LabelListViewController: UIViewController {
     }
     
     @objc func showNewLabelView() {
-        // 레이블 추가 화면으로 전환하기
+        let vc = AdditionViewController(nibName: "AdditionViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
 }

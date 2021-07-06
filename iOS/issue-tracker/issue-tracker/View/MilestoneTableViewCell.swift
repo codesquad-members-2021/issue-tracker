@@ -30,7 +30,7 @@ class MilestoneTableViewCell: UITableViewCell, Identifying {
         content.text = detailMilestone.content
         dueDate.text = detailMilestone.dueDate
         openIssueLabel.text = "열린 이슈 \(detailMilestone.openIssue)개"
-        closeIssueLabel.text = "닫힌 이슈 \(detailMilestone.closeIssue)개"
+        closeIssueLabel.text = "닫힌 이슈 \(detailMilestone.closedIssue)개"
         percentLabel.text = "\(detailMilestone.completePercent())%"
     }
     
