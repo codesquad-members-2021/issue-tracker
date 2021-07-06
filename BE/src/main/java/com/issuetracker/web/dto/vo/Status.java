@@ -8,18 +8,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Status {
 
-    OPEN("open"),
-    CLOSE("close");
+    OPEN(true),
+    CLOSE(false);
 
-   private final String name;
+    private final boolean bool;
 
-    public static Boolean statusToBoolean(String status) {
-        if (status.equals(OPEN.name)) {
-            return true;
+    public static boolean statusToBoolean(String status) {
+        try {
+            return Status.valueOf(status.toUpperCase()).bool;
+        } catch (RuntimeException e) {
+            throw new InvalidSearchRequestException();
         }
-        if (status.equals(CLOSE.name)) {
-            return false;
-        }
-        throw new InvalidSearchRequestException();
+    }
+
+    public String getName() {
+        return this.toString().toLowerCase();
     }
 }
