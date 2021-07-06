@@ -8,6 +8,7 @@ import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.exception.CommentNotFoundException;
+import com.issuetracker.exception.IllegalUserAccessException;
 import com.issuetracker.web.dto.reqeust.*;
 import com.issuetracker.web.dto.response.CommentDTO;
 import com.issuetracker.web.dto.response.IssueNumberResponseDTO;
@@ -100,9 +101,12 @@ public class IssueCommandService {
         User user = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchCommentId(commentDTO.getId()) && comment.verifyAuthor(user))
+                .filter(comment -> comment.matchCommentId(commentDTO.getId()))
                 .findFirst()
                 .orElseThrow(CommentNotFoundException::new);
+        if (targetComment.verifyAuthor(user)) {
+            throw new IllegalUserAccessException();
+        }
         targetComment.update(commentDTO.getComment());
         synchronizeIssue(issueRepository.save(issue));
     }
@@ -111,9 +115,12 @@ public class IssueCommandService {
         User loginUser = userService.findUserById(userId);
         Issue issue = findIssueById(issueId);
         Comment targetComment = issue.getComments().stream()
-                .filter(comment -> comment.matchCommentId(commentId) && comment.verifyAuthor(loginUser))
+                .filter(comment -> comment.matchCommentId(commentId))
                 .findFirst()
                 .orElseThrow(CommentNotFoundException::new);
+        if (targetComment.verifyAuthor(loginUser)) {
+            throw new IllegalUserAccessException();
+        }
         issue.deleteComment(targetComment);
         synchronizeIssue(issueRepository.save(issue));
     }

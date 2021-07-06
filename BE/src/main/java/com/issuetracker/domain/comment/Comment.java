@@ -54,10 +54,7 @@ public class Comment extends BaseTimeEntity {
     }
 
     public boolean verifyAuthor(User user) {
-        if (author.equals(user)) {
-            return true;
-        }
-        throw new IllegalUserAccessException();
+        return author.equals(user);
     }
 
     public boolean matchCommentId(Long commentId) {

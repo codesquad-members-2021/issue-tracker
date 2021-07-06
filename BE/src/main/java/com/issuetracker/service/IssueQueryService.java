@@ -11,10 +11,8 @@ import com.issuetracker.web.dto.reqeust.SearchRequestDTO;
 import com.issuetracker.web.dto.response.*;
 import com.issuetracker.web.dto.vo.Count;
 import com.issuetracker.web.dto.vo.Status;
-import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
