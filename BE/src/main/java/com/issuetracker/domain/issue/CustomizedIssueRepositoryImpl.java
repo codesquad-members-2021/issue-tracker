@@ -31,8 +31,15 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
 
     private final JPAQueryFactory queryFactory;
 
+    @Override
     public Page<Issue> findAllIssuesFilteredBySearchRequest(FilterRequestDTO searchRequest, Pageable pageable) {
         return findAllIssuesFilteredByStatusAndSearchRequest(searchRequest.getStatus(), searchRequest, pageable);
+    }
+
+    @Override
+    public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
+        return findIssuesByStatusAndSearchRequest(status, searchRequest, pageable)
+                .fetchCount();
     }
 
     private Page<Issue> findAllIssuesFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
@@ -44,11 +51,6 @@ public class CustomizedIssueRepositoryImpl implements CustomizedIssueRepository 
         }
         QueryResults<Issue> issueQueryResults = query.fetchResults();
         return new PageImpl<>(issueQueryResults.getResults(), pageable, issueQueryResults.getTotal());
-    }
-
-    public long countIssueFilteredByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {
-        return findIssuesByStatusAndSearchRequest(status, searchRequest, pageable)
-                .fetchCount();
     }
 
     private JPAQuery<Issue> findIssuesByStatusAndSearchRequest(String status, FilterRequestDTO searchRequest, Pageable pageable) {

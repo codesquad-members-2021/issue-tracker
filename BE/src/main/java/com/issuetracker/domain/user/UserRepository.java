@@ -9,17 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, CustomizedUserRepository {
 
     Optional<User> findByUserName(String userName);
 
-    @Modifying
     @Query(value = "select * from user where id in (select distinct assignees_id from issue_assignees)",
             nativeQuery = true)
     List<User> findAssignees();
-
-    @Modifying
-    @Query(value = "select * from user where id in (select distinct author_id from issue)",
-            nativeQuery = true)
-    List<User> findAuthors();
 }
