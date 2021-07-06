@@ -8,7 +8,6 @@ import com.issuetracker.auth.service.JwtService;
 import com.issuetracker.domain.elasticsearch.IssueDocument;
 import com.issuetracker.domain.user.User;
 import com.issuetracker.domain.user.UserRepository;
-import com.issuetracker.exception.InvalidSearchRequestException;
 import com.issuetracker.exception.UserNotFoundException;
 import com.issuetracker.web.dto.response.AssigneesResponseDTO;
 import com.issuetracker.web.dto.response.AuthorsResponseDTO;
@@ -107,13 +106,6 @@ public class UserService {
 
     public UserResponseDTO getUserInfo(Long userId) {
         return UserResponseDTO.of(findUserById(userId));
-    }
-
-    public User findNullableUserByUserName(String userName) {
-        if (userName == null) {
-            return null;
-        }
-        return userRepository.findByUserName(userName).orElseThrow(InvalidSearchRequestException::new);
     }
 
     private boolean verifyUser(String userName) {

@@ -67,13 +67,6 @@ public class MilestoneService {
         return milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
     }
 
-    public Milestone findNullableMilestoneByTitle(String title) {
-        if (title == null) {
-            return null;
-        }
-        return milestoneRepository.findByTitle(title).orElse(new Milestone());
-    }
-
     public List<MilestoneDTO> findAllMilestoneDTOs() {
         return milestoneRepository.findAll().stream()
                 .map(milestone -> MilestoneDTO.of(milestone, false))
