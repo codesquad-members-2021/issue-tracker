@@ -60,6 +60,8 @@
 		BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CCC26938559004695E9 /* TabBarViewController.swift */; };
 		BFD75CD226939108004695E9 /* IssueListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD75CD126939108004695E9 /* IssueListViewController.storyboard */; };
 		BFD75CDD269453CF004695E9 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CDC269453CF004695E9 /* NavigationController.swift */; };
+		BFD75CE626945CBC004695E9 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CE526945CBC004695E9 /* IssueCell.swift */; };
+		BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CFE26949C4E004695E9 /* LabelCell.swift */; };
 		BFE6F52C26761E5100CEC53F /* GithubConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +123,8 @@
 		BFD75CCC26938559004695E9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BFD75CD126939108004695E9 /* IssueListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueListViewController.storyboard; sourceTree = "<group>"; };
 		BFD75CDC269453CF004695E9 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		BFD75CE526945CBC004695E9 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
+		BFD75CFE26949C4E004695E9 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubConfigurationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +281,7 @@
 		BF370D6326734B9300E6C090 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				BFD75CE126945BF8004695E9 /* View */,
 				BF0A6BD9266F4EE5000F3BC5 /* IssueListViewController.swift */,
 				BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */,
 				BFD75CD126939108004695E9 /* IssueListViewController.storyboard */,
@@ -324,6 +329,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFD75CE126945BF8004695E9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BFD75CE526945CBC004695E9 /* IssueCell.swift */,
+				BFD75CFE26949C4E004695E9 /* LabelCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,6 +507,7 @@
 				BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */,
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
 				BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */,
+				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
 				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
 				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
@@ -501,6 +516,7 @@
 				BF0A6BD6266F4EE5000F3BC5 /* AppDelegate.swift in Sources */,
 				BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */,
 				BFD21993268ED96300FEF16C /* IssueRepository.swift in Sources */,
+				BFD75CE626945CBC004695E9 /* IssueCell.swift in Sources */,
 				BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */,
 				BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */,
 				BFD2199B268EF7FC00FEF16C /* IssuesListViewModel.swift in Sources */,

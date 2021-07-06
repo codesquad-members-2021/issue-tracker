@@ -20,7 +20,7 @@ class IssueListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @IBOutlet weak var issueTableView: UITableView!
+    @IBOutlet weak var issueCollectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
