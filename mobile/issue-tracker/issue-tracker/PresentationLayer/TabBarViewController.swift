@@ -31,12 +31,16 @@ class TabBarViewController: UITabBarController {
     }
 
     private func createIssueListViewController() -> UINavigationController {
-        let issueListViewController = UIStoryboard().create(name: "IssueList", type: IssueListViewController.self)
-        let issueViewModel = IssuesListViewModel()
-        issueViewModel.issues = issueListViewController.showIssueList(issues:)
+        let issueViewModel = IssueListViewModel()
+        let issueListViewController: IssueListViewController = UIStoryboard(name: "IssueListViewController", bundle: nil)
+            .instantiateViewController(identifier: "IssueList") { coder in
+            return IssueListViewController(coder: coder, issueViewModel: issueViewModel)
+        }
+
+        issueViewModel.issues = issueListViewController.fetchIssueList(issues:)
         issueViewModel.errorHandler = issueListViewController.showError(from:)
 
-        return UINavigationController(rootViewController: issueListViewController)
+        return NavigationController(rootViewController: issueListViewController)
     }
 
     private func makeTabBarItem(title: String,

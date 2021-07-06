@@ -58,7 +58,8 @@
 		BFD21993268ED96300FEF16C /* IssueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD21992268ED96300FEF16C /* IssueRepository.swift */; };
 		BFD2199B268EF7FC00FEF16C /* IssuesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */; };
 		BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CCC26938559004695E9 /* TabBarViewController.swift */; };
-		BFD75CD226939108004695E9 /* IssueList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD75CD126939108004695E9 /* IssueList.storyboard */; };
+		BFD75CD226939108004695E9 /* IssueListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD75CD126939108004695E9 /* IssueListViewController.storyboard */; };
+		BFD75CDD269453CF004695E9 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CDC269453CF004695E9 /* NavigationController.swift */; };
 		BFE6F52C26761E5100CEC53F /* GithubConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,7 +119,8 @@
 		BFD21992268ED96300FEF16C /* IssueRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesListViewModel.swift; sourceTree = "<group>"; };
 		BFD75CCC26938559004695E9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		BFD75CD126939108004695E9 /* IssueList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueList.storyboard; sourceTree = "<group>"; };
+		BFD75CD126939108004695E9 /* IssueListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueListViewController.storyboard; sourceTree = "<group>"; };
+		BFD75CDC269453CF004695E9 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BFE6F52B26761E5100CEC53F /* GithubConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubConfigurationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +226,7 @@
 				BF0A6C10266F5F31000F3BC5 /* Login */,
 				BF370D6326734B9300E6C090 /* Issue */,
 				BF0A6BDB266F4EE5000F3BC5 /* Main.storyboard */,
+				BFD75CDC269453CF004695E9 /* NavigationController.swift */,
 				BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */,
 				BFD75CCC26938559004695E9 /* TabBarViewController.swift */,
 			);
@@ -276,7 +279,7 @@
 			children = (
 				BF0A6BD9266F4EE5000F3BC5 /* IssueListViewController.swift */,
 				BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */,
-				BFD75CD126939108004695E9 /* IssueList.storyboard */,
+				BFD75CD126939108004695E9 /* IssueListViewController.storyboard */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -440,7 +443,7 @@
 				BF0A6BE2266F4EE7000F3BC5 /* LaunchScreen.storyboard in Resources */,
 				BF0A6BDF266F4EE7000F3BC5 /* Assets.xcassets in Resources */,
 				BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */,
-				BFD75CD226939108004695E9 /* IssueList.storyboard in Resources */,
+				BFD75CD226939108004695E9 /* IssueListViewController.storyboard in Resources */,
 				BF0A6BDD266F4EE5000F3BC5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +505,7 @@
 				BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */,
 				BFD2199B268EF7FC00FEF16C /* IssuesListViewModel.swift in Sources */,
 				BFB399D92671D7C7002C6D80 /* Auth.swift in Sources */,
+				BFD75CDD269453CF004695E9 /* NavigationController.swift in Sources */,
 				BFB399D22671BE6B002C6D80 /* LoginRepository.swift in Sources */,
 				BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */,
 				BFD21986268EA44D00FEF16C /* URLSession+Extension.swift in Sources */,

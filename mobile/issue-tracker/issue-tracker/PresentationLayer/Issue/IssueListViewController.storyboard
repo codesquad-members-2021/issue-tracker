@@ -38,9 +38,6 @@
                                         <integer key="value" value="32"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addIssue:" destination="L8F-f7-Ygb" eventType="touchUpInside" id="yxF-Ng-Gd4"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="geR-eb-I5d"/>
@@ -76,12 +73,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="issueTableView" destination="TAW-Xg-5HK" id="TdM-Yx-Grw"/>
+                        <outlet property="issueTableView" destination="TAW-Xg-5HK" id="ll7-1J-aFm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rV7-uk-7eF" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2011.594202898551" y="-176.11607142857142"/>
+            <point key="canvasLocation" x="2017" y="-175"/>
         </scene>
     </scenes>
     <resources>

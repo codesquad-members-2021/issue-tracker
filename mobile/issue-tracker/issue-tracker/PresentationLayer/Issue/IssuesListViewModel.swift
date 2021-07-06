@@ -8,7 +8,11 @@
 import Foundation
 import Combine
 
-final class IssuesListViewModel {
+protocol IssueListProvider {
+    func fetchIssueList()
+}
+
+final class IssueListViewModel: IssueListProvider {
 
     private var issuesUseCase: IssuesUseCase
     private var endpoint: EndPointGenerator
