@@ -9,10 +9,6 @@ import UIKit
 
 class IssueCell: UICollectionViewCell {
 
-    static var identifier: String {
-        return String(describing: self)
-    }
-
     private var labelDataSource: LabelCollectionDataSource
 
     override init(frame: CGRect) {

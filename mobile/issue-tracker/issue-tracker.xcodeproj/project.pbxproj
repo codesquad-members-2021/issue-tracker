@@ -19,6 +19,7 @@
 		BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
 		BF0E36A22695AE0B00835E49 /* IssueListCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36A12695AE0B00835E49 /* IssueListCollectionDataSource.swift */; };
 		BF0E36AA2695C88600835E49 /* LabelCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36A92695C88600835E49 /* LabelCollectionDataSource.swift */; };
+		BF0E36C3269606ED00835E49 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */; };
 		BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D242695A6AE00834E33 /* IssueLabel.swift */; };
 		BF251D2A2695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D292695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift */; };
 		BF370DB22676688E00E6C090 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
@@ -105,6 +106,7 @@
 		BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		BF0E36A12695AE0B00835E49 /* IssueListCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionDataSource.swift; sourceTree = "<group>"; };
 		BF0E36A92695C88600835E49 /* LabelCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCollectionDataSource.swift; sourceTree = "<group>"; };
+		BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		BF251D242695A6AE00834E33 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		BF251D292695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		BF370DB52677208400E6C090 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */,
 				BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */,
 				BFD21985268EA44D00FEF16C /* URLSession+Extension.swift */,
+				BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,
 				BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
+				BF0E36C3269606ED00835E49 /* UICollectionViewCell+Extension.swift in Sources */,
 				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
 				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
 				BF0A6BDA266F4EE5000F3BC5 /* IssueListViewController.swift in Sources */,

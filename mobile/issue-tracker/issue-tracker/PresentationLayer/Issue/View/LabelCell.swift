@@ -9,10 +9,6 @@ import UIKit
 
 class LabelCell: UICollectionViewCell {
 
-    static var identifier: String {
-        return String(describing: self)
-    }
-
     private var issueLabel: IssueLabel = {
         var label = IssueLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
