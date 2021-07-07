@@ -37,7 +37,7 @@ class TabBarViewController: UITabBarController {
             return IssueListViewController(coder: coder, issueViewModel: issueViewModel)
         }
 
-        issueViewModel.issues = issueListViewController.fetchIssueList(issues:)
+        issueViewModel.issues = issueListViewController.fetchIssueList(issueList:)
         issueViewModel.errorHandler = issueListViewController.showError(from:)
 
         return NavigationController(rootViewController: issueListViewController)

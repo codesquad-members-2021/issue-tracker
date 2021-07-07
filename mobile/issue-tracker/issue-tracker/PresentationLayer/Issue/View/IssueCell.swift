@@ -9,6 +9,20 @@ import UIKit
 
 class IssueCell: UICollectionViewCell {
 
+    static var identifier: String {
+        return String(describing: self)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureUI()
+    }
+
     private var issueStackView: UIStackView = {
        var stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +64,7 @@ class IssueCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.heightAnchor.constraint(equalToConstant: 17).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 17).isActive = true
+        imageView.tintColor = .gray
         return imageView
     }()
 
@@ -65,18 +80,8 @@ class IssueCell: UICollectionViewCell {
         return collectionView
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configureUI()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configureUI()
-    }
-
     func configureUI() {
-        addSubview(issueStackView)
+        contentView.addSubview(issueStackView)
         issueStackView.addArrangedSubview(titleLable)
         issueStackView.addArrangedSubview(contentLabel)
         issueStackView.addArrangedSubview(milestoneStackView)
