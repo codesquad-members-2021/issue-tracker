@@ -76,9 +76,9 @@ class IssueCell: UICollectionViewCell {
     }()
 
     private var labelCollectionView: UICollectionView = {
-        var layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = .zero
-        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        var leftAlignFlowLayout = LeftAlignCollectionFlowLayout()
+        leftAlignFlowLayout.estimatedItemSize = .zero
+        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: leftAlignFlowLayout)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.identifier)
         return collectionView
