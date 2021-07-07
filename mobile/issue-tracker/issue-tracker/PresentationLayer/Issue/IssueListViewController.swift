@@ -68,10 +68,9 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout, UICollect
         let dummyCell = IssueCell(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width, height: esitmatedHeight))
         dummyCell.setIssue(to: issues[indexPath.row])
         dummyCell.layoutIfNeeded()
-
         let targetSize = CGSize(width: collectionView.frame.width * 0.9, height: UIView.layoutFittingCompressedSize.height)
-        let height = dummyCell.contentView.systemLayoutSizeFitting(targetSize).height
-
-        return CGSize(width: collectionView.frame.width * 0.9, height: height)
+        let dummyCellSizeFitHeight = dummyCell.contentView.systemLayoutSizeFitting(targetSize).height
+        return CGSize(width: collectionView.frame.width * 0.9,
+                      height: dummyCellSizeFitHeight + dummyCell.labelCollectionViewHeight)
     }
 }

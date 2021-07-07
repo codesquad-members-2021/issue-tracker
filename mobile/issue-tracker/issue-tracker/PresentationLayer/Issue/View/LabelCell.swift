@@ -9,10 +9,16 @@ import UIKit
 
 class LabelCell: UICollectionViewCell {
 
+    static var identifier: String {
+        return String(describing: self)
+    }
+
     private var issueLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 17)
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
         return label
     }()
 
@@ -27,10 +33,12 @@ class LabelCell: UICollectionViewCell {
     }
 
     func configure() {
-        addSubview(issueLabel)
+        contentView.addSubview(issueLabel)
 
-        issueLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        issueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        issueLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        issueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        issueLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        issueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
 
     func setLabel(label: String) {

@@ -75,12 +75,16 @@ class IssueCell: UICollectionViewCell {
         return milestoneName
     }()
 
-    var labelCollectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private var labelCollectionView: UICollectionView = {
+        var layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = .zero
+        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.identifier)
         return collectionView
     }()
 
-    func configureUI() {
+    private func configureUI() {
         contentView.addSubview(issueStackView)
         issueStackView.addArrangedSubview(titleLable)
         issueStackView.addArrangedSubview(contentLabel)
@@ -88,6 +92,9 @@ class IssueCell: UICollectionViewCell {
         milestoneStackView.addArrangedSubview(milestoneImage)
         milestoneStackView.addArrangedSubview(milestoneLable)
         issueStackView.addArrangedSubview(labelCollectionView)
+
+        labelCollectionView.delegate = self
+        labelCollectionView.dataSource = self
 
         issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -99,5 +106,46 @@ class IssueCell: UICollectionViewCell {
         titleLable.text = issue.title
         contentLabel.text = issue.content
         milestoneLable.text = issue.milestoneInfo.title
+        updateCollectionView(labels: issue.labels.labels)
+    }
+
+    var tempLabels: [Label] = []
+
+    private func updateCollectionView(labels: [Label]) {
+        tempLabels = labels
+        DispatchQueue.main.async { [weak self] in
+            self?.labelCollectionView.reloadData()
+        }
+    }
+
+    var labelCollectionViewHeight: CGFloat {
+        return labelCollectionView
+            .collectionViewLayout
+            .collectionViewContentSize
+            .height
+    }
+}
+
+extension IssueCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tempLabels.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier, for: indexPath) as? LabelCell else {
+            return .init()
+        }
+        cell.setLabel(label: tempLabels[indexPath.row].title)
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let tagSize = LabelCell()
+        tagSize.setLabel(label: tempLabels[indexPath.row].title)
+        tagSize.layoutIfNeeded()
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: UIView.layoutFittingCompressedSize.height)
+        let estimatedSize = tagSize.contentView.systemLayoutSizeFitting(targetSize)
+        return CGSize(width: estimatedSize.width,
+                      height: estimatedSize.height)
     }
 }
