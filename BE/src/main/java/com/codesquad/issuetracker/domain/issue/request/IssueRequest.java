@@ -31,8 +31,8 @@ public class IssueRequest {
     private Long milestoneId;
 
     @JsonProperty("label_id_list")
-    private ArrayList<Long> labelList;
+    private ArrayList<Long> labelList = new ArrayList<>();
 
     @JsonProperty("assignee_list")
-    private ArrayList<AssigneeRequest> assigneeList;
+    private ArrayList<AssigneeRequest> assigneeList = new ArrayList<>();
 }
