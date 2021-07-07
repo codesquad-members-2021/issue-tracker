@@ -11,38 +11,31 @@ struct IssueList: Decodable {
     let issues: [Issue]
 }
 
-struct Issue: Decodable {
+struct Issue: Codable {
     let issueId: Int
-    let milestoneInfo: MilestoneInfo
+    let milestoneInfo: MilestoneInfo?
     let title, content, status: String
-    let writer: Writer?
+    let writer: Writer
     let createdDateTime: String
-    let assignees: Assignees
-    let labels: Labels
+    let assignees: [Assignee]
+    let labels: [Label]
 }
 
-struct Assignees: Codable {
-    let users: [Writer]
+struct Assignee: Codable {
+    let id, name: String
+    let avatarUrl: String
 }
 
 struct Writer: Codable {
-    let id, name: String?
-    let profileImageUrl: String?
-    let emails: [String]?
-}
-
-struct Labels: Codable {
-    let labels: [Label]
+    let name: String
+    let avatarUrl: String
 }
 
 struct Label: Codable {
     let id: Int
-    let title: String
-    let description: String
-    let backgroundColorHexa: String
-    let textColorHexa: String
+    let title, description, backgroundColor, textColor: String
 }
 
 struct MilestoneInfo: Codable {
-    let title, description, dueDate: String
+    let title, description, status, dueDate: String
 }

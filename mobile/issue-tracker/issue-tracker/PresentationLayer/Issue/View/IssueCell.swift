@@ -51,7 +51,7 @@ class IssueCell: UICollectionViewCell {
     }()
 
     private lazy var milestoneStackView: UIStackView = {
-        var stack = UIStackView(arrangedSubviews: [self.milestoneImage, self.milestoneLable] )
+        var stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .fill
         stack.distribution = .fillProportionally
@@ -115,8 +115,18 @@ class IssueCell: UICollectionViewCell {
     func setIssue(to issue: Issue) {
         titleLable.text = issue.title
         contentLabel.text = issue.content
-        milestoneLable.text = issue.milestoneInfo.title
-        updateCollectionView(labels: issue.labels.labels)
+        showMileStone(with: issue.milestoneInfo)
+        updateCollectionView(labels: issue.labels)
+    }
+
+    private func showMileStone(with milestone: MilestoneInfo?) {
+        guard let milestone = milestone else {
+            milestoneStackView.isHidden = true
+            return
+        }
+        milestoneStackView.addArrangedSubview(milestoneImage)
+        milestoneStackView.addArrangedSubview(milestoneLable)
+        milestoneLable.text = milestone.title
     }
 
     private func updateCollectionView(labels: [Label]) {
