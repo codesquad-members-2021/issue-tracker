@@ -13,12 +13,16 @@ class IssueCell: UICollectionViewCell {
         return String(describing: self)
     }
 
+    private var labelDataSource: LabelCollectionDataSource
+
     override init(frame: CGRect) {
+        labelDataSource = LabelCollectionDataSource()
         super.init(frame: frame)
         configureUI()
     }
 
     required init?(coder: NSCoder) {
+        labelDataSource = LabelCollectionDataSource()
         super.init(coder: coder)
         configureUI()
     }
@@ -92,7 +96,7 @@ class IssueCell: UICollectionViewCell {
         issueStackView.addArrangedSubview(labelCollectionView)
 
         labelCollectionView.delegate = self
-        labelCollectionView.dataSource = self
+        labelCollectionView.dataSource = labelDataSource
 
         issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -107,10 +111,8 @@ class IssueCell: UICollectionViewCell {
         updateCollectionView(labels: issue.labels.labels)
     }
 
-    var tempLabels: [Label] = []
-
     private func updateCollectionView(labels: [Label]) {
-        tempLabels = labels
+        labelDataSource.updateLabels(labels)
         DispatchQueue.main.async { [weak self] in
             self?.labelCollectionView.reloadData()
         }
@@ -124,22 +126,12 @@ class IssueCell: UICollectionViewCell {
     }
 }
 
-extension IssueCell: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tempLabels.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier, for: indexPath) as? LabelCell else {
-            return .init()
-        }
-        cell.setLabel(label: tempLabels[indexPath.row].title)
-        return cell
-    }
-
+extension IssueCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tagSize = LabelCell()
-        tagSize.setLabel(label: tempLabels[indexPath.row].title)
+        labelDataSource.bringLabel(index: indexPath.row) { (label) in
+            tagSize.setLabel(label: label.title)
+        }
         tagSize.layoutIfNeeded()
         let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: UIView.layoutFittingCompressedSize.height)
         let estimatedSize = tagSize.contentView.systemLayoutSizeFitting(targetSize)
