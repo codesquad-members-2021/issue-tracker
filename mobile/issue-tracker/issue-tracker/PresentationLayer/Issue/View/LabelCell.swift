@@ -13,12 +13,13 @@ class LabelCell: UICollectionViewCell {
         return String(describing: self)
     }
 
-    private var issueLabel: UILabel = {
-        var label = UILabel()
+    private var issueLabel: IssueLabel = {
+        var label = IssueLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 17)
         label.layer.cornerRadius = 8
         label.clipsToBounds = true
+        label.backgroundColor = .gray
         return label
     }()
 

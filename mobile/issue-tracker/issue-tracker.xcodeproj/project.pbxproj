@@ -17,6 +17,7 @@
 		BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */; };
 		BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
 		BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
+		BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D242695A6AE00834E33 /* IssueLabel.swift */; };
 		BF370DB22676688E00E6C090 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BF370DB32676689800E6C090 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
 		BF370DB4267668A100E6C090 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */; };
@@ -99,6 +100,7 @@
 		BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		BF251D242695A6AE00834E33 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		BF370DB52677208400E6C090 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialViewController.swift; sourceTree = "<group>"; };
 		BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				BFD75CE526945CBC004695E9 /* IssueCell.swift */,
 				BFD75CFE26949C4E004695E9 /* LabelCell.swift */,
+				BF251D242695A6AE00834E33 /* IssueLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
 				BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */,
 				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,
+				BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
 				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
 				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
