@@ -23,12 +23,11 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
-        request.setAttribute("user", getDefaultUser());
+        request.setAttribute("user", getUserFromJWT(request));
         return true;
     }
 
-    private String validateAndReturnJWT(HttpServletRequest request){
+    private String validateAndReturnJWT(HttpServletRequest request) {
         String jwtToken = authorizationExtractor.extract(request, "Bearer");
         if (jwtToken.isEmpty()) {
             throw new TokenEmptyException();
@@ -40,7 +39,8 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
         return jwtToken;
     }
 
-    private User getUserFromJWT(final String jwtToken){
+    private User getUserFromJWT(HttpServletRequest request) {
+        final String jwtToken = validateAndReturnJWT(request);
         final User user = jwtProvider.getUser(jwtToken);
 
         log.debug("User info from JWT : {}", user);
@@ -48,7 +48,7 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
         return user;
     }
 
-    private User getDefaultUser(){
+    private User getDefaultUser() {
         return User.create(1L, "bibi", "bibi6666667");
     }
 }
