@@ -48,8 +48,8 @@ class IssueCell: UICollectionViewCell {
         return content
     }()
 
-    private var milestoneStackView: UIStackView = {
-        var stack = UIStackView()
+    private lazy var milestoneStackView: UIStackView = {
+        var stack = UIStackView(arrangedSubviews: [self.milestoneImage, self.milestoneLable] )
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .fill
         stack.distribution = .fillProportionally
@@ -89,8 +89,6 @@ class IssueCell: UICollectionViewCell {
         issueStackView.addArrangedSubview(titleLable)
         issueStackView.addArrangedSubview(contentLabel)
         issueStackView.addArrangedSubview(milestoneStackView)
-        milestoneStackView.addArrangedSubview(milestoneImage)
-        milestoneStackView.addArrangedSubview(milestoneLable)
         issueStackView.addArrangedSubview(labelCollectionView)
 
         labelCollectionView.delegate = self
