@@ -12,7 +12,7 @@ class LabelCell: UICollectionViewCell {
     private var issueLabel: IssueLabel = {
         var label = IssueLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 17)
+        label.font = .systemFont(ofSize: 14)
         label.layer.cornerRadius = 8
         label.clipsToBounds = true
         label.backgroundColor = .gray

@@ -15,12 +15,14 @@ class IssueCell: UICollectionViewCell {
         labelDataSource = LabelCollectionDataSource()
         super.init(frame: frame)
         configureUI()
+        configureShadow()
     }
 
     required init?(coder: NSCoder) {
         labelDataSource = LabelCollectionDataSource()
         super.init(coder: coder)
         configureUI()
+        configureShadow()
     }
 
     private var issueStackView: UIStackView = {
@@ -29,14 +31,14 @@ class IssueCell: UICollectionViewCell {
         stack.alignment = .fill
         stack.distribution = .fill
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 10
         return stack
     }()
 
     private var titleLable: UILabel = {
         var title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = .boldSystemFont(ofSize: 22)
+        title.font = .boldSystemFont(ofSize: 20)
         return title
     }()
 
@@ -79,7 +81,7 @@ class IssueCell: UICollectionViewCell {
         var leftAlignFlowLayout = LeftAlignCollectionFlowLayout()
         leftAlignFlowLayout.estimatedItemSize = .zero
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: leftAlignFlowLayout)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .clear
         collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.identifier)
         return collectionView
     }()
@@ -94,10 +96,20 @@ class IssueCell: UICollectionViewCell {
         labelCollectionView.delegate = self
         labelCollectionView.dataSource = labelDataSource
 
-        issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        issueStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        issueStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6).isActive = true
+        issueStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6 ).isActive = true
+        issueStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+    }
+
+    private func configureShadow() {
+        layer.backgroundColor = UIColor.systemBackground.cgColor
+        layer.cornerRadius = 8
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 4.0
+        layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: layer.cornerRadius).cgPath
     }
 
     func setIssue(to issue: Issue) {
