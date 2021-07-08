@@ -24,9 +24,16 @@ class IssueListViewController: UIViewController {
 
     @IBOutlet weak var issueCollectionView: UICollectionView!
 
+    private var loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureIndicator()
     }
 
     private func configureCollectionView() {
@@ -38,6 +45,7 @@ class IssueListViewController: UIViewController {
     func fetchIssueList(issueList: [Issue]) {
         issueDataSourece.updateIssues(issueList)
         DispatchQueue.main.async { [weak self] in
+            self?.loadingIndicator.stopAnimating()
             self?.issueCollectionView.reloadData()
         }
     }
@@ -47,6 +55,16 @@ class IssueListViewController: UIViewController {
             let alertController = UIAlertController(title: error.description)
             self.present(alertController, animated: true)
         }
+    }
+
+    private func configureIndicator() {
+        view.addSubview(loadingIndicator)
+
+        loadingIndicator.centerYAnchor.constraint(equalTo:
+                                                    view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        loadingIndicator.centerXAnchor.constraint(equalTo:
+                                                    view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        loadingIndicator.startAnimating()
     }
 
     @IBAction func addIssue(_ sender: UIButton) {
