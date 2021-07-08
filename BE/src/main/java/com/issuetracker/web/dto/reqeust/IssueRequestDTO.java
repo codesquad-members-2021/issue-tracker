@@ -7,6 +7,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class IssueRequestDTO {
 
