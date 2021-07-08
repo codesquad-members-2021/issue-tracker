@@ -31,6 +31,7 @@
 		BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */; };
 		BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */; };
 		BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */; };
+		BF7B7CD72696AFE400278518 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */; };
 		BF7DE027267A418D0019B519 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
 		BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8C7FBE2682242B005ABB38 /* URLRouter.swift */; };
 		BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF8C7F042678905C005ABB38 /* ClientId.plist */; };
@@ -113,6 +114,7 @@
 		BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialViewController.swift; sourceTree = "<group>"; };
 		BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthPublisher.swift; sourceTree = "<group>"; };
+		BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		BF8C7F042678905C005ABB38 /* ClientId.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientId.plist; sourceTree = "<group>"; };
 		BF8C7F8A267B2C06005ABB38 /* LoginUITests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUITests2.swift; sourceTree = "<group>"; };
 		BF8C7FBE2682242B005ABB38 /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */,
 				BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */,
 				BFD21985268EA44D00FEF16C /* URLSession+Extension.swift */,
+				BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */,
 				BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */,
 			);
 			path = Extension;
@@ -527,6 +530,7 @@
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
 				BF0E36C3269606ED00835E49 /* UICollectionViewCell+Extension.swift in Sources */,
 				BFB399DC2671D993002C6D80 /* Encodable+Extension.swift in Sources */,
+				BF7B7CD72696AFE400278518 /* UIColor+Extension.swift in Sources */,
 				BFB399D42671BFDF002C6D80 /* Method.swift in Sources */,
 				BF0A6BDA266F4EE5000F3BC5 /* IssueListViewController.swift in Sources */,
 				BFB399D62671C015002C6D80 /* Error.swift in Sources */,

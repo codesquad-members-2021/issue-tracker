@@ -38,7 +38,8 @@ class LabelCell: UICollectionViewCell {
         issueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
 
-    func setLabel(label: String) {
-        issueLabel.text = label
+    func setLabel(with label: Label) {
+        issueLabel.text = label.title
+        issueLabel.backgroundColor = UIColor(hexString: label.backgroundColor)
     }
 }

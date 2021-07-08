@@ -31,7 +31,7 @@ class IssueCell: UICollectionViewCell {
         stack.alignment = .fill
         stack.distribution = .fill
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 7
         return stack
     }()
 
@@ -73,7 +73,7 @@ class IssueCell: UICollectionViewCell {
     private var milestoneLable: UILabel = {
         var milestoneName = UILabel()
         milestoneName.translatesAutoresizingMaskIntoConstraints = false
-        milestoneName.font = .systemFont(ofSize: 17)
+        milestoneName.font = .systemFont(ofSize: 15)
         return milestoneName
     }()
 
@@ -130,6 +130,10 @@ class IssueCell: UICollectionViewCell {
     }
 
     private func updateCollectionView(labels: [Label]) {
+        if labels.isEmpty {
+            labelCollectionView.isHidden = true
+            return
+        }
         labelDataSource.updateLabels(labels)
         DispatchQueue.main.async { [weak self] in
             self?.labelCollectionView.reloadData()
@@ -148,7 +152,7 @@ extension IssueCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tagSize = LabelCell()
         labelDataSource.bringLabel(index: indexPath.row) { (label) in
-            tagSize.setLabel(label: label.title)
+            tagSize.setLabel(with: label)
         }
         tagSize.layoutIfNeeded()
         let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: UIView.layoutFittingCompressedSize.height)

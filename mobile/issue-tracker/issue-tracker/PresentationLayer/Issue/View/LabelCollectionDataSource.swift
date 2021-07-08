@@ -23,7 +23,7 @@ final class LabelCollectionDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier, for: indexPath) as? LabelCell else {
             return .init()
         }
-        cell.setLabel(label: labels[indexPath.row].title)
+        cell.setLabel(with: labels[indexPath.row])
         return cell
     }
 
