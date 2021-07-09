@@ -15,25 +15,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SoftAssertionsExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class IssueQueryServiceTest {
 
     @LocalServerPort
     private int port;
-
-    @Autowired
-    private IssueRepository issueRepository;
 
     @Autowired
     private WebApplicationContext context;
@@ -59,15 +52,11 @@ class IssueQueryServiceTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJcImlzc3VlLXRyYWNrZXItdGVhbS0wNlwiIiwidXNlcklkIjoxfQ.WCMSnjyZCjZ80aSBN9GCNckS8Q_FkdpWXPWJwsx3kVA"))
                 .andExpect(status().isOk())
-                .andReturn();
-
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> LocalDateTime
-                        .parse(json.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .create();
-
-        String responseBody = result.getResponse().getContentAsString();
-        IssueDetailPageResponseDTO responseDto = gson.fromJson(responseBody, IssueDetailPageResponseDTO.class);
-        softly.assertThat(responseDto.getTitle()).isEqualTo("이슈 1번");
+                .andExpect(jsonPath("$.title").value("이슈 1번"))
+                .andExpect(jsonPath("$.owner.name").value("Jeong InHo"))
+                .andExpect(jsonPath("$.comments[0].comment").value("이슈 1번 내용"))
+                .andExpect(jsonPath("$.assignees[1].userName").value("janeljs"))
+                .andExpect(jsonPath("$.labels[1].name").value("feature"))
+                .andExpect(jsonPath("$.milestone.title").value("M1"));
     }
 }

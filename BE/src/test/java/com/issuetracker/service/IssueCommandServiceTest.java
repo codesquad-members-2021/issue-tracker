@@ -3,6 +3,7 @@ package com.issuetracker.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.issue.IssueRepository;
+import com.issuetracker.exception.IssueNotFoundException;
 import com.issuetracker.web.dto.reqeust.IssueRequestDTO;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
@@ -56,8 +57,8 @@ class IssueCommandServiceTest {
     @Transactional
     @DisplayName("이슈 생성")
     void createIssue() throws Exception {
-        String title = "이슈 1번";
-        String comment = "이슈 1번 내용";
+        String title = "이슈 4번";
+        String comment = "이슈 4번 내용";
         List<Long> assignees = new ArrayList<>(Arrays.asList(1L, 2L));
         List<Long> labels = new ArrayList<>(Arrays.asList(1L, 2L));
         IssueRequestDTO issueRequest = new IssueRequestDTO(title, comment, assignees, labels, 1L);
