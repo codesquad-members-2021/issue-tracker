@@ -41,5 +41,6 @@ class LabelCell: UICollectionViewCell {
     func setLabel(with label: Label) {
         issueLabel.text = label.title
         issueLabel.backgroundColor = UIColor(hexString: label.backgroundColor)
+        issueLabel.textColor = UIColor(hexString: label.textColor)
     }
 }

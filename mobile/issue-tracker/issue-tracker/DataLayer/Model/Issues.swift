@@ -37,5 +37,6 @@ struct Label: Codable {
 }
 
 struct MilestoneInfo: Codable {
-    let title, description, status, dueDate: String
+    let title, description, status: String
+    let dueDate: String?
 }

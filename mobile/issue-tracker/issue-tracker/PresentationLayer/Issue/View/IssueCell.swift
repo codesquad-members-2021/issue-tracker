@@ -9,17 +9,15 @@ import UIKit
 
 class IssueCell: UICollectionViewCell {
 
-    private var labelDataSource: LabelCollectionDataSource
+    private var labels: [Label] = []
 
     override init(frame: CGRect) {
-        labelDataSource = LabelCollectionDataSource()
         super.init(frame: frame)
         configureUI()
         configureShadow()
     }
 
     required init?(coder: NSCoder) {
-        labelDataSource = LabelCollectionDataSource()
         super.init(coder: coder)
         configureUI()
         configureShadow()
@@ -31,7 +29,7 @@ class IssueCell: UICollectionViewCell {
         stack.alignment = .fill
         stack.distribution = .fill
         stack.axis = .vertical
-        stack.spacing = 7
+        stack.spacing = 10
         return stack
     }()
 
@@ -54,7 +52,7 @@ class IssueCell: UICollectionViewCell {
         var stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         stack.axis = .horizontal
         stack.spacing = 8
         return stack
@@ -79,7 +77,6 @@ class IssueCell: UICollectionViewCell {
 
     private var labelCollectionView: UICollectionView = {
         var leftAlignFlowLayout = LeftAlignCollectionFlowLayout()
-        leftAlignFlowLayout.estimatedItemSize = .zero
         var collectionView = UICollectionView(frame: .zero, collectionViewLayout: leftAlignFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.identifier)
@@ -94,7 +91,7 @@ class IssueCell: UICollectionViewCell {
         issueStackView.addArrangedSubview(labelCollectionView)
 
         labelCollectionView.delegate = self
-        labelCollectionView.dataSource = labelDataSource
+        labelCollectionView.dataSource = self
 
         issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6).isActive = true
@@ -109,7 +106,6 @@ class IssueCell: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: 0, height: 1.0)
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 4.0
-        layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds, cornerRadius: layer.cornerRadius).cgPath
     }
 
     func setIssue(to issue: Issue) {
@@ -120,23 +116,26 @@ class IssueCell: UICollectionViewCell {
     }
 
     private func showMileStone(with milestone: MilestoneInfo?) {
-        guard let milestone = milestone else {
+        milestoneStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
+        milestoneStackView.isHidden = false
+        if let milestone = milestone {
+            milestoneStackView.addArrangedSubview(milestoneImage)
+            milestoneStackView.addArrangedSubview(milestoneLable)
+            milestoneLable.text = milestone.title
+        } else {
             milestoneStackView.isHidden = true
-            return
         }
-        milestoneStackView.addArrangedSubview(milestoneImage)
-        milestoneStackView.addArrangedSubview(milestoneLable)
-        milestoneLable.text = milestone.title
     }
 
     private func updateCollectionView(labels: [Label]) {
+        labelCollectionView.isHidden = false
         if labels.isEmpty {
             labelCollectionView.isHidden = true
-            return
-        }
-        labelDataSource.updateLabels(labels)
-        DispatchQueue.main.async { [weak self] in
-            self?.labelCollectionView.reloadData()
+        } else {
+            updateLabels(labels)
+            DispatchQueue.main.async { [weak self] in
+                self?.labelCollectionView.reloadData()
+            }
         }
     }
 
@@ -146,12 +145,22 @@ class IssueCell: UICollectionViewCell {
             .collectionViewContentSize
             .height
     }
+
+    lazy var updateLabels: (([Label]) -> Void) = { [weak self] labels in
+        self?.labels = labels
+    }
+
+    func bringLabel(index: Int, handler: (Label) -> Void) {
+        let label = labels[index]
+        handler(label)
+    }
+
 }
 
 extension IssueCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tagSize = LabelCell()
-        labelDataSource.bringLabel(index: indexPath.row) { (label) in
+        bringLabel(index: indexPath.row) { (label) in
             tagSize.setLabel(with: label)
         }
         tagSize.layoutIfNeeded()
@@ -161,3 +170,17 @@ extension IssueCell: UICollectionViewDelegateFlowLayout {
                       height: estimatedSize.height)
     }
 }
+
+ extension IssueCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return labels.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier, for: indexPath) as? LabelCell else {
+            return .init()
+        }
+        cell.setLabel(with: labels[indexPath.row])
+        return cell
+    }
+ }
