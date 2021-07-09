@@ -28,7 +28,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fxA-ah-m4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-36" y="-22"/>
+            <point key="canvasLocation" x="-1432" y="-37"/>
         </scene>
         <!--이슈-->
         <scene sceneID="2Yx-Nu-UYo">
@@ -50,7 +50,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mnu-4A-6oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1110" y="-22"/>
+            <point key="canvasLocation" x="383" y="-133"/>
         </scene>
         <!--레이블-->
         <scene sceneID="5Sm-0P-hsz">
@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4WI-jn-sPE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-903" y="636"/>
+            <point key="canvasLocation" x="-397" y="291"/>
         </scene>
     </scenes>
     <resources>

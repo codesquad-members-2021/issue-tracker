@@ -23,6 +23,15 @@ class IssueCell: UICollectionViewCell {
         configureShadow()
     }
 
+    private let issueStatusImage: UIImageView = {
+       var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.widthAnchor.constraint(equalToConstant: 22).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        return image
+    }()
+
     private var issueStackView: UIStackView = {
        var stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +93,9 @@ class IssueCell: UICollectionViewCell {
     }()
 
     private func configureUI() {
+        contentView.addSubview(issueStatusImage)
         contentView.addSubview(issueStackView)
+
         issueStackView.addArrangedSubview(titleLable)
         issueStackView.addArrangedSubview(contentLabel)
         issueStackView.addArrangedSubview(milestoneStackView)
@@ -93,10 +104,19 @@ class IssueCell: UICollectionViewCell {
         labelCollectionView.delegate = self
         labelCollectionView.dataSource = self
 
-        issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        issueStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6).isActive = true
-        issueStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6 ).isActive = true
-        issueStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        issueStatusImage.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                              constant: 10).isActive = true
+        issueStatusImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
+                                                  constant: 6).isActive = true
+
+        issueStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                            constant: 10).isActive = true
+        issueStackView.leadingAnchor.constraint(equalTo: issueStatusImage.trailingAnchor,
+                                                constant: 6).isActive = true
+        issueStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                                 constant: -6).isActive = true
+        issueStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                               constant: -10).isActive = true
     }
 
     private func configureShadow() {
@@ -109,15 +129,21 @@ class IssueCell: UICollectionViewCell {
     }
 
     func setIssue(to issue: Issue) {
+        issueStatusImage.image = showissueStatusImage(to: issue.status) ?? .init()
         titleLable.text = issue.title
         contentLabel.text = issue.content
         showMileStone(with: issue.milestoneInfo)
         updateCollectionView(labels: issue.labels)
     }
 
+    private func showissueStatusImage(to status: Status) -> UIImage? {
+        status == .open ? UIImage(named: "issueOpened") : UIImage(named: "issueClosed")
+    }
+
     private func showMileStone(with milestone: MilestoneInfo?) {
         milestoneStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
         milestoneStackView.isHidden = false
+
         if let milestone = milestone {
             milestoneStackView.addArrangedSubview(milestoneImage)
             milestoneStackView.addArrangedSubview(milestoneLable)
@@ -129,10 +155,11 @@ class IssueCell: UICollectionViewCell {
 
     private func updateCollectionView(labels: [Label]) {
         labelCollectionView.isHidden = false
+
         if labels.isEmpty {
             labelCollectionView.isHidden = true
         } else {
-            updateLabels(labels)
+            self.labels = labels
             DispatchQueue.main.async { [weak self] in
                 self?.labelCollectionView.reloadData()
             }
@@ -146,11 +173,7 @@ class IssueCell: UICollectionViewCell {
             .height
     }
 
-    lazy var updateLabels: (([Label]) -> Void) = { [weak self] labels in
-        self?.labels = labels
-    }
-
-    func bringLabel(index: Int, handler: (Label) -> Void) {
+    private func bringLabel(index: Int, handler: (Label) -> Void) {
         let label = labels[index]
         handler(label)
     }
@@ -158,13 +181,16 @@ class IssueCell: UICollectionViewCell {
 }
 
 extension IssueCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tagSize = LabelCell()
         bringLabel(index: indexPath.row) { (label) in
             tagSize.setLabel(with: label)
         }
         tagSize.layoutIfNeeded()
-        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width, height: UIView.layoutFittingCompressedSize.height)
+        let targetSize = CGSize(width: UIView.layoutFittingCompressedSize.width,
+                                height: UIView.layoutFittingCompressedSize.height)
         let estimatedSize = tagSize.contentView.systemLayoutSizeFitting(targetSize)
         return CGSize(width: estimatedSize.width,
                       height: estimatedSize.height)
@@ -177,7 +203,8 @@ extension IssueCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier, for: indexPath) as? LabelCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.identifier,
+                                                            for: indexPath) as? LabelCell else {
             return .init()
         }
         cell.setLabel(with: labels[indexPath.row])

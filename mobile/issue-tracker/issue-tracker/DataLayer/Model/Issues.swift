@@ -14,7 +14,8 @@ struct IssueList: Decodable {
 struct Issue: Codable {
     let issueId: Int
     let milestoneInfo: MilestoneInfo?
-    let title, content, status: String
+    let title, content: String
+    let status: Status
     let writer: Writer
     let createdDateTime: String
     let assignees: [Assignee]
@@ -39,4 +40,9 @@ struct Label: Codable {
 struct MilestoneInfo: Codable {
     let title, description, status: String
     let dueDate: String?
+}
+
+enum Status: String, Codable {
+    case open = "OPEN"
+    case close = "CLOSE"
 }
