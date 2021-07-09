@@ -30,6 +30,12 @@ class IssueListViewController: UIViewController {
         return indicator
     }()
 
+    private lazy var issueRefresh: UIRefreshControl = {
+        var refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(reloadissueList), for: .valueChanged)
+        return refreshController
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -39,6 +45,7 @@ class IssueListViewController: UIViewController {
     private func configureCollectionView() {
         issueCollectionView.register(IssueCell.self, forCellWithReuseIdentifier: IssueCell.identifier)
         issueCollectionView.dataSource = issueDataSourece
+        issueCollectionView.refreshControl = issueRefresh
         issueViewModel.fetchIssueList()
     }
 
@@ -47,6 +54,7 @@ class IssueListViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.loadingIndicator.stopAnimating()
             self?.issueCollectionView.reloadData()
+            self?.issueCollectionView.refreshControl?.endRefreshing()
         }
     }
 
@@ -65,6 +73,10 @@ class IssueListViewController: UIViewController {
         loadingIndicator.centerXAnchor.constraint(equalTo:
                                                     view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         loadingIndicator.startAnimating()
+    }
+
+    @objc private func reloadissueList() {
+        issueViewModel.fetchIssueList()
     }
 
     @IBAction func addIssue(_ sender: UIButton) {
