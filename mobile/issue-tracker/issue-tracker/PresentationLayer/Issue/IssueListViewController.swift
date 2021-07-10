@@ -12,9 +12,11 @@ class IssueListViewController: UIViewController {
     private var issueViewModel: IssueListProvider
     private var issueDataSourece: IssueListCollectionDataSource
 
-    init?(coder: NSCoder, issueViewModel: IssueListProvider) {
+    init?(coder: NSCoder,
+          issueViewModel: IssueListProvider,
+          issueDataSource: IssueListCollectionDataSource) {
         self.issueViewModel = issueViewModel
-        self.issueDataSourece = IssueListCollectionDataSource()
+        self.issueDataSourece = issueDataSource
         super.init(coder: coder)
     }
 

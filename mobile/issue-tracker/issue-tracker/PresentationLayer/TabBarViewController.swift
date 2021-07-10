@@ -32,9 +32,12 @@ class TabBarViewController: UITabBarController {
 
     private func createIssueListViewController() -> UINavigationController {
         let issueViewModel = IssueListViewModel()
+        let issueDataSourece = IssueListCollectionDataSource()
         let issueListViewController: IssueListViewController = UIStoryboard(name: "IssueListViewController", bundle: nil)
             .instantiateViewController(identifier: "IssueList") { coder in
-            return IssueListViewController(coder: coder, issueViewModel: issueViewModel)
+            return IssueListViewController(coder: coder,
+                                           issueViewModel: issueViewModel,
+                                           issueDataSource: issueDataSourece)
         }
 
         issueViewModel.issues = issueListViewController.fetchIssueList(issueList:)
