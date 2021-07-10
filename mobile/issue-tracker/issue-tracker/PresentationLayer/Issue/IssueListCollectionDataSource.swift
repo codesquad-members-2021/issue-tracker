@@ -27,8 +27,8 @@ final class IssueListCollectionDataSource: NSObject, UICollectionViewDataSource 
         return cell
     }
 
-    lazy var updateIssues: (([Issue]) -> Void) = { issueList in
-        return self.issues = issueList
+    func updateIssues(from issueList: [Issue]) {
+        self.issues = issueList
     }
 
     func bringIssue(index: Int, handler: (Issue) -> Void) {

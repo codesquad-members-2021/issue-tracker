@@ -50,7 +50,7 @@ class IssueListViewController: UIViewController {
     }
 
     func fetchIssueList(issueList: [Issue]) {
-        issueDataSourece.updateIssues(issueList)
+        issueDataSourece.updateIssues(from: issueList)
         DispatchQueue.main.async { [weak self] in
             self?.loadingIndicator.stopAnimating()
             self?.issueCollectionView.reloadData()
