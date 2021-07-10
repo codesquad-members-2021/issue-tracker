@@ -77,7 +77,7 @@ class IssueCell: UICollectionViewCell {
         return imageView
     }()
 
-    private var milestoneLable: UILabel = {
+    private var milestoneLabel: UILabel = {
         var milestoneName = UILabel()
         milestoneName.translatesAutoresizingMaskIntoConstraints = false
         milestoneName.font = .systemFont(ofSize: 15)
@@ -143,8 +143,8 @@ class IssueCell: UICollectionViewCell {
     private func showMileStone(with milestone: MilestoneInfo?) {
         if let milestone = milestone {
             milestoneStackView.addArrangedSubview(milestoneImage)
-            milestoneStackView.addArrangedSubview(milestoneLable)
-            milestoneLable.text = milestone.title
+            milestoneStackView.addArrangedSubview(milestoneLabel)
+            milestoneLabel.text = milestone.title
         } else {
             milestoneStackView.isHidden = true
         }
