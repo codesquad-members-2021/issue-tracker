@@ -18,8 +18,8 @@ final class IssueListViewModel: IssueListProvider {
     private var endpoint: EndPointGenerator
     private var cancellable = Set<AnyCancellable>()
 
-    var errorHandler: ((NetworkError) -> Void)?
-    var issues: (([Issue]) -> Void)?
+    var failErrorHandler: ((NetworkError) -> Void)?
+    var completeFetchIssues: (([Issue]) -> Void)?
 
     init(issuesUseCase: IssuesUseCase = IssueRepository(),
          endpoint: EndPointGenerator = EndPoint()) {
@@ -32,10 +32,10 @@ final class IssueListViewModel: IssueListProvider {
                                     session: .shared)
             .sink { [weak self] (complete) in
                 if case .failure(let error) = complete {
-                    self?.errorHandler?(error)
+                    self?.failErrorHandler?(error)
                 }
             } receiveValue: { [weak self] (issueList) in
-                self?.issues?(issueList.issues)
+                self?.completeFetchIssues?(issueList.issues)
             }.store(in: &cancellable)
     }
 }

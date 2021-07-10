@@ -40,8 +40,8 @@ class TabBarViewController: UITabBarController {
                                            issueDataSource: issueDataSourece)
         }
 
-        issueViewModel.issues = issueListViewController.fetchIssueList(issueList:)
-        issueViewModel.errorHandler = issueListViewController.showError(from:)
+        issueViewModel.completeFetchIssues = issueListViewController.fetchIssueList(issueList:)
+        issueViewModel.failErrorHandler = issueListViewController.showError(from:)
 
         return NavigationController(rootViewController: issueListViewController)
     }
