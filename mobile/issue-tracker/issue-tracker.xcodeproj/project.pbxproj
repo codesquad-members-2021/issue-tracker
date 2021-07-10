@@ -21,6 +21,7 @@
 		BF0E36C3269606ED00835E49 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */; };
 		BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D242695A6AE00834E33 /* IssueLabel.swift */; };
 		BF251D2A2695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D292695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift */; };
+		BF2AA766269987420091D081 /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2AA765269987420091D081 /* TabBarItemType.swift */; };
 		BF370DB22676688E00E6C090 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BF370DB32676689800E6C090 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D32671BFDF002C6D80 /* Method.swift */; };
 		BF370DB4267668A100E6C090 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399DB2671D993002C6D80 /* Encodable+Extension.swift */; };
@@ -108,6 +109,7 @@
 		BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		BF251D242695A6AE00834E33 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		BF251D292695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignCollectionFlowLayout.swift; sourceTree = "<group>"; };
+		BF2AA765269987420091D081 /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 		BF370DB52677208400E6C090 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialViewController.swift; sourceTree = "<group>"; };
 		BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				BFD75CDC269453CF004695E9 /* NavigationController.swift */,
 				BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */,
 				BFD75CCC26938559004695E9 /* TabBarViewController.swift */,
+				BF2AA765269987420091D081 /* TabBarItemType.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */,
+				BF2AA766269987420091D081 /* TabBarItemType.swift in Sources */,
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
 				BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */,
 				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,

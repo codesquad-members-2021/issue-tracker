@@ -9,32 +9,52 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
+    private let tapItems: [TabBarItemType]
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        tapItems = TabBarItemType.allCases
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        tapItems = TabBarItemType.allCases
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
     }
 
-    func configureTabBar() {
-        let firstTab = createIssueListViewController()
-        firstTab.tabBarItem = makeTabBarItem(title: "이슈", image: "exclamationmark.circle")
-
-        let secondTab: UIViewController = .init()
-        secondTab.tabBarItem = makeTabBarItem(title: "레이블", image: "tag")
-
-        let thirdTab: UIViewController = .init()
-        thirdTab.tabBarItem = makeTabBarItem(title: "마일스톤", image: "signpost.right")
-
-        let fourthTab: UIViewController = .init()
-        fourthTab.tabBarItem = makeTabBarItem(title: "내정보", image: "")
-
-        self.viewControllers = [firstTab, secondTab, thirdTab, fourthTab]
+    private func configureTabBar() {
+        self.viewControllers =
+            tapItems.map { item in makeTabBarController(type: item)}
     }
 
-    private func createIssueListViewController() -> UINavigationController {
+    private func makeTabBarController(type: TabBarItemType) -> UIViewController {
+        let viewController = makeViewController(type: type)
+        viewController.tabBarItem = makeTabBarItem(title: type.description, image: type.imageName)
+        return viewController
+    }
+
+    private func makeViewController(type: TabBarItemType) -> UIViewController {
+        switch type {
+        case .issue:
+            return createIssueListViewController(identifier: type.controllerIdentifier)
+        case .label:
+            return .init()
+        case .milestone:
+            return .init()
+        case .info:
+            return .init()
+        }
+    }
+
+    private func createIssueListViewController(identifier: String) -> UINavigationController {
         let issueViewModel = IssueListViewModel()
         let issueDataSourece = IssueListCollectionDataSource()
-        let issueListViewController: IssueListViewController = UIStoryboard(name: "IssueListViewController", bundle: nil)
-            .instantiateViewController(identifier: "IssueList") { coder in
+        let issueListViewController: IssueListViewController = UIStoryboard(name: identifier, bundle: nil)
+            .instantiateViewController(identifier: identifier) { coder in
             return IssueListViewController(coder: coder,
                                            issueViewModel: issueViewModel,
                                            issueDataSource: issueDataSourece)

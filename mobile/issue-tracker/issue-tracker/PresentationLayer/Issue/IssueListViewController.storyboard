@@ -12,7 +12,7 @@
         <!--이슈-->
         <scene sceneID="Dc6-jV-Uas">
             <objects>
-                <viewController storyboardIdentifier="IssueList" id="L8F-f7-Ygb" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueListViewController" id="L8F-f7-Ygb" customClass="IssueListViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KIN-cn-NS3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
