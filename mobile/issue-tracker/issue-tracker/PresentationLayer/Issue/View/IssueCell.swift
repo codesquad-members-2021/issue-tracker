@@ -141,9 +141,6 @@ class IssueCell: UICollectionViewCell {
     }
 
     private func showMileStone(with milestone: MilestoneInfo?) {
-        milestoneStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
-        milestoneStackView.isHidden = false
-
         if let milestone = milestone {
             milestoneStackView.addArrangedSubview(milestoneImage)
             milestoneStackView.addArrangedSubview(milestoneLable)
@@ -154,8 +151,6 @@ class IssueCell: UICollectionViewCell {
     }
 
     private func updateCollectionView(labels: [Label]) {
-        labelCollectionView.isHidden = false
-
         if labels.isEmpty {
             labelCollectionView.isHidden = true
         } else {
@@ -178,6 +173,12 @@ class IssueCell: UICollectionViewCell {
         handler(label)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        milestoneStackView.arrangedSubviews.forEach { view in view.removeFromSuperview() }
+        milestoneStackView.isHidden = false
+        labelCollectionView.isHidden = false
+    }
 }
 
 extension IssueCell: UICollectionViewDelegateFlowLayout {
