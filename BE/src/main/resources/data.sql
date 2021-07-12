@@ -18,3 +18,42 @@ insert into `user`(avatar_url, email, `name`, token, user_name)
 values ('https://avatars.githubusercontent.com/u/68000537?v=4', 'jane@gmail.com', 'JiSun Lim', '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', 'janeljs');
 insert into `user`(avatar_url, email, `name`, token, user_name)
 values ('https://avatars.githubusercontent.com/u/68000537?v=4', 'zane@gmail.com', 'zane', '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', 'zane');
+
+insert into issue(created_date_time, modified_date_time, is_open, title, author_id, milestone_id)
+values (now(), now(), true, "이슈 1번", 1, 1);
+insert into comment(created_date_time, modified_date_time, comment, user_id, issue_id)
+values(now(), now(), "이슈 1번 내용", 1, 1);
+insert into issue_assignees(issue_id, assignees_id)
+values (1, 1);
+insert into issue_assignees(issue_id, assignees_id)
+values (1, 2);
+insert into issue_labels(issues_id, labels_id)
+value (1, 1);
+insert into issue_labels(issues_id, labels_id)
+value (1, 2);
+
+insert into issue(created_date_time, modified_date_time, is_open, title, author_id, milestone_id)
+values (now(), now(), true, "이슈 2번", 1, 2);
+insert into comment(created_date_time, modified_date_time, comment, user_id, issue_id)
+values(now(), now(), "이슈 2번 내용", 1, 2);
+insert into issue_assignees(issue_id, assignees_id)
+values (2, 1);
+insert into issue_labels(issues_id, labels_id)
+value (2, 1);
+insert into issue_labels(issues_id, labels_id)
+value (2, 2);
+insert into issue_labels(issues_id, labels_id)
+value (2, 3);
+
+insert into issue(created_date_time, modified_date_time, is_open, title, author_id, milestone_id)
+values (now(), now(), true, "이슈 3번", 1, 3);
+insert into comment(created_date_time, modified_date_time, comment, user_id, issue_id)
+values(now(), now(), "이슈 3번 내용", 1, 3);
+insert into issue_assignees(issue_id, assignees_id)
+values (3, 1);
+insert into issue_assignees(issue_id, assignees_id)
+values (3, 2);
+insert into issue_labels(issues_id, labels_id)
+value (3, 2);
+insert into issue_labels(issues_id, labels_id)
+value (3, 3);

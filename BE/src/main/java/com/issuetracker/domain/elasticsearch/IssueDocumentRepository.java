@@ -6,8 +6,6 @@ import org.springframework.data.elasticsearch.annotations.CountQuery;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import java.util.List;
-
 public interface IssueDocumentRepository extends ElasticsearchRepository<IssueDocument, Long> {
 
     @CountQuery("{\"bool\": {\"must\": [{\"match\": {\"title\": \"?0\"}},{\"match\": {\"isOpen\": \"?1\"}}]}}")
