@@ -2,10 +2,12 @@ package com.issuetracker.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.issuetracker.domain.issue.Issue;
+import com.issuetracker.domain.issue.IssueRepository;
 import com.issuetracker.exception.IssueNotFoundException;
 import com.issuetracker.web.dto.reqeust.IssueRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class IssueCommandServiceTest extends BaseServiceTest {
+
     @Autowired
     private IssueRepository issueRepository;
 
