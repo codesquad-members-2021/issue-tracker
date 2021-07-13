@@ -6,6 +6,7 @@ import io.netty.resolver.DefaultAddressResolverGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -43,6 +44,11 @@ public class WebConfig implements WebMvcConfigurer {
         filter.setMaxPayloadLength(10000);
         filter.setAfterMessagePrefix("REQUEST DATA : ");
         return filter;
+    }
+
+    @Bean
+    public PageableHandlerMethodArgumentResolverCustomizer customize() {
+        return p -> p.setOneIndexedParameters(true);
     }
 
     @Override

@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 enum UserAgent {
 
     POSTMAN("PostmanRuntime"),
-    FRONT("IssueTrackerFE"),
+    FRONT("Mozilla"),
     IOS("IssueTrackerIOS");
 
     private final String userAgent;
@@ -21,4 +21,3 @@ enum UserAgent {
         return IOS.userAgent.equals(userAgent) || POSTMAN.userAgent.equals(userAgent);
     }
 }
-

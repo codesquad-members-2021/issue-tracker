@@ -1,9 +1,11 @@
 package com.issuetracker.domain.label;
 
+import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.web.dto.response.LabelDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +26,9 @@ public class Label {
 
     private String description;
 
+    @ManyToMany(mappedBy = "labels")
+    private List<Issue> issues;
+
     public static Label create(LabelDTO labelDTO) {
         return Label.builder()
                 .name(labelDTO.getName())
@@ -37,5 +42,10 @@ public class Label {
         this.description = labelDTO.getDescription();
         this.color = labelDTO.getColor();
         return this;
+    }
+
+    @PreRemove
+    public void delete() {
+        issues.forEach(issue -> issue.deleteLabel(this));
     }
 }

@@ -36,7 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows
 
@@ -98,4 +97,8 @@ $RECYCLE.BIN/
 # Querydsl
 generated
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,windows
+# Application properties
+/src/main/resources/application-key.properties
+
+# Front
+/src/main/resources/static/

@@ -17,14 +17,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'com.querydsl:querydsl-jpa'
 	implementation 'com.auth0:java-jwt:3.8.2'
 	implementation 'org.projectlombok:lombok'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
 	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.assertj:assertj-core:3.18.1'
 }
 
+// querydsl
 test {
 	useJUnitPlatform()
 }

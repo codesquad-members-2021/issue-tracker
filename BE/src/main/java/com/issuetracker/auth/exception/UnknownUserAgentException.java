@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UnknownUserAgentException extends OAuthException {
 
     public UnknownUserAgentException() {
-        super("Unknown user agent detected.");
+        super("Unknown User-Agent detected.");
     }
 }

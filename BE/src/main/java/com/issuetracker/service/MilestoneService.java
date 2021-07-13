@@ -1,14 +1,20 @@
 package com.issuetracker.service;
 
+import com.issuetracker.domain.elasticsearch.IssueDocument;
+import com.issuetracker.domain.elasticsearch.IssueDocumentRepository;
+import com.issuetracker.domain.issue.Issue;
 import com.issuetracker.domain.milestone.MilestoneRepository;
+import com.issuetracker.exception.MilestoneNotFoundException;
+import com.issuetracker.web.dto.reqeust.MilestoneNumbersRequestDTO;
 import com.issuetracker.web.dto.response.MilestoneDTO;
 import com.issuetracker.domain.label.LabelRepository;
 import com.issuetracker.domain.milestone.Milestone;
 import com.issuetracker.web.dto.response.MilestonesResponseDTO;
+import com.issuetracker.web.dto.vo.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,12 +24,21 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
+    private final IssueDocumentRepository issueDocumentRepository;
 
-    public MilestonesResponseDTO read() {
-        List<MilestoneDTO> milestoneDTOs = milestoneRepository.findAll().stream()
-                .map(MilestoneDTO::of)
+    public MilestonesResponseDTO read(String status) {
+        boolean newStatus = Status.statusToBoolean(status);
+        List<MilestoneDTO> milestoneDTOs = milestoneRepository.findAllByIsOpen(newStatus).stream()
+                .map(milestone -> MilestoneDTO.of(milestone, false))
                 .collect(Collectors.toList());
-        return MilestonesResponseDTO.of(labelRepository.count(), count(), milestoneDTOs);
+        return MilestonesResponseDTO.of(labelRepository.count(), countByIsOpen(true), countByIsOpen(false), milestoneDTOs);
+    }
+
+    @Transactional
+    public void changeMilestoneStatus(MilestoneNumbersRequestDTO requestDTO, String status) {
+        boolean newStatus = !Status.statusToBoolean(status);
+        System.out.println(requestDTO.getMilestoneNumbers());
+        milestoneRepository.updateStatusBy(newStatus, requestDTO.getMilestoneNumbers());
     }
 
     public void create(MilestoneDTO milestone) {
@@ -33,29 +48,56 @@ public class MilestoneService {
     public void update(Long milestoneId, MilestoneDTO newMilestoneInfo) {
         Milestone milestone = findMilestoneById(milestoneId);
         milestone.update(newMilestoneInfo);
-        milestoneRepository.save(milestone);
+        Milestone updatedMilestone = milestoneRepository.save(milestone);
+        updatedMilestone.getIssues().forEach(this::synchronizeIssue);
     }
 
     public void delete(Long milestoneId) {
-        milestoneRepository.deleteById(milestoneId);
+        Milestone milestone = findMilestoneById(milestoneId);
+        milestone.getIssues().stream()
+                .map(Issue::deleteMilestone)
+                .forEach(this::synchronizeIssue);
+        milestoneRepository.delete(milestone);
     }
 
     public Milestone findMilestoneById(Long milestoneId) {
-        return milestoneRepository.findById(milestoneId).orElseThrow(EntityExistsException::new);
-    }
-
-    public Milestone findNullableMilestoneByTitle(String title) {
-        if (title == null) {
+        if (milestoneId == null) {
             return null;
         }
-        return milestoneRepository.findByTitle(title).orElse(new Milestone());
+        return milestoneRepository.findById(milestoneId).orElseThrow(MilestoneNotFoundException::new);
     }
 
     public List<MilestoneDTO> findAllMilestoneDTOs() {
-        return milestoneRepository.findAll().stream().map(MilestoneDTO::of).collect(Collectors.toList());
+        return milestoneRepository.findAll().stream()
+                .map(milestone -> MilestoneDTO.of(milestone, false))
+                .collect(Collectors.toList());
     }
 
-    public long count() {
-        return milestoneRepository.count();
+    public List<MilestoneDTO> milestonesToMilestoneDTOs(Issue issue) {
+        return milestoneRepository.findAll().stream()
+                .map(milestone -> MilestoneDTO.of(milestone, checkMilestone(milestone, issue)))
+                .collect(Collectors.toList());
+    }
+
+    private boolean checkMilestone(Milestone targetMilestone, Issue issue) {
+        if (issue.getMilestone() == null) {
+            return false;
+        }
+        return issue.getMilestone().equals(targetMilestone);
+    }
+
+    public MilestoneDTO findMilestoneInIssue(Issue issue) {
+        if (issue.getMilestone() == null) {
+            return null;
+        }
+        return MilestoneDTO.of(issue.getMilestone(), true);
+    }
+
+    public long countByIsOpen(boolean isOpen) {
+        return milestoneRepository.countByIsOpen(isOpen);
+    }
+
+    private void synchronizeIssue(Issue issue) {
+        issueDocumentRepository.save(IssueDocument.of(issue));
     }
 }

@@ -2,6 +2,7 @@ package com.issuetracker.domain.comment;
 
 import com.issuetracker.domain.BaseTimeEntity;
 import com.issuetracker.domain.user.User;
+import com.issuetracker.exception.IllegalUserAccessException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,7 +45,15 @@ public class Comment extends BaseTimeEntity {
         return author.getUserName();
     }
 
+    public String getAuthorAvatarUrl() {
+        return author.getAvatarUrl();
+    }
+
     public boolean matchAuthor(User user) {
+        return author.equals(user);
+    }
+
+    public boolean verifyAuthor(User user) {
         return author.equals(user);
     }
 
