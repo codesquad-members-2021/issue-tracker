@@ -26,19 +26,6 @@ enum TabBarItemType: CaseIterable, CustomStringConvertible {
         }
     }
 
-    var controllerIdentifier: String {
-        switch self {
-        case .issue:
-            return "IssueListViewController"
-        case .label:
-            return ""
-        case .milestone:
-            return ""
-        case .info:
-            return ""
-        }
-    }
-
     var imageName: String {
         switch self {
         case .issue:

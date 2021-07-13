@@ -37,6 +37,14 @@ class IntialViewController: UIViewController {
             return loginViewController
         }
 
-        return UIStoryboard().create(name: "Main", type: UITabBarController.self)
+        let tabBarController = UIStoryboard(name: "TabBarViewController", bundle: nil)
+            .instantiateViewController(identifier: "TabBarViewController") { coder in
+            return TabBarViewController(coder: coder,
+                                        issueCoordinator: IssueListCoordinator(),
+                                        labelCoordinator: LabelCoordinator(),
+                                        milestoneCoordinator: MilestoneCoordinator(),
+                                        infoCoordinator: InfoCoordinator())
+        }
+        return tabBarController
     }
 }
