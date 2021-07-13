@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueListViewController: UIViewController {
+class IssueListViewController: UIViewController, StoryBoarded {
 
     private var issueViewModel: IssueListProvider
     private var issueDataSourece: IssueListCollectionDataSource

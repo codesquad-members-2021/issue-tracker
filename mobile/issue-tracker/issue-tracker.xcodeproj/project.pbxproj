@@ -16,7 +16,7 @@
 		BF0A6BF8266F4EE8000F3BC5 /* LoginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6BF7266F4EE8000F3BC5 /* LoginUITests.swift */; };
 		BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */; };
 		BF0A6C14266F5F50000F3BC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */; };
-		BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
+		BF0A6C16266F5F8F000F3BC5 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */; };
 		BF0E36A22695AE0B00835E49 /* IssueListCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36A12695AE0B00835E49 /* IssueListCollectionDataSource.swift */; };
 		BF0E36C3269606ED00835E49 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */; };
 		BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF251D242695A6AE00834E33 /* IssueLabel.swift */; };
@@ -32,7 +32,7 @@
 		BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */; };
 		BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */; };
 		BF7B7CD72696AFE400278518 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */; };
-		BF7DE027267A418D0019B519 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */; };
+		BF7DE027267A418D0019B519 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */; };
 		BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8C7FBE2682242B005ABB38 /* URLRouter.swift */; };
 		BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF8C7F042678905C005ABB38 /* ClientId.plist */; };
 		BF8C7F3A267A5E7D005ABB38 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
@@ -53,6 +53,8 @@
 		BF9D08F7269CC872009B6AA0 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D08F6269CC872009B6AA0 /* InfoCoordinator.swift */; };
 		BF9D08F9269CC905009B6AA0 /* UITabBarItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D08F8269CC905009B6AA0 /* UITabBarItem+Extension.swift */; };
 		BF9D0900269D54DB009B6AA0 /* TabBarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF9D08FF269D54DB009B6AA0 /* TabBarViewController.storyboard */; };
+		BF9D093C269DEF4A009B6AA0 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D093B269DEF4A009B6AA0 /* CompositionRoot.swift */; };
+		BF9D093E269E06C6009B6AA0 /* StoryBoarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D093D269E06C6009B6AA0 /* StoryBoarded.swift */; };
 		BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
@@ -111,7 +113,7 @@
 		BF0A6BF9266F4EE8000F3BC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		BF0E36A12695AE0B00835E49 /* IssueListCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionDataSource.swift; sourceTree = "<group>"; };
 		BF0E36C2269606ED00835E49 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		BF251D242695A6AE00834E33 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
@@ -130,6 +132,8 @@
 		BF9D08F6269CC872009B6AA0 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		BF9D08F8269CC905009B6AA0 /* UITabBarItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarItem+Extension.swift"; sourceTree = "<group>"; };
 		BF9D08FF269D54DB009B6AA0 /* TabBarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarViewController.storyboard; sourceTree = "<group>"; };
+		BF9D093B269DEF4A009B6AA0 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
+		BF9D093D269E06C6009B6AA0 /* StoryBoarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoarded.swift; sourceTree = "<group>"; };
 		BFB399CA2671B387002C6D80 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryBoard+Extension.swift"; sourceTree = "<group>"; };
 		BFB399CF2671BDCB002C6D80 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -207,10 +211,12 @@
 			children = (
 				BFB399DA2671D986002C6D80 /* Utility */,
 				BF0A6C0C266F5BAE000F3BC5 /* AppCycle */,
+				BF9D0941269E1F48009B6AA0 /* DI */,
 				BFB399CC2671BB44002C6D80 /* Extension */,
 				BF9D08FE269D5256009B6AA0 /* Protocol */,
 				BF0A6C0F266F5F07000F3BC5 /* DataLayer */,
 				BF0A6C0E266F5F05000F3BC5 /* DomainLayer */,
+				BF9D093F269E0E87009B6AA0 /* Coordinator */,
 				BF0A6C0D266F5F03000F3BC5 /* PresentationLayer */,
 				BF0A6BDE266F4EE7000F3BC5 /* Assets.xcassets */,
 				BF0A6BE0266F4EE7000F3BC5 /* LaunchScreen.storyboard */,
@@ -293,7 +299,7 @@
 			children = (
 				BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */,
 				BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */,
-				BF0A6C15266F5F8F000F3BC5 /* Login.storyboard */,
+				BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				BFC7325B269BFDAC00DFD26E /* Coordinator.swift */,
+				BF9D093D269E06C6009B6AA0 /* StoryBoarded.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -337,6 +344,21 @@
 				BF9D08FF269D54DB009B6AA0 /* TabBarViewController.storyboard */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		BF9D093F269E0E87009B6AA0 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		BF9D0941269E1F48009B6AA0 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				BF9D093B269DEF4A009B6AA0 /* CompositionRoot.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 		BFB399CC2671BB44002C6D80 /* Extension */ = {
@@ -509,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF9D0900269D54DB009B6AA0 /* TabBarViewController.storyboard in Resources */,
-				BF0A6C16266F5F8F000F3BC5 /* Login.storyboard in Resources */,
+				BF0A6C16266F5F8F000F3BC5 /* LoginViewController.storyboard in Resources */,
 				BF0A6BE2266F4EE7000F3BC5 /* LaunchScreen.storyboard in Resources */,
 				BF0A6BDF266F4EE7000F3BC5 /* Assets.xcassets in Resources */,
 				BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */,
@@ -529,7 +551,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF7DE027267A418D0019B519 /* Login.storyboard in Resources */,
+				BF7DE027267A418D0019B519 /* LoginViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF9D093C269DEF4A009B6AA0 /* CompositionRoot.swift in Sources */,
 				BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */,
 				BF2AA766269987420091D081 /* TabBarItemType.swift in Sources */,
 				BFC7325C269BFDAC00DFD26E /* Coordinator.swift in Sources */,
@@ -592,6 +615,7 @@
 				BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */,
 				BFD21986268EA44D00FEF16C /* URLSession+Extension.swift in Sources */,
 				BF9D08F5269CC864009B6AA0 /* MilestoneCoordinator.swift in Sources */,
+				BF9D093E269E06C6009B6AA0 /* StoryBoarded.swift in Sources */,
 				BF0E36A22695AE0B00835E49 /* IssueListCollectionDataSource.swift in Sources */,
 				BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,

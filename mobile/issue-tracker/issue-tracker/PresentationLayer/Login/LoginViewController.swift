@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, StoryBoarded {
 
     var githubLoginHandler: ((ASWebAuthenticationPresentationContextProviding) -> Void)?
 
