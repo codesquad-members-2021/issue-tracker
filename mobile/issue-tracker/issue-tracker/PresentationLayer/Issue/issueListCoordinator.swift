@@ -7,28 +7,26 @@
 
 import UIKit
 
+protocol IssueListCoordinatorDependencies {
+    func makeIssueListViewController() -> IssueListViewController
+}
+
  final class IssueListCoordinator: Coordinator {
 
-    var navigation: UINavigationController
+    var navigation: UINavigationController?
 
-    init(navigation: UINavigationController = NavigationController()) {
+    private let issueListViewControllerFactory: () -> IssueListViewController
+
+    init(navigation: UINavigationController = NavigationController(),
+         dependency: IssueListCoordinatorDependencies) {
         self.navigation = navigation
+        self.issueListViewControllerFactory = dependency.makeIssueListViewController
     }
 
     func start() {
-        let issueViewModel = IssueListViewModel()
-        let issueDataSourece = IssueListCollectionDataSource()
-        let issueListViewController: IssueListViewController = UIStoryboard(name: "IssueListViewController", bundle: nil)
-            .instantiateViewController(identifier: "IssueListViewController") { coder in
-            return IssueListViewController(coder: coder,
-                                           issueViewModel: issueViewModel,
-                                           issueDataSource: issueDataSourece)
-        }
+        let issueListViewController: IssueListViewController = issueListViewControllerFactory()
 
-        issueViewModel.completeFetchIssues = issueListViewController.fetchIssueList(issueList:)
-        issueViewModel.failErrorHandler = issueListViewController.showError(from:)
-
-        navigation.tabBarItem = UITabBarItem(type: .issue)
-        navigation.pushViewController(issueListViewController, animated: true)
+        navigation?.tabBarItem = UITabBarItem(type: .issue)
+        navigation?.pushViewController(issueListViewController, animated: true)
     }
  }

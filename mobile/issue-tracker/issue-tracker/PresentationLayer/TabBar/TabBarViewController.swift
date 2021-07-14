@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class TabBarViewController: UITabBarController, StoryBoarded {
 
     private let issueCoordinator: Coordinator
     private let labelCoordinator: Coordinator
@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
     private let infoCoordinator: Coordinator
 
     init?(coder: NSCoder,
-          issueCoordinator: Coordinator = IssueListCoordinator(),
+          issueCoordinator: Coordinator,
           labelCoordinator: Coordinator = LabelCoordinator(),
           milestoneCoordinator: Coordinator = MilestoneCoordinator(),
           infoCoordinator: Coordinator = InfoCoordinator()) {
@@ -42,9 +42,9 @@ class TabBarViewController: UITabBarController {
     }
 
     private func configureTabBar() {
-        self.viewControllers = [issueCoordinator.navigation,
-                                labelCoordinator.navigation,
-                                milestoneCoordinator.navigation,
-                                infoCoordinator.navigation]
+        self.viewControllers = [issueCoordinator.navigation ?? .init(),
+                                labelCoordinator.navigation ?? .init(),
+                                milestoneCoordinator.navigation ?? .init(),
+                                infoCoordinator.navigation ?? .init()]
     }
 }
