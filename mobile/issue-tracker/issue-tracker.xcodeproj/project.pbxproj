@@ -56,6 +56,8 @@
 		BF9D093C269DEF4A009B6AA0 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D093B269DEF4A009B6AA0 /* CompositionRoot.swift */; };
 		BF9D093E269E06C6009B6AA0 /* StoryBoarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D093D269E06C6009B6AA0 /* StoryBoarded.swift */; };
 		BF9D0943269E204E009B6AA0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D0942269E204E009B6AA0 /* AppCoordinator.swift */; };
+		BFA153E6269EE79000341A6D /* LoginViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA153E5269EE79000341A6D /* LoginViewCoordinator.swift */; };
+		BFA153FB269F401900341A6D /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA153FA269F401900341A6D /* TabBarCoordinator.swift */; };
 		BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CA2671B387002C6D80 /* Endpoint.swift */; };
 		BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BFB399D02671BDCB002C6D80 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CF2671BDCB002C6D80 /* LoginService.swift */; };
@@ -73,7 +75,6 @@
 		BFD2198E268EC02800FEF16C /* Issues.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD2198D268EC02800FEF16C /* Issues.swift */; };
 		BFD21993268ED96300FEF16C /* IssueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD21992268ED96300FEF16C /* IssueRepository.swift */; };
 		BFD2199B268EF7FC00FEF16C /* IssuesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */; };
-		BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CCC26938559004695E9 /* TabBarViewController.swift */; };
 		BFD75CD226939108004695E9 /* IssueListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD75CD126939108004695E9 /* IssueListViewController.storyboard */; };
 		BFD75CDD269453CF004695E9 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CDC269453CF004695E9 /* NavigationController.swift */; };
 		BFD75CE626945CBC004695E9 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD75CE526945CBC004695E9 /* IssueCell.swift */; };
@@ -136,6 +137,8 @@
 		BF9D093B269DEF4A009B6AA0 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		BF9D093D269E06C6009B6AA0 /* StoryBoarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoarded.swift; sourceTree = "<group>"; };
 		BF9D0942269E204E009B6AA0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		BFA153E5269EE79000341A6D /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
+		BFA153FA269F401900341A6D /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		BFB399CA2671B387002C6D80 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryBoard+Extension.swift"; sourceTree = "<group>"; };
 		BFB399CF2671BDCB002C6D80 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -152,7 +155,6 @@
 		BFD2198D268EC02800FEF16C /* Issues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issues.swift; sourceTree = "<group>"; };
 		BFD21992268ED96300FEF16C /* IssueRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		BFD2199A268EF7FC00FEF16C /* IssuesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesListViewModel.swift; sourceTree = "<group>"; };
-		BFD75CCC26938559004695E9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BFD75CD126939108004695E9 /* IssueListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueListViewController.storyboard; sourceTree = "<group>"; };
 		BFD75CDC269453CF004695E9 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BFD75CE526945CBC004695E9 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 			children = (
 				BF0A6C11266F5F40000F3BC5 /* LoginViewModel.swift */,
 				BF0A6C13266F5F50000F3BC5 /* LoginViewController.swift */,
+				BFA153E5269EE79000341A6D /* LoginViewCoordinator.swift */,
 				BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */,
 			);
 			path = Login;
@@ -342,7 +345,7 @@
 		BF9D0901269D5579009B6AA0 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				BFD75CCC26938559004695E9 /* TabBarViewController.swift */,
+				BFA153FA269F401900341A6D /* TabBarCoordinator.swift */,
 				BF9D08FF269D54DB009B6AA0 /* TabBarViewController.storyboard */,
 			);
 			path = TabBar;
@@ -590,7 +593,7 @@
 				BF2AA766269987420091D081 /* TabBarItemType.swift in Sources */,
 				BFC7325C269BFDAC00DFD26E /* Coordinator.swift in Sources */,
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
-				BFD75CCD26938559004695E9 /* TabBarViewController.swift in Sources */,
+				BFA153E6269EE79000341A6D /* LoginViewCoordinator.swift in Sources */,
 				BF9D08F9269CC905009B6AA0 /* UITabBarItem+Extension.swift in Sources */,
 				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,
 				BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */,
@@ -622,6 +625,7 @@
 				BF9D093E269E06C6009B6AA0 /* StoryBoarded.swift in Sources */,
 				BF0E36A22695AE0B00835E49 /* IssueListCollectionDataSource.swift in Sources */,
 				BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */,
+				BFA153FB269F401900341A6D /* TabBarCoordinator.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,
 				BFD2198E268EC02800FEF16C /* Issues.swift in Sources */,
