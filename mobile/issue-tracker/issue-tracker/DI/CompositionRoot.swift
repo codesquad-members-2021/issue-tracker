@@ -62,5 +62,16 @@ extension AppDependency: TabBarCoordinatorDependencies {
         return IssueListCoordinator(navigation: NavigationController(),
                                     dependency: self)
     }
+    func makeLabelCoordinator() -> LabelCoordinator {
+        return LabelCoordinator()
+    }
+
+    func makeMilestoneCoordinator() -> MilestoneCoordinator {
+        return MilestoneCoordinator()
+    }
+
+    func makeInfoCoordinator() -> InfoCoordinator {
+        return InfoCoordinator()
+    }
 
 }
