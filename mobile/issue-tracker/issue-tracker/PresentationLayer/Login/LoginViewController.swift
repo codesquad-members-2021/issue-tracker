@@ -8,9 +8,14 @@
 import UIKit
 import AuthenticationServices
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func didFinishLogin()
+}
+
 final class LoginViewController: UIViewController, StoryBoarded {
 
     var githubLoginHandler: ((ASWebAuthenticationPresentationContextProviding) -> Void)?
+    weak var delegate: LoginViewControllerDelegate?
 
     override func viewDidLoad() {}
 
@@ -26,8 +31,9 @@ final class LoginViewController: UIViewController, StoryBoarded {
     }
 
     func authorizeCompltion() {
-        DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.didFinishLogin()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 }

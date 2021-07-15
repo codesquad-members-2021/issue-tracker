@@ -39,8 +39,8 @@ final class AppCoordinator: Coordinator {
     }
 
     private func showLoginFlow() {
+        loginCoordinator.delegate = self
         loginCoordinator.start()
-
     }
 
     private func showTabBarFlow() {
@@ -52,5 +52,11 @@ final class AppCoordinator: Coordinator {
             return true
         }
         return toggle
+    }
+}
+
+extension AppCoordinator: LoginViewCoordinatorDelegate {
+    func completeLogin() {
+        showTabBarFlow()
     }
 }
