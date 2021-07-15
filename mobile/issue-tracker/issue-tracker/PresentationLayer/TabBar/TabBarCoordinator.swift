@@ -29,6 +29,7 @@ final class TabBarCoordinator: Coordinator {
         issueListCoordinator.start()
 
         tabBarController.viewControllers = [issueListCoordinator.navigation ?? .init()]
-        navigation?.present(tabBarController, animated: true)
+
+        navigation?.setViewControllers([tabBarController], animated: false)
     }
 }

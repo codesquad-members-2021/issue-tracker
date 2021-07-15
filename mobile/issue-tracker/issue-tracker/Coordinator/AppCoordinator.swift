@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KeychainSwift
 
 protocol AppCoordinatorDependencies {
     func makeLoginViewCoordinator(navigation: UINavigationController, dependency: LoginViewCoordinatorDependencies) -> LoginViewCoordinator
@@ -17,29 +18,39 @@ final class AppCoordinator: Coordinator {
     var navigation: UINavigationController?
 
     typealias dependency = AppCoordinatorDependencies & LoginViewCoordinatorDependencies & TabBarCoordinatorDependencies
-    private var loginViewCoordinatorDependenies: LoginViewCoordinator
-    private var tabBarViewControllerFactory: TabBarCoordinator
+    private var loginCoordinator: LoginViewCoordinator
+    private var tabBarCoordinator: TabBarCoordinator
 
     init(navigation: UINavigationController = UINavigationController(),
          dependency: dependency) {
         self.navigation = navigation
-        loginViewCoordinatorDependenies = dependency.makeLoginViewCoordinator(navigation: navigation,
-                                                                              dependency: dependency)
-        tabBarViewControllerFactory = dependency.makeTabBarCoordinator(navigation: navigation,
-                                                                       dependency: dependency)
+        loginCoordinator = dependency.makeLoginViewCoordinator(navigation: navigation,
+                                                               dependency: dependency)
+        tabBarCoordinator = dependency.makeTabBarCoordinator(navigation: navigation,
+                                                             dependency: dependency)
     }
 
     func start() {
-        let intialViewController = IntialViewController()
-        navigation?.pushViewController(intialViewController, animated: true)
+        if isEmptyToken() {
+            showLoginFlow()
+        } else {
+            showTabBarFlow()
+        }
     }
 
-    func showLoginFlow() {
-        loginViewCoordinatorDependenies.start()
+    private func showLoginFlow() {
+        loginCoordinator.start()
+
     }
 
-    func showTabBarFlow() {
-        tabBarViewControllerFactory.start()
+    private func showTabBarFlow() {
+        tabBarCoordinator.start()
     }
 
+    private func isEmptyToken() -> Bool {
+        guard let toggle = KeychainSwift().get("token")?.isEmpty else {
+            return true
+        }
+        return toggle
+    }
 }

@@ -19,13 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let screen = (scene as? UIWindowScene) else { return }
 
         let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = screen
         window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+
         appCoordinator = AppCoordinator(navigation: navigationController,
                                         dependency: appDependency)
         appCoordinator?.start()
-        window?.makeKeyAndVisible()
     }
 }

@@ -24,7 +24,7 @@ protocol IssueListCoordinatorDependencies {
     }
 
     func start() {
-        let issueListViewController: IssueListViewController = issueListViewControllerFactory()
+        let issueListViewController = issueListViewControllerFactory()
 
         navigation?.tabBarItem = UITabBarItem(type: .issue)
         navigation?.pushViewController(issueListViewController, animated: true)

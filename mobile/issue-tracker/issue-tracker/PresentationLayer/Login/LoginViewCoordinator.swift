@@ -24,6 +24,6 @@ final class LoginViewCoordinator: Coordinator {
 
     func start() {
         let loginViewController = loginViewControllerFactory()
-        navigation?.present(loginViewController, animated: true)
+        navigation?.setViewControllers([loginViewController], animated: true)
     }
 }

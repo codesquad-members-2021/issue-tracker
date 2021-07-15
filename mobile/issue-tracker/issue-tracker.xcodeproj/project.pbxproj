@@ -28,7 +28,6 @@
 		BF370DB62677208400E6C090 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF370DB52677208400E6C090 /* RepositoryTests.swift */; };
 		BF370DB726772F0700E6C090 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D12671BE6B002C6D80 /* LoginRepository.swift */; };
 		BF370DB82677308000E6C090 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399D52671C015002C6D80 /* Error.swift */; };
-		BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */; };
 		BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */; };
 		BF50FE68268022950084F73F /* ASWebAuthPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */; };
 		BF7B7CD72696AFE400278518 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */; };
@@ -122,7 +121,6 @@
 		BF251D292695AB9700834E33 /* LeftAlignCollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignCollectionFlowLayout.swift; sourceTree = "<group>"; };
 		BF2AA765269987420091D081 /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 		BF370DB52677208400E6C090 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
-		BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntialViewController.swift; sourceTree = "<group>"; };
 		BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthPublisher.swift; sourceTree = "<group>"; };
 		BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -269,7 +267,6 @@
 				BF9D0901269D5579009B6AA0 /* TabBar */,
 				BF0A6BDB266F4EE5000F3BC5 /* Main.storyboard */,
 				BFD75CDC269453CF004695E9 /* NavigationController.swift */,
-				BF50FE5F267FAB5B0084F73F /* IntialViewController.swift */,
 				BF9D08F2269CC854009B6AA0 /* LabelCoordinator.swift */,
 				BF9D08F4269CC864009B6AA0 /* MilestoneCoordinator.swift */,
 				BF9D08F6269CC872009B6AA0 /* InfoCoordinator.swift */,
@@ -618,7 +615,6 @@
 				BFB399D92671D7C7002C6D80 /* Auth.swift in Sources */,
 				BFD75CDD269453CF004695E9 /* NavigationController.swift in Sources */,
 				BFB399D22671BE6B002C6D80 /* LoginRepository.swift in Sources */,
-				BF50FE60267FAB5B0084F73F /* IntialViewController.swift in Sources */,
 				BFD21986268EA44D00FEF16C /* URLSession+Extension.swift in Sources */,
 				BF9D08F5269CC864009B6AA0 /* MilestoneCoordinator.swift in Sources */,
 				BF9D0943269E204E009B6AA0 /* AppCoordinator.swift in Sources */,
