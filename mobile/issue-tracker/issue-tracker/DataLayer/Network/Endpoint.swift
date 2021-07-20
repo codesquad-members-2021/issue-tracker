@@ -28,9 +28,9 @@ struct EndPoint: EndPointGenerator {
     private func baseURL(path: String) -> URL? {
         var component = URLComponents()
         component.scheme = "http"
-        component.host = "localhost"
+        component.host = "issue-tracker.pyro-squad.com"
         component.port = 8080
-        component.path = "/api/ios/" + path
+        component.path = "/api/web/" + path
         return component.url
     }
 
