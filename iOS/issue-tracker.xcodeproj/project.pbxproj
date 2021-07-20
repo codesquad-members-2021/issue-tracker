@@ -167,7 +167,7 @@
 				10D4258326709D3300AE119C /* Extension */,
 				10BCA8A3266F38D700DBBA61 /* Login */,
 				10ED3B7E2671C1F600FCBF2E /* Photo */,
-				10ED3B7D2671AFA000FCBF2E /* NewIssue */,
+				10ED3B7D2671AFA000FCBF2E /* IssueEdit */,
 				10D4258026709CB000AE119C /* IssueList */,
 			);
 			path = "issue-tracker";
@@ -193,13 +193,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		10ED3B7D2671AFA000FCBF2E /* NewIssue */ = {
+		10ED3B7D2671AFA000FCBF2E /* IssueEdit */ = {
 			isa = PBXGroup;
 			children = (
 				1029609A26733FB800669988 /* IssueEdit.storyboard */,
 				10BDE6B42670C324007B38AF /* IssueEditViewController.swift */,
 			);
-			path = NewIssue;
+			path = IssueEdit;
 			sourceTree = "<group>";
 		};
 		10ED3B7E2671C1F600FCBF2E /* Photo */ = {

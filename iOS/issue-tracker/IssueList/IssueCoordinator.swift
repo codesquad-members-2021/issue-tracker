@@ -16,6 +16,19 @@ class IssueCoordinator: NSObject, Coordinator {
         createIssueListVC()
     }
     
+    func present(view: PresentableView) {
+        switch view {
+        case .IssueList:
+            createIssueListVC()
+        case .IssueEdit:
+            pushEditView()
+        case .ImagePicker:
+            pushImagePickerView()
+        default:
+            return
+        }
+    }
+    
     private func createIssueListVC() {
         guard let issueListVC = IssueListViewController.instantiate(name: StoryBoardName.IssueList.description) else {
             return
@@ -29,7 +42,7 @@ class IssueCoordinator: NSObject, Coordinator {
         issueListVC.coordinator = self
     }
     
-    func pushEditView() {
+    private func pushEditView() {
         guard let issueEditVC = IssueEditViewController.instantiate(name: StoryBoardName.IssueEdit.description) else {
             return
         }
@@ -37,7 +50,7 @@ class IssueCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(issueEditVC, animated: true)
     }
     
-    func pushImagePickerView() {
+    private func pushImagePickerView() {
         let imagePickerDelegate = ImagePickerDelegate()
         let imagePicker = ImagePicker.init(presentationController: self.navigationController, delegate: imagePickerDelegate)
         imagePicker.coordinator = self

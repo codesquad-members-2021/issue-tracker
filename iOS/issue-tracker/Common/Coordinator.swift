@@ -8,5 +8,13 @@
 import UIKit
 
 protocol Coordinator: AnyObject {
+    
     var navigationController: UINavigationController { get set }
+    func present(view: PresentableView)
+}
+
+enum PresentableView {
+    case IssueList
+    case IssueEdit
+    case ImagePicker
 }

@@ -40,10 +40,7 @@ class IssueEditViewController: UIViewController, ReuseIdentity {
 
     @objc
     func insertPhoto() {
-        guard let issueCoordinator = coordinator as? IssueCoordinator else {
-            return
-        }
-        issueCoordinator.pushImagePickerView()
+        coordinator?.present(view: .ImagePicker)
     }
     
 }
