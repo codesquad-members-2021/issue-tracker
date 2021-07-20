@@ -7,45 +7,40 @@
 
 import UIKit
 
-protocol TabBarCoordinatorDependencies {
-    func makeIssueListCoordinator() -> IssueListCoordinator
-    func makeLabelCoordinator() -> LabelCoordinator
-    func makeMilestoneCoordinator() -> MilestoneCoordinator
-    func makeInfoCoordinator() -> InfoCoordinator
-}
-
 final class TabBarCoordinator: Coordinator {
     var navigation: UINavigationController?
 
-    private let issueListCoordinatorFactory: () -> IssueListCoordinator
-    private let labelCoordinatorFactory: () -> LabelCoordinator
-    private let milestoneCoordinatorFactory: () -> MilestoneCoordinator
-    private let infoCoordinatorFactory: () -> InfoCoordinator
+    struct Dependency {
+        let issueListCoordinatorFactory: () -> IssueListCoordinator
+        let labelCoordinatorFactory: () -> LabelCoordinator
+        let milestoneCoordinatorFactory: () -> MilestoneCoordinator
+        let infoCoordinatorFactory: () -> InfoCoordinator
+    }
+
+    let issueListCoordinator: IssueListCoordinator
+    let labelCoordinator: LabelCoordinator
+    let milestoneCoordinator: MilestoneCoordinator
+    let infoCoordinator: InfoCoordinator
 
     init(navigation: UINavigationController,
-         dependency: TabBarCoordinatorDependencies) {
+         dependency: Dependency) {
         self.navigation = navigation
-        self.issueListCoordinatorFactory = dependency.makeIssueListCoordinator
-        self.labelCoordinatorFactory = dependency.makeLabelCoordinator
-        self.milestoneCoordinatorFactory = dependency.makeMilestoneCoordinator
-        self.infoCoordinatorFactory = dependency.makeInfoCoordinator
+        self.issueListCoordinator = dependency.issueListCoordinatorFactory()
+        self.labelCoordinator = dependency.labelCoordinatorFactory()
+        self.milestoneCoordinator = dependency.milestoneCoordinatorFactory()
+        self.infoCoordinator = dependency.infoCoordinatorFactory()
     }
 
     func start() {
         let tabBarController = UITabBarController()
 
-        let issueListCoordinator = issueListCoordinatorFactory()
-        let lableCoordinator = labelCoordinatorFactory()
-        let milestoneCoordinator = milestoneCoordinatorFactory()
-        let infoCoordinator = infoCoordinatorFactory()
-
         issueListCoordinator.start()
-        lableCoordinator.start()
+        labelCoordinator.start()
         milestoneCoordinator.start()
         infoCoordinator.start()
 
         tabBarController.viewControllers = [issueListCoordinator.navigation ?? .init(),
-                                            lableCoordinator.navigation ?? .init(),
+                                            labelCoordinator.navigation ?? .init(),
                                             milestoneCoordinator.navigation ?? .init(),
                                             infoCoordinator.navigation ?? .init()]
 

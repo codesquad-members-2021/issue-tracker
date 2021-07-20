@@ -15,7 +15,23 @@ struct AppDependency {
     }
 
     func makeTabBarCoordinator(navigation: UINavigationController) -> TabBarCoordinator {
-        return .init(navigation: navigation, dependency: self)
+        return .init(navigation: navigation, dependency: .init(issueListCoordinatorFactory: makeIssueListCoordinator, labelCoordinatorFactory: makeLabelCoordinator, milestoneCoordinatorFactory: makeMilestoneCoordinator, infoCoordinatorFactory: makeInfoCoordinator))
+    }
+
+    func makeIssueListCoordinator() -> IssueListCoordinator {
+        return IssueListCoordinator(navigation: NavigationController(),
+                                    dependency: self)
+    }
+    func makeLabelCoordinator() -> LabelCoordinator {
+        return LabelCoordinator()
+    }
+
+    func makeMilestoneCoordinator() -> MilestoneCoordinator {
+        return MilestoneCoordinator()
+    }
+
+    func makeInfoCoordinator() -> InfoCoordinator {
+        return InfoCoordinator()
     }
 }
 
@@ -52,24 +68,4 @@ extension AppDependency: LoginViewCoordinatorDependencies {
         loginViewController.githubLoginHandler = loginViewModel.fetctGithubLogin(viewController:)
         return loginViewController
     }
-}
-
-extension AppDependency: TabBarCoordinatorDependencies {
-
-    func makeIssueListCoordinator() -> IssueListCoordinator {
-        return IssueListCoordinator(navigation: NavigationController(),
-                                    dependency: self)
-    }
-    func makeLabelCoordinator() -> LabelCoordinator {
-        return LabelCoordinator()
-    }
-
-    func makeMilestoneCoordinator() -> MilestoneCoordinator {
-        return MilestoneCoordinator()
-    }
-
-    func makeInfoCoordinator() -> InfoCoordinator {
-        return InfoCoordinator()
-    }
-
 }
