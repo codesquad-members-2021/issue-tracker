@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CxS-Sy-Rdc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Italic.ttf">
+            <string>Montserrat-Italic</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="IHw-7l-8wR">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="CxS-Sy-Rdc" customClass="LoginViewController" customModule="issue_tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XRs-Ba-eL1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STh-RM-usK">
+                                <rect key="frame" x="0.0" y="408.5" width="414" height="79"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hbj-Hz-d5A">
+                                        <rect key="frame" x="16" y="10" width="382" height="59"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1bO-JD-j2o">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="24.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNw-SX-UHd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="44.5" height="24.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ex-vU-eXv">
+                                                        <rect key="frame" x="60.5" y="0.0" width="321.5" height="24.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Xir-Ba-O1i">
+                                                <rect key="frame" x="0.0" y="34.5" width="382" height="24.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fon-ch-ciY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="59" height="24.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NaA-35-MNg">
+                                                        <rect key="frame" x="75" y="0.0" width="307" height="24.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hbj-Hz-d5A" secondAttribute="trailing" constant="16" id="KnP-qY-LAi"/>
+                                    <constraint firstItem="Hbj-Hz-d5A" firstAttribute="top" secondItem="STh-RM-usK" secondAttribute="top" constant="10" id="XxM-l6-hnb"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hbj-Hz-d5A" secondAttribute="bottom" constant="10" id="Z1G-lP-ina"/>
+                                    <constraint firstAttribute="height" constant="79" id="cyA-Ds-Qej"/>
+                                    <constraint firstItem="Hbj-Hz-d5A" firstAttribute="leading" secondItem="STh-RM-usK" secondAttribute="leading" constant="16" id="zpL-eG-zYT"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="8xb-ZV-hjX">
+                                <rect key="frame" x="118.5" y="519.5" width="177" height="33"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfe-fo-ptj">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="33"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <state key="normal" title="로그인"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7J-Dt-zOu">
+                                        <rect key="frame" x="121" y="0.0" width="56" height="33"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="회원가입"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issue-Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kl9-Ti-Egs">
+                                <rect key="frame" x="0.0" y="277.5" width="414" height="59"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Italic" family="Montserrat" pointSize="48"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dcd-cT-GFi"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="Kl9-Ti-Egs" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" id="2hq-aK-ssf"/>
+                            <constraint firstItem="8xb-ZV-hjX" firstAttribute="top" secondItem="STh-RM-usK" secondAttribute="bottom" constant="32" id="3ks-fj-vxZ"/>
+                            <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="Kl9-Ti-Egs" secondAttribute="trailing" id="Idp-ss-p8k"/>
+                            <constraint firstItem="STh-RM-usK" firstAttribute="centerY" secondItem="XRs-Ba-eL1" secondAttribute="centerY" id="QEI-lI-cJr"/>
+                            <constraint firstItem="STh-RM-usK" firstAttribute="top" secondItem="Kl9-Ti-Egs" secondAttribute="bottom" constant="72" id="ZLH-Au-mKH"/>
+                            <constraint firstItem="8xb-ZV-hjX" firstAttribute="centerX" secondItem="XRs-Ba-eL1" secondAttribute="centerX" id="dWn-8A-75W"/>
+                            <constraint firstItem="Dcd-cT-GFi" firstAttribute="trailing" secondItem="STh-RM-usK" secondAttribute="trailing" id="hQi-2D-vV2"/>
+                            <constraint firstItem="STh-RM-usK" firstAttribute="leading" secondItem="Dcd-cT-GFi" secondAttribute="leading" id="ju3-ox-IO9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="standardAccountStackView" destination="8xb-ZV-hjX" id="Sg9-Zm-Uoc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kTr-33-mlp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028.985507246377" y="130.58035714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
