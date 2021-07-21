@@ -13,7 +13,7 @@ protocol IssueListCoordinatorDependencies {
 
  final class IssueListCoordinator: Coordinator {
 
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     private let issueListViewControllerFactory: () -> IssueListViewController
 
@@ -26,7 +26,7 @@ protocol IssueListCoordinatorDependencies {
     func loadInitalView() {
         let issueListViewController = issueListViewControllerFactory()
 
-        navigation?.tabBarItem = UITabBarItem(type: .issue)
-        navigation?.pushViewController(issueListViewController, animated: true)
+        navigation.tabBarItem = UITabBarItem(type: .issue)
+        navigation.pushViewController(issueListViewController, animated: true)
     }
  }

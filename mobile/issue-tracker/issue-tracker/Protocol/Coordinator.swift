@@ -8,7 +8,7 @@
  import UIKit
 
  protocol Coordinator {
-    var navigation: UINavigationController? { get set }
+    var navigation: UINavigationController { get set }
     func loadInitalView()
     func coordinator(to coordinator: Coordinator)
  }

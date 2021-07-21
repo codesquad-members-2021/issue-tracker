@@ -9,13 +9,13 @@ import UIKit
 
 final class MilestoneCoordinator: Coordinator {
 
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     init(navigation: UINavigationController = NavigationController()) {
         self.navigation = navigation
     }
 
     func loadInitalView() {
-        navigation?.tabBarItem = UITabBarItem(type: .milestone)
+        navigation.tabBarItem = UITabBarItem(type: .milestone)
     }
 }

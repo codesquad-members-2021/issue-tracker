@@ -9,13 +9,13 @@ import UIKit
 
 final class InfoCoordinator: Coordinator {
 
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     init(navigation: UINavigationController = NavigationController()) {
         self.navigation = navigation
     }
 
     func loadInitalView() {
-        navigation?.tabBarItem = UITabBarItem(type: .info)
+        navigation.tabBarItem = UITabBarItem(type: .info)
     }
 }

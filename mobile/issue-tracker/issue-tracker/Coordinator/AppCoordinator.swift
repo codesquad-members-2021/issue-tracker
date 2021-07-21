@@ -10,7 +10,7 @@ import KeychainSwift
 
 final class AppCoordinator: Coordinator {
 
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     struct Dependency {
         var loginCoordinatorFactory: (UINavigationController) -> LoginViewCoordinator

@@ -8,7 +8,7 @@
 import UIKit
 
 final class TabBarCoordinator: Coordinator {
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     struct Dependency {
         let issueListCoordinatorFactory: () -> IssueListCoordinator
@@ -39,11 +39,11 @@ final class TabBarCoordinator: Coordinator {
         milestoneCoordinator.loadInitalView()
         infoCoordinator.loadInitalView()
 
-        tabBarController.viewControllers = [issueListCoordinator.navigation ?? .init(),
-                                            labelCoordinator.navigation ?? .init(),
-                                            milestoneCoordinator.navigation ?? .init(),
-                                            infoCoordinator.navigation ?? .init()]
+        tabBarController.viewControllers = [issueListCoordinator.navigation,
+                                            labelCoordinator.navigation,
+                                            milestoneCoordinator.navigation,
+                                            infoCoordinator.navigation]
 
-        navigation?.setViewControllers([tabBarController], animated: false)
+        navigation.setViewControllers([tabBarController], animated: false)
     }
 }

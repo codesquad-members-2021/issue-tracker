@@ -16,7 +16,7 @@ protocol LoginViewCoordinatorDelegate: AnyObject {
 }
 
 final class LoginViewCoordinator: Coordinator {
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     private let loginViewControllerFactory: () -> LoginViewController
     weak var delegate: LoginViewCoordinatorDelegate?
@@ -30,7 +30,7 @@ final class LoginViewCoordinator: Coordinator {
     func loadInitalView() {
         let loginViewController = loginViewControllerFactory()
         loginViewController.delegate = self
-        navigation?.setViewControllers([loginViewController], animated: true)
+        navigation.setViewControllers([loginViewController], animated: true)
     }
 }
 

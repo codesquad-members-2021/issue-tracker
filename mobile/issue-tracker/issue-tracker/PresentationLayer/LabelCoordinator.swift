@@ -9,13 +9,13 @@ import UIKit
 
 final class LabelCoordinator: Coordinator {
 
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
     init(navigation: UINavigationController = NavigationController()) {
         self.navigation = navigation
     }
 
     func loadInitalView() {
-        navigation?.tabBarItem = UITabBarItem(type: .label)
+        navigation.tabBarItem = UITabBarItem(type: .label)
     }
 }
