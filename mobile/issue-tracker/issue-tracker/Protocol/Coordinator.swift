@@ -9,12 +9,12 @@
 
  protocol Coordinator {
     var navigation: UINavigationController? { get set }
-    func start()
+    func loadInitalView()
     func coordinator(to coordinator: Coordinator)
  }
 
  extension Coordinator {
     func coordinator(to coordinator: Coordinator) {
-        coordinator.start()
+        coordinator.loadInitalView()
     }
  }

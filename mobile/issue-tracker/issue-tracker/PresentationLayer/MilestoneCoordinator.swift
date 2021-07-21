@@ -15,7 +15,7 @@ final class MilestoneCoordinator: Coordinator {
         self.navigation = navigation
     }
 
-    func start() {
+    func loadInitalView() {
         navigation?.tabBarItem = UITabBarItem(type: .milestone)
     }
 }

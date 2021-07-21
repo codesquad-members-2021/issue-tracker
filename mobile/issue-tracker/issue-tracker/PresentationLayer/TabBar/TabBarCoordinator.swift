@@ -31,13 +31,13 @@ final class TabBarCoordinator: Coordinator {
         self.infoCoordinator = dependency.infoCoordinatorFactory()
     }
 
-    func start() {
+    func loadInitalView() {
         let tabBarController = UITabBarController()
 
-        issueListCoordinator.start()
-        labelCoordinator.start()
-        milestoneCoordinator.start()
-        infoCoordinator.start()
+        issueListCoordinator.loadInitalView()
+        labelCoordinator.loadInitalView()
+        milestoneCoordinator.loadInitalView()
+        infoCoordinator.loadInitalView()
 
         tabBarController.viewControllers = [issueListCoordinator.navigation ?? .init(),
                                             labelCoordinator.navigation ?? .init(),

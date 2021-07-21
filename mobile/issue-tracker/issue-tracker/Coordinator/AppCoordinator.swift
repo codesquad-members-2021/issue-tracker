@@ -28,7 +28,7 @@ final class AppCoordinator: Coordinator {
         self.tabBarCoordinator = dependency.tabBarCoordinatorFactory(navigation)
     }
 
-    func start() {
+    func loadInitalView() {
         if isEmptyToken() {
             showLoginFlow()
         } else {
@@ -38,11 +38,11 @@ final class AppCoordinator: Coordinator {
 
     private func showLoginFlow() {
         loginCoordinator.delegate = self
-        loginCoordinator.start()
+        loginCoordinator.loadInitalView()
     }
 
     private func showTabBarFlow() {
-        tabBarCoordinator.start()
+        tabBarCoordinator.loadInitalView()
     }
 
     private func isEmptyToken() -> Bool {

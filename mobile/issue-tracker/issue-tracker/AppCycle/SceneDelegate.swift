@@ -30,6 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                         dependency: .init(loginCoordinatorFactory: appDependency.makeLoginCoordinator,
                                                           tabBarCoordinatorFactory: appDependency.makeTabBarCoordinator))
 
-        appCoordinator?.start()
+        appCoordinator?.loadInitalView()
     }
 }

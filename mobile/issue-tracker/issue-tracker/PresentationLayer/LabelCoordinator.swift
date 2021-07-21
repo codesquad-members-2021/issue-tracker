@@ -15,7 +15,7 @@ final class LabelCoordinator: Coordinator {
         self.navigation = navigation
     }
 
-    func start() {
+    func loadInitalView() {
         navigation?.tabBarItem = UITabBarItem(type: .label)
     }
 }
