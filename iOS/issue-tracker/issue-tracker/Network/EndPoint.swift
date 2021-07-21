@@ -1,16 +1,45 @@
 import Foundation
 
+enum Scheme: String {
+    
+    case http = "http"
+    
+}
+
+enum Host: String {
+    
+    case base = "3.37.234.113"
+    
+}
+
+enum Path: String {
+    
+    case api = "/api"
+    case user = "/user"
+    case issues = "/issues"
+    case close = "/close"
+    case label = "/labels"
+    case milestone = "/milestones"
+    
+}
+
 struct EndPoint {
+
+    private var scheme: String
+    private var host: String
+    private var path: String
     
-    private let scheme = "http"
-    private let host = "13.125.35.62"
-    private let userPath = "/api/user"
+    init(scheme: String, host: String, path: String) {
+        self.scheme = scheme
+        self.host = host
+        self.path = path
+    }
     
-    func makeUserInfoURL() -> URL? {
+    func makeURL(with path: String = "") -> URL? {
         var component = URLComponents()
         component.scheme = scheme
         component.host = host
-        component.path = userPath
+        component.path = self.path + path
         return component.url
     }
     

@@ -2,27 +2,38 @@ import Foundation
 import Combine
 
 class UserInfoViewModel {
+    
     @Published private var thumbnailImage: String
-    private var fetchUserInfoUseCase: FetchUserInfoUseCase
-    private var subscriptions: Set<AnyCancellable>
+    @Published private var errorMessage: NetworkError?
+    private let defaultUserInfoUseCase: UserInfoUseCase
 
-    init() {
+    init(userInfoUseCase: UserInfoUseCase) {
         self.thumbnailImage = ""
-        self.fetchUserInfoUseCase = FetchUserInfoUseCase()
-        self.subscriptions = Set<AnyCancellable>()
+        self.errorMessage = nil
+        self.defaultUserInfoUseCase = userInfoUseCase
     }
     
-    func configureThumbnailImage() {
-        fetchUserInfoUseCase.executeFetchingUserInfo { imageURL in
-            self.thumbnailImage = imageURL
+    func fetchThumbnailImage() {
+        defaultUserInfoUseCase.executeFetchingUserInfo { result in
+            switch result {
+            case .failure(let error):
+                self.errorMessage = error
+            case .success(let imageURL):
+                self.thumbnailImage = imageURL
+            }
         }
     }
     
-    func didUpdateThumbnailImage(completion: @escaping (String) -> Void) {
-        $thumbnailImage
+    func didUpdateThumbnailImage() -> AnyPublisher<String, Never> {
+        return $thumbnailImage
             .receive(on: DispatchQueue.main)
-            .sink { value in
-                completion(value)
-            }.store(in: &subscriptions)
+            .eraseToAnyPublisher()
     }
+    
+    func didUpdateErrorMessage() -> AnyPublisher<NetworkError?, Never> {
+        return $errorMessage
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
 }

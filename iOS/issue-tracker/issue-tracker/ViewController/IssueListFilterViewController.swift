@@ -26,12 +26,16 @@ class IssueListFilterViewController: UIViewController {
         filterTableView.tableFooterView = UIView()
     }
     
-    func configureHeaderView(section: Int) -> UIView {
+    private func makeHeaderView(section: Int) -> UIView {
         let headerView = UIView(frame: .zero)
-        headerView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        let customGray = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
+        headerView.backgroundColor = customGray
+        
         let label = UILabel(frame: .zero)
-        label.textColor = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        let customDarkGray = UIColor(red: 135/255, green: 135/255, blue: 141/255, alpha: 1)
+        label.textColor = customDarkGray
         headerView.addSubview(label)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
@@ -42,6 +46,7 @@ class IssueListFilterViewController: UIViewController {
     @IBAction func pressedCancelButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension IssueListFilterViewController: UITableViewDataSource, UITableViewDelegate {
@@ -76,11 +81,14 @@ extension IssueListFilterViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return configureHeaderView(section: section)
+        return makeHeaderView(section: section)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let heightForRowAt: CGFloat = 44
         return heightForRowAt
     }
+    
 }
+
+extension IssueListFilterViewController: Identifying { }

@@ -17,30 +17,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpf-ep-Gd6">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpf-ep-Gd6">
                         <rect key="frame" x="16" y="24" width="243" height="26.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈에 대한 설명" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gT-3I-aPM">
-                        <rect key="frame" x="16" y="66.5" width="288" height="20.5"/>
+                        <rect key="frame" x="16" y="66.5" width="288" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="22" id="fAR-vw-GIJ"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="fAR-vw-GIJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mileStoneImage" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-Sy-Bl7">
-                        <rect key="frame" x="17" y="103" width="17" height="18"/>
+                        <rect key="frame" x="17" y="104.5" width="17" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="ctt-U8-fTt"/>
                             <constraint firstAttribute="height" constant="18" id="r8E-vy-dRa"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마일스톤 이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIi-ua-HME">
-                        <rect key="frame" x="38" y="103" width="93" height="21"/>
+                        <rect key="frame" x="38" y="104.5" width="93" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                     <constraint firstAttribute="bottom" secondItem="oKA-M4-CeL" secondAttribute="bottom" id="CfU-pt-5YU"/>
                     <constraint firstItem="Qpf-ep-Gd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Dq1-Fy-ZXC"/>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="GIi-ua-HME" secondAttribute="trailing" constant="173" id="I8Y-K6-FNE"/>
-                    <constraint firstItem="oKA-M4-CeL" firstAttribute="top" relation="lessThanOrEqual" secondItem="E9A-TQ-zbz" secondAttribute="bottom" constant="146" id="J1K-WP-IgH"/>
+                    <constraint firstItem="oKA-M4-CeL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="E9A-TQ-zbz" secondAttribute="bottom" constant="146" id="J1K-WP-IgH"/>
                     <constraint firstItem="E9A-TQ-zbz" firstAttribute="leading" secondItem="Qpf-ep-Gd6" secondAttribute="trailing" constant="16" id="R01-7V-osg"/>
                     <constraint firstItem="GIi-ua-HME" firstAttribute="leading" secondItem="j3A-Sy-Bl7" secondAttribute="trailing" constant="4" id="RnV-1F-NaF"/>
                     <constraint firstAttribute="trailing" secondItem="5gT-3I-aPM" secondAttribute="trailing" constant="16" id="Zna-aJ-ajn"/>
@@ -95,12 +95,18 @@
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="k6e-V3-uEr"/>
                     <constraint firstItem="j3A-Sy-Bl7" firstAttribute="top" secondItem="5gT-3I-aPM" secondAttribute="bottom" constant="16" id="nRS-wo-Dx5"/>
                     <constraint firstItem="GeO-05-zJU" firstAttribute="top" secondItem="GIi-ua-HME" secondAttribute="bottom" constant="16" id="nU8-3s-ENI"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="GeO-05-zJU" secondAttribute="bottom" constant="19" id="qgb-9I-Eq3"/>
+                    <constraint firstItem="oKA-M4-CeL" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GeO-05-zJU" secondAttribute="bottom" constant="30" id="qgb-9I-Eq3"/>
                     <constraint firstItem="5gT-3I-aPM" firstAttribute="top" secondItem="Qpf-ep-Gd6" secondAttribute="bottom" constant="16" id="x52-N2-NGe"/>
                     <constraint firstItem="E9A-TQ-zbz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="xPf-IM-s0r"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="content" destination="5gT-3I-aPM" id="eDy-tP-p13"/>
+                <outlet property="label" destination="GeO-05-zJU" id="NgY-xt-YXb"/>
+                <outlet property="milestone" destination="GIi-ua-HME" id="NCq-8I-ru0"/>
+                <outlet property="title" destination="Qpf-ep-Gd6" id="FGh-Ap-6hq"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="123.88392857142857"/>
         </tableViewCell>
     </objects>

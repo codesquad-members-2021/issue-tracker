@@ -3,52 +3,72 @@ import Combine
 
 struct NetworkManager {
     
-    private let jwtManager: JWTManager
+    private let session: URLSessionProtocol
+    private let requestManager: RequestManager
     
-    init() {
-        self.jwtManager = JWTManager()
+    init(requestManager: RequestManager, session: URLSessionProtocol) {
+        self.requestManager = requestManager
+        self.session = session
     }
     
-    func setAuthorizationRequest(url: URL) -> URLRequest {
-        guard let jwt = jwtManager.get() else {
-            return URLRequest(url: url)
-        }
-        
-        var request = URLRequest(url: url)
-        let requestValue = "Bearer " + jwt
-        let headerField = "Authorization"
-        
-        request.setValue(requestValue, forHTTPHeaderField: headerField)
-        return request
-    }
-    
-    func get<T>(with url: URL?, type: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
+    func sendRequest<T: Decodable>(with url: URL?, method: HttpMethod, type: T.Type) -> AnyPublisher<T, NetworkError> {
         guard let url = url else {
-            let error = NetworkError.url(description: "The URL is not appropriate")
+            let error = NetworkError.url
             return Fail(error: error).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: self.setAuthorizationRequest(url: url))
-            .mapError { _ in NetworkError.networkConnection(desciption: "Network Error") }
-            .flatMap { data, response -> AnyPublisher<T, NetworkError> in
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    return Fail(error: NetworkError.networkConnection(desciption: "Response Error")).eraseToAnyPublisher()
-                }
-                guard 200..<300 ~= httpResponse.statusCode else {
-                    return Fail(error: NetworkError.networkConnection(desciption: "Status Error")).eraseToAnyPublisher()
-                }
+        let urlRequest = requestManager.makeRequest(url: url, method: method)
+        return session.dataTaskPublisher(for: urlRequest)
+            .mapError { _ in
+                NetworkError.networkConnection
+            }.print()
+            .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
                 let decodeData = Just(data)
                     .decode(type: type.self, decoder: JSONDecoder())
-                    .mapError { _ in NetworkError.decoding(description: "Decode Error")}.eraseToAnyPublisher()
+                    .mapError { _ in NetworkError.decoding }
+                    .eraseToAnyPublisher()
                 return decodeData
-            }.eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func sendRequest<T: Decodable, D: Encodable>(with url: URL?, method: HttpMethod, type: T.Type, body: D) -> AnyPublisher<T, NetworkError> {
+        guard let url = url else {
+            let error = NetworkError.url
+            return Fail(error: error).eraseToAnyPublisher()
+        }
+        
+        return Just(body).encode(encoder: JSONEncoder())
+            .mapError { _ in
+                return .encoding
+            }
+            .map { data -> URLRequest in
+                let urlRequest = requestManager.makeRequest(url: url, method: method, body: data)
+                return urlRequest
+            }
+            .flatMap { urlRequest in
+                session.dataTaskPublisher(for: urlRequest)
+                    .mapError { _ in NetworkError.networkConnection
+                    }
+                    .flatMap { data, _ -> AnyPublisher<T, NetworkError> in
+                        let decodeData = Just(data)
+                            .decode(type: type.self, decoder: JSONDecoder())
+                            .mapError { _ in NetworkError.decoding }
+                            .eraseToAnyPublisher()
+                        return decodeData
+                    }
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
     
 }
 
-enum NetworkError: Error {
-    case encoding(description: String)
-    case decoding(description: String)
-    case url(description: String)
-    case networkConnection(desciption: String)
+enum NetworkError: String, Error {
+
+    case encoding = "Encoding Error"
+    case decoding = "Decoding Error"
+    case url = "URL does not exist"
+    case networkConnection = "Network Error"
+    
 }

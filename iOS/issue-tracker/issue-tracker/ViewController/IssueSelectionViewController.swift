@@ -19,13 +19,13 @@ class IssueSelectionViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    func configureNavigationTitle() {
+    private func configureNavigationTitle() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34, weight: UIFont.Weight(700))]
         self.navigationItem.title = "이슈 선택"
     }
     
-    func configureCancelButton() {
+    private func configureCancelButton() {
         let button = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(pressedCancelButton))
         button.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight(600))], for: .normal)
         self.navigationItem.rightBarButtonItem = button
@@ -38,7 +38,9 @@ class IssueSelectionViewController: UIViewController {
 }
 
 extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 임시값
         return 4
     }
     
@@ -49,4 +51,7 @@ extension IssueSelectionViewController: UITableViewDataSource, UITableViewDelega
         
         return cell
     }
+    
 }
+
+extension IssueSelectionViewController: Identifying { }
