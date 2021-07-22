@@ -17,7 +17,7 @@ final class AppCoordinator: Coordinator {
         var tabBarCoordinatorFactory: ((UINavigationController) -> TabBarCoordinator)
     }
 
-    private let loginCoordinator: LoginViewCoordinator
+    private var loginCoordinator: LoginViewCoordinator
     private let tabBarCoordinator: TabBarCoordinator
 
     init(navigation: UINavigationController = UINavigationController(),
@@ -37,7 +37,9 @@ final class AppCoordinator: Coordinator {
     }
 
     private func showLoginFlow() {
-        loginCoordinator.delegate = self
+        loginCoordinator.authenticated = {
+            self.showTabBarFlow()
+        }
         loginCoordinator.loadInitalView()
     }
 
@@ -50,11 +52,5 @@ final class AppCoordinator: Coordinator {
             return true
         }
         return toggle
-    }
-}
-
-extension AppCoordinator: LoginViewCoordinatorDelegate {
-    func completeLogin() {
-        showTabBarFlow()
     }
 }
