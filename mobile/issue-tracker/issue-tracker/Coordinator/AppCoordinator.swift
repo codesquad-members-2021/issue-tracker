@@ -19,6 +19,9 @@ final class AppCoordinator: Coordinator {
 
     private var loginCoordinator: LoginViewCoordinator
     private let tabBarCoordinator: TabBarCoordinator
+    private var tokenState: Bool {
+        KeychainSwift().get("token")?.isEmpty ?? true
+    }
 
     init(navigation: UINavigationController = UINavigationController(),
          dependency: Dependency) {
@@ -29,7 +32,7 @@ final class AppCoordinator: Coordinator {
     }
 
     func loadInitalView() {
-        if isEmptyToken() {
+        if tokenState {
             showLoginFlow()
         } else {
             showTabBarFlow()
@@ -45,12 +48,5 @@ final class AppCoordinator: Coordinator {
 
     private func showTabBarFlow() {
         tabBarCoordinator.loadInitalView()
-    }
-
-    private func isEmptyToken() -> Bool {
-        guard let toggle = KeychainSwift().get("token")?.isEmpty else {
-            return true
-        }
-        return toggle
     }
 }
