@@ -9,15 +9,29 @@ import UIKit
 
 struct AppDependency {
     let endpoint = EndPoint()
-}
 
-extension AppDependency: AppCoordinatorDependencies {
-    func makeLoginViewCoordinator(navigation: UINavigationController, dependency: LoginViewCoordinatorDependencies) -> LoginViewCoordinator {
-        return LoginViewCoordinator(navigation: navigation, dependency: dependency)
+    func makeLoginCoordinator(navigation: UINavigationController) -> LoginViewCoordinator {
+        return .init(navigation: navigation, dependency: self)
     }
 
-    func makeTabBarCoordinator(navigation: UINavigationController, dependency: TabBarCoordinatorDependencies) -> TabBarCoordinator {
-        return TabBarCoordinator(navigation: navigation, dependency: dependency)
+    func makeTabBarCoordinator(navigation: UINavigationController) -> TabBarCoordinator {
+        return .init(navigation: navigation, dependency: .init(issueListCoordinatorFactory: makeIssueListCoordinator, labelCoordinatorFactory: makeLabelCoordinator, milestoneCoordinatorFactory: makeMilestoneCoordinator, infoCoordinatorFactory: makeInfoCoordinator))
+    }
+
+    func makeIssueListCoordinator() -> IssueListCoordinator {
+        return IssueListCoordinator(navigation: NavigationController(),
+                                    dependency: self)
+    }
+    func makeLabelCoordinator() -> LabelCoordinator {
+        return LabelCoordinator()
+    }
+
+    func makeMilestoneCoordinator() -> MilestoneCoordinator {
+        return MilestoneCoordinator()
+    }
+
+    func makeInfoCoordinator() -> InfoCoordinator {
+        return InfoCoordinator()
     }
 }
 
@@ -54,24 +68,4 @@ extension AppDependency: LoginViewCoordinatorDependencies {
         loginViewController.githubLoginHandler = loginViewModel.fetctGithubLogin(viewController:)
         return loginViewController
     }
-}
-
-extension AppDependency: TabBarCoordinatorDependencies {
-
-    func makeIssueListCoordinator() -> IssueListCoordinator {
-        return IssueListCoordinator(navigation: NavigationController(),
-                                    dependency: self)
-    }
-    func makeLabelCoordinator() -> LabelCoordinator {
-        return LabelCoordinator()
-    }
-
-    func makeMilestoneCoordinator() -> MilestoneCoordinator {
-        return MilestoneCoordinator()
-    }
-
-    func makeInfoCoordinator() -> InfoCoordinator {
-        return InfoCoordinator()
-    }
-
 }

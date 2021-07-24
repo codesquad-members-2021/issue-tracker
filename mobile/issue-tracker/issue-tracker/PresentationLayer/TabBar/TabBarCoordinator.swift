@@ -7,48 +7,43 @@
 
 import UIKit
 
-protocol TabBarCoordinatorDependencies {
-    func makeIssueListCoordinator() -> IssueListCoordinator
-    func makeLabelCoordinator() -> LabelCoordinator
-    func makeMilestoneCoordinator() -> MilestoneCoordinator
-    func makeInfoCoordinator() -> InfoCoordinator
-}
-
 final class TabBarCoordinator: Coordinator {
-    var navigation: UINavigationController?
+    var navigation: UINavigationController
 
-    private let issueListCoordinatorFactory: () -> IssueListCoordinator
-    private let labelCoordinatorFactory: () -> LabelCoordinator
-    private let milestoneCoordinatorFactory: () -> MilestoneCoordinator
-    private let infoCoordinatorFactory: () -> InfoCoordinator
-
-    init(navigation: UINavigationController,
-         dependency: TabBarCoordinatorDependencies) {
-        self.navigation = navigation
-        self.issueListCoordinatorFactory = dependency.makeIssueListCoordinator
-        self.labelCoordinatorFactory = dependency.makeLabelCoordinator
-        self.milestoneCoordinatorFactory = dependency.makeMilestoneCoordinator
-        self.infoCoordinatorFactory = dependency.makeInfoCoordinator
+    struct Dependency {
+        let issueListCoordinatorFactory: () -> IssueListCoordinator
+        let labelCoordinatorFactory: () -> LabelCoordinator
+        let milestoneCoordinatorFactory: () -> MilestoneCoordinator
+        let infoCoordinatorFactory: () -> InfoCoordinator
     }
 
-    func start() {
+    let issueListCoordinator: IssueListCoordinator
+    let labelCoordinator: LabelCoordinator
+    let milestoneCoordinator: MilestoneCoordinator
+    let infoCoordinator: InfoCoordinator
+
+    init(navigation: UINavigationController,
+         dependency: Dependency) {
+        self.navigation = navigation
+        self.issueListCoordinator = dependency.issueListCoordinatorFactory()
+        self.labelCoordinator = dependency.labelCoordinatorFactory()
+        self.milestoneCoordinator = dependency.milestoneCoordinatorFactory()
+        self.infoCoordinator = dependency.infoCoordinatorFactory()
+    }
+
+    func loadInitalView() {
         let tabBarController = UITabBarController()
 
-        let issueListCoordinator = issueListCoordinatorFactory()
-        let lableCoordinator = labelCoordinatorFactory()
-        let milestoneCoordinator = milestoneCoordinatorFactory()
-        let infoCoordinator = infoCoordinatorFactory()
+        issueListCoordinator.loadInitalView()
+        labelCoordinator.loadInitalView()
+        milestoneCoordinator.loadInitalView()
+        infoCoordinator.loadInitalView()
 
-        issueListCoordinator.start()
-        lableCoordinator.start()
-        milestoneCoordinator.start()
-        infoCoordinator.start()
+        tabBarController.viewControllers = [issueListCoordinator.navigation,
+                                            labelCoordinator.navigation,
+                                            milestoneCoordinator.navigation,
+                                            infoCoordinator.navigation]
 
-        tabBarController.viewControllers = [issueListCoordinator.navigation ?? .init(),
-                                            lableCoordinator.navigation ?? .init(),
-                                            milestoneCoordinator.navigation ?? .init(),
-                                            infoCoordinator.navigation ?? .init()]
-
-        navigation?.setViewControllers([tabBarController], animated: false)
+        navigation.setViewControllers([tabBarController], animated: false)
     }
 }

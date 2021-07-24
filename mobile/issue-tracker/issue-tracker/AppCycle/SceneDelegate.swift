@@ -27,7 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
 
         appCoordinator = AppCoordinator(navigation: navigationController,
-                                        dependency: appDependency)
-        appCoordinator?.start()
+                                        dependency: .init(loginCoordinatorFactory: appDependency.makeLoginCoordinator,
+                                                          tabBarCoordinatorFactory: appDependency.makeTabBarCoordinator))
+
+        appCoordinator?.loadInitalView()
     }
 }
