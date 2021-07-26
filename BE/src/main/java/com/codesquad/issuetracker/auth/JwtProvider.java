@@ -24,7 +24,7 @@ public class JwtProvider {
     private final long validityInMilliseconds;
     private final String secretKey;
 
-    public JwtProvider(@Value("&{security.jwt.token.secret-key}") String secretKey,
+    public JwtProvider(@Value("${security.jwt.token.secret-key}") String secretKey,
                        @Value("${security.jwt.token.expire-length}") long validityInMilliseconds) {
         this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
         this.validityInMilliseconds = validityInMilliseconds;
