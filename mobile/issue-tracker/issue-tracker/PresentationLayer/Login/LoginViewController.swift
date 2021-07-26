@@ -11,7 +11,7 @@ import AuthenticationServices
 final class LoginViewController: UIViewController, StoryBoarded {
 
     var githubLoginHandler: ((ASWebAuthenticationPresentationContextProviding) -> Void)?
-    var authorizeCompleteHandler: (() -> Void)?
+    var authorizeCompleteHandler: ((TokenAction) -> Void)?
 
     override func viewDidLoad() {}
 
@@ -28,7 +28,7 @@ final class LoginViewController: UIViewController, StoryBoarded {
 
     func authorizeCompltion() {
         DispatchQueue.main.async { [weak self] in
-            self?.authorizeCompleteHandler?()
+            self?.authorizeCompleteHandler?(.completed)
             self?.dismiss(animated: true, completion: nil)
         }
     }

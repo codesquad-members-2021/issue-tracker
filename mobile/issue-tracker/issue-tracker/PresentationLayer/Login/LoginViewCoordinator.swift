@@ -13,7 +13,7 @@ protocol LoginViewCoordinatorDependencies {
 
 struct LoginViewCoordinator: Coordinator {
     var navigation: UINavigationController
-    var authenticated: (() -> Void)?
+    var authenticated: ((TokenAction) -> Void)?
 
     private let loginViewControllerFactory: () -> LoginViewController
 
@@ -25,9 +25,7 @@ struct LoginViewCoordinator: Coordinator {
 
     func loadInitalView() {
         let loginViewController = loginViewControllerFactory()
-        loginViewController.authorizeCompleteHandler = {
-            self.authenticated?()
-        }
+        loginViewController.authorizeCompleteHandler = authenticated
         navigation.setViewControllers([loginViewController], animated: true)
     }
 }

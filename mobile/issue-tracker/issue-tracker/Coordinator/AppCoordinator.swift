@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KeychainSwift
 
 final class AppCoordinator: Coordinator {
 
@@ -17,11 +16,14 @@ final class AppCoordinator: Coordinator {
         var tabBarCoordinatorFactory: ((UINavigationController) -> TabBarCoordinator)
     }
 
+    struct TokenState {
+        var token: TokenAction = .initial
+    }
+
     private var loginCoordinator: LoginViewCoordinator
     private let tabBarCoordinator: TabBarCoordinator
-    private var tokenState: Bool {
-        KeychainSwift().get("token")?.isEmpty ?? true
-    }
+
+    var dispatch: ((TokenAction) -> Void)?
 
     init(navigation: UINavigationController = UINavigationController(),
          dependency: Dependency) {
@@ -32,21 +34,32 @@ final class AppCoordinator: Coordinator {
     }
 
     func loadInitalView() {
-        if tokenState {
+        dispatch?(.initial)
+    }
+
+    func update(with state: TokenState) {
+        switch state.token {
+        case .empty:
             showLoginFlow()
-        } else {
+        case .existent, .completed:
             showTabBarFlow()
+        case .initial:
+            break
         }
     }
 
     private func showLoginFlow() {
-        loginCoordinator.authenticated = {
-            self.showTabBarFlow()
-        }
+        loginCoordinator.authenticated = dispatch
         loginCoordinator.loadInitalView()
     }
 
     private func showTabBarFlow() {
         tabBarCoordinator.loadInitalView()
+    }
+}
+
+extension AppCoordinator.TokenState {
+    init(state: AppStore.State) {
+        token = state.token
     }
 }
