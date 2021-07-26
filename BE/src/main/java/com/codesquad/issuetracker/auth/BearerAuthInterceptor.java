@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BearerAuthInterceptor implements HandlerInterceptor {
 
     private final String TOKEN_TYPE = "Bearer";
+    private final String USER = "user";
 
     private AuthorizationExtractor authorizationExtractor;
     private JwtProvider jwtProvider;
@@ -25,7 +26,7 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        request.setAttribute("user", getUserFromJWT(request));
+        request.setAttribute(USER, getUserFromJWT(request));
         return true;
     }
 
