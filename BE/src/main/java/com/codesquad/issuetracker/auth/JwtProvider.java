@@ -36,8 +36,8 @@ public class JwtProvider {
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds); // 유효시간 (지금 + 유효기간)
-        log.info("now: {}", now);
-        log.info("validity: {}", validity);
+        log.debug("now: {}", now);
+        log.debug("validity: {}", validity);
 
         return Jwts.builder()
                 .setClaims(claims)
