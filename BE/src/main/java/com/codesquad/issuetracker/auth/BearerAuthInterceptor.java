@@ -50,7 +50,4 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
         return user;
     }
 
-    private User getDefaultUser() {
-        return User.create(1L, "bibi", "bibi6666667");
-    }
 }
