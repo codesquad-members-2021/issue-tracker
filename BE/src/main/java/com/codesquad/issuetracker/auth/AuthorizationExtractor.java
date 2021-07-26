@@ -9,7 +9,6 @@ import java.util.Enumeration;
 @Component
 public class AuthorizationExtractor {
     public static final String AUTHORIZATION = "Authorization";
-    public static final String ACCESS_TOKEN_TYPE = AuthorizationExtractor.class.getSimpleName();
 
     // HTTP 요청으로부터 JWT토큰을 추출함
     public String extract(HttpServletRequest request, String type) {
