@@ -33,6 +33,8 @@
 		BF7B7CD72696AFE400278518 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */; };
 		BF7DE027267A418D0019B519 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF0A6C15266F5F8F000F3BC5 /* LoginViewController.storyboard */; };
 		BF87CBC12686FC40002F81FD /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8C7FBE2682242B005ABB38 /* URLRouter.swift */; };
+		BF8AC85326AE7BE500D90C4C /* TokenAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8AC85226AE7BE500D90C4C /* TokenAction.swift */; };
+		BF8AC85526AE7CAD00D90C4C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8AC85426AE7CAD00D90C4C /* AppStore.swift */; };
 		BF8C7F052678905C005ABB38 /* ClientId.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF8C7F042678905C005ABB38 /* ClientId.plist */; };
 		BF8C7F3A267A5E7D005ABB38 /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB399CD2671BB59002C6D80 /* UIStoryBoard+Extension.swift */; };
 		BF8C7F4D267A6131005ABB38 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BF8C7F4C267A6131005ABB38 /* KeychainSwift */; };
@@ -124,6 +126,8 @@
 		BF50FE65267FC3FC0084F73F /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		BF50FE67268022950084F73F /* ASWebAuthPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASWebAuthPublisher.swift; sourceTree = "<group>"; };
 		BF7B7CD62696AFE400278518 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		BF8AC85226AE7BE500D90C4C /* TokenAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAction.swift; sourceTree = "<group>"; };
+		BF8AC85426AE7CAD00D90C4C /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		BF8C7F042678905C005ABB38 /* ClientId.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientId.plist; sourceTree = "<group>"; };
 		BF8C7F8A267B2C06005ABB38 /* LoginUITests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUITests2.swift; sourceTree = "<group>"; };
 		BF8C7FBE2682242B005ABB38 /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
@@ -352,6 +356,8 @@
 			isa = PBXGroup;
 			children = (
 				BF9D0942269E204E009B6AA0 /* AppCoordinator.swift */,
+				BF8AC85426AE7CAD00D90C4C /* AppStore.swift */,
+				BF8AC85226AE7BE500D90C4C /* TokenAction.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				BFB399CB2671B387002C6D80 /* Endpoint.swift in Sources */,
 				BFA153E6269EE79000341A6D /* LoginViewCoordinator.swift in Sources */,
 				BF9D08F9269CC905009B6AA0 /* UITabBarItem+Extension.swift in Sources */,
+				BF8AC85326AE7BE500D90C4C /* TokenAction.swift in Sources */,
 				BFD75CFF26949C4E004695E9 /* LabelCell.swift in Sources */,
 				BF251D252695A6AE00834E33 /* IssueLabel.swift in Sources */,
 				BF0A6C12266F5F40000F3BC5 /* LoginViewModel.swift in Sources */,
@@ -622,6 +629,7 @@
 				BF0E36A22695AE0B00835E49 /* IssueListCollectionDataSource.swift in Sources */,
 				BF50FE66267FC3FC0084F73F /* UIAlertController+Extension.swift in Sources */,
 				BFA153FB269F401900341A6D /* TabBarCoordinator.swift in Sources */,
+				BF8AC85526AE7CAD00D90C4C /* AppStore.swift in Sources */,
 				BFB399CE2671BB59002C6D80 /* UIStoryBoard+Extension.swift in Sources */,
 				BF0A6BD8266F4EE5000F3BC5 /* SceneDelegate.swift in Sources */,
 				BFD2198E268EC02800FEF16C /* Issues.swift in Sources */,

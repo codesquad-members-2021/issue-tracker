@@ -11,15 +11,11 @@ protocol LoginViewCoordinatorDependencies {
     func makeLoginViewController() -> LoginViewController
 }
 
-protocol LoginViewCoordinatorDelegate: AnyObject {
-    func completeLogin()
-}
-
-final class LoginViewCoordinator: Coordinator {
+struct LoginViewCoordinator: Coordinator {
     var navigation: UINavigationController
+    var authenticated: ((TokenAction) -> Void)?
 
     private let loginViewControllerFactory: () -> LoginViewController
-    weak var delegate: LoginViewCoordinatorDelegate?
 
     init(navigation: UINavigationController,
          dependency: LoginViewCoordinatorDependencies) {
@@ -29,13 +25,7 @@ final class LoginViewCoordinator: Coordinator {
 
     func loadInitalView() {
         let loginViewController = loginViewControllerFactory()
-        loginViewController.delegate = self
+        loginViewController.authorizeCompleteHandler = authenticated
         navigation.setViewControllers([loginViewController], animated: true)
-    }
-}
-
-extension LoginViewCoordinator: LoginViewControllerDelegate {
-    func didFinishLogin() {
-        delegate?.completeLogin()
     }
 }

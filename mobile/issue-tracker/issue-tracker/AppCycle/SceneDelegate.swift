@@ -26,10 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
 
+        let appStore = AppStore(state: .init())
         appCoordinator = AppCoordinator(navigation: navigationController,
                                         dependency: .init(loginCoordinatorFactory: appDependency.makeLoginCoordinator,
                                                           tabBarCoordinatorFactory: appDependency.makeTabBarCoordinator))
-
+        appCoordinator?.dispatch = appStore.dispatch(_:)
+        appStore.updateState = appCoordinator?.update(with:)
         appCoordinator?.loadInitalView()
     }
 }
