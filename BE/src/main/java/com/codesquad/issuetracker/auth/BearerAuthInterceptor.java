@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class BearerAuthInterceptor implements HandlerInterceptor {
 
+    private final String TOKEN_TYPE = "Bearer";
+
     private AuthorizationExtractor authorizationExtractor;
     private JwtProvider jwtProvider;
 
@@ -28,10 +30,9 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
     }
 
     private String validateAndReturnJWT(HttpServletRequest request) {
-        String jwtToken = authorizationExtractor.extract(request, "Bearer");
-        if (jwtToken.isEmpty()) {
-            throw new TokenEmptyException();
-        }
+        String jwtToken = authorizationExtractor
+                .extract(request, TOKEN_TYPE)
+                .orElseThrow(TokenEmptyException::new);
 
         if (!jwtProvider.validateToken(jwtToken)) {
             throw new IllegalArgumentException("유효하지 않은 토큰입니다");
