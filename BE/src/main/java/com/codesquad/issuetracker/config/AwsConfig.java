@@ -13,17 +13,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AwsConfig {
 
-    @Value("${cloud.aws.s3.access-key}")
-    private String accessKey;
+    private final String accessKey;
+    private final String secretKey;
+    private final String region;
+    private final String bucket;
 
-    @Value("${cloud.aws.s3.secret-key}")
-    private String secretKey;
-
-    @Value("${cloud.aws.s3.region}")
-    private String region;
-
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket;
+    public AwsConfig(@Value("${cloud.aws.s3.access-key}") String accessKey,
+                     @Value("${cloud.aws.s3.secret-key}") String secretKey,
+                     @Value("${cloud.aws.s3.region}") String region,
+                     @Value("${cloud.aws.s3.bucket}") String bucket) {
+        this.accessKey = accessKey;
+        this.secretKey = secretKey;
+        this.region = region;
+        this.bucket = bucket;
+    }
 
     @Bean
     public S3Client s3Client() {
@@ -35,6 +38,5 @@ public class AwsConfig {
                 .build();
 
         return S3Client.create(amazonS3, region, bucket);
-
     }
 }
