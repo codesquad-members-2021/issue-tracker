@@ -83,12 +83,12 @@ public class GitHubLoginService {
 
     private Optional<User> signUp(GitHubUser gitHubUser) {
         log.debug("github user : {}", gitHubUser);
-        if (!userRepository.findByLoginId(gitHubUser.getLogin()).isPresent()) {
+        if (!userRepository.findByLoginId(gitHubUser.getLoginId()).isPresent()) {
             User user = User.githubUserToUser(gitHubUser);
             log.debug("User : {} ", user);
             userRepository.save(user);
         }
-        return userRepository.findByLoginId(gitHubUser.getLogin());
+        return userRepository.findByLoginId(gitHubUser.getLoginId());
     }
 
     private GitHubUserResponse signIn(GitHubUser gitHubUser, String type) {

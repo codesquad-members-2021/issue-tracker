@@ -38,7 +38,7 @@ public class User {
     }
 
     public static User githubUserToUser(GitHubUser githubUser) {
-        return new User(githubUser.getName(), githubUser.getLogin());
+        return new User(githubUser.getName(), githubUser.getLoginId());
     }
 
     public boolean validateUser(User user) {
