@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.auth.service;
 
+import com.codesquad.issuetracker.auth.UserPlatform;
 import com.codesquad.issuetracker.auth.response.AccessTokenResponse;
 import com.codesquad.issuetracker.auth.JwtProvider;
 import com.codesquad.issuetracker.domain.user.User;
@@ -41,19 +42,17 @@ public class GitHubLoginService {
         this.GITHUB_CLIENT_SECRETS_IOS = environment.getProperty("github.client.secrets.ios");
     }
 
-    public GitHubUserResponse login(String code) {
-        AccessTokenResponse accessTokenResponse = accessToken(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code)
-                .orElseThrow(IllegalArgumentException::new);
-        log.debug("Web Access token : {}", accessTokenResponse.getAccessToken());
-
-        GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
-        return signIn(user, accessTokenResponse.getTokenType());
+    public GitHubUserResponse login(String code, UserPlatform platform) {
+        if (platform == UserPlatform.WEB) {
+            return authorize(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code);
+        }
+        return authorize(GITHUB_CLIENT_ID_IOS, GITHUB_CLIENT_SECRETS_IOS, code);
     }
 
-    public GitHubUserResponse loginIOS(String code) {
-        AccessTokenResponse accessTokenResponse = accessToken(GITHUB_CLIENT_ID_IOS, GITHUB_CLIENT_SECRETS_IOS, code)
+    public GitHubUserResponse authorize(String clientId, String clientSecret, String code) {
+        AccessTokenResponse accessTokenResponse = accessToken(clientId, clientSecret, code)
                 .orElseThrow(IllegalArgumentException::new);
-        log.debug("iOS Access token : {}", accessTokenResponse.getAccessToken());
+        log.debug("Access token : {}", accessTokenResponse.getAccessToken());
 
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
         return signIn(user, accessTokenResponse.getTokenType());

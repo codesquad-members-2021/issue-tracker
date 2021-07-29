@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.auth.controller;
 
+import com.codesquad.issuetracker.auth.UserPlatform;
 import com.codesquad.issuetracker.response.ApiResponse;
 import com.codesquad.issuetracker.auth.response.GitHubUserResponse;
 import com.codesquad.issuetracker.auth.service.GitHubLoginService;
@@ -21,16 +22,11 @@ public class GitHubLoginController {
 
 
     @GetMapping("/github")
-    public ApiResponse<GitHubUserResponse> githubLogin(@RequestParam String code) {
+    public ApiResponse<GitHubUserResponse> githubLogin(@RequestParam String code, @RequestHeader("User-Platform") String platform) {
         logger.debug("web code : {} ", code);
-        GitHubUserResponse response = loginService.login(code);
-        return ApiResponse.ok(response);
-    }
+        logger.debug("platform : {} ", platform);
 
-    @GetMapping("/github/iOS")
-    public ApiResponse<GitHubUserResponse> githubIOSLogin(@RequestParam String code) {
-        logger.debug("iOS code : {} ", code);
-        GitHubUserResponse response = loginService.loginIOS(code);
+        GitHubUserResponse response = loginService.login(code, UserPlatform.create(platform));
         return ApiResponse.ok(response);
     }
 }

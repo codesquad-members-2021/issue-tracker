@@ -1,9 +1,10 @@
 package com.codesquad.issuetracker.auth.controller;
 
+import com.codesquad.issuetracker.auth.UserPlatform;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,13 +22,11 @@ public class LoginController {
     }
 
     @GetMapping
-    public String login() {
-        return "redirect:" + GITHUB_URL + "?client_id=" + CLIENT_ID_WEB;
-    }
-
-    @GetMapping("/iOS")
-    public String loginIOS() {
+    public String login(@RequestHeader("User-Platform") String platform) {
+        UserPlatform userPlatform = UserPlatform.create(platform);
+        if (userPlatform == UserPlatform.WEB) {
+            return "redirect:" + GITHUB_URL + "?client_id=" + CLIENT_ID_WEB;
+        }
         return "redirect:" + GITHUB_URL + "?client_id=" + CLIENT_ID_IOS;
     }
-
 }
