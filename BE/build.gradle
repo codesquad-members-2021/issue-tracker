@@ -1,0 +1,64 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.codesquad'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // spring boot basic
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // data source
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    // jjwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.10.8'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.8'
+
+    // jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.0'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // aws
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.1')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
+
+    // querydsl
+    implementation 'com.querydsl:querydsl-core'
+    implementation 'com.querydsl:querydsl-jpa'
+
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    // h2
+    runtimeOnly 'com.h2database:h2'
+
+}
+
+clean {
+    delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성위치
+}
+
+test {
+    useJUnitPlatform()
+}
+
