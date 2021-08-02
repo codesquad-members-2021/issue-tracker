@@ -23,12 +23,12 @@ public class CommentService {
 
     @Transactional
     public CommentResponse create(Comment comment) {
-        return CommentResponse.create(commentRepository.save(comment));
+        return CommentResponse.from(commentRepository.save(comment));
     }
 
     public List<CommentResponse> getComments(Long issueId) {
         return commentRepository.getCommentsByIssueId(issueId).stream()
-                .map(CommentResponse::create)
+                .map(CommentResponse::from)
                 .collect(Collectors.toList());
     }
 
