@@ -1,13 +1,10 @@
 package com.codesquad.issuetracker.auth.service;
 
 import com.codesquad.issuetracker.auth.UserPlatform;
-import com.codesquad.issuetracker.auth.response.AccessTokenResponse;
-import com.codesquad.issuetracker.auth.JwtProvider;
-import com.codesquad.issuetracker.domain.user.User;
 import com.codesquad.issuetracker.auth.domain.GitHubUser;
-import com.codesquad.issuetracker.domain.user.UserRepository;
+import com.codesquad.issuetracker.auth.domain.JwtAuthenticationInfo;
 import com.codesquad.issuetracker.auth.request.AccessTokenRequest;
-import com.codesquad.issuetracker.auth.response.GitHubUserResponse;
+import com.codesquad.issuetracker.auth.response.AccessTokenResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.http.RequestEntity;
@@ -18,44 +15,39 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class GitHubLoginService {
+public class GitHubOauthService {
 
-    private final UserRepository userRepository;
-
-    private final JwtProvider jwtProvider;
 
     private static final String GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_USER_URL = "https://api.github.com/user";
 
-    private final String GITHUB_CLIENT_ID;
-    private final String GITHUB_CLIENT_SECRETS;
+    private final String gitHubClientId;
+    private final String gitHubClientSecrets;
 
-    private final String GITHUB_CLIENT_ID_IOS;
-    private final String GITHUB_CLIENT_SECRETS_IOS;
+    private final String gitHubClientIdIOS;
+    private final String gitHubClientSecretsIos;
 
-    public GitHubLoginService(UserRepository userRepository, JwtProvider jwtProvider, Environment environment) {
-        this.jwtProvider = jwtProvider;
-        this.userRepository = userRepository;
-        this.GITHUB_CLIENT_ID = environment.getProperty("github.client.id");
-        this.GITHUB_CLIENT_SECRETS = environment.getProperty("github.client.secrets");
-        this.GITHUB_CLIENT_ID_IOS = environment.getProperty("github.client.id.ios");
-        this.GITHUB_CLIENT_SECRETS_IOS = environment.getProperty("github.client.secrets.ios");
+    public GitHubOauthService(Environment environment) {
+        this.gitHubClientId = environment.getProperty("github.client.id");
+        this.gitHubClientSecrets = environment.getProperty("github.client.secrets");
+        this.gitHubClientIdIOS = environment.getProperty("github.client.id.ios");
+        this.gitHubClientSecretsIos = environment.getProperty("github.client.secrets.ios");
     }
 
-    public GitHubUserResponse login(String code, UserPlatform platform) {
+    public JwtAuthenticationInfo login(String code, UserPlatform platform) {
         if (platform == UserPlatform.WEB) {
-            return authorize(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRETS, code);
+            return authorize(gitHubClientId, gitHubClientSecrets, code);
         }
-        return authorize(GITHUB_CLIENT_ID_IOS, GITHUB_CLIENT_SECRETS_IOS, code);
+        return authorize(gitHubClientIdIOS, gitHubClientSecretsIos, code);
     }
 
-    public GitHubUserResponse authorize(String clientId, String clientSecret, String code) {
+    public JwtAuthenticationInfo authorize(String clientId, String clientSecret, String code) {
         AccessTokenResponse accessTokenResponse = accessToken(clientId, clientSecret, code)
                 .orElseThrow(IllegalArgumentException::new);
         log.debug("Access token : {}", accessTokenResponse.getAccessToken());
 
         GitHubUser user = getUserInfo(accessTokenResponse.getAccessToken()).orElseThrow(IllegalArgumentException::new);
-        return signIn(user, accessTokenResponse.getTokenType());
+        return JwtAuthenticationInfo.create(user, accessTokenResponse.getTokenType());
     }
 
     private Optional<AccessTokenResponse> accessToken(String clientId, String clientSecrets, String code) {
@@ -80,21 +72,4 @@ public class GitHubLoginService {
                         .exchange(githubUserInfoRequestEntity, GitHubUser.class)
                         .getBody());
     }
-
-    private Optional<User> signUp(GitHubUser gitHubUser) {
-        log.debug("github user : {}", gitHubUser);
-        if (!userRepository.findByLoginId(gitHubUser.getLoginId()).isPresent()) {
-            User user = User.githubUserToUser(gitHubUser);
-            log.debug("User : {} ", user);
-            userRepository.save(user);
-        }
-        return userRepository.findByLoginId(gitHubUser.getLoginId());
-    }
-
-    private GitHubUserResponse signIn(GitHubUser gitHubUser, String type) {
-        User user = signUp(gitHubUser).orElseThrow(IllegalArgumentException::new);
-        String jwt = jwtProvider.createJwt(user);
-        return GitHubUserResponse.create(jwt, user, type);
-    }
-
 }
