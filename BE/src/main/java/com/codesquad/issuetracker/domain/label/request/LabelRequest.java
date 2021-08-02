@@ -14,6 +14,6 @@ public class LabelRequest {
     private String color;
 
     public Label create(){
-        return Label.create(null, title, content, color);
+        return new Label(title, content, color);
     }
 }

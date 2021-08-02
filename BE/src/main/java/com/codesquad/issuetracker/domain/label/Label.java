@@ -37,6 +37,12 @@ public class Label {
         this.color = color;
     }
 
+    public Label(String title, String content, String color) {
+        this.title = title;
+        this.content = content;
+        this.color = color;
+    }
+
     public static Label create(Long id, String title, String content, String color) {
         return new Label(id, title, content, color);
     }
