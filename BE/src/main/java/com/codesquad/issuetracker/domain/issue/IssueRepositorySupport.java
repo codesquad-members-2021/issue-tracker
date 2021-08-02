@@ -48,7 +48,7 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
     public Predicate getPredicate(IssueFilter filter) {
         return new PredicateBuilder(issue.isNotNull())
                 .containsAnd(issue.title, filter.getTitle())
-                .isBooleanAnd(issue.status, filter.getStatus())
+                .isBooleanAnd(issue.isOpen, filter.getStatus())
                 .isLongEqualAnd(issue.user.id, filter.getAuthor())
                 .build();
     }
@@ -63,14 +63,14 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
     public List<Issue> findByStatusTrue() {
         return queryFactory
                 .selectFrom(issue)
-                .where(issue.status.isTrue())
+                .where(issue.isOpen.isTrue())
                 .fetch();
     }
 
     public List<Issue> findByStatusFalse() {
         return queryFactory
                 .selectFrom(issue)
-                .where(issue.status.isFalse())
+                .where(issue.isOpen.isFalse())
                 .fetch();
     }
 

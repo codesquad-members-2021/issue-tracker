@@ -138,7 +138,7 @@ public class IssueService {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
         loginUser.validateUser(updateIssue.getUser());
 
-        updateIssue.setStatus(issueRequest.isStatus());
+        updateIssue.setOpen(issueRequest.isStatus());
         issueRepository.save(updateIssue);
     }
 
@@ -186,7 +186,7 @@ public class IssueService {
     }
 
     private IssueResponse issueToIssueResponse(Issue issue) {
-        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(),
+        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isOpen(),
                 issue.getCreatedAt(), makeUserResponses(issue.getUser()),
                 makeMilestoneForIssueResponse(issue.getMilestoneId()), makeLabelResponses(issue.getId()),
                 makeAssigneeForIssueResponse(issue.getId()), makeCommentResponse(issue.getId()));

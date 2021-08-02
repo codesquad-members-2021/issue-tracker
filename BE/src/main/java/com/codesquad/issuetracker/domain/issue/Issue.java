@@ -27,7 +27,9 @@ public class Issue {
 
     private String title;
     private String content;
-    private boolean status;
+
+    @JsonProperty("status")
+    private boolean isOpen;
 
     @JsonProperty("created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd kk:mm:ss")
@@ -51,16 +53,16 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(Long id, String title, String content, boolean status, LocalDateTime createdAt, Long milestoneId, User user) {
-        this(title, content, status, createdAt, user, milestoneId);
+    public Issue(Long id, String title, String content, boolean isOpen, LocalDateTime createdAt, Long milestoneId, User user) {
+        this(title, content, isOpen, createdAt, user, milestoneId);
         this.id = id;
 
     }
 
-    public Issue(String title, String content, boolean status, LocalDateTime createdAt, User user, Long milestoneId) {
+    public Issue(String title, String content, boolean isOpen, LocalDateTime createdAt, User user, Long milestoneId) {
         this.title = title;
         this.content = content;
-        this.status = status;
+        this.isOpen = isOpen;
         this.createdAt = createdAt;
         this.user = user;
         this.milestoneId = milestoneId;
