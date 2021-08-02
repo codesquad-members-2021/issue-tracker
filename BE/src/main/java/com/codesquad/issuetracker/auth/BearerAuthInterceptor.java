@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class BearerAuthInterceptor implements HandlerInterceptor {
 
+    private final String TOKEN_TYPE = "Bearer";
+    private final String USER = "user";
+
     private AuthorizationExtractor authorizationExtractor;
     private JwtProvider jwtProvider;
 
@@ -23,15 +26,14 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        request.setAttribute("user", getUserFromJWT(request));
+        request.setAttribute(USER, getUserFromJWT(request));
         return true;
     }
 
     private String validateAndReturnJWT(HttpServletRequest request) {
-        String jwtToken = authorizationExtractor.extract(request, "Bearer");
-        if (jwtToken.isEmpty()) {
-            throw new TokenEmptyException();
-        }
+        String jwtToken = authorizationExtractor
+                .extract(request, TOKEN_TYPE)
+                .orElseThrow(TokenEmptyException::new);
 
         if (!jwtProvider.validateToken(jwtToken)) {
             throw new IllegalArgumentException("유효하지 않은 토큰입니다");
@@ -48,7 +50,4 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
         return user;
     }
 
-    private User getDefaultUser() {
-        return User.create(1L, "bibi", "bibi6666667");
-    }
 }

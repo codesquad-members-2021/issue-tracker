@@ -20,7 +20,6 @@ import com.codesquad.issuetracker.domain.user.response.UserResponse;
 import com.codesquad.issuetracker.exception.NoSuchIssueException;
 import com.codesquad.issuetracker.domain.assignee.request.AssigneeRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +39,6 @@ public class IssueService {
     private final AssigneeRepository assigneeRepository;
     private final CommentRepository commentRepository;
 
-    @Autowired
     public IssueService(IssueRepository issueRepository, IssueRepositorySupport issueRepositorySupport,
                         LabelRepository labelRepository,
                         IssueLabelRepository issueLabelRepository, MilestoneRepository milestoneRepository,
@@ -140,7 +138,7 @@ public class IssueService {
         Issue updateIssue = issueRepository.findById(issueId).orElseThrow(NoSuchIssueException::new);
         loginUser.validateUser(updateIssue.getUser());
 
-        updateIssue.setStatus(issueRequest.isStatus());
+        updateIssue.setOpen(issueRequest.isStatus());
         issueRepository.save(updateIssue);
     }
 
@@ -188,7 +186,7 @@ public class IssueService {
     }
 
     private IssueResponse issueToIssueResponse(Issue issue) {
-        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isStatus(),
+        return new IssueResponse(issue.getId(), issue.getTitle(), issue.getContent(), issue.isOpen(),
                 issue.getCreatedAt(), makeUserResponses(issue.getUser()),
                 makeMilestoneForIssueResponse(issue.getMilestoneId()), makeLabelResponses(issue.getId()),
                 makeAssigneeForIssueResponse(issue.getId()), makeCommentResponse(issue.getId()));
@@ -228,7 +226,7 @@ public class IssueService {
         List<Comment> comments = commentRepository.getCommentsByIssueId(issueId);
         Set<CommentResponse> result = new HashSet<>();
         for (Comment comment : comments) {
-            result.add(CommentResponse.create(comment));
+            result.add(CommentResponse.from(comment));
         }
         return result;
     }

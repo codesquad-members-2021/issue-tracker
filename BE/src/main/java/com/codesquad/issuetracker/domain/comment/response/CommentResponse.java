@@ -23,7 +23,7 @@ public class CommentResponse {
 
     private UserResponse author;
 
-    public static CommentResponse create(Comment comment) {
+    public static CommentResponse from(Comment comment) {
         return new CommentResponse(
                 comment.getId(),
                 comment.getContent(),
