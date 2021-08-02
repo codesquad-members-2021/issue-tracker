@@ -27,25 +27,25 @@ public class IssueRepositorySupport extends QuerydslRepositorySupport {
                 .selectFrom(issue)
                 .where(getPredicate(issueFilter));
 
-        Long userId = issueFilter.getAssignee();
-        if (userId != null) {
+        Long assigneeUserId = issueFilter.getAssignee();
+        if (assigneeUserId != null) {
             query.innerJoin(assignee)
                     .on(assignee.issueId.eq(issue.id))
-                    .where(assignee.userId.eq(userId));
+                    .where(assignee.userId.eq(assigneeUserId));
         }
 
-        userId = issueFilter.getCommenter();
-        if (userId != null) {
+        Long commenterUserId = issueFilter.getCommenter();
+        if (commenterUserId != null) {
             query.innerJoin(comment)
                     .on(comment.issueId.eq(issue.id))
-                    .where(comment.user.id.eq(userId));
+                    .where(comment.user.id.eq(commenterUserId));
         }
 
         return query.fetch();
 
     }
 
-    public Predicate getPredicate(IssueFilter filter) {
+    private Predicate getPredicate(IssueFilter filter) {
         return new PredicateBuilder(issue.isNotNull())
                 .containsAnd(issue.title, filter.getTitle())
                 .isBooleanAnd(issue.isOpen, filter.getStatus())
