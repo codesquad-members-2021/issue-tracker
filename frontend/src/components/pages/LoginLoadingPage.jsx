@@ -7,18 +7,19 @@ const LoginLoadingPage = () => {
 	const getToken = async () => {
 		const params = new URLSearchParams(window.location.search);
 		const code = params.get("code");
-		console.log(code);
 		const res = await fetch(API.login(code));
 		const json = await res.json();
 		const { accessToken, tokenType } = json;
-		localStorage.setItem("accessToken", accessToken);
-		localStorage.setItem("tokeType", tokenType);
-		setIsLogin(true);
+		accessToken && localStorage.setItem("accessToken", accessToken);
+		tokenType && localStorage.setItem("tokeType", tokenType);
+		if (res.ok) setIsLogin(true);
+		if (!res.ok) setIsLogin(false);
 	};
 	useEffect(() => {
 		getToken();
 	}, []);
-	return <>${isLogin ? <Redirect to="/main"></Redirect> : <div>로딩</div>}</>;
+
+	return <>{isLogin ? <Redirect to="/main" /> : <>Loading..</>}</>;
 };
 
 export default LoginLoadingPage;

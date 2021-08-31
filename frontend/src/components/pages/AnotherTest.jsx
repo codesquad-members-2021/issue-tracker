@@ -1,8 +1,8 @@
 import { useRecoilValue } from "MyRecoil/useRecoilValue";
-import { milestoneAtomState } from "MyRecoil/atom";
+import { milestoneState } from "MyRecoil/atom";
 
 export const AnotherTest = () => {
-	const milestoneState = useRecoilValue(milestoneAtomState);
+	const milestoneState = useRecoilValue(milestoneState);
 	const milestoneFilterList = milestoneState.map((filter, i) => (
 		<div key={i}> {filter}</div>
 	));

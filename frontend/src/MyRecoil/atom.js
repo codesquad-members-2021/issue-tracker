@@ -1,28 +1,39 @@
-function atom({ key, initialState }) {
-	return { key, initialState };
-}
+// // function atom({ key, initialState }) {
+// // 	return { key, initialState };
+// // }
 
-export const issueAtomState = atom({
-	key: "issueAtomState",
-	initialState: true,
-});
+// import { atom } from "./index";
+// export const issueState = atom({
+// 	key: "issueState",
+// 	initialState: true,
+// });
 
-export const milestoneAtomState = atom({
-	key: "milestoneAtomState",
-	initialState: [],
-});
+// export const milestoneState = atom({
+// 	key: "milestoneState",
+// 	initialState: [],
+// });
 
-export const asigneeAtomState = atom({
-	key: "asigneeAtomState",
-	initialState: [],
-});
+// export const asigneeState = atom({
+// 	key: "asigneeState",
+// 	initialState: [],
+// });
 
-export const labelAtomState = atom({
-	key: "labelAtomState",
-	initialState: [],
-});
+// export const labelState = atom({
+// 	key: "labelState",
+// 	initialState: [],
+// });
 
-export const authorAtomState = atom({
-	key: "authorAtomState",
-	initialState: [],
-});
+// export const authorState = atom({
+// 	key: "authorState",
+// 	initialState: [],
+// });
+
+// export const selectedIssueCntState = atom({
+// 	key: "selectedIssueCntState",
+// 	initialState: 0,
+// });
+
+// export const clickedFilterState = atom({
+// 	key: "clickedFilterState",
+// 	initialState: null,
+// });

@@ -1,48 +1,38 @@
-import { useState } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import NewIssue from "./NewIssuePage";
 import NoMatch from "./NoMatchPage";
 import IssueDetailPage from "./IssueDetailPage";
-import Labels from "components/Labels/Labels";
-import Milestones from "components/Milestones/Milestones";
+import LabelsPage from "./LabelsPage";
+import MilestonesPage from "./MilestonesPage";
 import Header from "components/common/Header";
 import Navigator from "components/common/Navigator";
 import Issues from "components/Issues/Issues";
-import { Test } from "components/pages/Test";
-import { AnotherTest } from "./AnotherTest";
 
 const MainPage = () => {
 	const { pathname } = window.location;
-
 	return localStorage.getItem("accessToken") ? (
 		<MainPageLayout>
 			<Header pathName={pathname} />
-			<AnotherTest />
 			{(pathname === "/main/labels" || pathname === "/main/milestones") && (
 				<Navigator />
 			)}
 			{pathname === "/main" && <Issues />}
 			<Switch>
-				<Route exact path="/main/test" component={Test} />
-				<Route exact path="/main/milestones" component={Milestones} />
-				<Route exact path="/main/labels" component={Labels} />
+				<Route exact path="/main/milestones" component={MilestonesPage} />
+				<Route exact path="/main/labels" component={LabelsPage} />
 				<Route exact path="/main/new" component={NewIssue} />
-				<Route exact path="/main/AnotherTest" component={AnotherTest} />
 				<Route exact path="/main/:id" component={IssueDetailPage} />
 				<Route path="/main/*" component={NoMatch} />
 			</Switch>
 		</MainPageLayout>
 	) : (
-		<Redirect to="/login"></Redirect>
+		<Redirect to="/" />
 	);
 };
 
 const MainPageLayout = styled.div`
-	/* display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0 80px; */
+	padding: 0 5%;
 `;
 
 export default MainPage;

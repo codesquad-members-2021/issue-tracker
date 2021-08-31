@@ -1,13 +1,27 @@
 import { css } from "styled-components";
 
-const calcRem = (size) => `${size / 16}rem`;
+const calcRem = size => `${size / 16}rem`;
 
 const StyledSpaceBetween = css`
 	display: flex;
 	justify-content: space-between;
 `;
 
+const buttonWidths = {
+	small: "100px",
+	baseS: "120px",
+	base: "128px",
+	lg: "160px",
+	xl: "340px",
+};
+const buttonHeights = {
+	small: "28px",
+	base: "40px",
+	lg: "64px",
+};
+
 const fontSizes = {
+	xxs: calcRem(12),
 	xs: calcRem(13),
 	small: calcRem(14),
 	base: calcRem(16),
@@ -15,7 +29,7 @@ const fontSizes = {
 	xl: calcRem(20),
 	xxl: calcRem(22),
 	xxxl: calcRem(24),
-	titleSize: calcRem(50),
+	titleSize: calcRem(32),
 };
 
 const paddings = {
@@ -65,6 +79,7 @@ const border_radius = {
 const border_radius_mix = {
 	right: "0 11px 11px 0",
 	left: "11px 0 0 11px",
+	all: "11px",
 };
 const grayScale = {
 	title_active: "#14142B",
@@ -75,6 +90,7 @@ const grayScale = {
 	input_background: "#EFF0F6",
 	background: "#F7F7FC",
 	off_white: "#FEFEFE",
+	black: "#000000",
 };
 
 const colors = {
@@ -90,6 +106,10 @@ const colors = {
 	green: "#34C759",
 	light_green: "#DDFFE6",
 	dark_green: "#00A028",
+};
+
+const getColorByCondition = (condition, colorA, colorB) => {
+	return condition ? colorA : colorB;
 };
 
 const device = {
@@ -113,6 +133,9 @@ const theme = {
 	interval,
 	verticalInterval,
 	StyledSpaceBetween,
+	buttonWidths,
+	buttonHeights,
+	getColorByCondition,
 };
 
 export default theme;

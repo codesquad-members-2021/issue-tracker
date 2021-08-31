@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
+import Milestones from "components/Milestones/Milestones";
+
 const MilestonesPage = () => {
-	return <div></div>;
+	return <>{<Milestones />}</>;
 };
 
 export default MilestonesPage;

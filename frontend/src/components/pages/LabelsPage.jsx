@@ -1,5 +1,11 @@
+import Labels from "components/Labels/Labels";
+
 const LabelsPage = () => {
-	return <div></div>;
+	return (
+		<>
+			<Labels />
+		</>
+	);
 };
 
 export default LabelsPage;

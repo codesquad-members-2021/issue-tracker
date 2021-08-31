@@ -11,14 +11,14 @@ import Labels from "./components/Labels/Labels";
 import NewIssue from "./components/pages/NewIssuePage";
 import { ThemeProvider } from "styled-components";
 import theme from "styles/theme";
-import store from "./MyRecoil/store";
-
-export const globalStateRoot = createContext();
+// import store from "./MyRecoil";
+// export const globalStateRoot = createContext();
 
 function App() {
-	const globalState = useRef(store);
+	// const globalState = useRef(store);
 	return (
-		<globalStateRoot.Provider value={globalState}>
+		// <globalStateRoot.Provider value={globalState}>
+		<RecoilRoot>
 			<ThemeProvider theme={theme}>
 				<Switch>
 					<Route exact path="/" component={LoginPage} />
@@ -26,11 +26,12 @@ function App() {
 					<Route path="/login" component={LoginLoadingPage} />
 					<Route path="/main/milestones" component={Milestones} />
 					<Route path="/main/labels" component={Labels} />
-					{/* <Route path="/main/new" component={NewIssue} /> */}
+					<Route path="/main/new" component={NewIssue} />
 					<Route path="*" component={NoMatch} />
 				</Switch>
 			</ThemeProvider>
-		</globalStateRoot.Provider>
+		</RecoilRoot>
+		// {/* </globalStateRoot.Provider> */}
 	);
 }
 
