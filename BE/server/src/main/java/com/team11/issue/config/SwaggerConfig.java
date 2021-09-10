@@ -12,14 +12,12 @@ import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@EnableSwagger2
 @Configuration
 public class SwaggerConfig {
 
@@ -29,7 +27,6 @@ public class SwaggerConfig {
         responseContentType.add("application/json;charset=UTF-8");
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("ec2-52-79-56-138.ap-northeast-2.compute.amazonaws.com")
                 .groupName("issue-tracker")
                 .produces(responseContentType)
                 .apiInfo(apiInfo())
