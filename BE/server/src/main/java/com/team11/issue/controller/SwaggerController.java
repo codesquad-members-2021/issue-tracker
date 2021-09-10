@@ -10,7 +10,7 @@ public class SwaggerController {
 
     @GetMapping("/api")
     public String getApiDocs(){
-        return "redirect:/swagger-ui.html";
+        return "redirect:/swagger-ui/index.html";
     }
 
 }
